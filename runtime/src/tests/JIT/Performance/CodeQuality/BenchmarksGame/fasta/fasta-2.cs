@@ -12,7 +12,6 @@
    contributed by Isaac Gouy
    optimizations by Alp Toker <alp@atoker.com>
 */
-
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;

@@ -5,7 +5,6 @@
  * We need to propagate array dimension changes through OPADDs that are already NonNull.
  * Expected and actual output is at the end of the test.
  * */
-
 using System;
 using Xunit;
 

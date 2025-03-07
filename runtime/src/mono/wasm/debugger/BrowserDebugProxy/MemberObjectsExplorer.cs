@@ -580,7 +580,6 @@ namespace BrowserDebugProxy
                  * property was *hidden* by a derived type member. In this case, we
                  * want to show *both* the members
                  */
-
                 JObject backingFieldForHiddenProp = allMembers.GetValueOrDefault(
                     overriddenOrHiddenPropName
                 );

@@ -10,7 +10,6 @@
  *
  * Copyright (c) 2008 Microsoft Corporation
  */
-
 namespace System.Web.Hosting
 {
     public interface IProcessHostPreloadClient

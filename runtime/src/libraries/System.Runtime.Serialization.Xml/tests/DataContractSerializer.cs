@@ -3043,7 +3043,6 @@ public static partial class DataContractSerializerTests
     /*
      * Begin tests of the InvalidDataContract generated for illegal types
      */
-
     [Fact]
     public static void DCS_InvalidDataContract_Write_And_Read_Empty_Collection_Of_Invalid_Type_Succeeds()
     {
@@ -3081,7 +3080,6 @@ public static partial class DataContractSerializerTests
     /*
      * End tests of the InvalidDataContract generated for illegal types
      */
-
     [Fact]
     public static void DCS_DerivedTypeWithBaseTypeWithDataMember()
     {

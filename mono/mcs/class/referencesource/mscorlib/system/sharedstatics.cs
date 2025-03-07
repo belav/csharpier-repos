@@ -12,7 +12,6 @@
 **
 **
 =============================================================================*/
-
 namespace System
 {
     using System.Diagnostics.Contracts;

@@ -410,7 +410,6 @@ namespace System
              * FIXME: we should check the caller has reflection permission
              * or if it lives in the same assembly...
              */
-
             /*
              * since we need to walk the inheritance chain anyway to
              * find private methods, adjust the bindingflags to ignore

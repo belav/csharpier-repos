@@ -65,7 +65,6 @@ namespace Sample
             Monitor.Exit(lck);
             Console.WriteLine("LockTest J ManagedThreadId: "+Thread.CurrentThread.ManagedThreadId);
             */
-
             /* deadlock
             await Task.Run(() =>
             {

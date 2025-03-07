@@ -59,7 +59,6 @@ namespace Program
 
             item.SetAttachedProperty(EDITING_TEXT, "label.Text");
             /*end block(A)*/
-
             gr.InsertControl(0, new WindowlessControl()); //NOT OK
 
             var wc = new WindowlessControl();

@@ -1397,7 +1397,6 @@ namespace MonoTests.System.Data
             Assert.AreEqual (result, xml, "#02");
         }
         */
-
         [Test]
         public void CloneCopy()
         {

@@ -49,7 +49,6 @@ namespace System.Net
 
 
 */
-
         internal bool ReleaseSemaphore()
         {
 #if MONO

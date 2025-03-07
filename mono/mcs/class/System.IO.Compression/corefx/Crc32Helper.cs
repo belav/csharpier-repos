@@ -13,7 +13,6 @@
  * This software program is licensed subject to the BSD License,
  * available at http://www.opensource.org/licenses/bsd-license.html.
  */
-
 using System.Diagnostics;
 
 namespace System.IO.Compression

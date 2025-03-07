@@ -46,7 +46,6 @@ namespace System.Web.Configuration
         </authorization>
 
         */
-
     /// <devdoc>
     ///     <para> Adds Authorization specific information to this section.
     ///     </para>

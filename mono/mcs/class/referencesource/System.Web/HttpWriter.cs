@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Collections;
@@ -116,7 +115,6 @@ namespace System.Web
          *  Close the buffer copying the data
          *  (needed to 'compress' buffers for caching)
          */
-
         internal override HttpResponseBufferElement Clone()
         {
             int clonedSize = _size - _free;
@@ -984,7 +982,6 @@ namespace System.Web
     /*
      * TextWriter synchronized with the response object
      */
-
     /// <devdoc>
     ///    <para>A TextWriter class synchronized with the Response object.</para>
     /// </devdoc>
@@ -2247,7 +2244,6 @@ namespace System.Web
         /*
          * The Stream for writing binary data
          */
-
         /// <devdoc>
         ///    <para> Enables binary output to the client.</para>
         /// </devdoc>

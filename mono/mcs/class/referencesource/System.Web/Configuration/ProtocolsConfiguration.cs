@@ -64,7 +64,6 @@ namespace System.Web.Configuration
                                         child);
                     }
                     */
-
                     // add entry
                     /* TEMPORARY hide errors and ignore bad <add> tags
                        to let breaking changes through */

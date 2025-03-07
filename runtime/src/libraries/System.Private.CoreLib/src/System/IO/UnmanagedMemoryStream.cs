@@ -27,7 +27,6 @@ namespace System.IO
      *    overruns or returning uninitialized memory when Reads and Writes are called
      *    concurrently in thread unsafe manner.
      */
-
     /// <summary>
     /// Stream over a memory pointer or over a SafeBuffer
     /// </summary>

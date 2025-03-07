@@ -37,7 +37,6 @@ namespace DefaultNamespace
             // console synchronization Console.SetOut(TextWriter.Synchronized(Console.Out));
 
             /*max memory will be used. If heap size is bigger than this, */
-
             // delete all the objects. Default 10MB
             iMem = 10;
 

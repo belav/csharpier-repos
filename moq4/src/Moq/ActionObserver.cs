@@ -22,14 +22,12 @@ namespace Moq
     After:
         sealed class ActionObserver : ExpressionReconstructor
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ActionObserver : ExpressionReconstructor
     After:
         sealed class ActionObserver : ExpressionReconstructor
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ActionObserver : ExpressionReconstructor
@@ -298,14 +296,12 @@ namespace Moq
                 After:
                         static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
                 After:
                         static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
@@ -338,14 +334,12 @@ namespace Moq
             After:
                     sealed class Recorder : IInterceptor
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private sealed class Recorder : IInterceptor
             After:
                     sealed class Recorder : IInterceptor
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private sealed class Recorder : IInterceptor
@@ -371,7 +365,6 @@ namespace Moq
                     int invocationTimestamp;
                     object returnValue;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private readonly MatcherObserver matcherObserver;
@@ -386,7 +379,6 @@ namespace Moq
                     int invocationTimestamp;
                     object returnValue;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private readonly MatcherObserver matcherObserver;

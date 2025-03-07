@@ -91,7 +91,6 @@ namespace System.Security.Cryptography
            operation, processing another message block, and updating the
            context.
            */
-
         [System.Security.SecurityCritical] // auto-generated
         private unsafe void _HashData(byte[] partIn, int ibStart, int cbSize)
         {
@@ -153,7 +152,6 @@ namespace System.Security.Cryptography
         /* SHA512 finalization. Ends an SHA512 message-digest operation, writing
            the message digest.
            */
-
         [System.Security.SecurityCritical] // auto-generated
         private byte[] _EndHash()
         {
@@ -164,7 +162,6 @@ namespace System.Security.Cryptography
 
             /* Compute padding: 80 00 00 ... 00 00 <bit count>
              */
-
             padLen = 128 - (int)(_count & 0x7f);
             if (padLen <= 16)
                 padLen += 128;
@@ -419,7 +416,6 @@ namespace System.Security.Cryptography
         /* This function creates W_16,...,W_79 according to the formula
            W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
         */
-
         [System.Security.SecurityCritical] // auto-generated
         private static unsafe void SHA512Expand(UInt64* x)
         {

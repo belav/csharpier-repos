@@ -388,7 +388,6 @@ class C
              * The first portion of this test verifies that Format Document uses the default indentation settings when
              * no .editorconfig is available.
              */
-
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
                 [
                     FeatureAttribute.Workspace,
@@ -409,7 +408,6 @@ class C
              * The second portion of this test adds a .editorconfig file to configure the indentation behavior, and
              * verifies that the next Format Document operation adheres to the formatting.
              */
-
             var editorConfig =
                 @"root = true
 
@@ -445,7 +443,6 @@ indent_size = 2
              * The third portion of this test modifies the existing .editorconfig file with a new indentation behavior,
              * and verifies that the next Format Document operation adheres to the updated formatting.
              */
-
             await TestServices.SolutionExplorer.SetFileContentsAsync(
                 ProjectName,
                 ".editorconfig",

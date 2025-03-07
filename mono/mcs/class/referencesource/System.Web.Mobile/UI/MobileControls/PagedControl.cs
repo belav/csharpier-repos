@@ -21,7 +21,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

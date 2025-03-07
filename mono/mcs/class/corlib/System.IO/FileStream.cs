@@ -375,7 +375,6 @@ namespace System.IO
             this.owner = true;
 
             /* Can we open non-files by name? */
-
             if (MonoIO.GetFileType(safeHandle, out error) == MonoFileType.Disk)
             {
                 this.canseek = true;

@@ -74,7 +74,6 @@ namespace System.ServiceModel.Channels
         preamble-ack-record-type = octet (0xB)
         preamble-end-record-type = octet (0xC)
     */
-
     enum FramingRecordType
     {
         Version = 0x0,

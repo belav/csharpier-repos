@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -34,7 +33,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html IMG control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlImage'/> class.</para>
         /// </devdoc>
@@ -44,7 +42,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Alt property
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the alternative caption that the
@@ -82,7 +79,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Align property
          */
-
         /// <devdoc>
         ///    <para>Gets or sets the alignment of the image with
         ///       surrounding text.</para>
@@ -105,7 +101,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Border property, size of border in pixels.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the width of image border, in pixels.
@@ -129,7 +124,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Height property
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets
@@ -156,7 +150,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Src property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the name of and path to the
@@ -183,7 +176,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Width property
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the width of the image. By default, this is
@@ -210,7 +202,6 @@ namespace System.Web.UI.HtmlControls
          * Override to render unique name attribute.
          * The name attribute is owned by the framework.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

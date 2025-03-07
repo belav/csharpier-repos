@@ -17,7 +17,6 @@ Revision History:
     15-Jan-2004 Converted to a partial class, only internal NegotiateStream implementaion goes into this file.
 
 --*/
-
 namespace System.Net.Security
 {
     using System;

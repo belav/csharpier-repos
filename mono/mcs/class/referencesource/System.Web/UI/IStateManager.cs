@@ -20,7 +20,6 @@ namespace System.Web.UI
         /*
          * Return true if tracking state changes.
          */
-
         /// <devdoc>
         ///    <para>Determines if state changes are being tracked.</para>
         ///    </devdoc>
@@ -29,7 +28,6 @@ namespace System.Web.UI
         /*
          * Load previously saved state.
          */
-
         /// <devdoc>
         ///    <para>Loads the specified control's previously saved state.</para>
         ///    </devdoc>
@@ -38,7 +36,6 @@ namespace System.Web.UI
         /*
          * Return object containing state changes.
          */
-
         /// <devdoc>
         ///    <para>Returns the object that contains the state changes.</para>
         ///    </devdoc>
@@ -47,7 +44,6 @@ namespace System.Web.UI
         /*
          * Start tracking state changes.
          */
-
         /// <devdoc>
         ///    <para>Instructs the control to start tracking changes in state.</para>
         ///    </devdoc>

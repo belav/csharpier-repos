@@ -165,7 +165,6 @@ namespace Mono.AppleTls
              * certificate, that certificate will be used for the rest of the
              * session.
              */
-
             SetSessionOption(SslSessionOption.BreakOnCertRequested, true);
             SetSessionOption(SslSessionOption.BreakOnClientAuth, true);
             SetSessionOption(SslSessionOption.BreakOnServerAuth, true);
@@ -291,7 +290,6 @@ namespace Mono.AppleTls
              * any.
              *
              */
-
             bool ok;
             SecTrust trust = null;
             X509Certificate2Collection certificates = null;
@@ -362,7 +360,6 @@ namespace Mono.AppleTls
              * In CoreFX, 'ServicePointManager.SecurityProtocol' defaults to
              * 'SecurityProtocolType.SystemDefault', which is zero.
              */
-
             if ((EnabledProtocols & SSA.SslProtocols.Tls) != 0)
                 MinProtocol = SslProtocol.Tls_1_0;
             else if ((EnabledProtocols & SSA.SslProtocols.Tls11) != 0)

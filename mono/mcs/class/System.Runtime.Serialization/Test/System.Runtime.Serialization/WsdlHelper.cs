@@ -48,7 +48,6 @@ namespace MonoTests.System.Runtime.Serialization
          * add the .wsdl file to Test/Resources/WSDL and add it to `TEST_RESOURCE_FILES'
          * in the Makefile.
          */
-
         public static MetadataSet GetMetadataSet(string name)
         {
             var asm = Assembly.GetExecutingAssembly();

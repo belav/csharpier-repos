@@ -768,7 +768,6 @@ namespace MonoTests.System.Runtime.Serialization.Json
                     }
                 }
         */
-
         [Test]
         public void SerializeDCWithEnumXml()
         {

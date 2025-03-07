@@ -194,7 +194,6 @@ namespace System.Collections.Generic
              * R1: [32] [33] [34] .. [63]
              * R2: [64] [65] [66] .. [95] .. [127]
              */
-
             int row = position.Row;
             int column = position.Column;
 

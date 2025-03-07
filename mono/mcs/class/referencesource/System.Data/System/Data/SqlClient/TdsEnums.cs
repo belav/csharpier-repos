@@ -275,7 +275,6 @@ namespace System.Data.SqlClient
                 public const byte LDEFUSER    = 0;    // regular old user
                 public const byte LINTEGRATED = 8;    // integrated security login
         */
-
         /* Versioning scheme table:
 
             Client sends:
@@ -290,7 +289,6 @@ namespace System.Data.SqlClient
             0x71000001 -> Shiloh SP1
             0x72xx0002 -> Yukon RTM
         */
-
         // Pre Shiloh SP1 versioning scheme:
         public const int SPHINXORSHILOH_MAJOR = 0x07; // The high byte (b3) is not sufficient to distinguish
         public const int SPHINX_INCREMENT = 0x00; // Sphinx and Shiloh

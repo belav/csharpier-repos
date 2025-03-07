@@ -13,7 +13,6 @@ Actual behavior:
 Hello from Main!
 Process is terminated due to StackOverflowException.
 */
-
 using System;
 using System.IO;
 using Xunit;

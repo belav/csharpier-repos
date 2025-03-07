@@ -26,7 +26,6 @@ using System.Text;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 #if __MOBILE__
 namespace ObjectTests
 {
@@ -1325,7 +1324,6 @@ class Tests
     public static int test_0_and_cmp_static()
     {
         /* various forms of test [mem], imm */
-
         my_flags = 0x01020304;
 
         if ((my_flags & 0x01020304) == 0)
@@ -2004,7 +2002,6 @@ class Tests
         return regress_679467_inner ();
     }
     */
-
     static int test_0_char_ctor()
     {
         string s = new String(new char[] { 'A', 'B' }, 0, 1);

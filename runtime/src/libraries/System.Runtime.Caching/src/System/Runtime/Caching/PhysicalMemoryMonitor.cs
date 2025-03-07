@@ -46,7 +46,6 @@ namespace System.Runtime.Caching
               8192    81.92   245.76  819.2
 
             */
-
             long memory = TotalPhysical;
             if (memory >= 0x100000000)
             {

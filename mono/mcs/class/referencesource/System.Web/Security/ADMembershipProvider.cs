@@ -5947,7 +5947,6 @@ namespace System.Web.Security
            ADS_ESCAPEDMODE_OFF=3,
            ADS_ESCAPEDMODE_OFF_EX=4
         } ADS_ESCAPE_MODE_ENUM;*/
-
         internal const int ADS_SETTYPE_FULL = 1;
         internal const int ADS_SETTYPE_DN = 4;
         internal const int ADS_FORMAT_PROVIDER = 10;

@@ -559,7 +559,6 @@ namespace System.Xml.XmlSchemaTests
         }
 
         /********* reprocess compile import**************/
-
         //[Variation(Desc = "v101.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
         [InlineData("import_v4_a.xsd", "import_v4_b.xsd", 2, null)]
         //[Variation(Desc = "v101.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
@@ -1298,7 +1297,6 @@ namespace System.Xml.XmlSchemaTests
         }
 
         /*********compile reprocess import**************/
-
         //[Variation(Desc = "v201.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
         [InlineData("import_v4_a.xsd", "import_v4_b.xsd", 2, null)]
         //[Variation(Desc = "v201.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]

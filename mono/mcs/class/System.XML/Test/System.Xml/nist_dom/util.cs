@@ -478,7 +478,6 @@ namespace nist_dom
                 return this.node;
             }
         */
-
         //	public string getTableCaption(object table)
         //	{
         //		return table.caption;

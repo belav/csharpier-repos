@@ -10,7 +10,6 @@
 /* number of these Variant array. Check out if GC can handle these
 /* objects
 /**************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

@@ -48,7 +48,6 @@ namespace Novell.Directory.Ldap.Controls
     *      contextID     OCTET STRING OPTIONAL }
     *
     */
-
     /// <summary> LdapVirtualListControl is a Server Control used to specify
     /// that results from a search are to be returned in pages - which are
     /// subsets of the entire virtual result set.
@@ -488,7 +487,6 @@ namespace Novell.Directory.Ldap.Controls
         /// <param name="afterCount">The number of entries after "listIndex" to be
         /// returned.
         /// </param>
-
         public virtual void setRange(System.String jumpTo, int beforeCount, int afterCount)
         {
             /* Save off the fields in local variables

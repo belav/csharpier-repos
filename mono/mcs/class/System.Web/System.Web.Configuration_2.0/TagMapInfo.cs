@@ -95,7 +95,6 @@ namespace System.Web.Configuration
             bool ret = base.SerializeElement(writer, serializeCollectionKey);
 
             /* XXX more here? .. */
-
             return ret;
         }
 

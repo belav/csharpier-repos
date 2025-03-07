@@ -2152,7 +2152,6 @@ namespace MonoTests.System.Reflection.Emit
             catch (ArgumentException) {
             }
             */
-
             try
             {
                 tb.DefineNestedType("BB", TypeAttributes.NestedPublic, null, new Type[1]);

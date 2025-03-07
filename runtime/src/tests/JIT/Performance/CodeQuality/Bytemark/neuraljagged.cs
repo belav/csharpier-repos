@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 /********************************
 ** BACK PROPAGATION NEURAL NET **
 *********************************
@@ -54,7 +52,6 @@
 ** I have modified the code so that it will work
 ** on systems other than a Macintosh -- RG
 */
-
 /***********
 ** DoNNet **
 ************
@@ -64,7 +61,6 @@
 ** should be on the local directory (from which the
 ** benchmark program in launched).
 */
-
 using System;
 using System.IO;
 
@@ -517,7 +513,6 @@ public class NeuralJagged : NNetStruct
         return;
     }
     */
-
     /**********************
     ** do_forward_pass() **
     ***********************
@@ -836,7 +831,6 @@ public class NeuralJagged : NNetStruct
         **        scanf("%d", &i);
         **        srand(i);
         */
-
         for (neurode = 0; neurode < MID_SIZE; neurode++)
         {
             for (i = 0; i < IN_SIZE; i++)

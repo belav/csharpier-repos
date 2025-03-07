@@ -365,7 +365,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Resolver - Integrity              */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.XmlResolver : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltTransform.XmlResolver : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.XmlResolver : Reader, Writer", Desc = "READER,WRITER")]
@@ -794,7 +793,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Load - Integrity                  */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Load() - Integrity : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltTransform.Load() - Integrity : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.Load() - Integrity : Reader, Writer", Desc = "READER,WRITER")]
@@ -1725,7 +1723,6 @@ namespace System.Xml.XslTransformApiTests
     /**************************************************************************/
     /*          XslTransform.Load(,XmlResolver) - Integrity   */
     /**************************************************************************/
-
     //[TestCase(Name = "XsltTransform.Load(,XmlResolver) - Integrity : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltTransform.Load(,XmlResolver) - Integrity : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.Load(,XmlResolver) - Integrity : Reader, Writer", Desc = "READER,WRITER")]
@@ -2536,7 +2533,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Load(Url, Resolver)               */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Load(Url, Resolver) : URI, Reader", Desc = "URI,READER")]
     //[TestCase(Name = "XsltTransform.Load(Url, Resolver) : URI, Stream", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltTransform.Load(Url, Resolver) : URI, Writer", Desc = "URI,WRITER")]
@@ -2653,7 +2649,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Load(Url)                         */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Load(Url) Integrity : URI, Stream", Desc = "URI,STREAM")]
     public class CLoadStringTest : XsltApiTestCaseBase
     {
@@ -2757,7 +2752,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Load(IXPathNavigable)             */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform .Load(IXPathNavigable) : Navigator, TextWriter", Desc = "NAVIGATOR,TEXTWRITER")]
     public class CLoadXPathNavigableTest : XsltApiTestCaseBase
     {
@@ -2873,7 +2867,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Load(Reader)                      */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Load(Reader) : Reader, Stream", Desc = "READER,STREAM")]
     public class CLoadReaderTest : XsltApiTestCaseBase
     {
@@ -3129,7 +3122,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Transform - Integrity             */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Transform() Integrity : Reader , Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltTransform.Transform() Integrity : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.Transform() Integrity : Reader, Writer", Desc = "READER,WRITER")]
@@ -3690,7 +3682,6 @@ namespace System.Xml.XslTransformApiTests
     /*************************************************************/
     /*          XslTransform(,Resolver) - Integrity              */
     /*************************************************************/
-
     //[TestCase(Name = "XsltTransform.Transform(,XmlResolver) : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltTransform.Transform(,XmlResolver) : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.Transform(,XmlResolver) : Reader, Writer", Desc = "READER,WRITER")]
@@ -4113,7 +4104,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Transform - (String, String)                    */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Transform(String, String) : Reader , String", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.Transform(String, String) : URI, String", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltTransform.Transform(String, String) : Navigator, String", Desc = "NAVIGATOR,STREAM")]
@@ -4514,7 +4504,6 @@ namespace System.Xml.XslTransformApiTests
     /***********************************************************/
     /*          XslTransform.Transform - (String, String, Resolver)          */
     /***********************************************************/
-
     //[TestCase(Name = "XsltTransform.Transform(String, String, Resolver) : Reader , String", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltTransform.Transform(String, String, Resolver) : URI, String", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltTransform.Transform(String, String, Resolver) : Navigator, String", Desc = "NAVIGATOR,STREAM")]

@@ -1428,7 +1428,6 @@ namespace System.Data
                     }
                 }
         */
-
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
         internal List<Index> LiveIndexes
         {
@@ -3478,7 +3477,6 @@ namespace System.Data
         ///    <para>
         ///       Clears the table of all data.</para>
         /// </devdoc>
-
         public void Clear()
         {
             Clear(true);
@@ -7968,7 +7966,6 @@ namespace System.Data
                     }
                 }
         */
-
         // RowDiffIdUsageSection & DSRowDiffIdUsageSection Usage:
         //
         //        DataTable.[DS]RowDiffIdUsageSection rowDiffIdUsage = new DataTable.[DS]RowDiffIdUsageSection();

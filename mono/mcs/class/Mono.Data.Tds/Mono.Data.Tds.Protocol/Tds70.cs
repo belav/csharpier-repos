@@ -773,7 +773,6 @@ namespace Mono.Data.Tds.Protocol
                 Console.WriteLine ("Collation is null");
             }
             */
-
             // Tds > 7.0 uses collation
             if (
                 Collation != null

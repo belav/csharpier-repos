@@ -951,7 +951,6 @@ namespace MonoTests.System.Net
                 rs.Write (buffer, 0, buffer.Length);
                 req.Abort ();
                 */
-
                 req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "POST";
                 req.SendChunked = true;
@@ -2550,7 +2549,6 @@ namespace MonoTests.System.Net
             });
         }
         **/
-
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
         [ExpectedException(typeof(PlatformNotSupportedException))]

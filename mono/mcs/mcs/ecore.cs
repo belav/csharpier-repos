@@ -953,7 +953,6 @@ namespace Mono.CSharp
         ///   Protected constructor.  Only derivate types should
         ///   be able to be created
         /// </summary>
-
         protected Expression() { }
 
         /// <summary>

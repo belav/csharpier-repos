@@ -18,7 +18,6 @@ namespace System.Xml.Xsl.Xslt
          ArrayList actualArgs  -- Array of QilNodes annotated with names. When name of formalArg match name actualArg last one
                                   is used as invokeArg, otherwise formalArg's default value is cloned and used.
     **/
-
     internal sealed class InvokeGenerator : QilCloneVisitor
     {
         private readonly bool _debug;

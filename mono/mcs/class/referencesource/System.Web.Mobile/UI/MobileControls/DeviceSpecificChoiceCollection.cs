@@ -18,7 +18,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecificChoiceCollection.uex' path='docs/doc[@for="DeviceSpecificChoiceCollection"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

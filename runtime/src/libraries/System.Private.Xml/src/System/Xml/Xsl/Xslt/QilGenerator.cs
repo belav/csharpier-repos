@@ -2238,7 +2238,6 @@ namespace System.Xml.Xsl.Xslt
                      '$A'           if the 'from' attribute is omitted,
                      '$A[. >> $F]'  if the 'from' attribute is present.
             */
-
             QilNode? countPattern2;
             QilNode countMatches,
                 fromMatches,
@@ -2309,7 +2308,6 @@ namespace System.Xml.Xsl.Xslt
                      '$A'           if the 'from' attribute is omitted,
                      '$A[. >> $F]'  if the 'from' attribute is present.
             */
-
             QilNode range,
                 fromMatches,
                 F,

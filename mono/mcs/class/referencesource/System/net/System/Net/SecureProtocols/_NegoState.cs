@@ -17,7 +17,6 @@ Revision History:
     12-Aug-2003 New design that has obsoleted Authenticator class
 
 --*/
-
 namespace System.Net.Security
 {
     using System;

@@ -12,7 +12,6 @@
 ** notifications from event log.
 **
 ============================================================*/
-
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -212,7 +212,6 @@ namespace MonoCasTests.System.Net
                     Dns.GetHostAddresses (null);
                 }
         */
-
         // ensure that only DnsPermission is required to call the methods
 
         [Test]
@@ -336,7 +335,6 @@ namespace MonoCasTests.System.Net
                     Dns.GetHostAddresses (null);
                 }
         */
-
         // async tests (for stack propagation)
 
         [DnsPermission(SecurityAction.Deny, Unrestricted = true)]

@@ -15,7 +15,6 @@ BuildResultCache
             PrecompiledSiteDiskBuildResultCache
 
 **********************************/
-
 namespace System.Web.Compilation
 {
     using System;

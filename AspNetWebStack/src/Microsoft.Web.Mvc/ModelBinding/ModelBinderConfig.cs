@@ -136,7 +136,6 @@ namespace Microsoft.Web.Mvc.ModelBinding
         /*
          * Initialization routines which replace the default binder implementation with the new binder implementation.
          */
-
         public static void Initialize()
         {
             Initialize(ModelBinders.Binders, ModelBinderProviders.Providers);

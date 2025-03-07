@@ -255,7 +255,6 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                   plus = %x2B                ; +
                   zero = %x30                ; 0
             */
-
             private static readonly Regex s_validNumberRegex = new(
                 @"^
 -?                 # [ minus ]

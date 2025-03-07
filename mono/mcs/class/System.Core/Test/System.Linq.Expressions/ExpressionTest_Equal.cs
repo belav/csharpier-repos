@@ -438,7 +438,6 @@ namespace MonoTests.System.Linq.Expressions
             Assert.AreEqual ((bool?) true, eq (new SlotFromNullableToNullable (2), new SlotFromNullableToNullable (2)));
             Assert.AreEqual ((bool?) false, eq (new SlotFromNullableToNullable (2), new SlotFromNullableToNullable (-2)));
         }*/
-
         [Test]
         public void NullableBoolEqualToBool()
         {

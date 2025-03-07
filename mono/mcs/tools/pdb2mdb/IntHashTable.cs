@@ -109,7 +109,6 @@ namespace Microsoft.Cci.Pdb
     
           -- Brian Grunkemeyer, 10/28/1999
         */
-
         // A typical resize algorithm would pick the smallest prime number in this array
         // that is larger than twice the previous capacity.
         // Suppose our Hashtable currently has capacity x and enough elements are added

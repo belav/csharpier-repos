@@ -24,7 +24,6 @@
  * The translation is outlined in detail in Section 4 of "Complementing Incomplete Edge Profile by applying
  * Minimum Cost Circulation Algorithms" (Levin 2007)
  ********/
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

@@ -759,7 +759,6 @@ namespace System.Web.UI.Design.MobileControls
                 return;
             }
             */
-
             SelectedStyle.RuntimeStyle.Name = newValue;
             _tempStyleSheet.Remove(oldValue);
             _tempStyleSheet[newValue] = SelectedStyle.RuntimeStyle;
@@ -1025,7 +1024,6 @@ namespace System.Web.UI.Design.MobileControls
         /*
          *  END EVENT HANDLING
          */
-
         private bool ReferencesContainCycle(StyleNode startingStyleItem)
         {
             StyleNode currentStyleItem = startingStyleItem;
@@ -1208,7 +1206,6 @@ namespace System.Web.UI.Design.MobileControls
         /*
          *   BEGIN INTERNAL CLASS
          */
-
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
             Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode

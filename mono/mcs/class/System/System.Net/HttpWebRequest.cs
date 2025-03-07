@@ -1281,7 +1281,6 @@ namespace System.Net
             /*
              * WebConnection has either called SetResponseData() or SetResponseError().
              */
-
             var response = new HttpWebResponse(actualUri, method, stream, cookieContainer);
 
             WebException throwMe = null;

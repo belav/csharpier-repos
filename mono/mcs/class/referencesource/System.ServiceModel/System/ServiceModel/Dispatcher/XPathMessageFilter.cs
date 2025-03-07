@@ -72,7 +72,6 @@ namespace System.ServiceModel.Dispatcher
             XPathMessageFilter.schema = XmlSchema.Read(new StringReader(SchemaString), null);
         }
         */
-
         static XmlSchemaComplexType CreateOuterType()
         {
             // Dialect attribute
@@ -841,7 +840,6 @@ namespace System.ServiceModel.Dispatcher
 
             writer.WriteString(this.xpath);
             */
-
             // Finish up!
             writer.WriteEndElement();
         }

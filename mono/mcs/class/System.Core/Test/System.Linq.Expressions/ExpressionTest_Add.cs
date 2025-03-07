@@ -368,7 +368,6 @@ namespace MonoTests.System.Linq.Expressions
             Assert.AreEqual ((SlotFromNullableToNullable?) new SlotFromNullableToNullable (4), add (new SlotFromNullableToNullable (2), new SlotFromNullableToNullable (2)));
             Assert.AreEqual ((SlotFromNullableToNullable?) new SlotFromNullableToNullable (0), add (new SlotFromNullableToNullable (2), new SlotFromNullableToNullable (-2)));
         }*/
-
         [Test]
         public void AddStrings()
         {

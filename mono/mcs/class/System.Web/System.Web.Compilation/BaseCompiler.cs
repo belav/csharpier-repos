@@ -520,7 +520,6 @@ namespace System.Web.Compilation
             }
 
             */
-
             CodeExpression result = null;
 
             CodeMemberProperty prop = new CodeMemberProperty();
@@ -623,7 +622,6 @@ namespace System.Web.Compilation
         }
 
         /******/
-
         void CheckCompilerErrors(CompilerResults results)
         {
             if (results.NativeCompilerReturnValue == 0)

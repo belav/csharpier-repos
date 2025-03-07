@@ -13,7 +13,6 @@ namespace System.Net.Sockets
     ///       Specifies the iocontrol codes that the <see cref='System.Net.Sockets.Socket'/> class supports.
     ///    </para>
     /// </devdoc>
-
     public enum IOControlCode : long
     {
         /// <devdoc>

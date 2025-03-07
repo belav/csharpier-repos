@@ -18,14 +18,12 @@ namespace Moq.Language.Flow
     After:
             SequenceSetup setup;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private SequenceSetup setup;
     After:
             SequenceSetup setup;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private SequenceSetup setup;
@@ -74,14 +72,12 @@ namespace Moq.Language.Flow
             After:
                 sealed class SetupSequencePhrase<TResult> : ISetupSequentialResult<TResult>
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                 internal sealed class SetupSequencePhrase<TResult> : ISetupSequentialResult<TResult>
             After:
                 sealed class SetupSequencePhrase<TResult> : ISetupSequentialResult<TResult>
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                 internal sealed class SetupSequencePhrase<TResult> : ISetupSequentialResult<TResult>
@@ -98,14 +94,12 @@ namespace Moq.Language.Flow
     After:
             SequenceSetup setup;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private SequenceSetup setup;
     After:
             SequenceSetup setup;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private SequenceSetup setup;

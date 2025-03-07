@@ -18,14 +18,12 @@ namespace Moq.Protected
     After:
         sealed class ProtectedAsMock<T, TAnalog> : IProtectedAsMock<T, TAnalog>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ProtectedAsMock<T, TAnalog> : IProtectedAsMock<T, TAnalog>
     After:
         sealed class ProtectedAsMock<T, TAnalog> : IProtectedAsMock<T, TAnalog>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ProtectedAsMock<T, TAnalog> : IProtectedAsMock<T, TAnalog>
@@ -41,14 +39,12 @@ namespace Moq.Protected
     After:
             Mock<T> mock;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Mock<T> mock;
     After:
             Mock<T> mock;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Mock<T> mock;
@@ -64,14 +60,12 @@ namespace Moq.Protected
         After:
                 static DuckReplacer DuckReplacerInstance = new DuckReplacer(typeof(TAnalog), typeof(T));
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private static DuckReplacer DuckReplacerInstance = new DuckReplacer(typeof(TAnalog), typeof(T));
         After:
                 static DuckReplacer DuckReplacerInstance = new DuckReplacer(typeof(TAnalog), typeof(T));
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private static DuckReplacer DuckReplacerInstance = new DuckReplacer(typeof(TAnalog), typeof(T));
@@ -309,14 +303,12 @@ namespace Moq.Protected
             After:
                     LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
             After:
                     LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
@@ -339,14 +331,12 @@ namespace Moq.Protected
             After:
                     static LambdaExpression ReplaceDuck(LambdaExpression expression)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static LambdaExpression ReplaceDuck(LambdaExpression expression)
             After:
                     static LambdaExpression ReplaceDuck(LambdaExpression expression)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static LambdaExpression ReplaceDuck(LambdaExpression expression)
@@ -368,14 +358,12 @@ namespace Moq.Protected
             After:
                     sealed class DuckReplacer : ExpressionVisitor
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private sealed class DuckReplacer : ExpressionVisitor
             After:
                     sealed class DuckReplacer : ExpressionVisitor
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private sealed class DuckReplacer : ExpressionVisitor
@@ -396,7 +384,6 @@ namespace Moq.Protected
                     Type duckType;
                     Type targetType;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private Type duckType;
@@ -405,7 +392,6 @@ namespace Moq.Protected
                     Type duckType;
                     Type targetType;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private Type duckType;
@@ -475,14 +461,12 @@ namespace Moq.Protected
                     After:
                                 MemberInfo FindCorrespondingMember(MemberInfo duckMember)
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                                 private MemberInfo FindCorrespondingMember(MemberInfo duckMember)
                     After:
                                 MemberInfo FindCorrespondingMember(MemberInfo duckMember)
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                                 private MemberInfo FindCorrespondingMember(MemberInfo duckMember)
@@ -512,14 +496,12 @@ namespace Moq.Protected
                     After:
                                 MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                                 private MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
                     After:
                                 MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                                 private MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
@@ -565,14 +547,12 @@ namespace Moq.Protected
                 After:
                             PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                             private PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
                 After:
                             PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                             private PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
@@ -611,14 +591,12 @@ namespace Moq.Protected
                 After:
                             static bool IsCorrespondingMethod(MethodInfo duckMethod, MethodInfo candidateTargetMethod)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                             private static bool IsCorrespondingMethod(MethodInfo duckMethod, MethodInfo candidateTargetMethod)
                 After:
                             static bool IsCorrespondingMethod(MethodInfo duckMethod, MethodInfo candidateTargetMethod)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                             private static bool IsCorrespondingMethod(MethodInfo duckMethod, MethodInfo candidateTargetMethod)
@@ -696,14 +674,12 @@ namespace Moq.Protected
                 After:
                             static bool IsCorrespondingProperty(PropertyInfo duckProperty, PropertyInfo candidateTargetProperty)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                             private static bool IsCorrespondingProperty(PropertyInfo duckProperty, PropertyInfo candidateTargetProperty)
                 After:
                             static bool IsCorrespondingProperty(PropertyInfo duckProperty, PropertyInfo candidateTargetProperty)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                             private static bool IsCorrespondingProperty(PropertyInfo duckProperty, PropertyInfo candidateTargetProperty)

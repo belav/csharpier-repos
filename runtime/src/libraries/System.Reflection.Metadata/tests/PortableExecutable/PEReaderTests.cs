@@ -188,7 +188,6 @@ namespace System.Reflection.PortableExecutable.Tests
             }
         }
         */
-
         [Fact]
         public void IL_LazyLoad()
         {

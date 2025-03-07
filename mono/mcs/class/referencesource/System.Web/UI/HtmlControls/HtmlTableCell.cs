@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -109,7 +108,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Number of columns that this cell spans.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the number of columns that the HtmlTableCell control spans.
@@ -154,7 +152,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Suppresses wrapping.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a value indicating whether text within an
@@ -187,7 +184,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Number of rows that this cell spans.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the number of rows an <see langword='HtmlTableCell'/> control

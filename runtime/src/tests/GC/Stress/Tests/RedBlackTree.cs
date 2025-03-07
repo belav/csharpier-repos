@@ -7,7 +7,6 @@
         Robert Sedgewick's paper:
           http://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
 **********************************************************************************************/
-
 using System;
 
 public enum Color

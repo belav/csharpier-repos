@@ -509,7 +509,6 @@ namespace System.Reflection
             int count = 0;
 
             /* MS.NET doesn't report MethodImplAttribute */
-
             MonoMethodInfo info = MonoMethodInfo.GetMethodInfo(mhandle);
             if ((info.iattrs & MethodImplAttributes.PreserveSig) != 0)
                 count++;
@@ -536,7 +535,6 @@ namespace System.Reflection
             int count = 0;
 
             /* MS.NET doesn't report MethodImplAttribute */
-
             MonoMethodInfo info = MonoMethodInfo.GetMethodInfo(mhandle);
             if ((info.iattrs & MethodImplAttributes.PreserveSig) != 0)
                 count++;

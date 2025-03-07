@@ -64,7 +64,6 @@ namespace Mono.Security.Cryptography
      *	</KeyValue>
      * </KeyPair>
      */
-
     /* NOTES
      *
      * - There's NO confidentiality / integrity built in this
@@ -89,7 +88,6 @@ namespace Mono.Security.Cryptography
      * created (saved). You must remove the container than save it
      * back. This is the same behaviour as CSP under Windows.
      */
-
 #if INSIDE_CORLIB
     internal
 #else

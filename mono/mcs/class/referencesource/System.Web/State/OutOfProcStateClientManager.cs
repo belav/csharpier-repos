@@ -262,7 +262,6 @@ namespace System.Web.SessionState
             *     "tcpip=<server>:<port>"
             *     "tcpip=[IPv6-address]:port", per RFC 3986, Sec. 3.2.2
             */
-
             // chop off the "tcpip=" part
             if (!stateConnectionString.StartsWith("tcpip=", StringComparison.Ordinal))
             {
@@ -684,7 +683,6 @@ namespace System.Web.SessionState
 
                     case 423:
                         /* state locked, return lock information */
-
                         if (0 <= results.lockAge)
                         {
                             if (results.lockAge < Sec.ONE_YEAR)

@@ -53,7 +53,6 @@ namespace Novell.Directory.Ldap
             *
             * @return the referral that could not be followed.
             */
-
             get { return failedReferral; }
             set
             {

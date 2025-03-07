@@ -162,7 +162,6 @@ WARNING: tried to acquire lock ImageDataLock at mono_image_init_name_cache while
     This one is fixable by splitting mono_image_init_name_cache into a locked and an unlocked variants and calling them appropriately.
 
 */
-
 public enum Lock
 {
     Invalid,

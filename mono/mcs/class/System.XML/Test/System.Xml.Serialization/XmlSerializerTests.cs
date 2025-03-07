@@ -1304,7 +1304,6 @@ namespace MonoTests.System.XmlSerialization
             Assert.AreEqual (WriterText, "");
         }
         */
-
         // test basic class serialization /////////////////////////////////////
         [Test]
         public void TestSerializeSimpleClass()

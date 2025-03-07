@@ -144,7 +144,6 @@ namespace Mono.Globalization.Unicode
             AppendBufferPrimitive (0, ref l1b, ref l1);
         }
         */
-
         // Append sort key value from table normally.
         internal void AppendKana(
             byte category,

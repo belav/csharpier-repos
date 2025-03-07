@@ -4983,7 +4983,6 @@ namespace System
             return GetTypeHandleInternal().IsMarshalByRef();
         }
         */
-
         protected override bool IsByRefImpl()
         {
             return RuntimeTypeHandle.IsByRef(this);

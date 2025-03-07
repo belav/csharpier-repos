@@ -23,7 +23,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\LiteralTextContainerControlBuilder.uex' path='docs/doc[@for="LiteralTextContainerControlBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

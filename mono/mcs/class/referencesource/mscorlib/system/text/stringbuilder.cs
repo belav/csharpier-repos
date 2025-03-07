@@ -1303,7 +1303,6 @@ namespace System.Text
         /*====================================Insert====================================
         **
         ==============================================================================*/
-
         // Returns a reference to the StringBuilder with ; value inserted into
         // the buffer at index. Existing characters are shifted to make room for the new text.
         // The capacity is adjusted as needed. If value equals String.Empty, the

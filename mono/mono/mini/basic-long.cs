@@ -22,7 +22,6 @@ using System.Reflection;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 #if __MOBILE__
 class LongTests
 #else
@@ -387,7 +386,6 @@ class Tests
         return 0;
     }
     */
-
     public static int test_8_and()
     {
         long a = 0xffffffffff;

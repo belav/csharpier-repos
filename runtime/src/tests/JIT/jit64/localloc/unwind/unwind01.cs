@@ -4,7 +4,6 @@
 /*
  * Test unwinding from simple function.
  */
-
 using System;
 using LocallocTesting;
 using Xunit;

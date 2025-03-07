@@ -81,7 +81,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Decoders for ASN.1 simple types
         */
-
         /// <summary> Decode a BOOLEAN directly from a stream. Call this method when you
         /// know that the next ASN.1 encoded element is a BOOLEAN
         ///
@@ -116,7 +115,6 @@ namespace Novell.Directory.Ldap.Asn1
         * public Object decodeBitString(InputStream in, int len)
         * throws IOException;
         */
-
         /// <summary> Decode an OCTET_STRING directly from a stream. Call this method when you
         /// know that the next ASN.1 encoded element is a OCTET_STRING.
         ///
@@ -133,7 +131,6 @@ namespace Novell.Directory.Ldap.Asn1
         * public Object decodeObjectIdentifier(InputStream in, int len)
         * throws IOException;
         */
-
         /// <summary> Decode a CharacterString directly from a stream.
         ///
         /// Decodes any of the specialized character strings.
@@ -149,28 +146,23 @@ namespace Novell.Directory.Ldap.Asn1
         /* No Decoders for ASN.1 structured types. A structured type's value is a
         * collection of other types.
         */
-
         /* Decoders for ASN.1 useful types
         */
-
         /* Asn1 TYPE NOT YET SUPPORTED
         * Decode a GENERALIZED_TIME directly from a stream.
         * public Object decodeGeneralizedTime(InputStream in, int len)
         * throws IOException;
         */
-
         /* Asn1 TYPE NOT YET SUPPORTED
         * Decode a UNIVERSAL_TIME directly from a stream.
         * public Object decodeUniversalTime(InputStream in, int len)
         * throws IOException;
         */
-
         /* Asn1 TYPE NOT YET SUPPORTED
         * Decode an EXTERNAL directly from a stream.
         * public Object decodeExternal(InputStream in, int len)
         * throws IOException;
         */
-
         /* Asn1 TYPE NOT YET SUPPORTED
         * Decode an OBJECT_DESCRIPTOR directly from a stream.
         * public Object decodeObjectDescriptor(InputStream in, int len)

@@ -299,7 +299,6 @@ namespace System.Data.Odbc
             base.GetProperties(propertyDescriptors);
         }
         */
-
         public override bool Remove(string keyword)
         {
             ADP.CheckArgumentNull(keyword, "keyword");

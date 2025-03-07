@@ -198,14 +198,12 @@ namespace Moq
             After:
                     static bool CanCast(object value)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static bool CanCast(object value)
             After:
                     static bool CanCast(object value)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static bool CanCast(object value)
@@ -275,14 +273,12 @@ namespace Moq
         After:
             sealed class MatchFactory : Match
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
             internal sealed class MatchFactory : Match
         After:
             sealed class MatchFactory : Match
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
             internal sealed class MatchFactory : Match
@@ -298,14 +294,12 @@ namespace Moq
     After:
             readonly Func<object, Type, bool> condition;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly Func<object, Type, bool> condition;
     After:
             readonly Func<object, Type, bool> condition;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly Func<object, Type, bool> condition;
@@ -345,14 +339,12 @@ namespace Moq
             After:
                     static bool CanCast<T>(object value)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static bool CanCast<T>(object value)
             After:
                     static bool CanCast<T>(object value)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static bool CanCast<T>(object value)
@@ -379,14 +371,12 @@ namespace Moq
                 After:
                         static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod("CanCast", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod("CanCast", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
                 After:
                         static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod("CanCast", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod("CanCast", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);

@@ -7,7 +7,6 @@ namespace System.Diagnostics
     {
         /// These methods are used on other Unix systems to track how many children use the terminal,
         /// and update the terminal configuration when necessary.
-
         [Conditional("unnecessary")]
         internal static void ConfigureTerminalForChildProcesses(
             int increment,

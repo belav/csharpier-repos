@@ -142,7 +142,6 @@ namespace IBM.Data.DB2
         /// Number of records affected by this operation.  Will be zero until we close the
         /// reader
         ///
-
         public int RecordsAffected
         {
             get { return recordsAffected; }
@@ -696,7 +695,6 @@ namespace IBM.Data.DB2
         /// <summary>
         /// Does the describe and bind steps for the query result set.  Called for both immediate and prepared queries.
         /// </summary>
-
         /// <summary>
         /// FetchResults does  what it says.
         /// </summary>
@@ -1084,7 +1082,6 @@ namespace IBM.Data.DB2
         ///
         /// GetDateTime method
         ///
-
         public DateTime GetDateTime(int col)
         {
             return (DateTime)GetDateTimeInternal(col);
@@ -1250,7 +1247,6 @@ namespace IBM.Data.DB2
         ///
         ///GetDecimal method
         ///
-
         public Decimal GetDecimal(int col)
         {
             return (Decimal)GetDecimalInternal(col);

@@ -374,7 +374,6 @@ namespace System.ServiceModel.Transactions
                         // It's recommended to not let partially trusted callers to bring down the process.
                         System.Runtime.PartialTrustHelpers.DemandForFullTrust();
                         */
-
                         try
                         {
                             CoordinationServiceConfiguration config =

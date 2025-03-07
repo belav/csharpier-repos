@@ -102,7 +102,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
                     </group>
                 </ElementType>
             */
-
             using (LocalTag(GetLineNumber(localDeclarationStatement)))
             {
                 // Spew the type first
@@ -241,7 +240,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
                     </group>
                 </ElementType>
             */
-
             using (LiteralTag())
             {
                 var constantValue = SemanticModel.GetConstantValue(expression);

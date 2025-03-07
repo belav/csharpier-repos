@@ -73,7 +73,6 @@ namespace System
                     Locale.GetText ("This isn't a 64bits machine."));
             }
             */
-
             m_value = (void*)value;
         }
 

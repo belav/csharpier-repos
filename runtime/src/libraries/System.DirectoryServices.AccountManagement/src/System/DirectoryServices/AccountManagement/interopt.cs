@@ -384,7 +384,6 @@ namespace System.DirectoryServices.AccountManagement
           DsRole_MemberServerWithSharedAccountDomain
         }DSROLE_MACHINE_ROLE;
         */
-
         public enum DSROLE_MACHINE_ROLE
         {
             DsRole_RoleStandaloneWorkstation,
@@ -409,7 +408,6 @@ namespace System.DirectoryServices.AccountManagement
          GUID DomainGuid;
          } DSROLE_PRIMARY_DOMAIN_INFO_BASIC,  *PDSROLE_PRIMARY_DOMAIN_INFO_BASIC;
          */
-
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public sealed class DSROLE_PRIMARY_DOMAIN_INFO_BASIC
         {

@@ -742,7 +742,6 @@ namespace System.Xml.Xsl.Xslt
             //ProcessExpr(node.Use);
         }
         */
-
         //protected override XslFlags VisitList(XslNode node) { return VisitChildren(node); }
 
         protected override XslFlags VisitLiteralAttribute(XslNode node)

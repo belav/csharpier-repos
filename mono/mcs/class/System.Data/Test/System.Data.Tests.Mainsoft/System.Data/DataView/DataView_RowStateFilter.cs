@@ -80,7 +80,6 @@ namespace tests.system_data_dll.System_Data
                 OriginalRows	Original rows including unchanged and deleted rows. 42
                 Unchanged		An unchanged row. 2
              */
-
             //DataRowView[] drvResult = null;
             System.Collections.ArrayList al = new System.Collections.ArrayList();
 

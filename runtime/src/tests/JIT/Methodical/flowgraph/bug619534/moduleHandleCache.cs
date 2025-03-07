@@ -19,7 +19,6 @@ System.BadImageFormatException: [C:\tests\Dev10\640711\Lib1.dll] Bad string toke
  * ----------------------------------------------------------------------
  * The reader should not cache the embedded module handle if it is not clearing the cache when changing scopes.
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

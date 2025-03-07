@@ -12,7 +12,6 @@
  **
  **
  ===========================================================*/
-
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
@@ -936,7 +935,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
             if (callA.Length != 7)
                 throw new SerializationException(String.Format(Environment.GetResourceString("Serialization_Method")));
                 */
-
             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsIsArray))
             {
                 args = callA;

@@ -12,7 +12,6 @@
 ** Purpose: Create a Memorystream over an UnmanagedMemoryStream
 **
 ===========================================================*/
-
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;

@@ -179,7 +179,6 @@ namespace Test.Mono.Data.Sqlite
                     Console.WriteLine(" " + myRow[myColumn.ColumnName]);
                 }
             }*/
-
             try
             {
                 dbcmd.CommandText = "SELECT NDESC INVALID SYNTAX FROM MONO_TEST WHERE NID=2";
@@ -197,7 +196,6 @@ namespace Test.Mono.Data.Sqlite
             } catch (Exception e) {
                 Console.WriteLine("Testing an execution error: " + e.GetType().Name + ": " + e.Message);
             }*/
-
             dataset.Dispose();
             adapter.Dispose();
             reader.Close();

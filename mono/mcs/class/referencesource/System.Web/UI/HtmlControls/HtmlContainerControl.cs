@@ -17,7 +17,6 @@ namespace System.Web.UI.HtmlControls
     /*
      *  A control representing an intrinsic Html tag.
      */
-
     /// <devdoc>
     /// <para>The <see langword='HtmlContainerControl'/>
     /// class defines the methods,
@@ -30,7 +29,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates a new WebControl
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlContainerControl'/> class using
         ///    default values.</para>
@@ -41,7 +39,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates a new HtmlContainerControl
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlContainerControl'/> class using the
         ///    specified string.</para>
@@ -56,7 +53,6 @@ namespace System.Web.UI.HtmlControls
          * will throw an exception if there are no children, more than one
          * child, or the single child is not a literal.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the
@@ -103,7 +99,6 @@ namespace System.Web.UI.HtmlControls
          * will throw an exception if there are no children, more than one child, or
          * the single child is not a literal.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets all text between the opening and closing tags
@@ -150,7 +145,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Render the control into the given writer.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -164,7 +158,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Override to prevent InnerHtml from being rendered as an attribute.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -177,7 +170,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Render the end tag, &lt;/TAGNAME&gt;.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

@@ -1072,7 +1072,6 @@ namespace System.Web
         /*
          * Add dependency on a file to the current response
          */
-
         /// <devdoc>
         ///    <para>Adds dependency on a file to the current response.</para>
         /// </devdoc>
@@ -1831,7 +1830,6 @@ namespace System.Web
         /*
          * Http status description string
          */
-
         // Http status description string
         //    Gets or sets the HTTP status string of output returned to the client.
         public String StatusDescription
@@ -1946,7 +1944,6 @@ namespace System.Web
         /*
          * Content-type
          */
-
         /// <devdoc>
         ///    <para>Gets or sets the
         ///       HTTP MIME type of output.</para>
@@ -2241,7 +2238,6 @@ namespace System.Web
         /*
          * Disconnect client
          */
-
         /// <devdoc>
         ///    <para>Closes the socket connection to a client.</para>
         /// </devdoc>
@@ -2345,7 +2341,6 @@ namespace System.Web
           * @param name header name
           * @param value header value
           */
-
         /// <devdoc>
         ///    <para>Adds an HTTP
         ///       header to the output stream.</para>
@@ -2549,7 +2544,6 @@ namespace System.Web
         /*
          * Clear response buffer and headers. (For ASP compat doesn't clear headers)
          */
-
         /// <devdoc>
         ///    <para>Clears all headers and content output from the buffer stream.</para>
         /// </devdoc>
@@ -2579,7 +2573,6 @@ namespace System.Web
         /*
          * Flush response currently buffered
          */
-
         /// <devdoc>
         ///    <para>Sends all currently buffered output to the client.</para>
         /// </devdoc>
@@ -2645,7 +2638,6 @@ namespace System.Web
          *
          * @param param string to append to the log record
          */
-
         /// <devdoc>
         ///    <para>Adds custom log information to the IIS log file.</para>
         /// </devdoc>
@@ -3271,7 +3263,6 @@ namespace System.Web
          * @param filename file to write
          * @readIntoMemory flag to read contents into memory immediately
          */
-
         /// <devdoc>
         ///    <para> Reads a file into a memory block.</para>
         /// </devdoc>
@@ -3418,7 +3409,6 @@ namespace System.Web
          * @param offset file offset to start writing
          * @param size number of bytes to write
          */
-
         /// <devdoc>
         ///    <para>Writes a file directly to an HTTP content output stream.</para>
         /// </devdoc>
@@ -3466,7 +3456,6 @@ namespace System.Web
          * @param offset file offset to start writing
          * @param size number of bytes to write
          */
-
         /// <devdoc>
         ///    <para>Writes a file directly to an HTTP content output stream.</para>
         /// </devdoc>
@@ -3658,7 +3647,6 @@ namespace System.Web
          * throws special [non-]exception uncatchable by the user code
          * to tell application to stop module execution.
          */
-
         /// <devdoc>
         ///    <para>Sends all currently buffered output to the client then closes the
         ///       socket connection.</para>
@@ -3711,7 +3699,6 @@ namespace System.Web
         /*
          * ASP compatible caching properties
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the time, in minutes, until cached

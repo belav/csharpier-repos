@@ -13,7 +13,6 @@
   further optimized (rewrote threading, random generation loop) by Jan de Vaan
   modified by Josh Goldfoot (fasta-repeat buffering)
 */
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -161,7 +160,6 @@ namespace BenchmarksGame
 
             /* JG: fasta_repeat repeats every len(alu) * line-length = 287 * 61 = 17507 characters.
                So, calculate this once, then just print that buffer over and over. */
-
             byte[] sequence;
             int sequenceLength;
             using (var unstandardOut = new MemoryStream(alu.Length * (LineLength + 1) + 1))

@@ -38,7 +38,6 @@ namespace nist_dom.fundamental
                     return tests;
                 }
         */
-
         //------------------------ test case core-0001T ------------------------
         //
         // Testing feature - The doctype attribute contains the Document Type

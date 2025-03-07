@@ -743,7 +743,6 @@ namespace Test_i8flat_cs
                 pass = false;
             }
             */
-
             x = -10;
             y = 4;
 
@@ -792,7 +791,6 @@ namespace Test_i8flat_cs
                 pass = false;
             }
             */
-
             x = -10;
             y = 4;
 
@@ -860,7 +858,6 @@ namespace Test_i8flat_cs
                 pass = false;
             }
             */
-
             x = -10;
             y = 4;
 

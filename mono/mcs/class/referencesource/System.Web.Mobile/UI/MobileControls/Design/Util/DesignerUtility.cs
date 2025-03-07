@@ -45,7 +45,6 @@ namespace System.Web.UI.Design.MobileControls.Util
             return true;
         }
         */
-
         internal static bool TopLevelControl(MobileControl control)
         {
             if (control is Form || control is StyleSheet)

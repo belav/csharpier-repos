@@ -53,7 +53,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructors for Asn1OctetString
         */
-
         /// <summary> Call this constructor to construct an Asn1OctetString
         /// object from a byte array.
         ///
@@ -124,7 +123,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Object implementation
         */
-
         /// <summary> Call this method to encode the current instance into the
         /// specified output stream using the specified encoder object.
         ///
@@ -143,7 +141,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /*Asn1OctetString specific methods
         */
-
         /// <summary> Returns the content of this Asn1OctetString as a byte array.</summary>
         [CLSCompliantAttribute(false)]
         public sbyte[] byteValue()

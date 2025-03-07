@@ -46,7 +46,6 @@ namespace System.Web.UI.WebControls
         {
             return null;
         }*/
-
         public override TypeConverter.StandardValuesCollection GetStandardValues(
             ITypeDescriptorContext context
         )
@@ -74,7 +73,6 @@ namespace System.Web.UI.WebControls
         {
             return false;
         }*/
-
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return false;
@@ -84,7 +82,6 @@ namespace System.Web.UI.WebControls
         {
             return false;
         }*/
-
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             if (context == null)

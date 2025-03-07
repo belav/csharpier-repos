@@ -42,7 +42,6 @@ namespace MonoTests.System.Collections.Specialized
              * If action is Reset, success.
              * If action is not Reset, throw an ArgumentException
              */
-
             // Trying with Reset
             NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(
                 NotifyCollectionChangedAction.Reset
@@ -103,7 +102,6 @@ namespace MonoTests.System.Collections.Specialized
              *    If changedItems is non-null, throw an Argument Exception
              * If action is Move or Replace, throw an Argument Exception
              */
-
             IList changedItems = new List<object>();
 
             // Trying with Add
@@ -213,7 +211,6 @@ namespace MonoTests.System.Collections.Specialized
              *    If changedItem is non-null, throw an Argument Exception
              * If action is Move or Replace, throw an Argument Exception
              */
-
             object changedItem = new object();
 
             // Trying with Add
@@ -299,7 +296,6 @@ namespace MonoTests.System.Collections.Specialized
              *    Otherwise, success.
              * If action is not Replace, throw an ArgumentException
              */
-
             IList newItems = new List<object>();
             IList oldItems = new List<object>();
 
@@ -450,7 +446,6 @@ namespace MonoTests.System.Collections.Specialized
              *    Otherwise, success.
              * If action is Move or Replace, throw an ArgumentException
              */
-
             IList changedItems = new List<object>();
             int startingIndex = 5; // Doesn't matter what the value of this is.
 

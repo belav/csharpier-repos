@@ -52,7 +52,6 @@ using System.Security.Permissions;
 [assembly: AssemblyFileVersion ("0.0.0.1")]
 
 */
-
 #if !MONO_POSIX_NETSTANDARD_BUILD
 // We are using ../Open.snk for MONO_POSIX_NETSTANDARD_BUILD
 [assembly: AssemblyDelaySign(true)]

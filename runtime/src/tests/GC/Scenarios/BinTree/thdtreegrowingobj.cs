@@ -6,7 +6,6 @@
  *      Mainly stresses the GC by creating n threads each manipulating its own local binary tree.
  *      Differs from thdtree in a way that the nodes of the binary trees grow during the lifetime.
  */
-
 namespace DefaultNamespace
 {
     using System;

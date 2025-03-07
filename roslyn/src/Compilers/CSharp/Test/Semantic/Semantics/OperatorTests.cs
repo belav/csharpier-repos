@@ -4993,7 +4993,6 @@ nr64 OPERATOR, //-LiftedDoubleKIND
 ndec OPERATOR  //-LiftedDecimalKIND
 " + Postfix;
         */
-
         private const string PrefixIncrementTemplate =
             Prefix
             + @"

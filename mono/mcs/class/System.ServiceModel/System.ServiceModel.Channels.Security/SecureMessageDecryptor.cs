@@ -184,7 +184,6 @@ namespace System.ServiceModel.Channels.Security
             doc.Save (Console.Out);
             doc.PreserveWhitespace = true;
             */
-
             // read and store headers, wsse:Security and setup in-band resolver.
             ReadHeaders(srcmsg);
 

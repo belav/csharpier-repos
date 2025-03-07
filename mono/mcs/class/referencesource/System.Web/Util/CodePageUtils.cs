@@ -51,7 +51,6 @@ namespace System.Web.Util
                 }
 
         */
-
         private static int[] _asciiCompatCodePages = new int[79]
         {
             437,

@@ -184,7 +184,6 @@ namespace MonoTests.System.Collections
             list.Capacity = Int32.MaxValue;
         }
         */
-
         [Test]
         public void TestCount()
         {
@@ -628,7 +627,6 @@ namespace MonoTests.System.Collections
             AssertNotNull("sl.GetEnumerator: enumerator not working(2)",e.Current);
         }
         */
-
         [Test]
         public void TestIndexOfKey()
         {

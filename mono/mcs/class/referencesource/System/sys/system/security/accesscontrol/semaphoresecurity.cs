@@ -12,7 +12,6 @@
 ** Date:  November 26, 2003
 **
 ===========================================================*/
-
 using System;
 using System.Collections;
 using System.IO;
@@ -118,7 +117,6 @@ namespace System.Security.AccessControl
         {
         }
         */
-
         internal SemaphoreAuditRule(
             IdentityReference identity,
             int accessMask,

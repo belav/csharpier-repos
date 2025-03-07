@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;
@@ -1367,7 +1366,6 @@ namespace System.Web
         /*
         * Public methods
         */
-
         internal HttpCachePolicySettings GetCurrentSettings(HttpResponse response)
         {
             String[] varyByContentEncodings;
@@ -1541,7 +1539,6 @@ namespace System.Web
         /*
          * Cache at server?
          */
-
         /// <devdoc>
         ///    <para>A call to this method stops all server caching for the current response. </para>
         /// </devdoc>
@@ -1597,7 +1594,6 @@ namespace System.Web
         /*
          * Cache-Control: extension
          */
-
         /// <devdoc>
         ///    <para>Appends a cache control extension directive to the Cache-Control: header.</para>
         /// </devdoc>
@@ -1631,7 +1627,6 @@ namespace System.Web
         /*
          * Cache-Control: no-transform
          */
-
         /// <devdoc>
         ///    <para>Enables the sending of the CacheControl:
         ///       no-transform directive.</para>
@@ -1695,7 +1690,6 @@ namespace System.Web
          *
          * Cache-Control: public | private[=1#field] | no-cache[=1#field] | no-store
          */
-
         /// <devdoc>
         ///    <para>Sets the Cache-Control header to one of the values of
         ///       HttpCacheability. This is used to enable the Cache-Control: public, private, and no-cache directives.</para>
@@ -1796,11 +1790,9 @@ namespace System.Web
         /*
          * Expiration policy.
          */
-
         /*
          * Expires: RFC date
          */
-
         /// <devdoc>
         ///    <para>Sets the Expires: header to the given absolute date.</para>
         /// </devdoc>
@@ -1837,7 +1829,6 @@ namespace System.Web
         /*
          * Cache-Control: max-age=delta-seconds
          */
-
         /// <devdoc>
         ///    <para>Sets Cache-Control: s-maxage based on the specified time span</para>
         /// </devdoc>
@@ -1879,7 +1870,6 @@ namespace System.Web
         /*
          * Cache-Control: s-maxage=delta-seconds
          */
-
         /// <devdoc>
         ///    <para>Sets the Cache-Control: s-maxage header based on the specified time span.</para>
         /// </devdoc>
@@ -1910,7 +1900,6 @@ namespace System.Web
         /*
          * Sliding Expiration
          */
-
         /// <devdoc>
         ///    <para>Make expiration sliding: that is, if cached, it should be renewed with each
         ///       response. This feature is identical in spirit to the IIS
@@ -1970,11 +1959,9 @@ namespace System.Web
         /*
          * Validation policy.
          */
-
         /*
          * Cache-control: must-revalidate | proxy-revalidate
          */
-
         /// <devdoc>
         ///    <para>Set the Cache-Control: header to reflect either the must-revalidate or
         ///       proxy-revalidate directives based on the supplied value. The default is to
@@ -2012,7 +1999,6 @@ namespace System.Web
         /*
         * Etag
         */
-
         /// <devdoc>
         ///    <para>Set the ETag header to the supplied string. Once an ETag is set,
         ///       subsequent attempts to set it will fail and an exception will be thrown.</para>
@@ -2053,7 +2039,6 @@ namespace System.Web
         /*
          * Last-Modified: RFC Date
          */
-
         /// <devdoc>
         ///    <para>Set the Last-Modified: header to the DateTime value supplied. If this
         ///       violates the restrictiveness hierarchy, this method will fail.</para>
@@ -2071,7 +2056,6 @@ namespace System.Web
              * Time may differ if the system time changes in the middle of the request.
              * Adjust the timestamp to Now if necessary.
              */
-
             DateTime utcNow = DateTime.UtcNow;
             if (utcDate > utcNow)
             {
@@ -2083,7 +2067,6 @@ namespace System.Web
              * need to store dates with 1 second resolution or comparisons
              * will be off.
              */
-
             utcDate = new DateTime(utcDate.Ticks - (utcDate.Ticks % TimeSpan.TicksPerSecond));
             if (!_isLastModifiedSet || utcDate > _utcLastModified)
             {

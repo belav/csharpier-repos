@@ -12,7 +12,6 @@
 **
 **
 ===========================================================*/
-
 using System;
 using System.Collections;
 using System.IO;
@@ -110,7 +109,6 @@ namespace System.Security.AccessControl
         {
         }
         */
-
         internal MutexAuditRule(
             IdentityReference identity,
             int accessMask,

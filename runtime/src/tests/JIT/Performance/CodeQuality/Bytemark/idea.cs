@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 /********************
 ** IDEA Encryption **
 *********************
@@ -39,14 +37,12 @@
 ** Other modifications made by Colin Plumb.
 **
 */
-
 /***********
 ** DoIDEA **
 ************
 ** Perform IDEA encryption.  Note that we time encryption & decryption
 ** time as being a single loop.
 */
-
 using System;
 
 public class IDEAEncryption : IDEAStruct
@@ -139,7 +135,6 @@ public class IDEAEncryption : IDEAStruct
         ** Clean up, calculate results, and go home.  Be sure to
         ** show that we don't have to rerun adjustment code.
         */
-
         if (this.adjust == 0)
             this.adjust = 1;
 
@@ -175,7 +170,6 @@ public class IDEAEncryption : IDEAStruct
         /*
         ** Do everything for nloops.
         */
-
         for (i = 0; i < nloops; i++)
         {
             for (j = 0; j < arraysize; j += 8)
@@ -375,13 +369,11 @@ public class IDEAEncryption : IDEAStruct
     ** fastest. -- RG
     */
     /* #define MUL(x,y) (x=mul(low16(x),y)) */
-
     /****************
     ** cipher_idea **
     *****************
     ** IDEA encryption/decryption algorithm.
     */
-
     // NOTE: args in and out were renamed because in/out are reserved words
     //		 in cool.
 

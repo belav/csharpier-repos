@@ -7,7 +7,6 @@
 /*      resurrected in finalize correctly. (verify it by accessing the
 /*      objects after finalization.
 /******************************************************************************/
-
 namespace NStruct
 {
     using System;

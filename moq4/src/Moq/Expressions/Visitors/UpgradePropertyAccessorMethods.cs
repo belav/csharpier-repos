@@ -14,14 +14,12 @@ namespace Moq.Expressions.Visitors
     After:
         sealed class UpgradePropertyAccessorMethods : ExpressionVisitor
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class UpgradePropertyAccessorMethods : ExpressionVisitor
     After:
         sealed class UpgradePropertyAccessorMethods : ExpressionVisitor
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class UpgradePropertyAccessorMethods : ExpressionVisitor
@@ -55,14 +53,12 @@ namespace Moq.Expressions.Visitors
         After:
                 UpgradePropertyAccessorMethods()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private UpgradePropertyAccessorMethods()
         After:
                 UpgradePropertyAccessorMethods()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private UpgradePropertyAccessorMethods()

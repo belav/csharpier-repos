@@ -300,7 +300,6 @@ namespace MonoTests.System.Security.Cryptography
                     hash = SHA224.Create ("InvalidHash");
                     Assert.IsNull (hash, "SHA224.Create('InvalidHash')");
                 }*/
-
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreateNull()

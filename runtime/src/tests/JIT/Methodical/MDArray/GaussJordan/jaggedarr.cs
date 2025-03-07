@@ -152,7 +152,6 @@ public class jaggedarr
             Console.WriteLine();
         }
         */
-
         gaussj(jaggeda, n, jaggedb, m);
 
         /*
@@ -174,7 +173,6 @@ public class jaggedarr
             Console.WriteLine();
         }
         */
-
         if (
             AreEqual(jaggeda[2][0, 0], 3)
             && AreEqual(jaggeda[2][1, 1], 4)

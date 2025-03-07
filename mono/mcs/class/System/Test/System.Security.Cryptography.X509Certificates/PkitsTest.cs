@@ -52,7 +52,6 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
      *	License information are available at
      *	http://cio.nist.gov/esd/emaildir/lists/pkits/msg00048.html
      */
-
     [Category("PKITS")]
     public class PkitsTest
     {

@@ -75,7 +75,6 @@ namespace MonoTests.System.ServiceModel
                     b.CreateBindingElements ();
                 }
         */
-
         [Test]
         public void CreateBindingElements()
         {

@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 // C5 example: File index: read a text file, build and print a list of
 // words and the line numbers (without duplicates) on which they occur.
 

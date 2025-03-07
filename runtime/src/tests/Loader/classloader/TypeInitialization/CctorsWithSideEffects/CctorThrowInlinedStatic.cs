@@ -11,7 +11,6 @@ Try to access a static method twice for inlined and not inlined methods.
 Expected: Should return the same exception.
 
 */
-
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;

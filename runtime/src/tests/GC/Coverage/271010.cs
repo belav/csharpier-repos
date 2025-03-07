@@ -4,7 +4,6 @@
 /* DESCRIPTION: regression test for VSWhidbey 271010
  *              Should throw OOM
  */
-
 using System;
 using System.Runtime.CompilerServices;
 

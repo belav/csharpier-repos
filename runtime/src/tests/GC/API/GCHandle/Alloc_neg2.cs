@@ -4,7 +4,6 @@
 /*
 This test verifies GCHandle.Alloc's ability to validate bad GCHandleTypes, since any int can be cast as a GCHandleType
 */
-
 using System;
 using System.Runtime.InteropServices;
 

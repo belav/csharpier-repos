@@ -88,7 +88,6 @@
  * mapping in WideCharToMultiByte.  Do this by setting BestFitMapping=false
  * in your DllImportAttribute.
  */
-
 namespace Microsoft.Win32
 {
     using System;

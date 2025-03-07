@@ -4,7 +4,6 @@
 /*
  * NOTE: The build action for this file is 'None'!
  */
-
 using System;
 using System.CommandLine.Invocation;
 using System.IO;

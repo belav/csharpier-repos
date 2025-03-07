@@ -933,7 +933,6 @@ namespace System.Data
          *                   (Do not decrease size in any tree, as its a collpase operation)
          *
          */
-
         private int RBDeleteX(int root_id, int z_id, int mainTreeNodeID)
         {
             int x_id = NIL; // used for holding spliced node (y_id's) child

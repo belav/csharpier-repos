@@ -16,7 +16,6 @@
 **
 **
 ==========================================================================*/
-
 #if !MOBILE
 namespace System.Runtime.InteropServices.ComTypes
 {

@@ -1,5 +1,4 @@
 /* -*- Mode: Csharp; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
 namespace System.IO.Ports
 {
     public class SerialDataReceivedEventArgs : EventArgs

@@ -60,7 +60,6 @@ namespace System.Configuration
             return (ConfigurationValue)BaseGet(BaseGetKey(index));
         }
         */
-
         internal ConfigurationValue GetConfigValue(string key)
         {
             return (ConfigurationValue)BaseGet(key);

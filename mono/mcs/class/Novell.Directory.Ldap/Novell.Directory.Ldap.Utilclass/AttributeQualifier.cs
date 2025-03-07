@@ -47,7 +47,6 @@ namespace Novell.Directory.Ldap.Utilclass
             return;
             }
             */
-
             get { return name; }
         }
         public virtual System.String[] Values

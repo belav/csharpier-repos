@@ -85,7 +85,6 @@ namespace MonoTests.System.Runtime.Serialization.Json
             Assert.IsTrue (BitFlagsGenerator.IsBitSet (bytes, 0), "#c4");
         }
         */
-
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorNullStream()

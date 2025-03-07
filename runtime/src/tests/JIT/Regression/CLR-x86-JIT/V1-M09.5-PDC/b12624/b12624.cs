@@ -159,7 +159,6 @@ namespace DefaultNamespace
         public X6 X7_F;
     }
     */
-
     public class Foo
     {
         public static int Read(ref int x)

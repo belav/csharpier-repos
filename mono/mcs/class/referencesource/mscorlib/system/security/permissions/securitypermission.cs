@@ -142,7 +142,6 @@ namespace System.Security.Permissions
         /*
           * IPermission interface implementation
           */
-
         public override bool IsSubsetOf(IPermission target)
         {
             if (target == null)

@@ -13,7 +13,6 @@
 **
 **
 =============================================================================*/
-
 namespace System
 {
     using System.Runtime.Serialization;

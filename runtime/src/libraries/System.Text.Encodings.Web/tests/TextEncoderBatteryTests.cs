@@ -218,7 +218,6 @@ namespace System.Text.Encodings.Web.Tests
          * chars (not supplementary chars) as @XXXX. A supplementary char is thus represented
          * as @XXXX@YYYY (10 chars total) in the stream.
          */
-
         private static string Escape(string value)
         {
             value = value.Replace(@"@", @"@0040");

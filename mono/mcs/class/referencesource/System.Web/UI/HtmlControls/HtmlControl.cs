@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -28,7 +27,6 @@ namespace System.Web.UI.HtmlControls
      * is not represented by both a begin and end tag, for example
      * INPUT or IMG.
      */
-
     /// <devdoc>
     ///    <para>
     ///       The <see langword='HtmlControl'/>
@@ -60,7 +58,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Access to collection of Attributes.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets all attribute name/value pairs expressed on a
@@ -85,7 +82,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Access to collection of styles.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets all
@@ -107,7 +103,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Property to get name of tag.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the element name of a tag that contains a runat=server
@@ -127,7 +122,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Disabled property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets
@@ -176,7 +170,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Render the control into the given writer.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -188,7 +181,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Render only the attributes, attr1=value1 attr2=value2 ...
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -203,7 +195,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Render the begin tag and its attributes, &lt;TAGNAME attr1=value1 attr2=value2&gt;.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -217,7 +208,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * HtmlControls support generic access to Attributes.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -237,7 +227,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * HtmlControls support generic access to Attributes.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

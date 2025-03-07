@@ -523,7 +523,6 @@ namespace System.Transactions.Tests
         #endregion
 
         /* Tests using IntResourceManager */
-
         [Fact]
         public void RMFail1()
         {
@@ -762,7 +761,6 @@ namespace System.Transactions.Tests
             /* Not setting ambient transaction
              Transaction.Current = ct;
              */
-
             IntResourceManager irm = new IntResourceManager(1);
 
             using (TransactionScope scope = new TransactionScope(ct))
@@ -794,7 +792,6 @@ namespace System.Transactions.Tests
             /* Not setting ambient transaction
              Transaction.Current = ct;
              */
-
             IntResourceManager irm = new IntResourceManager(1);
 
             using (TransactionScope scope = new TransactionScope(ct))

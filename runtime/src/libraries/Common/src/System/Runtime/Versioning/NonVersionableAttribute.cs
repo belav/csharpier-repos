@@ -18,7 +18,6 @@
 ** extremely trivial low level methods where NonVersionable gets used, but if there is any plan to
 ** significantly extend its usage or allow 3rd parties to use it please discuss with the diagnostics team.
 ===========================================================*/
-
 namespace System.Runtime.Versioning
 {
     [AttributeUsage(

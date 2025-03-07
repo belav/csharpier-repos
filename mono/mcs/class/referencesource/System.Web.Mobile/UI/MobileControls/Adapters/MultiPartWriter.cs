@@ -25,7 +25,6 @@ namespace System.Web.UI.MobileControls.Adapters
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\MultiPartWriter.uex' path='docs/doc[@for="MultiPartWriter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

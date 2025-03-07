@@ -2409,7 +2409,6 @@ namespace System.Windows.Forms
                 }
             }
             */
-
             rtf_line.Append(str);
         }
 

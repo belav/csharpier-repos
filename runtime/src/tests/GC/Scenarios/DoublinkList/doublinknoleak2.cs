@@ -7,7 +7,6 @@
 /* reference to the first node of the linked list, then delete all old
 /* reference. This test trys to make fake leak for GC.
 /**************************************************************/
-
 namespace DoubLink
 {
     using System;

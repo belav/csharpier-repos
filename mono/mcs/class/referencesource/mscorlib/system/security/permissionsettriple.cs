@@ -14,7 +14,6 @@
 **          Hence, the name PermissionSetTriple.
 **
 =============================================================================*/
-
 namespace System.Security
 {
     using System.Diagnostics.Contracts;

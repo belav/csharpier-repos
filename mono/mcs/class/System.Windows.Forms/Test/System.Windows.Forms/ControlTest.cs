@@ -1200,7 +1200,6 @@ namespace MonoTests.System.Windows.Forms
 
             /* this part fails on linux because we can't allocate X windows which are 0x0,
                and the Control bounds directly reflect the size of the X window */
-
             Assert.IsTrue(c.Bounds.IsEmpty, "A6");
             Assert.IsTrue(c.Size.IsEmpty, "A7");
             Assert.IsTrue(c.ClientSize.IsEmpty, "A8");

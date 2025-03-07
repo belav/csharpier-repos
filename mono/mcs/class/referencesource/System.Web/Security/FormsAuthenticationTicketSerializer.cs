@@ -38,7 +38,6 @@ namespace System.Web.Security
      * FormsAuthenticationTicket.CookiePath: 1+ bytes (1+ length prefix, 0+ payload)
      * {footer}: 1 byte
      */
-
     internal static class FormsAuthenticationTicketSerializer
     {
         private const byte CURRENT_TICKET_SERIALIZED_VERSION = 0x01;

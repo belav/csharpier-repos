@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -22,7 +21,6 @@ namespace System.Web.UI.HtmlControls
     /*
      * An abstract base class representing an intrinsic INPUT tag.
      */
-
     /// <devdoc>
     ///    <para>
     ///       The <see langword='HtmlInputControl'/> abstract class defines
@@ -39,7 +37,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates a new Input
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlInputControl'/> class.</para>
         /// </devdoc>
@@ -55,7 +52,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Name property
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the value of the HTML
@@ -98,7 +94,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Value property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the contents of a text box.
@@ -122,7 +117,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Type of input
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the Type attribute for a particular HTML input control.
@@ -150,7 +144,6 @@ namespace System.Web.UI.HtmlControls
          * Override to render unique name attribute.
          * The name attribute is owned by the framework.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

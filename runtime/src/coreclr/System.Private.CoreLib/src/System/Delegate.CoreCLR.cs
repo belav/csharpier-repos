@@ -139,7 +139,6 @@ namespace System
                 if (_methodPtr != d._methodPtr)
                     return false;
                     */
-
                 if (_methodPtrAux == d._methodPtrAux)
                     return true;
                 // fall through method handle check

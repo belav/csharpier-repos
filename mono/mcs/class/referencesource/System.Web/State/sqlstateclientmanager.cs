@@ -10,7 +10,6 @@
  * Copyright (c) 1998-2000, Microsoft Corporation
  *
  */
-
 namespace System.Web.SessionState
 {
     using System;

@@ -58,7 +58,6 @@ namespace System.ServiceModel.Security
      * on the factory;
 
      */
-
     // Whether we need to add support for targetting different SOAP roles is tracked by 19144
 
     abstract class SecurityProtocolFactory : ISecurityCommunicationObject

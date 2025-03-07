@@ -191,7 +191,6 @@ namespace MonoTests.System.Data
           // just deep table
           string xml24 = "<p1><p2><p3><p4><p5><p6/></p5></p4></p3></p2></p1>";
         */
-
         private DataSet GetDataSet(string xml, string[] nss)
         {
             DataSet ds = new DataSet();

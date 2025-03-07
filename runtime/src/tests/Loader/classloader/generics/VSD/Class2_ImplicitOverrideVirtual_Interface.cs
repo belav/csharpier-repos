@@ -16,7 +16,6 @@ class D<T> : C<T>, I<T> {virtual methods}
 
 
 */
-
 using System;
 using Xunit;
 

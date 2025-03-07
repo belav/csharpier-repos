@@ -302,7 +302,6 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                 var x = 5;  [Line = 2; Start = 13; End = 27; End including line break = 29]
             }               [Line = 3; Start = 29; End = 30; End including line break = 30]
              */
-
             var markup =
                 @"void M()
 {

@@ -21,7 +21,6 @@ namespace System.Web.UI
         /*
          * A sub-object tag was parsed by the parser; add it to this container.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

@@ -58,7 +58,6 @@ namespace System.Net.Configuration
                     set { this[this.executionTimeout] = value; }
                 }
         */
-
         protected override ConfigurationPropertyCollection Properties
         {
             get { return this.properties; }

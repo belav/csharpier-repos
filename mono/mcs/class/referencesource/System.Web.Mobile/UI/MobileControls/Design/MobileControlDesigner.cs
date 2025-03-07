@@ -533,7 +533,6 @@ namespace System.Web.UI.Design.MobileControls
         /*
          *  IMobileDesigner INTERFACE IMPLEMENTATION
          */
-
         /// <summary>
         ///
         /// </summary>

@@ -3180,7 +3180,6 @@ namespace System.Xml
             return true;
         }
         */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

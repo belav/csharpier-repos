@@ -90,7 +90,6 @@ namespace System.Xml.Serialization
                     arrayChoiceCount = 1;
                 }
         */
-
         internal bool AllowPrivateTypes
         {
             get { return allowPrivateTypes; }

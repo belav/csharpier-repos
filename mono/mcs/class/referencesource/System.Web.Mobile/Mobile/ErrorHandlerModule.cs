@@ -22,7 +22,6 @@ namespace System.Web.Mobile
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ErrorHandlerModule.uex' path='docs/doc[@for="ErrorHandlerModule"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -82,7 +81,6 @@ namespace System.Web.Mobile
                     }
                 }
         */
-
         /* Obsolete
                 private void Application_EndRequest(Object source, EventArgs e)
                 {
@@ -94,7 +92,6 @@ namespace System.Web.Mobile
                     }
                 }
         */
-
         private void Application_Error(Object source, EventArgs e)
         {
             HttpApplication application = (HttpApplication)source;

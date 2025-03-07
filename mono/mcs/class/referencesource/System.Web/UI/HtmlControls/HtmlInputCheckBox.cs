@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -38,7 +37,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html INPUT type=checkbox control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputCheckBox'/> class.</para>
         /// </devdoc>
@@ -48,7 +46,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Checked property.
          */
-
         /// <devdoc>
         ///    <para>Gets or sets a value indicating whether the checkbox is
         ///       currently selected.</para>
@@ -79,7 +76,6 @@ namespace System.Web.UI.HtmlControls
         * Adds an event handler for the OnServerChange event.
         *  value: New handler to install for this event.
         */
-
         /// <devdoc>
         ///    <para>Occurs when </para>
         /// </devdoc>
@@ -93,7 +89,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * This method is invoked just prior to rendering.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -119,7 +114,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method used to raise the OnServerChange event.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -135,7 +129,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to process posted data.
          * Checkbox determines the posted Checked state.
          */
-
         /// <internalonly/>
         bool IPostBackDataHandler.LoadPostData(
             string postDataKey,
@@ -176,7 +169,6 @@ namespace System.Web.UI.HtmlControls
          * posted data for a control has changed.  RadioButton fires an
          * OnServerChange event.
          */
-
         /// <internalonly/>
         void IPostBackDataHandler.RaisePostDataChangedEvent()
         {

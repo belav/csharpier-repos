@@ -6,7 +6,6 @@
 ** Purpose: Some single-precision floating-point math operations
 **
 ===========================================================*/
-
 using System.Runtime.CompilerServices;
 
 namespace System

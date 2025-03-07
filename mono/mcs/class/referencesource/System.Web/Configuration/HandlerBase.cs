@@ -10,7 +10,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.Configuration
 {
     using System.Collections;

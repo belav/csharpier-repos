@@ -1421,7 +1421,6 @@ namespace MonoTests.System.Text
                  *	F1..F3	80..BF	80..BF	80..BF
                  *	F4		80..8F	80..BF	80..BF
                  */
-
             var t = new EncodingTester("utf-8");
             byte[] data;
 

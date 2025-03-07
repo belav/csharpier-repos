@@ -114,7 +114,6 @@ namespace Commons.Xml.Relaxng
                         annotationNamespaces.Add (ns);
                 }
         */
-
         // public
         public override bool Read()
         {

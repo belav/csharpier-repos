@@ -13,7 +13,6 @@
 **
 **
 ===========================================================*/
-
 using Microsoft.Win32;
 
 namespace System.IO.Ports

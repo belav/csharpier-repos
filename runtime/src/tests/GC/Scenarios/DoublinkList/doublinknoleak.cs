@@ -6,7 +6,6 @@
 /* before creat a new object, it delete all node references to root
 /* except the first node to make a fake leak for GC.
 /**************************************************************/
-
 namespace DoubLink
 {
     using System;

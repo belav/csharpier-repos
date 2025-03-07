@@ -557,7 +557,6 @@ namespace System.Linq
         /*===================================================================================
          * BASIC OPERATORS
          *===================================================================================*/
-
         //-----------------------------------------------------------------------------------
         // Where is an operator that filters any elements from the data source for which the
         // user-supplied predicate returns false.
@@ -1332,7 +1331,6 @@ namespace System.Linq
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1368,7 +1366,6 @@ namespace System.Linq
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         ///
-
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1408,7 +1405,6 @@ namespace System.Linq
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         ///
-
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1444,7 +1440,6 @@ namespace System.Linq
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         ///
-
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1755,7 +1750,6 @@ namespace System.Linq
         /*===================================================================================
          * AGGREGATION OPERATORS
          *===================================================================================*/
-
         //-----------------------------------------------------------------------------------
         // Internal helper method that constructs an aggregation query operator and performs
         // the actual execution/reduction before returning the result.
@@ -4556,7 +4550,6 @@ namespace System.Linq
         /*===================================================================================
          * TOP (TAKE, SKIP) OPERATORS
          *===================================================================================*/
-
         //-----------------------------------------------------------------------------------
         // Take will take the first [0..count) contiguous elements from the input.
         //
@@ -4743,7 +4736,6 @@ namespace System.Linq
         /*===================================================================================
          * SET OPERATORS
          *===================================================================================*/
-
         //-----------------------------------------------------------------------------------
         // Appends the second data source to the first, preserving order in the process.
         //
@@ -5328,7 +5320,6 @@ namespace System.Linq
         /*===================================================================================
          * DATA TYPE CONVERSION OPERATORS
          *===================================================================================*/
-
         //-----------------------------------------------------------------------------------
         // For compatibility with LINQ. Changes the static type to be less specific if needed.
         //
@@ -5870,7 +5861,6 @@ namespace System.Linq
         /*===================================================================================
          * MISCELLANEOUS OPERATORS
          *===================================================================================*/
-
         //-----------------------------------------------------------------------------------
         // Reverses the input.
         //

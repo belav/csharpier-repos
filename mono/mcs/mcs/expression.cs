@@ -11088,7 +11088,6 @@ namespace Mono.CSharp
     /// <summary>
     ///   Represents the `this' construct
     /// </summary>
-
     public class This : VariableReference
     {
         sealed class ThisVariable : ILocalVariable

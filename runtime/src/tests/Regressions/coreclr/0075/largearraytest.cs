@@ -6,7 +6,6 @@
  * DESCRIPTION: creates arrays of size Int32.MaxValue through Int32.MaxValue-100 inclusive
  * PURPOSE:	 regression test for VSWhidbey 244717
  */
-
 using System;
 using Xunit;
 

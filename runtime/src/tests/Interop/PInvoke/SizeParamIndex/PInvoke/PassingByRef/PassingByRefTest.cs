@@ -8,7 +8,6 @@ using Xunit;
 /// <summary>
 ///  Pass LPArray Size by ref keyword using SizeParamIndex Attributes
 /// </summary>
-
 public class ClientMarshalArrayAsSizeParamIndexByRefTest
 {
     #region ByRef

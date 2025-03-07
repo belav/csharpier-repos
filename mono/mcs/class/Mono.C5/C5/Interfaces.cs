@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 using System;
 using SCG = System.Collections.Generic;
 
@@ -799,7 +798,6 @@ namespace C5
         /// <param name="index">The index at which to insert.</param>
         /// <param name="item">The item to insert.</param>
         void Insert(int index, T item);*/
-
         /// <summary>
         /// Insert an item at the end of a compatible view, used as a pointer.
         /// <para>The <code>pointer</code> must be a view on the same list as
@@ -1150,7 +1148,6 @@ namespace C5
         /// </summary>
         /// <param name="handle">On return: the handle of the item.</param>
         /// <returns>The largest item.</returns>
-
         T FindMax(out IPriorityQueueHandle<T> handle);
 
         /// <summary>
@@ -1158,7 +1155,6 @@ namespace C5
         /// </summary>
         /// <param name="handle">On return: the handle of the removed item.</param>
         /// <returns>The removed item.</returns>
-
         T DeleteMin(out IPriorityQueueHandle<T> handle);
 
         /// <summary>

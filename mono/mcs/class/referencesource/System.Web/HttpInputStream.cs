@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.CodeDom.Compiler; // needed for TempFilesCollection
@@ -483,7 +482,6 @@ namespace System.Web
     /*
      * Stream used as the source for input filtering
      */
-
     internal class HttpInputStreamFilterSource : HttpInputStream
     {
         internal HttpInputStreamFilterSource()

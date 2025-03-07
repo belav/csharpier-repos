@@ -1655,7 +1655,6 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             contentInfo.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.5"));
             contentInfo.Add (a0);
             byte[] digestedData = contentInfo.GetBytes ();*/
-
             byte[] digestedData = null;
             Oid o = ContentInfo.GetContentType(digestedData);
             Assert.AreEqual("1.2.840.113549.1.7.5", o.Value, "GetContentType");
@@ -1677,7 +1676,6 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             contentInfo.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.6"));
             contentInfo.Add (a0);
             byte[] encryptedData = contentInfo.GetBytes (); */
-
             byte[] encryptedData = null;
             Oid o = ContentInfo.GetContentType(encryptedData);
             Assert.AreEqual("1.2.840.113549.1.7.6", o.Value, "GetContentType");

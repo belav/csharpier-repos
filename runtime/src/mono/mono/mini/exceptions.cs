@@ -23,7 +23,6 @@ using System.Runtime.CompilerServices;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 #if __MOBILE__
 class ExceptionTests
 #else
@@ -1678,7 +1677,6 @@ class Tests
         if (failed)
             return 4;
         */
-
         {
             long i;
             float f = 1.1f;
@@ -1753,7 +1751,6 @@ class Tests
          * These tests depend on properties of x86 fp arithmetic so they won't work
          * on other platforms.
          */
-
         /*
         try {
             double d = System.UInt64.MaxValue - 1024.0;
@@ -1779,7 +1776,6 @@ class Tests
         if (failed)
             return 2;
         */
-
         try
         {
             double d = 0;
@@ -1879,7 +1875,6 @@ class Tests
         if ((byte)d != 0)
             return 4;
         */
-
         d = 0xffff;
 
         if ((ushort)d != 0xffff)
@@ -3239,7 +3234,6 @@ class Tests
         return (addr [0].ToInt64 () - addr [100].ToInt64 () < 100) ? 0 : 1;
     }
     */
-
     static unsafe void get_sp(int i)
     {
         addr[i] = new IntPtr(&i);

@@ -66,7 +66,6 @@ MemberDone + StartMember -> MemberStarted : push(xm)
 (in XamlObjectWriter, Value must be followed by EndMember.)
 
 */
-
 namespace System.Xaml
 {
     internal class XamlWriterStateManager<TError, TNSError> : XamlWriterStateManager

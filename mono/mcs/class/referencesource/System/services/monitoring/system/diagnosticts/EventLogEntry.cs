@@ -129,7 +129,6 @@ namespace System.Diagnostics
             return data;
         }
         */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the index of this entry in the event

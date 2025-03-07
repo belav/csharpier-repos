@@ -46,7 +46,6 @@ namespace MonoTests.System.Xml
            directly that by creating a schema then parsing a string.
          
          */
-
         public void WhiteSpaceTest(string type, string valid)
         {
             passed = true;

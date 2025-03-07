@@ -221,7 +221,6 @@ public class Test
         error ("unsafe method called");
     }
     */
-
     static void doBadTransparentOverrideClass()
     {
         new BadTransparentOverrideClass();
@@ -399,7 +398,6 @@ public class Test
         } catch (VerificationException) {
         }
         */
-
         try
         {
             Type type = Type.GetType("Test");

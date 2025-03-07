@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2009 Microsoft Corporation
  */
-
 namespace System.Web.Security
 {
     using System;

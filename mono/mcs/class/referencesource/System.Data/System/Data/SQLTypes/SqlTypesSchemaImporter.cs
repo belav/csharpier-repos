@@ -214,14 +214,12 @@ namespace System.Data.SqlTypes
         </xsd:restriction>
       </xsd:simpleType>
     */
-
     /*
       <xsd:simpleType name=\"timestampNumeric\">
       <!-- The timestampNumeric type supports a legacy format of timestamp. -->
         <xsd:restriction base=\"xsd:long\"/>
       </xsd:simpleType>
     */
-
     public sealed class TypeDecimalSchemaImporterExtension : SqlTypesSchemaImporterExtensionHelper
     {
         public TypeDecimalSchemaImporterExtension()
@@ -285,7 +283,6 @@ namespace System.Data.SqlTypes
         </xsd:restriction>
       </xsd:simpleType>
     */
-
     public sealed class TypeDateTimeSchemaImporterExtension : SqlTypesSchemaImporterExtensionHelper
     {
         public TypeDateTimeSchemaImporterExtension()
@@ -322,7 +319,6 @@ namespace System.Data.SqlTypes
     /*
       <!-- sql_variant directly maps to xsd:anyType -->
     */
-
     /*
       <xsd:complexType name=\"xml\" mixed=\"true\">
         <xsd:sequence>
@@ -330,7 +326,6 @@ namespace System.Data.SqlTypes
         </xsd:sequence>
       </xsd:complexType>
     */
-
     /*
       <xsd:simpleType name=\"dbobject\">
         <xsd:restriction base=\"xsd:anyURI\" />

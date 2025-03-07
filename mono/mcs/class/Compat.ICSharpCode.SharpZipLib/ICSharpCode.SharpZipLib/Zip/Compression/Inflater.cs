@@ -362,7 +362,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             * full window (15 bits) is needed most times, anyway.
             int max_wbits = ((header & 0x7000) >> 12) + 8;
             */
-
             if ((header & 0x0020) == 0)
             { // Dictionary flag?
                 mode = DECODE_BLOCKS;

@@ -146,7 +146,6 @@ public class plainarr
             Console.WriteLine();
         }
         */
-
         gaussj(a, n, b, m);
 
         /*
@@ -168,7 +167,6 @@ public class plainarr
             Console.WriteLine();
         }
         */
-
         if (
             AreEqual(a[0, 0], 3)
             && AreEqual(a[1, 1], 4)

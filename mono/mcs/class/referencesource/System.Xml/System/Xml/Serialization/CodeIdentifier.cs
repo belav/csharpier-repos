@@ -261,7 +261,6 @@ namespace System.Xml.Serialization
             return codeProvider.GetTypeOutput(new CodeTypeReference(name));
         }
         */
-
         static void EscapeKeywords(
             string identifier,
             CodeDomProvider codeProvider,

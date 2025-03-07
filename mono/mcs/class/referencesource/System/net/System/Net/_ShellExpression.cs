@@ -46,7 +46,6 @@ namespace System.Net
             Parse(pattern);
         }
         */
-
         internal bool IsMatch(string target)
         {
             GlobalLog.Print(

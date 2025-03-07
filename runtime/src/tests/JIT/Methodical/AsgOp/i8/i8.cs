@@ -1269,7 +1269,6 @@ namespace Test_i8_cs
                 pass = false;
             }
             */
-
             x = f66(-10, 4);
             if (x != 0)
             {
@@ -1307,7 +1306,6 @@ namespace Test_i8_cs
                 pass = false;
             }
             */
-
             x = f70(-10, 4);
             if (x != -1)
             {
@@ -1363,7 +1361,6 @@ namespace Test_i8_cs
                 pass = false;
             }
             */
-
             x = f76(-10, 4);
             if (x != -1)
             {

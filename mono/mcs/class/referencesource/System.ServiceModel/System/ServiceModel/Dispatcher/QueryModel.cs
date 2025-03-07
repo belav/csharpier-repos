@@ -614,7 +614,6 @@ namespace System.ServiceModel.Dispatcher
         The following EXACTLY follow the XPath 1.0 spec. Some conversions may seem ----/inefficient, but
         we prefer to adhere to the spec and shall leave them be unless performance becomes an issue.
         */
-
         internal static bool Boolean(string val)
         {
             Fx.Assert(null != val, "");

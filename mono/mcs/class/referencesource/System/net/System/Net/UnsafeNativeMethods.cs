@@ -301,7 +301,6 @@ namespace System.Net
                 }
             }
             */
-
             static RasHelper()
             {
                 if (ComNetOS.InstallationType == WindowsInstallationType.ServerCore)
@@ -977,7 +976,6 @@ namespace System.Net
                 [In] IntPtr                 reserved,
                 [Out] out SafeFreeCertChain  chainContext);
             */
-
             [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern void CertFreeCertificateChain([In] IntPtr pChainContext);
@@ -999,7 +997,6 @@ namespace System.Net
                 [In] IntPtr hCertStore,
                 [In] int dwFlags);
             */
-
 #endif // !FEATURE_PAL
 
             [DllImport(ExternDll.Kernel32, ExactSpelling = true, SetLastError = true)]
@@ -1055,7 +1052,6 @@ namespace System.Net
                                                [In] int optionLength
                                                );
             */
-
 #if !FEATURE_PAL
             [DllImport(WININET, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]

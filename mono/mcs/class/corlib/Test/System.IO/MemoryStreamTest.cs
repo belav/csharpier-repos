@@ -289,7 +289,6 @@ namespace MonoTests.System.IO
             VerifyTestData("R1", readBytes, 0, 10);
 
             /* Seek back to beginning */
-
             testStream.Seek(0, SeekOrigin.Begin);
 
             /* Read again, bit more this time */

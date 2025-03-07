@@ -407,7 +407,6 @@ namespace MonoTests.System.Runtime.CompilerServices
             GC.Collect(0);
 
             /*Be 100% sure it will be on the young gen*/
-
             /*cwt array now will be on old gen*/
             ForceMinor();
             ForceMinor();

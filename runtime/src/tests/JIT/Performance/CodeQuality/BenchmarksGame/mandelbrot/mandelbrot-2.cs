@@ -11,7 +11,6 @@
  *
  * Adapted by Antti Lankila from the earlier Isaac Gouy's implementation
  */
-
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;

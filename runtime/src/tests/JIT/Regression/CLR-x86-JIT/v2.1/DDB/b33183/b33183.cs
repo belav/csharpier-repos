@@ -14,7 +14,6 @@
 
     Any other outcome is a bug.
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

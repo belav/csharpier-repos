@@ -755,7 +755,6 @@ namespace Mono.AssemblyLinker
             /*
              * Emit Manifest
              * */
-
             if (isTemplateFile)
                 aname = ReadCustomAttributesFromTemplateFile(templateFile, aname);
 
@@ -789,7 +788,6 @@ namespace Mono.AssemblyLinker
             /*
              * Emit modules
              */
-
             foreach (ModuleInfo mod in inputFiles)
             {
                 if (mod.target != null)
@@ -815,7 +813,6 @@ namespace Mono.AssemblyLinker
             /*
              * Set entry point
              */
-
             if (entryPoint != null)
             {
                 string mainClass = entryPoint.Substring(0, entryPoint.LastIndexOf('.'));
@@ -842,7 +839,6 @@ namespace Mono.AssemblyLinker
             /*
              * Emit resources
              */
-
             ab.DefineVersionInfoResource();
 
             if (win32IconFile != null)

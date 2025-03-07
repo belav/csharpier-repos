@@ -22,7 +22,6 @@ namespace System.Web.Configuration
         <trust level="Full" originUrl="" />
      [SectionComment("<!--  level=\"[Full|High|Medium|Low|Minimal]\" -->")]
     ******************************************************************************/
-
     public sealed class TrustSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

@@ -65,11 +65,9 @@ namespace System.Text
          * since the error conditions will be different depending on whether or not an EncoderNLS
          * instance is available and what values its properties have.
          */
-
         /*
          * THESE TWO METHODS MUST BE OVERRIDDEN BY A SUBCLASSED TYPE
          */
-
         internal virtual OperationStatus DecodeFirstRune(
             ReadOnlySpan<byte> bytes,
             out Rune value,
@@ -94,11 +92,9 @@ namespace System.Text
          * ALL OTHER LOGIC CAN BE IMPLEMENTED IN TERMS OF THE TWO METHODS ABOVE.
          * FOR IMPROVED PERFORMANCE, SUBCLASSED TYPES MAY WANT TO OVERRIDE ONE OR MORE VIRTUAL METHODS BELOW.
          */
-
         /*
          * GETBYTECOUNT FAMILY OF FUNCTIONS
          */
-
         /// <summary>
         /// Given a <see cref="Rune"/>, determines its byte count under the current <see cref="Encoding"/>.
         /// Returns <see langword="false"/> if the <see cref="Rune"/> cannot be represented in the
@@ -473,7 +469,6 @@ namespace System.Text
         /*
          * GETBYTES FAMILY OF FUNCTIONS
          */
-
         /// <summary>
         /// Entry point from <see cref="EncoderNLS.GetBytes"/> and <see cref="EncoderNLS.Convert"/>.
         /// </summary>
@@ -916,7 +911,6 @@ namespace System.Text
         /*
          * GETCHARCOUNT FAMILY OF FUNCTIONS
          */
-
         /// <summary>
         /// Entry point from <see cref="DecoderNLS.GetCharCount"/>.
         /// </summary>
@@ -1270,7 +1264,6 @@ namespace System.Text
         /*
          * GETCHARS FAMILY OF FUNCTIONS
          */
-
         /// <summary>
         /// Entry point from <see cref="DecoderNLS.GetChars"/> and <see cref="DecoderNLS.Convert"/>.
         /// </summary>

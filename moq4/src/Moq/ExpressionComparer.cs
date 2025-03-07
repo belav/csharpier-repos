@@ -15,14 +15,12 @@ namespace Moq
     After:
         sealed class ExpressionComparer : IEqualityComparer<Expression>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ExpressionComparer : IEqualityComparer<Expression>
     After:
         sealed class ExpressionComparer : IEqualityComparer<Expression>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ExpressionComparer : IEqualityComparer<Expression>
@@ -42,14 +40,12 @@ namespace Moq
         After:
                 ExpressionComparer()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private ExpressionComparer()
         After:
                 ExpressionComparer()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private ExpressionComparer()
@@ -197,14 +193,12 @@ namespace Moq
             After:
                     static bool Equals<T>(ReadOnlyCollection<T> x, ReadOnlyCollection<T> y, Func<T, T, bool> comparer)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static bool Equals<T>(ReadOnlyCollection<T> x, ReadOnlyCollection<T> y, Func<T, T, bool> comparer)
             After:
                     static bool Equals<T>(ReadOnlyCollection<T> x, ReadOnlyCollection<T> y, Func<T, T, bool> comparer)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static bool Equals<T>(ReadOnlyCollection<T> x, ReadOnlyCollection<T> y, Func<T, T, bool> comparer)
@@ -240,14 +234,12 @@ namespace Moq
             After:
                     bool EqualsBinary(BinaryExpression x, BinaryExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsBinary(BinaryExpression x, BinaryExpression y)
             After:
                     bool EqualsBinary(BinaryExpression x, BinaryExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsBinary(BinaryExpression x, BinaryExpression y)
@@ -269,14 +261,12 @@ namespace Moq
             After:
                     bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
             After:
                     bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
@@ -297,14 +287,12 @@ namespace Moq
             After:
                     static bool EqualsConstant(ConstantExpression x, ConstantExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static bool EqualsConstant(ConstantExpression x, ConstantExpression y)
             After:
                     static bool EqualsConstant(ConstantExpression x, ConstantExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static bool EqualsConstant(ConstantExpression x, ConstantExpression y)
@@ -323,14 +311,12 @@ namespace Moq
             After:
                     bool EqualsElementInit(ElementInit x, ElementInit y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsElementInit(ElementInit x, ElementInit y)
             After:
                     bool EqualsElementInit(ElementInit x, ElementInit y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsElementInit(ElementInit x, ElementInit y)
@@ -349,14 +335,12 @@ namespace Moq
             After:
                     bool EqualsIndex(IndexExpression x, IndexExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsIndex(IndexExpression x, IndexExpression y)
             After:
                     bool EqualsIndex(IndexExpression x, IndexExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsIndex(IndexExpression x, IndexExpression y)
@@ -377,14 +361,12 @@ namespace Moq
             After:
                     bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
             After:
                     bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
@@ -404,14 +386,12 @@ namespace Moq
             After:
                     bool EqualsLambda(LambdaExpression x, LambdaExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsLambda(LambdaExpression x, LambdaExpression y)
             After:
                     bool EqualsLambda(LambdaExpression x, LambdaExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsLambda(LambdaExpression x, LambdaExpression y)
@@ -432,14 +412,12 @@ namespace Moq
             After:
                     bool EqualsListInit(ListInitExpression x, ListInitExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsListInit(ListInitExpression x, ListInitExpression y)
             After:
                     bool EqualsListInit(ListInitExpression x, ListInitExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsListInit(ListInitExpression x, ListInitExpression y)
@@ -459,14 +437,12 @@ namespace Moq
             After:
                     bool EqualsMemberAssignment(MemberAssignment x, MemberAssignment y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMemberAssignment(MemberAssignment x, MemberAssignment y)
             After:
                     bool EqualsMemberAssignment(MemberAssignment x, MemberAssignment y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMemberAssignment(MemberAssignment x, MemberAssignment y)
@@ -485,14 +461,12 @@ namespace Moq
             After:
                     bool EqualsMemberBinding(MemberBinding x, MemberBinding y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMemberBinding(MemberBinding x, MemberBinding y)
             After:
                     bool EqualsMemberBinding(MemberBinding x, MemberBinding y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMemberBinding(MemberBinding x, MemberBinding y)
@@ -531,14 +505,12 @@ namespace Moq
             After:
                     bool EqualsMember(MemberExpression x, MemberExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMember(MemberExpression x, MemberExpression y)
             After:
                     bool EqualsMember(MemberExpression x, MemberExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMember(MemberExpression x, MemberExpression y)
@@ -557,14 +529,12 @@ namespace Moq
             After:
                     bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
             After:
                     bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
@@ -584,14 +554,12 @@ namespace Moq
             After:
                     bool EqualsMemberListBinding(MemberListBinding x, MemberListBinding y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMemberListBinding(MemberListBinding x, MemberListBinding y)
             After:
                     bool EqualsMemberListBinding(MemberListBinding x, MemberListBinding y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMemberListBinding(MemberListBinding x, MemberListBinding y)
@@ -610,14 +578,12 @@ namespace Moq
             After:
                     bool EqualsMemberMemberBinding(MemberMemberBinding x, MemberMemberBinding y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMemberMemberBinding(MemberMemberBinding x, MemberMemberBinding y)
             After:
                     bool EqualsMemberMemberBinding(MemberMemberBinding x, MemberMemberBinding y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMemberMemberBinding(MemberMemberBinding x, MemberMemberBinding y)
@@ -636,14 +602,12 @@ namespace Moq
             After:
                     bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
             After:
                     bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
@@ -664,14 +628,12 @@ namespace Moq
             After:
                     bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y)
             After:
                     bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y)
@@ -690,14 +652,12 @@ namespace Moq
             After:
                     bool EqualsNew(NewExpression x, NewExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsNew(NewExpression x, NewExpression y)
             After:
                     bool EqualsNew(NewExpression x, NewExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsNew(NewExpression x, NewExpression y)
@@ -716,14 +676,12 @@ namespace Moq
             After:
                     bool EqualsParameter(ParameterExpression x, ParameterExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsParameter(ParameterExpression x, ParameterExpression y)
             After:
                     bool EqualsParameter(ParameterExpression x, ParameterExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsParameter(ParameterExpression x, ParameterExpression y)
@@ -742,14 +700,12 @@ namespace Moq
             After:
                     bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y)
             After:
                     bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y)
@@ -768,14 +724,12 @@ namespace Moq
             After:
                     bool EqualsUnary(UnaryExpression x, UnaryExpression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsUnary(UnaryExpression x, UnaryExpression y)
             After:
                     bool EqualsUnary(UnaryExpression x, UnaryExpression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsUnary(UnaryExpression x, UnaryExpression y)
@@ -794,14 +748,12 @@ namespace Moq
             After:
                     bool EqualsExtension(Expression x, Expression y)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private bool EqualsExtension(Expression x, Expression y)
             After:
                     bool EqualsExtension(Expression x, Expression y)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private bool EqualsExtension(Expression x, Expression y)

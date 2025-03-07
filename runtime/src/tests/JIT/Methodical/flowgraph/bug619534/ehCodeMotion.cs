@@ -12,7 +12,6 @@
  * However, if you put something else in the catch block (such as the commented out line) then it works again.
  * It seems like the 64bit runtime is doing something wrong here.
  */
-
 using System;
 using Xunit;
 

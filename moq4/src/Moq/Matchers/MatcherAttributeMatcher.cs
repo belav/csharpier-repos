@@ -16,14 +16,12 @@ namespace Moq.Matchers
     After:
         class MatcherAttributeMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal class MatcherAttributeMatcher : IMatcher
     After:
         class MatcherAttributeMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal class MatcherAttributeMatcher : IMatcher
@@ -57,7 +55,6 @@ namespace Moq.Matchers
             MethodInfo validatorMethod;
             MethodCallExpression expression;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private MethodInfo validatorMethod;
@@ -66,7 +63,6 @@ namespace Moq.Matchers
             MethodInfo validatorMethod;
             MethodCallExpression expression;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private MethodInfo validatorMethod;
@@ -90,14 +86,12 @@ namespace Moq.Matchers
             After:
                     static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
             After:
                     static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)

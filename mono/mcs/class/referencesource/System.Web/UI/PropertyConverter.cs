@@ -27,12 +27,10 @@ namespace System.Web.UI
         /*
          * Contains helpers to convert properties from strings to their types and vice versa.
          */
-
         /*
          * Converts a persisted enumeration value into its numeric value.
          * Hyphen characters in the persisted format are converted to underscores.
          */
-
         /// <devdoc>
         /// </devdoc>
         public static object EnumFromString(Type enumType, string value)
@@ -51,7 +49,6 @@ namespace System.Web.UI
          * Converts a numeric enumerated value into its persisted form, which is the
          * code name with underscores replaced by hyphens.
          */
-
         /// <devdoc>
         /// </devdoc>
         public static string EnumToString(Type enumType, object enumValue)
@@ -67,7 +64,6 @@ namespace System.Web.UI
          * Converts the persisted string into an object using the object's
          * FromString method.
          */
-
         /// <devdoc>
         /// </devdoc>
         public static object ObjectFromString(Type objType, MemberInfo propertyInfo, string value)

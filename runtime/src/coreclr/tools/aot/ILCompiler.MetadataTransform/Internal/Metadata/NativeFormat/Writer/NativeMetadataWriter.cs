@@ -859,7 +859,6 @@ namespace Internal.Metadata.NativeFormat.Writer
             return this.MethodDeclaration.ToString();
         }
     }*/
-
     public partial class MethodInstantiation
     {
         public override string ToString()

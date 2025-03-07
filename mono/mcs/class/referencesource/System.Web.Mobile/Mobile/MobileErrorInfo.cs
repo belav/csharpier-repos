@@ -25,7 +25,6 @@ namespace System.Web.Mobile
 
 
 */
-
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal

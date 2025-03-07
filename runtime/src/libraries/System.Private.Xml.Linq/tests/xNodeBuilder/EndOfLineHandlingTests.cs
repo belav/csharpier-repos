@@ -272,7 +272,6 @@ namespace CoreXml.Test.XLinq
                 }
 
                 /*================== NewLineChars, IndentChars ==================*/
-
                 //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation, Entitize", Param = NewLineHandling.Entitize, Id = 29, Priority = 1)]
                 //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation, Replace", Param = NewLineHandling.Replace, Id = 30, Priority = 1)]
                 //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation, None", Param = NewLineHandling.None, Id = 31, Priority = 1)]

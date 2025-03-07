@@ -17,7 +17,6 @@ using Microsoft.CodeAnalysis.Operations;
  * this workaround is necessary to apply these suppressions for `Map` invocations that the RDG
  * is able to generate code at compile time for that the analyzer is not able to resolve.
  */
-
 namespace Microsoft.AspNetCore.Http.RequestDelegateGenerator;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]

@@ -134,7 +134,6 @@ namespace System.Net
 
                 Newly created WebRequest.
         --*/
-
         private static WebRequest Create(Uri requestUri, bool useUriBase)
         {
             if (Logging.On)
@@ -249,7 +248,6 @@ namespace System.Net
 
                 Newly created WebRequest.
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Creates a new <see cref='System.Net.WebRequest'/>
@@ -285,7 +283,6 @@ namespace System.Net
 
                 Newly created WebRequest.
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Creates a new <see cref='System.Net.WebRequest'/> instance for the specified Uri scheme.
@@ -558,7 +555,6 @@ namespace System.Net
 
         }
         */
-
         /*++
 
             PrefixList - Returns And Initialize our prefix list.
@@ -639,7 +635,6 @@ namespace System.Net
         ///       class.
         ///    </para>
         /// </devdoc>
-
         protected WebRequest()
         {
 #if !FEATURE_PAL
@@ -790,7 +785,6 @@ namespace System.Net
                     read-only
 
         --*/
-
         /// <devdoc>
         ///    <para>When overridden in a derived class,
         ///       gets

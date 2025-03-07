@@ -193,7 +193,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PWSTR                           pwzDescriptiveText;
         } PEER_PRESENCE_INFO
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_PRESENCE_INFO
     {
@@ -245,7 +244,6 @@ namespace System.Net.PeerToPeer.Collaboration
             SOCKADDR_IN6            sin6;
         } PEER_ADDRESS
     */
-
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct PEER_ADDRESS
     {
@@ -259,7 +257,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PWSTR                       pwzEndpointName;
         } PEER_ENDPOINT
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_ENDPOINT
     {
@@ -273,7 +270,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PBYTE pbData;
         } PEER_DATA
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_DATA
     {
@@ -290,7 +286,6 @@ namespace System.Net.PeerToPeer.Collaboration
             unsigned char  Data4[ 8 ];
         } GUID;
     */
-
     [StructLayout(
         LayoutKind.Sequential /*, Pack=1*/
     )]
@@ -316,7 +311,6 @@ namespace System.Net.PeerToPeer.Collaboration
             DWORD           dwPublicationScope;
         } PEER_OBJECT
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_OBJECT
     {
@@ -332,7 +326,6 @@ namespace System.Net.PeerToPeer.Collaboration
         PWSTR           pwzDescription;
         } PEER_APPLICATION
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_APPLICATION
     {
@@ -349,7 +342,6 @@ namespace System.Net.PeerToPeer.Collaboration
         DWORD                       dwPublicationScope;
         } PEER_APPLICATION_REGISTRATION_INFO
      */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_APPLICATION_REGISTRATION_INFO
     {
@@ -371,7 +363,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PEER_DATA                           credentials;
         } PEER_CONTACT
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_CONTACT
     {
@@ -391,7 +382,6 @@ namespace System.Net.PeerToPeer.Collaboration
             GUID                        id;
         } PEER_PEOPLE_NEAR_ME
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_PEOPLE_NEAR_ME
     {
@@ -407,7 +397,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PWSTR               pwzMessage;
         } PEER_INVITATION
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_INVITATION
     {
@@ -423,7 +412,6 @@ namespace System.Net.PeerToPeer.Collaboration
             HRESULT                         hrExtendedInfo;
         } PEER_INVITATION_RESPONSE
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_INVITATION_RESPONSE
     {
@@ -439,7 +427,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PPEER_INVITATION            pInvitation;
         } PEER_APP_LAUNCH_INFO
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_APP_LAUNCH_INFO
     {
@@ -457,7 +444,6 @@ namespace System.Net.PeerToPeer.Collaboration
             GUID                        * pInstance;
         } PEER_COLLAB_EVENT_REGISTRATION
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_COLLAB_EVENT_REGISTRATION
     {
@@ -471,7 +457,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PEER_CHANGE_TYPE        changeType;
         } PEER_EVENT_WATCHLIST_CHANGED_DATA
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_WATCHLIST_CHANGED_DATA
     {
@@ -487,7 +472,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PPEER_PRESENCE_INFO     pPresenceInfo;
         } PEER_EVENT_PRESENCE_CHANGED_DATA
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_PRESENCE_CHANGED_DATA
     {
@@ -505,7 +489,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PPEER_APPLICATION       pApplication;
         } PEER_EVENT_APPLICATION_CHANGED_DATA
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_APPLICATION_CHANGED_DATA
     {
@@ -523,7 +506,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PPEER_OBJECT            pObject;
         } PEER_EVENT_OBJECT_CHANGED_DATA
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_OBJECT_CHANGED_DATA
     {
@@ -539,7 +521,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PPEER_ENDPOINT          pEndpoint;
         } PEER_EVENT_ENDPOINT_CHANGED_DATA
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_ENDPOINT_CHANGED_DATA
     {
@@ -553,7 +534,6 @@ namespace System.Net.PeerToPeer.Collaboration
             PPEER_PEOPLE_NEAR_ME    pPeopleNearMe;
         } PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA, *PPEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA;
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA
     {
@@ -567,7 +547,6 @@ namespace System.Net.PeerToPeer.Collaboration
             HRESULT                 hrChange;
         } PEER_EVENT_REQUEST_STATUS_CHANGED_DATA, *PPEER_EVENT_REQUEST_STATUS_CHANGED_DATA;
     */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
     {
@@ -589,7 +568,6 @@ namespace System.Net.PeerToPeer.Collaboration
             };
         } PEER_COLLAB_EVENT_DATA, *PPEER_COLLAB_EVENT_DATA;
     */
-
     //
     // We have two different structures and one has explicit layout to be able to
     // handle the union as shown in the structure above. Two structures are used

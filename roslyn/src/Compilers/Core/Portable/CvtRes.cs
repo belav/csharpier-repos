@@ -409,7 +409,6 @@ namespace Microsoft.CodeAnalysis
                     DWORD Characteristics;
                 };
                 */
-
                 resStream.Position = (resStream.Position + 3) & ~3; //headers begin on 4-byte boundaries.
                 resWriter.Write((DWORD)iconDirEntries[i].dwBytesInRes);
                 resWriter.Write((DWORD)0x00000020);
@@ -452,7 +451,6 @@ namespace Microsoft.CodeAnalysis
                 WORD IconId;       // = RESOURCEHEADER.Name
             };
             */
-
             const WORD RT_GROUP_ICON = RT_ICON + 11;
 
             resStream.Position = (resStream.Position + 3) & ~3; //align 4-byte boundary
@@ -521,7 +519,6 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
                 */
-
         internal static void AppendVersionToResourceStream(
             Stream resStream,
             bool isDll,
@@ -908,7 +905,6 @@ namespace Microsoft.CodeAnalysis
                         // followed by strings
                     };
                 */
-
                 var debugPos = writer.BaseStream.Position;
                 var dataSize = GetDataSize();
 

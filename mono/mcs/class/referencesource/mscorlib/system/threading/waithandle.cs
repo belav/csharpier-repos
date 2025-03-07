@@ -14,7 +14,6 @@
 **
 **
 =============================================================================*/
-
 #if MONO
 #undef FEATURE_PAL
 #endif
@@ -352,7 +351,6 @@ namespace System.Threading
         ** If exitContext is true then the synchronization domain for the context
         ** (if in a synchronized context) is exited before the wait and reacquired
         ========================================================================*/
-
 #if !MONO
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
@@ -512,7 +510,6 @@ namespace System.Threading
         ** If exitContext is true then the synchronization domain for the context
         ** (if in a synchronized context) is exited before the wait and reacquired
         ========================================================================*/
-
         [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static int WaitAny(
@@ -639,7 +636,6 @@ namespace System.Threading
         ==  SignalAndWait
         ==
         ==================================================*/
-
 #if !MONO
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]

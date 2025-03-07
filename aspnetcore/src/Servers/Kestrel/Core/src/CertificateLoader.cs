@@ -104,7 +104,6 @@ public static class CertificateLoader
          * applications MAY require that a particular purpose be indicated in
          * order for the certificate to be acceptable to that application.
          */
-
         var hasEkuExtension = false;
 
         foreach (var extension in certificate.Extensions.OfType<X509EnhancedKeyUsageExtension>())

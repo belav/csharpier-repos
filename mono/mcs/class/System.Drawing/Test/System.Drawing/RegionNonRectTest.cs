@@ -37,7 +37,6 @@ namespace MonoTests.System.Drawing
 {
     /* NOTE: General tests and rectangular region tests are located in TestRegion.cs */
     /*       Here we exclusively tests non-rectangular (GraphicsPath based) regions. */
-
     [TestFixture]
     [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
     public class RegionNonRectTest

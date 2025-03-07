@@ -14,7 +14,6 @@ using System.Diagnostics.Contracts;
  **
  **
  ===========================================================*/
-
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
@@ -297,7 +296,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
          * Primitive Reads from Stream
          * @internalonly
          */
-
         internal bool ReadBoolean()
         {
             return dataReader.ReadBoolean();

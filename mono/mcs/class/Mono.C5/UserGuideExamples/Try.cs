@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 // C5 example: various tests 2005 and later
 
 // Compile with

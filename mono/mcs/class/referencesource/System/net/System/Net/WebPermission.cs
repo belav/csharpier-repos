@@ -167,7 +167,6 @@ namespace System.Net
                     }
                 }
         */
-
         public override IPermission CreatePermission()
         {
             WebPermission perm = null;

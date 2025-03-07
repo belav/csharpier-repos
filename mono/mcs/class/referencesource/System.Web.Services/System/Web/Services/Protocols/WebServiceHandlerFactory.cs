@@ -34,7 +34,6 @@ namespace System.Web.Services.Protocols
             Debug.WriteLine("--------------");
         }
         */
-
 #if DEBUG
         void DumpRequest(HttpContext context)
         {

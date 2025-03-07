@@ -330,7 +330,6 @@ namespace System.IO
             Contract.Ensures(CanWrite == false);
             Contract.Ensures(CanSeek == false);
             */
-
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -342,7 +341,6 @@ namespace System.IO
             Contract.Ensures(CanWrite == false);
             Contract.Ensures(CanSeek == false);
             */
-
             Close();
         }
 

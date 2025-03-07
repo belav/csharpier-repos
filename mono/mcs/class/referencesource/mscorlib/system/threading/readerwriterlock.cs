@@ -15,7 +15,6 @@
 **
 **
 ===========================================================*/
-
 #if FEATURE_RWLOCK
 namespace System.Threading
 {

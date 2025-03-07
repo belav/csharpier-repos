@@ -15,7 +15,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ObjectListTitleAttribute.uex' path='docs/doc[@for="ObjectListTitleAttribute"]/*' />
     [AttributeUsage(AttributeTargets.Property)]
     [AspNetHostingPermission(

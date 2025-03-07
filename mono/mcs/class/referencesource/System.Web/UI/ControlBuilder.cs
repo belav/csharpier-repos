@@ -461,7 +461,6 @@ namespace System.Web.UI
         /*
          * Return the ID of the control that this builder creates
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1054,7 +1053,6 @@ namespace System.Web.UI
                 return;
             }
             */
-
             Debug.Assert(!String.IsNullOrEmpty(name));
             Debug.Assert(builder != null);
 
@@ -1410,7 +1408,6 @@ namespace System.Web.UI
                 return;
             }
             */
-
             Debug.Assert(!String.IsNullOrEmpty(name));
             Debug.Assert(builder != null);
 
@@ -3120,7 +3117,6 @@ namespace System.Web.UI
             if ((this.Page.GetDataItem() != null)) {
                 dataBindingExpressionBuilderTarget.SelectedValue = System.Convert.ToString(this.Eval("FavVegetable"));
             }*/
-
             bool isBindableTemplateBuilder = this is BindableTemplateBuilder;
             bool isTemplateBuilder = this is TemplateBuilder;
             bool firstEntry = true;

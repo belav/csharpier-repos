@@ -536,7 +536,6 @@ namespace System.Data.Tests
             Assert.Equal (result, xml);
         }
         */
-
         [Fact]
         public void CloneCopy()
         {

@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -35,7 +34,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html BUTTON control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlButton'/> class.</para>
         /// </devdoc>
@@ -96,7 +94,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Override to generate postback code for onclick.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -133,7 +130,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to raise events on post back.
          * Button fires an OnServerClick event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

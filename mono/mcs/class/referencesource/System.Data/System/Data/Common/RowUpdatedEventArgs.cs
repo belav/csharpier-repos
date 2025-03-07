@@ -16,7 +16,6 @@ namespace System.Data.Common
     /*
         public delegate void RowUpdatedEventHandler(object sender, RowUpdatedEventArgs e);
     */
-
     public class RowUpdatedEventArgs : System.EventArgs
     {
         private IDbCommand _command;

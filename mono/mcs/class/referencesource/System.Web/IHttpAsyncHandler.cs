@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Security.Permissions;
@@ -28,7 +27,6 @@ namespace System.Web
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         void EndProcessRequest(IAsyncResult result);
     }
 }

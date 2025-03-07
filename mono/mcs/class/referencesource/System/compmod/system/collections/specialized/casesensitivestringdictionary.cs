@@ -15,7 +15,6 @@ its used for environment settings storage (only ProcessStartInfo.cs and Executor
 This change enables the correct UNIX behavior along with not changing public API.
 Author: vitkaras
 */
-
 #if PLATFORM_UNIX
 
 namespace System.Collections.Specialized

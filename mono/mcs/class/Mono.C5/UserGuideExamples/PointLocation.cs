@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 using System;
 using System.Diagnostics;
 using C5;
@@ -105,7 +104,6 @@ namespace PointLocation
     /// The code assumes that the given set of edges is correct, in particular
     /// that they do not touch at interior points (e.g. cross or coincide).
     /// </summary>
-
     public class PointLocator<T>
     {
         private TreeDictionary<double, ISorted<Edge<T>>> htree;

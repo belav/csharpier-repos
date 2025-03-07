@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -33,7 +32,6 @@ namespace System.Web.UI
     /*
      * Parser for Template Files (TemplateControls and PageTheme)
      */
-
     /// <internalonly/>
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
@@ -72,7 +70,6 @@ namespace System.Web.UI
         /*
          * Compile a nested .ascx file (a User Control) and return its Type
          */
-
         protected internal Type GetUserControlType(string virtualPath)
         {
             return GetUserControlType(VirtualPath.Create(virtualPath));
@@ -107,7 +104,6 @@ namespace System.Web.UI
         /*
          * Compile a .aspx/.ascx file and return its Type
          */
-
         protected Type GetReferencedType(string virtualPath)
         {
             return GetReferencedType(VirtualPath.Create(virtualPath));

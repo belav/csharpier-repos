@@ -6,7 +6,6 @@
                 mscorwks!WKS::delete_next_card_table: (7 blocks, 11 arcs)
                 mscorwks!SVR::delete_next_card_table: (7 blocks, 11 arcs)
  */
-
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -69,7 +69,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
          * Create a fill-in string describing a parameter list.
          * Does NOT include ()
          */
-
         private void ErrAppendParamList(TypeArray @params, bool isParamArray)
         {
             if (null == @params)

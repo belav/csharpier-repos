@@ -52,7 +52,6 @@ namespace System.Text
             Surrogate:
             Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
          */
-
         private const int UTF8_CODEPAGE = 65001;
 
         // Yes, the idea of emitting U+FEFF as a UTF-8 identifier has made it into

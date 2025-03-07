@@ -241,7 +241,6 @@ namespace System.Net
                     ConnectionGroup
 
         --*/
-
         private ConnectionGroup FindConnectionGroup(string connName, bool dontCreate)
         {
             string lookupStr = ConnectionGroup.MakeQueryStr(connName);
@@ -486,7 +485,6 @@ namespace System.Net
                     Nothing.
 
         --*/
-
         internal virtual void SubmitRequest(HttpWebRequest request)
         {
             SubmitRequest(request, null);
@@ -804,11 +802,9 @@ namespace System.Net
             }
         }
         */
-
         /// <devdoc>
         ///     Removes the specified Connection group from the ServicePoint, destroys safe and unsafe groups, but not internal.
         /// </devdoc>
-
         public bool CloseConnectionGroup(string connectionGroupName)
         {
             GlobalLog.Enter(

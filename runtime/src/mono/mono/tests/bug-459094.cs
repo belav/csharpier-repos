@@ -10,7 +10,6 @@ class Driver
         string current = "";
         /*if (Directory.Exists (step)) FIXME this doesn't work on linux
             Directory.Delete (step, true);*/
-
         try
         {
             for (int i = 0; i < 4000; ++i)

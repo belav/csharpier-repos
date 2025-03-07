@@ -43,7 +43,6 @@ namespace Novell.Directory.Ldap.Utilclass
     /// </seealso>
     /// <seealso cref="Novell.Directory.Ldap.LdapSchemaElement.QualifierNames">
     /// </seealso>
-
     public class EnumeratedIterator : System.Collections.IEnumerator
     {
         private System.Object tempAuxObj;

@@ -7,7 +7,6 @@ op1 is of a user-defined class numHolder that overloads operator %
 op2 can be i4, u4, i8, u8, r4, r8, decimal and user-defined class numHolder
 op1 and op2 can be static, local, class/struct member, function retval, 1D/2D/3D array
 *****************************************************************************/
-
 using System;
 using Xunit;
 

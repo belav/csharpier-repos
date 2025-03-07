@@ -10,7 +10,6 @@
 ** Purpose: Represents an arbitrary precision integer.
 **
 =============================================================================*/
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;

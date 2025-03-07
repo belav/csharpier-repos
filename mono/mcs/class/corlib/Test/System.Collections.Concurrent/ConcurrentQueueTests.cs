@@ -73,7 +73,6 @@ namespace MonoTests.System.Collections.Concurrent
                 for (int i = 0; i < threads; i++)
                     Assert.AreEqual (count, values[i], "#" + i);
             });*/
-
             CollectionStressTestHelper.AddStressTest(new ConcurrentQueue<int>());
         }
 
@@ -111,7 +110,6 @@ namespace MonoTests.System.Collections.Concurrent
                 
                 Assert.AreEqual (expected, actual, "#3");
             });*/
-
             CollectionStressTestHelper.RemoveStressTest(
                 new ConcurrentQueue<int>(),
                 CheckOrderingType.InOrder

@@ -6,7 +6,6 @@
 
 /*
  */
-
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Microsoft.Security",
     "CA2113:SecureLateBindingMethods",

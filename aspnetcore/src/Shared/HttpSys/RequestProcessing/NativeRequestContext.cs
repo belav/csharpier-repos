@@ -102,7 +102,6 @@ internal unsafe class NativeRequestContext : IDisposable
 
                 } HTTP_REQUEST_TIMING_INFO, *PHTTP_REQUEST_TIMING_INFO;
             */
-
             if (
                 !RequestInfo.TryGetValue(
                     (int)HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeRequestTiming,

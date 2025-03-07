@@ -15,7 +15,6 @@
  * Expected Results:
  * value : 256, lowByte : 0, lowByteInt : 0
 */
-
 using System;
 using Xunit;
 

@@ -21,7 +21,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

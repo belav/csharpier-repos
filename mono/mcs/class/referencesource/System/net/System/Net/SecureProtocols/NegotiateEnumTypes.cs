@@ -6,7 +6,6 @@ Module Name:
     NegoEnumProperties.cs
 
 --*/
-
 namespace System.Net.Security
 {
     //

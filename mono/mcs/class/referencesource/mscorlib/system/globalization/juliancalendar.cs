@@ -112,7 +112,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
         // Construct an instance of gregorian calendar.
 
         public JulianCalendar()
@@ -174,7 +173,6 @@ namespace System.Globalization
         **  Before calling this method, call CheckYearEraRange()/CheckMonthRange() to make
         **  sure year/month values are correct.
         ============================================================================*/
-
         static internal void CheckDayRange(int year, int month, int day)
         {
             if (year == 1 && month == 1)

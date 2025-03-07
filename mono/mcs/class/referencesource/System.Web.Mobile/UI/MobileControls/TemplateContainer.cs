@@ -19,7 +19,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\TemplateContainer.uex' path='docs/doc[@for="TemplateContainer"]/*' />
     [ToolboxItem(false)]
     [AspNetHostingPermission(

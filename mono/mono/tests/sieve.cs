@@ -2,7 +2,6 @@
  * $Id$
  * http://www.bagley.org/~doug/shootout/
  */
-
 class Test
 {
     public static int Main()

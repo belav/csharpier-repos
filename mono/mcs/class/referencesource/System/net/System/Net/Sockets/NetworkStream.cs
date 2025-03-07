@@ -434,7 +434,6 @@ namespace System.Net.Sockets
 
                 Nothing, but may throw an exception.
         --*/
-
         internal void InitNetworkStream(Socket socket, FileAccess Access)
         {
             //
@@ -520,7 +519,6 @@ namespace System.Net.Sockets
                 Number of bytes we read, or 0 if the socket is closed.
 
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Reads data from the stream.
@@ -614,7 +612,6 @@ namespace System.Net.Sockets
                 can't write everything. It's brutal, but there's no other
                 way to indicate an error.
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Writes data to the stream..
@@ -807,7 +804,6 @@ namespace System.Net.Sockets
                 An IASyncResult, representing the read.
 
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Begins an asychronous read from a stream.
@@ -968,7 +964,6 @@ namespace System.Net.Sockets
                 The number of bytes read. May throw an exception.
 
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Handle the end of an asynchronous read.
@@ -1048,7 +1043,6 @@ namespace System.Net.Sockets
                 An IASyncResult, representing the write.
 
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Begins an asynchronous write to a stream.

@@ -35,7 +35,6 @@ using Microsoft.Win32.SafeHandles;
   HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\TSAppCompat must be 1
   There might possibly be an interaction with yet a third registry key as well.
 */
-
 namespace Microsoft.Win32
 {
     /// <summary>Registry encapsulation. To get an instance of a RegistryKey use the Registry class's static members then call OpenSubKey.</summary>

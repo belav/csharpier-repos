@@ -68,7 +68,6 @@ namespace Benchstone.BenchF
             }
 
             /*** second(&t1); ***/
-
             MinV1(b, ref n, out s_det, l1, l2);
 
             if (s_det == 0.0F)
@@ -77,7 +76,6 @@ namespace Benchstone.BenchF
             }
 
             /*** second(&tx); ***/
-
             MProd(b, a.A, c, ref n);
             for (k = 1; k <= nsq; ++k)
             {
@@ -85,7 +83,6 @@ namespace Benchstone.BenchF
             }
 
             /*** second(&tx); ***/
-
             MinV2(b, ref n, out s_det, l1, l2);
 
             if (s_det == 0.0F)
@@ -94,12 +91,10 @@ namespace Benchstone.BenchF
             }
 
             /*** second(&ty); ***/
-
             MProd(b, a.A, d, ref n);
             CompM(c, d, ref n);
 
             /*** second(&t2); ***/
-
             return true;
 
             L990: { }

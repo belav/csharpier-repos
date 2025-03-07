@@ -830,7 +830,6 @@ namespace System.Globalization
         **Arguments: eraName    the name of the era.
         **Exceptions: None.
         ============================================================================*/
-
         public int GetEra(String eraName)
         {
             if (eraName == null)
@@ -930,7 +929,6 @@ namespace System.Globalization
         **Exceptions:
         **      ArguementException if the era valie is invalid.
         ============================================================================*/
-
         // Era names are 1 indexed
         public String GetEraName(int era)
         {
@@ -1426,7 +1424,6 @@ namespace System.Globalization
         **      We put this internal property here so that we can avoid doing the
         **      concatation every time somebody asks for the general format.
         ==============================================================================*/
-
         internal String GeneralShortTimePattern
         {
             get
@@ -1445,7 +1442,6 @@ namespace System.Globalization
         **      We put this internal property here so that we can avoid doing the
         **      concatation every time somebody asks for the general format.
         ==============================================================================*/
-
         internal String GeneralLongTimePattern
         {
             get
@@ -1464,14 +1460,12 @@ namespace System.Globalization
         **      We put this internal property here so that we can avoid doing the
         **      concatation every time somebody uses this form
         ==============================================================================*/
-
         /*=================================DateTimeOffsetPattern==========================
         **Property: Return the default pattern DateTimeOffset : shortDate + long time + time zone offset
         **Note: This is used by DateTimeFormat.cs to get the pattern for short Date + long time +  time zone offset
         **      We put this internal property here so that we can avoid doing the
         **      concatation every time somebody uses this form
         ==============================================================================*/
-
         internal String DateTimeOffsetPattern
         {
             get
@@ -1481,7 +1475,6 @@ namespace System.Globalization
                     dateTimeOffsetPattern = ShortDatePattern + " " + LongTimePattern;
 
                     /* LongTimePattern might contain a "z" as part of the format string in which case we don't want to append a time zone offset */
-
                     bool foundZ = false;
                     bool inQuote = false;
                     char quote = '\'';

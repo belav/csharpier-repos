@@ -4,7 +4,6 @@
 /*
    IndexOutOfRange Exception When Using UShort or Short as an Input Array Type
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

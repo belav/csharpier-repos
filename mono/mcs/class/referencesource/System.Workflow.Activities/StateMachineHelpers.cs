@@ -151,7 +151,6 @@ namespace System.Workflow.Activities
             return false;
         }
          */
-
         /// <summary>
         /// Returns the State activity that is currently executing
         /// </summary>
@@ -351,7 +350,6 @@ namespace System.Workflow.Activities
         }
     }
     */
-
 #endif
     #endregion
 }

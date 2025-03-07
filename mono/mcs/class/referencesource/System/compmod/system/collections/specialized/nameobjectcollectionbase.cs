@@ -11,7 +11,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Collections.Specialized
 {
     using System.Collections;
@@ -80,7 +79,6 @@ namespace System.Collections.Specialized
         ///    the default initial capacity and using the specified case-insensitive hash code provider and the
         ///    specified case-insensitive comparer.</para>
         /// </devdoc>
-
 #pragma warning disable 618
         [Obsolete("Please use NameObjectCollectionBase(IEqualityComparer) instead.")]
         protected NameObjectCollectionBase(IHashCodeProvider hashProvider, IComparer comparer)

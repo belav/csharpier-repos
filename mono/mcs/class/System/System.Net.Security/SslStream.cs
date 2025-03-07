@@ -61,7 +61,6 @@ namespace System.Net.Security
     /*
      * Internal delegates from the referencesource / corefx.
      */
-
     internal delegate bool RemoteCertValidationCallback(
         string host,
         X509Certificate certificate,

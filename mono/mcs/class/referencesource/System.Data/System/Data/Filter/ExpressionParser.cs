@@ -118,7 +118,6 @@ namespace System.Data
 
         /// <devdoc>
         ///
-
         private const int MaxPredicates = 100;
         internal ExpressionNode[] NodeStack = new ExpressionNode[MaxPredicates];
 
@@ -221,7 +220,6 @@ namespace System.Data
                         string str = null;
 
                         /* Constants and identifiers: create leaf node */
-
                         if (prevOperand != Empty)
                         {
                             // set error missing operator
@@ -293,7 +291,6 @@ namespace System.Data
 
                             case Tokens.Name:
                                 /* Qualify name now for nice error checking */
-
                                 opInfo = ops[topOperator - 1];
 
                                 /* Create tree element -                */
@@ -361,7 +358,6 @@ namespace System.Data
                             if (opInfo.type == Nodes.Binop && opInfo.op == Operators.In)
                             {
                                 /* IN - handle as procedure call */
-
                                 node = new FunctionNode(_table, "In");
                                 NodePush(node);
                                 /* Push operator decriptor */
@@ -457,7 +453,6 @@ namespace System.Data
                         if (opInfo.type == Nodes.Call)
                         {
                             /* add argument to the function call. */
-
                             if (prevOperand != Empty)
                             {
                                 // read last function argument
@@ -491,14 +486,12 @@ namespace System.Data
                     case Tokens.ListSeparator:
                     {
                         /* Comma encountered: Must be operand; force out subexpression */
-
                         if (prevOperand == Empty)
                         {
                             throw ExprException.MissingOperandBefore(",");
                         }
 
                         /* We are be in a procedure call */
-
                         /* build next argument */
                         BuildExpression(Operators.priLow);
 
@@ -511,7 +504,6 @@ namespace System.Data
                         ExpressionNode argument2 = NodePop();
 
                         /* Get the procedure name */
-
                         FunctionNode func = (FunctionNode)NodePop();
 
                         func.AddArgument(argument2);
@@ -548,9 +540,7 @@ namespace System.Data
                             prevOperand = Empty;
 
                             /* CNSIDER: If we are going to support BETWEEN Translate AND to special BetweenAnd if it is. */
-
                             /* Force out to appropriate precedence; push operator. */
-
                             BuildExpression(Operators.Priority(op));
 
                             // PushOperator descriptor
@@ -730,7 +720,6 @@ namespace System.Data
         ///     Builds expression tree for higher-precedence operator to be used as left
         ///     operand of current operator. May cause errors - always do ErrorCheck() upin return.
         /// </devdoc>
-
         private void BuildExpression(int pri)
         {
             ExpressionNode expr = null;
@@ -765,7 +754,6 @@ namespace System.Data
                         nodeLeft = NodePop();
 
                         /* This is the place to do type and other checks */
-
                         switch (opInfo.op)
                         {
                             case Operators.Between:
@@ -1000,7 +988,6 @@ namespace System.Data
 
                     default:
                         /* Check for list separator */
-
                         if (ch == ListSeparator)
                         {
                             token = Tokens.ListSeparator;
@@ -1043,7 +1030,6 @@ namespace System.Data
                         }
 
                         /* Alpha means identifier */
-
                         if (IsAlphaNumeric(ch))
                         {
                             ScanName();
@@ -1301,7 +1287,6 @@ namespace System.Data
         ///     is the character a white space character?
         ///     Consider using CharacterInfo().IsWhiteSpace(ch) (System.Globalization)
         /// </devdoc>
-
         private bool IsWhiteSpace(char ch)
         {
             return ch <= 32 && ch != '\0';

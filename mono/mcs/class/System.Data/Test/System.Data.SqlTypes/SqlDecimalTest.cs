@@ -228,7 +228,6 @@ namespace MonoTests.System.Data.SqlTypes
                 Assert.AreEqual (typeof (DivideByZeroException), e.GetType (), "#D12");
             }
             */
-
             Assert.AreEqual((SqlDecimal)6464m, SqlDecimal.Floor(Test1), "#D13");
 
             // Multiply()
@@ -390,7 +389,6 @@ namespace MonoTests.System.Data.SqlTypes
             Assert.AreEqual (-1281249885, Test1.GetHashCode (), "#I01");
         }
         */
-
         [Test]
         public void GetTypeTest()
         {

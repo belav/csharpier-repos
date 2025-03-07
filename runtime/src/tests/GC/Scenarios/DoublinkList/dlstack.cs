@@ -8,7 +8,6 @@
 /* a local array in SetLink, then delete all old reference. To
 /* check if GC collects leak when the local array out of stack.
 /**************************************************************/
-
 namespace DoubLink
 {
     using System;

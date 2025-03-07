@@ -15,7 +15,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DesignerAdapterAttribute.uex' path='docs/doc[@for="DesignerAdapterAttribute"]/*' />
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     [AspNetHostingPermission(

@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
  * Simple test case for gmcs issue (should compile).
  * Bryan Silverthorn <bsilvert@cs.utexas.edu>
  */
-
 public interface Indexed
 {
     [IndexerName("Foo")]

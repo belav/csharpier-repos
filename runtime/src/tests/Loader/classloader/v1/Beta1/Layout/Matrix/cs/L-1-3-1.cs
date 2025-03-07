@@ -166,7 +166,6 @@ class A
     // protected int FldFamInst;          //Translates to "family"
     // internal int FldAsmInst;           //Translates to "assembly"
     ///protected internal int FldFoaInst; //Translates to "famorassem"
-
     //////////////////////////////
     // Static Fields
     public static int FldPubStat;

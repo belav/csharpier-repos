@@ -394,7 +394,6 @@ namespace Mono.Btls
              * MonoTlsSettings.CertificateSearchPaths is ignored on Android.
              *
              */
-
 #if MONODROID
             AddTrustedRoots(store, settings, server);
             if (!server)

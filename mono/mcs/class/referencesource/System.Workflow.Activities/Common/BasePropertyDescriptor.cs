@@ -25,7 +25,6 @@ using System.Workflow.ComponentModel.Design;
  * The two files must be kept in sync.  Any change made here must also
  * be made to WF\Common\Shared\BasePropertyDescriptor.cs
 *********************************************************************/
-
 namespace System.Workflow.Activities.Common
 {
     #region Class PropertyDescriptorUtils

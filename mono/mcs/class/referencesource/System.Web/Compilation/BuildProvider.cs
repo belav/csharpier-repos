@@ -31,7 +31,6 @@ BuildProvider
                 GlobalPageThemeBuildProvider
 
 **********************************/
-
 namespace System.Web.Compilation
 {
     using System;

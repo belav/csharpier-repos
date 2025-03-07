@@ -69,7 +69,6 @@ namespace Novell.Directory.Ldap
         public static RespExtensionSet RegisteredResponses
         {
             /* package */
-
             get { return registeredResponses; }
         }
 

@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 // C5 example: Graph representation with basic algorithms using C5
 
 // Compile with
@@ -487,7 +486,6 @@ namespace Graph
       
     
     */
-
     /// <summary>
     /// An implementation of IGraph&le;V,E,W&ge; based on an adjacency list representation using hash dictionaries.
     /// As a consequence, this will be most efficient for sparse graphs.

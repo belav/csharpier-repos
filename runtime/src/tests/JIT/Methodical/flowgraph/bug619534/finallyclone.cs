@@ -9,7 +9,6 @@
  * Customer Scenario: We seem to be hitting this strange bug (see repro code). If there is a try/catch statement in the finally block, the Test() method returns false, even if this should be impossible. Uncommenting the Console.WriteLine in the try block suddenly makes the test pass. Note that there is only one place where shouldFail becomes true. We tried this on an x86 machine, and the test always returns what we expected (true), we also get the correct result on VS2008, so the bug seems to be only on x64 builds.
  *
  * */
-
 using System;
 using Xunit;
 

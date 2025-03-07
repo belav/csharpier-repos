@@ -10,7 +10,6 @@
  * (GC.Collect) per generation (must be at least, since the GC may collect
  * on it's own).
  */
-
 using System;
 
 public class CollectionCountTest

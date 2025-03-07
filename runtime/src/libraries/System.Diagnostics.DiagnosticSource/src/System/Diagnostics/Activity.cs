@@ -457,7 +457,6 @@ namespace System.Diagnostics
         public object? GetTagItem(string key) => _tags?.Get(key) ?? null;
 
         /* Constructors  Builder methods */
-
         /// <summary>
         /// Note that Activity has a 'builder' pattern, where you call the constructor, a number of 'Set*' and 'Add*' APIs and then
         /// call <see cref="Start"/> to build the activity. You MUST call <see cref="Start"/> before using it.
@@ -822,7 +821,6 @@ namespace System.Diagnostics
         }
 
         /* W3C support functionality (see https://w3c.github.io/trace-context) */
-
         /// <summary>
         /// Holds the W3C 'tracestate' header as a string.
         ///

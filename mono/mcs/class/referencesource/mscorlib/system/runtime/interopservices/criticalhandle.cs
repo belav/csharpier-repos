@@ -46,7 +46,6 @@
 **
 **
 ===========================================================*/
-
 using System;
 using System.IO;
 using System.Reflection;
@@ -132,7 +131,6 @@ using System.Security.Permissions;
       private static extern MyCriticalHandleSubclass CreateHandle(int someState);
 
  */
-
 namespace System.Runtime.InteropServices
 {
     // This class should not be serializable - it's a handle.  We require unmanaged

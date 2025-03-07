@@ -510,7 +510,6 @@ namespace System.Globalization
 
         /**********************************************************/
         /* Implementation (would normally go in its own .c file): */
-
         /*** Bootstring parameters for Punycode ***/
         const int punycodeBase = 36;
         const int tmin = 1;
@@ -555,7 +554,6 @@ namespace System.Globalization
         /* (when used for representing integers) is d, which needs to be in   */
         /* the range 0 to punycodeBase-1.  The lowercase form is used unless flag is  */
         /* true, in which case the uppercase form is used. */
-
         static char encode_digit(int d)
         {
             Contract.Assert(
@@ -575,7 +573,6 @@ namespace System.Globalization
         /* the resulting code point.  The code point is unchanged if it  */
         /* is caseless.  The behavior is undefined if bcp is not a basic */
         /* code point.                                                   */
-
         static char encode_basic(char bcp)
         {
             if (HasUpperCaseFlag(bcp))
@@ -585,12 +582,10 @@ namespace System.Globalization
         }
 
         /*** Platform-specific constants ***/
-
         /* maxint is the maximum value of a uint variable: */
         const int maxint = 0x7ffffff;
 
         /*** Bias adaptation function ***/
-
         static int adapt(int delta, int numpoints, bool firsttime)
         {
             uint k;
@@ -609,7 +604,6 @@ namespace System.Globalization
         }
 
         /*** Main encode function ***/
-
         /* punycode_encode() converts Unicode to Punycode.  The input     */
         /* is represented as an array of Unicode code points (not code    */
         /* units; surrogate pairs are not allowed), and the output        */
@@ -620,7 +614,6 @@ namespace System.Globalization
         /* needed.)  The input_length is the number of code points in     */
         /* the input.  The output_length is an in/out argument: the       */
         /* caller passes in the maximum number of code points that it     */
-
         /* can receive, and on successful return it will contain the      */
         /* number of code points actually output.  The case_flags array   */
         /* holds input_length boolean values, where nonzero suggests that */
@@ -635,7 +628,6 @@ namespace System.Globalization
         /* value can be any of the punycode_status values defined above   */
         /* except punycode_bad_input; if not punycode_success, then       */
         /* output_size and output might contain garbage.                  */
-
         static String punycode_encode(String unicode)
         {
             // 0 length strings aren't allowed
@@ -918,7 +910,6 @@ namespace System.Globalization
         }
 
         /*** Main decode function ***/
-
         /* punycode_decode() converts Punycode to Unicode.  The input is  */
         /* represented as an array of ASCII code points, and the output   */
         /* will be represented as an array of Unicode code points.  The   */
@@ -939,7 +930,6 @@ namespace System.Globalization
         /* output, and case_flags might contain garbage.  On success, the */
         /* decoder will never need to write an output_length greater than */
         /* input_length, because of how the encoding is defined.          */
-
         static String punycode_decode(String ascii)
         {
             // 0 length strings aren't allowed

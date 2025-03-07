@@ -508,7 +508,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Resolver - Integrity              */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.XmlResolver : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XslCompiledTransform.XmlResolver : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.XmlResolver : Reader, Writer", Desc = "READER,WRITER")]
@@ -831,7 +830,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Load - Integrity                  */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Load() - Integrity : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XslCompiledTransform.Load() - Integrity : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Load() - Integrity : Reader, Writer", Desc = "READER,WRITER")]
@@ -1644,7 +1642,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /**************************************************************************/
     /*          XslCompiledTransform.Load(XmlResolver) - Integrity   */
     /**************************************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Load(XmlResolver) - Integrity : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XslCompiledTransform.Load(XmlResolver) - Integrity : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Load(XmlResolver) - Integrity : Reader, Writer", Desc = "READER,WRITER")]
@@ -2456,7 +2453,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Load(Url, Resolver)               */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Load(Url, Resolver) : URI, Reader", Desc = "URI,READER")]
     //[TestCase(Name = "XslCompiledTransform.Load(Url, Resolver) : URI, Stream", Desc = "URI,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Load(Url, Resolver) : URI, Writer", Desc = "URI,WRITER")]
@@ -2623,7 +2619,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Load(Url)                         */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Load(Url) Integrity : URI, Stream", Desc = "URI,STREAM")]
     [ConditionalClass(
         typeof(PlatformDetection),
@@ -2751,7 +2746,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Load(IXPathNavigable)             */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform .Load(IXPathNavigable) : Navigator, TextWriter", Desc = "NAVIGATOR,TEXTWRITER")]
     [ConditionalClass(
         typeof(PlatformDetection),
@@ -2871,7 +2865,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Load(Reader)                      */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Load(Reader) : Reader, Stream", Desc = "READER,STREAM")]
     [ConditionalClass(
         typeof(PlatformDetection),
@@ -3270,7 +3263,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Transform - Integrity     */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Transform() Integrity : Reader , Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XslCompiledTransform.Transform() Integrity : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Transform() Integrity : Reader, Writer", Desc = "READER,WRITER")]
@@ -3942,7 +3934,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /*************************************************************/
     /*          XslCompiledTransform(Resolver) - Integrity       */
     /*************************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Transform(XmlResolver) : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XslCompiledTransform.Transform(XmlResolver) : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Transform(XmlResolver) : Reader, Writer", Desc = "READER,WRITER")]
@@ -4451,7 +4442,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Transform - (String, String)                    */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Transform(String, String) : Reader , String", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Transform(String, String) : URI, String", Desc = "URI,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Transform(String, String) : Navigator, String", Desc = "NAVIGATOR,STREAM")]
@@ -4835,7 +4825,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XslCompiledTransform.Transform - (String, String, Resolver)          */
     /***********************************************************/
-
     //[TestCase(Name = "XslCompiledTransform.Transform(String, String, Resolver) : Reader , String", Desc = "READER,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Transform(String, String, Resolver) : URI, String", Desc = "URI,STREAM")]
     //[TestCase(Name = "XslCompiledTransform.Transform(String, String, Resolver) : Navigator, String", Desc = "NAVIGATOR,STREAM")]

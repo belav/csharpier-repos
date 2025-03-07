@@ -5425,7 +5425,6 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     /*if (WriterType == WriterType.XmlTextWriter)
                         return;*/
-
                     using (XmlWriter w = utils.CreateWriter())
                     {
                         try

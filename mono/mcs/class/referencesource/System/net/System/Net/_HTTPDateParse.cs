@@ -103,7 +103,6 @@ namespace System.Net
             Failure - DATE_TOKEN_ERROR
 
         --*/
-
         private static int MapDayMonthToDword(char[] lpszDay, int index)
         {
             switch (MAKE_UPPER(lpszDay[index]))

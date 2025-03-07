@@ -157,7 +157,6 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         /*================== Constructors ==================*/
-
         [Theory]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom)]
         public void EOF_Handling_01(XmlWriterUtils utils)
@@ -200,7 +199,6 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         /*================== Verification in Text Nodes ==================*/
-
         [Theory]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize)]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace)]
@@ -326,7 +324,6 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         /*================== Verification in Attributes ==================*/
-
         [Theory]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize)]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace)]
@@ -462,7 +459,6 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         /*================== NewLineChars, IndentChars ==================*/
-
         [Theory]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize)]
         [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace)]
@@ -802,7 +798,6 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         /*================== Other types of nodes ==================*/
-
         [Theory]
         [XmlWriterInlineData(
             ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,

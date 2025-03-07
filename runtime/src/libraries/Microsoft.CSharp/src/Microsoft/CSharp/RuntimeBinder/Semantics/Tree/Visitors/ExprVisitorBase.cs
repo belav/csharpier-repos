@@ -250,7 +250,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                   ALIAS - This represents an alias
 
                 *************************************************************************************************/
-
                 case ExpressionKind.Multi:
                     exprRet = Visit((pExpr as ExprMulti).Left);
                     Debug.Assert(exprRet != null);

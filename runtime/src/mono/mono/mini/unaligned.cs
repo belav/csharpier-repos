@@ -23,7 +23,6 @@ using Mono;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 #if __MOBILE__
 namespace UnalignedTests
 {

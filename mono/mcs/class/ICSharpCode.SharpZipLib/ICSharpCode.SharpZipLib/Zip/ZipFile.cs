@@ -411,7 +411,6 @@ namespace ICSharpCode.SharpZipLib.Zip
                             throw new ZipException("Spanned archives are not currently handled");
                         }
             */
-
             entries = new ZipEntry[entriesForWholeCentralDir];
 
             // SFX support, find the offset of the first entry vis the start of the stream

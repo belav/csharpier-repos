@@ -4,7 +4,6 @@
 /*
  * Test reading localloc variable with function call.
  */
-
 using System;
 using LocallocTesting;
 using Xunit;

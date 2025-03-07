@@ -4531,7 +4531,6 @@ public class CreateKeyboards
         VirtualKeys.VK_M, VirtualKeys.VK_OEM_COMMA, VirtualKeys.VK_OEM_PERIOD, VirtualKeys.VK_OEM_2,
         VirtualKeys.VK_OEM_102
         };*/
-
     internal enum VirtualKeys
     {
         VK_LBUTTON = 0x01,

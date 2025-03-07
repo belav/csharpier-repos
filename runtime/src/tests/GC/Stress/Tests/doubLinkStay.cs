@@ -15,7 +15,6 @@ using System.Runtime.CompilerServices;
 /*to make all the cyclic double linked lists become memory leaks.
 /*objects' life time is longer than DoubLinkGen.
 /******************************************************************/
-
 namespace DoubLink
 {
     public class DoubLinkStay

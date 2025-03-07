@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 // Turn this on to do regex profiling
 //#define PROFILE_REGEX
 
@@ -897,7 +896,6 @@ namespace System.Web.UI
         /*
          * Parse the contents of the input file
          */
-
         protected void ParseFile(string physicalPath, string virtualPath)
         {
             ParseFile(physicalPath, VirtualPath.Create(virtualPath));

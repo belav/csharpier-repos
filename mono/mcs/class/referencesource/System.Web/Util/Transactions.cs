@@ -153,7 +153,6 @@ namespace System.Web.Util
                 }
             }
             */
-
             internal static bool IsInTransaction
             {
                 get

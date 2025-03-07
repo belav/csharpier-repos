@@ -15,7 +15,6 @@
 **          This is thrown by the VM when attempts to marshal the exception
 **          object at the AppDomain transition boundary fails.
 =============================================================================*/
-
 namespace System
 {
     using System;

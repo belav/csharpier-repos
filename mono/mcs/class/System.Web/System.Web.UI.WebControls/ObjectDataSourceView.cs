@@ -263,7 +263,6 @@ namespace System.Web.UI.WebControls
                 }
                 }
         */
-
         protected virtual void OnSelected(ObjectDataSourceStatusEventArgs e)
         {
             if (Events != null)

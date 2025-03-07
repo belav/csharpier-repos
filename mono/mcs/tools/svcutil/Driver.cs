@@ -151,7 +151,6 @@ namespace Mono.ServiceContractTool
                 Console.Error.WriteLine ("Argument assemblies have no types.");
                 Environment.Exit (1);
             }*/
-
             //FIXME: Generate .config
 
             Console.WriteLine(GetOutputFilename());

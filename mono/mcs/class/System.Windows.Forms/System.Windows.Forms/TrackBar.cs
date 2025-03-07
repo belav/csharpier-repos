@@ -945,7 +945,6 @@ namespace System.Windows.Forms
                 other way unless the mouse is released and clicked again. This
                 is also true if the mouse moves while beeing hold down.
             */
-
             if (thumb_area.Contains(pnt))
             {
                 bool invalidate = false;

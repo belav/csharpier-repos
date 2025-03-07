@@ -69,7 +69,6 @@ namespace System
          * to the managed code below and to the native VM code. See the comment at the top of
          * src/vm/ecall.cpp for instructions on how to add new overloads.
          */
-
         [MethodImpl(MethodImplOptions.InternalCall)]
 #if MONO
         [DynamicDependency("Ctor(System.Char[])")]

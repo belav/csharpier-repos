@@ -16,7 +16,6 @@
 ** <owner>Microsoft</owner>
 **
 =============================================================================*/
-
 #if FEATURE_EXCEPTIONDISPATCHINFO || MONO
 namespace System.Runtime.ExceptionServices
 {

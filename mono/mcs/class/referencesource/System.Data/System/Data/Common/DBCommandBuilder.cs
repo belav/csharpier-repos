@@ -1653,7 +1653,6 @@ namespace System.Data.Common
                 /*if (null == command) {
                     //
 */
-
                 // the following properties are only initialized when the object is created
                 // all other properites are reinitialized on every row
                 /*command.Connection = select.Connection;*/

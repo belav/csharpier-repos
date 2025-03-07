@@ -1407,7 +1407,6 @@ namespace MonoTests.System.Reflection.Emit
             /* Yes the test really needs to roundtrip through SRE.Save().
              * The regression is in the token fixup code on the saving codepath.
              */
-
             var assm = Assembly.LoadFrom(Path.Combine(tempDir, an.Name + ".dll"));
 
             var baked = assm.GetType("T");

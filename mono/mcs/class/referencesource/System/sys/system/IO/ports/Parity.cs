@@ -12,7 +12,6 @@
 ** Date:  August 2002
 **
 ===========================================================*/
-
 using Microsoft.Win32;
 
 namespace System.IO.Ports

@@ -28,7 +28,6 @@ namespace X
             return  0;
         }
         */
-
         internal static void bomb()
         {
             char[] p = null;

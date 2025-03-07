@@ -90,7 +90,6 @@ namespace System.Security.Cryptography
            express written authorization of RSA Data Security, Inc. is
            prohibited.
            */
-
         /* SHA block update operation. Continues an SHA message-digest
            operation, processing another message block, and updating the
            context.
@@ -156,7 +155,6 @@ namespace System.Security.Cryptography
         /* SHA finalization. Ends an SHA message-digest operation, writing
            the message digest.
             */
-
         private byte[] _EndHash()
         {
             byte[] pad;
@@ -166,7 +164,6 @@ namespace System.Security.Cryptography
 
             /* Compute padding: 80 00 00 ... 00 00 <bit count>
              */
-
             padLen = 64 - (int)(_count & 0x3f);
             if (padLen <= 8)
                 padLen += 64;
@@ -456,7 +453,6 @@ namespace System.Security.Cryptography
         /* Expands x[0..15] into x[16..79], according to the recurrence
            x[i] = x[i-3] ^ x[i-8] ^ x[i-14] ^ x[i-16].
            */
-
         [System.Security.SecurityCritical] // auto-generated
         private static unsafe void SHAExpand(uint* x)
         {

@@ -347,7 +347,6 @@ namespace System.Data.OleDb
         IDbCommand IDbTransaction.CreateCommand() {
             return CreateCommand();
         }*/
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -75,7 +75,6 @@ namespace System.ServiceModel.Routing
                     }
                 }
         */
-
         internal RoutingService() { }
 
         internal RoutingConfiguration Configuration { get; set; }

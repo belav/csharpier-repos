@@ -93,7 +93,6 @@ namespace System.Data.Common
             Debug.Assert(null != schemaTable.Ordinal, "missing column Ordinal");
             dataRow[schemaTable.Ordinal] = value;
         }*/
-
         //}
 
         internal Int32 Size
@@ -462,7 +461,6 @@ namespace System.Data.Common
                 dataRow[schemaTable.ProviderType] = value;
             }
         }*/
-
         internal Int32 UnsortedIndex
         {
             get { return (Int32)dataRow[schemaTable.UnsortedIndex, DataRowVersion.Default]; }

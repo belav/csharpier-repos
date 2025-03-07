@@ -10,7 +10,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;
@@ -74,7 +73,6 @@ namespace System.Web
          * We added granular request validation in ASP.NET 4.5 to provide a better request validation story for our developers.
          * Instead of validating the entire collection ahead of time, we'll only validate entries that are actually looked at.
          */
-
         internal void EnableGranularValidation(ValidateStringCallback validationCallback)
         {
             // Iterate over all the keys, adding each to the set containing the keys awaiting validation.
@@ -168,7 +166,6 @@ namespace System.Web
         /*
          * END REQUEST VALIDATION
          */
-
         internal void MakeReadOnly()
         {
             IsReadOnly = true;

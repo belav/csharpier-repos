@@ -560,7 +560,6 @@ namespace System.Net.Security
             Returns: True if cached creds were used, false otherwise.
 
         --*/
-
         private bool AcquireClientCredentials(
             ref byte[]? thumbPrint,
             bool newCredentialsRequested = false
@@ -1156,7 +1155,6 @@ namespace System.Net.Security
             checkCRL if true, checks the certificate revocation list for validity.
             checkCertName, if true checks the CN field of the certificate
         --*/
-
         //This method validates a remote certificate.
         internal bool VerifyRemoteCertificate(
             RemoteCertificateValidationCallback? remoteCertValidationCallback,

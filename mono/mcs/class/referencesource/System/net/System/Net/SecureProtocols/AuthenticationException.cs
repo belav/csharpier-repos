@@ -22,7 +22,6 @@ Revision History:
     12-Aug-2003 New design that has obsoleted Authenticator class
     12-Dec-2003 FxCop: added default and serialization constructors
 --*/
-
 namespace System.Security.Authentication
 {
     using System;

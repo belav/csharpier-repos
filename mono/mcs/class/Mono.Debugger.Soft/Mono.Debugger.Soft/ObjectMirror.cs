@@ -398,7 +398,6 @@ namespace Mono.Debugger.Soft
         /*
          * Common implementation for invokes
          */
-
         class InvokeAsyncResult : IInvokeAsyncResult
         {
             public object AsyncState { get; set; }

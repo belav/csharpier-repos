@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2004 Microsoft Corporation
  */
-
 namespace System.Web.Hosting
 {
     using System.Collections;

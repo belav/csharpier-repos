@@ -57,7 +57,6 @@ namespace nist_dom.fundamental
                     return tests;
                 }
         */
-
         //------------------------ test case core-0001NO------------------------
         //
         // Testing feature - The "nodeType" attribute for an Element node is

@@ -14,14 +14,12 @@ namespace Moq
     After:
         sealed class MatcherObserver : IDisposable
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class MatcherObserver : IDisposable
     After:
         sealed class MatcherObserver : IDisposable
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class MatcherObserver : IDisposable
@@ -79,7 +77,6 @@ namespace Moq
                         int timestamp;
                         List<Observation> observations;
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private int timestamp;
@@ -88,7 +85,6 @@ namespace Moq
                         int timestamp;
                         List<Observation> observations;
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private int timestamp;
@@ -109,14 +105,12 @@ namespace Moq
         After:
                 MatcherObserver()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private MatcherObserver()
         After:
                 MatcherObserver()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private MatcherObserver()
@@ -194,14 +188,12 @@ namespace Moq
                 After:
                         readonly struct Observation
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private readonly struct Observation
                 After:
                         readonly struct Observation
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private readonly struct Observation

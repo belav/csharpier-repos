@@ -24,7 +24,6 @@ BuildResult
     BuildResultCodeCompileUnit
 
 **********************************/
-
 namespace System.Web.Compilation
 {
     using System;

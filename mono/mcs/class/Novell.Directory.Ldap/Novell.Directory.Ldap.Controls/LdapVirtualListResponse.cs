@@ -146,7 +146,6 @@ namespace Novell.Directory.Ldap.Controls
                 throw new System.IO.IOException("Decoding error");
 
             /* Else we got back a ASN.1 sequence - print it if running debug code */
-
             /* Get the 1st element which should be an integer containing the
             * targetPosition (firstPosition)
             */

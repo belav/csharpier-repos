@@ -12,7 +12,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_UNDEF, // invalid value. This should never be used
 
         /* Arithmetic helpers */
-
         CORINFO_HELP_DIV, // For the ARM 32-bit integer divide uses a helper call :-(
         CORINFO_HELP_MOD,
         CORINFO_HELP_UDIV,
@@ -45,7 +44,6 @@ namespace Internal.JitInterface
 
         /* Allocating a new object. Always use ICorClassInfo::getNewHelper() to decide
            which is the right helper to use to allocate an object of a given type. */
-
         CORINFO_HELP_NEWFAST,
         CORINFO_HELP_NEWFAST_MAYBEFROZEN, // allocator for objects that *might* allocate them on a frozen segment
         CORINFO_HELP_NEWSFAST, // allocator for small, non-finalizer, non-array object
@@ -64,7 +62,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_STRCNS, // create a new string literal
 
         /* Object model */
-
         CORINFO_HELP_INITCLASS, // Initialize class if not already initialized
         CORINFO_HELP_INITINSTCLASS, // Initialize class for instantiated type
 
@@ -96,7 +93,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_LDELEMA_REF, // does a precise type comparison and returns address
 
         /* Exceptions */
-
         CORINFO_HELP_THROW, // Throw an exception object
         CORINFO_HELP_RETHROW, // Rethrow the currently active exception
         CORINFO_HELP_USER_BREAKPOINT, // For a user program to break to the debugger
@@ -115,7 +111,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_ENDCATCH, // call back into the EE at the end of a catch block
 
         /* Synchronization */
-
         CORINFO_HELP_MON_ENTER,
         CORINFO_HELP_MON_EXIT,
         CORINFO_HELP_MON_ENTER_STATIC,
@@ -127,7 +122,6 @@ namespace Internal.JitInterface
         // in its ManagedClassObject
 
         /* GC support */
-
         CORINFO_HELP_STOP_FOR_GC, // Call GC (force a GC)
         CORINFO_HELP_POLL_GC, // Ask GC if it wants to collect
 
@@ -135,7 +129,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_CHECK_OBJ, // confirm that ECX is a valid object pointer (debugging only)
 
         /* GC Write barrier support */
-
         CORINFO_HELP_ASSIGN_REF, // universal helpers with F_CALL_CONV calling convention
         CORINFO_HELP_CHECKED_ASSIGN_REF,
         CORINFO_HELP_ASSIGN_REF_ENSURE_NONHEAP, // Do the store, and ensure that the target was not in the heap.
@@ -144,7 +137,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_ASSIGN_STRUCT,
 
         /* Accessing fields */
-
         // For COM object support (using COM get/set routines to update object)
         // and EnC and cross-context support
         CORINFO_HELP_GETFIELD8,
@@ -197,7 +189,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_GETSHARED_NONGCTHREADSTATIC_BASE_DYNAMICCLASS,
 
         /* Debugger */
-
         CORINFO_HELP_DBG_IS_JUST_MY_CODE, // Check if this is "JustMyCode" and needs to be stepped through.
 
         /* Profiling enter/leave probe addresses */
@@ -206,7 +197,6 @@ namespace Internal.JitInterface
         CORINFO_HELP_PROF_FCN_TAILCALL, // record the completionof current method through tailcall (caller)
 
         /* Miscellaneous */
-
         CORINFO_HELP_BBT_FCN_ENTER, // record the entry to a method for collecting Tuning data
 
         CORINFO_HELP_PINVOKE_CALLI, // Indirect pinvoke call

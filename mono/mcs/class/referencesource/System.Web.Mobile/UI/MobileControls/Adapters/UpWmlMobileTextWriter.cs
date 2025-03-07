@@ -30,7 +30,6 @@ namespace System.Web.UI.MobileControls.Adapters
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

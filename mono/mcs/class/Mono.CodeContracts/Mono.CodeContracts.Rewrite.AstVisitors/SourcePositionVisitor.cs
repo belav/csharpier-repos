@@ -116,7 +116,6 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
                 }
             }
             */
-
             return base.Visit(e);
         }
     }

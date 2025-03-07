@@ -5,7 +5,6 @@
 ///
 /// <owner>gpaperin</owner>
 ///------------------------------------------------------------------------------
-
 using System;
 using System.Runtime.Serialization;
 using System.Security;
@@ -16,7 +15,6 @@ namespace System.Text.RegularExpressions
     /// <summary>
     /// This is the exception that is thrown when a RegEx matching timeout occurs.
     /// </summary>
-
 #if SILVERLIGHT
 #if FEATURE_NETCORE
     public

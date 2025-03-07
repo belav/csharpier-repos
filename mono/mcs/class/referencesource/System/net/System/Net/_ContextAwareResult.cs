@@ -386,7 +386,6 @@ namespace System.Net
                     ProtectedInvokeCallback(result, (IntPtr) 1);
                 }
         */
-
         //
         protected override void Cleanup()
         {

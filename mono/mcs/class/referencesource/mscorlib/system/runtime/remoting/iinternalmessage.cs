@@ -14,7 +14,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Runtime.Remoting.Messaging
 {
     using System;

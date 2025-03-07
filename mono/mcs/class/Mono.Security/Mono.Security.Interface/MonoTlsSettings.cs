@@ -135,7 +135,6 @@ namespace Mono.Security.Interface
          * This is only public to avoid making our internals visible to System.dll.
          *
          */
-
         [Obsolete("Do not use outside System.dll!")]
         public ICertificateValidator CertificateValidator
         {

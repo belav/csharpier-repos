@@ -33,7 +33,6 @@ public class EnumPrinters
             for (int p = 0; p < ps.PrinterResolutions.Count; p++) {
                 Console.WriteLine ("        PrinterResolutions {0}", ps.PrinterResolutions [p]);
             }*/
-
             for (int p = 0; p < ps.PaperSizes.Count; p++)
             {
                 Console.WriteLine(

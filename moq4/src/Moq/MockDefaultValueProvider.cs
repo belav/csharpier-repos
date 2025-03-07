@@ -12,14 +12,12 @@ namespace Moq
     After:
         sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     After:
         sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider

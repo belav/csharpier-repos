@@ -4,7 +4,6 @@
  * enabled by default in Mono, this test should be removed from the
  * runtime test suite.
  */
-
 using System;
 using System.IO;
 using System.Reflection;

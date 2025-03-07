@@ -15,7 +15,6 @@
  * Accomplice
  * Failed
  */
-
 using System;
 
 public delegate int DoIt(int a, int b, int c, DoIt d);

@@ -215,7 +215,6 @@ namespace MonoTests.System
             catch (Exception e) {
                 Assert.AreEqual (typeof(ArgumentException), e.GetType(), "#A??");
             }*/
-
             try
             {
                 Convert.ChangeType(tryUI32, TypeCode.Byte, ci);
@@ -776,7 +775,6 @@ namespace MonoTests.System
         public void G22 () {
             Convert.ToDateTime("20002-25-01");
         } */
-
         [Test]
         public void TestToDateTime()
         {
@@ -3525,7 +3523,6 @@ namespace MonoTests.System
          *
          * However the test seems to run fine using mono in a cygwin environment
          */
-
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromBase64CharArray_Null()
@@ -3603,7 +3600,6 @@ namespace MonoTests.System
          *
          * However the test seems to run fine using mono in a cygwin environment
          */
-
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromBase64String_Null()

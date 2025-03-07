@@ -58,7 +58,6 @@ namespace System.Web.UI
         /*
          * Automatically adds new keys.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a specified CSS value.
@@ -105,7 +104,6 @@ namespace System.Web.UI
         /*
          * Returns a collection of keys.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets a collection of keys to all the styles in the

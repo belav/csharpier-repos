@@ -539,7 +539,6 @@ namespace MonoTests.System.Transactions
         #endregion
 
         /* Tests using IntResourceManager */
-
         [Test]
         public void RMFail1()
         {
@@ -604,7 +603,6 @@ namespace MonoTests.System.Transactions
             catch (TransactionAbortedException e)
             {
                 /* FIXME: Not working right now.. no timeout exception thrown! */
-
                 Assert.IsNotNull(e.InnerException, "innerexception is null");
                 Assert.AreEqual(typeof(TimeoutException), e.InnerException.GetType(), "#32");
 
@@ -774,7 +772,6 @@ namespace MonoTests.System.Transactions
             /* Not setting ambient transaction
              Transaction.Current = ct;
              */
-
             IntResourceManager irm = new IntResourceManager(1);
 
             using (TransactionScope scope = new TransactionScope(ct))
@@ -806,7 +803,6 @@ namespace MonoTests.System.Transactions
             /* Not setting ambient transaction
              Transaction.Current = ct;
              */
-
             IntResourceManager irm = new IntResourceManager(1);
 
             using (TransactionScope scope = new TransactionScope(ct))

@@ -137,7 +137,6 @@ namespace System.Workflow.ComponentModel.Serialization
                             return;
                         }
                         */
-
                         switch (reader.LocalName)
                         {
                             case StandardXomlKeys.Definitions_Code_LocalName:

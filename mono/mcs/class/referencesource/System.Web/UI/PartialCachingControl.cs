@@ -880,7 +880,6 @@ namespace System.Web.UI
          * Called by generated code (hence must be public).
          * Create a StaticPartialCachingControl and add it as a child
          */
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

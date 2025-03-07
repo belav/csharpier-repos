@@ -407,7 +407,6 @@ namespace System.Reflection.Emit
                  * would return constructors from the real mscorlib, instead of the
                  * newly built one.
                  */
-
                 if (ctors == null)
                     return null;
 

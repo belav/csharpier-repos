@@ -762,13 +762,11 @@ namespace System.Data.OleDb
         /*internal const int DBPARAMIO_NOTPARAM = 0;
         internal const int DBPARAMIO_INPUT = 0x1;
         internal const int DBPARAMIO_OUTPUT = 0x2;*/
-
         /*internal const int DBPARAMFLAGS_ISINPUT = 0x1;
         internal const int DBPARAMFLAGS_ISOUTPUT = 0x2;
         internal const int DBPARAMFLAGS_ISSIGNED = 0x10;
         internal const int DBPARAMFLAGS_ISNULLABLE = 0x40;
         internal const int DBPARAMFLAGS_ISLONG = 0x80;*/
-
         internal const int ParameterDirectionFlag = 3;
 
         // values of the searchable column in the provider types schema rowset

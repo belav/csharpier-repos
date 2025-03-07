@@ -269,7 +269,6 @@ public class ComparisonTestAnd2Chains
     }
 
     /* If/Else conditions that consume. */
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     [Theory]
     [InlineData(10, 11)]

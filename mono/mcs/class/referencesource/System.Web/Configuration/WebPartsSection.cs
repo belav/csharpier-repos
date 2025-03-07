@@ -122,7 +122,6 @@ namespace System.Web.Configuration
                     */
         /*        }
         */
-
         [ConfigurationProperty("enableExport", DefaultValue = false)]
         public bool EnableExport
         {

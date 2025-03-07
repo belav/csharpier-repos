@@ -337,7 +337,6 @@ namespace System.Xml.ReaderSettingsTests
             13 prefix or localname xmlns missing namespace uri.
 
             */
-
             List<string> list = new List<string>();
             ManagedNodeWriter mn = null;
 

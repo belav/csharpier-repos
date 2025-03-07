@@ -398,7 +398,6 @@ namespace ICSharpCode.SharpZipLib.Tar
                             }
                         }
             */
-
             name = name.Replace(Path.DirectorySeparatorChar, '/').ToLower();
 
             // No absolute pathnames

@@ -249,7 +249,6 @@ namespace System.Web.Configuration
         </healthMonitoring>
 
     */
-
     public sealed class HealthMonitoringSection : ConfigurationSection
     {
         const int MAX_HEARTBEAT_VALUE = Int32.MaxValue / 1000; // in sec; this value will be converted to ms and passed to Timer ctor, which takes a ms param

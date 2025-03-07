@@ -61,7 +61,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructors for Asn1Choice
         */
-
         /// <summary> Constructs an Asn1Choice object using an Asn1Object value.
         ///
         /// </summary>
@@ -88,7 +87,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Object implementation
         */
-
         /// <summary> Call this method to encode the contents of this Asn1Choice
         /// instance into the specified output stream using the
         /// specified encoder object.
@@ -108,7 +106,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Choice specific methods
         */
-
         /// <summary> Returns the CHOICE value stored in this Asn1Choice
         /// as an Asn1Object.
         /// </summary>

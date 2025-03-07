@@ -226,7 +226,6 @@ namespace System.Web
              * 3. The current user is authorized specifically for the requested URL in the authorization element for
              * the current application and the URL is located within the directory structure for the application.
             */
-
             /* 1. */
             IList roles = node.Roles;
             if (roles != null && roles.Count > 0)
@@ -238,7 +237,6 @@ namespace System.Web
 
             /* 2. */
             /* XXX */
-
             /* 3. */
             string url = node.Url;
             if (!String.IsNullOrEmpty(url))

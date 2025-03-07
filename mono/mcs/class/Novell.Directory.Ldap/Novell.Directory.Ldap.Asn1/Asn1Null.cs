@@ -51,7 +51,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructor for Asn1Null
         */
-
         /// <summary> Call this constructor to construct a new Asn1Null
         /// object.
         /// </summary>
@@ -63,7 +62,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Object implementation
         */
-
         /// <summary> Call this method to encode the current instance into the
         /// specified output stream using the specified encoder object.
         ///
@@ -82,7 +80,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Null specific methods
         */
-
         /// <summary> Return a String representation of this Asn1Null object.</summary>
         public override System.String ToString()
         {

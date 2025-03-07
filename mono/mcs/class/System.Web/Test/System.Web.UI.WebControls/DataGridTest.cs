@@ -1060,7 +1060,6 @@ namespace MonoTests.System.Web.UI.WebControls
             vs = (object []) p.SaveState ();
             Assert.IsNotNull (vs [2], "A5");
             */
-
             p.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
             vs = (object[])p.SaveState();
             Assert.IsNotNull(vs[3], "A6");
@@ -2085,7 +2084,6 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.IsTrue (-1 == render.IndexOf ("hola"), "template");
         }
         */
-
         [Test]
         public void CreateControls()
         {

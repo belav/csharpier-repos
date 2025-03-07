@@ -286,7 +286,6 @@ namespace System.Diagnostics.Tests
                     /*********************************************************************/
                     /* Only Subscriber 1 is left */
                     /*********************************************************************/
-
                     // Things that neither subscribe to get filtered out.
                     subscriber1Result.Clear();
                     subscriber2Result.Clear();
@@ -336,7 +335,6 @@ namespace System.Diagnostics.Tests
                 /*********************************************************************/
                 /* No Subscribers are left */
                 /*********************************************************************/
-
                 // Things that neither subscribe to get filtered out.
                 subscriber1Result.Clear();
                 subscriber2Result.Clear();

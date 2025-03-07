@@ -514,7 +514,6 @@ namespace System.Net
             }
         }
         */
-
         /// <devdoc>
         ///    <para>Seeks a specific position in the stream.</para>
         /// </devdoc>
@@ -722,7 +721,6 @@ namespace System.Net
             return m_NetworkStream.UnsafeBeginMultipleWrite(buffers, callback, state);
         }
         */
-
         /// <devdoc>
         ///    <para>
         ///       Handle the end of an asynchronous write.

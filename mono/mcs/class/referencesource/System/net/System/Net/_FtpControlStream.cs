@@ -1310,7 +1310,6 @@ namespace System.Net
             return IPstr.ToString();
         }
         */
-
         /// <summary>
         ///    <para>Parses a response string for our login dir in " "</para>
         /// </summary>

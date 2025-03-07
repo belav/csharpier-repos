@@ -207,7 +207,6 @@ namespace System.Globalization
         **Exceptions:
         **  ArgumentException if culture is invalid.
         ============================================================================*/
-
 #if FEATURE_USE_LCID
         // People really shouldn't be calling LCID versions, no custom support
         public static CompareInfo GetCompareInfo(int culture)
@@ -235,7 +234,6 @@ namespace System.Globalization
         **Exceptions:
         **  ArgumentException if name is invalid.
         ============================================================================*/
-
         public static CompareInfo GetCompareInfo(String name)
         {
             if (name == null)

@@ -12,7 +12,6 @@ namespace System.Web.Mobile
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     using System.Collections.Specialized;
     using System.Security.Permissions;
     using System.Web.Security;

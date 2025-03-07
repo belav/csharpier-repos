@@ -117,7 +117,6 @@ namespace System.Net.Mail
             : base(message + " " + SR.GetString(SR.MailServerResponse, serverResponse)) { }
 
         /// <internalonly/>
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",

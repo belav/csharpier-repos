@@ -14,7 +14,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Resources
 {
     /* An internal implementation detail for .resources files, describing

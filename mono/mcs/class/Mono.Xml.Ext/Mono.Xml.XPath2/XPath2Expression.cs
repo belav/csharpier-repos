@@ -2088,7 +2088,6 @@ namespace Mono.Xml.XPath2
             }
         }
     */
-
     internal class XPath2NodeTest
     {
         public XPath2NodeTest(XmlQualifiedName nameTest)
@@ -2466,7 +2465,6 @@ namespace Mono.Xml.XPath2
             }
         }
         */
-
         internal void CheckArguments(XQueryASTCompiler compiler)
         {
             if (args.Count < MinArgs || args.Count > MaxArgs)
@@ -2583,7 +2581,6 @@ namespace Mono.Xml.XPath2
         }
     #endregion
     */
-
     // Ordered / Unordered
     internal class OrderSpecifiedExpr : ExprSingle
     {

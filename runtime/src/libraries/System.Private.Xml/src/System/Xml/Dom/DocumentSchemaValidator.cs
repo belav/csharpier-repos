@@ -612,7 +612,6 @@ namespace System.Xml
                 }
             }
         }*/
-
         private void CheckNodeSequenceCapacity(int currentIndex)
         {
             if (_nodeSequenceToValidate == null)

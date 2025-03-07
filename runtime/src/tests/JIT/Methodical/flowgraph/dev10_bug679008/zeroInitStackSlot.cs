@@ -5,7 +5,6 @@
  * The JIT was removing a zero-init, but then emitting an untracked lifetime.
  * Please run under GCSTRESS = 0x4
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

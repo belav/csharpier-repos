@@ -77,7 +77,6 @@ namespace Moq
             static Type[] inheritedInterfaces;
             static int serialNumberCounter;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static Type[] inheritedInterfaces;
@@ -86,7 +85,6 @@ namespace Moq
             static Type[] inheritedInterfaces;
             static int serialNumberCounter;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static Type[] inheritedInterfaces;
@@ -130,7 +128,6 @@ namespace Moq
                     string name;
                     SetupCollection setups;
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private T instance;
@@ -153,7 +150,6 @@ namespace Moq
                     string name;
                     SetupCollection setups;
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private T instance;
@@ -198,7 +194,6 @@ namespace Moq
                 bool callBase;
                 Switches switches;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private MockBehavior behavior;
@@ -209,7 +204,6 @@ namespace Moq
                 bool callBase;
                 Switches switches;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private MockBehavior behavior;
@@ -332,14 +326,12 @@ namespace Moq
         After:
                 static string CreateUniqueDefaultMockName()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private static string CreateUniqueDefaultMockName()
         After:
                 static string CreateUniqueDefaultMockName()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private static string CreateUniqueDefaultMockName()
@@ -366,14 +358,12 @@ namespace Moq
             After:
                     void CheckParameters()
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private void CheckParameters()
             After:
                     void CheckParameters()
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private void CheckParameters()
@@ -475,14 +465,12 @@ namespace Moq
             After:
                     void InitializeInstance()
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private void InitializeInstance()
             After:
                     void InitializeInstance()
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private void InitializeInstance()

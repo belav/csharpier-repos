@@ -74,7 +74,6 @@ namespace System.Web.Configuration
             </providers>
         </membership>
  */
-
     public sealed class MembershipSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

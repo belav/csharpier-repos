@@ -6,7 +6,6 @@
  *  A Test which tests the GC using Variants. It is a test which creates a bunch of Variant Objects
  *  with mainly INT datatype.
 */
-
 namespace DefaultNamespace
 {
     using System;

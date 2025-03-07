@@ -12,14 +12,12 @@ namespace Moq
     After:
         sealed class DefaultExpressionCompiler : ExpressionCompiler
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class DefaultExpressionCompiler : ExpressionCompiler
     After:
         sealed class DefaultExpressionCompiler : ExpressionCompiler
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class DefaultExpressionCompiler : ExpressionCompiler
@@ -37,14 +35,12 @@ namespace Moq
         After:
                 DefaultExpressionCompiler()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private DefaultExpressionCompiler()
         After:
                 DefaultExpressionCompiler()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private DefaultExpressionCompiler()

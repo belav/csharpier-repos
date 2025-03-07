@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -39,7 +38,6 @@ namespace System.Web.UI
          * Return the Type of the control that should handle a tag with the
          * passed in properties.
          */
-
         /// <devdoc>
         ///    <para>Retrieves the .NET Framework type that should process
         ///       the control declared in the .aspx file.</para>

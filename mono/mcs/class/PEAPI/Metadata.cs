@@ -636,7 +636,6 @@ namespace PEAPI
     /// <summary>
     /// Base class for all Meta Data table elements
     /// </summary>
-
     public abstract class MetaDataElement : IComparable
     {
         protected ArrayList customAttributes;
@@ -831,7 +830,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for a Custom Attribute (.custom)
     /// </summary>
-
     public class CustomAttribute : MetaDataElement
     {
         MetaDataElement parent;
@@ -968,7 +966,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for security permissions for a class or a method
     /// </summary>
-
     public abstract class BaseDeclSecurity : MetaDataElement
     {
         ushort action;
@@ -1168,7 +1165,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for layout information for a field
     /// </summary>
-
     public class FieldLayout : MetaDataElement
     {
         Field field;
@@ -1394,7 +1390,6 @@ namespace PEAPI
     }
 
     /**************************************************************************/
-
     public class GenericParameter : MetaDataElement
     {
         MetaDataElement owner;
@@ -1612,7 +1607,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for resources used in this PE file
     /// </summary>
-
     public class ManifestResource : MetaDataElement
     {
         public static readonly uint PublicResource = 0x1;
@@ -2710,7 +2704,6 @@ namespace PEAPI
     /// Descriptor for a class defined in another module of THIS assembly
     /// and exported (.class extern)
     /// </summary>
-
     internal class ExternClass : Class
     {
         MetaDataElement parent;
@@ -3037,7 +3030,6 @@ namespace PEAPI
 
     #region Array Types
     /* Classes for Arrays */
-
     /// <summary>
     /// The IL Array type
     /// </summary>
@@ -4046,7 +4038,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for a custom modifier of a type (modopt or modreq)
     /// </summary>
-
     public class CustomModifiedType : Type
     {
         Type type;
@@ -4094,7 +4085,6 @@ namespace PEAPI
     /// <summary>
     /// Base class for Event and Property descriptors
     /// </summary>
-
     public class Feature : MetaDataElement
     {
         internal enum MethodType : ushort
@@ -4388,7 +4378,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for a field of a class
     /// </summary>
-
     public abstract class Field : Member
     {
         protected static readonly byte FieldSig = 0x6;
@@ -4589,7 +4578,6 @@ namespace PEAPI
     /// <summary>
     /// Base class for Method Descriptors
     /// </summary>
-
     public abstract class Method : Member
     {
         internal Method(string methName)
@@ -4605,7 +4593,6 @@ namespace PEAPI
     /// Descriptor for a method defined in THIS assembly/module
     /// IL     .method
     /// </summary>
-
     public class MethodDef : Method
     {
         private static readonly ushort PInvokeImpl = 0x2000;
@@ -5113,7 +5100,6 @@ namespace PEAPI
               this.len = len;
               }
          */
-
         public NativeArray(NativeType elemType, int numElem, int parNumForLen, int elemMult)
             : base(0x2A)
         {
@@ -5141,7 +5127,6 @@ namespace PEAPI
              * all, but csc still emits it, and it is used to distinguish
              * between parNum being 0, and parNum being omitted.
              */
-
             if (parNum == -1)
                 // <native_type> []
                 return str.ToArray();
@@ -5216,7 +5201,6 @@ namespace PEAPI
                ilasm 1.1 only supports "fixed array [5]"
                if (elemType == null) str.WriteByte(0x50);  // no info (MAX)
                else str.WriteByte(elemType.GetTypeIndex());*/
-
             return str.ToArray();
         }
     }
@@ -5396,7 +5380,6 @@ namespace PEAPI
     /// <summary>
     /// Descriptor for a managed pointer (type &  or byref)
     /// </summary>
-
     public class ManagedPointer : PtrType
     {
         /// <summary>
@@ -5422,7 +5405,6 @@ namespace PEAPI
     }
 
     /**************************************************************************/
-
     public interface IExternRef
     {
         ClassRef AddClass(string nsName, string name);
@@ -6475,7 +6457,6 @@ namespace PEAPI
                 }
                 }
              */
-
             SetIndexSizes();
             for (int i = 1; i < numStreams; i++)
             {
@@ -6616,7 +6597,6 @@ namespace PEAPI
     /// <summary>
     /// Stream in the Meta Data  (#Strings, #US, #Blob and #GUID)
     /// </summary>
-
     internal class MetaDataStream : BinaryWriter
     {
         private static readonly uint StreamHeaderSize = 8;

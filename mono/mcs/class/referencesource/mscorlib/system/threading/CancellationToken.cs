@@ -53,7 +53,6 @@ namespace System.Threading
         //!! warning. If more fields are added, the assumptions in CreateLinkedToken may no longer be valid
 
         /* Properties */
-
         /// <summary>
         /// Returns an empty CancellationToken value.
         /// </summary>
@@ -158,7 +157,6 @@ namespace System.Threading
         }
 
         /* Methods */
-
         private readonly static Action<Object> s_ActionToActionObjShunt = new Action<Object>(
             ActionToActionObjShunt
         );

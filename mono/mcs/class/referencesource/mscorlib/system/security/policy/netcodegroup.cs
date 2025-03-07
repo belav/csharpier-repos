@@ -1034,13 +1034,11 @@ namespace System.Security.Policy
 
 
 */
-
             // access fot https://
             AddConnectAccess("https", new CodeConnectAccess("https", CodeConnectAccess.OriginPort));
             /*
 
 */
-
             // access fot ftp://
             /*
 
@@ -1048,7 +1046,6 @@ namespace System.Security.Policy
 
 
 */
-
             // access for no scheme and for any other scheme
             AddConnectAccess(
                 NetCodeGroup.AbsentOriginScheme,

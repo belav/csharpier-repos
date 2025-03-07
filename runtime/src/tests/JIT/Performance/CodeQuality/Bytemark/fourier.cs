@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 using System;
 
 public class Fourier : FourierStruct
@@ -116,7 +114,6 @@ public class Fourier : FourierStruct
         ** Calculate the fourier series.  Begin by
         ** calculating A[0].
         */
-
         abase[0] = TrapezoidIntegrate(0.0, 2.0, 200, 0.0, 0) / 2.0;
 
         /*

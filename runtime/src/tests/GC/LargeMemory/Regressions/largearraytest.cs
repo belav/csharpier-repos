@@ -5,7 +5,6 @@
  * DATE:        2004-03-02
  * DESCRIPTION: creates arrays of size Int32.MaxValue through Int32.MaxValue-100 inclusive
  */
-
 using System;
 
 public class LargeArrayTest

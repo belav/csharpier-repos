@@ -2339,7 +2339,6 @@ namespace MonoTests.System.Data
             dt.Rows[0].EndEdit();
             dt.AcceptChanges();
         }*/
-
         [Test]
         public void RejectChanges()
         {

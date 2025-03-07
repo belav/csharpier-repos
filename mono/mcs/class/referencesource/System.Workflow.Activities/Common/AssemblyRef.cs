@@ -14,7 +14,6 @@ using System;
  * The two files must be kept in sync.  Any change made here must also
  * be made to WF\Common\Shared\AssemblyRef.cs
 *********************************************************************/
-
 namespace System.Workflow.Activities.Common
 {
     internal class AssemblyRef

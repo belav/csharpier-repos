@@ -7,7 +7,6 @@
 /*
  * Copyright (c) 2002 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;

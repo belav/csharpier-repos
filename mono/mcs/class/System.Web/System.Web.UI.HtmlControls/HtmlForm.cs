@@ -245,7 +245,6 @@ namespace System.Web.UI.HtmlControls
         {
             /* Need to always render: method, action and id
              */
-
             string action;
             string customAction = Attributes["action"];
             Page page = Page;

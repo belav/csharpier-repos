@@ -399,7 +399,6 @@ namespace MonoTests.System.Reflection.Emit
 
                ...  and then: new Store<string>().Subscribe<int>("x");
             */
-
             SetUp(AssemblyBuilderAccess.Run);
 
             var tb = module.DefineType("Store");

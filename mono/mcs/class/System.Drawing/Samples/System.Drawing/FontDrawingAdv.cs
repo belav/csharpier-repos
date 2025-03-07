@@ -337,7 +337,6 @@ namespace Font1Sample
             );
 
             /* 3rd row */
-
             Font f8 = new Font("Verdana", 10);
             Font f9 = new Font("Verdana", 6);
             Font f10 = new Font("Verdana", 12);

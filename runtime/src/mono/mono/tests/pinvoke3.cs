@@ -414,7 +414,6 @@ public class Tests
     }
 
     /* Passing and returning strings */
-
     public delegate String ReturnStringDelegate(String s);
 
     [DllImport("libtest", EntryPoint = "mono_test_return_string")]
@@ -437,7 +436,6 @@ public class Tests
     }
 
     /* Passing and returning enums */
-
     public enum FooEnum
     {
         Foo1,
@@ -464,7 +462,6 @@ public class Tests
     }
 
     /* Passing and returning blittable structs */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct BlittableStruct
     {
@@ -501,9 +498,7 @@ public class Tests
     /*
      * Passing and returning small structs
      */
-
     /* TEST 1: 4 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct1
     {
@@ -532,7 +527,6 @@ public class Tests
     }
 
     /* TEST 2: 2+2 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct2
     {
@@ -563,7 +557,6 @@ public class Tests
     }
 
     /* TEST 3: 2+1 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct3
     {
@@ -594,7 +587,6 @@ public class Tests
     }
 
     /* TEST 4: 2 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct4
     {
@@ -623,7 +615,6 @@ public class Tests
     }
 
     /* TEST 5: 8 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct5
     {
@@ -652,7 +643,6 @@ public class Tests
     }
 
     /* TEST 6: 4+4 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct6
     {
@@ -683,7 +673,6 @@ public class Tests
     }
 
     /* TEST 7: 4+2 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct7
     {
@@ -714,7 +703,6 @@ public class Tests
     }
 
     /* TEST 8: 4 byte long FLOAT struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct8
     {
@@ -743,7 +731,6 @@ public class Tests
     }
 
     /* TEST 9: 8 byte long FLOAT struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct9
     {
@@ -772,7 +759,6 @@ public class Tests
     }
 
     /* TEST 10: 4+4 byte long FLOAT struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct10
     {
@@ -803,7 +789,6 @@ public class Tests
     }
 
     /* TEST 11: 4+4 byte long MIXED struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct11
     {
@@ -1177,7 +1162,6 @@ public class Tests
     }
 
     /* Array with size param of type long */
-
     public delegate int ArrayDelegate8_2(
         long i,
         string j,
@@ -1217,7 +1201,6 @@ public class Tests
     /*
      * [Out] blittable arrays
      */
-
     public delegate int ArrayDelegate9(
         int i,
         string j,
@@ -1251,7 +1234,6 @@ public class Tests
     /*
      * [Out] string arrays
      */
-
     public delegate int ArrayDelegate10(
         int i,
         string j,
@@ -1290,7 +1272,6 @@ public class Tests
     /*
      * [In, Out] classes
      */
-
     public delegate int InOutByvalClassDelegate([In, Out] SimpleClass ss);
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_inout_byval_class_delegate")]
@@ -1408,7 +1389,6 @@ public class Tests
     /*
      * Thread attach
      */
-
     public delegate int SimpleDelegate(int i);
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_thread_attach")]

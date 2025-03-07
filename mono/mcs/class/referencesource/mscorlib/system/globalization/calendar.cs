@@ -223,7 +223,6 @@ namespace System.Globalization
         **Notes:
         ** The value is from calendar.nlp.
         ============================================================================*/
-
         internal virtual int CurrentEraValue
         {
             get
@@ -447,7 +446,6 @@ namespace System.Globalization
         **Arguments: None.
         **Exceptions: None.
         ============================================================================*/
-
         public abstract int[] Eras { get; }
 
         // Returns the hour part of the specified DateTime. The returned value is an
@@ -539,7 +537,6 @@ namespace System.Globalization
         **      This means that the first week actually starts 2 days before 1/1.
         **      So Week of year = (GetDayOfYear(time) + offset - 1) / 7 + 1
         ============================================================================*/
-
         internal int GetFirstDayWeekOfYear(DateTime time, int firstDayOfWeek)
         {
             int dayOfYear = GetDayOfYear(time) - 1; // Make the day of year to be 0-based, so that 1/1 is day 0.

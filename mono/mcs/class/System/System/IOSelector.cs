@@ -36,7 +36,6 @@ namespace System
     internal enum IOOperation : int
     {
         /* Keep in sync with MonoIOOperation in mono/metadata/threadpool-ms-io.c */
-
         Read = 1 << 0,
         Write = 1 << 1,
     }

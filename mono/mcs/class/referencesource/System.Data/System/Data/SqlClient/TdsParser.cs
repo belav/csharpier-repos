@@ -1192,7 +1192,6 @@ namespace System.Data.SqlClient
                             REQ,
                             LOGIN
                         } */
-
                         switch (_encryptionOption)
                         {
                             case (EncryptionOptions.ON):
@@ -8668,7 +8667,6 @@ namespace System.Data.SqlClient
 
              For TDS 7.0 and above, there are always 17 bytes of data
             */
-
             // write the sign (note that COM and SQL are opposite)
             if (0x80000000 == (decimalBits[3] & 0x80000000))
                 bytes[current++] = 0;
@@ -8716,7 +8714,6 @@ namespace System.Data.SqlClient
 
              For TDS 7.0 and above, there are always 17 bytes of data
             */
-
             // write the sign (note that COM and SQL are opposite)
             if (0x80000000 == (stateObj._decimalBits[3] & 0x80000000))
                 stateObj.WriteByte(0);
@@ -9875,7 +9872,6 @@ namespace System.Data.SqlClient
                    28) fExtension:1                 // Extensions are used
                    32 - total
                 */
-
                 // first byte
                 log7Flags |= TdsEnums.USE_DB_ON << 5;
                 log7Flags |= TdsEnums.INIT_DB_FATAL << 6;
@@ -13369,7 +13365,6 @@ namespace System.Data.SqlClient
                      HeaderData
                }
             */
-
             int notificationHeaderSize = GetNotificationHeaderSize(notificationRequest);
 
             const int marsHeaderSize = 18; // 4 + 2 + 8 + 4

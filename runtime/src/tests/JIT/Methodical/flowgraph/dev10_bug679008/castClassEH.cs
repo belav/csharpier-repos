@@ -10,7 +10,6 @@ the code can still use the local as if the cast had succeeded.
 Fix: Use an intermediate temporary, just like for other patterns, when the cast is inside a try block.
 
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

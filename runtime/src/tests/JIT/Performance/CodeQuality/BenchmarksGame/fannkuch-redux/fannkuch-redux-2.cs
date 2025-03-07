@@ -11,7 +11,6 @@
 
    contributed by Isaac Gouy, transliterated from Mike Pall's Lua program
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

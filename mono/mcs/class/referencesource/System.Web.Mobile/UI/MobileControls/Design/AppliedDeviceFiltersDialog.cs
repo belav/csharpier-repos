@@ -715,7 +715,6 @@ namespace System.Web.UI.Design.MobileControls
                         return;
                     }
                     */
-
                     filter = CreateExternalFilter(_cbAvailableFilters.Text);
                 }
             }

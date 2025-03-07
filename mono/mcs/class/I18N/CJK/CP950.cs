@@ -223,7 +223,6 @@ namespace I18N.CJK
 
             return charIndex - origIndex;
             */
-
             return GetDecoder().GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
 
@@ -264,7 +263,6 @@ namespace I18N.CJK
             get { return BIG5_PAGE; }
         }
         */
-
         // Decoder that handles a rolling Big5 state.
         private sealed class CP950Decoder : DbcsDecoder
         {

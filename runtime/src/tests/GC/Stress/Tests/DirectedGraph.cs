@@ -13,7 +13,6 @@ and entries in the adjacent-node list.
 n is 800 here
 
 *************************************************************************************************************/
-
 namespace DefaultNamespace
 {
     public class Graph
@@ -201,7 +200,6 @@ namespace DefaultNamespace
                 }
 
         }*/
-
         public void DeleteVertex()
         {
             Vertex temp1 = null;

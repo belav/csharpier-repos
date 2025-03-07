@@ -82,7 +82,6 @@ namespace Novell.Directory.Ldap.Extensions
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public GetBindDNRequest()
             : base(ReplicationConstants.GET_IDENTITY_NAME_REQ, null) { }
     }

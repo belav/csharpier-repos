@@ -105,7 +105,6 @@ namespace System.Net.PeerToPeer
             TracePeerNameRecord();
         }
          */
-
         public PeerName PeerName
         {
             get { return m_PeerName; }

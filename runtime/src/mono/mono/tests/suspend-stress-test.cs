@@ -24,7 +24,6 @@ Missing tests:
     Finalizers
     Async socket IO
 */
-
 class Driver
 {
     static bool stop_please;

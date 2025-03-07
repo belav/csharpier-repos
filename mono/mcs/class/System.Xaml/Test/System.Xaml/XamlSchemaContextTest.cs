@@ -155,7 +155,6 @@ namespace MonoTests.System.Xaml
                     Assert.IsTrue (arr.Contains ("urn:mono-test2"), "#5-3");
                 }
         */
-
         [Test]
         public void GetXamlTypeAndAllXamlTypes()
         {

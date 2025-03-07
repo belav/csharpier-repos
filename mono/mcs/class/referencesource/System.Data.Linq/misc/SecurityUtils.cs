@@ -6,7 +6,6 @@
 
 /*
  */
-
 #if MONO
 namespace System.Data.Linq
 #else

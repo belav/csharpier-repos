@@ -27,7 +27,6 @@ namespace Microsoft.XmlSerializer.Generator.Tests
              *
              * [dotnet.exe $(OutputPath)dotnet-Microsoft.XmlSerializer.Generator.dll $(OutputPath)SerializableAssembly.dll --force --quiet]
              */
-
             const string CodeFile = "SerializableAssembly.XmlSerializers.cs";
             const string LKGCodeFile = "Expected.SerializableAssembly.XmlSerializers.cs";
 

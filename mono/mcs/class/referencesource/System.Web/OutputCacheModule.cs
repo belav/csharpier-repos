@@ -649,7 +649,6 @@ namespace System.Web.Caching
          * Try to find this request in the cache. If so, return it. Otherwise,
          * store the cache key for use on Leave.
          */
-
         /// <devdoc>
         /// <para>Raises the <see langword='Enter'/>
         /// event, which searches the output cache for an item to satisfy the HTTP request. </para>
@@ -765,7 +764,6 @@ namespace System.Web.Caching
                  *
                  * Skip this step if it's a VaryByNone vary policy.
                  */
-
                 key = CreateOutputCachedItemKey(context, cachedVary);
                 if (key == null)
                 {
@@ -1304,7 +1302,6 @@ namespace System.Web.Caching
         /*
          * If the item is cacheable, add it to the cache.
          */
-
         /// <devdoc>
         /// <para>Raises the <see langword='Leave'/> event, which causes any cacheable items to
         ///    be put into the output cache.</para>

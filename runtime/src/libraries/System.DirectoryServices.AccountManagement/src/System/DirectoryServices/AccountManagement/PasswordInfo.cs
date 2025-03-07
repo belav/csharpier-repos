@@ -302,7 +302,6 @@ namespace System.DirectoryServices.AccountManagement
                     changed = true;
                 }
                 */
-
         //
         // Load/Store
         //

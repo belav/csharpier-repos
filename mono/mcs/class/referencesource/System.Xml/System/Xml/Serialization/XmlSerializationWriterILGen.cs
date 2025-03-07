@@ -3097,7 +3097,6 @@ namespace System.Xml.Serialization
             }
             return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
         }*/
-
         internal void ILGenForEnumMember(CodeGenerator ilg, Type type, string memberName)
         {
             ilg.Ldc(Enum.Parse(type, memberName, false));

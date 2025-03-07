@@ -176,7 +176,6 @@ namespace System.Net.Sockets
 
             /* Warning: any field on the current SocketAsyncResult might have changed, as the callback might have
              * called this.Init */
-
             switch (completedOperation)
             {
                 case SocketOperation.Receive:

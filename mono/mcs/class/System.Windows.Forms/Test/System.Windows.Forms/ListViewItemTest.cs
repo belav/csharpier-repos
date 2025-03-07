@@ -664,7 +664,6 @@ namespace MonoTests.System.Windows.Forms
             // These tests shoule be re-enabled when #333693
             /*Assert.IsTrue (item1.Focused, "#9");
             Assert.IsFalse (item2.Focused, "#10");*/
-
             f.Dispose();
         }
 

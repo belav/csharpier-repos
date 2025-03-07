@@ -4074,7 +4074,6 @@ namespace System.Runtime.Remoting.Messaging
         [NonSerialized]
         internal Object       _fakeThisPtr;     // used for proxyattribute::CI
         */
-
         //
         // construction
         //
@@ -5014,7 +5013,6 @@ namespace System.Runtime.Remoting.Messaging
         }
 
         /// <internalonly/>
-
         [System.Security.SecurityCritical]
         void IInternalMessage.SetCallContext(LogicalCallContext newCallContext)
         {
@@ -5265,7 +5263,6 @@ namespace System.Runtime.Remoting.Messaging
                     {
                         /*DBG Console.WriteLine("### Get SrvID: thrdCtxID== " + Int32.Format(Thread.CurrentContext.InternalContextID,"x"));
                         Console.WriteLine("### Get SrvID: _targetCtxID" + Int32.Format(_targetCtxID,"x")); DBG*/
-
                         // NOTE: if we don't have a managed context object
                         // corresponding to the targetCtxID ... we just use
                         // the default context for the AppDomain. This could

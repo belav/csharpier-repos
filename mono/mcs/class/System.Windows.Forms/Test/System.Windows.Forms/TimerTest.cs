@@ -123,7 +123,6 @@ namespace MonoTests.System.Windows.Forms
             }
         }
         */
-
         void TickHandler(object sender, EventArgs e)
         {
             Ticked = true;

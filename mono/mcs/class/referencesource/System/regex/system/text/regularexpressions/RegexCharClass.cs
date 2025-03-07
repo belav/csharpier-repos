@@ -261,7 +261,6 @@ namespace System.Text.RegularExpressions
             It is easy to verify that for any of these forms [L(a), L(b)] is
             contained in the union of [a, b] and L([a, b]).
         ***************************************************************************/
-
         private const int LowercaseSet = 0; // Set to arg.
         private const int LowercaseAdd = 1; // Add arg.
         private const int LowercaseBor = 2; // Bitwise or with 1.

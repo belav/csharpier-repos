@@ -1443,7 +1443,6 @@ namespace MonoTests.System.Windows.Forms
         /*
             ListViewItemCollection
         */
-
         [Test]
         public void ListViewItemCollectionTest_Add()
         {

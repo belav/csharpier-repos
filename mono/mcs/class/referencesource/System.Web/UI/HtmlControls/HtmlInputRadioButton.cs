@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -37,14 +36,12 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates an intrinsic Html INPUT type=radio control.
          */
-
         public HtmlInputRadioButton()
             : base("radio") { }
 
         /*
          * Checked property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a value indicating whether a radio button is
@@ -139,7 +136,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * This method is invoked just prior to rendering.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -164,7 +160,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method used to raise the OnServerChange event.
          */
-
         /// <devdoc>
         /// </devdoc>
         protected virtual void OnServerChange(EventArgs e)
@@ -193,7 +188,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to process posted data.
          * RadioButton determines the posted radio group state.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -238,7 +232,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface which is invoked whenever posted data
          * for a control has changed.  RadioButton fires an OnServerChange event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

@@ -336,7 +336,6 @@ namespace System.Windows.Forms
             else if (ValueEquals(false_value, value))
                 final_value = false;
             /* else error? */
-
             base.SetColumnValueAtRow(lm, row, final_value);
         }
         #endregion	// Public Instance Methods

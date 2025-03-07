@@ -130,7 +130,6 @@ namespace MonoTests.System.ServiceModel
             Assert.AreEqual (1, se.Behaviors.Count, "#3");
         }
         */
-
         [ServiceContract]
         public interface IFoo
         {

@@ -388,7 +388,6 @@ namespace System.Data.Tests
                     {
                         Assert.Null(dr["ChildId"]);
                     }*/
-
             Assert.Equal(4, arr.Length);
 
             // Rule = SetDefault

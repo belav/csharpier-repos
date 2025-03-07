@@ -91,7 +91,6 @@ namespace System.Web
         /*
          * ASPNET_STATE.EXE
          */
-
         [DllImport(ModName.STATE_FULL_NAME)]
         internal static extern void STWNDCloseConnection(IntPtr tracker);
 
@@ -452,7 +451,6 @@ namespace System.Web
         /*
          * webengine.dll
          */
-
 #if !FEATURE_PAL // FEATURE_PAL does not enable IIS-based hosting features
         [DllImport(ModName.ENGINE_FULL_NAME, CharSet = CharSet.Unicode, BestFitMapping = false)]
         internal static extern void AppDomainRestart(string appId);
@@ -1235,7 +1233,6 @@ namespace System.Web
         /*
          * ASPNET_WP.EXE
          */
-
         [DllImport(ModName.WP_FULL_NAME, EntryPoint = "PMGetTraceContextId")]
         internal static extern int PMGetTraceContextId(IntPtr pMsg, out Guid traceContextId);
 

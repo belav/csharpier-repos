@@ -52,7 +52,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructors for Asn1Enumerated
         */
-
         /// <summary> Call this constructor to construct an Asn1Enumerated
         /// object from an integer value.
         ///

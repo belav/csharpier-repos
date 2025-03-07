@@ -24,7 +24,6 @@ namespace System.Data.Common
         }
     }
     */
-
     [
         Serializable(),
         AttributeUsage(

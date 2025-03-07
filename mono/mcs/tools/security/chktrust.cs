@@ -42,7 +42,6 @@ namespace Mono.Tools
             /*			FileStream fs = File.Open (fileName + ".sig", FileMode.Create, FileAccess.Write);
                         fs.Write (a.Signature, 0, a.Signature.Length);
                         fs.Close ();*/
-
             // get something shorter to display
             fileName = Path.GetFileName(fileName);
 

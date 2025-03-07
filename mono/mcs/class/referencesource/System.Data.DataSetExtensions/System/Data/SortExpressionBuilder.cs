@@ -42,7 +42,6 @@ namespace System.Data
          * thenby  b
          *
          **/
-
         //Selectors and comparers are mapped using the index in the list.
         //E.g: _comparers[i] is used with _selectors[i]
 

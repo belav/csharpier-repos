@@ -9,7 +9,6 @@ public class Tests
     public static void Main(String[] args)
     {
         /* There are multiple approaches, we generate c# directly */
-
         using (var w = new StreamWriter(Console.OpenStandardOutput()))
         {
             w.WriteLine("using System;");

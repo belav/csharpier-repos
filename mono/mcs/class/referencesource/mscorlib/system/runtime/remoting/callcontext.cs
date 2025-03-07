@@ -302,7 +302,6 @@ namespace System.Runtime.Remoting.Messaging
         ** LogicalCallContextObject  to maintain alignment between the two classes.
         ** DON'T CHANGE THESE UNLESS YOU MODIFY LogicalContextObject in vm\object.h
         =========================================================================*/
-
         // Private member data
         private Hashtable m_Datastore;
         private CallContextRemotingData m_RemotingData = null;

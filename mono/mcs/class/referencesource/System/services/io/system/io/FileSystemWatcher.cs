@@ -540,7 +540,6 @@ namespace System.IO
                             NOTE2: The Filename is a Unicode string that's NOT NULL terminated.
                             NOTE3: A NextEntryOffset of zero means that it's the last entry
                         *******/
-
                         // Parse the file notify buffer:
                         int offset = 0;
                         int nextOffset,
@@ -593,7 +592,6 @@ namespace System.IO
     
                                (Phew!)
                              */
-
                             // If the action is RENAMED_FROM, save the name of the file
                             if (action == Direct.FILE_ACTION_RENAMED_OLD_NAME)
                             {

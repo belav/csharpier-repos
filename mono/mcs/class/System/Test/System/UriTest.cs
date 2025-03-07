@@ -53,7 +53,6 @@ namespace MonoTests.System
             uri = new Uri("http://[abcde::127.11.22.33]:8080");
             Print (uri);
             */
-
             /*
             uri = new Uri ("http://www.contoso.com:1234/foo/bar/");
             Print (uri);
@@ -67,7 +66,6 @@ namespace MonoTests.System
             uri = new Uri ("http://www.contoso.com:1234");
             Print (uri);
             */
-
             uri = new Uri("  \r  \n http://test.com\r\n \r\r  ");
             Assert.AreEqual("http://test.com/", uri.ToString(), "#k0");
             Assert.AreEqual(

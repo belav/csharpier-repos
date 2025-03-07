@@ -13,14 +13,12 @@ namespace Moq
     After:
         sealed class EventHandlerCollection
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class EventHandlerCollection
     After:
         sealed class EventHandlerCollection
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class EventHandlerCollection
@@ -34,14 +32,12 @@ namespace Moq
     After:
             readonly Dictionary<EventInfo, Delegate> eventHandlers;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly Dictionary<EventInfo, Delegate> eventHandlers;
     After:
             readonly Dictionary<EventInfo, Delegate> eventHandlers;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly Dictionary<EventInfo, Delegate> eventHandlers;
@@ -92,14 +88,12 @@ namespace Moq
                 After:
                         Delegate TryGet(EventInfo @event)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private Delegate TryGet(EventInfo @event)
                 After:
                         Delegate TryGet(EventInfo @event)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private Delegate TryGet(EventInfo @event)

@@ -27,7 +27,6 @@ namespace System.Web.Mail
     /*
      * Class that sends MailMessage using CDONTS/CDOSYS
      */
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -763,7 +762,6 @@ namespace System.Web.Mail
     /*
      * Immutable struct that holds a single attachment
      */
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -827,7 +825,6 @@ namespace System.Web.Mail
     /*
      * Struct that holds a single message
      */
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>

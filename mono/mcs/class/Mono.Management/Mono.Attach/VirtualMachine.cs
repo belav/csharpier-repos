@@ -116,7 +116,6 @@ namespace Mono.Attach
              * We communicate with the agent inside the runtime using a simlified
              * version of the .net remoting protocol.
              */
-
             string path = "/tmp/mono-" + user + "/.mono-" + pid;
 
             UnixClient client = new UnixClient(path);

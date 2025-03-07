@@ -43,7 +43,6 @@ public class X
         ///
         ///	Structure to pointer
         ///
-
         Dummy dummy = new Dummy();
         dummy.a = new byte[16];
         dummy.b = new float[16];

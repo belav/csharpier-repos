@@ -792,7 +792,6 @@ namespace System.Web.UI.HtmlControls
             /* postCollection contains the values that are
              * selected
              */
-
             string[] values = postCollection.GetValues(postDataKey);
             bool changed = false;
 

@@ -437,7 +437,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
              *  and puts them in the project file so we are good.  And by not making this code aware of which warnings comprise
              *  Option Strict-, we have one less place we have to keep up to date in terms of what comprises option strict-
              */
-
             // Decide whether we are Option Strict+ or Option Strict:custom
             object? optionStrictSetting = this._store["OptionStrict"];
             bool optionStrict = optionStrictSetting != null ? (bool)optionStrictSetting : false;

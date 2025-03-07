@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 /**************
 ** DoNumSort **
 ***************
@@ -38,7 +36,6 @@
 **  returned result in # of longword sorted per second.
 **  Not so; the routine returns # of iterations per sec.
 */
-
 using System;
 
 // #define DEBUG
@@ -86,7 +83,6 @@ public class NumericSortJagged : SortStruct
                 ** minimum, then allocate for more arrays and
                 ** try again.
                 */
-
                 if (
                     DoNumSortIteration(arraybase, this.arraysize, this.numarrays) > global.min_ticks
                 )
@@ -133,7 +129,6 @@ public class NumericSortJagged : SortStruct
     ** sort benchmark.  It returns the number of ticks
     ** elapsed for the iteration.
     */
-
     // JTR: The last 2 parms are no longer needed as they
     // can be inferred from the arraybase. <shrug>
     private static int DoNumSortIteration(int[][] arraybase, int arraysize, int numarrays)
@@ -381,7 +376,6 @@ public class NumericSortRect : SortStruct
     ** sort benchmark.  It returns the number of ticks
     ** elapsed for the iteration.
     */
-
     // JTR: The last 2 parms are no longer needed as they
     // can be inferred from the arraybase. <shrug>
     private static int DoNumSortIteration(int[,] arraybase, int arraysize, int numarrays)

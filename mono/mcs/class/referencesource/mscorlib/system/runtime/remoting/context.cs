@@ -237,7 +237,6 @@ namespace System.Runtime.Remoting.Contexts
                 throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_AddContextFrozen"));
             }
             */
-
             if (prop == null || prop.Name == null)
             {
                 throw new ArgumentNullException((prop == null) ? "prop" : "property name");
@@ -646,7 +645,6 @@ namespace System.Runtime.Remoting.Contexts
         {
             /*DBG Console.WriteLine("public DoCallBack: targetCtx: "
             + Int32.Format(this.InternalContextID,"x")); DBG*/
-
             if (deleg == null)
             {
                 throw new ArgumentNullException("deleg");
@@ -693,7 +691,6 @@ namespace System.Runtime.Remoting.Contexts
             /*DBG Console.WriteLine("private DoCallBackFromEE: targetCtx: "
             + Int32.Format(targetCtxID,"x")
             + " PvtData: " + Int32.Format(privateData,"x"));DBG*/
-
             if (targetDomainID == 0)
             {
                 CallBackHelper cb = new CallBackHelper(

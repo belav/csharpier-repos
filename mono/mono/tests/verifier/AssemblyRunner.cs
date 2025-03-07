@@ -255,7 +255,6 @@ namespace AssemblyRunner
                     /*This warning doesn't help a lot since there are cases which this happens
                     Console.WriteLine ("Warning: test {0} returned unverifiable under AD but {1} under runtime. PV said {2}, using runtime choice", testName, rt, pv);
                     */
-
                     return rt;
                 }
 

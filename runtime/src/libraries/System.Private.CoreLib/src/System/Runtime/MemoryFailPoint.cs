@@ -11,7 +11,6 @@
 **
 **
 ===========================================================*/
-
 using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Threading;
@@ -64,7 +63,6 @@ using System.Threading;
    consider checking for enough free space in both locations (with any
    appropriate adjustments to ensure the memory is contiguous).
 */
-
 namespace System.Runtime
 {
     public sealed partial class MemoryFailPoint : CriticalFinalizerObject, IDisposable

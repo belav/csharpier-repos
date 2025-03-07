@@ -14,7 +14,6 @@
  * A BBJ_CALL block is a call to a finally region the assert is expecting that the will be exactly one BBJ_RET branch back from the finally block to the BBJ_ALWAYS block.  Typically this is true, however for finally blocks that use multiple return statements (generally a poor practice IMHO)  we can have more than one BBJ_RET back to the BBJ_ALWAYS block.  Thus hitting the assert.  For a retail build we would not assert and would instead just remove one of the back edges to the BBJ_ALWAYS block, which is wrong but does actually cause any further problems in a retail build.
  * The fix is to loop over all of the back edged into the BBJ_ALWAYS block and remove all of them.
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

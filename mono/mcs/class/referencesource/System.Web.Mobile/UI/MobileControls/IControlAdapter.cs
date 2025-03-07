@@ -41,7 +41,6 @@ namespace System.Web.UI.MobileControls
         MobilePage Page { get; }
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.OnInit"]/*' />
-
         void OnInit(EventArgs e);
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.OnLoad"]/*' />
@@ -63,7 +62,6 @@ namespace System.Web.UI.MobileControls
         bool HandlePostBackEvent(String eventArgument);
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.LoadPostData"]/*' />
-
         // used by controls that implement IPostBackDataHandler to handle
         // situations where the post data is interpreted based upon generating
         // device.  Returns true if there is no device-specific handling, and
@@ -76,14 +74,12 @@ namespace System.Web.UI.MobileControls
         );
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.LoadAdapterState"]/*' />
-
         void LoadAdapterState(Object state);
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.SaveAdapterState"]/*' />
         Object SaveAdapterState();
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.VisibleWeight"]/*' />
-
         int VisibleWeight { get; }
 
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.ItemWeight"]/*' />

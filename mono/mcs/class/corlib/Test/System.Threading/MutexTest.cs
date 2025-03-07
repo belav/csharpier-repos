@@ -128,7 +128,6 @@ namespace MonoTests.System.Threading
                     Assert.AreEqual(class1.id,class1.marker);
                 }
         */
-
         [Test]
         [Category("MultiThreaded")]
         public void TestWaitAndSignal1()

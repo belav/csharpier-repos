@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2002 Microsoft Corporation
  */
-
 namespace System.Web.Security
 {
     using System.Collections.Specialized;

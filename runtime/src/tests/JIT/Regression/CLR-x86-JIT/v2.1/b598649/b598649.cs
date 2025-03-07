@@ -14,7 +14,6 @@ namespace Bug565326
         Should see this line: B will return False
         Should see this line: In E()
     */
-
     class A
     {
         public static bool boolRetValue;

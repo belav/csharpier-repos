@@ -12,7 +12,6 @@
 **
 **
 ============================================================*/
-
 namespace System.Runtime.Serialization
 {
     using System;

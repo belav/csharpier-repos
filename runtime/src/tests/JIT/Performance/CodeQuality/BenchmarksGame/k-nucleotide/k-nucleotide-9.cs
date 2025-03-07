@@ -12,7 +12,6 @@
    submitted by Josh Goldfoot
    Modified to reduce memory and do more in parallel by Anthony Lloyd
  */
-
 using System;
 using System.Collections.Generic;
 using System.IO;

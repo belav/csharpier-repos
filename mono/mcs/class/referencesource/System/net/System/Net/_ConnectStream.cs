@@ -43,7 +43,6 @@ namespace System.Net
         'below' the level of the HTTP request, for example MUX or SSL
 
     --*/
-
     internal class ConnectStream : Stream, ICloseEx, IRequestLifetimeTracker
     {
 #if DEBUG
@@ -232,7 +231,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
         public ConnectStream(Connection connection, HttpWebRequest request)
         {
             GlobalLog.Print(
@@ -301,7 +299,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
         public ConnectStream(
             Connection connection,
             byte[] buffer,
@@ -430,7 +427,6 @@ namespace System.Net
             Returns: True if there is an error
 
          --*/
-
         internal bool ErrorInStream
         {
             get { return m_ErrorException != null; }
@@ -563,7 +559,6 @@ namespace System.Net
             Returns: True if this is a read stream, false otherwise.
 
          --*/
-
         public override bool CanRead
         {
             get { return !WriteStream && !IsClosed; }
@@ -579,7 +574,6 @@ namespace System.Net
             Returns: false
 
          --*/
-
         public override bool CanSeek
         {
             get { return false; }
@@ -595,7 +589,6 @@ namespace System.Net
             Returns: True if this is a write stream, false otherwise.
 
          --*/
-
         public override bool CanWrite
         {
             get { return WriteStream && !IsClosed; }
@@ -611,7 +604,6 @@ namespace System.Net
             Returns: Throws exception.
 
          --*/
-
         public override long Length
         {
             get { throw new NotSupportedException(SR.GetString(SR.net_noseek)); }
@@ -627,7 +619,6 @@ namespace System.Net
             Returns: Throws exception.
 
          --*/
-
         public override long Position
         {
             get { throw new NotSupportedException(SR.GetString(SR.net_noseek)); }
@@ -644,7 +635,6 @@ namespace System.Net
             Returns: true/false depending on whether we are complete
 
          --*/
-
         internal bool Eof
         {
             get
@@ -686,7 +676,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
         //
         internal void ResubmitWrite(ConnectStream oldStream, bool suppressWrite)
         {
@@ -1040,7 +1029,6 @@ namespace System.Net
                 IAsyncResult    - the async result
 
         --*/
-
         [HostProtection(ExternalThreading = true)]
         public override IAsyncResult BeginWrite(
             byte[] buffer,
@@ -2135,7 +2123,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
         [HostProtection(ExternalThreading = true)]
         public override IAsyncResult BeginRead(
             byte[] buffer,
@@ -2275,7 +2262,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
         private IAsyncResult BeginReadWithoutValidation(
             byte[] buffer,
             int offset,
@@ -2443,7 +2429,6 @@ namespace System.Net
              that is called from the Chunked code as well the normal codepaths.
 
         --*/
-
         private int InternalRead(byte[] buffer, int offset, int size)
         {
             GlobalLog.ThreadContract(
@@ -2543,7 +2528,6 @@ namespace System.Net
                 int - size of bytes read, or < 0 on error
 
         --*/
-
         public override int EndRead(IAsyncResult asyncResult)
         {
 #if DEBUG
@@ -3120,7 +3104,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
         protected override void Dispose(bool disposing)
         {
 #if DEBUG
@@ -4152,7 +4135,6 @@ namespace System.Net
                 A byte array with the header in int.
 
         --*/
-
         internal static byte[] GetChunkHeader(int size, out int offset)
         {
             GlobalLog.Enter("ConnectStream::GetChunkHeader", "size:" + size.ToString());

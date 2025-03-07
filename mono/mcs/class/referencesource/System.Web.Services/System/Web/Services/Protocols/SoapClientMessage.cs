@@ -43,7 +43,6 @@ namespace System.Web.Services.Protocols
             get { return true; }
         }
         */
-
         /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.OneWay"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -80,7 +79,6 @@ namespace System.Web.Services.Protocols
             get { return method.extensionInitializers; }
         }
         */
-
         /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.Url"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

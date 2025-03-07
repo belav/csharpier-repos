@@ -22,7 +22,6 @@ using System.Reflection;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 /* A comparison made to same variable. */
 #pragma warning disable 1718
 
@@ -401,7 +400,6 @@ class Tests
         return result;
     }
     */
-
     public static int test_16_float_cmp()
     {
         double a = 2.0;
@@ -748,7 +746,6 @@ class Tests
         return 0;
     }
     */
-
     public static int INT_VAL = 0x13456799;
 
     public static int test_0_int4_to_float_conversion()

@@ -125,7 +125,6 @@ namespace System.DirectoryServices.ActiveDirectory
         DsRole_MemberServerWithSharedAccountDomain
     }DSROLE_MACHINE_ROLE;
     */
-
     internal enum DSROLE_MACHINE_ROLE
     {
         DsRole_RoleStandaloneWorkstation,
@@ -149,7 +148,6 @@ namespace System.DirectoryServices.ActiveDirectory
         DsRolePrimaryDomainInfoBasicEx
     }DSROLE_PRIMARY_DOMAIN_INFO_LEVEL;
     */
-
     internal enum DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
     {
         DsRolePrimaryDomainInfoBasic = 1,
@@ -553,7 +551,6 @@ namespace System.DirectoryServices.ActiveDirectory
      GUID DomainGuid;
      } DSROLE_PRIMARY_DOMAIN_INFO_BASIC,  *PDSROLE_PRIMARY_DOMAIN_INFO_BASIC;
      */
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DSROLE_PRIMARY_DOMAIN_INFO_BASIC
     {
@@ -715,7 +712,6 @@ namespace System.DirectoryServices.ActiveDirectory
           DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
           PBYTE* Buffer
         ); */
-
         [LibraryImport(
             global::Interop.Libraries.Netapi32,
             EntryPoint = "DsRoleGetPrimaryDomainInformation",

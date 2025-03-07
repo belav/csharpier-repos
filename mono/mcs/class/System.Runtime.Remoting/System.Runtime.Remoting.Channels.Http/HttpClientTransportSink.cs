@@ -192,7 +192,6 @@ namespace System.Runtime.Remoting.Channels.Http
             ServicePrincipalName
             UseAuthenticatedConnectionSharing
             */
-
             //build the headers
             request.ContentType = (string)requestHeaders["Content-Type"];
 

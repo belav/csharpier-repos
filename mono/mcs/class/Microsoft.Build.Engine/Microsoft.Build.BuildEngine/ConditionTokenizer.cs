@@ -346,7 +346,6 @@ namespace Microsoft.Build.BuildEngine
                     set { ignoreWhiteSpace = value; }
                 }
         */
-
         struct CharToTokenType
         {
             public char ch;

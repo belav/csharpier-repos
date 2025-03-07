@@ -207,7 +207,6 @@ namespace System.Data
                     return ToNode(dc, null, false);
                 }
         */
-
         internal XmlNode ToNode(XmlDocument dc, Hashtable prefixes, bool inRemoting)
         {
             XmlElement typeNode = dc.CreateElement(

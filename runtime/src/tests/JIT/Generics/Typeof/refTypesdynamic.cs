@@ -4,7 +4,6 @@
 
 /* Cases for some shared generics (generics instantiated over reference types, both sealed and unsealed).
  */
-
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;

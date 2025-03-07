@@ -410,7 +410,6 @@ namespace System.Reflection.Emit
             return method.Invoke (obj, parameters);
         }
         */
-
         public override object Invoke(
             object obj,
             BindingFlags invokeAttr,
@@ -522,7 +521,6 @@ namespace System.Reflection.Emit
                     }
                 }
         */
-
         private void RejectIfCreated()
         {
             if (mhandle.Value != IntPtr.Zero)

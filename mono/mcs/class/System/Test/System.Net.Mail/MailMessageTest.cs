@@ -76,7 +76,6 @@ namespace MonoTests.System.Net.Mail
             AlternateView av = msg.AlternateViews[0];
             // test that the type is ok, etc.
         }*/
-
         /*[Test]
         public void Attachment ()
         {
@@ -84,7 +83,6 @@ namespace MonoTests.System.Net.Mail
             Attachment at = msg.Attachments[0];
             Assert.AreEqual (at.ContentType.MediaType, "text/plain");
         }*/
-
         [Test]
         public void Body()
         {

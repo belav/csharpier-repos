@@ -528,7 +528,6 @@ namespace Mono.Globalization.Unicode
             }
         }
         */
-
         class CharMapping
         {
             public CharMapping(int cp, int mapIndex, bool isCanonical)

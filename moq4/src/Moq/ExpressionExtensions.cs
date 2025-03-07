@@ -21,14 +21,12 @@ namespace Moq
     After:
         static partial class ExpressionExtensions
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static partial class ExpressionExtensions
     After:
         static partial class ExpressionExtensions
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static partial class ExpressionExtensions
@@ -563,14 +561,12 @@ namespace Moq
             After:
                     static bool PartialMatcherAwareEval_ShouldEvaluate(Expression expression)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static bool PartialMatcherAwareEval_ShouldEvaluate(Expression expression)
             After:
                     static bool PartialMatcherAwareEval_ShouldEvaluate(Expression expression)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static bool PartialMatcherAwareEval_ShouldEvaluate(Expression expression)

@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 using System;
 
 /*
@@ -113,7 +111,6 @@ public class Huffman : HuffStruct
             ** # of loops and increasing the loop count until we
             ** get a number of loops that we can use.
             */
-
             for (this.loops = 100; this.loops < global.MAXHUFFLOOPS; this.loops += 10)
             {
                 if (

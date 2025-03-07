@@ -164,7 +164,6 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary> Set the debugging flag. </summary>
         ///
         /// <param name=debugF> The new debug setting. </param>
-
         public void SetDebug(bool debugF)
         {
             this.debug = debugF;
@@ -231,7 +230,6 @@ namespace ICSharpCode.SharpZipLib.Tar
                     this.transTyper = transTyper;
                 }
         */
-
         /// <summary>
         /// Set user and group information that will be used to fill in the
         /// tar archive's entry headers. Since Java currently provides no means

@@ -524,7 +524,6 @@ namespace System.Net
             }
         }
         */
-
         private string MyLocalPort
         {
             get
@@ -1005,7 +1004,6 @@ namespace System.Net
                     True if request was started, false otherwise.
 
         --*/
-
         private TriState StartRequest(HttpWebRequest request, bool canPollRead)
         {
             GlobalLog.Enter(
@@ -2087,7 +2085,6 @@ namespace System.Net
            None.
 
         --*/
-
         private void InitializeParseStatusLine()
         {
             m_StatusState = BeforeVersionNumbers;
@@ -2116,7 +2113,6 @@ namespace System.Net
            bool - Success true/false
 
         --*/
-
         private const int BeforeVersionNumbers = 0;
         private const int MajorVersionNumber = 1;
         private const int MinorVersionNumber = 2;
@@ -2719,7 +2715,6 @@ namespace System.Net
            None
 
         --*/
-
         private void SetStatusLineParsed()
         {
             // transfer this to response data
@@ -3807,7 +3802,6 @@ namespace System.Net
             dispatch the responses.
 
         --*/
-
         private void PrepareCloseConnectionSocket(ref ConnectionReturnResult returnResult)
         {
             GlobalLog.Enter(

@@ -9,7 +9,6 @@
  32 KB, we add some additional code that checks for null accesses. The address range on mac is
  much smaller, 0-4 KB, and if the field offset is above 2 KB we are adding this additional code again.
 */
-
 using System;
 using Xunit;
 

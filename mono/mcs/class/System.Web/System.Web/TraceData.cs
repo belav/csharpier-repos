@@ -139,7 +139,6 @@ namespace System.Web
             viewstate_data.Columns.Add (new DataColumn ("ControlId", typeof (string)));
             viewstate_data.Columns.Add (new DataColumn ("Data", typeof (string)));
             */
-
             is_first_time = true;
         }
 

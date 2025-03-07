@@ -44,7 +44,6 @@ namespace System.Text.Unicode
         /*
          * Helper methods
          */
-
         public static UnicodeCategory GetUnicodeCategory(int codePoint) =>
             GetData(codePoint).GeneralCategory;
 

@@ -11,7 +11,6 @@ Try to access a static method twice.
 Expected: Should return the same exception.
 
 */
-
 using System;
 using Xunit;
 
@@ -86,7 +85,6 @@ public class E
     {}
 }
 */
-
 // TEST6
 // instance method trigger (for zero initialized valuetype)
 public struct F

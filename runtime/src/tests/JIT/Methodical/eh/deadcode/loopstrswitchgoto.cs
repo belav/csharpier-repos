@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* dead code in a switch contained ina a loop */
-
 using System;
 using Xunit;
 

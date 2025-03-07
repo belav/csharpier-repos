@@ -60,7 +60,6 @@ namespace System.Web.Compilation
                protected abstract IDictionary ControlSkins { get; }
                protected abstract string[] LinkedStyleSheets { get; }
             */
-
             /* ControlSkins */
             fld = new CodeMemberField(typeof(HybridDictionary), "__controlSkins");
             fld.Attributes = MemberAttributes.Private;

@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;
@@ -179,7 +178,6 @@ namespace System.Web
          * @param filename physical file name
          * @param queryString query string
          */
-
         /// <devdoc>
         ///    <para>
         ///       Initializes an HttpRequest object.
@@ -290,7 +288,6 @@ namespace System.Web
         /*
          * Public property to determine if request is local
          */
-
         public bool IsLocal
         {
             get
@@ -1257,7 +1254,6 @@ namespace System.Web
         /*
          * Get boundary for the posted multipart content as byte array
          */
-
         private byte[] GetMultipartBoundary()
         {
             // extract boundary value
@@ -1325,7 +1321,6 @@ namespace System.Web
         /*
          * Http method (verb) associated with the current request
          */
-
         /// <devdoc>
         ///    <para>Indicates the HTTP data transfer method used by client (GET, POST). This property is read-only.</para>
         /// </devdoc>
@@ -1408,7 +1403,6 @@ namespace System.Web
         /*
          * RequestType default to verb, but can be changed
          */
-
         /// <devdoc>
         ///    Indicates the HTTP data transfer method used by client
         ///    (GET, POST).
@@ -1422,7 +1416,6 @@ namespace System.Web
         /*
           * Content-type of the content posted with the current request
           */
-
         /// <devdoc>
         ///    <para>Indicates the MIME content type of incoming request. This property is read-only.</para>
         /// </devdoc>
@@ -1488,7 +1481,6 @@ namespace System.Web
         /*
          * Encoding to read posted text content
          */
-
         /// <devdoc>
         ///    <para>Indicates the character set of data supplied by client. This property is read-only.</para>
         /// </devdoc>
@@ -1542,7 +1534,6 @@ namespace System.Web
         /*
          * Parsed Accept header as array of strings
          */
-
         /// <devdoc>
         ///    <para>Returns a string array of client-supported MIME accept types. This property is read-only.</para>
         /// </devdoc>
@@ -1591,7 +1582,6 @@ namespace System.Web
         /*
          * Virtual path corresponding to the requested Url
          */
-
         /// <devdoc>
         ///    <para>Indicates the virtual path of the current
         ///       request, including the path PathInfo. This property is read-only.</para>
@@ -1715,7 +1705,6 @@ namespace System.Web
         /*
          * File path corresponding to the requested Url
          */
-
         /// <devdoc>
         ///    <para>Indicates the virtual path of the current request, but without the PathInfo.
         ///         This property is read-only.</para>
@@ -1789,7 +1778,6 @@ namespace System.Web
          * Server.Execute, ClientFilePath doesn't change, while this changes to the
          * currently executing virtual path
          */
-
         public string CurrentExecutionFilePath
         {
             get { return CurrentExecutionFilePathObject.VirtualPathString; }
@@ -1896,7 +1884,6 @@ namespace System.Web
         /*
          * Physical path corresponding to the requested Url
          */
-
         /// <devdoc>
         ///    <para>Gets the physical file system path corresponding
         ///       to
@@ -1941,7 +1928,6 @@ namespace System.Web
         /*
          * Virtual path to the application root
          */
-
         /// <devdoc>
         ///    <para>Gets the
         ///       virtual path to the currently executing server application.</para>
@@ -1959,7 +1945,6 @@ namespace System.Web
         /*
          * Physical path to the application root
          */
-
         /// <devdoc>
         ///    <para>Gets the physical
         ///       file system path of currently executing server application.</para>
@@ -1980,7 +1965,6 @@ namespace System.Web
         /*
          * User agent string
          */
-
         /// <devdoc>
         ///    <para>Gets the client
         ///       browser's raw User Agent String.</para>
@@ -1999,7 +1983,6 @@ namespace System.Web
         /*
          * Accepted user languages
          */
-
         /// <devdoc>
         ///    <para>Gets a
         ///       sorted array of client language preferences.</para>
@@ -2053,7 +2036,6 @@ namespace System.Web
         /*
          * Client's host name
          */
-
         /// <devdoc>
         ///    <para>Gets the
         ///       DNS name of remote client.</para>
@@ -2072,7 +2054,6 @@ namespace System.Web
         /*
          * Client's host address
          */
-
         /// <devdoc>
         ///    <para>Gets the
         ///       IP host address of remote client.</para>
@@ -2091,7 +2072,6 @@ namespace System.Web
         /*
          * The current request's RAW Url (as supplied by worker request)
          */
-
         /// <devdoc>
         ///    <para>Gets the URI requsted by the client, which may include PathInfo and QueryString if it exists.
         ///    This value is unaffected by any URL rewriting or routing that may occur on the server.</para>
@@ -3346,7 +3326,6 @@ namespace System.Web
          * @param imageFieldName name of the image field
          * @return x,y as int[2] or null if not found
          */
-
         /// <devdoc>
         ///    <para>
         ///       Maps an incoming image field form parameter into appropriate x/y
@@ -3369,7 +3348,6 @@ namespace System.Web
          * @param imageFieldName name of the image field
          * @return x,y as double[2] or null if not found
          */
-
         /// <devdoc>
         ///    <para>
         ///       Maps an incoming image field form parameter into appropriate x/y
@@ -3442,7 +3420,6 @@ namespace System.Web
          * @param filename where to save
          * @param includeHeaders flag to request inclusion of Http headers
          */
-
         /// <devdoc>
         ///    <para>Saves an HTTP request to disk.</para>
         /// </devdoc>
@@ -3509,7 +3486,6 @@ namespace System.Web
          * @param virtualPath virtual path (absolute or relative)
          * @return physical path
          */
-
         /// <devdoc>
         ///    <para>
         ///       Maps the given virtual path to a physical path.

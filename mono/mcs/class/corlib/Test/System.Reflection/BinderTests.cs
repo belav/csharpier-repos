@@ -300,7 +300,6 @@ namespace MonoTests.System.Reflection
             Type [] types = { typeof (ulong), typeof (float), typeof (double),
                       typeof (decimal), typeof (object) };
             */
-
             MultiIndexer obj = new MultiIndexer();
 
             foreach (Type t in types)

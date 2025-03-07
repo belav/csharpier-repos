@@ -8,7 +8,6 @@
 ** Purpose: Creates collections that ignore the case in strings.
 **
 =============================================================================*/
-
 namespace System.Collections.Specialized
 {
     public class CollectionsUtil

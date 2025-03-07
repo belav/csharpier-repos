@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -39,7 +38,6 @@ namespace System.Web.UI
     /*
      * Base class for Pages and UserControls
      */
-
     /// <devdoc>
     /// <para>Provides the <see cref='System.Web.UI.Page'/> class and the <see cref='System.Web.UI.UserControl'/> class with a base set of functionality.</para>
     /// </devdoc>
@@ -214,7 +212,6 @@ namespace System.Web.UI
          * Method sometime overidden by the generated sub classes.  Users
          * should not override.
          */
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Initializes the requested page. While this is sometimes
@@ -247,7 +244,6 @@ namespace System.Web.UI
          * This property is overriden by the generated classes (hence it cannot be internal)
          * If false, we don't do the HookUpAutomaticHandlers() magic.
          */
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -374,7 +370,6 @@ namespace System.Web.UI
         /*
          * This method is overriden by the generated classes (hence it cannot be internal)
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -553,7 +548,6 @@ namespace System.Web.UI
             if (this is Page)
             {
                 /* SYNCHRONOUS - Page */
-
                 GetDelegateInformationFromSyncMethod(_pagePreInitEventName, syncEventDictionary);
                 GetDelegateInformationFromSyncMethod(_pagePreLoadEventName, syncEventDictionary);
                 GetDelegateInformationFromSyncMethod(
@@ -574,7 +568,6 @@ namespace System.Web.UI
                 );
 
                 /* ASYNCHRONOUS - Page */
-
                 GetDelegateInformationFromAsyncMethod(
                     _pagePreRenderCompleteAsyncEventName,
                     asyncEventDictionary
@@ -582,7 +575,6 @@ namespace System.Web.UI
             }
 
             /* SYNCHRONOUS - Control */
-
             GetDelegateInformationFromSyncMethod(_pageInitEventName, syncEventDictionary);
             GetDelegateInformationFromSyncMethod(_pageLoadEventName, syncEventDictionary);
             GetDelegateInformationFromSyncMethod(_pageDataBindEventName, syncEventDictionary);

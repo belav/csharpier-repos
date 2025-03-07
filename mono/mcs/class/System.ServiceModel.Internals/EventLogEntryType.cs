@@ -5,7 +5,6 @@ build without adding this public API in System.dll. IF we brought this
 API in mobile world, this will conflict and can be removed.
 
 */
-
 #if MOBILE
 //
 // System.Diagnostics.EventLogEntryType.cs

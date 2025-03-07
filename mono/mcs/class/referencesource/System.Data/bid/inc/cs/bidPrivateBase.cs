@@ -178,7 +178,6 @@ internal static partial class Bid
             NewLine = 0x02,
             Enabled = 0x04,
             /*DemandSrc   = 0x08,*/
-
             Blob = 0x10,
             BlobCopy = 0x12,
             BlobBinMode = 0x14;

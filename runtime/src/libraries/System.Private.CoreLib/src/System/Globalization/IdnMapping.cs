@@ -322,7 +322,6 @@ namespace System.Globalization
         /* needed.)  The input_length is the number of code points in     */
         /* the input.  The output_length is an in/out argument: the       */
         /* caller passes in the maximum number of code points that it     */
-
         /* can receive, and on successful return it will contain the      */
         /* number of code points actually output.  The case_flags array   */
         /* holds input_length boolean values, where nonzero suggests that */
@@ -652,7 +651,6 @@ namespace System.Globalization
         /* output, and case_flags might contain garbage.  On success, the */
         /* decoder will never need to write an output_length greater than */
         /* input_length, because of how the encoding is defined.          */
-
         private static string PunycodeDecode(string ascii)
         {
             // 0 length strings aren't allowed
@@ -999,7 +997,6 @@ namespace System.Globalization
         /* the resulting code point.  The code point is unchanged if it  */
         /* is caseless.  The behavior is undefined if bcp is not a basic */
         /* code point.                                                   */
-
         private static char EncodeBasic(char bcp)
         {
             if (char.IsAsciiLetterUpper(bcp))
@@ -1012,7 +1009,6 @@ namespace System.Globalization
         /* (when used for representing integers) is d, which needs to be in   */
         /* the range 0 to punycodeBase-1.  The lowercase form is used unless flag is  */
         /* true, in which case the uppercase form is used. */
-
         private static char EncodeDigit(int d)
         {
             Debug.Assert(

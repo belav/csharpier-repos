@@ -327,7 +327,6 @@ namespace System.Data
             return ((System.Data.ITypedList)this).GetListName(listAccessors);
         }
         */
-
         // Microsoft: GetListName and GetItemProperties almost the same in DataView and DataViewManager
         string System.ComponentModel.ITypedList.GetListName(PropertyDescriptor[] listAccessors)
         {

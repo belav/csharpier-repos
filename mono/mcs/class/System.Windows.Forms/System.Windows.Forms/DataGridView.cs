@@ -7918,7 +7918,6 @@ namespace System.Windows.Forms
              - the System.ComponentModel.IBindingList interface, such as the System.ComponentModel.Collections.BindingList<> class.
              - the System.ComponentModel.IBindingListView interface, such as the System.Windows.Forms.BindingSource class.
             */
-
             if (dataSource != null && DataManager != null)
             {
                 if (autoGenerateColumns)

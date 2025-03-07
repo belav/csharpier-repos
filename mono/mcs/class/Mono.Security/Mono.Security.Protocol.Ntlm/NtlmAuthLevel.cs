@@ -35,7 +35,6 @@ namespace Mono.Security.Protocol.Ntlm
      * Type3Message.DefaultAuthLevel property, the default value
      * is LM_and_NTLM_and_try_NTLMv2_Session.
      */
-
     public enum NtlmAuthLevel
     {
         /* Use LM and NTLM, never use NTLMv2 session security. */

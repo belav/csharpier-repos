@@ -2278,7 +2278,6 @@ namespace System.Windows.Forms
             if (checkbox.Checked)
             {
                 /* Need to draw a check-mark */
-
                 /* Make sure we've got at least a line width of 1 */
                 lineWidth = Math.Max(3, fill_rectangle.Width / 3);
                 Scale = Math.Max(1, fill_rectangle.Width / 9);
@@ -2341,7 +2340,6 @@ namespace System.Windows.Forms
             }
 
             /* Place the text; to be compatible with Windows place it after the checkbox has been drawn */
-
             // Windows seems to not wrap text in certain situations, this matches as close as I could get it
             if ((float)(button_base.Font.Height * 1.5f) > text_rectangle.Height)
             {
@@ -2394,7 +2392,6 @@ namespace System.Windows.Forms
             ButtonState state;
 
             /* Draw checkbox */
-
             if ((e.State & DrawItemState.Checked) == DrawItemState.Checked)
             {
                 state = ButtonState.Checked;
@@ -3233,7 +3230,6 @@ namespace System.Windows.Forms
             if (grid.RowsCount < grid.DataGridRows.Length)
             {
                 /* the table has an add row */
-
                 if (grid.FirstVisibleRow + grid.VisibleRowCount >= grid.DataGridRows.Length)
                 {
                     showing_add_row = true;
@@ -10743,7 +10739,6 @@ namespace System.Windows.Forms
                 the image grayscale. At least when having > 256 colors on
                 the display.
             */
-
             if (imagedisabled_attributes == null)
             {
                 imagedisabled_attributes = new ImageAttributes();
@@ -11802,7 +11797,6 @@ namespace System.Windows.Forms
             This way we can scale them nicely, no matter what size, and they
             still look like MS's scaled caption buttons. (as opposed to scaling a bitmap)
         */
-
         private void DrawCaptionHelper(
             Graphics graphics,
             Color color,

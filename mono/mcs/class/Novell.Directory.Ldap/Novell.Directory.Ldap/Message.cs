@@ -50,7 +50,6 @@ namespace Novell.Directory.Ldap
         virtual internal int Count
         {
             /* package */
-
             get
             {
                 int size = replies.Count;
@@ -69,7 +68,6 @@ namespace Novell.Directory.Ldap
         virtual internal MessageAgent Agent
         {
             /* package */
-
             set
             {
                 this.agent = value;
@@ -96,7 +94,6 @@ namespace Novell.Directory.Ldap
         internal virtual int MessageType
         {
             /* package */
-
             get
             {
                 if (msg == null)
@@ -110,7 +107,6 @@ namespace Novell.Directory.Ldap
         internal virtual int MessageID
         {
             /* package */
-
             get { return msgId; }
         }
 
@@ -123,7 +119,6 @@ namespace Novell.Directory.Ldap
         virtual internal bool Complete
         {
             /* package */
-
             get { return complete; }
         }
 
@@ -191,7 +186,6 @@ namespace Novell.Directory.Ldap
         virtual internal System.Object Reply
         {
             /* package */
-
             get
             {
                 System.Object msg;
@@ -239,14 +233,12 @@ namespace Novell.Directory.Ldap
         virtual internal LdapMessage Request
         {
             /*package*/
-
             get { return msg; }
         }
 
         internal virtual bool BindRequest
         {
             /* package */
-
             get { return (bindprops != null); }
         }
 
@@ -258,7 +250,6 @@ namespace Novell.Directory.Ldap
         virtual internal MessageAgent MessageAgent
         {
             /* package */
-
             get { return agent; }
         }
 

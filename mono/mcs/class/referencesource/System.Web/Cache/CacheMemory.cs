@@ -214,7 +214,6 @@ namespace System.Web.Caching
               4096	  56	  99%
               5120	  64	  99%
             */
-
             long memory = TotalPhysical;
             Debug.Assert(memory != 0, "memory != 0");
             if (memory >= 0x100000000)

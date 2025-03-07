@@ -16,7 +16,6 @@ Generic virtual methods:
         Generic type				Test3			Test7
 
 */
-
 using System;
 using Xunit;
 

@@ -70,14 +70,12 @@ namespace Moq
                 After:
                         static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
                 After:
                         static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);

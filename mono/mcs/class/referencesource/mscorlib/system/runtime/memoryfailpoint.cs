@@ -14,7 +14,6 @@
 **
 **
 ===========================================================*/
-
 using System;
 using System.Diagnostics.Contracts;
 using System.IO;
@@ -74,7 +73,6 @@ using Microsoft.Win32;
    consider checking for enough free space in both locations (with any
    appropriate adjustments to ensure the memory is contiguous).
 */
-
 namespace System.Runtime
 {
     public sealed class MemoryFailPoint : CriticalFinalizerObject, IDisposable

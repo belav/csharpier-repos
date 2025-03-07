@@ -50,7 +50,6 @@ Prohibited in [Nameprep]: C.1.2, C.2.2, C.3 - C.9 in [STRINGPREP]
     C.9 tagging characters (E0001, E0020-E007F)
 
 */
-
 using System;
 using System.Text;
 

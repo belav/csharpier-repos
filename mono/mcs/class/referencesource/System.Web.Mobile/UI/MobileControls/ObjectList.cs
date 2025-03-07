@@ -1561,7 +1561,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectListControlBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

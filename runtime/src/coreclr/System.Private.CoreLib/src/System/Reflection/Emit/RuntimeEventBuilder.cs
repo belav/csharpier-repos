@@ -11,7 +11,6 @@
 **
 **
 ===========================================================*/
-
 using System.Runtime.CompilerServices;
 
 namespace System.Reflection.Emit

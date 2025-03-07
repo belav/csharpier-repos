@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 #define HASHINDEX
 
 using System;
@@ -221,7 +220,6 @@ namespace C5
             }
     
               */
-
         #endregion
         #region Util
 

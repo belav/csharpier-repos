@@ -229,7 +229,6 @@ namespace System.Data.SqlTypes
         
         
         */
-
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
@@ -449,7 +448,6 @@ namespace System.Data.SqlTypes
                     return MAKECID(m_lcid, m_flag);
                 }
         */
-
         // Binary operators
 
         // Concatenation
@@ -895,7 +893,6 @@ namespace System.Data.SqlTypes
             return  sqlOptions;
         }
         */
-
         private bool FBinarySort()
         {
             return (

@@ -9,14 +9,12 @@ namespace Moq.Behaviors
     After:
         sealed class NoOp : Behavior
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class NoOp : Behavior
     After:
         sealed class NoOp : Behavior
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class NoOp : Behavior
@@ -33,14 +31,12 @@ namespace Moq.Behaviors
         After:
                 NoOp()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private NoOp()
         After:
                 NoOp()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private NoOp()

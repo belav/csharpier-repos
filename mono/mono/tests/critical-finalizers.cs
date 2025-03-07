@@ -10,7 +10,6 @@ class P
         Console.WriteLine ("p");
     }
     */
-
     ~P()
     {
         count++;

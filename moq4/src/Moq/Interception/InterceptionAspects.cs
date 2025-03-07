@@ -15,14 +15,12 @@ namespace Moq
     After:
         static class HandleWellKnownMethods
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static class HandleWellKnownMethods
     After:
         static class HandleWellKnownMethods
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static class HandleWellKnownMethods
@@ -36,14 +34,12 @@ namespace Moq
     After:
             static Dictionary<string, Func<Invocation, Mock, bool>> specialMethods = new Dictionary<string, Func<Invocation, Mock, bool>>()
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static Dictionary<string, Func<Invocation, Mock, bool>> specialMethods = new Dictionary<string, Func<Invocation, Mock, bool>>()
     After:
             static Dictionary<string, Func<Invocation, Mock, bool>> specialMethods = new Dictionary<string, Func<Invocation, Mock, bool>>()
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static Dictionary<string, Func<Invocation, Mock, bool>> specialMethods = new Dictionary<string, Func<Invocation, Mock, bool>>()
@@ -73,14 +69,12 @@ namespace Moq
             After:
                     static bool HandleEquals(Invocation invocation, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static bool HandleEquals(Invocation invocation, Mock mock)
             After:
                     static bool HandleEquals(Invocation invocation, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static bool HandleEquals(Invocation invocation, Mock mock)
@@ -106,14 +100,12 @@ namespace Moq
                 After:
                         static bool HandleGetHashCode(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static bool HandleGetHashCode(Invocation invocation, Mock mock)
                 After:
                         static bool HandleGetHashCode(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static bool HandleGetHashCode(Invocation invocation, Mock mock)
@@ -140,14 +132,12 @@ namespace Moq
                 After:
                         static bool HandleToString(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static bool HandleToString(Invocation invocation, Mock mock)
                 After:
                         static bool HandleToString(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static bool HandleToString(Invocation invocation, Mock mock)
@@ -174,14 +164,12 @@ namespace Moq
                 After:
                         static bool HandleMockGetter(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static bool HandleMockGetter(Invocation invocation, Mock mock)
                 After:
                         static bool HandleMockGetter(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static bool HandleMockGetter(Invocation invocation, Mock mock)
@@ -208,14 +196,12 @@ namespace Moq
                 After:
                         static bool IsObjectMethodWithoutSetup(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static bool IsObjectMethodWithoutSetup(Invocation invocation, Mock mock)
                 After:
                         static bool IsObjectMethodWithoutSetup(Invocation invocation, Mock mock)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static bool IsObjectMethodWithoutSetup(Invocation invocation, Mock mock)
@@ -236,14 +222,12 @@ namespace Moq
             After:
                 static class FindAndExecuteMatchingSetup
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                 internal static class FindAndExecuteMatchingSetup
             After:
                 static class FindAndExecuteMatchingSetup
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                 internal static class FindAndExecuteMatchingSetup
@@ -273,14 +257,12 @@ namespace Moq
                 After:
                     static class HandleEventSubscription
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                     internal static class HandleEventSubscription
                 After:
                     static class HandleEventSubscription
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                     internal static class HandleEventSubscription
@@ -376,14 +358,12 @@ namespace Moq
             After:
                 static class RecordInvocation
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                 internal static class RecordInvocation
             After:
                 static class RecordInvocation
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                 internal static class RecordInvocation
@@ -406,14 +386,12 @@ namespace Moq
             After:
                 static class Return
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                 internal static class Return
             After:
                 static class Return
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                 internal static class Return
@@ -435,14 +413,12 @@ namespace Moq
             After:
                 static class FailForStrictMock
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                 internal static class FailForStrictMock
             After:
                 static class FailForStrictMock
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                 internal static class FailForStrictMock

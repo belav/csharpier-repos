@@ -12,14 +12,12 @@ namespace Moq.Language.Flow
     After:
         sealed class WhenPhrase<T> : ISetupConditionResult<T>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
     After:
         sealed class WhenPhrase<T> : ISetupConditionResult<T>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
@@ -36,7 +34,6 @@ namespace Moq.Language.Flow
             Mock<T> mock;
             Condition condition;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Mock<T> mock;
@@ -45,7 +42,6 @@ namespace Moq.Language.Flow
             Mock<T> mock;
             Condition condition;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Mock<T> mock;

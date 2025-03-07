@@ -28,7 +28,6 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -550,7 +549,6 @@ namespace Exocortex.DSP
             Debug.Assert( inc >= 1 );
             Debug.Assert( length >= 1 );
             Debug.Assert( ( start + inc * ( length - 1 ) ) * 2 < data.Length );*/
-
             // copy to buffer
             float[] buffer = null;
             LockBufferF(length * 2, ref buffer);
@@ -650,7 +648,6 @@ namespace Exocortex.DSP
             Debug.Assert( inc >= 1 );
             Debug.Assert( length >= 1 );
             Debug.Assert( ( start + inc * ( length - 1 ) ) < data.Length );	*/
-
             // copy to buffer
             ComplexF[] buffer = null;
             LockBufferCF(length, ref buffer);
@@ -750,7 +747,6 @@ namespace Exocortex.DSP
             Debug.Assert( inc >= 1 );
             Debug.Assert( length >= 1 );
             Debug.Assert( ( start + inc * ( length - 1 ) ) < data.Length );*/
-
             // copy to buffer
             Complex[] buffer = null;
             LockBufferC(length, ref buffer);
@@ -848,7 +844,6 @@ namespace Exocortex.DSP
             Debug.Assert( Fourier.IsPowerOf2( length ) == true );
 
             Fourier.SyncLookupTableLength( length );*/
-
             int ln = Fourier.Log2(length);
 
             // reorder array
@@ -985,7 +980,6 @@ namespace Exocortex.DSP
             }
 
             Fourier.SyncLookupTableLength( length );*/
-
             int ln = Fourier.Log2(length);
 
             // reorder array
@@ -1136,7 +1130,6 @@ namespace Exocortex.DSP
             }
 
             Fourier.SyncLookupTableLength( length );   */
-
             int ln = Fourier.Log2(length);
 
             // reorder array

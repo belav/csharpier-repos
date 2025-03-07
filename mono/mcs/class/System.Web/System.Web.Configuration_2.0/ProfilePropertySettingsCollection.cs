@@ -88,7 +88,6 @@ namespace System.Web.Configuration
                 throw new ConfigurationErrorsException (String.Format ("{0} is not permitted here", elementName), reader);
             }
             */
-
             return base.OnDeserializeUnrecognizedElement(elementName, reader);
         }
 

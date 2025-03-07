@@ -845,7 +845,6 @@ namespace MonoTests.System.Data
                 OriginalRows	Original rows including unchanged and deleted rows. 42
                 Unchanged		An unchanged row. 2
              */
-
             //DataRowView[] drvResult = null;
             ArrayList al = new ArrayList();
 

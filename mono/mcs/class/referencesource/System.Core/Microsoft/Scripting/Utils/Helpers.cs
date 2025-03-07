@@ -12,7 +12,6 @@
  *
  *
  * ***************************************************************************/
-
 using System.Collections.Generic;
 #if CLR2
 using Microsoft.Scripting.Ast;

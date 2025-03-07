@@ -580,7 +580,6 @@ namespace System.Data.OracleClient
 
             return true;
         }*/
-
         private bool IncludedInWhereClause(DataRow schemaRow)
         {
             if ((bool)schemaRow["IsLong"])

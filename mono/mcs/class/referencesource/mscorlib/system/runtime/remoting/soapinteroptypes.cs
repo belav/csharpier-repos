@@ -11,7 +11,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
     using System;
@@ -1412,7 +1411,6 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
                 if (_namespace == null || _namespace.Length == 0)
                     throw new RemotingException(String.Format(Environment.GetResourceString("Remoting_SOAPQNameNamespace"), _name));
                     */
-
                 return _namespace;
             }
             set { _namespace = value; }

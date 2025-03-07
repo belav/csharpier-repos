@@ -1412,7 +1412,6 @@ namespace System.Diagnostics
             CloseAllTables();
         }
         */
-
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static void RegisterCategory(

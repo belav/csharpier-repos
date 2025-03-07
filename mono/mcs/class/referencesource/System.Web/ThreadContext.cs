@@ -67,7 +67,6 @@
              * !! IMPORTANT !!
              * Keep this logic in sync with DisassociateFromCurrentThread and EnterExecutionContext.
              */
-
             // attach http context to the call context
             _originalHttpContext = DisposableHttpContextWrapper.SwitchContext(HttpContext);
 
@@ -145,7 +144,6 @@
              * !! IMPORTANT !!
              * Keep this logic in sync with AssociateWithCurrentThread and EnterExecutionContext.
              */
-
             Current = _originalThreadContextCurrent;
             HasBeenDisassociatedFromThread = true;
 
@@ -201,7 +199,6 @@
              * !! IMPORTANT !!
              * Keep this logic in sync with AssociateWithCurrentThread and DisassociateFromCurrentThread.
              */
-
             // ExecutionContext.Run replaces the current impersonation token, so we need to impersonate
             // if AssociateWithCurrentThread also did so.
 

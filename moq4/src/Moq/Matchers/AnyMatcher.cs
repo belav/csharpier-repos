@@ -12,14 +12,12 @@ namespace Moq.Matchers
     After:
         sealed class AnyMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class AnyMatcher : IMatcher
     After:
         sealed class AnyMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class AnyMatcher : IMatcher
@@ -36,14 +34,12 @@ namespace Moq.Matchers
         After:
                 AnyMatcher()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private AnyMatcher()
         After:
                 AnyMatcher()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private AnyMatcher()

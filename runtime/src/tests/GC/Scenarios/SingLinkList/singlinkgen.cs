@@ -7,7 +7,6 @@
 /* object with iObj number node. then deletes its reference when
 /* the next object is created. Do this loop iRep times.
 /**************************************************************/
-
 namespace SingLink
 {
     using System;

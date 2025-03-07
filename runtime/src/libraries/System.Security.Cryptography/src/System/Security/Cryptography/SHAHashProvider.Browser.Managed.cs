@@ -220,7 +220,6 @@ namespace System.Security.Cryptography
 
                 /* Compute padding: 80 00 00 ... 00 00 <bit count>
                 */
-
                 padLen = 64 - (int)(_count & 0x3f);
                 if (padLen <= 8)
                     padLen += 64;
@@ -556,7 +555,6 @@ namespace System.Security.Cryptography
 
                 /* Compute padding: 80 00 00 ... 00 00 <bit count>
                 */
-
                 padLen = 128 - (int)(_count & 0x7f);
                 if (padLen <= 16)
                     padLen += 128;
@@ -928,7 +926,6 @@ namespace System.Security.Cryptography
 
                 /* Compute padding: 80 00 00 ... 00 00 <bit count>
                 */
-
                 padLen = 128 - (int)(_count & 0x7f);
                 if (padLen <= 16)
                     padLen += 128;

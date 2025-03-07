@@ -9,7 +9,6 @@
 /*to make all the cyclic double linked lists become memory leaks.
 /*objects' life time is longer than DoubLinkGen.
 /******************************************************************/
-
 namespace DoubLink
 {
     using System;

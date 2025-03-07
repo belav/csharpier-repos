@@ -543,7 +543,6 @@ namespace System.Net
                     force_close |= (context.Request.ProtocolVersion <= HttpVersion.Version10);
                 }
                 */
-
                 if (!force_close && context.Request.FlushInput())
                 {
                     if (chunked && context.Response.ForceCloseChunked == false)

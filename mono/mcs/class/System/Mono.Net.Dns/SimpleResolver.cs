@@ -461,7 +461,6 @@ namespace Mono.Net.Dns
                 return;
             }
             */
-
             DnsQType t = question.Type;
             if (t != DnsQType.A && t != DnsQType.AAAA && t != DnsQType.PTR)
             {

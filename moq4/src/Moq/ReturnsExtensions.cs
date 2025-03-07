@@ -177,14 +177,12 @@ namespace Moq
             After:
                     static readonly Random Random = new Random();
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static readonly Random Random = new Random();
             After:
                     static readonly Random Random = new Random();
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static readonly Random Random = new Random();
@@ -411,14 +409,12 @@ namespace Moq
                 After:
                         static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
                 After:
                         static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
@@ -444,14 +440,12 @@ namespace Moq
             After:
                     static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
             After:
                     static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
@@ -480,14 +474,12 @@ namespace Moq
             After:
                     static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
             After:
                     static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
@@ -516,14 +508,12 @@ namespace Moq
             After:
                     static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
             After:
                     static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
@@ -554,14 +544,12 @@ namespace Moq
             After:
                     static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
             After:
                     static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,

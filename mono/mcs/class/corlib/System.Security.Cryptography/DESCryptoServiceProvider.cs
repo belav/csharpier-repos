@@ -1915,7 +1915,6 @@ namespace System.Security.Cryptography
                     }
                 }
         */
-
         private uint CipherFunct(uint r, int n)
         {
             uint res = 0;

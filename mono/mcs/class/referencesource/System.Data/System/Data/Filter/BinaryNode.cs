@@ -366,7 +366,6 @@ namespace System.Data
                 for AND operator If one of rhe operands is flase the result is false
             
 */
-
             if (
                 op != Operators.Or
                 && op != Operators.And
@@ -1457,7 +1456,6 @@ namespace System.Data
                             If one of the operands is true the result is true
                         
     */
-
                         vLeft = BinaryNode.Eval(left, row, version, recordNos);
 
                         if ((vLeft != DBNull.Value) && (!DataStorage.IsObjectSqlNull(vLeft)))
@@ -1523,7 +1521,6 @@ namespace System.Data
                                         value = (bool)vRight;
                                         break;
                     */
-
                     case Operators.Modulo:
                         if (ExpressionNode.IsIntegerSql(resultType))
                         {
@@ -1579,7 +1576,6 @@ namespace System.Data
                         /*
                         special case evaluating of the IN operator: the right have to be IN function node
                         */
-
                         if (!(right is FunctionNode))
                         {
                             // this is more like an Assert: should never happens, so we do not care about "nice" Exseptions
@@ -1595,7 +1591,6 @@ namespace System.Data
                             return DBNull.Value;
 
                         /* validate IN parameters : must all be constant expressions */
-
                         value = false;
 
                         FunctionNode into = (FunctionNode)right;

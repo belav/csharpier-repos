@@ -80,7 +80,6 @@ namespace Mono.AppleTls
              * a private key - in this case, a keychain search will be performed (and you
              * may get a popup message on XamMac).
              */
-
 #if MOBILE
             using (var secCert = MonoCertificatePal.FromOtherCertificate(certificate))
                 return MonoCertificatePal.FindIdentity(secCert, true);

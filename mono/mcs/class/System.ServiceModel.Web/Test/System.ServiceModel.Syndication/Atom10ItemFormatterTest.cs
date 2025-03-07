@@ -68,7 +68,6 @@ namespace MonoTests.System.ServiceModel.Syndication
             Assert.IsNull (f.ItemType, "#2");
         }
         */
-
         [Test]
         public void Version()
         {

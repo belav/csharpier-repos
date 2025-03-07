@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 using System;
 using System.Diagnostics;
 using SCG = System.Collections.Generic;
@@ -234,7 +233,6 @@ namespace C5
             public T[] ToArray()
             {
             }*/
-
         /// <summary>
         ///
         /// </summary>

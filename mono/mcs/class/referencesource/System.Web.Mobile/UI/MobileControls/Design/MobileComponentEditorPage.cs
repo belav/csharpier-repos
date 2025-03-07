@@ -112,7 +112,6 @@ namespace System.Web.UI.Design.MobileControls
             return DesignerUtility.IsValidName(name);
         }
         */
-
         public override void ShowHelp()
         {
             HelpService.ShowHelpFromKeyword(HelpKeyword);

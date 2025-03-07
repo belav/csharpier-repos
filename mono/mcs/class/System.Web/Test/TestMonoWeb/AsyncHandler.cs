@@ -62,7 +62,6 @@ namespace TestMonoWeb
         An instance of this class is returned to the application.
         This class lets the application know how the BeginEventHandler method has been handled. The application checks the CompletedSynchronously method.
         */
-
         private bool _blnIsCompleted = false;
         private Mutex myMutex = null;
         private Object myAsynchStateObject = null;

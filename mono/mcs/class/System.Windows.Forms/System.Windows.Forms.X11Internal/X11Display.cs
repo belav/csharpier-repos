@@ -2751,7 +2751,6 @@ namespace System.Windows.Forms.X11Internal
 
                     case XEventName.MotionNotify:
                         /* XXX move the compression stuff here */
-
                         if (client)
                         {
 #if DriverDebugExtra

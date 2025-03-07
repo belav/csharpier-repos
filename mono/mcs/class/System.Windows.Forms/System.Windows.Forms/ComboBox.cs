@@ -1112,7 +1112,6 @@ namespace System.Windows.Forms
              ** the debugger is running (i.e. in MonoDevelop), we
              ** want to be alerted of exceptions.
              **/
-
             if (Debugger.IsAttached)
             {
                 SetSelectedIndex();
@@ -1759,7 +1758,6 @@ namespace System.Windows.Forms
              * Apples X11 looses override-redirect when doing a Unmap/Map on a previously mapped window
              * this causes the popup to appear under the main form.  This is horrible but necessary
              */
-
             // If the user opens a new form in an event, it will close our dropdown,
             // so we need a null check here
             if (listbox_ctrl != null)

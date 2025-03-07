@@ -121,7 +121,6 @@
             /*
              * Check that we can extract proper type arguments from the model.
              */
-
             if (
                 !modelMetadata.ModelType.IsGenericType
                 || modelMetadata.ModelType.IsGenericTypeDefinition
@@ -141,7 +140,6 @@
             /*
              * Is it possible just to change the reference rather than update the collection in-place?
              */
-
             if (!modelMetadata.IsReadOnly)
             {
                 Type closedNewInstanceType = newInstanceType.MakeGenericType(modelTypeArguments);
@@ -155,7 +153,6 @@
              * At this point, we know we can't change the reference, so we need to verify that
              * the model instance can be updated in-place.
              */
-
             Type closedSupportedInterfaceType = supportedInterfaceType.MakeGenericType(
                 modelTypeArguments
             );

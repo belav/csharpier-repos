@@ -20,7 +20,6 @@ namespace System.Web.UI
         /*
          * Get the string value of a named property
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -29,7 +28,6 @@ namespace System.Web.UI
         /*
          * Set a named property with a string value
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

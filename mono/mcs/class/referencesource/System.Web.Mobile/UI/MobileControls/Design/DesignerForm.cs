@@ -28,7 +28,6 @@ namespace System.Web.UI.Design.MobileControls
 
 
 */
-
     /// <devdoc>
     /// Represents a form used by a designer.
     /// </devdoc>

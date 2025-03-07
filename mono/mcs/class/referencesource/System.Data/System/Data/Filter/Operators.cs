@@ -20,13 +20,11 @@ namespace System.Data
         internal const int Noop = 0;
 
         /* Unary operations */
-
         internal const int Negative = 1;
         internal const int UnaryPlus = 2;
         internal const int Not = 3;
 
         /* Binary operations */
-
         internal const int BetweenAnd = 4;
 
         internal const int In = 5;
@@ -41,7 +39,6 @@ namespace System.Data
         internal const int NotEqual = 12; // <>
 
         /* End of Comparison (relational) operators */
-
         internal const int Is = 13;
         internal const int Like = 14;
 
@@ -56,7 +53,6 @@ namespace System.Data
 
         //internal final static int Exponent = 21;	// **
         /* End of arithmetic operators */
-
         /* Beginning of bitwise operators */
         internal const int BitwiseAnd = 22; // &
         internal const int BitwiseOr = 23; // |
@@ -64,14 +60,12 @@ namespace System.Data
         internal const int BitwiseNot = 25; // ~
 
         /* End of bitwise operators */
-
         /* Beginning of logical operators */
         internal const int And = 26; // AND
         internal const int Or = 27; // OR
 
         // internal final static int Not is in the unary ops
         /* End of logical operators */
-
         /* Calls/multi-valued stuff */
         internal const int Proc = 28;
         internal const int Iff = 29;
@@ -137,7 +131,6 @@ namespace System.Data
         /// <devdoc>
         ///     Mapping from Operator to prioritys
         ///
-
         private static readonly int[] priority = new int[]
         {
             priStart, // Noop
@@ -200,12 +193,10 @@ namespace System.Data
         {
             "", //Noop = 0;
             /* Unary operations */
-
             "-", //Negative = 1;
             "+", //UnaryPlus = 2;
             "Not", //Not = 3;
             /* Binary operations */
-
             "BetweenAnd", //BetweenAnd = 4;
             "In", //In = 5;
             "Between", //Between = 6;
@@ -217,7 +208,6 @@ namespace System.Data
             "<=", //LessOrEqual = 11;	// <=
             "<>", //NotEqual = 12;		// <>
             /* End of Comparison (relational) operators */
-
             "Is", //Is = 13;
             "Like", //Like = 14;
             /* Beginning of arithmetic operators */
@@ -229,20 +219,17 @@ namespace System.Data
             "Mod", //Modulo = 20;		// %
             "**", //Exponent = 21;	// **
             /* End of arithmetic operators */
-
             /* Beginning of bitwise operators */
             "&", //BitwiseAnd = 22;	// &
             "|", //BitwiseOr = 23;		// |
             "^", //BitwiseXor = 24;	// ^
             "~", //BitwiseNot = 25;	// ~
             /* End of bitwise operators */
-
             /* Beginning of logical operators */
             "And", //And = 26;		// AND
             "Or", //Or = 27;		// OR
             // Not is in the unary ops
             /* End of logical operators */
-
             /* Calls/multi-valued stuff */
             "Proc", //Proc = 28;
             "Iff", //Iff = 29;

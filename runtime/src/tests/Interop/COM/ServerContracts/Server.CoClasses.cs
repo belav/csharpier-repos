@@ -150,7 +150,6 @@ namespace Server.Contract.Servers
         {
         }
     */
-
     /// <summary>
     /// Managed definition of CoClass
     /// </summary>

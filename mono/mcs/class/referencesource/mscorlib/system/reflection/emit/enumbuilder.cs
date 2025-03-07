@@ -410,7 +410,6 @@ namespace System.Reflection.Emit
          * private/protected functions
          *
          */
-
         //*******************************
         // Make a private constructor so these cannot be constructed externally.
         //*******************************

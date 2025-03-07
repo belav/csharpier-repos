@@ -24,7 +24,6 @@ namespace System.Web.Management
         because the two children classes are public and the base class accessibility has to be the same.
         The solution here is to introduce an internal constructor so user can't inherit from it.
     */
-
     public abstract class MailWebEventProvider : BufferedWebEventProvider
     {
         internal const int DefaultMaxMessagesPerNotification = 10;

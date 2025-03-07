@@ -13,14 +13,12 @@ namespace Moq
     After:
         sealed class SequenceSetup : SetupWithOutParameterSupport
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class SequenceSetup : SetupWithOutParameterSupport
     After:
         sealed class SequenceSetup : SetupWithOutParameterSupport
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class SequenceSetup : SetupWithOutParameterSupport
@@ -37,14 +35,12 @@ namespace Moq
     After:
             ConcurrentQueue<Behavior> behaviors;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private ConcurrentQueue<Behavior> behaviors;
     After:
             ConcurrentQueue<Behavior> behaviors;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private ConcurrentQueue<Behavior> behaviors;

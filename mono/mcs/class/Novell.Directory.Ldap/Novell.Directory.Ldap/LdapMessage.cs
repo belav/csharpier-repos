@@ -48,7 +48,6 @@ namespace Novell.Directory.Ldap
         virtual internal LdapMessage RequestingMessage
         {
             /* package */
-
             get { return message.RequestingMessage; }
         }
 
@@ -186,7 +185,6 @@ namespace Novell.Directory.Ldap
         virtual internal RfcLdapMessage Asn1Object
         {
             /* package */
-
             get { return message; }
         }
         private System.String Name
@@ -483,7 +481,6 @@ namespace Novell.Directory.Ldap
         /*
         private static Object msgLock = new Object();
         */
-
         /// <summary> Counters used to construct request message #'s, unique for each request
         /// Will be enabled after ASN.1 conversion
         /// </summary>

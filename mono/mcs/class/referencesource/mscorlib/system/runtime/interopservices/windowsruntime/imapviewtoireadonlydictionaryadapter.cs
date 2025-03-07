@@ -175,7 +175,6 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return dictionary.ContainsKey(item);
         }
         */
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<TKey>)this).GetEnumerator();
@@ -274,7 +273,6 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return false;
         }
         */
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<TValue>)this).GetEnumerator();

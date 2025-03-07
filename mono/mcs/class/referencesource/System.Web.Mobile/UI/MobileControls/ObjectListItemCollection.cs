@@ -20,7 +20,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

@@ -12,7 +12,6 @@
 **            having a backing class factory.
 **
 =============================================================================*/
-
 namespace System.Runtime.InteropServices
 {
     using System;

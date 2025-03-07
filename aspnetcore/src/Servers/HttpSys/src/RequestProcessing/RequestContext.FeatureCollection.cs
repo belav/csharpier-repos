@@ -404,7 +404,6 @@ internal partial class RequestContext
         return Request.IsHttps ? this : null;
     }
     */
-
     void IHttpResponseBodyFeature.DisableBuffering()
     {
         // TODO: What about native buffering?

@@ -5,7 +5,6 @@
 //------------------------------------------------------------------------------
 
 /************************************************************************************************************/
-
 namespace System.Web.Compilation
 {
     using System;
@@ -150,7 +149,6 @@ namespace System.Web.Compilation
          *      but ideally it should match the path later given to Cassini, in order for
          *      compilation that happens here to be reused there.
          */
-
         public ClientBuildManager(string appVirtualDir, string appPhysicalSourceDir)
             : this(appVirtualDir, appPhysicalSourceDir, appPhysicalTargetDir: null, parameter: null)
         { }
@@ -283,7 +281,6 @@ namespace System.Web.Compilation
         /*
          * Indicates whether the host is created.
          */
-
         public bool IsHostCreated
         {
             get { return _host != null; }
@@ -292,7 +289,6 @@ namespace System.Web.Compilation
         /*
          * Create an object in the runtime appdomain
          */
-
         public IRegisteredObject CreateObject(Type type, bool failIfExists)
         {
             if (type == null)
@@ -329,7 +325,6 @@ namespace System.Web.Compilation
         /*
          * Makes sure that all the top level files are compiled (code, global.asax, ...)
          */
-
         public void CompileApplicationDependencies()
         {
             Debug.Trace("CBM", "CompileApplicationDependencies");
@@ -388,7 +383,6 @@ namespace System.Web.Compilation
         /*
          * Returns an array of the virtual paths to all the code directories in the app thru the hosted appdomain
          */
-
         public string[] GetVirtualCodeDirectories()
         {
             Debug.Trace("CBM", "GetHostedVirtualCodeDirectories");
@@ -401,7 +395,6 @@ namespace System.Web.Compilation
         /*
          * Returns an array of the assemblies defined in the bin and assembly reference config section
          */
-
         public String[] GetTopLevelAssemblyReferences(string virtualPath)
         {
             Debug.Trace("CBM", "GetHostedVirtualCodeDirectories");
@@ -421,7 +414,6 @@ namespace System.Web.Compilation
          * a given code directory.  Also, returns the directory containing all the code
          * files generated from non-code files in the code directory (e.g. wsdl files)
          */
-
         public void GetCodeDirectoryInformation(
             string virtualCodeDir,
             out Type codeDomProviderType,
@@ -452,7 +444,6 @@ namespace System.Web.Compilation
          * Returns the compiler type and parameters that need to be used to build
          * a given file.
          */
-
         public void GetCompilerParameters(
             string virtualPath,
             out Type codeDomProviderType,
@@ -478,7 +469,6 @@ namespace System.Web.Compilation
         /*
          * Returns the codedom tree and the compiler type/param for a given file.
          */
-
         public CodeCompileUnit GenerateCodeCompileUnit(
             string virtualPath,
             out Type codeDomProviderType,
@@ -548,7 +538,6 @@ namespace System.Web.Compilation
         /*
          * Returns the compiled type for an input file
          */
-
         public Type GetCompiledType(string virtualPath)
         {
             Debug.Trace("CBM", "GetCompiledType " + virtualPath);
@@ -952,7 +941,6 @@ namespace System.Web.Compilation
     /*
      * Type of the entries in the table returned by GenerateCodeCompileUnit
      */
-
     [Serializable]
     public sealed class LinePragmaCodeInfo
     {

@@ -1,7 +1,6 @@
 /*
  * Tests the ?: operator and the string concatenation
  */
-
 using System;
 
 class X

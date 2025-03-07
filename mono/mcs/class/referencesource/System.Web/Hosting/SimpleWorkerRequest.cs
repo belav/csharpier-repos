@@ -374,7 +374,6 @@ namespace System.Web.Hosting
          *  Ctor that gets application data from HttpRuntime, assuming
          *  HttpRuntime has been set up (app domain specially created, etc.)
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -400,7 +399,6 @@ namespace System.Web.Hosting
          *
          *  This allows for limited functionality to execute handlers.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

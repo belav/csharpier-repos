@@ -27,7 +27,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 // Tests sourced from .dat files at http://gsf.cococlyde.org/download.
 // Then some inputs were deleted / tweaked based on expected differences in behavior.
 

@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;
 **
 **
 ===========================================================*/
-
 namespace System
 {
     // This type does not implement GetHashCode but implements Equals

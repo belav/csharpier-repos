@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 // C5 example: anagrams represented as sorted strings 2004-08-26
 
 // To represent an anagram class, use a string containing the sorted

@@ -48,7 +48,6 @@
  *          ProcessFile(fileData.FullName);
  *      }
  */
-
 namespace System.Web.Util
 {
     using System.Collections;

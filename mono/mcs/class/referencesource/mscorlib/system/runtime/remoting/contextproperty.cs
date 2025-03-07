@@ -14,7 +14,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Runtime.Remoting.Contexts
 {
     using System;
@@ -97,7 +96,6 @@ namespace System.Runtime.Remoting.Contexts
         bool IsNewContextOK(Context newCtx);
 
         /// <internalonly/>
-
         // New method. All properties are notified when the context
         // they are in is frozen.
         [System.Security.SecurityCritical] // auto-generated_required

@@ -11,7 +11,6 @@
 ** This public class is used for reading event records from event log.
 **
 ============================================================*/
-
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -148,7 +148,6 @@ namespace System.IO.Tests
         /*
          * Other tests for Read7BitEncodedInt[64] are in BinaryWriter.WriteTests.cs, not here.
          */
-
         [Fact]
         public void BinaryReader_Read7BitEncodedInt_AllowsOverlongEncodings()
         {

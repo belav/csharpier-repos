@@ -12,7 +12,6 @@
 ** Date:  August 2002
 **
 ===========================================================*/
-
 namespace System.IO.Ports
 {
     public enum Handshake

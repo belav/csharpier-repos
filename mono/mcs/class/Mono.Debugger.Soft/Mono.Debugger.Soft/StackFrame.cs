@@ -19,7 +19,6 @@ namespace Mono.Debugger.Soft
          * - request the info from the runtime/request only the il offset, and compute
          *   everything else based on this info using the method debug info.
          */
-
         internal StackFrame(
             VirtualMachine vm,
             long id,

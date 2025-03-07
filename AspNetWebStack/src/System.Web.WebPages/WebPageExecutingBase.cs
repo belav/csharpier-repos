@@ -21,7 +21,6 @@ WebPageExecutingBase                        The base class for all Plan9 files (
             ViewWebPage?                    MVC Views
 HelperPage                                  Base class for Web Pages in App_Code.
 */
-
 namespace System.Web.WebPages
 {
     // The base class for all CSHTML files (_pagestart, _appstart, and regular pages)

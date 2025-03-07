@@ -9,14 +9,12 @@ namespace Moq.Behaviors
     After:
         sealed class ReturnBase : Behavior
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ReturnBase : Behavior
     After:
         sealed class ReturnBase : Behavior
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ReturnBase : Behavior
@@ -33,14 +31,12 @@ namespace Moq.Behaviors
         After:
                 ReturnBase()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private ReturnBase()
         After:
                 ReturnBase()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private ReturnBase()

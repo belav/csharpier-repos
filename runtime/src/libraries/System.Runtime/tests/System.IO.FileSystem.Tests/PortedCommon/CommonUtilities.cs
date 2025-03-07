@@ -4,7 +4,6 @@
 /**
 This is meant to contain useful utilities for IO related work
 **/
-
 #define TRACE
 #define DEBUG
 using System;

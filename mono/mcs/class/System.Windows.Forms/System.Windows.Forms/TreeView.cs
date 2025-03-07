@@ -2100,7 +2100,6 @@ namespace System.Windows.Forms
                 vbar.Maximum = max_visible_order;
                 vbar.LargeChange = ClientRectangle.Height / ItemHeight;
                 */
-
                 if (!vbar_bounds_set)
                 {
                     vbar.Bounds = new Rectangle(
@@ -2144,7 +2143,6 @@ namespace System.Windows.Forms
                 hbar.LargeChange = ClientRectangle.Width;
                 hbar.Maximum = width + 1;
                 */
-
                 if (!hbar_bounds_set)
                 {
                     hbar.Bounds = new Rectangle(
@@ -2231,7 +2229,6 @@ namespace System.Windows.Forms
         {
             vbar.Value = new_top.visible_order - VisibleCount;
         }*/
-
         private void HScrollBarValueChanged(object sender, EventArgs e)
         {
             if (edit_node != null)

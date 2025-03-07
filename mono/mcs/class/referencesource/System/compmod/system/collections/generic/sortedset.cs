@@ -13,7 +13,6 @@
 ** Date:  August 15, 2008
 **
 ===========================================================*/
-
 namespace System.Collections.Generic
 {
     using System;
@@ -1107,7 +1106,6 @@ namespace System.Collections.Generic
         /// <summary>
         /// Testing counter that can track rotations
         /// </summary>
-
         private static TreeRotation RotationNeeded(Node parent, Node current, Node sibling)
         {
             Debug.Assert(
@@ -2210,7 +2208,6 @@ namespace System.Collections.Generic
             /// <summary>
             /// Additions to this tree need to be added to the underlying tree as well
             /// </summary>
-
             internal override bool AddIfNotPresent(T item)
             {
                 if (!IsWithinRange(item))

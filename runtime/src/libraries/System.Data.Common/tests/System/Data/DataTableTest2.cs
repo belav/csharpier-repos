@@ -2130,7 +2130,6 @@ namespace System.Data.Tests
 Assert.Fail();
             } catch (DataException e) {}
             */
-
             table3.Merge(table2, false, MissingSchemaAction.Ignore);
             table1.PrimaryKey = null;
 

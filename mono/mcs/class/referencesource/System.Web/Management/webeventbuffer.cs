@@ -801,7 +801,6 @@ namespace System.Web.Management
                         "\n_regularFlushIntervalMs=" + _regularFlushIntervalMs);
                 }
                 */
-
                 _lastRegularFlush = now;
             }
         }

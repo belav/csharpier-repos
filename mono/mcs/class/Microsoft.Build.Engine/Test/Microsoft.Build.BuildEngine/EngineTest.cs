@@ -158,7 +158,6 @@ namespace MonoTests.Microsoft.Build.BuildEngine
 
             engine.CreateNewProject ();
         }*/
-
         [Test]
         public void TestBinPath()
         {

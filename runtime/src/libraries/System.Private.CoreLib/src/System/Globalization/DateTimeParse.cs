@@ -910,7 +910,6 @@ namespace System
         **      str the parsing string
         **Exceptions:
         ============================================================================*/
-
         private static bool ParseFraction(ref __DTString str, out double result)
         {
             result = 0;
@@ -936,7 +935,6 @@ namespace System
         **Exceptions:
         **      FormatException if invalid timezone format is found.
         ============================================================================*/
-
         private static bool ParseTimeZone(ref __DTString str, scoped ref TimeSpan result)
         {
             // The hour/minute offset for timezone.
@@ -3901,7 +3899,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if error in parsing number.
         ==============================================================================*/
-
         internal static bool ParseDigits(ref __DTString str, int digitLen, out int result)
         {
             if (digitLen == 1)
@@ -3956,7 +3953,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if error in parsing number.
         ==============================================================================*/
-
         private static bool ParseFractionExact(
             ref __DTString str,
             int maxDigitLen,
@@ -3993,7 +3989,6 @@ namespace System
         **Exceptions:   FormatException if end of string is encountered or a sign
         **              symbol is not found.
         ==============================================================================*/
-
         private static bool ParseSign(ref __DTString str, scoped ref bool result)
         {
             if (!str.GetNext())
@@ -4024,7 +4019,6 @@ namespace System
         **              len: the repeated number of the "z"
         **Exceptions: FormatException if errors in parsing.
         ==============================================================================*/
-
         private static bool ParseTimeZoneOffset(
             ref __DTString str,
             int len,
@@ -4099,7 +4093,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if an abbreviated month name can not be found.
         ==============================================================================*/
-
         private static bool MatchAbbreviatedMonthName(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4241,7 +4234,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if a month name can not be found.
         ==============================================================================*/
-
         private static bool MatchMonthName(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4410,7 +4402,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if a abbreviated day of week name can not be found.
         ==============================================================================*/
-
         private static bool MatchAbbreviatedDayName(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4507,7 +4498,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if a day of week name can not be found.
         ==============================================================================*/
-
         private static bool MatchDayName(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4663,7 +4653,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if an era name can not be found.
         ==============================================================================*/
-
         private static bool MatchEraName(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4705,7 +4694,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if a time mark can not be found.
         ==============================================================================*/
-
         private static bool MatchTimeMark(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4764,7 +4752,6 @@ namespace System
         **              next character after str.Index.
         **Exceptions: FormatException if a abbreviated time mark can not be found.
         ==============================================================================*/
-
         private static bool MatchAbbreviatedTimeMark(
             ref __DTString str,
             DateTimeFormatInfo dtfi,
@@ -4802,7 +4789,6 @@ namespace System
         **Arguments:
         **Exceptions:
         ==============================================================================*/
-
         private static bool CheckNewValue(
             scoped ref int currentValue,
             int newValue,
@@ -4904,7 +4890,6 @@ namespace System
                 --      --      --      CurrentYear Current month   Current day     So this means that if the date string only contains time, you will get current date.
 
                 */
-
                 DateTime now = GetDateTimeNow(ref result, ref styles);
                 if (result.Month == -1 && result.Day == -1)
                 {
@@ -5679,7 +5664,6 @@ namespace System
         **  Only GregorianCalendar is supported for now.
         **  Only support GMT timezone.
         ==============================================================================*/
-
         private static bool DoStrictParse(
             ReadOnlySpan<char> s,
             ReadOnlySpan<char> formatParam,

@@ -3272,7 +3272,6 @@ namespace System.Web
         /*
          * Resume execution of the app steps
          */
-
         private void ResumeStepsFromThreadPoolThread(Exception error)
         {
             if (Thread.CurrentThread.IsThreadPoolThread)

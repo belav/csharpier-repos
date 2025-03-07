@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.Util
 {
     using System.Runtime.Serialization.Formatters;
@@ -52,7 +51,6 @@ namespace System.Web.Util
              * Detect loops by moving one pointer forward 2 for every 1
              * of the other.
              */
-
             l1 = l2 = this;
             for (; ; )
             {

@@ -13,7 +13,6 @@
 **
 **
 =============================================================================*/
-
 namespace System.Runtime.InteropServices
 {
     // Delegate called when a managed object wishes to instantiate its unmanaged

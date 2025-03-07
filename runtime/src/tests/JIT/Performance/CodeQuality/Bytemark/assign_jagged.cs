@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 /*************
 ** DoAssign **
 **************
@@ -48,7 +46,6 @@
 **    probably non-optimal constructs.
 **
 */
-
 using System;
 
 public class AssignJagged : AssignStruct

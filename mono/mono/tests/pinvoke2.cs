@@ -666,7 +666,6 @@ public unsafe class Tests
         return 0;
     }
     */
-
     public static int test_0_marshal_lpstruct()
     {
         SimpleStruct ss = new SimpleStruct();
@@ -1272,7 +1271,6 @@ public unsafe class Tests
     }
 
     /* AsAny marshalling + [In, Out] */
-
     public static int test_0_asany_in()
     {
         // Struct
@@ -1340,7 +1338,6 @@ public unsafe class Tests
     }
 
     /* Byref String Array */
-
     [DllImport("libtest", EntryPoint = "mono_test_marshal_byref_string_array")]
     public static extern int mono_test_marshal_byref_string_array(ref string[] data);
 
@@ -1357,16 +1354,13 @@ public unsafe class Tests
             return 2;
 
         /* FIXME: Test returned array and out case */
-
         return 0;
     }
 
     /*
      * AMD64 small structs-by-value tests.
      */
-
     /* TEST 1: 16 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Amd64Struct1
     {
@@ -1436,7 +1430,6 @@ public unsafe class Tests
     }
 
     /* TEST 2: 8 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Amd64Struct2
     {
@@ -1459,7 +1452,6 @@ public unsafe class Tests
     }
 
     /* TEST 3: 4 byte long INTEGER struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Amd64Struct3
     {
@@ -1480,7 +1472,6 @@ public unsafe class Tests
     }
 
     /* Test 4: 16 byte long FLOAT struct */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Amd64Struct4
     {
@@ -1505,9 +1496,7 @@ public unsafe class Tests
     /*
      * IA64 struct tests
      */
-
     /* Test 5: Float HFA */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct TestStruct5
     {
@@ -1537,7 +1526,6 @@ public unsafe class Tests
     }
 
     /* Test 6: Double HFA */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct TestStruct6
     {
@@ -1595,7 +1583,6 @@ public unsafe class Tests
     /*
      * Generic structures
      */
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Amd64Struct1Gen<T>
     {
@@ -1626,7 +1613,6 @@ public unsafe class Tests
     /*
      * Other tests
      */
-
     public static int test_0_marshal_byval_class()
     {
         SimpleObj obj0 = new SimpleObj();
@@ -1737,7 +1723,6 @@ public unsafe class Tests
     }
 
     /* Float test */
-
     [DllImport("libtest", EntryPoint = "mono_test_marshal_pass_return_float")]
     public static extern float mono_test_marshal_pass_return_float(float f);
 
@@ -1751,7 +1736,6 @@ public unsafe class Tests
     /*
      * Pointers to structures can not be passed
      */
-
     /* This seems to be allowed by MS in some cases */
     /*
     public struct CharInfo {
@@ -1776,11 +1760,9 @@ public unsafe class Tests
         return 1;
     }
     */
-
     /*
      * LPWStr marshalling
      */
-
     [DllImport("libtest", EntryPoint = "test_lpwstr_marshal")]
     [return: MarshalAs(UnmanagedType.LPWStr)]
     private static extern string mono_test_marshal_lpwstr_marshal(
@@ -1837,7 +1819,6 @@ public unsafe class Tests
     /*
      * Byref bool marshalling
      */
-
     [DllImport("libtest")]
     static extern int marshal_test_ref_bool(
         int i,
@@ -1872,7 +1853,6 @@ public unsafe class Tests
     /*
      * Bool struct field marshalling
      */
-
     struct BoolStruct
     {
         public int i;
@@ -1914,7 +1894,6 @@ public unsafe class Tests
     /*
      * Alignment of structs containing longs
      */
-
     struct LongStruct2
     {
         public long l;
@@ -1942,7 +1921,6 @@ public unsafe class Tests
     /*
      * Invoking pinvoke methods through delegates
      */
-
     delegate int MyDelegate(string name);
 
     [DllImport("libtest", EntryPoint = "mono_test_puts_static")]
@@ -1964,7 +1942,6 @@ public unsafe class Tests
     /*
      * Missing virtual pinvoke methods
      */
-
     public class T
     {
         public virtual object MyClone()
@@ -1998,7 +1975,6 @@ public unsafe class Tests
     /*
      * Marshalling of type 'object'
      */
-
     [DllImport("libtest", EntryPoint = "mono_test_marshal_class")]
     public static extern SimpleClass mono_test_marshal_object(
         int i,
@@ -2042,7 +2018,6 @@ public unsafe class Tests
     /*
      * Calling pinvoke functions dynamically using calli
      */
-
     [DllImport("libtest")]
     private static extern IntPtr mono_test_marshal_lookup_symbol(string fileName);
 

@@ -57,7 +57,6 @@ namespace System.Data.Common
             }
         }
     */
-
     internal class DbConnectionStringBuilderDescriptor : PropertyDescriptor
     {
         private Type _componentType;

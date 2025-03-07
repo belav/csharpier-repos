@@ -19,7 +19,6 @@ namespace Microsoft.Win32.RegistryTests
 
         In general, RegFlushKey rarely, if ever, need be used.
         **/
-
         [Fact]
         public void FlushNewlyOpenedKey()
         {

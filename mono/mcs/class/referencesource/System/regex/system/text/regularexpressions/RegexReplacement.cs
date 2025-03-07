@@ -186,7 +186,6 @@ namespace System.Text.RegularExpressions
          * Three very similar algorithms appear below: replace (pattern),
          * replace (evaluator), and split.
          */
-
         /*
          * Replaces all ocurrances of the regex in the string with the
          * replacement pattern.

@@ -16,7 +16,6 @@ In E.cctor: thread T2: A.i 5
 In D.cctor: thread T2: E.i 9
 In C.cctor: thread T2: D.i 8
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;

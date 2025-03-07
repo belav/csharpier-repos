@@ -10,7 +10,6 @@ using System.Threading;
     Sections with various keys are the norm.
 
  */
-
 namespace System.Deployment.Internal.Isolation
 {
     [

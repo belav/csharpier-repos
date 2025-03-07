@@ -42,7 +42,6 @@ namespace Mono.Security.X509.Extensions
      *
      * KeyPurposeId ::= OBJECT IDENTIFIER
      */
-
 #if INSIDE_SYSTEM
     internal
 #else

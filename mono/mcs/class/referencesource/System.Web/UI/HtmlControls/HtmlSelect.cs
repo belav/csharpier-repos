@@ -73,7 +73,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates an intrinsic Html SELECT control.
          */
-
         public HtmlSelect()
             : base("select")
         {
@@ -257,7 +256,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * A collection containing the list of items.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the list of option items in an <see langword='HtmlSelect'/> control.
@@ -284,7 +282,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Multi-select property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a value indicating whether multiple option items can be selected
@@ -315,7 +312,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Name property.
          */
-
         [
             WebCategory("Behavior"),
             DefaultValue(""),
@@ -360,7 +356,6 @@ namespace System.Web.UI.HtmlControls
          * Returns the first selected item if list is multi-select.
          * Returns -1 if there is no selected item.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the ordinal index of the selected option item in an
@@ -416,7 +411,6 @@ namespace System.Web.UI.HtmlControls
          *  SelectedIndices property.
          *  Protected property for getting array of selected indices.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -449,7 +443,6 @@ namespace System.Web.UI.HtmlControls
          * The size of the list.
          * A size of 1 displays a dropdown list.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the number of option items visible in the browser at a time. A
@@ -471,7 +464,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Value property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the current item selected in the <see langword='HtmlSelect'/>
@@ -649,7 +641,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Override to load items and selected indices.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -829,7 +820,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * This method is invoked just prior to rendering.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -854,7 +844,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method used to raise the OnServerChange event.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Raised
@@ -872,7 +861,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Override to prevent SelectedIndex from being rendered as an attribute.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -896,7 +884,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Render the Items in the list.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -954,7 +941,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Save selected indices and modified Items.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -993,7 +979,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * TrackState
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -1007,7 +992,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to process posted data.
          * SelectList processes a newly posted value.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -1096,7 +1080,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface which is invoked whenever posted data
          * for a control has changed.  SelectList fires an OnServerChange event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

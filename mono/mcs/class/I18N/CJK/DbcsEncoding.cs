@@ -57,7 +57,6 @@ namespace I18N.CJK
                     return 0; // For subclasses to implement
                 }
         */
-
         // Get the number of characters needed to decode a byte buffer.
         public override int GetCharCount(byte[] bytes, int index, int count)
         {

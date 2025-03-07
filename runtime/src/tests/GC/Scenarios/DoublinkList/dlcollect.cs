@@ -6,7 +6,6 @@
 /* into array, it save them into List<object>
 /* to see if GC can handle Collections references correctly.
 /**************************************************************/
-
 namespace DoubLink
 {
     using System;

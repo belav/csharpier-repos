@@ -29,7 +29,6 @@ namespace System.Text
         **  ArgumentNullException if name is null.
         **  internalGetCodePageFromName will throw ArgumentException if name is not a valid encoding name.
         ============================================================================*/
-
         internal static int GetCodePageFromName(string name)
         {
             ArgumentNullException.ThrowIfNull(name);

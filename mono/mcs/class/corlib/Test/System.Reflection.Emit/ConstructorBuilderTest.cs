@@ -69,7 +69,6 @@ namespace MonoTests.System.Reflection.Emit
             Assert.AreEqual (CallingConventions.VarArgs | CallingConventions.HasThis,
                 cb3.CallingConvention, "#1");
             */
-
             ConstructorBuilder cb4 = genClass.DefineConstructor(
                 MethodAttributes.Static,
                 CallingConventions.Standard,

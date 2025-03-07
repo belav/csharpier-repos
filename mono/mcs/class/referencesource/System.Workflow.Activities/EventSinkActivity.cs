@@ -673,7 +673,6 @@ namespace System.Workflow.Activities
                           return true;
                   }
               }*/
-
             if (throwOnError)
                 throw new Exception(
                     SR.GetString(SR.Error_InterfaceTypeNotInterface, "InterfaceType")

@@ -219,7 +219,6 @@ namespace System.ServiceModel.Security
                         foreach (IEndpointBehavior b in ctx.BindingParameters.FindAll<IEndpointBehavior> ())
                             p.IssuerChannelBehaviors.Add (b);
             */
-
             SecurityTokenVersion ver = r.GetProperty<SecurityTokenVersion>(
                 ReqType.MessageSecurityVersionProperty
             );
@@ -233,7 +232,6 @@ namespace System.ServiceModel.Security
                             address = p.TargetAddress;
                         p.IssuerAddress = address;
             */
-
             // It is somehow not checked as mandatory ...
             SecurityAlgorithmSuite suite = null;
             r.TryGetProperty<SecurityAlgorithmSuite>(

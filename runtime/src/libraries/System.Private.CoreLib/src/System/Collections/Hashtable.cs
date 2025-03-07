@@ -10,7 +10,6 @@
 **          of the key.
 **
 ===========================================================*/
-
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -112,7 +111,6 @@ namespace System.Collections
 
            --
         */
-
         private const int InitialSize = 3;
 
         private const string LoadFactorName = "LoadFactor"; // Do not rename (binary serialization)

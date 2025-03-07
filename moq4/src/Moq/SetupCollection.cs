@@ -13,14 +13,12 @@ namespace Moq
     After:
         sealed class SetupCollection : ISetupList
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class SetupCollection : ISetupList
     After:
         sealed class SetupCollection : ISetupList
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class SetupCollection : ISetupList
@@ -36,7 +34,6 @@ namespace Moq
             List<Setup> setups;
             HashSet<Expectation> activeSetups;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private List<Setup> setups;
@@ -45,7 +42,6 @@ namespace Moq
             List<Setup> setups;
             HashSet<Expectation> activeSetups;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private List<Setup> setups;
@@ -101,14 +97,12 @@ namespace Moq
                     After:
                             void MarkOverriddenSetups()
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                             private void MarkOverriddenSetups()
                     After:
                             void MarkOverriddenSetups()
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                             private void MarkOverriddenSetups()

@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2004 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Security.Permissions;
@@ -21,7 +20,6 @@ namespace System.Web
     public static class VirtualPathUtility
     {
         /* Discover virtual path type */
-
         public static bool IsAbsolute(string virtualPath)
         {
             VirtualPath virtualPathObject = VirtualPath.Create(virtualPath);

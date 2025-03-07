@@ -11,7 +11,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Runtime.Remoting.Metadata
 {
     using System.Reflection;

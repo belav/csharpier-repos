@@ -277,7 +277,6 @@ namespace System.Xml.Serialization
             return codeProvider.GetTypeOutput(new CodeTypeReference(name));
         }
         */
-
         private static void EscapeKeywords(string identifier, StringBuilder sb)
         {
             if (string.IsNullOrEmpty(identifier))

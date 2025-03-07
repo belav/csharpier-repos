@@ -47,7 +47,6 @@ namespace MonoTests.System.Configuration.Provider
             /* simulate what should happen with the following <provider> line:
                <provider name="FooProvider" description="Provider for foos" />
              */
-
             NameValueCollection extra_attrs = new NameValueCollection();
             extra_attrs.Add("description", "Provider for foos");
 
@@ -60,7 +59,6 @@ namespace MonoTests.System.Configuration.Provider
 
             /* simulate what should happen with the following <provider> line:
                <provider name="FooProvider" /> */
-
             extra_attrs = new NameValueCollection();
             test = new TestProviderBase();
 

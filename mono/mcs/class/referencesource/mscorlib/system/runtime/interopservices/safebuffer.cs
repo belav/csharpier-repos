@@ -10,7 +10,6 @@
 ** underlying resource.
 **
 ===========================================================*/
-
 // Design points:
 // *) Avoid handle-recycling problems (including ones triggered via
 // resurrection attacks) for all accesses via pointers.  This requires tying
@@ -429,7 +428,6 @@ namespace System.Runtime.InteropServices
 
         /* No indexer.  The perf would be misleadingly bad.  People should use
          * AcquirePointer and ReleasePointer instead.  */
-
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private void SpaceCheck(byte* ptr, ulong sizeInBytes)
         {

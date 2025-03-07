@@ -16,7 +16,6 @@ public class Works
 }
 
 /* Same code as struct breaks */
-
 public struct Breaks
 {
     private double val;

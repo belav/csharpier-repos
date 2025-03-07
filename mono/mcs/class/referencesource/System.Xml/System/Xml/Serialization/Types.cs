@@ -1720,7 +1720,6 @@ namespace System.Xml.Serialization
             return hash;
         }
         */
-
         //
         internal static string TypeName(Type t)
         {

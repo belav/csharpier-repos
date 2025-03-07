@@ -22,7 +22,6 @@ namespace System.Web.UI
      * properties of type ITemplate.  It allows the parser to strongly type the
      * container, which makes it easier to write render code in a template
      */
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -156,7 +155,6 @@ namespace System.Web.UI
          * ITemplate implementation
          * This implementation of ITemplate is only used in the designer
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -249,7 +247,6 @@ namespace System.Web.UI
      * generated page class code.  It just passes the Initialize call on to a
      * delegate.
      */
-
     /// <internalonly/>
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

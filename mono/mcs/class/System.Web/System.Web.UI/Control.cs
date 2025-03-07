@@ -108,7 +108,6 @@ namespace System.Web.UI
         const int unload_mask = 1 << 5;
 
         /* */
-
         [ThreadStatic]
         static Dictionary<Type, bool> loadViewStateByIDCache;
         bool? loadViewStateByID;
@@ -160,7 +159,6 @@ namespace System.Web.UI
         const int REMOVED = 1 << 18;
 
         /*************/
-
         static Control()
         {
             defaultNameArray = new string[100];

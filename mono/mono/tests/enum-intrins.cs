@@ -1,7 +1,6 @@
 /*
  * enum-intrins.cs: Tests for Enum.HasFlag () intrinsic.
  */
-
 using System;
 
 namespace Test
@@ -136,7 +135,6 @@ namespace Test
         static int TestBoxed()
         {
             /* The casts to Enum will make the JIT's pattern matching miss the call. */
-
             var byteEnum1 = ByteEnum.A | ByteEnum.B;
             if (byteEnum1.HasFlag((Enum)(object)ByteEnum.C))
                 return 1;

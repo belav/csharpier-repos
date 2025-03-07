@@ -14,7 +14,6 @@ namespace System.Net.Sockets
     ///       Defines socket error constants.
     ///    </para>
     /// </devdoc>
-
     public enum SocketError : int
     {
         /// <devdoc>
@@ -41,9 +40,7 @@ namespace System.Net.Sockets
         ///       offset from this value.
         ///    </para>
         /// </devdoc>
-
         ///WSABASEERR = 10000;
-
         /*
          * Windows Sockets definitions of regular Microsoft C error constants
          */
@@ -382,7 +379,6 @@ namespace System.Net.Sockets
          * Note also that [WSA]NO_ADDRESS is defined only for
          * compatibility purposes.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Host not found (Authoritative Answer: Host not found).

@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 /*********************************
 
 Class hierarchy
@@ -30,7 +29,6 @@ BaseParser
         ApplicationFileParser
 
 **********************************/
-
 namespace System.Web.UI
 {
     using System;

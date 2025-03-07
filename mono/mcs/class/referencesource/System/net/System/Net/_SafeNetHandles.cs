@@ -97,7 +97,6 @@ Author:
 Revision History:
 
 --*/
-
 namespace System.Net
 {
     using System.Collections.Generic;

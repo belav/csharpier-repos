@@ -1046,7 +1046,6 @@ public class ReliabilityFramework
         /************************************************************************
          * test set is finished...
          */
-
         TestSetShutdown(totalTestsToRun);
     }
 
@@ -1477,7 +1476,6 @@ public class ReliabilityFramework
                         }
 
                         /* Test is finished executing, we need to clean up now... */
-
                         Interlocked.Increment(ref _testsRanCount);
 
                         if (

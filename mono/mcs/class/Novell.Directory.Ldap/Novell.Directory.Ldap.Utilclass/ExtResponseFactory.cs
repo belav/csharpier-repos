@@ -29,7 +29,6 @@ namespace Novell.Directory.Ldap.Utilclass
         /// class of this returned object depends on the operation being
         /// performed.
         /// </returns>
-
         static public LdapExtendedResponse convertToExtendedResponse(RfcLdapMessage inResponse)
         {
             LdapExtendedResponse tempResponse = new LdapExtendedResponse(inResponse);

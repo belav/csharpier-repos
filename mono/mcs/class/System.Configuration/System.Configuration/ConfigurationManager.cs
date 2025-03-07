@@ -40,7 +40,6 @@ using System.Xml;
 namespace System.Configuration
 {
     /*roaming user config path: C:\Documents and Settings\toshok\Application Data\domain-System.Configurati_Url_py3nlovv3wxe21qgacxc3n2b1mph2log\1.0.0.0\user.config */
-
     public static class ConfigurationManager
     {
         //		static bool systemWebInUse;
@@ -95,7 +94,6 @@ namespace System.Configuration
               PerUserRoaming = \Documents and Settings\<username>\Application Data\...
               PerUserRoamingAndLocal = \Documents and Settings\<username>\Local Settings\Application Data\...
             */
-
             switch (userLevel)
             {
                 case ConfigurationUserLevel.None:

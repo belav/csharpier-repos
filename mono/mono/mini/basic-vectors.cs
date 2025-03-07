@@ -1130,7 +1130,6 @@ public class VectorTests
         return 0;
     }
     */
-
     public static int test_0_vector_t_i2_equal()
     {
         var elems1 = new short[] { 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -1200,7 +1199,6 @@ public class VectorTests
     }
 
     /* op_Explicit () -> Vector<int32> */
-
     public static int test_0_vector_t_cast_vector_int32()
     {
         var v1 = new Vector<long>(new long[] { 0x123456789abcdef0L, 0x23456789abcdef01L });
@@ -1223,7 +1221,6 @@ public class VectorTests
     }
 
     /* Vector.GreaterThanOrEqual */
-
     public static int test_0_vector_t_i1_ge()
     {
         var elems1 = new sbyte[] { 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1 };
@@ -1283,7 +1280,6 @@ public class VectorTests
     }
 
     /* Vector.LessThan */
-
     public static int test_0_vector_t_i1_lt()
     {
         var elems1 = new sbyte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -1302,7 +1298,6 @@ public class VectorTests
     }
 
     /* Vector.GreaterThan */
-
     public static int test_0_vector_t_i1_gt()
     {
         var elems1 = new sbyte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -1339,7 +1334,6 @@ public class VectorTests
     }
 
     /* Vector.Abs */
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static Vector<T> vector_t_abs<T>(Vector<T> v1)
         where T : struct

@@ -492,7 +492,6 @@ namespace MonoTests.System.Web.UI.WebControls
             /* sorted, text, no sort expression, no
              * header/footer text
              */
-
             grid.AllowSorting = true;
 
             TableCell header_cell_s_t_ne_nhft = new TableCell();
@@ -739,7 +738,6 @@ namespace MonoTests.System.Web.UI.WebControls
             /* sorted, text, sort expression, no
              * header/footer text
              */
-
             d.SortExpression = "*sort_expression*";
 
             TableCell header_cell_s_t_e_nhft = new TableCell();
@@ -990,11 +988,9 @@ namespace MonoTests.System.Web.UI.WebControls
             );
 
             /* XXXXXX  Image starts here XXXXXX */
-
             /* not sorted, image, no sort expression, no
              * header/footer text
              */
-
             d.HeaderImageUrl = "*header_image_url*";
             d.SortExpression = null;
             grid.AllowSorting = false;
@@ -1260,7 +1256,6 @@ namespace MonoTests.System.Web.UI.WebControls
             /* sorted, image, no sort expression, no
              * header/footer text
              */
-
             grid.AllowSorting = true;
 
             TableCell header_cell_s_i_ne_nhft = new TableCell();
@@ -1515,7 +1510,6 @@ namespace MonoTests.System.Web.UI.WebControls
             /* sorted, image, sort expression, no
              * header/footer text
              */
-
             d.SortExpression = "*sort_expression*";
 
             TableCell header_cell_s_i_e_nhft = new TableCell();

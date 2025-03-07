@@ -6,7 +6,6 @@
  * DESCRIPTION: Tests casting to and from IntPtrs.
  *              See also ToFromIntPtr.cs test.
  */
-
 using System;
 using System.Runtime.InteropServices;
 

@@ -12,7 +12,6 @@
 ** Purpose: Read-only wrapper for another generic dictionary.
 **
 ===========================================================*/
-
 namespace System.Collections.ObjectModel
 {
     using System;

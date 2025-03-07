@@ -380,7 +380,6 @@ namespace Mono.Data.Tds.Protocol
             /* copy out of our input buffer in the largest chunks possible *
              * at a time. limited only by the buffer size for our outgoing *
              * packets.                                                    */
-
             while (bufBytesToCopy > 0)
             {
                 SendIfFull();

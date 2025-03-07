@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -148,7 +147,6 @@ namespace System.Web.UI
         /*
          * Trace context for output of useful information to page during development
          */
-
         /// <devdoc>
         /// <para>Indicates the <see cref='System.Web.TraceContext'/> object for the current Web
         ///    request. Tracing tracks and presents the execution details about a Web request.
@@ -198,7 +196,6 @@ namespace System.Web.UI
         /*
          * Cache intrinsic
          */
-
         /// <devdoc>
         /// <para>Retrieves a <see langword='Cache'/>
         /// object in which to store the user control's data for
@@ -253,7 +250,6 @@ namespace System.Web.UI
         /*
          * Performs intialization of the control required by the designer.
          */
-
         /// <devdoc>
         ///    <para>Performs any initialization of the control that is required by RAD designers.</para>
         /// </devdoc>
@@ -292,7 +288,6 @@ namespace System.Web.UI
         /*
          * Called on declarative controls to initialize them correctly
          */
-
         /// <devdoc>
         /// <para>Initializes the <see langword='UserControl'/> object. Since there are some
         ///    differences between pages and user controls, this method makes sure that the
@@ -380,7 +375,6 @@ namespace System.Web.UI
         /*
          * Map virtual path (absolute or relative) to physical path
          */
-
         /// <devdoc>
         ///    <para>Assigns a virtual path, either absolute or relative, to a physical path.</para>
         /// </devdoc>

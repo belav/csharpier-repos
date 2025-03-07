@@ -160,7 +160,6 @@ namespace System
          * Create an instance using the name of type and the assembly where it exists. This allows
          * types to be created remotely without having to load the type locally.
          */
-
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public static ObjectHandle CreateInstance(String assemblyName, String typeName)

@@ -682,7 +682,6 @@ Assert.Fail();
                 Assert.Equal ("Cannot interpret token 'Child' at position 1.", e.Message);
             }
             */
-
             rows = child.Select("Parent.name = 'Laura'");
             Assert.Equal(3, rows.Length);
 

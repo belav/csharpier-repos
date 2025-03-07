@@ -320,7 +320,6 @@ namespace System.Globalization
             // F800-FFFF //       NoCasingPage,    NoCasingPage,            null,            null,    NoCasingPage,            null,            null,            null,
         };
 */
-
         // 0 - null
         // 1 - NoCasingPage
         // The bits are in reverse order for readability, i.e. the highest order bit refers to

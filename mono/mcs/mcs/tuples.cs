@@ -737,7 +737,6 @@ namespace Mono.CSharp
             var invocation = new Invocation (new MemberAccess (src, "Deconstruct"), args);
             var res = invocation.Resolve (rc);
             */
-
             throw new NotImplementedException("Custom deconstruct");
         }
 

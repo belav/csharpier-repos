@@ -1583,7 +1583,6 @@ namespace System.Web.UI
                 Wrap = currentLayout.Wrap;
             }
              */
-
             public Layout(HorizontalAlign alignment, bool wrapping)
             {
                 Align = alignment;

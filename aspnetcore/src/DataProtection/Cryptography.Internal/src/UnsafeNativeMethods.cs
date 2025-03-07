@@ -279,7 +279,6 @@ internal static unsafe partial class UnsafeNativeMethods
     /*
      * CRYPT32.DLL
      */
-
     [return: MarshalAs(UnmanagedType.Bool)]
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa380261(v=vs.85).aspx
 #if NET7_0_OR_GREATER
@@ -352,7 +351,6 @@ internal static unsafe partial class UnsafeNativeMethods
     /*
      * NCRYPT.DLL
      */
-
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh706799(v=vs.85).aspx
 #if NETSTANDARD2_0
     [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]

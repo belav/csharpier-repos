@@ -239,7 +239,6 @@ namespace MonoTests.System
             Assert(((long)a * (long)b) == Math.BigMul(a,b));
         }
         */
-
         [Test]
         public void TestCos()
         {
@@ -295,7 +294,6 @@ namespace MonoTests.System
             Assert.IsTrue (div == 2);
         }
         */
-
         [Test]
         public void TestSin()
         {
@@ -555,7 +553,6 @@ namespace MonoTests.System
 #endif
 
             /* documentation cases : https://msdn.microsoft.com/en-us/library/system.math.pow%28v=vs.110%29.aspx */
-
             /* x or y = NaN -> NaN */
             Assert.IsTrue(double.IsNaN(Math.Pow(double.NaN, double.NaN)), "#1");
             Assert.IsTrue(double.IsNaN(Math.Pow(double.NaN, double.NegativeInfinity)), "#2");
@@ -648,7 +645,6 @@ namespace MonoTests.System
             Assert.AreEqual(double.PositiveInfinity, Math.Pow(double.PositiveInfinity, 2), "#40");
 
             /* other cases */
-
             double a = Math.Pow(y, x);
             double b = 1.363609446060212;
 

@@ -154,7 +154,6 @@ public class ReliabilityTestSet
 
     /// <summary>
     /// Gets the integer value or the random value specified in the string.
-
     /// accepted format:
     ///          30:50            run for 30 minutes at 50% usage
     ///          rand(30,60):50   run at 50% usage for somewhere between 30 and 60 minutes.

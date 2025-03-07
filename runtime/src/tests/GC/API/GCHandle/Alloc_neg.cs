@@ -8,7 +8,6 @@
  there is an object in the handle, we will pin it. It is quite reasonable to create
  the handle now and fill in the object later.
 **************************************************************************************/
-
 using System;
 using System.Runtime.InteropServices;
 

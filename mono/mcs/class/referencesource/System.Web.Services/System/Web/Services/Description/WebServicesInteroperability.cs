@@ -101,7 +101,6 @@ namespace System.Web.Services.Description
 
 
 */
-
             int count = violations.Count;
             AnalyzeDescription(descriptions, violations);
             return count == violations.Count;

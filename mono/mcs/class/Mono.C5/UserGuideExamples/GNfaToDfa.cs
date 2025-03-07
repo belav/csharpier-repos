@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 // Compile with
 //    csc /r:C5.dll GNfaToDfa.cs
 
@@ -218,7 +217,6 @@ namespace GNfaToDfa
         sets of ints by ints.
     
     */
-
     class Nfa
     {
         private readonly int startState;
@@ -496,7 +494,6 @@ namespace GNfaToDfa
        dictionary mapping state number (int) to a dictionary mapping label
        (a non-null string) to a target state (an int).
     */
-
     class Dfa
     {
         private readonly int startState;

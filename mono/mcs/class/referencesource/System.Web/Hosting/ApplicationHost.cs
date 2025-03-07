@@ -29,7 +29,6 @@ namespace System.Web.Hosting
          * user defined 'host' object in it.  The host is needed to make
          * cross-domain calls to process requests in the host's app domain
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

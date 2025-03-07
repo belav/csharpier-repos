@@ -45,7 +45,6 @@ using Novell.Directory.Ldap.Rfc2251;
  *  &nbsp;&nbsp;&nbsp;2.16.840.1.113719.1.27.100.97</p>
  *
  */
-
 namespace Novell.Directory.Ldap.Extensions
 {
     public class LdapBackupResponse : LdapExtendedResponse
@@ -87,7 +86,6 @@ namespace Novell.Directory.Ldap.Extensions
         *
         * @exception IOException The responseValue could not be decoded.
         */
-
         public LdapBackupResponse(RfcLdapMessage rfcMessage)
             : base(rfcMessage)
         {
@@ -154,7 +152,6 @@ namespace Novell.Directory.Ldap.Extensions
                  * 				SEQUENCE of {eacChunksize        INTEGER}]
                  * 	       }
                  */
-
                 Asn1Sequence asn1_chunksSeq = (Asn1Sequence)decoder.decode(currentPtr);
                 if (asn1_chunksSeq == null)
                     throw new IOException("Decoding error");

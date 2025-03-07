@@ -1163,7 +1163,6 @@ namespace System.Data
                     HandleAttributeColumn(s, table, isBase);
                 }
                 */
-
                 if (ct.ContentModel is XmlSchemaComplexContent)
                 {
                     XmlSchemaAnnotated? cContent = (
@@ -1429,7 +1428,6 @@ namespace System.Data
             <field>CustID</field>
         </keyref>
         */
-
         internal static AcceptRejectRule TranslateAcceptRejectRule(string? strRule)
         {
             if (strRule == "Cascade")
@@ -1865,7 +1863,6 @@ namespace System.Data
                             string textColumn = GenUniqueColumnName(table.TableName+ "_Text", table);
                             table.XmlText = new DataColumn(textColumn, typeof(string), null, MappingType.Text);
                         } */
-
             SetProperties(table, node.UnhandledAttributes);
             SetExtProperties(table, node.UnhandledAttributes);
 

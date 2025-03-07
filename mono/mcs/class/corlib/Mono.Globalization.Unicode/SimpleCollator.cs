@@ -812,7 +812,6 @@ namespace Mono.Globalization.Unicode
                         len1 == min ? - 1 : 1;
                 }
         */
-
         int ISimpleCollator.Compare(
             string s1,
             int idx1,
@@ -903,7 +902,6 @@ namespace Mono.Globalization.Unicode
         #endif
                 }
         */
-
         unsafe int CompareInternal(
             string s1,
             int idx1,

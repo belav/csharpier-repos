@@ -12,7 +12,6 @@
    contributed by Marek Safar
    *reset*
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

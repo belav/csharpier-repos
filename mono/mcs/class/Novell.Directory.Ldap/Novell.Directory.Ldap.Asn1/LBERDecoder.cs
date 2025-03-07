@@ -91,7 +91,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Generic decode routines
         */
-
         /// <summary> Decode an LBER encoded value into an Asn1Type from a byte array.</summary>
         [CLSCompliantAttribute(false)]
         public virtual Asn1Object decode(sbyte[] value_Renamed)
@@ -179,7 +178,6 @@ namespace Novell.Directory.Ldap.Asn1
                     case Asn1GeneralString.TAG:
                     return new Asn1GeneralString(this, in, length);
                     */
-
                     default:
                         throw new System.IO.EndOfStreamException("Unknown tag"); // !!! need a better exception
                 }
@@ -193,7 +191,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Decoders for ASN.1 simple type Contents
         */
-
         /// <summary> Decode a boolean directly from a stream.</summary>
         public System.Object decodeBoolean(System.IO.Stream in_Renamed, int len)
         {

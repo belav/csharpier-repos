@@ -23,7 +23,6 @@ namespace Moq
             readonly int to;
             readonly Kind kind;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly int from;
@@ -34,7 +33,6 @@ namespace Moq
             readonly int to;
             readonly Kind kind;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly int from;
@@ -56,14 +54,12 @@ namespace Moq
         After:
                 Times(Kind kind, int from, int to)
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private Times(Kind kind, int from, int to)
         After:
                 Times(Kind kind, int from, int to)
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private Times(Kind kind, int from, int to)
@@ -307,14 +303,12 @@ namespace Moq
                 After:
                         enum Kind
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private enum Kind
                 After:
                         enum Kind
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private enum Kind

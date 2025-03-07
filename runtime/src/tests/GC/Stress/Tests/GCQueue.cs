@@ -17,7 +17,6 @@ using System.Collections;
 /*arguments:iRep: count of G_Queue, repeat time of local stacks assignment.
 /*          iObj: count of local Queues' elements.
 /****************************************************************************/
-
 namespace DefaultNamespace
 {
     internal class BitArrayNode

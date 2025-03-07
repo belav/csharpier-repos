@@ -182,7 +182,6 @@ namespace MonoTests.System.Web.UI.WebControls
             SqlViewPoker sql = new SqlViewPoker(ds, "DefaultView", null);
 
             /* XXX test parameters */
-
             sql.CancelSelectOnNullParameter = false;
             sql.ConflictDetection = ConflictOptions.CompareAllValues;
             sql.DeleteCommandType = SqlDataSourceCommandType.Text;
@@ -294,7 +293,6 @@ namespace MonoTests.System.Web.UI.WebControls
             sql.DoOnDataSourceViewChanged();
             eventAssert.IsTrue("SqlDataSourceView"); // Assert include counter the first is zero
             /* XXX test parameters */
-
             sql.CancelSelectOnNullParameter = false;
             eventAssert.IsTrue("SqlDataSourceView");
             sql.ConflictDetection = ConflictOptions.CompareAllValues;

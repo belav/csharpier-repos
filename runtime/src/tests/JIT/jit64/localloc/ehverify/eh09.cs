@@ -4,7 +4,6 @@
 /*
  * Test reading localloc variable from nested catch block.
  */
-
 using System;
 using LocallocTesting;
 using Xunit;

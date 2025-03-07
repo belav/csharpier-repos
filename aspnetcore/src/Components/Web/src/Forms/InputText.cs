@@ -14,7 +14,6 @@ namespace Microsoft.AspNetCore.Components.Forms;
  * The only reason it's not implemented as a .razor file is that we don't presently have the ability to compile those
  * files within this project. Developers building their own input components should use Razor syntax.
  */
-
 /// <summary>
 /// An input component for editing <see cref="string"/> values.
 /// </summary>

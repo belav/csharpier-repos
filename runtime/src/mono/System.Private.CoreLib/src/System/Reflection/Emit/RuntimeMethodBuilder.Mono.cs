@@ -457,7 +457,6 @@ namespace System.Reflection.Emit
                      * - PreserveSig is true by default, while it is false by
                      *   default in DllImportAttribute.
                      */
-
                     pi_dll = (string?)attr.ctorArgs[0];
                     if (pi_dll == null || pi_dll.Length == 0)
                         throw new ArgumentException(SR.Arg_DllNameCannotBeEmpty);

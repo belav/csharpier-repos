@@ -15,7 +15,6 @@
 **
 **
 ============================================================*/
-
 namespace System
 {
     using System;
@@ -4442,7 +4441,6 @@ namespace System
                             m_isFixedDateRule = false;
                         }
             */
-
             // -------- SECTION: factory methods -----------------*
 
             static public TransitionTime CreateFixedDateRule(

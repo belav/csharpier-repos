@@ -25,7 +25,6 @@ namespace System.Web.UI
          * Processes the post data returned from the client for this control.
          * Answer true if the post data causes our state to change.
          */
-
         /// <devdoc>
         ///    <para>Processes the post back data for the specified control. </para>
         ///    </devdoc>
@@ -35,7 +34,6 @@ namespace System.Web.UI
          * Notify any listeners that our state has changed as the result of
          * a post back.
          */
-
         /// <devdoc>
         ///    <para>Signals the control to notify any listeners that the state of the
         ///       control has changed.</para>

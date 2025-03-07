@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.Util
 {
     using System.Collections;

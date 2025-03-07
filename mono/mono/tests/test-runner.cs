@@ -373,7 +373,6 @@ public class TestRunner
                     }
 
                     /* Spawn a new process */
-
                     string process_args = "";
 
                     if (opt_set != null)

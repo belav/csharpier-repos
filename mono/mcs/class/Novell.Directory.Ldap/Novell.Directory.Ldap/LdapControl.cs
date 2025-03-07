@@ -79,7 +79,6 @@ namespace Novell.Directory.Ldap
         internal static RespControlVector RegisteredControls
         {
             /* package */
-
             get { return registeredControls; }
         }
 
@@ -91,7 +90,6 @@ namespace Novell.Directory.Ldap
         virtual internal RfcControl Asn1Object
         {
             /*package*/
-
             get { return control; }
         }
 

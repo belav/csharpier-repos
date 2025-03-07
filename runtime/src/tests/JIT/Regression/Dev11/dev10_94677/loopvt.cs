@@ -14,7 +14,6 @@
  * fit in the stride group it was placed in.  This bug has existed since 2003 when ltaylors first wrote
  * these routines.  I believe the fix is to add the call to OsrGroupIVsByStride so the loops match.
  */
-
 using System;
 using Xunit;
 

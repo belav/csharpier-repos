@@ -36,7 +36,6 @@ namespace System.Web.Configuration
         />
 
     */
-
     public sealed class GlobalizationSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

@@ -472,7 +472,6 @@ namespace System.Runtime.Remoting
     /***************************************************************
      * Internal classes used by RemotingConfiguration.Configure () *
      ***************************************************************/
-
     internal class ConfigHandler : SmallXmlParser.IContentHandler
     {
         ArrayList typeEntries = new ArrayList();
@@ -940,7 +939,6 @@ namespace System.Runtime.Remoting
      * If having them implemented this way, makes configuration too    *
      * slow, we can use string arrays.                                 *
      *******************************************************************/
-
     internal class ChannelData
     {
         internal string Ref;

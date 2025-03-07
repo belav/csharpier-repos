@@ -86,7 +86,6 @@ namespace Microsoft.Build.BuildEngine
                     output [i++] = s;
                 return String.Join (";", output);
                 */
-
             List<string> list = new List<string>();
             foreach (object obj in o)
                 list.Add(ToString(obj));

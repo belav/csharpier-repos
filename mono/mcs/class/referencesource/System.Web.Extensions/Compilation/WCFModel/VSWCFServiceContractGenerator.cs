@@ -33,7 +33,6 @@ using Microsoft.VSDesigner.WCF.Resources;
 /// imports the metadata using a WsdlImporter and System.ServiceModel.ServiceContractGenerator
 /// that are configured according to the options set in the SvcMap file
 ///
-
 #if WEB_EXTENSIONS_CODE
 namespace System.Web.Compilation.WCFModel
 #else
@@ -859,7 +858,6 @@ namespace Microsoft.VSDesigner.WCFModel
 
 
 */
-
             xmlSerializerOptions.WebReferenceOptions = webReferenceOptions;
             xmlSerializerOptions.CodeProvider = codeDomProvider;
 

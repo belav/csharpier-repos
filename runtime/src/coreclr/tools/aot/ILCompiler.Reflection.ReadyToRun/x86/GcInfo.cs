@@ -139,7 +139,6 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 if ((val & 0x80) == 0)
                 {
                     /* A small 'regPtr' encoding */
-
                     curOffs += val & 0x7;
 
                     Action isLive = Action.LIVE;
@@ -161,15 +160,12 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 }
 
                 /* This is probably an argument push/pop */
-
                 argOffs = (val & 0x38) >> 3;
 
                 /* 6 [110] and 7 [111] are reserved for other encodings */
-
                 if (argOffs < 6)
                 {
                     /* A small argument encoding */
-
                     curOffs += (val & 0x07);
                     isPop = (val & 0x40);
 

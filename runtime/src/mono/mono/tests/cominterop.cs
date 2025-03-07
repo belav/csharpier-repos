@@ -931,7 +931,6 @@ public class Tests
                 }
 
                 /* in */
-
                 array = new object[] { };
                 if (mono_test_marshal_safearray_in_byval_1dim_empty(array) != 0)
                     return 71;
@@ -993,7 +992,6 @@ public class Tests
                     return 80;
 
                 /* in, out, byref */
-
                 array = new object[] { };
                 if (
                     (mono_test_marshal_safearray_in_out_byref_1dim_empty(ref array) != 0)
@@ -1043,7 +1041,6 @@ public class Tests
                     return 86;
 
                 /* in, out, byval */
-
                 array = new object[] { 1 };
                 if (
                     (mono_test_marshal_safearray_in_out_byval_1dim_vt_i4(array) != 0)
@@ -1083,7 +1080,6 @@ public class Tests
                     return 92;
 
                 /* Multiple safearray parameters with various types and options */
-
                 Array array1 = new object[] { 1 };
                 Array array2 = new object[,]
                 {

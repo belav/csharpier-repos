@@ -10,7 +10,6 @@
  * Copyright (c) 1998-2002, Microsoft Corporation
  *
  */
-
 namespace System.Web.SessionState
 {
     using System;
@@ -119,7 +118,6 @@ namespace System.Web.SessionState
      * The sesssion state module provides session state services
      * for an application.
      */
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -610,7 +608,6 @@ namespace System.Web.SessionState
          *
          * @param sessionEventHandler
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -674,7 +671,6 @@ namespace System.Web.SessionState
          *
          * @param sessionEventHandler
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1625,7 +1621,6 @@ namespace System.Web.SessionState
         /*
          * Release session state
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1671,7 +1666,6 @@ namespace System.Web.SessionState
                     /*
                      * Don't store untouched new sessions.
                      */
-
                     if (
                         // The store doesn't have the session state.
                         // ( Please note we aren't checking _rqIsNewSession because _rqIsNewSession
@@ -1911,7 +1905,6 @@ namespace System.Web.SessionState
         /*
          * End of request processing. Possibly does release if skipped due to errors
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1950,7 +1943,6 @@ namespace System.Web.SessionState
                         /*
                          * 'advise' -- update session timeout
                          */
-
                         if (_rqContext == null)
                         {
                             _rqContext = context;

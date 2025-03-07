@@ -56,7 +56,6 @@ namespace MonoTests.System.Xml
                 int.MaxValue, Q.DefaultMaxStringContentLength,
                 "static DefaultMaxStringContentLength");
             */
-
             Q q = new Q(); //Q.Default;
 
             Assert.AreEqual(0x4000, q.MaxArrayLength, "default - MaxArrayLength");

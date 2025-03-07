@@ -130,7 +130,6 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual (new Rectangle (24, 2, 11, 18), dgv.Rows[0].HeaderCell.GetContentBounds (dgv.Rows[0].HeaderCell.RowIndex), "A3");
         }
         */
-
         [Test]
         public void MethodGetErrorIconBounds()
         {
@@ -258,7 +257,6 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual (new Size (115, 17), dgv.Rows[0].HeaderCell.PreferredSize, "A4");
         }
         */
-
         private class BaseCell : DataGridViewRowHeaderCell
         {
             public Rectangle PublicGetContentBounds(

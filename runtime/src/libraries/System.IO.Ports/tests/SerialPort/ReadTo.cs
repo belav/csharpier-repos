@@ -111,7 +111,6 @@ namespace System.IO.Ports.Tests
             VerifyRead(new System.Text.UTF7Encoding(), GenRandomNewLine(false));
         }
     */
-
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void UTF8Encoding()
         {

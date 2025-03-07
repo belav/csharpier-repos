@@ -28,7 +28,6 @@ namespace System.Net.Sockets
     /// <para>The <see cref='Sockets.Socket'/> class implements the Berkeley sockets
     ///    interface.</para>
     /// </devdoc>
-
     public partial class Socket : IDisposable
     {
 #if !MONO
@@ -380,7 +379,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         /// <para>Indicates whether IPv6 support is available and enabled on this machine.</para>
         /// </devdoc>
-
         [Obsolete(
             "SupportsIPv6 is obsoleted for this type, please use OSSupportsIPv6 instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -1990,7 +1988,6 @@ namespace System.Net.Sockets
         ///       a connected socket, starting at the indicated location in the
         ///       data.</para>
         /// </devdoc>
-
         public int Send(byte[] buffer, int offset, int size, SocketFlags socketFlags)
         {
             SocketError errorCode;
@@ -2328,7 +2325,6 @@ namespace System.Net.Sockets
         ///    <para>Receives data from a connected socket into a specific location of the receive
         ///       buffer.</para>
         /// </devdoc>
-
         public int Receive(byte[] buffer, int offset, int size, SocketFlags socketFlags)
         {
             SocketError errorCode;
@@ -3252,7 +3248,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         ///    <para>Sets the specified option to the specified value.</para>
         /// </devdoc>
-
         public void SetSocketOption(
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -3745,7 +3740,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [HostProtection(ExternalThreading = true)]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -3795,7 +3789,6 @@ namespace System.Net.Sockets
            IAsyncResult - Async result used to retreive result
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -4127,7 +4120,6 @@ namespace System.Net.Sockets
             int errorCode = (int)socket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Error);
             GlobalLog.Print("Socket#" + ValidationHelper.HashString(socket) + "::ConnectCallback() GetSocketOption() returns errorCode:" + errorCode.ToString());
             */
-
             NetworkEvents networkEvents = new NetworkEvents();
             networkEvents.Events = AsyncEventBits.FdConnect;
 
@@ -4756,11 +4748,9 @@ namespace System.Net.Sockets
            IAsyncResult - Async result used to retreive result
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [HostProtection(ExternalThreading = true)]
         public IAsyncResult BeginSend(
             byte[] buffer,
@@ -5333,7 +5323,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         public int EndSend(IAsyncResult asyncResult)
         {
             SocketError errorCode;
@@ -5835,11 +5824,9 @@ namespace System.Net.Sockets
            IAsyncResult - Async result used to retreive result
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [HostProtection(ExternalThreading = true)]
         public IAsyncResult BeginReceive(
             byte[] buffer,
@@ -6244,7 +6231,6 @@ namespace System.Net.Sockets
            int - Number of bytes transferred
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -6703,7 +6689,6 @@ namespace System.Net.Sockets
            IAsyncResult - Async result used to retreive result
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -6926,7 +6911,6 @@ namespace System.Net.Sockets
            int - Number of bytes transferred
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -7061,7 +7045,6 @@ namespace System.Net.Sockets
            IAsyncResult - Async result used to retreive resultant new socket
 
         --*/
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -7471,7 +7454,6 @@ namespace System.Net.Sockets
         }
 
         ///  This is the true async version that uses AcceptEx
-
 #if !MONO
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -7631,12 +7613,10 @@ namespace System.Net.Sockets
            Socket - a valid socket if successful
 
         --*/
-
 #if !MONO
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         public Socket EndAccept(IAsyncResult asyncResult)
         {
             if (s_LoggingEnabled)
@@ -7733,7 +7713,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         public Socket EndAccept(out byte[] buffer, IAsyncResult asyncResult)
         {
             int bytesTransferred;
@@ -7749,7 +7728,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         public Socket EndAccept(
             out byte[] buffer,
             out int bytesTransferred,

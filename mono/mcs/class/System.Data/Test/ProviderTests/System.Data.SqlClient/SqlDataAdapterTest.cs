@@ -348,7 +348,6 @@ namespace MonoTests.System.Data.Connected.SqlClient
             }
         }
         */
-
         /**
            This needs a errortable created as follows
            id uniqueidentifier,name char(10) , with values
@@ -714,7 +713,6 @@ namespace MonoTests.System.Data.Connected.SqlClient
             adapter.SelectCommand.Connection.Close (); // tmp .. can be removed once the bug if fixed
             ex=null;
             */
-
             try
             {
                 adapter.Fill(null, 0, 0, "numeric_family");

@@ -205,7 +205,6 @@ namespace System.Runtime.InteropServices.JavaScript
         [return: JSMarshalAs(JSType.Function, JSType.Promise)]
         public static partial Func<Task<object>> CreateFunctionTask([JSMarshalAs<JSType.String>] string code);
         */
-
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
         public static partial Action<int, int> CreateActionIntInt(

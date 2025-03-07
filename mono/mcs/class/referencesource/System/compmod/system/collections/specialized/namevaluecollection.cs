@@ -10,7 +10,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Collections.Specialized
 {
     using System.Collections;

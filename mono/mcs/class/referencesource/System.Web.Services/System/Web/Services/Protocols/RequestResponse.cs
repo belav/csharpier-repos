@@ -35,7 +35,6 @@ namespace System.Web.Services.Protocols
             return result;
         }
         */
-
         //
 
         internal static Encoding GetEncoding(string contentType)

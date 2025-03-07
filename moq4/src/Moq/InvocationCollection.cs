@@ -14,14 +14,12 @@ namespace Moq
     After:
         sealed class InvocationCollection : IInvocationList
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class InvocationCollection : IInvocationList
     After:
         sealed class InvocationCollection : IInvocationList
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class InvocationCollection : IInvocationList
@@ -35,14 +33,12 @@ namespace Moq
     After:
             Invocation[] invocations;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Invocation[] invocations;
     After:
             Invocation[] invocations;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Invocation[] invocations;
@@ -60,7 +56,6 @@ namespace Moq
                 int capacity = 0;
                 int count = 0;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private int capacity = 0;
@@ -69,7 +64,6 @@ namespace Moq
                 int capacity = 0;
                 int count = 0;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private int capacity = 0;
@@ -89,7 +83,6 @@ namespace Moq
                 readonly object invocationsLock = new object();
                 readonly Mock owner;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private readonly object invocationsLock = new object();
@@ -98,7 +91,6 @@ namespace Moq
                 readonly object invocationsLock = new object();
                 readonly Mock owner;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private readonly object invocationsLock = new object();

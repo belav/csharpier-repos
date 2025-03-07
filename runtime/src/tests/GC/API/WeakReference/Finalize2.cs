@@ -5,7 +5,6 @@
  * TEST NAME: Finalize2
  * DESCRIPTION: operates on Weakhandles whose targets are being finalized
  */
-
 using System;
 using System.Runtime.CompilerServices;
 

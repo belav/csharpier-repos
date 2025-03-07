@@ -8,7 +8,6 @@
 ** Purpose: Provides the abstract base class for a strongly typed collection.
 **
 =============================================================================*/
-
 namespace System.Collections
 {
     // Useful base class for typed read/write collections where items derive from object

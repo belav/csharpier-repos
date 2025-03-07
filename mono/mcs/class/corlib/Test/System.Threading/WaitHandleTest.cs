@@ -595,7 +595,6 @@ namespace MonoTests.System.Threading
             /* This is to test that WaitEvent.WaitOne is not going to wait largely
              * more than its timeout. In this test, it shouldn't wait more than
              * 1500 milliseconds, with its timeout being 1000ms */
-
             using (ManualResetEvent mre = new ManualResetEvent(false))
             using (ManualResetEvent ready = new ManualResetEvent(false))
             {
@@ -628,7 +627,6 @@ namespace MonoTests.System.Threading
             /* This is to test that WaitEvent.WaitAny is not going to wait largely
              * more than its timeout. In this test, it shouldn't wait more than
              * 1500 milliseconds, with its timeout being 1000ms */
-
             using (ManualResetEvent mre1 = new ManualResetEvent(false))
             using (ManualResetEvent mre2 = new ManualResetEvent(false))
             using (ManualResetEvent ready = new ManualResetEvent(false))
@@ -662,7 +660,6 @@ namespace MonoTests.System.Threading
             /* This is to test that WaitEvent.WaitAll is not going to wait largely
              * more than its timeout. In this test, it shouldn't wait more than
              * 1500 milliseconds, with its timeout being 1000ms */
-
             using (ManualResetEvent mre1 = new ManualResetEvent(false))
             using (ManualResetEvent mre2 = new ManualResetEvent(false))
             using (ManualResetEvent ready = new ManualResetEvent(false))

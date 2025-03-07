@@ -198,7 +198,6 @@ namespace System.Activities.Core.Presentation
                  *  transform = |  0   1   0 | x |  0 1 0 | x |   0    1   0 | = |   0     1    0 |
                  *              | axis 0   1 |   |  0 0 1 |   | -axis  0   0 |   | 2*axis  0    1 |
                  */
-
                 MatrixTransform transform = new MatrixTransform(-1, 0, 0, 1, 2 * axis, 0);
                 drawingContext.PushTransform(transform);
                 doDraw();

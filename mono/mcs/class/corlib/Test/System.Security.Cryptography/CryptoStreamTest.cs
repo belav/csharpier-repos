@@ -33,7 +33,6 @@
  * CASES CONTAINS ERRORS AND AREN'T SECURE IN THEIR USE.
  *
  * WARNING * WARNING * WARNING * WARNING * WARNING * WARNING * WARNING */
-
 using System;
 using System.IO;
 using System.Reflection;

@@ -52,7 +52,6 @@ namespace System.Web.Caching
       adjusted by adding a setting to the cache policy.
 
     */
-
     internal class DependencyCacheEntry
     {
         private string _providerName;
@@ -1155,7 +1154,6 @@ namespace System.Web.Caching
                  * Use the Add method so that we guarantee we only use
                  * a single CachedVary and don't overwrite existing ones.
                  */
-
                 CachedVary cachedVaryInCache;
                 if (!useProvider)
                 {

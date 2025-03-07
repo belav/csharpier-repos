@@ -1030,7 +1030,6 @@ namespace System.Net
             }
         }
         */
-
 #if TRAVE
         /*
         // Consider removing.
@@ -1114,7 +1113,6 @@ namespace System.Net
             return address>=0x00000000 && address<=0xFFFFFFFF;
         }
         */
-
         public static bool ValidateTcpPort(int port)
         {
             // on false, API should throw new ArgumentOutOfRangeException("port");
@@ -1134,7 +1132,6 @@ namespace System.Net
             return actual>=fromAllowed && actual<=toAllowed;
         }
         */
-
         // There are threading tricks a malicious app can use to create an ArraySegment with mismatched
         // array/offset/count.  Copy locally and make sure they're valid before using them.
         internal static void ValidateSegment(ArraySegment<byte> segment)
@@ -1652,7 +1649,6 @@ namespace System.Net
             DWORD           reserved;
         } SCHANNEL_CRED, *PSCHANNEL_CRED;
         */
-
         public const int CurrentVersion = 0x4;
 
         public int version;
@@ -2021,7 +2017,6 @@ namespace System.Net
                     The newly created HttpWebRequest.
 
          --*/
-
         public WebRequest Create(Uri Uri)
         {
             //
@@ -2066,7 +2061,6 @@ namespace System.Net
                     The newly created HttpWebRequest for WebSocket connection.
 
          --*/
-
         public WebRequest Create(Uri Uri)
         {
             UriBuilder uriBuilder = new UriBuilder(Uri);

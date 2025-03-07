@@ -7,7 +7,6 @@ This test stresses the interaction of the multiple suspend sources and stop-the-
 Right now the current iteraction that we stresses is between the domain unloader and
 sgen STW. It's mighty hard to get this right on mach.
 */
-
 class Driver
 {
     static void AllocStuff()

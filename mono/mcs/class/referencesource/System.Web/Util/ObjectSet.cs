@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-
 // Generics are causing perf regressions, so don't use them for now until we can figure
 // it out (VSWhidbey 463572)
 //#define USEGENERICSET

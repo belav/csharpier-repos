@@ -15,7 +15,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*               XsltArgumentList.GetParam                 */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - GetParam", Desc = "Get Param Test Cases")]
     [ConditionalClass(
         typeof(PlatformDetection),
@@ -641,7 +640,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*      XsltArgumentList.GetExtensionObject                */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - GetExtensionObject", Desc = "XsltArgumentList.GetExtensionObject")]
     public class CArgGetExtObj : XsltApiTestCaseBase2
     {
@@ -1144,7 +1142,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*               XsltArgumentList.AddParam                 */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - AddParam : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltArgumentList - AddParam : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddParam : Reader, Writer", Desc = "READER,WRITER")]
@@ -2671,7 +2668,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /*               XsltArgumentList.AddParam Misc Tests          */
     /*Bug 268515 - Global param value is overridden by local value */
     /***************************************************************/
-
     //Testcases with Reader outputs are skipped because they don't write to an output file
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : Reader, Writer", Desc = "READER,WRITER")]
@@ -7391,7 +7387,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*          XsltArgumentList.AddExtensionObject            */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader , Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, Writer", Desc = "READER,WRITER")]
@@ -10397,7 +10392,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*            XsltArgumentList.RemoveParam                 */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - RemoveParam : Reader , Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltArgumentList - RemoveParam : URI, Stream", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltArgumentList - RemoveParam : Navigator, Writer", Desc = "NAVIGATOR,WRITER")]
@@ -11357,7 +11351,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*        XslCompiledTransform.RemoveExtensionObject               */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Reader, TextWriter", Desc = "READER,TEXTWRITER")]
     //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : URI, Reader", Desc = "URI,READER")]
@@ -11868,7 +11861,6 @@ namespace System.Xml.XslCompiledTransformApiTests
     /***********************************************************/
     /*        XslCompiledTransform.Clear                               */
     /***********************************************************/
-
     //[TestCase(Name = "XsltArgumentList - Clear", Desc = "XsltArgumentList.Clear")]
     public class CArgClear : XsltApiTestCaseBase2
     {

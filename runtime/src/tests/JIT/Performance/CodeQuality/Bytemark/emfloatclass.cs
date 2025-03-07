@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 using System;
 
 /*
@@ -106,7 +104,6 @@ public class EMFloatClass : EmFloatStruct
     /*
     ** TYPEDEFS
     */
-
     private class InternalFPF
     {
         public InternalFPF()
@@ -147,7 +144,6 @@ public class EMFloatClass : EmFloatStruct
     ** from the use of this code or the results obtained from using
     ** this code.
     */
-
     /*
     ** Floating-point emulator.
     ** These routines are only "sort of" IEEE-compliant.  All work is
@@ -162,11 +158,9 @@ public class EMFloatClass : EmFloatStruct
     ** the long-ago book: "Microprocessor Programming for
     ** Computer Hobbyists" by Neill Graham.
     */
-
     /*****************************
     ** FLOATING-POINT EMULATION **
     *****************************/
-
     /**************
     ** DoEmFloat **
     ***************
@@ -186,7 +180,6 @@ public class EMFloatClass : EmFloatStruct
         /*
         ** Test the emulation routines.
         */
-
         abase = new InternalFPF[this.arraysize];
         bbase = new InternalFPF[this.arraysize];
         cbase = new InternalFPF[this.arraysize];
@@ -217,7 +210,6 @@ public class EMFloatClass : EmFloatStruct
             cbase[i].mantissa = new char[INTERNAL_FPF_PRECISION];
         }
         */
-
         /*
         ** Set up the arrays
         */
@@ -272,7 +264,6 @@ public class EMFloatClass : EmFloatStruct
         ** Clean up, calculate results, and go home.
         ** Also, indicate that adjustment is done.
         */
-
         if (this.adjust == 0)
             this.adjust = 1;
         double emflops =
@@ -579,7 +570,6 @@ public class EMFloatClass : EmFloatStruct
     **         POST ARITHMETIC PROCESSING            **
     **  (NORMALIZE, ROUND, OVERFLOW, AND UNDERFLOW)  **
     **************************************************/
-
     /**************
     ** normalize **
     ***************
@@ -652,7 +642,6 @@ public class EMFloatClass : EmFloatStruct
     private static void RoundInternalFPF(InternalFPF ptr)
     {
         /* int i; */
-
         if (ptr.type == IFPF.IFPF_IS_NORMAL || ptr.type == IFPF.IFPF_IS_SUBNORMAL)
         {
             denormalize(ptr, MIN_EXP);
@@ -680,7 +669,6 @@ public class EMFloatClass : EmFloatStruct
     /*******************************************************
     **  ARITHMETIC OPERATIONS ON INTERNAL REPRESENTATION  **
     *******************************************************/
-
     private static void memmove(InternalFPF dest, InternalFPF src)
     {
         dest.type = src.type;
@@ -1174,7 +1162,6 @@ public class EMFloatClass : EmFloatStruct
                 ** Make local copy of x number, since we'll be
                 ** altering it in the process of dividing.
                 */
-
                 locx = new InternalFPF();
                 memmove(locx, x);
 

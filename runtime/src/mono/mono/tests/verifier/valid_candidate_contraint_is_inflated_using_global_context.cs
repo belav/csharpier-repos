@@ -35,7 +35,6 @@ IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<.ctor (class IronRuby.Runt
   } // end of method ConvertToReferenceTypeAction`2::.ctor
 
 */
-
 namespace IronRuby.Runtime.Calls
 {
     public abstract class ProtocolConversionAction<TSelf>

@@ -17,14 +17,12 @@ namespace Moq
     After:
         abstract class Setup : ISetup
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal abstract class Setup : ISetup
     After:
         abstract class Setup : ISetup
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal abstract class Setup : ISetup
@@ -44,7 +42,6 @@ namespace Moq
             readonly Mock mock;
             Flags flags;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly Expectation expectation;
@@ -57,7 +54,6 @@ namespace Moq
             readonly Mock mock;
             Flags flags;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly Expectation expectation;
@@ -256,14 +252,12 @@ namespace Moq
             After:
                     void Verify(bool recursive, Func<ISetup, bool> predicate)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private void Verify(bool recursive, Func<ISetup, bool> predicate)
             After:
                     void Verify(bool recursive, Func<ISetup, bool> predicate)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private void Verify(bool recursive, Func<ISetup, bool> predicate)

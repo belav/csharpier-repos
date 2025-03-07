@@ -88,7 +88,6 @@ The plan is therefore:
 
 There is also no unit tests for this code it seems.
 */
-
 namespace Mono.Security.Authenticode
 {
     // References:

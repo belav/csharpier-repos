@@ -680,7 +680,6 @@ namespace System.Runtime.Remoting
             // this call or outside.
             /* <
 */
-
             TrackingServices.MarshaledObject(Obj, objectRef);
             return objectRef;
         }

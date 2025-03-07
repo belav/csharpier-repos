@@ -38,14 +38,12 @@ namespace Moq
     After:
             Dictionary<object, Func<Type, Mock, object>> factories;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Dictionary<object, Func<Type, Mock, object>> factories;
     After:
             Dictionary<object, Func<Type, Mock, object>> factories;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Dictionary<object, Func<Type, Mock, object>> factories;
@@ -191,14 +189,12 @@ namespace Moq
             After:
                     object CreateValueTupleOf(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private object CreateValueTupleOf(Type type, Mock mock)
             After:
                     object CreateValueTupleOf(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private object CreateValueTupleOf(Type type, Mock mock)

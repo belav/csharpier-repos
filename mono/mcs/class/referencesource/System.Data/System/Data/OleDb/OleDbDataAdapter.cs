@@ -331,7 +331,6 @@ namespace System.Data.OleDb
                 }
             }
             */
-
             bool closeRecordset = multipleResults; // MDAC 60332, 66668
             Bid.Trace("<oledb.IUnknown.QueryInterface|API|OLEDB|ADODB> ADORecordsetConstruction\n");
             UnsafeNativeMethods.ADORecordsetConstruction recordset = (

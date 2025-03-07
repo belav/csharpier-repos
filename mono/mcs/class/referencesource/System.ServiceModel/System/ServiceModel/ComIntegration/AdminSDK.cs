@@ -11,7 +11,6 @@ namespace System.ServiceModel.ComIntegration
      * Stolen from ES.
      * I removed SuppressUnmanagedCodeSecurity. We can re-add it later.
      */
-
     enum COMAdminThreadingModel
     {
         Apartment = 0,

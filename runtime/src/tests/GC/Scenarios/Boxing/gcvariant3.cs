@@ -8,7 +8,6 @@
 /*with them. Because this test using Variant to save Variant
 /*the Variant Object's life time is longer than theirs in GCVariant2
 /**************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

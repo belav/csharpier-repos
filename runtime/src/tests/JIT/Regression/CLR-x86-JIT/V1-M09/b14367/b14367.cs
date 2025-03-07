@@ -57,7 +57,6 @@ namespace DefaultNamespace
         public int GetHashCode() { return 0; }
     }
     */
-
     public class jitAssert
     {
         internal const int Length = 3;

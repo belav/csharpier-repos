@@ -34,7 +34,6 @@ but find it the 2nd time.
 This test calls the same method from 10 threads so that we would hit this scenario. But this code path
 is only hit non-deterministically some of the time.
 */
-
 using System;
 using System.Threading;
 using Xunit;

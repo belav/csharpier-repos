@@ -61,7 +61,6 @@ using Novell.Directory.Ldap.Asn1;
 * &nbsp;&nbsp;&nbsp;&nbsp; revision&nbsp;&nbsp;&nbsp;			INTEGER<br>
 * &nbsp;&nbsp;&nbsp;&nbsp; passwd&nbsp;&nbsp;&nbsp;			OCTET STRING</p>
 */
-
 namespace Novell.Directory.Ldap.Extensions
 {
     public class LdapBackupRequest : LdapExtendedOperation

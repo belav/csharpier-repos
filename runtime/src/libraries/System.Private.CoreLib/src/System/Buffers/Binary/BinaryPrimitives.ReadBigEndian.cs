@@ -506,7 +506,6 @@ namespace System.Buffers.Binary
         /// <summary>
         /// Reads a <see cref="nuint" /> from the beginning of a read-only span of bytes, as big endian.
         /// </summary>
-
         /// <param name="source">The read-only span of bytes to read.</param>
         /// <param name="value">When this method returns, contains the value read out of the read-only span of bytes, as big endian.</param>
         /// <returns>

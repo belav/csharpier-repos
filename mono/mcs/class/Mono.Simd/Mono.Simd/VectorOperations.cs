@@ -32,7 +32,6 @@ namespace Mono.Simd
     public static class VectorOperations
     {
         /* ==== Bitwise operations ==== */
-
         [Acceleration(AccelMode.SSE1)]
         public static unsafe Vector4f AndNot(this Vector4f v1, Vector4f v2)
         {
@@ -135,7 +134,6 @@ namespace Mono.Simd
         }
 
         /* ==== Math operations ==== */
-
         [Acceleration(AccelMode.SSE2)]
         public static unsafe Vector8s AddWithSaturation(this Vector8s va, Vector8s vb)
         {
@@ -527,7 +525,6 @@ namespace Mono.Simd
         }
 
         /* ==== Horizontal operations ==== */
-
         [Acceleration(AccelMode.SSE3)]
         public static Vector4f HorizontalAdd(this Vector4f v1, Vector4f v2)
         {
@@ -565,7 +562,6 @@ namespace Mono.Simd
         }
 
         /* ==== Compare methods ==== */
-
         /*Same as a == b. */
         [Acceleration(AccelMode.SSE1)]
         public static unsafe Vector4f CompareEqual(this Vector4f v1, Vector4f v2)
@@ -887,7 +883,6 @@ namespace Mono.Simd
         }
 
         /* ==== Data shuffling ==== */
-
         [Acceleration(AccelMode.SSE1)]
         public static Vector4f InterleaveHigh(this Vector4f v1, Vector4f v2)
         {

@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.Caching
 {
     using System.Collections;
@@ -34,7 +33,6 @@ namespace System.Web.Caching
     ///    object to cache is created and the time it is inserted into the
     /// <see langword='Cache'/>.</para>
     /// </devdoc>
-
     // Overhead is 24 bytes + object header
     public class CacheDependency : IDisposable
     {

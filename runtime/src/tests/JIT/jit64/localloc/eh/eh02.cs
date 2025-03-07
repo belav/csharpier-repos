@@ -4,7 +4,6 @@
 /*
  * Test reading localloc variable from finally block.
  */
-
 using System;
 using LocallocTesting;
 using Xunit;

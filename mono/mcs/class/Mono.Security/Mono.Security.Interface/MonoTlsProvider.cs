@@ -40,7 +40,6 @@ namespace Mono.Security.Interface
      * The @MonoRemoteCertificateValidationCallback also has an additional 'targetHost' argument.
      *
      */
-
     [Flags]
     public enum MonoSslPolicyErrors
     {
@@ -90,7 +89,6 @@ namespace Mono.Security.Interface
          * This section abstracts the @SslStream class.
          *
          */
-
         public abstract bool SupportsSslStream { get; }
 
         /*

@@ -163,7 +163,6 @@ namespace System.Globalization
         **  ArgumentNullException if name is null.
         **  internalGetCodePageFromName will throw ArgumentException if name is not a valid encoding name.
         ============================================================================*/
-
         internal static int GetCodePageFromName(String name)
         {
             if (name == null)
@@ -268,7 +267,6 @@ namespace System.Globalization
     **
     ** We use this structure to access native data exposed by the native side.
     ============================================================================*/
-
     [System.Runtime.InteropServices.StructLayout(LayoutKind.Sequential)]
     internal unsafe struct InternalEncodingDataItem
     {
@@ -281,7 +279,6 @@ namespace System.Globalization
     **Action: This is used to access the properties related to a code page.
     ** We use this structure to access native data exposed by the native side.
     ============================================================================*/
-
     [System.Runtime.InteropServices.StructLayout(LayoutKind.Sequential)]
     internal unsafe struct InternalCodePageDataItem
     {

@@ -92,7 +92,6 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             return list.ToArray ();
         }
         */
-
         [Test]
         public void TestAssignment1()
         {

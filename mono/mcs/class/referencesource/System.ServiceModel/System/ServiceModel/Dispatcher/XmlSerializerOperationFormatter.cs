@@ -340,7 +340,6 @@ namespace System.ServiceModel.Dispatcher
                 doc.Load(memoryStream);
                 doc.Save(Console.Out);
                 */
-
                 memoryStream.Position = 0;
                 XmlDictionaryReader bufferReader = XmlDictionaryReader.CreateTextReader(
                     memoryStream.GetBuffer(),

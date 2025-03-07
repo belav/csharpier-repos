@@ -114,7 +114,6 @@ namespace Mono.Globalization.Unicode
             LastIndexOf ("-ABC", "-", CompareOptions.None);
             LastIndexOf ("--ABC", "--", CompareOptions.None);
             */
-
             coll = new SimpleCollator(new CultureInfo("hu"));
             DumpSortKey("ZSAZS1");
             IsSuffix("zs", "z", CompareOptions.None);

@@ -17,7 +17,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ObjectListCommandEventArgs.uex' path='docs/doc[@for="ObjectListCommandEventArgs"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

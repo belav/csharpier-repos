@@ -1842,7 +1842,6 @@ namespace MonoTests.System.Web.UI.WebControls
         /// From here rendering all possible field types and kinds of
         /// templates
         /// </summary>
-
         [Test]
         public void GridView_RenderingBoundField()
         {

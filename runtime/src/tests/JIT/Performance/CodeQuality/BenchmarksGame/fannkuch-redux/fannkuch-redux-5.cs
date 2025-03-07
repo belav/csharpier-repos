@@ -13,7 +13,6 @@
    concurrency fix and minor improvements by Peperud
    parallel and small optimisations by Anthony Lloyd
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;

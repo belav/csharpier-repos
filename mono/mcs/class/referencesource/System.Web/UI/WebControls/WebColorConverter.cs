@@ -135,7 +135,6 @@ namespace System.Web.UI.WebControls
                         }
                     }
                     */
-
                     if (c.IsKnownColor == false)
                     {
                         // in the Web scenario, colors should be formatted in #RRGGBB notation

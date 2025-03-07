@@ -730,7 +730,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///     Adds the SkipToContextText.
         /// </devdoc>
-
         protected internal override void RenderContents(HtmlTextWriter writer)
         {
             ControlRenderingHelper.WriteSkipLinkStart(

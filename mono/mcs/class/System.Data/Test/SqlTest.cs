@@ -32,7 +32,6 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -258,7 +257,6 @@ namespace Test.Mono.Data.SqlClient
                 "select * " +
                 "from mono_postgres_test";
             */
-
             selectCommand.CommandText =
                 "select "
                 + "bit_value, "

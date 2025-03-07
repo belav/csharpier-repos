@@ -1165,7 +1165,6 @@ namespace System.Net.Sockets
                  * Both BeginSConnect() and BeginMConnect() now return a `bool` indicating whether or
                  * not an async operation is pending.
                  */
-
                 if (!GetCheckedIPs(e, out addresses))
                 {
                     //NOTE: DualMode may cause Socket's RemoteEndpoint to differ in AddressFamily from the

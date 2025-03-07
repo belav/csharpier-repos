@@ -34,7 +34,6 @@ using DbLinq.Schema.Dbml.Adapter;
  * Here are additional methods and properties to DBML class.
  * Those properties are useful to dynamically change arrays
  */
-
 namespace DbLinq.Schema.Dbml
 {
     /// <summary>

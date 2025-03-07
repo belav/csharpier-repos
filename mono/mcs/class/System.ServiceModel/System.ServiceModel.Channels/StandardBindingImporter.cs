@@ -196,7 +196,6 @@ namespace System.ServiceModel.Channels
              * There seems to be no public API to do that, so maybe add a private .ctor ?
              *
              */
-
             var httpsTransport = transportElement as HttpsTransportBindingElement;
             var httpTransport = transportElement as HttpTransportBindingElement;
 

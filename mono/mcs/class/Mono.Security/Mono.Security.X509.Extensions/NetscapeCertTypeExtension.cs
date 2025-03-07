@@ -61,7 +61,6 @@ namespace Mono.Security.X509.Extensions
          * bit-6 S/MIME CA - this cert is certified for issuing certs for S/MIME use(New in PR3)
          * bit-7 Object Signing CA - this cert is certified for issuing certs for Object Signing(New in PR3)
          */
-
         // note: because nothing is simple in ASN.1 bits are reversed
         [Flags]
         public enum CertTypes
@@ -108,7 +107,6 @@ namespace Mono.Security.X509.Extensions
                     get { return ctbits; }
                     set { ctbits = value; }
                 }*/
-
         public bool Support(CertTypes usage)
         {
             int x = Convert.ToInt32(usage, CultureInfo.InvariantCulture);

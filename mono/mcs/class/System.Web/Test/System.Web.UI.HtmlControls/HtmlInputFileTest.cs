@@ -72,7 +72,6 @@ namespace MonoTests.System.Web.UI.HtmlControls
              * case at least) they're directly accessing
              * Page.Request.Files (which our test doesn't
              * support) */
-
             Assert.AreEqual("", p.Accept, "A1");
             Assert.AreEqual(-1, p.MaxLength, "A2");
             //Assert.IsNull (p.PostedFile, "A3");

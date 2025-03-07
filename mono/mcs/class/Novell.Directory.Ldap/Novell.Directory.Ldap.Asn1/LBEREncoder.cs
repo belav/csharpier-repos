@@ -133,7 +133,6 @@ namespace Novell.Directory.Ldap.Asn1
         throw new IOException("LBEREncoder: Encode to a stream not implemented");
         }
         */
-
         /// <summary> Encode an Asn1Null directly into the specified outputstream.</summary>
         public void encode(Asn1Null n, System.IO.Stream out_Renamed)
         {
@@ -150,7 +149,6 @@ namespace Novell.Directory.Ldap.Asn1
         throw new IOException("LBEREncoder: Encode to a stream not implemented");
         }
         */
-
         /// <summary> Encode an Asn1OctetString directly into the specified outputstream.</summary>
         public void encode(Asn1OctetString os, System.IO.Stream out_Renamed)
         {
@@ -172,7 +170,6 @@ namespace Novell.Directory.Ldap.Asn1
         * throw new IOException("LBEREncoder: Encode to a stream not implemented");
         * }
         */
-
         /* Asn1 TYPE NOT YET SUPPORTED
         * Encode an Asn1CharacterString directly to a stream.
         * public void encode(Asn1CharacterString cs, OutputStream out)
@@ -181,10 +178,8 @@ namespace Novell.Directory.Ldap.Asn1
         * throw new IOException("LBEREncoder: Encode to a stream not implemented");
         * }
         */
-
         /* Encoders for ASN.1 structured types
         */
-
         /// <summary> Encode an Asn1Structured into the specified outputstream.  This method
         /// can be used to encode SET, SET_OF, SEQUENCE, SEQUENCE_OF
         /// </summary>
@@ -248,7 +243,6 @@ namespace Novell.Directory.Ldap.Asn1
         */
         /* Encoder for ASN.1 Identifier
         */
-
         /// <summary> Encode an Asn1Identifier directly into the specified outputstream.</summary>
         public void encode(Asn1Identifier id, System.IO.Stream out_Renamed)
         {
@@ -272,7 +266,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Private helper methods
         */
-
         /*
         *  Encodes the specified length into the the outputstream
         */

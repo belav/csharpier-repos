@@ -24,7 +24,6 @@ namespace System.Runtime.CompilerServices
         Never               = 0x0003, // Assembly should not be ngened
     }
     */
-
     [Serializable]
     public enum LoadHint
     {

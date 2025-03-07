@@ -782,7 +782,6 @@ namespace System.Configuration
          *    parent and mode values from the cached 'SaveContext'.
          *
          */
-
         /*
          * Check whether property 'prop' should be included in the serialized XML
          * based on the current ConfigurationSaveMode.
@@ -812,7 +811,6 @@ namespace System.Configuration
              * value - which could either be a value that's set in a parent
              * configuration file or the default value.
              */
-
             var hasParentValue = parent != null && parent.HasValue(prop.Name);
             var parentOrDefault = hasParentValue ? parent[prop.Name] : prop.DefaultValue;
 

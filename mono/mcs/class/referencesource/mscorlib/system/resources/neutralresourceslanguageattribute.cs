@@ -22,7 +22,6 @@
 ** it is now read in Module::GetNeutralResourcesLanguage, accessed from ManifestBasedResourceGroveler
 ** through an internal runtime call.
 ===========================================================*/
-
 namespace System.Resources
 {
     using System;

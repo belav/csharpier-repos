@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -39,14 +38,12 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates an intrinsic Html INPUT type=text control.
          */
-
         public HtmlInputText()
             : base("text") { }
 
         /*
          * Creates an intrinsic Html INPUT type=text control.
          */
-
         /// <devdoc>
         /// </devdoc>
         public HtmlInputText(string type)
@@ -55,7 +52,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The property for the maximum characters allowed.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the maximum number of characters that
@@ -82,7 +78,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The property for the width of the TextBox in characters.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the width of a text box, in characters.
@@ -106,7 +101,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Value property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the
@@ -133,7 +127,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method used to raise the OnServerChange event.
          */
-
         /// <devdoc>
         /// </devdoc>
         protected virtual void OnServerChange(EventArgs e)
@@ -146,7 +139,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -185,7 +177,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to process posted data.
          * InputText process a newly posted value.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -220,7 +211,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface which is invoked whenever posted data
          * for a control has changed.  InputText fires an OnServerChange event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

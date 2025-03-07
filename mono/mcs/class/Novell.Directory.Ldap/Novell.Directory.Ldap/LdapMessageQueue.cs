@@ -50,7 +50,6 @@ namespace Novell.Directory.Ldap
         virtual internal System.String DebugName
         {
             /* package */
-
             get { return name; }
         }
 
@@ -62,7 +61,6 @@ namespace Novell.Directory.Ldap
         virtual internal MessageAgent MessageAgent
         {
             /* package */
-
             get { return agent; }
         }
 

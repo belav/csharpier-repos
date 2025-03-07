@@ -101,10 +101,8 @@ namespace Novell.Directory.Ldap
         virtual internal System.Collections.Hashtable Properties
         {
             /* package */
-
             get { return properties; }
             /* package */
-
             set
             {
                 properties = (System.Collections.Hashtable)value.Clone();

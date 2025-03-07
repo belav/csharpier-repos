@@ -13,14 +13,12 @@ namespace Moq
     After:
         static class Evaluator
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static class Evaluator
     After:
         static class Evaluator
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static class Evaluator
@@ -69,14 +67,12 @@ namespace Moq
             After:
                     class SubtreeEvaluator : ExpressionVisitor
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private class SubtreeEvaluator : ExpressionVisitor
             After:
                     class SubtreeEvaluator : ExpressionVisitor
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private class SubtreeEvaluator : ExpressionVisitor
@@ -95,14 +91,12 @@ namespace Moq
         After:
                     HashSet<Expression> candidates;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private HashSet<Expression> candidates;
         After:
                     HashSet<Expression> candidates;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private HashSet<Expression> candidates;
@@ -140,14 +134,12 @@ namespace Moq
                 After:
                             static Expression Evaluate(Expression e)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                             private static Expression Evaluate(Expression e)
                 After:
                             static Expression Evaluate(Expression e)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                             private static Expression Evaluate(Expression e)
@@ -172,14 +164,12 @@ namespace Moq
                 After:
                         class Nominator : ExpressionVisitor
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private class Nominator : ExpressionVisitor
                 After:
                         class Nominator : ExpressionVisitor
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private class Nominator : ExpressionVisitor
@@ -204,7 +194,6 @@ namespace Moq
                     HashSet<Expression> candidates;
                     bool cannotBeEvaluated;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private Func<Expression, bool> fnCanBeEvaluated;
@@ -215,7 +204,6 @@ namespace Moq
                     HashSet<Expression> candidates;
                     bool cannotBeEvaluated;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private Func<Expression, bool> fnCanBeEvaluated;

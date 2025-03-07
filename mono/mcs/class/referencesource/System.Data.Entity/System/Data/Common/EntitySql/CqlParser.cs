@@ -7,7 +7,6 @@
 //#line 2 "CqlGrammar.y"
 
 /*#define YYDEBUG*/
-
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                           !!
 !!         ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION       !!
@@ -18,7 +17,6 @@
 !!         ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION       !!
 !!                                                                           !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-
 /*-----------------------------------------------------------------------------
 // <copyright file="CqlGrammar.y" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -27,7 +25,6 @@
 // @owner  Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------------*/
-
 using System;
 using System.Data.Common.EntitySql.AST;
 using System.Data.Entity;

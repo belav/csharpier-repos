@@ -67,7 +67,6 @@ namespace Mono.Security.Interface
          * Note: The cipher suite values { 0x00, 0x1C } and { 0x00, 0x1D } are reserved to avoid
          * collision with Fortezza-based cipher suites in SSL 3.
         */
-
         /*
          * RFC 3268
         */

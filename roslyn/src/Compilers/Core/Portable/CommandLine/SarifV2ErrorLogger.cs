@@ -439,7 +439,6 @@ namespace Microsoft.CodeAnalysis
                   }
                 ]
              */
-
             _writer.WriteArrayStart("invocations");
             _writer.WriteObjectStart(); // invocation
 

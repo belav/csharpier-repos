@@ -14,7 +14,6 @@ System.StackOverflowException during JIT of function
 Expected Results:
 no exception
 */
-
 public class Form1
 {
     public static volatile bool RunsInWebServer = false;

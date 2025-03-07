@@ -290,7 +290,6 @@ namespace WebServiceMoonlightTest.ServiceReference1
                     }
                 }
         */
-
         public event System.EventHandler<GetDataCompletedEventArgs> GetDataCompleted;
 
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;

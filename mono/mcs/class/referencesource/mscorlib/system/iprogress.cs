@@ -14,7 +14,6 @@
 **
 **
 ===========================================================*/
-
 namespace System
 {
     /// <summary>Defines a provider for progress updates.</summary>

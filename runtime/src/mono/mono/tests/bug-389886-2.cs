@@ -4,7 +4,6 @@ using System.Reflection.Emit;
 using System.Threading;
 
 /*public delegate void FooDelegate ();*/
-
 public class EmitTest
 {
     static ConstructorBuilder ctor;

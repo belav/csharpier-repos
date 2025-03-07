@@ -151,7 +151,6 @@ namespace Commons.Xml.Relaxng.Derivative
             return p.ChildDeriv (child);
         }
         */
-
         // textDeriv :: Context -> Pattern -> String -> Pattern
         internal static RdpPattern TextDeriv(XmlReader reader, RdpPattern p, string s)
         {
@@ -239,7 +238,6 @@ namespace Commons.Xml.Relaxng.Derivative
             return p.AttsDeriv (attributes);
         }
         */
-
         // attDeriv :: Context -> Pattern -> AttributeNode -> Pattern
         // [all implemented]
         internal static RdpPattern AttDeriv(

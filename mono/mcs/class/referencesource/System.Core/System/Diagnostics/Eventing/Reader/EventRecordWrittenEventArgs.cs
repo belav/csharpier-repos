@@ -11,7 +11,6 @@
 ** The EventArgs class for an EventLogWatcher notification.
 **
 ============================================================*/
-
 using System;
 using System.Collections.Generic;
 using System.IO;

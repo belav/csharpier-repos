@@ -14,14 +14,12 @@ namespace Moq.Async
     After:
         sealed class TaskFactory<TResult> : AwaitableFactory<Task<TResult>, TResult>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class TaskFactory<TResult> : AwaitableFactory<Task<TResult>, TResult>
     After:
         sealed class TaskFactory<TResult> : AwaitableFactory<Task<TResult>, TResult>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class TaskFactory<TResult> : AwaitableFactory<Task<TResult>, TResult>

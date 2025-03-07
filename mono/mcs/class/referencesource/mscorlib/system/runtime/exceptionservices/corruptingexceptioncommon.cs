@@ -16,7 +16,6 @@
 ** <owner>Microsoft</owner>
 **
 =============================================================================*/
-
 namespace System.Runtime.ExceptionServices
 {
     using System;

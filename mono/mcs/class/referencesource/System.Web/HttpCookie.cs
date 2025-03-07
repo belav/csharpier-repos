@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Collections;
@@ -49,7 +48,6 @@ namespace System.Web
         /*
          * Constructor - empty cookie with name
          */
-
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.Web.HttpCookie'/>
@@ -67,7 +65,6 @@ namespace System.Web
         /*
          * Constructor - cookie with name and value
          */
-
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.Web.HttpCookie'/>
@@ -119,7 +116,6 @@ namespace System.Web
         /*
          * Cookie name
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets
@@ -139,7 +135,6 @@ namespace System.Web
         /*
          * Cookie path
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the URL prefix to transmit with the
@@ -159,7 +154,6 @@ namespace System.Web
         /*
          * 'Secure' flag
          */
-
         /// <devdoc>
         ///    <para>
         ///       Indicates whether the cookie should be transmitted only over HTTPS.
@@ -207,7 +201,6 @@ namespace System.Web
         /*
          * Cookie domain
          */
-
         /// <devdoc>
         ///    <para>
         ///       Restricts domain cookie is to be used with.
@@ -226,7 +219,6 @@ namespace System.Web
         /*
          * Cookie expiration
          */
-
         /// <devdoc>
         ///    <para>
         ///       Expiration time for cookie (in minutes).
@@ -246,7 +238,6 @@ namespace System.Web
         /*
          * Cookie value as string
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets
@@ -284,7 +275,6 @@ namespace System.Web
         /*
          * Checks is cookie has sub-keys
          */
-
         /// <devdoc>
         ///    <para>Gets a
         ///       value indicating whether the cookie has sub-keys.</para>
@@ -307,7 +297,6 @@ namespace System.Web
         /*
          * Cookie values as multivalue collection
          */
-
         /// <devdoc>
         ///    <para>Gets individual key:value pairs within a single cookie object.</para>
         /// </devdoc>
@@ -341,7 +330,6 @@ namespace System.Web
         /*
          * Default indexed property -- lookup the multivalue collection
          */
-
         /// <devdoc>
         ///    <para>
         ///       Shortcut for HttpCookie$Values[key]. Required for ASP compatibility.

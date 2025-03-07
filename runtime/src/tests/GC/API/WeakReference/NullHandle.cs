@@ -5,7 +5,6 @@
  * TEST NAME: NullHandle
  * DESCRIPTION: operates on Weakhandles whose m_handle is null
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;

@@ -14,14 +14,12 @@ namespace Moq
     After:
         sealed class StubbedPropertySetup : Setup
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class StubbedPropertySetup : Setup
     After:
         sealed class StubbedPropertySetup : Setup
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class StubbedPropertySetup : Setup
@@ -35,14 +33,12 @@ namespace Moq
     After:
             object value;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private object value;
     After:
             object value;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private object value;
@@ -120,14 +116,12 @@ namespace Moq
         After:
                 sealed class PropertyAccessorExpectation : Expectation
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private sealed class PropertyAccessorExpectation : Expectation
         After:
                 sealed class PropertyAccessorExpectation : Expectation
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private sealed class PropertyAccessorExpectation : Expectation
@@ -147,7 +141,6 @@ namespace Moq
                     readonly MethodInfo getter;
                     readonly MethodInfo setter;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private readonly LambdaExpression expression;
@@ -158,7 +151,6 @@ namespace Moq
                     readonly MethodInfo getter;
                     readonly MethodInfo setter;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private readonly LambdaExpression expression;

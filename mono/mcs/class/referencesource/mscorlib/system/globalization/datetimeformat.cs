@@ -123,7 +123,6 @@ namespace System
                             "y"/"Y"             Year/Month day                          culture-specific                        October, 1999
 
     */
-
     //This class contains only static members and does not require the serializable attribute.
     internal static class DateTimeFormat
     {

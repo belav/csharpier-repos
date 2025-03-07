@@ -261,7 +261,6 @@ namespace System
                 /* wild case : remove MulticastDelegate from MulticastDelegate
                  * complexity is O(m + n), with n the number of elements in
                  * this.delegates and m the number of elements in other.delegates */
-
                 if (delegates.Equals(other.delegates))
                     return null;
 

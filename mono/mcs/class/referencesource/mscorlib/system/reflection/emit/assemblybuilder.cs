@@ -1891,7 +1891,6 @@ namespace System.Reflection.Emit
         * this case, assembly is stored stand alone.
         *
         **********************************************/
-
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void Save(String assemblyFileName) // assembly file name
@@ -2470,7 +2469,6 @@ namespace System.Reflection.Emit
          * Private methods
          *
          **********************************************/
-
         /**********************************************
          * Make a private constructor so these cannot be constructed externally.
          * @internonly

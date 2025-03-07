@@ -719,7 +719,6 @@ namespace MonoTests.System.Data
                 Assert.AreEqual ("Cannot interpret token 'Child' at position 1.", e.Message, "test#05");
             }
             */
-
             Rows = Child.Select("Parent.name = 'Laura'");
             Assert.AreEqual(3, Rows.Length, "test#06");
 

@@ -13,14 +13,12 @@ namespace Moq.Async
     After:
         sealed class ValueTaskFactory : AwaitableFactory<ValueTask>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ValueTaskFactory : AwaitableFactory<ValueTask>
     After:
         sealed class ValueTaskFactory : AwaitableFactory<ValueTask>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ValueTaskFactory : AwaitableFactory<ValueTask>
@@ -37,14 +35,12 @@ namespace Moq.Async
         After:
                 ValueTaskFactory()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private ValueTaskFactory()
         After:
                 ValueTaskFactory()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private ValueTaskFactory()

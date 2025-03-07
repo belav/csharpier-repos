@@ -35,7 +35,6 @@ namespace System.Text.Unicode
          * OperationStatus.InvalidData. If 'isFinalBlock' is true, the method is
          * guaranteed never to return OperationStatus.NeedMoreData.
          */
-
         /// <summary>
         /// Transcodes the UTF-16 <paramref name="source"/> buffer to <paramref name="destination"/> as UTF-8.
         /// </summary>

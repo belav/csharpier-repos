@@ -3158,7 +3158,6 @@ namespace Mono.Math
                             if (carry != 0) u [l] = carry;
                             return carry != 0;
                         }*/
-
             #endregion
 
             #region Number Theory

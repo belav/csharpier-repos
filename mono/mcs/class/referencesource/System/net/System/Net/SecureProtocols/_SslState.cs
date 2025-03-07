@@ -1838,7 +1838,6 @@ namespace System.Net.Security
              *
              * ... PCT hello ...
              */
-
             /* Microsft Unihello starts with
              * RECORD_LENGTH_MSB  (ignore)
              * RECORD_LENGTH_LSB  (ignore)
@@ -1848,7 +1847,6 @@ namespace System.Net.Security
              *
              * ... SSLv2 Compatible Hello ...
              */
-
             /* SSLv2 CLIENT_HELLO starts with
              * RECORD_LENGTH_MSB  (ignore)
              * RECORD_LENGTH_LSB  (ignore)
@@ -1858,7 +1856,6 @@ namespace System.Net.Security
              *
              * ... SSLv2 CLIENT_HELLO ...
              */
-
             /* SSLv2 SERVER_HELLO starts with
              * RECORD_LENGTH_MSB  (ignore)
              * RECORD_LENGTH_LSB  (ignore)
@@ -1870,7 +1867,6 @@ namespace System.Net.Security
              *
              * ... SSLv2 SERVER_HELLO ...
              */
-
             /* SSLv3 Type 2 Hello starts with
               * RECORD_LENGTH_MSB  (ignore)
               * RECORD_LENGTH_LSB  (ignore)
@@ -1880,7 +1876,6 @@ namespace System.Net.Security
               *
               * ... SSLv2 Compatible Hello ...
               */
-
             /* SSLv3 Type 3 Hello starts with
              * 22 (HANDSHAKE MESSAGE)
              * VERSION MSB
@@ -1892,7 +1887,6 @@ namespace System.Net.Security
              * HS Version
              * HS Version
              */
-
             /* SSLv2 message codes
              * SSL_MT_ERROR                0
              * SSL_MT_CLIENT_HELLO         1
@@ -1904,7 +1898,6 @@ namespace System.Net.Security
              * SSL_MT_REQUEST_CERTIFICATE  7
              * SSL_MT_CLIENT_CERTIFICATE   8
              */
-
             int version = -1;
 
             GlobalLog.Assert(

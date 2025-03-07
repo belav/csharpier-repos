@@ -80,7 +80,6 @@ namespace System.Linq.Expressions.Tests
         Number ::= 29-bit-encoded-integer
 
         */
-
         protected const int ELEMENT_TYPE_END = 0x00; //Marks end of a list
         protected const int ELEMENT_TYPE_VOID = 0x01;
         protected const int ELEMENT_TYPE_BOOLEAN = 0x02;
@@ -711,7 +710,6 @@ namespace System.Linq.Expressions.Tests
                             | MVAR Number
 
             */
-
             NotifyBeginType();
 
             sig_elem_type elem_type;

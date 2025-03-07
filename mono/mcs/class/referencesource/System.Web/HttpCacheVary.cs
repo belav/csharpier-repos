@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Runtime.InteropServices;
@@ -191,7 +190,6 @@ namespace System.Web
         /*
          * Vary by accept types
          */
-
         /// <devdoc>
         ///    <para>Retrieves or assigns a value indicating whether the cache should vary by Accept types. This causes the
         ///       Vary: header to include an Accept field.</para>
@@ -209,7 +207,6 @@ namespace System.Web
         /*
          * Vary by accept language
          */
-
         /// <devdoc>
         ///    <para> Retrieves or assigns a Boolean value indicating whether
         ///       the cache should vary by user language.</para>
@@ -227,7 +224,6 @@ namespace System.Web
         /*
          * Vary by user agent
          */
-
         /// <devdoc>
         ///    <para> Retrieves or assigns a Boolean value indicating whether
         ///       the cache should vary by user agent.</para>
@@ -245,7 +241,6 @@ namespace System.Web
         /*
          * Vary by charset
          */
-
         /// <devdoc>
         ///    <para> Retrieves or assigns a value indicating whether the
         ///       cache should vary by browser character set.</para>
@@ -263,7 +258,6 @@ namespace System.Web
         /*
          * Vary by a given header
          */
-
         /// <devdoc>
         ///    <para> Default property.
         ///       Indexed property indicating that a cache should (or should not) vary according

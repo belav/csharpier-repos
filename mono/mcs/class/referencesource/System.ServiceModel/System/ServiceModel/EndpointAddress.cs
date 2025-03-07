@@ -68,7 +68,6 @@ namespace System.ServiceModel
          - RefProps turn into RefParams when doing OM->10wire->OM
          - Identity is always shuffled to front of extensions when doing anyWire->OM->anyWire
         */
-
         AddressingVersion addressingVersion;
         AddressHeaderCollection headers;
         EndpointIdentity identity;

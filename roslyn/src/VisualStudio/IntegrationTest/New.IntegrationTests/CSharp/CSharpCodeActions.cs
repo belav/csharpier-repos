@@ -308,7 +308,6 @@ class C
              * that diagnostics appear automatically in response to the newly-created file. A fix all operation is
              * applied, and the result is verified against the expected outcome for the .editorconfig style.
              */
-
             MarkupTestFile.GetSpans(markup, out _, out var _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
@@ -367,7 +366,6 @@ csharp_style_expression_bodied_properties = true:warning
              * response to the changes. A fix all operation is applied, and the result is verified against the expected
              * outcome for the modified .editorconfig style.
              */
-
             await TestServices.SolutionExplorer.SetFileContentsAsync(
                 ProjectName,
                 ".editorconfig",

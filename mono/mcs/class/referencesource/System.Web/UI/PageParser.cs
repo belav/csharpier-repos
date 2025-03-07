@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -38,7 +37,6 @@ namespace System.Web.UI
     /*
      * Parser for .aspx files
      */
-
     /// <internalonly/>
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
@@ -130,11 +128,9 @@ namespace System.Web.UI
         /*
          * Compile an .aspx file into a Page object
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         private static object s_lock = new object();
 
         // Only allowed in full trust (ASURT 123086)

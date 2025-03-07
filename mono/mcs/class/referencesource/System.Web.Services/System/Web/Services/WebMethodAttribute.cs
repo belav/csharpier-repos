@@ -240,7 +240,6 @@ namespace System.Web.Services
             return GetAttribute(implementation, null);
         }
         */
-
         internal static WebMethodAttribute GetAttribute(
             MethodInfo implementation,
             MethodInfo declaration

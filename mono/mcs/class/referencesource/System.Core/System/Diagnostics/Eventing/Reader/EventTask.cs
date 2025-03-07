@@ -13,7 +13,6 @@
 ** from a ProviderMetadata object.
 **
 ============================================================*/
-
 using System.Collections.Generic;
 
 namespace System.Diagnostics.Eventing.Reader

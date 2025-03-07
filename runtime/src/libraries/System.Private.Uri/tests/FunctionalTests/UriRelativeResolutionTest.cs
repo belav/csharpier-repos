@@ -822,7 +822,6 @@ namespace System.PrivateUri.Tests
                 sub-delims     = "!" / "$" / "&" / "'" / "(" / ")"
                                 / "*" / "+" / "," / ";" / "="
                 */
-
                 return _iriReserved.Contains(c);
             }
 
@@ -848,7 +847,6 @@ namespace System.PrivateUri.Tests
                                 / %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD
                                 / %xD0000-DFFFD / %xE1000-EFFFD
                 */
-
                 // https://www.ietf.org/rfc/rfc3987.txt 2.2
                 bool inRange = _iriUnreservedRanges.Any(_ => _.Item1 <= c && _.Item2 >= c);
 

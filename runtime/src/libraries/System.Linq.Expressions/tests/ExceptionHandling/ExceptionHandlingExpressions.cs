@@ -1209,7 +1209,6 @@ namespace System.Linq.Expressions.Tests
 
             The filter should execute on the first pass, so the result should be "ACBD".
             */
-
             ConstantExpression builder = Expression.Constant(sb);
             Type[] noTypes = Type.EmptyTypes;
             TryExpression tryExp = Expression.TryCatch(

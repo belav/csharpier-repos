@@ -1527,7 +1527,6 @@ namespace MonoTests.System.Data.Connected.Odbc
 
                 OdbcParameter p1Lname = OdbcCmd.Parameters.Add("@lname", OdbcType.Text, 15);
                 /*OdbcParameter p2Age = new OdbcParameter ();*/
-
                 Assert.AreEqual(
                     1,
                     OdbcCmd.Parameters.Count,

@@ -12,14 +12,12 @@ namespace Moq
     After:
         class AsInterface<TInterface> : Mock<TInterface>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal class AsInterface<TInterface> : Mock<TInterface>
     After:
         class AsInterface<TInterface> : Mock<TInterface>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal class AsInterface<TInterface> : Mock<TInterface>
@@ -34,14 +32,12 @@ namespace Moq
     After:
             Mock owner;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Mock owner;
     After:
             Mock owner;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Mock owner;

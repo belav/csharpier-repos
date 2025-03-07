@@ -65,7 +65,6 @@ namespace Mono.Security.Interface
          * to use a different provider.
          *
          */
-
         #region Provider Initialization
 
         /*

@@ -109,7 +109,6 @@ namespace System.ComponentModel.Design.Serialization
                     #endregion
                 }
             */
-
             public CodeTypeDeclaration GenerateClass()
             {
                 CodeTypeDeclaration clas = new CodeTypeDeclaration(_className);

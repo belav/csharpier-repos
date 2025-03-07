@@ -5,7 +5,6 @@
 ///
 /// <owner>gpaperin</owner>
 ///------------------------------------------------------------------------------
-
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;

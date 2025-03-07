@@ -46,7 +46,6 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     /// <seealso cref="LdapSchema">
     /// </seealso>
-
     public class LdapNameFormSchema : LdapSchemaElement
     {
         /// <summary> Returns the name of the object class which this name form applies to.

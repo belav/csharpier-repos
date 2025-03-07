@@ -17,14 +17,12 @@ namespace Moq
     After:
             static readonly Predicate<T> matchAllPredicate = _ => true;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static readonly Predicate<T> matchAllPredicate = _ => true;
     After:
             static readonly Predicate<T> matchAllPredicate = _ => true;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static readonly Predicate<T> matchAllPredicate = _ => true;
@@ -54,14 +52,12 @@ namespace Moq
         After:
                 static Predicate<T> BuildCondition(Expression<Func<T, bool>> predicateExpression)
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private static Predicate<T> BuildCondition(Expression<Func<T, bool>> predicateExpression)
         After:
                 static Predicate<T> BuildCondition(Expression<Func<T, bool>> predicateExpression)
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private static Predicate<T> BuildCondition(Expression<Func<T, bool>> predicateExpression)

@@ -14,7 +14,6 @@ After the fix, the Whidbey behavior is correct as well.
 
 
 */
-
 using System;
 using Xunit;
 

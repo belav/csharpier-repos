@@ -16,7 +16,6 @@
  * (C) 2005 Novell, Inc. (http://www.novell.com)
  *
 */
-
 using System;
 using System.Collections;
 using System.Drawing;

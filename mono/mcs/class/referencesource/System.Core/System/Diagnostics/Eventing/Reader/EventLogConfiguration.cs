@@ -13,7 +13,6 @@
 ** of this class is obtained from EventLogManagement class.
 **
 ============================================================*/
-
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;

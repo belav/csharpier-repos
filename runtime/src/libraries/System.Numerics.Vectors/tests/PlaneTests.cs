@@ -366,7 +366,6 @@ namespace System.Numerics.Tests
             Assert.Equal(40, sizeof(PlanePlusFloat_2x));
         }
         */
-
         [Fact]
         public void PlaneToStringTest()
         {

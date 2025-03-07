@@ -198,7 +198,6 @@ namespace StressAllocator
                 Console.WriteLine("pinned= " + pin);
             }
              */
-
             WR_All.Add(myNewObject);
 
             return myNewObject;
@@ -223,7 +222,6 @@ namespace StressAllocator
 
         }
          * */
-
         public static int Main(string[] args)
         {
             //            if (Environment.Is64BitProcess)

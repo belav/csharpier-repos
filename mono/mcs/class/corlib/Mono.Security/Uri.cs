@@ -344,7 +344,6 @@ namespace Mono.Security
                         return UriHostNameType.Basic; //.Unknown;
                     }
                 }*/
-
         public bool IsDefaultPort
         {
             get { return GetDefaultPort(scheme) == port; }
@@ -526,7 +525,6 @@ namespace Mono.Security
                     
                     return UriHostNameType.Unknown;
                 }*/
-
         internal static bool IsIPv4Address(string name)
         {
             string[] captures = name.Split(new char[] { '.' });
@@ -839,7 +837,6 @@ namespace Mono.Security
                 {
                     info.AddValue ("AbsoluteUri", this.AbsoluteUri);
                 }*/
-
         // Internal Methods
 
         protected void Escape()
@@ -1189,7 +1186,6 @@ namespace Mono.Security
                                 throw new FormatException ("Invalid URI: The hostname could not be parsed");
                             }
                         }*/
-
             if (unixAbsPath)
             {
                 path = '/' + uriString;

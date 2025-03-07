@@ -61,7 +61,6 @@ namespace ICSharpCode.SharpZipLib.GZip
             bit 6   reserved
             bit 7   reserved
          */
-
         /// <summary>
         /// Flag bit mask for text
         /// </summary>

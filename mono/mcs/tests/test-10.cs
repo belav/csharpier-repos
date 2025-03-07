@@ -1,7 +1,6 @@
 /*
  * Test explicit numeric conversions.
  */
-
 using System;
 
 class X

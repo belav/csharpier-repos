@@ -366,7 +366,6 @@ namespace System.Data.SqlTypes
                     return MAKECID(m_lcid, m_flag);
                 }
         */
-
         // Binary operators
 
         // Concatenation

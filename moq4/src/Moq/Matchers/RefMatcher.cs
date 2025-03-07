@@ -12,14 +12,12 @@ namespace Moq.Matchers
     After:
         class RefMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal class RefMatcher : IMatcher
     After:
         class RefMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal class RefMatcher : IMatcher
@@ -35,7 +33,6 @@ namespace Moq.Matchers
             readonly object reference;
             readonly bool referenceIsValueType;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly object reference;
@@ -44,7 +41,6 @@ namespace Moq.Matchers
             readonly object reference;
             readonly bool referenceIsValueType;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly object reference;

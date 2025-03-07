@@ -87,7 +87,6 @@ namespace System.Web.Configuration
 
 
 */
-
     public sealed class PagesSection : ConfigurationSection
     {
         private static readonly Version _controlRenderingDefaultVersion =

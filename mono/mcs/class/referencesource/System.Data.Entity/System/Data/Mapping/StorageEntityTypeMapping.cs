@@ -52,7 +52,6 @@ namespace System.Data.Mapping
     /// above example. Users can access the table mapping fragments under the
     /// entity type mapping through this class.
     /// </example>
-
     internal class StorageEntityTypeMapping : StorageTypeMapping
     {
         #region Constructors

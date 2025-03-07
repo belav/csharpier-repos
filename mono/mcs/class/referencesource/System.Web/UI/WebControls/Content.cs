@@ -162,7 +162,6 @@ namespace System.Web.UI.WebControls
 
     /* This control represents the ITemplate property on the content page that will be applied
        to the MasterPage template property. The ContentPlaceHolderID is never assigned at runtime. */
-
     [ControlBuilderAttribute(typeof(ContentBuilderInternal))]
     [Designer("System.Web.UI.Design.WebControls.ContentDesigner, " + AssemblyRef.SystemDesign)]
     [ToolboxItem(false)]

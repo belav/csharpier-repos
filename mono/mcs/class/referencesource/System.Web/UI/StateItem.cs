@@ -12,7 +12,6 @@ namespace System.Web.UI
      * The StateItem class * by the StateBag class.
      * The StateItem has an object value, a dirty flag.
      */
-
     /// <devdoc>
     /// <para>Represents an item that is saved in the <see cref='System.Web.UI.StateBag'/> class when view state
     ///    information is persisted between Web requests.</para>
@@ -34,7 +33,6 @@ namespace System.Web.UI
         /*
          * Property to indicate StateItem has been modified.
          */
-
         /// <devdoc>
         /// <para>Indicates whether the <see cref='System.Web.UI.StateItem'/> object has been modified.</para>
         /// </devdoc>
@@ -47,7 +45,6 @@ namespace System.Web.UI
         /*
          * Property to access the StateItem value.
          */
-
         /// <devdoc>
         /// <para>Indicates the value of the item that is stored in the <see cref='System.Web.UI.StateBag'/>
         /// object.</para>

@@ -23,7 +23,6 @@ namespace Tracing.Tests.Common
      * 8 bytes  - PID (little-endian)
      * 2 bytes  - unused for futureproofing
      */
-
     public class IpcAdvertise
     {
         public static int Size_V1 => 34;

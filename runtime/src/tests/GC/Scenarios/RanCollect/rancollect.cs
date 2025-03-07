@@ -14,7 +14,6 @@
 /*  delete random number elements or all the objects. samply change the four
 /*  arguments, you can get handreds of GC condition.
 /****************************************************************************/
-
 namespace DefaultNamespace
 {
     using System;
@@ -121,7 +120,6 @@ namespace DefaultNamespace
                 }
 
                 /*start to make leak*/
-
                 if (r.Next(1, iRep) / 3 == 0 || num < iObj / 8) //learn all the nodes
                 {
                     num = r.Next(10, iObj - 1);

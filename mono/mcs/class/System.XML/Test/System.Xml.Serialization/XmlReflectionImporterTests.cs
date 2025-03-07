@@ -2277,7 +2277,6 @@ namespace MonoTests.System.XmlSerialization
          *   http://www.w3.org/2000/09/xmldsig#
          *   http://www.w3.org/2001/04/xmlenc
          */
-
         [XmlTypeAttribute(Namespace = "urn:oasis:names:tc:SAML:2.0:protocol")]
         [XmlRootAttribute(
             "RequestedAuthnContext",

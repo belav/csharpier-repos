@@ -28,18 +28,15 @@ namespace System.Web.Configuration
      * New code should not call into these crypto APIs; use the APIs  *
      * provided by AspNetCryptoServiceProvider instead.               *
      ******************************************************************/
-
     /******************************************************************
      * !! WARNING !!                                                  *
      * This class contains cryptographic code. If you make changes to *
      * this class, please have it reviewed by the appropriate people. *
      ******************************************************************/
-
     /*
             <!--  validation="[SHA1|MD5|3DES|AES|HMACSHA256|HMACSHA384|HMACSHA512|alg:algorithm_name]" decryption="[AES|EDES" -->
         <machineKey validationKey="AutoGenerate,IsolateApps" decryptionKey="AutoGenerate,IsolateApps" decryption="[AES|3DES]" validation="HMACSHA256" compatibilityMode="[Framework20SP1|Framework20SP2]" />
     */
-
     public sealed class MachineKeySection : ConfigurationSection
     {
         private const string OBSOLETE_CRYPTO_API_MESSAGE =
@@ -713,7 +710,6 @@ namespace System.Web.Configuration
              *
              * In all cases, if something goes wrong (e.g. invalid padding, invalid signature, invalid modifier, etc.), a generic exception is thrown.
              */
-
             try
             {
                 EnsureConfig();

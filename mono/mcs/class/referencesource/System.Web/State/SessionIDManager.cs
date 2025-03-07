@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.SessionState
 {
     using System;
@@ -191,7 +190,6 @@ namespace System.Web.SessionState
                 /*
                  * Check if it's cookie-less session id
                  */
-
                 id = context.CookielessHelper.GetCookieValue('S');
                 if (id == null)
                     id = String.Empty;

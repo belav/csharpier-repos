@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -124,7 +122,6 @@ internal class global
 /*
 ** TYPEDEFS
 */
-
 public abstract class HarnessTest
 {
     public bool bRunTest = true;
@@ -644,7 +641,6 @@ public class ByteMark
 
         String eptr; /* Offset to "=" sign */
         /* markples: now the value half of the key=value pair */
-
         int eIndex; /* markples: now this is the "=" offset */
 
         PF i; /* Index */
@@ -1004,7 +1000,6 @@ public class ByteMark
         ** The system allows a maximum of 10 tries before it gives
         ** up.  Since we've done 5 already, we'll allow 5 more.
         */
-
         /*
         ** Enter loop to test for confidence criteria.
         */

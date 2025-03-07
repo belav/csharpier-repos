@@ -910,7 +910,6 @@ namespace System
         /*=================================CheckNumber=====================================
         ** Check if the specified UnicodeCategory belongs to the number categories.
         ==============================================================================*/
-
         internal static bool CheckNumber(UnicodeCategory uc)
         {
             switch (uc)
@@ -985,7 +984,6 @@ namespace System
         /*================================= CheckSeparator ============================
         ** Check if the specified UnicodeCategory belongs to the seprator categories.
         ==============================================================================*/
-
         internal static bool CheckSeparator(UnicodeCategory uc)
         {
             switch (uc)
@@ -1055,7 +1053,6 @@ namespace System
         /*================================= CheckSymbol ============================
          ** Check if the specified UnicodeCategory belongs to the symbol categories.
          ==============================================================================*/
-
         internal static bool CheckSymbol(UnicodeCategory uc)
         {
             switch (uc)
@@ -1284,7 +1281,6 @@ namespace System
         /*================================= ConvertFromUtf32 ============================
          ** Convert an UTF32 value into a surrogate pair.
          ==============================================================================*/
-
         public static String ConvertFromUtf32(int utf32)
         {
             // For UTF32 values from U+00D800 ~ U+00DFFF, we should throw.  They
@@ -1317,7 +1313,6 @@ namespace System
         /*=============================ConvertToUtf32===================================
         ** Convert a surrogate pair to UTF32 value
         ==============================================================================*/
-
         public static int ConvertToUtf32(char highSurrogate, char lowSurrogate)
         {
             if (!IsHighSurrogate(highSurrogate))
@@ -1349,7 +1344,6 @@ namespace System
         ** This method throws if a high-surrogate is not followed by a low surrogate.
         ** This method throws if a low surrogate is seen without preceding a high-surrogate.
         ==============================================================================*/
-
         public static int ConvertToUtf32(String s, int index)
         {
             if (s == null)

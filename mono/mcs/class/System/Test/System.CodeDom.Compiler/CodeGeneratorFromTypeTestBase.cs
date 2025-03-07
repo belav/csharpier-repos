@@ -1171,7 +1171,6 @@ namespace MonoTests.System.CodeDom.Compiler
             CodeTypeDeclaration nestedType = new CodeTypeDeclaration ("InnerType");
             TypeDeclaration.Members.Add (nestedType);
             */
-
             return GenerateCodeFromType(TypeDeclaration, options);
         }
 

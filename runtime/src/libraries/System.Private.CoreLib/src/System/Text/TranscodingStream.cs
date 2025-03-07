@@ -34,7 +34,6 @@ namespace System.Text
          * Fields used for writing bytes [this] -> chars -> bytes [inner]
          * Lazily initialized the first time we need to write
          */
-
         private Encoder? _innerEncoder;
         private Decoder? _thisDecoder;
 
@@ -42,7 +41,6 @@ namespace System.Text
          * Fields used for reading bytes [inner] -> chars -> bytes [this]
          * Lazily initialized the first time we need to read
          */
-
         private Encoder? _thisEncoder;
         private Decoder? _innerDecoder;
         private int _readCharBufferMaxSize; // the maximum number of characters _innerDecoder.ReadChars can return
@@ -72,7 +70,6 @@ namespace System.Text
          * Most CanXyz methods delegate to the inner stream, returning false
          * if this instance has been disposed. CanSeek is always false.
          */
-
         public override bool CanRead => _innerStream?.CanRead ?? false;
 
         public override bool CanSeek => false;

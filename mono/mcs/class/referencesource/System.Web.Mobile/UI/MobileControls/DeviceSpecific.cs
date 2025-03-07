@@ -23,7 +23,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific"]/*' />
     [
         ControlBuilderAttribute(typeof(DeviceSpecificControlBuilder)),
@@ -286,7 +285,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecificControlBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

@@ -287,7 +287,6 @@ The maximum sum of System.Windows.Forms.DataGridViewColumn.FillWeight values for
 
         /* When a column is frozen, all the columns to its left (or to its right in right-to-left languages) are frozen as well. The frozen and unfrozen columns form two groups. If column repositioning is enabled by setting the System.Windows.Forms.DataGridView.AllowUserToOrderColumns property to true, the user cannot drag a column from one group to the other.
 Example */
-
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataGridViewColumnHeaderCell HeaderCell

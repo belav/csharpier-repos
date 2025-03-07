@@ -14,7 +14,6 @@
 **
 **
 =============================================================================*/
-
 #pragma warning disable 0420
 
 /*
@@ -29,7 +28,6 @@
  * then assert full trust and can call any code they want regardless
  * of the previous stack information.
  */
-
 namespace System.Threading
 {
     using System;

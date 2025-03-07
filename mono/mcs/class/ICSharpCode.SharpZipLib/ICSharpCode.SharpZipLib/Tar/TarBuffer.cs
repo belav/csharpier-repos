@@ -77,7 +77,6 @@ namespace ICSharpCode.SharpZipLib.Tar
         properly handle an archive whose last record is shorter than the rest,
         or which contains garbage records after a zero block.
         */
-
         /// <summary>
         /// The size of a block in a tar archive in bytes.
         /// </summary>

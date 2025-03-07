@@ -16,7 +16,6 @@ namespace System.Web.Hosting
      * no-PIA interfaces that will be released OOB. This interface only exists so that ASP.NET can interface
      * with the Helios layer if necessary. These interfaces are subject to change.
      */
-
     /// <summary>
     /// Defines the mechanism via which IIS will interact with the application.
     /// </summary>

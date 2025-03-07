@@ -60,7 +60,6 @@ namespace System.Web
                     headerCheckingEnabled = section == null || section.EnableHeaderChecking;
                 }
         */
-
         internal BaseResponseHeader(string val)
         {
             Value = val;

@@ -7,7 +7,6 @@
 ** This interface is implemented by classes that support custom debugger notifications.
 **
 ===========================================================*/
-
 namespace System.Diagnostics
 {
     // Defines an interface indicating that a custom debugger notification is requested under specific

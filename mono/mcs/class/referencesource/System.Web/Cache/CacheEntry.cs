@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.Caching
 {
     using System.Collections;
@@ -140,7 +139,6 @@ namespace System.Web.Caching
         /*
  * ctor.
  */
-
         internal CacheEntry(
             String key,
             Object value,
@@ -325,7 +323,6 @@ namespace System.Web.Caching
         /*
          * Helper to call the on-remove callback
          */
-
         private void CallCacheItemRemovedCallback(
             CacheItemRemovedCallback callback,
             CacheItemRemovedReason reason

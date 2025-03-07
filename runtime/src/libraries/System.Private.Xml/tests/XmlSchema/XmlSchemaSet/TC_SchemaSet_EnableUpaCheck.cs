@@ -78,7 +78,6 @@ namespace System.Xml.XmlSchemaTests
         }
 
         /* a choice containing a wildcard and element declaraions */
-
         //[Variation(Desc = "v6-2- a choice containing a wildcard and element declaraions(2)", Priority = 1, id = 25, Params = new object[] { "v6-2.xml", "v6-2.xsd", 0 })]
         [InlineData("v6-2.xml", "v6-2.xsd", 0, new int[] { })]
         //[Variation(Desc = "v6-1- a choice containing a wildcard and element declaraions(1)", Priority = 1, id = 24, Params = new object[] { "v6-1.xml", "v6-1.xsd", 0 })]
@@ -128,7 +127,6 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v2.1- Sequence of choices with same element name, one which doesnt match fixed value in schema(1)", Priority = 1, id = 4, Params = new object[] { "v2-1.xml", "v2-1.xsd", 3, 3, 4, 5 })]
         [InlineData("v2-1.xml", "v2-1.xsd", 3, new int[] { 3, 4, 5 })]
         /* Sequence with same element name and same type */
-
         //[Variation(Desc = "v1.3- Sequence on element with same name and type, one has fixed value, instance has violation of fixed", Priority = 1, id = 3, Params = new object[] { "v1-3.xml", "v1-3.xsd", 1, 2 })]
         [InlineData("v1-3.xml", "v1-3.xsd", 1, new int[] { 2 })]
         //[Variation(Desc = "v1.2- Sequence on element with same name and type, one has default value", Priority = 1, id = 2, Params = new object[] { "v1-2.xml", "v1-2.xsd", 0 })]

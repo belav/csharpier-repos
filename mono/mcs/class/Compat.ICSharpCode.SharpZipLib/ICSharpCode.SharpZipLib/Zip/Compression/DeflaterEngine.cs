@@ -621,7 +621,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     )
                     {
                         /* longestMatch sets matchStart and matchLen */
-
                         /* Discard match if too small and too far away */
                         if (
                             matchLen <= 5

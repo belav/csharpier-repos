@@ -1351,7 +1351,6 @@ public class Tests : TestsBase, ITest2
         return 0;
     }
     */
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void arguments()
     {

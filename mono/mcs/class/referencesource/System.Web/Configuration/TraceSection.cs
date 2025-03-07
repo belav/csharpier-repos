@@ -31,7 +31,6 @@ namespace System.Web.Configuration
             traceMode="SortByTime"
         />
  */
-
     public sealed class TraceSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

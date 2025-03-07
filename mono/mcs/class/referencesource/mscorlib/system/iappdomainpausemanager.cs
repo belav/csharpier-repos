@@ -11,7 +11,6 @@
 ** Copyright (c) Microsoft
 **
 =============================================================================*/
-
 namespace System
 {
     using System;

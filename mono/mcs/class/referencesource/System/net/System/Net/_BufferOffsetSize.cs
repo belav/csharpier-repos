@@ -60,14 +60,12 @@ namespace System.Net
             : this(buffer, offset, buffer.Length - offset, copyBuffer) {
         }
         */
-
         /*
         // Consider removing.
         internal BufferOffsetSize(int size, byte[] buffer, bool copyBuffer)
             : this(buffer, 0, size, copyBuffer) {
         }
         */
-
         internal BufferOffsetSize(byte[] buffer, bool copyBuffer)
             : this(buffer, 0, buffer.Length, copyBuffer) { }
 

@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System.Collections;
@@ -23,7 +22,6 @@ namespace System.Web.UI
     /*
      * The AttributeCollection represents Attributes on an Html control.
      */
-
     /// <devdoc>
     ///    <para>
     ///       The <see langword='AttributeCollection'/> class provides object-model access
@@ -38,7 +36,6 @@ namespace System.Web.UI
         /*
          *      Constructs an AttributeCollection given a StateBag.
          */
-
         /// <devdoc>
         /// </devdoc>
         public AttributeCollection(StateBag bag)
@@ -49,7 +46,6 @@ namespace System.Web.UI
         /*
          * Automatically adds new keys.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a specified attribute value.
@@ -70,7 +66,6 @@ namespace System.Web.UI
         /*
          * Returns a collection of keys.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets a collection of keys to all the attributes in the

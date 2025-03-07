@@ -86,7 +86,6 @@ namespace Mono.Security.X509.Extensions
      *    utf8String       UTF8String     (SIZE (1..200))
      * }
      */
-
     // note: partial implementation (only policyIdentifier OID are supported)
     public class CertificatePoliciesExtension : X509Extension
     {

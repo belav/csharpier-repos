@@ -119,7 +119,6 @@ namespace System.Data.OleDb
             return (value & ~HighMask);
         }
         */
-
         private const string S_BINARY = "DBTYPE_BINARY"; // DBTYPE_BYTES
         private const string S_BOOL = "DBTYPE_BOOL";
         private const string S_BSTR = "DBTYPE_BSTR";

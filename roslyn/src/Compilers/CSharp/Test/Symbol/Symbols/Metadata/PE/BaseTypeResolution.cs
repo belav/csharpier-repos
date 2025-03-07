@@ -191,7 +191,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(arg);
             }
         } */
-
         private void TestBaseTypeResolutionHelper4(AssemblySymbol[] assemblies)
         {
             var module1 = assemblies[0].Modules[0];

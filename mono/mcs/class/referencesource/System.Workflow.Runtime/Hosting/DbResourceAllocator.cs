@@ -414,7 +414,6 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
         */
-
         private static SharedConnectionInfo GetConnectionInfo(
             WorkflowCommitWorkBatchService txSvc,
             Transaction transaction

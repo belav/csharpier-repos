@@ -233,7 +233,6 @@ namespace System.Web.UI.Design.MobileControls
                 SetDirty();
             }
             */
-
             OnNodeRenamed();
         }
 

@@ -6,7 +6,6 @@
  *      Mainly stresses the GC by creating n threads each manipulating its own local Linked List.
  *      Each thread in turn adds and deletes thousands of nodes from the linked list.
  */
-
 namespace ThdList
 {
     using System;

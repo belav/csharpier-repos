@@ -5,7 +5,6 @@
 //------------------------------------------------------------------------------
 
 /************************************************************************************************************/
-
 namespace System.Web.Compilation
 {
     using System;
@@ -38,7 +37,6 @@ namespace System.Web.Compilation
     public sealed class BuildManager
     {
         /// Contants relating to generated assembly names
-
         // All generated assemblies start with this prefix
         internal const string AssemblyNamePrefix = "App_";
 
@@ -432,7 +430,6 @@ namespace System.Web.Compilation
          * config assemblies (<assemblies> section), bin assemblies and assemblies built from the
          * app App_Code and other top level folders.
          */
-
         /// <devdoc>
         /// Returns the assemblies referenced at the root application level of the current appF
         /// </devdoc>

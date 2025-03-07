@@ -22,7 +22,6 @@ using System.Reflection;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 class Tests
 {
     public struct TestStruct1

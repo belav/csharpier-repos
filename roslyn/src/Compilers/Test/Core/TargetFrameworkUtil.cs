@@ -189,7 +189,6 @@ namespace Roslyn.Test.Utilities
          * for a TypeLoadException are missing important information for resolving problems if/when they occur.
          * https://github.com/dotnet/roslyn/issues/25961
          */
-
         public static ImmutableArray<MetadataReference> Mscorlib40References =>
             ImmutableArray.Create<MetadataReference>(Net40.mscorlib);
         public static ImmutableArray<MetadataReference> Mscorlib40ExtendedReferences =>

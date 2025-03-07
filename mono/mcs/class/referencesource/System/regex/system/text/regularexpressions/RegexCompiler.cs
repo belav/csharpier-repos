@@ -1664,7 +1664,6 @@ namespace System.Text.RegularExpressions
                                 }
                             }
                 */
-
                 Ldloc(_textposV);
                 Ldc(1);
                 Sub(_code._rightToLeft);

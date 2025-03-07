@@ -2045,7 +2045,6 @@ namespace System.Data.SqlTypes
             }
         }
         */
-
         //Determine the number of uints needed for a numeric given a precision
         //Precision        Length
         //    0            invalid

@@ -36,7 +36,6 @@ namespace System.Text
          * GetByteCount - Each Latin-1 char narrows to exactly one byte,
          * but fallback mechanism must be consulted for non-Latin-1 chars.
          */
-
         public override unsafe int GetByteCount(char* chars, int count)
         {
             if (chars is null)
@@ -198,7 +197,6 @@ namespace System.Text
          * GetBytes - Each Latin-1 char narrows to exactly one byte,
          * but fallback mechanism must be consulted for non-Latin-1 chars.
          */
-
         public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             if (chars is null || bytes is null)
@@ -448,7 +446,6 @@ namespace System.Text
          * GetCharCount - Each byte widens to exactly one char, preserving count.
          * We never consult the fallback mechanism during decoding.
          */
-
         public override unsafe int GetCharCount(byte* bytes, int count)
         {
             if (bytes is null)
@@ -545,7 +542,6 @@ namespace System.Text
          * GetChars - Each byte widens to exactly one char, preserving count.
          * We never consult the fallback mechanism during decoding.
          */
-
         public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             if (bytes is null || chars is null)

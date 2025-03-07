@@ -11,7 +11,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Collections
 {
     ///    This is a simple implementation of IDictionary that is empty and readonly.

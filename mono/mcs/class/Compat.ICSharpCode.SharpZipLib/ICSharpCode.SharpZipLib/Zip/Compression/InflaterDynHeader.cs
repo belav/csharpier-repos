@@ -159,7 +159,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                             while (((symbol = blTree.GetSymbol(input)) & ~15) == 0)
                             {
                                 /* Normal case: symbol in [0..15] */
-
                                 //  		  System.err.println("litdistLens["+ptr+"]: "+symbol);
                                 litdistLens[ptr++] = lastLen = (byte)symbol;
 

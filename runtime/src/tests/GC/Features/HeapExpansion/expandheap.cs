@@ -4,7 +4,6 @@
 /*
 This test stimulates heap expansion on the finalizer thread
 */
-
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

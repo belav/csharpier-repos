@@ -228,7 +228,6 @@ namespace System.ServiceModel.Description
      *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownConstantException(*));
      *
      */
-
     internal class XmlSerializationWriterMetadataSet
         : System.Xml.Serialization.XmlSerializationWriter
     {

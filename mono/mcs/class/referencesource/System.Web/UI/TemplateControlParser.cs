@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -32,7 +31,6 @@ namespace System.Web.UI
     /*
      * Parser for TemplateControl's (UserControls and Pages)
      */
-
     /// <internalonly/>
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

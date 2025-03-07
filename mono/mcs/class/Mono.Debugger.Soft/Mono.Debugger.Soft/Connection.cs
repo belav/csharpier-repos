@@ -2223,7 +2223,6 @@ namespace Mono.Debugger.Soft
         /*
          * Implementation of debugger commands
          */
-
         internal VersionInfo VM_GetVersion()
         {
             var res = SendReceive(CommandSet.VM, (int)CmdVM.VERSION, null);
@@ -2506,7 +2505,6 @@ namespace Mono.Debugger.Soft
         /*
          * DOMAIN
          */
-
         internal long RootDomain
         {
             get
@@ -2591,7 +2589,6 @@ namespace Mono.Debugger.Soft
         /*
          * METHOD
          */
-
         internal string Method_GetName(long id)
         {
             return SendReceive(
@@ -2870,7 +2867,6 @@ namespace Mono.Debugger.Soft
         /*
          * THREAD
          */
-
         internal string Thread_GetName(long id)
         {
             return SendReceive(
@@ -2976,7 +2972,6 @@ namespace Mono.Debugger.Soft
         /*
          * MODULE
          */
-
         internal ModuleInfo Module_GetInfo(long id)
         {
             PacketReader r = SendReceive(
@@ -3009,7 +3004,6 @@ namespace Mono.Debugger.Soft
         /*
          * ASSEMBLY
          */
-
         internal string Assembly_GetLocation(long id)
         {
             return SendReceive(
@@ -3153,7 +3147,6 @@ namespace Mono.Debugger.Soft
         /*
          * TYPE
          */
-
         internal TypeInfo Type_GetInfo(long id)
         {
             PacketReader r = SendReceive(
@@ -3459,7 +3452,6 @@ namespace Mono.Debugger.Soft
         /*
          * FIELD
          */
-
         internal FieldMirrorInfo Field_GetInfo(long id)
         {
             PacketReader r = SendReceive(
@@ -3480,7 +3472,6 @@ namespace Mono.Debugger.Soft
         /*
          * EVENTS
          */
-
         internal int EnableEvent(EventType etype, SuspendPolicy suspend_policy, List<Modifier> mods)
         {
             var w = new PacketWriter().WriteByte((byte)etype).WriteByte((byte)suspend_policy);
@@ -3781,7 +3772,6 @@ namespace Mono.Debugger.Soft
         /*
          * POINTERS
          */
-
         internal ValueImpl Pointer_GetValue(long address, TypeMirror type)
         {
             return SendReceive(

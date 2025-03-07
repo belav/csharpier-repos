@@ -22,7 +22,6 @@ namespace System.Text
     ** using this proxy since we pretty much need one anyway and that solves Whidbey
     ** to Everett compatibility as well.
     ==============================================================================*/
-
     [Serializable]
     internal sealed class MLangCodePageEncoding : ISerializable, IObjectReference
     {

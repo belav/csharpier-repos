@@ -29,7 +29,6 @@ namespace System.Runtime.Caching
         /*
          * KERNEL32.DLL
          */
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
@@ -53,7 +52,6 @@ namespace System.Runtime.Caching
         /*
          * ADVAPI32.DLL
          */
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",

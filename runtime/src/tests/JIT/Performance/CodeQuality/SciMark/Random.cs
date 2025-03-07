@@ -10,7 +10,6 @@
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
 /// </license>
-
 using System;
 using System.Runtime.CompilerServices;
 
@@ -19,13 +18,11 @@ namespace SciMark2
     /* Random.java based on Java Numerical Toolkit (JNT) Random.UniformSequence
     class.  We do not use Java's own java.util.Random so that we can compare
     results with equivalent C and Fortran coces.*/
-
     public class Random
     {
         /*------------------------------------------------------------------------------
         CLASS VARIABLES
         ------------------------------------------------------------------------------ */
-
         internal int seed = 0;
 
         private int[] _m;
@@ -47,7 +44,6 @@ namespace SciMark2
         /* ------------------------------------------------------------------------------
         CONSTRUCTORS
         ------------------------------------------------------------------------------ */
-
         /// <summary>
         /// Initializes a sequence of uniformly distributed quasi random numbers with a
         /// seed based on the system clock.
@@ -115,7 +111,6 @@ namespace SciMark2
         /* ------------------------------------------------------------------------------
         PUBLIC METHODS
         ------------------------------------------------------------------------------ */
-
         /// <summary>
         /// Returns the next random number in the sequence.
         /// </summary>
@@ -263,7 +258,6 @@ namespace SciMark2
         /*----------------------------------------------------------------------------
         PRIVATE METHODS
         ------------------------------------------------------------------------ */
-
         private void initialize(int seed)
         {
             // First the initialization of the member variables;

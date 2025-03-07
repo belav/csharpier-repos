@@ -649,7 +649,6 @@ namespace System.Web.UI.DataVisualization.Charting
                     --index;
                 }
                 */
-
                 // Reset start position/location fields
                 annotation.startMovePositionRel = RectangleF.Empty;
                 annotation.startMoveAnchorLocationRel = PointF.Empty;

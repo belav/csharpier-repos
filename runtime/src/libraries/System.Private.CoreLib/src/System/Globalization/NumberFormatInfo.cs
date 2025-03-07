@@ -433,7 +433,6 @@ namespace System.Globalization
         /// <summary>
         /// Returns the current culture's NumberFormatInfo. Used by Parse methods.
         /// </summary>
-
         public static NumberFormatInfo CurrentInfo
         {
             get

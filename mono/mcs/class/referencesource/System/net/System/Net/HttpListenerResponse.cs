@@ -895,7 +895,6 @@ namespace System.Net
                 return flags;
             }
             */
-
             ComputeCoreHeaders();
 
             GlobalLog.Print(

@@ -716,7 +716,6 @@ namespace System.Data.Tests
                 OriginalRows    Original rows including unchanged and deleted rows. 42
                 Unchanged       An unchanged row. 2
              */
-
             DataTable dt = DataProvider.CreateParentDataTable();
 
             //create the dataview for the table

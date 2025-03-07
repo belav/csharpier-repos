@@ -31,7 +31,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Boolean type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type bool
@@ -53,7 +52,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Char type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type char
@@ -77,7 +75,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The SByte type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type sbyte
@@ -101,7 +98,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Byte type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type bool
@@ -125,7 +121,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Int16 type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type short
@@ -149,7 +144,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Uint16 type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type ushort
@@ -173,7 +167,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Int32 type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type int
@@ -197,7 +190,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Uint32 type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type uint
@@ -221,7 +213,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Int64 type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type long
@@ -245,7 +236,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The UInt64 type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type ulong
@@ -269,7 +259,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Single type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type float
@@ -291,7 +280,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The Double type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type double
@@ -312,7 +300,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The IntPtr type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type void *
@@ -436,7 +423,6 @@ namespace System
     **
     **
     ===========================================================*/
-
     // CONTRACT with Runtime
     // The UIntPtr type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type void *

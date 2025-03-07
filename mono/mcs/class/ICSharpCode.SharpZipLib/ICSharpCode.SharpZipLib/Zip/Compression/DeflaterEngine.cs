@@ -583,7 +583,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                                    Console.WriteLine("storedBlock["+storedLen+","+lastBlock+"]");
                                 }
                 */
-
                 huffman.FlushStoredBlock(window, blockStart, storedLen, lastBlock);
                 blockStart += storedLen;
                 return !lastBlock;
@@ -734,7 +733,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     )
                     {
                         /* longestMatch sets matchStart and matchLen */
-
                         /* Discard match if too small and too far away */
                         if (
                             matchLen <= 5

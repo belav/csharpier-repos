@@ -4,7 +4,6 @@
 /* TEST: Usage
  * DESCRIPTION: Three usage scenarios that monitor the number of live handles and GC Collections
  */
-
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;

@@ -54,7 +54,6 @@ namespace System.Net.Sockets
         ///       Partial send or recv for message.
         ///    </para>
         /// </devdoc>
-
         Truncated = 0x0100,
         ControlDataTruncated = 0x0200,
         Broadcast = 0x0400,

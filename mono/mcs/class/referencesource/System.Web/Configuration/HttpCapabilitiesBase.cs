@@ -12,7 +12,6 @@
 
 
 */
-
 namespace System.Web.Configuration
 {
     using System.Collections;
@@ -241,7 +240,6 @@ namespace System.Web.Configuration
         /*
          * The actual initializer sets up Item[] before calling Init()
          */
-
         internal void InitInternal(HttpBrowserCapabilities browserCaps)
         {
             if (_items != null)

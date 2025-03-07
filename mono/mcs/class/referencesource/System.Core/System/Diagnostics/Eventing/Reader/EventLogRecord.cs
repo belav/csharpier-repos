@@ -12,7 +12,6 @@
 ** instance of this is obtained from an EventLogReader.
 **
 ============================================================*/
-
 using System;
 using System.Collections;
 using System.Collections.Generic;

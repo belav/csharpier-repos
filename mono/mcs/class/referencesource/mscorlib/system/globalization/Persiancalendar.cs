@@ -24,7 +24,6 @@ namespace System.Globalization
      **      Gregorian   0622/03/22   9999/12/31
      **      Persian     0001/01/01   9378/10/13
      */
-
     [Serializable]
     public class PersianCalendar : Calendar
     {
@@ -81,7 +80,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
         public override DateTime MinSupportedDateTime
         {
             get { return (minDate); }
@@ -121,7 +119,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
         long GetAbsoluteDatePersian(int year, int month, int day)
         {
             if (year >= 1 && year <= MaxCalendarYear && month >= 1 && month <= 12)
@@ -238,7 +235,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:  ArgumentException if part is incorrect.
         ============================================================================*/
-
         internal int GetDatePart(long ticks, int part)
         {
             long NumDays; // The calculation buffer in number of days.

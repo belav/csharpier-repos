@@ -65,7 +65,6 @@ namespace Mono.Security.X509.Extensions
      *    partyName               [1]     DirectoryString
      * }
      */
-
     // TODO: Directories not supported
 #if INSIDE_SYSTEM
     internal

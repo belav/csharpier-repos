@@ -11,7 +11,6 @@ Try to access a static field twice.
 Expected: Should return the same exception.
 
 */
-
 using System;
 using Xunit;
 

@@ -131,7 +131,6 @@ public class CairoGraphic : DrawingArea
 
         /* Draw a black circle on the overlay
         */
-
         gr.Color = new Color(0, 0, 0, 1);
 
         oval_path(gr, xc, yc, radius, radius);

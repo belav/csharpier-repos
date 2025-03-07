@@ -253,7 +253,6 @@ namespace System.Web
         /*
          * Helpers to populate the EventData structure
          */
-
         // prerequisite: str must be pinned and provided as pStr; may be null.
         // we'll convert null strings to empty strings if necessary.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

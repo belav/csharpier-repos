@@ -102,7 +102,6 @@ namespace System.ServiceModel.Description
              * </wsp:Policy>
              *
              */
-
             var exactlyOne = element.SelectSingleNode("*") as XmlElement;
             if (exactlyOne == null)
             {

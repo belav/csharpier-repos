@@ -2843,7 +2843,6 @@ namespace System.Management
                      * we cannot be sure that the qualifier will be propagated to
                      * the instance.
                      */
-
                     status = inParamsClass.BeginEnumeration_(
                         (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY
                     );
@@ -2940,7 +2939,6 @@ namespace System.Management
                     * we cannot be sure that the qualifier will be propagated to
                     * the instance.
                 */
-
                 status = outParamsClass.BeginEnumeration_(
                     (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY
                 );

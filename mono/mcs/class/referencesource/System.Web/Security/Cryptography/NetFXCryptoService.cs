@@ -15,7 +15,6 @@ namespace System.Web.Security.Cryptography
     * This class contains cryptographic code. If you make changes to *
     * this class, please have it reviewed by the appropriate people. *
     ******************************************************************/
-
     // Uses .NET Framework classes to encrypt (SymmetricAlgorithm) and sign (KeyedHashAlgorithm) data.
     //
     // [PROTECT]

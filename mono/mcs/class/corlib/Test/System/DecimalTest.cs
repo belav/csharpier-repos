@@ -1363,7 +1363,6 @@ namespace MonoTests.System
                     }
                 }
         */
-
         [Test]
         public void ParseCultureSeparator()
         {

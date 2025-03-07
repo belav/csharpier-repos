@@ -776,7 +776,6 @@ namespace System.Data.Tests
             incorrectly uses the current culture instead of the invariant culture when parsing strings like "-1" and "-2".
 
             */
-
             var buffer = new MemoryStream(
                 new byte[]
                 {

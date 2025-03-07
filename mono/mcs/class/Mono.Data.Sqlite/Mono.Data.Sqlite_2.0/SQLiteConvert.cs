@@ -4,7 +4,6 @@
  *
  * Released to the public domain, use at your own risk!
  ********************************************************/
-
 namespace Mono.Data.Sqlite
 {
     using System;
@@ -719,7 +718,6 @@ namespace Mono.Data.Sqlite
              *   4. If the declared type for a column contains any of the strings "REAL", "FLOA", or "DOUB" then the column has REAL affinity.
              *   5. Otherwise, the affinity is NUMERIC.
              */
-
             if (Name.IndexOf("INT", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 return DbType.Int64;

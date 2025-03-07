@@ -194,7 +194,6 @@ namespace MonoTests.System.Reflection.Emit
             Console.WriteLine (mb.Signature);
         }
         */
-
         [Test]
         public void TestCreateMethodBody()
         {
@@ -297,7 +296,6 @@ namespace MonoTests.System.Reflection.Emit
             } catch (ArgumentOutOfRangeException) {
             }
             */
-
             try
             {
                 mb.DefineParameter(3, 0, "param1");

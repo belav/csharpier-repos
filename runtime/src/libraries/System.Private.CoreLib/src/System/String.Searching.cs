@@ -260,7 +260,6 @@ namespace System
          * lead to incorrect matching behavior, or it could cause LastIndexOf to incorrectly report that
          * a zero-weight character could appear between the [HI] and [LO] chars.
          */
-
         public int IndexOf(string value)
         {
             return IndexOf(value, StringComparison.CurrentCulture);

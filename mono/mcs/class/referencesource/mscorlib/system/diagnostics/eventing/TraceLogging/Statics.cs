@@ -345,7 +345,6 @@ namespace System.Diagnostics.Tracing
         This helps with portability, and it also makes it easier to audit what
         kinds of reflection operations are being done.
         */
-
         public static object CreateInstance(Type type, params object[] parameters)
         {
             return Activator.CreateInstance(type, parameters);

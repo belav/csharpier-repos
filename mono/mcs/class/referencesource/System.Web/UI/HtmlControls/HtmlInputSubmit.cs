@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -39,7 +38,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html INPUT type=submit control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputSubmit'/> class using
         ///    default values.</para>
@@ -50,7 +48,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html INPUT type=button,submit,reset control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputSubmit'/> class using the
         ///    specified string.</para>

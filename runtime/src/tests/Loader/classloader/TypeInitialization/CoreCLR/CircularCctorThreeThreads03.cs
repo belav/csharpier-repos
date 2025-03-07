@@ -18,7 +18,6 @@ In B.cctor: thread T1: C.i 7
 In A.cctor: thread T1: B.i 6
 In E.cctor: thread T3: A.i 5
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;

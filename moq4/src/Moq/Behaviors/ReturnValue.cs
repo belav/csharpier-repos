@@ -9,14 +9,12 @@ namespace Moq.Behaviors
     After:
         sealed class ReturnValue : Behavior
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ReturnValue : Behavior
     After:
         sealed class ReturnValue : Behavior
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ReturnValue : Behavior
@@ -30,14 +28,12 @@ namespace Moq.Behaviors
     After:
             readonly object value;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly object value;
     After:
             readonly object value;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly object value;

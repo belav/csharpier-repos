@@ -26,7 +26,6 @@ namespace System.Web.UI.MobileControls.Adapters
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

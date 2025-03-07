@@ -23,7 +23,6 @@ namespace System.ComponentModel
      * A component interacts with its container primarily through a container-
      * provided "site".
      */
-
     // Interfaces don't need to be serializable
     /// <devdoc>
     ///    <para>Provides functionality required by all components.</para>

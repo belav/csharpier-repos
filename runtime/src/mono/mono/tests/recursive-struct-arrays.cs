@@ -2,7 +2,6 @@ using System;
 
 /* Test that the runtime can represent value types that have array fields that
  * recursively refer to the same value type */
-
 struct S1
 {
     static S1[][] foo;

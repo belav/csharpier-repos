@@ -92,7 +92,6 @@ namespace System.Security.Cryptography
            operation, processing another message block, and updating the
            context.
            */
-
         [System.Security.SecuritySafeCritical] // auto-generated
         private unsafe void _HashData(byte[] partIn, int ibStart, int cbSize)
         {
@@ -154,7 +153,6 @@ namespace System.Security.Cryptography
         /* SHA256 finalization. Ends an SHA256 message-digest operation, writing
            the message digest.
            */
-
         private byte[] _EndHash()
         {
             byte[] pad;
@@ -164,7 +162,6 @@ namespace System.Security.Cryptography
 
             /* Compute padding: 80 00 00 ... 00 00 <bit count>
              */
-
             padLen = 64 - (int)(_count & 0x3f);
             if (padLen <= 8)
                 padLen += 64;
@@ -391,7 +388,6 @@ namespace System.Security.Cryptography
         /* This function creates W_16,...,W_63 according to the formula
            W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
         */
-
         [System.Security.SecurityCritical] // auto-generated
         private static unsafe void SHA256Expand(uint* x)
         {

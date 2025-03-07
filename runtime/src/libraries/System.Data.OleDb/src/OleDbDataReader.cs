@@ -214,7 +214,6 @@ namespace System.Data.OleDb
                 return (long)_recordsAffected;
             }
         }*/
-
         public override object this[int index]
         {
             get { return GetValue(index); }
@@ -1767,7 +1766,6 @@ namespace System.Data.OleDb
                             bindings.DbType = (short) (getType | DbType.BYREF);
                         }
                         else*/
-
                         if (ODB.LargeDataSize < info.size)
                         {
                             maxLen = IntPtr.Size;

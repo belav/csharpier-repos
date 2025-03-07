@@ -11,7 +11,6 @@
  * The problem is that the way we use ComputePreferredZapModule grows exponentially in this test case.  The thing with the inliner is a red herring.  If you increase the constant from 5 to 15 it also hangs.  The only reason that it's worse with the inliner is because of the way we handle the unbounded recursion.  Once you get about 5 deep you go all the way infinitely (because the call site size is always smaller than the estimated function body).
  *
  */
-
 using System;
 using Xunit;
 

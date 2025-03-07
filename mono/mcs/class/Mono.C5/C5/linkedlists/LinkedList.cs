@@ -18,7 +18,6 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 */
-
 #define HASHINDEXnot
 
 using System;
@@ -4005,7 +4004,6 @@ namespace C5
               Console.WriteLine("underlying != null && underlying.stamp({0}) != stamp({1})", underlying.stamp, stamp);
               retval = false;
             }*/
-
             if (underlying != null)
             {
                 //TODO: check that this view is included in viewsEndpoints tree

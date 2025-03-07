@@ -308,7 +308,6 @@ namespace System.Workflow.Activities
             ChangeStateWorkflowQueuesState(context, state, true);
         }
         */
-
         internal static void DisableStateWorkflowQueues(
             ActivityExecutionContext context,
             StateActivity state

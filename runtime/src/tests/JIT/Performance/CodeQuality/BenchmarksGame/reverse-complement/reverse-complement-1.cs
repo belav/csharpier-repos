@@ -11,7 +11,6 @@
 
    contributed by Robert F. Tobler to process large blocks of byte arrays
 */
-
 using System;
 using System.Collections.Generic;
 using System.IO;

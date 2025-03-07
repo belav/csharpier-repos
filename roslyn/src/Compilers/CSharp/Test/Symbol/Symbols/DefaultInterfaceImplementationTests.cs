@@ -87012,7 +87012,6 @@ public partial interface I1<T>
             {
             }
              */
-
             var source1 =
                 @"
 public partial interface I2<T2> where T2 : I2<T2>
@@ -87398,7 +87397,6 @@ public interface I3<T3> : I1<T3> where T3 : I1<T3>
             }
 
              */
-
             var source1 =
                 @"
 public partial interface I1<T1> where T1 : I1<T1>
@@ -87516,7 +87514,6 @@ class Test1 : I2<Test1>, I3<Test1>
             }
 
              */
-
             var source1 =
                 @"
 public partial interface I1<T1> where T1 : I1<T1>

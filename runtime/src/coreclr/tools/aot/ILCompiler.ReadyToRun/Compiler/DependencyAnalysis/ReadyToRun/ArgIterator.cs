@@ -2150,7 +2150,6 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 PARAM_TYPE_REGISTER_STACK       = 0x0010,
                 PARAM_TYPE_REGISTER_ECX         = 0x0020,
                 PARAM_TYPE_REGISTER_EDX         = 0x0030,*/
-
         //        METHOD_INVOKE_NEEDS_ACTIVATION  = 0x0040,   // Flag used by ArgIteratorForMethodInvoke
 
         //        RETURN_FP_SIZE_SHIFT            = 8,        // The rest of the flags is cached value of GetFPReturnSize

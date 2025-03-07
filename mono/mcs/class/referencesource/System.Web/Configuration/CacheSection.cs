@@ -35,7 +35,6 @@ namespace System.Web.Configuration
                 </providers>
             </cache>
       */
-
     public sealed class CacheSection : ConfigurationSection
     {
         internal static TimeSpan DefaultPrivateBytesPollTime = new TimeSpan(0, 2, 0);

@@ -50,7 +50,6 @@
  *                                                                      *
  ************************************************************************
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -279,9 +278,7 @@ namespace Benchstone.BenchF
             /*
              *     end of initialization -- begin timing
              */
-
             /* loop 1      hydro excerpt */
-
             Init();
             ts[1] = (double)Clock();
             q = 0.0;
@@ -296,7 +293,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 2      mlr, inner product */
-
             Init();
             ts[2] = (double)Clock();
             q = 0.0;
@@ -313,7 +309,6 @@ namespace Benchstone.BenchF
             cksum[2] = q;
 
             /* loop 3      inner prod */
-
             Init();
             ts[3] = (double)Clock();
             q = 0.0;
@@ -325,7 +320,6 @@ namespace Benchstone.BenchF
             cksum[3] = q;
 
             /* loop 4      banded linear equarions */
-
             Init();
             ts[4] = (double)Clock();
             for (l = 7; l <= 107; l += 50)
@@ -344,7 +338,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 5      tri-diagonal elimination, below diagonal */
-
             Init();
             ts[5] = (double)Clock();
             for (i = 2; i <= 998; i += 3)
@@ -360,7 +353,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 6      tri-diagonal elimination, above diagonal */
-
             Init();
             ts[6] = (double)Clock();
             for (j = 3; j <= 999; j += 3)
@@ -378,7 +370,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 7      equation of state excerpt */
-
             Init();
             ts[7] = (double)Clock();
             for (m = 1; m <= 120; m++)
@@ -400,7 +391,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 8      p.d.e. integration */
-
             Init();
             ts[8] = (double)Clock();
             nl1 = 1;
@@ -458,7 +448,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 9      integrate predictors */
-
             Init();
             ts[9] = (double)Clock();
             for (i = 1; i <= 100; i++)
@@ -481,7 +470,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 10     difference predictors */
-
             Init();
             ts[10] = (double)Clock();
             for (i = 1; i <= 100; i++)
@@ -516,7 +504,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 11     first sum. */
-
             Init();
             ts[11] = (double)Clock();
             _x[1] = _y[1];
@@ -531,7 +518,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 12     first diff. */
-
             Init();
             ts[12] = (double)Clock();
             for (k = 1; k <= 999; k++)
@@ -545,7 +531,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 13      2-d particle pusher */
-
             Init();
             ts[13] = (double)Clock();
             for (ip = 1; ip <= 128; ip++)
@@ -584,7 +569,6 @@ namespace Benchstone.BenchF
             }
 
             /* loop 14      1-d particle pusher */
-
             Init();
             ts[14] = (double)Clock();
             for (k = 1; k <= 150; k++)
@@ -616,12 +600,10 @@ namespace Benchstone.BenchF
             }
 
             /* time the clock call */
-
             ts[15] = (double)Clock();
             ts[15] = (double)Clock() - ts[15];
 
             /* scale= set to convert time to micro-seconds */
-
             scale = 1.0;
             rt[15] = ts[15] * scale;
 

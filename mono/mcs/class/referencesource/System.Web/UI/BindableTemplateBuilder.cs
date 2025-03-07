@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-
 namespace System.Web.UI
 {
     using System;
@@ -42,7 +41,6 @@ namespace System.Web.UI
                 @__table["FavVegetable"] = ddl2.SelectedValue;
             }
             return @__table;*/
-
             BindableTemplateBuilder bindableTemplateBuilder = this as BindableTemplateBuilder;
 
             Debug.Assert(
@@ -215,7 +213,6 @@ namespace System.Web.UI
      * generated page class code.  It just passes the Initialize call on to a
      * delegate.
      */
-
     /// <internalonly/>
     /// <devdoc>
     /// <para>[To be supplied.]</para>

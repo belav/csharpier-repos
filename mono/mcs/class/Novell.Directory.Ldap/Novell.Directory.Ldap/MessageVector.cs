@@ -51,7 +51,6 @@ namespace Novell.Directory.Ldap
         internal System.Object[] ObjectArray
         {
             /* package */
-
             get
             {
                 lock (this.SyncRoot)

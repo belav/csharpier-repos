@@ -13,7 +13,6 @@
  * converted from regex-dna program
  *
 */
-
 using System;
 using System.IO;
 using System.Text.RegularExpressions;

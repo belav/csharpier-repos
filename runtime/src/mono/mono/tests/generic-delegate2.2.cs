@@ -17,7 +17,6 @@ public class Gen<T> {
 public delegate object DelObj (object g, int i);
 public delegate object DelStr (object g, int i);
 */
-
 public class main
 {
     public static int work()
@@ -113,7 +112,6 @@ public class main
         if (delStr (gs, 3).GetType () != typeof (string []))
             return 1;
         */
-
         /*
         ArrDel ad = go.newDel ();
         if (ad (3).GetType () != typeof (object []))
@@ -123,7 +121,6 @@ public class main
         if (ad (3).GetType () != typeof (string []))
             return 1;
         */
-
         Console.WriteLine("done");
 
         return 0;

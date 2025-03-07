@@ -81,7 +81,6 @@ public class FullRangeComparisonTest
     internal static void consume<T>(T a1, T a2) { }
 
     /* If conditions that are consumed. */
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     [Theory]
     [InlineData(10, 11)]
@@ -273,7 +272,6 @@ public class FullRangeComparisonTest
     }
 
     /* If/Else conditions that consume. */
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     [Theory]
     [InlineData(20, 21)]
@@ -464,7 +462,6 @@ public class FullRangeComparisonTest
     }
 
     /* If/Else conditions that return. */
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static byte Lt_else_byte_return(byte a1, byte a2)
     {

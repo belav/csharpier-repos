@@ -16,14 +16,12 @@ namespace Moq
     After:
         abstract class SetupWithOutParameterSupport : MethodSetup
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal abstract class SetupWithOutParameterSupport : MethodSetup
     After:
         abstract class SetupWithOutParameterSupport : MethodSetup
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal abstract class SetupWithOutParameterSupport : MethodSetup
@@ -37,14 +35,12 @@ namespace Moq
     After:
             readonly List<KeyValuePair<int, object>> outValues;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly List<KeyValuePair<int, object>> outValues;
     After:
             readonly List<KeyValuePair<int, object>> outValues;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly List<KeyValuePair<int, object>> outValues;
@@ -83,14 +79,12 @@ namespace Moq
                     After:
                             static List<KeyValuePair<int, object>> GetOutValues(IReadOnlyList<Expression> arguments, ParameterInfo[] parameters)
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                             private static List<KeyValuePair<int, object>> GetOutValues(IReadOnlyList<Expression> arguments, ParameterInfo[] parameters)
                     After:
                             static List<KeyValuePair<int, object>> GetOutValues(IReadOnlyList<Expression> arguments, ParameterInfo[] parameters)
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                             private static List<KeyValuePair<int, object>> GetOutValues(IReadOnlyList<Expression> arguments, ParameterInfo[] parameters)
@@ -123,7 +117,6 @@ namespace Moq
                     After:
                                             if (constant == null)
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                                             var constant = arguments[i].PartialEval() as ConstantExpression;
@@ -131,7 +124,6 @@ namespace Moq
                     After:
                                             if (constant == null)
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                                             var constant = arguments[i].PartialEval() as ConstantExpression;

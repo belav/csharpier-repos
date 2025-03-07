@@ -47,7 +47,6 @@ namespace System.Web.Hosting
             return VirtualPathUtility.Combine (basePath, relativePath);
         }
         */
-
         public override bool DirectoryExists(string virtualDir)
         {
             if (String.IsNullOrEmpty(virtualDir))

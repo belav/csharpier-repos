@@ -193,7 +193,6 @@ namespace System.Text.RegularExpressions
              * appear in the string are in the table. (Maximum size with
              * Unicode is 65K; ASCII only case is 512 bytes.)
              */
-
             _negativeASCII = new int[128];
 
             for (int i = 0; i < 128; i++)

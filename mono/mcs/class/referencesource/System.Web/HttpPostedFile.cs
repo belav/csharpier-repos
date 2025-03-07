@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Configuration;
@@ -40,7 +39,6 @@ namespace System.Web
         /*
          * File name
          */
-
         /// <devdoc>
         ///    <para>
         ///       Returns the full path of a file on the local browser's machine (for
@@ -55,7 +53,6 @@ namespace System.Web
         /*
          * Content type
          */
-
         /// <devdoc>
         ///    <para>
         ///       Returns the MIME content type of an incoming file sent by a client.
@@ -69,7 +66,6 @@ namespace System.Web
         /*
          * Content length
          */
-
         /// <devdoc>
         ///    <para>
         ///       Returns the size of an uploaded file, in bytes.
@@ -83,7 +79,6 @@ namespace System.Web
         /*
          * Stream
          */
-
         /// <devdoc>
         ///    <para>
         ///       Provides raw access to
@@ -98,7 +93,6 @@ namespace System.Web
         /*
          * Save into file
          */
-
         /// <devdoc>
         ///    <para>
         ///       Initiates a utility method to save an uploaded file to disk.

@@ -1381,7 +1381,6 @@ namespace MonoTests.System.Net.Sockets
         }
 
         /* No test for Ttl default as it is platform dependent */
-
         class MyUdpClient : UdpClient
         {
             public MyUdpClient() { }

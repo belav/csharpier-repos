@@ -109,7 +109,6 @@ namespace MonoTests.System.Collections.Concurrent
                 
                 Assert.AreEqual (expected, actual, "#3");
             });*/
-
             CollectionStressTestHelper.RemoveStressTest(
                 new ConcurrentStack<int>(),
                 CheckOrderingType.Reversed

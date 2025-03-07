@@ -15,7 +15,6 @@
    simplified to compute Cib alongside Crb by Tanner Gooding
    optimized to use Vector<double> by Tanner Gooding
 */
-
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;

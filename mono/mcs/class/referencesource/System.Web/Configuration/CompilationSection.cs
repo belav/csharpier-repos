@@ -95,7 +95,6 @@ namespace System.Web.Configuration
 
         </compilation>
 */
-
     public sealed class CompilationSection : ConfigurationSection
     {
         private const string tempDirectoryAttributeName = "tempDirectory";

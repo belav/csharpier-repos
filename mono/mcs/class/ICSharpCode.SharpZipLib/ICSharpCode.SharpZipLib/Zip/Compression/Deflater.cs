@@ -117,7 +117,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             * (7) At any time (7)
             *
             */
-
         private static int IS_SETDICT = 0x01;
         private static int IS_FLUSHING = 0x04;
         private static int IS_FINISHING = 0x08;

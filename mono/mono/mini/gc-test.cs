@@ -433,7 +433,6 @@ class Tests
      * Test the case when a stack slot becomes dead, then live again due to a backward
      * branch.
      */
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static object alloc_obj()
     {

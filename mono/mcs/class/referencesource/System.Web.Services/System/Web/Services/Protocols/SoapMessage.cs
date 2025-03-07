@@ -149,7 +149,6 @@ namespace System.Web.Services.Protocols
             get;
         }
         */
-
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.EnsureStage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

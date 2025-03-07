@@ -69,7 +69,6 @@ namespace Mono.Security.X509.Extensions
      *    privilegeWithdrawn      (7),
      *    aACompromise            (8) }
      */
-
     public class CRLDistributionPointsExtension : X509Extension
     {
         public class DistributionPoint

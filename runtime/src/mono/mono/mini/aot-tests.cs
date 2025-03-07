@@ -11,7 +11,6 @@ using System.Text;
 /*
  * Regression tests for the AOT/FULL-AOT code.
  */
-
 #if __MOBILE__
 class AotTests
 #else

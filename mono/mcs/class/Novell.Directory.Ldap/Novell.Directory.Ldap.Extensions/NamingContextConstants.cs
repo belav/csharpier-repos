@@ -36,7 +36,6 @@ namespace Novell.Directory.Ldap.Extensions
     /*
     * public class NamingContextConstants
     */
-
     /// <summary> Contains a collection of constants used by the Novell Ldap extensions.</summary>
     public class NamingContextConstants
     {

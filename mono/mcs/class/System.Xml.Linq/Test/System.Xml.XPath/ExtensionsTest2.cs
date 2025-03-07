@@ -237,7 +237,6 @@ namespace MonoTests.System.Xml
                 new_include.OuterXml, "#2");
         }
         */
-
         [Test]
         [ExpectedException(typeof(NotSupportedException))]
         public void XPathDocumentMoveToId()

@@ -29,7 +29,6 @@ namespace MonoTests.System.Reflection.Emit
     /// For testing constructors we have use 4 different test functions,
     /// Various exceptions have been checked for 4th type of consturctor.
     /// </summary>
-
     [TestFixture]
     public class CustomAttributeBuilderTest
     {
@@ -205,7 +204,6 @@ namespace MonoTests.System.Reflection.Emit
              * We also set the "Feild" of class CustomAttribute and the value;
              * And then check for the validity of attributes in the test functions
              */
-
             AssemblyName asmName = new AssemblyName();
             asmName.Name = "TestAssembly.dll";
 
@@ -262,7 +260,6 @@ namespace MonoTests.System.Reflection.Emit
              * We also set the "AttributeOne" of class CustomAttribute by means of the constuctor
              * And then check for the validity of attribute state
              */
-
             AssemblyName asmName = new AssemblyName();
             asmName.Name = "TestAssembly.dll";
 
@@ -319,7 +316,6 @@ namespace MonoTests.System.Reflection.Emit
              * by means of the constuctor of CustomAttributeBuilder
              * And then check for the validity
              */
-
             AssemblyName asmName = new AssemblyName();
             asmName.Name = "TestAssembly.dll";
 

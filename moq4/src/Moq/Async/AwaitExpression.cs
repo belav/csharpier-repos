@@ -13,14 +13,12 @@ namespace Moq.Async
     After:
         sealed class AwaitExpression : Expression
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class AwaitExpression : Expression
     After:
         sealed class AwaitExpression : Expression
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class AwaitExpression : Expression
@@ -36,7 +34,6 @@ namespace Moq.Async
             readonly IAwaitableFactory awaitableFactory;
             readonly Expression operand;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly IAwaitableFactory awaitableFactory;
@@ -45,7 +42,6 @@ namespace Moq.Async
             readonly IAwaitableFactory awaitableFactory;
             readonly Expression operand;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly IAwaitableFactory awaitableFactory;

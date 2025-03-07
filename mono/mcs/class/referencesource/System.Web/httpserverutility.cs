@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-
 // Don't entity encode high chars (160 to 256), to fix bugs VSWhidbey 85857/111927
 //
 #define ENTITY_ENCODE_HIGH_ASCII_CHARS
@@ -1270,7 +1269,6 @@ namespace System.Web
 
     /// <devdoc>
     /// </devdoc>
-
     // VSWhidbey 473228 - removed link demand from HttpUtility for ClickOnce scenario
     public sealed class HttpUtility
     {
@@ -1487,7 +1485,6 @@ namespace System.Web
 
             return sb.ToString();
         }*/
-
         //
         //  Query string parsing support
         //

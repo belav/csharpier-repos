@@ -75,7 +75,6 @@ namespace System.Threading.Tasks
         }
 
         /* Constructors */
-
         // ctor parameters provide defaults for the factory, which can be overridden by options provided to
         // specific calls on the factory
 
@@ -254,7 +253,6 @@ namespace System.Threading.Tasks
         }
 
         /* Properties */
-
         /// <summary>
         /// Gets the default <see cref="System.Threading.CancellationToken">CancellationToken</see> of this
         /// TaskFactory.

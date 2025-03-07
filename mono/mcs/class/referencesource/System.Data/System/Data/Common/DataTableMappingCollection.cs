@@ -184,7 +184,6 @@ namespace System.Data.Common
         public void AddCloneOfRange(IEnumerable values) {
             AddEnumerableRange(values, true);
         }*/
-
         public DataTableMapping Add(string sourceTable, string dataSetTable)
         {
             return Add(new DataTableMapping(sourceTable, dataSetTable));

@@ -242,7 +242,6 @@ namespace System.Xml.XmlSchemaTests
         }
 
         /******** reprocess compile include **********/
-
         //[Variation(Desc = "v101.6 - Include: A(ns-a) include B(ns-a) which includes C(ns-a) ", Priority = 2, Params = new object[] { "include_v7_a.xsd", 1, "ns-a:e3" })]
         [InlineData("include_v7_a.xsd", 1, "ns-a:e3")]
         //[Variation(Desc = "v101.5 - Include: A with NS includes B and C with no NS", Priority = 2, Params = new object[] { "include_v6_a.xsd", 1, "ns-a:e3" })]
@@ -506,7 +505,6 @@ namespace System.Xml.XmlSchemaTests
         }
 
         /********  compile reprocess include **********/
-
         //[Variation(Desc = "v201.6 - Include: A(ns-a) include B(ns-a) which includes C(ns-a) ", Priority = 2, Params = new object[] { "include_v7_a.xsd", 1, "ns-a:e3" })]
         [InlineData("include_v7_a.xsd", 1, "ns-a:e3")]
         //[Variation(Desc = "v201.5 - Include: A with NS includes B and C with no NS", Priority = 2, Params = new object[] { "include_v6_a.xsd", 1, "ns-a:e3" })]

@@ -11,14 +11,12 @@ namespace Moq
     After:
         readonly struct Pair<T1, T2> : IEquatable<Pair<T1, T2>>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal readonly struct Pair<T1, T2> : IEquatable<Pair<T1, T2>>
     After:
         readonly struct Pair<T1, T2> : IEquatable<Pair<T1, T2>>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal readonly struct Pair<T1, T2> : IEquatable<Pair<T1, T2>>

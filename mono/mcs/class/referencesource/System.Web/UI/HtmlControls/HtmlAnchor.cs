@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -37,7 +36,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html A control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/> class.</para>
         /// </devdoc>
@@ -58,7 +56,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Href property.
          */
-
         /// <devdoc>
         ///    <para>Gets or sets the URL target of the link specified in the
         ///    <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/>
@@ -83,7 +80,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Name of group this radio is in.
          */
-
         /// <devdoc>
         /// <para>Gets or sets the bookmark name defined in the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/>
         /// server
@@ -107,7 +103,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Target window property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or
@@ -133,7 +128,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Title property.
          */
-
         /// <devdoc>
         ///    <para> Gets or sets the title that
         ///       the browser displays when identifying linked content.</para>
@@ -213,7 +207,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Override to generate postback code for onclick.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -244,7 +237,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method used to raise the OnServerClick event.
          */
-
         /// <devdoc>
         /// <para>Raises the <see langword='ServerClick'/>
         /// event.</para>
@@ -260,7 +252,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackEventHandler interface to raise events on post back.
          * Button fires an OnServerClick event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

@@ -21,7 +21,6 @@ namespace System.Runtime.Caching.Configuration
        </system.caching>
 
     */
-
     public sealed class MemoryCacheSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

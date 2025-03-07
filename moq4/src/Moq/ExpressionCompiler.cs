@@ -19,14 +19,12 @@ namespace Moq
     After:
             static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
     After:
             static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;

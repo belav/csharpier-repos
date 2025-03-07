@@ -17,7 +17,6 @@ Author:
 Revision History:
 
 --*/
-
 namespace System.Net
 {
     using System;
@@ -87,7 +86,6 @@ namespace System.Net
             }
         }
         */
-
         public FrameHeader ReadHeader
         {
             get { return m_CurReadHeader; }
@@ -119,7 +117,6 @@ namespace System.Net
             }
         }
         */
-
         /*
         // Consider removing.
         public bool CanRead {
@@ -128,7 +125,6 @@ namespace System.Net
             }
         }
         */
-
         /*
         // Consider removing.
         public bool CanWrite {
@@ -137,7 +133,6 @@ namespace System.Net
             }
         }
         */
-
         public byte[] ReadMessage()
         {
             if (m_Eof)
@@ -644,7 +639,6 @@ namespace System.Net
     // Consider removing.
     internal delegate void WorkerCallback(WorkerAsyncResult result);
     */
-
     internal class WorkerAsyncResult : LazyAsyncResult
     {
         public byte[] Buffer;
@@ -725,7 +719,6 @@ namespace System.Net
             return new FrameHeader(_MessageId, _MajorV, _MinorV);
         }
         */
-
         public int Size
         {
             get { return 5; }

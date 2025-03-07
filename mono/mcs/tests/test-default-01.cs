@@ -51,5 +51,4 @@ enum E
     B = default + 1
 }
 */
-
 interface II { }

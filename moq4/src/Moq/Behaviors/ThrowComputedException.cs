@@ -12,14 +12,12 @@ namespace Moq.Behaviors
     After:
         sealed class ThrowComputedException : Behavior
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ThrowComputedException : Behavior
     After:
         sealed class ThrowComputedException : Behavior
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ThrowComputedException : Behavior
@@ -33,14 +31,12 @@ namespace Moq.Behaviors
     After:
             readonly Func<IInvocation, Exception> exceptionFactory;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly Func<IInvocation, Exception> exceptionFactory;
     After:
             readonly Func<IInvocation, Exception> exceptionFactory;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly Func<IInvocation, Exception> exceptionFactory;

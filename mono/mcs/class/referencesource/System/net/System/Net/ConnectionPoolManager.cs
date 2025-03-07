@@ -92,7 +92,6 @@ namespace System.Net
             }
         }
         */
-
         internal static bool RemoveConnectionPool(ServicePoint servicePoint, string groupName)
         {
             string key = GenerateKey(servicePoint.Host, servicePoint.Port, groupName);

@@ -75,7 +75,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             Note that pointer operators cannot be lifted over nullable and are not callable through dynamic
         */
-
         // BinOpBindMethod and UnaOpBindMethod are method pointer arrays to dispatch the appropriate operator binder.
         // Method pointers must be in the order of the corresponding enums. We check this when the full signature is set.
         // When the binding method is looked up in these arrays we ASSERT
@@ -716,7 +715,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             This handles binding binary operators by first checking for user defined operators, then
             applying overload resolution to the predefined operators. It handles lifting over nullable.
         */
-
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public Expr BindStandardBinop(ExpressionKind ek, Expr arg1, Expr arg2)
         {
@@ -1405,7 +1403,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             Returns negative if ibos1 is better, positive if ibos2 is better, 0 if neither.
         */
-
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private int WhichBofsIsBetter(
             BinOpFullSig bofs1,
@@ -2321,7 +2318,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Handles standard unary decimal based operators.
         */
-
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2984,7 +2980,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
           will be a constant also. op2 can be null for a unary operator. The operands are assumed
           to be already converted to the correct type.
          */
-
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",

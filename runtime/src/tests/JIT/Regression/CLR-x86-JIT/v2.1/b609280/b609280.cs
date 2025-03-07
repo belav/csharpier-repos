@@ -5,7 +5,6 @@
 /*Incorrect code generated for assignment in multidimmensional arrays of large (>255 bytes) valuetypes by the x86 JIT.
 (The size of the array element is truncated to 1 byte while being stored into internal JIT datastructures.)
 The fix is: Disable array get/set optimizations for multidimmensional arrays of large (>255 bytes) valuetypes.*/
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

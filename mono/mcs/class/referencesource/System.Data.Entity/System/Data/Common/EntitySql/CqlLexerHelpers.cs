@@ -329,7 +329,6 @@ namespace System.Data.Common.EntitySql
             Function Key(c Customer) AS (Key(c))
             select Key(cust) from Customsers as cust
             */
-
             Token token;
 
             // Handle the escaped identifiers coming from HandleEscapedIdentifiers()

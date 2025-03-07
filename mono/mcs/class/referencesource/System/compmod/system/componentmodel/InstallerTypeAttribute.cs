@@ -6,7 +6,6 @@
 
 /*
  */
-
 // SECREVIEW: Remove this attribute once bug#411889 is fixed.
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Microsoft.Security",

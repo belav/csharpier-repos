@@ -717,7 +717,6 @@ namespace System.Diagnostics.Tests
         }
 
         /****** WC3 Format tests *****/
-
         [Fact]
         public void IdFormat_W3CIsDefaultForNet5()
         {

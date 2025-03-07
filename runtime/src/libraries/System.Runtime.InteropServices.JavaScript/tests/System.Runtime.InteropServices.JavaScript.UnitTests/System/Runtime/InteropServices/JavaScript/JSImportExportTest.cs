@@ -193,7 +193,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             obj.GetProperty("x", out string? xs);
             Assert.Equal("42", xs);
             */
-
             obj.SetProperty("b", 3);
             double? b = obj.GetPropertyAsDouble("b");
             Assert.Equal(3, b);

@@ -587,7 +587,6 @@ UPDATE m
 
                 /* get the application id since it seems that inside transactions we
                    can't insert using subqueries.. */
-
                 commandText =
                     @"
 SELECT ApplicationId
@@ -608,7 +607,6 @@ SELECT ApplicationId
 
                 /* check for unique username, email and
                  * provider user key, if applicable */
-
                 commandText =
                     @"
 SELECT COUNT(*)
@@ -707,7 +705,6 @@ VALUES (@ApplicationId, NEWID(), @UserName, LOWER(@UserName), GETDATE())
                 }
 
                 /* then get the newly created userid */
-
                 commandText =
                     @"
 SELECT UserId
@@ -1134,7 +1131,6 @@ SELECT COUNT (*)
                        set FailedPasswordAnswerAttemptCount to 0
                        set FailedPasswordAnswerAttemptWindowStart to DefaultDateTime
                     */
-
                     string commandText =
                         @"
 SELECT m.Password
@@ -1550,7 +1546,6 @@ SELECT u.UserName
                     EmitValidatingPassword(username, newPassword, false);
 
                     /* otherwise update the user's password in the db */
-
                     db_password = EncodePassword(newPassword, db_passwordFormat, db_salt);
 
                     commandText =
@@ -1743,7 +1738,6 @@ UPDATE dbo.aspnet_Users
                        set FailedPasswordAnswerAttemptCount to 0
                        set FailedPasswordAnswerAttemptWindowStart to DefaultDateTime
                     */
-
                     commandText =
                         @"
 UPDATE dbo.aspnet_Membership
@@ -1858,7 +1852,6 @@ UPDATE dbo.aspnet_Membership
                  set IsLockedOut = true.
                  set LastLockoutDate = DateTime.Now
             */
-
             string commandText = String.Format(
                 @"
 SELECT m.{0}, m.{1}

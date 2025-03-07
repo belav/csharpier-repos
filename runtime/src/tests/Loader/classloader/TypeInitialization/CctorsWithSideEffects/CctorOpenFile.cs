@@ -7,7 +7,6 @@ Access type's static field (which would trigger the .cctor)
 Expected: Should get no exceptions.
 
 */
-
 using System;
 using System.IO;
 using Xunit;

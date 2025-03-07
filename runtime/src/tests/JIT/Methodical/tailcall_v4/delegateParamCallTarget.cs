@@ -14,7 +14,6 @@
  * Accomplice
  * Failed
  */
-
 using System;
 using Xunit;
 

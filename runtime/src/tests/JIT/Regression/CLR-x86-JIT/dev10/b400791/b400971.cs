@@ -5,7 +5,6 @@
 /*
    AV in mscorwks!WKS::gc_heap::mark_object_simple1
 */
-
 using System;
 using Xunit;
 

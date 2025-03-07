@@ -267,7 +267,6 @@ namespace System.Diagnostics.Tracing
                 to a blittable array, and the blittable array is small, it would be
                 more efficient to buffer the array instead of pinning it.
                 */
-
                 this.EnsureBuffer();
                 Debug.Assert(buffer != null);
                 this.PinArray(this.buffer, this.bufferPos);

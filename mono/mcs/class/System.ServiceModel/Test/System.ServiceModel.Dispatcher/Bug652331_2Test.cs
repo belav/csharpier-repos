@@ -711,7 +711,6 @@ namespace WebServiceMoonlightTest.ServiceReference2
                     }
                 }
         */
-
         public event System.EventHandler<GetDataCompletedEventArgs> GetDataCompleted;
 
         public event System.EventHandler<GetCollectionDataCompletedEventArgs> GetCollectionDataCompleted;

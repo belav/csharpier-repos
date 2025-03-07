@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -29,7 +28,6 @@
 ** from the use of this code or the results obtained from using
 ** this code.
 */
-
 using System;
 
 /***********************
@@ -42,7 +40,6 @@ using System;
 ** must be the same value (this routine depends on a square
 ** matrix).
 */
-
 internal class LUDecomp : LUStruct
 {
     private const int MAXLUARRAYS = 1000;

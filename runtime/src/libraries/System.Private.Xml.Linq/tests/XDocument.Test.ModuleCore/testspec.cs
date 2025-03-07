@@ -213,7 +213,6 @@ namespace Microsoft.Test.ModuleCore
                         </TestCase>
                 </TestModule>
             */
-
             //Create the document
             pxmldoc = new CXmlDocument();
 

@@ -819,7 +819,6 @@ namespace MonoTests.Microsoft.Build.BuildEngine
                 "A", "a;b",
                 "B", "$(A)"
             }, "H1");*/
-
             CheckBuildItemGroup(
                 project.GetEvaluatedItemsByName("C"),
                 new string[] { "C", "D" },

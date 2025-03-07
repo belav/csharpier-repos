@@ -126,7 +126,6 @@ namespace System.Xml.XmlSchemaTests
         }
 
         /* Parameters = file name , is custom xml namespace System.Xml.XmlSchemaTests */
-
         //[Variation(Desc = "v20 - DCR 264908 - XSD: Support user specified schema for http://www.w3.org/XML/1998/namespace System.Xml.XmlSchemaTests", Priority = 1, Params = new object[] { "bug264908_v10.xsd", 2, false })]
         [InlineData("bug264908_v10.xsd", 2, false)]
         //[Variation(Desc = "v19 - DCR 264908 - XSD: Support user specified schema for http://www.w3.org/XML/1998/namespace System.Xml.XmlSchemaTests", Priority = 1, Params = new object[] { "bug264908_v9.xsd", 5, true })]
@@ -552,7 +551,6 @@ namespace System.Xml.XmlSchemaTests
             }
 
             /***********************************************/
-
             XmlSchemaSet ss3 = new XmlSchemaSet();
             ss3.XmlResolver = new XmlUrlResolver();
             ss3.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);

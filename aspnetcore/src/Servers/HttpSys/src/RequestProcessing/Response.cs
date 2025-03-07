@@ -285,7 +285,6 @@ internal sealed class Response
         This flag should be passed on the first call to HttpSendResponseEntityBody, and
         not after. Thus, flag is not applicable to HttpSendHttpResponse.
     */
-
     // TODO: Consider using HTTP_SEND_RESPONSE_RAW_HEADER with HttpSendResponseEntityBody instead of calling HttpSendHttpResponse.
     // This will give us more control of the bytes that hit the wire, including encodings, HTTP 1.0, etc..
     // It may also be faster to do this work in managed code and then pass down only one buffer.

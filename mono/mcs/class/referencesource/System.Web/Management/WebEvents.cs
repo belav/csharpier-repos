@@ -1433,7 +1433,6 @@ namespace System.Web.Management
                             - WebAuthenticationFailureAuditEvent (+ NameToAuthenticate)
                             - WebViewStateFailureAuditEvent (+ ViewStateException)
             */
-
             // Hierarchy level 5
 
             if (eventRaised is WebAuthenticationSuccessAuditEvent)

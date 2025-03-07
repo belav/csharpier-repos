@@ -23,7 +23,6 @@ namespace System.Xml
         ///    <para>Maps a
         ///       URI to an Object containing the actual resource.</para>
         /// </devdoc>
-
         public abstract object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn);
 
         public virtual Task<object> GetEntityAsync(

@@ -9,7 +9,6 @@ DevDiv Bugs 181818: DateTimeOffset should have a type converter just like DateTi
 This converter should behave just like DateTimeConverter only it should convert DateTimeOffsets.
 The code was copied from DateTimeConverter and adapted for DateTimeOffset.
  */
-
 namespace System.ComponentModel
 {
     using System.ComponentModel.Design.Serialization;

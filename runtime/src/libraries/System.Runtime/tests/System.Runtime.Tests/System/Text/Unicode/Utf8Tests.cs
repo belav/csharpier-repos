@@ -63,7 +63,6 @@ namespace System.Text.Unicode.Tests
         /*
          * COMMON UTILITIES FOR UNIT TESTS
          */
-
         public static byte[] DecodeHex(ReadOnlySpan<char> inputHex)
         {
             Assert.Matches(@"^([0-9a-fA-F]{2})*$", inputHex.ToString());

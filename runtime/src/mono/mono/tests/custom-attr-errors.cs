@@ -243,7 +243,6 @@ class Tests
         }
     }
     */
-
     [BadAttr(Property3 = 1)]
     public static int test_0_bad_property_no_setter()
     {

@@ -17,7 +17,6 @@
 // <OWNER>Microsoft</OWNER>
 //
 ============================================================*/
-
 namespace System.Threading
 {
     using System;

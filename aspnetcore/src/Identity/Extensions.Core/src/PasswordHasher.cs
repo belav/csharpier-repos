@@ -32,7 +32,6 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser>
      * Format: { 0x01, prf (UInt32), iter count (UInt32), salt length (UInt32), salt, subkey }
      * (All UInt32s are stored big-endian.)
      */
-
     private readonly PasswordHasherCompatibilityMode _compatibilityMode;
     private readonly int _iterCount;
     private readonly RandomNumberGenerator _rng;

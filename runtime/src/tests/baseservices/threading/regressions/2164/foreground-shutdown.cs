@@ -12,7 +12,6 @@ using Xunit;
   Running foreground threads do not prevent runtime shutdown
   on return from main
 */
-
 public class Test_foreground_shutdown
 {
     [Fact]

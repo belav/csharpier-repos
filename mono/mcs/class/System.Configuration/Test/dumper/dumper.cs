@@ -14,7 +14,6 @@
 ** 5. diff the results:
 **    $ diff -u dumper.out.linux dumper.out.microsoft | grep ^[-+]
 */
-
 using System;
 using System.Collections;
 using System.Configuration;

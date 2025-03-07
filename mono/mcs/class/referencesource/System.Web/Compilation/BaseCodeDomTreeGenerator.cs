@@ -16,7 +16,6 @@ BaseCodeDomTreeGenerator
         PageThemeCodeDomTreeGenerator
     ApplicationFileCodeDomTreeGenerator
 ***********************************************/
-
 namespace System.Web.Compilation
 {
     using System;
@@ -957,7 +956,6 @@ namespace System.Web.Compilation
                     if (!CompilParams.IncludeDebugInformation)
                         return null;
             */
-
             if (String.IsNullOrEmpty(virtualPath))
                 return null;
 

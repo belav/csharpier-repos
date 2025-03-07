@@ -250,7 +250,6 @@ namespace Commons.Xml
                     return reader.ReadOuterXml ();
                 }
         */
-
         public override string LookupNamespace(string prefix)
         {
             return reader.LookupNamespace(prefix);

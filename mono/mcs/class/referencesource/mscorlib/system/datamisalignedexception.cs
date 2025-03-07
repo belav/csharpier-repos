@@ -10,7 +10,6 @@
 ** Purpose: The exception class for a misaligned access exception
 **
 =============================================================================*/
-
 namespace System
 {
     using System;

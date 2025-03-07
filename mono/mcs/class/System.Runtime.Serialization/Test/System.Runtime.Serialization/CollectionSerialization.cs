@@ -294,7 +294,6 @@ namespace MonoTests.System.Runtime.Serialization
              * The same also applies to ReadOnlyCollection<T>.
              *
              */
-
             try
             {
                 Deserialize<CustomList<int>>(arrayResult);
@@ -320,7 +319,6 @@ namespace MonoTests.System.Runtime.Serialization
              * so it is treated as custom collection type and serialized as array.
              *
              */
-
             var collection = new CustomCollection<int>(array);
             var result3 = (string)Serialize<CustomCollection<int>>(collection);
             Assert.That(result3, Is.EqualTo(arrayResult), "#9");

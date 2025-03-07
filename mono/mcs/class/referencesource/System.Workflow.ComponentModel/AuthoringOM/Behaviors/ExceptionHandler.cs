@@ -234,7 +234,6 @@ namespace System.Workflow.ComponentModel
                 error.PropertyName = "FaultType";
                 validationErrors.Add(error);
             }*/
-
             if (exceptionHandler.EnabledActivities.Count == 0)
                 validationErrors.Add(
                     new ValidationError(

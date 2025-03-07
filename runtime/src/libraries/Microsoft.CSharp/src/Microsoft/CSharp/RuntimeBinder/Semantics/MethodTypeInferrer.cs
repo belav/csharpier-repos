@@ -72,7 +72,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
 
         */
-
         // This file contains the implementation for method CType inference on calls (with
         // arguments, and method CType inference on conversion of method groups to delegate
         // types (which will not have arguments.)
@@ -1082,7 +1081,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return true;
         }
          * */
-
         ////////////////////////////////////////////////////////////////////////////////
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

@@ -80,7 +80,6 @@ n2 matches the context Identifier for SecurityContextToken.
 n3 matches the u:Id for SecurityContextToken.
 
 */
-
 namespace System.ServiceModel.Security.Tokens
 {
     internal class SslnegoCookieResolver

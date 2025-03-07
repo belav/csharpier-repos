@@ -20,7 +20,6 @@ KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
 IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 PARTICULAR PURPOSE.
 =====================================================================*/
-
 // Add the classes in the following namespaces to our namespace
 using System;
 using System.Threading;

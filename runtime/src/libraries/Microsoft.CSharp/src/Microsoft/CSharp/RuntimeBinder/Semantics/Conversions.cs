@@ -335,7 +335,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             Always returns false if the types are error, anonymous method, or method group
         ***************************************************************************************************/
-
         /***************************************************************************************************
             Determines whether there is a boxing conversion from typeSrc to typeDst
 
@@ -362,7 +361,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         *   From T to an interface-type I in T's effective interface set and from T to any base
             interface of I.
         ***************************************************************************************************/
-
         /***************************************************************************************************
             Determines whether there is a wrapping conversion from typeSrc to typeDst
 

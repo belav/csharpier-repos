@@ -918,7 +918,6 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 /***********************************************************************
                                  * Here's where we process an assembly & it's options.                 *
                                  ***********************************************************************/
-
                                 bool disabled = false;
 
                                 if (

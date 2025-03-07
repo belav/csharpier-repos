@@ -26,7 +26,6 @@
  * and then a crash!
  *
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

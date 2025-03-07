@@ -1662,7 +1662,6 @@ namespace System.Windows.Forms
             if (false && hwnd.client_window != IntPtr.Zero)
                 CFRelease (hwnd.client_window);
             */
-
             if (WindowMapping[handle] != null)
             {
                 IntPtr window_handle = (IntPtr)(WindowMapping[handle]);

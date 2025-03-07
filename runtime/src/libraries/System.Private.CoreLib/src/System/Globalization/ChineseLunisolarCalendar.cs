@@ -10,7 +10,6 @@ namespace System.Globalization
     ///     Gregorian              1901/02/19          2101/01/28
     ///     ChineseLunisolar       1901/01/01          2100/12/29
     /// </remarks>
-
     public class ChineseLunisolarCalendar : EastAsianLunisolarCalendar
     {
         public const int ChineseEra = 1;

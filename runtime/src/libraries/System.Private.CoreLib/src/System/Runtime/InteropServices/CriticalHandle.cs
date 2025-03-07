@@ -43,7 +43,6 @@
 **
 **
 ===========================================================*/
-
 using System.Runtime.ConstrainedExecution;
 
 /*
@@ -112,7 +111,6 @@ using System.Runtime.ConstrainedExecution;
       private static extern MyCriticalHandleSubclass CreateHandle(int someState);
 
  */
-
 namespace System.Runtime.InteropServices
 {
     // This class should not be serializable - it's a handle

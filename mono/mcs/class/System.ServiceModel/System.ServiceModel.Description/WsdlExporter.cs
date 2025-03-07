@@ -182,7 +182,6 @@ namespace System.ServiceModel.Description
                     ws_msg.Parts.Add(ws_msgpart);
 
                     /* FIXME: Faults */
-
                     //Action
                     XmlAttribute attr = xdoc.CreateAttribute(
                         "wsaw",

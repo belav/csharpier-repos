@@ -60,7 +60,6 @@ namespace System.Web.Util
      *
      * Copyright (c) 2003 Microsoft Corporation
      */
-
     internal class FactoryGenerator
     {
         private Type _factoryInterface;

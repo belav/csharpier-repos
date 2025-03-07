@@ -180,7 +180,6 @@ namespace System.Xml.Schema
                   this.position = position;
               }
           }*/
-
         public enum InferenceOption
         {
             Restricted,

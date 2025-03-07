@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2008 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.Security.Authentication.ExtendedProtection;

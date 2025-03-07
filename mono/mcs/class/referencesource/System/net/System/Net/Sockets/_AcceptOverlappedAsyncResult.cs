@@ -162,7 +162,6 @@ namespace System.Net.Sockets
             SetUnmanagedStructures(buffer, addressBufferLength);
         }
         */
-
         void LogBuffer(long size)
         {
             GlobalLog.Assert(

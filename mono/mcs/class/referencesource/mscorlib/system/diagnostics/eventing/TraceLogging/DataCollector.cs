@@ -228,7 +228,6 @@ namespace System.Diagnostics.Tracing
 
 
 */
-
                 this.EnsureBuffer();
                 this.PinArray(this.buffer, this.bufferPos);
                 this.buffer = null;

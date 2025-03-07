@@ -272,7 +272,6 @@ namespace System.IO.Packaging
         /// <param name="packageFileMode">Container is opened in the specified mode if possible</param>
         /// <param name="packageFileAccess">Container is opened with the specified access if possible</param>
         /// <param name="share">Container is opened with the specified share if possible</param>
-
         internal ZipPackage(
             string path,
             FileMode packageFileMode,

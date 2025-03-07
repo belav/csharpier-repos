@@ -1135,7 +1135,6 @@ namespace System.ServiceModel.Channels
                 get { return relationship; }
             }
             */
-
             public override bool Relay
             {
                 get { return relay; }

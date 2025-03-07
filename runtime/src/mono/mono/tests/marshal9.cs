@@ -371,7 +371,6 @@ public class Tests
     /*
      * Test custom marshaller class not implementing ICustomMarshaler
      */
-
     public class Marshal2 { }
 
     [DllImport("libtest")]
@@ -402,7 +401,6 @@ public class Tests
     /*
      * Test custom marshaller class missing GetInstance method
      */
-
     public class Marshal3 : ICustomMarshaler
     {
         public void CleanUpManagedData(object managedObj) { }

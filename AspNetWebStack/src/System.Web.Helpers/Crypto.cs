@@ -111,7 +111,6 @@ namespace System.Web.Helpers
          * (See also: SDL crypto guidelines v5.1, Part III)
          * Format: { 0x00, salt, subkey }
          */
-
         public static string HashPassword(string password)
         {
             if (password == null)

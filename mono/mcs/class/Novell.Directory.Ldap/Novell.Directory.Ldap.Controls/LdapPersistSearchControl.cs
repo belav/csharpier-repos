@@ -163,7 +163,6 @@ namespace Novell.Directory.Ldap.Controls
         public static readonly int ANY = ADD | DELETE | MODIFY | MODDN;
 
         /* public constructors */
-
         /// <summary>  The default constructor. A control with changes equal to ANY,
         /// isCritical equal to true, changesOnly equal to true, and
         /// returnControls equal to true

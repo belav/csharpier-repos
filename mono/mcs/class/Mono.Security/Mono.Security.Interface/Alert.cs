@@ -104,7 +104,6 @@ namespace Mono.Security.Interface
             get { return this.level == AlertLevel.Fatal ? true : false; }
         }
         */
-
         public bool IsCloseNotify
         {
             get

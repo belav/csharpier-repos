@@ -97,7 +97,6 @@ namespace System.Text
     ** This is used to support GB18030-2000 encoding (code page 54936).
     **
     ==============================================================================*/
-
     internal sealed class GB18030Encoding : DBCSCodePageEncoding
     {
         // This is the table of 4 byte conversions.

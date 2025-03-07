@@ -173,7 +173,6 @@ namespace System.Security
         ** SecurityContextObject  to maintain alignment between the two classes.
         ** DON'T CHANGE THESE UNLESS YOU MODIFY SecurityContextObject in vm\object.h
         =========================================================================*/
-
         private ExecutionContext _executionContext;
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
         private volatile WindowsIdentity _windowsIdentity;

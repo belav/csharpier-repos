@@ -110,7 +110,6 @@ namespace System.Web.Security
             else
             {
                 /* anonymous request */
-
                 if (cookie != null)
                 {
                     ClearCookie(app, _config.CookieName);

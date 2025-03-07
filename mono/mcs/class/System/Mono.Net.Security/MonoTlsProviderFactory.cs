@@ -70,7 +70,6 @@ namespace Mono.Net.Security
          * reflection or from friend assemblies.
          *
          */
-
         internal static MobileTlsProvider GetProviderInternal()
         {
             lock (locker)
@@ -382,7 +381,6 @@ namespace Mono.Net.Security
          *
          * Mono.Security.dll provides a public wrapper around these.
          */
-
         internal static MobileTlsProvider GetProvider()
         {
             return GetProviderInternal();

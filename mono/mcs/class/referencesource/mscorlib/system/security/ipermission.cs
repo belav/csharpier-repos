@@ -29,7 +29,6 @@ namespace System.Security
         /*
          * Methods to support the Installation, Registration, others... PolicyEngine
          */
-
         // Policy decisions and runtime mechanisms (for example, Deny)
         // require a means to retrieve shared state between two
         // permissions. If there is no shared state between two

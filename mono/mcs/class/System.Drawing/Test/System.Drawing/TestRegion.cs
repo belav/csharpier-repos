@@ -352,7 +352,6 @@ namespace MonoTests.System.Drawing
                 *  ----------|
                 *
                 */
-
                 rect1 = new Rectangle(10, 10, 100, 100);
                 rect2 = new Rectangle(40, 60, 100, 20);
                 r1 = new Region(rect1);
@@ -376,7 +375,6 @@ namespace MonoTests.System.Drawing
                 *  	----------|
                 *
                 */
-
                 rect1 = new Rectangle(70, 10, 100, 100);
                 rect2 = new Rectangle(40, 60, 100, 20);
 
@@ -402,7 +400,6 @@ namespace MonoTests.System.Drawing
                 *  	----------|
                 *
                 */
-
                 rect1 = new Rectangle(40, 100, 100, 100);
                 rect2 = new Rectangle(70, 80, 50, 40);
                 r1 = new Region(rect1);
@@ -426,7 +423,6 @@ namespace MonoTests.System.Drawing
                 *	   |   |
                 *  	   -----
                 */
-
                 rect1 = new Rectangle(40, 10, 100, 100);
                 rect2 = new Rectangle(70, 80, 50, 40);
 
@@ -631,7 +627,6 @@ namespace MonoTests.System.Drawing
                 *  ----------|
                 *
                 */
-
                 rect1 = new Rectangle(10, 10, 100, 100);
                 rect2 = new Rectangle(40, 60, 100, 20);
                 r1 = new Region(rect1);
@@ -655,7 +650,6 @@ namespace MonoTests.System.Drawing
                 *  	----------|
                 *
                 */
-
                 rect1 = new Rectangle(70, 10, 100, 100);
                 rect2 = new Rectangle(40, 60, 100, 20);
 
@@ -681,7 +675,6 @@ namespace MonoTests.System.Drawing
                 *  	----------|
                 *
                 */
-
                 rect1 = new Rectangle(40, 100, 100, 100);
                 rect2 = new Rectangle(70, 80, 50, 40);
 
@@ -707,7 +700,6 @@ namespace MonoTests.System.Drawing
                 *  	   -----
                 *
                 */
-
                 rect1 = new Rectangle(40, 10, 100, 100);
                 rect2 = new Rectangle(70, 80, 50, 40);
 
@@ -750,7 +742,6 @@ namespace MonoTests.System.Drawing
                 *  	----------|
                 *
                 */
-
                 rect1 = new Rectangle(50, 100, 100, 100);
                 rect2 = new Rectangle(30, 70, 150, 40);
 
@@ -776,7 +767,6 @@ namespace MonoTests.System.Drawing
                 * | 	----------|
                 * |-------|
                 */
-
                 rect1 = new Rectangle(70, 60, 100, 70);
                 rect2 = new Rectangle(40, 10, 100, 150);
 
@@ -803,7 +793,6 @@ namespace MonoTests.System.Drawing
                 * 		|--------|
                 *
                 */
-
                 rect1 = new Rectangle(70, 60, 100, 70);
                 rect2 = new Rectangle(100, 10, 100, 150);
 
@@ -827,7 +816,6 @@ namespace MonoTests.System.Drawing
                 * 	  |  		     |
                 *  	  |------------------|
                 */
-
                 rect1 = new Rectangle(20, 20, 100, 100);
                 rect2 = new Rectangle(10, 80, 140, 150);
 

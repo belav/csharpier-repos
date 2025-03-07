@@ -25,7 +25,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace I18N.Other
 {
     using System;
@@ -257,7 +256,6 @@ namespace I18N.Other
                     return posn - byteIndex;
                 }
         */
-
         // Get the number of characters needed to decode a byte buffer.
         public override int GetCharCount(byte[] bytes, int index, int count)
         {

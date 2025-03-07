@@ -557,7 +557,6 @@ namespace MonoTests.System.ServiceModel.Security
                     Assert.AreEqual (expected, sw.ToString (), "#1");
                 }
         */
-
         [Test]
         public void WriteLocalIdKeyIdentifierClause1()
         {

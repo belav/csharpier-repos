@@ -10,7 +10,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
     /// An enum to identify what kind of completion a given Completion
     /// represents.
     /// </summary>
-
     public enum XamlCompletionKind
     {
         /// <summary>

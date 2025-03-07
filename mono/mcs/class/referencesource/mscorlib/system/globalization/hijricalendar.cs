@@ -48,7 +48,6 @@ namespace System.Globalization
     **      Gregorian   0622/07/18   9999/12/31
     **      Hijri       0001/01/01   9666/04/03
     */
-
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class HijriCalendar : Calendar
@@ -137,7 +136,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
         // Construct an instance of Hijri calendar.
 
         public HijriCalendar() { }
@@ -164,7 +162,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
         long GetAbsoluteDateHijri(int y, int m, int d)
         {
             return (long)(DaysUpToHijriYear(y) + HijriMonthDays[m - 1] + d - 1 - HijriAdjustment);
@@ -178,7 +175,6 @@ namespace System.Globalization
         **Exceptions: None
         **Notes:
         ============================================================================*/
-
         long DaysUpToHijriYear(int HijriYear)
         {
             long NumDays; // number of absolute days
@@ -487,7 +483,6 @@ namespace System.Globalization
         **      In order to get the exact Hijri year, we compare the exact absolute date for HijriYear and (HijriYear + 1).
         **      From here, we can get the correct Hijri year.
         ============================================================================*/
-
         internal virtual int GetDatePart(long ticks, int part)
         {
             int HijriYear; // Hijri year

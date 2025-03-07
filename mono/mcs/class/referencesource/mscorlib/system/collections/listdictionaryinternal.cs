@@ -16,7 +16,6 @@ using System.Diagnostics.Contracts;
 **
 **
 ===========================================================*/
-
 namespace System.Collections
 {
     ///    This is a simple implementation of IDictionary using a singly linked list. This

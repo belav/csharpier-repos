@@ -44,7 +44,6 @@ namespace Mono.Security.X509.Extensions
      *
      * KeyIdentifier ::= OCTET STRING
      */
-
 #if INSIDE_SYSTEM
     internal
 #else

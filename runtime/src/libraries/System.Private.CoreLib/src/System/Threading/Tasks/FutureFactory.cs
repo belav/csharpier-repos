@@ -52,7 +52,6 @@ namespace System.Threading.Tasks
         }
 
         /* Constructors */
-
         /// <summary>
         /// Initializes a <see cref="TaskFactory{TResult}"/> instance with the default configuration.
         /// </summary>
@@ -199,7 +198,6 @@ namespace System.Threading.Tasks
         }
 
         /* Properties */
-
         /// <summary>
         /// Gets the default <see cref="Threading.CancellationToken">CancellationToken</see> of this
         /// TaskFactory.
@@ -244,7 +242,6 @@ namespace System.Threading.Tasks
         public TaskContinuationOptions ContinuationOptions => m_defaultContinuationOptions;
 
         /* StartNew */
-
         /// <summary>
         /// Creates and starts a <see cref="Task{TResult}"/>.
         /// </summary>

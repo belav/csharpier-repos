@@ -59,7 +59,6 @@ namespace System.Globalization
     **      Gregorian   1583/01/01  2239/09/29
     **      Hebrew      5343/04/07  5999/13/29
     */
-
     // Includes CHebrew implemetation;i.e All the code necessary for converting
     // Gregorian to Hebrew Lunar from 1583 to 2239.
 
@@ -121,7 +120,6 @@ namespace System.Globalization
                 For year 2000, we know it has a Hebrew year type 6, which means it has 385 days.
                 And 1/1/2000 A.D. is Hebrew year 5760, 23rd day of 4th month.
         */
-
         //
         //  Jewish Era in use today is dated from the supposed year of the
         //  Creation with its beginning in 3761 B.C.
@@ -1511,7 +1509,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
         /*
         internal static Calendar GetDefaultInstance() {
             if (m_defaultInstance == null) {
@@ -1520,7 +1517,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
         // Construct an instance of gregorian calendar.
 
         public HebrewCalendar() { }
@@ -1539,7 +1535,6 @@ namespace System.Globalization
         **Note:
         **  We use a table for the Hebrew calendar calculation, so the year supported is limited.
         ============================================================================*/
-
         static private void CheckHebrewYearValue(int y, int era, String varName)
         {
             CheckEraRange(era);
@@ -1566,7 +1561,6 @@ namespace System.Globalization
         **Note:
         **  Call CheckHebrewYearValue() before calling this to verify the year value is supported.
         ============================================================================*/
-
         private void CheckHebrewMonthValue(int year, int month, int era)
         {
             int monthsInYear = GetMonthsInYear(year, era);
@@ -1594,7 +1588,6 @@ namespace System.Globalization
         **Note:
         **  Call CheckHebrewYearValue()/CheckHebrewMonthValue() before calling this to verify the year/month values are valid.
         ============================================================================*/
-
         private void CheckHebrewDayValue(int year, int month, int day, int era)
         {
             int daysInMonth = GetDaysInMonth(year, month, era);
@@ -1673,7 +1666,6 @@ namespace System.Globalization
         **      lunarDate       Object to take the result of the Hebrew year/month/day.
         **Exceptions:
         ============================================================================*/
-
         static internal int GetLunarMonthDay(int gregorianYear, __DateBuffer lunarDate)
         {
             //
@@ -2253,7 +2245,6 @@ namespace System.Globalization
         **      the ticks value of the number of days.
         **
         ============================================================================*/
-
         static DateTime HebrewToGregorian(
             int hebrewYear,
             int hebrewMonth,

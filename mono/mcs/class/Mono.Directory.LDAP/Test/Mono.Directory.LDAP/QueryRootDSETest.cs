@@ -27,7 +27,6 @@ namespace MonoTests.Directory.LDAP
                 string[] attrs = { "+", null };
 
                 /* don't bind, we do this anonymously */
-
                 ld.Search(
                     "" /* root dse */
                     ,

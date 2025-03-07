@@ -1341,7 +1341,6 @@ namespace Microsoft.Win32
                             IntPtr eventHandle
                                            );
          */
-
         [DllImport(WEVTAPI, CharSet = CharSet.Auto, SetLastError = true)]
         [SecurityCritical]
         [return: MarshalAs(UnmanagedType.Bool)]

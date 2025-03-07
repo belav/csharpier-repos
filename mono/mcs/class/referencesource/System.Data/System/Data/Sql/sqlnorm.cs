@@ -259,7 +259,6 @@ namespace Microsoft.SqlServer.Server
           return sb.ToString();
         }
         */
-
         protected bool m_skipNormalize;
 
         /*
@@ -269,7 +268,6 @@ namespace Microsoft.SqlServer.Server
           return a.IsByteOrdered;
         }
         */
-
         internal static Normalizer GetNormalizer(Type t)
         {
             Normalizer n = null;

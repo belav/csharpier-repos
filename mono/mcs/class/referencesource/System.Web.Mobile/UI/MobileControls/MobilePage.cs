@@ -1010,7 +1010,6 @@ namespace System.Web.UI.MobileControls
                             MobileRedirect.DisallowRedirection(Context);
                         }
             */
-
             return collection;
         }
 

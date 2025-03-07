@@ -54,7 +54,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructors for Asn1Boolean
         */
-
         /// <summary> Call this constructor to construct an Asn1Boolean
         /// object from a boolean value.
         ///
@@ -91,7 +90,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Object implementation
         */
-
         /// <summary> Encode the current instance into the
         /// specified output stream using the specified encoder object.
         ///
@@ -110,7 +108,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Boolean specific methods
         */
-
         /// <summary> Returns the content of this Asn1Boolean as a boolean.</summary>
         public bool booleanValue()
         {

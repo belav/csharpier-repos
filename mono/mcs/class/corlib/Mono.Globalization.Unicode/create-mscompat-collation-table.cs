@@ -747,7 +747,6 @@ namespace Mono.Globalization.Unicode
                         CSResult.WriteLine ("};");
                         CSResult.WriteLine ();
             */
-
 #if Binary
             using (FileStream fs = File.Create("../resources/collation.core.bin"))
             {
@@ -4641,7 +4640,6 @@ namespace Mono.Globalization.Unicode
                     return false;
                 }
         */
-
         // FIXME: In the future use DerivedAge.txt to examine character
         // versions and set those ones that have higher version than
         // 1.0 as ignorable.

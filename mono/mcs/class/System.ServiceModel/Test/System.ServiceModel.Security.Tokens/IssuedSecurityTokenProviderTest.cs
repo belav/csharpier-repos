@@ -371,7 +371,6 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
             Console.Error.WriteLine ("******************** DONE ********************");
             Console.Error.Flush ();
             */
-
             Assert.AreEqual(
                 "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue",
                 input.Headers.Action,

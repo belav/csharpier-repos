@@ -9,7 +9,6 @@
 /* and GC.GetGeneration(WeakReference) may break in same way. If it failed,
 /* it needs investigation.
 /********************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

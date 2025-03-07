@@ -24,7 +24,6 @@ WriteXml
 additional notes:
 We decided to enforce the rule 1 just if Xml being persisted
 ******************************************************************************************************/
-
 namespace System.Data
 {
     using System;

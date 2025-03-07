@@ -61,7 +61,6 @@ namespace MonoTests.System.ServiceModel.Description
                             new EndpointAddress ("http://localhost:37564"));
         }
         */
-
         [Test]
         public void ScriptGenerator()
         {

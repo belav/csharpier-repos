@@ -17,7 +17,6 @@
 ** Date:  August 21, 2003
 **
 ===========================================================*/
-
 using System;
 
 namespace System.Resources

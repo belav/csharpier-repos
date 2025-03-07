@@ -451,7 +451,6 @@ namespace MonoTests.System.ServiceModel.Description
                     /*Assert.AreEqual ("http://schemas.xmlsoap.org/wsdl/", section.Dialect, msg + " Dialect");
                     Assert.AreEqual (id, section.Identifier, msg + "Identifier");
                     Assert.AreEqual (0, section.Attributes.Count, "#cw4");*/
-
                     return sd;
                 }
             }
@@ -472,7 +471,6 @@ namespace MonoTests.System.ServiceModel.Description
                     /*Assert.AreEqual ("http://schemas.xmlsoap.org/wxsl/", section.Dialect, msg + " Dialect");
                     Assert.AreEqual (id, section.Identifier, msg + "Identifier");
                     Assert.AreEqual (0, section.Attributes.Count, "#cw4");*/
-
                     return xs;
                 }
             }
@@ -869,7 +867,6 @@ namespace MonoTests.System.ServiceModel.Description
 
             [DataMember]
             NotReferenced nr;*/
-
         [DataMember]
         public FooNS.bar bb;
     }

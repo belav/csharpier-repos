@@ -6,7 +6,6 @@
 /* Purpose: Test if Root class manage memory correctly against GC
 /* Coverage:    Root.Alloc(), Root.Free(), Root.Get()
 /*******************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

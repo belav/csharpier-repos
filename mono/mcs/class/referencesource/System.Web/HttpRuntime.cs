@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;
@@ -1818,7 +1817,6 @@ namespace System.Web
          * Process one step of the integrated pipeline
          *
          */
-
         internal static RequestNotificationStatus ProcessRequestNotification(
             IIS7WorkerRequest wr,
             HttpContext context
@@ -3047,7 +3045,6 @@ namespace System.Web
         /*
          * Process one request
          */
-
         /// <devdoc>
         ///    <para><SPAN>The method that drives
         ///       all ASP.NET web processing execution.</SPAN></para>

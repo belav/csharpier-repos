@@ -89,7 +89,6 @@ namespace System.Xml.XmlSchemaTests
         /*
          *  Attribute Wildcards
          */
-
         [Theory]
         //[Variation(Desc = "v8.4.4- Attributes Wildcards(11), allowXmlAttribute=true", Priority = 1, id = 81, Params = new object[] { "v9-4.xml", "v9-4.xsd", true, 0, 1, 2 })]
         [InlineData("v9-4.xml", "v9-4.xsd", true, 0, 1, 2)]
@@ -218,7 +217,6 @@ namespace System.Xml.XmlSchemaTests
         /*
          * * Custom XML namespace System.Xml.XmlSchemaTests in the SchemaSet
          */
-
         //[Variation(Desc = "v3.2.4- Custom XML namespace System.Xml.XmlSchemaTests in the set which imports another, particle has reference to custom attribute, instance has that attribute invalid custom attribute with schemalocation, allowXmlAttribute=true", Priority = 1, id = 24, Params = new object[] { "v3-3.xml", null, true, 0, 1, 3 })]
         [InlineData("v3-3.xml", null, true, 0, 1, 3)]
         //[Variation(Desc = "v3.2.3- Custom XML namespace System.Xml.XmlSchemaTests in the set which imports another, particle has reference to custom attribute, instance has that attribute invalid custom attribute with schemalocation, allowXmlAttribute=false", Priority = 1, id = 23, Params = new object[] { "v3-3.xml", null, false, 0, 1, 3 })]

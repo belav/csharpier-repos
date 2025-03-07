@@ -11,7 +11,6 @@
  * The two files must be kept in sync.  Any change made here must also
  * be made to WF\Activities\Common\CompilerHelpers.cs
 *********************************************************************/
-
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;

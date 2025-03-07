@@ -54,7 +54,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Collection of child TableCells.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the group of table cells contained within an

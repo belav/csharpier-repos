@@ -11,7 +11,6 @@
  * It seems that if you compile with /debug we get correct code so I’m thinking the problem is with inlining DoubleToInt64Bits into IsNegativeZero.
  *
  */
-
 using System;
 using Xunit;
 

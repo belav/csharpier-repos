@@ -13,7 +13,6 @@
 ** class is obtained from EventLogSession.
 **
 ============================================================*/
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;

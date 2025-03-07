@@ -530,7 +530,6 @@ namespace System.ServiceModel.Description
                                 new BinarySecretSecurityToken (Rijndael.Create ().Key));
                             writer.WriteEndElement ();
                 */
-
                 writer.WriteEndElement();
             }
             catch (Exception ex)

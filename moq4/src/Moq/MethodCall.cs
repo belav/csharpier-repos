@@ -22,14 +22,12 @@ namespace Moq
     After:
         sealed partial class MethodCall : SetupWithOutParameterSupport
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed partial class MethodCall : SetupWithOutParameterSupport
     After:
         sealed partial class MethodCall : SetupWithOutParameterSupport
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed partial class MethodCall : SetupWithOutParameterSupport
@@ -55,7 +53,6 @@ namespace Moq
             Condition condition;
             string failMessage;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private VerifyInvocationCount verifyInvocationCount;
@@ -74,7 +71,6 @@ namespace Moq
             Condition condition;
             string failMessage;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private VerifyInvocationCount verifyInvocationCount;
@@ -108,14 +104,12 @@ namespace Moq
         After:
                 string declarationSite;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private string declarationSite;
         After:
                 string declarationSite;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private string declarationSite;
@@ -162,14 +156,12 @@ namespace Moq
                     After:
                             static string GetUserCodeCallSite()
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                             private static string GetUserCodeCallSite()
                     After:
                             static string GetUserCodeCallSite()
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                             private static string GetUserCodeCallSite()
@@ -540,14 +532,12 @@ namespace Moq
             After:
                     void ValidateNumberOfCallbackParameters(Delegate callback, MethodInfo callbackMethod)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private void ValidateNumberOfCallbackParameters(Delegate callback, MethodInfo callbackMethod)
             After:
                     void ValidateNumberOfCallbackParameters(Delegate callback, MethodInfo callbackMethod)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private void ValidateNumberOfCallbackParameters(Delegate callback, MethodInfo callbackMethod)
@@ -587,14 +577,12 @@ namespace Moq
                     After:
                             void ValidateCallbackReturnType(MethodInfo callbackMethod, Type expectedReturnType)
                     */
-
                     /* Unmerged change from project 'Moq(netstandard2.1)'
                     Before:
                             private void ValidateCallbackReturnType(MethodInfo callbackMethod, Type expectedReturnType)
                     After:
                             void ValidateCallbackReturnType(MethodInfo callbackMethod, Type expectedReturnType)
                     */
-
                     /* Unmerged change from project 'Moq(net6.0)'
                     Before:
                             private void ValidateCallbackReturnType(MethodInfo callbackMethod, Type expectedReturnType)

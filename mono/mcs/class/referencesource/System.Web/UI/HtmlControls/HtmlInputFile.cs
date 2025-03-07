@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -44,7 +43,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates an intrinsic Html INPUT type=file control.
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlInputFile'/> class.</para>
         /// </devdoc>
@@ -54,7 +52,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Accept type property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets
@@ -82,7 +79,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The property for the maximum characters allowed.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the
@@ -108,7 +104,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * PostedFile property.
          */
-
         /// <devdoc>
         ///    <para>Gets access to the uploaded file specified by a client.</para>
         /// </devdoc>
@@ -125,7 +120,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The property for the width in characters.
          */
-
         /// <devdoc>
         ///    <para>Gets or sets the width of the file-path text box that the
         ///       browser displays when the <see cref='System.Web.UI.HtmlControls.HtmlInputFile'/>
@@ -178,7 +172,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method of IPostBackDataHandler interface to process posted data.
          */
-
         /// <internalonly/>
         bool IPostBackDataHandler.LoadPostData(
             string postDataKey,
@@ -198,7 +191,6 @@ namespace System.Web.UI.HtmlControls
          * posted data for a control has changed.  RadioButton fires an
          * OnServerChange event.
          */
-
         /// <internalonly/>
         void IPostBackDataHandler.RaisePostDataChangedEvent()
         {

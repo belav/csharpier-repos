@@ -49,7 +49,6 @@ namespace Novell.Directory.Ldap
         virtual internal System.Object[] MessageArray
         {
             /* package */
-
             get { return messages.ObjectArray; }
         }
 
@@ -61,7 +60,6 @@ namespace Novell.Directory.Ldap
         virtual internal int[] MessageIDs
         {
             /* package */
-
             get
             {
                 int size = messages.Count;
@@ -85,7 +83,6 @@ namespace Novell.Directory.Ldap
         virtual internal System.String AgentName
         {
             /*packge*/
-
             get { return name; }
         }
 
@@ -93,7 +90,6 @@ namespace Novell.Directory.Ldap
         virtual internal int Count
         {
             /* package */
-
             get
             {
                 int count = 0;

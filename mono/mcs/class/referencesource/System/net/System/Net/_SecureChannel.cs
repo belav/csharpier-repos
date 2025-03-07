@@ -1629,7 +1629,6 @@ namespace System.Net.Security
                 output - Encrypted bytes
 
         --*/
-
         internal SecurityStatus Encrypt(
             byte[] buffer,
             int offset,
@@ -1846,7 +1845,6 @@ namespace System.Net.Security
             checkCertName, if true checks the CN field of the certificate
 
         --*/
-
         //This method validates a remote certificate.
         //SECURITY: The scenario is allowed in semi-trust StorePermission is asserted for Chain.Build
         //          A user callback has unique signature so it is safe to call it under permission assert.
@@ -2310,7 +2308,6 @@ namespace System.Net.Security
 #endif
         }
         */
-
 #if TRAVE
         internal static string MapSecurityStatus(uint statusCode)
         {
@@ -3012,7 +3009,6 @@ namespace System.Net.Security
             return result;
         }
         */
-
         [System.Diagnostics.Conditional("DEBUG")]
         internal void DebugMembers()
         {

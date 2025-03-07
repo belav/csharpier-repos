@@ -14,14 +14,12 @@ namespace Moq
     After:
         sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     After:
         sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
@@ -52,14 +50,12 @@ namespace Moq
         After:
                 static object CreateArray(Type type, Mock mock)
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private static object CreateArray(Type type, Mock mock)
         After:
                 static object CreateArray(Type type, Mock mock)
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private static object CreateArray(Type type, Mock mock)
@@ -78,14 +74,12 @@ namespace Moq
             After:
                     static object CreateEnumerable(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static object CreateEnumerable(Type type, Mock mock)
             After:
                     static object CreateEnumerable(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static object CreateEnumerable(Type type, Mock mock)
@@ -104,14 +98,12 @@ namespace Moq
             After:
                     static object CreateEnumerableOf(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static object CreateEnumerableOf(Type type, Mock mock)
             After:
                     static object CreateEnumerableOf(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static object CreateEnumerableOf(Type type, Mock mock)
@@ -131,14 +123,12 @@ namespace Moq
             After:
                     static object CreateQueryable(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static object CreateQueryable(Type type, Mock mock)
             After:
                     static object CreateQueryable(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static object CreateQueryable(Type type, Mock mock)
@@ -157,14 +147,12 @@ namespace Moq
             After:
                     static object CreateQueryableOf(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static object CreateQueryableOf(Type type, Mock mock)
             After:
                     static object CreateQueryableOf(Type type, Mock mock)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static object CreateQueryableOf(Type type, Mock mock)

@@ -599,7 +599,6 @@ namespace System.Reflection.Emit
                     resources [p].data = blob;
                 }
         */
-
         public static AssemblyBuilder DefineDynamicAssembly(
             AssemblyName name,
             AssemblyBuilderAccess access
@@ -752,7 +751,6 @@ namespace System.Reflection.Emit
              *
              * https://connect.microsoft.com/VisualStudio/feedback/details/95784/fatal-assemblybuilder-defineunmanagedresource-byte-and-modulebuilder-defineunmanagedresource-byte-bugs-renders-them-useless
              */
-
             throw new NotImplementedException();
         }
 
@@ -817,7 +815,6 @@ namespace System.Reflection.Emit
              * We can only create the resource later, when the file name and
              * the binary version is known.
              */
-
             version_res = new Win32VersionResource(1, 0, false);
             version_res.ProductName = product != null ? product : " ";
             version_res.ProductVersion = productVersion != null ? productVersion : " ";

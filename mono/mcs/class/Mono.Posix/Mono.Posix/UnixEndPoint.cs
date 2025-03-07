@@ -73,7 +73,6 @@ namespace Mono.Posix
             if (socketAddress [1] != ((addr & 0xFF00) >> 8))
                 throw new ArgumentException ("socketAddress is not a unix socket address.");
              */
-
             byte[] bytes = new byte[socketAddress.Size - 2];
             for (int i = 0; i < bytes.Length; i++)
             {

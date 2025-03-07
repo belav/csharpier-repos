@@ -23,7 +23,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

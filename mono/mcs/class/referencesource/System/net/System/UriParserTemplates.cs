@@ -17,7 +17,6 @@ Author:
 
 Revision History:
 --*/
-
 //
 // ATTN: The below types must be compile-time registered with UriParser.CheckSetIsSimpleFlag() method
 //       to avoid calling into the user code if there is no one.

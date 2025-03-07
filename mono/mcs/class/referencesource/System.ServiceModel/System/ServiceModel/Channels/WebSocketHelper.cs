@@ -469,7 +469,6 @@ namespace System.ServiceModel.Channels
 
              *RBS = ReceiveBufferSize, *SBS = SendBufferSize
              *PBS = PropertyBufferSize (32-bit: 16, 64 bit: 20 bytes) */
-
             int nativeSendBufferSize = isServerBuffer
                 ? WebSocketDefaults.MinSendBufferSize
                 : WebSocketDefaults.BufferSize;

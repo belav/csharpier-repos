@@ -31,7 +31,6 @@ namespace System.Globalization
         /*
             A.D. = anno Domini
          */
-
         public const int ADEra = 1;
 
         internal const int DatePartYear = 0;
@@ -140,7 +139,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
         internal static Calendar GetDefaultInstance()
         {
             if (s_defaultInstance == null)
@@ -286,7 +284,6 @@ namespace System.Globalization
         **      Number of Days in Current Month
         **
         ============================================================================*/
-
         internal static long GetAbsoluteDate(int year, int month, int day)
         {
             if (year >= 1 && year <= MaxYear && month >= 1 && month <= 12)

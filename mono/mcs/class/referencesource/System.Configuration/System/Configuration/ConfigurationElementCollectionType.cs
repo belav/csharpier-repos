@@ -55,7 +55,6 @@ namespace System.Configuration
           where the "nearest" config file entries take precendence over the "parent"
           config file entries (see example above).
         **********************************************************************/
-
         BasicMap,
         AddRemoveClearMap,
         BasicMapAlternate,

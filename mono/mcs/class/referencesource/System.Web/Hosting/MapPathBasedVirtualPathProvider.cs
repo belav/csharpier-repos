@@ -8,7 +8,6 @@
  * Implementation of VirtualPathProvider based on the metabase and the standard
  * file system.  This is what ASP.NET uses by default.
  */
-
 namespace System.Web.Hosting
 {
     using System;

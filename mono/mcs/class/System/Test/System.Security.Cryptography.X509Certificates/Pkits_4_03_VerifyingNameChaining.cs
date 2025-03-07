@@ -41,7 +41,6 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
      *
      * See PkitsTest.cs for more details
      */
-
     [TestFixture]
     [Category("PKITS")]
     public class Pkits_4_03_VerifyingNameChaining : PkitsTest

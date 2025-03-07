@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.SessionState
 {
     using System.Collections.Generic;
@@ -19,7 +18,6 @@ namespace System.Web.SessionState
     /*
      * Marker interface to indicate that class uses granular session state.
      */
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>

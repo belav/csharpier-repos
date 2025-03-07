@@ -85,7 +85,6 @@ public class Test_TryEnter04
         Gen<ValX1<string>[][][]>.TryEnterTest();
         Gen<ValX1<object>[,,,]>.TryEnterTest();
         Gen<ValX1<Guid>[][,,,][]>.TryEnterTest();*/
-
         if (result)
         {
             Console.WriteLine("Test Passed");

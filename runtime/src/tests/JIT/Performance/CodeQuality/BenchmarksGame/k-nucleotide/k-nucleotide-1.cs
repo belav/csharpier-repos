@@ -11,7 +11,6 @@
  *
  * byte processing version using C# *3.0 idioms by Robert F. Tobler
  */
-
 using System;
 using System.Collections.Generic;
 using System.IO;

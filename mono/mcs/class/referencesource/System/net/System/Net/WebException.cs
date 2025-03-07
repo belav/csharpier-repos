@@ -21,7 +21,6 @@ namespace System.Net
 
 
     --*/
-
     /// <devdoc>
     ///    <para>
     ///       Provides network communication exceptions to the application.
@@ -161,7 +160,6 @@ namespace System.Net
         }
 
         /// <internalonly/>
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",

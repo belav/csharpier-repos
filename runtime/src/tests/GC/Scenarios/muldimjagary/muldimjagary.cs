@@ -11,7 +11,6 @@ namespace DefaultNamespace
     /* Coverage: int[][], Object[][], Object[][][], Variant[][][],
     /*           take Mul_Dimention array as function argument.
     /*************************************************************/
-
     class MulDimJagAry
     {
         public static int Main()

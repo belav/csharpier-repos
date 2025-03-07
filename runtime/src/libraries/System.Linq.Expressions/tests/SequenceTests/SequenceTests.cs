@@ -2130,7 +2130,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.AreEqual((uint?)dmin, TestConvert<double, uint?>(dmin, useInterpreter));
                 Assert.AreEqual((ulong?)dmax, TestConvert<double, ulong?>(dmax, useInterpreter));
                  */
-
                 Assert.Equal(
                     (float)(uint?)uint.MaxValue,
                     TestConvert<uint?, float>(uint.MaxValue, useInterpreter)

@@ -19,7 +19,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItemType"]/*' />
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
@@ -44,7 +43,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\MobileListItem.uex' path='docs/doc[@for="MobileListItem"]/*' />
     [PersistName("Item"), ToolboxItem(false)]
     [AspNetHostingPermission(

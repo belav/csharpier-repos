@@ -11,7 +11,6 @@
  * Operations to convert to and from Hex
  *
  */
-
 namespace System.Security.Util
 {
     using System;

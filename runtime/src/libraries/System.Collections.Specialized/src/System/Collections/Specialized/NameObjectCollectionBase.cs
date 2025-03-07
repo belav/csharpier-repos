@@ -7,7 +7,6 @@
  * This class is intended to be used as a base class
  *
  */
-
 #pragma warning disable 618 // obsolete types, namely IHashCodeProvider
 
 using System.ComponentModel;

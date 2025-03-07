@@ -57,7 +57,6 @@ namespace System.IO.Ports.Tests
             that no other thread is in another event handler
 
             ***************************************************************/
-
                 Debug.WriteLine("Verifying that event handlers are called serially");
 
                 com1.WriteTimeout = 5000;

@@ -999,7 +999,6 @@ namespace System.Windows.Forms
              * ScrollWindow calls, pdb and toshok will each
              * pay you $5.
             */
-
             if (!vscrollbar.Visible)
             {
                 vscrollbar.Value = vscrollbar.Minimum;

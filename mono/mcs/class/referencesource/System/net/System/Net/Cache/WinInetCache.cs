@@ -87,7 +87,6 @@ namespace System.Net.Cache
 
 
 */
-
         //  Some supported Entry fields references
         [Flags]
         internal enum Entry_FC

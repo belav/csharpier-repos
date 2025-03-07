@@ -99,7 +99,6 @@ namespace V8.Richards
         /* --- *
          * P a c k e t
          * --- */
-
         public const int DATA_SIZE = 4;
 
         [Fact]

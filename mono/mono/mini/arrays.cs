@@ -22,7 +22,6 @@ using System.Reflection;
  * regression test file written in IL code to have better control on how
  * the IL code looks.
  */
-
 #if __MOBILE__
 class ArrayTests
 #else

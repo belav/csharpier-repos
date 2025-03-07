@@ -181,7 +181,6 @@ namespace System.Data
             /*else {
                 ValidateRow(rowCounter);
             }*/
-
             ValidateOpen("Read");
 
             ValidateReader();

@@ -4913,7 +4913,6 @@ namespace System.Configuration
           reserved    = '\' |  '/' | '|' | ':' |  '"' |  '<' | '>'
 
         */
-
         // NOTE: If you change these strings, you must change the associated error message
         const string invalidFirstSubPathCharacters = @"\./";
         const string invalidLastSubPathCharacters = @"\./";

@@ -37,7 +37,6 @@ class CGen
         get_method = tbuilder.DefineMethod("get_FieldI", MethodAttributes.Public, result, null);
         get_method.CreateMethodBody (body, body.Length);
         pbuilder.SetGetMethod (get_method);*/
-
         Type t = tbuilder.CreateType();
         abuilder.SetEntryPoint(method);
         abuilder.Save(name);

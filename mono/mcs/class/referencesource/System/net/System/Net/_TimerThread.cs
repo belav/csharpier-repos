@@ -54,7 +54,6 @@ namespace System.Net
                 return CreateTimer(callback, null);
             }
             */
-
             /// <summary>
             /// <para>Creates and returns a handle to a new timer with attached context.</para>
             /// </summary>
@@ -125,7 +124,6 @@ namespace System.Net
                 }
             }
             */
-
             /// <summary>
             /// <para>The amount of time left on the timer.  0 means it has fired.  1 means it has expired but
             /// not yet fired.  -1 means infinite.  Int32.MaxValue is the ceiling - the actual value could be longer.</para>
@@ -496,7 +494,6 @@ namespace System.Net
                 }
             }
             */
-
             internal override bool HasExpired
             {
                 get { return m_TimerState == TimerState.Fired; }
@@ -956,7 +953,6 @@ namespace System.Net
             }
         }
         */
-
         private static void StopTimerThread()
         {
             Interlocked.Exchange(ref s_ThreadState, (int)TimerThreadState.Stopped);

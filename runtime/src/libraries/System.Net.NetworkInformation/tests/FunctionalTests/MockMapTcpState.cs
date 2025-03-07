@@ -6,7 +6,6 @@
     For the tests that parse strings, we need to have a single definition for these mappings
     in order for the tests to run on different platforms against the same standard test files.
 */
-
 using System.Net.NetworkInformation;
 
 internal static class Interop

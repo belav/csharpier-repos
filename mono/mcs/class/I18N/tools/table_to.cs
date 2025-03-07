@@ -3,7 +3,6 @@
  *
  * @author Bruno Haible
  */
-
 using System; /* String, Console */
 using System.Text; /* Encoding */
 

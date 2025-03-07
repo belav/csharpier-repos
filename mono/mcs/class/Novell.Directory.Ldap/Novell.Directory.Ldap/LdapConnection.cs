@@ -398,7 +398,6 @@ namespace Novell.Directory.Ldap
         virtual internal Connection Connection
         {
             /* package */
-
             get { return conn; }
         }
 
@@ -410,7 +409,6 @@ namespace Novell.Directory.Ldap
         virtual internal System.String ConnectionName
         {
             /* package */
-
             get { return name; }
         }
         private LdapSearchConstraints defSearchCons;
@@ -539,7 +537,6 @@ namespace Novell.Directory.Ldap
         /*
         * Constructors
         */
-
         /// <summary> Constructs a new LdapConnection object, which will use the supplied
         /// class factory to construct a socket connection during
         /// LdapConnection.connect method.
@@ -569,7 +566,6 @@ namespace Novell.Directory.Ldap
         * The following are methods that affect the operation of
         * LdapConnection, but are not Ldap requests.
         */
-
         /// <summary> Returns a copy of the object with a private context, but sharing the
         /// network connection if there is one.
         ///
@@ -744,7 +740,6 @@ namespace Novell.Directory.Ldap
         /// LdapTLSSocketFactory an LdapException is thrown.
         ///
         /// </exception>
-
         public virtual void startTLS()
         {
             LdapMessage startTLS = MakeExtendedOperation(
@@ -1031,7 +1026,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual void Add(LdapEntry entry, LdapConstraints cons)
         {
             LdapResponseQueue queue = Add(entry, null, cons);
@@ -2025,7 +2019,6 @@ namespace Novell.Directory.Ldap
         /*
         *  Synchronous Ldap extended request with SearchConstraints
         */
-
         /// <summary>
         /// Provides a synchronous means to access extended, non-mandatory
         /// operations offered by a particular Ldapv3 compliant server.
@@ -2048,7 +2041,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual LdapExtendedResponse ExtendedOperation(
             LdapExtendedOperation op,
             LdapConstraints cons
@@ -2071,7 +2063,6 @@ namespace Novell.Directory.Ldap
         /*
         * Asynchronous Ldap extended request
         */
-
         /// <summary> Provides an asynchronous means to access extended, non-mandatory
         /// operations offered by a particular Ldapv3 compliant server.
         ///
@@ -2095,7 +2086,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual LdapResponseQueue ExtendedOperation(
             LdapExtendedOperation op,
             LdapResponseQueue queue
@@ -2107,7 +2097,6 @@ namespace Novell.Directory.Ldap
         /*
         *  Asynchronous Ldap extended request with SearchConstraints
         */
-
         /// <summary> Provides an asynchronous means to access extended, non-mandatory
         /// operations offered by a particular Ldapv3 compliant server.
         ///
@@ -2133,7 +2122,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual LdapResponseQueue ExtendedOperation(
             LdapExtendedOperation op,
             LdapConstraints cons,
@@ -2797,7 +2785,6 @@ namespace Novell.Directory.Ldap
         /*
         * rename
         */
-
         /// <summary> Asynchronously renames an existing entry in the directory.
         ///
         /// </summary>
@@ -3224,7 +3211,6 @@ namespace Novell.Directory.Ldap
         /*
         * Ldap URL search
         */
-
         /// <summary> Synchronously performs the search specified by the Ldap URL, returning
         /// an enumerable LdapSearchResults object.
         ///
@@ -3244,7 +3230,6 @@ namespace Novell.Directory.Ldap
         /*
         * Ldap URL search
         */
-
         /// <summary> Synchronously perfoms the search specified by the Ldap URL, using
         /// the specified search constraints (such as the maximum number of
         /// entries to find or the maximum time to wait for search results).

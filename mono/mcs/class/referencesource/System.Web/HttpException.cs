@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.CodeDom.Compiler;
@@ -163,7 +162,6 @@ namespace System.Web
          * If we have an Http code (non-zero), return it.  Otherwise, return
          * the inner exception's code.  If there isn't one, return 500.
          */
-
         /// <devdoc>
         ///    <para>HTTP return code to send back to client. If there is a
         ///       non-zero Http code, it is returned. Otherwise, the System.HttpException.innerException

@@ -83,7 +83,6 @@ namespace System.Diagnostics
             }
         }
     */
-
 #if (XML_DEP)
     [Obsolete("This class is obsoleted")]
     public class DiagnosticsConfigurationHandler : IConfigurationSectionHandler

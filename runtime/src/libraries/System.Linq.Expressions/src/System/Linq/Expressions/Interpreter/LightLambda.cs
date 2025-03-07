@@ -318,7 +318,6 @@ namespace System.Linq.Expressions.Interpreter
                 return _runCache[delegateType] = (Func<LightLambda, Delegate>)dm.CreateDelegate(typeof(Func<LightLambda, Delegate>));
             } catch (SecurityException) {
             }*/
-
             // we don't have permission for restricted skip visibility dynamic methods, use the slower Delegate.CreateDelegate.
             var targetMethod = runMethod.IsGenericMethodDefinition
                 ? runMethod.MakeGenericMethod(paramTypes)

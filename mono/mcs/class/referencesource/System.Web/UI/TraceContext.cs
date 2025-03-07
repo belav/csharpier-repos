@@ -41,7 +41,6 @@ namespace System.Web
     ///       user-provided trace content, the <see cref='System.Web.UI.Page'/> class not only shows user-provided trace content, it automatically includes
     ///       performance data, tree-structure information, and state management content.</para>
     /// </devdoc>
-
     public sealed class TraceContext
     {
         private static DataSet _masterRequest;

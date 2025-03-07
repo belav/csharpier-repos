@@ -669,7 +669,6 @@ namespace Novell.Directory.Ldap.Rfc2251
         *  The following methods aid in building filters sequentially,
         *  and is used by DSMLHandler:
         ***********************************************************************/
-
         /// <summary> Called by sequential filter building methods to add to a filter
         /// component.
         ///

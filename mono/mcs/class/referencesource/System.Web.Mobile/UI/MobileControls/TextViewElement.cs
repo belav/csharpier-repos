@@ -27,7 +27,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\TextViewElement.uex' path='docs/doc[@for="TextViewElement"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

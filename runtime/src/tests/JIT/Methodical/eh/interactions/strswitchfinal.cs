@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* switch with string values contained in a loop with various try/catch and try/finally constructs */
-
 using System;
 using Xunit;
 

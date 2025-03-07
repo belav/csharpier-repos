@@ -21,7 +21,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace I18N.Common
 {
     using System;
@@ -158,7 +157,6 @@ namespace I18N.Common
             ToBytes (carr, 0, charCount, barr, 0);
         }
         */
-
         // Convert an array of characters into a byte buffer,
         // once the parameters have been validated.
         protected unsafe virtual void ToBytes(
@@ -230,7 +228,6 @@ namespace I18N.Common
                 }
             }
         */
-
         //[CLSCompliant (false)]
         public unsafe override int GetBytesImpl(
             char* chars,
@@ -318,7 +315,6 @@ namespace I18N.Common
                         return charCount;
                     }
         */
-
         // Get the number of characters needed to decode a byte buffer.
         public override int GetCharCount(byte[] bytes, int index, int count)
         {

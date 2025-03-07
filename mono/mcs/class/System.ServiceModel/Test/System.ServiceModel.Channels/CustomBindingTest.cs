@@ -261,7 +261,6 @@ namespace MonoTests.System.ServiceModel.Channels
                         OperationDescription od = cf.Endpoint.Contract.Operations [0];
                         Assert.AreEqual (0, od.Behaviors.Count, "OperationBehavior");
             */
-
             ch.Open();
             try
             {
@@ -322,7 +321,6 @@ namespace MonoTests.System.ServiceModel.Channels
                             new SecureConversationSecurityTokenParameters (
                                 innersbe, false, reqs);
             */
-
             IChannelFactory<IRequestChannel> cf = binding.BuildChannelFactory<IRequestChannel>(
                 parameters
             );

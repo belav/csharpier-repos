@@ -407,7 +407,6 @@ namespace System.Globalization
          * example, given the str \u4f00\u302a\ud800\udc00\u4f01, this method would
          * return the indices: 0, 2, 4.
          */
-
         public static int[] ParseCombiningCharacters(String str)
         {
             if (str == null)

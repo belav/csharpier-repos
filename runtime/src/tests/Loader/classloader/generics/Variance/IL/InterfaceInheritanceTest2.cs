@@ -7,7 +7,6 @@
     we can use the generic type parameter of the child in any position
     (both as return parameter and argument type to a method)
 */
-
 using System;
 using Xunit;
 

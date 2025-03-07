@@ -21,7 +21,6 @@ namespace System.Web.Util
      * access properties (and fields) of objects.  This is an alternative to using
      * very slow reflection.
      */
-
     internal class FastPropertyAccessor
     {
         private static object s_lockObject = new object();

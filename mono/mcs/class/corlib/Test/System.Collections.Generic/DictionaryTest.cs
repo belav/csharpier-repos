@@ -704,7 +704,6 @@ namespace MonoTests.System.Collections.Generic
             var res = Convert.ToBase64String (dictSerializedStream.ToArray (), Base64FormattingOptions.InsertLineBreaks);
 
             */
-
             var x =
                 "AAEAAAD/////AQAAAAAAAAAEAQAAAOIBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlv"
                 + "bmFyeWAyW1tTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl"

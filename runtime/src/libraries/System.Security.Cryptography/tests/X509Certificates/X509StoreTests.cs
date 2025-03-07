@@ -371,7 +371,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void TestAddRangeAndRemoveRange() {}
         */
-
         [Fact]
         public static void EnumerateClosedIsEmpty()
         {

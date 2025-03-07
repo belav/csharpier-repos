@@ -12,14 +12,12 @@ namespace Moq
     After:
         abstract class MethodSetup : Setup
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal abstract class MethodSetup : Setup
     After:
         abstract class MethodSetup : Setup
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal abstract class MethodSetup : Setup

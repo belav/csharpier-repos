@@ -537,7 +537,6 @@ namespace System.Net
             return WaitForCompletion(false);
         }
         */
-
         private object WaitForCompletion(bool snap)
         {
             ManualResetEvent waitHandle = null;

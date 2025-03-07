@@ -446,7 +446,6 @@ namespace MonoTests.System.Data
                     {
                         Assert.AreEqual(null, dr["ChildId"], "FKC");
                     }*/
-
             Assert.AreEqual(4, arr.Length, "FKC46");
 
             // Rule = SetDefault

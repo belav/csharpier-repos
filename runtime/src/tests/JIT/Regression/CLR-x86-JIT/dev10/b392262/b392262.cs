@@ -12,7 +12,6 @@
    value types (bools) to repro the same issue. Which it did.
 
  * */
-
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;

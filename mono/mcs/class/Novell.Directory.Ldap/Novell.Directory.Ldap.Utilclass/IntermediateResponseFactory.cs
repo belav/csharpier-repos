@@ -64,7 +64,6 @@ namespace Novell.Directory.Ldap.Utilclass
          * @exception LDAPException A general exception which includes an error message
          *                          and an LDAP error code.
          */
-
         static public LdapIntermediateResponse convertToIntermediateResponse(
             RfcLdapMessage inResponse
         )

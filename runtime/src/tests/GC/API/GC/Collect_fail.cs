@@ -10,7 +10,6 @@
  *    -passes with debug
  *    -passes with DOTNET_gcstress
  */
-
 using System;
 
 public class Test_Collect_fail

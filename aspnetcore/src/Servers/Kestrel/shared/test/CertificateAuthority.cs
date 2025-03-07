@@ -552,7 +552,6 @@ ResponderID ::= CHOICE {
 byName               [1] Name,
 byKey                [2] KeyHash }
              */
-
             using (writer.PushSequence(s_context1))
             {
                 if (CorruptRevocationIssuerName)

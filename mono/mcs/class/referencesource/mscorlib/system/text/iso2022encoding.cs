@@ -50,7 +50,6 @@ namespace System.Text
     ** This is used to support ISO 2022 encodings that use shift/escape sequences.
     **
     ==============================================================================*/
-
     [Serializable]
     internal class ISO2022Encoding : DBCSCodePageEncoding
     {

@@ -295,7 +295,6 @@ namespace System.Net.Cache
         {
         }
         */
-
         //public
         internal HttpRequestCacheValidator(bool strictCacheErrors, TimeSpan unspecifiedMaxAge)
             : base(strictCacheErrors, unspecifiedMaxAge) { }

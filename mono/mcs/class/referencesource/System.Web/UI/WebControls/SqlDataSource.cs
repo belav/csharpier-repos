@@ -436,7 +436,6 @@ namespace System.Web.UI.WebControls
                 GetView().SelectCountCommand = value;
             }
         }*/
-
         /// <devdoc>
         /// Collection of parameters used in Select().
         /// </devdoc>
@@ -1046,7 +1045,6 @@ namespace System.Web.UI.WebControls
             string key = CreateMasterCacheKey();
             Cache.SaveDataToCache(key, totalRowCount);
         }*/
-
         /// <devdoc>
         /// Saves view state.
         /// </devdoc>

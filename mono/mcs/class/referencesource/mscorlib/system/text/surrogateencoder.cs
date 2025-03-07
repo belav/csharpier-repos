@@ -19,7 +19,6 @@ namespace System.Text
     ** This class is here only to deserialize the SurrogateEncoder class from Everett (V1.1) into
     ** Appropriate Whidbey (V2.0) objects.
     ==============================================================================*/
-
     [Serializable]
     internal sealed class SurrogateEncoder : ISerializable, IObjectReference
     {

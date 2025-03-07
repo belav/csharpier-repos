@@ -14,7 +14,6 @@
 **
 **
 =============================================================================*/
-
 namespace System.Threading
 {
     using System;
@@ -491,7 +490,6 @@ namespace System.Threading
 #endif
 #if (FEATURE_COMPRESSEDSTACK || MONO) && !NETCORE
         /// <internalonly/>
-
 #if !MONO
         [System.Security.SecurityCritical] // auto-generated_required
         [DynamicSecurityMethodAttribute()]
@@ -561,7 +559,6 @@ namespace System.Threading
         ** If Abort is called twice on the same thread, a DuplicateThreadAbort
         ** exception is thrown.
         =========================================================================*/
-
 #if !FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
         [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
@@ -738,7 +735,6 @@ namespace System.Threading
         **
         ** Exceptions: ThreadStateException if the thread is dead.
         =========================================================================*/
-
         public ThreadPriority Priority
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -888,7 +884,6 @@ namespace System.Threading
         /* wait for a length of time proportial to 'iterations'.  Each iteration is should
            only take a few machine instructions.  Calling this API is preferable to coding
            a explict busy loop because the hardware can be informed that it is busy waiting. */
-
         [System.Security.SecurityCritical] // auto-generated
         [
             MethodImplAttribute(MethodImplOptions.InternalCall),
@@ -1585,7 +1580,6 @@ namespace System.Threading
 #if !MONO
 
         /*=============================================================*/
-
         /*======================================================================
         **  Current thread context is stored in a slot in the thread local store
         **  CurrentContext gets the Context from the slot.
@@ -1685,7 +1679,6 @@ namespace System.Threading
         /*======================================================================
         ** Returns the current domain in which current thread is running.
         ======================================================================*/
-
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -1823,7 +1816,6 @@ namespace System.Threading
         ** Provides the ability to read and write values ensuring that the values
         ** are read/written each time they are accessed.
         =========================================================================*/
-
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // disable optimizations
         public static byte VolatileRead(ref byte address)
         {

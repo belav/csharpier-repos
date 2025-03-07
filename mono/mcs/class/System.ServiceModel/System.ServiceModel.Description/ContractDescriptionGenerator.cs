@@ -291,7 +291,6 @@ namespace System.ServiceModel.Description
              * using ContractDescription.GetInheritedContracts().
              *
              */
-
             var inherited = new Collection<ContractDescription>();
             var interfaces = cd.ContractType.GetInterfaces().Where(t => t != givenContractType);
 

@@ -17,7 +17,6 @@ namespace System.Globalization
     /// (such as month name of a leap year in genitive form.  Not likely for now,
     /// but would like to keep the option open).
     /// </summary>
-
     [Flags]
     internal enum MonthNameStyles
     {
@@ -1022,7 +1021,6 @@ namespace System.Globalization
                 if (dateTimeOffsetPattern == null)
                 {
                     /* LongTimePattern might contain a "z" as part of the format string in which case we don't want to append a time zone offset */
-
                     bool foundZ = false;
                     bool inQuote = false;
                     char quote = '\'';

@@ -292,7 +292,6 @@ namespace System.Globalization
         **Exceptions:
         **      ArgumentOutOfRangeException if year value is invalid or era value is invalid.
         ============================================================================*/
-
         internal int GetGregorianYear(int year, int era)
         {
 #if MONO
@@ -441,7 +440,6 @@ namespace System.Globalization
         **      Number of Days in Current Month
         **
         ============================================================================*/
-
         internal static long GetAbsoluteDate(int year, int month, int day)
         {
             if (year >= 1 && year <= 9999 && month >= 1 && month <= 12)

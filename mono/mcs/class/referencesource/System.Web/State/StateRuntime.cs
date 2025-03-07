@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.SessionState
 {
     using System.Configuration;
@@ -46,7 +45,6 @@ namespace System.Web.SessionState
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         void ProcessRequest(
@@ -108,7 +106,6 @@ namespace System.Web.SessionState
         /*
          * Shutdown runtime
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -169,7 +166,6 @@ namespace System.Web.SessionState
          *
          * @param ecb ECB
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

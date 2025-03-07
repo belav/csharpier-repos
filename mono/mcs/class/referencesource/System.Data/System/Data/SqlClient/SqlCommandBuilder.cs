@@ -318,7 +318,6 @@ namespace System.Data.SqlClient
                     }
                 }
         */
-
         protected override DataTable GetSchemaTable(DbCommand srcCommand)
         {
             SqlCommand sqlCommand = srcCommand as SqlCommand;

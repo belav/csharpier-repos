@@ -6,7 +6,6 @@
  *      Mainly stresses the GC by creating n threads each manipulating its own local binary tree structure.
  *      Each thread in turn adds and deletes thousands of nodes from the binary tree.
  */
-
 namespace DefaultNamespace
 {
     using System;

@@ -133,7 +133,6 @@ namespace System.Windows.Media
             double d = Determinant;
 
             /* 1/(ad-bc)[d -b; -c a] */
-
             double _m11 = this._m22;
             double _m12 = -this._m12;
             double _m21 = -this._m21;

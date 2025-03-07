@@ -575,7 +575,6 @@ namespace System.Net
                 string Expect, null clears the Expect except for 100-continue value
             Returns: The value of the Expect on get.
         */
-
         public string? Expect
         {
             get { return _webHeaderCollection[HttpKnownHeaderNames.Expect]; }

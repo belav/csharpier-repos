@@ -81,7 +81,6 @@ public class TestGC
      * In this case we pass the same string array to the function, so keys and values have references to each other
      * (But only within the dictionary)
      * */
-
     public static void TestKeyWithInsideReferences_Pass1(int length)
     {
         tbl = new ConditionalWeakTable<string, string>();

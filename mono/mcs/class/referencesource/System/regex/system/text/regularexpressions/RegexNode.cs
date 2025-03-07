@@ -53,7 +53,6 @@ namespace System.Text.RegularExpressions
         /*
          * RegexNode types
          */
-
         // the following are leaves, and correspond to primitive operations
 
         //    static final int Onerep     = RegexCode.Onerep;     // c,n      a {n}
@@ -114,7 +113,6 @@ namespace System.Text.RegularExpressions
          * RegexNode data members
          *
          */
-
         internal int _type;
 
         internal List<RegexNode> _children;
@@ -234,7 +232,6 @@ namespace System.Text.RegularExpressions
          * turn it into an empty.
          *
          */
-
         internal RegexNode StripEnation(int emptyType)
         {
             switch (ChildCount())
@@ -254,7 +251,6 @@ namespace System.Text.RegularExpressions
          * Simple optimization. Once parsed into a tree, noncapturing groups
          * serve no function, so strip them out.
          */
-
         internal RegexNode ReduceGroup()
         {
             RegexNode u;
@@ -271,7 +267,6 @@ namespace System.Text.RegularExpressions
          * Nested repeaters just get multiplied with each other if they're not
          * too lumpy
          */
-
         internal RegexNode ReduceRep()
         {
             RegexNode u;
@@ -327,7 +322,6 @@ namespace System.Text.RegularExpressions
          * Simple optimization. If a set is a singleton, an inverse singleton,
          * or empty, it's transformed accordingly.
          */
-
         internal RegexNode ReduceSet()
         {
             // Extract empty-set, one and not-one case as special
@@ -365,7 +359,6 @@ namespace System.Text.RegularExpressions
          *
          * <
 */
-
         internal RegexNode ReduceAlternation()
         {
             // Combine adjacent sets/chars
@@ -487,7 +480,6 @@ namespace System.Text.RegularExpressions
          *
          * (?:abc)(?:def) -> abcdef
          */
-
         internal RegexNode ReduceConcatenation()
         {
             // Eliminate empties and concat adjacent strings/chars

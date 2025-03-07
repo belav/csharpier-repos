@@ -1669,7 +1669,6 @@ namespace System.Globalization
         **Exceptions:
         **  ArgumentNull_Obj if the set value is null.
         ============================================================================*/
-
         public virtual Calendar Calendar
         {
             get
@@ -1699,7 +1698,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
         public virtual Calendar[] OptionalCalendars
         {
             get

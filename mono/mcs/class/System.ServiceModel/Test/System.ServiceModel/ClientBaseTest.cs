@@ -55,7 +55,6 @@ namespace MonoTests.System.ServiceModel
                     new MyClientBase<ICloneable> (new BasicHttpBinding (), new EndpointAddress ("http://localhost:4126"));
                 }
         */
-
         /*
                 public class MyClientBase<T> : ClientBase<T>
                 {
@@ -79,7 +78,6 @@ namespace MonoTests.System.ServiceModel
                     new MyClientBase1 (new BasicHttpBinding (), new EndpointAddress ("urn:dummy"));
                 }
         */
-
         [ServiceContract]
         public interface ITestService
         {

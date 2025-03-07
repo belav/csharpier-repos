@@ -184,7 +184,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         uninitialized. Note that when they are used as member of an EXPR they
         are automatically zero filled by newExpr.
     ******************************************************************************/
-
     internal class MethPropWithInst : MethPropWithType
     {
         public TypeArray TypeArgs { get; private set; }

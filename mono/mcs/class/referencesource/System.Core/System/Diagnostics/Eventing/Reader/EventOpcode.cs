@@ -13,7 +13,6 @@
 ** a ProviderMetadata object.
 **
 ============================================================*/
-
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 

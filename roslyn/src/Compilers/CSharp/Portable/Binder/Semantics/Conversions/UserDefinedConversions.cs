@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                - If `U` is empty, the conversion is undefined and a compile-time error occurs.
 
             */
-
             /* Spec 6.4.5: User-defined explicit conversions
 
                - Determine the types `S`, `S0` and `T0`.
@@ -80,7 +79,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                - If `U` is empty, the conversion is undefined and a compile-time error occurs.
 
             */
-
             // Note, in both cases, specification requires us to build two distinct sets of types, `D1` and `D2`.
             // `D1` contains only classes and structures, `D2` contains only interfaces.
             // However, we are going to put both, interfaces and non-interfaces, in a single set.

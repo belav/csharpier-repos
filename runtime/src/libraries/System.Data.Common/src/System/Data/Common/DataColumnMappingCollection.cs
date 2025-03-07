@@ -144,7 +144,6 @@ namespace System.Data.Common
         public void AddCloneOfRange(IEnumerable values) {
             AddEnumerableRange(values, true);
         }*/
-
         private void AddEnumerableRange(Array values, bool doClone)
         {
             if (null == values)

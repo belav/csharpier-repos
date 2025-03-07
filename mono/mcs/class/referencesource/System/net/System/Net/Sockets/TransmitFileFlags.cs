@@ -23,7 +23,6 @@ namespace System.Net.Sockets
         ///       Use no flags for this call.
         ///    </para>
         /// </devdoc>
-
         UseDefaultWorkerThread = 0x00,
 
         /// <devdoc>

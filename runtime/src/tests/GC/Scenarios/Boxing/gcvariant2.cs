@@ -7,7 +7,6 @@
 /*to see if GC can work fine with them. The most of Object Object's
 /*lifetime is shorter than theirs in GCObject3.
 /**************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

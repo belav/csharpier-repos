@@ -176,7 +176,6 @@ namespace System.Web.UI
         /// purposes. The Page object is used to determine whether the viewstate will be encrypted
         /// for serialize and deserialize.
         /// </devdoc>
-
         internal ObjectStateFormatter(Page page, bool throwOnErrorDeserializing)
         {
             _page = page;

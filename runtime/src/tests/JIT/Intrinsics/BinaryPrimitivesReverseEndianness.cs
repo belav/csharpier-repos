@@ -58,7 +58,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * CONST VALUE TESTS
              */
-
             ushort swappedUInt16 = BinaryPrimitives.ReverseEndianness(ConstantUInt16Input);
             if (swappedUInt16 != ConstantUInt16Expected)
             {
@@ -98,7 +97,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * SIGN-EXTENDED VALUE TESTS
              */
-
             Span<byte> spanInt16 = BitConverter.IsLittleEndian ? s_bufferLE.AsSpan(2) : s_bufferBE;
             short swappedInt16 = BinaryPrimitives.ReverseEndianness(
                 MemoryMarshal.Read<short>(spanInt16)
@@ -149,7 +147,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * NON-CONST VALUE TESTS
              */
-
             ushort nonConstUInt16Input = (ushort)DateTime.UtcNow.Ticks;
             ushort nonConstUInt16Output = BinaryPrimitives.ReverseEndianness(nonConstUInt16Input);
             ushort nonConstUInt16Expected = ByteSwapUInt16_Control(nonConstUInt16Input);
@@ -195,7 +192,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * READ TESTS CAST
              */
-
             byte readCastUInt16Input = (byte)DateTime.UtcNow.Ticks;
             ushort readCastUInt16Output = ByteSwapUInt16_ReadCast(ref readCastUInt16Input);
             ushort readCastUInt16Expected = ByteSwapUInt16_Control(readCastUInt16Input);
@@ -241,7 +237,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * WRITE TESTS
              */
-
             ushort writeUInt16Output = default;
             ushort writeUInt16Input = ByteSwapUInt16_Write(ref writeUInt16Output);
             ushort writeUInt16Expected = ByteSwapUInt16_Control(writeUInt16Input);
@@ -287,7 +282,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * WRITE TESTS LEA
              */
-
             ushort writeLeaUInt16Output = default;
             ushort writeLeaUInt16Input = ByteSwapUInt16_WriteLea(ref writeLeaUInt16Output, 0);
             ushort writeLeaUInt16Expected = ByteSwapUInt16_Control(writeLeaUInt16Input);
@@ -333,7 +327,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * WRITE TESTS CAST
              */
-
             ulong writeCastUInt8Input = (ulong)DateTime.UtcNow.Ticks;
             byte writeCastUInt8Output = default;
             ByteSwapUInt8_WriteCast(ref writeCastUInt8Output, writeCastUInt8Input);
@@ -382,7 +375,6 @@ namespace BinaryPrimitivesReverseEndianness
             /*
              * READ & WRITE TESTS
              */
-
             ushort writeBackUInt16Input = (ushort)DateTime.UtcNow.Ticks;
             ushort writeBackUInt16Output = writeBackUInt16Input;
             ByteSwapUInt16_WriteBack(ref writeBackUInt16Output);

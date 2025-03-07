@@ -373,7 +373,6 @@ namespace System.Web.Configuration
             allowDynamicModuleRegistration = "true"
 />
 */
-
         static HttpRuntimeSection()
         {
             // Property initialization

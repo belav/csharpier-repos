@@ -17,14 +17,12 @@ namespace Moq
     After:
         static partial class StringBuilderExtensions
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static partial class StringBuilderExtensions
     After:
         static partial class StringBuilderExtensions
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static partial class StringBuilderExtensions

@@ -6,7 +6,6 @@
 ** Purpose: Some single-precision floating-point math operations
 **
 ===========================================================*/
-
 //This class contains only static members and doesn't require serialization.
 
 using System.Runtime;

@@ -1634,7 +1634,6 @@ namespace System.ComponentModel
                 return componentType;
             }
             */
-
             /// <devdoc>
             ///      Retrieves the type converter for this entry.
             ///      Type converters are found by either looking for a
@@ -3497,7 +3496,6 @@ namespace System.ComponentModel
                 }
             }
             */
-
             // This is a private class used to stash a set of properties on
             // a component's site so we can quickly recover them.
             //

@@ -627,7 +627,6 @@ namespace System.IO.IsolatedStorage
             if ((ulong)allign > rem)
                 allign = (int)rem;
             */
-
             m_fs.Write(buffer, 0, allign);
             rem -= (ulong)allign;
 

@@ -21,7 +21,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-
 // Generated from "ibm-277.ucm".
 
 // WARNING: Modifying this file directly might be a bad idea.

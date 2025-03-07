@@ -628,7 +628,6 @@ namespace System.Web.Configuration
              <capability name="numberOfSoftKeys" value="$(softkeys)"</capability>
         </capabilities>
         */
-
         internal void ProcessCapabilitiesNode(XmlNode node)
         {
             foreach (XmlNode child in node.ChildNodes)

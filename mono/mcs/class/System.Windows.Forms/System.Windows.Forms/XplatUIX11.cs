@@ -1266,7 +1266,6 @@ namespace System.Windows.Forms
                 /* tool windows get no window manager
                    decorations.
                 */
-
                 /* just because the window doesn't get any decorations doesn't
                    mean we should disable the functions.  for instance, without
                    MotifFunctions.Maximize, changing the windowstate to Maximized
@@ -7318,7 +7317,6 @@ namespace System.Windows.Forms
             {
                 /* We have an invalid area in the window we're scrolling.
                    Adjust our stored invalid rectangle to to match the scrolled amount */
-
                 r.X += XAmount;
                 r.Y += YAmount;
 

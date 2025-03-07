@@ -332,7 +332,6 @@ namespace System.Net.Mail
             return CheckCommand.BeginSend(conn, callback, state);
         }
         */
-
         static void CheckResponse(SmtpStatusCode statusCode, string serverResponse)
         {
             switch (statusCode)
@@ -367,7 +366,6 @@ namespace System.Net.Mail
             CheckResponse((SmtpStatusCode)CheckCommand.EndSend(result));
         }
         */
-
         static void PrepareCommand(SmtpConnection conn)
         {
             if (conn.IsStreamOpen)

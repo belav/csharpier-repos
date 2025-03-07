@@ -52,7 +52,6 @@ public class main
         if (gci.boxNullableStruct (null) != null)
             return 1;
         */
-
         GenClass<ClassA> gca = new GenClass<ClassA>();
         GenStruct<ClassA> gsa = new GenStruct<ClassA>(new ClassA(), 789);
 
@@ -64,7 +63,6 @@ public class main
         if (gca.boxNullableStruct (null) != null)
             return 1;
         */
-
         UnboxerStruct<ClassA> us;
         Boxer<ClassA> b = new Boxer<ClassA>();
 

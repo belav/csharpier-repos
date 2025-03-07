@@ -12,7 +12,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Runtime.Serialization.Formatters
 {
     using System;

@@ -505,7 +505,6 @@ namespace MonoTests.System.Transactions
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-
             using (TransactionScope scope = new TransactionScope())
             {
                 irm[0].Value = 2;

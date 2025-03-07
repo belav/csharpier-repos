@@ -1352,7 +1352,6 @@ namespace System.Workflow.ComponentModel.Design
             base.Initialize(activity);
 
             ///
-
             CompositeActivity compositeActivity = activity as CompositeActivity;
             if (compositeActivity != null)
             {

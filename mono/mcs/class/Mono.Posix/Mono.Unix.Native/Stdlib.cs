@@ -942,7 +942,6 @@ namespace Mono.Unix.Native
 #endif
 
         /* SKIP: fscanf(3) */
-
         [DllImport(LIBC, CallingConvention = CallingConvention.Cdecl, EntryPoint = "printf")]
         private static extern int sys_printf(string format, string message);
 
@@ -965,7 +964,6 @@ namespace Mono.Unix.Native
 #endif
 
         /* SKIP: scanf(3) */
-
         [DllImport(
             MPH,
             CallingConvention = CallingConvention.Cdecl,
@@ -1043,7 +1041,6 @@ namespace Mono.Unix.Native
          *    vsprint(3)
          *    vsscanf(3)
          */
-
         [DllImport(
             MPH,
             CallingConvention = CallingConvention.Cdecl,
@@ -1098,7 +1095,6 @@ namespace Mono.Unix.Native
         public static extern int getchar();
 
         /* SKIP: gets(3) */
-
         public static int putc(int c, IntPtr stream)
         {
             return fputc(c, stream);
@@ -1386,7 +1382,6 @@ namespace Mono.Unix.Native
 
         /* SKIP: atexit(3) -- the GC should have collected most references by the
          * time this runs, so no delegates should exist, making it pointless. */
-
         [DllImport(LIBC, CallingConvention = CallingConvention.Cdecl)]
         public static extern void exit(int status);
 

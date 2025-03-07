@@ -37,7 +37,6 @@ using NUnit.Framework;
  * 09/13/12 martin
  *
  */
-
 namespace MonoTests.System.Net
 {
     [TestFixture]

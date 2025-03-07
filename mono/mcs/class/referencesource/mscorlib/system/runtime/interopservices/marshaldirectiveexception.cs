@@ -12,7 +12,6 @@
 **          supported.
 **
 =============================================================================*/
-
 namespace System.Runtime.InteropServices
 {
     using System;

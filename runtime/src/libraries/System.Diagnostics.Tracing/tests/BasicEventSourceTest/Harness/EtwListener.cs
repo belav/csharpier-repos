@@ -20,7 +20,6 @@ namespace BasicEventSourceTests
 {
     /**************************************************************************/
     /* Concrete implementation of the Listener abstraction */
-
     /// <summary>
     /// Implementation of the Listener abstraction for ETW.
     /// </summary>

@@ -926,7 +926,6 @@ namespace System.Data
          *                   (Do not decrease size in any tree, as its a collpase operation)
          *
          */
-
         private int RBDeleteX(int root_id, int z_id, int mainTreeNodeID)
         {
             int x_id = NIL; // used for holding spliced node (y_id's) child
@@ -1440,7 +1439,6 @@ namespace System.Data
          *
          * Assumption: The specified node always exist in the tree.
          */
-
         // this improves performance when used heavily, like with the default view (creating before rows added)
         public int GetIndexByNode(int node)
         {

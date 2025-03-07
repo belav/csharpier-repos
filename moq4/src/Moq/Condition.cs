@@ -11,14 +11,12 @@ namespace Moq
     After:
         sealed class Condition
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class Condition
     After:
         sealed class Condition
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class Condition
@@ -34,7 +32,6 @@ namespace Moq
             Func<bool> condition;
             Action success;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Func<bool> condition;
@@ -43,7 +40,6 @@ namespace Moq
             Func<bool> condition;
             Action success;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Func<bool> condition;

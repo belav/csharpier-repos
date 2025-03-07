@@ -7,7 +7,6 @@
  *      Differs from thdtree in a way that the nodes of the binary trees are alive(meaning they
  *      shrink and grow during their lifetime).
  */
-
 namespace DefaultNamespace
 {
     using System;

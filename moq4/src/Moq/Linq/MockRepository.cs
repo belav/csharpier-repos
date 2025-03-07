@@ -139,14 +139,12 @@ namespace Moq
             After:
                     IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
             After:
                     IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class

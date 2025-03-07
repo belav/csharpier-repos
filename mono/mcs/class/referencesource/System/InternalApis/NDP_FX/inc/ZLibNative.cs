@@ -384,7 +384,6 @@ namespace System.IO.Compression
          *   directories in order to PInvoke into them. This would preferably happen in the native interop/PInvoke
          *   layer; if not we can add a Framework level feature.
          */
-
         #region ZLib Stream Handle type
 
         /// <summary>

@@ -29,13 +29,11 @@ ErrorFormatter (abstract)
     PassportAuthFailedErrorFormatter
 
 **********************************/
-
 /*
  * Object used to put together ASP.NET HTML error messages
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System.CodeDom.Compiler;

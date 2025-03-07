@@ -35,7 +35,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
      * but very simple to implement. If the process of finding min-cost circulations become a
      * bottleneck, much more efficient algorithms exist.
      ********/
-
     public class MinimumCostCirculation
     {
         // Changes graph state into a minimum-cost circulation, if it exists.

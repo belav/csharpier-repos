@@ -808,7 +808,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Phase 2: compare all items before candidate to candidate
                 If candidate always better, return it, otherwise return null
             */
-
             // Record two method that are ambiguous for error reporting.
             CandidateFunctionMember ambig1 = null;
             CandidateFunctionMember ambig2 = null;

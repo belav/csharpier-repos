@@ -12,14 +12,12 @@ namespace Moq
     After:
         abstract class ExpressionReconstructor
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal abstract class ExpressionReconstructor
     After:
         abstract class ExpressionReconstructor
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal abstract class ExpressionReconstructor
@@ -37,14 +35,12 @@ namespace Moq
     After:
             static ExpressionReconstructor instance = new ActionObserver();
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static ExpressionReconstructor instance = new ActionObserver();
     After:
             static ExpressionReconstructor instance = new ActionObserver();
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static ExpressionReconstructor instance = new ActionObserver();

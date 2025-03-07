@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;
@@ -170,7 +169,6 @@ namespace System.Web
         /// This method returns a new collection instance for each invocation and callers are
         /// encouraged to call this method once per name per request.
         /// </devdoc>
-
         [SuppressMessage(
             "Microsoft.Globalization",
             "CA1309:UseOrdinalStringComparison",

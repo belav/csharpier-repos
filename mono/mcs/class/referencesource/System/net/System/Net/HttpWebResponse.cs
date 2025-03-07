@@ -433,7 +433,6 @@ namespace System.Net
             Returns: Response stream for response.
 
         --*/
-
         /// <devdoc>
         ///    <para>Gets the stream used for reading the body of the response from the
         ///       server.</para>
@@ -484,7 +483,6 @@ namespace System.Net
             This causes the read stream to be closed.
 
         --*/
-
         public override void Close()
         {
             if (Logging.On)
@@ -671,7 +669,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [Obsolete(
             "Serialization is obsoleted for this type.  http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -811,7 +808,6 @@ namespace System.Net
                     read-only
 
         --*/
-
         /// <devdoc>
         ///    <para>
         ///       Gets the Uniform Resource Indentifier (Uri) of the resource that returned the

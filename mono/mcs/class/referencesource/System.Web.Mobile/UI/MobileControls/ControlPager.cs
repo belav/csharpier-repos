@@ -18,7 +18,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\ControlPager.uex' path='docs/doc[@for="ControlPager"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -106,7 +105,6 @@ namespace System.Web.UI.MobileControls
             }
         }
          */
-
         /// <include file='doc\ControlPager.uex' path='docs/doc[@for="ControlPager.GetItemPager"]/*' />
         public ItemPager GetItemPager(
             MobileControl control,

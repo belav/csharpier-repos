@@ -8,7 +8,6 @@
         MimeMapping : This module maps document extensions to Content Mime Type.
         Copyright (c) 2011 Microsoft Corporation
 --*/
-
 namespace System.Web
 {
     using System;

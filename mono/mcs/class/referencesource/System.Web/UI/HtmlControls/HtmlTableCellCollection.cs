@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -41,7 +40,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The number of cells in the row.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the number of items in the <see langword='HtmlTableCell'/>
@@ -107,7 +105,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Returns an enumerator that enumerates over the cells in a table row in order.
          */
-
         /// <devdoc>
         /// </devdoc>
         public IEnumerator GetEnumerator()

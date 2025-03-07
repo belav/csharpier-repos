@@ -237,7 +237,6 @@ namespace System.Data.OleDb
                 return (long)_recordsAffected;
             }
         }*/
-
         override public object this[Int32 index]
         {
             get { return GetValue(index); }
@@ -1936,7 +1935,6 @@ namespace System.Data.OleDb
                             bindings.DbType = (short) (getType | DbType.BYREF);
                         }
                         else*/
-
                         if (ODB.LargeDataSize < info.size)
                         {
                             maxLen = ADP.PtrSize;

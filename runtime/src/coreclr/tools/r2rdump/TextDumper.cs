@@ -782,14 +782,12 @@ namespace R2RDump
              * getting values shorter than 5 digits (Length of "Fixup" and "Count"),
              * the formatting could be messed up. The likelihood of this happening
              * is apparently 0%, but better safe than sorry. */
-
             int fixupPadding = 5;
             int sortedFixupCountsTotal = sortedFixupCounts.Sum(x => x.Count);
             int countPadding = Math.Max(sortedFixupCountsTotal.ToString().Length, 5);
 
             /* We look at all the Fixup Kinds that will be printed. We
              * then store the length of the longest one's name. */
-
             foreach (var fixupAndCount in sortedFixupCounts)
             {
                 int kindLength = fixupAndCount.FixupKind.ToString().Length;

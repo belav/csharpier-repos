@@ -6393,7 +6393,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabel()
         {
             if (this.pointCustomProperties)
@@ -6405,7 +6404,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeAxisLabel()
         {
             if (this.pointCustomProperties)
@@ -6417,7 +6415,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelFormat()
         {
             if (this.pointCustomProperties)
@@ -6429,7 +6426,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeIsValueShownAsLabel()
         {
             if (this.pointCustomProperties)
@@ -6441,7 +6437,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeColor()
         {
             if (this.pointCustomProperties)
@@ -6453,7 +6448,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBorderColor()
         {
             if (this.pointCustomProperties)
@@ -6465,7 +6459,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBorderDashStyle()
         {
             if (this.pointCustomProperties)
@@ -6477,7 +6470,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBorderWidth()
         {
             if (this.pointCustomProperties)
@@ -6489,7 +6481,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerBorderWidth()
         {
             if (this.pointCustomProperties)
@@ -6501,7 +6492,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackImage()
         {
             if (this.pointCustomProperties)
@@ -6513,7 +6503,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackImageWrapMode()
         {
             if (this.pointCustomProperties)
@@ -6525,7 +6514,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackImageTransparentColor()
         {
             if (this.pointCustomProperties)
@@ -6539,7 +6527,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackImageAlignment()
         {
             if (this.pointCustomProperties)
@@ -6551,7 +6538,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackGradientStyle()
         {
             if (this.pointCustomProperties)
@@ -6563,7 +6549,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackSecondaryColor()
         {
             if (this.pointCustomProperties)
@@ -6575,7 +6560,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeBackHatchStyle()
         {
             if (this.pointCustomProperties)
@@ -6587,7 +6571,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeFont()
         {
             if (this.pointCustomProperties)
@@ -6612,7 +6595,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelAngle()
         {
             if (this.pointCustomProperties)
@@ -6624,7 +6606,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerStyle()
         {
             if (this.pointCustomProperties)
@@ -6636,7 +6617,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerSize()
         {
             if (this.pointCustomProperties)
@@ -6648,7 +6628,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerImage()
         {
             if (this.pointCustomProperties)
@@ -6660,7 +6639,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerImageTransparentColor()
         {
             if (this.pointCustomProperties)
@@ -6674,7 +6652,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerColor()
         {
             if (this.pointCustomProperties)
@@ -6686,7 +6663,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMarkerBorderColor()
         {
             if (this.pointCustomProperties)
@@ -6698,7 +6674,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeToolTip()
         {
             if (this.pointCustomProperties)
@@ -6712,7 +6687,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeUrl()
         {
             if (this.pointCustomProperties)
@@ -6724,7 +6698,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeMapAreaAttributes()
         {
             if (this.pointCustomProperties)
@@ -6747,7 +6720,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLegendUrl()
         {
             if (this.pointCustomProperties)
@@ -6759,7 +6731,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLegendMapAreaAttributes()
         {
             if (this.pointCustomProperties)
@@ -6771,7 +6742,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelUrl()
         {
             if (this.pointCustomProperties)
@@ -6783,7 +6753,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelMapAreaAttributes()
         {
             if (this.pointCustomProperties)
@@ -6796,7 +6765,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeIsVisibleInLegend()
         {
             if (this.pointCustomProperties)
@@ -6808,7 +6776,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLegendText()
         {
             if (this.pointCustomProperties)
@@ -6820,7 +6787,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLegendToolTip()
         {
             if (this.pointCustomProperties)
@@ -6832,7 +6798,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelToolTip()
         {
             if (this.pointCustomProperties)
@@ -6844,7 +6809,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelBackColor()
         {
             if (this.pointCustomProperties)
@@ -6856,7 +6820,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelBorderColor()
         {
             if (this.pointCustomProperties)
@@ -6868,7 +6831,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelBorderDashStyle()
         {
             if (this.pointCustomProperties)
@@ -6880,7 +6842,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-
         internal bool ShouldSerializeLabelBorderWidth()
         {
             if (this.pointCustomProperties)
@@ -6892,7 +6853,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabel()
         {
             if (this.pointCustomProperties)
@@ -6904,7 +6864,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetAxisLabel()
         {
             if (this.pointCustomProperties)
@@ -6916,7 +6875,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelFormat()
         {
             if (this.pointCustomProperties)
@@ -6928,7 +6886,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         public void ResetIsValueShownAsLabel()
         {
             if (this.pointCustomProperties)
@@ -6940,7 +6897,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetColor()
         {
             if (this.pointCustomProperties)
@@ -6952,7 +6908,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBorderColor()
         {
             if (this.pointCustomProperties)
@@ -6964,7 +6919,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBorderDashStyle()
         {
             if (this.pointCustomProperties)
@@ -6976,7 +6930,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBorderWidth()
         {
             if (this.pointCustomProperties)
@@ -6988,7 +6941,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerBorderWidth()
         {
             if (this.pointCustomProperties)
@@ -7000,7 +6952,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBackImage()
         {
             if (this.pointCustomProperties)
@@ -7012,7 +6963,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBackImageWrapMode()
         {
             if (this.pointCustomProperties)
@@ -7024,7 +6974,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBackImageTransparentColor()
         {
             if (this.pointCustomProperties)
@@ -7036,7 +6985,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBackSecondaryColor()
         {
             if (this.pointCustomProperties)
@@ -7048,7 +6996,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetBackHatchStyle()
         {
             if (this.pointCustomProperties)
@@ -7060,7 +7007,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetFont()
         {
             if (this.pointCustomProperties)
@@ -7074,7 +7020,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelAngle()
         {
             if (this.pointCustomProperties)
@@ -7086,7 +7031,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerStyle()
         {
             if (this.pointCustomProperties)
@@ -7098,7 +7042,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerSize()
         {
             if (this.pointCustomProperties)
@@ -7110,7 +7053,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerImage()
         {
             if (this.pointCustomProperties)
@@ -7122,7 +7064,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerImageTransparentColor()
         {
             if (this.pointCustomProperties)
@@ -7134,7 +7075,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerColor()
         {
             if (this.pointCustomProperties)
@@ -7146,7 +7086,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMarkerBorderColor()
         {
             if (this.pointCustomProperties)
@@ -7158,7 +7097,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetToolTip()
         {
             if (this.pointCustomProperties)
@@ -7179,7 +7117,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetUrl()
         {
             if (this.pointCustomProperties)
@@ -7191,7 +7128,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetMapAreaAttributes()
         {
             if (this.pointCustomProperties)
@@ -7214,7 +7150,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLegendUrl()
         {
             if (this.pointCustomProperties)
@@ -7226,7 +7161,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLegendMapAreaAttributes()
         {
             if (this.pointCustomProperties)
@@ -7238,7 +7172,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelUrl()
         {
             if (this.pointCustomProperties)
@@ -7250,7 +7183,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelMapAreaAttributes()
         {
             if (this.pointCustomProperties)
@@ -7263,7 +7195,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         public void ResetIsVisibleInLegend()
         {
             if (this.pointCustomProperties)
@@ -7275,7 +7206,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLegendText()
         {
             if (this.pointCustomProperties)
@@ -7287,7 +7217,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLegendToolTip()
         {
             if (this.pointCustomProperties)
@@ -7306,7 +7235,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelBackColor()
         {
             if (this.pointCustomProperties)
@@ -7318,7 +7246,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelBorderColor()
         {
             if (this.pointCustomProperties)
@@ -7330,7 +7257,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelBorderDashStyle()
         {
             if (this.pointCustomProperties)
@@ -7342,7 +7268,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelBorderWidth()
         {
             if (this.pointCustomProperties)
@@ -7354,7 +7279,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-
         internal void ResetLabelToolTip()
         {
             if (this.pointCustomProperties)

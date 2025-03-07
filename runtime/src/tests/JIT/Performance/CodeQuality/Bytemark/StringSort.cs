@@ -5,7 +5,6 @@
 ** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
-
 /*
 ** BYTEmark (tm)
 ** BYTE Magazine's Native Mode benchmarks
@@ -30,14 +29,12 @@
 ** this code.
 **
 */
-
 using System;
 using System.Text;
 
 /********************
 ** STRING HEAPSORT **
 ********************/
-
 /*****************
 ** DoStringSort **
 ******************
@@ -46,7 +43,6 @@ using System.Text;
 **      requested_secs = # of seconds to execute test
 **      stringspersec = # of strings per second sorted (RETURNED)
 */
-
 internal static class StringOrdinalComparer
 {
     public static int Compare(String left, String right)
@@ -137,7 +133,6 @@ public class StringSort : StringSortStruct
         ** Clean up, calculate results, and go home.
         ** Set flag to show we don't need to rerun adjustment code.
         */
-
         return (iterations * (double)this.numarrays / ByteMark.TicksToFracSecs(accumtime));
     }
 
@@ -149,7 +144,6 @@ public class StringSort : StringSortStruct
     ** Note that this routine also builds the offset pointer
     ** array.
     */
-
     private static int DoStringSortIteration(string[][] arraybase, int numarrays, int arraysize)
     {
         long elapsed; /* Elapsed ticks */
@@ -226,7 +220,6 @@ public class StringSort : StringSortStruct
         /*
         ** Load up the first array with randoms
         */
-
         int i;
         for (i = 0; i < arraysize; i++)
         {

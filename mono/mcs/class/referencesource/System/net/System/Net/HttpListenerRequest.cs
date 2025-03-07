@@ -1458,7 +1458,6 @@ namespace System.Net
             }
         }
         */
-
         private string GetKnownHeader(HttpRequestHeader header)
         {
             return UnsafeNclNativeMethods.HttpApi.GetKnownHeader(

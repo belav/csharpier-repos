@@ -335,7 +335,6 @@ namespace BasicEventSourceTests
                 /*************************************************************************/
                 /*************************** ENUM TESTING *******************************/
                 /*************************************************************************/
-
                 /*************************************************************************/
                 GenerateEnumTest<Color>(ref tests, logger, Color.Green);
                 GenerateEnumTest<ColorUInt32>(ref tests, logger, ColorUInt32.Green);
@@ -348,9 +347,7 @@ namespace BasicEventSourceTests
                 /*************************************************************************/
                 /*************************** ARRAY TESTING *******************************/
                 /*************************************************************************/
-
                 /*************************************************************************/
-
                 GenerateArrayTest<bool>(ref tests, logger, new bool[] { false, true, false });
                 GenerateArrayTest<byte>(ref tests, logger, new byte[] { 1, 10, 100 });
                 GenerateArrayTest<sbyte>(ref tests, logger, new sbyte[] { 1, 10, 100 });
@@ -382,7 +379,6 @@ namespace BasicEventSourceTests
                 /*************************************************************************/
                 /*********************** DICTIONARY TESTING ******************************/
                 /*************************************************************************/
-
                 var dict = new Dictionary<string, string>()
                 {
                     { "elem1", "10" },

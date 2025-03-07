@@ -21,7 +21,6 @@ namespace LOHPin
          *   - pin some of the large objects
          *   - compact LOH then check the address of the objects
          * */
-
         static int Main()
         {
             List<GCHandle> GCHandleList = new List<GCHandle>();

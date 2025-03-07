@@ -402,11 +402,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters DES_k64b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters DES_k64b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters DES_k64b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestDES_k64b64_CFB8_None()
         {
@@ -564,11 +561,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters DES_k64b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters DES_k64b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters DES_k64b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k40b64_ECB_None()
         {
@@ -906,11 +900,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k40b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k40b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k40b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k40b64_CFB8_None()
         {
@@ -1068,11 +1059,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k40b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k40b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k40b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k48b64_ECB_None()
         {
@@ -1410,11 +1398,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k48b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k48b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k48b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k48b64_CFB8_None()
         {
@@ -1572,11 +1557,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k48b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k48b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k48b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k56b64_ECB_None()
         {
@@ -1914,11 +1896,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k56b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k56b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k56b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k56b64_CFB8_None()
         {
@@ -2076,11 +2055,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k56b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k56b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k56b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k64b64_ECB_None()
         {
@@ -2418,11 +2394,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k64b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k64b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k64b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k64b64_CFB8_None()
         {
@@ -2580,11 +2553,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k64b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k64b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k64b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k72b64_ECB_None()
         {
@@ -2922,11 +2892,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k72b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k72b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k72b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k72b64_CFB8_None()
         {
@@ -3084,11 +3051,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k72b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k72b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k72b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k80b64_ECB_None()
         {
@@ -3426,11 +3390,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k80b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k80b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k80b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k80b64_CFB8_None()
         {
@@ -3588,11 +3549,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k80b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k80b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k80b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k88b64_ECB_None()
         {
@@ -3930,11 +3888,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k88b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k88b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k88b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k88b64_CFB8_None()
         {
@@ -4092,11 +4047,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k88b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k88b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k88b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k96b64_ECB_None()
         {
@@ -4434,11 +4386,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k96b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k96b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k96b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k96b64_CFB8_None()
         {
@@ -4596,11 +4545,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k96b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k96b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k96b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k104b64_ECB_None()
         {
@@ -5028,11 +4974,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k104b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k104b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k104b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k104b64_CFB8_None()
         {
@@ -5235,11 +5178,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k104b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k104b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k104b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k112b64_ECB_None()
         {
@@ -5673,11 +5613,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k112b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k112b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k112b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k112b64_CFB8_None()
         {
@@ -5883,11 +5820,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k112b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k112b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k112b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k120b64_ECB_None()
         {
@@ -6327,11 +6261,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k120b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k120b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k120b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k120b64_CFB8_None()
         {
@@ -6540,11 +6471,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k120b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k120b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k120b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRC2_k128b64_ECB_None()
         {
@@ -6990,11 +6918,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k128b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k128b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters RC2_k128b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestRC2_k128b64_CFB8_None()
         {
@@ -7206,11 +7131,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters RC2_k128b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k128b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters RC2_k128b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k128b128_ECB_None()
         {
@@ -7905,23 +7827,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k128b128_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b128_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b128_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b128_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b128_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b128_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b128_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b128_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b128_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k128b192_ECB_None()
         {
@@ -8808,23 +8721,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k128b192_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b192_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b192_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b192_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b192_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b192_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b192_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b192_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b192_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k128b256_ECB_None()
         {
@@ -9903,23 +9807,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k128b256_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b256_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b256_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k128b256_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b256_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b256_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b256_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b256_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k128b256_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k192b128_ECB_None()
         {
@@ -10662,23 +10557,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k192b128_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b128_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b128_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b128_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b128_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b128_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b128_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b128_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b128_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k192b192_ECB_None()
         {
@@ -11613,23 +11499,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k192b192_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b192_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b192_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b192_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b192_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b192_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b192_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b192_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b192_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k192b256_ECB_None()
         {
@@ -12756,23 +12633,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k192b256_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b256_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b256_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k192b256_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b256_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b256_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b256_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b256_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k192b256_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k256b128_ECB_None()
         {
@@ -13563,23 +13431,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k256b128_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b128_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b128_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b128_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b128_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b128_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b128_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b128_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b128_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k256b192_ECB_None()
         {
@@ -14562,23 +14421,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k256b192_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b192_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b192_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b192_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b192_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b192_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b192_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b192_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b192_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestRijndael_k256b256_ECB_None()
         {
@@ -15753,23 +15603,14 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters Rijndael_k256b256_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b256_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b256_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters Rijndael_k256b256_CFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b256_CFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b256_CFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b256_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b256_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters Rijndael_k256b256_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestTripleDES_k128b64_ECB_None()
         {
@@ -16215,11 +16056,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters TripleDES_k128b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters TripleDES_k128b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters TripleDES_k128b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestTripleDES_k128b64_CFB8_None()
         {
@@ -16431,11 +16269,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters TripleDES_k128b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters TripleDES_k128b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters TripleDES_k128b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         [Test]
         public void TestTripleDES_k192b64_ECB_None()
         {
@@ -16929,11 +16764,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters TripleDES_k192b64_CTS_None. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters TripleDES_k192b64_CTS_Zeros. Why? Specified cipher mode is not valid for this algorithm. */
-
         /* Invalid parameters TripleDES_k192b64_CTS_PKCS7. Why? Specified cipher mode is not valid for this algorithm. */
-
         [Test]
         public void TestTripleDES_k192b64_CFB8_None()
         {
@@ -17169,11 +17001,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         /* Invalid parameters TripleDES_k192b64_OFB8_None. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters TripleDES_k192b64_OFB8_Zeros. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         /* Invalid parameters TripleDES_k192b64_OFB8_PKCS7. Why? Output feedback mode (OFB) is not supported by this implementation. */
-
         // Number of test cases: 189
         // Number of invalid (non-generated) test cases: 171
     }

@@ -735,7 +735,6 @@ namespace System.DirectoryServices.AccountManagement
         /// <param name="ap">Principal to modify</param>
         /// <param name="enable">New state of the enable bit</param>
         ///
-
         protected virtual void SetAuthPrincipalEnableStatus(AuthenticablePrincipal ap, bool enable)
         {
             try

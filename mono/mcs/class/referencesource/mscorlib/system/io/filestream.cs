@@ -66,7 +66,6 @@ using System.Security.AccessControl;
  *     greater than zero, but neither can be greater than zero at the same time.
  *
  */
-
 namespace System.IO
 {
     // This is an internal object implementing IAsyncResult with fields

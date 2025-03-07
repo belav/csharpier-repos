@@ -6,7 +6,6 @@ using Xunit;
  * cross-compiler and AOT runtime use the same name hashing for names
  * that include UTF-8 continuation bytes.
  */
-
 [MySpecial(typeof(MeineTüre))]
 public class Program
 {

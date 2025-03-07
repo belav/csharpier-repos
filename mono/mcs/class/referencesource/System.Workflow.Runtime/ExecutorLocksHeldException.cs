@@ -41,7 +41,6 @@ namespace System.Workflow.Runtime
      * We then drop that lock and wait on the event handle. As soon as the handle is
      * Set() by DisposeTransaction(), we grab the executor lock and do everything all over.
      */
-
     internal class ExecutorLocksHeldException : Exception
     {
         private ManualResetEvent handle;

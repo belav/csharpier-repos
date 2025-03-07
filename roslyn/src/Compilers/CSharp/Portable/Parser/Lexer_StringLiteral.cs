@@ -1164,7 +1164,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     : '<Any character except \" (U+0022), : (U+003A), { (U+007B) and } (U+007D)>'
                 ;
                  */
-
                 Debug.Assert(_lexer.TextWindow.PeekChar() == ':');
                 _lexer.TextWindow.AdvanceChar();
                 while (true)

@@ -912,7 +912,6 @@ namespace MonoTests.System.Globalization
             } catch (ArgumentOutOfRangeException) {
             }
             */
-
             ThaiBuddhistCalendar tc = new ThaiBuddhistCalendar();
             Assert.AreEqual(2572, tc.ToFourDigitYear(72), "#3-1");
             Assert.AreEqual(2473, tc.ToFourDigitYear(73), "#3-2");
@@ -927,7 +926,6 @@ namespace MonoTests.System.Globalization
             } catch (ArgumentOutOfRangeException) {
             }
             */
-
             KoreanCalendar kc = new KoreanCalendar();
             Assert.AreEqual(4362, kc.ToFourDigitYear(62), "#4-1");
             Assert.AreEqual(4263, kc.ToFourDigitYear(63), "#4-2");

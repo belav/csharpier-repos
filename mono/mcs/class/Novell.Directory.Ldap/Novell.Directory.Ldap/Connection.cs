@@ -135,7 +135,6 @@ namespace Novell.Directory.Ldap
         internal bool Cloned
         {
             /* package */
-
             get { return (cloneCount > 0); }
         }
 
@@ -149,7 +148,6 @@ namespace Novell.Directory.Ldap
         internal System.String Host
         {
             /* package */
-
             get { return host; }
         }
 
@@ -157,7 +155,6 @@ namespace Novell.Directory.Ldap
         internal int Port
         {
             /* package */
-
             get { return port; }
         }
 
@@ -166,10 +163,8 @@ namespace Novell.Directory.Ldap
         internal int BindSemId
         {
             /* package */
-
             get { return bindSemaphoreId; }
             /* package */
-
             set
             {
                 bindSemaphoreId = value;
@@ -181,7 +176,6 @@ namespace Novell.Directory.Ldap
         internal bool BindSemIdClear
         {
             /* package */
-
             get
             {
                 if (bindSemaphoreId == 0)
@@ -198,7 +192,6 @@ namespace Novell.Directory.Ldap
         internal bool Bound
         {
             /* package */
-
             get
             {
                 if (bindProperties != null)
@@ -214,7 +207,6 @@ namespace Novell.Directory.Ldap
         internal bool Connected
         {
             /* package */
-
             get { return (in_Renamed != null); }
         }
 
@@ -239,10 +231,8 @@ namespace Novell.Directory.Ldap
         internal BindProperties BindProperties
         {
             /* package */
-
             get { return bindProperties; }
             /* package */
-
             set
             {
                 bindProperties = value;
@@ -277,7 +267,6 @@ namespace Novell.Directory.Ldap
         internal System.String ConnectionName
         {
             /*package*/
-
             get { return name; }
         }
 
@@ -894,7 +883,6 @@ namespace Novell.Directory.Ldap
         /// <returns> the default factory for this connection
         /// </returns>
         /* package */
-
         /// <summary> clears the writeSemaphore id used for active bind operation</summary>
         /* package */
         internal void clearBindSemId()
@@ -1361,7 +1349,6 @@ namespace Novell.Directory.Ldap
         }
 
         ///TLS not supported in first release
-
         internal Stream InputStream
         {
             get { return in_Renamed; }
@@ -1469,7 +1456,6 @@ namespace Novell.Directory.Ldap
                             * listeners that might have been registered to listen for these
                             * messages.
                             */
-
                             /* Note the location of this code.  We could have required
                             * that message ID 0 be just like other message ID's but
                             * since message ID 0 has to be treated specially we have

@@ -715,7 +715,6 @@ namespace System.Web.Services.Protocols
             get { return serverMethod != null; }
         }
         */
-
         internal override void CreateServerInstance()
         {
             base.CreateServerInstance();
@@ -741,7 +740,6 @@ namespace System.Web.Services.Protocols
         }
         #endif
         */
-
         private void SetHelper(SoapServerProtocolHelper helper)
         {
             this.helper = helper;

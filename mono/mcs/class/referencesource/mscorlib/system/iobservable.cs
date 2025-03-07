@@ -15,7 +15,6 @@
 **
 **
 ===========================================================*/
-
 namespace System
 {
     public interface IObservable<out T>

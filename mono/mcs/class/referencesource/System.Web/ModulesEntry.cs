@@ -8,7 +8,6 @@
  * Config related classes for HttpApplication
  *
  */
-
 namespace System.Web.Configuration.Common
 {
     using System.Collections;

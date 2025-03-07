@@ -67,7 +67,6 @@ namespace System.Diagnostics
             if (builder.ToString() == string.Empty)
                 return false;
             */
-
             return true;
         }
 

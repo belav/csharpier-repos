@@ -7,7 +7,6 @@
 * Define NOPARSE if you do not need FloatingDecimal -> double conversions
 *
 */
-
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;

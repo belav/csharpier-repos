@@ -259,14 +259,12 @@ namespace Moq
             After:
                     readonly MockExceptionReasons reasons;
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private readonly MockExceptionReasons reasons;
             After:
                     readonly MockExceptionReasons reasons;
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private readonly MockExceptionReasons reasons;
@@ -283,14 +281,12 @@ namespace Moq
         After:
                 MockException(MockExceptionReasons reasons, string message)
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private MockException(MockExceptionReasons reasons, string message)
         After:
                 MockException(MockExceptionReasons reasons, string message)
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private MockException(MockExceptionReasons reasons, string message)

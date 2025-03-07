@@ -68,7 +68,6 @@ namespace MonoTests.System.ServiceModel.Syndication
             Assert.IsNull (f.FeedType, "#2");
         }
         */
-
         [Test]
         public void Version()
         {

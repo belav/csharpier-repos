@@ -10,7 +10,6 @@
 ** Purpose: The exception class for class loading failures.
 **
 =============================================================================*/
-
 namespace System
 {
     using System;

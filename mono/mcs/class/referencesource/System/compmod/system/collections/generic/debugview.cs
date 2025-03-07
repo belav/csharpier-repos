@@ -12,7 +12,6 @@
 ** Date: Mar 09, 2004
 **
 =============================================================================*/
-
 namespace System.Collections.Generic
 {
     using System;

@@ -10,7 +10,6 @@
  * Copyright (c) 1998-1999, Microsoft Corporation
  *
  */
-
 namespace System.Web.SessionState
 {
     using System.Collections;
@@ -60,7 +59,6 @@ namespace System.Web.SessionState
         /*
          * The length of a session before it times out, in minutes.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -69,7 +67,6 @@ namespace System.Web.SessionState
         /*
          * Is this a new session?
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -78,7 +75,6 @@ namespace System.Web.SessionState
         /*
          * Is session state in a separate process
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -95,7 +91,6 @@ namespace System.Web.SessionState
          * Abandon the session.
          *
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -204,7 +199,6 @@ namespace System.Web.SessionState
         /*
          * The Id of the session.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -216,7 +210,6 @@ namespace System.Web.SessionState
         /*
          * The length of a session before it times out, in minutes.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -229,7 +222,6 @@ namespace System.Web.SessionState
         /*
          * Is this a new session?
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -241,7 +233,6 @@ namespace System.Web.SessionState
         /*
          * Is session state in a separate process
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -267,7 +258,6 @@ namespace System.Web.SessionState
          * Abandon the session.
          *
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

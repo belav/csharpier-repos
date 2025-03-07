@@ -20,7 +20,6 @@ namespace System.Globalization
     **      Gregorian              1901/02/19          2101/01/28
     **      ChineseLunisolar   1901/01/01          2100/12/29
     */
-
     [Serializable]
     public class ChineseLunisolarCalendar : EastAsianLunisolarCalendar
     {
@@ -571,7 +570,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
         /*
         internal static Calendar GetDefaultInstance()
         {
@@ -581,7 +579,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
         // Construct an instance of ChineseLunisolar calendar.
 
         public ChineseLunisolarCalendar() { }

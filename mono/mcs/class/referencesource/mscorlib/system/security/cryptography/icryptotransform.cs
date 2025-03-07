@@ -12,7 +12,6 @@
  * Author: bal
  *
  */
-
 namespace System.Security.Cryptography
 {
     using System;

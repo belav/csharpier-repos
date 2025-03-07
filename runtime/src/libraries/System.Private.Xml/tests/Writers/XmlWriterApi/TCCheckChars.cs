@@ -455,7 +455,6 @@ namespace System.Xml.XmlWriterApiTests
         or
             - IndentChars or NewLineChars contains <, &, ]]> or an invalid surrogate character when NewLineOnAttributes=false
         ===============================================================================*/
-
         [Theory]
         [XmlWriterInlineData("<")]
         [XmlWriterInlineData("&")]

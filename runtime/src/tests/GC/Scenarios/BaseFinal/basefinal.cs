@@ -6,7 +6,6 @@
 /* Purpose: 1. if finalize() is called before the objects are GCed.
 /*      2. resurrect the object while the finalize() method is call.
 /*******************************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

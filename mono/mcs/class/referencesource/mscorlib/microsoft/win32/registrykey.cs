@@ -24,7 +24,6 @@
   transaction support) and RegFlushKey.  RegCloseKey doesn't require any
   additional work.  .
  */
-
 /*
   Note on ACL support:
   The key thing to note about ACL's is you set them on a kernel object like a
@@ -48,7 +47,6 @@
   There might possibly be an interaction with yet a third registry key as well.
 
 */
-
 namespace Microsoft.Win32
 {
     using System;

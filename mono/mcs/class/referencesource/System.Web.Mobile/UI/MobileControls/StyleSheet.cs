@@ -663,7 +663,6 @@ namespace System.Web.UI.MobileControls
          * Private style collection class, that allows by-name or by-index access to
          * a set of styles.
          */
-
         private class StyleCollection : NameObjectCollectionBase
         {
             public Style this[String name]

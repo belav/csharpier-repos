@@ -51,7 +51,6 @@ namespace MonoTests.System.Net.Sockets
                 Assert.AreEqual (10049, ex.ErrorCode, "#2");
             }
             */
-
             try
             {
                 using (
@@ -922,7 +921,6 @@ namespace MonoTests.System.Net.Sockets
         }
 
         /* Nothing much to test for LingerState */
-
         [Test]
         public void MulticastLoopbackDefaultTcp()
         {
@@ -1017,7 +1015,6 @@ namespace MonoTests.System.Net.Sockets
         }
 
         /* OSSupportsIPv6 depends on the environment */
-
         [Test]
         [Category("NotWorking")] // We have different defaults for perf reasons
         public void ReceiveBufferSizeDefault()
@@ -1214,7 +1211,6 @@ namespace MonoTests.System.Net.Sockets
                         sock.Close ();
                     }
         */
-
         [Test]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void TtlClosed()
@@ -2193,7 +2189,6 @@ namespace MonoTests.System.Net.Sockets
                 Assert.Fail ("BeginConnectMultiple wait failed");
             }
             */
-
             Assert.IsTrue(BCCalledBack.WaitOne(30000), "#0");
 
             Assert.AreEqual(true, BCConnected, "BeginConnectMultiple #1");
@@ -2813,7 +2808,6 @@ namespace MonoTests.System.Net.Sockets
              * Bind to IPAddress.Any; Connect() will fail unless it can
              * connect to all the addresses in allIps.
              */
-
             listen.Bind(IPAddress.Any, out IPEndPoint ep);
             listen.Listen(1);
 
@@ -3138,7 +3132,6 @@ namespace MonoTests.System.Net.Sockets
              * of sendbuf from pos 4, and the next 230
              * bytes of sendbuf from pos 20
              */
-
             for (i = 0; i < 2; i++)
             {
                 Assert.AreEqual(sendbuf[i], recvbuf[i + 4], "#2/" + i.ToString());
@@ -3205,7 +3198,6 @@ namespace MonoTests.System.Net.Sockets
              * next 230 bytes of recvbuf should be sendbuf
              * from pos 20
              */
-
             for (i = 0; i < 2; i++)
             {
                 Assert.AreEqual(recvbuf[i], sendbuf[i + 4], "#2/" + i.ToString());
@@ -5870,7 +5862,6 @@ namespace MonoTests.System.Net.Sockets
         public void UdpMulticasTimeToLive()
         {
             /* see https://bugzilla.xamarin.com/show_bug.cgi?id=36941 */
-
             using (
                 Socket socket = new Socket(
                     AddressFamily.InterNetwork,

@@ -939,7 +939,6 @@ namespace System.Data.OleDb
                 throw ADP.ParameterValueOutOfRange(value);
             }
             */
-
             LengthValue(0);
             StatusValue(DBStatus.S_OK);
 
@@ -1170,7 +1169,6 @@ namespace System.Data.OleDb
                 throw ADP.ParameterValueOutOfRange(value);
             }
             */
-
             LengthValue(0);
             StatusValue(DBStatus.S_OK);
             RowBinding.WriteNumeric(ValueOffset, value, ColumnBindingPrecision);

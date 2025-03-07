@@ -9,7 +9,6 @@
 **          ignoring the case of strings.
 **
 ============================================================*/
-
 using System.Globalization;
 
 namespace System.Collections

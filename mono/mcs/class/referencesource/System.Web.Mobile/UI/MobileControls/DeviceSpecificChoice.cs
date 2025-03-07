@@ -23,7 +23,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice"]/*' />
     [
         ControlBuilderAttribute(typeof(DeviceSpecificChoiceControlBuilder)),
@@ -460,7 +459,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -564,7 +562,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     [ControlBuilderAttribute(typeof(DeviceSpecificChoiceTemplateBuilder))]
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
@@ -584,7 +581,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -712,7 +708,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

@@ -1900,7 +1900,6 @@ namespace System.Web.UI.DataVisualization.Charting
             else
                 this.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
             */
-
             // Draw a string
             this.DrawString(text, font, brush, absPosition, format);
 
@@ -3072,7 +3071,6 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
             }
             */
-
             this.DrawString(text, font, brush, rect, format);
         }
 
@@ -3150,7 +3148,6 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
             }
             */
-
             this.DrawString(text, font, brush, rect, format);
 
             // Set Old Angle

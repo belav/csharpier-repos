@@ -14,14 +14,12 @@ namespace Moq.Async
     After:
         static class AwaitableFactory
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static class AwaitableFactory
     After:
         static class AwaitableFactory
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static class AwaitableFactory
@@ -35,14 +33,12 @@ namespace Moq.Async
     After:
             static readonly Dictionary<Type, Func<Type, IAwaitableFactory>> Providers;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static readonly Dictionary<Type, Func<Type, IAwaitableFactory>> Providers;
     After:
             static readonly Dictionary<Type, Func<Type, IAwaitableFactory>> Providers;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static readonly Dictionary<Type, Func<Type, IAwaitableFactory>> Providers;
@@ -70,14 +66,12 @@ namespace Moq.Async
             After:
                     static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)
             After:
                     static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)

@@ -58,7 +58,6 @@ namespace Commons.Xml.XSD2ClassLib
 
     }
     */
-
     public class XSD2Class
     {
         XmlSchemas schemas;

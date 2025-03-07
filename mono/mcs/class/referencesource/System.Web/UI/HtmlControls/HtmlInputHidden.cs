@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -35,7 +34,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates an intrinsic Html INPUT type=hidden control.
          */
-
         public HtmlInputHidden()
             : base("hidden") { }
 
@@ -55,7 +53,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method used to raise the OnServerChange event.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Raised on the server when the <see langword='HtmlInputHidden'/> control
@@ -72,7 +69,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -99,7 +95,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to process posted data.
          * InputText process a newly posted value.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -141,7 +136,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface which is invoked whenever posted data
          * for a control has changed.  TextBox fires an OnTextChanged event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

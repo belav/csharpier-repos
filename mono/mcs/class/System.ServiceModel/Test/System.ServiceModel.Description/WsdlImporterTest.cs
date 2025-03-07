@@ -84,7 +84,6 @@ namespace MonoTests.System.ServiceModel.Description
             /*list.Add (new MessageEncodingBindingElementImporter ());
             list.Add (new TransportBindingElementImporter ());
             list.Add (new StandardBindingImporter ());*/
-
             wi = new WsdlImporter(ms, null, list);
         }
 
@@ -567,7 +566,6 @@ namespace MonoTests.System.ServiceModel.Description
             /*list.Add (new MessageEncodingBindingElementImporter ());
             list.Add (new TransportBindingElementImporter ());
             list.Add (new StandardBindingImporter ());*/
-
             wi = new WsdlImporter(ms, null, list);
         }
 

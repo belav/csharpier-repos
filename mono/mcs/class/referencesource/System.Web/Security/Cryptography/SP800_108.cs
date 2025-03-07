@@ -14,7 +14,6 @@ namespace System.Web.Security.Cryptography
      * This class contains cryptographic code. If you make changes to *
      * this class, please have it reviewed by the appropriate people. *
      ******************************************************************/
-
     // Implements the NIST SP800-108 key derivation routine in counter mode with an HMAC PRF (HMACSHA512).
     // See: http://csrc.nist.gov/publications/nistpubs/800-108/sp800-108.pdf
     //

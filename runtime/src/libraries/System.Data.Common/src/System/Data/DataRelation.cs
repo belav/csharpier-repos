@@ -18,7 +18,6 @@ WriteXml
 additional notes:
 We decided to enforce the rule 1 just if Xml being persisted
 ******************************************************************************************************/
-
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Common;
@@ -564,7 +563,6 @@ namespace System.Data
           However, Schema does not allow (3) to be a global element and multiple nested child has to be a global element.
           Therefore we'll reduce case (3) to (2) if all parents have same namespace else throw.
          ********************/
-
         /// <summary>
         /// Gets or sets a value indicating whether relations are nested.
         /// </summary>

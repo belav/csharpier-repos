@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-
 namespace System.Web
 {
     using System;
@@ -1005,7 +1004,6 @@ namespace System.Web
         ///       object for the previous handler;
         ///    </para>
         /// </devdoc>
-
         public IHttpHandler PreviousHandler
         {
             get
@@ -1831,7 +1829,6 @@ namespace System.Web
         /*
          * Called by the URL rewrite module to modify the path for downstream modules
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2105,7 +2102,6 @@ namespace System.Web
         ExecuteStep.
 
         */
-
         internal void BeginCancellablePeriod()
         {
             // It could be caused by an exception in OnThreadStart

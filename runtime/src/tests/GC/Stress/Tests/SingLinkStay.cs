@@ -13,7 +13,6 @@ using System;
 /*linked list. MakeLeak() deletes all the object reference in the array
 /*to make all the cyclic single linked lists become memory leaks.
 /******************************************************************/
-
 namespace SingLink
 {
     public class SingLinkStay

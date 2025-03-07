@@ -171,7 +171,6 @@ namespace System.Web.UI.MobileControls
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-
     /// <include file='doc\Panel.uex' path='docs/doc[@for="PanelControlBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

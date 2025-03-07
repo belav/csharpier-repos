@@ -17,14 +17,12 @@ namespace Moq.Linq
     After:
         class MockSetupsBuilder : ExpressionVisitor
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal class MockSetupsBuilder : ExpressionVisitor
     After:
         class MockSetupsBuilder : ExpressionVisitor
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal class MockSetupsBuilder : ExpressionVisitor
@@ -40,7 +38,6 @@ namespace Moq.Linq
             static readonly string[] queryableMethods = new[] { "First", "Where", "FirstOrDefault" };
             static readonly string[] unsupportedMethods = new[] { "All", "Any", "Last", "LastOrDefault", "Single", "SingleOrDefault" };
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static readonly string[] queryableMethods = new[] { "First", "Where", "FirstOrDefault" };
@@ -49,7 +46,6 @@ namespace Moq.Linq
             static readonly string[] queryableMethods = new[] { "First", "Where", "FirstOrDefault" };
             static readonly string[] unsupportedMethods = new[] { "All", "Any", "Last", "LastOrDefault", "Single", "SingleOrDefault" };
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static readonly string[] queryableMethods = new[] { "First", "Where", "FirstOrDefault" };
@@ -78,7 +74,6 @@ namespace Moq.Linq
                 int stackIndex;
                 int quoteDepth;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private int stackIndex;
@@ -87,7 +82,6 @@ namespace Moq.Linq
                 int stackIndex;
                 int quoteDepth;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private int stackIndex;
@@ -201,14 +195,12 @@ namespace Moq.Linq
             After:
                     static Expression ConvertToSetup(Expression left, Expression right)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static Expression ConvertToSetup(Expression left, Expression right)
             After:
                     static Expression ConvertToSetup(Expression left, Expression right)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static Expression ConvertToSetup(Expression left, Expression right)
@@ -242,14 +234,12 @@ namespace Moq.Linq
             After:
                     static Expression ConvertToSetupReturns(Expression left, Expression right)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static Expression ConvertToSetupReturns(Expression left, Expression right)
             After:
                     static Expression ConvertToSetupReturns(Expression left, Expression right)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static Expression ConvertToSetupReturns(Expression left, Expression right)
@@ -285,14 +275,12 @@ namespace Moq.Linq
             After:
                     sealed class ReplaceMockObjectWithParameter : ExpressionVisitor
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private sealed class ReplaceMockObjectWithParameter : ExpressionVisitor
             After:
                     sealed class ReplaceMockObjectWithParameter : ExpressionVisitor
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private sealed class ReplaceMockObjectWithParameter : ExpressionVisitor
@@ -314,7 +302,6 @@ namespace Moq.Linq
                     Expression mockObject;
                     ParameterExpression mockObjectParameter;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private Expression mockObject;
@@ -323,7 +310,6 @@ namespace Moq.Linq
                     Expression mockObject;
                     ParameterExpression mockObjectParameter;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private Expression mockObject;

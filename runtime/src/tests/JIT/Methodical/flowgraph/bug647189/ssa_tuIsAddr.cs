@@ -6,7 +6,6 @@
  * The repro can be generated as:
  * Basically a lot of static field direct accesses with nothing else in the methods.
  */
-
 using System;
 using Xunit;
 

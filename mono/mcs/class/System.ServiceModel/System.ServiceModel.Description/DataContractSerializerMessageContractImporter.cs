@@ -182,7 +182,6 @@ namespace System.ServiceModel.Description
                     }
 
                     /* OperationInput */
-
                     /* Parts, MessagePartDescription */
                     resolveMessage(msg, msgdescr.Body, parts);
                     foreach (MessagePartDescription p in parts)

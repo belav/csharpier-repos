@@ -60,7 +60,6 @@ It may be useful to run these tests with constant prop off.
 
 
 *********************************************/
-
 public class test
 {
     [Fact]

@@ -4,7 +4,6 @@
 /*
  * Test unwinding from catch block.
  */
-
 using System;
 using LocallocTesting;
 using Xunit;

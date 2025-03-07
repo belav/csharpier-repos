@@ -56,7 +56,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructors for Asn1Sequence
         */
-
         /// <summary> Constructs an Asn1Sequence object with no actual Asn1Objects in it.
         ///
         /// Assumes a default size of 10 elements.
@@ -119,7 +118,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Sequence specific methods
         */
-
         /// <summary> Return a String representation of this Asn1Sequence.</summary>
         [CLSCompliantAttribute(false)]
         public override System.String ToString()

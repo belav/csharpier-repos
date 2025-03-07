@@ -293,7 +293,6 @@ namespace MonoTests.System.ServiceModel
                     host.Open ();
                 }
         */
-
         [ServiceContract]
         class Foo
         {

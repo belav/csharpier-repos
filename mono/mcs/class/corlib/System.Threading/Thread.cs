@@ -478,7 +478,6 @@ namespace System.Threading
          * The thread name must be shared by appdomains, so it is stored in
          * unmanaged code.
          */
-
         public string Name
         {
             get { return GetName_internal(Internal); }

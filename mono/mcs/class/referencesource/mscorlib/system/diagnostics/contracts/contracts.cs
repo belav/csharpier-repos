@@ -174,7 +174,6 @@ namespace System.Diagnostics.Contracts
         }
     }
     */
-
     /// <summary>
     /// Instructs downstream tools whether to assume the correctness of this assembly, type or member without performing any verification or not.
     /// Can use [ContractVerification(false)] to explicitly mark assembly, type or member as one to *not* have verification performed on it.

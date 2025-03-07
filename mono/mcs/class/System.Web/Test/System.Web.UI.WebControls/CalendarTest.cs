@@ -771,7 +771,6 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.IsTrue (p.CS_Called == false, "#01");
         }
         */
-
         [Test]
         [Category("NotWorking")]
         public void HaveBaseAttributes()

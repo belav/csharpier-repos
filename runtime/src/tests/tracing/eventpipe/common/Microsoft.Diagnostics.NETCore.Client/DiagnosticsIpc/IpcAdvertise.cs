@@ -22,7 +22,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
      * 8 bytes  - PID (little-endian)
      * 2 bytes  - future
      */
-
     internal sealed class IpcAdvertise
     {
         private static byte[] Magic_V1 => Encoding.ASCII.GetBytes("ADVR_V1" + '\0');

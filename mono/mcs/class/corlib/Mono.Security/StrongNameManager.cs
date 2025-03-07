@@ -75,7 +75,6 @@ namespace Mono.Security
      *	return false			return true
      *	SKIP VERIFICATION		VERIFY ASSEMBLY
      */
-
     internal class StrongNameManager
     {
         private class Element

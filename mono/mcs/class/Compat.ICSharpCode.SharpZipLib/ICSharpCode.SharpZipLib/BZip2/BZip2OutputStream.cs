@@ -1435,7 +1435,6 @@ namespace ICSharpCode.SharpZipLib.BZip2
             from 0 to last+NUM_OVERSHOOT_BYTES inclusive.  First,
             set up the overshoot area for block.
             --*/
-
             //   if (verbosity >= 4) fprintf ( stderr, "        sort initialise ...\n" );
             for (i = 0; i < BZip2Constants.NUM_OVERSHOOT_BYTES; i++)
             {
@@ -1506,7 +1505,6 @@ namespace ICSharpCode.SharpZipLib.BZip2
                 Calculate the running order, from smallest to largest
                 big bucket.
                 --*/
-
                 for (i = 0; i <= 255; i++)
                 {
                     runningOrder[i] = i;

@@ -39,7 +39,6 @@ namespace Mono.Audio
         PCM,
         ADPCM,
     }*/
-
 #if PUBLIC_API
     public
 #else

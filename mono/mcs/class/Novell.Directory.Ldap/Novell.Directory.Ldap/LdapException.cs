@@ -148,7 +148,6 @@ namespace Novell.Directory.Ldap
     /// <tr><td>112</td><td>{@link #TLS_NOT_SUPPORTED}</td></tr>
     /// </table>
     /// </summary>
-
     public class LdapException : System.Exception
     {
         /// <summary> Returns the error message from the Ldap server, if this message is
@@ -766,7 +765,6 @@ namespace Novell.Directory.Ldap
         * Note: Error strings have been pulled out into
         * ResultCodeMessages.properties
         */
-
         /// <summary> Constructs a default exception with no specific error information.</summary>
         public LdapException()
             : base()

@@ -304,7 +304,6 @@ namespace Test.Sys.Drawing
             Assert.AreEqual (5, start);
             Assert.AreEqual (7, end);
             */
-
             iterator.NextSubpath(out start, out end, out isClosed);
             count = iterator.NextPathType(out pathType, out start, out end);
             Assert.AreEqual(4, count);
@@ -453,7 +452,6 @@ namespace Test.Sys.Drawing
             Assert.AreEqual (11, start);
             Assert.AreEqual (20, end);
             */
-
             count = iterator.NextSubpath(out start, out end, out isClosed); // figure #4
             Assert.AreEqual(8, count);
             Assert.AreEqual(13, start);
@@ -467,7 +465,6 @@ namespace Test.Sys.Drawing
             Assert.AreEqual (13, start);
             Assert.AreEqual (20, end);
             */
-
             count = iterator.NextSubpath(out start, out end, out isClosed); // no more figures
             Assert.AreEqual(0, count);
             Assert.AreEqual(0, start);

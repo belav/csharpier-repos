@@ -827,7 +827,6 @@ namespace Novell.Directory.Ldap.Utilclass
         * 0400 0000-7FFF FFFF | 1111110x 10xxxxxx ... 10xxxxxx
         * </pre>
         */
-
         /// <summary> Given the first byte in a sequence, getByteCount returns the number of
         /// additional bytes in a UTF-8 character sequence (not including the first
         /// byte).

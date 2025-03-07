@@ -67,7 +67,6 @@ using Novell.Directory.Ldap.Asn1;
 * SEQUENCE of {eacChunksize INTEGER}]<br>
 * }<br> </p>
 */
-
 namespace Novell.Directory.Ldap.Extensions
 {
     public class LdapRestoreRequest : LdapExtendedOperation
@@ -92,7 +91,6 @@ namespace Novell.Directory.Ldap.Extensions
         * @exception LdapException A general exception which includes an error
         *                          message and an LDAP error code.
         */
-
         public LdapRestoreRequest(
             String objectDN,
             byte[] passwd,

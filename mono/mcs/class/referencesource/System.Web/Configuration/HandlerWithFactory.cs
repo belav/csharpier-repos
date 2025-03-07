@@ -7,7 +7,6 @@
 /*
  * Config related classes for HttpApplication
  */
-
 namespace System.Web.Configuration
 {
     using System;

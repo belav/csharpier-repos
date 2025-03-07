@@ -1150,7 +1150,6 @@ namespace System.Web.UI.DataVisualization.Charting
                     graph.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
                 }
                 */
-
                 // Gets axis labels style
                 CircularAxisLabelsStyle labelsStyle =
                     this._axis.ChartArea.GetCircularAxisLabelsStyle();

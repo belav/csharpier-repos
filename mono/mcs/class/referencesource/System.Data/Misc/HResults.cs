@@ -36,7 +36,6 @@ CLR HRESULTs are defined in corerror.h. If you make any modifications to
 the range allocations described above, please make sure the corerror.h file
 gets updated.
 */
-
 namespace System
 {
     using System;

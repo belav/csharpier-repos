@@ -29,7 +29,6 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
 using System;
 using System.Data;
 using Mono.Data.PostgreSqlClient;
@@ -158,7 +157,6 @@ namespace Test.Mono.Data.PostgreSqlClient
                 "select * " +
                 "from mono_postgres_test";
             */
-
             selectCommand.CommandText =
                 "select "
                 + "boolean_value, "

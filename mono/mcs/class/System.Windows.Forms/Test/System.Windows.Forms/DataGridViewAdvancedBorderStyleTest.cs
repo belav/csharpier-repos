@@ -87,7 +87,6 @@ namespace MonoTests.System.Windows.Forms
             style.Left = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
         }
         */
-
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
         public void TestRightInvalidEnumArgumentException()
@@ -117,7 +116,6 @@ namespace MonoTests.System.Windows.Forms
             style.Right = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
         }
         */
-
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
         public void TestTopInvalidEnumArgumentException()

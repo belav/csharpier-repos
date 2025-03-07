@@ -670,7 +670,6 @@ namespace System.Resources
              * We can't use a BinaryReader since we have to keep track of the
              * stream position for padding.
              */
-
             while (true)
             {
                 if (!read_padding())
@@ -790,7 +789,6 @@ namespace System.Resources
                      * structure can be 0, so we set them from the BITMAPINFOHEADER
                      * structure that follows
                      */
-
                     if (entry.wPlanes == 0)
                         entry.wPlanes = (short)(entry.image[12] | (entry.image[13] << 8));
                     if (entry.wBitCount == 0)

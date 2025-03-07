@@ -13,7 +13,6 @@
 **
 ** Date:  April 2008
 **/
-
 #if FEATURE_COMINTEROP
 
 namespace System.Runtime.InteropServices

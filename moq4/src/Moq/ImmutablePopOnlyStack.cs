@@ -13,14 +13,12 @@ namespace Moq
     After:
         readonly struct ImmutablePopOnlyStack<T>
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal readonly struct ImmutablePopOnlyStack<T>
     After:
         readonly struct ImmutablePopOnlyStack<T>
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal readonly struct ImmutablePopOnlyStack<T>
@@ -36,7 +34,6 @@ namespace Moq
             readonly T[] items;
             readonly int index;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly T[] items;
@@ -45,7 +42,6 @@ namespace Moq
             readonly T[] items;
             readonly int index;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly T[] items;
@@ -71,14 +67,12 @@ namespace Moq
             After:
                     ImmutablePopOnlyStack(T[] items, int index)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private ImmutablePopOnlyStack(T[] items, int index)
             After:
                     ImmutablePopOnlyStack(T[] items, int index)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private ImmutablePopOnlyStack(T[] items, int index)

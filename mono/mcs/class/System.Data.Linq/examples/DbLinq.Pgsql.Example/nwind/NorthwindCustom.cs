@@ -25,7 +25,6 @@ namespace nwind
             set {}
         }
     } */
-
     [Table(Name = "public.\"Categories\"")]
     public partial class NoStorageCategory
     {

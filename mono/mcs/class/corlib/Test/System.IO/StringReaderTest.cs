@@ -102,7 +102,6 @@ namespace MonoTests.System.IO
             Assert.AreEqual("String", new String(test));
 
             /* Read past end of string */
-
             test = new char[6];
             reader = new StringReader("Foo");
             charsRead = reader.Read(test, 0, 6);

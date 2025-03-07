@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -41,7 +40,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The number of cells in the row.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the number of items in the

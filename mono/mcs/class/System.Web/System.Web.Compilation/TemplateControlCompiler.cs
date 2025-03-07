@@ -805,7 +805,6 @@ namespace System.Web.Compilation
             return (0 == String.Compare (a, b, false, Helpers.InvariantCulture));
         }
         */
-
         static bool InvariantCompareNoCase(string a, string b)
         {
             return (0 == String.Compare(a, b, true, Helpers.InvariantCulture));

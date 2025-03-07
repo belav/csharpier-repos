@@ -62,7 +62,6 @@ namespace Mono.Security.X509.Extensions
      *    partyName               [1]     DirectoryString
      * }
      */
-
     // TODO - incomplete (only rfc822Name, dNSName are supported)
     internal class GeneralNames
     {

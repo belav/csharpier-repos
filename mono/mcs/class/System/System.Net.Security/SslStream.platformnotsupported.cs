@@ -35,7 +35,6 @@ namespace System.Net.Security
      * These two are defined by the referencesource; add them here to make
      * it easy to switch between the two implementations.
      */
-
     internal delegate bool RemoteCertValidationCallback(
         string host,
         X509Certificate certificate,

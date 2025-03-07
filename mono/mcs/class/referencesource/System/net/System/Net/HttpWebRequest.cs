@@ -34,7 +34,6 @@ namespace System.Net
     ///    object, where the programmer can query for headers or continue reading, usw.
     ///  </para>
     /// </devdoc>
-
     [Flags]
     public enum DecompressionMethods
     {
@@ -454,7 +453,6 @@ namespace System.Net
 
             Write:      set the sense of the keep-alive request switch
         */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the value of the Keep-Alive header.
@@ -490,7 +488,6 @@ namespace System.Net
 
             Write:      sets the sense of the pipelined request switch
         */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the value of Pipelined property.
@@ -1005,7 +1002,6 @@ namespace System.Net
             Returns: The value of the content length on get.
 
         */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the Content-Length header of the request.
@@ -1997,7 +1993,6 @@ namespace System.Net
                     true if we need buffering, false otherwise.
 
         --*/
-
         /*
         // Consider removing.
         internal bool CheckBuffering {
@@ -2013,7 +2008,6 @@ namespace System.Net
             }
         }
         */
-
         internal bool HasEntityBody
         {
             get
@@ -2080,7 +2074,6 @@ namespace System.Net
                 HttpProcessingResult -
 
         */
-
         //
         // ASSUMPTION: If this method throws the exception must be caught and handled
         // appropriatelly by the caller.
@@ -3188,7 +3181,6 @@ namespace System.Net
                 return m_InternalConnectionGroup;
             }
             */
-
             set { m_InternalConnectionGroup = value; }
         }
 
@@ -3484,7 +3476,6 @@ namespace System.Net
             Returns: The value of the Expect on get.
 
         */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the value of the Expect header.
@@ -3652,7 +3643,6 @@ namespace System.Net
 
 
         */
-
         private void SetSpecialHeaders(string HeaderName, string value)
         {
             value = WebHeaderCollection.CheckBadChars(value, true);
@@ -5039,7 +5029,6 @@ namespace System.Net
             Returns: Nothing
 
         --*/
-
         private void BeginSubmitRequest()
         {
             GlobalLog.Enter(

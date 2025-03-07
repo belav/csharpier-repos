@@ -12,14 +12,12 @@ namespace Moq.Matchers
     After:
         class ParamArrayMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal class ParamArrayMatcher : IMatcher
     After:
         class ParamArrayMatcher : IMatcher
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal class ParamArrayMatcher : IMatcher
@@ -33,14 +31,12 @@ namespace Moq.Matchers
     After:
             IMatcher[] matchers;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private IMatcher[] matchers;
     After:
             IMatcher[] matchers;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private IMatcher[] matchers;
@@ -65,7 +61,6 @@ namespace Moq.Matchers
         After:
                     if (values == null || this.matchers.Length != values.Length)
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     Array values = argument as Array;
@@ -73,7 +68,6 @@ namespace Moq.Matchers
         After:
                     if (values == null || this.matchers.Length != values.Length)
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     Array values = argument as Array;

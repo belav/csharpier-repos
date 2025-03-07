@@ -6,7 +6,6 @@
  * This can cause GC holes, GC overreporting, crashes, corrupt data.
  * Fix is to not undo a register allocation as worthless, but rather to just force it to spill (and not spill when the spill would be redundant).
  */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

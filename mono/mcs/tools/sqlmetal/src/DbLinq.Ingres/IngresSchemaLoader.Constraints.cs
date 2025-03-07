@@ -82,7 +82,6 @@ namespace DbLinq.Ingres
                 }
             }
              */
-
             //public string[] column_name_primaries = new string[] { "", "" };
 
             public string ColumnName;

@@ -17,7 +17,6 @@
  * Note that EventLogInternal also holds a reference back to the EventLog instnace that is
  * exposing it so it is not prematurely collected.
  */
-
 namespace System.Diagnostics
 {
     using System;

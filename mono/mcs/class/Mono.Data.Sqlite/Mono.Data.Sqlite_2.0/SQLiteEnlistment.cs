@@ -4,7 +4,6 @@
  *
  * Released to the public domain, use at your own risk!
  ********************************************************/
-
 #if !PLATFORM_COMPACTFRAMEWORK
 namespace Mono.Data.Sqlite
 {

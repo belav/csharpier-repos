@@ -1844,7 +1844,6 @@ namespace System.Xml.Schema
               Content: ((include | import | redefine | annotation)* , ((attribute | attributeGroup | complexType | element | group | notation | simpleType) , annotation*)*)
             </schema>
         */
-
         private static void BuildSchema_AttributeFormDefault(XsdBuilder builder, string value)
         {
             builder._schema.AttributeFormDefault = (XmlSchemaForm)
@@ -2480,7 +2479,6 @@ namespace System.Xml.Schema
               Content: (annotation? , ((attribute | attributeGroup)* , anyAttribute?))
             </extension>
         */
-
         private static void InitSimpleContentExtension(XsdBuilder builder, string? value)
         {
             if (builder._simpleContent!.Content != null)

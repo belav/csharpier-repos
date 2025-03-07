@@ -11,7 +11,6 @@
  
    contributed by Isaac Gouy
 */
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

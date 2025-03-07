@@ -205,7 +205,6 @@ namespace System.Security.Permissions
             }
 
             /* not reached */
-
             return "";
         }
 

@@ -268,7 +268,6 @@ namespace System.Net.Sockets
             SetUnmanagedStructures(objectsToPin);
         }
         */
-
         protected void SetupCache(ref OverlappedCache overlappedCache)
         {
 #if !NO_OVERLAPPED_CACHE

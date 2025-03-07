@@ -11,7 +11,6 @@ struct Foo<T>
 }
 
 /*This is a WB-stress based test */
-
 public class Driver<T>
 {
     public static void Fill(int cycles, Func<int, T> mk_entry)

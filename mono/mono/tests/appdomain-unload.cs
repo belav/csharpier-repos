@@ -270,7 +270,6 @@ public class Tests
         return 1;
     }
     */
-
     public static void ThreadStart(object obj)
     {
         IRunnable runnable = (IRunnable)obj;
@@ -350,7 +349,6 @@ public class Tests
         return 0;
     }
     */
-
     public static void SyncCallback()
     {
         AppDomain.Unload(AppDomain.CurrentDomain);

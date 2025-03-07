@@ -454,7 +454,6 @@ namespace MonoTests.System.Security.AccessControl
             Assert.IsFalse (dacl.IsCanonical);
         }
         */
-
         [Test]
         public void RemovesMeaninglessAces()
         {

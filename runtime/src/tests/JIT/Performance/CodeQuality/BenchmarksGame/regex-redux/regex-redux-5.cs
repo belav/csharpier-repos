@@ -12,7 +12,6 @@
    Regex-Redux by Josh Goldfoot
    order variants by execution time by Anthony Lloyd
 */
-
 using System;
 using System.IO;
 using System.Text.RegularExpressions;

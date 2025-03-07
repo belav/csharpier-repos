@@ -196,7 +196,6 @@ namespace MonoTests.System.Text
 
             Assert.AreEqual(String.Empty, sb.ToString());
             /* Test empty StringBuilder conforms to spec */
-
             sb.Insert(0, "Foo"); /* Test insert at start of empty string */
 
             Assert.AreEqual("Foo", sb.ToString());

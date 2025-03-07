@@ -93,7 +93,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Encode Type property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the Enctype attribute of the form. This is
@@ -119,7 +118,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Method property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the Method attribute for the form. This defines how a browser
@@ -145,7 +143,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Name property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the value of the HTML Name attribute that will be rendered to the
@@ -179,7 +176,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Target property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the Uri of the frame or window to render the results of a Form

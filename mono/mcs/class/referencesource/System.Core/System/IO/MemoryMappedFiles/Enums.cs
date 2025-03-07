@@ -13,7 +13,6 @@
 ** Date:  February 7, 2007
 **
 ===========================================================*/
-
 using System;
 
 namespace System.IO.MemoryMappedFiles

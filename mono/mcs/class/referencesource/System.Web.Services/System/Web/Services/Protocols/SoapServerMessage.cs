@@ -37,7 +37,6 @@ namespace System.Web.Services.Protocols
             get { return protocol.IsInitialized; }
         }
         */
-
         /*
         internal override SoapReflectedExtension[] Extensions {
             get { return protocol.ServerMethod.extensions; }
@@ -47,7 +46,6 @@ namespace System.Web.Services.Protocols
             get { return protocol.ServerMethod.extensionInitializers; }
         }
         */
-
         /// <include file='doc\SoapServerMessage.uex' path='docs/doc[@for="SoapServerMessage.OneWay"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

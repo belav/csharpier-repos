@@ -38,7 +38,6 @@ class D : B
 sealed class CS : A
 sealed class DS : B
  */
-
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;

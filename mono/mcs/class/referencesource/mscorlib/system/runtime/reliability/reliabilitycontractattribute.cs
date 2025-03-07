@@ -18,7 +18,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Runtime.ConstrainedExecution
 {
     using System;

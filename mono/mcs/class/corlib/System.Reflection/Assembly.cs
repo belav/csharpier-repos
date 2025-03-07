@@ -584,7 +584,6 @@ namespace System.Reflection
          * ie System/// will throw an exception. However ////System will not as that is canocolized
          * out of the name.
          */
-
         // FIXME: LoadWithPartialName must look cache (no CAS) or read from disk (CAS)
         internal static Assembly LoadWithPartialName(
             string partialName,

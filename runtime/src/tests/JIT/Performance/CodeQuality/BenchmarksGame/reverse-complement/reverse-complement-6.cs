@@ -12,7 +12,6 @@
    Contributed by Peperud
    Modified to reduce memory use by Anthony Lloyd
 */
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

@@ -2654,7 +2654,6 @@ namespace System.Management
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point takes a parameter and no return value.
         /// </summary>
-
         private void ThreadEntryPointMethodWithParam()
         {
             try
@@ -2672,7 +2671,6 @@ namespace System.Management
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point has no parameter but does return a value.
         /// </summary>
-
         private void ThreadEntryPointMethodWithReturn()
         {
             try
@@ -2690,7 +2688,6 @@ namespace System.Management
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point has a parameter and return value.
         /// </summary>
-
         private void ThreadEntryPointMethodWithReturnAndParam()
         {
             try

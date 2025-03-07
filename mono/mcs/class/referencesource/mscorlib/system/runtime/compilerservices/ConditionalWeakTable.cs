@@ -62,7 +62,6 @@
 **    about managed weak table consistency. Native handles reclamation
 **    may be delayed until appdomain shutdown.
 ===========================================================*/
-
 namespace System.Runtime.CompilerServices
 {
     using System;

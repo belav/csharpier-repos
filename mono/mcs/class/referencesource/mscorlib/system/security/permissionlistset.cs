@@ -14,7 +14,6 @@
 **          (Replacement for PermissionListSet)
 **
 =============================================================================*/
-
 namespace System.Security
 {
     using System.Collections;

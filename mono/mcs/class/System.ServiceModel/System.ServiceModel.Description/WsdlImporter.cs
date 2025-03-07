@@ -470,7 +470,6 @@ namespace System.ServiceModel.Description
                     else if (opmsg.GetType() == typeof(OperationOutput))
                         dir = MessageDirection.Output;
                     /* FIXME: OperationFault--> OperationDescription.Faults ? */
-
                     if (opmsg.ExtensibleAttributes != null)
                     {
                         for (int i = 0; i < opmsg.ExtensibleAttributes.Length; i++)
@@ -497,7 +496,6 @@ namespace System.ServiceModel.Description
 
                     msg_descr = new MessageDescription(action, dir);
                     /* FIXME: Headers ? */
-
                     op_descr.Messages.Add(msg_descr);
                 }
 

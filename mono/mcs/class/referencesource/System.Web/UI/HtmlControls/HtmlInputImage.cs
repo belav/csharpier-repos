@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -39,7 +38,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates an intrinsic Html INPUT type=image control.
          */
-
         public HtmlInputImage()
             : base("image") { }
 
@@ -304,7 +302,6 @@ namespace System.Web.UI.HtmlControls
          * Override to render unique name attribute.
          * The name attribute is owned by the framework.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

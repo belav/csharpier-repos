@@ -26,7 +26,6 @@ namespace Moq.Internals
             static MethodInfo getHashCodeMethod = typeof(object).GetMethod("GetHashCode", BindingFlags.Public | BindingFlags.Instance);
             static MethodInfo toStringMethod = typeof(object).GetMethod("ToString", BindingFlags.Public | BindingFlags.Instance);
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private static MethodInfo equalsMethod = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
@@ -37,7 +36,6 @@ namespace Moq.Internals
             static MethodInfo getHashCodeMethod = typeof(object).GetMethod("GetHashCode", BindingFlags.Public | BindingFlags.Instance);
             static MethodInfo toStringMethod = typeof(object).GetMethod("ToString", BindingFlags.Public | BindingFlags.Instance);
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private static MethodInfo equalsMethod = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
@@ -100,14 +98,12 @@ namespace Moq.Internals
             After:
                     sealed class Invocation : Moq.Invocation
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private sealed class Invocation : Moq.Invocation
             After:
                     sealed class Invocation : Moq.Invocation
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private sealed class Invocation : Moq.Invocation
@@ -123,14 +119,12 @@ namespace Moq.Internals
         After:
                     static object[] noArguments = new object[0];
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                     private static object[] noArguments = new object[0];
         After:
                     static object[] noArguments = new object[0];
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                     private static object[] noArguments = new object[0];

@@ -12,14 +12,12 @@ namespace Moq.Behaviors
     After:
         sealed class ThrowException : Behavior
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class ThrowException : Behavior
     After:
         sealed class ThrowException : Behavior
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class ThrowException : Behavior
@@ -33,14 +31,12 @@ namespace Moq.Behaviors
     After:
             readonly Exception exception;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private readonly Exception exception;
     After:
             readonly Exception exception;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private readonly Exception exception;

@@ -557,7 +557,6 @@ namespace Mono.Debugger.Soft
             }
         }
         */
-
         // FIXME: When to remove items from the cache ?
 
         Dictionary<long, MethodMirror> methods;

@@ -51,7 +51,6 @@ namespace System.Net.Mail
             }
         }
         */
-
         /*
         // Consider removing.
         internal static void Unregister(string authenticationType)
@@ -71,7 +70,6 @@ namespace System.Net.Mail
             }
         }
         */
-
         internal static ISmtpAuthenticationModule[] GetModules()
         {
             lock (modules)

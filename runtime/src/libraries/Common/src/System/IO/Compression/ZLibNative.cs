@@ -175,7 +175,6 @@ namespace System.IO.Compression
          *   directories in order to PInvoke into them. This would preferably happen in the native interop/PInvoke
          *   layer; if not we can add a Framework level feature.
          */
-
         /// <summary>
         /// The <code>ZLibStreamHandle</code> could be a <code>CriticalFinalizerObject</code> rather than a
         /// <code>SafeHandleMinusOneIsInvalid</code>. This would save an <code>IntPtr</code> field since

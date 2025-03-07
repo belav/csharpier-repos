@@ -13,7 +13,6 @@
  *   - passes with DOTNET_gcstress = 0,1,2,3,4
  *   - passes in debug mode
  */
-
 using System;
 using System.Runtime.CompilerServices;
 

@@ -14,7 +14,6 @@ namespace System.Web
     /*
      * Handler factory -- gets Handler by requestType,path,file
      */
-
     /// <devdoc>
     ///    <para>
     ///       Defines the contract that factories must implement to dynamically

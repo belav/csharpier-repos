@@ -33,7 +33,6 @@ namespace System.Web.Mobile
                 private static readonly String _redirectQueryStringInline = QueryStringAssignment + "&";
                 private static readonly String _disallowRedirectionKey = "_disallowRedirection";
         */
-
         // This class should not be instantiated.
         private MobileRedirect() { }
 
@@ -60,7 +59,6 @@ namespace System.Web.Mobile
                     }
                 }
         */
-
         /* functionality merged into Response.Redirect
                 internal static void RedirectToUrl(HttpContext context, String url, bool endResponse)
                 {

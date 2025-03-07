@@ -61,7 +61,6 @@ struct header
 };
 
 */
-
 using System;
 using System.Text;
 
@@ -140,7 +139,6 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// LF_ constants represents the "type" of an entry
         /// </summary>
         ///
-
         /// <summary>
         ///  This is the "old way" of indicating a normal file.
         /// </summary>
@@ -591,7 +589,6 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// It's formatted differently from the other fields: it has 6 digits, a
         /// null, then a space -- rather than digits, a space, then a null.
         /// The final space is already there, from checksumming
-
         /// </param>
         /// <returns>
         /// The modified buffer offset

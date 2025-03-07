@@ -435,7 +435,6 @@ namespace System.Data
                         else
                             rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
             */
-
             if (!Common.ADP.IsEmpty(targetNamespace))
             {
                 rootSchema.SetAttribute(Keywords.TARGETNAMESPACE, targetNamespace);

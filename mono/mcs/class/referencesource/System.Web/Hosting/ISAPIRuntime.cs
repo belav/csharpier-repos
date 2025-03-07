@@ -9,7 +9,6 @@
  *
  * Copyright (c) 1998 Microsoft Corporation
  */
-
 namespace System.Web.Hosting
 {
     using System.Collections;
@@ -150,7 +149,6 @@ namespace System.Web.Hosting
          * @param ecb ECB
          * @param useProcessModel flag set to true when out-of-process
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

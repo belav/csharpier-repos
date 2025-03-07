@@ -192,7 +192,6 @@ namespace MonoTests.System.ServiceModel.Channels
             }
             Assert.AreEqual (1, count, "#15"); // allow only once
             */
-
             // MS implementation closes XmlReader regardless of
             // its initial state, which isn't good.
             //Assert.AreEqual (ReadState.Closed, r.ReadState, "#1");

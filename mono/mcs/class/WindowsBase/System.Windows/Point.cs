@@ -107,7 +107,6 @@ namespace System.Windows
         }
 
         /* operators */
-
         public static Vector operator -(Point point1, Point point2)
         {
             return Subtract(point1, point2);

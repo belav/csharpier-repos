@@ -1131,7 +1131,6 @@ namespace System.Windows.Forms
         }
 
         /* explicit interface implementations */
-
         void ICancelAddNew.CancelNew(int position)
         {
             if (!add_pending)

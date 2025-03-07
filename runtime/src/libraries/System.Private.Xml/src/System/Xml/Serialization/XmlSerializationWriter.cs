@@ -2447,7 +2447,6 @@ namespace System.Xml.Serialization
             }
             return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
         }*/
-
         internal string GetStringForEnumMember(
             string typeFullName,
             string memberName,

@@ -319,7 +319,6 @@ namespace System.Data.SqlTypes
             return x.m_time >= MaxTime / 2 ? x.m_day + 1 : x.m_day;
         }
         */
-
         // do we still want to define a property of DateTime? If the user uses it often, it is expensive
         // property: Value
         public DateTime Value
@@ -505,7 +504,6 @@ namespace System.Data.SqlTypes
                     }
 
         */
-
         // Explicit conversion from SqlString to SqlDateTime
         // Throws FormatException or OverflowException if necessary.
         public static explicit operator SqlDateTime(SqlString x)
@@ -525,7 +523,6 @@ namespace System.Data.SqlTypes
                            "DateTime: Time out of range");
         }
         */
-
         // Checks whether a given year is a leap year. This method returns true if
         // "year" is a leap year, or false if not.
         //

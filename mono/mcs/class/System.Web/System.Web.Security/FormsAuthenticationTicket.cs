@@ -63,7 +63,6 @@ namespace System.Web.Security
             Console.WriteLine ("user_data: {0}", user_data);
         }
         */
-
         internal byte[] ToByteArray()
         {
             MemoryStream ms = new MemoryStream();

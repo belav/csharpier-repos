@@ -167,7 +167,6 @@ namespace System.Windows.Forms
             fs.Close ();
         }
         */
-
         static byte[] header = new byte[] { 77, 83, 70, 116, 73, 76, 1, 1 };
 
         public void GetObjectData(SerializationInfo si, StreamingContext context)

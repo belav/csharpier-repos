@@ -4,7 +4,6 @@ using Xunit;
 /* Regression test for https://github.com/dotnet/runtime/issues/85821
  * ensure that self-referencing generic instances are initialized correctly and don't TLE
  */
-
 public class Program
 {
     [Fact]

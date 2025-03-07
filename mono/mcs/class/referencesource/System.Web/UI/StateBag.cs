@@ -19,7 +19,6 @@ namespace System.Web.UI
      * properties after being 'marked'.  This class is used as the primary storage
      * mechanism for all HtmlControls and WebControls.
      */
-
     /// <devdoc>
     ///    <para>Manages the state of Web Forms control properties. This
     ///       class stores attribute/value pairs as string/object and tracks changes to these
@@ -40,7 +39,6 @@ namespace System.Web.UI
         /*
          * Constructs an StateBag
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.StateBag'/> class.</para>
         /// </devdoc>
@@ -50,7 +48,6 @@ namespace System.Web.UI
         /*
          * Constructs an StateBag
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.StateBag'/> class that allows stored state
         ///    values to be case-insensitive.</para>
@@ -65,7 +62,6 @@ namespace System.Web.UI
         /*
          * Return count of number of StateItems in the bag.
          */
-
         /// <devdoc>
         /// <para>Indicates the number of items in the <see cref='System.Web.UI.StateBag'/> object. This property is
         ///    read-only.</para>
@@ -78,7 +74,6 @@ namespace System.Web.UI
         /*
          * Returns a collection of keys.
          */
-
         /// <devdoc>
         /// <para>Indicates a collection of keys representing the items in the <see cref='System.Web.UI.StateBag'/> object.
         ///    This property is read-only.</para>
@@ -91,7 +86,6 @@ namespace System.Web.UI
         /*
          * Returns a collection of values.
          */
-
         /// <devdoc>
         /// <para>Indicates a collection of view state values in the <see cref='System.Web.UI.StateBag'/> object.
         ///    This property is read-only.</para>
@@ -109,7 +103,6 @@ namespace System.Web.UI
          * a null set will be saved to allow tracking of state
          * removed after mark.
          */
-
         /// <devdoc>
         ///    <para> Indicates the value of an item stored in the
         ///    <see langword='StateBag'/>
@@ -137,7 +130,6 @@ namespace System.Web.UI
         /*
          * Private implementation of IDictionary item accessor
          */
-
         /// <internalonly/>
         object IDictionary.this[object key]
         {
@@ -153,7 +145,6 @@ namespace System.Web.UI
         /*
          * Add a new StateItem or update an existing StateItem in the bag.
          */
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -193,7 +184,6 @@ namespace System.Web.UI
         /*
          * Private implementation of IDictionary Add
          */
-
         /// <internalonly/>
         void IDictionary.Add(object key, object value)
         {
@@ -203,7 +193,6 @@ namespace System.Web.UI
         /*
          * Clear all StateItems from the bag.
          */
-
         /// <devdoc>
         /// <para>Removes all controls from the <see cref='System.Web.UI.StateBag'/> object.</para>
         /// </devdoc>
@@ -215,7 +204,6 @@ namespace System.Web.UI
         /*
          * Get an enumerator for the StateItems.
          */
-
         /// <devdoc>
         ///    <para>Returns an enumerator that iterates over the key/value pairs stored in
         ///       the <see langword='StateBag'/>.</para>
@@ -229,7 +217,6 @@ namespace System.Web.UI
          * Return the dirty flag of the state item.
          * Returns false if there is not an item for given key.
          */
-
         /// <devdoc>
         /// <para>Checks an item stored in the <see langword='StateBag'/> to see if it has been
         ///    modified.</para>
@@ -246,7 +233,6 @@ namespace System.Web.UI
         /*
          * Return true if 'marked' and state changes are being tracked.
          */
-
         /// <devdoc>
         ///    <para>Determines if state changes in the StateBag object's store are being tracked.</para>
         /// </devdoc>
@@ -258,7 +244,6 @@ namespace System.Web.UI
         /*
          * Restore state that was previously saved via SaveViewState.
          */
-
         /// <devdoc>
         ///    <para>Loads the specified previously saved state information</para>
         /// </devdoc>
@@ -285,7 +270,6 @@ namespace System.Web.UI
         /*
          * Start tracking state changes after "mark".
          */
-
         /// <devdoc>
         ///    <para>Initiates the tracking of state changes for items stored in the
         ///    <see langword='StateBag'/> object.</para>
@@ -299,7 +283,6 @@ namespace System.Web.UI
          * Remove a StateItem from the bag altogether regardless of marked.
          * Used internally by controls.
          */
-
         /// <devdoc>
         /// <para>Removes the specified item from the <see cref='System.Web.UI.StateBag'/> object.</para>
         /// </devdoc>
@@ -311,7 +294,6 @@ namespace System.Web.UI
         /*
          * Private implementation of IDictionary Remove
          */
-
         /// <internalonly/>
         void IDictionary.Remove(object key)
         {
@@ -322,7 +304,6 @@ namespace System.Web.UI
          * Return object containing state that has been modified since "mark".
          * Returns null if there is no modified state.
          */
-
         /// <devdoc>
         ///    <para>Returns an object that contains all state changes for items stored in the
         ///    <see langword='StateBag'/> object.</para>
@@ -376,7 +357,6 @@ namespace System.Web.UI
          * Internal method for setting dirty flag on a state item.
          * Used internallly to prevent state management of certain properties.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -435,7 +415,6 @@ namespace System.Web.UI
          * Return true if tracking state changes.
          * Method of private interface, IStateManager.
          */
-
         /// <internalonly/>
         bool IStateManager.IsTrackingViewState
         {
@@ -446,7 +425,6 @@ namespace System.Web.UI
          * Load previously saved state.
          * Method of private interface, IStateManager.
          */
-
         /// <internalonly/>
         void IStateManager.LoadViewState(object state)
         {
@@ -457,7 +435,6 @@ namespace System.Web.UI
          * Start tracking state changes.
          * Method of private interface, IStateManager.
          */
-
         /// <internalonly/>
         void IStateManager.TrackViewState()
         {
@@ -468,7 +445,6 @@ namespace System.Web.UI
          * Return object containing state changes.
          * Method of private interface, IStateManager.
          */
-
         /// <internalonly/>
         object IStateManager.SaveViewState()
         {

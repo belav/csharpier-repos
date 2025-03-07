@@ -235,7 +235,6 @@ namespace System.Data.OleDb
                 }
             }
             */
-
             bool closeRecordset = multipleResults;
             UnsafeNativeMethods.ADORecordsetConstruction? recordset = (
                 adodb as UnsafeNativeMethods.ADORecordsetConstruction

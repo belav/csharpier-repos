@@ -19,14 +19,12 @@ namespace Moq
     After:
         static class MatcherFactory
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static class MatcherFactory
     After:
         static class MatcherFactory
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static class MatcherFactory

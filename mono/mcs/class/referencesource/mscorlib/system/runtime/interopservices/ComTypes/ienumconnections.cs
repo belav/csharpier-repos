@@ -12,7 +12,6 @@
 **
 **
 =============================================================================*/
-
 namespace System.Runtime.InteropServices.ComTypes
 {
     using System;

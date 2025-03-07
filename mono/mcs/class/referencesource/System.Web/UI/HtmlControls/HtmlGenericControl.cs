@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -21,7 +20,6 @@ namespace System.Web.UI.HtmlControls
     /*
      *  A control representing an unknown Html tag.
      */
-
     /// <devdoc>
     ///    <para>
     ///       The <see langword='HtmlGenericControl'/> class defines the methods,
@@ -35,7 +33,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Creates a new WebControl
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlGenericControl'/> class with default
         ///    values.</para>
@@ -46,7 +43,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates a new HtmlGenericControl
          */
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlGenericControl'/> class using the specified
         ///    string.</para>
@@ -62,7 +58,6 @@ namespace System.Web.UI.HtmlControls
         /*
         * Property to get name of tag.
         */
-
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the element name of a tag that contains a

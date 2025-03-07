@@ -213,7 +213,6 @@ namespace MonoTests.System.Web.UI.HtmlControls
                 Console.WriteLine ("attr key {0} is {1}", key, sel.Attributes[key]);
             }
             */
-
             StateBag sb = sel.GetViewState();
             Assert.AreEqual(5, sb.Count, "ViewState Count");
 

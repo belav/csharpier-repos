@@ -155,7 +155,6 @@ namespace System.Security.Cryptography
 
             /* Compute padding: 80 00 00 ... 00 00 <bit count>
              */
-
             padLen = 64 - (int)(_count & 0x3f);
             if (padLen <= 8)
                 padLen += 64;
@@ -209,7 +208,6 @@ namespace System.Security.Cryptography
                 16 * 10 = 160 function calls)
                 we'll prefer a less compact code to a less performant code
             */
-
             // Left Round 1
             // FF(ref aa, ref bb, ref cc, ref dd, ref ee, blockDWords[0], 11);
             aa += blockDWords[0] + F(bb, cc, dd);

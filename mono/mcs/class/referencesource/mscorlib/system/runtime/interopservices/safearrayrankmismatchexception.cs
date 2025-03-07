@@ -11,7 +11,6 @@
 **            is different than the array rank specified in the metadata.
 **
 =============================================================================*/
-
 namespace System.Runtime.InteropServices
 {
     using System;

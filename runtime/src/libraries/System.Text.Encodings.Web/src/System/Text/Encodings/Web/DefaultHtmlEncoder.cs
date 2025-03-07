@@ -35,7 +35,6 @@ namespace System.Text.Encodings.Web
          * These overrides should be copied to all other subclasses that are backed
          * by the fast inbox escaping mechanism.
          */
-
 #pragma warning disable CS0618 // some of the adapters are intentionally marked [Obsolete]
         private protected override OperationStatus EncodeCore(
             ReadOnlySpan<char> source,
@@ -96,7 +95,6 @@ namespace System.Text.Encodings.Web
         /*
          * End overrides section.
          */
-
         private sealed class EscaperImplementation : ScalarEscaperBase
         {
             internal static readonly EscaperImplementation Singleton = new EscaperImplementation();

@@ -19,14 +19,12 @@ namespace Moq
     After:
         static class Extensions
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal static class Extensions
     After:
         static class Extensions
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal static class Extensions
@@ -436,14 +434,12 @@ namespace Moq
             After:
                     static MethodInfo GetInvokeMethodFromUntypedDelegateCallback(Delegate callback)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static MethodInfo GetInvokeMethodFromUntypedDelegateCallback(Delegate callback)
             After:
                     static MethodInfo GetInvokeMethodFromUntypedDelegateCallback(Delegate callback)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static MethodInfo GetInvokeMethodFromUntypedDelegateCallback(Delegate callback)

@@ -3,7 +3,6 @@ mono max-min.exe              0m1.468s
 mono -O=inline max-min.exe    0m1.087s
 ../mini/mono max-min.exe      0m0.511s
 */
-
 class T
 {
     static int DoIt(int a, int b)

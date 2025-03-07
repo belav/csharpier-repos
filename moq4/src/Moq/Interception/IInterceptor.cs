@@ -9,14 +9,12 @@ namespace Moq
     After:
         interface IInterceptor
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal interface IInterceptor
     After:
         interface IInterceptor
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal interface IInterceptor

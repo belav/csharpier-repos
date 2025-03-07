@@ -2751,7 +2751,6 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                     RecipientInfo ri =
                     ep.Decrypt (ri, null);
                 }*/
-
         private void RoundTrip(byte[] encoded)
         {
             X509Certificate2Collection xc = new X509Certificate2Collection();

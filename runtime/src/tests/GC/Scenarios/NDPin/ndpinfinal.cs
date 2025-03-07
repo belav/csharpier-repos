@@ -7,7 +7,6 @@
 /*coverage: GetPinnedHandle(); FreePinnedHandle(); GetPinnedObject()
 /*          Finalize
 /******************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

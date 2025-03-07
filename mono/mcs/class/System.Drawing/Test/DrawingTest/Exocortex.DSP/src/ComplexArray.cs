@@ -28,7 +28,6 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-
 using System;
 using System.Diagnostics;
 using Exocortex.DSP;
@@ -249,7 +248,6 @@ namespace Exocortex.DSP
             }
             return	newArray;
         }	 */
-
         //---------------------------------------------------------------------------------------------
 
         /// <summary>
@@ -666,7 +664,6 @@ namespace Exocortex.DSP
 
             ComplexArray.UnlockWorkspaceF( ref workspace );
         }  */
-
         /// <summary>
         /// Copy an array
         /// </summary>

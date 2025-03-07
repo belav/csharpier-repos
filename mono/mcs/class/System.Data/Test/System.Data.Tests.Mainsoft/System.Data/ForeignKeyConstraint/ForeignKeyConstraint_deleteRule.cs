@@ -210,7 +210,6 @@ namespace tests.system_data_dll.System_Data
                 {
                     Compare(dr["ChildId"],null);
                 }*/
-
                 Compare(arr.Length, 4);
             }
             catch (Exception ex)

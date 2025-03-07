@@ -19,7 +19,6 @@ Change description:
   If the operation has already begun completing successfully, do not
   cancel the associated Task.
 */
-
 public class Test
 {
     [Fact]

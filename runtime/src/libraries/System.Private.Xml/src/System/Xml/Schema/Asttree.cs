@@ -15,7 +15,6 @@ namespace System.Xml.Schema
     /*--------------------------------------------------------------------------------------------- *
      * Dynamic Part Below...                                                                        *
      * -------------------------------------------------------------------------------------------- */
-
     // stack element class
     // this one needn't change, even the parameter in methods
     internal sealed class AxisElement
@@ -405,7 +404,6 @@ namespace System.Xml.Schema
     /* ---------------------------------------------------------------------------------------------- *
      * Static Part Below...                                                                           *
      * ---------------------------------------------------------------------------------------------- */
-
     // each node in the xpath tree
     internal sealed class DoubleLinkAxis : Axis
     {

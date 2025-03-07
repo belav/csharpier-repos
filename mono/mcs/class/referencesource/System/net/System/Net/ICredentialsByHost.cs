@@ -29,7 +29,6 @@ namespace System.Net
         ///       is associated with the supplied host, realm, and authentication type.
         ///    </para>
         /// </devdoc>
-
         //
         // CONVENTION:
         // returns null if no information is available

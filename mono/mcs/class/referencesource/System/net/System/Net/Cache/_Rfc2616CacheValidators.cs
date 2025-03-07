@@ -463,7 +463,6 @@ namespace System.Net.Cache
                 }
             }
             *********/
-
             if (ctx.ValidationStatus == CacheValidationStatus.RemoveFromCache)
             {
                 return CacheValidationStatus.RemoveFromCache;
@@ -678,7 +677,6 @@ namespace System.Net.Cache
                 /*
                      apparent_age = max(0, response_time - date_value);
                 */
-
                 DateTime nowDate = DateTime.UtcNow;
 
                 TimeSpan age = TimeSpan.MaxValue;
@@ -776,7 +774,6 @@ namespace System.Net.Cache
                 The calculation to determine if a response has expired is quite simple:
                 response_is_fresh = (freshness_lifetime > current_age)
                 */
-
                 // If we managed to compute the Cache Age
                 if (ctx.CacheAge != TimeSpan.MinValue)
                 {
@@ -908,7 +905,6 @@ namespace System.Net.Cache
 
                         response_is_fresh = (freshness_lifetime > current_age)
                */
-
                 ctx.HeuristicExpiration = true;
 
                 DateTime lastModifiedDate = ctx.CacheEntry.LastModifiedUtc;
@@ -1048,7 +1044,6 @@ namespace System.Net.Cache
                    that such a response was taken from a cache by comparing the Date
                    header to the current time.
                 */
-
                 // NOTE: If no Expire and no Validator peresnt we choose to CACHE
                 //===============================================================
 
@@ -1648,7 +1643,6 @@ namespace System.Net.Cache
                            content if the ETag or Last-Modified headers do not match exactly,
                            see 13.5.4.
                     */
-
                     // Sometime if ETag has been used the server won't include Last-Modified, which seems to be OK
                     if (
                         ctx.CacheHeaders.ETag != ctx.Response.Headers.ETag
@@ -1754,7 +1748,6 @@ namespace System.Net.Cache
                         differ from that sent in any previous response for the same
                         variant
                 */
-
                 if (resp.StatusCode == HttpStatusCode.NotModified)
                 {
                     // We will return the response from cache.
@@ -2036,7 +2029,6 @@ namespace System.Net.Cache
                    same values for the listed field names, for the duration of time for
                    which the response is fresh.
                 */
-
                 for (int i = 0; i < varyValues.Count; ++i)
                 {
                     string[] requestValues = ctx.Request.Headers.GetValues((string)varyValues[i]);
@@ -2502,7 +2494,6 @@ namespace System.Net.Cache
                     requests (using If-Unmodified-Since:). The user agent SHOULD
                     provide a way to disable this, in case of difficulty.
                 */
-
                 if (ctx.CacheEntry.LastModifiedUtc != DateTime.MinValue)
                 {
                     str = ctx.CacheEntry.LastModifiedUtc.ToString(
@@ -2659,7 +2650,6 @@ namespace System.Net.Cache
                     response.
 
                */
-
                 if (
                     ctx.CacheHeaders == null
                     || (
@@ -2724,7 +2714,6 @@ namespace System.Net.Cache
                       - Transfer-Encoding
                       - Upgrade
                 */
-
                 // We add or Replace headers from the live response
                 for (int i = 0; i < ctx.Response.Headers.Count; ++i)
                 {

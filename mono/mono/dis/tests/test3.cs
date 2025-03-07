@@ -3,7 +3,6 @@
      case doesn't get exposed, so use csc compiled
      assemblies till gmcs is fixed.
 */
-
 using System;
 
 class X<T1>

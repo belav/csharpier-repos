@@ -36,7 +36,6 @@ namespace System.Globalization
          * is encoded in DerivedBidiClass.txt. We map "L" to "strong left-to-right"; and we map "R" and "AL"
          * to "strong right-to-left". All other (non-strong) code points are "other" for our purposes.
          */
-
         internal static StrongBidiCategory GetBidiCategory(string s, int index)
         {
             if (s is null)
@@ -106,7 +105,6 @@ namespace System.Globalization
          * then retrieves the Numeric_Value (0..9) for this code point. If Numeric_Type!=Decimal, returns -1.
          * This data is encoded in field 6 of UnicodeData.txt.
          */
-
         public static int GetDecimalDigitValue(char ch)
         {
             return GetDecimalDigitValueInternalNoBoundsCheck(ch);
@@ -145,7 +143,6 @@ namespace System.Globalization
          * or Numeric_Type=Digit, then retrieves the Numeric_Value (0..9) for this code point. Otherwise
          * returns -1. This data is encoded in field 7 of UnicodeData.txt.
          */
-
         public static int GetDigitValue(char ch)
         {
             return GetDigitValueInternalNoBoundsCheck(ch);
@@ -181,7 +178,6 @@ namespace System.Globalization
          * Data derived from https://unicode.org/reports/tr29/#Default_Grapheme_Cluster_Table. Represents
          * grapheme cluster boundary information for the given code point.
          */
-
         internal static GraphemeClusterBreakType GetGraphemeClusterBreakType(Rune rune)
         {
             nuint offset = GetNumericGraphemeTableOffsetNoBoundsChecks((uint)rune.Value);
@@ -198,7 +194,6 @@ namespace System.Globalization
          * Data derived from https://unicode.org/reports/tr44/#White_Space. Represents whether a code point
          * is listed as White_Space per PropList.txt.
          */
-
         internal static bool GetIsWhiteSpace(char ch)
         {
             // We don't need a (string, int) overload because all current white space chars are in the BMP.
@@ -219,7 +214,6 @@ namespace System.Globalization
          * or Numeric_Type=Digit or Numeric_Type=Numeric, then retrieves the Numeric_Value for this code point.
          * Otherwise returns -1. This data is encoded in field 8 of UnicodeData.txt.
          */
-
         public static double GetNumericValue(char ch)
         {
             return GetNumericValueNoBoundsCheck(ch);
@@ -372,7 +366,6 @@ namespace System.Globalization
          * General_Category of this code point as encoded in field 2 of UnicodeData.txt, or "Cn"
          * if the code point has not been assigned.
          */
-
         public static UnicodeCategory GetUnicodeCategory(char ch)
         {
             return GetUnicodeCategoryNoBoundsChecks(ch);
@@ -454,7 +447,6 @@ namespace System.Globalization
         /*
          * HELPER AND TABLE LOOKUP ROUTINES
          */
-
         /// <summary>
         /// Returns the code point pointed to by index, decoding any surrogate sequence if possible.
         /// This is similar to char.ConvertToUTF32, but the difference is that

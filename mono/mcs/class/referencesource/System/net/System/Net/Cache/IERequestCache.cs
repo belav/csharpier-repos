@@ -56,7 +56,6 @@ namespace Microsoft.Win32
                 s_ReadPermission.Demand();
             }
             ***********/
-
             // Per VsWhidbey#88276 it was decided to not enforce any cache metadata limits for WinInet cache provider.
             //  (Microsoft 7/17 made this a const to avoid threading issues)
             //_MaximumResponseHeadersLength = Int32.MaxValue;

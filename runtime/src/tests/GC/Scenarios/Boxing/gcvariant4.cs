@@ -8,7 +8,6 @@
 /*of Objects from Object arrays and make local objects of Object
 /*in MakeLeak() see if GC can work fine
 /**************************************************************/
-
 namespace DefaultNamespace
 {
     using System;

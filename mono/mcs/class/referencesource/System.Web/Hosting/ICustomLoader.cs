@@ -16,7 +16,6 @@ namespace System.Web.Hosting
      * no-PIA interfaces that will be released OOB. This interface only exists so that ASP.NET can interface
      * with the Helios layer if necessary. These interfaces are subject to change.
      */
-
     /// <summary>
     /// Defines the entry point where the Helios hoster calls into the developer-provided bootstrapper.
     /// The developer's bin-deployed AspNet.Loader assembly is expected to have an assembly-level

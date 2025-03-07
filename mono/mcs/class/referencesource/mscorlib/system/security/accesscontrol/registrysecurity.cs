@@ -12,7 +12,6 @@
 **
 **
 ===========================================================*/
-
 using System;
 using System.Collections;
 using System.IO;
@@ -193,7 +192,6 @@ namespace System.Security.AccessControl
             new RegistryPermission(RegistryPermissionAccess.NoAccess, AccessControlActions.View, name).Demand();
         }
         */
-
         [System.Security.SecurityCritical] // auto-generated
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         internal RegistrySecurity(
@@ -327,7 +325,6 @@ namespace System.Security.AccessControl
             OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
         }
         */
-
         [System.Security.SecurityCritical] // auto-generated
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         internal void Persist(SafeRegistryHandle hKey, String keyName)

@@ -2693,7 +2693,6 @@ namespace MonoTests.System.Data
                 Assert.Fail("#6");
             } catch (DataException e) {}
             */
-
             table3.Merge(table2, false, MissingSchemaAction.Ignore);
             table1.PrimaryKey = null;
 

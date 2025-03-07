@@ -119,7 +119,6 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual (new Rectangle (2, 4, 13, 13), dgv.Rows[0].Cells[0].ContentBounds, "A2");
         }
         */
-
         [Test]
         public void ContextMenuStrip()
         {
@@ -434,7 +433,6 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual (new Size (21, 20), dgv.Rows[0].Cells[0].PreferredSize, "A3");
         }
          */
-
         [Test]
         public void ReadOnly()
         {
@@ -563,7 +561,6 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual (new Size (100, 22), dgv.Rows[0].Cells[0].Size, "A3");
         }
         */
-
         [Test]
         public void Style()
         {
@@ -795,7 +792,6 @@ namespace MonoTests.System.Windows.Forms
             b.Dispose ();
         }
         */
-
         [Test]
         public void MethodGetErrorIconBounds()
         {

@@ -3015,7 +3015,6 @@ namespace System.Web.UI
         /*
          * Walk the tree and fill in profile information
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// <para>Gathers information about the control and delivers it to the <see cref='System.Web.UI.Page.Trace'/>
@@ -3977,7 +3976,6 @@ namespace System.Web.UI
          * Returns true if the container contains just a static string, i.e.,
          * when the Controls collection has a single LiteralControl.
          */
-
         /// <devdoc>
         ///    <para>Determines if the container holds literal content only.
         ///       When this method returns <see langword='true'/>

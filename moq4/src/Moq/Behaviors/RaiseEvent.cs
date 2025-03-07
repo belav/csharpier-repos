@@ -13,14 +13,12 @@ namespace Moq.Behaviors
     After:
         sealed class RaiseEvent : Behavior
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class RaiseEvent : Behavior
     After:
         sealed class RaiseEvent : Behavior
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class RaiseEvent : Behavior
@@ -40,7 +38,6 @@ namespace Moq.Behaviors
             Delegate eventArgsFunc;
             object[] eventArgsParams;
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
             private Mock mock;
@@ -53,7 +50,6 @@ namespace Moq.Behaviors
             Delegate eventArgsFunc;
             object[] eventArgsParams;
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
             private Mock mock;

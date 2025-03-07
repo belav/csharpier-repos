@@ -14,7 +14,6 @@
 **
 **
 ===========================================================*/
-
 namespace System.Collections
 {
     using System;
@@ -128,7 +127,6 @@ namespace System.Collections
 
            --
         */
-
         internal const Int32 HashPrime = 101;
         private const Int32 InitialSize = 3;
         private const String LoadFactorName = "LoadFactor";

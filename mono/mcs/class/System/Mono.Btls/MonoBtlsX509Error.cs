@@ -34,7 +34,6 @@ namespace Mono.Btls
         OK = 0,
 
         /* illegal error (for uninitialized values, to avoid X509_V_OK): 1 */
-
         UNABLE_TO_GET_ISSUER_CERT = 2,
         UNABLE_TO_GET_CRL = 3,
         UNABLE_TO_DECRYPT_CERT_SIGNATURE = 4,

@@ -12,7 +12,6 @@
  * The two files must be kept in sync.  Any change made here must also
  * be made to WF\Common\Shared\CompilerHelpers.cs
 *********************************************************************/
-
 namespace System.Workflow.Activities.Common
 {
     using System;

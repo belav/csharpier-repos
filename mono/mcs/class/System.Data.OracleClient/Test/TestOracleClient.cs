@@ -514,7 +514,6 @@ namespace Test.OracleClient
                 " clob_value Clob, " +
                 " blob_value Blob ) ";
             */
-
             cmd.ExecuteNonQuery();
 
             Console.WriteLine("  Begin Trans for table mono_adapter_test...");

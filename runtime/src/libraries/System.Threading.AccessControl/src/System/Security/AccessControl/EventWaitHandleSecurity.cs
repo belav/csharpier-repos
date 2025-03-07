@@ -9,7 +9,6 @@
 **
 **
 ===========================================================*/
-
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
@@ -112,7 +111,6 @@ namespace System.Security.AccessControl
         {
         }
         */
-
         internal EventWaitHandleAuditRule(
             IdentityReference identity,
             int accessMask,

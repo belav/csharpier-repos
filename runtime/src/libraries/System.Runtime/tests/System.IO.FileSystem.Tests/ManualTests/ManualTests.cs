@@ -37,7 +37,6 @@ namespace System.IO.ManualTests
                 - Unmount the folder:
                     $ fusermount -u ~/mountedremote
             */
-
             string mountedPath = $"{Environment.GetEnvironmentVariable("HOME")}/mountedremote";
             string largefile = $"{mountedPath}/largefile.txt";
             string origin = $"{mountedPath}/copyme.txt";
@@ -99,7 +98,6 @@ namespace System.IO.ManualTests
             sudo mount -o loop /mnt/ramdisk/exfat.image /mnt/exfatrd
 
             */
-
             File.WriteAllText("/mnt/exfatrd/1", "content");
             File.Copy("/mnt/exfatrd/1", "/mnt/exfatrd/2");
             Assert.True(File.Exists("/mnt/exfatrd/2"));
@@ -126,7 +124,6 @@ namespace System.IO.ManualTests
 
                 - Run the test. If configured correctly, the SetLength operation should fail at least once.
              */
-
             using FileStream fs = File.Open("E:/dummy_file.txt", FileMode.OpenOrCreate);
 
             // Position was less than new Length; should remain the same.

@@ -19,14 +19,12 @@ namespace Moq
     After:
         sealed class MethodExpectation : Expectation
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class MethodExpectation : Expectation
     After:
         sealed class MethodExpectation : Expectation
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class MethodExpectation : Expectation
@@ -94,7 +92,6 @@ namespace Moq
                     static readonly Expression[] noArguments = new Expression[0];
                     static readonly IMatcher[] noArgumentMatchers = new IMatcher[0];
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static readonly Expression[] noArguments = new Expression[0];
@@ -103,7 +100,6 @@ namespace Moq
                     static readonly Expression[] noArguments = new Expression[0];
                     static readonly IMatcher[] noArgumentMatchers = new IMatcher[0];
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static readonly Expression[] noArguments = new Expression[0];
@@ -123,14 +119,12 @@ namespace Moq
         After:
                 LambdaExpression expression;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private LambdaExpression expression;
         After:
                 LambdaExpression expression;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private LambdaExpression expression;
@@ -153,7 +147,6 @@ namespace Moq
                 MethodInfo methodImplementation;
                 Expression[] partiallyEvaluatedArguments;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private readonly IMatcher[] argumentMatchers;
@@ -166,7 +159,6 @@ namespace Moq
                 MethodInfo methodImplementation;
                 Expression[] partiallyEvaluatedArguments;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private readonly IMatcher[] argumentMatchers;
@@ -191,14 +183,12 @@ namespace Moq
         After:
                 Type proxyType;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private Type proxyType;
         After:
                 Type proxyType;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private Type proxyType;
@@ -214,14 +204,12 @@ namespace Moq
         After:
                 readonly bool exactGenericTypeArguments;
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private readonly bool exactGenericTypeArguments;
         After:
                 readonly bool exactGenericTypeArguments;
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private readonly bool exactGenericTypeArguments;
@@ -325,14 +313,12 @@ namespace Moq
                 After:
                         bool IsOverride(Invocation invocation)
                 */
-
                 /* Unmerged change from project 'Moq(netstandard2.1)'
                 Before:
                         private bool IsOverride(Invocation invocation)
                 After:
                         bool IsOverride(Invocation invocation)
                 */
-
                 /* Unmerged change from project 'Moq(net6.0)'
                 Before:
                         private bool IsOverride(Invocation invocation)
@@ -480,14 +466,12 @@ namespace Moq
             After:
                     static Expression[] PartiallyEvaluateArguments(IReadOnlyList<Expression> arguments)
             */
-
             /* Unmerged change from project 'Moq(netstandard2.1)'
             Before:
                     private static Expression[] PartiallyEvaluateArguments(IReadOnlyList<Expression> arguments)
             After:
                     static Expression[] PartiallyEvaluateArguments(IReadOnlyList<Expression> arguments)
             */
-
             /* Unmerged change from project 'Moq(net6.0)'
             Before:
                     private static Expression[] PartiallyEvaluateArguments(IReadOnlyList<Expression> arguments)

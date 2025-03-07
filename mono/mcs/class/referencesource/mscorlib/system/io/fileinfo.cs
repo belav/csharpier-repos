@@ -15,7 +15,6 @@
 **          April 09,2000 (some design refactorization)
 **
 ===========================================================*/
-
 using System;
 using System.Diagnostics.Contracts;
 using System.Globalization;

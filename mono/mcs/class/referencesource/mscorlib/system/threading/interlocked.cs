@@ -26,7 +26,6 @@ namespace System.Threading
          *   Implemented: int
          *                        long
          *****************************/
-
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static int Increment(ref int location)
@@ -46,7 +45,6 @@ namespace System.Threading
          *   Implemented: int
          *                        long
          *****************************/
-
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static int Decrement(ref int location)
@@ -69,7 +67,6 @@ namespace System.Threading
          *                        Object
          *                        IntPtr
          *****************************/
-
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -132,7 +129,6 @@ namespace System.Threading
          *                         Object
          *                         IntPtr
          *****************************/
-
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -205,7 +201,6 @@ namespace System.Threading
          * See getILIntrinsicImplementationForInterlocked() in VM\JitInterface.cpp
          * for details.
          *****************************************************************/
-
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Runtime.InteropServices.ComVisible(false)]
         [System.Security.SecuritySafeCritical]
@@ -244,7 +239,6 @@ namespace System.Threading
          *    Implemented: int
          *                         long
          *****************************/
-
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]

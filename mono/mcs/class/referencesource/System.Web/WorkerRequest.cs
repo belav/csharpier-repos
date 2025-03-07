@@ -18,7 +18,6 @@
         code for request processing.
  
 --*/
-
 namespace System.Web
 {
     using System;
@@ -454,7 +453,6 @@ namespace System.Web
         /*
          * Internal property to determine if request is local
          */
-
         internal bool IsLocal()
         {
             String remoteAddress = GetRemoteAddress();

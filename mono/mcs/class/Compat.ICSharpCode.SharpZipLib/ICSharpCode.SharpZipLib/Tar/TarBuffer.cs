@@ -77,7 +77,6 @@ namespace ICSharpCode.SharpZipLib.Tar
         properly handle an archive whose last record is shorter than the rest,
         or which contains garbage records after a zero block.
         */
-
         //      public static readonly int DEFAULT_RCDSIZE = 512;
         //      public const int DEFAULT_BLOCKFACTOR = 20;
         //	     public static readonly int DEFAULT_BLKSIZE = DEFAULT_RCDSIZE * DEFAULT_BLOCKFACTOR;

@@ -20,7 +20,6 @@ namespace System.Runtime.Caching.Configuration
          </memoryCaches>
        </system.caching>
     */
-
 #if NETCOREAPP
     [UnsupportedOSPlatform("browser")]
 #endif

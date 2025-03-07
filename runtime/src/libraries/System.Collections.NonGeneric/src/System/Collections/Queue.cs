@@ -8,7 +8,6 @@
 ** Purpose: Represents a first-in, first-out collection of objects.
 **
 =============================================================================*/
-
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 

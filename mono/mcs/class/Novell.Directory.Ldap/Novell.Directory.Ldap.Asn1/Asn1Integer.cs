@@ -51,7 +51,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Constructors for Asn1Integer
         */
-
         /// <summary> Call this constructor to construct an Asn1Integer
         /// object from an integer value.
         ///
@@ -99,7 +98,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Object implementation
         */
-
         /// <summary> Call this method to encode the current instance into the
         /// specified output stream using the specified encoder object.
         ///
@@ -118,7 +116,6 @@ namespace Novell.Directory.Ldap.Asn1
 
         /* Asn1Integer specific methods
         */
-
         /// <summary> Returns a String representation of this Asn1Integer object.</summary>
         public override System.String ToString()
         {

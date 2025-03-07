@@ -188,7 +188,6 @@ namespace System.Xml.Schema
                   this.position = position;
               }
           }*/
-
         /// <include file='doc\Infer.uex' path='docs/doc[@for="InferenceOption"]/*' />
         public enum InferenceOption
         {

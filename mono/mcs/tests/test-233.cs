@@ -184,7 +184,6 @@ class Tests
         return result;
     }
     */
-
     static int test_16_float_cmp()
     {
         double a = 2.0;

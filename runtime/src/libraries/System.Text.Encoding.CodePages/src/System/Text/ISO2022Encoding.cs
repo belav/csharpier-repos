@@ -45,7 +45,6 @@ namespace System.Text
     ** This is used to support ISO 2022 encodings that use shift/escape sequences.
     **
     ==============================================================================*/
-
     internal sealed class ISO2022Encoding : DBCSCodePageEncoding
     {
         private const byte SHIFT_OUT = (byte)0x0E;

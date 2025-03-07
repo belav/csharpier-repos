@@ -9,7 +9,6 @@ namespace Test.Sys.Drawing
     /// <summary>
     /// Summary description for Brush.
     /// </summary>
-
     #region BrushFixture
 
     [TestFixture]

@@ -7,7 +7,6 @@
 /*memory, the nodes number inside of every cyclic double linked list
 /*is iObj.
 /******************************************************************/
-
 namespace DoubLink
 {
     using System;

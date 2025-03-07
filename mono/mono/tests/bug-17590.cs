@@ -3,7 +3,6 @@
  * not be much we can do about that - I haven't looked into it), and
  * the array portions are unbearably slow, so it's only run on SGen.
  */
-
 using System;
 
 class X
@@ -75,7 +74,6 @@ class X
         Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i)));
         Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i * 100)));
         */
-
         //Console.WriteLine ("no objects allocated - all good");
         return 0;
     }

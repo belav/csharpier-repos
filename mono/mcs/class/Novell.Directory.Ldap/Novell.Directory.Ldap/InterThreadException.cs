@@ -45,7 +45,6 @@ namespace Novell.Directory.Ldap
         virtual internal int MessageID
         {
             /* package */
-
             get
             {
                 if (request == null)
@@ -66,7 +65,6 @@ namespace Novell.Directory.Ldap
         virtual internal int ReplyType
         {
             /* package */
-
             get
             {
                 if (request == null)

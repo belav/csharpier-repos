@@ -47,7 +47,6 @@ Each bound is classified as an upper bound, lower bound or exact bound.
 Initially each type variable Xi is unfixed with an empty set of bounds.
 
 */
-
 // This file contains the implementation for method type inference on calls (with
 // arguments, and method type inference on conversion of method groups to delegate
 // types (which will not have arguments.)

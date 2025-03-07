@@ -6,7 +6,6 @@
  * DESCRIPTION: Added ToIntPtr and FromIntPtr methods to adhere to FXCop rule "OperatorOverloadsHaveNamedAlternativeMethods".
  *              See also Casting.cs test.
  */
-
 using System;
 using System.Runtime.InteropServices;
 

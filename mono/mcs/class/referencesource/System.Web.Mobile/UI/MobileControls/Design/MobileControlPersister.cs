@@ -665,7 +665,6 @@ namespace System.Web.UI.Design.MobileControls
                                     persistName = "xmlns";
                                 }
                    End of Change */
-
                 if (prefix.Length != 0)
                     persistName = persistPrefix + persistName;
 

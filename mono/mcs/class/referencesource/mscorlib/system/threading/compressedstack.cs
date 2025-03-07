@@ -13,7 +13,6 @@
 ** Purpose: Managed wrapper for the security stack compression implementation
 **
 =============================================================================*/
-
 namespace System.Threading
 {
     using System.Collections;

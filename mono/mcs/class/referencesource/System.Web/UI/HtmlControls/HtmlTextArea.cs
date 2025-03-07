@@ -9,7 +9,6 @@
  *
  * Copyright (c) 2000 Microsoft Corporation
  */
-
 namespace System.Web.UI.HtmlControls
 {
     using System;
@@ -35,7 +34,6 @@ namespace System.Web.UI.HtmlControls
         /*
          *  Creates an intrinsic Html TEXTAREA control.
          */
-
         /// <devdoc>
         ///    Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlTextArea'/> class.
         /// </devdoc>
@@ -45,7 +43,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The property for the number of columns to display.
          */
-
         /// <devdoc>
         ///    <para> Indicates the display width (in characters) of the
         ///       text area.</para>
@@ -68,7 +65,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * Name property.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the value of the HTML
@@ -111,7 +107,6 @@ namespace System.Web.UI.HtmlControls
         /*
          * The property for the number of rows to display.
          */
-
         /// <devdoc>
         ///    <para>Gets or sets the display height (in rows) of the text area.</para>
         /// </devdoc>
@@ -226,7 +221,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface to process posted data.
          * TextArea process a newly posted value.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -258,7 +252,6 @@ namespace System.Web.UI.HtmlControls
          * Method of IPostBackDataHandler interface which is invoked whenever posted data
          * for a control has changed.  TextArea fires an OnServerChange event.
          */
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

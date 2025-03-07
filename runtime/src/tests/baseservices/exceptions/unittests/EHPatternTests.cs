@@ -1361,7 +1361,6 @@ class StackOverflowInLeafFunction
             return c;
         }
     */
-
     unsafe void RecursiveDeath(int depth)
     {
         string msg = String.Concat("caught at depth:", depth.ToString());

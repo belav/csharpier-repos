@@ -232,7 +232,6 @@ namespace System.Data.Common
                 return CreateStatic(parent, context, section);
             }
             */
-
             static internal DataTable CreateStatic(
                 DataTable config,
                 Object context,

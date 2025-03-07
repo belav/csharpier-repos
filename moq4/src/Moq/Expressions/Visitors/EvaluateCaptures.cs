@@ -13,14 +13,12 @@ namespace Moq.Expressions.Visitors
     After:
         sealed class EvaluateCaptures : ExpressionVisitor
     */
-
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
         internal sealed class EvaluateCaptures : ExpressionVisitor
     After:
         sealed class EvaluateCaptures : ExpressionVisitor
     */
-
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
         internal sealed class EvaluateCaptures : ExpressionVisitor
@@ -40,14 +38,12 @@ namespace Moq.Expressions.Visitors
         After:
                 EvaluateCaptures()
         */
-
         /* Unmerged change from project 'Moq(netstandard2.1)'
         Before:
                 private EvaluateCaptures()
         After:
                 EvaluateCaptures()
         */
-
         /* Unmerged change from project 'Moq(net6.0)'
         Before:
                 private EvaluateCaptures()

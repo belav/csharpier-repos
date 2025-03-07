@@ -37,7 +37,6 @@ namespace System.Security.Policy
      * 	permissions manually.
      *
      */
-
     internal static class DefaultPolicies
     {
         public static class ReservedNames

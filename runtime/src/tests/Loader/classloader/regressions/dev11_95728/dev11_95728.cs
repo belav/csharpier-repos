@@ -7,7 +7,6 @@
 * on thread 0x7f4. The error code is 0xc0000005. This error may be a bug in the CLR or in the unsafe or non-verifiable portions of user
 * code. Common sources of this bug include user marshaling errors for COM-interop or PInvoke, which may corrupt the stack.
 */
-
 using System;
 using System.Linq.Expressions;
 using Xunit;

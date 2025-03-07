@@ -2190,7 +2190,6 @@ namespace System.Web.Script.Serialization
             {
                 case JsonType.INTEGER:
                     /* MS AJAX.NET JSON parser promotes big integers to double */
-
                     if (
                         Int32.TryParse(
                             s,

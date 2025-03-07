@@ -87,7 +87,6 @@ namespace System.Net.Cache
         private TimeSpan _UnspecifiedMaxAge;
 
         /*-------------- public members -------------*/
-
         internal abstract RequestCacheValidator CreateValidator();
 
         /*
@@ -96,7 +95,6 @@ namespace System.Net.Cache
         {
         }
         */
-
         protected RequestCacheValidator(bool strictCacheErrors, TimeSpan unspecifiedMaxAge)
         {
             _StrictCacheErrors = strictCacheErrors;

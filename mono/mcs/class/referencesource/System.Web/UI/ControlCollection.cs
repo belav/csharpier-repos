@@ -58,7 +58,6 @@ namespace System.Web.UI
         /*
          * Adds a child control to this control.
          */
-
         /// <devdoc>
         /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object
         ///    to the collection. The new control is logically added to the end of an ordinal
@@ -102,7 +101,6 @@ namespace System.Web.UI
         /*
          * Adds a child control to this control at a certain index
          */
-
         /// <devdoc>
         /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
         ///    to the array at the specified index location.</para>
@@ -203,7 +201,6 @@ namespace System.Web.UI
         /*
          * Retrieves the number of child controls.
          */
-
         /// <devdoc>
         ///    <para>
         ///       Gets the number of child controls in the collection.

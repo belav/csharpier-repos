@@ -19,7 +19,6 @@ namespace System.Net
 
 
     --*/
-
     /// <devdoc>
     ///    <para>
     ///       A
@@ -88,7 +87,6 @@ namespace System.Net
             This causes the read stream to be closed.
 
         --*/
-
         public virtual void Close()
         {
             // We can't throw MethodNotImplementedException here because this is not listed in the
@@ -144,7 +142,6 @@ namespace System.Net
             This property returns the content length of the response.
 
         --*/
-
         /// <devdoc>
         ///    <para>When overridden in a derived class, gets or
         ///       sets
@@ -163,7 +160,6 @@ namespace System.Net
             This property returns the content type of the response.
 
         --*/
-
         /// <devdoc>
         ///    <para>When overridden in a derived class,
         ///       gets
@@ -188,7 +184,6 @@ namespace System.Net
                     read-only
 
         --*/
-
         /// <devdoc>
         /// <para>When overridden in a derived class, returns the <see cref='System.IO.Stream'/> object used
         ///    for reading data from the resource referenced in the <see cref='System.Net.WebRequest'/>
@@ -214,7 +209,6 @@ namespace System.Net
                     read-only
 
         --*/
-
         /// <devdoc>
         ///    <para>When overridden in a derived class, gets the Uri that
         ///       actually responded to the request.</para>
@@ -237,7 +231,6 @@ namespace System.Net
                     read-only
 
         --*/
-
         /// <devdoc>
         ///    <para>When overridden in a derived class, gets
         ///       a collection of header name-value pairs associated with this

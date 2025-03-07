@@ -530,7 +530,6 @@ namespace MonoTests.System.Xml
                         Assert.IsTrue (eventStrings.Contains ("NodeRemoved, Remove, <bar />, foo, <none>"));
                         Assert.AreEqual (0, element.ChildNodes.Count);
             */
-
             // Removed 'bar' element from 'foo' inside document.
             element = document.CreateElement("foo");
             document.AppendChild(element);
@@ -571,7 +570,6 @@ namespace MonoTests.System.Xml
                         Assert.IsTrue (eventStrings.Contains ("NodeRemoving, Remove, <bar />, foo, <none>"));
                         Assert.AreEqual (0, element.ChildNodes.Count);
             */
-
             // Removing 'bar' element from 'foo' inside document.
             element = document.CreateElement("foo");
             document.AppendChild(element);

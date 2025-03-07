@@ -33,7 +33,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
      * (2 * length) bytes - The data of the string encoded using Unicode
      *                      (includes null terminating character)
      */
-
     internal class ProcessInfo
     {
         private static readonly int GuidSizeInBytes = 16;

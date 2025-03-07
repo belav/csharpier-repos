@@ -20,7 +20,6 @@ namespace System.Globalization
     **      Gregorian   1900/04/30   2077/11/17
     **      UmAlQura    1318/01/01   1500/12/30
     */
-
     [Serializable]
     public class UmAlQuraCalendar : Calendar
     {
@@ -1017,7 +1016,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
         public override DateTime MinSupportedDateTime
         {
             get { return (minDate); }
@@ -1250,7 +1248,6 @@ namespace System.Globalization
         **      In order to get the exact UmAlQura year, we compare the exact absolute date for UmAlQuraYear and (UmAlQuraYear + 1).
         **      From here, we can get the correct UmAlQura year.
         ============================================================================*/
-
         internal virtual int GetDatePart(DateTime time, int part)
         {
             int UmAlQuraYear = 0; // UmAlQura year
@@ -1398,7 +1395,6 @@ namespace System.Globalization
             return ((((year * 11) + 14) % 30) < 11);
         }
         */
-
         // Returns the number of days in the month given by the year and
         // month arguments.
         //
