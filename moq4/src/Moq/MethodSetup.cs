@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class MethodSetup : Setup
@@ -32,10 +31,12 @@ namespace Moq
     /// </summary>
     abstract class MethodSetup : Setup
     {
-        protected MethodSetup(Expression originalExpression, Mock mock, MethodExpectation expectation)
-            : base(originalExpression, mock, expectation)
-        {
-        }
+        protected MethodSetup(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation
+        )
+            : base(originalExpression, mock, expectation) { }
 
         public MethodInfo Method => ((MethodExpectation)this.Expectation).Method;
     }

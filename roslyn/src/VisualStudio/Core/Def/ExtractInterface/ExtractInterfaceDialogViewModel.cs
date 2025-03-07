@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             ImmutableArray<LanguageServices.Utilities.MemberSymbolViewModel> memberViewModels,
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
-            string languageName)
+            string languageName
+        )
         {
             _notificationService = notificationService;
 
@@ -43,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
                 dependentsMap: null,
                 destinationTypeKind: TypeKind.Interface,
                 showDependentsButton: false,
-                showPublicButton: false);
+                showPublicButton: false
+            );
 
             DestinationViewModel = new NewTypeDestinationSelectionViewModel(
                 defaultInterfaceName,
@@ -51,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
                 defaultNamespace,
                 generatedNameTypeParameterSuffix,
                 conflictingTypeNames.ToImmutableArray(),
-                syntaxFactsService);
+                syntaxFactsService
+            );
         }
 
         internal bool TrySubmit()
@@ -73,10 +76,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             return true;
         }
 
-        private void SendFailureNotification(string message)
-            => _notificationService.SendNotification(message, severity: NotificationSeverity.Information);
+        private void SendFailureNotification(string message) =>
+            _notificationService.SendNotification(
+                message,
+                severity: NotificationSeverity.Information
+            );
 
-        public ImmutableArray<MemberSymbolViewModel> MemberContainers => MemberSelectionViewModel.Members;
+        public ImmutableArray<MemberSymbolViewModel> MemberContainers =>
+            MemberSelectionViewModel.Members;
 
         public NewTypeDestinationSelectionViewModel DestinationViewModel { get; internal set; }
 

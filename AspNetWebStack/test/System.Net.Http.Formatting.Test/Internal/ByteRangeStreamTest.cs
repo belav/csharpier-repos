@@ -69,13 +69,19 @@ namespace System.Net.Http.Internal
         public void Ctor_ThrowsOnNullInnerStream()
         {
             var range = new RangeItemHeaderValue(0, 10);
-            Assert.ThrowsArgumentNull(() => new ByteRangeStream(innerStream: null, range: range), "innerStream");
+            Assert.ThrowsArgumentNull(
+                () => new ByteRangeStream(innerStream: null, range: range),
+                "innerStream"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnNullRange()
         {
-            Assert.ThrowsArgumentNull(() => new ByteRangeStream(innerStream: Stream.Null, range: null), "range");
+            Assert.ThrowsArgumentNull(
+                () => new ByteRangeStream(innerStream: Stream.Null, range: null),
+                "range"
+            );
         }
 
         [Fact]
@@ -87,7 +93,10 @@ namespace System.Net.Http.Internal
             var range = new RangeItemHeaderValue(0, 10);
 
             // Act/Assert
-            Assert.ThrowsArgument(() => new ByteRangeStream(mockInnerStream.Object, range), "innerStream");
+            Assert.ThrowsArgument(
+                () => new ByteRangeStream(mockInnerStream.Object, range),
+                "innerStream"
+            );
         }
 
         [Fact]
@@ -100,8 +109,13 @@ namespace System.Net.Http.Internal
             var range = new RangeItemHeaderValue(10, 20);
 
             // Act/Assert
-            Assert.ThrowsArgumentOutOfRange(() => new ByteRangeStream(mockInnerStream.Object, range), "range",
-                "The 'From' value of the range must be less than or equal to 5.", false, 10);
+            Assert.ThrowsArgumentOutOfRange(
+                () => new ByteRangeStream(mockInnerStream.Object, range),
+                "range",
+                "The 'From' value of the range must be less than or equal to 5.",
+                false,
+                10
+            );
         }
 
         [Fact]
@@ -137,10 +151,11 @@ namespace System.Net.Http.Internal
             Assert.ThrowsArgumentOutOfRange(
                 () => new ByteRangeStream(mockInnerStream.Object, range),
                 "innerStream",
-                "The stream over which 'ByteRangeStream' provides a range view must have a length greater than or " +
-                "equal to 1.",
+                "The stream over which 'ByteRangeStream' provides a range view must have a length greater than or "
+                    + "equal to 1.",
                 false,
-                innerLength);
+                innerLength
+            );
         }
 
         [Theory]
@@ -306,7 +321,12 @@ namespace System.Net.Http.Internal
 #if !Testing_NetStandard1_3 // BeginX and EndX are not supported on Streams in netstandard1.3
         [Theory]
         [PropertyData("ReadBoundsDataWithLimit")]
-        public void BeginRead_ReadsEffectiveLengthBytes(int from, int to, int innerLength, int effectiveLength)
+        public void BeginRead_ReadsEffectiveLengthBytes(
+            int from,
+            int to,
+            int innerLength,
+            int effectiveLength
+        )
         {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
@@ -327,7 +347,8 @@ namespace System.Net.Http.Internal
                 // Assert
                 mockInnerStream.Verify(
                     s => s.BeginRead(data, offset, effectiveLength, callback, userState),
-                    Times.Once());
+                    Times.Once()
+                );
                 Assert.Equal(effectiveLength, rangeStream.Position);
             }
         }
@@ -365,7 +386,12 @@ namespace System.Net.Http.Internal
 
         [Theory]
         [PropertyData("ReadBoundsDataWithLimit")]
-        public void Read_ReadsEffectiveLengthBytes(int from, int to, int innerLength, int effectiveLength)
+        public void Read_ReadsEffectiveLengthBytes(
+            int from,
+            int to,
+            int innerLength,
+            int effectiveLength
+        )
         {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
@@ -415,7 +441,12 @@ namespace System.Net.Http.Internal
 
         [Theory]
         [PropertyData("ReadBoundsDataWithLimit")]
-        public async Task ReadAsync_ReadsEffectiveLengthBytes(int from, int to, int innerLength, int effectiveLength)
+        public async Task ReadAsync_ReadsEffectiveLengthBytes(
+            int from,
+            int to,
+            int innerLength,
+            int effectiveLength
+        )
         {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
@@ -433,7 +464,8 @@ namespace System.Net.Http.Internal
                 // Assert
                 mockInnerStream.Verify(
                     s => s.ReadAsync(data, offset, effectiveLength, CancellationToken.None),
-                    Times.Once());
+                    Times.Once()
+                );
                 Assert.Equal(effectiveLength, rangeStream.Position);
             }
         }
@@ -467,7 +499,12 @@ namespace System.Net.Http.Internal
 
         [Theory]
         [PropertyData("ReadBoundsData")]
-        public void ReadByte_ReadsEffectiveLengthTimes(int from, int to, int innerLength, int effectiveLength)
+        public void ReadByte_ReadsEffectiveLengthTimes(
+            int from,
+            int to,
+            int innerLength,
+            int effectiveLength
+        )
         {
             // Arrange
             var mockInnerStream = new Mock<Stream>();

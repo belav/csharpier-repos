@@ -38,7 +38,12 @@ public class TokenExtensionTests
 
         props.StoreTokens(tokens);
 
-        props.StoreTokens(new[] { new AuthenticationToken { Name = "Zero", Value = "0" } });
+        props.StoreTokens(
+            new[]
+            {
+                new AuthenticationToken { Name = "Zero", Value = "0" },
+            }
+        );
 
         Assert.Equal("0", props.GetTokenValue("Zero"));
         Assert.Null(props.GetTokenValue("One"));
@@ -113,7 +118,6 @@ public class TokenExtensionTests
         Assert.Null(props.GetTokenValue("ONE"));
         Assert.Null(props.GetTokenValue("Jigglypuff"));
         Assert.Equal(3, props.GetTokens().Count());
-
     }
 
     //public class TestAuthHandler : IAuthenticationHandler
@@ -172,5 +176,4 @@ public class TokenExtensionTests
     //    Assert.Equal("2", await context.GetTokenAsync("Two"));
     //    Assert.Equal("3", await context.GetTokenAsync("Three"));
     //}
-
 }

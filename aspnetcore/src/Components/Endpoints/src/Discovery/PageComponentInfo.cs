@@ -24,7 +24,8 @@ internal class PageComponentInfo
         string displayName,
         [DynamicallyAccessedMembers(Component)] Type type,
         string route,
-        IReadOnlyList<object> metadata)
+        IReadOnlyList<object> metadata
+    )
     {
         DisplayName = displayName;
         Type = type;

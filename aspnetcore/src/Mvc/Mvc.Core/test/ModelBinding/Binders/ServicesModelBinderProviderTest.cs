@@ -12,11 +12,11 @@ public class ServicesModelBinderProviderTest
         get
         {
             return new TheoryData<BindingSource>()
-                {
-                    BindingSource.Header,
-                    BindingSource.Form,
-                    null,
-                };
+            {
+                BindingSource.Header,
+                BindingSource.Form,
+                null,
+            };
         }
     }
 
@@ -55,7 +55,10 @@ public class ServicesModelBinderProviderTest
 
     [Theory]
     [MemberData(nameof(ParameterInfoData))]
-    public void Create_WhenBindingSourceIsNullableFromServices_ReturnsBinder(ParameterInfo parameterInfo, bool isOptional)
+    public void Create_WhenBindingSourceIsNullableFromServices_ReturnsBinder(
+        ParameterInfo parameterInfo,
+        bool isOptional
+    )
     {
         // Arrange
         var provider = new ServicesModelBinderProvider();
@@ -70,9 +73,7 @@ public class ServicesModelBinderProviderTest
         Assert.Equal(isOptional, binder.IsOptional);
     }
 
-    private class IPersonService
-    {
-    }
+    private class IPersonService { }
 
     public static TheoryData<ParameterInfo, bool> ParameterInfoData()
     {
@@ -88,31 +89,33 @@ public class ServicesModelBinderProviderTest
     private class ParameterInfos
     {
 #nullable disable
-        public void TestMethod([FromServices] IPersonService param1, [FromServices] IPersonService param2 = null)
-        { }
+        public void TestMethod(
+            [FromServices] IPersonService param1,
+            [FromServices] IPersonService param2 = null
+        ) { }
+
 #nullable restore
 
 #nullable enable
-        public void TestMethod2([FromServices] IPersonService param1, [FromServices] IPersonService? param2)
-        { }
+        public void TestMethod2(
+            [FromServices] IPersonService param1,
+            [FromServices] IPersonService? param2
+        ) { }
+
 #nullable restore
 
-        public static ParameterInfo NonNullableParameterInfo
-            = typeof(ParameterInfos)
-                .GetMethod(nameof(ParameterInfos.TestMethod2))
-                .GetParameters()[0];
-        public static ParameterInfo NullableParameterInfo
-            = typeof(ParameterInfos)
-                .GetMethod(nameof(ParameterInfos.TestMethod2))
-                .GetParameters()[1];
+        public static ParameterInfo NonNullableParameterInfo = typeof(ParameterInfos)
+            .GetMethod(nameof(ParameterInfos.TestMethod2))
+            .GetParameters()[0];
+        public static ParameterInfo NullableParameterInfo = typeof(ParameterInfos)
+            .GetMethod(nameof(ParameterInfos.TestMethod2))
+            .GetParameters()[1];
 
-        public static ParameterInfo NonNullabilityContextParameterInfo
-            = typeof(ParameterInfos)
-                .GetMethod(nameof(ParameterInfos.TestMethod))
-                .GetParameters()[0];
-        public static ParameterInfo DefaultValueParameterInfo
-            = typeof(ParameterInfos)
-                .GetMethod(nameof(ParameterInfos.TestMethod))
-                .GetParameters()[1];
+        public static ParameterInfo NonNullabilityContextParameterInfo = typeof(ParameterInfos)
+            .GetMethod(nameof(ParameterInfos.TestMethod))
+            .GetParameters()[0];
+        public static ParameterInfo DefaultValueParameterInfo = typeof(ParameterInfos)
+            .GetMethod(nameof(ParameterInfos.TestMethod))
+            .GetParameters()[1];
     }
 }

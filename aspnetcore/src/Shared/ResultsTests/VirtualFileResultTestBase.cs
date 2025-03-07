@@ -28,7 +28,8 @@ public abstract class VirtualFileResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false);
+        bool enableRangeProcessing = false
+    );
 
     [Theory]
     [InlineData(0L, 3L, 4L)]
@@ -38,14 +39,14 @@ public abstract class VirtualFileResultTestBase
     public async Task WriteFileAsync_WritesRangeRequested(
         long? start,
         long? end,
-        long contentLength)
+        long contentLength
+    )
     {
         // Arrange
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -81,8 +82,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -92,11 +92,19 @@ public abstract class VirtualFileResultTestBase
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
         requestHeaders.Range = new RangeHeaderValue(0, 3);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"Etag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
 
         // Act
-        await ExecuteAsync(httpContext, path, contentType, entityTag: entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            path,
+            contentType,
+            entityTag: entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -118,8 +126,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -129,7 +136,9 @@ public abstract class VirtualFileResultTestBase
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
         requestHeaders.Range = new RangeHeaderValue(0, 3);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"Etag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
 
         // Act
@@ -151,8 +160,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -162,11 +170,19 @@ public abstract class VirtualFileResultTestBase
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
         requestHeaders.Range = new RangeHeaderValue(0, 3);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"NotEtag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"NotEtag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
 
         // Act
-        await ExecuteAsync(httpContext, path, contentType, entityTag: entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            path,
+            contentType,
+            entityTag: entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -187,8 +203,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -221,8 +236,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var httpContext = GetHttpContext(GetFileProvider(path));
         httpContext.Response.Body = new MemoryStream();
@@ -257,8 +271,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -288,8 +301,7 @@ public abstract class VirtualFileResultTestBase
         var path = Path.GetFullPath("helllo.txt");
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var sendFileFeature = new TestSendFileFeature();
         var httpContext = GetHttpContext(GetFileProvider(path));
@@ -318,7 +330,11 @@ public abstract class VirtualFileResultTestBase
     [InlineData(8L, 13L, 6L)]
     [InlineData(null, 3L, 3L)]
     [InlineData(8L, null, 25L)]
-    public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(long? start, long? end, long contentLength)
+    public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(
+        long? start,
+        long? end,
+        long contentLength
+    )
     {
         // Arrange
         var path = Path.Combine("TestFiles", "FilePathResultTestFile.txt");
@@ -327,8 +343,7 @@ public abstract class VirtualFileResultTestBase
         var httpContext = GetHttpContext(GetFileProvider(path));
         httpContext.Features.Set<IHttpResponseBodyFeature>(sendFile);
         var appEnvironment = new Mock<IWebHostEnvironment>();
-        appEnvironment.Setup(app => app.WebRootFileProvider)
-            .Returns(GetFileProvider(path));
+        appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.Range = new RangeHeaderValue(start, end);
@@ -447,7 +462,9 @@ public abstract class VirtualFileResultTestBase
         nonDiskFileInfo.SetupGet(fi => fi.PhysicalPath).Returns(() => null); // set null to indicate non-disk file
         nonDiskFileInfo.Setup(fi => fi.CreateReadStream()).Returns(sourceStream);
         var nonDiskFileProvider = new Mock<IFileProvider>();
-        nonDiskFileProvider.Setup(fp => fp.GetFileInfo(It.IsAny<string>())).Returns(nonDiskFileInfo.Object);
+        nonDiskFileProvider
+            .Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
+            .Returns(nonDiskFileInfo.Object);
 
         var httpContext = GetHttpContext(nonDiskFileProvider.Object);
         httpContext.Response.Body = new MemoryStream();
@@ -475,7 +492,9 @@ public abstract class VirtualFileResultTestBase
         var httpContext = GetHttpContext(fileProvider.Object);
 
         // Act
-        var ex = await Assert.ThrowsAsync<FileNotFoundException>(() => ExecuteAsync(httpContext, path, "text/plain"));
+        var ex = await Assert.ThrowsAsync<FileNotFoundException>(
+            () => ExecuteAsync(httpContext, path, "text/plain")
+        );
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);
@@ -486,7 +505,9 @@ public abstract class VirtualFileResultTestBase
     {
         var services = new ServiceCollection();
 
-        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(e => e.WebRootFileProvider == webRootFileProvider);
+        var hostingEnvironment = Mock.Of<IWebHostEnvironment>(e =>
+            e.WebRootFileProvider == webRootFileProvider
+        );
 
         services.AddSingleton<IWebHostEnvironment>(hostingEnvironment);
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
@@ -511,13 +532,19 @@ public abstract class VirtualFileResultTestBase
         fileInfo.SetupGet(fi => fi.Length).Returns(33);
         fileInfo.SetupGet(fi => fi.Exists).Returns(true);
         var lastModified = DateTimeOffset.MinValue.AddDays(1);
-        lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+        lastModified = new DateTimeOffset(
+            lastModified.Year,
+            lastModified.Month,
+            lastModified.Day,
+            lastModified.Hour,
+            lastModified.Minute,
+            lastModified.Second,
+            TimeSpan.FromSeconds(0)
+        );
         fileInfo.SetupGet(fi => fi.LastModified).Returns(lastModified);
         fileInfo.SetupGet(fi => fi.PhysicalPath).Returns(path);
         var fileProvider = new Mock<IFileProvider>();
-        fileProvider.Setup(fp => fp.GetFileInfo(path))
-            .Returns(fileInfo.Object)
-            .Verifiable();
+        fileProvider.Setup(fp => fp.GetFileInfo(path)).Returns(fileInfo.Object).Verifiable();
 
         return fileProvider.Object;
     }
@@ -543,7 +570,12 @@ public abstract class VirtualFileResultTestBase
             throw new NotImplementedException();
         }
 
-        public Task SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+        public Task SendFileAsync(
+            string path,
+            long offset,
+            long? length,
+            CancellationToken cancellation
+        )
         {
             Name = path;
             Offset = offset;

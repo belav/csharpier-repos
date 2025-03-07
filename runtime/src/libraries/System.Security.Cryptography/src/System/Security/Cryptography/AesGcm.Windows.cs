@@ -25,7 +25,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             AeadCommon.Encrypt(_keyHandle, nonce, associatedData, plaintext, ciphertext, tag);
         }
@@ -35,9 +36,18 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
-            AeadCommon.Decrypt(_keyHandle, nonce, associatedData, ciphertext, tag, plaintext, clearPlaintextOnFailure: true);
+            AeadCommon.Decrypt(
+                _keyHandle,
+                nonce,
+                associatedData,
+                ciphertext,
+                tag,
+                plaintext,
+                clearPlaintextOnFailure: true
+            );
         }
 
         public void Dispose()

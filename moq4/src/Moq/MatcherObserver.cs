@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class MatcherObserver : IDisposable
@@ -104,7 +103,6 @@ namespace Moq
         int timestamp;
         List<Observation> observations;
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private MatcherObserver()
@@ -125,9 +123,7 @@ namespace Moq
         After:
                 MatcherObserver()
         */
-        MatcherObserver()
-        {
-        }
+        MatcherObserver() { }
 
         public void Dispose()
         {
@@ -175,13 +171,18 @@ namespace Moq
             return false;
         }
 
-        public IEnumerable<Match> GetMatchesBetween(int fromTimestampInclusive, int toTimestampExclusive)
+        public IEnumerable<Match> GetMatchesBetween(
+            int fromTimestampInclusive,
+            int toTimestampExclusive
+        )
         {
             if (this.observations != null)
             {
-                return this.observations
-                           .Where(o => fromTimestampInclusive <= o.Timestamp && o.Timestamp < toTimestampExclusive)
-                           .Select(o => o.Match);
+                return this
+                    .observations.Where(o =>
+                        fromTimestampInclusive <= o.Timestamp && o.Timestamp < toTimestampExclusive
+                    )
+                    .Select(o => o.Match);
             }
             else
             {

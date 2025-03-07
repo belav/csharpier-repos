@@ -19,7 +19,7 @@ namespace System.Data.Mapping.Update.Internal
     internal partial class Propagator
     {
         /// <summary>
-        /// Class generating default records for extents. Has a single external entry point, the 
+        /// Class generating default records for extents. Has a single external entry point, the
         /// <see cref="CreatePlaceholder" /> static method.
         /// </summary>
         private class ExtentPlaceholderCreator
@@ -37,7 +37,8 @@ namespace System.Data.Mapping.Update.Internal
             #endregion
 
             #region Fields
-            static private Dictionary<PrimitiveTypeKind, object> s_typeDefaultMap = InitializeTypeDefaultMap();
+            static private Dictionary<PrimitiveTypeKind, object> s_typeDefaultMap =
+                InitializeTypeDefaultMap();
             private UpdateTranslator m_parent;
             #endregion
 
@@ -48,8 +49,10 @@ namespace System.Data.Mapping.Update.Internal
             /// </summary>
             private static Dictionary<PrimitiveTypeKind, object> InitializeTypeDefaultMap()
             {
-                Dictionary<PrimitiveTypeKind, object> typeDefaultMap = new Dictionary<PrimitiveTypeKind, object>(
-                    EqualityComparer<PrimitiveTypeKind>.Default);
+                Dictionary<PrimitiveTypeKind, object> typeDefaultMap = new Dictionary<
+                    PrimitiveTypeKind,
+                    object
+                >(EqualityComparer<PrimitiveTypeKind>.Default);
 
                 // Use CLR defaults for value types, arbitrary constants for reference types
                 // (since these default to null)
@@ -70,27 +73,58 @@ namespace System.Data.Mapping.Update.Internal
                 typeDefaultMap[PrimitiveTypeKind.String] = String.Empty;
 
                 typeDefaultMap[PrimitiveTypeKind.Geometry] = DbGeometry.FromText("POINT EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeometryPoint] = DbGeometry.FromText("POINT EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeometryLineString] = DbGeometry.FromText("LINESTRING EMPTY"); 
-                typeDefaultMap[PrimitiveTypeKind.GeometryPolygon] = DbGeometry.FromText("POLYGON EMPTY"); 
-                typeDefaultMap[PrimitiveTypeKind.GeometryMultiPoint] = DbGeometry.FromText("MULTIPOINT EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeometryMultiLineString] = DbGeometry.FromText("MULTILINESTRING EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeometryMultiPolygon] = DbGeometry.FromText("MULTIPOLYGON EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeometryCollection] = DbGeometry.FromText("GEOMETRYCOLLECTION EMPTY");
+                typeDefaultMap[PrimitiveTypeKind.GeometryPoint] = DbGeometry.FromText(
+                    "POINT EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeometryLineString] = DbGeometry.FromText(
+                    "LINESTRING EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeometryPolygon] = DbGeometry.FromText(
+                    "POLYGON EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeometryMultiPoint] = DbGeometry.FromText(
+                    "MULTIPOINT EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeometryMultiLineString] = DbGeometry.FromText(
+                    "MULTILINESTRING EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeometryMultiPolygon] = DbGeometry.FromText(
+                    "MULTIPOLYGON EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeometryCollection] = DbGeometry.FromText(
+                    "GEOMETRYCOLLECTION EMPTY"
+                );
 
                 typeDefaultMap[PrimitiveTypeKind.Geography] = DbGeography.FromText("POINT EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyPoint] = DbGeography.FromText("POINT EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyLineString] = DbGeography.FromText("LINESTRING EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyPolygon] = DbGeography.FromText("POLYGON EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyMultiPoint] = DbGeography.FromText("MULTIPOINT EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyMultiLineString] = DbGeography.FromText("MULTILINESTRING EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyMultiPolygon] = DbGeography.FromText("MULTIPOLYGON EMPTY");
-                typeDefaultMap[PrimitiveTypeKind.GeographyCollection] = DbGeography.FromText("GEOMETRYCOLLECTION EMPTY");
+                typeDefaultMap[PrimitiveTypeKind.GeographyPoint] = DbGeography.FromText(
+                    "POINT EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeographyLineString] = DbGeography.FromText(
+                    "LINESTRING EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeographyPolygon] = DbGeography.FromText(
+                    "POLYGON EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeographyMultiPoint] = DbGeography.FromText(
+                    "MULTIPOINT EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeographyMultiLineString] = DbGeography.FromText(
+                    "MULTILINESTRING EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeographyMultiPolygon] = DbGeography.FromText(
+                    "MULTIPOLYGON EMPTY"
+                );
+                typeDefaultMap[PrimitiveTypeKind.GeographyCollection] = DbGeography.FromText(
+                    "GEOMETRYCOLLECTION EMPTY"
+                );
 
-#if DEBUG                
+#if DEBUG
                 foreach (object o in typeDefaultMap.Values)
                 {
-                    Debug.Assert(null != o, "DbConstantExpression instances do not support null values");
+                    Debug.Assert(
+                        null != o,
+                        "DbConstantExpression instances do not support null values"
+                    );
                 }
 #endif
 
@@ -109,7 +143,10 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="extent">Extent</param>
             /// <param name="parent">Command tree used to generate portions of the record</param>
             /// <returns>A default record for the </returns>
-            internal static PropagatorResult CreatePlaceholder(EntitySetBase extent, UpdateTranslator parent)
+            internal static PropagatorResult CreatePlaceholder(
+                EntitySetBase extent,
+                UpdateTranslator parent
+            )
             {
                 EntityUtil.CheckArgumentNull(extent, "extent");
 
@@ -127,8 +164,12 @@ namespace System.Data.Mapping.Update.Internal
                     return creator.CreateEntitySetPlaceholder(entitySet);
                 }
 
-                throw EntityUtil.NotSupported(System.Data.Entity.Strings.Update_UnsupportedExtentType(
-                    extent.Name, extent.GetType().Name));
+                throw EntityUtil.NotSupported(
+                    System.Data.Entity.Strings.Update_UnsupportedExtentType(
+                        extent.Name,
+                        extent.GetType().Name
+                    )
+                );
             }
 
             /// <summary>
@@ -148,7 +189,11 @@ namespace System.Data.Mapping.Update.Internal
                     memberValues[ordinal] = memberValue;
                 }
 
-                PropagatorResult result = PropagatorResult.CreateStructuralValue(memberValues, entitySet.ElementType, false);
+                PropagatorResult result = PropagatorResult.CreateStructuralValue(
+                    memberValues,
+                    entitySet.ElementType,
+                    false
+                );
 
                 return result;
             }
@@ -169,11 +214,18 @@ namespace System.Data.Mapping.Update.Internal
                 for (int endOrdinal = 0; endOrdinal < endMetadata.Count; endOrdinal++)
                 {
                     var end = endMetadata[endOrdinal];
-                    EntityType entityType = (EntityType)((RefType)end.TypeUsage.EdmType).ElementType;
+                    EntityType entityType = (EntityType)
+                        ((RefType)end.TypeUsage.EdmType).ElementType;
 
                     // Retrieve key values for this end
-                    PropagatorResult[] keyValues = new PropagatorResult[entityType.KeyMembers.Count];
-                    for (int memberOrdinal = 0; memberOrdinal < entityType.KeyMembers.Count; memberOrdinal++)
+                    PropagatorResult[] keyValues = new PropagatorResult[
+                        entityType.KeyMembers.Count
+                    ];
+                    for (
+                        int memberOrdinal = 0;
+                        memberOrdinal < entityType.KeyMembers.Count;
+                        memberOrdinal++
+                    )
                     {
                         EdmMember keyMember = entityType.KeyMembers[memberOrdinal];
                         PropagatorResult keyValue = CreateMemberPlaceholder(keyMember);
@@ -181,12 +233,20 @@ namespace System.Data.Mapping.Update.Internal
                     }
 
                     RowType endType = entityType.GetKeyRowType(m_parent.MetadataWorkspace);
-                    PropagatorResult refKeys = PropagatorResult.CreateStructuralValue(keyValues, endType, false);
+                    PropagatorResult refKeys = PropagatorResult.CreateStructuralValue(
+                        keyValues,
+                        endType,
+                        false
+                    );
 
                     endReferenceValues[endOrdinal] = refKeys;
                 }
 
-                PropagatorResult result = PropagatorResult.CreateStructuralValue(endReferenceValues, associationSet.ElementType, false);
+                PropagatorResult result = PropagatorResult.CreateStructuralValue(
+                    endReferenceValues,
+                    associationSet.ElementType,
+                    false
+                );
                 return result;
             }
 
@@ -215,13 +275,18 @@ namespace System.Data.Mapping.Update.Internal
 
                 if (Helper.IsScalarType(nodeType.EdmType))
                 {
-                    GetPropagatorResultForPrimitiveType(Helper.AsPrimitive(nodeType.EdmType), out result);
+                    GetPropagatorResultForPrimitiveType(
+                        Helper.AsPrimitive(nodeType.EdmType),
+                        out result
+                    );
                 }
                 else
                 {
                     // Construct a new 'complex type' (really any structural type) member.
                     StructuralType structuralType = (StructuralType)nodeType.EdmType;
-                    IBaseList<EdmMember> members = TypeHelpers.GetAllStructuralMembers(structuralType);
+                    IBaseList<EdmMember> members = TypeHelpers.GetAllStructuralMembers(
+                        structuralType
+                    );
 
                     PropagatorResult[] args = new PropagatorResult[members.Count];
                     for (int ordinal = 0; ordinal < members.Count; ordinal++)
@@ -237,7 +302,10 @@ namespace System.Data.Mapping.Update.Internal
             }
 
             // Find "sanctioned" default value
-            private static void GetPropagatorResultForPrimitiveType(PrimitiveType primitiveType, out PropagatorResult result)
+            private static void GetPropagatorResultForPrimitiveType(
+                PrimitiveType primitiveType,
+                out PropagatorResult result
+            )
             {
                 object value;
                 PrimitiveTypeKind primitiveTypeKind = primitiveType.PrimitiveTypeKind;

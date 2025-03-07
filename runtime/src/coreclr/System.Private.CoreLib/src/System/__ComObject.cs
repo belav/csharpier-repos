@@ -23,9 +23,7 @@ namespace System
         /// <summary>
         /// Default constructor - can't instantiate this directly.
         /// </summary>
-        protected __ComObject()
-        {
-        }
+        protected __ComObject() { }
 
         /// <summary>
         /// Retrieves the data associated with the specified if such data exists.
@@ -107,7 +105,12 @@ namespace System
         /// Called from within the EE and is used to handle calls on methods of event interfaces.
         /// </summary>
         internal object GetEventProvider(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] RuntimeType t)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                RuntimeType t
+        )
         {
             // Check to see if we already have a cached event provider for this type.
             object? provider = GetData(t);
@@ -121,10 +124,24 @@ namespace System
         }
 
         private object CreateEventProvider(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] RuntimeType t)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                RuntimeType t
+        )
         {
             // Create the event provider for the specified type.
-            object EvProvider = Activator.CreateInstance(t, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, null, new object[] { this }, null)!;
+            object EvProvider = Activator.CreateInstance(
+                t,
+                BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.CreateInstance,
+                null,
+                new object[] { this },
+                null
+            )!;
 
             // Attempt to cache the wrapper on the object.
             if (!SetData(t, EvProvider))

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,28 +35,28 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceProcess
 {
-	public class TimeoutException : Exception
-	{
-		public TimeoutException ()
-		{
-			throw new PlatformNotSupportedException ();
-		}
+    public class TimeoutException : Exception
+    {
+        public TimeoutException()
+        {
+            throw new PlatformNotSupportedException();
+        }
 
-		public TimeoutException (string message)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public TimeoutException(string message)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
-		public TimeoutException (string message, Exception innerException)
-		{
-			throw new PlatformNotSupportedException ();
-		}
+        public TimeoutException(string message, Exception innerException)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
-		protected TimeoutException (SerializationInfo info, StreamingContext context)
-		{
-			throw new PlatformNotSupportedException ();
-		}
-	}
+        protected TimeoutException(SerializationInfo info, StreamingContext context)
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
 }
 
 #endif

@@ -1031,7 +1031,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToByteTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToByte(value, useInterpreter);
             }
@@ -1040,7 +1049,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableByteTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableByte(value, useInterpreter);
             }
@@ -1049,7 +1067,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToCharTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToChar(value, useInterpreter);
             }
@@ -1058,7 +1085,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableCharTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableChar(value, useInterpreter);
             }
@@ -1067,7 +1103,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToDecimalTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToDecimal(value, useInterpreter);
             }
@@ -1076,7 +1121,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableDecimal(value, useInterpreter);
             }
@@ -1085,7 +1139,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToDoubleTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToDouble(value, useInterpreter);
             }
@@ -1094,7 +1157,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableDouble(value, useInterpreter);
             }
@@ -1103,7 +1175,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToFloatTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToFloat(value, useInterpreter);
             }
@@ -1112,7 +1193,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableFloatTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableFloat(value, useInterpreter);
             }
@@ -1121,7 +1211,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToIntTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToInt(value, useInterpreter);
             }
@@ -1130,7 +1229,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableIntTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableInt(value, useInterpreter);
             }
@@ -1139,7 +1247,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToLongTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToLong(value, useInterpreter);
             }
@@ -1148,7 +1265,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableLongTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableLong(value, useInterpreter);
             }
@@ -1157,7 +1283,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToSByteTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToSByte(value, useInterpreter);
             }
@@ -1166,7 +1301,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableSByteTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableSByte(value, useInterpreter);
             }
@@ -1175,7 +1319,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToShortTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToShort(value, useInterpreter);
             }
@@ -1184,7 +1337,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableShortTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableShort(value, useInterpreter);
             }
@@ -1193,7 +1355,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToUIntTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToUInt(value, useInterpreter);
             }
@@ -1202,7 +1373,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableUIntTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableUInt(value, useInterpreter);
             }
@@ -1211,7 +1391,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToULongTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToULong(value, useInterpreter);
             }
@@ -1220,7 +1409,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableULongTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableULong(value, useInterpreter);
             }
@@ -1229,7 +1427,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToUShortTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToUShort(value, useInterpreter);
             }
@@ -1238,7 +1445,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDecimalToNullableUShortTest(bool useInterpreter)
         {
-            foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal value in new decimal[]
+                {
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyDecimalToNullableUShort(value, useInterpreter);
             }
@@ -1247,7 +1463,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToByteTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToByte(value, useInterpreter);
             }
@@ -1256,7 +1482,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableByteTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableByte(value, useInterpreter);
             }
@@ -1265,7 +1501,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToCharTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToChar(value, useInterpreter);
             }
@@ -1274,7 +1520,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableCharTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableChar(value, useInterpreter);
             }
@@ -1283,7 +1539,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToDecimalTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToDecimal(value, useInterpreter);
             }
@@ -1292,7 +1558,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableDecimal(value, useInterpreter);
             }
@@ -1301,7 +1577,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToDoubleTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToDouble(value, useInterpreter);
             }
@@ -1310,7 +1596,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableDouble(value, useInterpreter);
             }
@@ -1319,7 +1615,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToFloatTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToFloat(value, useInterpreter);
             }
@@ -1328,7 +1634,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableFloatTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableFloat(value, useInterpreter);
             }
@@ -1337,7 +1653,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToIntTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToInt(value, useInterpreter);
             }
@@ -1346,7 +1672,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableIntTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableInt(value, useInterpreter);
             }
@@ -1355,7 +1691,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToLongTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToLong(value, useInterpreter);
             }
@@ -1364,7 +1710,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableLongTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableLong(value, useInterpreter);
             }
@@ -1373,7 +1729,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToSByteTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToSByte(value, useInterpreter);
             }
@@ -1382,7 +1748,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableSByteTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableSByte(value, useInterpreter);
             }
@@ -1391,7 +1767,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToShortTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToShort(value, useInterpreter);
             }
@@ -1400,7 +1786,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableShortTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableShort(value, useInterpreter);
             }
@@ -1409,7 +1805,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToUIntTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToUInt(value, useInterpreter);
             }
@@ -1418,7 +1824,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableUIntTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableUInt(value, useInterpreter);
             }
@@ -1427,7 +1843,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToULongTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToULong(value, useInterpreter);
             }
@@ -1436,7 +1862,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableULongTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableULong(value, useInterpreter);
             }
@@ -1445,7 +1881,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToUShortTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToUShort(value, useInterpreter);
             }
@@ -1454,7 +1900,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDecimalToNullableUShortTest(bool useInterpreter)
         {
-            foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
+            foreach (
+                decimal? value in new decimal?[]
+                {
+                    null,
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                }
+            )
             {
                 VerifyNullableDecimalToNullableUShort(value, useInterpreter);
             }
@@ -1463,7 +1919,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToByteTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToByte(value, useInterpreter);
             }
@@ -1472,7 +1941,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableByteTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableByte(value, useInterpreter);
             }
@@ -1481,7 +1963,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToCharTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToChar(value, useInterpreter);
             }
@@ -1490,7 +1985,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableCharTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableChar(value, useInterpreter);
             }
@@ -1499,7 +2007,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToDecimalTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToDecimal(value, useInterpreter);
             }
@@ -1508,7 +2029,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableDecimal(value, useInterpreter);
             }
@@ -1517,7 +2051,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToDoubleTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToDouble(value, useInterpreter);
             }
@@ -1526,7 +2073,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableDouble(value, useInterpreter);
             }
@@ -1535,7 +2095,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToEnumTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToEnum(value, useInterpreter);
             }
@@ -1544,7 +2117,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableEnumTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableEnum(value, useInterpreter);
             }
@@ -1553,7 +2139,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToEnumLongTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToEnumLong(value, useInterpreter);
             }
@@ -1562,7 +2161,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableEnumLong(value, useInterpreter);
             }
@@ -1571,7 +2183,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToFloatTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToFloat(value, useInterpreter);
             }
@@ -1580,7 +2205,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableFloatTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableFloat(value, useInterpreter);
             }
@@ -1589,7 +2227,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToIntTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToInt(value, useInterpreter);
             }
@@ -1598,7 +2249,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableIntTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableInt(value, useInterpreter);
             }
@@ -1607,7 +2271,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToLongTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToLong(value, useInterpreter);
             }
@@ -1616,7 +2293,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableLongTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableLong(value, useInterpreter);
             }
@@ -1625,7 +2315,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToSByteTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToSByte(value, useInterpreter);
             }
@@ -1634,7 +2337,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableSByteTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableSByte(value, useInterpreter);
             }
@@ -1643,7 +2359,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToShortTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToShort(value, useInterpreter);
             }
@@ -1652,7 +2381,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableShortTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableShort(value, useInterpreter);
             }
@@ -1661,7 +2403,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToUIntTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToUInt(value, useInterpreter);
             }
@@ -1670,7 +2425,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableUIntTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableUInt(value, useInterpreter);
             }
@@ -1679,7 +2447,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToULongTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToULong(value, useInterpreter);
             }
@@ -1688,7 +2469,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableULongTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableULong(value, useInterpreter);
             }
@@ -1697,7 +2491,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToUShortTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToUShort(value, useInterpreter);
             }
@@ -1706,7 +2513,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertDoubleToNullableUShortTest(bool useInterpreter)
         {
-            foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double value in new double[]
+                {
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyDoubleToNullableUShort(value, useInterpreter);
             }
@@ -1715,7 +2535,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToByteTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToByte(value, useInterpreter);
             }
@@ -1724,7 +2558,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableByteTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableByte(value, useInterpreter);
             }
@@ -1733,7 +2581,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToCharTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToChar(value, useInterpreter);
             }
@@ -1742,7 +2604,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableCharTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableChar(value, useInterpreter);
             }
@@ -1751,7 +2627,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToDecimalTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToDecimal(value, useInterpreter);
             }
@@ -1760,7 +2650,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableDecimal(value, useInterpreter);
             }
@@ -1769,7 +2673,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToDoubleTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToDouble(value, useInterpreter);
             }
@@ -1778,7 +2696,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableDouble(value, useInterpreter);
             }
@@ -1787,7 +2719,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToEnumTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToEnum(value, useInterpreter);
             }
@@ -1796,7 +2742,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableEnumTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableEnum(value, useInterpreter);
             }
@@ -1805,7 +2765,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToEnumLongTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToEnumLong(value, useInterpreter);
             }
@@ -1814,7 +2788,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableEnumLong(value, useInterpreter);
             }
@@ -1823,7 +2811,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToFloatTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToFloat(value, useInterpreter);
             }
@@ -1832,7 +2834,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableFloatTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableFloat(value, useInterpreter);
             }
@@ -1841,7 +2857,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToIntTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToInt(value, useInterpreter);
             }
@@ -1850,7 +2880,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableIntTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableInt(value, useInterpreter);
             }
@@ -1859,7 +2903,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToLongTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToLong(value, useInterpreter);
             }
@@ -1868,7 +2926,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableLongTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableLong(value, useInterpreter);
             }
@@ -1877,7 +2949,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToSByteTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToSByte(value, useInterpreter);
             }
@@ -1886,7 +2972,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableSByteTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableSByte(value, useInterpreter);
             }
@@ -1895,7 +2995,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToShortTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToShort(value, useInterpreter);
             }
@@ -1904,7 +3018,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableShortTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableShort(value, useInterpreter);
             }
@@ -1913,7 +3041,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToUIntTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToUInt(value, useInterpreter);
             }
@@ -1922,7 +3064,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableUIntTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableUInt(value, useInterpreter);
             }
@@ -1931,7 +3087,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToULongTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToULong(value, useInterpreter);
             }
@@ -1940,7 +3110,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableULongTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableULong(value, useInterpreter);
             }
@@ -1949,7 +3133,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToUShortTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToUShort(value, useInterpreter);
             }
@@ -1958,7 +3156,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableDoubleToNullableUShortTest(bool useInterpreter)
         {
-            foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
+            foreach (
+                double? value in new double?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                }
+            )
             {
                 VerifyNullableDoubleToNullableUShort(value, useInterpreter);
             }
@@ -2201,7 +3413,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToByteTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToByte(value, useInterpreter);
             }
@@ -2210,7 +3424,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableByteTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableByte(value, useInterpreter);
             }
@@ -2219,7 +3435,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToCharTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToChar(value, useInterpreter);
             }
@@ -2228,7 +3446,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableCharTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableChar(value, useInterpreter);
             }
@@ -2237,7 +3457,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToDoubleTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToDouble(value, useInterpreter);
             }
@@ -2246,7 +3468,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableDouble(value, useInterpreter);
             }
@@ -2255,7 +3479,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToEnumTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToEnum(value, useInterpreter);
             }
@@ -2264,7 +3490,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableEnumTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableEnum(value, useInterpreter);
             }
@@ -2273,7 +3501,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToEnumLongTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToEnumLong(value, useInterpreter);
             }
@@ -2282,7 +3512,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableEnumLong(value, useInterpreter);
             }
@@ -2291,7 +3523,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToFloatTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToFloat(value, useInterpreter);
             }
@@ -2300,7 +3534,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableFloatTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableFloat(value, useInterpreter);
             }
@@ -2309,7 +3545,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToIntTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToInt(value, useInterpreter);
             }
@@ -2318,7 +3556,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableIntTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableInt(value, useInterpreter);
             }
@@ -2327,7 +3567,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToLongTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToLong(value, useInterpreter);
             }
@@ -2336,7 +3578,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableLongTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableLong(value, useInterpreter);
             }
@@ -2345,7 +3589,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToSByteTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToSByte(value, useInterpreter);
             }
@@ -2354,7 +3600,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableSByteTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableSByte(value, useInterpreter);
             }
@@ -2363,7 +3611,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToShortTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToShort(value, useInterpreter);
             }
@@ -2372,7 +3622,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableShortTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableShort(value, useInterpreter);
             }
@@ -2381,7 +3633,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToUIntTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToUInt(value, useInterpreter);
             }
@@ -2390,7 +3644,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableUIntTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableUInt(value, useInterpreter);
             }
@@ -2399,7 +3655,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToULongTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToULong(value, useInterpreter);
             }
@@ -2408,7 +3666,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableULongTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableULong(value, useInterpreter);
             }
@@ -2417,7 +3677,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToUShortTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToUShort(value, useInterpreter);
             }
@@ -2426,7 +3688,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumToNullableUShortTest(bool useInterpreter)
         {
-            foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
+            foreach (
+                E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+            )
             {
                 VerifyNullableEnumToNullableUShort(value, useInterpreter);
             }
@@ -2435,7 +3699,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToByteTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToByte(value, useInterpreter);
             }
@@ -2444,7 +3710,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableByteTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableByte(value, useInterpreter);
             }
@@ -2453,7 +3721,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToCharTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToChar(value, useInterpreter);
             }
@@ -2462,7 +3732,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableCharTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableChar(value, useInterpreter);
             }
@@ -2471,7 +3743,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToDoubleTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToDouble(value, useInterpreter);
             }
@@ -2480,7 +3754,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableDouble(value, useInterpreter);
             }
@@ -2489,7 +3765,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToEnumTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToEnum(value, useInterpreter);
             }
@@ -2498,7 +3776,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableEnumTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableEnum(value, useInterpreter);
             }
@@ -2507,7 +3787,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToEnumLongTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToEnumLong(value, useInterpreter);
             }
@@ -2516,7 +3798,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableEnumLong(value, useInterpreter);
             }
@@ -2525,7 +3809,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToFloatTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToFloat(value, useInterpreter);
             }
@@ -2534,7 +3820,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableFloatTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableFloat(value, useInterpreter);
             }
@@ -2543,7 +3831,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToIntTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToInt(value, useInterpreter);
             }
@@ -2552,7 +3842,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableIntTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableInt(value, useInterpreter);
             }
@@ -2561,7 +3853,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToLongTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToLong(value, useInterpreter);
             }
@@ -2570,7 +3864,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableLongTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableLong(value, useInterpreter);
             }
@@ -2579,7 +3875,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToSByteTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToSByte(value, useInterpreter);
             }
@@ -2588,7 +3886,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableSByteTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableSByte(value, useInterpreter);
             }
@@ -2597,7 +3897,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToShortTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToShort(value, useInterpreter);
             }
@@ -2606,7 +3908,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableShortTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableShort(value, useInterpreter);
             }
@@ -2615,7 +3919,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToUIntTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToUInt(value, useInterpreter);
             }
@@ -2624,7 +3930,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableUIntTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableUInt(value, useInterpreter);
             }
@@ -2633,7 +3941,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToULongTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToULong(value, useInterpreter);
             }
@@ -2642,7 +3952,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableULongTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableULong(value, useInterpreter);
             }
@@ -2651,7 +3963,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToUShortTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToUShort(value, useInterpreter);
             }
@@ -2660,7 +3974,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertEnumLongToNullableUShortTest(bool useInterpreter)
         {
-            foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+            )
             {
                 VerifyEnumLongToNullableUShort(value, useInterpreter);
             }
@@ -2669,7 +3985,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToByteTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToByte(value, useInterpreter);
             }
@@ -2678,7 +4004,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableByteTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableByte(value, useInterpreter);
             }
@@ -2687,7 +4023,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToCharTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToChar(value, useInterpreter);
             }
@@ -2696,7 +4042,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableCharTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableChar(value, useInterpreter);
             }
@@ -2705,7 +4061,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToDoubleTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToDouble(value, useInterpreter);
             }
@@ -2714,7 +4080,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableDouble(value, useInterpreter);
             }
@@ -2723,7 +4099,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToEnumTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToEnum(value, useInterpreter);
             }
@@ -2732,7 +4118,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableEnumTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableEnum(value, useInterpreter);
             }
@@ -2741,7 +4137,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToEnumLongTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToEnumLong(value, useInterpreter);
             }
@@ -2750,7 +4156,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableEnumLong(value, useInterpreter);
             }
@@ -2759,7 +4175,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToFloatTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToFloat(value, useInterpreter);
             }
@@ -2768,7 +4194,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableFloatTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableFloat(value, useInterpreter);
             }
@@ -2777,7 +4213,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToIntTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToInt(value, useInterpreter);
             }
@@ -2786,7 +4232,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableIntTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableInt(value, useInterpreter);
             }
@@ -2795,7 +4251,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToLongTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToLong(value, useInterpreter);
             }
@@ -2804,7 +4270,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableLongTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableLong(value, useInterpreter);
             }
@@ -2813,7 +4289,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToSByteTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToSByte(value, useInterpreter);
             }
@@ -2822,7 +4308,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableSByteTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableSByte(value, useInterpreter);
             }
@@ -2831,7 +4327,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToShortTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToShort(value, useInterpreter);
             }
@@ -2840,7 +4346,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableShortTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableShort(value, useInterpreter);
             }
@@ -2849,7 +4365,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToUIntTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToUInt(value, useInterpreter);
             }
@@ -2858,7 +4384,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableUIntTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableUInt(value, useInterpreter);
             }
@@ -2867,7 +4403,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToULongTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToULong(value, useInterpreter);
             }
@@ -2876,7 +4422,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableULongTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableULong(value, useInterpreter);
             }
@@ -2885,7 +4441,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToUShortTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToUShort(value, useInterpreter);
             }
@@ -2894,7 +4460,17 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableEnumLongToNullableUShortTest(bool useInterpreter)
         {
-            foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El? value in new El?[]
+                {
+                    null,
+                    (El)0,
+                    El.A,
+                    El.B,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
             {
                 VerifyNullableEnumLongToNullableUShort(value, useInterpreter);
             }
@@ -2903,7 +4479,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToByteTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToByte(value, useInterpreter);
             }
@@ -2912,7 +4501,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableByteTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableByte(value, useInterpreter);
             }
@@ -2921,7 +4523,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToCharTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToChar(value, useInterpreter);
             }
@@ -2930,7 +4545,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableCharTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableChar(value, useInterpreter);
             }
@@ -2939,7 +4567,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToDecimalTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToDecimal(value, useInterpreter);
             }
@@ -2948,7 +4589,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableDecimal(value, useInterpreter);
             }
@@ -2957,7 +4611,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToDoubleTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToDouble(value, useInterpreter);
             }
@@ -2966,7 +4633,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableDouble(value, useInterpreter);
             }
@@ -2975,7 +4655,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToEnumTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToEnum(value, useInterpreter);
             }
@@ -2984,7 +4677,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableEnumTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableEnum(value, useInterpreter);
             }
@@ -2993,7 +4699,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToEnumLongTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToEnumLong(value, useInterpreter);
             }
@@ -3002,7 +4721,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableEnumLong(value, useInterpreter);
             }
@@ -3011,7 +4743,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToFloatTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToFloat(value, useInterpreter);
             }
@@ -3020,7 +4765,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableFloatTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableFloat(value, useInterpreter);
             }
@@ -3029,7 +4787,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToIntTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToInt(value, useInterpreter);
             }
@@ -3038,7 +4809,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableIntTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableInt(value, useInterpreter);
             }
@@ -3047,7 +4831,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToLongTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToLong(value, useInterpreter);
             }
@@ -3056,7 +4853,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableLongTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableLong(value, useInterpreter);
             }
@@ -3065,7 +4875,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToSByteTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToSByte(value, useInterpreter);
             }
@@ -3074,7 +4897,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableSByteTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableSByte(value, useInterpreter);
             }
@@ -3083,7 +4919,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToShortTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToShort(value, useInterpreter);
             }
@@ -3092,7 +4941,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableShortTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableShort(value, useInterpreter);
             }
@@ -3101,7 +4963,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToUIntTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToUInt(value, useInterpreter);
             }
@@ -3110,7 +4985,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableUIntTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableUInt(value, useInterpreter);
             }
@@ -3119,7 +5007,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToULongTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToULong(value, useInterpreter);
             }
@@ -3128,7 +5029,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableULongTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableULong(value, useInterpreter);
             }
@@ -3137,7 +5051,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToUShortTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToUShort(value, useInterpreter);
             }
@@ -3146,7 +5073,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertFloatToNullableUShortTest(bool useInterpreter)
         {
-            foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float value in new float[]
+                {
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyFloatToNullableUShort(value, useInterpreter);
             }
@@ -3155,7 +5095,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToByteTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToByte(value, useInterpreter);
             }
@@ -3164,7 +5118,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableByteTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableByte(value, useInterpreter);
             }
@@ -3173,7 +5141,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToCharTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToChar(value, useInterpreter);
             }
@@ -3182,7 +5164,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableCharTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableChar(value, useInterpreter);
             }
@@ -3191,7 +5187,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToDecimalTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToDecimal(value, useInterpreter);
             }
@@ -3200,7 +5210,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableDecimal(value, useInterpreter);
             }
@@ -3209,7 +5233,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToDoubleTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToDouble(value, useInterpreter);
             }
@@ -3218,7 +5256,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableDouble(value, useInterpreter);
             }
@@ -3227,7 +5279,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToEnumTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToEnum(value, useInterpreter);
             }
@@ -3236,7 +5302,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableEnumTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableEnum(value, useInterpreter);
             }
@@ -3245,7 +5325,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToEnumLongTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToEnumLong(value, useInterpreter);
             }
@@ -3254,7 +5348,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableEnumLong(value, useInterpreter);
             }
@@ -3263,7 +5371,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToFloatTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToFloat(value, useInterpreter);
             }
@@ -3272,7 +5394,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableFloatTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableFloat(value, useInterpreter);
             }
@@ -3281,7 +5417,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToIntTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToInt(value, useInterpreter);
             }
@@ -3290,7 +5440,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableIntTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableInt(value, useInterpreter);
             }
@@ -3299,7 +5463,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToLongTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToLong(value, useInterpreter);
             }
@@ -3308,7 +5486,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableLongTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableLong(value, useInterpreter);
             }
@@ -3317,7 +5509,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToSByteTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToSByte(value, useInterpreter);
             }
@@ -3326,7 +5532,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableSByteTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableSByte(value, useInterpreter);
             }
@@ -3335,7 +5555,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToShortTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToShort(value, useInterpreter);
             }
@@ -3344,7 +5578,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableShortTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableShort(value, useInterpreter);
             }
@@ -3353,7 +5601,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToUIntTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToUInt(value, useInterpreter);
             }
@@ -3362,7 +5624,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableUIntTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableUInt(value, useInterpreter);
             }
@@ -3371,7 +5647,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToULongTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToULong(value, useInterpreter);
             }
@@ -3380,7 +5670,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableULongTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableULong(value, useInterpreter);
             }
@@ -3389,7 +5693,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToUShortTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToUShort(value, useInterpreter);
             }
@@ -3398,7 +5716,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableFloatToNullableUShortTest(bool useInterpreter)
         {
-            foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
+            foreach (
+                float? value in new float?[]
+                {
+                    null,
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                }
+            )
             {
                 VerifyNullableFloatToNullableUShort(value, useInterpreter);
             }
@@ -4676,7 +7008,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToByteTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToByte(value, useInterpreter);
             }
@@ -4685,7 +7019,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableByteTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableByte(value, useInterpreter);
             }
@@ -4694,7 +7030,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToCharTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToChar(value, useInterpreter);
             }
@@ -4703,7 +7041,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableCharTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableChar(value, useInterpreter);
             }
@@ -4712,7 +7052,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToDecimalTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToDecimal(value, useInterpreter);
             }
@@ -4721,7 +7063,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableDecimal(value, useInterpreter);
             }
@@ -4730,7 +7074,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToDoubleTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToDouble(value, useInterpreter);
             }
@@ -4739,7 +7085,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableDouble(value, useInterpreter);
             }
@@ -4748,7 +7096,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToEnumTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToEnum(value, useInterpreter);
             }
@@ -4757,7 +7107,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableEnumTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableEnum(value, useInterpreter);
             }
@@ -4766,7 +7118,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToEnumLongTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToEnumLong(value, useInterpreter);
             }
@@ -4775,7 +7129,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableEnumLong(value, useInterpreter);
             }
@@ -4784,7 +7140,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToFloatTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToFloat(value, useInterpreter);
             }
@@ -4793,7 +7151,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableFloatTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableFloat(value, useInterpreter);
             }
@@ -4802,7 +7162,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToIntTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToInt(value, useInterpreter);
             }
@@ -4811,7 +7173,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableIntTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableInt(value, useInterpreter);
             }
@@ -4820,7 +7184,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToLongTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToLong(value, useInterpreter);
             }
@@ -4829,7 +7195,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableLongTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableLong(value, useInterpreter);
             }
@@ -4838,7 +7206,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToSByteTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToSByte(value, useInterpreter);
             }
@@ -4847,7 +7217,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableSByteTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableSByte(value, useInterpreter);
             }
@@ -4856,7 +7228,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToShortTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToShort(value, useInterpreter);
             }
@@ -4865,7 +7239,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableShortTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableShort(value, useInterpreter);
             }
@@ -4874,7 +7250,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToUIntTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToUInt(value, useInterpreter);
             }
@@ -4883,7 +7261,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableUIntTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableUInt(value, useInterpreter);
             }
@@ -4892,7 +7272,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToULongTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToULong(value, useInterpreter);
             }
@@ -4901,7 +7283,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableULongTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableULong(value, useInterpreter);
             }
@@ -4910,7 +7294,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToUShortTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToUShort(value, useInterpreter);
             }
@@ -4919,7 +7305,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableSByteToNullableUShortTest(bool useInterpreter)
         {
-            foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
+            foreach (
+                sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+            )
             {
                 VerifyNullableSByteToNullableUShort(value, useInterpreter);
             }
@@ -5189,7 +7577,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToByteTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToByte(value, useInterpreter);
             }
@@ -5198,7 +7588,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableByteTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableByte(value, useInterpreter);
             }
@@ -5207,7 +7599,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToCharTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToChar(value, useInterpreter);
             }
@@ -5216,7 +7610,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableCharTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableChar(value, useInterpreter);
             }
@@ -5225,7 +7621,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToDecimalTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToDecimal(value, useInterpreter);
             }
@@ -5234,7 +7632,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableDecimalTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableDecimal(value, useInterpreter);
             }
@@ -5243,7 +7643,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToDoubleTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToDouble(value, useInterpreter);
             }
@@ -5252,7 +7654,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableDoubleTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableDouble(value, useInterpreter);
             }
@@ -5261,7 +7665,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToEnumTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToEnum(value, useInterpreter);
             }
@@ -5270,7 +7676,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableEnumTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableEnum(value, useInterpreter);
             }
@@ -5279,7 +7687,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToEnumLongTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToEnumLong(value, useInterpreter);
             }
@@ -5288,7 +7698,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableEnumLongTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableEnumLong(value, useInterpreter);
             }
@@ -5297,7 +7709,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToFloatTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToFloat(value, useInterpreter);
             }
@@ -5306,7 +7720,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableFloatTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableFloat(value, useInterpreter);
             }
@@ -5315,7 +7731,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToIntTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToInt(value, useInterpreter);
             }
@@ -5324,7 +7742,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableIntTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableInt(value, useInterpreter);
             }
@@ -5333,7 +7753,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToLongTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToLong(value, useInterpreter);
             }
@@ -5342,7 +7764,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableLongTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableLong(value, useInterpreter);
             }
@@ -5351,7 +7775,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToSByteTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToSByte(value, useInterpreter);
             }
@@ -5360,7 +7786,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableSByteTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableSByte(value, useInterpreter);
             }
@@ -5369,7 +7797,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToShortTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToShort(value, useInterpreter);
             }
@@ -5378,7 +7808,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableShortTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableShort(value, useInterpreter);
             }
@@ -5387,7 +7819,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToUIntTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToUInt(value, useInterpreter);
             }
@@ -5396,7 +7830,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableUIntTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableUInt(value, useInterpreter);
             }
@@ -5405,7 +7841,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToULongTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToULong(value, useInterpreter);
             }
@@ -5414,7 +7852,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableULongTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableULong(value, useInterpreter);
             }
@@ -5423,7 +7863,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToUShortTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToUShort(value, useInterpreter);
             }
@@ -5432,7 +7874,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertNullableShortToNullableUShortTest(bool useInterpreter)
         {
-            foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
+            foreach (
+                short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
+            )
             {
                 VerifyNullableShortToNullableUShort(value, useInterpreter);
             }
@@ -6965,10 +9409,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToByte(byte value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -6976,10 +9420,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableByte(byte value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -6987,10 +9431,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToChar(byte value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal((char)value, f());
@@ -6998,10 +9442,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableChar(byte value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal((char)value, f());
@@ -7009,10 +9453,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToDecimal(byte value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7020,10 +9464,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableDecimal(byte value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7031,10 +9475,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToDouble(byte value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7042,10 +9486,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableDouble(byte value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7053,10 +9497,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToEnum(byte value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -7064,10 +9508,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableEnum(byte value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -7075,10 +9519,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToEnumLong(byte value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -7086,10 +9530,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableEnumLong(byte value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -7097,10 +9541,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToFloat(byte value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7108,10 +9552,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableFloat(byte value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7119,10 +9563,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToInt(byte value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7130,10 +9574,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableInt(byte value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7141,10 +9585,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToLong(byte value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7152,10 +9596,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableLong(byte value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7163,10 +9607,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToSByte(byte value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -7174,10 +9618,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToSByteRetInt(byte value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(sbyte)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(
+                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(sbyte)),
+                    typeof(int)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal((int)unchecked((sbyte)value), f());
@@ -7185,10 +9632,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableSByte(byte value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -7196,10 +9643,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToShort(byte value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7207,10 +9654,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableShort(byte value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7218,10 +9665,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToUInt(byte value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7229,10 +9676,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableUInt(byte value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7240,10 +9687,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToULong(byte value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7251,10 +9698,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableULong(byte value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7262,10 +9709,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToUShort(byte value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7273,10 +9720,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteToNullableUShort(byte value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7284,10 +9731,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToByte(byte? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7298,10 +9745,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableByte(byte? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7309,10 +9756,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToChar(byte? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7323,10 +9770,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableChar(byte? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal((char?)value, f());
@@ -7334,10 +9781,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToDecimal(byte? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7348,10 +9795,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableDecimal(byte? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7359,10 +9806,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToDouble(byte? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7373,10 +9820,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableDouble(byte? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7384,10 +9831,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToEnum(byte? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7398,10 +9845,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableEnum(byte? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E?)value, f());
@@ -7409,10 +9856,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToEnumLong(byte? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7423,10 +9870,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableEnumLong(byte? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -7434,10 +9881,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToFloat(byte? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7448,10 +9895,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableFloat(byte? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7459,10 +9906,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToInt(byte? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7473,10 +9920,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableInt(byte? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7484,10 +9931,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToLong(byte? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7498,10 +9945,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableLong(byte? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7509,10 +9956,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToSByte(byte? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7523,10 +9970,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableSByte(byte? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -7534,10 +9981,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToShort(byte? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7548,10 +9995,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableShort(byte? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7559,10 +10006,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToUInt(byte? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7573,10 +10020,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableUInt(byte? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7584,10 +10031,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToULong(byte? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7598,10 +10045,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableULong(byte? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7609,10 +10056,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToUShort(byte? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7623,10 +10070,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteToNullableUShort(byte? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(byte?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7634,10 +10081,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToByte(char value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -7645,10 +10092,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableByte(char value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -7656,10 +10103,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToChar(char value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7667,10 +10114,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableChar(char value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7678,10 +10125,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToDecimal(char value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7689,10 +10136,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableDecimal(char value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7700,10 +10147,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToDouble(char value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7711,10 +10158,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableDouble(char value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7722,10 +10169,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToEnum(char value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -7733,10 +10180,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableEnum(char value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -7744,10 +10191,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToEnumLong(char value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -7755,10 +10202,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableEnumLong(char value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -7766,10 +10213,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToFloat(char value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7777,10 +10224,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableFloat(char value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7788,10 +10235,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToInt(char value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7799,10 +10246,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableInt(char value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7810,10 +10257,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToLong(char value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7821,10 +10268,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableLong(char value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7832,10 +10279,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToSByte(char value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -7843,10 +10290,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableSByte(char value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -7854,10 +10301,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToShort(char value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -7865,10 +10312,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableShort(char value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -7876,10 +10323,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToUInt(char value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7887,10 +10334,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableUInt(char value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7898,10 +10345,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToULong(char value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7909,10 +10356,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableULong(char value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7920,10 +10367,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToUShort(char value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7931,10 +10378,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharToNullableUShort(char value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7942,10 +10389,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToByte(char? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7956,10 +10403,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableByte(char? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -7967,10 +10414,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToChar(char? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -7981,10 +10428,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableChar(char? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -7992,10 +10439,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToDecimal(char? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8006,10 +10453,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableDecimal(char? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8017,10 +10464,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToDouble(char? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8031,10 +10478,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableDouble(char? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8042,10 +10489,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToEnum(char? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8056,10 +10503,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableEnum(char? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E?)value, f());
@@ -8067,10 +10514,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToEnumLong(char? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8081,10 +10528,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableEnumLong(char? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -8092,10 +10539,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToFloat(char? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8106,10 +10553,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableFloat(char? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8117,10 +10564,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToInt(char? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8131,10 +10578,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableInt(char? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8142,10 +10589,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToLong(char? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8156,10 +10603,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableLong(char? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8167,10 +10614,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToSByte(char? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8181,10 +10628,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableSByte(char? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -8192,10 +10639,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToShort(char? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8206,10 +10653,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableShort(char? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -8217,10 +10664,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToUInt(char? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8231,10 +10678,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableUInt(char? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8242,10 +10689,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToULong(char? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8256,10 +10703,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableULong(char? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8267,10 +10714,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToUShort(char? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8281,10 +10728,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharToNullableUShort(char? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(char?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8292,10 +10739,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToByte(decimal value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             byte expected = 0;
@@ -8314,10 +10761,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableByte(decimal value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             byte expected = 0;
@@ -8336,10 +10783,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToChar(decimal value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             char expected = '\0';
@@ -8358,10 +10805,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableChar(decimal value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             char expected = '\0';
@@ -8380,10 +10827,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToDecimal(decimal value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8391,10 +10838,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableDecimal(decimal value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8402,10 +10849,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToDouble(decimal value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -8413,10 +10860,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableDouble(decimal value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -8424,10 +10871,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToFloat(decimal value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -8435,10 +10882,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableFloat(decimal value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -8446,10 +10893,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToInt(decimal value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             int expected = 0;
@@ -8468,10 +10915,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableInt(decimal value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             int expected = 0;
@@ -8490,10 +10937,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToLong(decimal value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             long expected = 0;
@@ -8512,10 +10959,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableLong(decimal value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             long expected = 0;
@@ -8534,10 +10981,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToSByte(decimal value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             sbyte expected = 0;
@@ -8556,10 +11003,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableSByte(decimal value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             sbyte expected = 0;
@@ -8578,10 +11025,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToShort(decimal value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             short expected = 0;
@@ -8600,10 +11047,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableShort(decimal value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             short expected = 0;
@@ -8622,10 +11069,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToUInt(decimal value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             uint expected = 0;
@@ -8644,10 +11091,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableUInt(decimal value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             uint expected = 0;
@@ -8666,10 +11113,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToULong(decimal value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             ulong expected = 0;
@@ -8688,10 +11135,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableULong(decimal value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             ulong expected = 0;
@@ -8710,10 +11157,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToUShort(decimal value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             ushort expected = 0;
@@ -8732,10 +11179,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalToNullableUShort(decimal value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             ushort expected = 0;
@@ -8754,10 +11201,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToByte(decimal? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8781,10 +11228,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToNullableByte(decimal? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             byte? expected = null;
@@ -8803,10 +11250,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToChar(decimal? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8830,10 +11277,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToNullableChar(decimal? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             char? expected = null;
@@ -8852,10 +11299,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToDecimal(decimal? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8864,12 +11311,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableDecimal(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableDecimal(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -8877,10 +11327,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToDouble(decimal? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8889,12 +11339,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableDouble(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableDouble(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double?)value, f());
@@ -8902,10 +11355,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToFloat(decimal? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8914,12 +11367,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableFloat(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableFloat(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float?)value, f());
@@ -8927,10 +11383,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToInt(decimal? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -8954,10 +11410,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToNullableInt(decimal? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             int? expected = null;
@@ -8976,10 +11432,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToLong(decimal? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9003,10 +11459,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToNullableLong(decimal? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             long? expected = null;
@@ -9025,10 +11481,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToSByte(decimal? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9050,12 +11506,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableSByte(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableSByte(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             sbyte? expected = null;
@@ -9074,10 +11533,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToShort(decimal? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9099,12 +11558,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableShort(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableShort(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             short? expected = null;
@@ -9123,10 +11585,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToUInt(decimal? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9150,10 +11612,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToNullableUInt(decimal? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             uint? expected = null;
@@ -9172,10 +11634,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToULong(decimal? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9197,12 +11659,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableULong(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableULong(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             ulong? expected = null;
@@ -9221,10 +11686,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalToUShort(decimal? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9246,12 +11711,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDecimalToNullableUShort(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalToNullableUShort(
+            decimal? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(decimal?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             ushort? expected = null;
@@ -9270,10 +11738,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToByte(double value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -9281,10 +11749,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableByte(double value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -9292,10 +11760,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToChar(double value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -9303,10 +11771,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableChar(double value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -9314,10 +11782,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToDecimal(double value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             decimal expected = 0;
@@ -9336,10 +11804,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableDecimal(double value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal expected = 0;
@@ -9358,10 +11826,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToDouble(double value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -9369,10 +11837,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableDouble(double value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -9380,10 +11848,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToEnum(double value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -9391,10 +11859,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableEnum(double value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -9402,10 +11870,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToEnumLong(double value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El)value), f());
@@ -9413,10 +11881,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableEnumLong(double value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El)value), f());
@@ -9424,10 +11892,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToFloat(double value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -9435,10 +11903,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableFloat(double value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -9446,10 +11914,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToInt(double value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -9457,10 +11925,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableInt(double value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -9468,10 +11936,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToLong(double value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long)value), f());
@@ -9479,10 +11947,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableLong(double value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long)value), f());
@@ -9490,10 +11958,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToSByte(double value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -9501,10 +11969,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableSByte(double value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -9512,10 +11980,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToShort(double value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -9523,10 +11991,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableShort(double value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -9534,10 +12002,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToUInt(double value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -9545,10 +12013,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableUInt(double value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -9556,10 +12024,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToULong(double value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -9567,10 +12035,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableULong(double value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -9578,10 +12046,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToUShort(double value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -9589,10 +12057,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleToNullableUShort(double value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -9600,10 +12068,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToByte(double? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9614,10 +12082,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableByte(double? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -9625,10 +12093,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToChar(double? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9639,10 +12107,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableChar(double? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -9650,10 +12118,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToDecimal(double? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9675,12 +12143,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDoubleToNullableDecimal(double? value, bool useInterpreter)
+        private static void VerifyNullableDoubleToNullableDecimal(
+            double? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal? expected = null;
@@ -9699,10 +12170,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToDouble(double? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9713,10 +12184,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableDouble(double? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -9724,10 +12195,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToEnum(double? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9738,10 +12209,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableEnum(double? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E?)value), f());
@@ -9749,10 +12220,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToEnumLong(double? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9761,12 +12232,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableDoubleToNullableEnumLong(double? value, bool useInterpreter)
+        private static void VerifyNullableDoubleToNullableEnumLong(
+            double? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El?)value), f());
@@ -9774,10 +12248,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToFloat(double? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9788,10 +12262,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableFloat(double? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float?)value, f());
@@ -9799,10 +12273,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToInt(double? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9813,10 +12287,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableInt(double? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int?)value), f());
@@ -9824,10 +12298,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToLong(double? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9838,10 +12312,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableLong(double? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long?)value), f());
@@ -9849,10 +12323,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToSByte(double? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9863,10 +12337,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableSByte(double? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -9874,10 +12348,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToShort(double? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9888,10 +12362,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableShort(double? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -9899,10 +12373,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToUInt(double? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9913,10 +12387,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableUInt(double? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -9924,10 +12398,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToULong(double? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9938,10 +12412,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableULong(double? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -9949,10 +12423,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToUShort(double? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -9963,10 +12437,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleToNullableUShort(double? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(double?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -9974,10 +12448,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToByte(E value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -9985,10 +12459,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableByte(E value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -9996,10 +12470,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToChar(E value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -10007,10 +12481,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableChar(E value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -10018,10 +12492,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToDouble(E value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -10029,10 +12503,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableDouble(E value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -10040,10 +12514,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToEnum(E value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -10051,10 +12525,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableEnum(E value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -10062,10 +12536,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToEnumLong(E value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -10073,10 +12547,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableEnumLong(E value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -10084,10 +12558,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToFloat(E value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -10095,10 +12569,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableFloat(E value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -10106,10 +12580,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToInt(E value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal((int)value, f());
@@ -10117,10 +12591,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableInt(E value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal((int)value, f());
@@ -10128,10 +12602,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToLong(E value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal((long)value, f());
@@ -10139,10 +12613,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableLong(E value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal((long)value, f());
@@ -10150,10 +12624,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToSByte(E value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -10161,10 +12635,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableSByte(E value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -10172,10 +12646,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToShort(E value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -10183,10 +12657,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableShort(E value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -10194,10 +12668,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToUInt(E value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -10205,10 +12679,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableUInt(E value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -10216,10 +12690,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToULong(E value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -10227,10 +12701,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableULong(E value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -10238,10 +12712,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToUShort(E value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -10249,10 +12723,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumToNullableUShort(E value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -10260,10 +12734,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToByte(E? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10274,10 +12748,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableByte(E? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -10285,10 +12759,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToChar(E? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10299,10 +12773,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableChar(E? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -10310,10 +12784,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToDouble(E? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10324,10 +12798,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableDouble(E? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double?)value, f());
@@ -10335,10 +12809,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToEnum(E? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10349,10 +12823,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableEnum(E? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -10360,10 +12834,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToEnumLong(E? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10374,10 +12848,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableEnumLong(E? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -10385,10 +12859,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToFloat(E? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10399,10 +12873,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableFloat(E? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float?)value, f());
@@ -10410,10 +12884,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToInt(E? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10424,10 +12898,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableInt(E? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal((int?)value, f());
@@ -10435,10 +12909,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToLong(E? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10449,10 +12923,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableLong(E? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal((long?)value, f());
@@ -10460,10 +12934,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToSByte(E? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10474,10 +12948,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableSByte(E? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -10485,10 +12959,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToShort(E? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10499,10 +12973,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableShort(E? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -10510,10 +12984,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToUInt(E? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10524,10 +12998,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableUInt(E? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -10535,10 +13009,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToULong(E? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10549,10 +13023,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableULong(E? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -10560,10 +13034,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToUShort(E? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10574,10 +13048,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumToNullableUShort(E? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(E?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -10585,10 +13059,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToByte(El value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -10596,10 +13070,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableByte(El value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -10607,10 +13081,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToChar(El value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -10618,10 +13092,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableChar(El value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -10629,10 +13103,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToDouble(El value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -10640,10 +13114,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableDouble(El value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -10651,10 +13125,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToEnum(El value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -10662,10 +13136,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableEnum(El value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -10673,10 +13147,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToEnumLong(El value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -10684,10 +13158,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableEnumLong(El value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -10695,10 +13169,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToFloat(El value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -10706,10 +13180,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableFloat(El value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float)value, f());
@@ -10717,10 +13191,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToInt(El value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -10728,10 +13202,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableInt(El value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -10739,10 +13213,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToLong(El value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal((long)value, f());
@@ -10750,10 +13224,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableLong(El value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal((long)value, f());
@@ -10761,10 +13235,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToSByte(El value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -10772,10 +13246,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableSByte(El value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -10783,10 +13257,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToShort(El value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -10794,10 +13268,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableShort(El value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -10805,10 +13279,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToUInt(El value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -10816,10 +13290,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableUInt(El value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -10827,10 +13301,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToULong(El value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -10838,10 +13312,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableULong(El value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -10849,10 +13323,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToUShort(El value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -10860,10 +13334,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumLongToNullableUShort(El value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -10871,10 +13345,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToByte(El? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10885,10 +13359,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableByte(El? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -10896,10 +13370,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToChar(El? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10910,10 +13384,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableChar(El? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -10921,10 +13395,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToDouble(El? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10935,10 +13409,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableDouble(El? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double?)value, f());
@@ -10946,10 +13420,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToEnum(El? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10960,10 +13434,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableEnum(El? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E?)value), f());
@@ -10971,10 +13445,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToEnumLong(El? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -10985,10 +13459,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableEnumLong(El? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -10996,10 +13470,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToFloat(El? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11010,10 +13484,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableFloat(El? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal((float?)value, f());
@@ -11021,10 +13495,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToInt(El? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11035,10 +13509,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableInt(El? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int?)value), f());
@@ -11046,10 +13520,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToLong(El? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11060,10 +13534,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableLong(El? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal((long?)value, f());
@@ -11071,10 +13545,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToSByte(El? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11085,10 +13559,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableSByte(El? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -11096,10 +13570,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToShort(El? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11110,10 +13584,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableShort(El? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -11121,10 +13595,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToUInt(El? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11135,10 +13609,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableUInt(El? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -11146,10 +13620,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToULong(El? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11160,10 +13634,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableULong(El? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -11171,10 +13645,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToUShort(El? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11185,10 +13659,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumLongToNullableUShort(El? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(El?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -11196,10 +13670,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToByte(float value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -11207,10 +13681,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableByte(float value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -11218,10 +13692,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToChar(float value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -11229,10 +13703,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableChar(float value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -11240,10 +13714,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToDecimal(float value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             decimal expected = 0;
@@ -11262,10 +13736,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableDecimal(float value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal expected = 0;
@@ -11284,10 +13758,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToDouble(float value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -11295,10 +13769,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableDouble(float value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal((double)value, f());
@@ -11306,10 +13780,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToEnum(float value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -11317,10 +13791,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableEnum(float value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -11328,10 +13802,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToEnumLong(float value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El)value), f());
@@ -11339,10 +13813,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableEnumLong(float value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El)value), f());
@@ -11350,10 +13824,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToFloat(float value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11361,10 +13835,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableFloat(float value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11372,10 +13846,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToInt(float value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -11383,10 +13857,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableInt(float value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -11394,10 +13868,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToLong(float value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long)value), f());
@@ -11405,10 +13879,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableLong(float value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long)value), f());
@@ -11416,10 +13890,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToSByte(float value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -11427,10 +13901,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableSByte(float value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -11438,10 +13912,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToShort(float value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -11449,10 +13923,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableShort(float value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -11460,10 +13934,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToUInt(float value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -11471,10 +13945,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableUInt(float value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -11482,10 +13956,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToULong(float value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -11493,10 +13967,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableULong(float value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -11504,10 +13978,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToUShort(float value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -11515,10 +13989,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatToNullableUShort(float value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -11526,10 +14000,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToByte(float? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11540,10 +14014,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableByte(float? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -11551,10 +14025,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToChar(float? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11565,10 +14039,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableChar(float? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -11576,10 +14050,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToDecimal(float? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11603,10 +14077,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableDecimal(float? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal? expected = null;
@@ -11625,10 +14099,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToDouble(float? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11639,10 +14113,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableDouble(float? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11650,10 +14124,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToEnum(float? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11664,10 +14138,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableEnum(float? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E?)value), f());
@@ -11675,10 +14149,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToEnumLong(float? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11689,10 +14163,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableEnumLong(float? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El?)value), f());
@@ -11700,10 +14174,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToFloat(float? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11714,10 +14188,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableFloat(float? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11725,10 +14199,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToInt(float? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11739,10 +14213,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableInt(float? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int?)value), f());
@@ -11750,10 +14224,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToLong(float? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11764,10 +14238,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableLong(float? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long?)value), f());
@@ -11775,10 +14249,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToSByte(float? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11789,10 +14263,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableSByte(float? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -11800,10 +14274,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToShort(float? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11814,10 +14288,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableShort(float? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -11825,10 +14299,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToUInt(float? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11839,10 +14313,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableUInt(float? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -11850,10 +14324,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToULong(float? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11864,10 +14338,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableULong(float? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -11875,10 +14349,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToUShort(float? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -11889,10 +14363,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatToNullableUShort(float? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(float?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -11900,10 +14374,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToByte(int value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -11911,10 +14385,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableByte(int value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -11922,10 +14396,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToChar(int value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -11933,10 +14407,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableChar(int value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -11944,10 +14418,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToDecimal(int value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11955,10 +14429,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableDecimal(int value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11966,10 +14440,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToDouble(int value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11977,10 +14451,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableDouble(int value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -11988,10 +14462,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToEnum(int value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -11999,10 +14473,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableEnum(int value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -12010,10 +14484,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToEnumLong(int value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -12021,10 +14495,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableEnumLong(int value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -12032,10 +14506,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToFloat(int value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12043,10 +14517,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableFloat(int value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12054,10 +14528,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToInt(int value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12065,10 +14539,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableInt(int value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12076,10 +14550,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToLong(int value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12087,10 +14561,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableLong(int value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12098,10 +14572,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToSByte(int value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -12109,10 +14583,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableSByte(int value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -12120,10 +14594,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToShort(int value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -12131,10 +14605,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableShort(int value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -12142,10 +14616,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToUInt(int value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -12153,10 +14627,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableUInt(int value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -12164,10 +14638,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToULong(int value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -12175,10 +14649,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableULong(int value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -12186,10 +14660,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToUShort(int value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -12197,10 +14671,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntToNullableUShort(int value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -12208,10 +14682,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToByte(int? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12222,10 +14696,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableByte(int? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -12233,10 +14707,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToChar(int? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12247,10 +14721,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableChar(int? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -12258,10 +14732,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToDecimal(int? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12272,10 +14746,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableDecimal(int? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12283,10 +14757,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToDouble(int? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12297,10 +14771,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableDouble(int? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12308,10 +14782,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToEnum(int? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12322,10 +14796,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableEnum(int? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E?)value, f());
@@ -12333,10 +14807,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToEnumLong(int? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12347,10 +14821,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableEnumLong(int? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -12358,10 +14832,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToFloat(int? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12372,10 +14846,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableFloat(int? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12383,10 +14857,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToInt(int? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12397,10 +14871,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableInt(int? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12408,10 +14882,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToLong(int? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12422,10 +14896,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableLong(int? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12433,10 +14907,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToSByte(int? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12447,10 +14921,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableSByte(int? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -12458,10 +14932,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToShort(int? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12472,10 +14946,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableShort(int? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -12483,10 +14957,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToUInt(int? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12497,10 +14971,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableUInt(int? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -12508,10 +14982,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToULong(int? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12522,10 +14996,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableULong(int? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -12533,10 +15007,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToUShort(int? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12547,10 +15021,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntToNullableUShort(int? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(int?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -12558,10 +15032,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToByte(long value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -12569,10 +15043,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableByte(long value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -12580,10 +15054,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToChar(long value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -12591,10 +15065,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableChar(long value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -12602,10 +15076,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToDecimal(long value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12613,10 +15087,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableDecimal(long value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12624,10 +15098,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToDouble(long value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12635,10 +15109,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableDouble(long value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12646,10 +15120,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToEnum(long value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -12657,10 +15131,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableEnum(long value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -12668,10 +15142,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToEnumLong(long value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -12679,10 +15153,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableEnumLong(long value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -12690,10 +15164,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToFloat(long value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12701,10 +15175,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableFloat(long value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12712,10 +15186,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToInt(long value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -12723,10 +15197,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableInt(long value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -12734,10 +15208,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToLong(long value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12745,10 +15219,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableLong(long value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12756,10 +15230,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToSByte(long value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -12767,10 +15241,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableSByte(long value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -12778,10 +15252,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToShort(long value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -12789,10 +15263,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableShort(long value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -12800,10 +15274,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToUInt(long value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -12811,10 +15285,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableUInt(long value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -12822,10 +15296,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToULong(long value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -12833,10 +15307,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableULong(long value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -12844,10 +15318,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToUShort(long value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -12855,10 +15329,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongToNullableUShort(long value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -12866,10 +15340,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToByte(long? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12880,10 +15354,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableByte(long? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -12891,10 +15365,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToChar(long? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12905,10 +15379,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableChar(long? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -12916,10 +15390,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToDecimal(long? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12930,10 +15404,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableDecimal(long? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12941,10 +15415,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToDouble(long? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12955,10 +15429,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableDouble(long? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -12966,10 +15440,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToEnum(long? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -12980,10 +15454,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableEnum(long? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E?)value), f());
@@ -12991,10 +15465,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToEnumLong(long? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13005,10 +15479,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableEnumLong(long? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -13016,10 +15490,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToFloat(long? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13030,10 +15504,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableFloat(long? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13041,10 +15515,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToInt(long? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13055,10 +15529,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableInt(long? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int?)value), f());
@@ -13066,10 +15540,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToLong(long? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13080,10 +15554,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableLong(long? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13091,10 +15565,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToSByte(long? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13105,10 +15579,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableSByte(long? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -13116,10 +15590,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToShort(long? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13130,10 +15604,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableShort(long? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -13141,10 +15615,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToUInt(long? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13155,10 +15629,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableUInt(long? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -13166,10 +15640,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToULong(long? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13180,10 +15654,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableULong(long? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -13191,10 +15665,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToUShort(long? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13205,10 +15679,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongToNullableUShort(long? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(long?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -13216,10 +15690,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToByte(sbyte value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -13227,10 +15701,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToByteRetInt(sbyte value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(byte)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(
+                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(byte)),
+                    typeof(int)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal((int)unchecked((byte)value), f());
@@ -13238,10 +15715,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableByte(sbyte value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -13249,10 +15726,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToChar(sbyte value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -13260,10 +15737,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableChar(sbyte value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -13271,10 +15748,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToDecimal(sbyte value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13282,10 +15759,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableDecimal(sbyte value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13293,10 +15770,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToDouble(sbyte value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13304,10 +15781,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableDouble(sbyte value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13315,10 +15792,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToEnum(sbyte value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -13326,10 +15803,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableEnum(sbyte value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -13337,10 +15814,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToEnumLong(sbyte value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -13348,10 +15825,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableEnumLong(sbyte value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -13359,10 +15836,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToFloat(sbyte value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13370,10 +15847,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableFloat(sbyte value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13381,10 +15858,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToInt(sbyte value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13392,10 +15869,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableInt(sbyte value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13403,10 +15880,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToLong(sbyte value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13414,10 +15891,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableLong(sbyte value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13425,10 +15902,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToSByte(sbyte value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13436,10 +15913,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableSByte(sbyte value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13447,10 +15924,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToShort(sbyte value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13458,10 +15935,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableShort(sbyte value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13469,10 +15946,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToUInt(sbyte value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -13480,10 +15957,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableUInt(sbyte value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -13491,10 +15968,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToULong(sbyte value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -13502,10 +15979,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableULong(sbyte value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -13513,10 +15990,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToUShort(sbyte value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -13524,10 +16001,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteToNullableUShort(sbyte value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -13535,10 +16012,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToByte(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13549,10 +16026,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableByte(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -13560,10 +16037,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToChar(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13574,10 +16051,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableChar(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -13585,10 +16062,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToDecimal(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13599,10 +16076,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableDecimal(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13610,10 +16087,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToDouble(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13624,10 +16101,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableDouble(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13635,10 +16112,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToEnum(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13649,10 +16126,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableEnum(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E?)value, f());
@@ -13660,10 +16137,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToEnumLong(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13674,10 +16151,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableEnumLong(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -13685,10 +16162,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToFloat(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13699,10 +16176,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableFloat(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13710,10 +16187,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToInt(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13724,10 +16201,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableInt(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13735,10 +16212,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToLong(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13749,10 +16226,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableLong(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13760,10 +16237,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToSByte(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13774,10 +16251,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableSByte(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13785,10 +16262,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToShort(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13799,10 +16276,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableShort(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13810,10 +16287,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToUInt(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13824,10 +16301,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableUInt(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -13835,10 +16312,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToULong(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13849,10 +16326,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableULong(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -13860,10 +16337,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToUShort(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -13874,10 +16351,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteToNullableUShort(sbyte? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(sbyte?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -13885,10 +16362,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToByte(short value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -13896,10 +16373,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableByte(short value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -13907,10 +16384,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToChar(short value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -13918,10 +16395,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableChar(short value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -13929,10 +16406,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToDecimal(short value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13940,10 +16417,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableDecimal(short value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13951,10 +16428,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToDouble(short value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13962,10 +16439,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableDouble(short value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -13973,10 +16450,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToEnum(short value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -13984,10 +16461,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableEnum(short value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -13995,10 +16472,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToEnumLong(short value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -14006,10 +16483,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableEnumLong(short value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -14017,10 +16494,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToFloat(short value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14028,10 +16505,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableFloat(short value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14039,10 +16516,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToInt(short value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14050,10 +16527,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableInt(short value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14061,10 +16538,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToLong(short value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14072,10 +16549,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableLong(short value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14083,10 +16560,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToSByte(short value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -14094,10 +16571,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableSByte(short value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -14105,10 +16582,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToShort(short value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14116,10 +16593,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableShort(short value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14127,10 +16604,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToUInt(short value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -14138,10 +16615,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableUInt(short value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -14149,10 +16626,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToULong(short value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -14160,10 +16637,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableULong(short value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong)value), f());
@@ -14171,10 +16648,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToUShort(short value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -14182,10 +16659,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToUShortRetInt(short value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ushort)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(
+                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ushort)),
+                    typeof(int)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal((int)unchecked((ushort)value), f());
@@ -14193,10 +16673,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortToNullableUShort(short value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -14204,10 +16684,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToByte(short? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14218,10 +16698,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableByte(short? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -14229,10 +16709,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToChar(short? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14243,10 +16723,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableChar(short? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -14254,10 +16734,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToDecimal(short? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14268,10 +16748,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableDecimal(short? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14279,10 +16759,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToDouble(short? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14293,10 +16773,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableDouble(short? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14304,10 +16784,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToEnum(short? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14318,10 +16798,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableEnum(short? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E?)value, f());
@@ -14329,10 +16809,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToEnumLong(short? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14343,10 +16823,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableEnumLong(short? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -14354,10 +16834,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToFloat(short? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14368,10 +16848,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableFloat(short? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14379,10 +16859,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToInt(short? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14393,10 +16873,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableInt(short? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14404,10 +16884,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToLong(short? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14418,10 +16898,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableLong(short? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14429,10 +16909,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToSByte(short? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14443,10 +16923,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableSByte(short? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -14454,10 +16934,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToShort(short? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14468,10 +16948,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableShort(short? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14479,10 +16959,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToUInt(short? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14493,10 +16973,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableUInt(short? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -14504,10 +16984,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToULong(short? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14518,10 +16998,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableULong(short? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ulong?)value), f());
@@ -14529,10 +17009,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToUShort(short? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14543,10 +17023,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortToNullableUShort(short? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(short?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -14554,10 +17034,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToByte(uint value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -14565,10 +17045,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableByte(uint value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -14576,10 +17056,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToChar(uint value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -14587,10 +17067,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableChar(uint value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -14598,10 +17078,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToDecimal(uint value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14609,10 +17089,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableDecimal(uint value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14620,10 +17100,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToDouble(uint value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14631,10 +17111,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableDouble(uint value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14642,10 +17122,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToEnum(uint value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -14653,10 +17133,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableEnum(uint value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -14664,10 +17144,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToEnumLong(uint value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -14675,10 +17155,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableEnumLong(uint value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -14686,10 +17166,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToFloat(uint value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14697,10 +17177,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableFloat(uint value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14708,10 +17188,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToInt(uint value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -14719,10 +17199,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableInt(uint value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -14730,10 +17210,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToLong(uint value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14741,10 +17221,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableLong(uint value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14752,10 +17232,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToSByte(uint value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -14763,10 +17243,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableSByte(uint value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -14774,10 +17254,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToShort(uint value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -14785,10 +17265,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableShort(uint value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -14796,10 +17276,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToUInt(uint value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14807,10 +17287,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableUInt(uint value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14818,10 +17298,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToULong(uint value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14829,10 +17309,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableULong(uint value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14840,10 +17320,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToUShort(uint value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -14851,10 +17331,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntToNullableUShort(uint value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -14862,10 +17342,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToByte(uint? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14876,10 +17356,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableByte(uint? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -14887,10 +17367,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToChar(uint? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14901,10 +17381,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableChar(uint? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -14912,10 +17392,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToDecimal(uint? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14926,10 +17406,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableDecimal(uint? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14937,10 +17417,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToDouble(uint? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14951,10 +17431,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableDouble(uint? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -14962,10 +17442,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToEnum(uint? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -14976,10 +17456,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableEnum(uint? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E?)value), f());
@@ -14987,10 +17467,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToEnumLong(uint? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15001,10 +17481,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableEnumLong(uint? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -15012,10 +17492,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToFloat(uint? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15026,10 +17506,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableFloat(uint? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15037,10 +17517,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToInt(uint? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15051,10 +17531,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableInt(uint? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int?)value), f());
@@ -15062,10 +17542,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToLong(uint? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15076,10 +17556,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableLong(uint? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal((long?)value, f());
@@ -15087,10 +17567,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToSByte(uint? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15101,10 +17581,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableSByte(uint? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -15112,10 +17592,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToShort(uint? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15126,10 +17606,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableShort(uint? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -15137,10 +17617,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToUInt(uint? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15151,10 +17631,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableUInt(uint? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15162,10 +17642,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToULong(uint? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15176,10 +17656,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableULong(uint? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15187,10 +17667,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToUShort(uint? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15201,10 +17681,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntToNullableUShort(uint? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(uint?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -15212,10 +17692,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToByte(ulong value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -15223,10 +17703,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableByte(ulong value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -15234,10 +17714,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToChar(ulong value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char)value), f());
@@ -15245,10 +17725,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableChar(ulong value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -15256,10 +17736,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToDecimal(ulong value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15267,10 +17747,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableDecimal(ulong value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15278,10 +17758,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToDouble(ulong value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15289,10 +17769,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableDouble(ulong value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15300,10 +17780,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToEnum(ulong value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -15311,10 +17791,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableEnum(ulong value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -15322,10 +17802,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToEnumLong(ulong value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El)value), f());
@@ -15333,10 +17813,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableEnumLong(ulong value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El)value), f());
@@ -15344,10 +17824,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToFloat(ulong value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15355,10 +17835,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableFloat(ulong value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15366,10 +17846,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToInt(ulong value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -15377,10 +17857,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableInt(ulong value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int)value), f());
@@ -15388,10 +17868,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToLong(ulong value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long)value), f());
@@ -15399,10 +17879,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableLong(ulong value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long)value), f());
@@ -15410,10 +17890,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToSByte(ulong value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -15421,10 +17901,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableSByte(ulong value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -15432,10 +17912,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToShort(ulong value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -15443,10 +17923,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableShort(ulong value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -15454,10 +17934,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToUInt(ulong value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -15465,10 +17945,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableUInt(ulong value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint)value), f());
@@ -15476,10 +17956,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToULong(ulong value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15487,10 +17967,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableULong(ulong value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15498,10 +17978,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToUShort(ulong value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -15509,10 +17989,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongToNullableUShort(ulong value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)value), f());
@@ -15520,10 +18000,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToByte(ulong? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15534,10 +18014,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableByte(ulong? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -15545,10 +18025,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToChar(ulong? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15559,10 +18039,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableChar(ulong? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)value), f());
@@ -15570,10 +18050,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToDecimal(ulong? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15584,10 +18064,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableDecimal(ulong? value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15595,10 +18075,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToDouble(ulong? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15609,10 +18089,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableDouble(ulong? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15620,10 +18100,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToEnum(ulong? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15634,10 +18114,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableEnum(ulong? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E?)value), f());
@@ -15645,10 +18125,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToEnumLong(ulong? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15659,10 +18139,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableEnumLong(ulong? value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((El?)value), f());
@@ -15670,10 +18150,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToFloat(ulong? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15684,10 +18164,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableFloat(ulong? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15695,10 +18175,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToInt(ulong? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15709,10 +18189,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableInt(ulong? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((int?)value), f());
@@ -15720,10 +18200,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToLong(ulong? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15734,10 +18214,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableLong(ulong? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((long?)value), f());
@@ -15745,10 +18225,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToSByte(ulong? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15759,10 +18239,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableSByte(ulong? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -15770,10 +18250,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToShort(ulong? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15784,10 +18264,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableShort(ulong? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -15795,10 +18275,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToUInt(ulong? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15809,10 +18289,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableUInt(ulong? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((uint?)value), f());
@@ -15820,10 +18300,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToULong(ulong? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15834,10 +18314,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableULong(ulong? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15845,10 +18325,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToUShort(ulong? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -15859,10 +18339,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongToNullableUShort(ulong? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ulong?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)value), f());
@@ -15870,10 +18350,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToByte(ushort value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -15881,10 +18361,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableByte(ushort value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)value), f());
@@ -15892,10 +18372,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToChar(ushort value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal((char)value, f());
@@ -15903,10 +18383,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableChar(ushort value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal((char?)value, f());
@@ -15914,10 +18394,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToDecimal(ushort value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15925,10 +18405,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableDecimal(ushort value, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15936,10 +18416,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToDouble(ushort value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15947,10 +18427,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableDouble(ushort value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -15958,10 +18438,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToEnum(ushort value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -15969,10 +18449,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableEnum(ushort value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E)value, f());
@@ -15980,10 +18460,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToEnumLong(ushort value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -15991,10 +18471,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableEnumLong(ushort value, bool useInterpreter)
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -16002,10 +18482,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToFloat(ushort value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16013,10 +18493,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableFloat(ushort value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16024,10 +18504,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToInt(ushort value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16035,10 +18515,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableInt(ushort value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16046,10 +18526,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToLong(ushort value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16057,10 +18537,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableLong(ushort value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16068,10 +18548,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToSByte(ushort value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -16079,10 +18559,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableSByte(ushort value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)value), f());
@@ -16090,10 +18570,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToShort(ushort value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -16101,10 +18581,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToShortRetInt(ushort value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(short)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(
+                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(short)),
+                    typeof(int)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal((int)unchecked((short)value), f());
@@ -16112,10 +18595,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableShort(ushort value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)value), f());
@@ -16123,10 +18606,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToUInt(ushort value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16134,10 +18617,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableUInt(ushort value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16145,10 +18628,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToULong(ushort value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16156,10 +18639,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableULong(ushort value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16167,10 +18650,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToUShort(ushort value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16178,10 +18661,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortToNullableUShort(ushort value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16189,10 +18672,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToByte(ushort? value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(byte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(byte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16203,10 +18686,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableByte(ushort? value, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(byte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(byte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)value), f());
@@ -16214,10 +18697,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToChar(ushort? value, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(char)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(char)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16228,10 +18711,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableChar(ushort? value, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(char?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(char?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal((char?)value, f());
@@ -16239,10 +18722,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToDecimal(ushort? value, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(decimal)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(decimal)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16251,12 +18734,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableUShortToNullableDecimal(ushort? value, bool useInterpreter)
+        private static void VerifyNullableUShortToNullableDecimal(
+            ushort? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(decimal?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(decimal?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16264,10 +18750,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToDouble(ushort? value, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(double)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(double)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16278,10 +18764,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableDouble(ushort? value, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(double?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(double?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16289,10 +18775,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToEnum(ushort? value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16303,10 +18789,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableEnum(ushort? value, bool useInterpreter)
         {
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(E?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(E?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
 
             Assert.Equal((E?)value, f());
@@ -16314,10 +18800,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToEnumLong(ushort? value, bool useInterpreter)
         {
-            Expression<Func<El>> e =
-                Expression.Lambda<Func<El>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(El)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El>> e = Expression.Lambda<Func<El>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(El)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16326,12 +18812,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidOperationException>(() => f());
         }
 
-        private static void VerifyNullableUShortToNullableEnumLong(ushort? value, bool useInterpreter)
+        private static void VerifyNullableUShortToNullableEnumLong(
+            ushort? value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<El?>> e =
-                Expression.Lambda<Func<El?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(El?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(El?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?> f = e.Compile(useInterpreter);
 
             Assert.Equal((El?)value, f());
@@ -16339,10 +18828,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToFloat(ushort? value, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(float)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(float)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16353,10 +18842,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableFloat(ushort? value, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(float?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(float?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16364,10 +18853,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToInt(ushort? value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16378,10 +18867,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableInt(ushort? value, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(int?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(int?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16389,10 +18878,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToLong(ushort? value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(long)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(long)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16403,10 +18892,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableLong(ushort? value, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(long?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(long?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16414,10 +18903,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToSByte(ushort? value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(sbyte)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(sbyte)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16428,10 +18917,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableSByte(ushort? value, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(sbyte?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(sbyte?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)value), f());
@@ -16439,10 +18928,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToShort(ushort? value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(short)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(short)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16453,10 +18942,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableShort(ushort? value, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(short?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(short?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)value), f());
@@ -16464,10 +18953,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToUInt(ushort? value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(uint)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(uint)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16478,10 +18967,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableUInt(ushort? value, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(uint?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(uint?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16489,10 +18978,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToULong(ushort? value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ulong)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ulong)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16503,10 +18992,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableULong(ushort? value, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ulong?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ulong?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16514,10 +19003,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToUShort(ushort? value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ushort)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ushort)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             if (value.HasValue)
@@ -16528,10 +19017,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortToNullableUShort(ushort? value, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ushort?)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Convert(Expression.Constant(value, typeof(ushort?)), typeof(ushort?)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -16554,15 +19043,13 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private struct HalfLiftedTo
-        {
-        }
+        private struct HalfLiftedTo { }
 
         private struct ImplicitHalfLiftedFrom
         {
             public bool NullEquiv { get; set; }
 
-            public static implicit operator HalfLiftedTo? (ImplicitHalfLiftedFrom source) =>
+            public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedFrom source) =>
                 source.NullEquiv ? default(HalfLiftedTo?) : new HalfLiftedTo();
         }
 
@@ -16570,26 +19057,33 @@ namespace System.Linq.Expressions.Tests
         {
             public bool NullEquiv { get; set; }
 
-            public static explicit operator HalfLiftedTo? (ExplicitHalfLiftedFrom source) =>
+            public static explicit operator HalfLiftedTo?(ExplicitHalfLiftedFrom source) =>
                 source.NullEquiv ? default(HalfLiftedTo?) : new HalfLiftedTo();
         }
 
         private struct ImplicitHalfLiftedOverloaded
         {
-            public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedOverloaded source) => new HalfLiftedTo();
+            public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedOverloaded source) =>
+                new HalfLiftedTo();
 
-            public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedOverloaded? source) => new HalfLiftedTo();
+            public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedOverloaded? source) =>
+                new HalfLiftedTo();
         }
 
         private struct ImplicitHalfLiftedFromReverse
         {
-            public static implicit operator HalfLiftedTo(ImplicitHalfLiftedFromReverse? source) => new HalfLiftedTo();
+            public static implicit operator HalfLiftedTo(ImplicitHalfLiftedFromReverse? source) =>
+                new HalfLiftedTo();
         }
 
         private struct HalfLiftedToTargetOperator
         {
-            public static implicit operator HalfLiftedToTargetOperator?(HalfLiftedFromTargetOperator source) =>
-                source.NullEquiv ? default(HalfLiftedToTargetOperator?) : new HalfLiftedToTargetOperator();
+            public static implicit operator HalfLiftedToTargetOperator?(
+                HalfLiftedFromTargetOperator source
+            ) =>
+                source.NullEquiv
+                    ? default(HalfLiftedToTargetOperator?)
+                    : new HalfLiftedToTargetOperator();
         }
 
         private struct HalfLiftedFromTargetOperator
@@ -16630,10 +19124,9 @@ namespace System.Linq.Expressions.Tests
         public static void ImplicitHalfLiftedConversion(bool useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(ImplicitHalfLiftedFrom?));
-            Expression<Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>> e =
-                Expression.Lambda<Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>>(
-                    Expression.Convert(x, typeof(HalfLiftedTo?)),
-                    x);
+            Expression<Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>> e = Expression.Lambda<
+                Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>
+            >(Expression.Convert(x, typeof(HalfLiftedTo?)), x);
             Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?> f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ImplicitHalfLiftedFrom()));
             Assert.Null(f(new ImplicitHalfLiftedFrom { NullEquiv = true }));
@@ -16644,10 +19137,9 @@ namespace System.Linq.Expressions.Tests
         public static void ExplicitHalfLiftedConversion(bool useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(ExplicitHalfLiftedFrom?));
-            Expression<Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>> e =
-                Expression.Lambda<Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>>(
-                    Expression.Convert(x, typeof(HalfLiftedTo?)),
-                    x);
+            Expression<Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>> e = Expression.Lambda<
+                Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>
+            >(Expression.Convert(x, typeof(HalfLiftedTo?)), x);
             Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?> f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ExplicitHalfLiftedFrom()));
             Assert.Null(f(new ExplicitHalfLiftedFrom { NullEquiv = true }));
@@ -16658,10 +19150,9 @@ namespace System.Linq.Expressions.Tests
         public static void ImplicitHalfLiftedOverloadedConversion(bool useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(ImplicitHalfLiftedOverloaded?));
-            Expression<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>> e =
-                Expression.Lambda<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>>(
-                    Expression.Convert(x, typeof(HalfLiftedTo?)),
-                    x);
+            Expression<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>> e = Expression.Lambda<
+                Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>
+            >(Expression.Convert(x, typeof(HalfLiftedTo?)), x);
             Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?> f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ImplicitHalfLiftedOverloaded()));
             Assert.NotNull(f(null));
@@ -16671,10 +19162,16 @@ namespace System.Linq.Expressions.Tests
         public static void ImplicitHalfLiftedConversionExplicitlySetMethod(bool useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(ImplicitHalfLiftedFrom?));
-            Expression<Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>> e =
-                Expression.Lambda<Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>>(
-                    Expression.Convert(x, typeof(HalfLiftedTo?), typeof(ImplicitHalfLiftedFrom).GetMethod("op_Implicit")),
-                    x);
+            Expression<Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>> e = Expression.Lambda<
+                Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?>
+            >(
+                Expression.Convert(
+                    x,
+                    typeof(HalfLiftedTo?),
+                    typeof(ImplicitHalfLiftedFrom).GetMethod("op_Implicit")
+                ),
+                x
+            );
             Func<ImplicitHalfLiftedFrom?, HalfLiftedTo?> f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ImplicitHalfLiftedFrom()));
             Assert.Null(f(new ImplicitHalfLiftedFrom { NullEquiv = true }));
@@ -16685,10 +19182,16 @@ namespace System.Linq.Expressions.Tests
         public static void ExplicitHalfLiftedConversionExplicitlySetMethod(bool useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(ExplicitHalfLiftedFrom?));
-            Expression<Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>> e =
-                Expression.Lambda<Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>>(
-                    Expression.Convert(x, typeof(HalfLiftedTo?), typeof(ExplicitHalfLiftedFrom).GetMethod("op_Explicit")),
-                    x);
+            Expression<Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>> e = Expression.Lambda<
+                Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?>
+            >(
+                Expression.Convert(
+                    x,
+                    typeof(HalfLiftedTo?),
+                    typeof(ExplicitHalfLiftedFrom).GetMethod("op_Explicit")
+                ),
+                x
+            );
             Func<ExplicitHalfLiftedFrom?, HalfLiftedTo?> f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ExplicitHalfLiftedFrom()));
             Assert.Null(f(new ExplicitHalfLiftedFrom { NullEquiv = true }));
@@ -16696,24 +19199,31 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ImplicitHalfLiftedOverloadedConversionExplicitlySetMethod(bool useInterpreter)
+        public static void ImplicitHalfLiftedOverloadedConversionExplicitlySetMethod(
+            bool useInterpreter
+        )
         {
-            List<MethodInfo> opMethods =
-                typeof(ImplicitHalfLiftedOverloaded).GetMethods().Where(m => m.Name == "op_Implicit").ToList();
-            MethodInfo direct =
-                opMethods.First(m => m.GetParameters()[0].ParameterType == typeof(ImplicitHalfLiftedOverloaded?));
-            MethodInfo liftNeeded =
-                opMethods.First(m => m.GetParameters()[0].ParameterType == typeof(ImplicitHalfLiftedOverloaded));
+            List<MethodInfo> opMethods = typeof(ImplicitHalfLiftedOverloaded)
+                .GetMethods()
+                .Where(m => m.Name == "op_Implicit")
+                .ToList();
+            MethodInfo direct = opMethods.First(m =>
+                m.GetParameters()[0].ParameterType == typeof(ImplicitHalfLiftedOverloaded?)
+            );
+            MethodInfo liftNeeded = opMethods.First(m =>
+                m.GetParameters()[0].ParameterType == typeof(ImplicitHalfLiftedOverloaded)
+            );
             ParameterExpression x = Expression.Parameter(typeof(ImplicitHalfLiftedOverloaded?));
-            Expression<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>> e =
-                Expression.Lambda<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>>(
-                    Expression.Convert(x, typeof(HalfLiftedTo?), direct),
-                    x);
+            Expression<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>> e = Expression.Lambda<
+                Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>
+            >(Expression.Convert(x, typeof(HalfLiftedTo?), direct), x);
             Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?> f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ImplicitHalfLiftedOverloaded()));
             Assert.NotNull(f(null));
             e = Expression.Lambda<Func<ImplicitHalfLiftedOverloaded?, HalfLiftedTo?>>(
-                Expression.Convert(x, typeof(HalfLiftedTo?), liftNeeded), x);
+                Expression.Convert(x, typeof(HalfLiftedTo?), liftNeeded),
+                x
+            );
             f = e.Compile(useInterpreter);
             Assert.NotNull(f(new ImplicitHalfLiftedOverloaded()));
             Assert.Null(f(null));
@@ -16729,17 +19239,26 @@ namespace System.Linq.Expressions.Tests
             // The compiler correctly does this double-conversion in such cases.
             // We should probably not allow it to be done as a single lifted operation.
             ParameterExpression x = Expression.Parameter(typeof(ImplicitHalfLiftedFromReverse?));
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(
-                x, typeof(HalfLiftedTo?), typeof(ImplicitHalfLiftedFromReverse).GetMethod("op_Implicit")));
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(
-                x, typeof(HalfLiftedTo?)));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.Convert(
+                        x,
+                        typeof(HalfLiftedTo?),
+                        typeof(ImplicitHalfLiftedFromReverse).GetMethod("op_Implicit")
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Convert(x, typeof(HalfLiftedTo?))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ImplicitHalfLiftedConversionOpOnTargetFromCSCompiler(bool useInterpreter)
         {
             Expression<Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?>> e = x => x;
-            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f = e.Compile(useInterpreter);
+            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f = e.Compile(
+                useInterpreter
+            );
             Assert.NotNull(f(new HalfLiftedFromTargetOperator()));
             Assert.Null(f(new HalfLiftedFromTargetOperator { NullEquiv = true }));
             Assert.Null(f(null));
@@ -16752,8 +19271,11 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?>> e =
                 Expression.Lambda<Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?>>(
                     Expression.Convert(x, typeof(HalfLiftedToTargetOperator?)),
-                    x);
-            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f = e.Compile(useInterpreter);
+                    x
+                );
+            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f = e.Compile(
+                useInterpreter
+            );
             Assert.NotNull(f(new HalfLiftedFromTargetOperator()));
             Assert.Null(f(new HalfLiftedFromTargetOperator { NullEquiv = true }));
             Assert.Null(f(null));
@@ -16762,32 +19284,57 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ExplicitOpImplicit()
         {
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(Expression.Constant(new PerverselyNamedMembers(0)), typeof(uint)));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.Convert(
+                        Expression.Constant(new PerverselyNamedMembers(0)),
+                        typeof(uint)
+                    )
+            );
         }
 
         [Fact]
         public static void OpenGenericnType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Convert(Expression.Constant(null), typeof(List<>)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Convert(Expression.Constant(null), typeof(List<>))
+            );
         }
 
         [Fact]
         public static void TypeContainingGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Convert(Expression.Constant(null), typeof(List<>.Enumerator)));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Convert(Expression.Constant(null), typeof(List<>).MakeGenericType(typeof(List<>))));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Convert(Expression.Constant(null), typeof(List<>.Enumerator))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Convert(
+                        Expression.Constant(null),
+                        typeof(List<>).MakeGenericType(typeof(List<>))
+                    )
+            );
         }
 
         [Fact]
         public static void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Convert(Expression.Constant(null), typeof(object).MakeByRefType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Convert(Expression.Constant(null), typeof(object).MakeByRefType())
+            );
         }
 
         [Fact]
         public static void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Convert(Expression.Constant(null), typeof(int*)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Convert(Expression.Constant(null), typeof(int*))
+            );
         }
 
         public static IEnumerable<object[]> Conversions()
@@ -16803,8 +19350,12 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertMakeUnary(object source, object result, bool useInterpreter)
         {
             LambdaExpression lambda = Expression.Lambda(
-                Expression.MakeUnary(ExpressionType.Convert, Expression.Constant(source), result.GetType())
-                );
+                Expression.MakeUnary(
+                    ExpressionType.Convert,
+                    Expression.Constant(source),
+                    result.GetType()
+                )
+            );
             Delegate del = lambda.Compile(useInterpreter);
             Assert.Equal(result, del.DynamicInvoke());
         }
@@ -16815,26 +19366,30 @@ namespace System.Linq.Expressions.Tests
 
             public static int ConvertToInt(CustomConversions cc) => cc.Value;
 
-            public static CustomConversions ConvertFromInt(int x) => new CustomConversions {Value = x};
+            public static CustomConversions ConvertFromInt(int x) =>
+                new CustomConversions { Value = x };
 
-            public static CustomConversions ConvertFromRefInt(ref int x) => new CustomConversions { Value = x++ };
+            public static CustomConversions ConvertFromRefInt(ref int x) =>
+                new CustomConversions { Value = x++ };
 
-            public static void DoNothing(CustomConversions cc)
-            {
-            }
+            public static void DoNothing(CustomConversions cc) { }
 
             public static CustomConversions Create() => new CustomConversions();
 
-            public static CustomConversions FromAddition(int x, int y) => new CustomConversions {Value = x + y};
+            public static CustomConversions FromAddition(int x, int y) =>
+                new CustomConversions { Value = x + y };
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CustomConversionNotStandardNameTo(bool useInterpreter)
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertToInt));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertToInt)
+            );
             Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(
-                Expression.Convert(operand, typeof(int), method));
+                Expression.Convert(operand, typeof(int), method)
+            );
             Func<int> func = lambda.Compile(useInterpreter);
             Assert.Equal(9, func());
         }
@@ -16843,9 +19398,12 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFrom(bool useInterpreter)
         {
             Expression operand = Expression.Constant(4);
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertFromInt));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertFromInt)
+            );
             Expression<Func<CustomConversions>> lambda = Expression.Lambda<Func<CustomConversions>>(
-                Expression.Convert(operand, typeof(CustomConversions), method));
+                Expression.Convert(operand, typeof(CustomConversions), method)
+            );
             Func<CustomConversions> func = lambda.Compile(useInterpreter);
             Assert.Equal(4, func().Value);
         }
@@ -16854,9 +19412,12 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromLifted(bool useInterpreter)
         {
             Expression operand = Expression.Constant(4, typeof(int?));
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertFromInt));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertFromInt)
+            );
             Expression<Func<CustomConversions>> lambda = Expression.Lambda<Func<CustomConversions>>(
-                Expression.Convert(operand, typeof(CustomConversions), method));
+                Expression.Convert(operand, typeof(CustomConversions), method)
+            );
             Func<CustomConversions> func = lambda.Compile(useInterpreter);
             Assert.Equal(4, func().Value);
         }
@@ -16865,9 +19426,12 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromLiftedNullOperand(bool useInterpreter)
         {
             Expression operand = Expression.Constant(null, typeof(int?));
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertFromInt));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertFromInt)
+            );
             Expression<Func<CustomConversions>> lambda = Expression.Lambda<Func<CustomConversions>>(
-                Expression.Convert(operand, typeof(CustomConversions), method));
+                Expression.Convert(operand, typeof(CustomConversions), method)
+            );
             Func<CustomConversions> func = lambda.Compile(useInterpreter);
             Assert.Throws<InvalidOperationException>(() => func());
         }
@@ -16878,9 +19442,12 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromLiftedByRef(bool useInterpreter)
         {
             var param = Expression.Parameter(typeof(int?).MakeByRefType());
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertFromRefInt));
-            Expression<ByRefFunc<int?, CustomConversions>> lambda = Expression.Lambda<ByRefFunc<int?, CustomConversions>>(
-                Expression.Convert(param, typeof(CustomConversions), method), param);
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertFromRefInt)
+            );
+            Expression<ByRefFunc<int?, CustomConversions>> lambda = Expression.Lambda<
+                ByRefFunc<int?, CustomConversions>
+            >(Expression.Convert(param, typeof(CustomConversions), method), param);
             ByRefFunc<int?, CustomConversions> func = lambda.Compile(useInterpreter);
             int? x = 5;
             Assert.Equal(5, func(ref x).Value);
@@ -16891,9 +19458,12 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromByRef(bool useInterpreter)
         {
             var param = Expression.Parameter(typeof(int).MakeByRefType());
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertFromRefInt));
-            Expression<ByRefFunc<int, CustomConversions>> lambda = Expression.Lambda<ByRefFunc<int, CustomConversions>>(
-                Expression.Convert(param, typeof(CustomConversions), method), param);
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertFromRefInt)
+            );
+            Expression<ByRefFunc<int, CustomConversions>> lambda = Expression.Lambda<
+                ByRefFunc<int, CustomConversions>
+            >(Expression.Convert(param, typeof(CustomConversions), method), param);
             ByRefFunc<int, CustomConversions> func = lambda.Compile(useInterpreter);
             int x = 5;
             Assert.Equal(5, func(ref x).Value);
@@ -16904,54 +19474,84 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameToWrongType()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertToInt));
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(operand, typeof(long), method));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertToInt)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Convert(operand, typeof(long), method)
+            );
         }
 
         [Fact]
         public static void CustomConversionNotStandardNameFromWrongType()
         {
             Expression operand = Expression.Constant(4L);
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.ConvertFromInt));
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(operand, typeof(CustomConversions), method));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.ConvertFromInt)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Convert(operand, typeof(CustomConversions), method)
+            );
         }
 
         [Fact]
         public static void CustomConversionNotStandardNameToVoidReturn()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.DoNothing));
-            AssertExtensions.Throws<ArgumentException>("method", () => Expression.Convert(operand, typeof(int), method));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.DoNothing)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () => Expression.Convert(operand, typeof(int), method)
+            );
         }
 
         [Fact]
         public static void CustomConversionNotStandardNameToNullary()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.Create));
-            AssertExtensions.Throws<ArgumentException>("method", () => Expression.Convert(operand, typeof(int), method));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.Create)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () => Expression.Convert(operand, typeof(int), method)
+            );
         }
 
         [Fact]
         public static void CustomConversionNotStandardNameToExcessiveArity()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(nameof(CustomConversions.FromAddition));
-            AssertExtensions.Throws<ArgumentException>("method", () => Expression.Convert(operand, typeof(int), method));
+            MethodInfo method = typeof(CustomConversions).GetMethod(
+                nameof(CustomConversions.FromAddition)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () => Expression.Convert(operand, typeof(int), method)
+            );
         }
 
         [Fact]
         public static void CannotConvertNonVoidToVoid()
         {
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(Expression.Constant(1), typeof(void)));
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(Expression.Constant("a"), typeof(void)));
-            Assert.Throws<InvalidOperationException>(() => Expression.Convert(Expression.Constant(DateTime.MinValue), typeof(void)));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Convert(Expression.Constant(1), typeof(void))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Convert(Expression.Constant("a"), typeof(void))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Convert(Expression.Constant(DateTime.MinValue), typeof(void))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ConvertVoidToVoid(bool useInterpreter)
         {
-            Action act = Expression.Lambda<Action>(Expression.Convert(Expression.Empty(), typeof(void)))
+            Action act = Expression
+                .Lambda<Action>(Expression.Convert(Expression.Empty(), typeof(void)))
                 .Compile(useInterpreter);
             act();
         }
@@ -16960,55 +19560,63 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertReferenceArrayToValueTypeArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(string[])), typeof(int[])));
+                () => Expression.Convert(Expression.Default(typeof(string[])), typeof(int[]))
+            );
         }
 
         [Fact]
         public static void ConvertValueTypeArrayToValueTypeArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(long[])), typeof(int[])));
+                () => Expression.Convert(Expression.Default(typeof(long[])), typeof(int[]))
+            );
         }
 
         [Fact]
         public static void ConvertValueTypeArrayToReferenceArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(StringComparison[])), typeof(string[])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(StringComparison[])),
+                        typeof(string[])
+                    )
+            );
         }
 
         [Fact]
         public static void ConvertSealedTypeArrayToNonImplementedInterfaceArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(string[])), typeof(IAsyncResult[])));
+                () =>
+                    Expression.Convert(Expression.Default(typeof(string[])), typeof(IAsyncResult[]))
+            );
         }
 
         [Fact]
         public static void ConvertNonImplementedInterfaceArrayToSealedTypeArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(IAsyncResult[])), typeof(string[])));
+                () =>
+                    Expression.Convert(Expression.Default(typeof(IAsyncResult[])), typeof(string[]))
+            );
         }
 
-        interface IInterface
-        {
-        }
+        interface IInterface { }
 
-        class NonSealed
-        {
-        }
+        class NonSealed { }
 
-        class Derived : NonSealed, IInterface
-        {
-        }
+        class Derived : NonSealed, IInterface { }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void NonSealedArrayToIfaceArray(bool useInterpreter)
         {
             Expression<Func<NonSealed[][], IInterface[][]>> e = a => (IInterface[][])a;
             Func<NonSealed[][], IInterface[][]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[]{new[] {new Derived(), new Derived(), new Derived(), new Derived()}};
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<NonSealed[]>()));
@@ -17019,7 +19627,10 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<IInterface[][], NonSealed[][]>> e = a => (NonSealed[][])a;
             Func<IInterface[][], NonSealed[][]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] {new[] {new Derived(), new Derived(), new Derived(), new Derived()}};
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<IInterface[]>()));
@@ -17030,7 +19641,10 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<ICollection<NonSealed[]>, IInterface[][]>> e = a => (IInterface[][])a;
             Func<ICollection<NonSealed[]>, IInterface[][]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] {new[] {new Derived(), new Derived(), new Derived(), new Derived()}};
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<NonSealed[]>()));
@@ -17041,7 +19655,10 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<IInterface[][], IList<NonSealed>[]>> e = a => (IList<NonSealed>[])a;
             Func<IInterface[][], IList<NonSealed>[]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] {new[] {new Derived(), new Derived(), new Derived(), new Derived()}};
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<IInterface[]>()));
@@ -17050,9 +19667,13 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void NonSealedArrayToIfaceIEnumerable(bool useInterpreter)
         {
-            Expression<Func<NonSealed[][], IEnumerable<IInterface>[]>> e = a => (IEnumerable<IInterface>[])a;
+            Expression<Func<NonSealed[][], IEnumerable<IInterface>[]>> e = a =>
+                (IEnumerable<IInterface>[])a;
             Func<NonSealed[][], IEnumerable<IInterface>[]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] {new[] {new Derived(), new Derived(), new Derived(), new Derived()}};
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<NonSealed[]>()));
@@ -17061,9 +19682,13 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void IfaceIReadonlyCollectionToNonSealedArray(bool useInterpreter)
         {
-            Expression<Func<IReadOnlyCollection<IInterface>[], NonSealed[][]>> e = a => (NonSealed[][])a;
+            Expression<Func<IReadOnlyCollection<IInterface>[], NonSealed[][]>> e = a =>
+                (NonSealed[][])a;
             Func<IReadOnlyCollection<IInterface>[], NonSealed[][]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] {new[] {new Derived(), new Derived(), new Derived(), new Derived()}};
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<IInterface[]>()));
@@ -17074,7 +19699,10 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<IList<IInterface[]>, object[][]>> e = a => (object[][])a;
             Func<IList<IInterface[]>, object[][]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] { new[] { new Derived(), new Derived(), new Derived(), new Derived() } };
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
         }
@@ -17084,7 +19712,10 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<IList<object[]>, IInterface[][]>> e = a => (IInterface[][])a;
             Func<IList<object[]>, IInterface[][]> f = e.Compile(useInterpreter);
-            Derived[][] arr = new[] { new[] { new Derived(), new Derived(), new Derived(), new Derived() } };
+            Derived[][] arr = new[]
+            {
+                new[] { new Derived(), new Derived(), new Derived(), new Derived() },
+            };
             Assert.Same(arr, f(arr));
             Assert.Null(f(null));
             Assert.Throws<InvalidCastException>(() => f(Array.Empty<string[]>()));
@@ -17094,39 +19725,74 @@ namespace System.Linq.Expressions.Tests
         public static void IfaceToNonSZArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(IList<NonSealed>[])), typeof(NonSealed[,][])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(IList<NonSealed>[])),
+                        typeof(NonSealed[,][])
+                    )
+            );
         }
 
         [Fact]
         public static void NonSZArrayToIface()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(NonSealed[,][])), typeof(IList<NonSealed>[])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(NonSealed[,][])),
+                        typeof(IList<NonSealed>[])
+                    )
+            );
         }
 
         [Fact]
         public static void ArrayToNonArrayCompatibleIFace()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(NonSealed[][])), typeof(IEquatable<NonSealed>[])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(NonSealed[][])),
+                        typeof(IEquatable<NonSealed>[])
+                    )
+            );
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(NonSealed[][])), typeof(IDictionary<NonSealed, NonSealed>[])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(NonSealed[][])),
+                        typeof(IDictionary<NonSealed, NonSealed>[])
+                    )
+            );
         }
 
         [Fact]
         public static void NonArrayCompatibleIFaceToArray()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(IEquatable<NonSealed>[])), typeof(NonSealed[][])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(IEquatable<NonSealed>[])),
+                        typeof(NonSealed[][])
+                    )
+            );
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])), typeof(NonSealed[][])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])),
+                        typeof(NonSealed[][])
+                    )
+            );
         }
 
         [Fact]
         public static void ArrayToNotRelated()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Expression.Convert(Expression.Default(typeof(NonSealed[][][])), typeof(string[][])));
+                () =>
+                    Expression.Convert(
+                        Expression.Default(typeof(NonSealed[][][])),
+                        typeof(string[][])
+                    )
+            );
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class StubbedPropertySetup : Setup
@@ -30,7 +29,6 @@ namespace Moq
         sealed class StubbedPropertySetup : Setup
     */
     sealed class StubbedPropertySetup : Setup
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private object value;
@@ -54,8 +52,18 @@ namespace Moq
     {
         object value;
 
-        public StubbedPropertySetup(Mock mock, LambdaExpression expression, MethodInfo getter, MethodInfo setter, object initialValue)
-            : base(originalExpression: null, mock, new PropertyAccessorExpectation(expression, getter, setter))
+        public StubbedPropertySetup(
+            Mock mock,
+            LambdaExpression expression,
+            MethodInfo getter,
+            MethodInfo setter,
+            object initialValue
+        )
+            : base(
+                originalExpression: null,
+                mock,
+                new PropertyAccessorExpectation(expression, getter, setter)
+            )
         {
             // NOTE:
             //
@@ -106,7 +114,6 @@ namespace Moq
         }
 
         protected override void VerifySelf()
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private sealed class PropertyAccessorExpectation : Expectation
@@ -127,11 +134,9 @@ namespace Moq
         After:
                 sealed class PropertyAccessorExpectation : Expectation
         */
-        {
-        }
+        { }
 
         sealed class PropertyAccessorExpectation : Expectation
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     private readonly LambdaExpression expression;
@@ -169,7 +174,11 @@ namespace Moq
             readonly MethodInfo getter;
             readonly MethodInfo setter;
 
-            public PropertyAccessorExpectation(LambdaExpression expression, MethodInfo getter, MethodInfo setter)
+            public PropertyAccessorExpectation(
+                LambdaExpression expression,
+                MethodInfo getter,
+                MethodInfo setter
+            )
             {
                 Debug.Assert(expression != null);
                 Debug.Assert(expression.IsProperty());
@@ -191,7 +200,9 @@ namespace Moq
 
             public override int GetHashCode()
             {
-                return unchecked((this.getter?.GetHashCode() ?? 0) + 103 * (this.setter?.GetHashCode() ?? 0));
+                return unchecked(
+                    (this.getter?.GetHashCode() ?? 0) + 103 * (this.setter?.GetHashCode() ?? 0)
+                );
             }
 
             public override bool IsMatch(Invocation invocation)

@@ -35,7 +35,8 @@ public class CorsResultTest
         // Assert
         Assert.Equal(
             $"PreflightMaxAge must be greater than or equal to 0. (Parameter 'value')",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -46,7 +47,7 @@ public class CorsResultTest
         {
             SupportsCredentials = true,
             PreflightMaxAge = TimeSpan.FromSeconds(30),
-            AllowedOrigin = "*"
+            AllowedOrigin = "*",
         };
         corsResult.AllowedExposedHeaders.Add("foo");
         corsResult.AllowedHeaders.Add("bar");
@@ -58,8 +59,9 @@ public class CorsResultTest
 
         // Assert
         Assert.Equal(
-            @"AllowCredentials: True, PreflightMaxAge: 30, AllowOrigin: *," +
-            " AllowExposedHeaders: {foo}, AllowHeaders: {bar,baz}, AllowMethods: {GET}",
-            result);
+            @"AllowCredentials: True, PreflightMaxAge: 30, AllowOrigin: *,"
+                + " AllowExposedHeaders: {foo}, AllowHeaders: {bar,baz}, AllowMethods: {GET}",
+            result
+        );
     }
 }

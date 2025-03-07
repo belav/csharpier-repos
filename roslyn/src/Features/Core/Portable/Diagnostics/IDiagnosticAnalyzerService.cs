@@ -28,7 +28,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Re-analyze given projects and documents. If both <paramref name="projectIds"/> and <paramref name="documentIds"/> are null,
         /// then re-analyzes the entire <see cref="Workspace.CurrentSolution"/> for the given <paramref name="workspace"/>.
         /// </summary>
-        void Reanalyze(Workspace workspace, IEnumerable<ProjectId>? projectIds, IEnumerable<DocumentId>? documentIds, bool highPriority);
+        void Reanalyze(
+            Workspace workspace,
+            IEnumerable<ProjectId>? projectIds,
+            IEnumerable<DocumentId>? documentIds,
+            bool highPriority
+        );
 
         /// <summary>
         /// Get specific diagnostics currently stored in the source. returned diagnostic might be out-of-date if solution has changed but analyzer hasn't run for the new solution.
@@ -46,7 +51,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// complete set of non-local document diagnostics.
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        Task<ImmutableArray<DiagnosticData>> GetSpecificCachedDiagnosticsAsync(Workspace workspace, object id, bool includeSuppressedDiagnostics, bool includeNonLocalDocumentDiagnostics, CancellationToken cancellationToken);
+        Task<ImmutableArray<DiagnosticData>> GetSpecificCachedDiagnosticsAsync(
+            Workspace workspace,
+            object id,
+            bool includeSuppressedDiagnostics,
+            bool includeNonLocalDocumentDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get diagnostics currently stored in the source. returned diagnostic might be out-of-date if solution has changed but analyzer hasn't run for the new solution.
@@ -67,7 +78,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// complete set of non-local document diagnostics.
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        Task<ImmutableArray<DiagnosticData>> GetCachedDiagnosticsAsync(Workspace workspace, ProjectId? projectId, DocumentId? documentId, bool includeSuppressedDiagnostics, bool includeLocalDocumentDiagnostics, bool includeNonLocalDocumentDiagnostics, CancellationToken cancellationToken);
+        Task<ImmutableArray<DiagnosticData>> GetCachedDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            bool includeSuppressedDiagnostics,
+            bool includeLocalDocumentDiagnostics,
+            bool includeNonLocalDocumentDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get diagnostics for the given solution. all diagnostics returned should be up-to-date with respect to the given solution.
@@ -83,7 +102,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// complete set of non-local document diagnostics.
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(Solution solution, ProjectId? projectId, DocumentId? documentId, bool includeSuppressedDiagnostics, bool includeNonLocalDocumentDiagnostics, CancellationToken cancellationToken);
+        Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
+            Solution solution,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            bool includeSuppressedDiagnostics,
+            bool includeNonLocalDocumentDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Force analyzes the given project by running all applicable analyzers on the project and caching the reported analyzer diagnostics.
@@ -113,7 +139,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// complete set of non-local document diagnostics.
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForIdsAsync(Solution solution, ProjectId? projectId, DocumentId? documentId, ImmutableHashSet<string>? diagnosticIds, Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer, bool includeSuppressedDiagnostics, bool includeLocalDocumentDiagnostics, bool includeNonLocalDocumentDiagnostics, CancellationToken cancellationToken);
+        Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForIdsAsync(
+            Solution solution,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            ImmutableHashSet<string>? diagnosticIds,
+            Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer,
+            bool includeSuppressedDiagnostics,
+            bool includeLocalDocumentDiagnostics,
+            bool includeNonLocalDocumentDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get project diagnostics (diagnostics with no source location) of the given diagnostic ids and/or analyzers from the given solution. all diagnostics returned should be up-to-date with respect to the given solution.
@@ -130,45 +166,62 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Entire project must be analyzed to get the complete set of non-local diagnostics.
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        Task<ImmutableArray<DiagnosticData>> GetProjectDiagnosticsForIdsAsync(Solution solution, ProjectId? projectId, ImmutableHashSet<string>? diagnosticIds, Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer, bool includeSuppressedDiagnostics, bool includeNonLocalDocumentDiagnostics, CancellationToken cancellationToken);
+        Task<ImmutableArray<DiagnosticData>> GetProjectDiagnosticsForIdsAsync(
+            Solution solution,
+            ProjectId? projectId,
+            ImmutableHashSet<string>? diagnosticIds,
+            Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer,
+            bool includeSuppressedDiagnostics,
+            bool includeNonLocalDocumentDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Try to return up to date diagnostics for the given span for the document.
         ///
         /// It will return true if it was able to return all up-to-date diagnostics.
         ///  otherwise, false indicating there are some missing diagnostics in the diagnostic list
-        ///  
+        ///
         /// This API will only force complete analyzers that support span based analysis, i.e. compiler analyzer and
         /// <see cref="IBuiltInAnalyzer"/>s that support <see cref="DiagnosticAnalyzerCategory.SemanticSpanAnalysis"/>.
         /// For the rest of the analyzers, it will only return diagnostics if the analyzer has already been executed.
         /// Use <see cref="GetDiagnosticsForSpanAsync(TextDocument, TextSpan?, Func{string, bool}?, bool, bool, ICodeActionRequestPriorityProvider, Func{string, IDisposable?}?, DiagnosticKind, bool, CancellationToken)"/>
         /// if you want to force complete all analyzers and get up-to-date diagnostics for all analyzers for the given span.
         /// </summary>
-        Task<(ImmutableArray<DiagnosticData> diagnostics, bool upToDate)> TryGetDiagnosticsForSpanAsync(
-            TextDocument document, TextSpan range, Func<string, bool>? shouldIncludeDiagnostic,
+        Task<(
+            ImmutableArray<DiagnosticData> diagnostics,
+            bool upToDate
+        )> TryGetDiagnosticsForSpanAsync(
+            TextDocument document,
+            TextSpan range,
+            Func<string, bool>? shouldIncludeDiagnostic,
             bool includeSuppressedDiagnostics,
             ICodeActionRequestPriorityProvider priorityProvider,
             DiagnosticKind diagnosticKind,
             bool isExplicit,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Return up to date diagnostics for the given span for the document
         /// <para>
         /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet.
-        /// Predicate <paramref name="shouldIncludeDiagnostic"/> filters out analyzers from execution if 
+        /// Predicate <paramref name="shouldIncludeDiagnostic"/> filters out analyzers from execution if
         /// none of its reported diagnostics should be included in the result.
         /// </para>
         /// </summary>
         Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
-            TextDocument document, TextSpan? range, Func<string, bool>? shouldIncludeDiagnostic,
+            TextDocument document,
+            TextSpan? range,
+            Func<string, bool>? shouldIncludeDiagnostic,
             bool includeCompilerDiagnostics,
             bool includeSuppressedDiagnostics,
             ICodeActionRequestPriorityProvider priorityProvider,
             Func<string, IDisposable?>? addOperationScope,
             DiagnosticKind diagnosticKind,
             bool isExplicit,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IDiagnosticAnalyzerServiceExtensions
@@ -179,9 +232,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet.
         /// </para>
         /// </summary>
-        public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(this IDiagnosticAnalyzerService service,
-            TextDocument document, TextSpan? range, CancellationToken cancellationToken)
-            => service.GetDiagnosticsForSpanAsync(document, range, DiagnosticKind.All, includeSuppressedDiagnostics: false, cancellationToken);
+        public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
+            this IDiagnosticAnalyzerService service,
+            TextDocument document,
+            TextSpan? range,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetDiagnosticsForSpanAsync(
+                document,
+                range,
+                DiagnosticKind.All,
+                includeSuppressedDiagnostics: false,
+                cancellationToken
+            );
 
         /// <summary>
         /// Return up to date diagnostics of the given <paramref name="diagnosticKind"/> for the given <paramref name="range"/>
@@ -190,12 +253,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet.
         /// </para>
         /// </summary>
-        public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(this IDiagnosticAnalyzerService service,
-            TextDocument document, TextSpan? range, DiagnosticKind diagnosticKind, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
-            => service.GetDiagnosticsForSpanAsync(document, range,
-                diagnosticId: null, includeSuppressedDiagnostics,
+        public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
+            this IDiagnosticAnalyzerService service,
+            TextDocument document,
+            TextSpan? range,
+            DiagnosticKind diagnosticKind,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetDiagnosticsForSpanAsync(
+                document,
+                range,
+                diagnosticId: null,
+                includeSuppressedDiagnostics,
                 priorityProvider: new DefaultCodeActionRequestPriorityProvider(),
-                addOperationScope: null, diagnosticKind, isExplicit: false, cancellationToken);
+                addOperationScope: null,
+                diagnosticKind,
+                isExplicit: false,
+                cancellationToken
+            );
 
         /// <summary>
         /// Return up to date diagnostics for the given <paramref name="range"/> and parameters for the given <paramref name="document"/>.
@@ -205,19 +281,33 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// name="diagnosticId"/> value.
         /// </para>
         /// </summary>
-        public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(this IDiagnosticAnalyzerService service,
-            TextDocument document, TextSpan? range, string? diagnosticId,
+        public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
+            this IDiagnosticAnalyzerService service,
+            TextDocument document,
+            TextSpan? range,
+            string? diagnosticId,
             bool includeSuppressedDiagnostics,
             ICodeActionRequestPriorityProvider priorityProvider,
             Func<string, IDisposable?>? addOperationScope,
             DiagnosticKind diagnosticKind,
             bool isExplicit,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            Func<string, bool>? shouldIncludeDiagnostic = diagnosticId != null ? id => id == diagnosticId : null;
-            return service.GetDiagnosticsForSpanAsync(document, range, shouldIncludeDiagnostic,
-                includeCompilerDiagnostics: true, includeSuppressedDiagnostics, priorityProvider,
-                addOperationScope, diagnosticKind, isExplicit, cancellationToken);
+            Func<string, bool>? shouldIncludeDiagnostic =
+                diagnosticId != null ? id => id == diagnosticId : null;
+            return service.GetDiagnosticsForSpanAsync(
+                document,
+                range,
+                shouldIncludeDiagnostic,
+                includeCompilerDiagnostics: true,
+                includeSuppressedDiagnostics,
+                priorityProvider,
+                addOperationScope,
+                diagnosticKind,
+                isExplicit,
+                cancellationToken
+            );
         }
     }
 }

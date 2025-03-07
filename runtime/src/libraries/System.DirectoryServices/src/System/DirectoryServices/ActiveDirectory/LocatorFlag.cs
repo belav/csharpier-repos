@@ -10,7 +10,7 @@ namespace System.DirectoryServices.ActiveDirectory
         KdcRequired = 0x00000400,
         TimeServerRequired = 0x00000800,
         WriteableRequired = 0x00001000,
-        AvoidSelf = 0x00004000
+        AvoidSelf = 0x00004000,
     }
 
     [Flags]
@@ -28,6 +28,6 @@ namespace System.DirectoryServices.ActiveDirectory
         IsFlatName = 0x00010000,
         IsDNSName = 0x00020000,
         ReturnDNSName = 0x40000000,
-        ReturnFlatName = 0x80000000
+        ReturnFlatName = 0x80000000,
     }
 }

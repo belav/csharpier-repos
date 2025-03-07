@@ -8,7 +8,10 @@ using Xunit;
 
 namespace System.Net.Tests
 {
-    [SkipOnCoreClr("System.Net.Tests may timeout in stress configurations", ~RuntimeConfiguration.Release)]
+    [SkipOnCoreClr(
+        "System.Net.Tests may timeout in stress configurations",
+        ~RuntimeConfiguration.Release
+    )]
     [ActiveIssue("https://github.com/dotnet/runtime/issues/2391", TestRuntimes.Mono)]
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // httpsys component missing in Nano.
     public class HttpListenerResponseCookiesTests : HttpListenerResponseTestBase
@@ -32,39 +35,34 @@ namespace System.Net.Tests
         {
             yield return new object[]
             {
-                new CookieCollection()
-                {
-                    new Cookie()
-                },
-                120, null, null
+                new CookieCollection() { new Cookie() },
+                120,
+                null,
+                null,
             };
 
             yield return new object[]
             {
-                new CookieCollection()
-                {
-                    new Cookie(),
-                    new Cookie("name", "value")
-                },
-                144, "Set-Cookie: name=value", null
+                new CookieCollection() { new Cookie(), new Cookie("name", "value") },
+                144,
+                "Set-Cookie: name=value",
+                null,
             };
 
             yield return new object[]
             {
-                new CookieCollection()
-                {
-                    new Cookie("name", "value")
-                },
-                144, "Set-Cookie: name=value", null
+                new CookieCollection() { new Cookie("name", "value") },
+                144,
+                "Set-Cookie: name=value",
+                null,
             };
 
             yield return new object[]
             {
-                new CookieCollection()
-                {
-                    new Cookie("foo bar", "value")
-                },
-                147, "Set-Cookie: foo bar=value", null
+                new CookieCollection() { new Cookie("foo bar", "value") },
+                147,
+                "Set-Cookie: foo bar=value",
+                null,
             };
 
             yield return new object[]
@@ -72,9 +70,11 @@ namespace System.Net.Tests
                 new CookieCollection()
                 {
                     new Cookie("name1", "value1"),
-                    new Cookie("name2", "value2")
+                    new Cookie("name2", "value2"),
                 },
-                160, "Set-Cookie: name1=value1, name2=value2", null
+                160,
+                "Set-Cookie: name1=value1, name2=value2",
+                null,
             };
 
             yield return new object[]
@@ -84,7 +84,9 @@ namespace System.Net.Tests
                     new Cookie("name1", "value1") { Port = "\"200\"" },
                     new Cookie("name2", "value2") { Port = "\"300\"" },
                 },
-                207, null, "Set-Cookie2: name1=value1; Port=\"200\"; Version=1, name2=value2; Port=\"300\"; Version=1"
+                207,
+                null,
+                "Set-Cookie2: name1=value1; Port=\"200\"; Version=1, name2=value2; Port=\"300\"; Version=1",
             };
 
             yield return new object[]
@@ -94,21 +96,34 @@ namespace System.Net.Tests
                     new Cookie("name1", "value1"),
                     new Cookie("name2", "value2") { Port = "\"300\"" },
                 },
-                196, "Set-Cookie: name1=value1", "Set-Cookie2: name2=value2; Port=\"300\"; Version=1"
+                196,
+                "Set-Cookie: name1=value1",
+                "Set-Cookie2: name2=value2; Port=\"300\"; Version=1",
             };
         }
 
         [Theory]
         [MemberData(nameof(Cookies_TestData))]
-        public async Task Cookies_SetAndSend_ClientReceivesExpectedHeaders(CookieCollection cookies, int expectedBytes, string expectedSetCookie, string expectedSetCookie2)
+        public async Task Cookies_SetAndSend_ClientReceivesExpectedHeaders(
+            CookieCollection cookies,
+            int expectedBytes,
+            string expectedSetCookie,
+            string expectedSetCookie2
+        )
         {
             HttpListenerResponse response = await GetResponse();
             response.Cookies = cookies;
 
             response.Close();
 
-            Assert.Equal(expectedSetCookie?.Replace("Set-Cookie: ", ""), response.Headers["Set-Cookie"]);
-            Assert.Equal(expectedSetCookie2?.Replace("Set-Cookie2: ", ""), response.Headers["Set-Cookie2"]);
+            Assert.Equal(
+                expectedSetCookie?.Replace("Set-Cookie: ", ""),
+                response.Headers["Set-Cookie"]
+            );
+            Assert.Equal(
+                expectedSetCookie2?.Replace("Set-Cookie2: ", ""),
+                response.Headers["Set-Cookie2"]
+            );
 
             string clientResponse = GetClientResponse(expectedBytes);
             if (expectedSetCookie != null)
@@ -139,7 +154,7 @@ namespace System.Net.Tests
 
             response.Close();
 
-            string clientResponse = GetClientResponse(expectedLength:173);
+            string clientResponse = GetClientResponse(expectedLength: 173);
             Assert.Contains("\r\nSet-Cookie: name1=value1\r\n", clientResponse);
             Assert.Contains("\r\nSet-Cookie2: name2=value2\r\n", clientResponse);
         }
@@ -158,9 +173,12 @@ namespace System.Net.Tests
             Assert.Null(response.Headers["Set-Cookie"]);
             Assert.Equal("name3=value3; Port=\"200\"; Version=1", response.Headers["Set-Cookie2"]);
 
-            string clientResponse = GetClientResponse(expectedLength:170);
+            string clientResponse = GetClientResponse(expectedLength: 170);
             Assert.DoesNotContain("Set-Cookie:", clientResponse);
-            Assert.Contains("\r\nSet-Cookie2: name3=value3; Port=\"200\"; Version=1\r\n", clientResponse);
+            Assert.Contains(
+                "\r\nSet-Cookie2: name3=value3; Port=\"200\"; Version=1\r\n",
+                clientResponse
+            );
         }
 
         [Fact]
@@ -177,7 +195,7 @@ namespace System.Net.Tests
             Assert.Equal("name3=value3", response.Headers["Set-Cookie"]);
             Assert.Null(response.Headers["Set-Cookie2"]);
 
-            string clientResponse = GetClientResponse(expectedLength:146);
+            string clientResponse = GetClientResponse(expectedLength: 146);
             Assert.Contains("\r\nSet-Cookie: name3=value3\r\n", clientResponse);
             Assert.DoesNotContain("Set-Cookie2", clientResponse);
         }
@@ -193,7 +211,7 @@ namespace System.Net.Tests
 
             response.Close();
 
-            string clientResponse = GetClientResponse(expectedLength:224);
+            string clientResponse = GetClientResponse(expectedLength: 224);
             Assert.Contains("\r\nSet-Cookie: name1=value1\r\n", clientResponse);
             Assert.Contains("\r\nSet-Cookie: name2=value2\r\n", clientResponse);
             Assert.Contains("\r\nSet-Cookie: name3=value3\r\n", clientResponse);
@@ -225,7 +243,10 @@ namespace System.Net.Tests
         public async Task AppendCookie_NullCookie_ThrowsArgumentNullException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentNullException>("cookie", () => response.AppendCookie(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "cookie",
+                () => response.AppendCookie(null)
+            );
         }
 
         [Fact]
@@ -257,7 +278,10 @@ namespace System.Net.Tests
         public async Task SetCookie_NullCookie_ThrowsArgumentNullException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentNullException>("cookie", () => response.SetCookie(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "cookie",
+                () => response.SetCookie(null)
+            );
         }
 
         [Fact]

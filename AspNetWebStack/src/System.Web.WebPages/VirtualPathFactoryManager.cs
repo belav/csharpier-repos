@@ -10,9 +10,13 @@ namespace System.Web.WebPages
     // by using explicitly registered factories (which happens through ApplicationPart.Register).
     public class VirtualPathFactoryManager : IVirtualPathFactory
     {
-        private static readonly Lazy<VirtualPathFactoryManager> _instance = new Lazy<VirtualPathFactoryManager>(() => new VirtualPathFactoryManager(new BuildManagerWrapper()));
+        private static readonly Lazy<VirtualPathFactoryManager> _instance =
+            new Lazy<VirtualPathFactoryManager>(
+                () => new VirtualPathFactoryManager(new BuildManagerWrapper())
+            );
         private static Func<string, bool> _instancePathExists;
-        private readonly LinkedList<IVirtualPathFactory> _virtualPathFactories = new LinkedList<IVirtualPathFactory>();
+        private readonly LinkedList<IVirtualPathFactory> _virtualPathFactories =
+            new LinkedList<IVirtualPathFactory>();
 
         internal VirtualPathFactoryManager(IVirtualPathFactory defaultFactory)
         {
@@ -27,7 +31,7 @@ namespace System.Web.WebPages
 
         internal static Func<string, bool> InstancePathExists
         {
-            get 
+            get
             {
                 if (_instancePathExists == null)
                 {
@@ -70,9 +74,12 @@ namespace System.Web.WebPages
             return CreateInstanceOfType<object>(virtualPath);
         }
 
-        internal T CreateInstanceOfType<T>(string virtualPath) where T : class
+        internal T CreateInstanceOfType<T>(string virtualPath)
+            where T : class
         {
-            var virtualPathFactory = _virtualPathFactories.FirstOrDefault(f => f.Exists(virtualPath));
+            var virtualPathFactory = _virtualPathFactories.FirstOrDefault(f =>
+                f.Exists(virtualPath)
+            );
             if (virtualPathFactory != null)
             {
                 return virtualPathFactory.CreateInstance<T>(virtualPath);

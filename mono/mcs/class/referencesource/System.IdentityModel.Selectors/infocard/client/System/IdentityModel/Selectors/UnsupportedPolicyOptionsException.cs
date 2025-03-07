@@ -16,24 +16,18 @@ namespace System.IdentityModel.Selectors
     public class UnsupportedPolicyOptionsException : System.Exception
     {
         public UnsupportedPolicyOptionsException()
-        : base()
-        {
-        }
+            : base() { }
 
-        public UnsupportedPolicyOptionsException( string message )
-        : base( message )
-        {
-        }
+        public UnsupportedPolicyOptionsException(string message)
+            : base(message) { }
 
-        public UnsupportedPolicyOptionsException( string message, Exception innerException )
-        : base( message, innerException )
-        {
-        }
+        public UnsupportedPolicyOptionsException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected UnsupportedPolicyOptionsException( SerializationInfo info, StreamingContext context )
-        : base( info, context )
-        {
-        }
+        protected UnsupportedPolicyOptionsException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
-
 }

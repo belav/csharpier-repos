@@ -3,8 +3,8 @@
 //-----------------------------------------------------------------------------
 namespace System.Activities.Debugger
 {
-
     using System;
+    using System.Activities.Debugger.Symbol;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -15,7 +15,6 @@ namespace System.Activities.Debugger
     using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Activities.Debugger.Symbol;
 
     // Manager for supporting debugging a state machine.
     // The general usage is to call:
@@ -29,14 +28,20 @@ namespace System.Activities.Debugger
     [Fx.Tag.XamlVisible(false)]
     public sealed class StateManager : IDisposable
     {
-        static readonly Guid WorkflowLanguageGuid = new Guid("1F1149BB-9732-4EB8-9ED4-FA738768919C");
+        static readonly Guid WorkflowLanguageGuid = new Guid(
+            "1F1149BB-9732-4EB8-9ED4-FA738768919C"
+        );
 
-        static readonly LocalsItemDescription[] debugInfoDescriptions = new LocalsItemDescription[] {
-                new LocalsItemDescription("debugInfo", typeof(DebugInfo))
-            };
+        static readonly LocalsItemDescription[] debugInfoDescriptions = new LocalsItemDescription[]
+        {
+            new LocalsItemDescription("debugInfo", typeof(DebugInfo)),
+        };
 
         static Type threadWorkerControllerType = typeof(ThreadWorkerController);
-        static MethodInfo islandWorkerMethodInfo = threadWorkerControllerType.GetMethod("IslandWorker", BindingFlags.Static | BindingFlags.Public);
+        static MethodInfo islandWorkerMethodInfo = threadWorkerControllerType.GetMethod(
+            "IslandWorker",
+            BindingFlags.Static | BindingFlags.Public
+        );
         internal const string MethodWithPrimingPrefix = "_";
 
         List<LogicalThread> threads;
@@ -51,14 +56,15 @@ namespace System.Activities.Debugger
 
         // Simple default constructor.
         internal StateManager()
-            : this(new Properties(), true, null)
-        {
-        }
-
+            : this(new Properties(), true, null) { }
 
         // Constructor.
         // Properties must be set at creation time.
-        internal StateManager(Properties properties, bool debugStartedAtRoot, DynamicModuleManager dynamicModuleManager)
+        internal StateManager(
+            Properties properties,
+            bool debugStartedAtRoot,
+            DynamicModuleManager dynamicModuleManager
+        )
         {
             this.properties = properties;
             this.debugStartedAtRoot = debugStartedAtRoot;
@@ -75,24 +81,17 @@ namespace System.Activities.Debugger
             get { return this.properties; }
         }
 
-        internal bool IsPriming
-        {
-            get;
-            set;
-        }
+        internal bool IsPriming { get; set; }
 
-        // Whether debugging is started at the root workflow (contrast to attaching in the middle 
+        // Whether debugging is started at the root workflow (contrast to attaching in the middle
         // of a running workflow.
         internal bool DebugStartedAtRoot
         {
-            get
-            {
-                return this.debugStartedAtRoot;
-            }
+            get { return this.debugStartedAtRoot; }
         }
 
         // Declare a new state associated with the given source location.
-        // States should have disjoint source locations. 
+        // States should have disjoint source locations.
         // location is Source location associated with this state.
         // This returns a state object, which can be passed to EnterState.
         internal State DefineState(SourceLocation location)
@@ -105,9 +104,19 @@ namespace System.Activities.Debugger
             return DefineState(location, name, null, 0);
         }
 
-        internal State DefineState(SourceLocation location, string name, LocalsItemDescription[] earlyLocals, int numberOfEarlyLocals)
+        internal State DefineState(
+            SourceLocation location,
+            string name,
+            LocalsItemDescription[] earlyLocals,
+            int numberOfEarlyLocals
+        )
         {
-            return this.dynamicModuleManager.DefineState(location, name, earlyLocals, numberOfEarlyLocals);
+            return this.dynamicModuleManager.DefineState(
+                location,
+                name,
+                earlyLocals,
+                numberOfEarlyLocals
+            );
         }
 
         internal State DefineStateWithDebugInfo(SourceLocation location, string name)
@@ -115,14 +124,12 @@ namespace System.Activities.Debugger
             return DefineState(location, name, debugInfoDescriptions, debugInfoDescriptions.Length);
         }
 
-
         // Bake all states using the default type namespace.
         // States must be baked before calling EnterState().
         internal void Bake()
         {
             Bake(this.properties.TypeNamePrefix, null);
         }
-
 
         // Bake all newly defined states. States must be baked before calling EnterState().
         // typeName is the type name that the islands are contained in. This
@@ -163,9 +170,8 @@ namespace System.Activities.Debugger
         // State is the state to push onto stack.
         //internal void EnterState(int threadIndex, State state)
         //{
-        //    this.EnterState(threadIndex, state, null); 
+        //    this.EnterState(threadIndex, state, null);
         //}
-
 
         // Enter a state and push it onto the 'virtual callstack'.
         // If the user set a a breakpoint at the source location associated with
@@ -176,7 +182,7 @@ namespace System.Activities.Debugger
         // "locals" is local variables (both early-bound and late-bound) associated with this state.
         // Early-bound locals match by name with the set passed into DefineState.
         // Late-bound will be displayed read-only to the user in the watch window.</param>
-        // 
+        //
         // EnterState can be called reentrantly. If code calls Enter(A); Enter(B); Enter(C);
         // Then on the call to Enter(C), the virtual callstack will be A-->B-->C.
         // Each call to Enter() will rebuild the virtual callstack.
@@ -204,9 +210,9 @@ namespace System.Activities.Debugger
             this.threads[threadIndex].LeaveState(state);
         }
 
-        // Common helper to invoke an Stack frame. 
-        // This handles marshaling the args. 
-        // islandArguments - arbitrary argument passed ot the islands. 
+        // Common helper to invoke an Stack frame.
+        // This handles marshaling the args.
+        // islandArguments - arbitrary argument passed ot the islands.
         // [DebuggerHidden]
         internal void InvokeWorker(object islandArguments, VirtualStackFrame stackFrame)
         {
@@ -253,8 +259,6 @@ namespace System.Activities.Debugger
             methodInfo.Invoke(null, arguments);
         }
 
-
-
         // Release any unmanaged resources.
         // This may not necessarily unload islands or dynamic modules that were created until the calling appdomain has exited.
         public void Dispose()
@@ -274,7 +278,6 @@ namespace System.Activities.Debugger
             this.threads.Clear();
         }
 
-
         // Release any unmanaged resources.
         // This may not necessarily unload islands or dynamic modules that were created until the calling appdomain has exited.
         public void Exit(int threadIndex)
@@ -293,12 +296,16 @@ namespace System.Activities.Debugger
         [DebuggerNonUserCode]
         internal class Properties
         {
-            public Properties() :
-                this("Locals", "Script", "States", "WorkflowDebuggerThread", true)
-            {
-            }
+            public Properties()
+                : this("Locals", "Script", "States", "WorkflowDebuggerThread", true) { }
 
-            public Properties(string defaultLocalsName, string moduleNamePrefix, string typeNamePrefix, string auxiliaryThreadName, bool breakOnStartup)
+            public Properties(
+                string defaultLocalsName,
+                string moduleNamePrefix,
+                string typeNamePrefix,
+                string auxiliaryThreadName,
+                bool breakOnStartup
+            )
             {
                 this.DefaultLocalsName = defaultLocalsName;
                 this.ModuleNamePrefix = moduleNamePrefix;
@@ -307,47 +314,27 @@ namespace System.Activities.Debugger
                 this.BreakOnStartup = breakOnStartup;
             }
 
-            public string DefaultLocalsName
-            {
-                get;
-                set;
-            }
+            public string DefaultLocalsName { get; set; }
 
             // The name of the dynamic module (not including extension) that the states are emitted to.
             // This may show up on the callstack.
             // This is a prefix because there may be multiple modules for the islands.
-            public string ModuleNamePrefix
-            {
-                get;
-                set;
-            }
+            public string ModuleNamePrefix { get; set; }
 
             // Typename that states are created in.
             // This is a prefix because there may be multiple Types for the islands
             // (such as if islands are created lazily).
-            public string TypeNamePrefix
-            {
-                get;
-                set;
-            }
+            public string TypeNamePrefix { get; set; }
 
             // If UseAuxiliaryThread is true, sets the friendly name of that thread as visible
             // in the debugger's window.
-            public string AuxiliaryThreadName
-            {
-                get;
-                set;
-            }
+            public string AuxiliaryThreadName { get; set; }
 
             // If true, the VM issues a Debugger.Break() before entering the first state.
             // This can be useful for an F11 experience on startup to stop at the first state.
             // If this is false, then the interpreter will run until it hits a breakpoint or some
             // other stopping event.
-            public bool BreakOnStartup
-            {
-                get;
-                set;
-            }
+            public bool BreakOnStartup { get; set; }
         }
 
         [DebuggerNonUserCode]
@@ -362,7 +349,10 @@ namespace System.Activities.Debugger
                 this.threadId = threadId;
                 this.callStack = new Stack<VirtualStackFrame>();
                 this.controller = new ThreadWorkerController();
-                this.controller.Initialize(threadName + "." + threadId.ToString(CultureInfo.InvariantCulture), stateManager);
+                this.controller.Initialize(
+                    threadName + "." + threadId.ToString(CultureInfo.InvariantCulture),
+                    stateManager
+                );
             }
 
             // Unwind call stack cleanly.
@@ -397,21 +387,30 @@ namespace System.Activities.Debugger
             }
 
             // Pop the state most recently pushed by EnterState.
-            [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.ReviewUnusedParameters, Justification = "Revisit for bug 36860")]
+            [SuppressMessage(
+                FxCop.Category.Usage,
+                FxCop.Rule.ReviewUnusedParameters,
+                Justification = "Revisit for bug 36860"
+            )]
             public void LeaveState(State state)
             {
                 if (this.callStack.Count > 0)
                 {
                     VirtualStackFrame stackFrame = this.callStack.Pop();
                     Fx.Assert(
-                        (state == null && stackFrame == null) ||
-                        (stackFrame != null && stackFrame.State == state),
-                        "Unmatched LeaveState: " +
-                        ((state == null) ? "null" : state.Name) +
-                        " with top stack frame: " +
-                        ((stackFrame == null || stackFrame.State == null) ? "null" : stackFrame.State.Name));
+                        (state == null && stackFrame == null)
+                            || (stackFrame != null && stackFrame.State == state),
+                        "Unmatched LeaveState: "
+                            + ((state == null) ? "null" : state.Name)
+                            + " with top stack frame: "
+                            + (
+                                (stackFrame == null || stackFrame.State == null)
+                                    ? "null"
+                                    : stackFrame.State.Name
+                            )
+                    );
 
-                    if (stackFrame != null)    // Matches with an uninstrumented Activity.
+                    if (stackFrame != null) // Matches with an uninstrumented Activity.
                     {
                         this.controller.LeaveState();
                     }
@@ -430,7 +429,7 @@ namespace System.Activities.Debugger
             Dictionary<SourceLocation, State> stateMap = new Dictionary<SourceLocation, State>();
 
             // Index into states array of the last set of states baked.
-            // So Bake() will build islands for each state 
+            // So Bake() will build islands for each state
             // { states[x], where indexLastBaked <= x < states.Length; }
             int indexLastBaked;
 
@@ -439,18 +438,23 @@ namespace System.Activities.Debugger
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic assembly.")]
             [SecurityCritical]
             Dictionary<State, MethodInfo> islands;
+
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic assembly.")]
             [SecurityCritical]
             Dictionary<State, MethodInfo> islandsWithPriming;
+
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic assembly.")]
             [SecurityCritical]
             ModuleBuilder dynamicModule;
+
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic assembly.")]
             [SecurityCritical]
             Dictionary<string, ISymbolDocumentWriter> sourceDocuments;
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses Critical members and calling Critical method InitDynamicModule.",
-                Safe = "We are only creating empty dictionaries, not populating them. And we are validating the provided moduleNamePrefix in partial trust.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses Critical members and calling Critical method InitDynamicModule.",
+                Safe = "We are only creating empty dictionaries, not populating them. And we are validating the provided moduleNamePrefix in partial trust."
+            )]
             [SecuritySafeCritical]
             public DynamicModuleManager(string moduleNamePrefix)
             {
@@ -467,7 +471,12 @@ namespace System.Activities.Debugger
                 InitDynamicModule(moduleNamePrefix);
             }
 
-            public State DefineState(SourceLocation location, string name, LocalsItemDescription[] earlyLocals, int numberOfEarlyLocals)
+            public State DefineState(
+                SourceLocation location,
+                string name,
+                LocalsItemDescription[] earlyLocals,
+                int numberOfEarlyLocals
+            )
             {
                 State state;
                 lock (this)
@@ -489,10 +498,16 @@ namespace System.Activities.Debugger
             // typeName is the type name that the islands are contained in. This
             // may show up on the callstack. If this is not unique, it will be appended with a unique
             // identifier.
-            [Fx.Tag.SecurityNote(Critical = "Accesses Critical members and invoking Critical methods.",
-                Safe = "We validating the input strings - typeName and typeNamePrefix - and the checksum values in the checksumCache.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses Critical members and invoking Critical methods.",
+                Safe = "We validating the input strings - typeName and typeNamePrefix - and the checksum values in the checksumCache."
+            )]
             [SecuritySafeCritical]
-            public void Bake(string typeName, string typeNamePrefix, Dictionary<string, byte[]> checksumCache)
+            public void Bake(
+                string typeName,
+                string typeNamePrefix,
+                Dictionary<string, byte[]> checksumCache
+            )
             {
                 // In partial trust, validate the typeName and typeNamePrefix.
                 if (!PartialTrustHelpers.AppDomainFullyTrusted)
@@ -524,25 +539,39 @@ namespace System.Activities.Debugger
 
                 lock (this)
                 {
-                    if (this.indexLastBaked < this.states.Count)    // there are newly created states.
+                    if (this.indexLastBaked < this.states.Count) // there are newly created states.
                     {
                         // Ensure typename is unique. Append a number if needed.
                         int suffix = 1;
                         while (this.dynamicModule.GetType(typeName) != null)
                         {
-                            typeName = typeNamePrefix + "_" + suffix.ToString(CultureInfo.InvariantCulture);
+                            typeName =
+                                typeNamePrefix
+                                + "_"
+                                + suffix.ToString(CultureInfo.InvariantCulture);
                             ++suffix;
                         }
 
-                        TypeBuilder typeBuilder = this.dynamicModule.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class);
+                        TypeBuilder typeBuilder = this.dynamicModule.DefineType(
+                            typeName,
+                            TypeAttributes.Public | TypeAttributes.Class
+                        );
 
                         for (int i = indexLastBaked; i < this.states.Count; i++)
                         {
                             // Only create the island if debugging is enabled for the state.
                             if (this.states[i].DebuggingEnabled)
                             {
-                                MethodBuilder methodBuilder = this.CreateIsland(typeBuilder, this.states[i], false, checksumCache);
-                                Fx.Assert(methodBuilder != null, "CreateIsland call should have succeeded");
+                                MethodBuilder methodBuilder = this.CreateIsland(
+                                    typeBuilder,
+                                    this.states[i],
+                                    false,
+                                    checksumCache
+                                );
+                                Fx.Assert(
+                                    methodBuilder != null,
+                                    "CreateIsland call should have succeeded"
+                                );
 
                                 // Always generate method with priming, for the following scenario:
                                 //  1. Start debugging a workflow inside VS, workflow debug session 1 starts (debugStartedAtRoot = true, instrumentation is done)
@@ -550,8 +579,16 @@ namespace System.Activities.Debugger
                                 //  3. Workflow continued, workflow debug session 2 starts (debugStartedAtRoot = false, instrumentation is skipped because the static dynamicModuleManager is being reused and the instrumentation is done)
                                 //  4. PrimeCallStack is called to rebuild the call stack
                                 //  5. NullReferenceException will be thrown if MethodInfo with prime is not available
-                                MethodBuilder methodBuilderWithPriming = this.CreateIsland(typeBuilder, this.states[i], true, checksumCache);
-                                Fx.Assert(methodBuilderWithPriming != null, "CreateIsland call should have succeeded");
+                                MethodBuilder methodBuilderWithPriming = this.CreateIsland(
+                                    typeBuilder,
+                                    this.states[i],
+                                    true,
+                                    checksumCache
+                                );
+                                Fx.Assert(
+                                    methodBuilderWithPriming != null,
+                                    "CreateIsland call should have succeeded"
+                                );
 
                                 // Save information needed to call Type.GetMethod() later.
                                 this.states[i].CacheMethodInfo(typeBuilder, methodBuilder.Name);
@@ -571,10 +608,17 @@ namespace System.Activities.Debugger
 
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic module.")]
             [SecurityCritical]
-            internal MethodBuilder CreateMethodBuilder(TypeBuilder typeBuilder, Type typeIslandArguments, State state, bool withPriming)
+            internal MethodBuilder CreateMethodBuilder(
+                TypeBuilder typeBuilder,
+                Type typeIslandArguments,
+                State state,
+                bool withPriming
+            )
             {
-                // create the method            
-                string methodName = (state.Name != null ? state.Name : ("Line_" + state.Location.StartLine));
+                // create the method
+                string methodName = (
+                    state.Name != null ? state.Name : ("Line_" + state.Location.StartLine)
+                );
 
                 if (withPriming)
                 {
@@ -607,7 +651,9 @@ namespace System.Activities.Debugger
                 MethodBuilder methodbuilder = typeBuilder.DefineMethod(
                     methodName,
                     MethodAttributes.Static | MethodAttributes.Public,
-                    returnType, parameterTypes);
+                    returnType,
+                    parameterTypes
+                );
 
                 // Need to define parameter here, otherwise EE cannot get the correct IDebugContainerField
                 // for debugInfo.
@@ -615,14 +661,18 @@ namespace System.Activities.Debugger
                 methodbuilder.DefineParameter(2, ParameterAttributes.None, "typeIslandArguments");
 
                 // Define the parameter names
-                // Note that we can hide implementation-specific arguments from VS by not defining parameter 
+                // Note that we can hide implementation-specific arguments from VS by not defining parameter
                 // info for them.  Eg., the StepInTarget argument doesn't appear to show up in VS at all.
                 if (numberOfEarlyLocals > 0)
                 {
                     int i = numberOfBaseArguments + 1;
                     foreach (LocalsItemDescription localsItemDescription in earlyLocals)
                     {
-                        methodbuilder.DefineParameter(i, ParameterAttributes.None, localsItemDescription.Name);
+                        methodbuilder.DefineParameter(
+                            i,
+                            ParameterAttributes.None,
+                            localsItemDescription.Name
+                        );
                         i++;
                     }
                 }
@@ -630,13 +680,25 @@ namespace System.Activities.Debugger
                 return methodbuilder;
             }
 
-
-            [Fx.Tag.InheritThrows(From = "GetILGenerator", FromDeclaringType = typeof(MethodBuilder))]
+            [Fx.Tag.InheritThrows(
+                From = "GetILGenerator",
+                FromDeclaringType = typeof(MethodBuilder)
+            )]
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic module.")]
             [SecurityCritical]
-            MethodBuilder CreateIsland(TypeBuilder typeBuilder, State state, bool withPrimingTest, Dictionary<string, byte[]>checksumCache)
+            MethodBuilder CreateIsland(
+                TypeBuilder typeBuilder,
+                State state,
+                bool withPrimingTest,
+                Dictionary<string, byte[]> checksumCache
+            )
             {
-                MethodBuilder methodbuilder = this.CreateMethodBuilder(typeBuilder, threadWorkerControllerType, state, withPrimingTest);
+                MethodBuilder methodbuilder = this.CreateMethodBuilder(
+                    typeBuilder,
+                    threadWorkerControllerType,
+                    state,
+                    withPrimingTest
+                );
                 ILGenerator ilGenerator = methodbuilder.GetILGenerator();
                 const int lineHidden = 0xFeeFee; // #line hidden directive
 
@@ -649,7 +711,11 @@ namespace System.Activities.Debugger
                 //     ret;
                 // }
                 SourceLocation stateLocation = state.Location;
-                ISymbolDocumentWriter document = this.GetSourceDocument(stateLocation.FileName, stateLocation.Checksum, checksumCache);
+                ISymbolDocumentWriter document = this.GetSourceDocument(
+                    stateLocation.FileName,
+                    stateLocation.Checksum,
+                    checksumCache
+                );
                 Label islandWorkerLabel = ilGenerator.DefineLabel();
 
                 // Hide all the opcodes before the real source line.
@@ -664,7 +730,13 @@ namespace System.Activities.Debugger
                 }
 
                 // Emit sequence point before the IL instructions to map it to a source location.
-                ilGenerator.MarkSequencePoint(document, stateLocation.StartLine, stateLocation.StartColumn, stateLocation.EndLine, stateLocation.EndColumn);
+                ilGenerator.MarkSequencePoint(
+                    document,
+                    stateLocation.StartLine,
+                    stateLocation.StartColumn,
+                    stateLocation.EndLine,
+                    stateLocation.EndColumn
+                );
                 ilGenerator.Emit(OpCodes.Nop);
 
                 ilGenerator.MarkLabel(islandWorkerLabel);
@@ -675,8 +747,14 @@ namespace System.Activities.Debugger
                 return methodbuilder;
             }
 
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts, Justification = "The validations of the user input are done elsewhere.")]
-            [Fx.Tag.SecurityNote(Critical = "Because we Assert UnmanagedCode in order to be able to emit symbols.")]
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.SecureAsserts,
+                Justification = "The validations of the user input are done elsewhere."
+            )]
+            [Fx.Tag.SecurityNote(
+                Critical = "Because we Assert UnmanagedCode in order to be able to emit symbols."
+            )]
             [SecurityCritical]
             void InitDynamicModule(string asmName)
             {
@@ -684,7 +762,7 @@ namespace System.Activities.Debugger
                 // of debuggable reflection-emit.
                 Fx.Assert(dynamicModule == null, "can only be initialized once");
 
-                // create a dynamic assembly and module 
+                // create a dynamic assembly and module
                 AssemblyName assemblyName = new AssemblyName();
                 assemblyName.Name = asmName;
 
@@ -692,44 +770,57 @@ namespace System.Activities.Debugger
 
                 // The temporary assembly needs to be Transparent.
                 ConstructorInfo transparentCtor =
-                    typeof(SecurityTransparentAttribute).GetConstructor(
-                        Type.EmptyTypes);
+                    typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes);
                 CustomAttributeBuilder transparent = new CustomAttributeBuilder(
                     transparentCtor,
-                    new Object[] { });
+                    new Object[] { }
+                );
 
-                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run, null, true, new CustomAttributeBuilder[] { transparent });
+                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    assemblyName,
+                    AssemblyBuilderAccess.Run,
+                    null,
+                    true,
+                    new CustomAttributeBuilder[] { transparent }
+                );
 
-                // Mark generated code as debuggable. 
-                // See http://blogs.msdn.com/rmbyers/archive/2005/06/26/432922.aspx for explanation.        
+                // Mark generated code as debuggable.
+                // See http://blogs.msdn.com/rmbyers/archive/2005/06/26/432922.aspx for explanation.
                 Type debuggableAttributeType = typeof(DebuggableAttribute);
-                ConstructorInfo constructorInfo = debuggableAttributeType.GetConstructor(new Type[] { typeof(DebuggableAttribute.DebuggingModes) });
-                CustomAttributeBuilder builder = new CustomAttributeBuilder(constructorInfo, new object[] {
-                    DebuggableAttribute.DebuggingModes.DisableOptimizations |
-                    DebuggableAttribute.DebuggingModes.Default
-                });
+                ConstructorInfo constructorInfo = debuggableAttributeType.GetConstructor(
+                    new Type[] { typeof(DebuggableAttribute.DebuggingModes) }
+                );
+                CustomAttributeBuilder builder = new CustomAttributeBuilder(
+                    constructorInfo,
+                    new object[]
+                    {
+                        DebuggableAttribute.DebuggingModes.DisableOptimizations
+                            | DebuggableAttribute.DebuggingModes.Default,
+                    }
+                );
                 assemblyBuilder.SetCustomAttribute(builder);
 
                 // We need UnmanagedCode permissions because we are asking for Symbols to be emitted.
                 // We are protecting the dynamicModule so that only Critical code modifies it.
                 PermissionSet unmanagedCodePermissionSet = new PermissionSet(PermissionState.None);
-                unmanagedCodePermissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.UnmanagedCode));
+                unmanagedCodePermissionSet.AddPermission(
+                    new SecurityPermission(SecurityPermissionFlag.UnmanagedCode)
+                );
                 unmanagedCodePermissionSet.Assert();
                 try
                 {
-
                     dynamicModule = assemblyBuilder.DefineDynamicModule(asmName, true); // <-- pass 'true' to track debug info.
-
                 }
                 finally
                 {
                     CodeAccessPermission.RevertAssert();
                 }
-
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic module.",
-                Safe = "State validates its SecurityCritical members itself")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Used in generating the dynamic module.",
+                Safe = "State validates its SecurityCritical members itself"
+            )]
             [SecuritySafeCritical]
             public MethodInfo GetIsland(State state, bool isPriming)
             {
@@ -766,24 +857,34 @@ namespace System.Activities.Debugger
             // to this method to protect the sourceDocuments dictionary.
             [Fx.Tag.SecurityNote(Critical = "Used in generating the dynamic module.")]
             [SecurityCritical]
-            private ISymbolDocumentWriter GetSourceDocument(string fileName, byte[] checksum, Dictionary<string, byte[]> checksumCache)
+            private ISymbolDocumentWriter GetSourceDocument(
+                string fileName,
+                byte[] checksum,
+                Dictionary<string, byte[]> checksumCache
+            )
             {
                 ISymbolDocumentWriter documentWriter;
                 string sourceDocKey = fileName + SymbolHelper.GetHexStringFromChecksum(checksum);
 
                 if (!this.sourceDocuments.TryGetValue(sourceDocKey, out documentWriter))
                 {
-                    documentWriter =
-                        dynamicModule.DefineDocument(
+                    documentWriter = dynamicModule.DefineDocument(
                         fileName,
                         StateManager.WorkflowLanguageGuid,
                         SymLanguageVendor.Microsoft,
-                        SymDocumentType.Text);
+                        SymDocumentType.Text
+                    );
                     this.sourceDocuments.Add(sourceDocKey, documentWriter);
 
                     byte[] checksumBytes;
 
-                    if (checksumCache == null || !checksumCache.TryGetValue(fileName.ToUpperInvariant(), out checksumBytes))
+                    if (
+                        checksumCache == null
+                        || !checksumCache.TryGetValue(
+                            fileName.ToUpperInvariant(),
+                            out checksumBytes
+                        )
+                    )
                     {
                         checksumBytes = SymbolHelper.CalculateChecksum(fileName);
                     }
@@ -795,7 +896,6 @@ namespace System.Activities.Debugger
                 }
                 return documentWriter;
             }
-
         }
     }
 }

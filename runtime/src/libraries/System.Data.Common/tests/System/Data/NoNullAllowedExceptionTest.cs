@@ -25,7 +25,6 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class NoNullAllowedExceptionTest
@@ -49,19 +48,32 @@ namespace System.Data.Tests
             // NoNullAllowedException - Add Row
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.Rows.Add(new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true });
+                tbl.Rows.Add(
+                    new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
+                );
             });
 
             // NoNullAllowedException - ItemArray
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.Rows[0].ItemArray = new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true };
+                tbl.Rows[0].ItemArray = new object[]
+                {
+                    DBNull.Value,
+                    "value",
+                    "value",
+                    new DateTime(0),
+                    0.5,
+                    true,
+                };
             });
 
             // NoNullAllowedException - Add Row - LoadDataRow
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.LoadDataRow(new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }, true);
+                tbl.LoadDataRow(
+                    new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true },
+                    true
+                );
             });
 
             // NoNullAllowedException - EndEdit
@@ -98,19 +110,33 @@ namespace System.Data.Tests
             // NoNullAllowedException - Add Row
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.Rows.Add(new object[] { 1, "value", "value", new DateTime(0), 0.5, true, DBNull.Value });
+                tbl.Rows.Add(
+                    new object[] { 1, "value", "value", new DateTime(0), 0.5, true, DBNull.Value }
+                );
             });
 
             // NoNullAllowedException - ItemArray
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.Rows[0].ItemArray = new object[] { 77, "value", "value", new DateTime(0), 0.5, true, DBNull.Value };
+                tbl.Rows[0].ItemArray = new object[]
+                {
+                    77,
+                    "value",
+                    "value",
+                    new DateTime(0),
+                    0.5,
+                    true,
+                    DBNull.Value,
+                };
             });
 
             // NoNullAllowedException - Add Row - LoadDataRow
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.LoadDataRow(new object[] { 66, "value", "value", new DateTime(0), 0.5, true }, true);
+                tbl.LoadDataRow(
+                    new object[] { 66, "value", "value", new DateTime(0), 0.5, true },
+                    true
+                );
             });
 
             // NoNullAllowedException - EndEdit

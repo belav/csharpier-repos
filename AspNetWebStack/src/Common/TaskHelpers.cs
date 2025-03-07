@@ -4,13 +4,17 @@
 namespace System.Threading.Tasks
 {
     /// <summary>
-    /// Helpers for safely using Task libraries. 
+    /// Helpers for safely using Task libraries.
     /// </summary>
     internal static class TaskHelpers
     {
-        private static readonly Task _defaultCompleted = Task.FromResult<AsyncVoid>(default(AsyncVoid));
+        private static readonly Task _defaultCompleted = Task.FromResult<AsyncVoid>(
+            default(AsyncVoid)
+        );
 
-        private static readonly Task<object> _completedTaskReturningNull = Task.FromResult<object>(null);
+        private static readonly Task<object> _completedTaskReturningNull = Task.FromResult<object>(
+            null
+        );
 
         /// <summary>
         /// Returns a canceled Task. The task is completed, IsCanceled = True, IsFaulted = False.
@@ -29,8 +33,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Returns a completed task that has no result. 
-        /// </summary>        
+        /// Returns a completed task that has no result.
+        /// </summary>
         internal static Task Completed()
         {
             return _defaultCompleted;
@@ -63,9 +67,7 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Used as the T in a "conversion" of a Task into a Task{T}
         /// </summary>
-        private struct AsyncVoid
-        {
-        }
+        private struct AsyncVoid { }
 
         /// <summary>
         /// This class is a convenient cache for per-type cancelled tasks

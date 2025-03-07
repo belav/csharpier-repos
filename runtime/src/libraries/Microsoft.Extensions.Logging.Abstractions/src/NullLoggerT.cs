@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
         public static readonly NullLogger<T> Instance = new NullLogger<T>();
 
         /// <inheritdoc />
-        public IDisposable BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable BeginScope<TState>(TState state)
+            where TState : notnull
         {
             return NullScope.Instance;
         }
@@ -31,9 +32,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
             EventId eventId,
             TState state,
             Exception? exception,
-            Func<TState, Exception?, string> formatter)
-        {
-        }
+            Func<TState, Exception?, string> formatter
+        ) { }
 
         /// <inheritdoc />
         public bool IsEnabled(LogLevel logLevel)

@@ -21,13 +21,21 @@ namespace Microsoft.CodeAnalysis.Classification
             private readonly TextSpan _textSpan;
             private readonly SegmentedList<ClassifiedSpan> _list;
             private readonly CancellationToken _cancellationToken;
-            private readonly Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> _getNodeClassifiers;
-            private readonly Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> _getTokenClassifiers;
+            private readonly Func<
+                SyntaxNode,
+                ImmutableArray<ISyntaxClassifier>
+            > _getNodeClassifiers;
+            private readonly Func<
+                SyntaxToken,
+                ImmutableArray<ISyntaxClassifier>
+            > _getTokenClassifiers;
             private readonly SegmentedHashSet<ClassifiedSpan> _set;
             private readonly Stack<SyntaxNodeOrToken> _pendingNodes;
             private readonly ClassificationOptions _options;
 
-            private static readonly ObjectPool<SegmentedList<ClassifiedSpan>> s_listPool = new(() => new());
+            private static readonly ObjectPool<SegmentedList<ClassifiedSpan>> s_listPool = new(
+                () => new()
+            );
 
             private Worker(
                 SemanticModel semanticModel,
@@ -36,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
                 Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
                 ClassificationOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _getNodeClassifiers = getNodeClassifiers;
                 _getTokenClassifiers = getTokenClassifiers;
@@ -58,12 +67,21 @@ namespace Microsoft.CodeAnalysis.Classification
                 Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
                 Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
                 ClassificationOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var root = semanticModel.SyntaxTree.GetRoot(cancellationToken);
                 foreach (var textSpan in textSpans)
                 {
-                    using var worker = new Worker(semanticModel, textSpan, list, getNodeClassifiers, getTokenClassifiers, options, cancellationToken);
+                    using var worker = new Worker(
+                        semanticModel,
+                        textSpan,
+                        list,
+                        getNodeClassifiers,
+                        getTokenClassifiers,
+                        options,
+                        cancellationToken
+                    );
 
                     worker._pendingNodes.Push(root);
                     worker.ProcessNodes();
@@ -135,7 +153,14 @@ namespace Microsoft.CodeAnalysis.Classification
                     _cancellationToken.ThrowIfCancellationRequested();
 
                     list.Clear();
-                    classifier.AddClassifications(syntax, _textSpan, _semanticModel, _options, list, _cancellationToken);
+                    classifier.AddClassifications(
+                        syntax,
+                        _textSpan,
+                        _semanticModel,
+                        _options,
+                        list,
+                        _cancellationToken
+                    );
                     AddClassifications(list);
                 }
             }
@@ -166,7 +191,14 @@ namespace Microsoft.CodeAnalysis.Classification
                     _cancellationToken.ThrowIfCancellationRequested();
 
                     list.Clear();
-                    classifier.AddClassifications(syntax, _textSpan, _semanticModel, _options, list, _cancellationToken);
+                    classifier.AddClassifications(
+                        syntax,
+                        _textSpan,
+                        _semanticModel,
+                        _options,
+                        list,
+                        _cancellationToken
+                    );
                     AddClassifications(list);
                 }
 

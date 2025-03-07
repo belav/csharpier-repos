@@ -14,15 +14,18 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint Assembly = 0x00000002;
         internal const uint TagMask = 0x00000003;
         internal const TableMask TablesReferenced =
-          TableMask.TypeDef
-          | TableMask.MethodDef
-          | TableMask.Assembly;
-        internal const uint TagToTokenTypeByteVector = (TokenTypeIds.TypeDef >> 24) | (TokenTypeIds.MethodDef >> 16) | (TokenTypeIds.Assembly >> 8);
+            TableMask.TypeDef | TableMask.MethodDef | TableMask.Assembly;
+        internal const uint TagToTokenTypeByteVector =
+            (TokenTypeIds.TypeDef >> 24)
+            | (TokenTypeIds.MethodDef >> 16)
+            | (TokenTypeIds.Assembly >> 8);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static EntityHandle ConvertToHandle(uint hasDeclSecurity)
         {
-            uint tokenType = (TagToTokenTypeByteVector >> ((int)(hasDeclSecurity & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;
+            uint tokenType =
+                (TagToTokenTypeByteVector >> ((int)(hasDeclSecurity & TagMask) << 3))
+                << TokenTypeIds.RowIdBitCount;
             uint rowId = (hasDeclSecurity >> NumberOfBits);
 
             if (tokenType == 0 || (rowId & ~TokenTypeIds.RIDMask) != 0)
@@ -39,9 +42,12 @@ namespace System.Reflection.Metadata.Ecma335
             uint rowId = (uint)handle.RowId;
             return (tokenType >> TokenTypeIds.RowIdBitCount) switch
             {
-                TokenTypeIds.TypeDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | TypeDef,
-                TokenTypeIds.MethodDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | MethodDef,
-                TokenTypeIds.Assembly >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | Assembly,
+                TokenTypeIds.TypeDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | TypeDef,
+                TokenTypeIds.MethodDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | MethodDef,
+                TokenTypeIds.Assembly >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | Assembly,
                 _ => 0,
             };
         }

@@ -12,8 +12,17 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
             TypeBuilder type1 = module.DefineType("C1", TypeAttributes.Public);
-            MethodBuilder method1 = type1.DefineMethod("meth1", MethodAttributes.Public, typeof(int), new Type[0]);
-            FieldBuilder field = type1.DefineField("field1", typeof(int), FieldAttributes.Public | FieldAttributes.Static);
+            MethodBuilder method1 = type1.DefineMethod(
+                "meth1",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
+            FieldBuilder field = type1.DefineField(
+                "field1",
+                typeof(int),
+                FieldAttributes.Public | FieldAttributes.Static
+            );
 
             int expectedRet = 1;
 
@@ -27,7 +36,12 @@ namespace System.Reflection.Emit.Tests
             FieldInfo createdField = createdType1.GetField("field1");
 
             TypeBuilder type2 = module.DefineType("C2", TypeAttributes.Public);
-            MethodBuilder method2 = type2.DefineMethod("meth2", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[0]);
+            MethodBuilder method2 = type2.DefineMethod(
+                "meth2",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[0]
+            );
 
             // Generate code for the method which will be invoking the first method
             ILGenerator ilGenerator2 = method2.GetILGenerator();

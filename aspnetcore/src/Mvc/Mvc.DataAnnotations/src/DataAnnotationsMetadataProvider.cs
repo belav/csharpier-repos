@@ -16,10 +16,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// An implementation of <see cref="IBindingMetadataProvider"/> and <see cref="IDisplayMetadataProvider"/> for
 /// the System.ComponentModel.DataAnnotations attribute classes.
 /// </summary>
-internal sealed class DataAnnotationsMetadataProvider :
-    IBindingMetadataProvider,
-    IDisplayMetadataProvider,
-    IValidationMetadataProvider
+internal sealed class DataAnnotationsMetadataProvider
+    : IBindingMetadataProvider,
+        IDisplayMetadataProvider,
+        IValidationMetadataProvider
 {
     private readonly IStringLocalizerFactory? _stringLocalizerFactory;
     private readonly MvcOptions _options;
@@ -28,7 +28,8 @@ internal sealed class DataAnnotationsMetadataProvider :
     public DataAnnotationsMetadataProvider(
         MvcOptions options,
         IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions,
-        IStringLocalizerFactory? stringLocalizerFactory)
+        IStringLocalizerFactory? stringLocalizerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(localizationOptions);
@@ -80,7 +81,8 @@ internal sealed class DataAnnotationsMetadataProvider :
         // ConvertEmptyStringToNull
         if (displayFormatAttribute != null)
         {
-            displayMetadata.ConvertEmptyStringToNull = displayFormatAttribute.ConvertEmptyStringToNull;
+            displayMetadata.ConvertEmptyStringToNull =
+                displayFormatAttribute.ConvertEmptyStringToNull;
         }
 
         // DataTypeName
@@ -95,17 +97,25 @@ internal sealed class DataAnnotationsMetadataProvider :
 
         var containerType = context.Key.ContainerType ?? context.Key.ModelType;
         IStringLocalizer? localizer = null;
-        if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+        if (
+            _stringLocalizerFactory != null
+            && _localizationOptions.DataAnnotationLocalizerProvider != null
+        )
         {
-            localizer = _localizationOptions.DataAnnotationLocalizerProvider(containerType, _stringLocalizerFactory);
+            localizer = _localizationOptions.DataAnnotationLocalizerProvider(
+                containerType,
+                _stringLocalizerFactory
+            );
         }
 
         // Description
         if (displayAttribute != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayAttribute.Description) &&
-                displayAttribute.ResourceType == null)
+            if (
+                localizer != null
+                && !string.IsNullOrEmpty(displayAttribute.Description)
+                && displayAttribute.ResourceType == null
+            )
             {
                 displayMetadata.Description = () => localizer[displayAttribute.Description];
             }
@@ -125,9 +135,11 @@ internal sealed class DataAnnotationsMetadataProvider :
         // DisplayAttribute has precedence over DisplayNameAttribute.
         if (displayAttribute?.GetName() != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayAttribute.Name) &&
-                displayAttribute.ResourceType == null)
+            if (
+                localizer != null
+                && !string.IsNullOrEmpty(displayAttribute.Name)
+                && displayAttribute.ResourceType == null
+            )
             {
                 displayMetadata.DisplayName = () => localizer[displayAttribute.Name];
             }
@@ -138,8 +150,7 @@ internal sealed class DataAnnotationsMetadataProvider :
         }
         else if (displayNameAttribute != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
+            if (localizer != null && !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
             {
                 displayMetadata.DisplayName = () => localizer[displayNameAttribute.DisplayName];
             }
@@ -156,7 +167,8 @@ internal sealed class DataAnnotationsMetadataProvider :
         }
 
         // IsEnum et cetera
-        var underlyingType = Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
+        var underlyingType =
+            Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
 
         if (underlyingType.IsEnum)
         {
@@ -164,7 +176,10 @@ internal sealed class DataAnnotationsMetadataProvider :
             displayMetadata.IsEnum = true;
 
             // IsFlagsEnum
-            displayMetadata.IsFlagsEnum = underlyingType.IsDefined(typeof(FlagsAttribute), inherit: false);
+            displayMetadata.IsFlagsEnum = underlyingType.IsDefined(
+                typeof(FlagsAttribute),
+                inherit: false
+            );
 
             // EnumDisplayNamesAndValues and EnumNamesAndValues
             //
@@ -176,25 +191,34 @@ internal sealed class DataAnnotationsMetadataProvider :
             var namesAndValues = new Dictionary<string, string>();
 
             IStringLocalizer? enumLocalizer = null;
-            if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+            if (
+                _stringLocalizerFactory != null
+                && _localizationOptions.DataAnnotationLocalizerProvider != null
+            )
             {
-                enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(underlyingType, _stringLocalizerFactory);
+                enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(
+                    underlyingType,
+                    _stringLocalizerFactory
+                );
             }
 
             var enumFields = Enum.GetNames(underlyingType)
                 .Select(name => underlyingType.GetField(name)!)
-                .OrderBy(field => field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000);
+                .OrderBy(field =>
+                    field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000
+                );
 
             foreach (var field in enumFields)
             {
                 var groupName = GetDisplayGroup(field);
                 var value = ((Enum)field.GetValue(obj: null)!).ToString("d");
 
-                groupedDisplayNamesAndValues.Add(new KeyValuePair<EnumGroupAndName, string>(
-                    new EnumGroupAndName(
-                        groupName,
-                        () => GetDisplayName(field, enumLocalizer)),
-                    value));
+                groupedDisplayNamesAndValues.Add(
+                    new KeyValuePair<EnumGroupAndName, string>(
+                        new EnumGroupAndName(groupName, () => GetDisplayName(field, enumLocalizer)),
+                        value
+                    )
+                );
                 namesAndValues.Add(field.Name, value);
             }
 
@@ -203,8 +227,10 @@ internal sealed class DataAnnotationsMetadataProvider :
         }
 
         // HasNonDefaultEditFormat
-        if (!string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString) &&
-            displayFormatAttribute?.ApplyFormatInEditMode == true)
+        if (
+            !string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString)
+            && displayFormatAttribute?.ApplyFormatInEditMode == true
+        )
         {
             // Have a non-empty EditFormatString based on [DisplayFormat] from our cache.
             if (dataTypeAttribute == null)
@@ -253,9 +279,11 @@ internal sealed class DataAnnotationsMetadataProvider :
         // Placeholder
         if (displayAttribute != null)
         {
-            if (localizer != null &&
-                !string.IsNullOrEmpty(displayAttribute.Prompt) &&
-                displayAttribute.ResourceType == null)
+            if (
+                localizer != null
+                && !string.IsNullOrEmpty(displayAttribute.Prompt)
+                && displayAttribute.ResourceType == null
+            )
             {
                 displayMetadata.Placeholder = () => localizer[displayAttribute.Prompt];
             }
@@ -324,10 +352,12 @@ internal sealed class DataAnnotationsMetadataProvider :
         // For non-nullable reference types, treat them as-if they had an implicit [Required].
         // This allows the developer to specify [Required] to customize the error message, so
         // if they already have [Required] then there's no need for us to do this check.
-        if (!_options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes &&
-            requiredAttribute == null &&
-            !context.Key.ModelType.IsValueType &&
-            context.Key.MetadataKind != ModelMetadataKind.Type)
+        if (
+            !_options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
+            && requiredAttribute == null
+            && !context.Key.ModelType.IsValueType
+            && context.Key.MetadataKind != ModelMetadataKind.Type
+        )
         {
             var addInferredRequiredAttribute = false;
             if (context.Key.MetadataKind == ModelMetadataKind.Type)
@@ -353,7 +383,9 @@ internal sealed class DataAnnotationsMetadataProvider :
             }
             else
             {
-                throw new InvalidOperationException("Unsupported ModelMetadataKind: " + context.Key.MetadataKind);
+                throw new InvalidOperationException(
+                    "Unsupported ModelMetadataKind: " + context.Key.MetadataKind
+                );
             }
 
             if (addInferredRequiredAttribute)
@@ -362,10 +394,7 @@ internal sealed class DataAnnotationsMetadataProvider :
                 // option to tolerate empty/whitespace strings. empty/whitespace INPUT will still result in
                 // a validation error by default because we convert empty/whitespace strings to null
                 // unless you say otherwise.
-                requiredAttribute = new RequiredAttribute()
-                {
-                    AllowEmptyStrings = true,
-                };
+                requiredAttribute = new RequiredAttribute() { AllowEmptyStrings = true };
                 attributes.Add(requiredAttribute);
             }
         }
@@ -395,7 +424,11 @@ internal sealed class DataAnnotationsMetadataProvider :
         {
             // Note [Display(Name = "")] is allowed but we will not attempt to localize the empty name.
             var name = display.GetName();
-            if (stringLocalizer != null && !string.IsNullOrEmpty(name) && display.ResourceType == null)
+            if (
+                stringLocalizer != null
+                && !string.IsNullOrEmpty(name)
+                && display.ResourceType == null
+            )
             {
                 name = stringLocalizer[name];
             }
@@ -430,7 +463,7 @@ internal sealed class DataAnnotationsMetadataProvider :
         {
             ModelMetadataKind.Parameter => nullabilityContext.Create(context.Key.ParameterInfo!),
             ModelMetadataKind.Property => nullabilityContext.Create(context.Key.PropertyInfo!),
-            _ => null
+            _ => null,
         };
         var isOptional = nullability != null && nullability.ReadState != NullabilityState.NotNull;
         return !isOptional;

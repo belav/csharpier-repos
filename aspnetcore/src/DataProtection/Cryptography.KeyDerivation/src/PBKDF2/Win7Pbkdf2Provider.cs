@@ -13,7 +13,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 /// </summary>
 internal sealed unsafe class Win7Pbkdf2Provider : IPbkdf2Provider
 {
-    public byte[] DeriveKey(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+    public byte[] DeriveKey(
+        string password,
+        byte[] salt,
+        KeyDerivationPrf prf,
+        int iterationCount,
+        int numBytesRequested
+    )
     {
         Debug.Assert(password != null);
         Debug.Assert(salt != null);
@@ -28,7 +34,12 @@ internal sealed unsafe class Win7Pbkdf2Provider : IPbkdf2Provider
         // Convert password string to bytes.
         // Allocate on the stack whenever we can to save allocations.
         int cbPasswordBuffer = Encoding.UTF8.GetMaxByteCount(password.Length);
-        fixed (byte* pbHeapAllocatedPasswordBuffer = (cbPasswordBuffer > Constants.MAX_STACKALLOC_BYTES) ? new byte[cbPasswordBuffer] : null)
+        fixed (
+            byte* pbHeapAllocatedPasswordBuffer =
+                (cbPasswordBuffer > Constants.MAX_STACKALLOC_BYTES)
+                    ? new byte[cbPasswordBuffer]
+                    : null
+        )
         {
             byte* pbPasswordBuffer = pbHeapAllocatedPasswordBuffer;
             if (pbPasswordBuffer == null)
@@ -49,7 +60,12 @@ internal sealed unsafe class Win7Pbkdf2Provider : IPbkdf2Provider
                 int cbPasswordBufferUsed; // we're not filling the entire buffer, just a partial buffer
                 fixed (char* pszPassword = password)
                 {
-                    cbPasswordBufferUsed = Encoding.UTF8.GetBytes(pszPassword, password.Length, pbPasswordBuffer, cbPasswordBuffer);
+                    cbPasswordBufferUsed = Encoding.UTF8.GetBytes(
+                        pszPassword,
+                        password.Length,
+                        pbPasswordBuffer,
+                        cbPasswordBuffer
+                    );
                 }
 
                 fixed (byte* pbHeapAllocatedSalt = salt)
@@ -68,7 +84,8 @@ internal sealed unsafe class Win7Pbkdf2Provider : IPbkdf2Provider
                             cIterations: (ulong)iterationCount,
                             pbDerivedKey: pbRetVal,
                             cbDerivedKey: (uint)retVal.Length,
-                            dwFlags: 0);
+                            dwFlags: 0
+                        );
                         UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
                     }
                     return retVal;

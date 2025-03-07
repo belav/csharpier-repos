@@ -67,10 +67,7 @@ namespace System.Security.Cryptography.Xml
 
         public XmlResolver? Resolver
         {
-            internal get
-            {
-                return _xmlResolver;
-            }
+            internal get { return _xmlResolver; }
             // This property only has a public setter. The rationale for this is that we don't have a good value
             // to return when it has not been explicitely set, as we are using XmlSecureResolver by default
             set
@@ -86,15 +83,9 @@ namespace System.Security.Cryptography.Xml
             get { return _bResolverSet; }
         }
 
-        public abstract Type[] InputTypes
-        {
-            get;
-        }
+        public abstract Type[] InputTypes { get; }
 
-        public abstract Type[] OutputTypes
-        {
-            get;
-        }
+        public abstract Type[] OutputTypes { get; }
 
         internal bool AcceptsType(Type inputType)
         {
@@ -127,7 +118,10 @@ namespace System.Security.Cryptography.Xml
 
         internal XmlElement GetXml(XmlDocument document, string name)
         {
-            XmlElement transformElement = document.CreateElement(name, SignedXml.XmlDsigNamespaceUrl);
+            XmlElement transformElement = document.CreateElement(
+                name,
+                SignedXml.XmlDsigNamespaceUrl
+            );
             if (!string.IsNullOrEmpty(Algorithm))
                 transformElement.SetAttribute("Algorithm", Algorithm);
             XmlNodeList? children = GetInnerXml();
@@ -170,10 +164,7 @@ namespace System.Security.Cryptography.Xml
 
                 return signedXml._context;
             }
-            set
-            {
-                _context = value;
-            }
+            set { _context = value; }
         }
 
         public Hashtable PropagatedNamespaces
@@ -187,9 +178,13 @@ namespace System.Security.Cryptography.Xml
                 SignedXml? signedXml = (reference == null ? SignedXml : reference.SignedXml);
 
                 // If the reference is not a Uri reference with a DataObject target, return an empty hashtable.
-                if (reference != null &&
-                    ((reference.ReferenceTargetType != ReferenceTargetType.UriReference) ||
-                     (string.IsNullOrEmpty(reference.Uri) || reference.Uri[0] != '#')))
+                if (
+                    reference != null
+                    && (
+                        (reference.ReferenceTargetType != ReferenceTargetType.UriReference)
+                        || (string.IsNullOrEmpty(reference.Uri) || reference.Uri[0] != '#')
+                    )
+                )
                 {
                     _propagatedNamespaces = new Hashtable(0);
                     return _propagatedNamespaces;
@@ -211,7 +206,11 @@ namespace System.Security.Cryptography.Xml
                 _propagatedNamespaces = new Hashtable(namespaces.Count);
                 foreach (XmlNode attrib in namespaces)
                 {
-                    string key = ((attrib.Prefix.Length > 0) ? attrib.Prefix + ":" + attrib.LocalName : attrib.LocalName);
+                    string key = (
+                        (attrib.Prefix.Length > 0)
+                            ? attrib.Prefix + ":" + attrib.LocalName
+                            : attrib.LocalName
+                    );
                     if (!_propagatedNamespaces.Contains(key))
                         _propagatedNamespaces.Add(key, attrib.Value);
                 }

@@ -1,29 +1,31 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
-    using System.Resources;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Windows.Forms.Design;
-    using System.Drawing.Design;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Interop;
-    using System.Text;
-    using System.Globalization;
-    using Microsoft.Win32;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Interop;
+    using Microsoft.Win32;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class TypeBrowserDialog : Form, ISite
     {
         private static ResourceManager ResMgr;
@@ -68,10 +70,18 @@ namespace System.Workflow.ComponentModel.Design
         #region Construction and Destruction
         static TypeBrowserDialog()
         {
-            TypeBrowserDialog.ResMgr = new ResourceManager("System.Workflow.ComponentModel.Design.ArtifactReference", System.Reflection.Assembly.GetExecutingAssembly());
+            TypeBrowserDialog.ResMgr = new ResourceManager(
+                "System.Workflow.ComponentModel.Design.ArtifactReference",
+                System.Reflection.Assembly.GetExecutingAssembly()
+            );
         }
 
-        public TypeBrowserDialog(IServiceProvider serviceProvider, ITypeFilterProvider filterProvider, string selectedTypeName, TypeProvider typeProvider)
+        public TypeBrowserDialog(
+            IServiceProvider serviceProvider,
+            ITypeFilterProvider filterProvider,
+            string selectedTypeName,
+            TypeProvider typeProvider
+        )
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
@@ -88,7 +98,11 @@ namespace System.Workflow.ComponentModel.Design
             this.buttonBrowse.BringToFront();
         }
 
-        public TypeBrowserDialog(IServiceProvider serviceProvider, ITypeFilterProvider filterProvider, string selectedTypeName)
+        public TypeBrowserDialog(
+            IServiceProvider serviceProvider,
+            ITypeFilterProvider filterProvider,
+            string selectedTypeName
+        )
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
@@ -96,7 +110,11 @@ namespace System.Workflow.ComponentModel.Design
             InitializeDialog(serviceProvider, filterProvider, selectedTypeName);
         }
 
-        internal void InitializeDialog(IServiceProvider serviceProvider, ITypeFilterProvider filterProvider, string selectedTypeName)
+        internal void InitializeDialog(
+            IServiceProvider serviceProvider,
+            ITypeFilterProvider filterProvider,
+            string selectedTypeName
+        )
         {
             this.serviceProvider = serviceProvider;
             this.sortListViewAscending = true;
@@ -105,9 +123,17 @@ namespace System.Workflow.ComponentModel.Design
             this.selectedTypeName = selectedTypeName;
             this.typeFilterProvider = filterProvider;
 
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            WorkflowDesignerLoader loader = this.serviceProvider.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
-            if (designerHost == null || designerHost.RootComponent == null || loader == null || loader.InDebugMode)
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            WorkflowDesignerLoader loader =
+                this.serviceProvider.GetService(typeof(WorkflowDesignerLoader))
+                as WorkflowDesignerLoader;
+            if (
+                designerHost == null
+                || designerHost.RootComponent == null
+                || loader == null
+                || loader.InDebugMode
+            )
                 throw new Exception(DR.GetString(DR.Error_WorkflowNotLoaded));
 
             InitializeComponent();
@@ -129,7 +155,8 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TypeBrowserDialog));
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(TypeBrowserDialog));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.helpTextHolder = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -157,143 +184,156 @@ namespace System.Workflow.ComponentModel.Design
             this.okCancelTableLayoutPanel.SuspendLayout();
             this.typeNameTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // buttonCancel
-            // 
+            //
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            // 
+            //
             // helpTextHolder
-            // 
+            //
             resources.ApplyResources(this.helpTextHolder, "helpTextHolder");
             this.helpTextHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.helpTextHolder.Name = "helpTextHolder";
             this.helpTextHolder.ReadOnly = true;
-            // 
+            //
             // buttonOK
-            // 
+            //
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Click += new System.EventHandler(this.OkButtonClicked);
-            // 
+            //
             // tabControl
-            // 
+            //
             resources.ApplyResources(this.tabControl, "tabControl");
             this.tabControl.Controls.Add(this.typeTabPage);
             this.tabControl.Controls.Add(this.advancedTabPage);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            // 
+            //
             // typeTabPage
-            // 
+            //
             this.typeTabPage.BackColor = System.Drawing.Color.Transparent;
             this.typeTabPage.Controls.Add(this.typeSplitContainer);
             resources.ApplyResources(this.typeTabPage, "typeTabPage");
             this.typeTabPage.Name = "typeTabPage";
-            // 
+            //
             // typeSplitContainer
-            // 
+            //
             this.typeSplitContainer.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.typeSplitContainer, "typeSplitContainer");
             this.typeSplitContainer.Name = "typeSplitContainer";
-            // 
+            //
             // typeSplitContainer.Panel1
-            // 
+            //
             this.typeSplitContainer.Panel1.Controls.Add(this.artifactTreeView);
-            // 
+            //
             // typeSplitContainer.Panel2
-            // 
+            //
             this.typeSplitContainer.Panel2.Controls.Add(this.artifactListView);
             this.typeSplitContainer.TabStop = false;
-            // 
+            //
             // artifactTreeView
-            // 
+            //
             this.artifactTreeView.BackColor = System.Drawing.SystemColors.Window;
             resources.ApplyResources(this.artifactTreeView, "artifactTreeView");
             this.artifactTreeView.ItemHeight = 16;
             this.artifactTreeView.Name = "artifactTreeView";
-            this.artifactTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.OnTreeSelectionChange);
+            this.artifactTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(
+                this.OnTreeSelectionChange
+            );
             this.artifactTreeView.GotFocus += new System.EventHandler(this.OnTreeViewGotFocus);
-            // 
+            //
             // artifactListView
-            // 
+            //
             this.artifactListView.AllowColumnReorder = true;
-            this.artifactListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.typeName,
-            this.fullyQualifiedName});
+            this.artifactListView.Columns.AddRange(
+                new System.Windows.Forms.ColumnHeader[] { this.typeName, this.fullyQualifiedName }
+            );
             resources.ApplyResources(this.artifactListView, "artifactListView");
             this.artifactListView.Name = "artifactListView";
             this.artifactListView.UseCompatibleStateImageBehavior = false;
             this.artifactListView.View = System.Windows.Forms.View.Details;
-            this.artifactListView.SelectedIndexChanged += new System.EventHandler(this.OnListViewSelectedIndexChanged);
-            this.artifactListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.OnListViewColumnClick);
-            // 
+            this.artifactListView.SelectedIndexChanged += new System.EventHandler(
+                this.OnListViewSelectedIndexChanged
+            );
+            this.artifactListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(
+                this.OnListViewColumnClick
+            );
+            //
             // typeName
-            // 
+            //
             resources.ApplyResources(this.typeName, "typeName");
-            // 
+            //
             // fullyQualifiedName
-            // 
+            //
             resources.ApplyResources(this.fullyQualifiedName, "fullyQualifiedName");
-            // 
+            //
             // advancedTabPage
-            // 
+            //
             this.advancedTabPage.BackColor = System.Drawing.Color.Transparent;
             this.advancedTabPage.Controls.Add(this.genericParametersPropertyGrid);
             resources.ApplyResources(this.advancedTabPage, "advancedTabPage");
             this.advancedTabPage.Name = "advancedTabPage";
-            // 
+            //
             // genericParametersPropertyGrid
-            // 
-            resources.ApplyResources(this.genericParametersPropertyGrid, "genericParametersPropertyGrid");
+            //
+            resources.ApplyResources(
+                this.genericParametersPropertyGrid,
+                "genericParametersPropertyGrid"
+            );
             this.genericParametersPropertyGrid.Name = "genericParametersPropertyGrid";
-            this.genericParametersPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.genericParametersPropertyGrid.PropertySort = System
+                .Windows
+                .Forms
+                .PropertySort
+                .Categorized;
             this.genericParametersPropertyGrid.ToolbarVisible = false;
-            // 
+            //
             // buttonBrowse
-            // 
+            //
             resources.ApplyResources(this.buttonBrowse, "buttonBrowse");
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Click += new System.EventHandler(this.OnButtonBrowse_Click);
-            // 
+            //
             // typeTextBox
-            // 
+            //
             resources.ApplyResources(this.typeTextBox, "typeTextBox");
             this.typeTextBox.Name = "typeTextBox";
             this.typeTextBox.TextChanged += new System.EventHandler(this.OnTypeTextBoxTextChanged);
-            // 
+            //
             // typeNameLabel
-            // 
+            //
             resources.ApplyResources(this.typeNameLabel, "typeNameLabel");
             this.typeNameLabel.Name = "typeNameLabel";
-            // 
+            //
             // okCancelTableLayoutPanel
-            // 
+            //
             resources.ApplyResources(this.okCancelTableLayoutPanel, "okCancelTableLayoutPanel");
             this.okCancelTableLayoutPanel.Controls.Add(this.buttonOK, 0, 0);
             this.okCancelTableLayoutPanel.Controls.Add(this.buttonCancel, 1, 0);
             this.okCancelTableLayoutPanel.Name = "okCancelTableLayoutPanel";
-            // 
+            //
             // typeNameTableLayoutPanel
-            // 
+            //
             resources.ApplyResources(this.typeNameTableLayoutPanel, "typeNameTableLayoutPanel");
             this.typeNameTableLayoutPanel.Controls.Add(this.typeNameLabel, 0, 0);
             this.typeNameTableLayoutPanel.Controls.Add(this.typeTextBox, 1, 0);
             this.typeNameTableLayoutPanel.Name = "typeNameTableLayoutPanel";
-            // 
+            //
             // artifactLabel
-            // 
+            //
             this.artifactLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.artifactLabel.CausesValidation = false;
             resources.ApplyResources(this.artifactLabel, "artifactLabel");
             this.artifactLabel.Name = "artifactLabel";
             this.artifactLabel.ReadOnly = true;
             this.artifactLabel.TabStop = false;
-            // 
+            //
             // TypeBrowserDialog
-            // 
+            //
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.CancelButton = this.buttonCancel;
@@ -309,7 +349,9 @@ namespace System.Workflow.ComponentModel.Design
             this.MinimizeBox = false;
             this.Name = "TypeBrowserDialog";
             this.ShowInTaskbar = false;
-            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.TypeBrowserDialog_HelpButtonClicked);
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(
+                this.TypeBrowserDialog_HelpButtonClicked
+            );
             this.tabControl.ResumeLayout(false);
             this.typeTabPage.ResumeLayout(false);
             this.typeSplitContainer.Panel1.ResumeLayout(false);
@@ -322,32 +364,32 @@ namespace System.Workflow.ComponentModel.Design
             this.typeNameTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
         #endregion
 
         #region Properties and Methods
         public Type SelectedType
         {
-            get
-            {
-                return this.selectedType;
-            }
+            get { return this.selectedType; }
         }
         #endregion
 
         List<Type> GetTargetFrameworkTypes(ITypeProvider currentTypeProvider)
         {
-            IExtendedUIService2 extendedUIService = (IExtendedUIService2)this.serviceProvider.GetService(typeof(IExtendedUIService2));
+            IExtendedUIService2 extendedUIService = (IExtendedUIService2)
+                this.serviceProvider.GetService(typeof(IExtendedUIService2));
             List<Type> targetFrameworkTypes = new List<Type>();
             if (currentTypeProvider != null)
             {
                 if (extendedUIService != null)
                 {
-                    List<Assembly> runtimeAssemblies = new List<Assembly>(currentTypeProvider.ReferencedAssemblies);
+                    List<Assembly> runtimeAssemblies = new List<Assembly>(
+                        currentTypeProvider.ReferencedAssemblies
+                    );
                     foreach (Assembly runtimeAssembly in runtimeAssemblies)
                     {
-                        Assembly reflectionContextAssembly = extendedUIService.GetReflectionAssembly(runtimeAssembly.GetName());
+                        Assembly reflectionContextAssembly =
+                            extendedUIService.GetReflectionAssembly(runtimeAssembly.GetName());
                         if (reflectionContextAssembly != null)
                         {
                             foreach (Type type in reflectionContextAssembly.GetTypes())
@@ -360,7 +402,7 @@ namespace System.Workflow.ComponentModel.Design
                         }
                     }
 
-                    // add design time types from type provider to the list 
+                    // add design time types from type provider to the list
                     // and design time types are only for the current user assemblies.
                     foreach (Type type in currentTypeProvider.GetTypes())
                     {
@@ -369,7 +411,6 @@ namespace System.Workflow.ComponentModel.Design
                             targetFrameworkTypes.Add(type);
                         }
                     }
-                    
                 }
                 else
                 {
@@ -393,19 +434,34 @@ namespace System.Workflow.ComponentModel.Design
                 // add current project node
                 TreeNode currentProjectNode = null;
                 if (this.localTypeProvider == null)
-                    currentProjectNode = this.artifactTreeView.Nodes.Add(SR.CurrentProject, SR.GetString(SR.CurrentProject), 2, 2);
+                    currentProjectNode = this.artifactTreeView.Nodes.Add(
+                        SR.CurrentProject,
+                        SR.GetString(SR.CurrentProject),
+                        2,
+                        2
+                    );
 
                 // add references node
-                TreeNode assembliesNode = this.artifactTreeView.Nodes.Add(SR.ReferencedAssemblies, SR.GetString(SR.ReferencedAssemblies), 2, 2);
+                TreeNode assembliesNode = this.artifactTreeView.Nodes.Add(
+                    SR.ReferencedAssemblies,
+                    SR.GetString(SR.ReferencedAssemblies),
+                    2,
+                    2
+                );
 
                 ITypeProvider typeProvider = this.TypeProvider;
 
-                AutoCompleteStringCollection autoCompleteStringCollection = new AutoCompleteStringCollection();
-                this.UpdateTreeView(GetTargetFrameworkTypes(this.TypeProvider).ToArray(), autoCompleteStringCollection);
+                AutoCompleteStringCollection autoCompleteStringCollection =
+                    new AutoCompleteStringCollection();
+                this.UpdateTreeView(
+                    GetTargetFrameworkTypes(this.TypeProvider).ToArray(),
+                    autoCompleteStringCollection
+                );
 
                 //Select the root node to show all the types.
                 assembliesNode.Expand();
-                TreeNode selectNode = (currentProjectNode == null) ? assembliesNode : currentProjectNode;
+                TreeNode selectNode =
+                    (currentProjectNode == null) ? assembliesNode : currentProjectNode;
                 this.artifactTreeView.SelectedNode = selectNode;
                 TreeSelectionChanged(selectNode);
                 selectNode.EnsureVisible();
@@ -436,14 +492,24 @@ namespace System.Workflow.ComponentModel.Design
             this.typeTextBox.Select();
         }
 
-        private void UpdateTreeView(Type[] types, AutoCompleteStringCollection autoCompleteStringCollection)
+        private void UpdateTreeView(
+            Type[] types,
+            AutoCompleteStringCollection autoCompleteStringCollection
+        )
         {
             TreeNode assembliesNode = this.artifactTreeView.Nodes[SR.ReferencedAssemblies];
             Hashtable assemblyNodes = new Hashtable();
-            IExtendedUIService2 extendedUIService = (IExtendedUIService2)this.serviceProvider.GetService(typeof(IExtendedUIService2));
+            IExtendedUIService2 extendedUIService = (IExtendedUIService2)
+                this.serviceProvider.GetService(typeof(IExtendedUIService2));
             foreach (Type type in types)
             {
-                if (this.typeFilterProvider != null && !this.typeFilterProvider.CanFilterType(extendedUIService != null ? extendedUIService.GetRuntimeType(type) : type, false))
+                if (
+                    this.typeFilterProvider != null
+                    && !this.typeFilterProvider.CanFilterType(
+                        extendedUIService != null ? extendedUIService.GetRuntimeType(type) : type,
+                        false
+                    )
+                )
                     continue;
 
                 if (autoCompleteStringCollection.Contains(type.FullName))
@@ -506,20 +572,92 @@ namespace System.Workflow.ComponentModel.Design
             base.OnPaint(paintArgs);
 
             ///Draw the top devider line
-            Rectangle lineRectangle = new Rectangle(this.ClientRectangle.Left, this.artifactLabel.Bottom + ((this.typeNameTableLayoutPanel.Top + this.typeTextBox.Top - this.artifactLabel.Bottom) / 2), this.ClientRectangle.Width, 1);
-            paintArgs.Graphics.DrawLine(SystemPens.ControlDark, lineRectangle.Left, lineRectangle.Bottom, lineRectangle.Right, lineRectangle.Bottom);
-            paintArgs.Graphics.DrawLine(SystemPens.ControlLightLight, lineRectangle.Left, lineRectangle.Bottom + 1, lineRectangle.Right, lineRectangle.Bottom + 1);
+            Rectangle lineRectangle = new Rectangle(
+                this.ClientRectangle.Left,
+                this.artifactLabel.Bottom
+                    + (
+                        (
+                            this.typeNameTableLayoutPanel.Top
+                            + this.typeTextBox.Top
+                            - this.artifactLabel.Bottom
+                        ) / 2
+                    ),
+                this.ClientRectangle.Width,
+                1
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.ControlDark,
+                lineRectangle.Left,
+                lineRectangle.Bottom,
+                lineRectangle.Right,
+                lineRectangle.Bottom
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.ControlLightLight,
+                lineRectangle.Left,
+                lineRectangle.Bottom + 1,
+                lineRectangle.Right,
+                lineRectangle.Bottom + 1
+            );
 
             ///Draw the bottom devider line
-            lineRectangle = new Rectangle(this.ClientRectangle.Left, this.helpTextHolder.Bottom + ((this.okCancelTableLayoutPanel.Top + this.buttonOK.Top - this.helpTextHolder.Bottom) / 2), this.ClientRectangle.Width, 1);
-            paintArgs.Graphics.DrawLine(SystemPens.ControlDark, lineRectangle.Left, lineRectangle.Bottom, lineRectangle.Right, lineRectangle.Bottom);
-            paintArgs.Graphics.DrawLine(SystemPens.ControlLightLight, lineRectangle.Left, lineRectangle.Bottom + 1, lineRectangle.Right, lineRectangle.Bottom + 1);
+            lineRectangle = new Rectangle(
+                this.ClientRectangle.Left,
+                this.helpTextHolder.Bottom
+                    + (
+                        (
+                            this.okCancelTableLayoutPanel.Top
+                            + this.buttonOK.Top
+                            - this.helpTextHolder.Bottom
+                        ) / 2
+                    ),
+                this.ClientRectangle.Width,
+                1
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.ControlDark,
+                lineRectangle.Left,
+                lineRectangle.Bottom,
+                lineRectangle.Right,
+                lineRectangle.Bottom
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.ControlLightLight,
+                lineRectangle.Left,
+                lineRectangle.Bottom + 1,
+                lineRectangle.Right,
+                lineRectangle.Bottom + 1
+            );
 
             //Draw help text border
-            paintArgs.Graphics.DrawLine(SystemPens.WindowFrame, this.helpTextHolder.Left - 1, this.helpTextHolder.Top - 1, this.helpTextHolder.Left - 1, this.helpTextHolder.Bottom);
-            paintArgs.Graphics.DrawLine(SystemPens.WindowFrame, this.helpTextHolder.Left - 1, this.helpTextHolder.Bottom, this.helpTextHolder.Right, this.helpTextHolder.Bottom);
-            paintArgs.Graphics.DrawLine(SystemPens.WindowFrame, this.helpTextHolder.Right, this.helpTextHolder.Bottom, this.helpTextHolder.Right, this.helpTextHolder.Top - 1);
-            paintArgs.Graphics.DrawLine(SystemPens.WindowFrame, this.helpTextHolder.Right, this.helpTextHolder.Top - 1, this.helpTextHolder.Left - 1, this.helpTextHolder.Top - 1);
+            paintArgs.Graphics.DrawLine(
+                SystemPens.WindowFrame,
+                this.helpTextHolder.Left - 1,
+                this.helpTextHolder.Top - 1,
+                this.helpTextHolder.Left - 1,
+                this.helpTextHolder.Bottom
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.WindowFrame,
+                this.helpTextHolder.Left - 1,
+                this.helpTextHolder.Bottom,
+                this.helpTextHolder.Right,
+                this.helpTextHolder.Bottom
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.WindowFrame,
+                this.helpTextHolder.Right,
+                this.helpTextHolder.Bottom,
+                this.helpTextHolder.Right,
+                this.helpTextHolder.Top - 1
+            );
+            paintArgs.Graphics.DrawLine(
+                SystemPens.WindowFrame,
+                this.helpTextHolder.Right,
+                this.helpTextHolder.Top - 1,
+                this.helpTextHolder.Left - 1,
+                this.helpTextHolder.Top - 1
+            );
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -544,7 +682,13 @@ namespace System.Workflow.ComponentModel.Design
             {
                 ITypeProvider typeProvider = this.TypeProvider;
                 Type type = typeProvider.GetType(this.typeTextBox.Text);
-                if ((type != null) && (this.typeFilterProvider == null || this.typeFilterProvider.CanFilterType(type, false)))
+                if (
+                    (type != null)
+                    && (
+                        this.typeFilterProvider == null
+                        || this.typeFilterProvider.CanFilterType(type, false)
+                    )
+                )
                 {
                     this.selectedTypeName = type.AssemblyQualifiedName;
                     this.selectedType = type;
@@ -583,13 +727,18 @@ namespace System.Workflow.ComponentModel.Design
             try
             {
                 if ((!this.refreshTypeTextBox) && (this.artifactListView.SelectedItems.Count > 0))
-                    this.typeTextBox.Text = (this.artifactListView.SelectedItems[0].Tag as Type).FullName;
+                    this.typeTextBox.Text = (
+                        this.artifactListView.SelectedItems[0].Tag as Type
+                    ).FullName;
 
                 if (this.artifactListView.SelectedItems.Count > 0)
                     this.artifactListView.SelectedItems[0].EnsureVisible();
 
                 //Update the namespace selection in tree based on listview selection
-                if (!this.artifactListView.Focused || this.artifactListView.SelectedItems.Count == 0)
+                if (
+                    !this.artifactListView.Focused
+                    || this.artifactListView.SelectedItems.Count == 0
+                )
                     return;
 
                 Type type = this.artifactListView.SelectedItems[0].Tag as Type;
@@ -605,10 +754,12 @@ namespace System.Workflow.ComponentModel.Design
         private void OnListViewMouseDown(object sender, MouseEventArgs mouseArgs)
         {
             //Close the dialog on double click
-            if (mouseArgs.Clicks > 1 && 
-            this.artifactListView.SelectedItems.Count > 0 && 
-            this.artifactListView.SelectedItems[0].Tag is Type &&
-            this.buttonOK.Enabled == true)
+            if (
+                mouseArgs.Clicks > 1
+                && this.artifactListView.SelectedItems.Count > 0
+                && this.artifactListView.SelectedItems[0].Tag is Type
+                && this.buttonOK.Enabled == true
+            )
                 OkButtonClicked(this.buttonOK, EventArgs.Empty);
         }
 
@@ -633,7 +784,10 @@ namespace System.Workflow.ComponentModel.Design
 
         private void GetHelp()
         {
-            DesignerHelpers.ShowHelpFromKeyword(this.serviceProvider, typeof(TypeBrowserDialog).FullName + ".UI");
+            DesignerHelpers.ShowHelpFromKeyword(
+                this.serviceProvider,
+                typeof(TypeBrowserDialog).FullName + ".UI"
+            );
         }
 
         private void OnTypeTextBoxSelectedIndexChanged(object sender, EventArgs e)
@@ -660,7 +814,8 @@ namespace System.Workflow.ComponentModel.Design
                     int[] arrayRanks = null;
 
                     GetTypeParts(actualType, out baseType, out parameterDataArray, out arrayRanks);
-                    this.genericParameters.Parameters = parameterDataArray != null ? parameterDataArray : new ParameterData[0];
+                    this.genericParameters.Parameters =
+                        parameterDataArray != null ? parameterDataArray : new ParameterData[0];
                     this.genericParametersPropertyGrid.Refresh();
 
                     ListSelectionChanged(baseType);
@@ -723,24 +878,46 @@ namespace System.Workflow.ComponentModel.Design
 
                     if (exception != null)
                     {
-                        string errorMessage = (exception is ReflectionTypeLoadException || (exception.InnerException != null && exception.InnerException is ReflectionTypeLoadException)) ? DR.GetString(DR.TypeBrowser_UnableToLoadOneOrMoreTypes) : DR.GetString(DR.TypeBrowser_ProblemsLoadingAssembly);
-                        errorMessage = string.Format(CultureInfo.CurrentCulture, errorMessage, new object[] { fileDialog.FileName });
+                        string errorMessage =
+                            (
+                                exception is ReflectionTypeLoadException
+                                || (
+                                    exception.InnerException != null
+                                    && exception.InnerException is ReflectionTypeLoadException
+                                )
+                            )
+                                ? DR.GetString(DR.TypeBrowser_UnableToLoadOneOrMoreTypes)
+                                : DR.GetString(DR.TypeBrowser_ProblemsLoadingAssembly);
+                        errorMessage = string.Format(
+                            CultureInfo.CurrentCulture,
+                            errorMessage,
+                            new object[] { fileDialog.FileName }
+                        );
                         DesignerHelpers.ShowError(this.serviceProvider, errorMessage);
                     }
                 };
 
                 try
                 {
-                    ITypeProviderCreator typeProviderCreator = this.serviceProvider.GetService(typeof(ITypeProviderCreator)) as ITypeProviderCreator;
+                    ITypeProviderCreator typeProviderCreator =
+                        this.serviceProvider.GetService(typeof(ITypeProviderCreator))
+                        as ITypeProviderCreator;
                     if (typeProviderCreator != null)
-                        this.localTypeProvider.AddAssembly(typeProviderCreator.GetTransientAssembly(AssemblyName.GetAssemblyName(fileDialog.FileName)));
+                        this.localTypeProvider.AddAssembly(
+                            typeProviderCreator.GetTransientAssembly(
+                                AssemblyName.GetAssemblyName(fileDialog.FileName)
+                            )
+                        );
                     else
                         this.localTypeProvider.AddAssemblyReference(fileDialog.FileName);
 
                     Helpers.UpdateTypeProviderAssembliesRegistry(fileDialog.FileName);
                     this.localTypeProvider.TypeLoadErrorsChanged += typeLoadErrorsChangedHandler;
 
-                    UpdateTreeView(GetTargetFrameworkTypes(this.localTypeProvider).ToArray(), this.typeTextBox.AutoCompleteCustomSource);
+                    UpdateTreeView(
+                        GetTargetFrameworkTypes(this.localTypeProvider).ToArray(),
+                        this.typeTextBox.AutoCompleteCustomSource
+                    );
                 }
                 catch (FileNotFoundException fnf)
                 {
@@ -748,15 +925,24 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 catch (BadImageFormatException)
                 {
-                    DesignerHelpers.ShowError(this.serviceProvider, SR.GetString(SR.Error_AssemblyBadImage, fileDialog.FileName));
+                    DesignerHelpers.ShowError(
+                        this.serviceProvider,
+                        SR.GetString(SR.Error_AssemblyBadImage, fileDialog.FileName)
+                    );
                 }
                 catch (FileLoadException)
                 {
-                    DesignerHelpers.ShowError(this.serviceProvider, SR.GetString(SR.Error_AssemblyBadImage, fileDialog.FileName));
+                    DesignerHelpers.ShowError(
+                        this.serviceProvider,
+                        SR.GetString(SR.Error_AssemblyBadImage, fileDialog.FileName)
+                    );
                 }
                 catch (Exception ex)
                 {
-                    DesignerHelpers.ShowError(this.serviceProvider, SR.GetString(SR.Error_AddAssemblyRef, fileDialog.FileName, ex.Message));
+                    DesignerHelpers.ShowError(
+                        this.serviceProvider,
+                        SR.GetString(SR.Error_AddAssemblyRef, fileDialog.FileName, ex.Message)
+                    );
                 }
                 finally
                 {
@@ -784,7 +970,9 @@ namespace System.Workflow.ComponentModel.Design
             //Create imagelist for tree and list
             this.artifactImages = new ImageList();
             this.artifactImages.TransparentColor = Color.FromArgb(0, 255, 0);
-            this.artifactImages.Images.AddStrip((Image)TypeBrowserDialog.ResMgr.GetObject("IDB_ARTIFACTIMAGES"));
+            this.artifactImages.Images.AddStrip(
+                (Image)TypeBrowserDialog.ResMgr.GetObject("IDB_ARTIFACTIMAGES")
+            );
 
             //DO NOT CHANGE THE CREATION SEQUENCE OF FOLLOWING CONTROLS
 
@@ -805,8 +993,14 @@ namespace System.Workflow.ComponentModel.Design
             this.helpTextHolder.Visible = false;
             this.helpTextWindow = new HelpTextWindow();
             this.helpTextWindow.Parent = this;
-            this.helpTextWindow.Location = new Point(this.helpTextHolder.Location.X + 3, this.helpTextHolder.Location.Y + 3);
-            this.helpTextWindow.Size = new Size(this.helpTextHolder.Size.Width - 6, this.helpTextHolder.Size.Height - 6);
+            this.helpTextWindow.Location = new Point(
+                this.helpTextHolder.Location.X + 3,
+                this.helpTextHolder.Location.Y + 3
+            );
+            this.helpTextWindow.Size = new Size(
+                this.helpTextHolder.Size.Width - 6,
+                this.helpTextHolder.Size.Height - 6
+            );
 
             //Set the text based on the browsed type
             if (this.typeFilterProvider != null)
@@ -818,11 +1012,16 @@ namespace System.Workflow.ComponentModel.Design
                 this.Font = (Font)uisvc.Styles["DialogFont"];
 
             //Set the font for the artifact label
-            this.artifactLabel.Font = new Font(this.Font.Name, this.Font.SizeInPoints, FontStyle.Bold);
+            this.artifactLabel.Font = new Font(
+                this.Font.Name,
+                this.Font.SizeInPoints,
+                FontStyle.Bold
+            );
 
             this.genericParametersPropertyGrid.SelectedObject = this.genericParameters;
             this.genericParametersPropertyGrid.Site = this;
-            this.genericParametersPropertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(GenericParameterChanged);
+            this.genericParametersPropertyGrid.PropertyValueChanged +=
+                new PropertyValueChangedEventHandler(GenericParameterChanged);
             this.ResumeLayout(false);
         }
 
@@ -862,12 +1061,16 @@ namespace System.Workflow.ComponentModel.Design
                 }
 
                 ITypeProvider typeProvider = this.TypeProvider;
-                IExtendedUIService2 extendedUIService = (IExtendedUIService2)this.serviceProvider.GetService(typeof(IExtendedUIService2));
+                IExtendedUIService2 extendedUIService = (IExtendedUIService2)
+                    this.serviceProvider.GetService(typeof(IExtendedUIService2));
                 foreach (Type type in GetTargetFrameworkTypes(typeProvider))
                 {
                     try
                     {
-                        object[] attributes = type.GetCustomAttributes(typeof(ObsoleteAttribute), false);
+                        object[] attributes = type.GetCustomAttributes(
+                            typeof(ObsoleteAttribute),
+                            false
+                        );
                         if ((attributes != null) && attributes.Length > 0)
                             continue;
                     }
@@ -876,7 +1079,22 @@ namespace System.Workflow.ComponentModel.Design
                         Debug.WriteLine("Count not retrieve attributes from type:" + e.Message);
                     }
 
-                    if ((namespaceToFilter == null || type.Namespace == namespaceToFilter) && ((selectedAssemblies.Count == 0 && type.Assembly == null) || selectedAssemblies.Contains(type.Assembly)) && (this.typeFilterProvider == null || this.typeFilterProvider.CanFilterType(extendedUIService != null ? extendedUIService.GetRuntimeType(type) : type, false)))
+                    if (
+                        (namespaceToFilter == null || type.Namespace == namespaceToFilter)
+                        && (
+                            (selectedAssemblies.Count == 0 && type.Assembly == null)
+                            || selectedAssemblies.Contains(type.Assembly)
+                        )
+                        && (
+                            this.typeFilterProvider == null
+                            || this.typeFilterProvider.CanFilterType(
+                                extendedUIService != null
+                                    ? extendedUIService.GetRuntimeType(type)
+                                    : type,
+                                false
+                            )
+                        )
+                    )
                     {
                         ListViewItem listItem = new ListViewItem();
 
@@ -898,7 +1116,6 @@ namespace System.Workflow.ComponentModel.Design
             {
                 DesignerHelpers.ShowError(this.serviceProvider, ex);
             }
-
         }
 
         private void GenericParameterChanged(object sender, PropertyValueChangedEventArgs e)
@@ -937,8 +1154,10 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (TreeNode assemblyNode in assembliesNode.Nodes)
                 {
                     Assembly assembly = assemblyNode.Tag as Assembly;
-                    if (assembly.FullName == assemblyName ||
-                        assembly.GetName().Name == assemblyName)
+                    if (
+                        assembly.FullName == assemblyName
+                        || assembly.GetName().Name == assemblyName
+                    )
                     {
                         selectedAssemblyNode = assemblyNode;
                         break;
@@ -971,7 +1190,7 @@ namespace System.Workflow.ComponentModel.Design
             if (selectedNode == null)
                 selectedNode = selectedAssemblyNode;
 
-            if (selectedNode != null && this.artifactTreeView.CanFocus) 
+            if (selectedNode != null && this.artifactTreeView.CanFocus)
             {
                 this.artifactTreeView.SelectedNode = selectedNode;
                 selectedNode.EnsureVisible();
@@ -983,7 +1202,10 @@ namespace System.Workflow.ComponentModel.Design
             if (columnIndex < 0 || columnIndex >= this.artifactListView.Columns.Count)
                 return;
 
-            ListItemComparer listItemComparer = new ListItemComparer((columnIndex == 0) ? true : false, this.sortListViewAscending);
+            ListItemComparer listItemComparer = new ListItemComparer(
+                (columnIndex == 0) ? true : false,
+                this.sortListViewAscending
+            );
             this.artifactListView.ListViewItemSorter = listItemComparer;
 
             if (this.artifactListView.SelectedItems.Count > 0)
@@ -997,7 +1219,9 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (NativeMethods.Header_GetItem(headerWindow, i, headerItem))
                 {
-                    headerItem.fmt &= ~(NativeMethods.HDF_BITMAP | NativeMethods.HDF_BITMAP_ON_RIGHT);
+                    headerItem.fmt &= ~(
+                        NativeMethods.HDF_BITMAP | NativeMethods.HDF_BITMAP_ON_RIGHT
+                    );
                     headerItem.hbm = IntPtr.Zero;
                     NativeMethods.Header_SetItem(headerWindow, i, headerItem);
                 }
@@ -1007,7 +1231,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 headerItem.mask = NativeMethods.HDI_FORMAT | NativeMethods.HDI_BITMAP;
                 headerItem.fmt |= NativeMethods.HDF_BITMAP | NativeMethods.HDF_BITMAP_ON_RIGHT;
-                headerItem.hbm = (this.sortListViewAscending) ? this.bitmapSortUp : this.bitmapSortDown;
+                headerItem.hbm =
+                    (this.sortListViewAscending) ? this.bitmapSortUp : this.bitmapSortDown;
                 NativeMethods.Header_SetItem(headerWindow, columnIndex, headerItem);
             }
         }
@@ -1018,7 +1243,14 @@ namespace System.Workflow.ComponentModel.Design
             Type selectedType = null;
 
             selectedType = typeProvider.GetType(this.typeTextBox.Text);
-            if ((null != selectedType) && (this.typeFilterProvider == null || (this.typeFilterProvider.CanFilterType(selectedType, false))) && !selectedType.IsGenericTypeDefinition)
+            if (
+                (null != selectedType)
+                && (
+                    this.typeFilterProvider == null
+                    || (this.typeFilterProvider.CanFilterType(selectedType, false))
+                )
+                && !selectedType.IsGenericTypeDefinition
+            )
             {
                 this.buttonOK.Enabled = true;
                 this.AcceptButton = this.buttonOK;
@@ -1069,12 +1301,16 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 if (appendParameteres)
                     typeName += parameters;
-
             }
             this.typeTextBox.Text = typeName;
         }
 
-        private void GetTypeParts(Type type, out Type baseType, out ParameterData[] parameterDataArray, out int[] arrayRanks)
+        private void GetTypeParts(
+            Type type,
+            out Type baseType,
+            out ParameterData[] parameterDataArray,
+            out int[] arrayRanks
+        )
         {
             baseType = null;
             parameterDataArray = null;
@@ -1083,7 +1319,12 @@ namespace System.Workflow.ComponentModel.Design
             if (type.IsArray == true)
             {
                 ArrayList arrayRankList = new ArrayList();
-                GetTypeParts(type.GetElementType(), out baseType, out parameterDataArray, out arrayRanks);
+                GetTypeParts(
+                    type.GetElementType(),
+                    out baseType,
+                    out parameterDataArray,
+                    out arrayRanks
+                );
                 if (arrayRanks != null)
                     arrayRankList.AddRange(arrayRanks);
                 arrayRankList.Add(type.GetArrayRank());
@@ -1113,7 +1354,8 @@ namespace System.Workflow.ComponentModel.Design
                         parameterData.Type = type.GetGenericArguments()[loop];
                     parameterDataList.Add(parameterData);
                 }
-                parameterDataArray = (ParameterData[])parameterDataList.ToArray(typeof(ParameterData));
+                parameterDataArray = (ParameterData[])
+                    parameterDataList.ToArray(typeof(ParameterData));
                 baseType = unboundedType;
             }
             else
@@ -1139,7 +1381,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     foreach (Type parameterType in type.GetGenericArguments())
                     {
-                        typeName.Replace("[" + parameterType.AssemblyQualifiedName + "]", parameterType.FullName);
+                        typeName.Replace(
+                            "[" + parameterType.AssemblyQualifiedName + "]",
+                            parameterType.FullName
+                        );
                         types.Push(parameterType);
                     }
                 }
@@ -1154,10 +1399,13 @@ namespace System.Workflow.ComponentModel.Design
             {
                 ITypeProvider typeProvider = this.localTypeProvider as ITypeProvider;
                 if (typeProvider == null)
-                    typeProvider = (ITypeProvider)this.serviceProvider.GetService(typeof(ITypeProvider));
+                    typeProvider = (ITypeProvider)
+                        this.serviceProvider.GetService(typeof(ITypeProvider));
 
                 if (typeProvider == null)
-                    throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                    );
 
                 return typeProvider;
             }
@@ -1169,21 +1417,32 @@ namespace System.Workflow.ComponentModel.Design
         {
             private bool compareTypeName;
             private bool ascending;
+
             internal ListItemComparer(bool compareTypeName, bool ascending)
             {
                 this.compareTypeName = compareTypeName;
                 this.ascending = ascending;
             }
-            
-            
-            [SuppressMessage("Microsoft.Globalization", "CA1307:SpecifyStringComparison", MessageId = "System.String.Compare(System.String,System.String)", Justification = "This is not a security issue because this is a design time class")]
+
+            [SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1307:SpecifyStringComparison",
+                MessageId = "System.String.Compare(System.String,System.String)",
+                Justification = "This is not a security issue because this is a design time class"
+            )]
             public int Compare(object first, object second)
             {
                 int result = 0;
                 if (this.compareTypeName)
-                    result = string.Compare(((ListViewItem)first).Text, ((ListViewItem)second).Text);
+                    result = string.Compare(
+                        ((ListViewItem)first).Text,
+                        ((ListViewItem)second).Text
+                    );
                 else
-                    result = string.Compare(((ListViewItem)first).SubItems[1].Text, ((ListViewItem)second).SubItems[1].Text);
+                    result = string.Compare(
+                        ((ListViewItem)first).SubItems[1].Text,
+                        ((ListViewItem)second).SubItems[1].Text
+                    );
                 return ((this.ascending) ? 1 * result : -1 * result);
             }
         }
@@ -1215,7 +1474,13 @@ namespace System.Workflow.ComponentModel.Design
 
             internal void UpdateHelpText(Type selectedType)
             {
-                using (Font helpFontBold = new Font(this.Font.FontFamily, this.Font.SizeInPoints, FontStyle.Bold))
+                using (
+                    Font helpFontBold = new Font(
+                        this.Font.FontFamily,
+                        this.Font.SizeInPoints,
+                        FontStyle.Bold
+                    )
+                )
                 {
                     this.Clear();
 
@@ -1225,7 +1490,13 @@ namespace System.Workflow.ComponentModel.Design
                         keywords[0] = selectedType.Name;
                         try
                         {
-                            keywords[1] = (selectedType.Namespace != null && selectedType.Namespace.Length > 0) ? selectedType.Namespace : TypeBrowserDialog.ResMgr.GetString("IDS_GLOBALNS");
+                            keywords[1] =
+                                (
+                                    selectedType.Namespace != null
+                                    && selectedType.Namespace.Length > 0
+                                )
+                                    ? selectedType.Namespace
+                                    : TypeBrowserDialog.ResMgr.GetString("IDS_GLOBALNS");
                         }
                         catch (NullReferenceException)
                         {
@@ -1233,22 +1504,38 @@ namespace System.Workflow.ComponentModel.Design
                             //       Remove the try-catch when the bug is fixed.
                         }
                         keywords[1] = "{" + keywords[1] + "}";
-                        keywords[2] = (selectedType.Assembly != null) ? selectedType.Assembly.GetName().FullName : "<Current Project>";
+                        keywords[2] =
+                            (selectedType.Assembly != null)
+                                ? selectedType.Assembly.GetName().FullName
+                                : "<Current Project>";
 
                         Color[] keywordColors = new Color[3];
                         keywordColors[0] = Color.DarkRed;
                         keywordColors[1] = Color.Green;
                         keywordColors[2] = Color.Blue;
 
-                        this.Text = TypeBrowserDialog.ResMgr.GetString("IDS_SELECTEDTYPE") + " " + keywords[0] + " " +
-                        TypeBrowserDialog.ResMgr.GetString("IDS_MEMBEROF") + " " + keywords[1] + "\r\n" +
-                        TypeBrowserDialog.ResMgr.GetString("IDS_CONTAINEDINASM") + " " + keywords[2];
+                        this.Text =
+                            TypeBrowserDialog.ResMgr.GetString("IDS_SELECTEDTYPE")
+                            + " "
+                            + keywords[0]
+                            + " "
+                            + TypeBrowserDialog.ResMgr.GetString("IDS_MEMBEROF")
+                            + " "
+                            + keywords[1]
+                            + "\r\n"
+                            + TypeBrowserDialog.ResMgr.GetString("IDS_CONTAINEDINASM")
+                            + " "
+                            + keywords[2];
 
                         int nStartSearch = 0;
                         for (int i = 0; i < keywords.GetLength(0); i++)
                         {
                             int nPrevStart = nStartSearch;
-                            nStartSearch = this.Find(keywords[i], nStartSearch, RichTextBoxFinds.MatchCase | RichTextBoxFinds.WholeWord);
+                            nStartSearch = this.Find(
+                                keywords[i],
+                                nStartSearch,
+                                RichTextBoxFinds.MatchCase | RichTextBoxFinds.WholeWord
+                            );
                             this.SelectionColor = keywordColors[i];
                             this.SelectionFont = helpFontBold;
                             nStartSearch += keywords[i].Length;
@@ -1271,34 +1558,20 @@ namespace System.Workflow.ComponentModel.Design
 
         IComponent System.ComponentModel.ISite.Component
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
         bool System.ComponentModel.ISite.DesignMode
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
         string System.ComponentModel.ISite.Name
         {
-            get
-            {
-                return "";
-            }
-            set
-            {
-            }
+            get { return ""; }
+            set { }
         }
         IContainer System.ComponentModel.ISite.Container
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         #endregion
@@ -1327,28 +1600,14 @@ namespace System.Workflow.ComponentModel.Design
 
             public Type Type
             {
-                get
-                {
-                    return type;
-                }
-
-                set
-                {
-                    type = value;
-                }
+                get { return type; }
+                set { type = value; }
             }
 
             public Type ParameterType
             {
-                get
-                {
-                    return this.parameterType;
-                }
-
-                set
-                {
-                    this.parameterType = value;
-                }
+                get { return this.parameterType; }
+                set { this.parameterType = value; }
             }
 
             #region ITypeFilterProvider Members
@@ -1356,7 +1615,15 @@ namespace System.Workflow.ComponentModel.Design
             {
                 bool validType = true;
 
-                if ((type.IsByRef) || (!System.Workflow.ComponentModel.Compiler.TypeProvider.IsAssignable(this.parameterType.BaseType, type)))
+                if (
+                    (type.IsByRef)
+                    || (
+                        !System.Workflow.ComponentModel.Compiler.TypeProvider.IsAssignable(
+                            this.parameterType.BaseType,
+                            type
+                        )
+                    )
+                )
                     validType = false;
 
                 if (throwOnError && !validType)
@@ -1369,7 +1636,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 get
                 {
-                    return SR.GetString(SR.FilterDescription_GenericArgument, this.parameterType.Name);
+                    return SR.GetString(
+                        SR.FilterDescription_GenericArgument,
+                        this.parameterType.Name
+                    );
                 }
             }
             #endregion
@@ -1385,14 +1655,8 @@ namespace System.Workflow.ComponentModel.Design
 
             public ParameterData[] Parameters
             {
-                get
-                {
-                    return parameters;
-                }
-                set
-                {
-                    this.parameters = value;
-                }
+                get { return parameters; }
+                set { this.parameters = value; }
             }
         }
 
@@ -1407,17 +1671,29 @@ namespace System.Workflow.ComponentModel.Design
                 return true;
             }
 
-            public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+            public override PropertyDescriptorCollection GetProperties(
+                ITypeDescriptorContext context,
+                object value,
+                Attribute[] attributes
+            )
             {
                 PropertyDescriptorCollection newProps = new PropertyDescriptorCollection(null);
                 GenericParameters genericParameters = value as GenericParameters;
 
                 foreach (ParameterData parameterData in genericParameters.Parameters)
-                    newProps.Add(new ParameterDataPropertyDescriptor(context, TypeDescriptor.CreateProperty(typeof(GenericParameters), parameterData.ParameterType.Name, typeof(ParameterData))));
+                    newProps.Add(
+                        new ParameterDataPropertyDescriptor(
+                            context,
+                            TypeDescriptor.CreateProperty(
+                                typeof(GenericParameters),
+                                parameterData.ParameterType.Name,
+                                typeof(ParameterData)
+                            )
+                        )
+                    );
 
                 return newProps;
             }
-
         }
 
         #endregion
@@ -1432,6 +1708,7 @@ namespace System.Workflow.ComponentModel.Design
                     return true;
                 return base.CanConvertFrom(context, sourceType);
             }
+
             public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (destinationType == typeof(string))
@@ -1439,9 +1716,13 @@ namespace System.Workflow.ComponentModel.Design
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
-                if (value == null) 
+                if (value == null)
                     return new ParameterData();
                 else if (value is string)
                 {
@@ -1449,7 +1730,8 @@ namespace System.Workflow.ComponentModel.Design
 
                     if ((string)value != string.Empty)
                     {
-                        ITypeProvider typeProvider = context.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                        ITypeProvider typeProvider =
+                            context.GetService(typeof(ITypeProvider)) as ITypeProvider;
                         parameterData.Type = typeProvider.GetType(value as string, true);
                     }
                     return parameterData;
@@ -1458,7 +1740,12 @@ namespace System.Workflow.ComponentModel.Design
                 return base.ConvertFrom(context, culture, value);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
                 if (destinationType == typeof(string))
                 {
@@ -1468,13 +1755,11 @@ namespace System.Workflow.ComponentModel.Design
                     else
                         return string.Empty;
                 }
-                else
-                    if (destinationType == null)
-                        return string.Empty;
+                else if (destinationType == null)
+                    return string.Empty;
 
                 return base.ConvertTo(context, culture, value, destinationType);
             }
-
         }
 
         #endregion
@@ -1486,73 +1771,60 @@ namespace System.Workflow.ComponentModel.Design
             private PropertyDescriptor realPropertyDescriptor = null;
             private IServiceProvider serviceProvider = null;
 
-            internal ParameterDataPropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor desc)
+            internal ParameterDataPropertyDescriptor(
+                IServiceProvider serviceProvider,
+                PropertyDescriptor desc
+            )
                 : base(desc, null)
             {
                 this.realPropertyDescriptor = desc;
                 this.serviceProvider = serviceProvider;
             }
+
             public override string Category
             {
-                get
-                {
-                    return SR.GetString(SR.GenericParameters);
-                }
+                get { return SR.GetString(SR.GenericParameters); }
             }
             public override AttributeCollection Attributes
             {
-                get
-                {
-                    return this.realPropertyDescriptor.Attributes;
-                }
+                get { return this.realPropertyDescriptor.Attributes; }
             }
             public override TypeConverter Converter
             {
-                get
-                {
-                    return this.realPropertyDescriptor.Converter;
-                }
+                get { return this.realPropertyDescriptor.Converter; }
             }
             public override string Description
             {
-                get
-                {
-                    return this.realPropertyDescriptor.Description;
-                }
+                get { return this.realPropertyDescriptor.Description; }
             }
             public override Type ComponentType
             {
-                get
-                {
-                    return this.realPropertyDescriptor.ComponentType;
-                }
+                get { return this.realPropertyDescriptor.ComponentType; }
             }
             public override Type PropertyType
             {
-                get
-                {
-                    return this.realPropertyDescriptor.PropertyType;
-                }
+                get { return this.realPropertyDescriptor.PropertyType; }
             }
             public override bool IsReadOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
+
             public override void ResetValue(object component)
             {
                 this.realPropertyDescriptor.ResetValue(component);
             }
+
             public override bool CanResetValue(object component)
             {
                 return this.realPropertyDescriptor.CanResetValue(component);
             }
+
             public override bool ShouldSerializeValue(object component)
             {
                 return this.realPropertyDescriptor.ShouldSerializeValue(component);
             }
+
             public override object GetValue(object component)
             {
                 GenericParameters genericParameters = component as GenericParameters;
@@ -1564,6 +1836,7 @@ namespace System.Workflow.ComponentModel.Design
 
                 return null;
             }
+
             public override void SetValue(object component, object value)
             {
                 GenericParameters genericParameters = component as GenericParameters;
@@ -1589,12 +1862,28 @@ namespace System.Workflow.ComponentModel.Design
                 this.serviceProvider = serviceProvider;
             }
 
-            public IComponent Component { get { return null; } }
-            public IContainer Container { get { return null; } }
-            public bool DesignMode { get { return true; } }
-            public string Name { get { return string.Empty; } set { } }
-            public object GetService(Type type) { return this.serviceProvider.GetService(type); }
+            public IComponent Component
+            {
+                get { return null; }
+            }
+            public IContainer Container
+            {
+                get { return null; }
+            }
+            public bool DesignMode
+            {
+                get { return true; }
+            }
+            public string Name
+            {
+                get { return string.Empty; }
+                set { }
+            }
+
+            public object GetService(Type type)
+            {
+                return this.serviceProvider.GetService(type);
+            }
         }
     }
-
 }

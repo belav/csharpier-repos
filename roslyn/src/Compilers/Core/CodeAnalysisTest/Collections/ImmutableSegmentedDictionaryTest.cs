@@ -24,13 +24,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void AddExistingKeySameValueTest()
         {
-            AddExistingKeySameValueTestHelper(Empty<string, string>(StringComparer.Ordinal), "Company", "Microsoft", "Microsoft");
+            AddExistingKeySameValueTestHelper(
+                Empty<string, string>(StringComparer.Ordinal),
+                "Company",
+                "Microsoft",
+                "Microsoft"
+            );
         }
 
         [Fact]
         public void AddExistingKeyDifferentValueTest()
         {
-            AddExistingKeyDifferentValueTestHelper(Empty<string, string>(StringComparer.Ordinal), "Company", "Microsoft", "MICROSOFT");
+            AddExistingKeyDifferentValueTestHelper(
+                Empty<string, string>(StringComparer.Ordinal),
+                "Company",
+                "Microsoft",
+                "MICROSOFT"
+            );
         }
 
         [Fact]
@@ -56,13 +66,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 .Add("JOHNNY", "Appleseed");
             var sortedMap = map.ToImmutableSortedDictionary(StringComparer.Ordinal);
             Assert.Equal(sortedMap.Count, map.Count);
-            CollectionAssertAreEquivalent<KeyValuePair<string, string>>(sortedMap.ToList(), map.ToList());
+            CollectionAssertAreEquivalent<KeyValuePair<string, string>>(
+                sortedMap.ToList(),
+                map.ToList()
+            );
         }
 
         [Fact]
         public void SetItemUpdateEqualKeyTest()
         {
-            var map = Empty<string, int>().WithComparer(StringComparer.OrdinalIgnoreCase)
+            var map = Empty<string, int>()
+                .WithComparer(StringComparer.OrdinalIgnoreCase)
                 .SetItem("A", 1);
             map = map.SetItem("a", 2);
             Assert.Equal("A", map.Keys.Single());
@@ -71,7 +85,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ContainsValueTest()
         {
-            ContainsValueTestHelper(ImmutableSegmentedDictionary<int, GenericParameterHelper>.Empty, 1, new GenericParameterHelper());
+            ContainsValueTestHelper(
+                ImmutableSegmentedDictionary<int, GenericParameterHelper>.Empty,
+                1,
+                new GenericParameterHelper()
+            );
         }
 
         [Fact]
@@ -80,7 +98,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedDictionary<int, string?> dictionary = new Dictionary<int, string?>
             {
                 { 1, "a" },
-                { 2, "b" }
+                { 2, "b" },
             }.ToImmutableSegmentedDictionary();
             Assert.False(dictionary.ContainsValue("c"));
             Assert.False(dictionary.ContainsValue(null));
@@ -89,7 +107,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Create()
         {
-            IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string> { { "a", "b" } };
+            IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string>
+            {
+                { "a", "b" },
+            };
             var keyComparer = StringComparer.OrdinalIgnoreCase;
 
             var dictionary = ImmutableSegmentedDictionary.Create<string, string>();
@@ -112,10 +133,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ToImmutableDictionary()
         {
-            IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string> { { "a", "B" } };
+            IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string>
+            {
+                { "a", "B" },
+            };
             var keyComparer = StringComparer.OrdinalIgnoreCase;
 
-            ImmutableSegmentedDictionary<string, string> dictionary = pairs.ToImmutableSegmentedDictionary();
+            ImmutableSegmentedDictionary<string, string> dictionary =
+                pairs.ToImmutableSegmentedDictionary();
             Assert.Equal(1, dictionary.Count);
             Assert.Same(EqualityComparer<string>.Default, dictionary.KeyComparer);
 
@@ -123,13 +148,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(1, dictionary.Count);
             Assert.Same(keyComparer, dictionary.KeyComparer);
 
-            dictionary = pairs.ToImmutableSegmentedDictionary(p => p.Key.ToUpperInvariant(), p => p.Value.ToLowerInvariant());
+            dictionary = pairs.ToImmutableSegmentedDictionary(
+                p => p.Key.ToUpperInvariant(),
+                p => p.Value.ToLowerInvariant()
+            );
             Assert.Equal(1, dictionary.Count);
             Assert.Equal("A", dictionary.Keys.Single());
             Assert.Equal("b", dictionary.Values.Single());
             Assert.Same(EqualityComparer<string>.Default, dictionary.KeyComparer);
 
-            dictionary = pairs.ToImmutableSegmentedDictionary(p => p.Key.ToUpperInvariant(), p => p.Value.ToLowerInvariant(), keyComparer);
+            dictionary = pairs.ToImmutableSegmentedDictionary(
+                p => p.Key.ToUpperInvariant(),
+                p => p.Value.ToLowerInvariant(),
+                keyComparer
+            );
             Assert.Equal(1, dictionary.Count);
             Assert.Equal("A", dictionary.Keys.Single());
             Assert.Equal("b", dictionary.Values.Single());
@@ -141,15 +173,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(2, intDictionary[2.0]);
             Assert.Equal(2, intDictionary.Count);
 
-            var stringIntDictionary = list.ToImmutableSegmentedDictionary(n => n.ToString(), StringComparer.OrdinalIgnoreCase);
+            var stringIntDictionary = list.ToImmutableSegmentedDictionary(
+                n => n.ToString(),
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Same(StringComparer.OrdinalIgnoreCase, stringIntDictionary.KeyComparer);
             Assert.Equal(1, stringIntDictionary["1"]);
             Assert.Equal(2, stringIntDictionary["2"]);
             Assert.Equal(2, intDictionary.Count);
 
-            Assert.Throws<ArgumentNullException>("keySelector", () => list.ToImmutableSegmentedDictionary<int, int>(null!));
-            Assert.Throws<ArgumentNullException>("keySelector", () => list.ToImmutableSegmentedDictionary<int, int, int>(null!, v => v));
-            Assert.Throws<ArgumentNullException>("elementSelector", () => list.ToImmutableSegmentedDictionary<int, int, int>(k => k, null!));
+            Assert.Throws<ArgumentNullException>(
+                "keySelector",
+                () => list.ToImmutableSegmentedDictionary<int, int>(null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "keySelector",
+                () => list.ToImmutableSegmentedDictionary<int, int, int>(null!, v => v)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "elementSelector",
+                () => list.ToImmutableSegmentedDictionary<int, int, int>(k => k, null!)
+            );
 
             list.ToDictionary(k => k, v => v, null); // verifies BCL behavior is to not throw.
             list.ToImmutableSegmentedDictionary(k => k, v => v, null);
@@ -170,7 +214,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void WithComparer()
         {
-            var map = ImmutableSegmentedDictionary.Create<string, string>().Add("a", "1").Add("B", "1");
+            var map = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("B", "1");
             Assert.Same(EqualityComparer<string>.Default, map.KeyComparer);
             Assert.True(map.ContainsKey("a"));
             Assert.False(map.ContainsKey("A"));
@@ -187,8 +234,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void WithComparerCollisions()
         {
             // First check where collisions have matching values.
-            var map = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("a", "1").Add("A", "1");
+            var map = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("A", "1");
             map = map.WithComparer(StringComparer.OrdinalIgnoreCase);
             Assert.Same(StringComparer.OrdinalIgnoreCase, map.KeyComparer);
             Assert.Equal(1, map.Count);
@@ -196,16 +245,24 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal("1", map["a"]);
 
             // Now check where collisions have conflicting values.
-            map = ImmutableSegmentedDictionary.Create<string, string>()
-              .Add("a", "1").Add("A", "2").Add("b", "3");
-            Assert.Throws<ArgumentException>(null, () => map.WithComparer(StringComparer.OrdinalIgnoreCase));
+            map = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("A", "2")
+                .Add("b", "3");
+            Assert.Throws<ArgumentException>(
+                null,
+                () => map.WithComparer(StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
         public void CollisionExceptionMessageContainsKey()
         {
-            var map = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("firstKey", "1").Add("secondKey", "2");
+            var map = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("firstKey", "1")
+                .Add("secondKey", "2");
             var exception = Assert.Throws<ArgumentException>(null, () => map.Add("firstKey", "3"));
             Assert.Contains("firstKey", exception.Message);
         }
@@ -222,8 +279,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void GetValueOrDefaultOfIImmutableDictionary()
         {
-            IImmutableDictionary<string, int> empty = ImmutableSegmentedDictionary.Create<string, int>();
-            IImmutableDictionary<string, int> populated = ImmutableSegmentedDictionary.Create<string, int>().Add("a", 5);
+            IImmutableDictionary<string, int> empty = ImmutableSegmentedDictionary.Create<
+                string,
+                int
+            >();
+            IImmutableDictionary<string, int> populated = ImmutableSegmentedDictionary
+                .Create<string, int>()
+                .Add("a", 5);
             Assert.Equal(0, empty.GetValueOrDefault("a"));
             Assert.Equal(1, empty.GetValueOrDefault("a", 1));
             Assert.Equal(5, populated.GetValueOrDefault("a"));
@@ -244,22 +306,41 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/50657")]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSegmentedDictionary.Create<int, int>());
-            ImmutableSegmentedDictionary<string, int> dict = ImmutableSegmentedDictionary.Create<string, int>().Add("One", 1).Add("Two", 2);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(dict);
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSegmentedDictionary.Create<int, int>()
+            );
+            ImmutableSegmentedDictionary<string, int> dict = ImmutableSegmentedDictionary
+                .Create<string, int>()
+                .Add("One", 1)
+                .Add("Two", 2);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                dict
+            );
 
-            object rootNode = DebuggerAttributes.GetFieldValue(ImmutableSegmentedDictionary.Create<string, string>(), "_root") ?? throw new InvalidOperationException();
+            object rootNode =
+                DebuggerAttributes.GetFieldValue(
+                    ImmutableSegmentedDictionary.Create<string, string>(),
+                    "_root"
+                ) ?? throw new InvalidOperationException();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State == DebuggerBrowsableState.RootHidden);
-            KeyValuePair<string, int>[]? items = itemProperty.GetValue(info.Instance) as KeyValuePair<string, int>[];
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                == DebuggerBrowsableState.RootHidden
+            );
+            KeyValuePair<string, int>[]? items =
+                itemProperty.GetValue(info.Instance) as KeyValuePair<string, int>[];
             Assert.Equal(dict, items);
         }
 
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/50657")]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSegmentedDictionary.Create<string, int>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object?)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSegmentedDictionary.Create<string, int>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object?)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -268,9 +349,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             ImmutableSegmentedDictionary<string, int> dictionary = new Dictionary<string, int>
             {
-                { "a", 1 }
+                { "a", 1 },
             }.ToImmutableSegmentedDictionary();
-            Assert.True(IsSame(ImmutableSegmentedDictionary<string, int>.Empty, dictionary.Clear()));
+            Assert.True(
+                IsSame(ImmutableSegmentedDictionary<string, int>.Empty, dictionary.Clear())
+            );
             Assert.NotEmpty(dictionary);
         }
 
@@ -279,11 +362,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             ImmutableSegmentedDictionary<string, int> dictionary = new Dictionary<string, int>
             {
-                { "a", 1 }
+                { "a", 1 },
             }.ToImmutableSegmentedDictionary(StringComparer.OrdinalIgnoreCase);
 
             ImmutableSegmentedDictionary<string, int> clearedDictionary = dictionary.Clear();
-            Assert.False(IsSame(ImmutableSegmentedDictionary<string, int>.Empty, clearedDictionary.Clear()));
+            Assert.False(
+                IsSame(ImmutableSegmentedDictionary<string, int>.Empty, clearedDictionary.Clear())
+            );
             Assert.NotEmpty(dictionary);
 
             clearedDictionary = clearedDictionary.Add("a", 1);
@@ -293,8 +378,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Indexer_KeyNotFoundException_ContainsKeyInMessage()
         {
-            var map = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("a", "1").Add("b", "2");
+            var map = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("b", "2");
             var missingKey = "__ThisKeyDoesNotExist__";
             var exception = Assert.Throws<KeyNotFoundException>(() => map[missingKey]);
             Assert.Contains(missingKey, exception.Message);
@@ -303,7 +390,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Keys_All()
         {
-            var map = ImmutableSegmentedDictionary.Create<string, string>()
+            var map = ImmutableSegmentedDictionary
+                .Create<string, string>()
                 .Add("a", "1")
                 .Add("b", "2");
 
@@ -316,14 +404,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Values_All()
         {
-            var map = ImmutableSegmentedDictionary.Create<string, string>()
+            var map = ImmutableSegmentedDictionary
+                .Create<string, string>()
                 .Add("a", "1")
                 .Add("b", "2");
 
             Assert.False(map.Values.All((key, arg) => key == arg, "1"));
             Assert.True(map.Values.All((key, arg) => key.Length == arg, 1));
 
-            Assert.True(ImmutableSegmentedDictionary<int, int>.Empty.Values.All((_, _) => false, 0));
+            Assert.True(
+                ImmutableSegmentedDictionary<int, int>.Empty.Values.All((_, _) => false, 0)
+            );
         }
 
         protected override IImmutableDictionary<TKey, TValue> Empty<TKey, TValue>()
@@ -331,24 +422,34 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return ImmutableSegmentedDictionaryTest.Empty<TKey, TValue>();
         }
 
-        protected override IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer)
+        protected override IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        )
         {
             return ImmutableSegmentedDictionary.Create<string, TValue>(comparer);
         }
 
-        protected override IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary)
+        protected override IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        )
         {
             return EqualityComparer<TValue>.Default;
         }
 
-        private protected static void ContainsValueTestHelper<TKey, TValue>(ImmutableSegmentedDictionary<TKey, TValue> map, TKey key, TValue value)
+        private protected static void ContainsValueTestHelper<TKey, TValue>(
+            ImmutableSegmentedDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             Assert.False(map.ContainsValue(value));
             Assert.True(map.Add(key, value).ContainsValue(value));
         }
 
-        private static ImmutableSegmentedDictionary<TKey, TValue> Empty<TKey, TValue>(IEqualityComparer<TKey>? keyComparer = null)
+        private static ImmutableSegmentedDictionary<TKey, TValue> Empty<TKey, TValue>(
+            IEqualityComparer<TKey>? keyComparer = null
+        )
             where TKey : notnull
         {
             return ImmutableSegmentedDictionary<TKey, TValue>.Empty.WithComparer(keyComparer);
@@ -381,13 +482,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
 
             public string Value { get; private set; }
+
             public override int GetHashCode()
             {
                 return StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value);
             }
+
             public override bool Equals(object? obj)
             {
-                return StringComparer.OrdinalIgnoreCase.Equals(this.Value, ((CaseInsensitiveString?)obj)!.Value);
+                return StringComparer.OrdinalIgnoreCase.Equals(
+                    this.Value,
+                    ((CaseInsensitiveString?)obj)!.Value
+                );
             }
         }
     }

@@ -28,23 +28,21 @@ internal sealed class HandleOptionsRequestsPageFilter : IPageFilter, IOrderedFil
     /// </summary>
     public int Order => 1000;
 
-    public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-    {
-    }
+    public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        if (context.HandlerMethod == null &&
-            context.Result == null &&
-            HttpMethods.IsOptions(context.HttpContext.Request.Method))
+        if (
+            context.HandlerMethod == null
+            && context.Result == null
+            && HttpMethods.IsOptions(context.HttpContext.Request.Method)
+        )
         {
             context.Result = new OkResult();
         }
     }
 
-    public void OnPageHandlerSelected(PageHandlerSelectedContext context)
-    {
-    }
+    public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
 }

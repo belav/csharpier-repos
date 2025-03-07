@@ -27,11 +27,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
 {
     public partial class PreviewTests : AbstractCSharpCodeActionTest
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeaturesWpf
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .EditorFeaturesWpf.AddExcludedPartTypes(
+                typeof(IDiagnosticUpdateSourceRegistrationService)
+            )
             .AddParts(
                 typeof(MockDiagnosticUpdateSourceRegistrationService),
-                typeof(MockPreviewPaneService));
+                typeof(MockPreviewPaneService)
+            );
 
         private const string AddedDocumentName = "AddedDocument";
         private const string AddedDocumentText = "class C1 {}";
@@ -42,8 +45,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
 
         protected override TestComposition GetComposition() => s_composition;
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new MyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new MyCodeRefactoringProvider();
 
         private sealed class MyCodeRefactoringProvider : CodeRefactoringProvider
         {
@@ -58,52 +63,85 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             {
                 private readonly Document _oldDocument;
 
-                public TestCodeAction(Document document)
-                    => _oldDocument = document;
+                public TestCodeAction(Document document) => _oldDocument = document;
 
                 public override string Title
                 {
-                    get
-                    {
-                        return "Title";
-                    }
+                    get { return "Title"; }
                 }
 
                 protected override Task<Solution> GetChangedSolutionAsync(
-                    IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
+                    IProgress<CodeAnalysisProgress> progress,
+                    CancellationToken cancellationToken
+                )
                 {
                     var solution = _oldDocument.Project.Solution;
 
                     // Add a document - This will result in IWpfTextView previews.
-                    solution = solution.AddDocument(DocumentId.CreateNewId(_oldDocument.Project.Id, AddedDocumentName), AddedDocumentName, AddedDocumentText);
+                    solution = solution.AddDocument(
+                        DocumentId.CreateNewId(_oldDocument.Project.Id, AddedDocumentName),
+                        AddedDocumentName,
+                        AddedDocumentText
+                    );
 
                     // Remove a reference - This will result in a string preview.
-                    var removedReference = _oldDocument.Project.MetadataReferences[_oldDocument.Project.MetadataReferences.Count - 1];
+                    var removedReference = _oldDocument.Project.MetadataReferences[
+                        _oldDocument.Project.MetadataReferences.Count - 1
+                    ];
                     s_removedMetadataReferenceDisplayName = removedReference.Display;
-                    solution = solution.RemoveMetadataReference(_oldDocument.Project.Id, removedReference);
+                    solution = solution.RemoveMetadataReference(
+                        _oldDocument.Project.Id,
+                        removedReference
+                    );
 
                     // Add a project - This will result in a string preview.
-                    solution = solution.AddProject(ProjectInfo.Create(s_addedProjectId, VersionStamp.Create(), AddedProjectName, AddedProjectName, LanguageNames.CSharp));
+                    solution = solution.AddProject(
+                        ProjectInfo.Create(
+                            s_addedProjectId,
+                            VersionStamp.Create(),
+                            AddedProjectName,
+                            AddedProjectName,
+                            LanguageNames.CSharp
+                        )
+                    );
 
                     // Change a document - This will result in IWpfTextView previews.
-                    solution = solution.WithDocumentSyntaxRoot(_oldDocument.Id, CSharpSyntaxTree.ParseText(ChangedDocumentText, cancellationToken: cancellationToken).GetRoot(cancellationToken));
+                    solution = solution.WithDocumentSyntaxRoot(
+                        _oldDocument.Id,
+                        CSharpSyntaxTree
+                            .ParseText(ChangedDocumentText, cancellationToken: cancellationToken)
+                            .GetRoot(cancellationToken)
+                    );
 
                     return Task.FromResult(solution);
                 }
             }
         }
 
-        private async Task<(Document document, SolutionPreviewResult previews)> GetMainDocumentAndPreviewsAsync(TestParameters parameters, TestWorkspace workspace)
+        private async Task<(
+            Document document,
+            SolutionPreviewResult previews
+        )> GetMainDocumentAndPreviewsAsync(TestParameters parameters, TestWorkspace workspace)
         {
             var document = GetDocument(workspace);
             var provider = CreateCodeRefactoringProvider(workspace, parameters);
             var span = document.GetSyntaxRootAsync().Result.Span;
             var refactorings = new List<CodeAction>();
-            var context = new CodeRefactoringContext(document, span, refactorings.Add, CancellationToken.None);
+            var context = new CodeRefactoringContext(
+                document,
+                span,
+                refactorings.Add,
+                CancellationToken.None
+            );
             provider.ComputeRefactoringsAsync(context).Wait();
             var action = refactorings.Single();
-            var editHandler = workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
-            var previews = await editHandler.GetPreviewsAsync(workspace, action.GetPreviewOperationsAsync(CancellationToken.None).Result, CancellationToken.None);
+            var editHandler =
+                workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
+            var previews = await editHandler.GetPreviewsAsync(
+                workspace,
+                action.GetPreviewOperationsAsync(CancellationToken.None).Result,
+                CancellationToken.None
+            );
 
             return (document, previews);
         }
@@ -122,7 +160,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             Assert.NotNull(preview);
             Assert.True(preview is DifferenceViewerPreview);
             var diffView = preview as DifferenceViewerPreview;
-            var text = diffView.Viewer.RightView.TextBuffer.AsTextContainer().CurrentText.ToString();
+            var text = diffView
+                .Viewer.RightView.TextBuffer.AsTextContainer()
+                .CurrentText.ToString();
             Assert.Equal(ChangedDocumentText, text);
             diffView.Dispose();
 

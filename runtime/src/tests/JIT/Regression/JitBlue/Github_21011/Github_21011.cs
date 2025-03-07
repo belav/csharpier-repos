@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public class Test_Github_21011
@@ -18,7 +18,7 @@ public class Test_Github_21011
     [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.NoInlining)]
     internal KeyValuePair<uint, float>? GetPair()
     {
-        KeyValuePair<uint,float>? result = new KeyValuePair<uint,float>?();
+        KeyValuePair<uint, float>? result = new KeyValuePair<uint, float>?();
         return result;
     }
 }

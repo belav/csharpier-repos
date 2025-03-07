@@ -5,24 +5,21 @@
 [A2]
 class Program
 {
-	void Test ()
-	{
-		new X();
-		
-		var s = new MultipleSameNames ();
-		s.AA = "1";
-		
-		Overload.Test (1);
-	}
-	
-	void Test2 (IMemberDelayed md)
-	{
-		md.Working ();
-		var t = typeof (IMemberDelayed);
-	}
+    void Test()
+    {
+        new X();
 
-	public static void Main ()
-	{
-	}
+        var s = new MultipleSameNames();
+        s.AA = "1";
+
+        Overload.Test(1);
+    }
+
+    void Test2(IMemberDelayed md)
+    {
+        md.Working();
+        var t = typeof(IMemberDelayed);
+    }
+
+    public static void Main() { }
 }
-

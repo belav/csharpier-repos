@@ -42,7 +42,9 @@ namespace System.ServiceModel.Description
             }
 
             VerifyContractNamespace(wsdls);
-            WsdlNS.ServiceDescription singleWsdl = GetSingleWsdl(CopyServiceDescriptionCollection(wsdls));
+            WsdlNS.ServiceDescription singleWsdl = GetSingleWsdl(
+                CopyServiceDescriptionCollection(wsdls)
+            );
 
             // Inline XML schemas
             foreach (XmlSchema schema in xsds)
@@ -67,7 +69,9 @@ namespace System.ServiceModel.Description
             }
         }
 
-        private static WsdlNS.ServiceDescription GetSingleWsdl(List<WsdlNS.ServiceDescription> wsdls)
+        private static WsdlNS.ServiceDescription GetSingleWsdl(
+            List<WsdlNS.ServiceDescription> wsdls
+        )
         {
             // Use WSDL that has the contracts as the base for single WSDL
             WsdlNS.ServiceDescription singleWsdl = wsdls.First(wsdl => wsdl.PortTypes.Count > 0);
@@ -81,20 +85,23 @@ namespace System.ServiceModel.Description
                 singleWsdl.Imports.Clear();
             }
 
-            Dictionary<XmlQualifiedName, XmlQualifiedName> bindingReferenceChanges = new Dictionary<XmlQualifiedName, XmlQualifiedName>();
+            Dictionary<XmlQualifiedName, XmlQualifiedName> bindingReferenceChanges =
+                new Dictionary<XmlQualifiedName, XmlQualifiedName>();
             foreach (WsdlNS.ServiceDescription wsdl in wsdls)
             {
                 if (wsdl != singleWsdl)
                 {
                     MergeWsdl(singleWsdl, wsdl, bindingReferenceChanges);
-                }              
+                }
             }
 
             EnsureSingleNamespace(singleWsdl, bindingReferenceChanges);
             return singleWsdl;
         }
 
-        private static List<WsdlNS.ServiceDescription> CopyServiceDescriptionCollection(List<WsdlNS.ServiceDescription> wsdls)
+        private static List<WsdlNS.ServiceDescription> CopyServiceDescriptionCollection(
+            List<WsdlNS.ServiceDescription> wsdls
+        )
         {
             List<WsdlNS.ServiceDescription> newWsdls = new List<WsdlNS.ServiceDescription>();
             foreach (WsdlNS.ServiceDescription wsdl in wsdls)
@@ -105,7 +112,11 @@ namespace System.ServiceModel.Description
             return newWsdls;
         }
 
-        private static void MergeWsdl(WsdlNS.ServiceDescription singleWsdl, WsdlNS.ServiceDescription wsdl, Dictionary<XmlQualifiedName, XmlQualifiedName> bindingReferenceChanges)
+        private static void MergeWsdl(
+            WsdlNS.ServiceDescription singleWsdl,
+            WsdlNS.ServiceDescription wsdl,
+            Dictionary<XmlQualifiedName, XmlQualifiedName> bindingReferenceChanges
+        )
         {
             if (wsdl.Services.Count > 0)
             {
@@ -114,12 +125,20 @@ namespace System.ServiceModel.Description
 
             foreach (WsdlNS.Binding binding in wsdl.Bindings)
             {
-                string uniqueBindingName = NamingHelper.GetUniqueName(binding.Name, WsdlHelper.IsBindingNameUsed, singleWsdl.Bindings);
+                string uniqueBindingName = NamingHelper.GetUniqueName(
+                    binding.Name,
+                    WsdlHelper.IsBindingNameUsed,
+                    singleWsdl.Bindings
+                );
                 if (binding.Name != uniqueBindingName)
                 {
                     bindingReferenceChanges.Add(
-                        new XmlQualifiedName(binding.Name, binding.ServiceDescription.TargetNamespace),
-                        new XmlQualifiedName(uniqueBindingName, singleWsdl.TargetNamespace));
+                        new XmlQualifiedName(
+                            binding.Name,
+                            binding.ServiceDescription.TargetNamespace
+                        ),
+                        new XmlQualifiedName(uniqueBindingName, singleWsdl.TargetNamespace)
+                    );
                     UpdatePolicyKeys(binding, uniqueBindingName, wsdl);
                     binding.Name = uniqueBindingName;
                 }
@@ -148,22 +167,49 @@ namespace System.ServiceModel.Description
             }
         }
 
-        private static void UpdatePolicyKeys(WsdlNS.Binding binding, string newBindingName, WsdlNS.ServiceDescription wsdl)
+        private static void UpdatePolicyKeys(
+            WsdlNS.Binding binding,
+            string newBindingName,
+            WsdlNS.ServiceDescription wsdl
+        )
         {
             string oldBindingName = binding.Name;
 
             // policy
-            IEnumerable<XmlElement> bindingPolicies = FindAllElements(wsdl.Extensions, MetadataStrings.WSPolicy.Elements.Policy);
+            IEnumerable<XmlElement> bindingPolicies = FindAllElements(
+                wsdl.Extensions,
+                MetadataStrings.WSPolicy.Elements.Policy
+            );
             string policyIdStringPrefixFormat = "{0}_";
             foreach (XmlElement policyElement in bindingPolicies)
             {
-                XmlNode policyId = policyElement.Attributes.GetNamedItem(MetadataStrings.Wsu.Attributes.Id, MetadataStrings.Wsu.NamespaceUri);
+                XmlNode policyId = policyElement.Attributes.GetNamedItem(
+                    MetadataStrings.Wsu.Attributes.Id,
+                    MetadataStrings.Wsu.NamespaceUri
+                );
                 string policyIdString = policyId.Value;
-                string policyIdStringWithOldBindingName = string.Format(CultureInfo.InvariantCulture, policyIdStringPrefixFormat, oldBindingName);
-                string policyIdStringWithNewBindingName = string.Format(CultureInfo.InvariantCulture, policyIdStringPrefixFormat, newBindingName);
-                if (policyId != null && policyIdString != null && policyIdString.StartsWith(policyIdStringWithOldBindingName, StringComparison.Ordinal))
+                string policyIdStringWithOldBindingName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    policyIdStringPrefixFormat,
+                    oldBindingName
+                );
+                string policyIdStringWithNewBindingName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    policyIdStringPrefixFormat,
+                    newBindingName
+                );
+                if (
+                    policyId != null
+                    && policyIdString != null
+                    && policyIdString.StartsWith(
+                        policyIdStringWithOldBindingName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
-                    policyId.Value = policyIdStringWithNewBindingName + policyIdString.Substring(policyIdStringWithOldBindingName.Length);
+                    policyId.Value =
+                        policyIdStringWithNewBindingName
+                        + policyIdString.Substring(policyIdStringWithOldBindingName.Length);
                 }
             }
 
@@ -174,12 +220,20 @@ namespace System.ServiceModel.Description
                 UpdatePolicyReference(operationBinding.Extensions, oldBindingName, newBindingName);
                 if (operationBinding.Input != null)
                 {
-                    UpdatePolicyReference(operationBinding.Input.Extensions, oldBindingName, newBindingName);
+                    UpdatePolicyReference(
+                        operationBinding.Input.Extensions,
+                        oldBindingName,
+                        newBindingName
+                    );
                 }
 
                 if (operationBinding.Output != null)
                 {
-                    UpdatePolicyReference(operationBinding.Output.Extensions, oldBindingName, newBindingName);
+                    UpdatePolicyReference(
+                        operationBinding.Output.Extensions,
+                        oldBindingName,
+                        newBindingName
+                    );
                 }
 
                 foreach (WsdlNS.FaultBinding fault in operationBinding.Faults)
@@ -189,24 +243,55 @@ namespace System.ServiceModel.Description
             }
         }
 
-        private static void UpdatePolicyReference(WsdlNS.ServiceDescriptionFormatExtensionCollection extensions, string oldBindingName, string newBindingName)
+        private static void UpdatePolicyReference(
+            WsdlNS.ServiceDescriptionFormatExtensionCollection extensions,
+            string oldBindingName,
+            string newBindingName
+        )
         {
-            IEnumerable<XmlElement> bindingPolicyReferences = FindAllElements(extensions, MetadataStrings.WSPolicy.Elements.PolicyReference);
+            IEnumerable<XmlElement> bindingPolicyReferences = FindAllElements(
+                extensions,
+                MetadataStrings.WSPolicy.Elements.PolicyReference
+            );
             string policyReferencePrefixFormat = "#{0}_";
             foreach (XmlElement policyReferenceElement in bindingPolicyReferences)
             {
-                XmlNode policyReference = policyReferenceElement.Attributes.GetNamedItem(MetadataStrings.WSPolicy.Attributes.URI);
+                XmlNode policyReference = policyReferenceElement.Attributes.GetNamedItem(
+                    MetadataStrings.WSPolicy.Attributes.URI
+                );
                 string policyReferenceValue = policyReference.Value;
-                string policyReferenceValueWithOldBindingName = string.Format(CultureInfo.InvariantCulture, policyReferencePrefixFormat, oldBindingName);
-                string policyReferenceValueWithNewBindingName = string.Format(CultureInfo.InvariantCulture, policyReferencePrefixFormat, newBindingName);
-                if (policyReference != null && policyReferenceValue != null && policyReferenceValue.StartsWith(policyReferenceValueWithOldBindingName, StringComparison.Ordinal))
+                string policyReferenceValueWithOldBindingName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    policyReferencePrefixFormat,
+                    oldBindingName
+                );
+                string policyReferenceValueWithNewBindingName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    policyReferencePrefixFormat,
+                    newBindingName
+                );
+                if (
+                    policyReference != null
+                    && policyReferenceValue != null
+                    && policyReferenceValue.StartsWith(
+                        policyReferenceValueWithOldBindingName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
-                    policyReference.Value = policyReferenceValueWithNewBindingName + policyReference.Value.Substring(policyReferenceValueWithOldBindingName.Length);
+                    policyReference.Value =
+                        policyReferenceValueWithNewBindingName
+                        + policyReference.Value.Substring(
+                            policyReferenceValueWithOldBindingName.Length
+                        );
                 }
             }
         }
 
-        private static IEnumerable<XmlElement> FindAllElements(WsdlNS.ServiceDescriptionFormatExtensionCollection extensions, string elementName)
+        private static IEnumerable<XmlElement> FindAllElements(
+            WsdlNS.ServiceDescriptionFormatExtensionCollection extensions,
+            string elementName
+        )
         {
             List<XmlElement> policyReferences = new List<XmlElement>();
             for (int i = 0; i < extensions.Count; i++)
@@ -223,16 +308,28 @@ namespace System.ServiceModel.Description
 
         private static void VerifyContractNamespace(List<WsdlNS.ServiceDescription> wsdls)
         {
-            IEnumerable<WsdlNS.ServiceDescription> contractWsdls = wsdls.Where(serviceDescription => serviceDescription.PortTypes.Count > 0);
+            IEnumerable<WsdlNS.ServiceDescription> contractWsdls = wsdls.Where(serviceDescription =>
+                serviceDescription.PortTypes.Count > 0
+            );
             if (contractWsdls.Count() > 1)
             {
-                IEnumerable<string> namespaces = contractWsdls.Select<WsdlNS.ServiceDescription, string>(wsdl => wsdl.TargetNamespace);
+                IEnumerable<string> namespaces = contractWsdls.Select<
+                    WsdlNS.ServiceDescription,
+                    string
+                >(wsdl => wsdl.TargetNamespace);
                 string contractNamespaces = string.Join(", ", namespaces);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SingleWsdlNotGenerated, contractNamespaces)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.SingleWsdlNotGenerated, contractNamespaces)
+                    )
+                );
             }
         }
 
-        private static void EnsureSingleNamespace(WsdlNS.ServiceDescription wsdl, Dictionary<XmlQualifiedName, XmlQualifiedName> bindingReferenceChanges)
+        private static void EnsureSingleNamespace(
+            WsdlNS.ServiceDescription wsdl,
+            Dictionary<XmlQualifiedName, XmlQualifiedName> bindingReferenceChanges
+        )
         {
             string targetNamespace = wsdl.TargetNamespace;
             foreach (WsdlNS.Binding binding in wsdl.Bindings)
@@ -250,20 +347,29 @@ namespace System.ServiceModel.Description
                     WsdlNS.OperationInput messageInput = operation.Messages.Input;
                     if (messageInput != null && messageInput.Message.Namespace != targetNamespace)
                     {
-                        messageInput.Message = new XmlQualifiedName(messageInput.Message.Name, targetNamespace);
+                        messageInput.Message = new XmlQualifiedName(
+                            messageInput.Message.Name,
+                            targetNamespace
+                        );
                     }
 
                     WsdlNS.OperationOutput messageOutput = operation.Messages.Output;
                     if (messageOutput != null && messageOutput.Message.Namespace != targetNamespace)
                     {
-                        messageOutput.Message = new XmlQualifiedName(messageOutput.Message.Name, targetNamespace);
+                        messageOutput.Message = new XmlQualifiedName(
+                            messageOutput.Message.Name,
+                            targetNamespace
+                        );
                     }
 
                     foreach (WsdlNS.OperationFault fault in operation.Faults)
                     {
                         if (fault.Message.Namespace != targetNamespace)
                         {
-                            fault.Message = new XmlQualifiedName(fault.Message.Name, targetNamespace);
+                            fault.Message = new XmlQualifiedName(
+                                fault.Message.Name,
+                                targetNamespace
+                            );
                         }
                     }
                 }
@@ -315,7 +421,11 @@ namespace System.ServiceModel.Description
         }
 
         [SuppressMessage("Microsoft.Security.Xml", "CA3054:DoNotAllowDtdOnXmlTextReader")]
-        [SuppressMessage("Microsoft.Security.Xml", "CA3069:ReviewDtdProcessingAssignment", Justification = "This is trusted server code from the application only. We should allow the customer add dtd.")]
+        [SuppressMessage(
+            "Microsoft.Security.Xml",
+            "CA3069:ReviewDtdProcessingAssignment",
+            Justification = "This is trusted server code from the application only. We should allow the customer add dtd."
+        )]
         private static XmlSchema CloneXsd(XmlSchema originalXsd)
         {
             Fx.Assert(originalXsd != null, "originalXsd must not be null");
@@ -324,7 +434,10 @@ namespace System.ServiceModel.Description
             {
                 originalXsd.Write(memoryStream);
                 memoryStream.Seek(0, SeekOrigin.Begin);
-                newXsd = XmlSchema.Read(new XmlTextReader(memoryStream) { DtdProcessing = DtdProcessing.Parse }, null);
+                newXsd = XmlSchema.Read(
+                    new XmlTextReader(memoryStream) { DtdProcessing = DtdProcessing.Parse },
+                    null
+                );
             }
 
             return newXsd;

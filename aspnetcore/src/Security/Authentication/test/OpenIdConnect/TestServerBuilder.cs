@@ -30,10 +30,12 @@ internal class TestServerBuilder
         {
             Authority = DefaultAuthority,
             ClientId = Guid.NewGuid().ToString(),
-            Configuration = CreateDefaultOpenIdConnectConfiguration()
+            Configuration = CreateDefaultOpenIdConnectConfiguration(),
         };
 
-    public static OpenIdConnectOptions CreateOpenIdConnectOptions(Action<OpenIdConnectOptions> update)
+    public static OpenIdConnectOptions CreateOpenIdConnectOptions(
+        Action<OpenIdConnectOptions> update
+    )
     {
         var options = CreateOpenIdConnectOptions();
         update?.Invoke(options);
@@ -45,11 +47,13 @@ internal class TestServerBuilder
         {
             AuthorizationEndpoint = DefaultAuthority + "/oauth2/authorize",
             EndSessionEndpoint = DefaultAuthority + "/oauth2/endsessionendpoint",
-            TokenEndpoint = DefaultAuthority + "/oauth2/token"
+            TokenEndpoint = DefaultAuthority + "/oauth2/token",
         };
 
     public static IConfigurationManager<OpenIdConnectConfiguration> CreateDefaultOpenIdConnectConfigurationManager() =>
-        new StaticConfigurationManager<OpenIdConnectConfiguration>(CreateDefaultOpenIdConnectConfiguration());
+        new StaticConfigurationManager<OpenIdConnectConfiguration>(
+            CreateDefaultOpenIdConnectConfiguration()
+        );
 
     public static TestServer CreateServer(Action<OpenIdConnectOptions> options)
     {
@@ -59,61 +63,85 @@ internal class TestServerBuilder
     public static TestServer CreateServer(
         Action<OpenIdConnectOptions> options,
         Func<HttpContext, Task> handler,
-        AuthenticationProperties properties)
+        AuthenticationProperties properties
+    )
     {
         var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Use(async (context, next) =>
-                        {
-                            var req = context.Request;
-                            var res = context.Response;
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                var req = context.Request;
+                                var res = context.Response;
 
-                            if (req.Path == new PathString(Challenge))
-                            {
-                                await context.ChallengeAsync(OpenIdConnectDefaults.AuthenticationScheme);
+                                if (req.Path == new PathString(Challenge))
+                                {
+                                    await context.ChallengeAsync(
+                                        OpenIdConnectDefaults.AuthenticationScheme
+                                    );
+                                }
+                                else if (req.Path == new PathString(ChallengeWithProperties))
+                                {
+                                    await context.ChallengeAsync(
+                                        OpenIdConnectDefaults.AuthenticationScheme,
+                                        properties
+                                    );
+                                }
+                                else if (req.Path == new PathString(ChallengeWithOutContext))
+                                {
+                                    res.StatusCode = 401;
+                                }
+                                else if (req.Path == new PathString(Signin))
+                                {
+                                    await context.SignInAsync(
+                                        OpenIdConnectDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal()
+                                    );
+                                }
+                                else if (req.Path == new PathString(Signout))
+                                {
+                                    await context.SignOutAsync(
+                                        OpenIdConnectDefaults.AuthenticationScheme
+                                    );
+                                }
+                                else if (
+                                    req.Path
+                                    == new PathString("/signout_with_specific_redirect_uri")
+                                )
+                                {
+                                    await context.SignOutAsync(
+                                        OpenIdConnectDefaults.AuthenticationScheme,
+                                        new AuthenticationProperties()
+                                        {
+                                            RedirectUri =
+                                                "http://www.example.com/specific_redirect_uri",
+                                        }
+                                    );
+                                }
+                                else if (handler != null)
+                                {
+                                    await handler(context);
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
                             }
-                            else if (req.Path == new PathString(ChallengeWithProperties))
-                            {
-                                await context.ChallengeAsync(OpenIdConnectDefaults.AuthenticationScheme, properties);
-                            }
-                            else if (req.Path == new PathString(ChallengeWithOutContext))
-                            {
-                                res.StatusCode = 401;
-                            }
-                            else if (req.Path == new PathString(Signin))
-                            {
-                                await context.SignInAsync(OpenIdConnectDefaults.AuthenticationScheme, new ClaimsPrincipal());
-                            }
-                            else if (req.Path == new PathString(Signout))
-                            {
-                                await context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-                            }
-                            else if (req.Path == new PathString("/signout_with_specific_redirect_uri"))
-                            {
-                                await context.SignOutAsync(
-                                    OpenIdConnectDefaults.AuthenticationScheme,
-                                    new AuthenticationProperties() { RedirectUri = "http://www.example.com/specific_redirect_uri" });
-                            }
-                            else if (handler != null)
-                            {
-                                await handler(context);
-                            }
-                            else
-                            {
-                                await next(context);
-                            }
-                        });
+                        );
                     })
                     .ConfigureServices(services =>
                     {
-                        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                        services
+                            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                             .AddCookie()
                             .AddOpenIdConnect(options);
-                    }))
+                    })
+            )
             .Build();
 
         host.Start();

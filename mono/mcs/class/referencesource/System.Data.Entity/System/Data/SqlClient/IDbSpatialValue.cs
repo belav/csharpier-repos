@@ -7,14 +7,14 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-using System.Data.Spatial;
 using System.Data.Metadata.Edm;
+using System.Data.Spatial;
 
 namespace System.Data.SqlClient.Internal
 {
     /// <summary>
-    /// Adapter interface to make working with instances of <see cref="DbGeometry"/> or <see cref="DbGeography"/> easier.  
-    /// Implementing types wrap instances of DbGeography/DbGeometry and allow them to be consumed in a common way. 
+    /// Adapter interface to make working with instances of <see cref="DbGeometry"/> or <see cref="DbGeography"/> easier.
+    /// Implementing types wrap instances of DbGeography/DbGeometry and allow them to be consumed in a common way.
     /// This interface is implemented by wrapping types for two reasons:
     /// 1. The DbGeography/DbGeometry classes cannot directly implement internal interfaces because their members are virtual (behavior is not guaranteed).
     /// 2. The wrapping types ensure that instances of IDbSpatialValue handle the <see cref="NotImplementedException"/>s thrown
@@ -29,7 +29,7 @@ namespace System.Data.SqlClient.Internal
         string WellKnownText { get; }
         byte[] WellKnownBinary { get; }
         string GmlString { get; }
-        
+
         Exception NotSqlCompatible();
     }
 
@@ -100,9 +100,15 @@ namespace System.Data.SqlClient.Internal
             }
         }
 
-        public bool IsGeography { get { return true; } }
+        public bool IsGeography
+        {
+            get { return true; }
+        }
 
-        public PrimitiveTypeKind PrimitiveType { get { return PrimitiveTypeKind.Geography; } }
+        public PrimitiveTypeKind PrimitiveType
+        {
+            get { return PrimitiveTypeKind.Geography; }
+        }
 
         public object ProviderValue
         {
@@ -133,7 +139,10 @@ namespace System.Data.SqlClient.Internal
             get { return NullIfNotImplemented(geog => geog.AsGml()); }
         }
 
-        public Exception NotSqlCompatible() { return EntityUtil.GeographyValueNotSqlCompatible(); }
+        public Exception NotSqlCompatible()
+        {
+            return EntityUtil.GeographyValueNotSqlCompatible();
+        }
     }
 
     internal struct DbGeometryAdapter : IDbSpatialValue
@@ -170,9 +179,15 @@ namespace System.Data.SqlClient.Internal
             }
         }
 
-        public bool IsGeography { get { return false; } }
+        public bool IsGeography
+        {
+            get { return false; }
+        }
 
-        public PrimitiveTypeKind PrimitiveType { get { return PrimitiveTypeKind.Geometry; } }
+        public PrimitiveTypeKind PrimitiveType
+        {
+            get { return PrimitiveTypeKind.Geometry; }
+        }
 
         public object ProviderValue
         {
@@ -186,7 +201,7 @@ namespace System.Data.SqlClient.Internal
 
         public string WellKnownText
         {
-            get 
+            get
             {
                 return NullIfNotImplemented(geom => geom.AsTextIncludingElevationAndMeasure())
                     ?? NullIfNotImplemented(geom => geom.AsText()); // better than nothing if the provider doesn't support AsTextIncludingElevationAndMeasure
@@ -203,6 +218,9 @@ namespace System.Data.SqlClient.Internal
             get { return NullIfNotImplemented(geom => geom.AsGml()); }
         }
 
-        public Exception NotSqlCompatible() { return EntityUtil.GeometryValueNotSqlCompatible(); }
+        public Exception NotSqlCompatible()
+        {
+            return EntityUtil.GeometryValueNotSqlCompatible();
+        }
     }
 }

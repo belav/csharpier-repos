@@ -13,6 +13,5 @@ public class Program
     }
 
     // Do not change the signature of this method. It's used for tests.
-    private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        new WebHostBuilder();
+    private static IWebHostBuilder CreateWebHostBuilder(string[] args) => new WebHostBuilder();
 }

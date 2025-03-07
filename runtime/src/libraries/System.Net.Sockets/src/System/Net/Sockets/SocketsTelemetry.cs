@@ -172,31 +172,59 @@ namespace System.Net.Sockets
             {
                 // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first enable command).
 
-                _currentOutgoingConnectAttemptsCounter ??= new PollingCounter("current-outgoing-connect-attempts", this, () => Interlocked.Read(ref _currentOutgoingConnectAttempts))
+                _currentOutgoingConnectAttemptsCounter ??= new PollingCounter(
+                    "current-outgoing-connect-attempts",
+                    this,
+                    () => Interlocked.Read(ref _currentOutgoingConnectAttempts)
+                )
                 {
                     DisplayName = "Current Outgoing Connect Attempts",
                 };
-                _outgoingConnectionsEstablishedCounter ??= new PollingCounter("outgoing-connections-established", this, () => Interlocked.Read(ref _outgoingConnectionsEstablished))
+                _outgoingConnectionsEstablishedCounter ??= new PollingCounter(
+                    "outgoing-connections-established",
+                    this,
+                    () => Interlocked.Read(ref _outgoingConnectionsEstablished)
+                )
                 {
                     DisplayName = "Outgoing Connections Established",
                 };
-                _incomingConnectionsEstablishedCounter ??= new PollingCounter("incoming-connections-established", this, () => Interlocked.Read(ref _incomingConnectionsEstablished))
+                _incomingConnectionsEstablishedCounter ??= new PollingCounter(
+                    "incoming-connections-established",
+                    this,
+                    () => Interlocked.Read(ref _incomingConnectionsEstablished)
+                )
                 {
                     DisplayName = "Incoming Connections Established",
                 };
-                _bytesReceivedCounter ??= new PollingCounter("bytes-received", this, () => Interlocked.Read(ref _bytesReceived))
+                _bytesReceivedCounter ??= new PollingCounter(
+                    "bytes-received",
+                    this,
+                    () => Interlocked.Read(ref _bytesReceived)
+                )
                 {
                     DisplayName = "Bytes Received",
                 };
-                _bytesSentCounter ??= new PollingCounter("bytes-sent", this, () => Interlocked.Read(ref _bytesSent))
+                _bytesSentCounter ??= new PollingCounter(
+                    "bytes-sent",
+                    this,
+                    () => Interlocked.Read(ref _bytesSent)
+                )
                 {
                     DisplayName = "Bytes Sent",
                 };
-                _datagramsReceivedCounter ??= new PollingCounter("datagrams-received", this, () => Interlocked.Read(ref _datagramsReceived))
+                _datagramsReceivedCounter ??= new PollingCounter(
+                    "datagrams-received",
+                    this,
+                    () => Interlocked.Read(ref _datagramsReceived)
+                )
                 {
                     DisplayName = "Datagrams Received",
                 };
-                _datagramsSentCounter ??= new PollingCounter("datagrams-sent", this, () => Interlocked.Read(ref _datagramsSent))
+                _datagramsSentCounter ??= new PollingCounter(
+                    "datagrams-sent",
+                    this,
+                    () => Interlocked.Read(ref _datagramsSent)
+                )
                 {
                     DisplayName = "Datagrams Sent",
                 };

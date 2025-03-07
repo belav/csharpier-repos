@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,7 +12,11 @@ namespace Test
     {
         bool m_bFlag = false;
         static int[] m_anStatic2;
-        static void GoToEnd() { throw new Exception(); }
+
+        static void GoToEnd()
+        {
+            throw new Exception();
+        }
 
         static bool[] Method1()
         {
@@ -35,9 +40,7 @@ namespace Test
                 while (true)
                     GoToEnd();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return new bool[7];
         }
 

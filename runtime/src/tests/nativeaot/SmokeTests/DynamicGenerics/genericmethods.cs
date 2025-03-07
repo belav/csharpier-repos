@@ -3,13 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 using CoreFXTestLibrary;
 using TypeOfRepo;
-
 
 namespace MakeGenMethod
 {
@@ -29,7 +28,7 @@ namespace MakeGenMethod
             return typeof(T) + "::" + typeof(U);
         }
     }
-    
+
     public class NonGenericType
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -51,15 +50,20 @@ namespace MakeGenMethod
             MyEnumType arg16 = MyEnumType.Val3,
             MyEnumType arg17 = MyEnumType.Val3,
             MyEnumType arg18 = MyEnumType.Val3,
-            MyEnumType arg19 = MyEnumType.Val3)
+            MyEnumType arg19 = MyEnumType.Val3
+        )
         {
-            return String.Format("FuncWithManyEnumArgsAndDefaultValues<{0}>: {1}", typeof(T), arg10);
+            return String.Format(
+                "FuncWithManyEnumArgsAndDefaultValues<{0}>: {1}",
+                typeof(T),
+                arg10
+            );
         }
     }
-    
+
     public class Gen2<T>
     {
-       [MethodImpl(MethodImplOptions.NoInlining)]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static string M<U>()
         {
             return typeof(T).ToString() + "::" + typeof(U).ToString();
@@ -87,45 +91,84 @@ namespace MakeGenMethod
     public class Foo<T>
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public string GenericFooFunc1<M>() { return this.GetType() + "::GenericFooFunc1 called on " + typeof(T) + "::" + typeof(M); }
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public string GenericFooFunc2<M>() { return this.GetType() + "::GenericFooFunc2 called on " + typeof(T) + "::" + typeof(M); }
+        public string GenericFooFunc1<M>()
+        {
+            return this.GetType() + "::GenericFooFunc1 called on " + typeof(T) + "::" + typeof(M);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public string NonGenericFooFunc1() { return this.GetType() + "::NonGenericFooFunc1 called on " + typeof(T); }
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public string NonGenericFooFunc2() { return this.GetType() + "::NonGenericFooFunc2 called on " + typeof(T); }
+        public string GenericFooFunc2<M>()
+        {
+            return this.GetType() + "::GenericFooFunc2 called on " + typeof(T) + "::" + typeof(M);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string StaticGenericFooFunc1<M>() { return "StaticGenericFooFunc1 called on " + typeof(T) + "::" + typeof(M); }
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string StaticGenericFooFunc2<M>() { return "StaticGenericFooFunc2 called on " + typeof(T) + "::" + typeof(M); }
+        public string NonGenericFooFunc1()
+        {
+            return this.GetType() + "::NonGenericFooFunc1 called on " + typeof(T);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string StaticNonGenericFooFunc1() { return "StaticNonGenericFooFunc1 called on " + typeof(T); }
+        public string NonGenericFooFunc2()
+        {
+            return this.GetType() + "::NonGenericFooFunc2 called on " + typeof(T);
+        }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string StaticNonGenericFooFunc2() { return "StaticNonGenericFooFunc2 called on " + typeof(T); }
+        public static string StaticGenericFooFunc1<M>()
+        {
+            return "StaticGenericFooFunc1 called on " + typeof(T) + "::" + typeof(M);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static string StaticGenericFooFunc2<M>()
+        {
+            return "StaticGenericFooFunc2 called on " + typeof(T) + "::" + typeof(M);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static string StaticNonGenericFooFunc1()
+        {
+            return "StaticNonGenericFooFunc1 called on " + typeof(T);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static string StaticNonGenericFooFunc2()
+        {
+            return "StaticNonGenericFooFunc2 called on " + typeof(T);
+        }
     }
+
     public class Bar<T> : Foo<T>
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public string GenericFooFunc3<M>() { return this.GetType() + "::GenericFooFunc3 called on " + typeof(T) + "::" + typeof(M); }
+        public string GenericFooFunc3<M>()
+        {
+            return this.GetType() + "::GenericFooFunc3 called on " + typeof(T) + "::" + typeof(M);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public string NonGenericFooFunc3() { return this.GetType() + "::NonGenericFooFunc3 called on " + typeof(T); }
+        public string NonGenericFooFunc3()
+        {
+            return this.GetType() + "::NonGenericFooFunc3 called on " + typeof(T);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string StaticGenericFooFunc3<M>() { return "StaticGenericFooFunc3 called on " + typeof(T) + "::" + typeof(M); }
+        public static string StaticGenericFooFunc3<M>()
+        {
+            return "StaticGenericFooFunc3 called on " + typeof(T) + "::" + typeof(M);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string StaticNonGenericFooFunc3() { return "StaticNonGenericFooFunc3 called on " + typeof(T); }
+        public static string StaticNonGenericFooFunc3()
+        {
+            return "StaticNonGenericFooFunc3 called on " + typeof(T);
+        }
     }
 
     public class Gen<T>
     {
-       public Gen()
-       {
-       }
+        public Gen() { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string TestMethodDict<U>()
@@ -189,31 +232,64 @@ namespace MakeGenMethod
     }
     #endregion
 
-    
+
     public class Test
     {
         // Basic MakeGenericMethod testing
         #region MakeGenericMethod and Dictionary Testing
-        static void RunTest(Type containingType, MethodInfo testMethod, object thisPtr, object T_object, object U_object, object List_U_objects)
+        static void RunTest(
+            Type containingType,
+            MethodInfo testMethod,
+            object thisPtr,
+            object T_object,
+            object U_object,
+            object List_U_objects
+        )
         {
             var result = testMethod.Invoke(thisPtr, new object[] { 0, null, T_object, U_object });
             Assert.AreEqual(T_object.GetType() + "::" + U_object.GetType(), result.ToString());
 
             result = testMethod.Invoke(thisPtr, new object[] { 1, null, T_object, U_object });
-            Assert.AreEqual("System.Collections.Generic.List`1[" + T_object.GetType() + "]::" + "System.Collections.Generic.List`1[" + U_object.GetType() + "]", result.ToString());
+            Assert.AreEqual(
+                "System.Collections.Generic.List`1["
+                    + T_object.GetType()
+                    + "]::"
+                    + "System.Collections.Generic.List`1["
+                    + U_object.GetType()
+                    + "]",
+                result.ToString()
+            );
 
-            result = testMethod.Invoke(thisPtr, new object[] { 2, List_U_objects, T_object, U_object });
+            result = testMethod.Invoke(
+                thisPtr,
+                new object[] { 2, List_U_objects, T_object, U_object }
+            );
             Assert.AreEqual(2, result);
 
             result = testMethod.Invoke(thisPtr, new object[] { 3, null, T_object, U_object });
-            Assert.AreEqual(T_object.GetType() + "[]::" + U_object.GetType() + "[]", result.ToString());
+            Assert.AreEqual(
+                T_object.GetType() + "[]::" + U_object.GetType() + "[]",
+                result.ToString()
+            );
 
             result = testMethod.Invoke(thisPtr, new object[] { 4, null, T_object, U_object });
-            Assert.AreEqual(T_object.GetType() + "::" + U_object.GetType() + "::" + U_object.GetType() + "::" + U_object.GetType(), result.ToString());
+            Assert.AreEqual(
+                T_object.GetType()
+                    + "::"
+                    + U_object.GetType()
+                    + "::"
+                    + U_object.GetType()
+                    + "::"
+                    + U_object.GetType(),
+                result.ToString()
+            );
 
             try
             {
-                result = testMethod.Invoke(thisPtr, new object[] { 51, T_object, T_object, U_object });
+                result = testMethod.Invoke(
+                    thisPtr,
+                    new object[] { 51, T_object, T_object, U_object }
+                );
             }
             catch (TargetInvocationException ex)
             {
@@ -221,7 +297,10 @@ namespace MakeGenMethod
             }
             try
             {
-                result = testMethod.Invoke(thisPtr, new object[] { 52, U_object, T_object, U_object });
+                result = testMethod.Invoke(
+                    thisPtr,
+                    new object[] { 52, U_object, T_object, U_object }
+                );
             }
             catch (TargetInvocationException ex)
             {
@@ -240,11 +319,15 @@ namespace MakeGenMethod
             TestInstanceMakeGenericMethod_Inner();
             TestInstanceMakeGenericMethod_Inner();
         }
+
         static void TestInstanceMakeGenericMethod_Inner()
         {
             // Dynamically created method on a dynamically created type
             Type genOfType = TypeOf.GM_Gen.MakeGenericType(TypeOf.CommonType1);
-            MethodInfo testMethod = genOfType.GetTypeInfo().GetDeclaredMethod("InstanceMethodTest").MakeGenericMethod(new Type[] { TypeOf.CommonType2 });
+            MethodInfo testMethod = genOfType
+                .GetTypeInfo()
+                .GetDeclaredMethod("InstanceMethodTest")
+                .MakeGenericMethod(new Type[] { TypeOf.CommonType2 });
             object thisPtr = Activator.CreateInstance(genOfType);
             object T_object = new CommonType1();
             object U_object = new CommonType2();
@@ -255,14 +338,24 @@ namespace MakeGenMethod
             listAddMethod.Invoke(List_U_objects, new object[] { new CommonType2() });
             listAddMethod.Invoke(List_U_objects, new object[] { new CommonType2() });
             RunTest(genOfType, testMethod, thisPtr, T_object, U_object, List_U_objects);
-            
+
             // Static entries exist for the following generic type instantiation and generic method instance
             genOfType = TypeOf.GM_Gen.MakeGenericType(TypeOf.Object);
-            testMethod = genOfType.GetTypeInfo().GetDeclaredMethod("InstanceMethodTest").MakeGenericMethod(new Type[] { TypeOf.Object });
+            testMethod = genOfType
+                .GetTypeInfo()
+                .GetDeclaredMethod("InstanceMethodTest")
+                .MakeGenericMethod(new Type[] { TypeOf.Object });
             thisPtr = Activator.CreateInstance(genOfType);
             T_object = new object();
             U_object = new object();
-            RunTest(genOfType, testMethod, thisPtr, T_object, U_object, new List<object>() { new object(), new object() });
+            RunTest(
+                genOfType,
+                testMethod,
+                thisPtr,
+                T_object,
+                U_object,
+                new List<object>() { new object(), new object() }
+            );
         }
 
         [TestMethod]
@@ -273,11 +366,15 @@ namespace MakeGenMethod
             TestStaticMakeGenericMethod_Inner();
             TestStaticMakeGenericMethod_Inner();
         }
+
         static void TestStaticMakeGenericMethod_Inner()
         {
             // Dynamically created method on a dynamically created type
             Type genOfType = TypeOf.GM_Gen.MakeGenericType(TypeOf.CommonType3);
-            MethodInfo testMethod = genOfType.GetTypeInfo().GetDeclaredMethod("StaticMethodTest").MakeGenericMethod(new Type[] { TypeOf.CommonType4 });
+            MethodInfo testMethod = genOfType
+                .GetTypeInfo()
+                .GetDeclaredMethod("StaticMethodTest")
+                .MakeGenericMethod(new Type[] { TypeOf.CommonType4 });
             object T_object = new CommonType3();
             object U_object = new CommonType4();
 
@@ -287,13 +384,23 @@ namespace MakeGenMethod
             listAddMethod.Invoke(List_U_objects, new object[] { new CommonType4() });
             listAddMethod.Invoke(List_U_objects, new object[] { new CommonType4() });
             RunTest(genOfType, testMethod, null, T_object, U_object, List_U_objects);
-            
+
             // Static entries exist for the following generic type instantiation and generic method instance
             genOfType = TypeOf.GM_Gen.MakeGenericType(TypeOf.Object);
-            testMethod = genOfType.GetTypeInfo().GetDeclaredMethod("StaticMethodTest").MakeGenericMethod(new Type[] { TypeOf.Object });
+            testMethod = genOfType
+                .GetTypeInfo()
+                .GetDeclaredMethod("StaticMethodTest")
+                .MakeGenericMethod(new Type[] { TypeOf.Object });
             T_object = new object();
             U_object = new object();
-            RunTest(genOfType, testMethod, null, T_object, U_object, new List<object>() { new object(), new object() });
+            RunTest(
+                genOfType,
+                testMethod,
+                null,
+                T_object,
+                U_object,
+                new List<object>() { new object(), new object() }
+            );
         }
 
         [TestMethod]
@@ -305,18 +412,59 @@ namespace MakeGenMethod
             // dynamic instantiations at runtime during the Invoke call.
 
             // Normal shared generics case
-            MethodInfo mi = ti.GetDeclaredMethod("FuncWithManyEnumArgsAndDefaultValues").MakeGenericMethod(TypeOf.Type);
-            string result = (string)mi.Invoke(new NonGenericType(), new object[] { typeof(string), null, null, null, null, null, null, null, null, null, null });
+            MethodInfo mi = ti.GetDeclaredMethod("FuncWithManyEnumArgsAndDefaultValues")
+                .MakeGenericMethod(TypeOf.Type);
+            string result = (string)
+                mi.Invoke(
+                    new NonGenericType(),
+                    new object[]
+                    {
+                        typeof(string),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    }
+                );
             Assert.AreEqual("FuncWithManyEnumArgsAndDefaultValues<System.Type>: 0", result);
 
 #if UNIVERSAL_GENERICS
             // Universal shared generics case
-            mi = ti.GetDeclaredMethod("FuncWithManyEnumArgsAndDefaultValues").MakeGenericMethod(TypeOf.Double);
-            result = (string)mi.Invoke(new NonGenericType(), new object[] { 12.34, null, null, null, null, null, null, null, null, null, null });
+            mi = ti.GetDeclaredMethod("FuncWithManyEnumArgsAndDefaultValues")
+                .MakeGenericMethod(TypeOf.Double);
+            result = (string)
+                mi.Invoke(
+                    new NonGenericType(),
+                    new object[]
+                    {
+                        12.34,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    }
+                );
             Assert.AreEqual("FuncWithManyEnumArgsAndDefaultValues<System.Double>: 0", result);
 
-            mi = ti.GetDeclaredMethod("FuncWithManyEnumArgsAndDefaultValues").MakeGenericMethod(TypeOf.Int32);
-            result = (string)mi.Invoke(new NonGenericType(), new object[] { 123, null, null, null, null, null, null, null, null, null, null });
+            mi = ti.GetDeclaredMethod("FuncWithManyEnumArgsAndDefaultValues")
+                .MakeGenericMethod(TypeOf.Int32);
+            result = (string)
+                mi.Invoke(
+                    new NonGenericType(),
+                    new object[] { 123, null, null, null, null, null, null, null, null, null, null }
+                );
             Assert.AreEqual("FuncWithManyEnumArgsAndDefaultValues<System.Int32>: 0", result);
 #endif
         }
@@ -329,9 +477,13 @@ namespace MakeGenMethod
             TestGenericMethod_NoDictionaries_Inner();
             TestGenericMethod_NoDictionaries_Inner();
         }
+
         static void TestGenericMethod_NoDictionaries_Inner()
         {
-            MethodInfo testMethod = TypeOf.GM_NonGenericType.GetTypeInfo().GetDeclaredMethod("VerySimpleGenericMethod").MakeGenericMethod(new Type[] { TypeOf.CommonType1 });
+            MethodInfo testMethod = TypeOf
+                .GM_NonGenericType.GetTypeInfo()
+                .GetDeclaredMethod("VerySimpleGenericMethod")
+                .MakeGenericMethod(new Type[] { TypeOf.CommonType1 });
             var result = testMethod.Invoke(new NonGenericType(), null);
             Assert.AreEqual("i'm useless!", result.ToString());
         }
@@ -344,6 +496,7 @@ namespace MakeGenMethod
             TestGenericMethod_GenMethodOnGenType_Inner();
             TestGenericMethod_GenMethodOnGenType_Inner();
         }
+
         static void TestGenericMethod_GenMethodOnGenType_Inner()
         {
             RunTest_GenMethodOnGenType(TypeOf.CommonType1, TypeOf.CommonType2);
@@ -358,10 +511,13 @@ namespace MakeGenMethod
             RunTest_GenMethodOnGenType(TypeOf.CommonType3, TypeOf.CommonType1);
             RunTest_GenMethodOnGenType(TypeOf.CommonType3, TypeOf.CommonType3);
         }
+
         static void RunTest_GenMethodOnGenType(Type typeArg, Type methodArg)
         {
             var type = TypeOf.GM_GenericType.MakeGenericType(typeArg);
-            var method = type.GetTypeInfo().GetDeclaredMethod("GenericFunc").MakeGenericMethod(methodArg);
+            var method = type.GetTypeInfo()
+                .GetDeclaredMethod("GenericFunc")
+                .MakeGenericMethod(methodArg);
             var result = (string)method.Invoke(Activator.CreateInstance(type), null);
             Assert.AreEqual(typeArg + "::" + methodArg, result);
         }
@@ -379,6 +535,7 @@ namespace MakeGenMethod
             TestGenericMethod_ReverseLookups_Inner();
             TestGenericMethod_ReverseLookups_Inner();
         }
+
         static void TestGenericMethod_ReverseLookups_Inner()
         {
 #if !USC    // BUG with reflection invoke codegen
@@ -399,35 +556,108 @@ namespace MakeGenMethod
 
             foreach (var funcid in new string[] { "1", "2", "3" })
             {
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType1, TypeOf.CommonType1, "GenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType3, TypeOf.CommonType4, "GenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType5, TypeOf.CommonType4, "GenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType6, TypeOf.CommonType3, "GenericFooFunc" + funcid);
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType1,
+                    TypeOf.CommonType1,
+                    "GenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType3,
+                    TypeOf.CommonType4,
+                    "GenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType5,
+                    TypeOf.CommonType4,
+                    "GenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType6,
+                    TypeOf.CommonType3,
+                    "GenericFooFunc" + funcid
+                );
 
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType1, null, "NonGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType2, null, "NonGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType7, null, "NonGenericFooFunc" + funcid);
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType1,
+                    null,
+                    "NonGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType2,
+                    null,
+                    "NonGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType7,
+                    null,
+                    "NonGenericFooFunc" + funcid
+                );
 
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType1, TypeOf.CommonType1, "StaticGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType8, TypeOf.CommonType4, "StaticGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType9, TypeOf.CommonType4, "StaticGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType8, TypeOf.CommonType9, "StaticGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType7, TypeOf.CommonType2, "StaticGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType10, TypeOf.CommonType2, "StaticGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType7, TypeOf.CommonType10, "StaticGenericFooFunc" + funcid);
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType1,
+                    TypeOf.CommonType1,
+                    "StaticGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType8,
+                    TypeOf.CommonType4,
+                    "StaticGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType9,
+                    TypeOf.CommonType4,
+                    "StaticGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType8,
+                    TypeOf.CommonType9,
+                    "StaticGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType7,
+                    TypeOf.CommonType2,
+                    "StaticGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType10,
+                    TypeOf.CommonType2,
+                    "StaticGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType7,
+                    TypeOf.CommonType10,
+                    "StaticGenericFooFunc" + funcid
+                );
 
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType1, null, "StaticNonGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType11, null, "StaticNonGenericFooFunc" + funcid);
-                RunTest_MethodOnGenericTypeDelegate(TypeOf.CommonType6, null, "StaticNonGenericFooFunc" + funcid);
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType1,
+                    null,
+                    "StaticNonGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType11,
+                    null,
+                    "StaticNonGenericFooFunc" + funcid
+                );
+                RunTest_MethodOnGenericTypeDelegate(
+                    TypeOf.CommonType6,
+                    null,
+                    "StaticNonGenericFooFunc" + funcid
+                );
             }
         }
+
         public static TResult MethodForDelegate<T, TResult>(T inputParam)
         {
             return (TResult)((object)(typeof(T) + "::" + typeof(TResult)));
         }
+
         static void RunTest_Delegate(Type t_in, Type t_out)
         {
-            MethodInfo method = TypeOf.GM_MakeGenericMethodTest.GetTypeInfo().GetDeclaredMethod("MethodForDelegate").MakeGenericMethod(new Type[] { t_in, t_out });
+            MethodInfo method = TypeOf
+                .GM_MakeGenericMethodTest.GetTypeInfo()
+                .GetDeclaredMethod("MethodForDelegate")
+                .MakeGenericMethod(new Type[] { t_in, t_out });
 
             var delegateType = TypeOf.Func2.MakeGenericType(new Type[] { t_in, t_out });
             Assert.AreEqual("System.Func`2[" + t_in + "," + t_out + "]", delegateType.ToString());
@@ -435,14 +665,26 @@ namespace MakeGenMethod
             Delegate d = method.CreateDelegate(delegateType);
             Assert.AreEqual(delegateType.ToString(), d.ToString());
             Assert.AreEqual(method.ToString(), d.GetMethodInfo().ToString());
-            Assert.AreEqual(t_out + " MethodForDelegate[" + t_in.Name + "," + t_out.Name + "](" + t_in + ")", d.GetMethodInfo().ToString());
+            Assert.AreEqual(
+                t_out + " MethodForDelegate[" + t_in.Name + "," + t_out.Name + "](" + t_in + ")",
+                d.GetMethodInfo().ToString()
+            );
 
             var result = d.DynamicInvoke(new object[] { null });
             Assert.AreEqual(t_in + "::" + t_out, result.ToString());
         }
-        static void RunTest_MethodOnGenericTypeDelegate(Type typeArg, Type methodArg, string methodName)
+
+        static void RunTest_MethodOnGenericTypeDelegate(
+            Type typeArg,
+            Type methodArg,
+            string methodName
+        )
         {
-            Type type = (methodName.EndsWith("3") ? TypeOf.GM_Bar.MakeGenericType(typeArg) : TypeOf.GM_Foo.MakeGenericType(typeArg));
+            Type type = (
+                methodName.EndsWith("3")
+                    ? TypeOf.GM_Bar.MakeGenericType(typeArg)
+                    : TypeOf.GM_Foo.MakeGenericType(typeArg)
+            );
             object inst = Activator.CreateInstance(TypeOf.GM_Bar.MakeGenericType(typeArg));
 
             var method = type.GetTypeInfo().GetDeclaredMethod(methodName);
@@ -459,8 +701,10 @@ namespace MakeGenMethod
 
             var result = d.DynamicInvoke();
             var expected = methodName + " called on " + typeArg;
-            if (methodArg != null) expected += "::" + methodArg;
-            if (!method.IsStatic) expected = inst.GetType().ToString() + "::" + expected;
+            if (methodArg != null)
+                expected += "::" + methodArg;
+            if (!method.IsStatic)
+                expected = inst.GetType().ToString() + "::" + expected;
             Assert.AreEqual(expected, result.ToString());
 
             if (method.IsStatic)
@@ -478,13 +722,20 @@ namespace MakeGenMethod
         [TestMethod]
         public static void TestReverseLookupsWithArrayArg()
         {
-            var staticallyCreatedDelegate = new Func<CommonType10[], CommonType10[]>(MethodForDelegate<CommonType10[], CommonType10[]>);
+            var staticallyCreatedDelegate = new Func<CommonType10[], CommonType10[]>(
+                MethodForDelegate<CommonType10[], CommonType10[]>
+            );
 
             var dynamicallyCreatedArray = TypeOf.CommonType10.MakeArrayType();
 
-            MethodInfo method = TypeOf.GM_MakeGenericMethodTest.GetTypeInfo().GetDeclaredMethod("MethodForDelegate").MakeGenericMethod(new Type[] { dynamicallyCreatedArray, dynamicallyCreatedArray });
+            MethodInfo method = TypeOf
+                .GM_MakeGenericMethodTest.GetTypeInfo()
+                .GetDeclaredMethod("MethodForDelegate")
+                .MakeGenericMethod(new Type[] { dynamicallyCreatedArray, dynamicallyCreatedArray });
 
-            var dynamicallyCreatedDelegate = method.CreateDelegate(typeof(Func<CommonType10[], CommonType10[]>));
+            var dynamicallyCreatedDelegate = method.CreateDelegate(
+                typeof(Func<CommonType10[], CommonType10[]>)
+            );
 
             Assert.AreEqual(staticallyCreatedDelegate, dynamicallyCreatedDelegate);
         }

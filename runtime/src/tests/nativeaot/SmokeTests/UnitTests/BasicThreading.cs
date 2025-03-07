@@ -23,7 +23,7 @@ class BasicThreading
 
         if (TimerTest.Run() != Pass)
             return Fail;
-        
+
         if (FinalizeTest.Run() != Pass)
             return Fail;
 
@@ -34,6 +34,7 @@ class BasicThreading
 class FinalizeTest
 {
     public static bool visited = false;
+
     public class Dummy
     {
         ~Dummy()
@@ -97,12 +98,18 @@ class SimpleReadWriteThreadStaticTest
 
         if (NonGenericType.IntValue != intValue)
         {
-            throw new Exception("SimpleReadWriteThreadStaticsTest: wrong integer value: " + NonGenericType.IntValue.ToString());
+            throw new Exception(
+                "SimpleReadWriteThreadStaticsTest: wrong integer value: "
+                    + NonGenericType.IntValue.ToString()
+            );
         }
 
         if (NonGenericType.StringValue != stringValue)
         {
-            throw new Exception("SimpleReadWriteThreadStaticsTest: wrong string value: " + NonGenericType.StringValue);
+            throw new Exception(
+                "SimpleReadWriteThreadStaticsTest: wrong string value: "
+                    + NonGenericType.StringValue
+            );
         }
     }
 
@@ -113,12 +120,18 @@ class SimpleReadWriteThreadStaticTest
 
         if (GenericType<int, string>.ValueT != intValue)
         {
-            throw new Exception("GenericReadWriteThreadStaticsTest1a: wrong integer value: " + GenericType<int, string>.ValueT.ToString());
+            throw new Exception(
+                "GenericReadWriteThreadStaticsTest1a: wrong integer value: "
+                    + GenericType<int, string>.ValueT.ToString()
+            );
         }
 
         if (GenericType<int, string>.ValueV != stringValue)
         {
-            throw new Exception("GenericReadWriteThreadStaticsTest1b: wrong string value: " + GenericType<int, string>.ValueV);
+            throw new Exception(
+                "GenericReadWriteThreadStaticsTest1b: wrong string value: "
+                    + GenericType<int, string>.ValueV
+            );
         }
 
         intValue++;
@@ -127,12 +140,18 @@ class SimpleReadWriteThreadStaticTest
 
         if (GenericType<int, int>.ValueT != intValue)
         {
-            throw new Exception("GenericReadWriteThreadStaticsTest2a: wrong integer value: " + GenericType<int, string>.ValueT.ToString());
+            throw new Exception(
+                "GenericReadWriteThreadStaticsTest2a: wrong integer value: "
+                    + GenericType<int, string>.ValueT.ToString()
+            );
         }
 
         if (GenericType<int, int>.ValueV != (intValue + 1))
         {
-            throw new Exception("GenericReadWriteThreadStaticsTest2b: wrong integer value: " + GenericType<int, string>.ValueV.ToString());
+            throw new Exception(
+                "GenericReadWriteThreadStaticsTest2b: wrong integer value: "
+                    + GenericType<int, string>.ValueV.ToString()
+            );
         }
 
         GenericType<string, string>.ValueT = stringValue + "a";
@@ -140,12 +159,18 @@ class SimpleReadWriteThreadStaticTest
 
         if (GenericType<string, string>.ValueT != (stringValue + "a"))
         {
-            throw new Exception("GenericReadWriteThreadStaticsTest3a: wrong string value: " + GenericType<string, string>.ValueT);
+            throw new Exception(
+                "GenericReadWriteThreadStaticsTest3a: wrong string value: "
+                    + GenericType<string, string>.ValueT
+            );
         }
 
         if (GenericType<string, string>.ValueV != (stringValue + "b"))
         {
-            throw new Exception("GenericReadWriteThreadStaticsTest3b: wrong string value: " + GenericType<string, string>.ValueV);
+            throw new Exception(
+                "GenericReadWriteThreadStaticsTest3b: wrong string value: "
+                    + GenericType<string, string>.ValueV
+            );
         }
     }
 }
@@ -160,25 +185,28 @@ class ThreadStaticsTestWithTasks
         Task[] tasks = new Task[TotalTaskCount];
         for (int i = 0; i < tasks.Length; ++i)
         {
-            tasks[i] = Task.Factory.StartNew((param) =>
-            {
-                int index = (int)param;
-                int intTestValue = index * 10;
-                string stringTestValue = "ThreadStaticsTestWithTasks" + index;
-
-                // Try to run the on every other task
-                if ((index % 2) == 0)
+            tasks[i] = Task.Factory.StartNew(
+                (param) =>
                 {
-                    lock (lockObject)
+                    int index = (int)param;
+                    int intTestValue = index * 10;
+                    string stringTestValue = "ThreadStaticsTestWithTasks" + index;
+
+                    // Try to run the on every other task
+                    if ((index % 2) == 0)
+                    {
+                        lock (lockObject)
+                        {
+                            SimpleReadWriteThreadStaticTest.Run(intTestValue, stringTestValue);
+                        }
+                    }
+                    else
                     {
                         SimpleReadWriteThreadStaticTest.Run(intTestValue, stringTestValue);
                     }
-                }
-                else
-                {
-                    SimpleReadWriteThreadStaticTest.Run(intTestValue, stringTestValue);
-                }
-            }, i);
+                },
+                i
+            );
         }
         for (int i = 0; i < tasks.Length; ++i)
         {
@@ -221,7 +249,10 @@ class ThreadTest
 
         if (!(ex is T))
         {
-            message += string.Format(" (caught {0})", (ex == null) ? "no exception" : ex.GetType().Name);
+            message += string.Format(
+                " (caught {0})",
+                (ex == null) ? "no exception" : ex.GetType().Name
+            );
         }
         Expect(ex is T, message);
     }
@@ -236,7 +267,15 @@ class ThreadTest
 
         s_startedThreads.Clear();
 
-        Expect(s_passed == expectedPassed, string.Format("{0}: Expected s_passed == {1}, got {2}", testName, expectedPassed, s_passed));
+        Expect(
+            s_passed == expectedPassed,
+            string.Format(
+                "{0}: Expected s_passed == {1}, got {2}",
+                testName,
+                expectedPassed,
+                s_passed
+            )
+        );
         s_passed = 0;
     }
 
@@ -250,7 +289,10 @@ class ThreadTest
         // Case 2: new Thread(ThreadStart).Start(parameter)
         var t2 = new Thread(() => Expect(false, "This thread must not be started"));
         // InvalidOperationException: The thread was created with a ThreadStart delegate that does not accept a parameter.
-        ExpectException<InvalidOperationException>(() => t2.Start(null), "Expected InvalidOperationException for t2.Start()");
+        ExpectException<InvalidOperationException>(
+            () => t2.Start(null),
+            "Expected InvalidOperationException for t2.Start()"
+        );
 
         // Case 3: new Thread(ParameterizedThreadStart).Start()
         var t3 = new Thread(obj => Expect(obj == null, "Expected obj == null"));
@@ -270,14 +312,21 @@ class ThreadTest
 
         // Threads cannot started more than once
         t1.Join();
-        ExpectException<ThreadStateException>(() => t1.Start(), "Expected ThreadStateException for t1.Start()");
+        ExpectException<ThreadStateException>(
+            () => t1.Start(),
+            "Expected ThreadStateException for t1.Start()"
+        );
 
-        ExpectException<ThreadStateException>(() => Thread.CurrentThread.Start(),
-            "Expected ThreadStateException for CurrentThread.Start()");
+        ExpectException<ThreadStateException>(
+            () => Thread.CurrentThread.Start(),
+            "Expected ThreadStateException for CurrentThread.Start()"
+        );
 
         Thread stoppedResurrected = Resurrector.CreateStoppedResurrected();
-        ExpectException<ThreadStateException>(() => stoppedResurrected.Start(),
-            "Expected ThreadStateException for stoppedResurrected.Start()");
+        ExpectException<ThreadStateException>(
+            () => stoppedResurrected.Start(),
+            "Expected ThreadStateException for stoppedResurrected.Start()"
+        );
 
         ExpectPassed(nameof(TestStartMethod), 7);
     }
@@ -285,8 +334,14 @@ class ThreadTest
     private static void TestJoinMethod()
     {
         var t = new Thread(() => { });
-        ExpectException<InvalidOperationException>(() => t.Start(null), "Expected InvalidOperationException for t.Start()");
-        ExpectException<ThreadStateException>(() => t.Join(), "Expected ThreadStateException for t.Join()");
+        ExpectException<InvalidOperationException>(
+            () => t.Start(null),
+            "Expected InvalidOperationException for t.Start()"
+        );
+        ExpectException<ThreadStateException>(
+            () => t.Join(),
+            "Expected ThreadStateException for t.Join()"
+        );
 
         Thread stoppedResurrected = Resurrector.CreateStoppedResurrected();
         Expect(stoppedResurrected.Join(1), "Expected stoppedResurrected.Join(1) to return true");
@@ -299,7 +354,9 @@ class ThreadTest
     private static void TestCurrentThreadProperty()
     {
         Thread t = null;
-        t = new Thread(() => Expect(Thread.CurrentThread == t, "Expected CurrentThread == t on thread t"));
+        t = new Thread(
+            () => Expect(Thread.CurrentThread == t, "Expected CurrentThread == t on thread t")
+        );
         t.Start();
         s_startedThreads.Add(t);
 
@@ -335,13 +392,18 @@ class ThreadTest
         for (int i = 0; i < spawnedCount; i++)
         {
             ManualResetEventSlim mres = new ManualResetEventSlim(false);
-            var t = new Thread(() => {
+            var t = new Thread(() =>
+            {
                 Thread.CurrentThread.IsBackground = !Thread.CurrentThread.IsBackground;
                 mres.Wait();
             });
             s_startedThreads.Add(t);
-            spawned[i] = Task.Factory.StartNew(() => { t.Start(); });
-            Task.Factory.StartNew(() => {
+            spawned[i] = Task.Factory.StartNew(() =>
+            {
+                t.Start();
+            });
+            Task.Factory.StartNew(() =>
+            {
                 Expect(true, "Always true");
                 for (int i = 0; i < 10000; i++)
                 {
@@ -366,19 +428,29 @@ class ThreadTest
         Expect(!t.IsBackground, "Expected t.IsBackground == false");
         t_event.Set();
         t.Join();
-        ExpectException<ThreadStateException>(() => Console.WriteLine(t.IsBackground),
-            "Expected ThreadStateException for t.IsBackground");
+        ExpectException<ThreadStateException>(
+            () => Console.WriteLine(t.IsBackground),
+            "Expected ThreadStateException for t.IsBackground"
+        );
 
         // Thread pool thread
-        Task.Factory.StartNew(() => Expect(Thread.CurrentThread.IsBackground, "Expected IsBackground == true")).Wait();
+        Task.Factory.StartNew(
+                () => Expect(Thread.CurrentThread.IsBackground, "Expected IsBackground == true")
+            )
+            .Wait();
 
         // Resurrected threads
         Thread unstartedResurrected = Resurrector.CreateUnstartedResurrected();
-        Expect(unstartedResurrected.IsBackground == false, "Expected unstartedResurrected.IsBackground == false");
+        Expect(
+            unstartedResurrected.IsBackground == false,
+            "Expected unstartedResurrected.IsBackground == false"
+        );
 
         Thread stoppedResurrected = Resurrector.CreateStoppedResurrected();
-        ExpectException<ThreadStateException>(() => Console.WriteLine(stoppedResurrected.IsBackground),
-            "Expected ThreadStateException for stoppedResurrected.IsBackground");
+        ExpectException<ThreadStateException>(
+            () => Console.WriteLine(stoppedResurrected.IsBackground),
+            "Expected ThreadStateException for stoppedResurrected.IsBackground"
+        );
 
         // Main thread
         Expect(!Thread.CurrentThread.IsBackground, "Expected CurrentThread.IsBackground == false");
@@ -402,25 +474,44 @@ class ThreadTest
     private static void TestManagedThreadIdProperty()
     {
         int t_id = 0;
-        var t = new Thread(() => {
-            Expect(Thread.CurrentThread.ManagedThreadId == t_id, "Expected CurrentTread.ManagedThreadId == t_id on thread t");
-            Expect(Environment.CurrentManagedThreadId == t_id, "Expected Environment.CurrentManagedThreadId == t_id on thread t");
+        var t = new Thread(() =>
+        {
+            Expect(
+                Thread.CurrentThread.ManagedThreadId == t_id,
+                "Expected CurrentTread.ManagedThreadId == t_id on thread t"
+            );
+            Expect(
+                Environment.CurrentManagedThreadId == t_id,
+                "Expected Environment.CurrentManagedThreadId == t_id on thread t"
+            );
         });
 
         t_id = t.ManagedThreadId;
         Expect(t_id != 0, "Expected t_id != 0");
-        Expect(Thread.CurrentThread.ManagedThreadId != t_id, "Expected CurrentTread.ManagedThreadId != t_id on main thread");
-        Expect(Environment.CurrentManagedThreadId != t_id, "Expected Environment.CurrentManagedThreadId != t_id on main thread");
+        Expect(
+            Thread.CurrentThread.ManagedThreadId != t_id,
+            "Expected CurrentTread.ManagedThreadId != t_id on main thread"
+        );
+        Expect(
+            Environment.CurrentManagedThreadId != t_id,
+            "Expected Environment.CurrentManagedThreadId != t_id on main thread"
+        );
 
         t.Start();
         s_startedThreads.Add(t);
 
         // Resurrected threads
         Thread unstartedResurrected = Resurrector.CreateUnstartedResurrected();
-        Expect(unstartedResurrected.ManagedThreadId != 0, "Expected unstartedResurrected.ManagedThreadId != 0");
+        Expect(
+            unstartedResurrected.ManagedThreadId != 0,
+            "Expected unstartedResurrected.ManagedThreadId != 0"
+        );
 
         Thread stoppedResurrected = Resurrector.CreateStoppedResurrected();
-        Expect(stoppedResurrected.ManagedThreadId != 0, "Expected stoppedResurrected.ManagedThreadId != 0");
+        Expect(
+            stoppedResurrected.ManagedThreadId != 0,
+            "Expected stoppedResurrected.ManagedThreadId != 0"
+        );
 
         ExpectPassed(nameof(TestManagedThreadIdProperty), 7);
     }
@@ -430,24 +521,36 @@ class ThreadTest
         var t_event = new AutoResetEvent(false);
         var t = new Thread(() => t_event.WaitOne());
 
-        Expect(t.ThreadState == ThreadState.Unstarted, "Expected t.ThreadState == ThreadState.Unstarted");
+        Expect(
+            t.ThreadState == ThreadState.Unstarted,
+            "Expected t.ThreadState == ThreadState.Unstarted"
+        );
         t.Start();
         s_startedThreads.Add(t);
 
-        Expect(t.ThreadState == ThreadState.Running || t.ThreadState == ThreadState.WaitSleepJoin,
-            "Expected t.ThreadState is either ThreadState.Running or ThreadState.WaitSleepJoin");
+        Expect(
+            t.ThreadState == ThreadState.Running || t.ThreadState == ThreadState.WaitSleepJoin,
+            "Expected t.ThreadState is either ThreadState.Running or ThreadState.WaitSleepJoin"
+        );
         t_event.Set();
         t.Join();
-        Expect(t.ThreadState == ThreadState.Stopped, "Expected t.ThreadState == ThreadState.Stopped");
+        Expect(
+            t.ThreadState == ThreadState.Stopped,
+            "Expected t.ThreadState == ThreadState.Stopped"
+        );
 
         // Resurrected threads
         Thread unstartedResurrected = Resurrector.CreateUnstartedResurrected();
-        Expect(unstartedResurrected.ThreadState == ThreadState.Unstarted,
-            "Expected unstartedResurrected.ThreadState == ThreadState.Unstarted");
+        Expect(
+            unstartedResurrected.ThreadState == ThreadState.Unstarted,
+            "Expected unstartedResurrected.ThreadState == ThreadState.Unstarted"
+        );
 
         Thread stoppedResurrected = Resurrector.CreateStoppedResurrected();
-        Expect(stoppedResurrected.ThreadState == ThreadState.Stopped,
-            "Expected stoppedResurrected.ThreadState == ThreadState.Stopped");
+        Expect(
+            stoppedResurrected.ThreadState == ThreadState.Stopped,
+            "Expected stoppedResurrected.ThreadState == ThreadState.Stopped"
+        );
 
         ExpectPassed(nameof(TestThreadStateProperty), 5);
     }
@@ -471,6 +574,7 @@ class ThreadTest
     }
 
     static int s_startedThreadCount = 0;
+
     private static void TestStartShutdown()
     {
         Thread[] threads = new Thread[2048];
@@ -478,7 +582,10 @@ class ThreadTest
         // Creating a large number of threads
         for (int i = 0; i < threads.Length; i++)
         {
-            threads[i] = new Thread(() => { Interlocked.Increment(ref s_startedThreadCount); });
+            threads[i] = new Thread(() =>
+            {
+                Interlocked.Increment(ref s_startedThreadCount);
+            });
             threads[i].Start();
         }
 
@@ -488,8 +595,14 @@ class ThreadTest
             threads[i].Join();
         }
 
-        Expect(s_startedThreadCount == threads.Length,
-            String.Format("Not all threads completed. Expected: {0}, Actual: {1}", threads.Length, s_startedThreadCount));
+        Expect(
+            s_startedThreadCount == threads.Length,
+            String.Format(
+                "Not all threads completed. Expected: {0}, Actual: {1}",
+                threads.Length,
+                s_startedThreadCount
+            )
+        );
         ExpectPassed(nameof(TestStartShutdown), 1);
     }
 
@@ -540,7 +653,7 @@ class ThreadTest
             {
                 s_unstartedResurrected = _thread;
             }
-            else if(!_unstarted && (s_stoppedResurrected == null))
+            else if (!_unstarted && (s_stoppedResurrected == null))
             {
                 s_stoppedResurrected = _thread;
             }

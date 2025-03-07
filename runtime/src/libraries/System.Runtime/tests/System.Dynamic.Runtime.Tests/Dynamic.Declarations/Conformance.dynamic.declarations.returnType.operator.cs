@@ -33,8 +33,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.operate.binary002.binary002
 {
     public class Test
@@ -64,8 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.operate.binary003.binary003
 {
@@ -97,8 +93,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.operate.binary004.binary004
 {
     public class Test
@@ -129,8 +123,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.operate.unary002.unary002
 {
     public class Test
@@ -138,14 +130,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
         public class MyClass
         {
             public int Field;
+
             public static dynamic operator -(MyClass d)
             {
-                return new MyClass()
-                {
-                    Field = 3
-                }
-
-                ;
+                return new MyClass() { Field = 3 };
             }
         }
 

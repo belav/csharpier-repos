@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,26 +30,28 @@
 
 using System;
 
-namespace Mono.Messaging {
+namespace Mono.Messaging
+{
+    [Serializable]
+    public class ConnectionException : MonoMessagingException
+    {
+        private readonly QueueReference qRef;
 
-	[Serializable]
-	public class ConnectionException : MonoMessagingException {
-		private readonly QueueReference qRef;
-	
-		public ConnectionException (QueueReference qRef, Exception e) 
-			: base ("Unable to connect to Queue: " + qRef + ", Error: " + e.Message, e)
-		{
-			this.qRef = qRef;
-		}
-		
-		public ConnectionException (QueueReference qRef) 
-			: base ("Unable to connect to Queue: " + qRef)
-		{
-			this.qRef = qRef;
-		}
-		
-		public QueueReference QRef {
-			get { return qRef; }
-		}
-	}
+        public ConnectionException(QueueReference qRef, Exception e)
+            : base("Unable to connect to Queue: " + qRef + ", Error: " + e.Message, e)
+        {
+            this.qRef = qRef;
+        }
+
+        public ConnectionException(QueueReference qRef)
+            : base("Unable to connect to Queue: " + qRef)
+        {
+            this.qRef = qRef;
+        }
+
+        public QueueReference QRef
+        {
+            get { return qRef; }
+        }
+    }
 }

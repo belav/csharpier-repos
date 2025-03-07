@@ -4,21 +4,24 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security {
+namespace System.Web.Security
+{
     using System.Web.ApplicationServices;
     using System.Web.Script.Services;
     using System.Web.Services;
 
     [ScriptService]
-    internal sealed class AuthenticationService {
+    internal sealed class AuthenticationService
+    {
         [WebMethod]
-        public bool Login(string userName, string password, bool createPersistentCookie) {
+        public bool Login(string userName, string password, bool createPersistentCookie)
+        {
             ApplicationServiceHelper.EnsureAuthenticationServiceEnabled(HttpContext.Current, true);
 
-            // 
+            //
 
-
-            if(Membership.ValidateUser(userName, password)) {
+            if (Membership.ValidateUser(userName, password))
+            {
                 FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
                 return true;
             }
@@ -27,12 +30,15 @@ namespace System.Web.Security {
         }
 
         [WebMethod]
-        public void Logout() {
+        public void Logout()
+        {
             ApplicationServiceHelper.EnsureAuthenticationServiceEnabled(HttpContext.Current, false);
             FormsAuthentication.SignOut();
         }
+
         [WebMethod]
-        public bool IsLoggedIn() {
+        public bool IsLoggedIn()
+        {
             ApplicationServiceHelper.EnsureAuthenticationServiceEnabled(HttpContext.Current, false);
             return HttpContext.Current.Request.IsAuthenticated;
         }

@@ -24,7 +24,10 @@ internal sealed class RangeBasedDocumentSymbol(Id<Range> id, TextSpan span)
     [JsonProperty("children")]
     public List<RangeBasedDocumentSymbol>? Children { get; internal set; }
 
-    public static void AddNestedFromDocumentOrderTraversal(List<RangeBasedDocumentSymbol> list, RangeBasedDocumentSymbol symbol)
+    public static void AddNestedFromDocumentOrderTraversal(
+        List<RangeBasedDocumentSymbol> list,
+        RangeBasedDocumentSymbol symbol
+    )
     {
         // If this is the first entry, just add it
         if (list.Count == 0)
@@ -37,7 +40,10 @@ internal sealed class RangeBasedDocumentSymbol(Id<Range> id, TextSpan span)
             // or is after that one. As a result we'll check the last one only.
             var last = list[^1];
 
-            Contract.ThrowIfTrue(symbol.Span.Start < last.Span.Start, "We didn't produce symbols in document order, so we're not going to correctly structure the result.");
+            Contract.ThrowIfTrue(
+                symbol.Span.Start < last.Span.Start,
+                "We didn't produce symbols in document order, so we're not going to correctly structure the result."
+            );
 
             if (last.Span.Contains(symbol.Span))
             {

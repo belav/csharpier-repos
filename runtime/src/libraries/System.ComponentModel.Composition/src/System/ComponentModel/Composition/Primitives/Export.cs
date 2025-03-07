@@ -29,9 +29,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///         and <see cref="GetExportedValueCore"/>.
         ///     </note>
         /// </remarks>
-        protected Export()
-        {
-        }
+        protected Export() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class
@@ -56,9 +54,10 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="contractName"/> is an empty string ("").
         /// </exception>
         public Export(string contractName, Func<object?> exportedValueGetter)
-            : this(new ExportDefinition(contractName, (IDictionary<string, object?>?)null), exportedValueGetter)
-        {
-        }
+            : this(
+                new ExportDefinition(contractName, (IDictionary<string, object?>?)null),
+                exportedValueGetter
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class
@@ -88,10 +87,12 @@ namespace System.ComponentModel.Composition.Primitives
         /// <exception cref="ArgumentException">
         ///     <paramref name="contractName"/> is an empty string ("").
         /// </exception>
-        public Export(string contractName, IDictionary<string, object?>? metadata, Func<object?> exportedValueGetter)
-            : this(new ExportDefinition(contractName, metadata), exportedValueGetter)
-        {
-        }
+        public Export(
+            string contractName,
+            IDictionary<string, object?>? metadata,
+            Func<object?> exportedValueGetter
+        )
+            : this(new ExportDefinition(contractName, metadata), exportedValueGetter) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class
@@ -202,7 +203,11 @@ namespace System.ComponentModel.Composition.Primitives
                 if (_exportedValue == Export._EmptyValue)
                 {
                     object? exportedValue = GetExportedValueCore();
-                    Interlocked.CompareExchange(ref _exportedValue, exportedValue, Export._EmptyValue);
+                    Interlocked.CompareExchange(
+                        ref _exportedValue,
+                        exportedValue,
+                        Export._EmptyValue
+                    );
                 }
 
                 return _exportedValue;

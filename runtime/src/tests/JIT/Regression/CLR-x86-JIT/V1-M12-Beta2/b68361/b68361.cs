@@ -3,9 +3,11 @@
 //
 
 using Xunit;
+
 namespace A
 {
     using System;
+
     public class B
     {
         public static int downBy1ge(int amount)
@@ -251,4 +253,3 @@ namespace A
         }
     }
 }
-

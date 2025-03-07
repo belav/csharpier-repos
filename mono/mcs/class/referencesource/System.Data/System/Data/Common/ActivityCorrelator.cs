@@ -9,15 +9,15 @@ namespace System.Data.Common
 {
     using System;
     using System.Data;
-    using System.Threading;
     using System.Diagnostics;
     using System.Globalization;
-    
+    using System.Threading;
+
     /// <summary>
     /// This class defines the data strucutre for ActvitiyId used for correlated tracing between client (bid trace event) and server (XEvent).
     /// It also includes all the APIs used to access the ActivityId. Note: ActivityId is thread based which is stored in TLS.
     /// </summary>
- 
+
     internal static class ActivityCorrelator
     {
         internal const Bid.ApiGroup CorrelationTracePoints = Bid.ApiGroup.Correlation;
@@ -50,7 +50,12 @@ namespace System.Data.Common
 
             public override string ToString()
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}:{1}", this.Id, this.Sequence);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}:{1}",
+                    this.Id,
+                    this.Sequence
+                );
             }
         }
 
@@ -80,7 +85,7 @@ namespace System.Data.Common
         /// Increment the sequence number and generate the new ActviityId
         /// </summary>
         /// <returns>ActivityId</returns>
-        internal static ActivityId Next()   
+        internal static ActivityId Next()
         {
             if (tlsActivity == null)
             {

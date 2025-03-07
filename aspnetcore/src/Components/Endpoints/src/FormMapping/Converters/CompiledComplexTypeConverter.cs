@@ -5,13 +5,27 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal class CompiledComplexTypeConverter<T>(CompiledComplexTypeConverter<T>.ConverterDelegate body) : FormDataConverter<T>
+internal class CompiledComplexTypeConverter<T>(
+    CompiledComplexTypeConverter<T>.ConverterDelegate body
+) : FormDataConverter<T>
 {
-    public delegate bool ConverterDelegate(ref FormDataReader reader, Type type, FormDataMapperOptions options, out T? result, out bool found);
+    public delegate bool ConverterDelegate(
+        ref FormDataReader reader,
+        Type type,
+        FormDataMapperOptions options,
+        out T? result,
+        out bool found
+    );
 
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
-    internal override bool TryRead(ref FormDataReader context, Type type, FormDataMapperOptions options, out T? result, out bool found)
+    internal override bool TryRead(
+        ref FormDataReader context,
+        Type type,
+        FormDataMapperOptions options,
+        out T? result,
+        out bool found
+    )
     {
         result = default;
         found = false;

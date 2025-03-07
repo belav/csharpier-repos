@@ -13,16 +13,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             public RemoveAnalyzerConfigDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
-                DocumentId documentId)
-                : base(workspace, documentId)
-            {
-            }
+                DocumentId documentId
+            )
+                : base(workspace, documentId) { }
 
-            protected override IReadOnlyList<DocumentId> GetDocumentIds(Project fromProject)
-                => fromProject.State.AnalyzerConfigDocumentStates.Ids;
+            protected override IReadOnlyList<DocumentId> GetDocumentIds(Project fromProject) =>
+                fromProject.State.AnalyzerConfigDocumentStates.Ids;
 
-            protected override TextDocument? GetDocument(Solution currentSolution)
-                => currentSolution.GetAnalyzerConfigDocument(this.DocumentId);
+            protected override TextDocument? GetDocument(Solution currentSolution) =>
+                currentSolution.GetAnalyzerConfigDocument(this.DocumentId);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace System.ServiceModel.Dispatcher
 
     class ProxyOperationRuntime
     {
-        static internal readonly ParameterInfo[] NoParams = new ParameterInfo[0];
-        static internal readonly object[] EmptyArray = new object[0];
+        internal static readonly ParameterInfo[] NoParams = new ParameterInfo[0];
+        internal static readonly object[] EmptyArray = new object[0];
 
         readonly IClientMessageFormatter formatter;
         readonly bool isInitiating;
@@ -57,7 +57,9 @@ namespace System.ServiceModel.Dispatcher
             this.isTerminating = operation.IsTerminating;
             this.isSessionOpenNotificationEnabled = operation.IsSessionOpenNotificationEnabled;
             this.name = operation.Name;
-            this.parameterInspectors = EmptyArray<IParameterInspector>.ToArray(operation.ParameterInspectors);
+            this.parameterInspectors = EmptyArray<IParameterInspector>.ToArray(
+                operation.ParameterInspectors
+            );
             this.faultFormatter = operation.FaultFormatter;
             this.serializeRequest = operation.SerializeRequest;
             this.deserializeReply = operation.DeserializeReply;
@@ -91,7 +93,11 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.formatter == null && (serializeRequest || deserializeReply))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ClientRuntimeRequiresFormatter0, this.name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ClientRuntimeRequiresFormatter0, this.name)
+                    )
+                );
             }
         }
 
@@ -150,11 +156,7 @@ namespace System.ServiceModel.Dispatcher
             get { return this.serializeRequest; }
         }
 
-        internal Type TaskTResult 
-        { 
-            get; 
-            set; 
-        }
+        internal Type TaskTResult { get; set; }
 
         internal void AfterReply(ref ProxyRpc rpc)
         {
@@ -175,7 +177,6 @@ namespace System.ServiceModel.Dispatcher
                     {
                         TD.ClientFormatterDeserializeReplyStop(rpc.EventTraceActivity);
                     }
-
                 }
                 else
                 {
@@ -187,13 +188,19 @@ namespace System.ServiceModel.Dispatcher
                 {
                     for (int i = parameterInspectors.Length - 1; i >= 0; i--)
                     {
-                        this.parameterInspectors[i].AfterCall(this.name,
-                                                              rpc.OutputParameters,
-                                                              rpc.ReturnValue,
-                                                              rpc.Correlation[offset + i]);
+                        this.parameterInspectors[i]
+                            .AfterCall(
+                                this.name,
+                                rpc.OutputParameters,
+                                rpc.ReturnValue,
+                                rpc.Correlation[offset + i]
+                            );
                         if (TD.ClientParameterInspectorAfterCallInvokedIsEnabled())
                         {
-                            TD.ClientParameterInspectorAfterCallInvoked(rpc.EventTraceActivity, this.parameterInspectors[i].GetType().FullName);
+                            TD.ClientParameterInspectorAfterCallInvoked(
+                                rpc.EventTraceActivity,
+                                this.parameterInspectors[i].GetType().FullName
+                            );
                         }
                     }
                 }
@@ -212,10 +219,19 @@ namespace System.ServiceModel.Dispatcher
 
                 if (parent.ValidateMustUnderstand)
                 {
-                    Collection<MessageHeaderInfo> headersNotUnderstood = reply.Headers.GetHeadersNotUnderstood();
+                    Collection<MessageHeaderInfo> headersNotUnderstood =
+                        reply.Headers.GetHeadersNotUnderstood();
                     if (headersNotUnderstood != null && headersNotUnderstood.Count > 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.SFxHeaderNotUnderstood, headersNotUnderstood[0].Name, headersNotUnderstood[0].Namespace)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.SFxHeaderNotUnderstood,
+                                    headersNotUnderstood[0].Name,
+                                    headersNotUnderstood[0].Namespace
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -228,10 +244,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 for (int i = 0; i < parameterInspectors.Length; i++)
                 {
-                    rpc.Correlation[offset + i] = this.parameterInspectors[i].BeforeCall(this.name, rpc.InputParameters);
+                    rpc.Correlation[offset + i] = this.parameterInspectors[i]
+                        .BeforeCall(this.name, rpc.InputParameters);
                     if (TD.ClientParameterInspectorBeforeCallInvokedIsEnabled())
                     {
-                        TD.ClientParameterInspectorBeforeCallInvoked(rpc.EventTraceActivity, this.parameterInspectors[i].GetType().FullName);
+                        TD.ClientParameterInspectorBeforeCallInvoked(
+                            rpc.EventTraceActivity,
+                            this.parameterInspectors[i].GetType().FullName
+                        );
                     }
                 }
             }
@@ -255,9 +275,10 @@ namespace System.ServiceModel.Dispatcher
                     TD.ClientFormatterSerializeRequestStart(rpc.EventTraceActivity);
                 }
 
-                rpc.Request = this.formatter.SerializeRequest(rpc.MessageVersion, rpc.InputParameters);
-
-
+                rpc.Request = this.formatter.SerializeRequest(
+                    rpc.MessageVersion,
+                    rpc.InputParameters
+                );
 
                 if (TD.ClientFormatterSerializeRequestStopIsEnabled())
                 {
@@ -268,18 +289,33 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (rpc.InputParameters[0] == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxProxyRuntimeMessageCannotBeNull, this.name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxProxyRuntimeMessageCannotBeNull, this.name)
+                        )
+                    );
                 }
 
                 rpc.Request = (Message)rpc.InputParameters[0];
                 if (!IsValidAction(rpc.Request, Action))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidRequestAction, this.Name, rpc.Request.Headers.Action ?? "{NULL}", this.Action)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInvalidRequestAction,
+                                this.Name,
+                                rpc.Request.Headers.Action ?? "{NULL}",
+                                this.Action
+                            )
+                        )
+                    );
             }
         }
 
         internal static object GetDefaultParameterValue(Type parameterType)
         {
-            return (parameterType.IsValueType && parameterType != typeof(void)) ? Activator.CreateInstance(parameterType) : null;
+            return (parameterType.IsValueType && parameterType != typeof(void))
+                ? Activator.CreateInstance(parameterType)
+                : null;
         }
 
         [SecurityCritical]
@@ -332,7 +368,11 @@ namespace System.ServiceModel.Dispatcher
         }
 
         [SecurityCritical]
-        internal object[] MapAsyncBeginInputs(IMethodCallMessage methodCall, out AsyncCallback callback, out object asyncState)
+        internal object[] MapAsyncBeginInputs(
+            IMethodCallMessage methodCall,
+            out AsyncCallback callback,
+            out object asyncState
+        )
         {
             object[] ins;
             if (this.inParams.Length == 0)
@@ -356,26 +396,43 @@ namespace System.ServiceModel.Dispatcher
         }
 
         [SecurityCritical]
-        internal void MapAsyncEndInputs(IMethodCallMessage methodCall, out IAsyncResult result, out object[] outs)
+        internal void MapAsyncEndInputs(
+            IMethodCallMessage methodCall,
+            out IAsyncResult result,
+            out object[] outs
+        )
         {
             outs = new object[this.endOutParams.Length];
             result = methodCall.Args[methodCall.ArgCount - 1] as IAsyncResult;
         }
 
         [SecurityCritical]
-        internal object[] MapSyncOutputs(IMethodCallMessage methodCall, object[] outs, ref object ret)
+        internal object[] MapSyncOutputs(
+            IMethodCallMessage methodCall,
+            object[] outs,
+            ref object ret
+        )
         {
             return MapOutputs(this.outParams, methodCall, outs, ref ret);
         }
 
         [SecurityCritical]
-        internal object[] MapAsyncOutputs(IMethodCallMessage methodCall, object[] outs, ref object ret)
+        internal object[] MapAsyncOutputs(
+            IMethodCallMessage methodCall,
+            object[] outs,
+            ref object ret
+        )
         {
             return MapOutputs(this.endOutParams, methodCall, outs, ref ret);
         }
 
         [SecurityCritical]
-        object[] MapOutputs(ParameterInfo[] parameters, IMethodCallMessage methodCall, object[] outs, ref object ret)
+        object[] MapOutputs(
+            ParameterInfo[] parameters,
+            IMethodCallMessage methodCall,
+            object[] outs,
+            ref object ret
+        )
         {
             if (ret == null && this.returnParam != null)
             {
@@ -393,7 +450,9 @@ namespace System.ServiceModel.Dispatcher
                 if (outs[i] == null)
                 {
                     // the RealProxy infrastructure requires a default value for value types
-                    args[parameters[i].Position] = GetDefaultParameterValue(TypeLoader.GetParameterType(parameters[i]));
+                    args[parameters[i].Position] = GetDefaultParameterValue(
+                        TypeLoader.GetParameterType(parameters[i])
+                    );
                 }
                 else
                 {
@@ -404,7 +463,7 @@ namespace System.ServiceModel.Dispatcher
             return args;
         }
 
-        static internal bool IsValidAction(Message message, string action)
+        internal static bool IsValidAction(Message message, string action)
         {
             if (message == null)
             {

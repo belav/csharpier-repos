@@ -44,7 +44,6 @@ namespace System.Linq.Parallel.Tests
             return ParallelEnumerable.Range(start, count);
         }
 
-
         // Get a set of ranges, of each count in `counts`.
         // The start of each range is determined by passing the count into the `start` predicate.
         public static IEnumerable<object[]> Ranges(Func<int, int> start, IEnumerable<int> counts)
@@ -69,7 +68,8 @@ namespace System.Linq.Parallel.Tests
         /// the second element is the count, and the third is the start.</returns>
         public static IEnumerable<object[]> Ranges(int start, IEnumerable<int> counts)
         {
-            foreach (object[] parms in Ranges(x => start, counts)) yield return parms;
+            foreach (object[] parms in Ranges(x => start, counts))
+                yield return parms;
         }
 
         /// <summary>
@@ -82,7 +82,8 @@ namespace System.Linq.Parallel.Tests
         /// and the second element is the count</returns>
         public static IEnumerable<object[]> Ranges(int[] counts)
         {
-            foreach (object[] parms in Ranges(counts.Cast<int>())) yield return parms;
+            foreach (object[] parms in Ranges(counts.Cast<int>()))
+                yield return parms;
         }
 
         /// <summary>
@@ -93,7 +94,8 @@ namespace System.Linq.Parallel.Tests
         /// and the second element is the count</returns>
         public static IEnumerable<object[]> OuterLoopRanges()
         {
-            foreach (object[] parms in Ranges(new[] { Sources.OuterLoopCount })) yield return parms;
+            foreach (object[] parms in Ranges(new[] { Sources.OuterLoopCount }))
+                yield return parms;
         }
 
         /// <summary>
@@ -107,7 +109,8 @@ namespace System.Linq.Parallel.Tests
         /// the second element is the count, and the third is the start.</returns>
         public static IEnumerable<object[]> Ranges(int start, int[] counts)
         {
-            foreach (object[] parms in Ranges(start, counts.Cast<int>())) yield return parms;
+            foreach (object[] parms in Ranges(start, counts.Cast<int>()))
+                yield return parms;
         }
 
         /// <summary>
@@ -121,7 +124,10 @@ namespace System.Linq.Parallel.Tests
         /// the third element is the right Labeled{ParallelQuery{int}} range, and the fourth element is the right count, .</returns>
         public static IEnumerable<object[]> BinaryRanges(int[] leftCounts, int[] rightCounts)
         {
-            foreach (object[] parms in BinaryRanges(leftCounts.Cast<int>(), rightCounts.Cast<int>())) yield return parms;
+            foreach (
+                object[] parms in BinaryRanges(leftCounts.Cast<int>(), rightCounts.Cast<int>())
+            )
+                yield return parms;
         }
 
         /// <summary>
@@ -133,7 +139,8 @@ namespace System.Linq.Parallel.Tests
         /// and the second element is the count</returns>
         public static IEnumerable<object[]> Ranges(IEnumerable<int> counts)
         {
-            foreach (object[] parms in Ranges(x => 0, counts)) yield return parms.Take(2).ToArray();
+            foreach (object[] parms in Ranges(x => 0, counts))
+                yield return parms.Take(2).ToArray();
         }
 
         /// <summary>
@@ -144,7 +151,10 @@ namespace System.Linq.Parallel.Tests
         /// <returns>Entries for test data.
         /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left count,
         /// the third element is the right Labeled{ParallelQuery{int}} range, and the fourth element is the right count.</returns>
-        public static IEnumerable<object[]> BinaryRanges(IEnumerable<int> leftCounts, IEnumerable<int> rightCounts)
+        public static IEnumerable<object[]> BinaryRanges(
+            IEnumerable<int> leftCounts,
+            IEnumerable<int> rightCounts
+        )
         {
             IEnumerable<object[]> rightRanges = Ranges(rightCounts);
             foreach (object[] left in Ranges(leftCounts))
@@ -166,11 +176,17 @@ namespace System.Linq.Parallel.Tests
         /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left count,
         /// the third element is the right Labeled{ParallelQuery{int}} range, the fourth element is the right count,
         /// and the fifth is the right start.</returns>
-        public static IEnumerable<object[]> BinaryRanges(IEnumerable<int> leftCounts, Func<int, int, int> rightStart, IEnumerable<int> rightCounts)
+        public static IEnumerable<object[]> BinaryRanges(
+            IEnumerable<int> leftCounts,
+            Func<int, int, int> rightStart,
+            IEnumerable<int> rightCounts
+        )
         {
             foreach (object[] left in Ranges(leftCounts))
             {
-                foreach (object[] right in Ranges(right => rightStart((int)left[1], right), rightCounts))
+                foreach (
+                    object[] right in Ranges(right => rightStart((int)left[1], right), rightCounts)
+                )
                 {
                     yield return left.Concat(right).ToArray();
                 }
@@ -188,7 +204,10 @@ namespace System.Linq.Parallel.Tests
         /// <returns>Entries for test data.
         /// The first element is the Labeled{ParallelQuery{int}} range,
         /// the second element is the count, and one additional element for each modifier.</returns>
-        public static IEnumerable<object[]> Ranges<T>(IEnumerable<int> counts, Func<int, T> modifiers)
+        public static IEnumerable<object[]> Ranges<T>(
+            IEnumerable<int> counts,
+            Func<int, T> modifiers
+        )
         {
             foreach (object[] parms in Ranges(counts))
             {
@@ -210,7 +229,10 @@ namespace System.Linq.Parallel.Tests
         /// <returns>Entries for test data.
         /// The first element is the Labeled{ParallelQuery{int}} range,
         /// the second element is the count, and one additional element for each modifier.</returns>
-        public static IEnumerable<object[]> Ranges<T>(IEnumerable<int> counts, Func<int, IEnumerable<T>> modifiers)
+        public static IEnumerable<object[]> Ranges<T>(
+            IEnumerable<int> counts,
+            Func<int, IEnumerable<T>> modifiers
+        )
         {
             foreach (object[] parms in Ranges(counts))
             {
@@ -225,13 +247,26 @@ namespace System.Linq.Parallel.Tests
         // Useful for testing promptness of cancellation.
         public static IEnumerable<object[]> ThrowOnFirstEnumeration()
         {
-            yield return new object[] { Labeled.Label("ThrowOnFirstEnumeration", Enumerables<int>.ThrowOnEnumeration().AsParallel()), 8 };
+            yield return new object[]
+            {
+                Labeled.Label(
+                    "ThrowOnFirstEnumeration",
+                    Enumerables<int>.ThrowOnEnumeration().AsParallel()
+                ),
+                8,
+            };
         }
 
         public static IEnumerable<Labeled<ParallelQuery<int>>> LabeledRanges(int start, int count)
         {
-            yield return Labeled.Label("ParallelEnumerable.Range", ParallelEnumerable.Range(start, count));
-            yield return Labeled.Label("Enumerable.Range", Enumerable.Range(start, count).AsParallel());
+            yield return Labeled.Label(
+                "ParallelEnumerable.Range",
+                ParallelEnumerable.Range(start, count)
+            );
+            yield return Labeled.Label(
+                "Enumerable.Range",
+                Enumerable.Range(start, count).AsParallel()
+            );
             int[] rangeArray = Enumerable.Range(start, count).ToArray();
             yield return Labeled.Label("Array", rangeArray.AsParallel());
             IList<int> rangeList = rangeArray.ToList();

@@ -4,60 +4,59 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.UI;
-    using System.ComponentModel;
     using System.Web.Util;
-    using System.Security.Permissions;
-
+    using System.Xml;
 
     [ConfigurationCollection(typeof(OutputCacheProfile))]
-    public sealed class OutputCacheProfileCollection : ConfigurationElementCollection {
+    public sealed class OutputCacheProfileCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static OutputCacheProfileCollection() {
+        static OutputCacheProfileCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
+
         public OutputCacheProfileCollection()
-            : base(StringComparer.OrdinalIgnoreCase) {
-        }
+            : base(StringComparer.OrdinalIgnoreCase) { }
 
         // public properties
-        public String[] AllKeys {
-            get {
-                return StringUtil.ObjectArrayToStringArray(BaseGetAllKeys());
-            }
+        public String[] AllKeys
+        {
+            get { return StringUtil.ObjectArrayToStringArray(BaseGetAllKeys()); }
         }
 
-        public new OutputCacheProfile this[string name] {
-            get {
-                return (OutputCacheProfile)BaseGet(name);
-            }
+        public new OutputCacheProfile this[string name]
+        {
+            get { return (OutputCacheProfile)BaseGet(name); }
             // Having a setter here would be strange in that you could write
             //  collection["Name1"] = new OutputCacheProfile("differentName"...
-            // 
+            //
         }
 
-        public OutputCacheProfile this[int index] {
-            get {
-                return (OutputCacheProfile)BaseGet(index);
-            }
-            set {
+        public OutputCacheProfile this[int index]
+        {
+            get { return (OutputCacheProfile)BaseGet(index); }
+            set
+            {
                 if (BaseGet(index) != null)
                     BaseRemoveAt(index);
                 BaseAdd(index, value);
@@ -65,46 +64,55 @@ namespace System.Web.Configuration {
         }
 
         // Protected Overrides
-        protected override ConfigurationElement CreateNewElement() {
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new OutputCacheProfile();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) {
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
             return ((OutputCacheProfile)element).Name;
         }
 
         // public methods
-        public void Add(OutputCacheProfile name) {
+        public void Add(OutputCacheProfile name)
+        {
             BaseAdd(name);
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             BaseClear();
         }
 
-        public OutputCacheProfile Get(int index) {
+        public OutputCacheProfile Get(int index)
+        {
             return (OutputCacheProfile)BaseGet(index);
         }
 
-        public OutputCacheProfile Get(string name) {
+        public OutputCacheProfile Get(string name)
+        {
             return (OutputCacheProfile)BaseGet(name);
         }
 
-        public String GetKey(int index) {
-            return (String) BaseGetKey(index);
+        public String GetKey(int index)
+        {
+            return (String)BaseGetKey(index);
         }
 
-        public void Remove(string name) {
+        public void Remove(string name)
+        {
             BaseRemove(name);
         }
 
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             BaseRemoveAt(index);
         }
 
-        public void Set(OutputCacheProfile user) {
+        public void Set(OutputCacheProfile user)
+        {
             BaseAdd(user, false);
         }
-
     }
 }

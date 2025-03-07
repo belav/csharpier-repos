@@ -18,16 +18,17 @@ namespace System.IdentityModel.Selectors
         bool includeWindowsGroups;
 
         public WindowsUserNameSecurityTokenAuthenticator()
-            : this(WindowsClaimSet.DefaultIncludeWindowsGroups)
-        {
-        }
+            : this(WindowsClaimSet.DefaultIncludeWindowsGroups) { }
 
         public WindowsUserNameSecurityTokenAuthenticator(bool includeWindowsGroups)
         {
             this.includeWindowsGroups = includeWindowsGroups;
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(string userName, string password)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(
+            string userName,
+            string password
+        )
         {
             string domain = null;
             string[] strings = userName.Split('\\');
@@ -36,7 +37,9 @@ namespace System.IdentityModel.Selectors
                 if (strings.Length != 2 || string.IsNullOrEmpty(strings[0]))
                 {
                     // Only support one slash and domain cannot be empty (consistent with windowslogon).
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.IncorrectUserNameFormat));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.IncorrectUserNameFormat)
+                    );
                 }
 
                 // This is the downlevel case - domain\userName
@@ -49,14 +52,36 @@ namespace System.IdentityModel.Selectors
             SafeCloseHandle tokenHandle = null;
             try
             {
-                if (!NativeMethods.LogonUser(userName, domain, password, LOGON32_LOGON_NETWORK_CLEARTEXT, LOGON32_PROVIDER_DEFAULT, out tokenHandle))
+                if (
+                    !NativeMethods.LogonUser(
+                        userName,
+                        domain,
+                        password,
+                        LOGON32_LOGON_NETWORK_CLEARTEXT,
+                        LOGON32_PROVIDER_DEFAULT,
+                        out tokenHandle
+                    )
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.FailLogonUser, userName), new Win32Exception(error)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(SR.FailLogonUser, userName),
+                            new Win32Exception(error)
+                        )
+                    );
                 }
 
-                WindowsIdentity windowsIdentity = new WindowsIdentity(tokenHandle.DangerousGetHandle(), SecurityUtils.AuthTypeBasic);
-                WindowsClaimSet claimSet = new WindowsClaimSet(windowsIdentity, SecurityUtils.AuthTypeBasic, this.includeWindowsGroups, false);
+                WindowsIdentity windowsIdentity = new WindowsIdentity(
+                    tokenHandle.DangerousGetHandle(),
+                    SecurityUtils.AuthTypeBasic
+                );
+                WindowsClaimSet claimSet = new WindowsClaimSet(
+                    windowsIdentity,
+                    SecurityUtils.AuthTypeBasic,
+                    this.includeWindowsGroups,
+                    false
+                );
                 return SecurityUtils.CreateAuthorizationPolicies(claimSet, claimSet.ExpirationTime);
             }
             finally

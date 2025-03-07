@@ -6,5 +6,6 @@ public class Entity10 : BaseEntity
     {
         this.Entities11 = new Entity11();
     }
+
     public Entity11 Entities11 { get; set; }
 }

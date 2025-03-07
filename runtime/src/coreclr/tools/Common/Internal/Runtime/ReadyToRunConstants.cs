@@ -11,19 +11,19 @@ namespace Internal.ReadyToRunConstants
     [Flags]
     public enum ReadyToRunFlags
     {
-        READYTORUN_FLAG_PlatformNeutralSource = 0x00000001,     // Set if the original IL assembly was platform-neutral
-        READYTORUN_FLAG_SkipTypeValidation = 0x00000002,        // Runtime should trust that the metadata for the types defined in this module is correct
-        READYTORUN_FLAG_Partial = 0x00000004,                   // Set of methods with native code was determined using profile data
-        READYTORUN_FLAG_NonSharedPInvokeStubs = 0x00000008,     // PInvoke stubs compiled into image are non-shareable (no secret parameter)
-        READYTORUN_FLAG_EmbeddedMSIL = 0x00000010,              // MSIL is embedded in the composite R2R executable
-        READYTORUN_FLAG_Component = 0x00000020,                 // This is the header describing a component assembly of composite R2R
-        READYTORUN_FLAG_MultiModuleVersionBubble = 0x00000040,   // This R2R module has multiple modules within its version bubble
-        READYTORUN_FLAG_UnrelatedR2RCode = 0x00000080,          // This R2R module has generic code in it that would not be naturally encoded into this module
+        READYTORUN_FLAG_PlatformNeutralSource = 0x00000001, // Set if the original IL assembly was platform-neutral
+        READYTORUN_FLAG_SkipTypeValidation = 0x00000002, // Runtime should trust that the metadata for the types defined in this module is correct
+        READYTORUN_FLAG_Partial = 0x00000004, // Set of methods with native code was determined using profile data
+        READYTORUN_FLAG_NonSharedPInvokeStubs = 0x00000008, // PInvoke stubs compiled into image are non-shareable (no secret parameter)
+        READYTORUN_FLAG_EmbeddedMSIL = 0x00000010, // MSIL is embedded in the composite R2R executable
+        READYTORUN_FLAG_Component = 0x00000020, // This is the header describing a component assembly of composite R2R
+        READYTORUN_FLAG_MultiModuleVersionBubble = 0x00000040, // This R2R module has multiple modules within its version bubble
+        READYTORUN_FLAG_UnrelatedR2RCode = 0x00000080, // This R2R module has generic code in it that would not be naturally encoded into this module
     }
 
     public enum ReadyToRunImportSectionType : byte
     {
-        Unknown      = 0,
+        Unknown = 0,
         StubDispatch = 2,
         StringHandle = 3,
         ILBodyFixups = 7,
@@ -32,9 +32,9 @@ namespace Internal.ReadyToRunConstants
     [Flags]
     public enum ReadyToRunImportSectionFlags : ushort
     {
-        None     = 0x0000,
-        Eager    = 0x0001, // Section at module load time.
-        PCode    = 0x0004, // Section contains pointers to code
+        None = 0x0000,
+        Eager = 0x0001, // Section at module load time.
+        PCode = 0x0004, // Section contains pointers to code
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ namespace Internal.ReadyToRunConstants
     [Flags]
     internal enum ReadyToRunCrossModuleInlineFlags : uint
     {
-        CrossModuleInlinee  = 0x1,
+        CrossModuleInlinee = 0x1,
         HasCrossModuleInliners = 0x2,
         CrossModuleInlinerIndexShift = 2,
         InlinerRidHasModule = 0x1,
@@ -102,12 +102,12 @@ namespace Internal.ReadyToRunConstants
         Zero = 0,
         One = 1,
         Two = 2,
-        MoreThanTwo = 3
+        MoreThanTwo = 3,
     }
 
     public enum ReadyToRunEnclosingTypeMap : uint
     {
-        MaxTypeCount = 0xFFFE
+        MaxTypeCount = 0xFFFE,
     }
 
     public enum DictionaryEntryKind
@@ -134,57 +134,57 @@ namespace Internal.ReadyToRunConstants
         MethodHandle = 0x11,
         FieldHandle = 0x12,
 
-        MethodEntry = 0x13,                 // For calling a method entry point
-        MethodEntry_DefToken = 0x14,        // Smaller version of MethodEntry - method is def token
-        MethodEntry_RefToken = 0x15,        // Smaller version of MethodEntry - method is ref token
+        MethodEntry = 0x13, // For calling a method entry point
+        MethodEntry_DefToken = 0x14, // Smaller version of MethodEntry - method is def token
+        MethodEntry_RefToken = 0x15, // Smaller version of MethodEntry - method is ref token
 
-        VirtualEntry = 0x16,                // For invoking a virtual method
-        VirtualEntry_DefToken = 0x17,       // Smaller version of VirtualEntry - method is def token
-        VirtualEntry_RefToken = 0x18,       // Smaller version of VirtualEntry - method is ref token
-        VirtualEntry_Slot = 0x19,           // Smaller version of VirtualEntry - type & slot
+        VirtualEntry = 0x16, // For invoking a virtual method
+        VirtualEntry_DefToken = 0x17, // Smaller version of VirtualEntry - method is def token
+        VirtualEntry_RefToken = 0x18, // Smaller version of VirtualEntry - method is ref token
+        VirtualEntry_Slot = 0x19, // Smaller version of VirtualEntry - type & slot
 
-        Helper = 0x1A,                      // Helper
-        StringHandle = 0x1B,                // String handle
+        Helper = 0x1A, // Helper
+        StringHandle = 0x1B, // String handle
 
-        NewObject = 0x1C,                   // Dynamically created new helper
+        NewObject = 0x1C, // Dynamically created new helper
         NewArray = 0x1D,
 
-        IsInstanceOf = 0x1E,                // Dynamically created casting helper
+        IsInstanceOf = 0x1E, // Dynamically created casting helper
         ChkCast = 0x1F,
 
-        FieldAddress = 0x20,                // For accessing a cross-module static fields
-        CctorTrigger = 0x21,                // Static constructor trigger
+        FieldAddress = 0x20, // For accessing a cross-module static fields
+        CctorTrigger = 0x21, // Static constructor trigger
 
-        StaticBaseNonGC = 0x22,             // Dynamically created static base helpers
+        StaticBaseNonGC = 0x22, // Dynamically created static base helpers
         StaticBaseGC = 0x23,
         ThreadStaticBaseNonGC = 0x24,
         ThreadStaticBaseGC = 0x25,
 
-        FieldBaseOffset = 0x26,             // Field base offset
-        FieldOffset = 0x27,                 // Field offset
+        FieldBaseOffset = 0x26, // Field base offset
+        FieldOffset = 0x27, // Field offset
 
         TypeDictionary = 0x28,
         MethodDictionary = 0x29,
 
-        Check_TypeLayout = 0x2A,            // size, alignment, HFA, reference map
+        Check_TypeLayout = 0x2A, // size, alignment, HFA, reference map
         Check_FieldOffset = 0x2B,
 
-        DelegateCtor = 0x2C,                // optimized delegate ctor
+        DelegateCtor = 0x2C, // optimized delegate ctor
         DeclaringTypeHandle = 0x2D,
 
-        IndirectPInvokeTarget = 0x2E,       // Target (indirect) of an inlined pinvoke
-        PInvokeTarget = 0x2F,               // Target of an inlined pinvoke
+        IndirectPInvokeTarget = 0x2E, // Target (indirect) of an inlined pinvoke
+        PInvokeTarget = 0x2F, // Target of an inlined pinvoke
 
         Check_InstructionSetSupport = 0x30, // Define the set of instruction sets that must be supported/unsupported to use the fixup
 
-        Verify_FieldOffset = 0x31,  // Generate a runtime check to ensure that the field offset matches between compile and runtime. Unlike CheckFieldOffset, this will generate a runtime exception on failure instead of silently dropping the method
-        Verify_TypeLayout = 0x32,  // Generate a runtime check to ensure that the type layout (size, alignment, HFA, reference map) matches between compile and runtime. Unlike Check_TypeLayout, this will generate a runtime failure instead of silently dropping the method
+        Verify_FieldOffset = 0x31, // Generate a runtime check to ensure that the field offset matches between compile and runtime. Unlike CheckFieldOffset, this will generate a runtime exception on failure instead of silently dropping the method
+        Verify_TypeLayout = 0x32, // Generate a runtime check to ensure that the type layout (size, alignment, HFA, reference map) matches between compile and runtime. Unlike Check_TypeLayout, this will generate a runtime failure instead of silently dropping the method
 
         Check_VirtualFunctionOverride = 0x33, // Generate a runtime check to ensure that virtual function resolution has equivalent behavior at runtime as at compile time. If not equivalent, code will not be used
         Verify_VirtualFunctionOverride = 0x34, // Generate a runtime check to ensure that virtual function resolution has equivalent behavior at runtime as at compile time. If not equivalent, generate runtime failure.
 
-        Check_IL_Body              = 0x35, /* Check to see if an IL method is defined the same at runtime as at compile time. A failed match will cause code not to be used. */
-        Verify_IL_Body             = 0x36, /* Verify an IL body is defined the same at compile time and runtime. A failed match will cause a hard runtime failure. */
+        Check_IL_Body = 0x35, /* Check to see if an IL method is defined the same at runtime as at compile time. A failed match will cause code not to be used. */
+        Verify_IL_Body = 0x36, /* Verify an IL body is defined the same at compile time and runtime. A failed match will cause a hard runtime failure. */
 
         ModuleOverride = 0x80,
         // followed by sig-encoded UInt with assemblyref index into either the assemblyref
@@ -201,12 +201,12 @@ namespace Internal.ReadyToRunConstants
     [Flags]
     public enum ReadyToRunHelper
     {
-        Invalid                     = 0x00,
+        Invalid = 0x00,
 
         // Not a real helper - handle to current module passed to delay load helpers.
-        Module                      = 0x01,
-        GSCookie                    = 0x02,
-        IndirectTrapThreads         = 0x03,
+        Module = 0x01,
+        GSCookie = 0x02,
+        IndirectTrapThreads = 0x03,
 
         //
         // Delay load helpers
@@ -215,39 +215,39 @@ namespace Internal.ReadyToRunConstants
         // All delay load helpers use custom calling convention:
         // - scratch register - address of indirection cell. 0 = address is inferred from callsite.
         // - stack - section index, module handle
-        DelayLoad_MethodCall        = 0x08,
+        DelayLoad_MethodCall = 0x08,
 
-        DelayLoad_Helper            = 0x10,
-        DelayLoad_Helper_Obj        = 0x11,
-        DelayLoad_Helper_ObjObj     = 0x12,
+        DelayLoad_Helper = 0x10,
+        DelayLoad_Helper_Obj = 0x11,
+        DelayLoad_Helper_ObjObj = 0x12,
 
         // Exception handling helpers
-        Throw                       = 0x20,
-        Rethrow                     = 0x21,
-        Overflow                    = 0x22,
-        RngChkFail                  = 0x23,
-        FailFast                    = 0x24,
-        ThrowNullRef                = 0x25,
-        ThrowDivZero                = 0x26,
+        Throw = 0x20,
+        Rethrow = 0x21,
+        Overflow = 0x22,
+        RngChkFail = 0x23,
+        FailFast = 0x24,
+        ThrowNullRef = 0x25,
+        ThrowDivZero = 0x26,
 
         // Write barriers
-        WriteBarrier                = 0x30,
-        CheckedWriteBarrier         = 0x31,
-        ByRefWriteBarrier           = 0x32,
+        WriteBarrier = 0x30,
+        CheckedWriteBarrier = 0x31,
+        ByRefWriteBarrier = 0x32,
 
         // Array helpers
-        Stelem_Ref                  = 0x38,
-        Ldelema_Ref                 = 0x39,
+        Stelem_Ref = 0x38,
+        Ldelema_Ref = 0x39,
 
-        MemSet                      = 0x40,
-        MemCpy                      = 0x41,
+        MemSet = 0x40,
+        MemCpy = 0x41,
 
         // P/Invoke support
-        PInvokeBegin                = 0x42,
-        PInvokeEnd                  = 0x43,
-        GCPoll                      = 0x44,
-        ReversePInvokeEnter         = 0x45,
-        ReversePInvokeExit          = 0x46,
+        PInvokeBegin = 0x42,
+        PInvokeEnd = 0x43,
+        GCPoll = 0x44,
+        ReversePInvokeEnter = 0x45,
+        ReversePInvokeExit = 0x46,
 
         // Get string handle lazily
         GetString = 0x50,
@@ -256,94 +256,94 @@ namespace Internal.ReadyToRunConstants
         LogMethodEnter = 0x51,
 
         // Reflection helpers
-        GetRuntimeTypeHandle        = 0x54,
-        GetRuntimeMethodHandle      = 0x55,
-        GetRuntimeFieldHandle       = 0x56,
+        GetRuntimeTypeHandle = 0x54,
+        GetRuntimeMethodHandle = 0x55,
+        GetRuntimeFieldHandle = 0x56,
 
-        Box                         = 0x58,
-        Box_Nullable                = 0x59,
-        Unbox                       = 0x5A,
-        Unbox_Nullable              = 0x5B,
-        NewMultiDimArr              = 0x5C,
+        Box = 0x58,
+        Box_Nullable = 0x59,
+        Unbox = 0x5A,
+        Unbox_Nullable = 0x5B,
+        NewMultiDimArr = 0x5C,
 
         // Helpers used with generic handle lookup cases
-        NewObject                   = 0x60,
-        NewArray                    = 0x61,
-        CheckCastAny                = 0x62,
-        CheckInstanceAny            = 0x63,
-        GenericGcStaticBase         = 0x64,
-        GenericNonGcStaticBase      = 0x65,
-        GenericGcTlsBase            = 0x66,
-        GenericNonGcTlsBase         = 0x67,
-        VirtualFuncPtr              = 0x68,
-        IsInstanceOfException       = 0x69,
-        NewMaybeFrozenArray         = 0x6A,
-        NewMaybeFrozenObject        = 0x6B,
+        NewObject = 0x60,
+        NewArray = 0x61,
+        CheckCastAny = 0x62,
+        CheckInstanceAny = 0x63,
+        GenericGcStaticBase = 0x64,
+        GenericNonGcStaticBase = 0x65,
+        GenericGcTlsBase = 0x66,
+        GenericNonGcTlsBase = 0x67,
+        VirtualFuncPtr = 0x68,
+        IsInstanceOfException = 0x69,
+        NewMaybeFrozenArray = 0x6A,
+        NewMaybeFrozenObject = 0x6B,
 
         // Long mul/div/shift ops
-        LMul                        = 0xC0,
-        LMulOfv                     = 0xC1,
-        ULMulOvf                    = 0xC2,
-        LDiv                        = 0xC3,
-        LMod                        = 0xC4,
-        ULDiv                       = 0xC5,
-        ULMod                       = 0xC6,
-        LLsh                        = 0xC7,
-        LRsh                        = 0xC8,
-        LRsz                        = 0xC9,
-        Lng2Dbl                     = 0xCA,
-        ULng2Dbl                    = 0xCB,
+        LMul = 0xC0,
+        LMulOfv = 0xC1,
+        ULMulOvf = 0xC2,
+        LDiv = 0xC3,
+        LMod = 0xC4,
+        ULDiv = 0xC5,
+        ULMod = 0xC6,
+        LLsh = 0xC7,
+        LRsh = 0xC8,
+        LRsz = 0xC9,
+        Lng2Dbl = 0xCA,
+        ULng2Dbl = 0xCB,
 
         // 32-bit division helpers
-        Div                         = 0xCC,
-        Mod                         = 0xCD,
-        UDiv                        = 0xCE,
-        UMod                        = 0xCF,
+        Div = 0xCC,
+        Mod = 0xCD,
+        UDiv = 0xCE,
+        UMod = 0xCF,
 
         // Floating point conversions
-        Dbl2Int                     = 0xD0,
-        Dbl2IntOvf                  = 0xD1,
-        Dbl2Lng                     = 0xD2,
-        Dbl2LngOvf                  = 0xD3,
-        Dbl2UInt                    = 0xD4,
-        Dbl2UIntOvf                 = 0xD5,
-        Dbl2ULng                    = 0xD6,
-        Dbl2ULngOvf                 = 0xD7,
+        Dbl2Int = 0xD0,
+        Dbl2IntOvf = 0xD1,
+        Dbl2Lng = 0xD2,
+        Dbl2LngOvf = 0xD3,
+        Dbl2UInt = 0xD4,
+        Dbl2UIntOvf = 0xD5,
+        Dbl2ULng = 0xD6,
+        Dbl2ULngOvf = 0xD7,
 
         // Floating point ops
-        DblRem                      = 0xE0,
-        FltRem                      = 0xE1,
-        DblRound                    = 0xE2,
-        FltRound                    = 0xE3,
+        DblRem = 0xE0,
+        FltRem = 0xE1,
+        DblRound = 0xE2,
+        FltRound = 0xE3,
 
         // Personality routines
-        PersonalityRoutine          = 0xF0,
+        PersonalityRoutine = 0xF0,
         PersonalityRoutineFilterFunclet = 0xF1,
 
         // Synchronized methods
-        MonitorEnter                = 0xF8,
-        MonitorExit                 = 0xF9,
+        MonitorEnter = 0xF8,
+        MonitorExit = 0xF9,
 
         // JIT32 x86-specific write barriers
-        WriteBarrier_EAX            = 0x100,
-        WriteBarrier_EBX            = 0x101,
-        WriteBarrier_ECX            = 0x102,
-        WriteBarrier_ESI            = 0x103,
-        WriteBarrier_EDI            = 0x104,
-        WriteBarrier_EBP            = 0x105,
-        CheckedWriteBarrier_EAX     = 0x106,
-        CheckedWriteBarrier_EBX     = 0x107,
-        CheckedWriteBarrier_ECX     = 0x108,
-        CheckedWriteBarrier_ESI     = 0x109,
-        CheckedWriteBarrier_EDI     = 0x10A,
-        CheckedWriteBarrier_EBP     = 0x10B,
+        WriteBarrier_EAX = 0x100,
+        WriteBarrier_EBX = 0x101,
+        WriteBarrier_ECX = 0x102,
+        WriteBarrier_ESI = 0x103,
+        WriteBarrier_EDI = 0x104,
+        WriteBarrier_EBP = 0x105,
+        CheckedWriteBarrier_EAX = 0x106,
+        CheckedWriteBarrier_EBX = 0x107,
+        CheckedWriteBarrier_ECX = 0x108,
+        CheckedWriteBarrier_ESI = 0x109,
+        CheckedWriteBarrier_EDI = 0x10A,
+        CheckedWriteBarrier_EBP = 0x10B,
 
         // JIT32 x86-specific exception handling
-        EndCatch                    = 0x110,
+        EndCatch = 0x110,
 
-        StackProbe                  = 0x111,
+        StackProbe = 0x111,
 
-        GetCurrentManagedThreadId   = 0x112,
+        GetCurrentManagedThreadId = 0x112,
 
         // **********************************************************************************************
         //

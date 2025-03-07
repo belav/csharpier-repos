@@ -6,71 +6,71 @@
 
 using System.Globalization;
 
-namespace System.Net {
-    internal static class HttpDateParse {
-        private const int BASE_DEC  = 10; // base 10
+namespace System.Net
+{
+    internal static class HttpDateParse
+    {
+        private const int BASE_DEC = 10; // base 10
 
         //
         // Date indicies used to figure out what each entry is.
         //
 
+        private const int DATE_INDEX_DAY_OF_WEEK = 0;
 
-        private const int DATE_INDEX_DAY_OF_WEEK     = 0;
+        private const int DATE_1123_INDEX_DAY = 1;
+        private const int DATE_1123_INDEX_MONTH = 2;
+        private const int DATE_1123_INDEX_YEAR = 3;
+        private const int DATE_1123_INDEX_HRS = 4;
+        private const int DATE_1123_INDEX_MINS = 5;
+        private const int DATE_1123_INDEX_SECS = 6;
 
-        private const int DATE_1123_INDEX_DAY        = 1;
-        private const int DATE_1123_INDEX_MONTH      = 2;
-        private const int DATE_1123_INDEX_YEAR       = 3;
-        private const int DATE_1123_INDEX_HRS        = 4;
-        private const int DATE_1123_INDEX_MINS       = 5;
-        private const int DATE_1123_INDEX_SECS       = 6;
+        private const int DATE_ANSI_INDEX_MONTH = 1;
+        private const int DATE_ANSI_INDEX_DAY = 2;
+        private const int DATE_ANSI_INDEX_HRS = 3;
+        private const int DATE_ANSI_INDEX_MINS = 4;
+        private const int DATE_ANSI_INDEX_SECS = 5;
+        private const int DATE_ANSI_INDEX_YEAR = 6;
 
-        private const int DATE_ANSI_INDEX_MONTH      = 1;
-        private const int DATE_ANSI_INDEX_DAY        = 2;
-        private const int DATE_ANSI_INDEX_HRS        = 3;
-        private const int DATE_ANSI_INDEX_MINS       = 4;
-        private const int DATE_ANSI_INDEX_SECS       = 5;
-        private const int DATE_ANSI_INDEX_YEAR       = 6;
+        private const int DATE_INDEX_TZ = 7;
 
-        private const int DATE_INDEX_TZ              = 7;
-
-        private const int DATE_INDEX_LAST            = DATE_INDEX_TZ;
-        private const int MAX_FIELD_DATE_ENTRIES           = (DATE_INDEX_LAST+1);
+        private const int DATE_INDEX_LAST = DATE_INDEX_TZ;
+        private const int MAX_FIELD_DATE_ENTRIES = (DATE_INDEX_LAST + 1);
 
         //
         // DATE_TOKEN's DWORD values used to determine what day/month we're on
         //
 
-        private const int DATE_TOKEN_JANUARY      = 1;
-        private const int DATE_TOKEN_FEBRUARY     = 2;
-        private const int DATE_TOKEN_Microsoft        = 3;
-        private const int DATE_TOKEN_APRIL        = 4;
-        private const int DATE_TOKEN_MAY          = 5;
-        private const int DATE_TOKEN_JUNE         = 6;
-        private const int DATE_TOKEN_JULY         = 7;
-        private const int DATE_TOKEN_AUGUST       = 8;
-        private const int DATE_TOKEN_SEPTEMBER    = 9;
-        private const int DATE_TOKEN_OCTOBER      = 10;
-        private const int DATE_TOKEN_NOVEMBER     = 11;
-        private const int DATE_TOKEN_DECEMBER     = 12;
+        private const int DATE_TOKEN_JANUARY = 1;
+        private const int DATE_TOKEN_FEBRUARY = 2;
+        private const int DATE_TOKEN_Microsoft = 3;
+        private const int DATE_TOKEN_APRIL = 4;
+        private const int DATE_TOKEN_MAY = 5;
+        private const int DATE_TOKEN_JUNE = 6;
+        private const int DATE_TOKEN_JULY = 7;
+        private const int DATE_TOKEN_AUGUST = 8;
+        private const int DATE_TOKEN_SEPTEMBER = 9;
+        private const int DATE_TOKEN_OCTOBER = 10;
+        private const int DATE_TOKEN_NOVEMBER = 11;
+        private const int DATE_TOKEN_DECEMBER = 12;
 
-        private const int DATE_TOKEN_LAST_MONTH   = (DATE_TOKEN_DECEMBER+1);
+        private const int DATE_TOKEN_LAST_MONTH = (DATE_TOKEN_DECEMBER + 1);
 
-        private const int DATE_TOKEN_SUNDAY       = 0;
-        private const int DATE_TOKEN_MONDAY       = 1;
-        private const int DATE_TOKEN_TUESDAY      = 2;
-        private const int DATE_TOKEN_WEDNESDAY    = 3;
-        private const int DATE_TOKEN_THURSDAY     = 4;
-        private const int DATE_TOKEN_FRIDAY       = 5;
-        private const int DATE_TOKEN_SATURDAY     = 6;
+        private const int DATE_TOKEN_SUNDAY = 0;
+        private const int DATE_TOKEN_MONDAY = 1;
+        private const int DATE_TOKEN_TUESDAY = 2;
+        private const int DATE_TOKEN_WEDNESDAY = 3;
+        private const int DATE_TOKEN_THURSDAY = 4;
+        private const int DATE_TOKEN_FRIDAY = 5;
+        private const int DATE_TOKEN_SATURDAY = 6;
 
-        private const int DATE_TOKEN_LAST_DAY     = (DATE_TOKEN_SATURDAY+1);
+        private const int DATE_TOKEN_LAST_DAY = (DATE_TOKEN_SATURDAY + 1);
 
-        private const int DATE_TOKEN_GMT          = -1000;
+        private const int DATE_TOKEN_GMT = -1000;
 
-        private const int DATE_TOKEN_LAST         = DATE_TOKEN_GMT;
+        private const int DATE_TOKEN_LAST = DATE_TOKEN_GMT;
 
-        private const int DATE_TOKEN_ERROR        = (DATE_TOKEN_LAST+1);
-
+        private const int DATE_TOKEN_ERROR = (DATE_TOKEN_LAST + 1);
 
         //
         // MAKE_UPPER - takes an assumed lower character and bit manipulates into a upper.
@@ -78,11 +78,9 @@ namespace System.Net {
         //               otherwise it corrupts)
         //
 
-        private
-        static
-        char
-        MAKE_UPPER(char c) {
-            return(Char.ToUpper(c, CultureInfo.InvariantCulture));
+        private static char MAKE_UPPER(char c)
+        {
+            return (Char.ToUpper(c, CultureInfo.InvariantCulture));
         }
 
         /*++
@@ -106,21 +104,17 @@ namespace System.Net {
 
         --*/
 
-        private
-        static
-        int
-        MapDayMonthToDword(
-                          char [] lpszDay,
-                          int index
-                          ) {
-            switch (MAKE_UPPER(lpszDay[index])) { // make uppercase
+        private static int MapDayMonthToDword(char[] lpszDay, int index)
+        {
+            switch (MAKE_UPPER(lpszDay[index]))
+            { // make uppercase
                 case 'A':
-                    switch (MAKE_UPPER(lpszDay[index+1])) {
+                    switch (MAKE_UPPER(lpszDay[index + 1]))
+                    {
                         case 'P':
                             return DATE_TOKEN_APRIL;
                         case 'U':
                             return DATE_TOKEN_AUGUST;
-
                     }
                     return DATE_TOKEN_ERROR;
 
@@ -128,7 +122,8 @@ namespace System.Net {
                     return DATE_TOKEN_DECEMBER;
 
                 case 'F':
-                    switch (MAKE_UPPER(lpszDay[index+1])) {
+                    switch (MAKE_UPPER(lpszDay[index + 1]))
+                    {
                         case 'R':
                             return DATE_TOKEN_FRIDAY;
                         case 'E':
@@ -142,11 +137,13 @@ namespace System.Net {
 
                 case 'M':
 
-                    switch (MAKE_UPPER(lpszDay[index+1])) {
+                    switch (MAKE_UPPER(lpszDay[index + 1]))
+                    {
                         case 'O':
                             return DATE_TOKEN_MONDAY;
                         case 'A':
-                            switch (MAKE_UPPER(lpszDay[index+2])) {
+                            switch (MAKE_UPPER(lpszDay[index + 2]))
+                            {
                                 case 'R':
                                     return DATE_TOKEN_Microsoft;
                                 case 'Y':
@@ -164,12 +161,14 @@ namespace System.Net {
 
                 case 'J':
 
-                    switch (MAKE_UPPER(lpszDay[index+1])) {
+                    switch (MAKE_UPPER(lpszDay[index + 1]))
+                    {
                         case 'A':
                             return DATE_TOKEN_JANUARY;
 
                         case 'U':
-                            switch (MAKE_UPPER(lpszDay[index+2])) {
+                            switch (MAKE_UPPER(lpszDay[index + 2]))
+                            {
                                 case 'N':
                                     return DATE_TOKEN_JUNE;
                                 case 'L':
@@ -187,7 +186,8 @@ namespace System.Net {
 
                 case 'S':
 
-                    switch (MAKE_UPPER(lpszDay[index+1])) {
+                    switch (MAKE_UPPER(lpszDay[index + 1]))
+                    {
                         case 'A':
                             return DATE_TOKEN_SATURDAY;
                         case 'U':
@@ -198,9 +198,9 @@ namespace System.Net {
 
                     return DATE_TOKEN_ERROR;
 
-
                 case 'T':
-                    switch (MAKE_UPPER(lpszDay[index+1])) {
+                    switch (MAKE_UPPER(lpszDay[index + 1]))
+                    {
                         case 'U':
                             return DATE_TOKEN_TUESDAY;
                         case 'H':
@@ -214,7 +214,6 @@ namespace System.Net {
 
                 case 'W':
                     return DATE_TOKEN_WEDNESDAY;
-
             }
 
             return DATE_TOKEN_ERROR;
@@ -247,19 +246,15 @@ namespace System.Net {
             Failure - FALSE
 
         --*/
-        public
-        static
-        bool
-        ParseHttpDate(
-                     String DateString,
-                     out DateTime dtOut
-                     ) {
+        public static bool ParseHttpDate(String DateString, out DateTime dtOut)
+        {
             int index = 0;
-            int i = 0, iLastLettered = -1;
+            int i = 0,
+                iLastLettered = -1;
             bool fIsANSIDateFormat = false;
-            int [] rgdwDateParseResults = new int[MAX_FIELD_DATE_ENTRIES];
+            int[] rgdwDateParseResults = new int[MAX_FIELD_DATE_ENTRIES];
             bool fRet = true;
-            char [] lpInputBuffer = DateString.ToCharArray();
+            char[] lpInputBuffer = DateString.ToCharArray();
 
             dtOut = new DateTime();
 
@@ -279,41 +274,50 @@ namespace System.Net {
             //  Note: do we need to fully handle TZs anymore?
             //
 
-            while (index < DateString.Length && i < MAX_FIELD_DATE_ENTRIES) {
-                if (lpInputBuffer[index] >= '0' && lpInputBuffer[index] <= '9') {
+            while (index < DateString.Length && i < MAX_FIELD_DATE_ENTRIES)
+            {
+                if (lpInputBuffer[index] >= '0' && lpInputBuffer[index] <= '9')
+                {
                     //
                     // we have a numerical entry, scan through it and convent to DWORD
                     //
 
                     rgdwDateParseResults[i] = 0;
 
-                    do {
+                    do
+                    {
                         rgdwDateParseResults[i] *= BASE_DEC;
                         rgdwDateParseResults[i] += (lpInputBuffer[index] - '0');
                         index++;
-                    } while (index < DateString.Length &&
-                             lpInputBuffer[index] >= '0' &&
-                             lpInputBuffer[index] <= '9');
+                    } while (
+                        index < DateString.Length
+                        && lpInputBuffer[index] >= '0'
+                        && lpInputBuffer[index] <= '9'
+                    );
 
                     i++; // next token
                 }
-                else if ((lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z') ||
-                         (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z')) {
+                else if (
+                    (lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z')
+                    || (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z')
+                )
+                {
                     //
                     // we have a string, should be a day, month, or GMT
                     //   lets skim to the end of the string
                     //
 
-                    rgdwDateParseResults[i] =
-                    MapDayMonthToDword(lpInputBuffer, index);
+                    rgdwDateParseResults[i] = MapDayMonthToDword(lpInputBuffer, index);
 
                     iLastLettered = i;
 
                     // We want to ignore the possibility of a time zone such as PST or EST in a non-standard
                     // date format such as "Thu Dec 17 16:01:28 PST 1998" (Notice that the year is _after_ the time zone
-                    if ((rgdwDateParseResults[i] == DATE_TOKEN_ERROR)
-                        &&
-                        !(fIsANSIDateFormat && (i==DATE_ANSI_INDEX_YEAR))) {
+                    if (
+                        (rgdwDateParseResults[i] == DATE_TOKEN_ERROR)
+                        && !(fIsANSIDateFormat && (i == DATE_ANSI_INDEX_YEAR))
+                    )
+                    {
                         fRet = false;
                         goto quit;
                     }
@@ -324,7 +328,8 @@ namespace System.Net {
                     //  looking at a ANSI type DATE format.
                     //
 
-                    if (i == DATE_ANSI_INDEX_MONTH) {
+                    if (i == DATE_ANSI_INDEX_MONTH)
+                    {
                         fIsANSIDateFormat = true;
                     }
 
@@ -333,15 +338,21 @@ namespace System.Net {
                     //  as MapDayMonthToDword only peeks at a few characters
                     //
 
-                    do {
+                    do
+                    {
                         index++;
-                    } while (index < DateString.Length &&
-                             ( (lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z') ||
-                               (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z') ));
+                    } while (
+                        index < DateString.Length
+                        && (
+                            (lpInputBuffer[index] >= 'A' && lpInputBuffer[index] <= 'Z')
+                            || (lpInputBuffer[index] >= 'a' && lpInputBuffer[index] <= 'z')
+                        )
+                    );
 
                     i++; // next token
                 }
-                else {
+                else
+                {
                     //
                     // For the generic case its either a space, comma, semi-colon, etc.
                     //  the point is we really don't care, nor do we need to waste time
@@ -368,28 +379,32 @@ namespace System.Net {
             int second;
             int millisecond;
 
-            millisecond =  0;
+            millisecond = 0;
 
-            if (fIsANSIDateFormat) {
-                day    = rgdwDateParseResults[DATE_ANSI_INDEX_DAY];
-                month  = rgdwDateParseResults[DATE_ANSI_INDEX_MONTH];
-                hour   = rgdwDateParseResults[DATE_ANSI_INDEX_HRS];
+            if (fIsANSIDateFormat)
+            {
+                day = rgdwDateParseResults[DATE_ANSI_INDEX_DAY];
+                month = rgdwDateParseResults[DATE_ANSI_INDEX_MONTH];
+                hour = rgdwDateParseResults[DATE_ANSI_INDEX_HRS];
                 minute = rgdwDateParseResults[DATE_ANSI_INDEX_MINS];
                 second = rgdwDateParseResults[DATE_ANSI_INDEX_SECS];
-                if (iLastLettered != DATE_ANSI_INDEX_YEAR) {
-                    year   = rgdwDateParseResults[DATE_ANSI_INDEX_YEAR];
+                if (iLastLettered != DATE_ANSI_INDEX_YEAR)
+                {
+                    year = rgdwDateParseResults[DATE_ANSI_INDEX_YEAR];
                 }
-                else {
+                else
+                {
                     // This is a fix to get around toString/toGMTstring (where the timezone is
                     // appended at the end. (See above)
-                    year   = rgdwDateParseResults[DATE_INDEX_TZ];
+                    year = rgdwDateParseResults[DATE_INDEX_TZ];
                 }
             }
-            else {
-                day    = rgdwDateParseResults[DATE_1123_INDEX_DAY];
-                month  = rgdwDateParseResults[DATE_1123_INDEX_MONTH];
-                year   = rgdwDateParseResults[DATE_1123_INDEX_YEAR];
-                hour   = rgdwDateParseResults[DATE_1123_INDEX_HRS];
+            else
+            {
+                day = rgdwDateParseResults[DATE_1123_INDEX_DAY];
+                month = rgdwDateParseResults[DATE_1123_INDEX_MONTH];
+                year = rgdwDateParseResults[DATE_1123_INDEX_YEAR];
+                hour = rgdwDateParseResults[DATE_1123_INDEX_HRS];
                 minute = rgdwDateParseResults[DATE_1123_INDEX_MINS];
                 second = rgdwDateParseResults[DATE_1123_INDEX_SECS];
             }
@@ -400,7 +415,8 @@ namespace System.Net {
             //  we all look bad.
             //
 
-            if (year < 100) {
+            if (year < 100)
+            {
                 year += ((year < 80) ? 2000 : 1900);
             }
 
@@ -409,11 +425,8 @@ namespace System.Net {
             // !lpszHrs || !lpszMins || !lpszSec
             //
 
-            if ((i < 4)
-                || (day > 31)
-                || (hour > 23)
-                || (minute > 59)
-                || (second > 59)) {
+            if ((i < 4) || (day > 31) || (hour > 23) || (minute > 59) || (second > 59))
+            {
                 fRet = false;
                 goto quit;
             }
@@ -422,14 +435,15 @@ namespace System.Net {
             // Now do the DateTime conversion
             //
 
-            dtOut = new DateTime (year, month, day, hour, minute, second, millisecond);
+            dtOut = new DateTime(year, month, day, hour, minute, second, millisecond);
 
             //
             // we want the system time to be accurate. This is _suhlow_
             // The time passed in is in the local time zone; we have to convert this into GMT.
             //
 
-            if (iLastLettered==DATE_ANSI_INDEX_YEAR) {
+            if (iLastLettered == DATE_ANSI_INDEX_YEAR)
+            {
                 // this should be an unusual case.
                 dtOut = dtOut.ToUniversalTime();
             }
@@ -439,16 +453,15 @@ namespace System.Net {
             //   then convert to appropriate GMT time
             //
 
-            if ((i > DATE_INDEX_TZ &&
-                 rgdwDateParseResults[DATE_INDEX_TZ] != DATE_TOKEN_GMT)) {
-
+            if ((i > DATE_INDEX_TZ && rgdwDateParseResults[DATE_INDEX_TZ] != DATE_TOKEN_GMT))
+            {
                 //
                 // if we received +/-nnnn as offset (hhmm), modify the output FILETIME
                 //
 
                 double offset;
 
-                offset = (double) rgdwDateParseResults[DATE_INDEX_TZ];
+                offset = (double)rgdwDateParseResults[DATE_INDEX_TZ];
                 dtOut.AddHours(offset);
             }
 
@@ -461,5 +474,4 @@ namespace System.Net {
             return fRet;
         }
     }
-
 } // namespace System.Net

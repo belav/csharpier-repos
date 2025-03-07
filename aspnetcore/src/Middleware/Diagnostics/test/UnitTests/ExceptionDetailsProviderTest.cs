@@ -16,10 +16,7 @@ public class ExceptionDetailsProviderTest
     {
         get
         {
-            var data = new TheoryData<string>
-                {
-                    "TestFiles/SourceFile.txt"
-                };
+            var data = new TheoryData<string> { "TestFiles/SourceFile.txt" };
 
             if (!(OperatingSystem.IsLinux() || OperatingSystem.IsMacOS()))
             {
@@ -37,9 +34,9 @@ public class ExceptionDetailsProviderTest
             var rootPath = Directory.GetCurrentDirectory();
 
             var data = new TheoryData<string>()
-                {
-                    Path.Combine(rootPath, "TestFiles/SourceFile.txt")
-                };
+            {
+                Path.Combine(rootPath, "TestFiles/SourceFile.txt"),
+            };
 
             if (!TestPlatformHelper.IsMono)
             {
@@ -60,11 +57,16 @@ public class ExceptionDetailsProviderTest
         using (var provider = new PhysicalFileProvider(rootPath))
         {
             // Act
-            var exceptionDetailProvider = new ExceptionDetailsProvider(provider, logger: null, sourceCodeLineCount: 6);
+            var exceptionDetailProvider = new ExceptionDetailsProvider(
+                provider,
+                logger: null,
+                sourceCodeLineCount: 6
+            );
             var stackFrame = exceptionDetailProvider.GetStackFrameSourceCodeInfo(
                 "func1",
                 absoluteFilePath,
-                lineNumber: 10);
+                lineNumber: 10
+            );
 
             // Assert
             // Lines 4-16 (inclusive) is the code block
@@ -84,11 +86,16 @@ public class ExceptionDetailsProviderTest
         using (var provider = new PhysicalFileProvider(rootPath))
         {
             // Act
-            var exceptionDetailProvider = new ExceptionDetailsProvider(provider, logger: null, sourceCodeLineCount: 6);
+            var exceptionDetailProvider = new ExceptionDetailsProvider(
+                provider,
+                logger: null,
+                sourceCodeLineCount: 6
+            );
             var stackFrame = exceptionDetailProvider.GetStackFrameSourceCodeInfo(
                 "func1",
                 relativePath,
-                lineNumber: 10);
+                lineNumber: 10
+            );
 
             // Assert
             // Lines 4-16 (inclusive) is the code block
@@ -107,14 +114,20 @@ public class ExceptionDetailsProviderTest
         // Arrange
         var provider = new EmbeddedFileProvider(
             GetType().Assembly,
-            baseNamespace: $"{typeof(ExceptionDetailsProviderTest).Assembly.GetName().Name}.Resources");
+            baseNamespace: $"{typeof(ExceptionDetailsProviderTest).Assembly.GetName().Name}.Resources"
+        );
 
         // Act
-        var exceptionDetailProvider = new ExceptionDetailsProvider(provider, logger: null, sourceCodeLineCount: 6);
+        var exceptionDetailProvider = new ExceptionDetailsProvider(
+            provider,
+            logger: null,
+            sourceCodeLineCount: 6
+        );
         var stackFrame = exceptionDetailProvider.GetStackFrameSourceCodeInfo(
             "func1",
             relativePath,
-            lineNumber: 10);
+            lineNumber: 10
+        );
 
         // Assert
         // Lines 4-16 (inclusive) is the code block
@@ -129,117 +142,113 @@ public class ExceptionDetailsProviderTest
         get
         {
             return new TheoryData<ErrorData>()
+            {
+                new ErrorData()
                 {
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 30),
-                        ErrorStartLine = 10,
-                        ErrorEndLine = 10,
-                        ExpectedPreContextLine = 4,
-                        ExpectedPreErrorCode = GetCodeLines(4, 9),
-                        ExpectedErrorCode = GetCodeLines(10, 10),
-                        ExpectedPostErrorCode = GetCodeLines(11, 16)
-                    },
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 30),
-                        ErrorStartLine = 10,
-                        ErrorEndLine = 13, // multi-line error
-                        ExpectedPreContextLine = 4,
-                        ExpectedPreErrorCode = GetCodeLines(4, 9),
-                        ExpectedErrorCode = GetCodeLines(10, 13),
-                        ExpectedPostErrorCode = GetCodeLines(14, 19)
-                    },
-
-                    // PreErrorCode less than source code line count
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 10),
-                        ErrorStartLine = 1,
-                        ErrorEndLine = 1,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = Enumerable.Empty<string>(),
-                        ExpectedErrorCode = GetCodeLines(1, 1),
-                        ExpectedPostErrorCode = GetCodeLines(2, 7)
-                    },
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 10),
-                        ErrorStartLine = 3,
-                        ErrorEndLine = 5,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = GetCodeLines(1, 2),
-                        ExpectedErrorCode = GetCodeLines(3, 5),
-                        ExpectedPostErrorCode = GetCodeLines(6, 10)
-                    },
-
-                    // PostErrorCode less than source code line count
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 10),
-                        ErrorStartLine = 10,
-                        ErrorEndLine = 10,
-                        ExpectedPreContextLine = 4,
-                        ExpectedPreErrorCode = GetCodeLines(4, 9),
-                        ExpectedErrorCode = GetCodeLines(10, 10),
-                        ExpectedPostErrorCode = Enumerable.Empty<string>()
-                    },
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 10),
-                        ErrorStartLine = 7,
-                        ErrorEndLine = 10,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = GetCodeLines(1, 6),
-                        ExpectedErrorCode = GetCodeLines(7, 10),
-                        ExpectedPostErrorCode = Enumerable.Empty<string>()
-                    },
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 10),
-                        ErrorStartLine = 5,
-                        ErrorEndLine = 8,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = GetCodeLines(1, 4),
-                        ExpectedErrorCode = GetCodeLines(5, 8),
-                        ExpectedPostErrorCode = GetCodeLines(9, 10)
-                    },
-
-                    // Pre and Post error code less than source code line count
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 4),
-                        ErrorStartLine = 2,
-                        ErrorEndLine = 3,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = GetCodeLines(1, 1),
-                        ExpectedErrorCode = GetCodeLines(2, 3),
-                        ExpectedPostErrorCode = GetCodeLines(4, 4)
-                    },
-                    new ErrorData()
-                    {
-                        AllLines = GetCodeLines(1, 4),
-                        ErrorStartLine = 1,
-                        ErrorEndLine = 4,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = Enumerable.Empty<string>(),
-                        ExpectedErrorCode = GetCodeLines(1, 4),
-                        ExpectedPostErrorCode = Enumerable.Empty<string>()
-                    },
-
-                    // change source code line count
-                    new ErrorData()
-                    {
-                        SourceCodeLineCount = 1,
-                        AllLines = GetCodeLines(1, 1),
-                        ErrorStartLine = 1,
-                        ErrorEndLine = 1,
-                        ExpectedPreContextLine = 1,
-                        ExpectedPreErrorCode = Enumerable.Empty<string>(),
-                        ExpectedErrorCode = GetCodeLines(1, 1),
-                        ExpectedPostErrorCode = Enumerable.Empty<string>()
-                    },
-                };
+                    AllLines = GetCodeLines(1, 30),
+                    ErrorStartLine = 10,
+                    ErrorEndLine = 10,
+                    ExpectedPreContextLine = 4,
+                    ExpectedPreErrorCode = GetCodeLines(4, 9),
+                    ExpectedErrorCode = GetCodeLines(10, 10),
+                    ExpectedPostErrorCode = GetCodeLines(11, 16),
+                },
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 30),
+                    ErrorStartLine = 10,
+                    ErrorEndLine = 13, // multi-line error
+                    ExpectedPreContextLine = 4,
+                    ExpectedPreErrorCode = GetCodeLines(4, 9),
+                    ExpectedErrorCode = GetCodeLines(10, 13),
+                    ExpectedPostErrorCode = GetCodeLines(14, 19),
+                },
+                // PreErrorCode less than source code line count
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 10),
+                    ErrorStartLine = 1,
+                    ErrorEndLine = 1,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = Enumerable.Empty<string>(),
+                    ExpectedErrorCode = GetCodeLines(1, 1),
+                    ExpectedPostErrorCode = GetCodeLines(2, 7),
+                },
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 10),
+                    ErrorStartLine = 3,
+                    ErrorEndLine = 5,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = GetCodeLines(1, 2),
+                    ExpectedErrorCode = GetCodeLines(3, 5),
+                    ExpectedPostErrorCode = GetCodeLines(6, 10),
+                },
+                // PostErrorCode less than source code line count
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 10),
+                    ErrorStartLine = 10,
+                    ErrorEndLine = 10,
+                    ExpectedPreContextLine = 4,
+                    ExpectedPreErrorCode = GetCodeLines(4, 9),
+                    ExpectedErrorCode = GetCodeLines(10, 10),
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
+                },
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 10),
+                    ErrorStartLine = 7,
+                    ErrorEndLine = 10,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = GetCodeLines(1, 6),
+                    ExpectedErrorCode = GetCodeLines(7, 10),
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
+                },
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 10),
+                    ErrorStartLine = 5,
+                    ErrorEndLine = 8,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = GetCodeLines(1, 4),
+                    ExpectedErrorCode = GetCodeLines(5, 8),
+                    ExpectedPostErrorCode = GetCodeLines(9, 10),
+                },
+                // Pre and Post error code less than source code line count
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 4),
+                    ErrorStartLine = 2,
+                    ErrorEndLine = 3,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = GetCodeLines(1, 1),
+                    ExpectedErrorCode = GetCodeLines(2, 3),
+                    ExpectedPostErrorCode = GetCodeLines(4, 4),
+                },
+                new ErrorData()
+                {
+                    AllLines = GetCodeLines(1, 4),
+                    ErrorStartLine = 1,
+                    ErrorEndLine = 4,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = Enumerable.Empty<string>(),
+                    ExpectedErrorCode = GetCodeLines(1, 4),
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
+                },
+                // change source code line count
+                new ErrorData()
+                {
+                    SourceCodeLineCount = 1,
+                    AllLines = GetCodeLines(1, 1),
+                    ErrorStartLine = 1,
+                    ErrorEndLine = 1,
+                    ExpectedPreContextLine = 1,
+                    ExpectedPreErrorCode = Enumerable.Empty<string>(),
+                    ExpectedErrorCode = GetCodeLines(1, 1),
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
+                },
+            };
         }
     }
 
@@ -254,13 +263,15 @@ public class ExceptionDetailsProviderTest
         var exceptionDetailProvider = new ExceptionDetailsProvider(
             new PhysicalFileProvider(Directory.GetCurrentDirectory()),
             logger: null,
-            sourceCodeLineCount: 6);
+            sourceCodeLineCount: 6
+        );
 
         exceptionDetailProvider.ReadFrameContent(
             stackFrame,
             errorData.AllLines,
             errorData.ErrorStartLine,
-            errorData.ErrorEndLine);
+            errorData.ErrorEndLine
+        );
 
         // Assert
         Assert.Equal(errorData.ExpectedPreContextLine, stackFrame.PreContextLine);
@@ -273,7 +284,9 @@ public class ExceptionDetailsProviderTest
     {
         var start = fromLine;
         var count = toLine - fromLine + 1;
-        return Enumerable.Range(start, count).Select(i => string.Format(CultureInfo.InvariantCulture, "Line{0}", i));
+        return Enumerable
+            .Range(start, count)
+            .Select(i => string.Format(CultureInfo.InvariantCulture, "Line{0}", i));
     }
 
     private class TestFileProvider : IFileProvider
@@ -320,50 +333,32 @@ public class ExceptionDetailsProviderTest
 
         public bool Exists
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool IsDirectory
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public DateTimeOffset LastModified
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public long Length
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public string Name
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public string PhysicalPath
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public Stream CreateReadStream()

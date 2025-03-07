@@ -49,15 +49,18 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             ITextView textView,
             SnapshotSpan span,
             InlineHint hint,
-            InlineHintsTaggerProvider taggerProvider)
-            : base(adornment,
-                   removalCallback: null,
-                   topSpace: null,
-                   baseline: null,
-                   textHeight: null,
-                   bottomSpace: null,
-                   PositionAffinity.Predecessor,
-                   hint.Ranking)
+            InlineHintsTaggerProvider taggerProvider
+        )
+            : base(
+                adornment,
+                removalCallback: null,
+                topSpace: null,
+                baseline: null,
+                textHeight: null,
+                bottomSpace: null,
+                PositionAffinity.Predecessor,
+                hint.Ranking
+            )
         {
             _textView = textView;
             _span = span;
@@ -89,23 +92,45 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             SnapshotSpan span,
             InlineHintsTaggerProvider taggerProvider,
             IClassificationFormatMap formatMap,
-            bool classify)
+            bool classify
+        )
         {
             return new InlineHintsTag(
-                CreateElement(hint.DisplayParts, textView, format, formatMap, taggerProvider.TypeMap, classify),
-                textView, span, hint, taggerProvider);
+                CreateElement(
+                    hint.DisplayParts,
+                    textView,
+                    format,
+                    formatMap,
+                    taggerProvider.TypeMap,
+                    classify
+                ),
+                textView,
+                span,
+                hint,
+                taggerProvider
+            );
         }
 
-        public async Task<IReadOnlyCollection<object>> CreateDescriptionAsync(CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<object>> CreateDescriptionAsync(
+            CancellationToken cancellationToken
+        )
         {
             var document = _span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
-                var taggedText = await _hint.GetDescriptionAsync(document, cancellationToken).ConfigureAwait(false);
+                var taggedText = await _hint
+                    .GetDescriptionAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
                 if (!taggedText.IsDefaultOrEmpty)
                 {
-                    var classificationOptions = _taggerProvider.EditorOptionsService.GlobalOptions.GetClassificationOptions(document.Project.Language);
-                    var lineFormattingOptions = _span.Snapshot.TextBuffer.GetLineFormattingOptions(_taggerProvider.EditorOptionsService, explicitFormat: false);
+                    var classificationOptions =
+                        _taggerProvider.EditorOptionsService.GlobalOptions.GetClassificationOptions(
+                            document.Project.Language
+                        );
+                    var lineFormattingOptions = _span.Snapshot.TextBuffer.GetLineFormattingOptions(
+                        _taggerProvider.EditorOptionsService,
+                        explicitFormat: false
+                    );
 
                     var context = new IntellisenseQuickInfoBuilderContext(
                         document,
@@ -114,8 +139,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                         _taggerProvider.ThreadingContext,
                         _taggerProvider.OperationExecutor,
                         _taggerProvider.AsynchronousOperationListener,
-                        _taggerProvider.StreamingFindUsagesPresenter);
-                    return Implementation.IntelliSense.Helpers.BuildInteractiveTextElements(taggedText, context);
+                        _taggerProvider.StreamingFindUsagesPresenter
+                    );
+                    return Implementation.IntelliSense.Helpers.BuildInteractiveTextElements(
+                        taggedText,
+                        context
+                    );
                 }
             }
 
@@ -128,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             TextFormattingRunProperties format,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap,
-            bool classify)
+            bool classify
+        )
         {
             // Constructs the hint block which gets assigned parameter name and FontStyles according to the options
             // page. Calculates a inline tag that will be 3/4s the size of a normal line. This shrink size tends to work
@@ -141,18 +171,22 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 Foreground = format.ForegroundBrush,
                 // Adds a little bit of padding to the left of the text relative to the border to make the text seem
                 // more balanced in the border
-                Padding = new Thickness(left: 2, top: 0, right: 2, bottom: 0)
+                Padding = new Thickness(left: 2, top: 0, right: 2, bottom: 0),
             };
 
             var (trimmedTexts, leftPadding, rightPadding) = Trim(taggedTexts);
 
             foreach (var taggedText in trimmedTexts)
             {
-                var run = new Run(taggedText.ToVisibleDisplayString(includeLeftToRightMarker: true));
+                var run = new Run(
+                    taggedText.ToVisibleDisplayString(includeLeftToRightMarker: true)
+                );
 
                 if (classify && taggedText.Tag != TextTags.Text)
                 {
-                    var properties = formatMap.GetTextProperties(typeMap.GetClassificationType(taggedText.Tag.ToClassificationTypeName()));
+                    var properties = formatMap.GetTextProperties(
+                        typeMap.GetClassificationType(taggedText.Tag.ToClassificationTypeName())
+                    );
                     var brush = properties.ForegroundBrush.Clone();
                     run.Foreground = brush;
                 }
@@ -184,7 +218,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 Height = dockPanelHeight,
                 LastChildFill = false,
                 // VerticalAlignment is set to Top because it will rest to the top relative to the StackPanel
-                VerticalAlignment = VerticalAlignment.Top
+                VerticalAlignment = VerticalAlignment.Top,
             };
 
             dockPanel.Children.Add(border);
@@ -193,21 +227,34 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             var stackPanel = new StackPanel
             {
                 // Height set to align the baseline of the text within the TextBlock with the baseline of text in the editor
-                Height = dockPanelHeight + (block.DesiredSize.Height - (block.FontFamily.Baseline * block.FontSize)),
-                Orientation = Orientation.Vertical
+                Height =
+                    dockPanelHeight
+                    + (block.DesiredSize.Height - (block.FontFamily.Baseline * block.FontSize)),
+                Orientation = Orientation.Vertical,
             };
 
             stackPanel.Children.Add(dockPanel);
             // Need to set these properties to avoid unnecessary reformatting because some dependency properties
             // affect layout
-            TextOptions.SetTextFormattingMode(stackPanel, TextOptions.GetTextFormattingMode(textView.VisualElement));
-            TextOptions.SetTextHintingMode(stackPanel, TextOptions.GetTextHintingMode(textView.VisualElement));
-            TextOptions.SetTextRenderingMode(stackPanel, TextOptions.GetTextRenderingMode(textView.VisualElement));
+            TextOptions.SetTextFormattingMode(
+                stackPanel,
+                TextOptions.GetTextFormattingMode(textView.VisualElement)
+            );
+            TextOptions.SetTextHintingMode(
+                stackPanel,
+                TextOptions.GetTextHintingMode(textView.VisualElement)
+            );
+            TextOptions.SetTextRenderingMode(
+                stackPanel,
+                TextOptions.GetTextRenderingMode(textView.VisualElement)
+            );
 
             return stackPanel;
         }
 
-        private static (ImmutableArray<TaggedText> texts, int leftPadding, int rightPadding) Trim(ImmutableArray<TaggedText> taggedTexts)
+        private static (ImmutableArray<TaggedText> texts, int leftPadding, int rightPadding) Trim(
+            ImmutableArray<TaggedText> taggedTexts
+        )
         {
             using var _ = ArrayBuilder<TaggedText>.GetInstance(out var result);
             var leftPadding = 0;
@@ -253,10 +300,18 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             bool KeepOpen()
             {
                 var mousePoint = Mouse.GetPosition(hintUIElement);
-                return !(mousePoint.X > hintUIElement.ActualWidth || mousePoint.X < 0 || mousePoint.Y > hintUIElement.ActualHeight || mousePoint.Y < 0);
+                return !(
+                    mousePoint.X > hintUIElement.ActualWidth
+                    || mousePoint.X < 0
+                    || mousePoint.Y > hintUIElement.ActualHeight
+                    || mousePoint.Y < 0
+                );
             }
 
-            var toolTipPresenter = _taggerProvider.ToolTipService.CreatePresenter(_textView, new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen));
+            var toolTipPresenter = _taggerProvider.ToolTipService.CreatePresenter(
+                _textView,
+                new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
+            );
             _ = StartToolTipServiceAsync(toolTipPresenter);
         }
 
@@ -266,10 +321,22 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         private async Task StartToolTipServiceAsync(IToolTipPresenter toolTipPresenter)
         {
             var threadingContext = _taggerProvider.ThreadingContext;
-            var uiList = await Task.Run(() => CreateDescriptionAsync(threadingContext.DisposalToken)).ConfigureAwait(false);
-            await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(threadingContext.DisposalToken);
+            var uiList = await Task.Run(
+                    () => CreateDescriptionAsync(threadingContext.DisposalToken)
+                )
+                .ConfigureAwait(false);
+            await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                threadingContext.DisposalToken
+            );
 
-            toolTipPresenter.StartOrUpdate(_textView.TextSnapshot.CreateTrackingSpan(_span.Start, _span.Length, SpanTrackingMode.EdgeInclusive), uiList);
+            toolTipPresenter.StartOrUpdate(
+                _textView.TextSnapshot.CreateTrackingSpan(
+                    _span.Start,
+                    _span.Length,
+                    SpanTrackingMode.EdgeInclusive
+                ),
+                uiList
+            );
         }
 
         private void Adornment_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -285,8 +352,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 // Selected SpanTrackingMode to be EdgeExclusive by default.
                 // Will revise if there are some scenarios we did not think of that produce undesirable behavior.
                 subjectBuffer.Replace(
-                    textChange.Span.ToSnapshotSpan(snapshot).TranslateTo(subjectBuffer.CurrentSnapshot, SpanTrackingMode.EdgeExclusive),
-                    textChange.NewText);
+                    textChange
+                        .Span.ToSnapshotSpan(snapshot)
+                        .TranslateTo(subjectBuffer.CurrentSnapshot, SpanTrackingMode.EdgeExclusive),
+                    textChange.NewText
+                );
             }
         }
     }

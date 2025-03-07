@@ -35,10 +35,7 @@ public class TestAssert
 
     internal static IEnumerable<IHtmlElement> HasElements(string selector, IHtmlDocument document)
     {
-        var elements = document
-            .QuerySelectorAll(selector)
-            .OfType<IHtmlElement>()
-            .ToArray();
+        var elements = document.QuerySelectorAll(selector).OfType<IHtmlElement>().ToArray();
 
         Assert.NotEmpty(elements);
 
@@ -75,15 +72,14 @@ public class TestAssert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("text/html", response.Content.Headers.ContentType.MediaType);
         var content = await response.Content.ReadAsStringAsync();
-        var document = await BrowsingContext.New()
+        var document = await BrowsingContext
+            .New()
             .OpenAsync(ResponseFactory, CancellationToken.None);
         return Assert.IsAssignableFrom<IHtmlDocument>(document);
 
         void ResponseFactory(VirtualResponse htmlResponse)
         {
-            htmlResponse
-                .Address(response.RequestMessage.RequestUri)
-                .Status(response.StatusCode);
+            htmlResponse.Address(response.RequestMessage.RequestUri).Status(response.StatusCode);
 
             MapHeaders(response.Headers);
             MapHeaders(response.Content.Headers);
@@ -103,6 +99,6 @@ public class TestAssert
         }
     }
 
-    internal static void IsOK(HttpResponseMessage download)
-        => Assert.Equal(HttpStatusCode.OK, download.StatusCode);
+    internal static void IsOK(HttpResponseMessage download) =>
+        Assert.Equal(HttpStatusCode.OK, download.StatusCode);
 }

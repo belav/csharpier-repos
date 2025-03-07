@@ -10,10 +10,19 @@ namespace System.ServiceModel.Channels
 
     class ContextRequestChannel : ContextRequestChannelBase<IRequestChannel>, IRequestChannel
     {
-        public ContextRequestChannel(ChannelManagerBase channelManager, IRequestChannel innerChannel,
-            ContextExchangeMechanism contextExchangeMechanism, Uri callbackAddress, bool contextManagementEnabled)
-            : base(channelManager, innerChannel, contextExchangeMechanism, callbackAddress, contextManagementEnabled)
-        {
-        }
+        public ContextRequestChannel(
+            ChannelManagerBase channelManager,
+            IRequestChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism,
+            Uri callbackAddress,
+            bool contextManagementEnabled
+        )
+            : base(
+                channelManager,
+                innerChannel,
+                contextExchangeMechanism,
+                callbackAddress,
+                contextManagementEnabled
+            ) { }
     }
 }

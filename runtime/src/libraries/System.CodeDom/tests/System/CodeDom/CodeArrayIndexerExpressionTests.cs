@@ -20,7 +20,11 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { null, new CodeExpression[0] };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), new CodeExpression[] { new CodePrimitiveExpression("Value2") } };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodeExpression[] { new CodePrimitiveExpression("Value2") },
+            };
         }
 
         [Theory]
@@ -35,13 +39,23 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullIndices_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayIndexerExpression(new CodeExpression(), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeArrayIndexerExpression(new CodeExpression(), null)
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInIndices_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayIndexerExpression(new CodeExpression(), new CodeExpression[] { null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    new CodeArrayIndexerExpression(
+                        new CodeExpression(),
+                        new CodeExpression[] { null }
+                    )
+            );
         }
 
         [Theory]
@@ -60,11 +74,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             arrayIndexer.Indices.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, arrayIndexer.Indices.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                arrayIndexer.Indices.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             arrayIndexer.Indices.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, arrayIndexer.Indices.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                arrayIndexer.Indices.Cast<CodeExpression>()
+            );
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             MeterOptions options = new MeterOptions("name")
             {
                 Version = "version",
-                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } }
+                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } },
             };
 
             Meter meter1 = meterFactory.Create(options);
@@ -41,7 +41,11 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
 
             Assert.Same(meter1, meter2);
 
-            Meter meter3 = meterFactory.Create(options.Name, options.Version, new TagList() { { "key1", "value1" }, { "key2", "value1" } });
+            Meter meter3 = meterFactory.Create(
+                options.Name,
+                options.Version,
+                new TagList() { { "key1", "value1" }, { "key2", "value1" } }
+            );
             Assert.Same(meterFactory, meter3.Scope);
 
             Assert.NotSame(meter1, meter3);
@@ -51,18 +55,38 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             //
 
             object o = new object();
-            TagList l1 = new TagList() { { "z", "a" }, { "y", "b" }, { "x", "c" }, { "w", o }, { "N", null }, { "c", "d" }, { "q", "d" }, { "c", null } };
+            TagList l1 = new TagList()
+            {
+                { "z", "a" },
+                { "y", "b" },
+                { "x", "c" },
+                { "w", o },
+                { "N", null },
+                { "c", "d" },
+                { "q", "d" },
+                { "c", null },
+            };
             List<KeyValuePair<string, object?>> l2 = new List<KeyValuePair<string, object?>>()
             {
-                new KeyValuePair<string, object?>("y", "b"), new KeyValuePair<string, object?>("c", null), new KeyValuePair<string, object?>("N", null),
-                new KeyValuePair<string, object?>("x", "c"), new KeyValuePair<string, object?>("w", o), new KeyValuePair<string, object?>("z", "a"),
-                new KeyValuePair<string, object?>("c", "d"), new KeyValuePair<string, object?>("q", "d")
+                new KeyValuePair<string, object?>("y", "b"),
+                new KeyValuePair<string, object?>("c", null),
+                new KeyValuePair<string, object?>("N", null),
+                new KeyValuePair<string, object?>("x", "c"),
+                new KeyValuePair<string, object?>("w", o),
+                new KeyValuePair<string, object?>("z", "a"),
+                new KeyValuePair<string, object?>("c", "d"),
+                new KeyValuePair<string, object?>("q", "d"),
             };
             HashSet<KeyValuePair<string, object?>> l3 = new HashSet<KeyValuePair<string, object?>>()
             {
-                new KeyValuePair<string, object?>("q", "d"), new KeyValuePair<string, object?>("c", null), new KeyValuePair<string, object?>("N", null),
-                new KeyValuePair<string, object?>("w", o), new KeyValuePair<string, object?>("c", "d"), new KeyValuePair<string, object?>("x", "c"),
-                new KeyValuePair<string, object?>("z", "a"), new KeyValuePair<string, object?>("y", "b")
+                new KeyValuePair<string, object?>("q", "d"),
+                new KeyValuePair<string, object?>("c", null),
+                new KeyValuePair<string, object?>("N", null),
+                new KeyValuePair<string, object?>("w", o),
+                new KeyValuePair<string, object?>("c", "d"),
+                new KeyValuePair<string, object?>("x", "c"),
+                new KeyValuePair<string, object?>("z", "a"),
+                new KeyValuePair<string, object?>("y", "b"),
             };
 
             Meter meter4 = meterFactory.Create("name4", "4", l1);
@@ -84,7 +108,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             t1 = meter4.Tags.ToArray();
             for (int i = 0; i < t1.Length - 1; i++)
             {
-                Assert.True(string.Compare(t1[i].Key, t1[i + 1].Key, StringComparison.Ordinal) <= 0);
+                Assert.True(
+                    string.Compare(t1[i].Key, t1[i + 1].Key, StringComparison.Ordinal) <= 0
+                );
             }
         }
 
@@ -97,9 +123,16 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             using IMeterFactory meterFactory = sp.GetRequiredService<IMeterFactory>();
 
             Assert.Throws<ArgumentNullException>(() => meterFactory.Create(name: null));
-            Assert.Throws<InvalidOperationException>(() => meterFactory.Create(new MeterOptions("name") { Name = "SomeName", Scope = new object() }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    meterFactory.Create(
+                        new MeterOptions("name") { Name = "SomeName", Scope = new object() }
+                    )
+            );
 
-            Meter meter = meterFactory.Create(new MeterOptions("name") { Name = "SomeName", Scope = meterFactory });
+            Meter meter = meterFactory.Create(
+                new MeterOptions("name") { Name = "SomeName", Scope = meterFactory }
+            );
             Assert.Equal(meterFactory, meter.Scope);
         }
 
@@ -117,7 +150,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
 
             using MeterListener listener = new MeterListener();
             int lastMeasurement = 0;
-            listener.SetMeasurementEventCallback<int>((inst, measurement, tags, state) => lastMeasurement = measurement);
+            listener.SetMeasurementEventCallback<int>(
+                (inst, measurement, tags, state) => lastMeasurement = measurement
+            );
             listener.EnableMeasurementEvents(counter, null);
 
             counter.Add(10);
@@ -149,7 +184,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             MeterOptions options = new MeterOptions("name")
             {
                 Version = "version",
-                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } }
+                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } },
             };
 
             Meter meter1 = meterFactory.Create(options);

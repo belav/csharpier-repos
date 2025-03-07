@@ -8,7 +8,10 @@ namespace Internal.TypeSystem
     // Functionality related to deterministic ordering of types
     public partial class CanonBaseType
     {
-        protected internal sealed override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer)
+        protected internal sealed override int CompareToImpl(
+            TypeDesc other,
+            TypeSystemComparer comparer
+        )
         {
             // These should be singletons
             Debug.Assert(this == other);

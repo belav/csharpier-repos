@@ -41,7 +41,7 @@ namespace System.Data.Objects.ELinq
 
         /// <summary>
         /// Constructs a new provider with the given ObjectQuery. This ObjectQuery instance
-        /// is used to transfer state information to the new ObjectQuery instance created using 
+        /// is used to transfer state information to the new ObjectQuery instance created using
         /// the private CreateQuery method overloads.
         /// </summary>
         /// <param name="query"></param>
@@ -65,7 +65,10 @@ namespace System.Data.Objects.ELinq
             EntityUtil.CheckArgumentNull(expression, "expression");
             if (!typeof(IQueryable<S>).IsAssignableFrom(expression.Type))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ELinq_ExpressionMustBeIQueryable, "expression");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ELinq_ExpressionMustBeIQueryable,
+                    "expression"
+                );
             }
 
             ObjectQuery<S> query = CreateQuery<S>(expression);
@@ -102,7 +105,10 @@ namespace System.Data.Objects.ELinq
             EntityUtil.CheckArgumentNull(expression, "expression");
             if (!typeof(IQueryable).IsAssignableFrom(expression.Type))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ELinq_ExpressionMustBeIQueryable, "expression");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ELinq_ExpressionMustBeIQueryable,
+                    "expression"
+                );
             }
 
             // Determine the type of the query instance by binding generic parameter in Query<>.Queryable
@@ -179,40 +185,64 @@ namespace System.Data.Objects.ELinq
         /// a singleton result from an IEnumerable query result. The function
         /// used depends on the semantics required by the expression that is
         /// the root of the query. First,FirstOrDefault and SingleOrDefault are
-        /// currently handled as special cases, and the default behavior is to 
+        /// currently handled as special cases, and the default behavior is to
         /// use the Enumerable.Single materialization pattern.
         /// </summary>
         /// <typeparam name="TResult">The expected result type and the required element type of the IEnumerable collection</typeparam>
         /// <param name="query">The query result set</param>
         /// <param name="queryRoot">The expression that is the root of the LINQ query expression tree</param>
         /// <returns>An instance of TResult if evaluation of the expression-specific singleton-producing function is successful</returns>
-        internal static TResult ExecuteSingle<TResult>(IEnumerable<TResult> query, Expression queryRoot)
+        internal static TResult ExecuteSingle<TResult>(
+            IEnumerable<TResult> query,
+            Expression queryRoot
+        )
         {
             return GetElementFunction<TResult>(queryRoot)(query);
         }
 
-        private static Func<IEnumerable<TResult>, TResult> GetElementFunction<TResult>(Expression queryRoot)
+        private static Func<IEnumerable<TResult>, TResult> GetElementFunction<TResult>(
+            Expression queryRoot
+        )
         {
             SequenceMethod seqMethod;
-            if (ReflectionUtil.TryIdentifySequenceMethod(queryRoot, true /*unwrapLambdas*/, out seqMethod))
+            if (
+                ReflectionUtil.TryIdentifySequenceMethod(
+                    queryRoot,
+                    true /*unwrapLambdas*/
+                    ,
+                    out seqMethod
+                )
+            )
             {
                 switch (seqMethod)
                 {
                     case SequenceMethod.First:
                     case SequenceMethod.FirstPredicate:
-                            return (sequence) => { return Enumerable.First(sequence); };
+                        return (sequence) =>
+                        {
+                            return Enumerable.First(sequence);
+                        };
 
                     case SequenceMethod.FirstOrDefault:
                     case SequenceMethod.FirstOrDefaultPredicate:
-                            return (sequence) => { return Enumerable.FirstOrDefault(sequence); };
+                        return (sequence) =>
+                        {
+                            return Enumerable.FirstOrDefault(sequence);
+                        };
 
                     case SequenceMethod.SingleOrDefault:
                     case SequenceMethod.SingleOrDefaultPredicate:
-                            return (sequence) => { return Enumerable.SingleOrDefault(sequence); };
+                        return (sequence) =>
+                        {
+                            return Enumerable.SingleOrDefault(sequence);
+                        };
                 }
             }
 
-            return (sequence) => { return Enumerable.Single(sequence); };
+            return (sequence) =>
+            {
+                return Enumerable.Single(sequence);
+            };
         }
 
         #endregion

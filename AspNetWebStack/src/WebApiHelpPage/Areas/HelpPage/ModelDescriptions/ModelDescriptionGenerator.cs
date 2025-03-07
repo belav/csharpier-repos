@@ -19,49 +19,92 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
     public class ModelDescriptionGenerator
     {
         // Modify this to support more data annotation attributes.
-        private readonly IDictionary<Type, Func<object, string>> AnnotationTextGenerator = new Dictionary<Type, Func<object, string>>
-        {
-            { typeof(RequiredAttribute), a => "Required" },
-            { typeof(RangeAttribute), a =>
+        private readonly IDictionary<Type, Func<object, string>> AnnotationTextGenerator =
+            new Dictionary<Type, Func<object, string>>
+            {
+                { typeof(RequiredAttribute), a => "Required" },
                 {
-                    RangeAttribute range = (RangeAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Range: inclusive between {0} and {1}", range.Minimum, range.Maximum);
-                }
-            },
-            { typeof(MaxLengthAttribute), a =>
+                    typeof(RangeAttribute),
+                    a =>
+                    {
+                        RangeAttribute range = (RangeAttribute)a;
+                        return String.Format(
+                            CultureInfo.CurrentCulture,
+                            "Range: inclusive between {0} and {1}",
+                            range.Minimum,
+                            range.Maximum
+                        );
+                    }
+                },
                 {
-                    MaxLengthAttribute maxLength = (MaxLengthAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Max length: {0}", maxLength.Length);
-                }
-            },
-            { typeof(MinLengthAttribute), a =>
+                    typeof(MaxLengthAttribute),
+                    a =>
+                    {
+                        MaxLengthAttribute maxLength = (MaxLengthAttribute)a;
+                        return String.Format(
+                            CultureInfo.CurrentCulture,
+                            "Max length: {0}",
+                            maxLength.Length
+                        );
+                    }
+                },
                 {
-                    MinLengthAttribute minLength = (MinLengthAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Min length: {0}", minLength.Length);
-                }
-            },
-            { typeof(StringLengthAttribute), a =>
+                    typeof(MinLengthAttribute),
+                    a =>
+                    {
+                        MinLengthAttribute minLength = (MinLengthAttribute)a;
+                        return String.Format(
+                            CultureInfo.CurrentCulture,
+                            "Min length: {0}",
+                            minLength.Length
+                        );
+                    }
+                },
                 {
-                    StringLengthAttribute strLength = (StringLengthAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "String length: inclusive between {0} and {1}", strLength.MinimumLength, strLength.MaximumLength);
-                }
-            },
-            { typeof(DataTypeAttribute), a =>
+                    typeof(StringLengthAttribute),
+                    a =>
+                    {
+                        StringLengthAttribute strLength = (StringLengthAttribute)a;
+                        return String.Format(
+                            CultureInfo.CurrentCulture,
+                            "String length: inclusive between {0} and {1}",
+                            strLength.MinimumLength,
+                            strLength.MaximumLength
+                        );
+                    }
+                },
                 {
-                    DataTypeAttribute dataType = (DataTypeAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Data type: {0}", dataType.CustomDataType ?? dataType.DataType.ToString());
-                }
-            },
-            { typeof(RegularExpressionAttribute), a =>
+                    typeof(DataTypeAttribute),
+                    a =>
+                    {
+                        DataTypeAttribute dataType = (DataTypeAttribute)a;
+                        return String.Format(
+                            CultureInfo.CurrentCulture,
+                            "Data type: {0}",
+                            dataType.CustomDataType ?? dataType.DataType.ToString()
+                        );
+                    }
+                },
                 {
-                    RegularExpressionAttribute regularExpression = (RegularExpressionAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Matching regular expression pattern: {0}", regularExpression.Pattern);
-                }
-            },
-        };
+                    typeof(RegularExpressionAttribute),
+                    a =>
+                    {
+                        RegularExpressionAttribute regularExpression =
+                            (RegularExpressionAttribute)a;
+                        return String.Format(
+                            CultureInfo.CurrentCulture,
+                            "Matching regular expression pattern: {0}",
+                            regularExpression.Pattern
+                        );
+                    }
+                },
+            };
 
         // Modify this to add more default documentations.
-        private readonly IDictionary<Type, string> DefaultTypeDocumentation = new Dictionary<Type, string>
+        private readonly IDictionary<Type, string> DefaultTypeDocumentation = new Dictionary<
+            Type,
+            string
+        >
         {
             { typeof(Int16), "integer" },
             { typeof(Int32), "integer" },
@@ -93,18 +136,19 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 throw new ArgumentNullException("config");
             }
 
-            _documentationProvider = new Lazy<IModelDocumentationProvider>(() => config.Services.GetDocumentationProvider() as IModelDocumentationProvider);
-            GeneratedModels = new Dictionary<string, ModelDescription>(StringComparer.OrdinalIgnoreCase);
+            _documentationProvider = new Lazy<IModelDocumentationProvider>(
+                () => config.Services.GetDocumentationProvider() as IModelDocumentationProvider
+            );
+            GeneratedModels = new Dictionary<string, ModelDescription>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public Dictionary<string, ModelDescription> GeneratedModels { get; private set; }
 
         private IModelDocumentationProvider DocumentationProvider
         {
-            get
-            {
-                return _documentationProvider.Value;
-            }
+            get { return _documentationProvider.Value; }
         }
 
         public ModelDescription GetOrCreateModelDescription(Type modelType)
@@ -129,11 +173,13 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                     throw new InvalidOperationException(
                         String.Format(
                             CultureInfo.CurrentCulture,
-                            "A model description could not be created. Duplicate model name '{0}' was found for types '{1}' and '{2}'. " +
-                            "Use the [ModelName] attribute to change the model name for at least one of the types so that it has a unique name.",
+                            "A model description could not be created. Duplicate model name '{0}' was found for types '{1}' and '{2}'. "
+                                + "Use the [ModelName] attribute to change the model name for at least one of the types so that it has a unique name.",
                             modelName,
                             modelDescription.ModelType.FullName,
-                            modelType.FullName));
+                            modelType.FullName
+                        )
+                    );
                 }
 
                 return modelDescription;
@@ -166,13 +212,23 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                     Type dictionaryType = typeof(IDictionary<,>).MakeGenericType(genericArguments);
                     if (dictionaryType.IsAssignableFrom(modelType))
                     {
-                        return GenerateDictionaryModelDescription(modelType, genericArguments[0], genericArguments[1]);
+                        return GenerateDictionaryModelDescription(
+                            modelType,
+                            genericArguments[0],
+                            genericArguments[1]
+                        );
                     }
 
-                    Type keyValuePairType = typeof(KeyValuePair<,>).MakeGenericType(genericArguments);
+                    Type keyValuePairType = typeof(KeyValuePair<,>).MakeGenericType(
+                        genericArguments
+                    );
                     if (keyValuePairType.IsAssignableFrom(modelType))
                     {
-                        return GenerateKeyValuePairModelDescription(modelType, genericArguments[0], genericArguments[1]);
+                        return GenerateKeyValuePairModelDescription(
+                            modelType,
+                            genericArguments[0],
+                            genericArguments[1]
+                        );
                     }
                 }
             }
@@ -185,12 +241,20 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
 
             if (modelType == typeof(NameValueCollection))
             {
-                return GenerateDictionaryModelDescription(modelType, typeof(string), typeof(string));
+                return GenerateDictionaryModelDescription(
+                    modelType,
+                    typeof(string),
+                    typeof(string)
+                );
             }
 
             if (typeof(IDictionary).IsAssignableFrom(modelType))
             {
-                return GenerateDictionaryModelDescription(modelType, typeof(object), typeof(object));
+                return GenerateDictionaryModelDescription(
+                    modelType,
+                    typeof(object),
+                    typeof(object)
+                );
             }
 
             if (typeof(IEnumerable).IsAssignableFrom(modelType))
@@ -226,13 +290,16 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
         {
             JsonIgnoreAttribute jsonIgnore = member.GetCustomAttribute<JsonIgnoreAttribute>();
             XmlIgnoreAttribute xmlIgnore = member.GetCustomAttribute<XmlIgnoreAttribute>();
-            IgnoreDataMemberAttribute ignoreDataMember = member.GetCustomAttribute<IgnoreDataMemberAttribute>();
-            NonSerializedAttribute nonSerialized = member.GetCustomAttribute<NonSerializedAttribute>();
-            ApiExplorerSettingsAttribute apiExplorerSetting = member.GetCustomAttribute<ApiExplorerSettingsAttribute>();
+            IgnoreDataMemberAttribute ignoreDataMember =
+                member.GetCustomAttribute<IgnoreDataMemberAttribute>();
+            NonSerializedAttribute nonSerialized =
+                member.GetCustomAttribute<NonSerializedAttribute>();
+            ApiExplorerSettingsAttribute apiExplorerSetting =
+                member.GetCustomAttribute<ApiExplorerSettingsAttribute>();
 
-            bool hasMemberAttribute = member.DeclaringType.IsEnum ?
-                member.GetCustomAttribute<EnumMemberAttribute>() != null :
-                member.GetCustomAttribute<DataMemberAttribute>() != null;
+            bool hasMemberAttribute = member.DeclaringType.IsEnum
+                ? member.GetCustomAttribute<EnumMemberAttribute>() != null
+                : member.GetCustomAttribute<DataMemberAttribute>() != null;
 
             // Display member only if all the followings are true:
             // no JsonIgnoreAttribute
@@ -241,12 +308,12 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             // no NonSerializedAttribute
             // no ApiExplorerSettingsAttribute with IgnoreApi set to true
             // no DataContractAttribute without DataMemberAttribute or EnumMemberAttribute
-            return jsonIgnore == null &&
-                xmlIgnore == null &&
-                ignoreDataMember == null &&
-                nonSerialized == null &&
-                (apiExplorerSetting == null || !apiExplorerSetting.IgnoreApi) &&
-                (!hasDataContractAttribute || hasMemberAttribute);
+            return jsonIgnore == null
+                && xmlIgnore == null
+                && ignoreDataMember == null
+                && nonSerialized == null
+                && (apiExplorerSetting == null || !apiExplorerSetting.IgnoreApi)
+                && (!hasDataContractAttribute || hasMemberAttribute);
         }
 
         private string CreateDefaultDocumentation(Type type)
@@ -278,27 +345,34 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                         new ParameterAnnotation
                         {
                             AnnotationAttribute = attribute,
-                            Documentation = textGenerator(attribute)
-                        });
+                            Documentation = textGenerator(attribute),
+                        }
+                    );
                 }
             }
 
             // Rearrange the annotations
-            annotations.Sort((x, y) =>
-            {
-                // Special-case RequiredAttribute so that it shows up on top
-                if (x.AnnotationAttribute is RequiredAttribute)
+            annotations.Sort(
+                (x, y) =>
                 {
-                    return -1;
-                }
-                if (y.AnnotationAttribute is RequiredAttribute)
-                {
-                    return 1;
-                }
+                    // Special-case RequiredAttribute so that it shows up on top
+                    if (x.AnnotationAttribute is RequiredAttribute)
+                    {
+                        return -1;
+                    }
+                    if (y.AnnotationAttribute is RequiredAttribute)
+                    {
+                        return 1;
+                    }
 
-                // Sort the rest based on alphabetic order of the documentation
-                return String.Compare(x.Documentation, y.Documentation, StringComparison.OrdinalIgnoreCase);
-            });
+                    // Sort the rest based on alphabetic order of the documentation
+                    return String.Compare(
+                        x.Documentation,
+                        y.Documentation,
+                        StringComparison.OrdinalIgnoreCase
+                    );
+                }
+            );
 
             foreach (ParameterAnnotation annotation in annotations)
             {
@@ -306,7 +380,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             }
         }
 
-        private CollectionModelDescription GenerateCollectionModelDescription(Type modelType, Type elementType)
+        private CollectionModelDescription GenerateCollectionModelDescription(
+            Type modelType,
+            Type elementType
+        )
         {
             ModelDescription collectionModelDescription = GetOrCreateModelDescription(elementType);
             if (collectionModelDescription != null)
@@ -315,7 +392,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 {
                     Name = ModelNameHelper.GetModelName(modelType),
                     ModelType = modelType,
-                    ElementDescription = collectionModelDescription
+                    ElementDescription = collectionModelDescription,
                 };
             }
 
@@ -328,29 +405,36 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             {
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
-                Documentation = CreateDefaultDocumentation(modelType)
+                Documentation = CreateDefaultDocumentation(modelType),
             };
 
             GeneratedModels.Add(complexModelDescription.Name, complexModelDescription);
-            bool hasDataContractAttribute = modelType.GetCustomAttribute<DataContractAttribute>() != null;
-            PropertyInfo[] properties = modelType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            bool hasDataContractAttribute =
+                modelType.GetCustomAttribute<DataContractAttribute>() != null;
+            PropertyInfo[] properties = modelType.GetProperties(
+                BindingFlags.Public | BindingFlags.Instance
+            );
             foreach (PropertyInfo property in properties)
             {
                 if (ShouldDisplayMember(property, hasDataContractAttribute))
                 {
                     ParameterDescription propertyModel = new ParameterDescription
                     {
-                        Name = GetMemberName(property, hasDataContractAttribute)
+                        Name = GetMemberName(property, hasDataContractAttribute),
                     };
 
                     if (DocumentationProvider != null)
                     {
-                        propertyModel.Documentation = DocumentationProvider.GetDocumentation(property);
+                        propertyModel.Documentation = DocumentationProvider.GetDocumentation(
+                            property
+                        );
                     }
 
                     GenerateAnnotations(property, propertyModel);
                     complexModelDescription.Properties.Add(propertyModel);
-                    propertyModel.TypeDescription = GetOrCreateModelDescription(property.PropertyType);
+                    propertyModel.TypeDescription = GetOrCreateModelDescription(
+                        property.PropertyType
+                    );
                 }
             }
 
@@ -361,7 +445,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 {
                     ParameterDescription propertyModel = new ParameterDescription
                     {
-                        Name = GetMemberName(field, hasDataContractAttribute)
+                        Name = GetMemberName(field, hasDataContractAttribute),
                     };
 
                     if (DocumentationProvider != null)
@@ -377,7 +461,11 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             return complexModelDescription;
         }
 
-        private DictionaryModelDescription GenerateDictionaryModelDescription(Type modelType, Type keyType, Type valueType)
+        private DictionaryModelDescription GenerateDictionaryModelDescription(
+            Type modelType,
+            Type keyType,
+            Type valueType
+        )
         {
             ModelDescription keyModelDescription = GetOrCreateModelDescription(keyType);
             ModelDescription valueModelDescription = GetOrCreateModelDescription(valueType);
@@ -387,7 +475,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
                 KeyModelDescription = keyModelDescription,
-                ValueModelDescription = valueModelDescription
+                ValueModelDescription = valueModelDescription,
             };
         }
 
@@ -397,17 +485,20 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             {
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
-                Documentation = CreateDefaultDocumentation(modelType)
+                Documentation = CreateDefaultDocumentation(modelType),
             };
-            bool hasDataContractAttribute = modelType.GetCustomAttribute<DataContractAttribute>() != null;
-            foreach (FieldInfo field in modelType.GetFields(BindingFlags.Public | BindingFlags.Static))
+            bool hasDataContractAttribute =
+                modelType.GetCustomAttribute<DataContractAttribute>() != null;
+            foreach (
+                FieldInfo field in modelType.GetFields(BindingFlags.Public | BindingFlags.Static)
+            )
             {
                 if (ShouldDisplayMember(field, hasDataContractAttribute))
                 {
                     EnumValueDescription enumValue = new EnumValueDescription
                     {
                         Name = field.Name,
-                        Value = field.GetRawConstantValue().ToString()
+                        Value = field.GetRawConstantValue().ToString(),
                     };
                     if (DocumentationProvider != null)
                     {
@@ -421,7 +512,11 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             return enumDescription;
         }
 
-        private KeyValuePairModelDescription GenerateKeyValuePairModelDescription(Type modelType, Type keyType, Type valueType)
+        private KeyValuePairModelDescription GenerateKeyValuePairModelDescription(
+            Type modelType,
+            Type keyType,
+            Type valueType
+        )
         {
             ModelDescription keyModelDescription = GetOrCreateModelDescription(keyType);
             ModelDescription valueModelDescription = GetOrCreateModelDescription(valueType);
@@ -431,7 +526,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
                 KeyModelDescription = keyModelDescription,
-                ValueModelDescription = valueModelDescription
+                ValueModelDescription = valueModelDescription,
             };
         }
 
@@ -441,7 +536,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
             {
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
-                Documentation = CreateDefaultDocumentation(modelType)
+                Documentation = CreateDefaultDocumentation(modelType),
             };
             GeneratedModels.Add(simpleModelDescription.Name, simpleModelDescription);
 

@@ -9,11 +9,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class StoredProcedureResultColumn :
-    ConventionAnnotatable,
-    IMutableStoredProcedureResultColumn,
-    IConventionStoredProcedureResultColumn,
-    IRuntimeStoredProcedureResultColumn
+public class StoredProcedureResultColumn
+    : ConventionAnnotatable,
+        IMutableStoredProcedureResultColumn,
+        IConventionStoredProcedureResultColumn,
+        IRuntimeStoredProcedureResultColumn
 {
     private string _name = "RowsAffected";
 
@@ -29,12 +29,16 @@ public class StoredProcedureResultColumn :
     public StoredProcedureResultColumn(
         StoredProcedure storedProcedure,
         bool forRowsAffected,
-        string? propertyName)
+        string? propertyName
+    )
     {
         StoredProcedure = storedProcedure;
         ForRowsAffected = forRowsAffected;
         PropertyName = propertyName;
-        _builder = new InternalStoredProcedureResultColumnBuilder(this, storedProcedure.Builder.ModelBuilder);
+        _builder = new InternalStoredProcedureResultColumnBuilder(
+            this,
+            storedProcedure.Builder.ModelBuilder
+        );
     }
 
     /// <summary>
@@ -46,7 +50,9 @@ public class StoredProcedureResultColumn :
     public virtual InternalStoredProcedureResultColumnBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
+        get =>
+            _builder
+            ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
     }
 
     /// <summary>
@@ -55,9 +61,7 @@ public class StoredProcedureResultColumn :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && StoredProcedure.IsInModel;
+    public virtual bool IsInModel => _builder is not null && StoredProcedure.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,8 +69,7 @@ public class StoredProcedureResultColumn :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -74,8 +77,7 @@ public class StoredProcedureResultColumn :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => ((Annotatable)StoredProcedure.EntityType).IsReadOnly;
+    public override bool IsReadOnly => ((Annotatable)StoredProcedure.EntityType).IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -117,10 +119,13 @@ public class StoredProcedureResultColumn :
     /// </summary>
     public virtual string Name
     {
-        get => ForRowsAffected
-            ? _name
-            : GetProperty().GetColumnName(
-                ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value)!;
+        get =>
+            ForRowsAffected
+                ? _name
+                : GetProperty()
+                    .GetColumnName(
+                        ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value
+                    )!;
         set => SetName(value, ConfigurationSource.Explicit);
     }
 
@@ -143,13 +148,19 @@ public class StoredProcedureResultColumn :
 
         if (configurationSource == ConfigurationSource.Explicit)
         {
-            GetProperty().SetColumnName(name, ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value);
+            GetProperty()
+                .SetColumnName(
+                    name,
+                    ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value
+                );
             return name;
         }
 
         return ((IConventionProperty)GetProperty()).SetColumnName(
-            name, ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value,
-            fromDataAnnotation: configurationSource == ConfigurationSource.DataAnnotation);
+            name,
+            ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value,
+            fromDataAnnotation: configurationSource == ConfigurationSource.DataAnnotation
+        );
     }
 
     /// <summary>
@@ -158,25 +169,19 @@ public class StoredProcedureResultColumn :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetNameConfigurationSource()
-        => ForRowsAffected
+    public virtual ConfigurationSource? GetNameConfigurationSource() =>
+        ForRowsAffected
             ? _nameConfigurationSource
-            : ((IConventionProperty)GetProperty()!)
-            .GetColumnNameConfigurationSource(((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value);
+            : ((IConventionProperty)GetProperty()!).GetColumnNameConfigurationSource(
+                ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value
+            );
 
-    private IMutableProperty GetProperty()
-        => StoredProcedure.EntityType.FindProperty(PropertyName!)
-            ?? StoredProcedure.EntityType.GetDerivedTypes().Select(t => t.FindDeclaredProperty(PropertyName!)!)
-                .First(n => n != null);
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public override string ToString()
-        => ((IStoredProcedureResultColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    private IMutableProperty GetProperty() =>
+        StoredProcedure.EntityType.FindProperty(PropertyName!)
+        ?? StoredProcedure
+            .EntityType.GetDerivedTypes()
+            .Select(t => t.FindDeclaredProperty(PropertyName!)!)
+            .First(n => n != null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -184,10 +189,25 @@ public class StoredProcedureResultColumn :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public override string ToString() =>
+        ((IStoredProcedureResultColumn)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoredProcedureResultColumn)this).ToDebugString(),
-            () => ((IStoredProcedureResultColumn)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoredProcedureResultColumn)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IReadOnlyStoredProcedure IReadOnlyStoredProcedureResultColumn.StoredProcedure
@@ -225,6 +245,9 @@ public class StoredProcedureResultColumn :
     }
 
     /// <inheritdoc />
-    string? IConventionStoredProcedureResultColumn.SetName(string name, bool fromDataAnnotation)
-        => SetName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    string? IConventionStoredProcedureResultColumn.SetName(string name, bool fromDataAnnotation) =>
+        SetName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

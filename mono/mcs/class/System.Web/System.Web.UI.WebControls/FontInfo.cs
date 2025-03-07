@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,347 +29,412 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-	public sealed class FontInfo 
-	{
-		#region Fields
-		static string[]	empty_names = new string[0];
-		StateBag bag;
-		Style _owner;
-		#endregion	// Fields
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+    public sealed class FontInfo
+    {
+        #region Fields
+        static string[] empty_names = new string[0];
+        StateBag bag;
+        Style _owner;
+        #endregion	// Fields
 
-		#region Constructors
-		internal FontInfo(Style owner) 
-		{
-			_owner = owner;
-			this.bag = owner.ViewState;
-		}
-		#endregion	// Constructors
+        #region Constructors
+        internal FontInfo(Style owner)
+        {
+            _owner = owner;
+            this.bag = owner.ViewState;
+        }
+        #endregion	// Constructors
 
-		#region Public Instance Properties
-		[DefaultValue(false)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public bool Bold {
-			get  {
-				if (!_owner.CheckBit((int)Style.Styles.FontBold))
-					return false;
+        #region Public Instance Properties
+        [DefaultValue(false)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public bool Bold
+        {
+            get
+            {
+                if (!_owner.CheckBit((int)Style.Styles.FontBold))
+                    return false;
 
-				return bag.GetBool("Font_Bold", false);
-			}
+                return bag.GetBool("Font_Bold", false);
+            }
+            set
+            {
+                bag["Font_Bold"] = value;
+                _owner.SetBit((int)Style.Styles.FontBold);
+            }
+        }
 
-			set {
-				bag["Font_Bold"] = value;
-				_owner.SetBit ((int) Style.Styles.FontBold);
-			}
-		}
+        [DefaultValue(false)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public bool Italic
+        {
+            get
+            {
+                if (!_owner.CheckBit((int)Style.Styles.FontItalic))
+                    return false;
 
-		[DefaultValue(false)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public bool Italic  {
-			get {
-				if (!_owner.CheckBit ((int) Style.Styles.FontItalic))
-					return false;
+                return bag.GetBool("Font_Italic", false);
+            }
+            set
+            {
+                bag["Font_Italic"] = value;
+                _owner.SetBit((int)Style.Styles.FontItalic);
+            }
+        }
 
-				return bag.GetBool("Font_Italic", false);
-			}
+        [RefreshProperties(RefreshProperties.Repaint)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Editor(
+            "System.Drawing.Design.FontNameEditor, " + Consts.AssemblySystem_Drawing_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [NotifyParentProperty(true)]
+        [TypeConverter(typeof(System.Drawing.FontConverter.FontNameConverter))]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public string Name
+        {
+            get
+            {
+                string[] names = Names;
 
-			set {
-				bag["Font_Italic"] = value;
-				_owner.SetBit ((int) Style.Styles.FontItalic);
-			}
-		}
+                if (names.Length == 0)
+                    return string.Empty;
 
-		[RefreshProperties (RefreshProperties.Repaint)]
-		[DefaultValue("")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Editor("System.Drawing.Design.FontNameEditor, " + Consts.AssemblySystem_Drawing_Design, typeof(System.Drawing.Design.UITypeEditor))]
-		[NotifyParentProperty(true)]
-		[TypeConverter (typeof(System.Drawing.FontConverter.FontNameConverter))]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public string Name {
-			get {
-				string [] names = Names;
+                return names[0];
+            }
+            set
+            {
+                // Seems to be a special case in MS, removing the names from the bag when Name is set to empty,
+                // but not when setting Names to an empty array
+                if (value == string.Empty)
+                {
+                    Names = null;
+                    return;
+                }
 
-				if (names.Length == 0)
-					return string.Empty;
+                if (value == null)
+                    throw new ArgumentNullException("value", "Font name cannot be null");
+                Names = new string[1] { value };
+            }
+        }
 
-				return names[0];
-			}
+        [RefreshProperties(RefreshProperties.Repaint)]
+        [Editor(
+            "System.Windows.Forms.Design.StringArrayEditor, " + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [NotifyParentProperty(true)]
+        [TypeConverter(typeof(System.Web.UI.WebControls.FontNamesConverter))]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public string[] Names
+        {
+            get
+            {
+                string[] ret;
 
-			set {
-				// Seems to be a special case in MS, removing the names from the bag when Name is set to empty, 
-				// but not when setting Names to an empty array
-				if (value == string.Empty) {
-					Names = null;
-					return;
-				}
+                if (!_owner.CheckBit((int)Style.Styles.FontNames))
+                    return FontInfo.empty_names;
 
-				if (value == null)
-					throw new ArgumentNullException("value", "Font name cannot be null");
-				Names = new string[1] { value };
-			}
-		}
+                ret = (string[])bag["Font_Names"];
 
-		[RefreshProperties (RefreshProperties.Repaint)]
-		[Editor("System.Windows.Forms.Design.StringArrayEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
-		[NotifyParentProperty(true)]
-		[TypeConverter(typeof(System.Web.UI.WebControls.FontNamesConverter))]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public string[] Names {
-			get  {
-				string[] ret;
+                if (ret != null)
+                    return ret;
 
-				if (!_owner.CheckBit ((int) Style.Styles.FontNames))
-					return FontInfo.empty_names;
+                return FontInfo.empty_names;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    bag.Remove("Font_Names");
+                    _owner.RemoveBit((int)Style.Styles.FontNames);
+                }
+                else
+                {
+                    bag["Font_Names"] = value;
+                    _owner.SetBit((int)Style.Styles.FontNames);
+                }
+            }
+        }
 
-				ret = (string[])bag["Font_Names"];
+        [DefaultValue(false)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public bool Overline
+        {
+            get
+            {
+                if (!_owner.CheckBit((int)Style.Styles.FontOverline))
+                    return false;
 
-				if (ret != null)
-					return ret;
-				
-				return FontInfo.empty_names;
-			}
+                return bag.GetBool("Font_Overline", false);
+            }
+            set
+            {
+                bag["Font_Overline"] = value;
+                _owner.SetBit((int)Style.Styles.FontOverline);
+            }
+        }
 
-			set {
-				if (value == null) {
-					bag.Remove ("Font_Names");
-					_owner.RemoveBit ((int) Style.Styles.FontNames);
-				} else {
-					bag ["Font_Names"] = value;
-					_owner.SetBit ((int) Style.Styles.FontNames);
-				}
-			}
-		}
+        [RefreshProperties(RefreshProperties.Repaint)]
+        [DefaultValue(typeof(FontUnit), "")]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public FontUnit Size
+        {
+            get
+            {
+                if (!_owner.CheckBit((int)Style.Styles.FontSize))
+                    return FontUnit.Empty;
 
-		[DefaultValue(false)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public bool Overline {
-			get {
-				if (!_owner.CheckBit ((int) Style.Styles.FontOverline)) 
-					return false;
+                return (FontUnit)bag["Font_Size"];
+            }
+            set
+            {
+                if (value.Unit.Value < 0)
+                    throw new ArgumentOutOfRangeException(
+                        "Value",
+                        value.Unit.Value,
+                        "Font size cannot be negative"
+                    );
 
-				return bag.GetBool("Font_Overline", false);
-			}
+                bag["Font_Size"] = value;
+                _owner.SetBit((int)Style.Styles.FontSize);
+            }
+        }
 
-			set {
-				bag["Font_Overline"] = value;
-				_owner.SetBit ((int) Style.Styles.FontOverline);
-			}
-		}
+        [DefaultValue(false)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public bool Strikeout
+        {
+            get
+            {
+                if (!_owner.CheckBit((int)Style.Styles.FontStrikeout))
+                    return false;
 
-		[RefreshProperties (RefreshProperties.Repaint)]
-		[DefaultValue(typeof (FontUnit), "")]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public FontUnit Size {
-			get {
-				if (!_owner.CheckBit ((int) Style.Styles.FontSize)) 
-					return FontUnit.Empty;
+                return bag.GetBool("Font_Strikeout", false);
+            }
+            set
+            {
+                bag["Font_Strikeout"] = value;
+                _owner.SetBit((int)Style.Styles.FontStrikeout);
+            }
+        }
 
-				return (FontUnit)bag["Font_Size"];
-			}
+        [DefaultValue(false)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Font")]
+        public bool Underline
+        {
+            get
+            {
+                if (!_owner.CheckBit((int)Style.Styles.FontUnderline))
+                    return false;
 
-			set {
-				if (value.Unit.Value < 0)
-					throw new ArgumentOutOfRangeException("Value", value.Unit.Value, "Font size cannot be negative");
-				
-				bag["Font_Size"] = value;
-				_owner.SetBit ((int) Style.Styles.FontSize);
-			}
-		}
+                return bag.GetBool("Font_Underline", false);
+            }
+            set
+            {
+                bag["Font_Underline"] = value;
+                _owner.SetBit((int)Style.Styles.FontUnderline);
+            }
+        }
+        #endregion	// Public Instance Properties
 
-		[DefaultValue(false)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public bool Strikeout {
-			get  {
-				if (!_owner.CheckBit ((int) Style.Styles.FontStrikeout))
-					return false;
+        #region Public Instance Methods
+        public void CopyFrom(FontInfo f)
+        {
+            if (f == null || f.IsEmpty)
+                return;
 
-				return bag.GetBool("Font_Strikeout", false);
-			}
+            if (f == this)
+                return;
 
-			set {
-				bag["Font_Strikeout"] = value;
-				_owner.SetBit ((int) Style.Styles.FontStrikeout);
-			}
-		}
+            // MS stores the property in the bag if it's value is false
+            if (f._owner.CheckBit((int)Style.Styles.FontBold))
+                this.Bold = f.Bold;
 
-		[DefaultValue(false)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Font")]
-		public bool Underline {
-			get  {
-				if (!_owner.CheckBit ((int) Style.Styles.FontUnderline))
-					return false;
+            if (f._owner.CheckBit((int)Style.Styles.FontItalic))
+                this.Italic = f.Italic;
 
-				return bag.GetBool("Font_Underline", false);
-			}
+            // MS seems to have some weird behaviour, even if f's Name has been set to String.Empty we still get an empty array
+            this.Names = f.Names;
 
-			set {
-				bag["Font_Underline"] = value;
-				_owner.SetBit ((int) Style.Styles.FontUnderline);
-			}
-		}
-		#endregion	// Public Instance Properties
+            if (f._owner.CheckBit((int)Style.Styles.FontOverline))
+                this.Overline = f.Overline;
 
-		#region Public Instance Methods
-		public void CopyFrom (FontInfo f) 
-		{
-			if (f == null || f.IsEmpty)
-				return;
+            if (f._owner.CheckBit((int)Style.Styles.FontSize))
+                this.Size = f.Size;
 
-			if (f == this)
-				return;
+            if (f._owner.CheckBit((int)Style.Styles.FontStrikeout))
+                this.Strikeout = f.Strikeout;
 
-			// MS stores the property in the bag if it's value is false
-			if (f._owner.CheckBit((int) Style.Styles.FontBold))
-				this.Bold = f.Bold;
+            if (f._owner.CheckBit((int)Style.Styles.FontUnderline))
+                this.Underline = f.Underline;
+        }
 
-			if (f._owner.CheckBit ((int) Style.Styles.FontItalic))
-				this.Italic = f.Italic;
+        public void MergeWith(FontInfo f)
+        {
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontBold)
+                && f._owner.CheckBit((int)Style.Styles.FontBold)
+            )
+                this.Bold = f.Bold;
 
-			// MS seems to have some weird behaviour, even if f's Name has been set to String.Empty we still get an empty array
-			this.Names = f.Names;
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontItalic)
+                && f._owner.CheckBit((int)Style.Styles.FontItalic)
+            )
+                this.Italic = f.Italic;
 
-			if (f._owner.CheckBit ((int) Style.Styles.FontOverline))
-				this.Overline = f.Overline;
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontNames)
+                && f._owner.CheckBit((int)Style.Styles.FontNames)
+            )
+                this.Names = f.Names;
 
-			if (f._owner.CheckBit ((int) Style.Styles.FontSize))
-				this.Size = f.Size;
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontOverline)
+                && f._owner.CheckBit((int)Style.Styles.FontOverline)
+            )
+                this.Overline = f.Overline;
 
-			if (f._owner.CheckBit ((int) Style.Styles.FontStrikeout))
-				this.Strikeout = f.Strikeout;
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontSize)
+                && f._owner.CheckBit((int)Style.Styles.FontSize)
+            )
+                this.Size = f.Size;
 
-			if (f._owner.CheckBit ((int) Style.Styles.FontUnderline))
-				this.Underline = f.Underline;
-		}
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontStrikeout)
+                && f._owner.CheckBit((int)Style.Styles.FontStrikeout)
+            )
+                this.Strikeout = f.Strikeout;
 
-		public void MergeWith (FontInfo f) 
-		{
-			if (!_owner.CheckBit ((int) Style.Styles.FontBold) && f._owner.CheckBit ((int) Style.Styles.FontBold))
-				this.Bold = f.Bold;
+            if (
+                !_owner.CheckBit((int)Style.Styles.FontUnderline)
+                && f._owner.CheckBit((int)Style.Styles.FontUnderline)
+            )
+                this.Underline = f.Underline;
+        }
 
-			if (!_owner.CheckBit ((int) Style.Styles.FontItalic) && f._owner.CheckBit ((int) Style.Styles.FontItalic))
-				this.Italic = f.Italic;
+        public bool ShouldSerializeNames()
+        {
+            return (Names.Length != 0);
+        }
 
-			if (!_owner.CheckBit ((int) Style.Styles.FontNames) && f._owner.CheckBit ((int) Style.Styles.FontNames))
-				this.Names = f.Names;
+        public override string ToString()
+        {
+            if (this.Names.Length == 0)
+                return this.Size.ToString();
 
-			if (!_owner.CheckBit ((int) Style.Styles.FontOverline) && f._owner.CheckBit ((int) Style.Styles.FontOverline))
-				this.Overline = f.Overline;
+            return this.Name + ", " + this.Size.ToString();
+        }
 
-			if (!_owner.CheckBit ((int) Style.Styles.FontSize) && f._owner.CheckBit ((int) Style.Styles.FontSize))
-				this.Size = f.Size;
+        public void ClearDefaults()
+        {
+            Reset();
+        }
 
-			if (!_owner.CheckBit ((int) Style.Styles.FontStrikeout) && f._owner.CheckBit ((int) Style.Styles.FontStrikeout))
-				this.Strikeout = f.Strikeout;
+        #endregion	// Public Instance Methods
 
-			if (!_owner.CheckBit ((int) Style.Styles.FontUnderline) && f._owner.CheckBit ((int) Style.Styles.FontUnderline))
-				this.Underline = f.Underline;
-		}
+        #region Private Methods
+        internal void Reset()
+        {
+            bag.Remove("Font_Bold");
+            bag.Remove("Font_Italic");
+            bag.Remove("Font_Names");
+            bag.Remove("Font_Overline");
+            bag.Remove("Font_Size");
+            bag.Remove("Font_Strikeout");
+            bag.Remove("Font_Underline");
+            _owner.RemoveBit((int)Style.Styles.FontAll);
+        }
 
-		public bool ShouldSerializeNames () 
-		{
-			return (Names.Length != 0);
-		}
+        internal void FillStyleAttributes(
+            CssStyleCollection attributes,
+            bool alwaysRenderTextDecoration
+        )
+        {
+            if (IsEmpty)
+            {
+                if (alwaysRenderTextDecoration)
+                    attributes.Add(HtmlTextWriterStyle.TextDecoration, "none");
+                return;
+            }
 
-		public override string ToString () 
-		{
-			if (this.Names.Length == 0)
-				return this.Size.ToString();
+            string s;
+            // Fonts are a bit weird
+            s = String.Join(",", Names);
+            if (s.Length > 0)
+                attributes.Add(HtmlTextWriterStyle.FontFamily, s);
 
-			return this.Name + ", " + this.Size.ToString();
-		}
+            if (_owner.CheckBit((int)Style.Styles.FontBold))
+                attributes.Add(HtmlTextWriterStyle.FontWeight, Bold ? "bold" : "normal");
 
-		public void ClearDefaults ()
-		{
-			Reset ();
-		}
+            if (_owner.CheckBit((int)Style.Styles.FontItalic))
+                attributes.Add(HtmlTextWriterStyle.FontStyle, Italic ? "italic" : "normal");
 
-		#endregion	// Public Instance Methods
+            if (!Size.IsEmpty)
+                attributes.Add(HtmlTextWriterStyle.FontSize, Size.ToString());
 
-		#region Private Methods
-		internal void Reset() 
-		{
-			bag.Remove("Font_Bold");
-			bag.Remove("Font_Italic");
-			bag.Remove("Font_Names");
-			bag.Remove("Font_Overline");
-			bag.Remove("Font_Size");
-			bag.Remove("Font_Strikeout");
-			bag.Remove("Font_Underline");
-			_owner.RemoveBit ((int) Style.Styles.FontAll);
-		}
+            // These styles are munged into a attribute decoration
+            s = String.Empty;
+            bool hasTextDecoration = false;
 
-		internal void FillStyleAttributes (CssStyleCollection attributes, bool alwaysRenderTextDecoration)
-		{
-			if (IsEmpty) {
-				if(alwaysRenderTextDecoration)
-					attributes.Add (HtmlTextWriterStyle.TextDecoration, "none");
-				return;
-			}
+            if (_owner.CheckBit((int)Style.Styles.FontOverline))
+            {
+                if (Overline)
+                    s += "overline ";
+                hasTextDecoration = true;
+            }
 
-			string s;
-			// Fonts are a bit weird
-			s = String.Join (",", Names);
-			if (s.Length > 0)
-				attributes.Add (HtmlTextWriterStyle.FontFamily, s);
+            if (_owner.CheckBit((int)Style.Styles.FontStrikeout))
+            {
+                if (Strikeout)
+                    s += "line-through ";
+                hasTextDecoration = true;
+            }
 
-			if (_owner.CheckBit ((int) Style.Styles.FontBold))
-				attributes.Add (HtmlTextWriterStyle.FontWeight, Bold ? "bold" : "normal");
+            if (_owner.CheckBit((int)Style.Styles.FontUnderline))
+            {
+                if (Underline)
+                    s += "underline ";
+                hasTextDecoration = true;
+            }
 
-			if (_owner.CheckBit ((int) Style.Styles.FontItalic))
-				attributes.Add (HtmlTextWriterStyle.FontStyle, Italic ? "italic" : "normal");
-
-			if (!Size.IsEmpty)
-				attributes.Add (HtmlTextWriterStyle.FontSize, Size.ToString ());
-
-			// These styles are munged into a attribute decoration
-			s = String.Empty;
-			bool hasTextDecoration = false;
-
-			if (_owner.CheckBit ((int) Style.Styles.FontOverline)) {
-				if (Overline)
-					s += "overline ";
-				hasTextDecoration = true;
-			}
-
-			if (_owner.CheckBit ((int) Style.Styles.FontStrikeout)) {
-				if (Strikeout)
-					s += "line-through ";
-				hasTextDecoration = true;
-			}
-
-			if (_owner.CheckBit ((int) Style.Styles.FontUnderline)) {
-				if (Underline)
-					s += "underline ";
-				hasTextDecoration = true;
-			}
-
-			s = (s.Length > 0) ? s.Trim () : (alwaysRenderTextDecoration || hasTextDecoration) ? "none" : String.Empty;
-			if (s.Length > 0)
-				attributes.Add (HtmlTextWriterStyle.TextDecoration, s);
-		}
-		#endregion	// Private Methods
+            s =
+                (s.Length > 0) ? s.Trim()
+                : (alwaysRenderTextDecoration || hasTextDecoration) ? "none"
+                : String.Empty;
+            if (s.Length > 0)
+                attributes.Add(HtmlTextWriterStyle.TextDecoration, s);
+        }
+        #endregion	// Private Methods
 
 
-		bool IsEmpty {
-			get { return !_owner.CheckBit ((int) Style.Styles.FontAll); }
-		}
-	}
+        bool IsEmpty
+        {
+            get { return !_owner.CheckBit((int)Style.Styles.FontAll); }
+        }
+    }
 }

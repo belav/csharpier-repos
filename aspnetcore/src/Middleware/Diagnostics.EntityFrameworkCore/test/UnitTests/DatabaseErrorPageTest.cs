@@ -23,14 +23,16 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: false,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: false,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -48,14 +50,16 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: false,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { "111_MigrationOne" })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: false,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { "111_MigrationOne" }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -73,14 +77,16 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: true,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { "111_MigrationOne" })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: true,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { "111_MigrationOne" }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -98,14 +104,16 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: true,
-                        pendingModelChanges: true,
-                        pendingMigrations: new string[] { "111_MigrationOne" })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: true,
+                    pendingModelChanges: true,
+                    pendingMigrations: new string[] { "111_MigrationOne" }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -123,14 +131,16 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: true,
-                        pendingModelChanges: true,
-                        pendingMigrations: new string[] { })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: true,
+                    pendingModelChanges: true,
+                    pendingMigrations: new string[] { }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -148,14 +158,16 @@ public class DatabaseErrorPageTest
             new Exception("Something bad happened"),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: false,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: false,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -168,17 +180,22 @@ public class DatabaseErrorPageTest
         var options = new DatabaseErrorPageOptions();
 
         var model = new DatabaseErrorPageModel(
-            new Exception("Something bad happened", new Exception("Because something more badder happened")),
+            new Exception(
+                "Something bad happened",
+                new Exception("Because something more badder happened")
+            ),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: false,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: false,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -196,14 +213,16 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: true,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { "111_MigrationOne" })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: true,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { "111_MigrationOne" }
+                ),
             },
             options: options,
-            pathBase: PathString.Empty);
+            pathBase: PathString.Empty
+        );
 
         var content = await ExecutePage(options, model);
 
@@ -221,21 +240,26 @@ public class DatabaseErrorPageTest
             new Exception(),
             new DatabaseContextDetails[]
             {
-                    new DatabaseContextDetails(
-                        type: typeof(BloggingContext),
-                        databaseExists: true,
-                        pendingModelChanges: false,
-                        pendingMigrations: new string[] { "111_MigrationOne" })
+                new DatabaseContextDetails(
+                    type: typeof(BloggingContext),
+                    databaseExists: true,
+                    pendingModelChanges: false,
+                    pendingMigrations: new string[] { "111_MigrationOne" }
+                ),
             },
             options: options,
-            pathBase: "/PathBase");
+            pathBase: "/PathBase"
+        );
 
         var content = await ExecutePage(options, model);
 
         Assert.Contains("/PathBase/HitThisEndPoint", content);
     }
 
-    private static async Task<string> ExecutePage(DatabaseErrorPageOptions options, DatabaseErrorPageModel model)
+    private static async Task<string> ExecutePage(
+        DatabaseErrorPageOptions options,
+        DatabaseErrorPageModel model
+    )
     {
         var page = new DatabaseErrorPage();
         var context = new Mock<HttpContext>();
@@ -252,8 +276,5 @@ public class DatabaseErrorPageTest
         return content;
     }
 
-    private class BloggingContext : DbContext
-    {
-
-    }
+    private class BloggingContext : DbContext { }
 }

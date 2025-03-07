@@ -14,10 +14,7 @@ public class Index : DefaultUIPage
     private readonly IHtmlAnchorElement _manageLink;
     public static readonly string Path = "/";
 
-    public Index(
-        HttpClient client,
-        IHtmlDocument index,
-        DefaultUIContext context)
+    public Index(HttpClient client, IHtmlDocument index, DefaultUIContext context)
         : base(client, index, context)
     {
         if (!Context.UserAuthenticated)
@@ -76,8 +73,10 @@ public class Index : DefaultUIPage
         var goToManage = await Client.GetAsync(_manageLink.Href);
         var manage = await ResponseAssert.IsHtmlDocumentAsync(goToManage);
 
-        return new Account.Manage.Index(Client, manage, Context
-            .WithSocialLoginEnabled()
-            .WithSocialLoginProvider());
+        return new Account.Manage.Index(
+            Client,
+            manage,
+            Context.WithSocialLoginEnabled().WithSocialLoginProvider()
+        );
     }
 }

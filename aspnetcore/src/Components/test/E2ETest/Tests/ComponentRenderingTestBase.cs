@@ -15,15 +15,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+public abstract class ComponentRenderingTestBase
+    : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public ComponentRenderingTestBase(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -101,20 +101,20 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         // List is initially empty
         var appElement = Browser.MountTestComponent<KeyPressEventComponent>();
         var inputElement = appElement.FindElement(By.TagName("input"));
-        Func<IEnumerable<IWebElement>> liElements =
-            () => appElement.FindElements(By.TagName("li"));
+        Func<IEnumerable<IWebElement>> liElements = () => appElement.FindElements(By.TagName("li"));
         Assert.Empty(liElements());
 
         // Typing adds element
         inputElement.SendKeys("a");
-        Browser.Collection(liElements,
-            li => Assert.Equal("a", li.Text));
+        Browser.Collection(liElements, li => Assert.Equal("a", li.Text));
 
         // Typing again adds another element
         inputElement.SendKeys("b");
-        Browser.Collection(liElements,
+        Browser.Collection(
+            liElements,
             li => Assert.Equal("a", li.Text),
-            li => Assert.Equal("b", li.Text));
+            li => Assert.Equal("b", li.Text)
+        );
 
         // Textbox contains typed text
         Assert.Equal("ab", inputElement.GetAttribute("value"));
@@ -150,8 +150,10 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
     public void CanRenderChildComponents()
     {
         var appElement = Browser.MountTestComponent<ParentChildComponent>();
-        Assert.Equal("Parent component",
-            appElement.FindElement(By.CssSelector("fieldset > legend")).Text);
+        Assert.Equal(
+            "Parent component",
+            appElement.FindElement(By.CssSelector("fieldset > legend")).Text
+        );
 
         var styledElement = appElement.FindElement(By.CssSelector("fieldset > h1"));
         Assert.Equal("Hello, world!", styledElement.Text);
@@ -164,8 +166,10 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
     public void CanRenderChildContent_StaticHtmlBlock()
     {
         var appElement = Browser.MountTestComponent<HtmlBlockChildContent>();
-        Assert.Equal("<p>Some-Static-Text</p>",
-            appElement.FindElement(By.Id("foo")).GetAttribute("innerHTML"));
+        Assert.Equal(
+            "<p>Some-Static-Text</p>",
+            appElement.FindElement(By.Id("foo")).GetAttribute("innerHTML")
+        );
     }
 
     // Verifies we can rewite more complex HTML content into blocks
@@ -242,27 +246,36 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         var appElement = Browser.MountTestComponent<AddRemoveChildComponents>();
         var addButton = appElement.FindElement(By.ClassName("addChild"));
         var removeButton = appElement.FindElement(By.ClassName("removeChild"));
-        Func<IEnumerable<IWebElement>> childComponentWrappers = () => appElement.FindElements(By.TagName("p"));
+        Func<IEnumerable<IWebElement>> childComponentWrappers = () =>
+            appElement.FindElements(By.TagName("p"));
         Assert.Empty(childComponentWrappers());
 
         // Click to add/remove some child components
         addButton.Click();
-        Browser.Collection(childComponentWrappers,
-            elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text));
+        Browser.Collection(
+            childComponentWrappers,
+            elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text)
+        );
 
         addButton.Click();
-        Browser.Collection(childComponentWrappers,
+        Browser.Collection(
+            childComponentWrappers,
             elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text),
-            elem => Assert.Equal("Child 2", elem.FindElement(By.ClassName("message")).Text));
+            elem => Assert.Equal("Child 2", elem.FindElement(By.ClassName("message")).Text)
+        );
 
         removeButton.Click();
-        Browser.Collection(childComponentWrappers,
-            elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text));
+        Browser.Collection(
+            childComponentWrappers,
+            elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text)
+        );
 
         addButton.Click();
-        Browser.Collection(childComponentWrappers,
+        Browser.Collection(
+            childComponentWrappers,
             elem => Assert.Equal("Child 1", elem.FindElement(By.ClassName("message")).Text),
-            elem => Assert.Equal("Child 3", elem.FindElement(By.ClassName("message")).Text));
+            elem => Assert.Equal("Child 3", elem.FindElement(By.ClassName("message")).Text)
+        );
     }
 
     [Fact]
@@ -288,12 +301,16 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         // Initially, the region isn't shown
         var appElement = Browser.MountTestComponent<RenderFragmentToggler>();
         var originalButton = appElement.FindElement(By.TagName("button"));
-        Func<IEnumerable<IWebElement>> fragmentElements = () => appElement.FindElements(By.CssSelector("p[name=fragment-element]"));
+        Func<IEnumerable<IWebElement>> fragmentElements = () =>
+            appElement.FindElements(By.CssSelector("p[name=fragment-element]"));
         Assert.Empty(fragmentElements());
 
         // The JS-side DOM builder handles regions correctly, placing elements
         // after the region after the corresponding elements
-        Assert.Equal("The end", appElement.FindElements(By.CssSelector("div > *:last-child")).Single().Text);
+        Assert.Equal(
+            "The end",
+            appElement.FindElements(By.CssSelector("div > *:last-child")).Single().Text
+        );
 
         // When we click the button, the region is shown
         originalButton.Click();
@@ -310,9 +327,11 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         // The component is able to compile and output these type names only because
         // of the _ViewImports.cshtml files at the same and ancestor levels
         var appElement = Browser.MountTestComponent<ComponentUsingImports>();
-        Assert.Collection(appElement.FindElements(By.TagName("p")),
+        Assert.Collection(
+            appElement.FindElements(By.TagName("p")),
             elem => Assert.Equal(typeof(Complex).FullName, elem.Text),
-            elem => Assert.Equal(typeof(AssemblyHashAlgorithm).FullName, elem.Text));
+            elem => Assert.Equal(typeof(AssemblyHashAlgorithm).FullName, elem.Text)
+        );
     }
 
     [Fact]
@@ -402,7 +421,11 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         string getFocusedElementId() => Browser.SwitchTo().ActiveElement().GetAttribute("id");
 
         // A local helper that gets window.PageYOffset
-        int getPageYOffset() => Convert.ToInt32(((IJavaScriptExecutor)Browser).ExecuteScript("return window.pageYOffset"), CultureInfo.InvariantCulture);
+        int getPageYOffset() =>
+            Convert.ToInt32(
+                ((IJavaScriptExecutor)Browser).ExecuteScript("return window.pageYOffset"),
+                CultureInfo.InvariantCulture
+            );
     }
 
     [Fact]
@@ -457,7 +480,11 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         string getFocusedElementId() => Browser.SwitchTo().ActiveElement().GetAttribute("id");
 
         // A local helper that gets window.PageYOffset
-        int getPageYOffset() => Convert.ToInt32(((IJavaScriptExecutor)Browser).ExecuteScript("return window.pageYOffset"), CultureInfo.InvariantCulture);
+        int getPageYOffset() =>
+            Convert.ToInt32(
+                ((IJavaScriptExecutor)Browser).ExecuteScript("return window.pageYOffset"),
+                CultureInfo.InvariantCulture
+            );
     }
 
     [Theory]
@@ -475,7 +502,10 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
 
         appElement.FindElement(By.Id(triggerButton)).Click();
         Browser.Equal("True", () => didReceiveFocusLabel.Text);
-        Browser.Equal("focus-input-onafterrender", () => Browser.SwitchTo().ActiveElement().GetAttribute("id"));
+        Browser.Equal(
+            "focus-input-onafterrender",
+            () => Browser.SwitchTo().ActiveElement().GetAttribute("id")
+        );
 
         // As well as actually focusing and triggering the onfocusin event, we should not be seeing any errors
         var log = Browser.Manage().Logs.GetLog(LogType.Browser).ToArray();
@@ -542,7 +572,10 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
     public void CanUseJsInteropForRefElementsDuringOnAfterRender()
     {
         var appElement = Browser.MountTestComponent<AfterRenderInteropComponent>();
-        Browser.Equal("Value set after render", () => Browser.Exists(By.TagName("input")).GetAttribute("value"));
+        Browser.Equal(
+            "Value set after render",
+            () => Browser.Exists(By.TagName("input")).GetAttribute("value")
+        );
     }
 
     [Fact]
@@ -553,32 +586,41 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
         // Static markup
         Assert.Equal(
             "attributes",
-            appElement.FindElement(By.CssSelector("p span#attribute-example")).Text);
+            appElement.FindElement(By.CssSelector("p span#attribute-example")).Text
+        );
 
         // Dynamic markup (from a custom RenderFragment)
         Assert.Equal(
             "[Here is an example. We support multiple-top-level nodes.]",
-            appElement.FindElement(By.Id("dynamic-markup-block")).Text);
+            appElement.FindElement(By.Id("dynamic-markup-block")).Text
+        );
         Assert.Equal(
             "example",
-            appElement.FindElement(By.CssSelector("#dynamic-markup-block strong#dynamic-element em")).Text);
+            appElement
+                .FindElement(By.CssSelector("#dynamic-markup-block strong#dynamic-element em"))
+                .Text
+        );
 
         // Dynamic markup (from a MarkupString)
         Assert.Equal(
             "This is a markup string.",
-            appElement.FindElement(By.ClassName("markup-string-value")).Text);
+            appElement.FindElement(By.ClassName("markup-string-value")).Text
+        );
         Assert.Equal(
             "markup string",
-            appElement.FindElement(By.CssSelector(".markup-string-value em")).Text);
+            appElement.FindElement(By.CssSelector(".markup-string-value em")).Text
+        );
 
         // Updating markup blocks
         appElement.FindElement(By.TagName("button")).Click();
         Browser.Equal(
             "[The output was changed completely.]",
-            () => appElement.FindElement(By.Id("dynamic-markup-block")).Text);
+            () => appElement.FindElement(By.Id("dynamic-markup-block")).Text
+        );
         Assert.Equal(
             "changed",
-            appElement.FindElement(By.CssSelector("#dynamic-markup-block span em")).Text);
+            appElement.FindElement(By.CssSelector("#dynamic-markup-block span em")).Text
+        );
     }
 
     [Fact]
@@ -592,7 +634,8 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
             element.FindElements(By.TagName("li")),
             e => Assert.Equal("#1 - a", e.Text),
             e => Assert.Equal("#2 - b", e.Text),
-            e => Assert.Equal("#3 - c", e.Text));
+            e => Assert.Equal("#3 - c", e.Text)
+        );
     }
 
     [Fact]
@@ -607,7 +650,8 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
             thead.FindElements(By.TagName("th")),
             e => Assert.Equal("Col1", e.Text),
             e => Assert.Equal("Col2", e.Text),
-            e => Assert.Equal("Col3", e.Text));
+            e => Assert.Equal("Col3", e.Text)
+        );
 
         var tfoot = table.FindElement(By.TagName("tfoot"));
         Assert.Empty(tfoot.FindElements(By.TagName("td")));
@@ -619,15 +663,14 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
             () => tfoot.FindElements(By.TagName("td")),
             e => Assert.Equal("The", e.Text),
             e => Assert.Equal("", e.Text),
-            e => Assert.Equal("End", e.Text));
+            e => Assert.Equal("End", e.Text)
+        );
     }
 
     [Fact]
     public async Task CanAcceptSimultaneousRenderRequests()
     {
-        var expectedOutput = string.Join(
-            string.Empty,
-            Enumerable.Range(0, 100).Select(_ => "😊"));
+        var expectedOutput = string.Join(string.Empty, Enumerable.Range(0, 100).Select(_ => "😊"));
 
         var appElement = Browser.MountTestComponent<ConcurrentRenderParent>();
 
@@ -665,8 +708,14 @@ public abstract class ComponentRenderingTestBase : ServerTestBase<ToggleExecutio
     public void CanPerformInteropImmediatelyOnComponentInsertion()
     {
         var appElement = Browser.MountTestComponent<InteropOnInitializationComponent>();
-        Browser.Equal("Hello from interop call", () => appElement.FindElement(By.Id("val-get-by-interop")).Text);
-        Browser.Equal("Hello from interop call", () => appElement.FindElement(By.Id("val-set-by-interop")).GetAttribute("value"));
+        Browser.Equal(
+            "Hello from interop call",
+            () => appElement.FindElement(By.Id("val-get-by-interop")).Text
+        );
+        Browser.Equal(
+            "Hello from interop call",
+            () => appElement.FindElement(By.Id("val-set-by-interop")).GetAttribute("value")
+        );
     }
 
     [Fact]

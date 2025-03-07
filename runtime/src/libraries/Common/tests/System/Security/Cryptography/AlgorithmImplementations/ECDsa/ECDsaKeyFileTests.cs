@@ -11,6 +11,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
     public class ECDsaKeyFileTests : ECKeyFileTests<ECDsa>
     {
         protected override ECDsa CreateKey() => ECDsaFactory.Create();
+
         protected override void Exercise(ECDsa key) => key.Exercise();
     }
 }

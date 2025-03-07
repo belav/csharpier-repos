@@ -27,17 +27,19 @@ public class StringRole : IdentityRole<string>
 public class UserStoreStringKeyTest : SqlStoreTestBase<StringUser, StringRole, string>
 {
     public UserStoreStringKeyTest(ScratchDatabaseFixture fixture)
-        : base(fixture)
-    { }
+        : base(fixture) { }
 
     [Fact]
     public void AddEntityFrameworkStoresCanInferKey()
     {
         var services = new ServiceCollection();
-        services.AddLogging()
+        services
+            .AddLogging()
             .AddSingleton(new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options));
         // This used to throw
-        var builder = services.AddIdentity<StringUser, StringRole>().AddEntityFrameworkStores<TestDbContext>();
+        var builder = services
+            .AddIdentity<StringUser, StringRole>()
+            .AddEntityFrameworkStores<TestDbContext>();
 
         var sp = services.BuildServiceProvider();
         using (var csope = sp.CreateScope())
@@ -51,10 +53,14 @@ public class UserStoreStringKeyTest : SqlStoreTestBase<StringUser, StringRole, s
     public void AddEntityFrameworkStoresCanInferKeyWithGenericBase()
     {
         var services = new ServiceCollection();
-        services.AddLogging()
+        services
+            .AddLogging()
             .AddSingleton(new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options));
         // This used to throw
-        var builder = services.AddIdentityCore<IdentityUser<string>>().AddRoles<IdentityRole<string>>().AddEntityFrameworkStores<TestDbContext>();
+        var builder = services
+            .AddIdentityCore<IdentityUser<string>>()
+            .AddRoles<IdentityRole<string>>()
+            .AddEntityFrameworkStores<TestDbContext>();
 
         var sp = services.BuildServiceProvider();
         using (var csope = sp.CreateScope())

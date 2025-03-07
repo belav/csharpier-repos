@@ -4,13 +4,13 @@
 namespace System.ServiceModel.Security
 {
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel.Security.Tokens;
     using System.Net;
     using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Security.Tokens;
 
     public class SspiSecurityTokenProvider : SecurityTokenProvider
     {
@@ -20,15 +20,27 @@ namespace System.ServiceModel.Security
         SspiSecurityToken token;
 
         // client side ctor
-        public SspiSecurityTokenProvider(NetworkCredential credential, bool allowNtlm, TokenImpersonationLevel impersonationLevel)
-        { 
+        public SspiSecurityTokenProvider(
+            NetworkCredential credential,
+            bool allowNtlm,
+            TokenImpersonationLevel impersonationLevel
+        )
+        {
             this.token = new SspiSecurityToken(impersonationLevel, allowNtlm, credential);
         }
 
         // service side ctor
-        public SspiSecurityTokenProvider(NetworkCredential credential, bool extractGroupsForWindowsAccounts, bool allowUnauthenticatedCallers)
+        public SspiSecurityTokenProvider(
+            NetworkCredential credential,
+            bool extractGroupsForWindowsAccounts,
+            bool allowUnauthenticatedCallers
+        )
         {
-            this.token = new SspiSecurityToken(credential, extractGroupsForWindowsAccounts, allowUnauthenticatedCallers);
+            this.token = new SspiSecurityToken(
+                credential,
+                extractGroupsForWindowsAccounts,
+                allowUnauthenticatedCallers
+            );
         }
 
         protected override SecurityToken GetTokenCore(TimeSpan timeout)

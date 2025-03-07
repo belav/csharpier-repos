@@ -36,11 +36,15 @@ internal static class Bitshifter
 
     // Does not overwrite the highest order bit
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void WriteUInt31BigEndian(Span<byte> destination, uint value)
-        => WriteUInt31BigEndian(destination, value, true);
+    public static void WriteUInt31BigEndian(Span<byte> destination, uint value) =>
+        WriteUInt31BigEndian(destination, value, true);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void WriteUInt31BigEndian(Span<byte> destination, uint value, bool preserveHighestBit)
+    public static void WriteUInt31BigEndian(
+        Span<byte> destination,
+        uint value,
+        bool preserveHighestBit
+    )
     {
         Debug.Assert(value <= 0x7F_FF_FF_FF, value.ToString(CultureInfo.InvariantCulture));
 

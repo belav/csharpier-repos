@@ -32,7 +32,11 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     /// <returns>
     ///     An <see cref="IConventionComplexTypeBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionComplexTypeBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionComplexTypeBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -49,7 +53,8 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     new IConventionComplexTypeBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -59,13 +64,18 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     /// <returns>
     ///     An <see cref="IConventionComplexTypeBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionComplexTypeBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+    new IConventionComplexTypeBuilder? HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes properties in the given list if they are not part of any metadata object.
     /// </summary>
     /// <param name="properties">The properties to remove.</param>
-    new IConventionComplexTypeBuilder RemoveUnusedImplicitProperties(IReadOnlyList<IConventionProperty> properties);
+    new IConventionComplexTypeBuilder RemoveUnusedImplicitProperties(
+        IReadOnlyList<IConventionProperty> properties
+    );
 
     /// <summary>
     ///     Removes a property from this complex type.
@@ -76,7 +86,10 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     ///     The same builder instance if the property was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionComplexTypeBuilder? HasNoProperty(IConventionProperty property, bool fromDataAnnotation = false);
+    new IConventionComplexTypeBuilder? HasNoProperty(
+        IConventionProperty property,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes a complex property from this complex type.
@@ -87,7 +100,10 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     ///     The same builder instance if the complex property was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionComplexTypeBuilder? HasNoComplexProperty(IConventionComplexProperty complexProperty, bool fromDataAnnotation = false);
+    new IConventionComplexTypeBuilder? HasNoComplexProperty(
+        IConventionComplexProperty complexProperty,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Excludes the given property from the complex type and prevents conventions from adding a matching property
@@ -116,7 +132,8 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     /// </returns>
     new IConventionComplexTypeBuilder? HasChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for all properties of this complex type.
@@ -133,5 +150,6 @@ public interface IConventionComplexTypeBuilder : IConventionTypeBaseBuilder
     /// </returns>
     new IConventionComplexTypeBuilder? UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 }

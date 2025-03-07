@@ -6,7 +6,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class GlobalStatementSyntax
     {
-        public GlobalStatementSyntax Update(StatementSyntax statement)
-            => this.Update(this.AttributeLists, this.Modifiers, statement);
+        public GlobalStatementSyntax Update(StatementSyntax statement) =>
+            this.Update(this.AttributeLists, this.Modifiers, statement);
     }
 }

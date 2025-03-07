@@ -43,22 +43,70 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
             }
 
-            Assert.Equal(SpecialType.System_Boolean, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Boolean));
-            Assert.Equal(SpecialType.System_Char, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Char));
-            Assert.Equal(SpecialType.System_Void, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Void));
-            Assert.Equal(SpecialType.System_String, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.String));
-            Assert.Equal(SpecialType.System_Int64, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int64));
-            Assert.Equal(SpecialType.System_Int32, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int32));
-            Assert.Equal(SpecialType.System_Int16, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int16));
-            Assert.Equal(SpecialType.System_SByte, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int8));
-            Assert.Equal(SpecialType.System_UInt64, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt64));
-            Assert.Equal(SpecialType.System_UInt32, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt32));
-            Assert.Equal(SpecialType.System_UInt16, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt16));
-            Assert.Equal(SpecialType.System_Byte, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt8));
-            Assert.Equal(SpecialType.System_Single, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Float32));
-            Assert.Equal(SpecialType.System_Double, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Float64));
-            Assert.Equal(SpecialType.System_IntPtr, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.IntPtr));
-            Assert.Equal(SpecialType.System_UIntPtr, SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UIntPtr));
+            Assert.Equal(
+                SpecialType.System_Boolean,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Boolean)
+            );
+            Assert.Equal(
+                SpecialType.System_Char,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Char)
+            );
+            Assert.Equal(
+                SpecialType.System_Void,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Void)
+            );
+            Assert.Equal(
+                SpecialType.System_String,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.String)
+            );
+            Assert.Equal(
+                SpecialType.System_Int64,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int64)
+            );
+            Assert.Equal(
+                SpecialType.System_Int32,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int32)
+            );
+            Assert.Equal(
+                SpecialType.System_Int16,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int16)
+            );
+            Assert.Equal(
+                SpecialType.System_SByte,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Int8)
+            );
+            Assert.Equal(
+                SpecialType.System_UInt64,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt64)
+            );
+            Assert.Equal(
+                SpecialType.System_UInt32,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt32)
+            );
+            Assert.Equal(
+                SpecialType.System_UInt16,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt16)
+            );
+            Assert.Equal(
+                SpecialType.System_Byte,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UInt8)
+            );
+            Assert.Equal(
+                SpecialType.System_Single,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Float32)
+            );
+            Assert.Equal(
+                SpecialType.System_Double,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.Float64)
+            );
+            Assert.Equal(
+                SpecialType.System_IntPtr,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.IntPtr)
+            );
+            Assert.Equal(
+                SpecialType.System_UIntPtr,
+                SpecialTypes.GetTypeFromMetadataName(Cci.PrimitiveTypeCode.UIntPtr)
+            );
         }
 
         [Fact]
@@ -66,15 +114,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var comp = CSharp.CSharpCompilation.Create(
                 "c",
-                options: new CSharp.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel),
-                references: new[] { NetCoreApp.SystemRuntime });
+                options: new CSharp.CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
+                ),
+                references: new[] { NetCoreApp.SystemRuntime }
+            );
 
             var knownMissingTypes = new HashSet<SpecialType>()
             {
-                SpecialType.System_Runtime_CompilerServices_InlineArrayAttribute
+                SpecialType.System_Runtime_CompilerServices_InlineArrayAttribute,
             };
 
-            for (var specialType = SpecialType.None + 1; specialType <= SpecialType.Count; specialType++)
+            for (
+                var specialType = SpecialType.None + 1;
+                specialType <= SpecialType.Count;
+                specialType++
+            )
             {
                 var symbol = comp.GetSpecialType(specialType);
                 if (knownMissingTypes.Contains(specialType))
@@ -92,24 +148,60 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void ConstantValueInvalidOperationTest01()
         {
-            Assert.Throws<InvalidOperationException>(() => { ConstantValue.Create(null, ConstantValueTypeDiscriminator.Bad); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ConstantValue.Create(null, ConstantValueTypeDiscriminator.Bad);
+            });
 
             var cv1 = ConstantValue.Create(1);
-            Assert.Throws<InvalidOperationException>(() => { var c = cv1.StringValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cv1.DateTimeValue; });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cv1.StringValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cv1.DateTimeValue;
+            });
 
             var cv2 = ConstantValue.Create(2);
-            Assert.Throws<InvalidOperationException>(() => { var c = cv2.StringValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cv2.CharValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cv2.DateTimeValue; });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cv2.StringValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cv2.CharValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cv2.DateTimeValue;
+            });
 
             var cvNull = ConstantValue.Create(null, ConstantValueTypeDiscriminator.Null);
-            Assert.Throws<InvalidOperationException>(() => { var c = cvNull.BooleanValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cvNull.DecimalValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cvNull.DoubleValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cvNull.SingleValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cvNull.SByteValue; });
-            Assert.Throws<InvalidOperationException>(() => { var c = cvNull.ByteValue; });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cvNull.BooleanValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cvNull.DecimalValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cvNull.DoubleValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cvNull.SingleValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cvNull.SByteValue;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var c = cvNull.ByteValue;
+            });
         }
 
         [Fact]
@@ -154,7 +246,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void ConstantValuePropertiesTest01()
         {
-            Assert.Equal(ConstantValue.Bad, ConstantValue.Default(ConstantValueTypeDiscriminator.Bad));
+            Assert.Equal(
+                ConstantValue.Bad,
+                ConstantValue.Default(ConstantValueTypeDiscriminator.Bad)
+            );
 
             var cv1 = ConstantValue.Create((sbyte)-1);
             Assert.True(cv1.IsNegativeNumeric);
@@ -216,7 +311,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         // In general, different values are not required to have different hash codes.
-        // But for perf reasons we want hash functions with a good distribution, 
+        // But for perf reasons we want hash functions with a good distribution,
         // so we expect hash codes to differ if a single component is incremented.
         // But program correctness should be preserved even with a null hash function,
         // so we need a way to disable these tests during such correctness validation.
@@ -230,15 +325,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.NotEqual(cv1.GetHashCode(), cv2.GetHashCode());
         }
-
 #endif
 
         [Fact]
         public void ConstantValueToStringTest01()
         {
-            string value = (RuntimeUtilities.IsCoreClrRuntime && !RuntimeUtilities.IsCoreClr6Runtime)
-                ? "Nothing"
-                : "Null";
+            string value =
+                (RuntimeUtilities.IsCoreClrRuntime && !RuntimeUtilities.IsCoreClr6Runtime)
+                    ? "Nothing"
+                    : "Null";
 
             var cv = ConstantValue.Create(null, ConstantValueTypeDiscriminator.Null);
             Assert.Equal($"ConstantValueNull(null: {value})", cv.ToString());

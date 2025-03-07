@@ -24,7 +24,10 @@ namespace System.Security.Cryptography.X509Certificates
                     pbData = new IntPtr((byte*)&keyUsagesAsShort),
                     cUnusedBits = 0,
                 };
-                return Interop.crypt32.EncodeObject(CryptDecodeObjectStructType.X509_KEY_USAGE, &blob);
+                return Interop.crypt32.EncodeObject(
+                    CryptDecodeObjectStructType.X509_KEY_USAGE,
+                    &blob
+                );
             }
         }
 
@@ -34,15 +37,19 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 uint keyUsagesAsUint = encoded.DecodeObject(
                     CryptDecodeObjectStructType.X509_KEY_USAGE,
-                    static delegate (void* pvDecoded, int cbDecoded)
+                    static delegate(void* pvDecoded, int cbDecoded)
                     {
                         Debug.Assert(cbDecoded >= sizeof(Interop.Crypt32.CRYPT_BIT_BLOB));
-                        Interop.Crypt32.CRYPT_BIT_BLOB* pBlob = (Interop.Crypt32.CRYPT_BIT_BLOB*)pvDecoded;
+                        Interop.Crypt32.CRYPT_BIT_BLOB* pBlob =
+                            (Interop.Crypt32.CRYPT_BIT_BLOB*)pvDecoded;
                         byte* pbData = (byte*)pBlob->pbData.ToPointer();
 
                         if (pbData != null)
                         {
-                            Debug.Assert((uint)pBlob->cbData < 3, "Unexpected length for X509_KEY_USAGE data");
+                            Debug.Assert(
+                                (uint)pBlob->cbData < 3,
+                                "Unexpected length for X509_KEY_USAGE data"
+                            );
 
                             switch (pBlob->cbData)
                             {
@@ -65,7 +72,11 @@ namespace System.Security.Cryptography.X509Certificates
             get { return true; }
         }
 
-        public byte[] EncodeX509BasicConstraints2Extension(bool certificateAuthority, bool hasPathLengthConstraint, int pathLengthConstraint)
+        public byte[] EncodeX509BasicConstraints2Extension(
+            bool certificateAuthority,
+            bool hasPathLengthConstraint,
+            int pathLengthConstraint
+        )
         {
             unsafe
             {
@@ -80,37 +91,60 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public void DecodeX509BasicConstraintsExtension(byte[] encoded, out bool certificateAuthority, out bool hasPathLengthConstraint, out int pathLengthConstraint)
+        public void DecodeX509BasicConstraintsExtension(
+            byte[] encoded,
+            out bool certificateAuthority,
+            out bool hasPathLengthConstraint,
+            out int pathLengthConstraint
+        )
         {
             unsafe
             {
-                (certificateAuthority, hasPathLengthConstraint, pathLengthConstraint) = encoded.DecodeObject(
-                    CryptDecodeObjectStructType.X509_BASIC_CONSTRAINTS,
-                    static delegate (void* pvDecoded, int cbDecoded)
-                    {
-                        Debug.Assert(cbDecoded >= sizeof(CERT_BASIC_CONSTRAINTS_INFO));
-                        CERT_BASIC_CONSTRAINTS_INFO* pBasicConstraints = (CERT_BASIC_CONSTRAINTS_INFO*)pvDecoded;
-                        return ((Marshal.ReadByte(pBasicConstraints->SubjectType.pbData) & CERT_BASIC_CONSTRAINTS_INFO.CERT_CA_SUBJECT_FLAG) != 0,
+                (certificateAuthority, hasPathLengthConstraint, pathLengthConstraint) =
+                    encoded.DecodeObject(
+                        CryptDecodeObjectStructType.X509_BASIC_CONSTRAINTS,
+                        static delegate(void* pvDecoded, int cbDecoded)
+                        {
+                            Debug.Assert(cbDecoded >= sizeof(CERT_BASIC_CONSTRAINTS_INFO));
+                            CERT_BASIC_CONSTRAINTS_INFO* pBasicConstraints =
+                                (CERT_BASIC_CONSTRAINTS_INFO*)pvDecoded;
+                            return (
+                                (
+                                    Marshal.ReadByte(pBasicConstraints->SubjectType.pbData)
+                                    & CERT_BASIC_CONSTRAINTS_INFO.CERT_CA_SUBJECT_FLAG
+                                ) != 0,
                                 pBasicConstraints->fPathLenConstraint != 0,
-                                pBasicConstraints->dwPathLenConstraint);
-                    });
+                                pBasicConstraints->dwPathLenConstraint
+                            );
+                        }
+                    );
             }
         }
 
-        public void DecodeX509BasicConstraints2Extension(byte[] encoded, out bool certificateAuthority, out bool hasPathLengthConstraint, out int pathLengthConstraint)
+        public void DecodeX509BasicConstraints2Extension(
+            byte[] encoded,
+            out bool certificateAuthority,
+            out bool hasPathLengthConstraint,
+            out int pathLengthConstraint
+        )
         {
             unsafe
             {
-                (certificateAuthority, hasPathLengthConstraint, pathLengthConstraint) = encoded.DecodeObject(
-                    CryptDecodeObjectStructType.X509_BASIC_CONSTRAINTS2,
-                    static delegate (void* pvDecoded, int cbDecoded)
-                    {
-                        Debug.Assert(cbDecoded >= sizeof(CERT_BASIC_CONSTRAINTS2_INFO));
-                        CERT_BASIC_CONSTRAINTS2_INFO* pBasicConstraints2 = (CERT_BASIC_CONSTRAINTS2_INFO*)pvDecoded;
-                        return (pBasicConstraints2->fCA != 0,
+                (certificateAuthority, hasPathLengthConstraint, pathLengthConstraint) =
+                    encoded.DecodeObject(
+                        CryptDecodeObjectStructType.X509_BASIC_CONSTRAINTS2,
+                        static delegate(void* pvDecoded, int cbDecoded)
+                        {
+                            Debug.Assert(cbDecoded >= sizeof(CERT_BASIC_CONSTRAINTS2_INFO));
+                            CERT_BASIC_CONSTRAINTS2_INFO* pBasicConstraints2 =
+                                (CERT_BASIC_CONSTRAINTS2_INFO*)pvDecoded;
+                            return (
+                                pBasicConstraints2->fCA != 0,
                                 pBasicConstraints2->fPathLenConstraint != 0,
-                                pBasicConstraints2->dwPathLenConstraint);
-                    });
+                                pBasicConstraints2->dwPathLenConstraint
+                            );
+                        }
+                    );
             }
         }
 
@@ -138,7 +172,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 usages = encoded.DecodeObject(
                     CryptDecodeObjectStructType.X509_ENHANCED_KEY_USAGE,
-                    static delegate (void* pvDecoded, int cbDecoded)
+                    static delegate(void* pvDecoded, int cbDecoded)
                     {
                         var localUsages = new OidCollection();
 
@@ -154,34 +188,44 @@ namespace System.Security.Cryptography.X509Certificates
                         }
 
                         return localUsages;
-                    });
+                    }
+                );
             }
         }
 
-        public byte[] EncodeX509SubjectKeyIdentifierExtension(ReadOnlySpan<byte> subjectKeyIdentifier)
+        public byte[] EncodeX509SubjectKeyIdentifierExtension(
+            ReadOnlySpan<byte> subjectKeyIdentifier
+        )
         {
             unsafe
             {
                 fixed (byte* pSubkectKeyIdentifier = subjectKeyIdentifier)
                 {
-                    Interop.Crypt32.DATA_BLOB blob = new Interop.Crypt32.DATA_BLOB(new IntPtr(pSubkectKeyIdentifier), (uint)subjectKeyIdentifier.Length);
+                    Interop.Crypt32.DATA_BLOB blob = new Interop.Crypt32.DATA_BLOB(
+                        new IntPtr(pSubkectKeyIdentifier),
+                        (uint)subjectKeyIdentifier.Length
+                    );
                     return Interop.crypt32.EncodeObject(Oids.SubjectKeyIdentifier, &blob);
                 }
             }
         }
 
-        public void DecodeX509SubjectKeyIdentifierExtension(byte[] encoded, out byte[] subjectKeyIdentifier)
+        public void DecodeX509SubjectKeyIdentifierExtension(
+            byte[] encoded,
+            out byte[] subjectKeyIdentifier
+        )
         {
             unsafe
             {
                 subjectKeyIdentifier = encoded.DecodeObject(
                     Oids.SubjectKeyIdentifier,
-                    static delegate (void* pvDecoded, int cbDecoded)
+                    static delegate(void* pvDecoded, int cbDecoded)
                     {
                         Debug.Assert(cbDecoded >= sizeof(Interop.Crypt32.DATA_BLOB));
                         Interop.Crypt32.DATA_BLOB* pBlob = (Interop.Crypt32.DATA_BLOB*)pvDecoded;
                         return pBlob->ToByteArray();
-                    });
+                    }
+                );
             }
         }
 
@@ -197,25 +241,39 @@ namespace System.Security.Cryptography.X509Certificates
                         byte[] encodedKeyValue = key.EncodedKeyValue.RawData;
                         fixed (byte* pEncodedKeyValue = encodedKeyValue)
                         {
-                            Interop.Crypt32.CERT_PUBLIC_KEY_INFO publicKeyInfo = new Interop.Crypt32.CERT_PUBLIC_KEY_INFO()
-                            {
-                                Algorithm = new Interop.Crypt32.CRYPT_ALGORITHM_IDENTIFIER()
+                            Interop.Crypt32.CERT_PUBLIC_KEY_INFO publicKeyInfo =
+                                new Interop.Crypt32.CERT_PUBLIC_KEY_INFO()
                                 {
-                                    pszObjId = new IntPtr(pszOidValue),
-                                    Parameters = new Interop.Crypt32.DATA_BLOB(new IntPtr(pEncodedParameters), (uint)encodedParameters.Length),
-                                },
+                                    Algorithm = new Interop.Crypt32.CRYPT_ALGORITHM_IDENTIFIER()
+                                    {
+                                        pszObjId = new IntPtr(pszOidValue),
+                                        Parameters = new Interop.Crypt32.DATA_BLOB(
+                                            new IntPtr(pEncodedParameters),
+                                            (uint)encodedParameters.Length
+                                        ),
+                                    },
 
-                                PublicKey = new Interop.Crypt32.CRYPT_BIT_BLOB()
-                                {
-                                    cbData = encodedKeyValue.Length,
-                                    pbData = new IntPtr(pEncodedKeyValue),
-                                    cUnusedBits = 0,
-                                },
-                            };
+                                    PublicKey = new Interop.Crypt32.CRYPT_BIT_BLOB()
+                                    {
+                                        cbData = encodedKeyValue.Length,
+                                        pbData = new IntPtr(pEncodedKeyValue),
+                                        cUnusedBits = 0,
+                                    },
+                                };
 
                             int cb = 20;
                             byte[] buffer = new byte[cb];
-                            if (!Interop.Crypt32.CryptHashPublicKeyInfo(IntPtr.Zero, AlgId.CALG_SHA1, 0, Interop.Crypt32.CertEncodingType.All, ref publicKeyInfo, buffer, ref cb))
+                            if (
+                                !Interop.Crypt32.CryptHashPublicKeyInfo(
+                                    IntPtr.Zero,
+                                    AlgId.CALG_SHA1,
+                                    0,
+                                    Interop.Crypt32.CertEncodingType.All,
+                                    ref publicKeyInfo,
+                                    buffer,
+                                    ref cb
+                                )
+                            )
                                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                             if (cb < buffer.Length)
                             {

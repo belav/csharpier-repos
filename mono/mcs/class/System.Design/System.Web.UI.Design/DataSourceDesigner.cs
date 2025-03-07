@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,109 +28,112 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Security.Permissions;
 
-namespace System.Web.UI.Design {
+namespace System.Web.UI.Design
+{
+    [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+    public class DataSourceDesigner : ControlDesigner, IDataSourceDesigner
+    {
+        [MonoTODO]
+        public static bool SchemasEquivalent(IDataSourceSchema schema1, IDataSourceSchema schema2)
+        {
+            throw new NotImplementedException();
+        }
 
-	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public class DataSourceDesigner : ControlDesigner, IDataSourceDesigner
-	{
-		[MonoTODO]
-		public static bool SchemasEquivalent (IDataSourceSchema schema1, IDataSourceSchema schema2)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static bool ViewSchemasEquivalent(
+            IDataSourceViewSchema viewSchema1,
+            IDataSourceViewSchema viewSchema2
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static bool ViewSchemasEquivalent (IDataSourceViewSchema viewSchema1, IDataSourceViewSchema viewSchema2)
-		{
-			throw new NotImplementedException ();
-		}
+        public DataSourceDesigner() { }
 
-		public DataSourceDesigner ()
-		{
-		}
+        public event EventHandler DataSourceChanged;
+        public event EventHandler SchemaRefreshed;
 
-		public event EventHandler DataSourceChanged;
-		public event EventHandler SchemaRefreshed;
+        [MonoTODO]
+        public override DesignerActionListCollection ActionLists
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override DesignerActionListCollection ActionLists {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual bool CanConfigure
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public virtual bool CanConfigure {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual bool CanRefreshSchema
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public virtual bool CanRefreshSchema {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        protected bool SuppressingDataSourceEvents
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		protected bool SuppressingDataSourceEvents {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual void Configure()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual void Configure ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override string GetDesignTimeHtml()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override string GetDesignTimeHtml ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual DesignerDataSourceView GetView(string viewName)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual DesignerDataSourceView GetView (string viewName)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual string[] GetViewNames()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual string [] GetViewNames ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected virtual void OnDataSourceChanged(EventArgs e)
+        {
+            if (DataSourceChanged != null)
+                DataSourceChanged(this, e);
+        }
 
-		protected virtual void OnDataSourceChanged (EventArgs e)
-		{
-			if (DataSourceChanged != null)
-				DataSourceChanged (this, e);
-		}
+        protected virtual void OnSchemaRefreshed(EventArgs e)
+        {
+            if (SchemaRefreshed != null)
+                SchemaRefreshed(this, e);
+        }
 
-		protected virtual void OnSchemaRefreshed (EventArgs e)
-		{
-			if (SchemaRefreshed != null)
-				SchemaRefreshed (this, e);
-		}
+        [MonoTODO]
+        public virtual void RefreshSchema(bool preferSilent)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual void RefreshSchema (bool preferSilent)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual void ResumeDataSourceEvents()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual void ResumeDataSourceEvents ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO]
-		public virtual void SuppressDataSourceEvents ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public virtual void SuppressDataSourceEvents()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

@@ -17,8 +17,12 @@ namespace System.Web.Mvc.Test
         public void ConstructorWithNullRequestContextThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { new MvcHandler(null); },
-                "requestContext");
+                delegate
+                {
+                    new MvcHandler(null);
+                },
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -32,8 +36,12 @@ namespace System.Web.Mvc.Test
 
             // Act
             Assert.Throws<InvalidOperationException>(
-                delegate { mvcHandler.ProcessRequest(contextMock.Object); },
-                "The RouteData must contain an item named 'controller' with a non-empty string value.");
+                delegate
+                {
+                    mvcHandler.ProcessRequest(contextMock.Object);
+                },
+                "The RouteData must contain an item named 'controller' with a non-empty string value."
+            );
 
             // Assert
             contextMock.Verify();
@@ -57,7 +65,9 @@ namespace System.Web.Mvc.Test
 
             ControllerBuilder cb = new ControllerBuilder();
             Mock<IControllerFactory> controllerFactoryMock = new Mock<IControllerFactory>();
-            controllerFactoryMock.Setup(o => o.CreateController(requestContext, "foo")).Returns(controllerMock.Object);
+            controllerFactoryMock
+                .Setup(o => o.CreateController(requestContext, "foo"))
+                .Returns(controllerMock.Object);
             controllerFactoryMock.Setup(o => o.ReleaseController(controllerMock.Object));
             cb.SetControllerFactory(controllerFactoryMock.Object);
             mvcHandler.ControllerBuilder = cb;
@@ -89,7 +99,9 @@ namespace System.Web.Mvc.Test
 
             ControllerBuilder cb = new ControllerBuilder();
             Mock<IControllerFactory> controllerFactoryMock = new Mock<IControllerFactory>();
-            controllerFactoryMock.Setup(o => o.CreateController(requestContext, "foo")).Returns(controllerMock.Object);
+            controllerFactoryMock
+                .Setup(o => o.CreateController(requestContext, "foo"))
+                .Returns(controllerMock.Object);
             controllerFactoryMock.Setup(o => o.ReleaseController(controllerMock.Object));
             cb.SetControllerFactory(controllerFactoryMock.Object);
             mvcHandler.ControllerBuilder = cb;
@@ -123,7 +135,9 @@ namespace System.Web.Mvc.Test
 
                 ControllerBuilder cb = new ControllerBuilder();
                 Mock<IControllerFactory> controllerFactoryMock = new Mock<IControllerFactory>();
-                controllerFactoryMock.Setup(o => o.CreateController(requestContext, "foo")).Returns(controllerMock.Object);
+                controllerFactoryMock
+                    .Setup(o => o.CreateController(requestContext, "foo"))
+                    .Returns(controllerMock.Object);
                 controllerFactoryMock.Setup(o => o.ReleaseController(controllerMock.Object));
                 cb.SetControllerFactory(controllerFactoryMock.Object);
                 mvcHandler.ControllerBuilder = cb;
@@ -147,7 +161,10 @@ namespace System.Web.Mvc.Test
             Mock<ControllerBase> mockController = new Mock<ControllerBase>();
             mockController.As<IDisposable>().Setup(c => c.Dispose()); // so that Verify can be called on Dispose later
             mockController.As<IController>().CallBase = true;
-            mockController.Protected().Setup("Execute", ItExpr.IsAny<RequestContext>()).Verifiable();
+            mockController
+                .Protected()
+                .Setup("Execute", ItExpr.IsAny<RequestContext>())
+                .Verifiable();
 
             ControllerBuilder builder = new ControllerBuilder();
             builder.SetControllerFactory(new SimpleControllerFactory(mockController.Object));
@@ -156,10 +173,7 @@ namespace System.Web.Mvc.Test
             contextMock.ExpectMvcVersionResponseHeader().Verifiable();
             RequestContext requestContext = new RequestContext(contextMock.Object, new RouteData());
             requestContext.RouteData.Values["controller"] = "fooController";
-            MvcHandler handler = new MvcHandler(requestContext)
-            {
-                ControllerBuilder = builder
-            };
+            MvcHandler handler = new MvcHandler(requestContext) { ControllerBuilder = builder };
 
             // Act
             handler.ProcessRequest(requestContext.HttpContext);
@@ -177,7 +191,10 @@ namespace System.Web.Mvc.Test
             Mock<ControllerBase> mockController = new Mock<ControllerBase>();
             mockController.As<IDisposable>().Setup(d => d.Dispose()); // so that Verify can be called on Dispose later
             mockController.As<IController>().CallBase = true;
-            mockController.Protected().Setup("Execute", ItExpr.IsAny<RequestContext>()).Throws(new Exception("some exception"));
+            mockController
+                .Protected()
+                .Setup("Execute", ItExpr.IsAny<RequestContext>())
+                .Throws(new Exception("some exception"));
 
             ControllerBuilder builder = new ControllerBuilder();
             builder.SetControllerFactory(new SimpleControllerFactory(mockController.Object));
@@ -186,15 +203,16 @@ namespace System.Web.Mvc.Test
             contextMock.ExpectMvcVersionResponseHeader().Verifiable();
             RequestContext requestContext = new RequestContext(contextMock.Object, new RouteData());
             requestContext.RouteData.Values["controller"] = "fooController";
-            MvcHandler handler = new MvcHandler(requestContext)
-            {
-                ControllerBuilder = builder
-            };
+            MvcHandler handler = new MvcHandler(requestContext) { ControllerBuilder = builder };
 
             // Act
             Assert.Throws<Exception>(
-                delegate { handler.ProcessRequest(requestContext.HttpContext); },
-                "some exception");
+                delegate
+                {
+                    handler.ProcessRequest(requestContext.HttpContext);
+                },
+                "some exception"
+            );
 
             // Assert
             mockController.Verify();
@@ -207,15 +225,27 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IAsyncController> mockController = new Mock<IAsyncController>();
-            mockController.Setup(o => o.BeginExecute(It.IsAny<RequestContext>(), It.IsAny<AsyncCallback>(), It.IsAny<object>())).Throws(new Exception("Some exception text."));
+            mockController
+                .Setup(o =>
+                    o.BeginExecute(
+                        It.IsAny<RequestContext>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+                )
+                .Throws(new Exception("Some exception text."));
             mockController.As<IDisposable>().Setup(o => o.Dispose()).Verifiable();
 
             MvcHandler handler = GetMvcHandler(mockController.Object);
 
             // Act & assert
             Assert.Throws<Exception>(
-                delegate { handler.BeginProcessRequest(handler.RequestContext.HttpContext, null, null); },
-                @"Some exception text.");
+                delegate
+                {
+                    handler.BeginProcessRequest(handler.RequestContext.HttpContext, null, null);
+                },
+                @"Some exception text."
+            );
 
             mockController.Verify();
         }
@@ -229,13 +259,33 @@ namespace System.Web.Mvc.Test
                 bool disposeWasCalled = false;
 
                 Mock<IAsyncController> mockController = new Mock<IAsyncController>();
-                mockController.Setup(o => o.BeginExecute(It.IsAny<RequestContext>(), It.IsAny<AsyncCallback>(), It.IsAny<object>())).Returns(innerAsyncResult);
-                mockController.As<IDisposable>().Setup(o => o.Dispose()).Callback(delegate { disposeWasCalled = true; });
+                mockController
+                    .Setup(o =>
+                        o.BeginExecute(
+                            It.IsAny<RequestContext>(),
+                            It.IsAny<AsyncCallback>(),
+                            It.IsAny<object>()
+                        )
+                    )
+                    .Returns(innerAsyncResult);
+                mockController
+                    .As<IDisposable>()
+                    .Setup(o => o.Dispose())
+                    .Callback(
+                        delegate
+                        {
+                            disposeWasCalled = true;
+                        }
+                    );
 
                 MvcHandler handler = GetMvcHandler(mockController.Object);
 
                 // Act & assert
-                IAsyncResult outerAsyncResult = handler.BeginProcessRequest(handler.RequestContext.HttpContext, null, null);
+                IAsyncResult outerAsyncResult = handler.BeginProcessRequest(
+                    handler.RequestContext.HttpContext,
+                    null,
+                    null
+                );
                 Assert.False(disposeWasCalled);
 
                 handler.EndProcessRequest(outerAsyncResult);
@@ -252,13 +302,32 @@ namespace System.Web.Mvc.Test
             bool disposeWasCalled = false;
 
             Mock<IController> mockController = new Mock<IController>();
-            mockController.Setup(o => o.Execute(It.IsAny<RequestContext>())).Callback(delegate { executeWasCalled = true; });
-            mockController.As<IDisposable>().Setup(o => o.Dispose()).Callback(delegate { disposeWasCalled = true; });
+            mockController
+                .Setup(o => o.Execute(It.IsAny<RequestContext>()))
+                .Callback(
+                    delegate
+                    {
+                        executeWasCalled = true;
+                    }
+                );
+            mockController
+                .As<IDisposable>()
+                .Setup(o => o.Dispose())
+                .Callback(
+                    delegate
+                    {
+                        disposeWasCalled = true;
+                    }
+                );
 
             MvcHandler handler = GetMvcHandler(mockController.Object);
 
             // Act & assert
-            IAsyncResult outerAsyncResult = handler.BeginProcessRequest(handler.RequestContext.HttpContext, null, null);
+            IAsyncResult outerAsyncResult = handler.BeginProcessRequest(
+                handler.RequestContext.HttpContext,
+                null,
+                null
+            );
             Assert.False(executeWasCalled);
             Assert.False(disposeWasCalled);
 
@@ -278,7 +347,11 @@ namespace System.Web.Mvc.Test
             handler.RequestContext.RouteData.Values["action"] = "Widget";
 
             // Act
-            IAsyncResult outerAsyncResult = handler.BeginProcessRequest(handler.RequestContext.HttpContext, null, null);
+            IAsyncResult outerAsyncResult = handler.BeginProcessRequest(
+                handler.RequestContext.HttpContext,
+                null,
+                null
+            );
             handler.EndProcessRequest(outerAsyncResult);
 
             // Assert
@@ -331,10 +404,7 @@ namespace System.Web.Mvc.Test
             ControllerBuilder controllerBuilder = new ControllerBuilder();
             controllerBuilder.SetControllerFactory(new SimpleControllerFactory(controller));
 
-            return new MvcHandler(requestContext)
-            {
-                ControllerBuilder = controllerBuilder
-            };
+            return new MvcHandler(requestContext) { ControllerBuilder = controllerBuilder };
         }
 
         private class SimpleControllerFactory : IControllerFactory
@@ -351,7 +421,10 @@ namespace System.Web.Mvc.Test
                 return _instance;
             }
 
-            public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+            public SessionStateBehavior GetControllerSessionBehavior(
+                RequestContext requestContext,
+                string controllerName
+            )
             {
                 return SessionStateBehavior.Default;
             }

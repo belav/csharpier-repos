@@ -29,9 +29,27 @@ namespace System.Security.Tests
         [Fact]
         public static unsafe void Ctor_CharInt_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new SecureString(null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => { fixed (char* chars = "test") new SecureString(chars, -1); });
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => CreateSecureString(CreateString(ushort.MaxValue + 2 /*65537: Max allowed length is 65536*/)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new SecureString(null, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () =>
+                {
+                    fixed (char* chars = "test")
+                        new SecureString(chars, -1);
+                }
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () =>
+                    CreateSecureString(
+                        CreateString(
+                            ushort.MaxValue + 2 /*65537: Max allowed length is 65536*/
+                        )
+                    )
+            );
         }
 
         [Fact]
@@ -55,7 +73,10 @@ namespace System.Security.Tests
         {
             using (SecureString ss = CreateSecureString(CreateString(ushort.MaxValue + 1)))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => ss.AppendChar('a'));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "capacity",
+                    () => ss.AppendChar('a')
+                );
             }
         }
 
@@ -116,10 +137,18 @@ namespace System.Security.Tests
             Assert.Throws<ObjectDisposedException>(() => ss.MakeReadOnly());
             Assert.Throws<ObjectDisposedException>(() => ss.RemoveAt(0));
             Assert.Throws<ObjectDisposedException>(() => ss.SetAt(0, 'a'));
-            Assert.Throws<ObjectDisposedException>(() => SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss));
-            Assert.Throws<ObjectDisposedException>(() => SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss));
-            Assert.Throws<ObjectDisposedException>(() => SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss));
-            Assert.Throws<ObjectDisposedException>(() => SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss));
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss)
+            );
 
             ss.Dispose(); // ok to call again
         }
@@ -198,13 +227,22 @@ namespace System.Security.Tests
         {
             using (SecureString testString = CreateSecureString("bd"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.InsertAt(-1, 'S'));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.InsertAt(6, 'S'));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.InsertAt(-1, 'S')
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.InsertAt(6, 'S')
+                );
             }
 
             using (SecureString testString = CreateSecureString(CreateString(ushort.MaxValue + 1)))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => testString.InsertAt(22, 'S'));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "capacity",
+                    () => testString.InsertAt(22, 'S')
+                );
             }
         }
 
@@ -256,9 +294,18 @@ namespace System.Security.Tests
         {
             using (SecureString testString = CreateSecureString("test"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.RemoveAt(-1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.RemoveAt(testString.Length));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.RemoveAt(testString.Length + 1));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.RemoveAt(-1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.RemoveAt(testString.Length)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.RemoveAt(testString.Length + 1)
+                );
             }
         }
 
@@ -292,19 +339,40 @@ namespace System.Security.Tests
         {
             using (SecureString testString = CreateSecureString("test"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.SetAt(-1, 'a'));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.SetAt(testString.Length, 'b'));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => testString.SetAt(testString.Length + 1, 'c'));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.SetAt(-1, 'a')
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.SetAt(testString.Length, 'b')
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => testString.SetAt(testString.Length + 1, 'c')
+                );
             }
         }
 
         [Fact]
         public static void SecureStringMarshal_NullArgsAllowed_IntPtrZero()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => SecureStringMarshal.SecureStringToCoTaskMemAnsi(null));
-            AssertExtensions.Throws<ArgumentNullException>("s", () => SecureStringMarshal.SecureStringToCoTaskMemUnicode(null));
-            AssertExtensions.Throws<ArgumentNullException>("s", () => SecureStringMarshal.SecureStringToGlobalAllocAnsi(null));
-            AssertExtensions.Throws<ArgumentNullException>("s", () => SecureStringMarshal.SecureStringToGlobalAllocUnicode(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => SecureStringMarshal.SecureStringToCoTaskMemAnsi(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => SecureStringMarshal.SecureStringToCoTaskMemUnicode(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => SecureStringMarshal.SecureStringToGlobalAllocAnsi(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => SecureStringMarshal.SecureStringToGlobalAllocUnicode(null)
+            );
         }
 
         [Fact]
@@ -328,10 +396,12 @@ namespace System.Security.Tests
         [InlineData(1000, true)]
         public static void SecureStringMarshal_Ansi_Roundtrip(int length, bool allocHGlobal)
         {
-            string input = new string(Enumerable
-                .Range(0, length)
-                .Select(i => (char)('a' + i)) // include non-ASCII chars
-                .ToArray());
+            string input = new string(
+                Enumerable
+                    .Range(0, length)
+                    .Select(i => (char)('a' + i)) // include non-ASCII chars
+                    .ToArray()
+            );
 
             IntPtr marshaledString = Marshal.StringToHGlobalAnsi(input);
             string expectedAnsi = Marshal.PtrToStringAnsi(marshaledString);
@@ -339,9 +409,9 @@ namespace System.Security.Tests
 
             using (SecureString ss = CreateSecureString(input))
             {
-                IntPtr marshaledSecureString = allocHGlobal ?
-                    SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss) :
-                    SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss);
+                IntPtr marshaledSecureString = allocHGlobal
+                    ? SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss)
+                    : SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss);
 
                 string actualAnsi = Marshal.PtrToStringAnsi(marshaledSecureString);
 
@@ -369,10 +439,12 @@ namespace System.Security.Tests
         [InlineData(1000, true)]
         public static void SecureStringMarshal_Unicode_Roundtrip(int length, bool allocHGlobal)
         {
-            string input = new string(Enumerable
-                .Range(0, length)
-                .Select(i => (char)('a' + i)) // include non-ASCII chars
-                .ToArray());
+            string input = new string(
+                Enumerable
+                    .Range(0, length)
+                    .Select(i => (char)('a' + i)) // include non-ASCII chars
+                    .ToArray()
+            );
 
             IntPtr marshaledString = Marshal.StringToHGlobalUni(input);
             string expectedAnsi = Marshal.PtrToStringUni(marshaledString);
@@ -380,9 +452,9 @@ namespace System.Security.Tests
 
             using (SecureString ss = CreateSecureString(input))
             {
-                IntPtr marshaledSecureString = allocHGlobal ?
-                    SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss) :
-                    SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss);
+                IntPtr marshaledSecureString = allocHGlobal
+                    ? SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss)
+                    : SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss);
 
                 string actualAnsi = Marshal.PtrToStringUni(marshaledSecureString);
 
@@ -447,59 +519,92 @@ namespace System.Security.Tests
 
         [OuterLoop]
         [InlineData(5)]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         public static void ThreadSafe_Stress(int executionTimeSeconds) // do some minimal verification that an instance can be used concurrently
         {
             using (var ss = new SecureString())
             {
-                DateTimeOffset end = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(executionTimeSeconds);
-                Task.WaitAll(Enumerable.Range(0, Environment.ProcessorCount).Select(_ => Task.Run(() =>
-                {
-                    var rand = new Random(Task.CurrentId.Value);
-                    while (DateTimeOffset.UtcNow < end)
-                    {
-                        char c = (char)rand.Next(0, char.MaxValue);
-                        switch (rand.Next(12))
-                        {
-                            case 0:
-                                ss.AppendChar(c);
-                                break;
-                            case 1:
-                                ss.InsertAt(0, c);
-                                break;
-                            case 2:
-                                try { ss.SetAt(0, c); } catch (ArgumentOutOfRangeException) { }
-                                break;
-                            case 3:
-                                ss.Copy().Dispose();
-                                break;
-                            case 4:
-                                Assert.InRange(ss.Length, 0, ushort.MaxValue + 1);
-                                break;
-                            case 5:
-                                ss.Clear();
-                                break;
-                            case 6:
-                                try { ss.RemoveAt(0); } catch (ArgumentOutOfRangeException) { }
-                                break;
-                            case 7:
-                                Assert.False(ss.IsReadOnly());
-                                break;
-                            case 8:
-                                Marshal.ZeroFreeCoTaskMemAnsi(SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss));
-                                break;
-                            case 9:
-                                Marshal.ZeroFreeCoTaskMemUnicode(SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss));
-                                break;
-                            case 10:
-                                Marshal.ZeroFreeGlobalAllocAnsi(SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss));
-                                break;
-                            case 11:
-                                Marshal.ZeroFreeGlobalAllocUnicode(SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss));
-                                break;
-                        }
-                    }
-                })).ToArray());
+                DateTimeOffset end =
+                    DateTimeOffset.UtcNow + TimeSpan.FromSeconds(executionTimeSeconds);
+                Task.WaitAll(
+                    Enumerable
+                        .Range(0, Environment.ProcessorCount)
+                        .Select(_ =>
+                            Task.Run(() =>
+                            {
+                                var rand = new Random(Task.CurrentId.Value);
+                                while (DateTimeOffset.UtcNow < end)
+                                {
+                                    char c = (char)rand.Next(0, char.MaxValue);
+                                    switch (rand.Next(12))
+                                    {
+                                        case 0:
+                                            ss.AppendChar(c);
+                                            break;
+                                        case 1:
+                                            ss.InsertAt(0, c);
+                                            break;
+                                        case 2:
+                                            try
+                                            {
+                                                ss.SetAt(0, c);
+                                            }
+                                            catch (ArgumentOutOfRangeException) { }
+                                            break;
+                                        case 3:
+                                            ss.Copy().Dispose();
+                                            break;
+                                        case 4:
+                                            Assert.InRange(ss.Length, 0, ushort.MaxValue + 1);
+                                            break;
+                                        case 5:
+                                            ss.Clear();
+                                            break;
+                                        case 6:
+                                            try
+                                            {
+                                                ss.RemoveAt(0);
+                                            }
+                                            catch (ArgumentOutOfRangeException) { }
+                                            break;
+                                        case 7:
+                                            Assert.False(ss.IsReadOnly());
+                                            break;
+                                        case 8:
+                                            Marshal.ZeroFreeCoTaskMemAnsi(
+                                                SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss)
+                                            );
+                                            break;
+                                        case 9:
+                                            Marshal.ZeroFreeCoTaskMemUnicode(
+                                                SecureStringMarshal.SecureStringToCoTaskMemUnicode(
+                                                    ss
+                                                )
+                                            );
+                                            break;
+                                        case 10:
+                                            Marshal.ZeroFreeGlobalAllocAnsi(
+                                                SecureStringMarshal.SecureStringToGlobalAllocAnsi(
+                                                    ss
+                                                )
+                                            );
+                                            break;
+                                        case 11:
+                                            Marshal.ZeroFreeGlobalAllocUnicode(
+                                                SecureStringMarshal.SecureStringToGlobalAllocUnicode(
+                                                    ss
+                                                )
+                                            );
+                                            break;
+                                    }
+                                }
+                            })
+                        )
+                        .ToArray()
+                );
             }
         }
 

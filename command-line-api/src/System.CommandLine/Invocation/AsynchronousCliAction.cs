@@ -15,5 +15,8 @@ public abstract class AsynchronousCliAction : CliAction
     /// <param name="parseResult">Provides the parse results.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A value that can be used as the exit code for the process.</returns>
-    public abstract Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default);
+    public abstract Task<int> InvokeAsync(
+        ParseResult parseResult,
+        CancellationToken cancellationToken = default
+    );
 }

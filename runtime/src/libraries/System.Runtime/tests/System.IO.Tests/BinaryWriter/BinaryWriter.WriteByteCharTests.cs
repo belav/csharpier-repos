@@ -14,11 +14,11 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-         /// Cases Tested:
-         /// 1) Tests that BinaryWriter properly writes chars into a stream.
-         /// 2) Tests that if someone writes surrogate characters, an argument exception is thrown
-         /// 3) Casting an int to char and writing it, works.
-         /// </summary>
+        /// Cases Tested:
+        /// 1) Tests that BinaryWriter properly writes chars into a stream.
+        /// 2) Tests that if someone writes surrogate characters, an argument exception is thrown
+        /// 3) Casting an int to char and writing it, works.
+        /// </summary>
         [Fact]
         public void BinaryWriter_WriteCharTest()
         {
@@ -30,7 +30,21 @@ namespace System.IO.Tests
             int ii = 0;
 
             // [] Write a series of characters to a MemoryStream and read them back
-            chArr = new char[] { 'A', 'c', '\0', '\u2701', '$', '.', '1', 'l', '\u00FF', '\n', '\t', '\v' };
+            chArr = new char[]
+            {
+                'A',
+                'c',
+                '\0',
+                '\u2701',
+                '$',
+                '.',
+                '1',
+                'l',
+                '\u00FF',
+                '\n',
+                '\t',
+                '\v',
+            };
             for (ii = 0; ii < chArr.Length; ii++)
                 dw2.Write(chArr[ii]);
 
@@ -144,7 +158,16 @@ namespace System.IO.Tests
         public void BinaryWriter_WriteByteTest()
         {
             int ii = 0;
-            byte[] bytArr = new byte[] { byte.MinValue, byte.MaxValue, 100, 1, 10, byte.MaxValue / 2, byte.MaxValue - 100 };
+            byte[] bytArr = new byte[]
+            {
+                byte.MinValue,
+                byte.MaxValue,
+                100,
+                1,
+                10,
+                byte.MaxValue / 2,
+                byte.MaxValue - 100,
+            };
 
             // [] read/Write with Memorystream
             Stream mstr = CreateStream();
@@ -177,9 +200,23 @@ namespace System.IO.Tests
         public void BinaryWriter_WriteSByteTest()
         {
             int ii = 0;
-            sbyte[] sbArr = new sbyte[] {
-                sbyte.MinValue, sbyte.MaxValue, -100, 100, 0, sbyte.MinValue / 2, sbyte.MaxValue / 2,
-                10, 20, 30, -10, -20, -30, sbyte.MaxValue - 100 };
+            sbyte[] sbArr = new sbyte[]
+            {
+                sbyte.MinValue,
+                sbyte.MaxValue,
+                -100,
+                100,
+                0,
+                sbyte.MinValue / 2,
+                sbyte.MaxValue / 2,
+                10,
+                20,
+                30,
+                -10,
+                -20,
+                -30,
+                sbyte.MaxValue - 100,
+            };
 
             // [] read/Write with Memorystream
             Stream mstr = CreateStream();
@@ -210,9 +247,23 @@ namespace System.IO.Tests
         public void BinaryWriter_WriteSByteTest_NegativeCase()
         {
             int ii = 0;
-            sbyte[] sbArr = new sbyte[] {
-                sbyte.MinValue, sbyte.MaxValue, -100, 100, 0, sbyte.MinValue / 2, sbyte.MaxValue / 2,
-                10, 20, 30, -10, -20, -30, sbyte.MaxValue - 100 };
+            sbyte[] sbArr = new sbyte[]
+            {
+                sbyte.MinValue,
+                sbyte.MaxValue,
+                -100,
+                100,
+                0,
+                sbyte.MinValue / 2,
+                sbyte.MaxValue / 2,
+                10,
+                20,
+                30,
+                -10,
+                -20,
+                -30,
+                sbyte.MaxValue - 100,
+            };
 
             Stream mstr = CreateStream();
             BinaryWriter dw2 = new BinaryWriter(mstr);
@@ -266,8 +317,29 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteBArrayTest_Negative()
         {
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue, short.MinValue };
-            int[] iArrLargeValues = new int[] { int.MaxValue, int.MaxValue - 1, int.MaxValue / 2, int.MaxValue / 10, int.MaxValue / 100 };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+                short.MinValue,
+            };
+            int[] iArrLargeValues = new int[]
+            {
+                int.MaxValue,
+                int.MaxValue - 1,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+                int.MaxValue / 100,
+            };
             byte[] bArr = new byte[0];
             // [] ArgumentNullException for null argument
             Stream mstr = CreateStream();
@@ -290,9 +362,13 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrInvalidValues.Length; iLoop++)
             {
                 // [] ArgumentOutOfRange for negative offset
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(bArr, iArrInvalidValues[iLoop], 0));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, iArrInvalidValues[iLoop], 0)
+                );
                 // [] ArgumentOutOfRangeException for negative count
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(bArr, 0, iArrInvalidValues[iLoop]));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, 0, iArrInvalidValues[iLoop])
+                );
             }
             dw2.Dispose();
             mstr.Dispose();
@@ -302,9 +378,13 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrLargeValues.Length; iLoop++)
             {
                 // [] Offset out of range
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(bArr, iArrLargeValues[iLoop], 0));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, iArrLargeValues[iLoop], 0)
+                );
                 // [] Invalid count value
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(bArr, 0, iArrLargeValues[iLoop]));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, 0, iArrLargeValues[iLoop])
+                );
             }
             dw2.Dispose();
             mstr.Dispose();
@@ -404,8 +484,29 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteCharArrayTest_Negative()
         {
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue, short.MinValue };
-            int[] iArrLargeValues = new int[] { int.MaxValue, int.MaxValue - 1, int.MaxValue / 2, int.MaxValue / 10, int.MaxValue / 100 };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+                short.MinValue,
+            };
+            int[] iArrLargeValues = new int[]
+            {
+                int.MaxValue,
+                int.MaxValue - 1,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+                int.MaxValue / 100,
+            };
             char[] chArr = new char[1000];
 
             // [] ArgumentNullException for null argument
@@ -414,7 +515,6 @@ namespace System.IO.Tests
             Assert.Throws<ArgumentNullException>(() => dw2.Write((char[])null));
             dw2.Dispose();
             mstr.Dispose();
-
 
             // [] ArgumentNullException for null argument
             mstr = CreateStream();
@@ -430,9 +530,13 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrInvalidValues.Length; iLoop++)
             {
                 // [] ArgumentOutOfRange for negative offset
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(chArr, iArrInvalidValues[iLoop], 0));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, iArrInvalidValues[iLoop], 0)
+                );
                 // [] negative count.
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(chArr, 0, iArrInvalidValues[iLoop]));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, 0, iArrInvalidValues[iLoop])
+                );
             }
             mstr.Dispose();
             dw2.Dispose();
@@ -442,9 +546,13 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrLargeValues.Length; iLoop++)
             {
                 // [] Offset out of range
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(chArr, iArrLargeValues[iLoop], 0));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, iArrLargeValues[iLoop], 0)
+                );
                 // [] Invalid count value
-                Assert.Throws<ArgumentOutOfRangeException>(() => dw2.Write(chArr, 0, iArrLargeValues[iLoop]));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, 0, iArrLargeValues[iLoop])
+                );
             }
             mstr.Dispose();
             dw2.Dispose();
@@ -473,17 +581,34 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_WriteCharArrayTest2()
         {
-
             Stream mem = CreateStream();
             BinaryWriter writer = new BinaryWriter(mem, Encoding.Unicode);
 
             // between 55296 <= x < 56319
 
             // between 56320 <= x < 57343
-            char[] randomChars = new char[] {
-                (char)55296, (char)57297, (char)55513, (char)56624, (char)55334, (char)56957, (char)55857,
-                (char)56355, (char)56095, (char)56887, (char) 56126, (char) 56735, (char)55748, (char)56405,
-                (char)55787, (char)56707, (char) 56300, (char)56417, (char)55465, (char)56944
+            char[] randomChars = new char[]
+            {
+                (char)55296,
+                (char)57297,
+                (char)55513,
+                (char)56624,
+                (char)55334,
+                (char)56957,
+                (char)55857,
+                (char)56355,
+                (char)56095,
+                (char)56887,
+                (char)56126,
+                (char)56735,
+                (char)55748,
+                (char)56405,
+                (char)55787,
+                (char)56707,
+                (char)56300,
+                (char)56417,
+                (char)55465,
+                (char)56944,
             };
 
             writer.Write(randomChars);
@@ -579,13 +704,19 @@ namespace System.IO.Tests
 
                     char testChar;
 
-                    testChar = (char)((ushort)baseStream.ReadByte() + ((ushort)baseStream.ReadByte() << 8));
+                    testChar = (char)(
+                        (ushort)baseStream.ReadByte() + ((ushort)baseStream.ReadByte() << 8)
+                    );
                     Assert.Equal('a', testChar);
 
-                    testChar = (char)((ushort)baseStream.ReadByte() + ((ushort)baseStream.ReadByte() << 8));
+                    testChar = (char)(
+                        (ushort)baseStream.ReadByte() + ((ushort)baseStream.ReadByte() << 8)
+                    );
                     Assert.Equal('7', testChar);
 
-                    testChar = (char)((ushort)baseStream.ReadByte() + ((ushort)baseStream.ReadByte() << 8));
+                    testChar = (char)(
+                        (ushort)baseStream.ReadByte() + ((ushort)baseStream.ReadByte() << 8)
+                    );
                     Assert.Equal(char.MaxValue, testChar);
                 }
             }

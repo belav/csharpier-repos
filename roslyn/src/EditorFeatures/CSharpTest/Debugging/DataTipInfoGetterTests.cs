@@ -25,25 +25,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     {
         private static async Task TestAsync(string markup, string expectedText = null)
         {
-            await TestSpanGetterAsync(markup, async (document, position, expectedSpan) =>
-            {
-                var result = await DataTipInfoGetter.GetInfoAsync(document, position, CancellationToken.None);
+            await TestSpanGetterAsync(
+                markup,
+                async (document, position, expectedSpan) =>
+                {
+                    var result = await DataTipInfoGetter.GetInfoAsync(
+                        document,
+                        position,
+                        CancellationToken.None
+                    );
 
-                Assert.Equal(expectedSpan, result.Span);
-                Assert.Equal(expectedText, result.Text);
-            });
+                    Assert.Equal(expectedSpan, result.Span);
+                    Assert.Equal(expectedText, result.Text);
+                }
+            );
         }
 
         private static async Task TestNoDataTipAsync(string markup)
         {
-            await TestSpanGetterAsync(markup, async (document, position, expectedSpan) =>
-            {
-                var result = await DataTipInfoGetter.GetInfoAsync(document, position, CancellationToken.None);
-                Assert.True(result.IsDefault);
-            });
+            await TestSpanGetterAsync(
+                markup,
+                async (document, position, expectedSpan) =>
+                {
+                    var result = await DataTipInfoGetter.GetInfoAsync(
+                        document,
+                        position,
+                        CancellationToken.None
+                    );
+                    Assert.True(result.IsDefault);
+                }
+            );
         }
 
-        private static async Task TestSpanGetterAsync(string markup, Func<Document, int, TextSpan?, Task> continuation)
+        private static async Task TestSpanGetterAsync(
+            string markup,
+            Func<Document, int, TextSpan?, Task> continuation
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(markup);
             var testHostDocument = workspace.Documents.Single();
@@ -55,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await continuation(
                 workspace.CurrentSolution.Projects.First().Documents.First(),
                 position,
-                expectedSpan);
+                expectedSpan
+            );
         }
 
         [Fact]
@@ -80,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|Sys$$tem|].Console.WriteLine(args);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -95,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|System$$.Console|].WriteLine(args);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -110,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|System.$$Console|].WriteLine(args);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -125,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|System.Con$$sole|].WriteLine(args);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -140,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|System.Console.Wri$$teLine|](args);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -155,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|System.Console.WriteLine|]$$(args);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -170,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     System.Console.WriteLine($$[|args|]);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -185,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|System.Console.WriteLine|](args$$);
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -200,7 +226,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|va$$r|] v = 0;
                   }
                 }
-                """, "int");
+                """,
+                "int"
+            );
         }
 
         [Fact]
@@ -215,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     [|in$$t|] i = 0;
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -230,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     int [|$$i|] = 0;
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539910")]
@@ -245,7 +275,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     int i = [|4$$2|];
                   }
                 }
-                """, "int");
+                """,
+                "int"
+            );
         }
 
         [Fact]
@@ -260,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     int i = 42;
                   }$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -274,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942699")]
@@ -294,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -306,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     event System.Action [|$$E|];
                 }
-                """);
+                """
+            );
 
             await TestAsync(
                 """
@@ -318,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         remove { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -330,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     int [|$$M|]() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -343,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 {
                     void M<T, [|$$U|]>() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -356,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 static class Static
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540921")]
@@ -373,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546328")]
@@ -403,7 +444,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -418,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         return from [|$$a|] in args select a;
                     }
                 }
-                """);
+                """
+            );
             await TestAsync( // Let
                 """
                 class C
@@ -428,7 +471,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         return from a in args let [|$$b|] = "END" select a + b;
                     }
                 }
-                """);
+                """
+            );
             await TestAsync( // Join
                 """
                 class C
@@ -438,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         return from a in args join [|$$b|] in args on a equals b;
                     }
                 }
-                """);
+                """
+            );
             await TestAsync( // Join Into
                 """
                 class C
@@ -448,7 +493,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         return from a in args join b in args on a equals b into [|$$c|];
                     }
                 }
-                """);
+                """
+            );
             await TestAsync( // Continuation
                 """
                 class C
@@ -458,7 +504,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                         return from a in args select a into [|$$b|] from c in b select c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1077843")]
@@ -557,9 +604,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 }}
                 """;
 
-            await TestAsync(string.Format(sourceTemplate, "/*1*/[|$$Me|]/*2*/?./*3*/B/*4*/?./*5*/C/*6*/"));
-            await TestAsync(string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/$$B|]/*4*/?./*5*/C/*6*/"));
-            await TestAsync(string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/B/*4*/?./*5*/$$C|]/*6*/"));
+            await TestAsync(
+                string.Format(sourceTemplate, "/*1*/[|$$Me|]/*2*/?./*3*/B/*4*/?./*5*/C/*6*/")
+            );
+            await TestAsync(
+                string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/$$B|]/*4*/?./*5*/C/*6*/")
+            );
+            await TestAsync(
+                string.Format(sourceTemplate, "/*1*/[|Me/*2*/?./*3*/B/*4*/?./*5*/$$C|]/*6*/")
+            );
         }
     }
 }

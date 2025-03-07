@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Logging
         private const string NullFormat = "[null]";
 
         private static int s_count;
-        private static readonly ConcurrentDictionary<string, LogValuesFormatter> s_formatters = new ConcurrentDictionary<string, LogValuesFormatter>();
+        private static readonly ConcurrentDictionary<string, LogValuesFormatter> s_formatters =
+            new ConcurrentDictionary<string, LogValuesFormatter>();
 
         private readonly LogValuesFormatter? _formatter;
         private readonly object?[]? _values;
@@ -41,11 +42,14 @@ namespace Microsoft.Extensions.Logging
                 }
                 else
                 {
-                    _formatter = s_formatters.GetOrAdd(format, f =>
-                    {
-                        Interlocked.Increment(ref s_count);
-                        return new LogValuesFormatter(f);
-                    });
+                    _formatter = s_formatters.GetOrAdd(
+                        format,
+                        f =>
+                        {
+                            Interlocked.Increment(ref s_count);
+                            return new LogValuesFormatter(f);
+                        }
+                    );
                 }
             }
             else
@@ -68,7 +72,7 @@ namespace Microsoft.Extensions.Logging
 
                 if (index == Count - 1)
                 {
-                    return new KeyValuePair<string, object?> ("{OriginalFormat}", _originalMessage);
+                    return new KeyValuePair<string, object?>("{OriginalFormat}", _originalMessage);
                 }
 
                 return _formatter!.GetValue(_values!, index);

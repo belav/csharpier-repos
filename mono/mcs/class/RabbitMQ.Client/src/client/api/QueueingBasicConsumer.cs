@@ -55,9 +55,8 @@
 //
 //---------------------------------------------------------------------------
 using System;
-
-using RabbitMQ.Util;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Util;
 
 namespace RabbitMQ.Client
 {
@@ -87,10 +86,10 @@ namespace RabbitMQ.Client
     ///	IModel channel = ...;
     ///	QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
     ///	channel.BasicConsume(queueName, null, consumer);
-    ///	
+    ///
     ///	// At this point, messages will be being asynchronously delivered,
     ///	// and will be queueing up in consumer.Queue.
-    ///	
+    ///
     ///	while (true) {
     ///	    try {
     ///	        BasicDeliverEventArgs e = (BasicDeliverEventArgs) consumer.Queue.Dequeue();
@@ -111,12 +110,14 @@ namespace RabbitMQ.Client
         ///<summary>Creates a fresh QueueingBasicConsumer,
         ///initialising the Model property to null and the Queue
         ///property to a fresh SharedQueue.</summary>
-        public QueueingBasicConsumer() : this(null) { }
+        public QueueingBasicConsumer()
+            : this(null) { }
 
         ///<summary>Creates a fresh QueueingBasicConsumer, with Model
         ///set to the argument, and Queue set to a fresh
         ///SharedQueue.</summary>
-        public QueueingBasicConsumer(IModel model) : this(model, new SharedQueue()) { }
+        public QueueingBasicConsumer(IModel model)
+            : this(model, new SharedQueue()) { }
 
         ///<summary>Creates a fresh QueueingBasicConsumer,
         ///initialising the Model and Queue properties to the given
@@ -146,13 +147,15 @@ namespace RabbitMQ.Client
         ///HandleBasicDeliver implementation, building a
         ///BasicDeliverEventArgs instance and placing it in the
         ///Queue.</summary>
-        public override void HandleBasicDeliver(string consumerTag,
-                                                ulong deliveryTag,
-                                                bool redelivered,
-                                                string exchange,
-                                                string routingKey,
-                                                IBasicProperties properties,
-                                                byte[] body)
+        public override void HandleBasicDeliver(
+            string consumerTag,
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            IBasicProperties properties,
+            byte[] body
+        )
         {
             BasicDeliverEventArgs e = new BasicDeliverEventArgs();
             e.ConsumerTag = consumerTag;

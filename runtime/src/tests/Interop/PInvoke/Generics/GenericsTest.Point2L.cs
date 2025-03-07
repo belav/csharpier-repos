@@ -29,7 +29,10 @@ unsafe partial class GenericsNative
     public static extern Point2<long> AddPoint2Ls(Point2<long>* pValues, int count);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point2<long> AddPoint2Ls([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<long>[] pValues, int count);
+    public static extern Point2<long> AddPoint2Ls(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<long>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point2<long> AddPoint2Ls(in Point2<long> pValues, int count);
@@ -64,17 +67,21 @@ unsafe partial class GenericsTest
         Assert.Equal(result.e00, 2L);
         Assert.Equal(result.e01, 4L);
 
-        GenericsNative.Point2<long>[] values = new GenericsNative.Point2<long>[] {
+        GenericsNative.Point2<long>[] values = new GenericsNative.Point2<long>[]
+        {
             value,
             value2,
             value3,
             *value4,
-            value5
+            value5,
         };
 
         fixed (GenericsNative.Point2<long>* pValues = &values[0])
         {
-            GenericsNative.Point2<long> result2 = GenericsNative.AddPoint2Ls(pValues, values.Length);
+            GenericsNative.Point2<long> result2 = GenericsNative.AddPoint2Ls(
+                pValues,
+                values.Length
+            );
             Assert.Equal(result2.e00, 5l);
             Assert.Equal(result2.e01, 10l);
         }
@@ -83,7 +90,10 @@ unsafe partial class GenericsTest
         Assert.Equal(result3.e00, 5l);
         Assert.Equal(result3.e01, 10l);
 
-        GenericsNative.Point2<long> result4 = GenericsNative.AddPoint2Ls(in values[0], values.Length);
+        GenericsNative.Point2<long> result4 = GenericsNative.AddPoint2Ls(
+            in values[0],
+            values.Length
+        );
         Assert.Equal(result4.e00, 5l);
         Assert.Equal(result4.e01, 10l);
     }

@@ -1,18 +1,17 @@
 using System;
 
-struct BB
-{}
+struct BB { }
 
 public class X
 {
-	public static void Main ()
-	{
-		// Reduced expression statements
-		
-		new BB? ();
-		new float();
+    public static void Main()
+    {
+        // Reduced expression statements
 
-		Action a = () => new float();
-		a ();
-	}
+        new BB?();
+        new float();
+
+        Action a = () => new float();
+        a();
+    }
 }

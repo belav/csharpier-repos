@@ -17,29 +17,33 @@ namespace System.ServiceModel.Activities
     using System.ServiceModel.Activation;
     using System.ServiceModel.Activities.Configuration;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Activities.Diagnostics;
     using System.ServiceModel.Activities.Dispatcher;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Activities.Diagnostics;
     using System.Xml;
     using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
     public class WorkflowServiceHost : ServiceHostBase
     {
-        static readonly XName mexContractXName = XName.Get(ServiceMetadataBehavior.MexContractName, ServiceMetadataBehavior.MexContractNamespace);
+        static readonly XName mexContractXName = XName.Get(
+            ServiceMetadataBehavior.MexContractName,
+            ServiceMetadataBehavior.MexContractNamespace
+        );
         static readonly Type mexBehaviorType = typeof(ServiceMetadataBehavior);
         static readonly TimeSpan defaultPersistTimeout = TimeSpan.FromSeconds(30);
         static readonly TimeSpan defaultTrackTimeout = TimeSpan.FromSeconds(30);
         static readonly Type baseActivityType = typeof(Activity);
         static readonly Type correlationQueryBehaviorType = typeof(CorrelationQueryBehavior);
-        static readonly Type bufferedReceiveServiceBehaviorType = typeof(BufferedReceiveServiceBehavior);
+        static readonly Type bufferedReceiveServiceBehaviorType =
+            typeof(BufferedReceiveServiceBehavior);
 
         WorkflowServiceHostExtensions workflowExtensions;
         DurableInstanceManager durableInstanceManager;
 
         WorkflowDefinitionProvider workflowDefinitionProvider;
-    
+
         Activity activity;
         WorkflowService serviceDefinition;
         IDictionary<XName, ContractDescription> inferredContracts;
@@ -49,10 +53,13 @@ namespace System.ServiceModel.Activities
         TimeSpan idleTimeToPersist;
         TimeSpan idleTimeToUnload;
 
-        WorkflowServiceHostPerformanceCounters workflowServiceHostPerformanceCounters; 
+        WorkflowServiceHostPerformanceCounters workflowServiceHostPerformanceCounters;
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors, 
-            Justification = "Based on prior are from WCF3: By design, don't want to complicate ServiceHost state model")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "Based on prior are from WCF3: By design, don't want to complicate ServiceHost state model"
+        )]
         public WorkflowServiceHost(object serviceImplementation, params Uri[] baseAddresses)
             : base()
         {
@@ -70,15 +77,20 @@ namespace System.ServiceModel.Activities
                 Activity activity = serviceImplementation as Activity;
                 if (activity == null)
                 {
-                    throw FxTrace.Exception.Argument("serviceImplementation", SR.InvalidServiceImplementation);
+                    throw FxTrace.Exception.Argument(
+                        "serviceImplementation",
+                        SR.InvalidServiceImplementation
+                    );
                 }
                 InitializeFromConstructor(activity, baseAddresses);
             }
         }
 
-
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors, 
-            Justification = "Based on prior are from WCF3: By design, don't want to complicate ServiceHost state model")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "Based on prior are from WCF3: By design, don't want to complicate ServiceHost state model"
+        )]
         public WorkflowServiceHost(Activity activity, params Uri[] baseAddresses)
             : base()
         {
@@ -90,8 +102,11 @@ namespace System.ServiceModel.Activities
             InitializeFromConstructor(activity, baseAddresses);
         }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
-            Justification = "Based on prior art from WCF 3.0: By design, don't want to complicate ServiceHost state model")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "Based on prior art from WCF 3.0: By design, don't want to complicate ServiceHost state model"
+        )]
         public WorkflowServiceHost(WorkflowService serviceDefinition, params Uri[] baseAddresses)
             : base()
         {
@@ -101,11 +116,13 @@ namespace System.ServiceModel.Activities
             }
 
             InitializeFromConstructor(serviceDefinition, baseAddresses);
-      
         }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
-            Justification = "Based on prior art from WCF 3.0: By design, don't want to complicate ServiceHost state model")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "Based on prior art from WCF 3.0: By design, don't want to complicate ServiceHost state model"
+        )]
         protected WorkflowServiceHost()
         {
             InitializeFromConstructor((WorkflowService)null);
@@ -113,83 +130,51 @@ namespace System.ServiceModel.Activities
 
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
 
         public WorkflowInstanceExtensionManager WorkflowExtensions
         {
-            get
-            {
-                return this.workflowExtensions;
-            }
+            get { return this.workflowExtensions; }
         }
 
         public DurableInstancingOptions DurableInstancingOptions
         {
-            get
-            {
-                return this.durableInstanceManager.DurableInstancingOptions;
-            }
+            get { return this.durableInstanceManager.DurableInstancingOptions; }
         }
 
         public ICollection<WorkflowService> SupportedVersions
         {
-            get
-            {
-                return this.workflowDefinitionProvider.SupportedVersions;
-            }
+            get { return this.workflowDefinitionProvider.SupportedVersions; }
         }
 
-        internal XName ServiceName
-        {
-            get;
-            set;
-        }
+        internal XName ServiceName { get; set; }
 
-        internal TimeSpan PersistTimeout
-        {
-            get;
-            set;
-        }
+        internal TimeSpan PersistTimeout { get; set; }
 
-        internal TimeSpan TrackTimeout
-        {
-            get;
-            set;
-        }
+        internal TimeSpan TrackTimeout { get; set; }
 
-        // 
-        internal TimeSpan FilterResumeTimeout
-        {
-            get;
-            set;
-        }
+        //
+        internal TimeSpan FilterResumeTimeout { get; set; }
 
         internal DurableInstanceManager DurableInstanceManager
         {
-            get
-            {
-                return this.durableInstanceManager;
-            }
+            get { return this.durableInstanceManager; }
         }
 
-        internal bool IsLoadTransactionRequired
-        {
-            get;
-            private set;
-        }
+        internal bool IsLoadTransactionRequired { get; private set; }
 
         // set by WorkflowUnhandledExceptionBehavior.ApplyDispatchBehavior, used by WorkflowServiceInstance.UnhandledExceptionPolicy
         internal WorkflowUnhandledExceptionAction UnhandledExceptionAction
         {
             get { return this.unhandledExceptionAction; }
-            set 
+            set
             {
-                Fx.Assert(WorkflowUnhandledExceptionActionHelper.IsDefined(value), "Undefined WorkflowUnhandledExceptionAction");
-                this.unhandledExceptionAction = value; 
+                Fx.Assert(
+                    WorkflowUnhandledExceptionActionHelper.IsDefined(value),
+                    "Undefined WorkflowUnhandledExceptionAction"
+                );
+                this.unhandledExceptionAction = value;
             }
         }
 
@@ -197,19 +182,19 @@ namespace System.ServiceModel.Activities
         internal TimeSpan IdleTimeToPersist
         {
             get { return this.idleTimeToPersist; }
-            set 
+            set
             {
                 Fx.Assert(value >= TimeSpan.Zero, "IdleTimeToPersist cannot be less than zero");
-                this.idleTimeToPersist = value; 
+                this.idleTimeToPersist = value;
             }
         }
         internal TimeSpan IdleTimeToUnload
         {
             get { return this.idleTimeToUnload; }
-            set 
+            set
             {
                 Fx.Assert(value >= TimeSpan.Zero, "IdleTimeToUnload cannot be less than zero");
-                this.idleTimeToUnload = value; 
+                this.idleTimeToUnload = value;
             }
         }
 
@@ -219,36 +204,30 @@ namespace System.ServiceModel.Activities
             {
                 lock (this.ThisLock)
                 {
-                    return this.State == CommunicationState.Created || this.State == CommunicationState.Opening;
+                    return this.State == CommunicationState.Created
+                        || this.State == CommunicationState.Opening;
                 }
             }
         }
 
         internal WorkflowServiceHostPerformanceCounters WorkflowServiceHostPerformanceCounters
         {
-            get
-            {
-                return this.workflowServiceHostPerformanceCounters;
-            }
+            get { return this.workflowServiceHostPerformanceCounters; }
         }
-        
-        internal bool OverrideSiteName
-        {
-            get;
-            set;
-        }
+
+        internal bool OverrideSiteName { get; set; }
 
         void InitializeFromConstructor(Activity activity, params Uri[] baseAddresses)
         {
-            WorkflowService serviceDefinition = new WorkflowService 
-            {
-                Body = activity
-            };
+            WorkflowService serviceDefinition = new WorkflowService { Body = activity };
 
             InitializeFromConstructor(serviceDefinition, baseAddresses);
         }
 
-        void InitializeFromConstructor(WorkflowService serviceDefinition, params Uri[] baseAddresses)
+        void InitializeFromConstructor(
+            WorkflowService serviceDefinition,
+            params Uri[] baseAddresses
+        )
         {
             // first initialize some values to their defaults
             this.idleTimeToPersist = WorkflowIdleBehavior.defaultTimeToPersist;
@@ -261,7 +240,8 @@ namespace System.ServiceModel.Activities
             // unregister its BookmarkScope, which will cause key disassociation. KB2669774.
             if (AppSettings.DefaultAutomaticInstanceKeyDisassociation)
             {
-                DisassociateInstanceKeysExtension extension = new DisassociateInstanceKeysExtension();
+                DisassociateInstanceKeysExtension extension =
+                    new DisassociateInstanceKeysExtension();
                 extension.AutomaticDisassociationEnabled = true;
                 this.workflowExtensions.Add(extension);
             }
@@ -272,29 +252,60 @@ namespace System.ServiceModel.Activities
             }
             if (serviceDefinition != null)
             {
-                this.workflowDefinitionProvider = new WorkflowDefinitionProvider(serviceDefinition, this);
-                InitializeDescription(serviceDefinition, new UriSchemeKeyedCollection(baseAddresses));
+                this.workflowDefinitionProvider = new WorkflowDefinitionProvider(
+                    serviceDefinition,
+                    this
+                );
+                InitializeDescription(
+                    serviceDefinition,
+                    new UriSchemeKeyedCollection(baseAddresses)
+                );
             }
-            this.durableInstanceManager = new DurableInstanceManager(this);            
+            this.durableInstanceManager = new DurableInstanceManager(this);
 
             if (TD.CreateWorkflowServiceHostStopIsEnabled())
             {
                 TD.CreateWorkflowServiceHostStop();
             }
 
-            this.workflowServiceHostPerformanceCounters = new WorkflowServiceHostPerformanceCounters(this);
+            this.workflowServiceHostPerformanceCounters =
+                new WorkflowServiceHostPerformanceCounters(this);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DefaultParametersShouldNotBeUsed, Justification = "Temporary suppression - to be addressed by DCR 127467")]
-        public ServiceEndpoint AddServiceEndpoint(XName serviceContractName, Binding binding, string address,
-            Uri listenUri = null, string behaviorConfigurationName = null)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DefaultParametersShouldNotBeUsed,
+            Justification = "Temporary suppression - to be addressed by DCR 127467"
+        )]
+        public ServiceEndpoint AddServiceEndpoint(
+            XName serviceContractName,
+            Binding binding,
+            string address,
+            Uri listenUri = null,
+            string behaviorConfigurationName = null
+        )
         {
-            return AddServiceEndpoint(serviceContractName, binding, new Uri(address, UriKind.RelativeOrAbsolute), listenUri, behaviorConfigurationName);
+            return AddServiceEndpoint(
+                serviceContractName,
+                binding,
+                new Uri(address, UriKind.RelativeOrAbsolute),
+                listenUri,
+                behaviorConfigurationName
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DefaultParametersShouldNotBeUsed, Justification = "Temporary suppression - to be addressed by DCR 127467")]
-        public ServiceEndpoint AddServiceEndpoint(XName serviceContractName, Binding binding, Uri address,
-            Uri listenUri = null, string behaviorConfigurationName = null)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DefaultParametersShouldNotBeUsed,
+            Justification = "Temporary suppression - to be addressed by DCR 127467"
+        )]
+        public ServiceEndpoint AddServiceEndpoint(
+            XName serviceContractName,
+            Binding binding,
+            Uri address,
+            Uri listenUri = null,
+            string behaviorConfigurationName = null
+        )
         {
             if (binding == null)
             {
@@ -306,12 +317,27 @@ namespace System.ServiceModel.Activities
             }
 
             Uri via = this.MakeAbsoluteUri(address, binding);
-            return AddServiceEndpointCore(serviceContractName, binding, new EndpointAddress(via), listenUri, behaviorConfigurationName);
+            return AddServiceEndpointCore(
+                serviceContractName,
+                binding,
+                new EndpointAddress(via),
+                listenUri,
+                behaviorConfigurationName
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DefaultParametersShouldNotBeUsed, Justification = "Temporary suppression - to be addressed by DCR 127467")]
-        ServiceEndpoint AddServiceEndpointCore(XName serviceContractName, Binding binding, EndpointAddress address,
-            Uri listenUri = null, string behaviorConfigurationName = null)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DefaultParametersShouldNotBeUsed,
+            Justification = "Temporary suppression - to be addressed by DCR 127467"
+        )]
+        ServiceEndpoint AddServiceEndpointCore(
+            XName serviceContractName,
+            Binding binding,
+            EndpointAddress address,
+            Uri listenUri = null,
+            string behaviorConfigurationName = null
+        )
         {
             if (serviceContractName == null)
             {
@@ -319,13 +345,19 @@ namespace System.ServiceModel.Activities
             }
             if (this.inferredContracts == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                    SR.ContractNotFoundInAddServiceEndpoint(serviceContractName.LocalName, serviceContractName.NamespaceName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.ContractNotFoundInAddServiceEndpoint(
+                            serviceContractName.LocalName,
+                            serviceContractName.NamespaceName
+                        )
+                    )
+                );
             }
 
             ServiceEndpoint serviceEndpoint;
             ContractDescription description;
-            
+
             ContractInferenceHelper.ProvideDefaultNamespace(ref serviceContractName);
 
             if (this.inferredContracts.TryGetValue(serviceContractName, out description))
@@ -334,23 +366,38 @@ namespace System.ServiceModel.Activities
 
                 if (!string.IsNullOrEmpty(behaviorConfigurationName))
                 {
-                    ConfigLoader.LoadChannelBehaviors(behaviorConfigurationName, null, serviceEndpoint.Behaviors);
+                    ConfigLoader.LoadChannelBehaviors(
+                        behaviorConfigurationName,
+                        null,
+                        serviceEndpoint.Behaviors
+                    );
                 }
             }
-            else if (serviceContractName == mexContractXName)  // Special case for mex endpoint
+            else if (serviceContractName == mexContractXName) // Special case for mex endpoint
             {
                 if (!this.Description.Behaviors.Contains(mexBehaviorType))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(
-                        SR.ServiceMetadataBehaviorNotFoundForServiceMetadataEndpoint(this.Description.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.ServiceMetadataBehaviorNotFoundForServiceMetadataEndpoint(
+                                this.Description.Name
+                            )
+                        )
+                    );
                 }
 
                 serviceEndpoint = new ServiceMetadataEndpoint(binding, address);
             }
             else
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                    SR.ContractNotFoundInAddServiceEndpoint(serviceContractName.LocalName, serviceContractName.NamespaceName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.ContractNotFoundInAddServiceEndpoint(
+                            serviceContractName.LocalName,
+                            serviceContractName.NamespaceName
+                        )
+                    )
+                );
             }
 
             if (listenUri != null)
@@ -363,7 +410,11 @@ namespace System.ServiceModel.Activities
 
             if (TD.ServiceEndpointAddedIsEnabled())
             {
-                TD.ServiceEndpointAdded(address.Uri.ToString(), binding.GetType().ToString(), serviceEndpoint.Contract.Name);
+                TD.ServiceEndpointAdded(
+                    address.Uri.ToString(),
+                    binding.GetType().ToString(),
+                    serviceEndpoint.Contract.Name
+                );
             }
 
             return serviceEndpoint;
@@ -371,22 +422,40 @@ namespace System.ServiceModel.Activities
 
         // Duplicate public AddServiceEndpoint methods from the base class
         // This is to ensure that base class methods with string are not hidden by derived class methods with XName
-        public new ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, string address)
+        public new ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            string address
+        )
         {
             return base.AddServiceEndpoint(implementedContract, binding, address);
         }
 
-        public new ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, Uri address)
+        public new ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            Uri address
+        )
         {
             return base.AddServiceEndpoint(implementedContract, binding, address);
         }
 
-        public new ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, string address, Uri listenUri)
+        public new ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            string address,
+            Uri listenUri
+        )
         {
             return base.AddServiceEndpoint(implementedContract, binding, address, listenUri);
         }
 
-        public new ServiceEndpoint AddServiceEndpoint(string implementedContract, Binding binding, Uri address, Uri listenUri)
+        public new ServiceEndpoint AddServiceEndpoint(
+            string implementedContract,
+            Binding binding,
+            Uri address,
+            Uri listenUri
+        )
         {
             return base.AddServiceEndpoint(implementedContract, binding, address, listenUri);
         }
@@ -395,19 +464,30 @@ namespace System.ServiceModel.Activities
         {
             if (!endpoint.IsSystemEndpoint)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotUseAddServiceEndpointOverloadForWorkflowServices));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CannotUseAddServiceEndpointOverloadForWorkflowServices
+                    )
+                );
             }
-            
-            base.AddServiceEndpoint(endpoint);
-        }        
 
-        internal override void AddDefaultEndpoints(Binding defaultBinding, List<ServiceEndpoint> defaultEndpoints)
+            base.AddServiceEndpoint(endpoint);
+        }
+
+        internal override void AddDefaultEndpoints(
+            Binding defaultBinding,
+            List<ServiceEndpoint> defaultEndpoints
+        )
         {
             if (this.inferredContracts != null)
             {
                 foreach (XName contractName in this.inferredContracts.Keys)
                 {
-                    ServiceEndpoint endpoint = AddServiceEndpoint(contractName, defaultBinding, String.Empty);
+                    ServiceEndpoint endpoint = AddServiceEndpoint(
+                        contractName,
+                        defaultBinding,
+                        String.Empty
+                    );
                     ConfigLoader.LoadDefaultEndpointBehaviors(endpoint);
                     AddCorrelationQueryBehaviorToServiceEndpoint(endpoint);
                     defaultEndpoints.Add(endpoint);
@@ -415,14 +495,22 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, MessageId = "0#", Justification = "This is defined by the ServiceHost base class")]
-        protected override ServiceDescription CreateDescription(out IDictionary<string, ContractDescription> implementedContracts)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            MessageId = "0#",
+            Justification = "This is defined by the ServiceHost base class"
+        )]
+        protected override ServiceDescription CreateDescription(
+            out IDictionary<string, ContractDescription> implementedContracts
+        )
         {
             Fx.AssertAndThrow(this.serviceDefinition != null, "serviceDefinition is null");
 
             this.activity = this.serviceDefinition.Body;
 
-            Dictionary<string, ContractDescription> result = new Dictionary<string, ContractDescription>();
+            Dictionary<string, ContractDescription> result =
+                new Dictionary<string, ContractDescription>();
 
             // Note: We do not check whether this.inferredContracts == null || this.inferredContracts.Count == 0,
             // because we need to support hosting workflow with zero contract.
@@ -436,7 +524,9 @@ namespace System.ServiceModel.Activities
                     {
                         if (result.ContainsKey(contract.ConfigurationName))
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DifferentContractsSameConfigName));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(SR.DifferentContractsSameConfigName)
+                            );
                         }
                         result.Add(contract.ConfigurationName, contract);
                     }
@@ -447,12 +537,18 @@ namespace System.ServiceModel.Activities
 
             // Currently, only WorkflowService has CorrelationQueries property
             this.correlationQueries = this.serviceDefinition.CorrelationQueries;
-            ServiceDescription serviceDescription = this.serviceDefinition.GetEmptyServiceDescription();
-            serviceDescription.Behaviors.Add(new WorkflowServiceBehavior(this.workflowDefinitionProvider));
+            ServiceDescription serviceDescription =
+                this.serviceDefinition.GetEmptyServiceDescription();
+            serviceDescription.Behaviors.Add(
+                new WorkflowServiceBehavior(this.workflowDefinitionProvider)
+            );
             return serviceDescription;
         }
 
-        void InitializeDescription(WorkflowService serviceDefinition, UriSchemeKeyedCollection baseAddresses)
+        void InitializeDescription(
+            WorkflowService serviceDefinition,
+            UriSchemeKeyedCollection baseAddresses
+        )
         {
             Fx.Assert(serviceDefinition != null, "caller must verify");
 
@@ -463,13 +559,27 @@ namespace System.ServiceModel.Activities
             {
                 if (endpoint.Binding == null)
                 {
-                    string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(endpoint.Name);
-                    string contractName = ContractValidationHelper.GetErrorMessageEndpointServiceContractName(endpoint.ServiceContractName);
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MissingBindingInEndpoint(endpointName, contractName)));
+                    string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(
+                        endpoint.Name
+                    );
+                    string contractName =
+                        ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
+                            endpoint.ServiceContractName
+                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.MissingBindingInEndpoint(endpointName, contractName)
+                        )
+                    );
                 }
 
-                ServiceEndpoint serviceEndpoint = AddServiceEndpointCore(endpoint.ServiceContractName, endpoint.Binding,
-                        endpoint.GetAddress(this), endpoint.ListenUri, endpoint.BehaviorConfigurationName);
+                ServiceEndpoint serviceEndpoint = AddServiceEndpointCore(
+                    endpoint.ServiceContractName,
+                    endpoint.Binding,
+                    endpoint.GetAddress(this),
+                    endpoint.ListenUri,
+                    endpoint.BehaviorConfigurationName
+                );
 
                 if (!string.IsNullOrEmpty(endpoint.Name))
                 {
@@ -481,7 +591,9 @@ namespace System.ServiceModel.Activities
 
             this.PersistTimeout = defaultPersistTimeout;
             this.TrackTimeout = defaultTrackTimeout;
-            this.FilterResumeTimeout = TimeSpan.FromSeconds(AppSettings.FilterResumeTimeoutInSeconds);
+            this.FilterResumeTimeout = TimeSpan.FromSeconds(
+                AppSettings.FilterResumeTimeoutInSeconds
+            );
         }
 
         protected override void InitializeRuntime()
@@ -492,26 +604,34 @@ namespace System.ServiceModel.Activities
                 this.SetScopeName();
                 if (this.DurableInstancingOptions.ScopeName == null)
                 {
-                    this.DurableInstancingOptions.ScopeName = XNamespace.Get(this.Description.Namespace).GetName(this.Description.Name);
+                    this.DurableInstancingOptions.ScopeName = XNamespace
+                        .Get(this.Description.Namespace)
+                        .GetName(this.Description.Name);
                 }
             }
 
             base.InitializeRuntime();
 
             this.WorkflowServiceHostPerformanceCounters.InitializePerformanceCounters();
-            
-            this.ServiceName = XNamespace.Get(this.Description.Namespace).GetName(this.Description.Name);
+
+            this.ServiceName = XNamespace
+                .Get(this.Description.Namespace)
+                .GetName(this.Description.Name);
 
             // add a host-wide SendChannelCache (with default settings) if one doesn't exist
             this.workflowExtensions.EnsureChannelCache();
 
             // add a host-wide (free-threaded) CorrelationExtension based on our ServiceName
-            this.WorkflowExtensions.Add(new CorrelationExtension(this.DurableInstancingOptions.ScopeName));
+            this.WorkflowExtensions.Add(
+                new CorrelationExtension(this.DurableInstancingOptions.ScopeName)
+            );
 
             this.WorkflowExtensions.MakeReadOnly();
 
             // now calculate if IsLoadTransactionRequired
-            this.IsLoadTransactionRequired = WorkflowServiceInstance.IsLoadTransactionRequired(this);
+            this.IsLoadTransactionRequired = WorkflowServiceInstance.IsLoadTransactionRequired(
+                this
+            );
 
             if (this.serviceDefinition != null)
             {
@@ -525,7 +645,11 @@ namespace System.ServiceModel.Activities
             this.durableInstanceManager.Open(timeout);
         }
 
-        internal override IAsyncResult BeginAfterInitializeRuntime(TimeSpan timeout, AsyncCallback callback, object state)
+        internal override IAsyncResult BeginAfterInitializeRuntime(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.durableInstanceManager.BeginOpen(timeout, callback, state);
         }
@@ -546,7 +670,11 @@ namespace System.ServiceModel.Activities
             this.workflowServiceHostPerformanceCounters.Dispose();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult(this, timeout, callback, state);
         }
@@ -567,7 +695,10 @@ namespace System.ServiceModel.Activities
 
         internal void FaultServiceHostIfNecessary(Exception exception)
         {
-            if (exception is InstancePersistenceException && !(exception is InstancePersistenceCommandException))
+            if (
+                exception is InstancePersistenceException
+                && !(exception is InstancePersistenceCommandException)
+            )
             {
                 this.Fault(exception);
             }
@@ -577,6 +708,7 @@ namespace System.ServiceModel.Activities
         {
             return base.OnBeginClose(timeout, callback, state);
         }
+
         void EndHostClose(IAsyncResult result)
         {
             base.OnEndClose(result);
@@ -587,13 +719,21 @@ namespace System.ServiceModel.Activities
             Fx.Assert(serviceEndpoint != null, "Argument cannot be null!");
             Fx.Assert(serviceEndpoint.Contract != null, "ServiceEndpoint must have a contract!");
             Fx.Assert(this.serviceDefinition != null, "Missing WorkflowService!");
-            Fx.Assert(!serviceEndpoint.Behaviors.Contains(correlationQueryBehaviorType),
-                "ServiceEndpoint should not have CorrelationQueryBehavior before this point!");
+            Fx.Assert(
+                !serviceEndpoint.Behaviors.Contains(correlationQueryBehaviorType),
+                "ServiceEndpoint should not have CorrelationQueryBehavior before this point!"
+            );
 
-            XName endpointContractName = XName.Get(serviceEndpoint.Contract.Name, serviceEndpoint.Contract.Namespace);
+            XName endpointContractName = XName.Get(
+                serviceEndpoint.Contract.Name,
+                serviceEndpoint.Contract.Namespace
+            );
 
             Collection<CorrelationQuery> queries;
-            if (this.correlationQueries != null && this.correlationQueries.TryGetValue(endpointContractName, out queries))
+            if (
+                this.correlationQueries != null
+                && this.correlationQueries.TryGetValue(endpointContractName, out queries)
+            )
             {
                 // Filter out duplicate CorrelationQueries in the collection.
                 // Currently, we only do reference comparison and Where message filter comparison.
@@ -612,13 +752,23 @@ namespace System.ServiceModel.Activities
                         }
                     }
                 }
-                serviceEndpoint.Behaviors.Add(new CorrelationQueryBehavior(uniqueQueries) { ServiceContractName = endpointContractName });
+                serviceEndpoint.Behaviors.Add(
+                    new CorrelationQueryBehavior(uniqueQueries)
+                    {
+                        ServiceContractName = endpointContractName,
+                    }
+                );
             }
             else if (CorrelationQueryBehavior.BindingHasDefaultQueries(serviceEndpoint.Binding))
             {
                 if (!serviceEndpoint.Behaviors.Contains(typeof(CorrelationQueryBehavior)))
                 {
-                    serviceEndpoint.Behaviors.Add(new CorrelationQueryBehavior(new Collection<CorrelationQuery>()) { ServiceContractName = endpointContractName });
+                    serviceEndpoint.Behaviors.Add(
+                        new CorrelationQueryBehavior(new Collection<CorrelationQuery>())
+                        {
+                            ServiceContractName = endpointContractName,
+                        }
+                    );
                 }
             }
         }
@@ -627,7 +777,8 @@ namespace System.ServiceModel.Activities
         {
             Fx.Assert(this.Description != null, "ServiceDescription cannot be null");
 
-            Dictionary<Type, ContractDescription> contractDescriptionDictionary = new Dictionary<Type, ContractDescription>();
+            Dictionary<Type, ContractDescription> contractDescriptionDictionary =
+                new Dictionary<Type, ContractDescription>();
             foreach (ServiceEndpoint serviceEndpoint in this.Description.Endpoints)
             {
                 if (this.serviceDefinition.AllowBufferedReceive)
@@ -649,18 +800,27 @@ namespace System.ServiceModel.Activities
                 if (serviceEndpoint is WorkflowHostingEndpoint)
                 {
                     ContractDescription contract;
-                    if (contractDescriptionDictionary.TryGetValue(serviceEndpoint.Contract.ContractType, out contract))
+                    if (
+                        contractDescriptionDictionary.TryGetValue(
+                            serviceEndpoint.Contract.ContractType,
+                            out contract
+                        )
+                    )
                     {
                         serviceEndpoint.Contract = contract;
                     }
                     else
                     {
-                        contractDescriptionDictionary[serviceEndpoint.Contract.ContractType] = serviceEndpoint.Contract;
+                        contractDescriptionDictionary[serviceEndpoint.Contract.ContractType] =
+                            serviceEndpoint.Contract;
                     }
                 }
             }
 
-            if (this.serviceDefinition.AllowBufferedReceive && !this.Description.Behaviors.Contains(bufferedReceiveServiceBehaviorType))
+            if (
+                this.serviceDefinition.AllowBufferedReceive
+                && !this.Description.Behaviors.Contains(bufferedReceiveServiceBehaviorType)
+            )
             {
                 this.Description.Behaviors.Add(new BufferedReceiveServiceBehavior());
             }
@@ -668,37 +828,59 @@ namespace System.ServiceModel.Activities
 
         void SetScopeName()
         {
-            VirtualPathExtension virtualPathExtension = this.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension =
+                this.Extensions.Find<VirtualPathExtension>();
             if (virtualPathExtension != null)
             {
-                // Web Hosted scenario            
-                WorkflowHostingOptionsSection hostingOptions = (WorkflowHostingOptionsSection)ConfigurationManager.GetSection(ConfigurationStrings.WorkflowHostingOptionsSectionPath);
+                // Web Hosted scenario
+                WorkflowHostingOptionsSection hostingOptions = (WorkflowHostingOptionsSection)
+                    ConfigurationManager.GetSection(
+                        ConfigurationStrings.WorkflowHostingOptionsSectionPath
+                    );
                 if (hostingOptions != null && hostingOptions.OverrideSiteName)
                 {
                     this.OverrideSiteName = hostingOptions.OverrideSiteName;
 
                     string fullVirtualPath = virtualPathExtension.VirtualPath.Substring(1);
-                    fullVirtualPath = ("/" == virtualPathExtension.ApplicationVirtualPath) ? fullVirtualPath : virtualPathExtension.ApplicationVirtualPath + fullVirtualPath;
+                    fullVirtualPath =
+                        ("/" == virtualPathExtension.ApplicationVirtualPath)
+                            ? fullVirtualPath
+                            : virtualPathExtension.ApplicationVirtualPath + fullVirtualPath;
 
-                    int index = fullVirtualPath.LastIndexOf("/", StringComparison.OrdinalIgnoreCase); 
+                    int index = fullVirtualPath.LastIndexOf(
+                        "/",
+                        StringComparison.OrdinalIgnoreCase
+                    );
                     string virtualDirectoryPath = fullVirtualPath.Substring(0, index + 1);
 
-                    this.DurableInstancingOptions.ScopeName = XName.Get(XmlConvert.EncodeLocalName(Path.GetFileName(virtualPathExtension.VirtualPath)),
-                        string.Format(CultureInfo.InvariantCulture, "/{0}{1}", this.Description.Name, virtualDirectoryPath));
+                    this.DurableInstancingOptions.ScopeName = XName.Get(
+                        XmlConvert.EncodeLocalName(
+                            Path.GetFileName(virtualPathExtension.VirtualPath)
+                        ),
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "/{0}{1}",
+                            this.Description.Name,
+                            virtualDirectoryPath
+                        )
+                    );
                 }
             }
         }
-        
+
         void SetupReceiveContextEnabledAttribute(ServiceEndpoint serviceEndpoint)
         {
             if (BufferedReceiveServiceBehavior.IsWorkflowEndpoint(serviceEndpoint))
             {
                 foreach (OperationDescription operation in serviceEndpoint.Contract.Operations)
                 {
-                    ReceiveContextEnabledAttribute behavior = operation.Behaviors.Find<ReceiveContextEnabledAttribute>();
+                    ReceiveContextEnabledAttribute behavior =
+                        operation.Behaviors.Find<ReceiveContextEnabledAttribute>();
                     if (behavior == null)
                     {
-                        operation.Behaviors.Add(new ReceiveContextEnabledAttribute() { ManualControl = true });
+                        operation.Behaviors.Add(
+                            new ReceiveContextEnabledAttribute() { ManualControl = true }
+                        );
                     }
                     else
                     {
@@ -711,10 +893,14 @@ namespace System.ServiceModel.Activities
         void ValidateBufferedReceiveProperty()
         {
             // Validate that the AttachedProperty is indeed being used when the behavior is also used
-            bool hasBehavior = this.Description.Behaviors.Contains(bufferedReceiveServiceBehaviorType);
+            bool hasBehavior = this.Description.Behaviors.Contains(
+                bufferedReceiveServiceBehaviorType
+            );
             if (hasBehavior && !this.serviceDefinition.AllowBufferedReceive)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BufferedReceiveBehaviorUsedWithoutProperty));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BufferedReceiveBehaviorUsedWithoutProperty)
+                );
             }
         }
 
@@ -726,9 +912,7 @@ namespace System.ServiceModel.Activities
             bool hasChannelCache;
 
             public WorkflowServiceHostExtensions()
-                : base()
-            {
-            }
+                : base() { }
 
             public override void Add<T>(Func<T> extensionCreationFunction)
             {
@@ -765,20 +949,31 @@ namespace System.ServiceModel.Activities
             {
                 if (TypeHelper.AreTypesCompatible(type, SendReceiveExtensionType))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ExtensionTypeNotSupported(SendReceiveExtensionType.FullName)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.ExtensionTypeNotSupported(SendReceiveExtensionType.FullName)
+                        )
+                    );
                 }
             }
         }
 
         class CloseAsyncResult : AsyncResult
         {
-            static AsyncCompletion handleDurableInstanceManagerEndClose = new AsyncCompletion(HandleDurableInstanceManagerEndClose);
+            static AsyncCompletion handleDurableInstanceManagerEndClose = new AsyncCompletion(
+                HandleDurableInstanceManagerEndClose
+            );
             static AsyncCompletion handleEndHostClose = new AsyncCompletion(HandleEndHostClose);
 
             TimeoutHelper timeoutHelper;
             WorkflowServiceHost host;
 
-            public CloseAsyncResult(WorkflowServiceHost host, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                WorkflowServiceHost host,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -793,14 +988,20 @@ namespace System.ServiceModel.Activities
             bool CloseDurableInstanceManager()
             {
                 IAsyncResult result = this.host.durableInstanceManager.BeginClose(
-                    this.timeoutHelper.RemainingTime(), base.PrepareAsyncCompletion(handleDurableInstanceManagerEndClose), this);
+                    this.timeoutHelper.RemainingTime(),
+                    base.PrepareAsyncCompletion(handleDurableInstanceManagerEndClose),
+                    this
+                );
                 return SyncContinue(result);
             }
 
             bool CloseHost()
             {
                 IAsyncResult result = this.host.BeginHostClose(
-                    this.timeoutHelper.RemainingTime(), base.PrepareAsyncCompletion(handleEndHostClose), this);
+                    this.timeoutHelper.RemainingTime(),
+                    base.PrepareAsyncCompletion(handleEndHostClose),
+                    this
+                );
                 return SyncContinue(result);
             }
 
@@ -809,7 +1010,7 @@ namespace System.ServiceModel.Activities
                 CloseAsyncResult thisPtr = (CloseAsyncResult)result.AsyncState;
 
                 thisPtr.host.durableInstanceManager.EndClose(result);
-                
+
                 thisPtr.host.WorkflowServiceHostPerformanceCounters.Dispose();
                 return true;
             }

@@ -14,7 +14,8 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-            "Test should not be running on Linux");
+            "Test should not be running on Linux"
+        );
     }
 
     [ConditionalFact]
@@ -23,7 +24,8 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX),
-            "Test should not be running on MacOSX.");
+            "Test should not be running on MacOSX."
+        );
     }
 
     [ConditionalFact]
@@ -32,7 +34,8 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
-            "Test should not be running on Windows.");
+            "Test should not be running on Windows."
+        );
     }
 
     [ConditionalFact]
@@ -41,10 +44,12 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-            "Test should not be running on Linux.");
+            "Test should not be running on Linux."
+        );
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX),
-            "Test should not be running on MacOSX.");
+            "Test should not be running on MacOSX."
+        );
     }
 
     [ConditionalTheory]
@@ -54,7 +59,8 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-            "Test should not be running on Linux");
+            "Test should not be running on Linux"
+        );
     }
 
     [ConditionalTheory]
@@ -64,7 +70,8 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX),
-            "Test should not be running on MacOSX.");
+            "Test should not be running on MacOSX."
+        );
     }
 
     [ConditionalTheory]
@@ -74,7 +81,8 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
-            "Test should not be running on Windows.");
+            "Test should not be running on Windows."
+        );
     }
 
     [ConditionalTheory]
@@ -84,10 +92,12 @@ public class OSSkipConditionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-            "Test should not be running on Linux.");
+            "Test should not be running on Linux."
+        );
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX),
-            "Test should not be running on MacOSX.");
+            "Test should not be running on MacOSX."
+        );
     }
 }
 
@@ -99,6 +109,7 @@ public class OSSkipConditionClassTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
-            "Test should not be running on Windows.");
+            "Test should not be running on Windows."
+        );
     }
 }

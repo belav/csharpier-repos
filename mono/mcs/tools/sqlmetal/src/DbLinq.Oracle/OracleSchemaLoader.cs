@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -38,20 +38,40 @@ namespace DbLinq.Oracle
     partial class OracleSchemaLoader : SchemaLoader
     {
         private readonly Vendor.IVendor vendor = new OracleVendor();
-        public override IVendor Vendor { get { return vendor; } set { } }
+        public override IVendor Vendor
+        {
+            get { return vendor; }
+            set { }
+        }
 
-        protected override void LoadConstraints(Database schema, SchemaName schemaName, IDbConnection conn, NameFormat nameFormat, Names names)
+        protected override void LoadConstraints(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            NameFormat nameFormat,
+            Names names
+        )
         {
             var constraints = ReadConstraints(conn, schemaName.DbName);
 
             foreach (DataConstraint constraint in constraints)
             {
                 //find my table:
-                string constraintFullDbName = GetFullDbName(constraint.TableName, constraint.TableSchema);
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t => constraintFullDbName == t.Name);
+                string constraintFullDbName = GetFullDbName(
+                    constraint.TableName,
+                    constraint.TableSchema
+                );
+                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
+                    constraintFullDbName == t.Name
+                );
                 if (table == null)
                 {
-                    WriteErrorLine("ERROR L100: Table '" + constraint.TableName + "' not found for column " + constraint.ColumnNameList);
+                    WriteErrorLine(
+                        "ERROR L100: Table '"
+                            + constraint.TableName
+                            + "' not found for column "
+                            + constraint.ColumnNameList
+                    );
                     continue;
                 }
 
@@ -61,30 +81,48 @@ namespace DbLinq.Oracle
                 if (constraint.ConstraintType == "P")
                 {
                     //A) add primary key
-                    DbLinq.Schema.Dbml.Column pkColumn = table.Type.Columns.Where(c => constraint.ColumnNames.Contains(c.Name)).First();
+                    DbLinq.Schema.Dbml.Column pkColumn = table
+                        .Type.Columns.Where(c => constraint.ColumnNames.Contains(c.Name))
+                        .First();
                     pkColumn.IsPrimaryKey = true;
                 }
                 else if (constraint.ConstraintType == "R")
                 {
                     //if not PRIMARY, it's a foreign key. (constraint_type=="R")
                     //both parent and child table get an [Association]
-                    DataConstraint referencedConstraint = constraints.FirstOrDefault(c => c.ConstraintName == constraint.ReverseConstraintName);
+                    DataConstraint referencedConstraint = constraints.FirstOrDefault(c =>
+                        c.ConstraintName == constraint.ReverseConstraintName
+                    );
                     if (constraint.ReverseConstraintName == null || referencedConstraint == null)
                     {
-                        WriteErrorLine("ERROR L127: given R_contraint_name='" + constraint.ReverseConstraintName + "', unable to find parent constraint");
+                        WriteErrorLine(
+                            "ERROR L127: given R_contraint_name='"
+                                + constraint.ReverseConstraintName
+                                + "', unable to find parent constraint"
+                        );
                         continue;
                     }
 
-                    LoadForeignKey(schema, table, constraint.ColumnNameList, constraint.TableName, constraint.TableSchema,
-                                   referencedConstraint.ColumnNameList, referencedConstraint.TableName,
-                                   referencedConstraint.TableSchema,
-                                   constraint.ConstraintName, nameFormat, names);
-
+                    LoadForeignKey(
+                        schema,
+                        table,
+                        constraint.ColumnNameList,
+                        constraint.TableName,
+                        constraint.TableSchema,
+                        referencedConstraint.ColumnNameList,
+                        referencedConstraint.TableName,
+                        referencedConstraint.TableSchema,
+                        constraint.ConstraintName,
+                        nameFormat,
+                        names
+                    );
                 }
                 // custom type, this is a trigger
                 else if (constraint.ConstraintType == "T" && constraint.ColumnNames.Count == 1)
                 {
-                    var column = table.Type.Columns.Where(c => c.Name == constraint.ColumnNames[0]).First();
+                    var column = table
+                        .Type.Columns.Where(c => c.Name == constraint.ColumnNames[0])
+                        .First();
                     column.Expression = constraint.Expression;
                     column.IsDbGenerated = true;
                 }
@@ -103,11 +141,10 @@ namespace DbLinq.Oracle
                 return;
             foreach (DbLinq.Schema.Dbml.Table tbl in schema.Tables)
             {
-                var q = from col in tbl.Type.Columns
-                        where col.IsPrimaryKey
-                        select col;
+                var q = from col in tbl.Type.Columns where col.IsPrimaryKey select col;
                 List<DbLinq.Schema.Dbml.Column> cols = q.ToList();
-                bool canBeFromSequence = cols.Count == 1
+                bool canBeFromSequence =
+                    cols.Count == 1
                     && (!cols[0].CanBeNull)
                     && (cols[0].DbType == "NUMBER" || cols[0].DbType == "INTEGER");
                 if (canBeFromSequence)

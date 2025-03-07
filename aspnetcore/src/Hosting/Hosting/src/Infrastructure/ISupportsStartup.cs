@@ -33,7 +33,9 @@ public interface ISupportsStartup
     /// </summary>
     /// <param name="startupType">The <see cref="Type"/> to be used.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    IWebHostBuilder UseStartup([DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType);
+    IWebHostBuilder UseStartup(
+        [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType
+    );
 
     /// <summary>
     /// Specify a factory that creates the startup instance to be used by the web host.
@@ -41,5 +43,7 @@ public interface ISupportsStartup
     /// <param name="startupFactory">A delegate that specifies a factory for the startup class.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     /// <remarks>When in a trimmed app, all public methods of <typeparamref name="TStartup"/> are preserved. This should match the Startup type directly (and not a base type).</remarks>
-    IWebHostBuilder UseStartup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup>(Func<WebHostBuilderContext, TStartup> startupFactory);
+    IWebHostBuilder UseStartup<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
+    >(Func<WebHostBuilderContext, TStartup> startupFactory);
 }

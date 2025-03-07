@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,51 +31,58 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public sealed class FileDialogPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        // Fields
+        private bool canOpen;
+        private bool canSave;
 
-	[ComVisible (true)]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-			 AttributeTargets.Struct | AttributeTargets.Constructor |
-			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public sealed class FileDialogPermissionAttribute : CodeAccessSecurityAttribute {
+        // Constructor
+        public FileDialogPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-		// Fields
-		private bool canOpen;
-		private bool canSave;
-		
-		// Constructor
-		public FileDialogPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-		}
+        // Properties
+        public bool Open
+        {
+            get { return canOpen; }
+            set { canOpen = value; }
+        }
 
-		// Properties
-		public bool Open {
-			get { return canOpen; }
-			set { canOpen = value; }
-		} 
+        public bool Save
+        {
+            get { return canSave; }
+            set { canSave = value; }
+        }
 
-		public bool Save {
-			get { return canSave; }
-			set { canSave = value; }
-		}
-
-		// Methods
-		public override IPermission CreatePermission ()
-		{
-			FileDialogPermission perm = null;
-			if (this.Unrestricted)
-				perm = new FileDialogPermission (PermissionState.Unrestricted);
-			else {
-				FileDialogPermissionAccess access = FileDialogPermissionAccess.None;
-				if (canOpen)
-					access |= FileDialogPermissionAccess.Open;
-				if (canSave)
-					access |= FileDialogPermissionAccess.Save;
-				perm = new FileDialogPermission (access);
-			}
-			return perm;
-		}
-	}
+        // Methods
+        public override IPermission CreatePermission()
+        {
+            FileDialogPermission perm = null;
+            if (this.Unrestricted)
+                perm = new FileDialogPermission(PermissionState.Unrestricted);
+            else
+            {
+                FileDialogPermissionAccess access = FileDialogPermissionAccess.None;
+                if (canOpen)
+                    access |= FileDialogPermissionAccess.Open;
+                if (canSave)
+                    access |= FileDialogPermissionAccess.Save;
+                perm = new FileDialogPermission(access);
+            }
+            return perm;
+        }
+    }
 }

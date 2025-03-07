@@ -2,13 +2,13 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
-    using System.CodeDom;
-    using System.Diagnostics;
     using System.Text;
 
     internal sealed class DesignTimeType : Type, ICloneable
@@ -34,11 +34,13 @@ namespace System.Workflow.ComponentModel.Compiler
         private CodeNamespaceImportCollection codeNamespaceImports = null;
         private Guid guid = Guid.Empty;
 
-        internal DesignTimeType(Type declaringType,
+        internal DesignTimeType(
+            Type declaringType,
             string typeName,
             CodeNamespaceImportCollection codeNamespaceImports,
             string namespaceName,
-            ITypeProvider typeProvider)
+            ITypeProvider typeProvider
+        )
         {
             if (typeName == null)
                 throw new ArgumentNullException("typeName");
@@ -50,7 +52,9 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("typeProvider");
 
             if (namespaceName == null && declaringType == null)
-                throw new InvalidOperationException(SR.GetString(SR.NamespaceAndDeclaringTypeCannotBeNull));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.NamespaceAndDeclaringTypeCannotBeNull)
+                );
 
             typeName = Helper.EnsureTypeName(typeName);
             namespaceName = Helper.EnsureTypeName(namespaceName);
@@ -74,10 +78,13 @@ namespace System.Workflow.ComponentModel.Compiler
             this.typeAttributes = default(TypeAttributes);
         }
 
-
-        internal DesignTimeType(Type declaringType, string elementTypeFullName, ITypeProvider typeProvider)
+        internal DesignTimeType(
+            Type declaringType,
+            string elementTypeFullName,
+            ITypeProvider typeProvider
+        )
         {
-            // constructor for declaring types with element (Arrays, Pointers, ByRef). 
+            // constructor for declaring types with element (Arrays, Pointers, ByRef).
             if (typeProvider == null)
                 throw new ArgumentNullException("typeProvider");
 
@@ -101,12 +108,16 @@ namespace System.Workflow.ComponentModel.Compiler
 
             if (IsArray)
             {
-                this.typeAttributes = elementType.Attributes & TypeAttributes.VisibilityMask | TypeAttributes.Class | TypeAttributes.Sealed | TypeAttributes.Serializable;
+                this.typeAttributes =
+                    elementType.Attributes & TypeAttributes.VisibilityMask
+                    | TypeAttributes.Class
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.Serializable;
             }
             else
             {
                 // Pointer/ByRef attributes
-                // 
+                //
                 this.typeAttributes = TypeAttributes.AnsiClass;
             }
         }
@@ -115,10 +126,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal ITypeProvider Provider
         {
-            get
-            {
-                return this.typeProvider;
-            }
+            get { return this.typeProvider; }
         }
 
         internal void AddCodeTypeDeclaration(CodeTypeDeclaration codeDomType)
@@ -129,10 +137,30 @@ namespace System.Workflow.ComponentModel.Compiler
             //
             this.typeAttributes |= codeDomType.TypeAttributes & ~TypeAttributes.Public;
 
-            this.typeAttributes |= Helper.ConvertToTypeAttributes(codeDomType.Attributes, this.declaringType);
+            this.typeAttributes |= Helper.ConvertToTypeAttributes(
+                codeDomType.Attributes,
+                this.declaringType
+            );
             foreach (CodeAttributeDeclaration attribute in codeDomType.CustomAttributes)
             {
-                if (string.Equals(attribute.Name, "System.SerializableAttribute", StringComparison.Ordinal) || string.Equals(attribute.Name, "System.Serializable", StringComparison.Ordinal) || string.Equals(attribute.Name, "SerializableAttribute", StringComparison.Ordinal) || string.Equals(attribute.Name, "Serializable", StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        attribute.Name,
+                        "System.SerializableAttribute",
+                        StringComparison.Ordinal
+                    )
+                    || string.Equals(
+                        attribute.Name,
+                        "System.Serializable",
+                        StringComparison.Ordinal
+                    )
+                    || string.Equals(
+                        attribute.Name,
+                        "SerializableAttribute",
+                        StringComparison.Ordinal
+                    )
+                    || string.Equals(attribute.Name, "Serializable", StringComparison.Ordinal)
+                )
                 {
                     this.typeAttributes |= TypeAttributes.Serializable;
                     break;
@@ -182,7 +210,9 @@ namespace System.Workflow.ComponentModel.Compiler
                         // Look for candidates in the type
                         foreach (CodeTypeReference codeBaseType in codeDomType.BaseTypes)
                         {
-                            Type typeCandidate = ResolveType(GetTypeNameFromCodeTypeReference(codeBaseType, this));
+                            Type typeCandidate = ResolveType(
+                                GetTypeNameFromCodeTypeReference(codeBaseType, this)
+                            );
 
                             if ((typeCandidate != null) && (!typeCandidate.IsInterface))
                             {
@@ -245,18 +275,12 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override Type DeclaringType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
 
         public override string FullName
         {
-            get
-            {
-                return this.fullName;
-            }
+            get { return this.fullName; }
         }
 
         public override Guid GUID
@@ -265,7 +289,7 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (this.guid == Guid.Empty)
                     // Set a GUID
-                    // 
+                    //
                     this.guid = Guid.NewGuid();
 
                 return this.guid;
@@ -287,7 +311,7 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 string name = this.fullName;
 
-                // detect first bracket, any name seperators after it are part of a generic parameter...  
+                // detect first bracket, any name seperators after it are part of a generic parameter...
                 int idx = name.IndexOf('[');
 
                 // Get the name after the last dot
@@ -308,7 +332,7 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (this.fullName == Name)
                     return string.Empty;
-                
+
                 if (this.declaringType != null)
                 {
                     return this.declaringType.Namespace;
@@ -324,18 +348,16 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 // no runtime context to our type
 #pragma warning suppress 56503
-                throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
+                throw new NotImplementedException(
+                    TypeSystemSR.GetString("Error_RuntimeNotSupported")
+                );
             }
         }
 
         public override Type UnderlyingSystemType
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
-
 
         #endregion
 
@@ -353,7 +375,8 @@ namespace System.Workflow.ComponentModel.Compiler
             // Ensure attributes
             if (this.codeDomTypes != null && this.attributes == null)
             {
-                CodeAttributeDeclarationCollection attributeDecls = new CodeAttributeDeclarationCollection();
+                CodeAttributeDeclarationCollection attributeDecls =
+                    new CodeAttributeDeclarationCollection();
 
                 foreach (CodeTypeDeclaration codeType in this.codeDomTypes)
                     attributeDecls.AddRange(codeType.CustomAttributes);
@@ -361,7 +384,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.attributes = Helper.LoadCustomAttributes(attributeDecls, this);
             }
 
-            // It is possible both this.codeDomTypes and this.attributes are null.  
+            // It is possible both this.codeDomTypes and this.attributes are null.
             // For example, when constructing type with element (Array, ByRef, Pointer), we don't
             // set the typedecl because the base type is a system type.  We don't set this.attributes
             // either because we don't actually create a type of the base type.  We simply do
@@ -380,7 +403,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
-            return GetMemberHelper<EventInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.events);
+            return GetMemberHelper<EventInfo>(
+                bindingAttr,
+                new MemberSignature(name, null, null),
+                ref this.events
+            );
         }
 
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
@@ -390,7 +417,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
-            return GetMemberHelper<FieldInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.fields);
+            return GetMemberHelper<FieldInfo>(
+                bindingAttr,
+                new MemberSignature(name, null, null),
+                ref this.fields
+            );
         }
 
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
@@ -408,7 +439,11 @@ namespace System.Workflow.ComponentModel.Compiler
             return GetMembersHelper<PropertyInfo>(bindingAttr, ref this.properties, true);
         }
 
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             // verify arguments
             VerifyGetMemberArguments(name, bindingAttr);
@@ -417,27 +452,63 @@ namespace System.Workflow.ComponentModel.Compiler
 
             // Methods
             if ((type & MemberTypes.Method) != 0)
-                members.AddRange(GetMembersHelper<MethodInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.methods));
+                members.AddRange(
+                    GetMembersHelper<MethodInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.methods
+                    )
+                );
 
             // Constructors
             if ((type & MemberTypes.Constructor) != 0)
-                members.AddRange(GetMembersHelper<ConstructorInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.constructors));
+                members.AddRange(
+                    GetMembersHelper<ConstructorInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.constructors
+                    )
+                );
 
             // Properties
             if ((type & MemberTypes.Property) != 0)
-                members.AddRange(GetMembersHelper<PropertyInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.properties));
+                members.AddRange(
+                    GetMembersHelper<PropertyInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.properties
+                    )
+                );
 
             // Events
             if ((type & MemberTypes.Event) != 0)
-                members.AddRange(GetMembersHelper<EventInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.events));
+                members.AddRange(
+                    GetMembersHelper<EventInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.events
+                    )
+                );
 
             // Fields
             if ((type & MemberTypes.Field) != 0)
-                members.AddRange(GetMembersHelper<FieldInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.fields));
+                members.AddRange(
+                    GetMembersHelper<FieldInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.fields
+                    )
+                );
 
             // Nested types
             if ((type & MemberTypes.NestedType) != 0)
-                members.AddRange(GetMembersHelper<Type>(bindingAttr, new MemberSignature(name, null, null), ref this.nestedTypes));
+                members.AddRange(
+                    GetMembersHelper<Type>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.nestedTypes
+                    )
+                );
 
             return members.ToArray();
         }
@@ -449,7 +520,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
             ArrayList members = new ArrayList();
 
-            // 
+            //
             members.AddRange(GetMethods(bindingAttr));
             members.AddRange(GetProperties(bindingAttr));
             members.AddRange(GetEvents(bindingAttr));
@@ -486,7 +557,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override Type GetNestedType(string name, BindingFlags bindingAttr)
         {
-            return GetMemberHelper<Type>(bindingAttr, new MemberSignature(name, null, null), ref this.nestedTypes);
+            return GetMemberHelper<Type>(
+                bindingAttr,
+                new MemberSignature(name, null, null),
+                ref this.nestedTypes
+            );
         }
 
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
@@ -498,22 +573,31 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             if (this.codeDomTypes != null)
             {
-                StringComparison compare = (ignoreCase) ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+                StringComparison compare =
+                    (ignoreCase) ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 
                 // search in the type
                 foreach (CodeTypeDeclaration codeDomType in this.codeDomTypes)
                 {
                     foreach (CodeTypeReference codeBaseType in codeDomType.BaseTypes)
                     {
-                        Type interfaceCandidate = ResolveType(GetTypeNameFromCodeTypeReference(codeBaseType, this));
+                        Type interfaceCandidate = ResolveType(
+                            GetTypeNameFromCodeTypeReference(codeBaseType, this)
+                        );
 
                         if (interfaceCandidate != null)
                         {
-                            if ((interfaceCandidate.IsInterface == true) && (string.Equals(interfaceCandidate.FullName, name, compare)))
+                            if (
+                                (interfaceCandidate.IsInterface == true)
+                                && (string.Equals(interfaceCandidate.FullName, name, compare))
+                            )
                                 return interfaceCandidate;
 
                             // look in base class/intefaces
-                            Type baseInterfaceCandidate = interfaceCandidate.GetInterface(name, ignoreCase);
+                            Type baseInterfaceCandidate = interfaceCandidate.GetInterface(
+                                name,
+                                ignoreCase
+                            );
 
                             if (baseInterfaceCandidate != null)
                                 return baseInterfaceCandidate;
@@ -536,11 +620,16 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     foreach (CodeTypeReference codeBaseType in codeDomType.BaseTypes)
                     {
-                        Type interfaceCandidate = ResolveType(GetTypeNameFromCodeTypeReference(codeBaseType, this));
+                        Type interfaceCandidate = ResolveType(
+                            GetTypeNameFromCodeTypeReference(codeBaseType, this)
+                        );
 
                         if (interfaceCandidate != null)
                         {
-                            if ((interfaceCandidate.IsInterface == true) && (!types.Contains(interfaceCandidate)))
+                            if (
+                                (interfaceCandidate.IsInterface == true)
+                                && (!types.Contains(interfaceCandidate))
+                            )
                                 types.Add(interfaceCandidate);
 
                             // look in base class/intefaces
@@ -548,7 +637,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
                             foreach (Type baseInterfaceCandidate in baseInterfaces)
                             {
-                                if ((baseInterfaceCandidate != null) && (!types.Contains(baseInterfaceCandidate)))
+                                if (
+                                    (baseInterfaceCandidate != null)
+                                    && (!types.Contains(baseInterfaceCandidate))
+                                )
                                     types.Add(baseInterfaceCandidate);
                             }
                         }
@@ -559,7 +651,16 @@ namespace System.Workflow.ComponentModel.Compiler
             return (Type[])types.ToArray(typeof(Type));
         }
 
-        public override object InvokeMember(string name, BindingFlags bindingFlags, Binder binder, object target, object[] providedArgs, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParams)
+        public override object InvokeMember(
+            string name,
+            BindingFlags bindingFlags,
+            Binder binder,
+            object target,
+            object[] providedArgs,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParams
+        )
         {
             throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
         }
@@ -579,7 +680,7 @@ namespace System.Workflow.ComponentModel.Compiler
             if (attributeType == null)
                 throw new ArgumentNullException("attributeType");
 
-            // 
+            //
             this.GetCustomAttributes(true);
 
             if (Helper.IsDefined(attributeType, inherit, attributes, this))
@@ -598,7 +699,6 @@ namespace System.Workflow.ComponentModel.Compiler
 
             return elementType;
         }
-
 
         public override int GetArrayRank()
         {
@@ -632,7 +732,9 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override Type MakeArrayType()
         {
-            return this.typeProvider.GetType(String.Format(CultureInfo.InvariantCulture, "{0}[]", this.FullName));
+            return this.typeProvider.GetType(
+                String.Format(CultureInfo.InvariantCulture, "{0}[]", this.FullName)
+            );
         }
 
         #endregion
@@ -650,12 +752,21 @@ namespace System.Workflow.ComponentModel.Compiler
         private void VerifyGetMemberArguments(BindingFlags bindingAttr)
         {
             // We only support public based constructors on DesignTime type
-            BindingFlags supported = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.IgnoreCase;
+            BindingFlags supported =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Static
+                | BindingFlags.FlattenHierarchy
+                | BindingFlags.Instance
+                | BindingFlags.DeclaredOnly
+                | BindingFlags.IgnoreCase;
 
             if ((bindingAttr & ~supported) != 0)
-                throw new ArgumentException(TypeSystemSR.GetString("Error_GetMemberBindingOptions"));
-
+                throw new ArgumentException(
+                    TypeSystemSR.GetString("Error_GetMemberBindingOptions")
+                );
         }
+
         internal Type ResolveType(string name)
         {
             Type type = null;
@@ -688,14 +799,20 @@ namespace System.Workflow.ComponentModel.Compiler
                 string nestedName = name;
                 int indexOfFirstDot = name.IndexOf('.');
                 int indexOfLastDot = -1;
-                while (((indexOfLastDot = nestedName.LastIndexOf('.')) != indexOfFirstDot) && (type == null))
+                while (
+                    ((indexOfLastDot = nestedName.LastIndexOf('.')) != indexOfFirstDot)
+                    && (type == null)
+                )
                 {
-                    nestedName = nestedName.Substring(0, indexOfLastDot) + "+" + nestedName.Substring(indexOfLastDot + 1);
+                    nestedName =
+                        nestedName.Substring(0, indexOfLastDot)
+                        + "+"
+                        + nestedName.Substring(indexOfLastDot + 1);
                     type = typeProvider.GetType(nestedName);
                 }
             }
 
-            // 
+            //
             return type;
         }
 
@@ -726,7 +843,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             else if (memberInfo is PropertyInfo)
             {
-                // Property public\static attributes can be fetched using the accessors 
+                // Property public\static attributes can be fetched using the accessors
                 PropertyInfo propertyInfo = memberInfo as PropertyInfo;
                 MethodInfo accessorMethod = null;
                 if (propertyInfo.CanRead)
@@ -743,10 +860,24 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 isPublic = (memberInfo as Type).IsPublic || (memberInfo as Type).IsNestedPublic;
                 // No static check.
-                return ((((isPublic) && ((bindingFlags & BindingFlags.Public) != 0)) || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))));
+                return (
+                    (
+                        ((isPublic) && ((bindingFlags & BindingFlags.Public) != 0))
+                        || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))
+                    )
+                );
             }
 
-            return ((((isPublic) && ((bindingFlags & BindingFlags.Public) != 0)) || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))) && (((isStatic) && ((bindingFlags & BindingFlags.Static) != 0)) || ((!isStatic) && ((bindingFlags & BindingFlags.Instance) != 0))));
+            return (
+                (
+                    ((isPublic) && ((bindingFlags & BindingFlags.Public) != 0))
+                    || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))
+                )
+                && (
+                    ((isStatic) && ((bindingFlags & BindingFlags.Static) != 0))
+                    || ((!isStatic) && ((bindingFlags & BindingFlags.Instance) != 0))
+                )
+            );
         }
 
         // generic method that implements all GetXXXs methods
@@ -765,7 +896,10 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 MemberSignature memberSignature = new MemberSignature(memberInfo);
 
-                if ((FilterMember(memberInfo, bindingAttr)) && (!membersDictionary.ContainsKey(memberSignature)))
+                if (
+                    (FilterMember(memberInfo, bindingAttr))
+                    && (!membersDictionary.ContainsKey(memberSignature))
+                )
                     membersDictionary.Add(new MemberSignature(memberInfo), memberInfo);
             }
 
@@ -783,7 +917,11 @@ namespace System.Workflow.ComponentModel.Compiler
                     foreach (T memberInfo in baseMembers)
                     {
                         // We should not return private members from base classes. Note: Generics requires us to use "as".
-                        if ((memberInfo is FieldInfo && (memberInfo as FieldInfo).IsPrivate) || (memberInfo is MethodBase && (memberInfo as MethodBase).IsPrivate) || (memberInfo is Type && (memberInfo as Type).IsNestedPrivate))
+                        if (
+                            (memberInfo is FieldInfo && (memberInfo as FieldInfo).IsPrivate)
+                            || (memberInfo is MethodBase && (memberInfo as MethodBase).IsPrivate)
+                            || (memberInfo is Type && (memberInfo as Type).IsNestedPrivate)
+                        )
                             continue;
 
                         // verify a member with this signature was not already created
@@ -818,7 +956,11 @@ namespace System.Workflow.ComponentModel.Compiler
             return members;
         }
 
-        private T[] GetMembersHelper<T>(BindingFlags bindingAttr, MemberSignature memberSignature, ref T[] members)
+        private T[] GetMembersHelper<T>(
+            BindingFlags bindingAttr,
+            MemberSignature memberSignature,
+            ref T[] members
+        )
             where T : MemberInfo
         {
             List<T> memberCandidates = new List<T>();
@@ -832,7 +974,11 @@ namespace System.Workflow.ComponentModel.Compiler
         }
 
         // generic method that implements all GetXXX methods
-        private T GetMemberHelper<T>(BindingFlags bindingAttr, MemberSignature memberSignature, ref T[] members)
+        private T GetMemberHelper<T>(
+            BindingFlags bindingAttr,
+            MemberSignature memberSignature,
+            ref T[] members
+        )
             where T : MemberInfo
         {
             // verify arguments
@@ -844,7 +990,10 @@ namespace System.Workflow.ComponentModel.Compiler
             foreach (T memberInfo in members)
             {
                 MemberSignature candididateMemberSignature = new MemberSignature(memberInfo);
-                if (candididateMemberSignature.FilterSignature(memberSignature) && FilterMember(memberInfo, bindingAttr))
+                if (
+                    candididateMemberSignature.FilterSignature(memberSignature)
+                    && FilterMember(memberInfo, bindingAttr)
+                )
                     return memberInfo;
             }
 
@@ -859,12 +1008,21 @@ namespace System.Workflow.ComponentModel.Compiler
                 Type baseType = BaseType;
                 if (baseType != null)
                 {
-                    T memberInfo = (T)GetBaseMember(typeof(T), baseType, bindingAttr, memberSignature);
+                    T memberInfo = (T)GetBaseMember(
+                        typeof(T),
+                        baseType,
+                        bindingAttr,
+                        memberSignature
+                    );
 
                     if (memberInfo != null)
                     {
                         // We should not return private members from base classes. Note: Generics requires us to use "as".
-                        if ((memberInfo is FieldInfo && (memberInfo as FieldInfo).IsPrivate) || (memberInfo is MethodBase && (memberInfo as MethodBase).IsPrivate) || (memberInfo is Type && (memberInfo as Type).IsNestedPrivate))
+                        if (
+                            (memberInfo is FieldInfo && (memberInfo as FieldInfo).IsPrivate)
+                            || (memberInfo is MethodBase && (memberInfo as MethodBase).IsPrivate)
+                            || (memberInfo is Type && (memberInfo as Type).IsNestedPrivate)
+                        )
                             return null;
 
                         return memberInfo;
@@ -875,7 +1033,12 @@ namespace System.Workflow.ComponentModel.Compiler
             return null;
         }
 
-        internal MemberInfo GetBaseMember(Type type, Type baseType, BindingFlags bindingAttr, MemberSignature memberSignature)
+        internal MemberInfo GetBaseMember(
+            Type type,
+            Type baseType,
+            BindingFlags bindingAttr,
+            MemberSignature memberSignature
+        )
         {
             if (memberSignature == null)
                 throw new ArgumentNullException("memberSignature");
@@ -888,18 +1051,36 @@ namespace System.Workflow.ComponentModel.Compiler
             if (typeof(PropertyInfo).IsAssignableFrom(type))
             {
                 if (memberSignature.Parameters != null)
-                    member = baseType.GetProperty(memberSignature.Name, bindingAttr, null, memberSignature.ReturnType, memberSignature.Parameters, null);
+                    member = baseType.GetProperty(
+                        memberSignature.Name,
+                        bindingAttr,
+                        null,
+                        memberSignature.ReturnType,
+                        memberSignature.Parameters,
+                        null
+                    );
                 else
                     member = baseType.GetProperty(memberSignature.Name, bindingAttr);
             }
             else if (typeof(EventInfo).IsAssignableFrom(type))
                 member = baseType.GetEvent(memberSignature.Name, bindingAttr);
             else if (typeof(ConstructorInfo).IsAssignableFrom(type))
-                member = baseType.GetConstructor(bindingAttr, null, memberSignature.Parameters, null);
+                member = baseType.GetConstructor(
+                    bindingAttr,
+                    null,
+                    memberSignature.Parameters,
+                    null
+                );
             else if (typeof(MethodInfo).IsAssignableFrom(type))
             {
                 if (memberSignature.Parameters != null)
-                    member = baseType.GetMethod(memberSignature.Name, bindingAttr, null, memberSignature.Parameters, null);
+                    member = baseType.GetMethod(
+                        memberSignature.Name,
+                        bindingAttr,
+                        null,
+                        memberSignature.Parameters,
+                        null
+                    );
                 else
                     member = baseType.GetMethod(memberSignature.Name, bindingAttr);
             }
@@ -911,7 +1092,10 @@ namespace System.Workflow.ComponentModel.Compiler
             return member;
         }
 
-        internal static string GetTypeNameFromCodeTypeReference(CodeTypeReference codeTypeReference, DesignTimeType declaringType)
+        internal static string GetTypeNameFromCodeTypeReference(
+            CodeTypeReference codeTypeReference,
+            DesignTimeType declaringType
+        )
         {
             StringBuilder typeName = new StringBuilder();
 
@@ -925,15 +1109,26 @@ namespace System.Workflow.ComponentModel.Compiler
                 else
                     typeName.Append(codeTypeReference.BaseType);
 
-                if ((codeTypeReference.TypeArguments != null) && (codeTypeReference.TypeArguments.Count > 0))
+                if (
+                    (codeTypeReference.TypeArguments != null)
+                    && (codeTypeReference.TypeArguments.Count > 0)
+                )
                 {
                     if (codeTypeReference.BaseType.IndexOf('`') == -1)
-                        typeName.Append(string.Format(CultureInfo.InvariantCulture, "`{0}", new object[] { codeTypeReference.TypeArguments.Count }));
+                        typeName.Append(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "`{0}",
+                                new object[] { codeTypeReference.TypeArguments.Count }
+                            )
+                        );
                     typeName.Append("[");
                     foreach (CodeTypeReference typeArgument in codeTypeReference.TypeArguments)
                     {
                         typeName.Append("[");
-                        typeName.Append(GetTypeNameFromCodeTypeReference(typeArgument, declaringType));
+                        typeName.Append(
+                            GetTypeNameFromCodeTypeReference(typeArgument, declaringType)
+                        );
                         typeName.Append("],");
                     }
                     typeName.Length = typeName.Length - 1; //remove the last comma
@@ -942,9 +1137,14 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             else
             {
-                typeName.Append(GetTypeNameFromCodeTypeReference(codeTypeReference.ArrayElementType, declaringType));
+                typeName.Append(
+                    GetTypeNameFromCodeTypeReference(
+                        codeTypeReference.ArrayElementType,
+                        declaringType
+                    )
+                );
 
-                // Build array decoration (ByRefs and Pointers are part of the the BaseType) 
+                // Build array decoration (ByRefs and Pointers are part of the the BaseType)
                 typeName.Append("[");
                 for (int loop = 0; loop < codeTypeReference.ArrayRank - 1; loop++)
                     typeName.Append(',');
@@ -959,19 +1159,51 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region implementation overrides
 
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return GetMemberHelper<ConstructorInfo>(bindingAttr, new MemberSignature(null, types, null), ref this.constructors);
+            return GetMemberHelper<ConstructorInfo>(
+                bindingAttr,
+                new MemberSignature(null, types, null),
+                ref this.constructors
+            );
         }
 
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return GetMemberHelper<MethodInfo>(bindingAttr, new MemberSignature(name, types, null), ref this.methods);
+            return GetMemberHelper<MethodInfo>(
+                bindingAttr,
+                new MemberSignature(name, types, null),
+                ref this.methods
+            );
         }
 
-        protected override PropertyInfo GetPropertyImpl(String name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            String name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return GetMemberHelper<PropertyInfo>(bindingAttr, new MemberSignature(name, types, null), ref this.properties);
+            return GetMemberHelper<PropertyInfo>(
+                bindingAttr,
+                new MemberSignature(name, types, null),
+                ref this.properties
+            );
         }
 
         protected override TypeAttributes GetAttributeFlagsImpl()
@@ -981,7 +1213,6 @@ namespace System.Workflow.ComponentModel.Compiler
 
         protected override bool HasElementTypeImpl()
         {
-
             int elementCharPosition = Name.LastIndexOfAny(elementDecorators);
             return (elementCharPosition != -1);
         }
@@ -993,7 +1224,6 @@ namespace System.Workflow.ComponentModel.Compiler
                 return true;
 
             return false;
-
         }
 
         protected override bool IsByRefImpl()
@@ -1005,7 +1235,6 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             return this.ResolveType(this.fullName + "&");
         }
-
 
         protected override bool IsCOMObjectImpl()
         {
@@ -1097,7 +1326,11 @@ namespace System.Workflow.ComponentModel.Compiler
                         CodeMemberMethod invokeMethod = new CodeMemberMethod();
                         invokeMethod.Name = "Invoke";
                         invokeMethod.Attributes = MemberAttributes.Public;
-                        foreach (CodeParameterDeclarationExpression parameterDecl in ((CodeTypeDelegate)codeDomType).Parameters)
+                        foreach (
+                            CodeParameterDeclarationExpression parameterDecl in (
+                                (CodeTypeDelegate)codeDomType
+                            ).Parameters
+                        )
                             invokeMethod.Parameters.Add(parameterDecl);
                         invokeMethod.ReturnType = ((CodeTypeDelegate)codeDomType).ReturnType;
                         memberCollection.Add((T)CreateMemberInfo(typeof(MethodInfo), invokeMethod));
@@ -1115,20 +1348,20 @@ namespace System.Workflow.ComponentModel.Compiler
             return memberCollection;
         }
 
-        // CFx bug 461 
+        // CFx bug 461
         // The code dom being generated by VsCodeDomParser.cs does not
         // add default constructors for classes unless they
         // exist in the source code. Unfortunately, this cannot be easily
         // fixed in the CodeDomParser because the code dom returned by that
-        // class is expected to kept in sync with the real source code. 
+        // class is expected to kept in sync with the real source code.
         // So we cannot "fabricate" a default constructor there without
-        // breaking lots of assumptions elsewhere in the code. 
+        // breaking lots of assumptions elsewhere in the code.
         // Instead, we add a default constructor here, if necessary.
         private List<ConstructorInfo> GetCodeDomConstructors()
         {
             List<ConstructorInfo> constructors = GetCodeDomMembers<ConstructorInfo>();
-            // we only add a default constructor if 
-            // this is a struct or is a non-static\non-abstract class and it doesn't have any 
+            // we only add a default constructor if
+            // this is a struct or is a non-static\non-abstract class and it doesn't have any
             // constructors
             //  * Note - static classes are represented as Abstract and Sealed
             //           abstract classes are represented as Abstract; thus we will check just for that flag
@@ -1136,7 +1369,10 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 CodeConstructor codeConstructor = new CodeConstructor();
                 codeConstructor.Attributes = MemberAttributes.Public;
-                ConstructorInfo constructorInfo = new DesignTimeConstructorInfo(this, codeConstructor);
+                ConstructorInfo constructorInfo = new DesignTimeConstructorInfo(
+                    this,
+                    codeConstructor
+                );
                 constructors.Add(constructorInfo);
             }
             return constructors;
@@ -1166,7 +1402,13 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 if (partialType == null)
                 {
-                    partialType = new DesignTimeType(this, codeType.Name, this.codeNamespaceImports, this.fullName, this.typeProvider);
+                    partialType = new DesignTimeType(
+                        this,
+                        codeType.Name,
+                        this.codeNamespaceImports,
+                        this.fullName,
+                        this.typeProvider
+                    );
                     localMembers.Add(partialType);
                     ((TypeProvider)this.typeProvider).AddType(partialType);
                 }
@@ -1185,9 +1427,15 @@ namespace System.Workflow.ComponentModel.Compiler
                 memberInfo = new DesignTimeEventInfo(this, member as CodeMemberEvent);
             else if ((memberInfoType == typeof(FieldInfo)) && (member is CodeMemberField))
                 memberInfo = new DesignTimeFieldInfo(this, member as CodeMemberField);
-            else if ((memberInfoType == typeof(ConstructorInfo)) && ((member is CodeConstructor) || (member is CodeTypeConstructor)))
+            else if (
+                (memberInfoType == typeof(ConstructorInfo))
+                && ((member is CodeConstructor) || (member is CodeTypeConstructor))
+            )
                 memberInfo = new DesignTimeConstructorInfo(this, member as CodeMemberMethod);
-            else if ((memberInfoType == typeof(MethodInfo)) && (member.GetType() == typeof(CodeMemberMethod)))
+            else if (
+                (memberInfoType == typeof(MethodInfo))
+                && (member.GetType() == typeof(CodeMemberMethod))
+            )
                 memberInfo = new DesignTimeMethodInfo(this, member as CodeMemberMethod);
             return memberInfo;
         }
@@ -1214,7 +1462,9 @@ namespace System.Workflow.ComponentModel.Compiler
                     List<Type> typeCollection = new List<Type>();
 
                     // method/constructor arguments
-                    foreach (ParameterInfo parameterInfo in (memberInfo as MethodBase).GetParameters())
+                    foreach (
+                        ParameterInfo parameterInfo in (memberInfo as MethodBase).GetParameters()
+                    )
                         typeCollection.Add(parameterInfo.ParameterType);
 
                     this.parameters = typeCollection.ToArray();
@@ -1256,18 +1506,12 @@ namespace System.Workflow.ComponentModel.Compiler
 
             public string Name
             {
-                get
-                {
-                    return name;
-                }
+                get { return name; }
             }
 
             public Type ReturnType
             {
-                get
-                {
-                    return returnType;
-                }
+                get { return returnType; }
             }
 
             public Type[] Parameters
@@ -1281,7 +1525,6 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
             }
 
-
             #endregion
 
             #region Comparison
@@ -1290,11 +1533,17 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 MemberSignature memberSignature = obj as MemberSignature;
 
-                if ((memberSignature == null) || (this.name != memberSignature.name) || (this.returnType != memberSignature.returnType))
+                if (
+                    (memberSignature == null)
+                    || (this.name != memberSignature.name)
+                    || (this.returnType != memberSignature.returnType)
+                )
                     return false;
 
-                if ((this.Parameters == null) && (memberSignature.Parameters != null) ||
-                    (this.Parameters != null) && (memberSignature.Parameters == null))
+                if (
+                    (this.Parameters == null) && (memberSignature.Parameters != null)
+                    || (this.Parameters != null) && (memberSignature.Parameters == null)
+                )
                     return false;
 
                 if (this.Parameters != null)
@@ -1312,15 +1561,20 @@ namespace System.Workflow.ComponentModel.Compiler
                 return true;
             }
 
-            // this method will filter using a mask signautre. only non-null mask members are used to filter 
+            // this method will filter using a mask signautre. only non-null mask members are used to filter
             // the signature, the rest are ignored
             public bool FilterSignature(MemberSignature maskSignature)
             {
                 if (maskSignature == null)
                     throw new ArgumentNullException("maskSignature");
 
-                if (((maskSignature.Name != null) && (this.name != maskSignature.name)) ||
-                    ((maskSignature.returnType != null) && (this.returnType != maskSignature.returnType)))
+                if (
+                    ((maskSignature.Name != null) && (this.name != maskSignature.name))
+                    || (
+                        (maskSignature.returnType != null)
+                        && (this.returnType != maskSignature.returnType)
+                    )
+                )
                     return false;
 
                 if (maskSignature.parameters != null)

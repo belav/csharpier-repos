@@ -24,25 +24,29 @@ public static class HtmlGeneratorUtilities
         return GetHtmlGenerator(provider, urlHelperFactory.Object, options);
     }
 
-    public static IHtmlGenerator GetHtmlGenerator(IModelMetadataProvider provider, IUrlHelperFactory urlHelperFactory, MvcViewOptions options)
+    public static IHtmlGenerator GetHtmlGenerator(
+        IModelMetadataProvider provider,
+        IUrlHelperFactory urlHelperFactory,
+        MvcViewOptions options
+    )
     {
         var optionsAccessor = new Mock<IOptions<MvcViewOptions>>();
-        optionsAccessor
-            .SetupGet(o => o.Value)
-            .Returns(options);
+        optionsAccessor.SetupGet(o => o.Value).Returns(options);
 
         var attributeProvider = new DefaultValidationHtmlAttributeProvider(
             optionsAccessor.Object,
             provider,
-            new ClientValidatorCache());
+            new ClientValidatorCache()
+        );
 
         var htmlGenerator = new DefaultHtmlGenerator(
-                Mock.Of<IAntiforgery>(),
-                optionsAccessor.Object,
-                provider,
-                urlHelperFactory,
-                new HtmlTestEncoder(),
-                attributeProvider);
+            Mock.Of<IAntiforgery>(),
+            optionsAccessor.Object,
+            provider,
+            urlHelperFactory,
+            new HtmlTestEncoder(),
+            attributeProvider
+        );
         return htmlGenerator;
     }
 }

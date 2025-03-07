@@ -25,10 +25,17 @@ public class DiagnosticProject
     /// </summary>
     public static string TestProjectName = "TestProject";
 
-    private static readonly ICompilationAssemblyResolver _assemblyResolver = new AppBaseCompilationAssemblyResolver();
-    private static readonly Dictionary<Assembly, Solution> _solutionCache = new Dictionary<Assembly, Solution>();
+    private static readonly ICompilationAssemblyResolver _assemblyResolver =
+        new AppBaseCompilationAssemblyResolver();
+    private static readonly Dictionary<Assembly, Solution> _solutionCache =
+        new Dictionary<Assembly, Solution>();
 
-    public static Project Create(Assembly testAssembly, string[] sources, Func<Workspace> workspaceFactory = null, Type analyzerReference = null)
+    public static Project Create(
+        Assembly testAssembly,
+        string[] sources,
+        Func<Workspace> workspaceFactory = null,
+        Type analyzerReference = null
+    )
     {
         Solution solution;
         lock (_solutionCache)
@@ -39,14 +46,29 @@ public class DiagnosticProject
 
                 var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
                 solution = workspaceFactory()
-                    .CurrentSolution
-                    .AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp);
+                    .CurrentSolution.AddProject(
+                        projectId,
+                        TestProjectName,
+                        TestProjectName,
+                        LanguageNames.CSharp
+                    );
 
-                foreach (var defaultCompileLibrary in DependencyContext.Load(testAssembly).CompileLibraries)
+                foreach (
+                    var defaultCompileLibrary in DependencyContext
+                        .Load(testAssembly)
+                        .CompileLibraries
+                )
                 {
-                    foreach (var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(_assemblyResolver))
+                    foreach (
+                        var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
+                            _assemblyResolver
+                        )
+                    )
                     {
-                        solution = solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(resolveReferencePath));
+                        solution = solution.AddMetadataReference(
+                            projectId,
+                            MetadataReference.CreateFromFile(resolveReferencePath)
+                        );
                     }
                 }
 
@@ -54,7 +76,11 @@ public class DiagnosticProject
                 {
                     solution = solution.AddAnalyzerReference(
                         projectId,
-                        new AnalyzerFileReference(analyzerReference.Assembly.Location, AssemblyLoader.Instance));
+                        new AnalyzerFileReference(
+                            analyzerReference.Assembly.Location,
+                            AssemblyLoader.Instance
+                        )
+                    );
                 }
 
                 _solutionCache.Add(testAssembly, solution);
@@ -89,9 +115,7 @@ public class DiagnosticProject
     {
         public static AssemblyLoader Instance = new AssemblyLoader();
 
-        public void AddDependencyLocation(string fullPath)
-        {
-        }
+        public void AddDependencyLocation(string fullPath) { }
 
         public Assembly LoadFromPath(string fullPath)
         {

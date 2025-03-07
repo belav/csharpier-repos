@@ -27,60 +27,89 @@
 //
 
 using System;
-using System.Reflection;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Reflection;
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq.Expressions {
+namespace MonoTests.System.Linq.Expressions
+{
+    [TestFixture]
+    [Category("SRE")]
+    public class ExpressionTest_Loop
+    {
+        public static void Print(int arg) { }
 
-	[TestFixture]
-	[Category("SRE")]
-	public class ExpressionTest_Loop
-	{
-		public static void Print (int arg)
-		{
-		}
+        [Test]
+        public void ComplexTest()
+        {
+            var breakLabel = Expression.Label("LoopBreak");
+            var counter = Expression.Variable(typeof(int), "counter");
 
-		[Test]
-		public void ComplexTest ()
-		{
-			var breakLabel = Expression.Label ("LoopBreak");
-			var counter = Expression.Variable (typeof (int), "counter");
+            var l = Expression.Block(
+                new[] { counter },
+                Expression.Assign(counter, Expression.Constant(-1)),
+                Expression.Loop(
+                    Expression.Block(
+                        Expression.IfThenElse(
+                            Expression.Equal(
+                                Expression.Assign(
+                                    counter,
+                                    Expression.Add(counter, Expression.Constant(1))
+                                ),
+                                Expression.Constant(1000)
+                            ),
+                            Expression.Block(Expression.Break(breakLabel)),
+                            Expression.Call(
+                                null,
+                                typeof(ExpressionTest_Loop).GetMethod(
+                                    "Print",
+                                    new Type[] { typeof(int) }
+                                ),
+                                counter
+                            )
+                        )
+                    ),
+                    breakLabel
+                )
+            );
 
-			var l = Expression.Block (new[] { counter },
-				Expression.Assign (counter, Expression.Constant (-1)),
-				Expression.Loop (
-				Expression.Block (Expression.IfThenElse (
-					Expression.Equal (Expression.Assign (counter, Expression.Add (counter, Expression.Constant (1))), Expression.Constant (1000)),
-					Expression.Block (Expression.Break (breakLabel)),
-					Expression.Call (null, typeof (ExpressionTest_Loop).GetMethod ("Print", new Type[] { typeof (int) }), counter)
-				)),
-				breakLabel)
-		   );
+            var res = Expression.Lambda<Action>(l).Compile();
+        }
 
-			var res = Expression.Lambda<Action> (l).Compile ();
-		}
+        [Test]
+        public void ComplexTest_2()
+        {
+            var breakLabel = Expression.Label("LoopBreak");
+            var counter = Expression.Variable(typeof(int), "counter");
 
-		[Test]
-		public void ComplexTest_2 ()
-		{
-			var breakLabel = Expression.Label ("LoopBreak");
-			var counter = Expression.Variable (typeof (int), "counter");
+            var l = Expression.Block(
+                new[] { counter },
+                Expression.Assign(counter, Expression.Constant(-1)),
+                Expression.Loop(
+                    Expression.IfThenElse(
+                        Expression.Equal(
+                            Expression.Assign(
+                                counter,
+                                Expression.Add(counter, Expression.Constant(1))
+                            ),
+                            Expression.Constant(1000)
+                        ),
+                        Expression.Break(breakLabel),
+                        Expression.Call(
+                            null,
+                            typeof(ExpressionTest_Loop).GetMethod(
+                                "Print",
+                                new Type[] { typeof(int) }
+                            ),
+                            counter
+                        )
+                    ),
+                    breakLabel
+                )
+            );
 
-			var l = Expression.Block (new[] { counter },
-				Expression.Assign (counter, Expression.Constant(-1)),
-				Expression.Loop (
-				Expression.IfThenElse (
-					Expression.Equal (Expression.Assign (counter, Expression.Add (counter, Expression.Constant (1))), Expression.Constant (1000)),
-					Expression.Break (breakLabel),
-					Expression.Call (null, typeof (ExpressionTest_Loop).GetMethod ("Print", new Type[] { typeof (int) }), counter)
-				),
-				breakLabel)
-		   );
-
-			var res = Expression.Lambda<Action> (l).Compile ();
-		}
-	}
+            var res = Expression.Lambda<Action>(l).Compile();
+        }
+    }
 }

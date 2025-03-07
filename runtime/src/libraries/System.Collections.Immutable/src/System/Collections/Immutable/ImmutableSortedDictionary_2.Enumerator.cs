@@ -73,9 +73,17 @@ namespace System.Collections.Immutable
                 _stack = null;
                 if (!_root.IsEmpty)
                 {
-                    if (!SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.TryTake(this, out _stack))
+                    if (
+                        !SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.TryTake(
+                            this,
+                            out _stack
+                        )
+                    )
                     {
-                        _stack = SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.PrepNew(this, new Stack<RefAsValueType<Node>>(root.Height));
+                        _stack = SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.PrepNew(
+                            this,
+                            new Stack<RefAsValueType<Node>>(root.Height)
+                        );
                     }
 
                     this.PushLeft(_root);
@@ -120,7 +128,10 @@ namespace System.Collections.Immutable
             {
                 _root = null!;
                 _current = null;
-                if (_stack != null && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack))
+                if (
+                    _stack != null
+                    && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack)
+                )
                 {
                     stack.ClearFastWhenEmpty();
                     SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.TryAdd(this, _stack!);
@@ -140,7 +151,8 @@ namespace System.Collections.Immutable
 
                 if (_stack != null)
                 {
-                    Stack<RefAsValueType<ImmutableSortedDictionary<TKey, TValue>.Node>> stack = _stack.Use(ref this);
+                    Stack<RefAsValueType<ImmutableSortedDictionary<TKey, TValue>.Node>> stack =
+                        _stack.Use(ref this);
                     if (stack.Count > 0)
                     {
                         Node n = stack.Pop().Value;
@@ -165,7 +177,8 @@ namespace System.Collections.Immutable
                 _current = null;
                 if (_stack != null)
                 {
-                    Stack<RefAsValueType<ImmutableSortedDictionary<TKey, TValue>.Node>> stack = _stack.Use(ref this);
+                    Stack<RefAsValueType<ImmutableSortedDictionary<TKey, TValue>.Node>> stack =
+                        _stack.Use(ref this);
                     stack.ClearFastWhenEmpty();
                     this.PushLeft(_root);
                 }
@@ -208,7 +221,8 @@ namespace System.Collections.Immutable
             {
                 Requires.NotNull(node, nameof(node));
                 Debug.Assert(_stack != null);
-                Stack<RefAsValueType<ImmutableSortedDictionary<TKey, TValue>.Node>> stack = _stack.Use(ref this);
+                Stack<RefAsValueType<ImmutableSortedDictionary<TKey, TValue>.Node>> stack =
+                    _stack.Use(ref this);
                 while (!node.IsEmpty)
                 {
                     stack.Push(new RefAsValueType<Node>(node));

@@ -64,7 +64,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IAsynchronousOperationListenerProvider listenerProvider,
             IThreadingContext threadingContext,
 #pragma warning disable CS0618 // Editor team use Obsolete attribute to mark potential changing API
-            [Import(ISmartRenameSessionFactoryWrapper.WrappedTypeName, AllowDefault = true)] Lazy<object>? smartRenameSessionFactory)
+            [Import(ISmartRenameSessionFactoryWrapper.WrappedTypeName, AllowDefault = true)]
+                Lazy<object>? smartRenameSessionFactory
+        )
 #pragma warning restore CS0618
         {
             _renameService = renameService;
@@ -76,28 +78,60 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _listenerProvider = listenerProvider;
             if (smartRenameSessionFactory is not null)
             {
-                _smartRenameSessionFactory = new Lazy<ISmartRenameSessionFactoryWrapper>(() => ISmartRenameSessionFactoryWrapper.FromInstance(smartRenameSessionFactory));
+                _smartRenameSessionFactory = new Lazy<ISmartRenameSessionFactoryWrapper>(
+                    () => ISmartRenameSessionFactoryWrapper.FromInstance(smartRenameSessionFactory)
+                );
             }
 
             _threadingContext = threadingContext;
         }
 
-        public void SubjectBuffersConnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        public void SubjectBuffersConnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             // Create it for the view if we don't already have one
-            textView.GetOrCreateAutoClosingProperty(v => new InlineRenameAdornmentManager(_renameService, _editorFormatMapService, _dashboardColorUpdater, v, _globalOptionService, _themeingService, _asyncQuickInfoBroker, _listenerProvider, _threadingContext, _smartRenameSessionFactory));
+            textView.GetOrCreateAutoClosingProperty(v => new InlineRenameAdornmentManager(
+                _renameService,
+                _editorFormatMapService,
+                _dashboardColorUpdater,
+                v,
+                _globalOptionService,
+                _themeingService,
+                _asyncQuickInfoBroker,
+                _listenerProvider,
+                _threadingContext,
+                _smartRenameSessionFactory
+            ));
         }
 
-        public void SubjectBuffersDisconnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        public void SubjectBuffersDisconnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             // Do we still have any buffers alive?
-            if (textView.BufferGraph.GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)).Any())
+            if (
+                textView
+                    .BufferGraph.GetTextBuffers(b =>
+                        b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
+                    )
+                    .Any()
+            )
             {
                 // Yep, some are still attached
                 return;
             }
 
-            if (textView.Properties.TryGetProperty(typeof(InlineRenameAdornmentManager), out InlineRenameAdornmentManager manager))
+            if (
+                textView.Properties.TryGetProperty(
+                    typeof(InlineRenameAdornmentManager),
+                    out InlineRenameAdornmentManager manager
+                )
+            )
             {
                 manager.Dispose();
                 textView.Properties.RemoveProperty(typeof(InlineRenameAdornmentManager));

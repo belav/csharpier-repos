@@ -20,8 +20,12 @@ internal class CollectionConverterFactory : IFormDataConverterFactory
             return false;
         }
 
-        if (Activator.CreateInstance(typeof(TypedCollectionConverterFactory<,>)
-            .MakeGenericType(type, element!)) is not IFormDataConverterFactory factory)
+        if (
+            Activator.CreateInstance(
+                typeof(TypedCollectionConverterFactory<,>).MakeGenericType(type, element!)
+            )
+            is not IFormDataConverterFactory factory
+        )
         {
             return false;
         }
@@ -52,18 +56,25 @@ internal class CollectionConverterFactory : IFormDataConverterFactory
         // There is an assumption here that if the type is a bindable collection, it's going to implement
         // ICollection<T> and IEnumerable<T>. There could potentially be a type that implements ICollection<T>
         // multiple times for different T's explicitly, but that is not something we will support (nor something supported today).
-        var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IEnumerable<>));
+        var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(
+            type,
+            typeof(IEnumerable<>)
+        );
         var elementType = enumerableType?.GetGenericArguments()[0];
 
         // The collection converter heavily relies on generics to adapt to different collection types.
         // Since reflection gets a bit tricky with generics, we instead close over the generic collection and
         // element types to make it simpler to create the converter.
-        var factory = Activator.CreateInstance(typeof(TypedCollectionConverterFactory<,>)
-            .MakeGenericType(type, elementType!)) as IFormDataConverterFactory;
+        var factory =
+            Activator.CreateInstance(
+                typeof(TypedCollectionConverterFactory<,>).MakeGenericType(type, elementType!)
+            ) as IFormDataConverterFactory;
 
         if (factory == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
         return factory.CreateConverter(type, options);

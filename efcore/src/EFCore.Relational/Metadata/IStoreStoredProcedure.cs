@@ -78,15 +78,11 @@ public interface IStoreStoredProcedure : ITableBase
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("StoreStoredProcedure: ");
+            builder.Append(indentString).Append("StoreStoredProcedure: ");
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);

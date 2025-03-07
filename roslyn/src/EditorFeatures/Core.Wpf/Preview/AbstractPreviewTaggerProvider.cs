@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     internal class AbstractPreviewTaggerProvider<TTag> : ITaggerProvider
-            where TTag : ITag
+        where TTag : ITag
     {
         private readonly object _key;
         private readonly TTag _tagInstance;
@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             _tagInstance = tagInstance;
         }
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
-            => new Tagger(buffer, _key, _tagInstance) as ITagger<T>;
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag => new Tagger(buffer, _key, _tagInstance) as ITagger<T>;
 
         private class Tagger : ITagger<TTag>
         {
@@ -43,9 +43,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection spans)
             {
-                if (_buffer.Properties.TryGetProperty(_key, out NormalizedSnapshotSpanCollection matchingSpans))
+                if (
+                    _buffer.Properties.TryGetProperty(
+                        _key,
+                        out NormalizedSnapshotSpanCollection matchingSpans
+                    )
+                )
                 {
-                    var intersection = NormalizedSnapshotSpanCollection.Intersection(matchingSpans, spans);
+                    var intersection = NormalizedSnapshotSpanCollection.Intersection(
+                        matchingSpans,
+                        spans
+                    );
 
                     return intersection.Select(s => new TagSpan<TTag>(s, _tagInstance));
                 }

@@ -5,18 +5,38 @@ namespace System.Configuration
 {
     public sealed class ConnectionStringSettings : ConfigurationElement
     {
-        private static readonly ConfigurationProperty s_propName =
-            new ConfigurationProperty("name", typeof(string), null, null,
-                ConfigurationProperty.s_nonEmptyStringValidator,
-                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        private static readonly ConfigurationProperty s_propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            null,
+            null,
+            ConfigurationProperty.s_nonEmptyStringValidator,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
 
         private static readonly ConfigurationProperty s_propConnectionString =
-            new ConfigurationProperty("connectionString", typeof(string), "", ConfigurationPropertyOptions.IsRequired);
+            new ConfigurationProperty(
+                "connectionString",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.IsRequired
+            );
 
         private static readonly ConfigurationProperty s_propProviderName =
-            new ConfigurationProperty("providerName", typeof(string), string.Empty, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "providerName",
+                typeof(string),
+                string.Empty,
+                ConfigurationPropertyOptions.None
+            );
 
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection { s_propName, s_propConnectionString, s_propProviderName };
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection
+            {
+                s_propName,
+                s_propConnectionString,
+                s_propProviderName,
+            };
 
         public ConnectionStringSettings() { }
 
@@ -39,15 +59,22 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 
-        [ConfigurationProperty("name",
-            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey, DefaultValue = "")]
+        [ConfigurationProperty(
+            "name",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            DefaultValue = ""
+        )]
         public string Name
         {
             get { return (string)base[s_propName]; }
             set { base[s_propName] = value; }
         }
 
-        [ConfigurationProperty("connectionString", Options = ConfigurationPropertyOptions.IsRequired, DefaultValue = "")]
+        [ConfigurationProperty(
+            "connectionString",
+            Options = ConfigurationPropertyOptions.IsRequired,
+            DefaultValue = ""
+        )]
         public string ConnectionString
         {
             get { return (string)base[s_propConnectionString]; }

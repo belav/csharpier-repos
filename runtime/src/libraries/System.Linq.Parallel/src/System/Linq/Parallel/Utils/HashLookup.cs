@@ -27,9 +27,8 @@ namespace System.Linq.Parallel
 
         private const int HashCodeMask = 0x7fffffff;
 
-        internal HashLookup() : this(null)
-        {
-        }
+        internal HashLookup()
+            : this(null) { }
 
         internal HashLookup(IEqualityComparer<TKey>? comparer)
         {
@@ -62,16 +61,17 @@ namespace System.Linq.Parallel
 
         private int GetKeyHashCode(TKey key)
         {
-            return HashCodeMask &
-                (key == null ? 0 : (comparer?.GetHashCode(key) ?? key.GetHashCode()));
+            return HashCodeMask
+                & (key == null ? 0 : (comparer?.GetHashCode(key) ?? key.GetHashCode()));
         }
 
         private bool AreKeysEqual(TKey key1, TKey key2)
         {
-            return
-                (comparer == null ?
-                    ((key1 == null && key2 == null) || (key1 != null && key1.Equals(key2))) :
-                    comparer.Equals(key1, key2));
+            return (
+                comparer == null
+                    ? ((key1 == null && key2 == null) || (key1 != null && key1.Equals(key2)))
+                    : comparer.Equals(key1, key2)
+            );
         }
 
         private bool Find(TKey key, bool add, bool set, [MaybeNullWhen(false)] ref TValue value)
@@ -105,7 +105,8 @@ namespace System.Linq.Parallel
                 }
                 else
                 {
-                    if (count == slots.Length) Resize();
+                    if (count == slots.Length)
+                        Resize();
                     index = count;
                     count++;
                 }

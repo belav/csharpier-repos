@@ -40,8 +40,10 @@ public sealed class FormMappingContext
     /// <param name="formName">Form name for a form under this context.</param>
     /// <returns>The list of errors associated with that part of the model if any.</returns>
     public FormMappingError? GetErrors(string formName, string key) =>
-        _errorsByFormName?.TryGetValue(formName, out var formErrors) == true &&
-        formErrors.TryGetValue(key, out var mappingError) == true ? mappingError : null;
+        _errorsByFormName?.TryGetValue(formName, out var formErrors) == true
+        && formErrors.TryGetValue(key, out var mappingError) == true
+            ? mappingError
+            : null;
 
     /// <summary>
     /// Retrieves all the errors for the model.
@@ -52,7 +54,9 @@ public sealed class FormMappingContext
         return GetAllErrorsCore(_errors);
     }
 
-    private static IEnumerable<FormMappingError> GetAllErrorsCore(Dictionary<string, FormMappingError>? errors)
+    private static IEnumerable<FormMappingError> GetAllErrorsCore(
+        Dictionary<string, FormMappingError>? errors
+    )
     {
         if (errors == null)
         {
@@ -69,9 +73,9 @@ public sealed class FormMappingContext
     /// <returns>The list of errors associated with the model if any.</returns>
     public IEnumerable<FormMappingError> GetAllErrors(string formName)
     {
-        return _errorsByFormName?.TryGetValue(formName, out var formErrors) == true ?
-            GetAllErrorsCore(formErrors) :
-            Array.Empty<FormMappingError>();
+        return _errorsByFormName?.TryGetValue(formName, out var formErrors) == true
+            ? GetAllErrorsCore(formErrors)
+            : Array.Empty<FormMappingError>();
     }
 
     /// <summary>
@@ -80,7 +84,9 @@ public sealed class FormMappingContext
     /// <param name="key">The key used to identify the specific part of the model.</param>
     /// <returns>The attempted value associated with that part of the model if any.</returns>
     public string? GetAttemptedValue(string key) =>
-        _errors?.TryGetValue(key, out var mappingError) == true ? mappingError.AttemptedValue : null;
+        _errors?.TryGetValue(key, out var mappingError) == true
+            ? mappingError.AttemptedValue
+            : null;
 
     /// <summary>
     /// Retrieves the attempted value that failed to map for a given model key.
@@ -89,8 +95,10 @@ public sealed class FormMappingContext
     /// <param name="key">The key used to identify the specific part of the model.</param>
     /// <returns>The attempted value associated with that part of the model if any.</returns>
     public string? GetAttemptedValue(string formName, string key) =>
-        _errorsByFormName?.TryGetValue(formName, out var formErrors) == true &&
-            formErrors.TryGetValue(key, out var mappingError) ? mappingError.AttemptedValue : null;
+        _errorsByFormName?.TryGetValue(formName, out var formErrors) == true
+        && formErrors.TryGetValue(key, out var mappingError)
+            ? mappingError.AttemptedValue
+            : null;
 
     internal void AddError(string key, FormattableString error, string? attemptedValue)
     {
@@ -98,11 +106,21 @@ public sealed class FormMappingContext
         AddErrorCore(_errors, key, error, attemptedValue, ref _pendingErrors);
     }
 
-    private static void AddErrorCore(Dictionary<string, FormMappingError> errors, string key, FormattableString error, string? attemptedValue, ref List<KeyValuePair<string, FormMappingError>>? pendingErrors)
+    private static void AddErrorCore(
+        Dictionary<string, FormMappingError> errors,
+        string key,
+        FormattableString error,
+        string? attemptedValue,
+        ref List<KeyValuePair<string, FormMappingError>>? pendingErrors
+    )
     {
         if (!errors.TryGetValue(key, out var mappingError))
         {
-            mappingError = new FormMappingError(key, new List<FormattableString>() { error }, attemptedValue);
+            mappingError = new FormMappingError(
+                key,
+                new List<FormattableString>() { error },
+                attemptedValue
+            );
             errors.Add(key, mappingError);
             pendingErrors ??= new();
             pendingErrors.Add(new KeyValuePair<string, FormMappingError>(key, mappingError));
@@ -113,7 +131,12 @@ public sealed class FormMappingContext
         }
     }
 
-    internal void AddError(string formName, string key, FormattableString error, string? attemptedValue)
+    internal void AddError(
+        string formName,
+        string key,
+        FormattableString error,
+        string? attemptedValue
+    )
     {
         _errorsByFormName ??= new Dictionary<string, Dictionary<string, FormMappingError>>();
         if (!_errorsByFormName.TryGetValue(formName, out var formErrors))
@@ -147,7 +170,10 @@ public sealed class FormMappingContext
 
     internal void SetErrors(string formName, FormMappingContext childContext)
     {
-        if (_errorsByFormName == null || !_errorsByFormName.TryGetValue(formName, out var formErrors))
+        if (
+            _errorsByFormName == null
+            || !_errorsByFormName.TryGetValue(formName, out var formErrors)
+        )
         {
             return;
         }

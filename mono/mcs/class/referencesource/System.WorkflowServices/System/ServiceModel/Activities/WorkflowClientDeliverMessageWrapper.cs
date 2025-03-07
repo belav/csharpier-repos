@@ -10,28 +10,44 @@ namespace System.ServiceModel.Activities
     using System.ServiceModel;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Channels;
-    using System.Workflow.Activities;
-    using System.Workflow.Runtime;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.Workflow.Activities;
+    using System.Workflow.Runtime;
 
     class WorkflowClientDeliverMessageWrapper : IDeliverMessage
     {
         string baseUri;
+
         public WorkflowClientDeliverMessageWrapper(string baseUri)
         {
             this.baseUri = baseUri;
         }
 
-        public object[] PrepareEventArgsArray(object sender, ExternalDataEventArgs eventArgs, out object workItem, out IPendingWork workHandler)
+        public object[] PrepareEventArgsArray(
+            object sender,
+            ExternalDataEventArgs eventArgs,
+            out object workItem,
+            out IPendingWork workHandler
+        )
         {
             workItem = null;
             workHandler = null;
             return new object[] { sender, eventArgs };
         }
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
-            Justification = "Calling into already shipped assembly; can't apply APTCA")]
-        public void DeliverMessage(ExternalDataEventArgs eventArgs, IComparable queueName, object message, object workItem, IPendingWork workHandler)
+
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "Calling into already shipped assembly; can't apply APTCA"
+        )]
+        public void DeliverMessage(
+            ExternalDataEventArgs eventArgs,
+            IComparable queueName,
+            object message,
+            object workItem,
+            IPendingWork workHandler
+        )
         {
             if (eventArgs == null)
             {
@@ -42,12 +58,21 @@ namespace System.ServiceModel.Activities
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("queueName");
             }
 
-            using (ExternalDataExchangeClient desClient = new ExternalDataExchangeClient(WorkflowRuntimeEndpoint.netNamedPipeContextBinding,
-                new EndpointAddress(this.baseUri)))
+            using (
+                ExternalDataExchangeClient desClient = new ExternalDataExchangeClient(
+                    WorkflowRuntimeEndpoint.netNamedPipeContextBinding,
+                    new EndpointAddress(this.baseUri)
+                )
+            )
             {
-                using (OperationContextScope scope = new OperationContextScope((IContextChannel)desClient.InnerChannel))
+                using (
+                    OperationContextScope scope = new OperationContextScope(
+                        (IContextChannel)desClient.InnerChannel
+                    )
+                )
                 {
-                    IContextManager contextManager = desClient.InnerChannel.GetProperty<IContextManager>();
+                    IContextManager contextManager =
+                        desClient.InnerChannel.GetProperty<IContextManager>();
                     Fx.Assert(contextManager != null, "IContextManager must not be null.");
                     if (contextManager != null)
                     {
@@ -59,7 +84,6 @@ namespace System.ServiceModel.Activities
                     desClient.RaiseEvent(eventArgs, queueName, message);
                 }
             }
-  
         }
     }
 }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,22 +23,21 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-namespace System.Windows.Forms {
-
-	[FlagsAttribute()]
-	public enum DataGridViewDataErrorContexts {
-		Formatting = 1,
-		Display = 2,
-		PreferredSize = 4,
-		RowDeletion = 8,
-		Parsing = 256,
-		Commit = 512,
-		InitialValueRestoration = 1024,
-		LeaveControl = 2048,
-		CurrentCellChange = 4096,
-		Scroll = 8192,
-		ClipboardContent = 16384
-	}
-
+namespace System.Windows.Forms
+{
+    [FlagsAttribute()]
+    public enum DataGridViewDataErrorContexts
+    {
+        Formatting = 1,
+        Display = 2,
+        PreferredSize = 4,
+        RowDeletion = 8,
+        Parsing = 256,
+        Commit = 512,
+        InitialValueRestoration = 1024,
+        LeaveControl = 2048,
+        CurrentCellChange = 4096,
+        Scroll = 8192,
+        ClipboardContent = 16384,
+    }
 }
-

@@ -11,7 +11,10 @@ public class LinkParserEndpointNameExtensionsTest : LinkParserTestBase
     public void ParsePathByAddresss_NoMatchingEndpoint_ReturnsNull()
     {
         // Arrange
-        var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id?}", metadata: new object[] { new EndpointNameMetadata("Test2"), });
+        var endpoint = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id?}",
+            metadata: new object[] { new EndpointNameMetadata("Test2") }
+        );
 
         var parser = CreateLinkParser(endpoint);
 
@@ -26,8 +29,14 @@ public class LinkParserEndpointNameExtensionsTest : LinkParserTestBase
     public void ParsePathByAddresss_HasMatches_ReturnsNullWhenParsingFails()
     {
         // Arrange
-        var endpoint1 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", metadata: new object[] { new EndpointNameMetadata("Test2"), });
-        var endpoint2 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id2}", metadata: new object[] { new EndpointNameMetadata("Test"), });
+        var endpoint1 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            metadata: new object[] { new EndpointNameMetadata("Test2") }
+        );
+        var endpoint2 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id2}",
+            metadata: new object[] { new EndpointNameMetadata("Test") }
+        );
 
         var parser = CreateLinkParser(endpoint1, endpoint2);
 
@@ -42,7 +51,10 @@ public class LinkParserEndpointNameExtensionsTest : LinkParserTestBase
     public void ParsePathByAddresss_HasMatches_ReturnsFirstSuccessfulParse()
     {
         // Arrange
-        var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", metadata: new object[] { new EndpointNameMetadata("Test"), });
+        var endpoint = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            metadata: new object[] { new EndpointNameMetadata("Test") }
+        );
 
         var parser = CreateLinkParser(endpoint);
 
@@ -50,6 +62,14 @@ public class LinkParserEndpointNameExtensionsTest : LinkParserTestBase
         var values = parser.ParsePathByEndpointName("Test", "/Home/Index/17");
 
         // Assert
-        MatcherAssert.AssertRouteValuesEqual(new { controller = "Home", action = "Index", id = "17" }, values);
+        MatcherAssert.AssertRouteValuesEqual(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                id = "17",
+            },
+            values
+        );
     }
 }

@@ -45,8 +45,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (rpc.Operation.IsTerminating && rpc.Channel.HasSession)
             {
-                IOThreadTimer timer = new IOThreadTimer(new Action<object>(TerminatingOperationBehavior.AbortChannel),
-                                                        rpc.Channel.Binder.Channel, false);
+                IOThreadTimer timer = new IOThreadTimer(
+                    new Action<object>(TerminatingOperationBehavior.AbortChannel),
+                    rpc.Channel.Binder.Channel,
+                    false
+                );
 
                 timer.Set(rpc.Channel.CloseTimeout);
             }

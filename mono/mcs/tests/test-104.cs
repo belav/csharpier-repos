@@ -3,12 +3,14 @@
 //
 using System;
 
-class Test {
-        public static int Main(String[] args) {
-                int iTest = 1;
+class Test
+{
+    public static int Main(String[] args)
+    {
+        int iTest = 1;
 
-                System.Threading.Interlocked.Increment(ref iTest);
+        System.Threading.Interlocked.Increment(ref iTest);
 
-		return 0;
-        }
+        return 0;
+    }
 }

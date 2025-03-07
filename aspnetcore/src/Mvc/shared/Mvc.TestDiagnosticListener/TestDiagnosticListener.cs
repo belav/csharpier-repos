@@ -8,9 +8,9 @@ namespace Microsoft.AspNetCore.Mvc;
 public class TestDiagnosticListener
 {
     public class OnBeforeResourceEventData
-    {        
-        public IProxyActionDescriptor ActionDescriptor { get; set;  }        
-        public object ExecutingContext { get; set; }        
+    {
+        public IProxyActionDescriptor ActionDescriptor { get; set; }
+        public object ExecutingContext { get; set; }
         public object Filter { get; set; }
     }
 
@@ -20,13 +20,14 @@ public class TestDiagnosticListener
     public virtual void OnBeforeResource(
         IProxyActionDescriptor actionDescriptor,
         object resourceExecutingContext,
-        object filter)
-    {        
+        object filter
+    )
+    {
         BeforeResource = new OnBeforeResourceEventData()
         {
             ActionDescriptor = actionDescriptor,
             ExecutingContext = resourceExecutingContext,
-            Filter = filter
+            Filter = filter,
         };
     }
 
@@ -43,15 +44,16 @@ public class TestDiagnosticListener
     public virtual void OnAfterResource(
         IProxyActionDescriptor actionDescriptor,
         object resourceExecutedContext,
-        object filter)
+        object filter
+    )
     {
         AfterResource = new OnAfterResourceEventData()
         {
             ActionDescriptor = actionDescriptor,
             ExecutedContext = resourceExecutedContext,
-            Filter = filter
+            Filter = filter,
         };
-    }    
+    }
 
     public class OnBeforeActionEventData
     {
@@ -66,7 +68,8 @@ public class TestDiagnosticListener
     public virtual void OnBeforeAction(
         IProxyHttpContext httpContext,
         IProxyRouteData routeData,
-        IProxyActionDescriptor actionDescriptor)
+        IProxyActionDescriptor actionDescriptor
+    )
     {
         BeforeAction = new OnBeforeActionEventData()
         {
@@ -87,7 +90,8 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterAction")]
     public virtual void OnAfterAction(
         IProxyHttpContext httpContext,
-        IProxyActionDescriptor actionDescriptor)
+        IProxyActionDescriptor actionDescriptor
+    )
     {
         AfterAction = new OnAfterActionEventData()
         {
@@ -107,7 +111,8 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeActionMethod")]
     public virtual void OnBeforeActionMethod(
         IProxyActionContext actionContext,
-        IReadOnlyDictionary<string, object> arguments)
+        IReadOnlyDictionary<string, object> arguments
+    )
     {
         BeforeActionMethod = new OnBeforeActionMethodEventData()
         {
@@ -127,7 +132,8 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterActionMethod")]
     public virtual void OnAfterActionMethod(
         IProxyActionContext actionContext,
-        IProxyActionResult result)
+        IProxyActionResult result
+    )
     {
         AfterActionMethod = new OnAfterActionMethodEventData()
         {
@@ -145,7 +151,10 @@ public class TestDiagnosticListener
     public OnBeforeActionResultEventData BeforeActionResult { get; set; }
 
     [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeActionResult")]
-    public virtual void OnBeforeActionResult(IProxyActionContext actionContext, IProxyActionResult result)
+    public virtual void OnBeforeActionResult(
+        IProxyActionContext actionContext,
+        IProxyActionResult result
+    )
     {
         BeforeActionResult = new OnBeforeActionResultEventData()
         {
@@ -163,7 +172,10 @@ public class TestDiagnosticListener
     public OnAfterActionResultEventData AfterActionResult { get; set; }
 
     [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterActionResult")]
-    public virtual void OnAfterActionResult(IProxyActionContext actionContext, IProxyActionResult result)
+    public virtual void OnAfterActionResult(
+        IProxyActionContext actionContext,
+        IProxyActionResult result
+    )
     {
         AfterActionResult = new OnAfterActionResultEventData()
         {
@@ -189,7 +201,8 @@ public class TestDiagnosticListener
         bool isMainPage,
         IProxyActionResult result,
         string viewName,
-        IProxyView view)
+        IProxyView view
+    )
     {
         ViewFound = new OnViewFoundEventData()
         {
@@ -218,7 +231,8 @@ public class TestDiagnosticListener
         bool isMainPage,
         IProxyActionResult result,
         string viewName,
-        IEnumerable<string> searchedLocations)
+        IEnumerable<string> searchedLocations
+    )
     {
         ViewNotFound = new OnViewNotFoundEventData()
         {
@@ -241,11 +255,7 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeView")]
     public virtual void OnBeforeView(IProxyView view, IProxyViewContext viewContext)
     {
-        BeforeView = new OnBeforeViewEventData()
-        {
-            View = view,
-            ViewContext = viewContext,
-        };
+        BeforeView = new OnBeforeViewEventData() { View = view, ViewContext = viewContext };
     }
 
     public class OnAfterViewEventData
@@ -259,11 +269,7 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterView")]
     public virtual void OnAfterView(IProxyView view, IProxyViewContext viewContext)
     {
-        AfterView = new OnAfterViewEventData()
-        {
-            View = view,
-            ViewContext = viewContext,
-        };
+        AfterView = new OnAfterViewEventData() { View = view, ViewContext = viewContext };
     }
 
     public class OnBeforeViewPageEventData
@@ -281,7 +287,8 @@ public class TestDiagnosticListener
         IProxyPage page,
         IProxyViewContext viewContext,
         IProxyActionDescriptor actionDescriptor,
-        IProxyHttpContext httpContext)
+        IProxyHttpContext httpContext
+    )
     {
         BeforeViewPage = new OnBeforeViewPageEventData()
         {
@@ -307,7 +314,8 @@ public class TestDiagnosticListener
         IProxyPage page,
         IProxyViewContext viewContext,
         IProxyActionDescriptor actionDescriptor,
-        IProxyHttpContext httpContext)
+        IProxyHttpContext httpContext
+    )
     {
         AfterViewPage = new OnAfterViewPageEventData()
         {
@@ -333,13 +341,14 @@ public class TestDiagnosticListener
     public virtual void OnBeforeViewComponent(
         IProxyActionDescriptor actionDescriptor,
         IProxyViewComponentContext viewComponentContext,
-        object viewComponent)
+        object viewComponent
+    )
     {
         BeforeViewComponent = new OnBeforeViewComponentEventData()
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
-            ViewComponent = viewComponent
+            ViewComponent = viewComponent,
         };
     }
 
@@ -361,14 +370,15 @@ public class TestDiagnosticListener
         IProxyActionDescriptor actionDescriptor,
         IProxyViewComponentContext viewComponentContext,
         IProxyViewComponentResult viewComponentResult,
-        object viewComponent)
+        object viewComponent
+    )
     {
         AfterViewComponent = new OnAfterViewComponentEventData()
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
             ViewComponentResult = viewComponentResult,
-            ViewComponent = viewComponent
+            ViewComponent = viewComponent,
         };
     }
 
@@ -387,13 +397,14 @@ public class TestDiagnosticListener
     public virtual void OnViewComponentBeforeViewExecute(
         IProxyActionDescriptor actionDescriptor,
         IProxyViewComponentContext viewComponentContext,
-        IProxyView view)
+        IProxyView view
+    )
     {
         ViewComponentBeforeViewExecute = new OnViewComponentBeforeViewExecuteEventData()
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
-            View = view
+            View = view,
         };
     }
 
@@ -412,13 +423,14 @@ public class TestDiagnosticListener
     public virtual void OnViewComponentAfterViewExecute(
         IProxyActionDescriptor actionDescriptor,
         IProxyViewComponentContext viewComponentContext,
-        IProxyView view)
+        IProxyView view
+    )
     {
         ViewComponentAfterViewExecute = new OnViewComponentAfterViewExecuteEventData()
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
-            View = view
+            View = view,
         };
     }
 
@@ -450,16 +462,19 @@ public class TestDiagnosticListener
         string path,
         int position,
         int length,
-        bool isLiteral)
+        bool isLiteral
+    )
     {
-        PageInstrumentationData.Add(new BeginPageInstrumentationData
-        {
-            HttpContext = httpContext,
-            Path = path,
-            Position = position,
-            Length = length,
-            IsLiteral = isLiteral,
-        });
+        PageInstrumentationData.Add(
+            new BeginPageInstrumentationData
+            {
+                HttpContext = httpContext,
+                Path = path,
+                Position = position,
+                Length = length,
+                IsLiteral = isLiteral,
+            }
+        );
     }
 
     [DiagnosticName("Microsoft.AspNetCore.Mvc.Razor.EndInstrumentationContext")]
@@ -468,12 +483,11 @@ public class TestDiagnosticListener
         string path,
         int position,
         int length,
-        bool isLiteral)
+        bool isLiteral
+    )
     {
-        PageInstrumentationData.Add(new EndPageInstrumentationData
-        {
-            HttpContext = httpContext,
-            Path = path,
-        });
+        PageInstrumentationData.Add(
+            new EndPageInstrumentationData { HttpContext = httpContext, Path = path }
+        );
     }
 }

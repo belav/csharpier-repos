@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// This API supports the ASP.NET Core Identity infrastructure and is not intended to be used as a general purpose
 /// email abstraction. It should be implemented by the application so the Identity infrastructure can send confirmation and password reset emails.
 /// </summary>
-public interface IEmailSender<TUser> where TUser : class
+public interface IEmailSender<TUser>
+    where TUser : class
 {
     /// <summary>
     /// This API supports the ASP.NET Core Identity infrastructure and is not intended to be used as a general purpose

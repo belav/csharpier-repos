@@ -17,10 +17,13 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext originalBindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(object)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(object)
+                ),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             // Act
@@ -39,7 +42,10 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
             };
 
             // Act & assert
@@ -55,7 +61,8 @@ namespace System.Web.Http.ModelBinding
             // Act & assert
             Assert.Throws<InvalidOperationException>(
                 () => bindingContext.Model = null,
-                "The ModelMetadata property must be set before accessing this property.");
+                "The ModelMetadata property must be set before accessing this property."
+            );
         }
 
         [Fact]
@@ -85,7 +92,10 @@ namespace System.Web.Http.ModelBinding
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => 42, typeof(int))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
             };
 
             // Assert
@@ -99,11 +109,18 @@ namespace System.Web.Http.ModelBinding
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => 42, typeof(int))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
             };
 
             // Act & assert
-            MemberHelper.TestPropertyWithDefaultInstance(bindingContext, "ValidationNode", new ModelValidationNode(bindingContext.ModelMetadata, "someName"));
+            MemberHelper.TestPropertyWithDefaultInstance(
+                bindingContext,
+                "ValidationNode",
+                new ModelValidationNode(bindingContext.ModelMetadata, "someName")
+            );
         }
 
         [Fact]
@@ -112,8 +129,11 @@ namespace System.Web.Http.ModelBinding
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => 42, typeof(int)),
-                ModelName = "theInt"
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
+                ModelName = "theInt",
             };
 
             // Act

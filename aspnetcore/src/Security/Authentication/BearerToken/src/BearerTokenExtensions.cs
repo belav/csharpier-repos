@@ -22,8 +22,8 @@ public static class BearerTokenExtensions
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddBearerToken(this AuthenticationBuilder builder)
-        => builder.AddBearerToken(BearerTokenDefaults.AuthenticationScheme);
+    public static AuthenticationBuilder AddBearerToken(this AuthenticationBuilder builder) =>
+        builder.AddBearerToken(BearerTokenDefaults.AuthenticationScheme);
 
     /// <summary>
     /// Adds bearer token authentication.
@@ -34,8 +34,10 @@ public static class BearerTokenExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddBearerToken(this AuthenticationBuilder builder, string authenticationScheme)
-        => builder.AddBearerToken(authenticationScheme, _ => { });
+    public static AuthenticationBuilder AddBearerToken(
+        this AuthenticationBuilder builder,
+        string authenticationScheme
+    ) => builder.AddBearerToken(authenticationScheme, _ => { });
 
     /// <summary>
     /// Adds bearer token authentication. The default scheme is specified by <see cref="BearerTokenDefaults.AuthenticationScheme"/>.
@@ -46,8 +48,10 @@ public static class BearerTokenExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="configure">Action used to configure the bearer token authentication options.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddBearerToken(this AuthenticationBuilder builder, Action<BearerTokenOptions> configure)
-        => builder.AddBearerToken(BearerTokenDefaults.AuthenticationScheme, configure);
+    public static AuthenticationBuilder AddBearerToken(
+        this AuthenticationBuilder builder,
+        Action<BearerTokenOptions> configure
+    ) => builder.AddBearerToken(BearerTokenDefaults.AuthenticationScheme, configure);
 
     /// <summary>
     /// Adds bearer token authentication.
@@ -59,14 +63,31 @@ public static class BearerTokenExtensions
     /// <param name="authenticationScheme">The authentication scheme.</param>
     /// <param name="configure">Action used to configure the bearer token authentication options.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddBearerToken(this AuthenticationBuilder builder, string authenticationScheme, Action<BearerTokenOptions> configure)
+    public static AuthenticationBuilder AddBearerToken(
+        this AuthenticationBuilder builder,
+        string authenticationScheme,
+        Action<BearerTokenOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(authenticationScheme);
         ArgumentNullException.ThrowIfNull(configure);
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<JsonOptions>, BearerTokenConfigureJsonOptions>());
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<BearerTokenOptions>, BearerTokenConfigureOptions>());
-        return builder.AddScheme<BearerTokenOptions, BearerTokenHandler>(authenticationScheme, configure);
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<JsonOptions>,
+                BearerTokenConfigureJsonOptions
+            >()
+        );
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<BearerTokenOptions>,
+                BearerTokenConfigureOptions
+            >()
+        );
+        return builder.AddScheme<BearerTokenOptions, BearerTokenHandler>(
+            authenticationScheme,
+            configure
+        );
     }
 }

@@ -8,20 +8,38 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.InlineHints
 {
-    internal readonly struct TypeHint(ITypeSymbol type, TextSpan span, TextChange? textChange, bool leadingSpace = false, bool trailingSpace = false)
+    internal readonly struct TypeHint(
+        ITypeSymbol type,
+        TextSpan span,
+        TextChange? textChange,
+        bool leadingSpace = false,
+        bool trailingSpace = false
+    )
     {
-        private static readonly ImmutableArray<SymbolDisplayPart> s_spaceArray = ImmutableArray.Create(new SymbolDisplayPart(SymbolDisplayPartKind.Space, symbol: null, " "));
+        private static readonly ImmutableArray<SymbolDisplayPart> s_spaceArray =
+            ImmutableArray.Create(
+                new SymbolDisplayPart(SymbolDisplayPartKind.Space, symbol: null, " ")
+            );
 
         public ITypeSymbol Type { get; } = type;
         public TextSpan Span { get; } = span;
         public TextChange? TextChange { get; } = textChange;
-        public ImmutableArray<SymbolDisplayPart> Prefix { get; } = CreateSpaceSymbolPartArray(leadingSpace);
-        public ImmutableArray<SymbolDisplayPart> Suffix { get; } = CreateSpaceSymbolPartArray(trailingSpace);
+        public ImmutableArray<SymbolDisplayPart> Prefix { get; } =
+            CreateSpaceSymbolPartArray(leadingSpace);
+        public ImmutableArray<SymbolDisplayPart> Suffix { get; } =
+            CreateSpaceSymbolPartArray(trailingSpace);
 
-        private static ImmutableArray<SymbolDisplayPart> CreateSpaceSymbolPartArray(bool hasSpace)
-            => hasSpace ? s_spaceArray : ImmutableArray<SymbolDisplayPart>.Empty;
+        private static ImmutableArray<SymbolDisplayPart> CreateSpaceSymbolPartArray(
+            bool hasSpace
+        ) => hasSpace ? s_spaceArray : ImmutableArray<SymbolDisplayPart>.Empty;
 
-        public void Deconstruct(out ITypeSymbol type, out TextSpan span, out TextChange? textChange, out ImmutableArray<SymbolDisplayPart> prefix, out ImmutableArray<SymbolDisplayPart> suffix)
+        public void Deconstruct(
+            out ITypeSymbol type,
+            out TextSpan span,
+            out TextChange? textChange,
+            out ImmutableArray<SymbolDisplayPart> prefix,
+            out ImmutableArray<SymbolDisplayPart> suffix
+        )
         {
             type = Type;
             span = Span;

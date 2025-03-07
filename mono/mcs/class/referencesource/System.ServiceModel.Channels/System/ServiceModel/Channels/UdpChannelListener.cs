@@ -14,7 +14,8 @@ namespace System.ServiceModel.Channels
     using System.Threading;
 
     internal abstract class UdpChannelListener<ChannelInterfaceType, TChannel, QueueItemType>
-        : ChannelListenerBase<ChannelInterfaceType>, IUdpReceiveHandler
+        : ChannelListenerBase<ChannelInterfaceType>,
+            IUdpReceiveHandler
         where ChannelInterfaceType : class, IChannel
         where TChannel : UdpChannelBase<QueueItemType>, ChannelInterfaceType
         where QueueItemType : class, IDisposable
@@ -32,10 +33,16 @@ namespace System.ServiceModel.Channels
         UdpSocketReceiveManager socketReceiveManager;
         int cleanedUp;
 
-        internal UdpChannelListener(UdpTransportBindingElement udpTransportBindingElement, BindingContext context)
+        internal UdpChannelListener(
+            UdpTransportBindingElement udpTransportBindingElement,
+            BindingContext context
+        )
             : base(context.Binding)
         {
-            Fx.Assert(udpTransportBindingElement != null, "udpTransportBindingElement can't be null");
+            Fx.Assert(
+                udpTransportBindingElement != null,
+                "udpTransportBindingElement can't be null"
+            );
             Fx.Assert(context != null, "BindingContext parameter can't be null");
 
             this.udpTransportBindingElement = udpTransportBindingElement;
@@ -45,71 +52,85 @@ namespace System.ServiceModel.Channels
 
             if (udpTransportBindingElement.DuplicateMessageHistoryLength > 0)
             {
-                this.duplicateDetector = new DuplicateMessageDetector(udpTransportBindingElement.DuplicateMessageHistoryLength);
+                this.duplicateDetector = new DuplicateMessageDetector(
+                    udpTransportBindingElement.DuplicateMessageHistoryLength
+                );
             }
 
             this.onChannelClosed = new EventHandler(OnChannelClosed);
 
             // We should only throw this exception if the user specified realistic MaxReceivedMessageSize less than or equal to max message size over UDP.
             // If the user specified something bigger like Long.MaxValue, we shouldn't stop them.
-            if (this.udpTransportBindingElement.MaxReceivedMessageSize <= UdpConstants.MaxMessageSizeOverIPv4 &&
-                this.udpTransportBindingElement.SocketReceiveBufferSize < this.udpTransportBindingElement.MaxReceivedMessageSize)
+            if (
+                this.udpTransportBindingElement.MaxReceivedMessageSize
+                    <= UdpConstants.MaxMessageSizeOverIPv4
+                && this.udpTransportBindingElement.SocketReceiveBufferSize
+                    < this.udpTransportBindingElement.MaxReceivedMessageSize
+            )
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("SocketReceiveBufferSize", this.udpTransportBindingElement.SocketReceiveBufferSize,
-                    SR.Property1LessThanOrEqualToProperty2("MaxReceivedMessageSize", this.udpTransportBindingElement.MaxReceivedMessageSize,
-                    "SocketReceiveBufferSize", this.udpTransportBindingElement.SocketReceiveBufferSize));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "SocketReceiveBufferSize",
+                    this.udpTransportBindingElement.SocketReceiveBufferSize,
+                    SR.Property1LessThanOrEqualToProperty2(
+                        "MaxReceivedMessageSize",
+                        this.udpTransportBindingElement.MaxReceivedMessageSize,
+                        "SocketReceiveBufferSize",
+                        this.udpTransportBindingElement.SocketReceiveBufferSize
+                    )
+                );
             }
 
-
-            int maxBufferSize = (int)Math.Min(udpTransportBindingElement.MaxReceivedMessageSize, UdpConstants.MaxMessageSizeOverIPv4);
-            this.bufferManager = BufferManager.CreateBufferManager(udpTransportBindingElement.MaxBufferPoolSize, maxBufferSize);
+            int maxBufferSize = (int)
+                Math.Min(
+                    udpTransportBindingElement.MaxReceivedMessageSize,
+                    UdpConstants.MaxMessageSizeOverIPv4
+                );
+            this.bufferManager = BufferManager.CreateBufferManager(
+                udpTransportBindingElement.MaxBufferPoolSize,
+                maxBufferSize
+            );
 
             this.messageEncoderFactory = UdpUtility.GetEncoder(context);
 
-            UdpUtility.ValidateDuplicateDetectionAndRetransmittionSupport(this.messageEncoderFactory, this.udpTransportBindingElement.RetransmissionSettings.Enabled, this.udpTransportBindingElement.DuplicateMessageHistoryLength > 0);
-            
+            UdpUtility.ValidateDuplicateDetectionAndRetransmittionSupport(
+                this.messageEncoderFactory,
+                this.udpTransportBindingElement.RetransmissionSettings.Enabled,
+                this.udpTransportBindingElement.DuplicateMessageHistoryLength > 0
+            );
+
             InitUri(context);
 
             //Note: because we are binding the sockets in InitSockets, we can start receiving data immediately.
             //If there is a delay between the Building of the listener and the call to Open, stale data could build up
-            //inside the Winsock buffer.  We have decided that making sure the port is updated correctly in the listen uri 
-            //(e.g. in the ListenUriMode.Unique case) before leaving the build step is more important than the 
+            //inside the Winsock buffer.  We have decided that making sure the port is updated correctly in the listen uri
+            //(e.g. in the ListenUriMode.Unique case) before leaving the build step is more important than the
             //potential for stale data.
             InitSockets(context.ListenUriMode == ListenUriMode.Unique);
 
-            Fx.Assert(!this.listenUri.IsDefaultPort, "Listen Uri's port should never be the default port: " + this.listenUri);
+            Fx.Assert(
+                !this.listenUri.IsDefaultPort,
+                "Listen Uri's port should never be the default port: " + this.listenUri
+            );
         }
 
         public MessageEncoderFactory MessageEncoderFactory
         {
-            get
-            {
-                return this.messageEncoderFactory;
-            }
+            get { return this.messageEncoderFactory; }
         }
 
         public override Uri Uri
         {
-            get
-            {
-                return this.listenUri;
-            }
+            get { return this.listenUri; }
         }
 
         protected override TimeSpan DefaultReceiveTimeout
         {
-            get
-            {
-                return UdpConstants.Defaults.ReceiveTimeout;
-            }
+            get { return UdpConstants.Defaults.ReceiveTimeout; }
         }
 
         protected override TimeSpan DefaultSendTimeout
         {
-            get
-            {
-                return UdpConstants.Defaults.SendTimeout;
-            }
+            get { return UdpConstants.Defaults.SendTimeout; }
         }
 
         internal BufferManager BufferManager
@@ -139,10 +160,7 @@ namespace System.ServiceModel.Channels
 
         string Scheme
         {
-            get
-            {
-                return UdpConstants.Scheme;
-            }
+            get { return UdpConstants.Scheme; }
         }
 
         public override T GetProperty<T>()
@@ -166,7 +184,12 @@ namespace System.ServiceModel.Channels
         }
 
         //returns false if the message was dropped because the max pending message count was hit.
-        bool IUdpReceiveHandler.HandleDataReceived(ArraySegment<byte> data, EndPoint remoteEndpoint, int interfaceIndex, Action onMessageDequeuedCallback)
+        bool IUdpReceiveHandler.HandleDataReceived(
+            ArraySegment<byte> data,
+            EndPoint remoteEndpoint,
+            int interfaceIndex,
+            Action onMessageDequeuedCallback
+        )
         {
             BufferManager localBufferManager = this.bufferManager;
             bool returnBuffer = true;
@@ -179,26 +202,46 @@ namespace System.ServiceModel.Channels
                 IPEndPoint remoteIPEndPoint = (IPEndPoint)remoteEndpoint;
                 if (localBufferManager != null)
                 {
-                    message = UdpUtility.DecodeMessage(this.duplicateDetector, this.messageEncoderFactory.Encoder,
-                        localBufferManager, data, remoteIPEndPoint, interfaceIndex, true, out messageHash);
+                    message = UdpUtility.DecodeMessage(
+                        this.duplicateDetector,
+                        this.messageEncoderFactory.Encoder,
+                        localBufferManager,
+                        data,
+                        remoteIPEndPoint,
+                        interfaceIndex,
+                        true,
+                        out messageHash
+                    );
 
                     if (message != null)
                     {
                         // We pass in the length of the message buffer instead of the length of the message to keep track of the amount of memory that's been allocated
-                        continueReceiving = Dispatch(message, data.Array.Length, onMessageDequeuedCallback);
+                        continueReceiving = Dispatch(
+                            message,
+                            data.Array.Length,
+                            onMessageDequeuedCallback
+                        );
                         returnBuffer = !continueReceiving;
                     }
                 }
                 else
                 {
-                    Fx.Assert(this.State != CommunicationState.Opened, "buffer manager should only be null when closing down and the channel instance has taken control of the receive manager.");
+                    Fx.Assert(
+                        this.State != CommunicationState.Opened,
+                        "buffer manager should only be null when closing down and the channel instance has taken control of the receive manager."
+                    );
 
                     IUdpReceiveHandler receiveHandler = (IUdpReceiveHandler)this.channelInstance;
 
                     if (receiveHandler != null)
                     {
                         returnBuffer = false; //let the channel instance take care of the buffer
-                        continueReceiving = receiveHandler.HandleDataReceived(data, remoteEndpoint, interfaceIndex, onMessageDequeuedCallback);
+                        continueReceiving = receiveHandler.HandleDataReceived(
+                            data,
+                            remoteEndpoint,
+                            interfaceIndex,
+                            onMessageDequeuedCallback
+                        );
                     }
                     else
                     {
@@ -225,7 +268,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.duplicateDetector != null)
                         {
-                            Fx.Assert(messageHash != null, "message hash should always be available if duplicate detector is enabled");
+                            Fx.Assert(
+                                messageHash != null,
+                                "message hash should always be available if duplicate detector is enabled"
+                            );
                             this.duplicateDetector.RemoveEntry(messageHash);
                         }
 
@@ -233,9 +279,9 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        // CSDMain 238600. Both channel and listener are shutting down. There's a race condition happening here 
+                        // CSDMain 238600. Both channel and listener are shutting down. There's a race condition happening here
                         // and the bufferManager is not available at this moment. The data buffer ignored here might introduce
-                        // an issue with buffer manager, but given that we are in the shutting down case here, it should not be a 
+                        // an issue with buffer manager, but given that we are in the shutting down case here, it should not be a
                         // big problem.
                         if (localBufferManager != null)
                         {
@@ -253,7 +299,6 @@ namespace System.ServiceModel.Channels
             return this.GetType();
         }
 
-
         protected override void OnAbort()
         {
             Cleanup();
@@ -268,29 +313,43 @@ namespace System.ServiceModel.Channels
             return this.channelQueue.Dequeue(timeout);
         }
 
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowPending();
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-
             return this.channelQueue.BeginDequeue(timeout, callback, state);
         }
 
-
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnClose(timeout);
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnOpen(timeout);
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowPending();
 
@@ -306,8 +365,12 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.channelInstance != null)
                     {
-                        if (this.channelInstance.TransferReceiveManagerOwnership(this.socketReceiveManager,
-                            this.duplicateDetector))
+                        if (
+                            this.channelInstance.TransferReceiveManagerOwnership(
+                                this.socketReceiveManager,
+                                this.duplicateDetector
+                            )
+                        )
                         {
                             //don't clean these objects up, they now belong to the channel instance
                             this.socketReceiveManager = null;
@@ -356,22 +419,23 @@ namespace System.ServiceModel.Channels
             return this.channelQueue.EndWaitForItem(result);
         }
 
-
-        protected override void OnOpen(TimeSpan timeout)
-        {
-
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
         protected override void OnOpened()
         {
             this.channelQueue = new InputQueue<TChannel>();
 
-            Fx.Assert(this.socketReceiveManager == null, "receive manager shouldn't be initialized yet");
+            Fx.Assert(
+                this.socketReceiveManager == null,
+                "receive manager shouldn't be initialized yet"
+            );
 
-            this.socketReceiveManager = new UdpSocketReceiveManager(this.listenSockets.ToArray(),
+            this.socketReceiveManager = new UdpSocketReceiveManager(
+                this.listenSockets.ToArray(),
                 UdpConstants.PendingReceiveCountPerProcessor * Environment.ProcessorCount,
                 this.bufferManager,
-                this);
+                this
+            );
 
             //do the state change to CommunicationState.Opened before starting the receive loop.
             //this avoids a ---- between transitioning state and processing messages that are
@@ -465,7 +529,10 @@ namespace System.ServiceModel.Channels
             {
                 if (this.State != CommunicationState.Opened)
                 {
-                    Fx.Assert(this.State > CommunicationState.Opened, "DispatchMessage called when object is not fully opened.  This would indicate that the receive loop started before transitioning to CommunicationState.Opened, which should not happen.");
+                    Fx.Assert(
+                        this.State > CommunicationState.Opened,
+                        "DispatchMessage called when object is not fully opened.  This would indicate that the receive loop started before transitioning to CommunicationState.Opened, which should not happen."
+                    );
 
                     //Shutting down - the message will get closed by the caller (IUdpReceiveHandler.OnMessageReceivedCallback)
                     return false;
@@ -482,7 +549,7 @@ namespace System.ServiceModel.Channels
             return channel.EnqueueMessage(message, messageBufferSize, onMessageDequeuedCallback);
         }
 
-        //Tries to enqueue this async exception onto the channel instance if possible, 
+        //Tries to enqueue this async exception onto the channel instance if possible,
         //puts it onto the local exception queue otherwise.
         void HandleReceiveException(Exception ex)
         {
@@ -500,7 +567,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    this.channelQueue.EnqueueAndDispatch(UdpUtility.WrapAsyncException(ex), null, false);
+                    this.channelQueue.EnqueueAndDispatch(
+                        UdpUtility.WrapAsyncException(ex),
+                        null,
+                        false
+                    );
                 }
             }
         }
@@ -509,11 +580,14 @@ namespace System.ServiceModel.Channels
         {
             if (listenUriBaseAddress.IsDefaultPort || listenUriBaseAddress.Port == 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("context.ListenUriBaseAddress", listenUriBaseAddress, SR.ExplicitListenUriModeRequiresPort);
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "context.ListenUriBaseAddress",
+                    listenUriBaseAddress,
+                    SR.ExplicitListenUriModeRequiresPort
+                );
             }
 
             this.listenUri = UdpUtility.AppendRelativePath(listenUriBaseAddress, relativeAddress);
-
         }
 
         void InitSockets(bool updateListenPort)
@@ -529,50 +603,80 @@ namespace System.ServiceModel.Channels
 
             int port = (this.listenUri.IsDefaultPort ? 0 : this.listenUri.Port);
 
-            if (this.listenUri.HostNameType == UriHostNameType.IPv6 ||
-                this.listenUri.HostNameType == UriHostNameType.IPv4)
+            if (
+                this.listenUri.HostNameType == UriHostNameType.IPv6
+                || this.listenUri.HostNameType == UriHostNameType.IPv4
+            )
             {
                 UdpUtility.ThrowOnUnsupportedHostNameType(this.listenUri);
-                
+
                 IPAddress address = IPAddress.Parse(this.listenUri.DnsSafeHost);
 
                 if (UdpUtility.IsMulticastAddress(address))
                 {
-
                     this.isMulticast = true;
 
-                    NetworkInterface[] adapters = UdpUtility.GetMulticastInterfaces(udpTransportBindingElement.MulticastInterfaceId);
+                    NetworkInterface[] adapters = UdpUtility.GetMulticastInterfaces(
+                        udpTransportBindingElement.MulticastInterfaceId
+                    );
 
                     //if listening on a specific adapter, don't disable multicast loopback on that adapter.
-                    bool allowMulticastLoopback = !string.IsNullOrEmpty(this.udpTransportBindingElement.MulticastInterfaceId);
+                    bool allowMulticastLoopback = !string.IsNullOrEmpty(
+                        this.udpTransportBindingElement.MulticastInterfaceId
+                    );
 
                     for (int i = 0; i < adapters.Length; i++)
                     {
                         if (adapters[i].OperationalStatus == OperationalStatus.Up)
                         {
                             IPInterfaceProperties properties = adapters[i].GetIPProperties();
-                            bool isLoopbackAdapter = adapters[i].NetworkInterfaceType == NetworkInterfaceType.Loopback;
+                            bool isLoopbackAdapter =
+                                adapters[i].NetworkInterfaceType == NetworkInterfaceType.Loopback;
 
                             if (isLoopbackAdapter)
                             {
                                 int interfaceIndex;
-                                if (UdpUtility.TryGetLoopbackInterfaceIndex(adapters[i], address.AddressFamily == AddressFamily.InterNetwork, out interfaceIndex))
+                                if (
+                                    UdpUtility.TryGetLoopbackInterfaceIndex(
+                                        adapters[i],
+                                        address.AddressFamily == AddressFamily.InterNetwork,
+                                        out interfaceIndex
+                                    )
+                                )
                                 {
-                                    listenSockets.Add(UdpUtility.CreateListenSocket(address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive,
-                                        interfaceIndex, allowMulticastLoopback, isLoopbackAdapter));
+                                    listenSockets.Add(
+                                        UdpUtility.CreateListenSocket(
+                                            address,
+                                            ref port,
+                                            this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                            this.udpTransportBindingElement.TimeToLive,
+                                            interfaceIndex,
+                                            allowMulticastLoopback,
+                                            isLoopbackAdapter
+                                        )
+                                    );
                                 }
-
                             }
                             else if (this.listenUri.HostNameType == UriHostNameType.IPv6)
                             {
                                 if (adapters[i].Supports(NetworkInterfaceComponent.IPv6))
                                 {
-                                    IPv6InterfaceProperties v6Properties = properties.GetIPv6Properties();
+                                    IPv6InterfaceProperties v6Properties =
+                                        properties.GetIPv6Properties();
 
                                     if (v6Properties != null)
                                     {
-                                        listenSockets.Add(UdpUtility.CreateListenSocket(address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize,
-                                            this.udpTransportBindingElement.TimeToLive, v6Properties.Index, allowMulticastLoopback, isLoopbackAdapter));
+                                        listenSockets.Add(
+                                            UdpUtility.CreateListenSocket(
+                                                address,
+                                                ref port,
+                                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                                this.udpTransportBindingElement.TimeToLive,
+                                                v6Properties.Index,
+                                                allowMulticastLoopback,
+                                                isLoopbackAdapter
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -580,11 +684,21 @@ namespace System.ServiceModel.Channels
                             {
                                 if (adapters[i].Supports(NetworkInterfaceComponent.IPv4))
                                 {
-                                    IPv4InterfaceProperties v4Properties = properties.GetIPv4Properties();
+                                    IPv4InterfaceProperties v4Properties =
+                                        properties.GetIPv4Properties();
                                     if (v4Properties != null)
                                     {
-                                        listenSockets.Add(UdpUtility.CreateListenSocket(address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize,
-                                            this.udpTransportBindingElement.TimeToLive, v4Properties.Index, allowMulticastLoopback, isLoopbackAdapter));
+                                        listenSockets.Add(
+                                            UdpUtility.CreateListenSocket(
+                                                address,
+                                                ref port,
+                                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                                this.udpTransportBindingElement.TimeToLive,
+                                                v4Properties.Index,
+                                                allowMulticastLoopback,
+                                                isLoopbackAdapter
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -593,14 +707,24 @@ namespace System.ServiceModel.Channels
 
                     if (listenSockets.Count == 0)
                     {
-                        throw FxTrace.Exception.AsError(new ArgumentException(SR.UdpFailedToFindMulticastAdapter(this.listenUri)));
+                        throw FxTrace.Exception.AsError(
+                            new ArgumentException(
+                                SR.UdpFailedToFindMulticastAdapter(this.listenUri)
+                            )
+                        );
                     }
                 }
                 else
                 {
                     //unicast - only sends on the default adapter...
-                    this.listenSockets.Add(UdpUtility.CreateUnicastListenSocket(address, ref port,
-                        this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive));
+                    this.listenSockets.Add(
+                        UdpUtility.CreateUnicastListenSocket(
+                            address,
+                            ref port,
+                            this.udpTransportBindingElement.SocketReceiveBufferSize,
+                            this.udpTransportBindingElement.TimeToLive
+                        )
+                    );
                 }
             }
             else
@@ -613,25 +737,61 @@ namespace System.ServiceModel.Channels
                     if (port == 0)
                     {
                         //port 0 is only allowed when ListenUriMode == ListenUriMode.Unique
-                        UdpSocket ipv4Socket, ipv6Socket;
-                        port = UdpUtility.CreateListenSocketsOnUniquePort(v4Address, v6Address, this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive, out ipv4Socket, out ipv6Socket);
+                        UdpSocket ipv4Socket,
+                            ipv6Socket;
+                        port = UdpUtility.CreateListenSocketsOnUniquePort(
+                            v4Address,
+                            v6Address,
+                            this.udpTransportBindingElement.SocketReceiveBufferSize,
+                            this.udpTransportBindingElement.TimeToLive,
+                            out ipv4Socket,
+                            out ipv6Socket
+                        );
 
                         this.listenSockets.Add(ipv4Socket);
                         this.listenSockets.Add(ipv6Socket);
                     }
                     else
                     {
-                        this.listenSockets.Add(UdpUtility.CreateUnicastListenSocket(v4Address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive));
-                        this.listenSockets.Add(UdpUtility.CreateUnicastListenSocket(v6Address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive));
+                        this.listenSockets.Add(
+                            UdpUtility.CreateUnicastListenSocket(
+                                v4Address,
+                                ref port,
+                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                this.udpTransportBindingElement.TimeToLive
+                            )
+                        );
+                        this.listenSockets.Add(
+                            UdpUtility.CreateUnicastListenSocket(
+                                v6Address,
+                                ref port,
+                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                this.udpTransportBindingElement.TimeToLive
+                            )
+                        );
                     }
                 }
                 else if (ipV4)
                 {
-                    this.listenSockets.Add(UdpUtility.CreateUnicastListenSocket(v4Address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive));
+                    this.listenSockets.Add(
+                        UdpUtility.CreateUnicastListenSocket(
+                            v4Address,
+                            ref port,
+                            this.udpTransportBindingElement.SocketReceiveBufferSize,
+                            this.udpTransportBindingElement.TimeToLive
+                        )
+                    );
                 }
                 else if (ipV6)
                 {
-                    this.listenSockets.Add(UdpUtility.CreateUnicastListenSocket(v6Address, ref port, this.udpTransportBindingElement.SocketReceiveBufferSize, this.udpTransportBindingElement.TimeToLive));
+                    this.listenSockets.Add(
+                        UdpUtility.CreateUnicastListenSocket(
+                            v6Address,
+                            ref port,
+                            this.udpTransportBindingElement.SocketReceiveBufferSize,
+                            this.udpTransportBindingElement.TimeToLive
+                        )
+                    );
                 }
             }
 
@@ -651,11 +811,20 @@ namespace System.ServiceModel.Channels
 
         void InitUniqueUri(Uri listenUriBaseAddress, string relativeAddress)
         {
-            Fx.Assert(listenUriBaseAddress != null, "listenUriBaseAddress parameter should have been verified before now");
+            Fx.Assert(
+                listenUriBaseAddress != null,
+                "listenUriBaseAddress parameter should have been verified before now"
+            );
 
-            listenUriBaseAddress = UdpUtility.AppendRelativePath(listenUriBaseAddress, relativeAddress);
+            listenUriBaseAddress = UdpUtility.AppendRelativePath(
+                listenUriBaseAddress,
+                relativeAddress
+            );
 
-            this.listenUri = UdpUtility.AppendRelativePath(listenUriBaseAddress, Guid.NewGuid().ToString());
+            this.listenUri = UdpUtility.AppendRelativePath(
+                listenUriBaseAddress,
+                Guid.NewGuid().ToString()
+            );
         }
 
         void InitUri(BindingContext context)
@@ -678,22 +847,40 @@ namespace System.ServiceModel.Channels
 
                 if (!listenUriBase.IsAbsoluteUri)
                 {
-                    throw FxTrace.Exception.Argument("context.ListenUriBaseAddress", SR.RelativeUriNotAllowed(listenUriBase));
+                    throw FxTrace.Exception.Argument(
+                        "context.ListenUriBaseAddress",
+                        SR.RelativeUriNotAllowed(listenUriBase)
+                    );
                 }
 
                 if (context.ListenUriMode == ListenUriMode.Unique && !listenUriBase.IsDefaultPort)
                 {
-                    throw FxTrace.Exception.Argument("context.ListenUriBaseAddress", SR.DefaultPortRequiredForListenUriModeUnique(listenUriBase));
+                    throw FxTrace.Exception.Argument(
+                        "context.ListenUriBaseAddress",
+                        SR.DefaultPortRequiredForListenUriModeUnique(listenUriBase)
+                    );
                 }
 
-                if (listenUriBase.Scheme.Equals(this.Scheme, StringComparison.OrdinalIgnoreCase) == false)
+                if (
+                    listenUriBase.Scheme.Equals(this.Scheme, StringComparison.OrdinalIgnoreCase)
+                    == false
+                )
                 {
-                    throw FxTrace.Exception.Argument("context.ListenUriBaseAddress", SR.UriSchemeNotSupported(listenUriBase.Scheme));
+                    throw FxTrace.Exception.Argument(
+                        "context.ListenUriBaseAddress",
+                        SR.UriSchemeNotSupported(listenUriBase.Scheme)
+                    );
                 }
 
                 if (!UdpUtility.IsSupportedHostNameType(listenUriBase.HostNameType))
                 {
-                    throw FxTrace.Exception.Argument("context.ListenUriBaseAddress", SR.UnsupportedUriHostNameType(listenUriBase.Host, listenUriBase.HostNameType));
+                    throw FxTrace.Exception.Argument(
+                        "context.ListenUriBaseAddress",
+                        SR.UnsupportedUriHostNameType(
+                            listenUriBase.Host,
+                            listenUriBase.HostNameType
+                        )
+                    );
                 }
             }
 
@@ -706,7 +893,9 @@ namespace System.ServiceModel.Channels
                     InitUniqueUri(context.ListenUriBaseAddress, context.ListenUriRelativeAddress);
                     break;
                 default:
-                    Fx.AssertAndThrow("Unhandled ListenUriMode encountered: " + context.ListenUriMode);
+                    Fx.AssertAndThrow(
+                        "Unhandled ListenUriMode encountered: " + context.ListenUriMode
+                    );
                     break;
             }
         }
@@ -719,48 +908,78 @@ namespace System.ServiceModel.Channels
             lock (ThisLock)
             {
                 //set to null within a lock because other code
-                //assumes that the instance will not suddenly become null 
+                //assumes that the instance will not suddenly become null
                 //if it already holds the lock.
                 this.channelInstance = null;
             }
         }
     }
 
-    internal class UdpDuplexChannelListener : UdpChannelListener<IDuplexChannel, UdpDuplexChannel, Message>
+    internal class UdpDuplexChannelListener
+        : UdpChannelListener<IDuplexChannel, UdpDuplexChannel, Message>
     {
-        public UdpDuplexChannelListener(UdpTransportBindingElement udpTransportBindingElement, BindingContext context)
-            : base(udpTransportBindingElement, context)
-        {
-        }
+        public UdpDuplexChannelListener(
+            UdpTransportBindingElement udpTransportBindingElement,
+            BindingContext context
+        )
+            : base(udpTransportBindingElement, context) { }
 
         public override UdpDuplexChannel CreateChannel()
         {
-            return new ServerUdpDuplexChannel(this, this.ListenSockets.ToArray(), new EndpointAddress(this.Uri), this.Uri, this.IsMulticast);
+            return new ServerUdpDuplexChannel(
+                this,
+                this.ListenSockets.ToArray(),
+                new EndpointAddress(this.Uri),
+                this.Uri,
+                this.IsMulticast
+            );
         }
     }
 
-    internal class UdpReplyChannelListener : UdpChannelListener<IReplyChannel, UdpReplyChannel, RequestContext>
+    internal class UdpReplyChannelListener
+        : UdpChannelListener<IReplyChannel, UdpReplyChannel, RequestContext>
     {
-        public UdpReplyChannelListener(UdpTransportBindingElement udpTransportBindingElement, BindingContext context)
-            : base(udpTransportBindingElement, context)
-        {
-        }
+        public UdpReplyChannelListener(
+            UdpTransportBindingElement udpTransportBindingElement,
+            BindingContext context
+        )
+            : base(udpTransportBindingElement, context) { }
 
         public override UdpReplyChannel CreateChannel()
         {
-            return new UdpReplyChannel(this, this.ListenSockets.ToArray(), new EndpointAddress(this.Uri), this.Uri, this.IsMulticast);
+            return new UdpReplyChannel(
+                this,
+                this.ListenSockets.ToArray(),
+                new EndpointAddress(this.Uri),
+                this.Uri,
+                this.IsMulticast
+            );
         }
     }
 
-
     internal sealed class ServerUdpDuplexChannel : UdpDuplexChannel
     {
-        //the listener's buffer manager is used, but the channel won't clear it unless 
+        //the listener's buffer manager is used, but the channel won't clear it unless
         //UdpChannelListener.OnClosing successfully transfers ownership to the channel instance.
-        public ServerUdpDuplexChannel(UdpDuplexChannelListener listener, UdpSocket[] sockets, EndpointAddress localAddress, Uri via, bool isMulticast)
-            : base(listener, listener.MessageEncoderFactory.Encoder, listener.BufferManager,
-            sockets, listener.UdpTransportBindingElement.RetransmissionSettings, listener.UdpTransportBindingElement.MaxPendingMessagesTotalSize,
-            localAddress, via, listener.IsMulticast, (int)listener.UdpTransportBindingElement.MaxReceivedMessageSize)
+        public ServerUdpDuplexChannel(
+            UdpDuplexChannelListener listener,
+            UdpSocket[] sockets,
+            EndpointAddress localAddress,
+            Uri via,
+            bool isMulticast
+        )
+            : base(
+                listener,
+                listener.MessageEncoderFactory.Encoder,
+                listener.BufferManager,
+                sockets,
+                listener.UdpTransportBindingElement.RetransmissionSettings,
+                listener.UdpTransportBindingElement.MaxPendingMessagesTotalSize,
+                localAddress,
+                via,
+                listener.IsMulticast,
+                (int)listener.UdpTransportBindingElement.MaxReceivedMessageSize
+            )
         {
             UdpOutputChannel udpOutputChannel = new ServerUdpOutputChannel(
                 listener,
@@ -769,17 +988,15 @@ namespace System.ServiceModel.Channels
                 sockets,
                 listener.UdpTransportBindingElement.RetransmissionSettings,
                 via,
-                isMulticast);
+                isMulticast
+            );
 
             this.SetOutputChannel(udpOutputChannel);
         }
 
         protected override bool IgnoreSerializationException
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override void HandleReceiveException(Exception ex)
@@ -795,5 +1012,4 @@ namespace System.ServiceModel.Channels
             }
         }
     }
-
 }

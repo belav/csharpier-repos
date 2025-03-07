@@ -34,7 +34,12 @@ namespace System.Xml.Xsl.XsltOld
             get { return _next; }
         }
 
-        internal NamespaceDecl(string prefix, string nsUri, string prevDefaultNsUri, NamespaceDecl? next)
+        internal NamespaceDecl(
+            string prefix,
+            string nsUri,
+            string prevDefaultNsUri,
+            NamespaceDecl? next
+        )
         {
             Init(prefix, nsUri, prevDefaultNsUri, next);
         }
@@ -42,7 +47,12 @@ namespace System.Xml.Xsl.XsltOld
         [MemberNotNull(nameof(_prefix))]
         [MemberNotNull(nameof(_nsUri))]
         [MemberNotNull(nameof(_prevDefaultNsUri))]
-        internal void Init(string prefix, string nsUri, string prevDefaultNsUri, NamespaceDecl? next)
+        internal void Init(
+            string prefix,
+            string nsUri,
+            string prevDefaultNsUri,
+            NamespaceDecl? next
+        )
         {
             _prefix = prefix;
             _nsUri = nsUri;

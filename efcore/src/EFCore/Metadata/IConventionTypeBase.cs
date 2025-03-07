@@ -34,8 +34,7 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <summary>
     ///     Gets this entity type or the one on which the complex property chain is declared.
     /// </summary>
-    new IConventionEntityType ContainingEntityType
-        => (IConventionEntityType)this;
+    new IConventionEntityType ContainingEntityType => (IConventionEntityType)this;
 
     /// <summary>
     ///     Marks the given member name as ignored, preventing conventions from adding a matching property
@@ -74,8 +73,7 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </summary>
     /// <param name="memberName">The name of the member that might be ignored.</param>
     /// <returns><see langword="true" /> if the given member name is ignored.</returns>
-    bool IsIgnored(string memberName)
-        => FindIgnoredConfigurationSource(memberName) != null;
+    bool IsIgnored(string memberName) => FindIgnoredConfigurationSource(memberName) != null;
 
     /// <summary>
     ///     Adds a property to this entity type.
@@ -84,10 +82,14 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The newly created property.</returns>
     [RequiresUnreferencedCode("Currently used only in tests")]
-    IConventionProperty? AddProperty(MemberInfo memberInfo, bool fromDataAnnotation = false)
-        => AddProperty(
-            memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(),
-            memberInfo, setTypeConfigurationSource: true, fromDataAnnotation);
+    IConventionProperty? AddProperty(MemberInfo memberInfo, bool fromDataAnnotation = false) =>
+        AddProperty(
+            memberInfo.GetSimpleMemberName(),
+            memberInfo.GetMemberType(),
+            memberInfo,
+            setTypeConfigurationSource: true,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Adds a property to this entity type.
@@ -109,7 +111,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         string name,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         bool setTypeConfigurationSource = true,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Adds a property to this entity type.
@@ -132,7 +135,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         MemberInfo memberInfo,
         bool setTypeConfigurationSource = true,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Adds a property backed by and indexer to this entity type.
@@ -146,16 +150,28 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         string name,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         bool setTypeConfigurationSource = true,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         var indexerPropertyInfo = FindIndexerPropertyInfo();
         if (indexerPropertyInfo == null)
         {
             throw new InvalidOperationException(
-                CoreStrings.NonIndexerEntityType(name, DisplayName(), typeof(string).ShortDisplayName()));
+                CoreStrings.NonIndexerEntityType(
+                    name,
+                    DisplayName(),
+                    typeof(string).ShortDisplayName()
+                )
+            );
         }
 
-        return AddProperty(name, propertyType, indexerPropertyInfo, setTypeConfigurationSource, fromDataAnnotation);
+        return AddProperty(
+            name,
+            propertyType,
+            indexerPropertyInfo,
+            setTypeConfigurationSource,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -176,8 +192,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </remarks>
     /// <param name="memberInfo">The property on the entity class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IConventionProperty? FindProperty(MemberInfo memberInfo)
-        => (IConventionProperty?)((IReadOnlyTypeBase)this).FindProperty(memberInfo);
+    new IConventionProperty? FindProperty(MemberInfo memberInfo) =>
+        (IConventionProperty?)((IReadOnlyTypeBase)this).FindProperty(memberInfo);
 
     /// <summary>
     ///     Finds matching properties on the given entity type. Returns <see langword="null" /> if any property is not found.
@@ -187,8 +203,9 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </remarks>
     /// <param name="propertyNames">The property names.</param>
     /// <returns>The properties, or <see langword="null" /> if any property is not found.</returns>
-    new IReadOnlyList<IConventionProperty>? FindProperties(IReadOnlyList<string> propertyNames)
-        => (IReadOnlyList<IConventionProperty>?)((IReadOnlyTypeBase)this).FindProperties(propertyNames);
+    new IReadOnlyList<IConventionProperty>? FindProperties(IReadOnlyList<string> propertyNames) =>
+        (IReadOnlyList<IConventionProperty>?)
+            ((IReadOnlyTypeBase)this).FindProperties(propertyNames);
 
     /// <summary>
     ///     Gets a property with the given name.
@@ -198,8 +215,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property.</returns>
-    new IConventionProperty GetProperty(string name)
-        => (IConventionProperty)((IReadOnlyTypeBase)this).GetProperty(name);
+    new IConventionProperty GetProperty(string name) =>
+        (IConventionProperty)((IReadOnlyTypeBase)this).GetProperty(name);
 
     /// <summary>
     ///     Finds a property declared on the type with the given name.
@@ -207,8 +224,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </summary>
     /// <param name="name">The property name.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IConventionProperty? FindDeclaredProperty(string name)
-        => (IConventionProperty?)((IReadOnlyTypeBase)this).FindDeclaredProperty(name);
+    new IConventionProperty? FindDeclaredProperty(string name) =>
+        (IConventionProperty?)((IReadOnlyTypeBase)this).FindDeclaredProperty(name);
 
     /// <summary>
     ///     Gets all scalar properties declared on this type.
@@ -230,8 +247,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     ///     and base entity typed types.
     /// </remarks>
     /// <returns>Derived non-navigation properties.</returns>
-    new IEnumerable<IConventionProperty> GetDerivedProperties()
-        => ((IReadOnlyTypeBase)this).GetDerivedProperties().Cast<IConventionProperty>();
+    new IEnumerable<IConventionProperty> GetDerivedProperties() =>
+        ((IReadOnlyTypeBase)this).GetDerivedProperties().Cast<IConventionProperty>();
 
     /// <summary>
     ///     Gets all scalar properties defined on this type.
@@ -269,10 +286,17 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         MemberInfo memberInfo,
         string? complexTypeName = null,
         bool collection = false,
-        bool fromDataAnnotation = false)
-        => AddComplexProperty(
-            memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(),
-            memberInfo, memberInfo.GetMemberType(), complexTypeName, collection, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        AddComplexProperty(
+            memberInfo.GetSimpleMemberName(),
+            memberInfo.GetMemberType(),
+            memberInfo,
+            memberInfo.GetMemberType(),
+            complexTypeName,
+            collection,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Adds a property to this type.
@@ -281,7 +305,11 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <param name="collection">Indicates whether the property represents a collection.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The newly created property.</returns>
-    IConventionComplexProperty? AddComplexProperty(string name, bool collection = false, bool fromDataAnnotation = false);
+    IConventionComplexProperty? AddComplexProperty(
+        string name,
+        bool collection = false,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Adds a property to this type.
@@ -299,7 +327,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type complexType,
         string? complexTypeName = null,
         bool collection = false,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Adds a property to this type.
@@ -326,7 +355,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type complexType,
         string? complexTypeName = null,
         bool collection = false,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Adds a property backed by and indexer to this type.
@@ -344,16 +374,29 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type complexType,
         string? complexTypeName = null,
         bool collection = false,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         var indexerPropertyInfo = FindIndexerPropertyInfo();
         if (indexerPropertyInfo == null)
         {
             throw new InvalidOperationException(
-                CoreStrings.NonIndexerEntityType(name, DisplayName(), typeof(string).ShortDisplayName()));
+                CoreStrings.NonIndexerEntityType(
+                    name,
+                    DisplayName(),
+                    typeof(string).ShortDisplayName()
+                )
+            );
         }
 
-        return AddComplexProperty(name, propertyType, indexerPropertyInfo, complexType, complexTypeName, fromDataAnnotation);
+        return AddComplexProperty(
+            name,
+            propertyType,
+            indexerPropertyInfo,
+            complexType,
+            complexTypeName,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -374,8 +417,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </remarks>
     /// <param name="memberInfo">The member on the entity class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IConventionComplexProperty? FindComplexProperty(MemberInfo memberInfo)
-        => (IConventionComplexProperty?)((IReadOnlyEntityType)this).FindComplexProperty(memberInfo);
+    new IConventionComplexProperty? FindComplexProperty(MemberInfo memberInfo) =>
+        (IConventionComplexProperty?)((IReadOnlyEntityType)this).FindComplexProperty(memberInfo);
 
     /// <summary>
     ///     Finds a property declared on the type with the given name.
@@ -386,8 +429,8 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IConventionComplexProperty? FindDeclaredComplexProperty(string name)
-        => (IConventionComplexProperty?)((IReadOnlyEntityType)this).FindDeclaredComplexProperty(name);
+    new IConventionComplexProperty? FindDeclaredComplexProperty(string name) =>
+        (IConventionComplexProperty?)((IReadOnlyEntityType)this).FindDeclaredComplexProperty(name);
 
     /// <summary>
     ///     Gets the complex properties defined on this type.
@@ -413,8 +456,10 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     ///     and base typed types.
     /// </remarks>
     /// <returns>Derived complex properties.</returns>
-    new IEnumerable<IConventionComplexProperty> GetDerivedComplexProperties()
-        => ((IReadOnlyEntityType)this).GetDerivedComplexProperties().Cast<IConventionComplexProperty>();
+    new IEnumerable<IConventionComplexProperty> GetDerivedComplexProperties() =>
+        ((IReadOnlyEntityType)this)
+            .GetDerivedComplexProperties()
+            .Cast<IConventionComplexProperty>();
 
     /// <summary>
     ///     Removes a property from this type.
@@ -465,7 +510,10 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <param name="changeTrackingStrategy">The strategy to use.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    ChangeTrackingStrategy? SetChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy, bool fromDataAnnotation = false);
+    ChangeTrackingStrategy? SetChangeTrackingStrategy(
+        ChangeTrackingStrategy? changeTrackingStrategy,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetChangeTrackingStrategy" />.
@@ -483,14 +531,21 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    PropertyAccessMode? SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false)
-        => (PropertyAccessMode?)SetOrRemoveAnnotation(CoreAnnotationNames.PropertyAccessMode, propertyAccessMode, fromDataAnnotation)
-            ?.Value;
+    PropertyAccessMode? SetPropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    ) =>
+        (PropertyAccessMode?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.PropertyAccessMode,
+                propertyAccessMode,
+                fromDataAnnotation
+            )?.Value;
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetPropertyAccessMode" />.
     /// </summary>
     /// <returns>The configuration source for <see cref="IReadOnlyTypeBase.GetPropertyAccessMode" />.</returns>
-    ConfigurationSource? GetPropertyAccessModeConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.PropertyAccessMode)?.GetConfigurationSource();
+    ConfigurationSource? GetPropertyAccessModeConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.PropertyAccessMode)?.GetConfigurationSource();
 }

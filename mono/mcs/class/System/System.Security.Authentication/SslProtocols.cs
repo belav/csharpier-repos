@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,20 +29,22 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Security.Authentication {
+namespace System.Security.Authentication
+{
+    [Flags]
+    public enum SslProtocols
+    {
+        None,
+        Ssl2 = 12,
+        Ssl3 = 48,
+        Tls = 192,
 
-	[Flags]
-	public enum SslProtocols {
-		None,
-		Ssl2 = 12,
-		Ssl3 = 48,
-		Tls = 192,
-		[MonoTODO ("unsupported")]
-		Tls11 = 768,
-		[MonoTODO ("unsupported")]
-		Tls12 = 3072,
-		Tls13 = 12288,
-		Default = Ssl3 | Tls
-	}
+        [MonoTODO("unsupported")]
+        Tls11 = 768,
+
+        [MonoTODO("unsupported")]
+        Tls12 = 3072,
+        Tls13 = 12288,
+        Default = Ssl3 | Tls,
+    }
 }
-

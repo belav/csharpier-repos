@@ -16,10 +16,7 @@ public class TestDuplexPipe : IDuplexPipe
     public TestDuplexPipe(bool writerForceAsync = false)
     {
         _input = new TestPipeReader();
-        Output = new TestPipeWriter
-        {
-            ForceAsync = writerForceAsync
-        };
+        Output = new TestPipeWriter { ForceAsync = writerForceAsync };
     }
 
     public void AddReadResult(ValueTask<ReadResult> readResult)

@@ -26,16 +26,17 @@ namespace AutoMapper.UnitTests
                 public string Value { get; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.DisableConstructorMapping();
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.DisableConstructorMapping();
 
-                cfg.CreateProfile("Custom", p => p.CreateMap<Model, Dto>());
-            });
+                    cfg.CreateProfile("Custom", p => p.CreateMap<Model, Dto>());
+                });
 
             protected override void Because_of()
             {
-                _result = Mapper.Map<Model, Dto>(new Model {Value = 5});
+                _result = Mapper.Map<Model, Dto>(new Model { Value = 5 });
             }
 
             [Fact]
@@ -84,12 +85,13 @@ namespace AutoMapper.UnitTests
                 }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                _customProfile = new CustomProfile1();
-                cfg.AddProfile(_customProfile);
-                cfg.AddProfile<CustomProfile2>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    _customProfile = new CustomProfile1();
+                    cfg.AddProfile(_customProfile);
+                    cfg.AddProfile<CustomProfile2>();
+                });
 
             protected override void Because_of()
             {
@@ -108,7 +110,6 @@ namespace AutoMapper.UnitTests
                 _result.FooValue.ShouldBe("5");
             }
         }
-
 
         public class When_disabling_constructor_mapping_with_profiles : AutoMapperSpecBase
         {
@@ -130,10 +131,7 @@ namespace AutoMapper.UnitTests
 
             public class B
             {
-
-                public B()
-                {
-                }
+                public B() { }
 
                 public B(string value)
                 {
@@ -143,10 +141,11 @@ namespace AutoMapper.UnitTests
                 public string Value { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.AddProfile<AProfile>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.AddProfile<AProfile>();
+                });
 
             protected override void Because_of()
             {
@@ -159,7 +158,5 @@ namespace AutoMapper.UnitTests
                 Assert.Equal("BLUEZ", _b.Value, StringComparer.Ordinal);
             }
         }
-
-
     }
 }

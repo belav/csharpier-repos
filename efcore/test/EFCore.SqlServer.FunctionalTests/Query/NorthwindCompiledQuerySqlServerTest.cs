@@ -3,11 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindCompiledQuerySqlServerTest : NorthwindCompiledQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class NorthwindCompiledQuerySqlServerTest
+    : NorthwindCompiledQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
     public NorthwindCompiledQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
@@ -15,8 +17,8 @@ public class NorthwindCompiledQuerySqlServerTest : NorthwindCompiledQueryTestBas
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override void DbSet_query()
     {
@@ -31,7 +33,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override void DbSet_query_first()
@@ -43,7 +46,8 @@ FROM [Customers] AS [c]
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override void Query_ending_with_include()
@@ -63,7 +67,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override void Untyped_context()
@@ -79,7 +84,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override void Query_with_single_parameter()
@@ -101,7 +107,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override void First_query_with_single_parameter()
@@ -123,7 +130,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override void Query_with_two_parameters()
@@ -145,7 +153,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override void Query_with_three_parameters()
@@ -167,7 +176,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override void Query_with_contains()
@@ -195,7 +205,8 @@ WHERE [c].[CustomerID] IN (
     SELECT [a].[value]
     FROM OPENJSON(@__args) WITH ([value] nchar(5) '$') AS [a]
 )
-""");
+"""
+        );
     }
 
     public override void Query_with_closure()
@@ -213,7 +224,8 @@ WHERE [c].[CustomerID] = N'ALFKI'
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override void Compiled_query_when_does_not_end_in_query_operator()
@@ -227,7 +239,8 @@ WHERE [c].[CustomerID] = N'ALFKI'
 SELECT COUNT(*)
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override async Task Compiled_query_with_max_parameters()
@@ -390,7 +403,8 @@ WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] =
 SELECT COUNT(*)
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14
-""");
+"""
+        );
     }
 
     public override void Query_with_array_parameter()
@@ -412,7 +426,8 @@ WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
-""");
+"""
+        );
     }
 
     public override async Task Query_with_array_parameter_async()
@@ -434,7 +449,8 @@ WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
-""");
+"""
+        );
     }
 
     public override void Multiple_queries()
@@ -464,7 +480,8 @@ ORDER BY [c].[CustomerID]
 SELECT TOP(1) [o].[CustomerID]
 FROM [Orders] AS [o]
 ORDER BY [o].[CustomerID]
-""");
+"""
+        );
     }
 
     public override void Compiled_query_when_using_member_on_context()
@@ -482,7 +499,8 @@ WHERE [c].[CustomerID] LIKE N'A%'
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
     public override async Task First_query_with_cancellation_async()
@@ -504,7 +522,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override async Task DbSet_query_first_async()
@@ -516,7 +535,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task First_query_with_single_parameter_async()
@@ -538,7 +558,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override async Task Keyless_query_first_async()
@@ -552,7 +573,8 @@ FROM (
     SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
 ) AS [m]
 ORDER BY [m].[CompanyName]
-""");
+"""
+        );
     }
 
     public override async Task Query_with_closure_async_null()
@@ -564,7 +586,8 @@ ORDER BY [m].[CompanyName]
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
     public override async Task Query_with_three_parameters_async()
@@ -586,7 +609,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override async Task Query_with_two_parameters_async()
@@ -608,7 +632,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override async Task Keyless_query_async()
@@ -622,7 +647,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
             //
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Query_with_single_parameter_async()
@@ -644,7 +670,8 @@ WHERE [c].[CustomerID] = @__customerID
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = @__customerID
-""");
+"""
+        );
     }
 
     public override void Keyless_query_first()
@@ -658,7 +685,8 @@ FROM (
     SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
 ) AS [m]
 ORDER BY [m].[CompanyName]
-""");
+"""
+        );
     }
 
     public override void Query_with_closure_null()
@@ -670,7 +698,8 @@ ORDER BY [m].[CompanyName]
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
     public override async Task Query_with_closure_async()
@@ -688,7 +717,8 @@ WHERE [c].[CustomerID] = N'ALFKI'
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Untyped_context_async()
@@ -704,7 +734,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task DbSet_query_async()
@@ -720,7 +751,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override void Keyless_query()
@@ -734,7 +766,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
             //
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override void Query_with_single_parameter_with_include()
@@ -760,9 +793,10 @@ FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 WHERE [c].[CustomerID] = @__customerID
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

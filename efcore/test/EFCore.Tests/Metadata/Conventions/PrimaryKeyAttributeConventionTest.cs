@@ -16,13 +16,20 @@ public class PrimaryKeyAttributeConventionTest
     {
         var modelBuilder = new InternalModelBuilder(new Model());
 
-        var entityBuilder = modelBuilder.Entity(typeof(EntityWithPrimaryKey), ConfigurationSource.Convention)!;
+        var entityBuilder = modelBuilder.Entity(
+            typeof(EntityWithPrimaryKey),
+            ConfigurationSource.Convention
+        )!;
         entityBuilder.Property("Id", ConfigurationSource.Convention);
         var propABuilder = entityBuilder.Property("A", ConfigurationSource.Convention)!;
         var propBBuilder = entityBuilder.Property("B", ConfigurationSource.Convention)!;
         entityBuilder.PrimaryKey(new List<string> { "Id" }, ConfigurationSource.Convention);
 
-        var primaryKeyProperties = new List<string> { propABuilder.Metadata.Name, propBBuilder.Metadata.Name };
+        var primaryKeyProperties = new List<string>
+        {
+            propABuilder.Metadata.Name,
+            propBBuilder.Metadata.Name,
+        };
         entityBuilder.PrimaryKey(primaryKeyProperties, ConfigurationSource.Convention);
 
         RunConvention(entityBuilder);
@@ -34,7 +41,8 @@ public class PrimaryKeyAttributeConventionTest
         Assert.Collection(
             primaryKey.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -49,9 +57,7 @@ public class PrimaryKeyAttributeConventionTest
 
         var primaryKey = (Key)entityBuilder.Metadata.FindPrimaryKey()!;
         Assert.Equal(ConfigurationSource.Explicit, primaryKey.GetConfigurationSource());
-        Assert.Collection(
-            primaryKey.Properties,
-            prop0 => Assert.Equal("A", prop0.Name));
+        Assert.Collection(primaryKey.Properties, prop0 => Assert.Equal("A", prop0.Name));
     }
 
     [ConditionalFact]
@@ -59,21 +65,29 @@ public class PrimaryKeyAttributeConventionTest
     {
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-        Assert.Throws<ArgumentNullException>(() => modelBuilder.Entity<EntityWithInvalidNullAdditionalProperties>());
+        Assert.Throws<ArgumentNullException>(
+            () => modelBuilder.Entity<EntityWithInvalidNullAdditionalProperties>()
+        );
     }
 
     [InlineData(typeof(EntityWithInvalidNullAdditionalProperty))]
     [InlineData(typeof(EntityWithInvalidEmptyPrimaryKeyProperty))]
     [InlineData(typeof(EntityWithInvalidWhiteSpacePrimaryKeyProperty))]
     [ConditionalTheory]
-    public void PrimaryKeyAttribute_properties_cannot_include_whitespace(Type entityTypeWithInvalidPrimaryKey)
+    public void PrimaryKeyAttribute_properties_cannot_include_whitespace(
+        Type entityTypeWithInvalidPrimaryKey
+    )
     {
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         Assert.Equal(
             AbstractionsStrings.CollectionArgumentHasEmptyElements("additionalPropertyNames"),
-            Assert.Throws<ArgumentException>(
-                () => modelBuilder.Entity(entityTypeWithInvalidPrimaryKey)).Message);
+            Assert
+                .Throws<ArgumentException>(
+                    () => modelBuilder.Entity(entityTypeWithInvalidPrimaryKey)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -85,8 +99,10 @@ public class PrimaryKeyAttributeConventionTest
 
         // assert that the base type is not part of the model
         Assert.Empty(
-            modelBuilder.Model.GetEntityTypes()
-                .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithPrimaryKey)));
+            modelBuilder
+                .Model.GetEntityTypes()
+                .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithPrimaryKey))
+        );
 
         // assert that we see the primaryKey anyway
         var primaryKey = (Key)entityBuilder.Metadata.FindPrimaryKey()!;
@@ -94,7 +110,8 @@ public class PrimaryKeyAttributeConventionTest
         Assert.Collection(
             primaryKey.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -104,9 +121,14 @@ public class PrimaryKeyAttributeConventionTest
         modelBuilder.Entity<EntityPrimaryKeyWithIgnoredProperty>();
 
         Assert.Equal(
-            CoreStrings.PrimaryKeyDefinedOnIgnoredProperty(nameof(EntityPrimaryKeyWithIgnoredProperty), "B"),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Model.FinalizeModel()).Message);
+            CoreStrings.PrimaryKeyDefinedOnIgnoredProperty(
+                nameof(EntityPrimaryKeyWithIgnoredProperty),
+                "B"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -119,9 +141,12 @@ public class PrimaryKeyAttributeConventionTest
             CoreStrings.PrimaryKeyDefinedOnNonExistentProperty(
                 nameof(EntityPrimaryKeyWithNonExistentProperty),
                 "{'A', 'DoesNotExist'}",
-                "DoesNotExist"),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Model.FinalizeModel()).Message);
+                "DoesNotExist"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -130,9 +155,15 @@ public class PrimaryKeyAttributeConventionTest
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         Assert.Equal(
-            CoreStrings.ConflictingKeylessAndPrimaryKeyAttributes(nameof(EntityPrimaryKeyAndKeyless)),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Entity<EntityPrimaryKeyAndKeyless>()).Message);
+            CoreStrings.ConflictingKeylessAndPrimaryKeyAttributes(
+                nameof(EntityPrimaryKeyAndKeyless)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => modelBuilder.Entity<EntityPrimaryKeyAndKeyless>()
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -189,7 +220,8 @@ public class PrimaryKeyAttributeConventionTest
         Assert.Collection(
             primaryKey.Properties,
             prop0 => Assert.Equal("X", prop0.Name),
-            prop1 => Assert.Equal("Y", prop1.Name));
+            prop1 => Assert.Equal("Y", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -204,29 +236,35 @@ public class PrimaryKeyAttributeConventionTest
         Assert.Collection(
             primaryKey.Properties,
             prop0 => Assert.Equal("X", prop0.Name),
-            prop1 => Assert.Equal("Y", prop1.Name));
+            prop1 => Assert.Equal("Y", prop1.Name)
+        );
     }
 
     private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
     {
         var context = new ConventionContext<IConventionEntityTypeBuilder>(
-            entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            entityTypeBuilder.Metadata.Model.ConventionDispatcher
+        );
 
         CreatePrimaryKeyAttributeConvention().ProcessEntityTypeAdded(entityTypeBuilder, context);
     }
 
     private void RunConvention(InternalModelBuilder modelBuilder)
     {
-        var context = new ConventionContext<IConventionModelBuilder>(modelBuilder.Metadata.ConventionDispatcher);
+        var context = new ConventionContext<IConventionModelBuilder>(
+            modelBuilder.Metadata.ConventionDispatcher
+        );
 
         CreatePrimaryKeyAttributeConvention().ProcessModelFinalizing(modelBuilder, context);
     }
 
-    private KeyAttributeConvention CreatePrimaryKeyAttributeConvention()
-        => new(CreateDependencies());
+    private KeyAttributeConvention CreatePrimaryKeyAttributeConvention() =>
+        new(CreateDependencies());
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     [PrimaryKey(nameof(A), nameof(B))]
     private class EntityWithPrimaryKey

@@ -32,7 +32,10 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new DebuggerTypeProxyAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new DebuggerTypeProxyAttribute((Type)null)
+            );
         }
 
         [Theory]
@@ -56,7 +59,10 @@ namespace System.Diagnostics.Tests
         [InlineData("TargetTypeName")]
         public void TargetTypeName_Set_GetReturnsExpected(string targetTypeName)
         {
-            var attribute = new DebuggerTypeProxyAttribute("TypeName") { TargetTypeName = targetTypeName };
+            var attribute = new DebuggerTypeProxyAttribute("TypeName")
+            {
+                TargetTypeName = targetTypeName,
+            };
             Assert.Equal(targetTypeName, attribute.TargetTypeName);
         }
     }

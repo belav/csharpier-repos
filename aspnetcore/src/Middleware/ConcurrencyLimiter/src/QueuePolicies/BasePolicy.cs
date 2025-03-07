@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 internal class BasePolicy : IQueuePolicy, IDisposable
 {
     private readonly Limiter _limiter;
-    private readonly ConcurrentQueue<RateLimitLease> _leases = new ConcurrentQueue<RateLimitLease>();
+    private readonly ConcurrentQueue<RateLimitLease> _leases =
+        new ConcurrentQueue<RateLimitLease>();
 
     public int TotalRequests => _leases.Count;
 
@@ -23,21 +24,29 @@ internal class BasePolicy : IQueuePolicy, IDisposable
         var maxConcurrentRequests = queuePolicyOptions.MaxConcurrentRequests;
         if (maxConcurrentRequests <= 0)
         {
-            throw new ArgumentException("MaxConcurrentRequests must be a positive integer.", nameof(options));
+            throw new ArgumentException(
+                "MaxConcurrentRequests must be a positive integer.",
+                nameof(options)
+            );
         }
 
         var requestQueueLimit = queuePolicyOptions.RequestQueueLimit;
         if (requestQueueLimit < 0)
         {
-            throw new ArgumentException("The RequestQueueLimit cannot be a negative number.", nameof(options));
+            throw new ArgumentException(
+                "The RequestQueueLimit cannot be a negative number.",
+                nameof(options)
+            );
         }
 
-        _limiter = new Limiter(new LimiterOptions
-        {
-            PermitLimit = maxConcurrentRequests,
-            QueueProcessingOrder = order,
-            QueueLimit = requestQueueLimit
-        });
+        _limiter = new Limiter(
+            new LimiterOptions
+            {
+                PermitLimit = maxConcurrentRequests,
+                QueueProcessingOrder = order,
+                QueueLimit = requestQueueLimit,
+            }
+        );
     }
 
     public ValueTask<bool> TryEnterAsync()

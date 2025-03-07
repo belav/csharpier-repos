@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PeerApplication.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net.PeerToPeer.Collaboration
@@ -10,14 +10,14 @@ namespace System.Net.PeerToPeer.Collaboration
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Text;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.ComponentModel;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This class handles all the functionality and events associated with the Collaboration
@@ -48,13 +48,22 @@ namespace System.Net.PeerToPeer.Collaboration
             CollaborationHelperFunctions.Initialize();
         }
 
-        public PeerApplication(){}
+        public PeerApplication() { }
 
-        public PeerApplication( Guid id, string description, byte[] data, string path, 
-                                string commandLineArgs, PeerScope peerScope)
+        public PeerApplication(
+            Guid id,
+            string description,
+            byte[] data,
+            string path,
+            string commandLineArgs,
+            PeerScope peerScope
+        )
         {
             if ((data != null) && (data.Length > c_16K))
-                throw new ArgumentException(SR.GetString(SR.Collab_ApplicationDataSizeFailed), "data");
+                throw new ArgumentException(
+                    SR.GetString(SR.Collab_ApplicationDataSizeFailed),
+                    "data"
+                );
 
             m_id = id;
             m_description = description;
@@ -65,42 +74,56 @@ namespace System.Net.PeerToPeer.Collaboration
         }
 
         /// <summary>
-        /// Constructor to enable serialization 
+        /// Constructor to enable serialization
         /// </summary>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        protected PeerApplication(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        protected PeerApplication(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            m_id = (Guid) serializationInfo.GetValue("_Id", typeof(Guid));
-            m_data = (byte []) serializationInfo.GetValue("_Data", typeof(byte[]));
+            m_id = (Guid)serializationInfo.GetValue("_Id", typeof(Guid));
+            m_data = (byte[])serializationInfo.GetValue("_Data", typeof(byte[]));
             m_description = serializationInfo.GetString("_Description");
             m_path = serializationInfo.GetString("_Path");
             m_commandLineArgs = serializationInfo.GetString("_CommandLineArgs");
-            m_peerScope = (PeerScope) serializationInfo.GetInt32("_Scope");
+            m_peerScope = (PeerScope)serializationInfo.GetInt32("_Scope");
         }
 
         public Guid Id
         {
-            get {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            get
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
 
-                return m_id; 
+                return m_id;
             }
-            set {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
-                
-                m_id = value; 
+            set
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
+
+                m_id = value;
             }
         }
 
         public byte[] Data
         {
-            get {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
-                
+            get
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
+
                 return m_data;
             }
-            set {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            set
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
 
                 if ((value != null) && (value.Length > c_16K))
                     throw new ArgumentException(SR.GetString(SR.Collab_ApplicationDataSizeFailed));
@@ -111,55 +134,71 @@ namespace System.Net.PeerToPeer.Collaboration
 
         public string Description
         {
-            get{
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            get
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 return m_description;
             }
-            set {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
-                
+            set
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
+
                 m_description = value;
             }
         }
 
         public string Path
         {
-            get {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            get
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 return m_path;
             }
-            set {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            set
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 m_path = value;
             }
         }
 
         public string CommandLineArgs
         {
-            get {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            get
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 return m_commandLineArgs;
             }
-            set {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            set
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 m_commandLineArgs = value;
             }
         }
 
         public PeerScope PeerScope
         {
-            get {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            get
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 return m_peerScope;
             }
-            set {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            set
+            {
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 m_peerScope = value;
             }
         }
 
         /// <summary>
-        /// Gets and set the object used to marshall event handlers calls for stand alone 
+        /// Gets and set the object used to marshall event handlers calls for stand alone
         /// events
         /// </summary>
         [Browsable(false), DefaultValue(null), Description(SR.SynchronizingObject)]
@@ -167,12 +206,14 @@ namespace System.Net.PeerToPeer.Collaboration
         {
             get
             {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 return m_synchronizingObject;
             }
             set
             {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
                 m_synchronizingObject = value;
             }
         }
@@ -186,7 +227,8 @@ namespace System.Net.PeerToPeer.Collaboration
             [System.Security.SecurityCritical]
             add
             {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
 
                 PeerCollaborationPermission.UnrestrictedPeerCollaborationPermission.Demand();
                 AddApplicationChanged(value);
@@ -197,7 +239,8 @@ namespace System.Net.PeerToPeer.Collaboration
             [System.Security.SecurityCritical]
             remove
             {
-                if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+                if (m_Disposed)
+                    throw new ObjectDisposedException(this.GetType().FullName);
 
                 PeerCollaborationPermission.UnrestrictedPeerCollaborationPermission.Demand();
                 RemoveApplicationChanged(value);
@@ -208,8 +251,10 @@ namespace System.Net.PeerToPeer.Collaboration
         private object m_lockAppChangedEvent;
         private object LockAppChangedEvent
         {
-            get{
-                if (m_lockAppChangedEvent == null){
+            get
+            {
+                if (m_lockAppChangedEvent == null)
+                {
                     object o = new object();
                     Interlocked.CompareExchange(ref m_lockAppChangedEvent, o, null);
                 }
@@ -217,10 +262,10 @@ namespace System.Net.PeerToPeer.Collaboration
             }
         }
 
-        private RegisteredWaitHandle m_regAppChangedWaitHandle; 
-        private AutoResetEvent m_appChangedEvent;   
-        private SafeCollabEvent m_safeAppChangedEvent;      
-        #endregion 
+        private RegisteredWaitHandle m_regAppChangedWaitHandle;
+        private AutoResetEvent m_appChangedEvent;
+        private SafeCollabEvent m_safeAppChangedEvent;
+        #endregion
 
         // <SecurityKernel Critical="True" Ring="0">
         // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabRegisterEvent(Microsoft.Win32.SafeHandles.SafeWaitHandle,System.UInt32,System.Net.PeerToPeer.Collaboration.PEER_COLLAB_EVENT_REGISTRATION&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&):System.Int32" />
@@ -239,12 +284,20 @@ namespace System.Net.PeerToPeer.Collaboration
             // Register a wait handle if one has not been registered already
             //
 
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "AddApplicationChanged() called.");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "AddApplicationChanged() called."
+            );
 
-            lock (LockAppChangedEvent){
-                if (m_applicationChanged == null){
-                    if (m_id.Equals(Guid.Empty)){ 
-                        throw new PeerToPeerException("No application guid defined"); }
+            lock (LockAppChangedEvent)
+            {
+                if (m_applicationChanged == null)
+                {
+                    if (m_id.Equals(Guid.Empty))
+                    {
+                        throw new PeerToPeerException("No application guid defined");
+                    }
 
                     m_appChangedEvent = new AutoResetEvent(false);
 
@@ -252,12 +305,13 @@ namespace System.Net.PeerToPeer.Collaboration
                     // Register callback with a wait handle
                     //
 
-                    m_regAppChangedWaitHandle = ThreadPool.RegisterWaitForSingleObject(m_appChangedEvent, //Event that triggers the callback
-                                            new WaitOrTimerCallback(ApplicationChangedCallback), //callback to be called 
-                                            null, //state to be passed
-                                            -1,   //Timeout - aplicable only for timers
-                                            false //call us everytime the event is set
-                                            );
+                    m_regAppChangedWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                        m_appChangedEvent, //Event that triggers the callback
+                        new WaitOrTimerCallback(ApplicationChangedCallback), //callback to be called
+                        null, //state to be passed
+                        -1, //Timeout - aplicable only for timers
+                        false //call us everytime the event is set
+                    );
                     PEER_COLLAB_EVENT_REGISTRATION pcer = new PEER_COLLAB_EVENT_REGISTRATION();
                     pcer.eventType = PeerCollabEventType.EndPointApplicationChanged;
 
@@ -270,20 +324,37 @@ namespace System.Net.PeerToPeer.Collaboration
                     // Register event with collab
                     //
 
-                    try{
-                        Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Registering event with App ID {0}", m_id.ToString());
+                    try
+                    {
+                        Logging.P2PTraceSource.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Registering event with App ID {0}",
+                            m_id.ToString()
+                        );
 
                         int errorCode = UnsafeCollabNativeMethods.PeerCollabRegisterEvent(
-                                                                            m_appChangedEvent.SafeWaitHandle,
-                                                                            1,
-                                                                            ref pcer,
-                                                                            out m_safeAppChangedEvent);
-                        if (errorCode != 0){
-                            Logging.P2PTraceSource.TraceEvent(TraceEventType.Error, 0, "PeerCollabRegisterEvent returned with errorcode {0}", errorCode);
-                            throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Collab_ApplicationChangedRegFailed), errorCode);
+                            m_appChangedEvent.SafeWaitHandle,
+                            1,
+                            ref pcer,
+                            out m_safeAppChangedEvent
+                        );
+                        if (errorCode != 0)
+                        {
+                            Logging.P2PTraceSource.TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "PeerCollabRegisterEvent returned with errorcode {0}",
+                                errorCode
+                            );
+                            throw PeerToPeerException.CreateFromHr(
+                                SR.GetString(SR.Collab_ApplicationChangedRegFailed),
+                                errorCode
+                            );
                         }
                     }
-                    finally{
+                    finally
+                    {
                         if (guidHandle.IsAllocated)
                             guidHandle.Free();
                     }
@@ -291,8 +362,11 @@ namespace System.Net.PeerToPeer.Collaboration
                 m_applicationChanged += callback;
             }
 
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "AddApplicationChanged() successful.");
-
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "AddApplicationChanged() successful."
+            );
         }
 
         // <SecurityKernel Critical="True" Ring="1">
@@ -302,31 +376,55 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         private void RemoveApplicationChanged(EventHandler<ApplicationChangedEventArgs> callback)
         {
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "RemoveApplicationChanged() called.");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "RemoveApplicationChanged() called."
+            );
 
-            lock (LockAppChangedEvent){
+            lock (LockAppChangedEvent)
+            {
                 m_applicationChanged -= callback;
-                if (m_applicationChanged == null){
-                    CollaborationHelperFunctions.CleanEventVars(ref m_regAppChangedWaitHandle,
-                                                                ref m_safeAppChangedEvent,
-                                                                ref m_appChangedEvent);
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Clean ApplicationChanged variables successful.");
+                if (m_applicationChanged == null)
+                {
+                    CollaborationHelperFunctions.CleanEventVars(
+                        ref m_regAppChangedWaitHandle,
+                        ref m_safeAppChangedEvent,
+                        ref m_appChangedEvent
+                    );
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Clean ApplicationChanged variables successful."
+                    );
                 }
             }
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "RemoveApplicationChanged() successful.");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "RemoveApplicationChanged() successful."
+            );
         }
 
         protected virtual void OnApplicationChanged(ApplicationChangedEventArgs appChangedArgs)
         {
             EventHandler<ApplicationChangedEventArgs> handlerCopy = m_applicationChanged;
 
-            if (handlerCopy != null){
+            if (handlerCopy != null)
+            {
                 if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
-                    SynchronizingObject.BeginInvoke(handlerCopy, new object[] { this, appChangedArgs });
+                    SynchronizingObject.BeginInvoke(
+                        handlerCopy,
+                        new object[] { this, appChangedArgs }
+                    );
                 else
                     handlerCopy(this, appChangedArgs);
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Fired the application changed event callback.");
-            } 
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Fired the application changed event callback."
+                );
+            }
         }
 
         //
@@ -351,84 +449,135 @@ namespace System.Net.PeerToPeer.Collaboration
             SafeCollabData eventData = null;
             int errorCode = 0;
 
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "ApplicationChangedCallback() called.");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "ApplicationChangedCallback() called."
+            );
 
-            if (m_Disposed) return;
+            if (m_Disposed)
+                return;
 
-            while (true){
+            while (true)
+            {
                 ApplicationChangedEventArgs appChangedArgs = null;
-                
+
                 //
                 // Get the event data for the fired event
                 //
-                try{
+                try
+                {
                     lock (LockAppChangedEvent)
                     {
-                        if (m_safeAppChangedEvent.IsInvalid) return;
-                        errorCode = UnsafeCollabNativeMethods.PeerCollabGetEventData(m_safeAppChangedEvent,
-                                                                                     out eventData);
-                    } 
-                    
-                    if (errorCode == UnsafeCollabReturnCodes.PEER_S_NO_EVENT_DATA)
-                        break;
-                    else if (errorCode != 0){
-                        Logging.P2PTraceSource.TraceEvent(TraceEventType.Error, 0, "PeerCollabGetEventData returned with errorcode {0}", errorCode);
-                        throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Collab_GetApplicationChangedDataFailed), errorCode);
+                        if (m_safeAppChangedEvent.IsInvalid)
+                            return;
+                        errorCode = UnsafeCollabNativeMethods.PeerCollabGetEventData(
+                            m_safeAppChangedEvent,
+                            out eventData
+                        );
                     }
 
-                    PEER_COLLAB_EVENT_DATA ped = (PEER_COLLAB_EVENT_DATA)Marshal.PtrToStructure(eventData.DangerousGetHandle(),
-                                                                                                typeof(PEER_COLLAB_EVENT_DATA));
-                    if (ped.eventType == PeerCollabEventType.EndPointApplicationChanged){
-                        PEER_EVENT_APPLICATION_CHANGED_DATA appData = ped.applicationChangedData;
-                        PEER_APPLICATION pa = (PEER_APPLICATION)Marshal.PtrToStructure(appData.pApplication, typeof(PEER_APPLICATION));
+                    if (errorCode == UnsafeCollabReturnCodes.PEER_S_NO_EVENT_DATA)
+                        break;
+                    else if (errorCode != 0)
+                    {
+                        Logging.P2PTraceSource.TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "PeerCollabGetEventData returned with errorcode {0}",
+                            errorCode
+                        );
+                        throw PeerToPeerException.CreateFromHr(
+                            SR.GetString(SR.Collab_GetApplicationChangedDataFailed),
+                            errorCode
+                        );
+                    }
 
-                        PeerApplication peerApplication = CollaborationHelperFunctions.ConvertPEER_APPLICATIONToPeerApplication(pa); ;
+                    PEER_COLLAB_EVENT_DATA ped = (PEER_COLLAB_EVENT_DATA)
+                        Marshal.PtrToStructure(
+                            eventData.DangerousGetHandle(),
+                            typeof(PEER_COLLAB_EVENT_DATA)
+                        );
+                    if (ped.eventType == PeerCollabEventType.EndPointApplicationChanged)
+                    {
+                        PEER_EVENT_APPLICATION_CHANGED_DATA appData = ped.applicationChangedData;
+                        PEER_APPLICATION pa = (PEER_APPLICATION)
+                            Marshal.PtrToStructure(appData.pApplication, typeof(PEER_APPLICATION));
+
+                        PeerApplication peerApplication =
+                            CollaborationHelperFunctions.ConvertPEER_APPLICATIONToPeerApplication(
+                                pa
+                            );
+                        ;
 
                         //
                         // Check if the Guid of the fired app is indeed our guid
                         //
 
-                        if (Guid.Equals(m_id, peerApplication.Id)){
+                        if (Guid.Equals(m_id, peerApplication.Id))
+                        {
                             PeerContact peerContact = null;
                             PeerEndPoint peerEndPoint = null;
 
-                            if (appData.pContact != IntPtr.Zero){
-                                PEER_CONTACT pc = (PEER_CONTACT)Marshal.PtrToStructure(appData.pContact, typeof(PEER_CONTACT));
-                                peerContact = CollaborationHelperFunctions.ConvertPEER_CONTACTToPeerContact(pc);
+                            if (appData.pContact != IntPtr.Zero)
+                            {
+                                PEER_CONTACT pc = (PEER_CONTACT)
+                                    Marshal.PtrToStructure(appData.pContact, typeof(PEER_CONTACT));
+                                peerContact =
+                                    CollaborationHelperFunctions.ConvertPEER_CONTACTToPeerContact(
+                                        pc
+                                    );
                             }
 
-                            if (appData.pEndPoint != IntPtr.Zero){
-                                PEER_ENDPOINT pe = (PEER_ENDPOINT)Marshal.PtrToStructure(appData.pEndPoint, typeof(PEER_ENDPOINT));
-                                peerEndPoint = CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(pe);
+                            if (appData.pEndPoint != IntPtr.Zero)
+                            {
+                                PEER_ENDPOINT pe = (PEER_ENDPOINT)
+                                    Marshal.PtrToStructure(
+                                        appData.pEndPoint,
+                                        typeof(PEER_ENDPOINT)
+                                    );
+                                peerEndPoint =
+                                    CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(
+                                        pe
+                                    );
                             }
 
-                            appChangedArgs = new ApplicationChangedEventArgs(peerEndPoint,
-                                                                                                    peerContact,
-                                                                                                    appData.changeType,
-                                                                                                    peerApplication);
+                            appChangedArgs = new ApplicationChangedEventArgs(
+                                peerEndPoint,
+                                peerContact,
+                                appData.changeType,
+                                peerApplication
+                            );
                         }
                     }
                 }
-                finally{
-                    if (eventData != null) eventData.Dispose();
+                finally
+                {
+                    if (eventData != null)
+                        eventData.Dispose();
                 }
 
                 //
                 // Fire the callback with the marshalled event args data
                 //
 
-                if(appChangedArgs != null)
+                if (appChangedArgs != null)
                     OnApplicationChanged(appChangedArgs);
-
             }
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Leaving ApplicationChangedCallback().");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Leaving ApplicationChangedCallback()."
+            );
         }
 
         public bool Equals(PeerApplication other)
         {
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
-            if (other != null){
+            if (other != null)
+            {
                 return Guid.Equals(other.Id, m_id);
             }
             return false;
@@ -436,22 +585,25 @@ namespace System.Net.PeerToPeer.Collaboration
 
         public override bool Equals(object obj)
         {
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
             PeerApplication comparandPeerApplication = obj as PeerApplication;
-            if (comparandPeerApplication != null){
+            if (comparandPeerApplication != null)
+            {
                 return Guid.Equals(comparandPeerApplication.Id, Id);
             }
 
             return false;
         }
 
-        public new static bool Equals(object objA, object objB)
+        public static new bool Equals(object objA, object objB)
         {
             PeerApplication comparandPeerApplication1 = objA as PeerApplication;
             PeerApplication comparandPeerApplication2 = objB as PeerApplication;
 
-            if ((comparandPeerApplication1 != null) && (comparandPeerApplication2 != null)){
+            if ((comparandPeerApplication1 != null) && (comparandPeerApplication2 != null))
+            {
                 return Guid.Equals(comparandPeerApplication1.Id, comparandPeerApplication2.Id);
             }
 
@@ -460,19 +612,22 @@ namespace System.Net.PeerToPeer.Collaboration
 
         public override int GetHashCode()
         {
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
             return Id.GetHashCode();
         }
 
         public override string ToString()
         {
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
             return Id.ToString() + " " + Description;
         }
 
         private bool m_Disposed;
+
         // <SecurityKernel Critical="True" Ring="2">
         // <ReferencesCritical Name="Method: Dispose(Boolean):Void" Ring="2" />
         // </SecurityKernel>
@@ -490,11 +645,18 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         protected virtual void Dispose(bool disposing)
         {
-            if (!m_Disposed){
-                CollaborationHelperFunctions.CleanEventVars(ref m_regAppChangedWaitHandle,
-                                                            ref m_safeAppChangedEvent,
-                                                            ref m_appChangedEvent);
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Clean ApplicationChanged variables successful.");
+            if (!m_Disposed)
+            {
+                CollaborationHelperFunctions.CleanEventVars(
+                    ref m_regAppChangedWaitHandle,
+                    ref m_safeAppChangedEvent,
+                    ref m_appChangedEvent
+                );
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Clean ApplicationChanged variables successful."
+                );
                 m_Disposed = true;
             }
         }
@@ -502,9 +664,17 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="GetObjectData(SerializationInfo, StreamingContext):Void" />
         // </SecurityKernel>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.Net.dll is still using pre-v4 security model and needs this demand")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.Net.dll is still using pre-v4 security model and needs this demand"
+        )]
         [System.Security.SecurityCritical]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter, SerializationFormatter = true)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             GetObjectData(info, context);
@@ -530,21 +700,58 @@ namespace System.Net.PeerToPeer.Collaboration
         //
         internal void TracePeerApplication()
         {
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Contents of the PeerApplication");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Contents of the PeerApplication"
+            );
             Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tGuid: {0}", Id);
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tDescription: {0}", Description);
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "\tDescription: {0}",
+                Description
+            );
             Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tPath: {0}", Path);
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tCommandLineArgs: {0}", CommandLineArgs);
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tPeerScope: {0}", PeerScope);
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "\tCommandLineArgs: {0}",
+                CommandLineArgs
+            );
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "\tPeerScope: {0}",
+                PeerScope
+            );
 
-            if (Data != null){
-
-                if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Verbose)){
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tApplication data:");
-                    Logging.DumpData(Logging.P2PTraceSource, TraceEventType.Verbose, Logging.P2PTraceSource.MaxDataSize, Data, 0, Data.Length);
+            if (Data != null)
+            {
+                if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Verbose))
+                {
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "\tApplication data:"
+                    );
+                    Logging.DumpData(
+                        Logging.P2PTraceSource,
+                        TraceEventType.Verbose,
+                        Logging.P2PTraceSource.MaxDataSize,
+                        Data,
+                        0,
+                        Data.Length
+                    );
                 }
-                else{
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tApplication data length {0}", Data.Length);
+                else
+                {
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "\tApplication data length {0}",
+                        Data.Length
+                    );
                 }
             }
         }
@@ -557,10 +764,12 @@ namespace System.Net.PeerToPeer.Collaboration
     public class PeerApplicationCollection : Collection<PeerApplication>
     {
         internal PeerApplicationCollection() { }
+
         protected override void SetItem(int index, PeerApplication item)
         {
             // nulls not allowed
-            if (item == null){
+            if (item == null)
+            {
                 throw new ArgumentNullException("item");
             }
             base.SetItem(index, item);
@@ -569,7 +778,8 @@ namespace System.Net.PeerToPeer.Collaboration
         protected override void InsertItem(int index, PeerApplication item)
         {
             // nulls not allowed
-            if (item == null){
+            if (item == null)
+            {
                 throw new ArgumentNullException("item");
             }
             base.InsertItem(index, item);
@@ -580,11 +790,14 @@ namespace System.Net.PeerToPeer.Collaboration
             bool first = true;
             StringBuilder builder = new StringBuilder();
 
-            foreach (PeerApplication peerApplication in this){
-                if(!first){
+            foreach (PeerApplication peerApplication in this)
+            {
+                if (!first)
+                {
                     builder.Append(", ");
                 }
-                else{
+                else
+                {
                     first = false;
                 }
                 builder.Append(peerApplication.ToString());

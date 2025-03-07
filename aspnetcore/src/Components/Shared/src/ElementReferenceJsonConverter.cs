@@ -17,7 +17,11 @@ internal sealed class ElementReferenceJsonConverter : JsonConverter<ElementRefer
         _elementReferenceContext = elementReferenceContext;
     }
 
-    public override ElementReference Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ElementReference Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         string? id = null;
         while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
@@ -48,7 +52,11 @@ internal sealed class ElementReferenceJsonConverter : JsonConverter<ElementRefer
         return new ElementReference(id, _elementReferenceContext);
     }
 
-    public override void Write(Utf8JsonWriter writer, ElementReference value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ElementReference value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         writer.WriteString(IdProperty, value.Id);

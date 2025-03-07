@@ -44,7 +44,10 @@ namespace Microsoft.Extensions.Logging.EventLog
             {
                 if (_enabled)
                 {
-                    DiagnosticsEventLog.WriteEvent(new EventInstance(eventID, category, type), message);
+                    DiagnosticsEventLog.WriteEvent(
+                        new EventInstance(eventID, category, type),
+                        message
+                    );
                 }
             }
             catch (SecurityException sx)
@@ -53,16 +56,25 @@ namespace Microsoft.Extensions.Logging.EventLog
                 // We couldn't create the log or source name. Disable logging.
                 try
                 {
-                    using (var backupLog = new System.Diagnostics.EventLog("Application", ".", "Application"))
+                    using (
+                        var backupLog = new System.Diagnostics.EventLog(
+                            "Application",
+                            ".",
+                            "Application"
+                        )
+                    )
                     {
-                        backupLog.WriteEvent(new EventInstance(instanceId: 0, categoryId: 0, EventLogEntryType.Error),
-                            $"Unable to log .NET application events. {sx.Message}");
+                        backupLog.WriteEvent(
+                            new EventInstance(
+                                instanceId: 0,
+                                categoryId: 0,
+                                EventLogEntryType.Error
+                            ),
+                            $"Unable to log .NET application events. {sx.Message}"
+                        );
                     }
                 }
-                catch (Exception)
-                {
-
-                }
+                catch (Exception) { }
             }
         }
     }

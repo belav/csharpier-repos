@@ -6,58 +6,79 @@ namespace TestServer;
 public class TransportsServerStartup : ServerStartup
 {
     public TransportsServerStartup(IConfiguration configuration)
-        : base(configuration)
-    {
-    }
+        : base(configuration) { }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public override void Configure(IApplicationBuilder app, IWebHostEnvironment env, ResourceRequestLog resourceRequestLog)
+    public override void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env,
+        ResourceRequestLog resourceRequestLog
+    )
     {
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
         }
 
-        app.Map("/defaultTransport", app =>
-        {
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/defaultTransport",
+            app =>
             {
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_ServerHost");
-            });
-        });
+                app.UseStaticFiles();
 
-        app.Map("/longPolling", app =>
-        {
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapBlazorHub(configureOptions: options =>
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
                 {
-                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_ServerHost");
                 });
-                endpoints.MapFallbackToPage("/_ServerHost");
-            });
-        });
+            }
+        );
 
-        app.Map("/webSockets", app =>
-        {
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/longPolling",
+            app =>
             {
-                endpoints.MapBlazorHub(configureOptions: options =>
+                app.UseStaticFiles();
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
                 {
-                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
+                    endpoints.MapBlazorHub(configureOptions: options =>
+                    {
+                        options.Transports = Microsoft
+                            .AspNetCore
+                            .Http
+                            .Connections
+                            .HttpTransportType
+                            .LongPolling;
+                    });
+                    endpoints.MapFallbackToPage("/_ServerHost");
                 });
-                endpoints.MapFallbackToPage("/_ServerHost");
-            });
-        });
+            }
+        );
+
+        app.Map(
+            "/webSockets",
+            app =>
+            {
+                app.UseStaticFiles();
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapBlazorHub(configureOptions: options =>
+                    {
+                        options.Transports = Microsoft
+                            .AspNetCore
+                            .Http
+                            .Connections
+                            .HttpTransportType
+                            .WebSockets;
+                    });
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
+            }
+        );
     }
 }

@@ -27,15 +27,40 @@ namespace System.Tests
         public void FromDecimal()
         {
             decimal[] testValues = { 1000m, 0m, -1000m, decimal.MaxValue, decimal.MinValue };
-            float[] expectedValues = { 1000f, 0.0f, -1000f, (float)decimal.MaxValue, (float)decimal.MinValue };
+            float[] expectedValues =
+            {
+                1000f,
+                0.0f,
+                -1000f,
+                (float)decimal.MaxValue,
+                (float)decimal.MinValue,
+            };
             Verify(Convert.ToSingle, testValues, expectedValues);
         }
 
         [Fact]
         public void FromDouble()
         {
-            double[] testValues = { 1000.0, 100.0, 0.0, -100.0, -1000.0, double.MaxValue, double.MinValue };
-            float[] expectedValues = { 1000.0f, 100.0f, 0.0f, -100.0f, -1000.0f, float.PositiveInfinity, float.NegativeInfinity };
+            double[] testValues =
+            {
+                1000.0,
+                100.0,
+                0.0,
+                -100.0,
+                -1000.0,
+                double.MaxValue,
+                double.MinValue,
+            };
+            float[] expectedValues =
+            {
+                1000.0f,
+                100.0f,
+                0.0f,
+                -100.0f,
+                -1000.0f,
+                float.PositiveInfinity,
+                float.NegativeInfinity,
+            };
             Verify(Convert.ToSingle, testValues, expectedValues);
         }
 
@@ -71,7 +96,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToSingle, Convert.ToSingle, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToSingle, Convert.ToSingle, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToSingle,
+                Convert.ToSingle,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -85,33 +114,64 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { float.MaxValue, float.MinValue, new float(), float.NegativeInfinity, float.PositiveInfinity, float.Epsilon };
-            float[] expectedValues = { float.MaxValue, float.MinValue, new float(), float.NegativeInfinity, float.PositiveInfinity, float.Epsilon };
+            float[] testValues =
+            {
+                float.MaxValue,
+                float.MinValue,
+                new float(),
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.Epsilon,
+            };
+            float[] expectedValues =
+            {
+                float.MaxValue,
+                float.MinValue,
+                new float(),
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.Epsilon,
+            };
             Verify(Convert.ToSingle, testValues, expectedValues);
         }
 
         [Fact]
         public void FromString()
         {
-            string[] testValues = { Single.MaxValue.ToString("R"), (0f).ToString(), Single.MinValue.ToString("R"), null };
+            string[] testValues =
+            {
+                Single.MaxValue.ToString("R"),
+                (0f).ToString(),
+                Single.MinValue.ToString("R"),
+                null,
+            };
             float[] expectedValues = { float.MaxValue, 0f, float.MinValue, 0f };
             VerifyFromString(Convert.ToSingle, Convert.ToSingle, testValues, expectedValues);
 
             string[] formatExceptionValues = { "1f2d" };
-            VerifyFromStringThrows<FormatException>(Convert.ToSingle, Convert.ToSingle, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToSingle,
+                Convert.ToSingle,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromString_NotNetFramework()
         {
             string[] overflowValues = { Double.MinValue.ToString(), Double.MaxValue.ToString() };
-            VerifyFromString(Convert.ToSingle, Convert.ToSingle, overflowValues, new float[] { float.NegativeInfinity, float.PositiveInfinity });
+            VerifyFromString(
+                Convert.ToSingle,
+                Convert.ToSingle,
+                overflowValues,
+                new float[] { float.NegativeInfinity, float.PositiveInfinity }
+            );
         }
 
         [Fact]
         public void FromUInt16()
         {
-            ushort[] testValues = { ushort.MaxValue, ushort.MinValue, };
+            ushort[] testValues = { ushort.MaxValue, ushort.MinValue };
             float[] expectedValues = { ushort.MaxValue, ushort.MinValue };
             Verify(Convert.ToSingle, testValues, expectedValues);
         }

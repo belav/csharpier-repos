@@ -3,8 +3,8 @@
 
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -32,7 +32,17 @@ namespace System.Diagnostics.Tests
         {
             EventBookmark bookmark = GetBookmark();
             Assert.Throws<ArgumentNullException>(() => new EventLogWatcher(null, bookmark, true));
-            Assert.Throws<InvalidOperationException>(() => new EventLogWatcher(new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true }, bookmark, true));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    new EventLogWatcher(
+                        new EventLogQuery("Application", PathType.LogName, "*[System]")
+                        {
+                            ReverseDirection = true,
+                        },
+                        bookmark,
+                        true
+                    )
+            );
 
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]");
             using (var eventLogWatcher = new EventLogWatcher(query, bookmark))
@@ -48,7 +58,11 @@ namespace System.Diagnostics.Tests
         private EventBookmark GetBookmark()
         {
             EventBookmark bookmark;
-            EventLogQuery eventLogQuery = new EventLogQuery("Application", PathType.LogName, "*[System]");
+            EventLogQuery eventLogQuery = new EventLogQuery(
+                "Application",
+                PathType.LogName,
+                "*[System]"
+            );
             using (var eventLog = new EventLogReader(eventLogQuery))
             using (var record = eventLog.ReadEvent())
             {
@@ -80,7 +94,9 @@ namespace System.Diagnostics.Tests
                         signal.Set();
                     };
                     Helpers.Retry(() => eventLogWatcher.Enabled = waitOnEvent);
-                    Helpers.Retry(() => eventLog.WriteEntry(message, EventLogEntryType.Information));
+                    Helpers.Retry(
+                        () => eventLog.WriteEntry(message, EventLogEntryType.Information)
+                    );
                     if (waitOnEvent)
                     {
                         Assert.True(signal.WaitOne(6000));
@@ -106,7 +122,11 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
         public void RecordWrittenEventRaiseDisable()
         {
-            RaisingEvent("DisableEvent", nameof(RecordWrittenEventRaiseDisable), waitOnEvent: false);
+            RaisingEvent(
+                "DisableEvent",
+                nameof(RecordWrittenEventRaiseDisable),
+                waitOnEvent: false
+            );
             Assert.Equal(0, eventCounter);
         }
     }

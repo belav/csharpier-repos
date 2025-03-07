@@ -27,16 +27,17 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         [InlineData("\n", "\r", "cr")]
         [InlineData("\r\n", "\r", "cr")]
         [InlineData("\r", "\r", "cr")]
-        public async Task TestEndOfLine_NoFinalNewline(string codeNewline, string expectedNewline, string endOfLine)
+        public async Task TestEndOfLine_NoFinalNewline(
+            string codeNewline,
+            string expectedNewline,
+            string endOfLine
+        )
         {
             var testCode = $"class C{codeNewline}{{{codeNewline}}}";
 
             var expectedCode = $"class C{expectedNewline}{{{expectedNewline}}}";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-                ["end_of_line"] = endOfLine,
-            };
+            var editorConfig = new Dictionary<string, string>() { ["end_of_line"] = endOfLine };
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
         }
@@ -51,16 +52,17 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         [InlineData("\n", "\r", "cr")]
         [InlineData("\r\n", "\r", "cr")]
         [InlineData("\r", "\r", "cr")]
-        public async Task TestEndOfLine_WithFinalNewline(string codeNewline, string expectedNewline, string endOfLine)
+        public async Task TestEndOfLine_WithFinalNewline(
+            string codeNewline,
+            string expectedNewline,
+            string endOfLine
+        )
         {
             var testCode = $"class C{codeNewline}{{{codeNewline}}}{codeNewline}";
 
             var expectedCode = $"class C{expectedNewline}{{{expectedNewline}}}{expectedNewline}";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-                ["end_of_line"] = endOfLine,
-            };
+            var editorConfig = new Dictionary<string, string>() { ["end_of_line"] = endOfLine };
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
         }

@@ -10,11 +10,15 @@ namespace System.Runtime.Serialization.Formatters.Binary
     {
         [RequiresDynamicCode(IFormatter.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
-        public object Deserialize(Stream serializationStream)
-            => throw new PlatformNotSupportedException(SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform);
+        public object Deserialize(Stream serializationStream) =>
+            throw new PlatformNotSupportedException(
+                SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform
+            );
 
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
-        public void Serialize(Stream serializationStream, object graph)
-            => throw new PlatformNotSupportedException(SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform);
+        public void Serialize(Stream serializationStream, object graph) =>
+            throw new PlatformNotSupportedException(
+                SR.BinaryFormatter_SerializationNotSupportedOnThisPlatform
+            );
     }
 }

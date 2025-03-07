@@ -10,28 +10,36 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
-
     [Fx.Tag.XamlVisible(false)]
-    sealed public class DiscoveryClientBindingElement : BindingElement
+    public sealed class DiscoveryClientBindingElement : BindingElement
     {
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes, Justification = "EndpointAddress is an immutable type.")]
-        public static readonly EndpointAddress DiscoveryEndpointAddress = new EndpointAddress("http://schemas.microsoft.com/discovery/dynamic");
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes,
+            Justification = "EndpointAddress is an immutable type."
+        )]
+        public static readonly EndpointAddress DiscoveryEndpointAddress = new EndpointAddress(
+            "http://schemas.microsoft.com/discovery/dynamic"
+        );
 
-        DiscoveryEndpointProvider discoveryEndpointProvider;        
-        FindCriteria findCriteria;        
+        DiscoveryEndpointProvider discoveryEndpointProvider;
+        FindCriteria findCriteria;
 
-        public DiscoveryClientBindingElement()            
+        public DiscoveryClientBindingElement()
         {
             this.FindCriteria = new FindCriteria();
             this.DiscoveryEndpointProvider = new UdpDiscoveryEndpointProvider();
         }
 
-        public DiscoveryClientBindingElement(DiscoveryEndpointProvider discoveryEndpointProvider, FindCriteria findCriteria)
+        public DiscoveryClientBindingElement(
+            DiscoveryEndpointProvider discoveryEndpointProvider,
+            FindCriteria findCriteria
+        )
         {
             if (discoveryEndpointProvider == null)
             {
                 throw FxTrace.Exception.ArgumentNull("discoveryEndpointProvider");
-            }            
+            }
 
             if (findCriteria == null)
             {
@@ -46,15 +54,13 @@ namespace System.ServiceModel.Discovery
             : base(elementToBeCloned)
         {
             this.discoveryEndpointProvider = elementToBeCloned.DiscoveryEndpointProvider;
-            this.findCriteria = elementToBeCloned.FindCriteria.Clone();;
+            this.findCriteria = elementToBeCloned.FindCriteria.Clone();
+            ;
         }
 
         public DiscoveryEndpointProvider DiscoveryEndpointProvider
         {
-            get
-            {
-                return this.discoveryEndpointProvider;
-            }
+            get { return this.discoveryEndpointProvider; }
             set
             {
                 if (value == null)
@@ -68,10 +74,7 @@ namespace System.ServiceModel.Discovery
 
         public FindCriteria FindCriteria
         {
-            get
-            {
-                return this.findCriteria;
-            }
+            get { return this.findCriteria; }
             set
             {
                 if (value == null)
@@ -89,12 +92,14 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            if (typeof(TChannel) == typeof(IOutputChannel)
+            if (
+                typeof(TChannel) == typeof(IOutputChannel)
                 || typeof(TChannel) == typeof(IDuplexChannel)
                 || typeof(TChannel) == typeof(IRequestChannel)
                 || typeof(TChannel) == typeof(IOutputSessionChannel)
                 || typeof(TChannel) == typeof(IRequestSessionChannel)
-                || typeof(TChannel) == typeof(IDuplexSessionChannel))
+                || typeof(TChannel) == typeof(IDuplexSessionChannel)
+            )
             {
                 return context.CanBuildInnerChannelFactory<TChannel>();
             }
@@ -102,7 +107,9 @@ namespace System.ServiceModel.Discovery
             return false;
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -111,7 +118,9 @@ namespace System.ServiceModel.Discovery
 
             if (context.Binding.Elements.IndexOf(this) != 0)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DiscoveryClientBindingElementNotFirst));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.DiscoveryClientBindingElementNotFirst)
+                );
             }
 
             if (this.CanBuildChannelFactory<TChannel>(context))
@@ -119,11 +128,18 @@ namespace System.ServiceModel.Discovery
                 return new DiscoveryClientChannelFactory<TChannel>(
                     context.BuildInnerChannelFactory<TChannel>(),
                     this.FindCriteria,
-                    this.DiscoveryEndpointProvider);
+                    this.DiscoveryEndpointProvider
+                );
             }
             else
             {
-                throw FxTrace.Exception.Argument("TChannel", ServiceModel.SR.GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw FxTrace.Exception.Argument(
+                    "TChannel",
+                    ServiceModel.SR.GetString(
+                        ServiceModel.SR.ChannelTypeNotSupported,
+                        typeof(TChannel)
+                    )
+                );
             }
         }
 
@@ -137,14 +153,19 @@ namespace System.ServiceModel.Discovery
             return false;
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            throw FxTrace.Exception.Argument("TChannel", ServiceModel.SR.GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel)));
+            throw FxTrace.Exception.Argument(
+                "TChannel",
+                ServiceModel.SR.GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
+            );
         }
 
         public override BindingElement Clone()
@@ -160,6 +181,6 @@ namespace System.ServiceModel.Discovery
             }
 
             return context.GetInnerProperty<T>();
-        }      
+        }
     }
 }

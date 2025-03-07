@@ -10,7 +10,7 @@ namespace NonBlittablePointer
     static class NonBlittablePointerNative
     {
         [DllImport(nameof(NonBlittablePointerNative))]
-        public static unsafe extern void Negate(bool* ptr);
+        public static extern unsafe void Negate(bool* ptr);
     }
 
     public class Program

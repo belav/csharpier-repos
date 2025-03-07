@@ -9,20 +9,28 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
     public partial class ECDiffieHellmanTests
     {
-        public static bool DoesNotSupportRawDerivation => !ECDiffieHellmanFactory.SupportsRawDerivation;
+        public static bool DoesNotSupportRawDerivation =>
+            !ECDiffieHellmanFactory.SupportsRawDerivation;
 
-        [ConditionalFact(typeof(ECDiffieHellmanFactory), nameof(ECDiffieHellmanFactory.SupportsRawDerivation))]
+        [ConditionalFact(
+            typeof(ECDiffieHellmanFactory),
+            nameof(ECDiffieHellmanFactory.SupportsRawDerivation)
+        )]
         public static void RawDerivation_OtherKeyRequired()
         {
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "otherPartyPublicKey",
-                    () => ecdh.DeriveRawSecretAgreement(null));
+                    () => ecdh.DeriveRawSecretAgreement(null)
+                );
             }
         }
 
-        [ConditionalTheory(typeof(ECDiffieHellmanFactory), nameof(ECDiffieHellmanFactory.SupportsRawDerivation))]
+        [ConditionalTheory(
+            typeof(ECDiffieHellmanFactory),
+            nameof(ECDiffieHellmanFactory.SupportsRawDerivation)
+        )]
         [MemberData(nameof(MismatchedKeysizes))]
         public static void RawDerivation_SameSizeOtherKeyRequired(int aliceSize, int bobSize)
         {
@@ -32,11 +40,15 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             {
                 AssertExtensions.Throws<ArgumentException>(
                     "otherPartyPublicKey",
-                    () => alice.DeriveRawSecretAgreement(bobPublic));
+                    () => alice.DeriveRawSecretAgreement(bobPublic)
+                );
             }
         }
 
-        [ConditionalTheory(typeof(ECDiffieHellmanFactory), nameof(ECDiffieHellmanFactory.SupportsRawDerivation))]
+        [ConditionalTheory(
+            typeof(ECDiffieHellmanFactory),
+            nameof(ECDiffieHellmanFactory.SupportsRawDerivation)
+        )]
         [MemberData(nameof(EveryKeysize))]
         public static void RawDerivation_DeriveSharedSecret_Agree(int keySize)
         {
@@ -51,12 +63,21 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             }
         }
 
-        [ConditionalFact(typeof(ECDiffieHellmanFactory), nameof(ECDiffieHellmanFactory.SupportsRawDerivation))]
+        [ConditionalFact(
+            typeof(ECDiffieHellmanFactory),
+            nameof(ECDiffieHellmanFactory.SupportsRawDerivation)
+        )]
         public static void RawDerivation_DeriveSharedSecret_Disagree()
         {
-            using (ECDiffieHellman alice = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
-            using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
-            using (ECDiffieHellman eve = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
+            using (
+                ECDiffieHellman alice = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
+            using (
+                ECDiffieHellman bob = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
+            using (
+                ECDiffieHellman eve = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             using (ECDiffieHellmanPublicKey evePublic = eve.PublicKey)
             {
@@ -67,11 +88,18 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             }
         }
 
-        [ConditionalFact(typeof(ECDiffieHellmanFactory), nameof(ECDiffieHellmanFactory.SupportsRawDerivation))]
+        [ConditionalFact(
+            typeof(ECDiffieHellmanFactory),
+            nameof(ECDiffieHellmanFactory.SupportsRawDerivation)
+        )]
         public static void RawDerivation_DeriveIsStable()
         {
-            using (ECDiffieHellman alice = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
-            using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
+            using (
+                ECDiffieHellman alice = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
+            using (
+                ECDiffieHellman bob = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 byte[] aliceDerived1 = alice.DeriveRawSecretAgreement(bobPublic);
@@ -83,11 +111,17 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         [ConditionalFact(nameof(DoesNotSupportRawDerivation))]
         public static void RawDerivation_NotSupported()
         {
-            using (ECDiffieHellman alice = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
-            using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
+            using (
+                ECDiffieHellman alice = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
+            using (
+                ECDiffieHellman bob = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                Assert.Throws<PlatformNotSupportedException>(() => alice.DeriveRawSecretAgreement(bobPublic));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => alice.DeriveRawSecretAgreement(bobPublic)
+                );
             }
         }
     }

@@ -12,7 +12,8 @@ namespace System.Runtime.Serialization
 
     static class AppSettings
     {
-        internal const string MaxMimePartsAppSettingsString = "microsoft:xmldictionaryreader:maxmimeparts";
+        internal const string MaxMimePartsAppSettingsString =
+            "microsoft:xmldictionaryreader:maxmimeparts";
         const int DefaultMaxMimeParts = 1000;
         static int maxMimeParts;
         static volatile bool settingsInitalized = false;
@@ -28,8 +29,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104:CaughtAndHandledExceptionsRule", 
-            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            "Reliability104:CaughtAndHandledExceptionsRule",
+            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios"
+        )]
         static void EnsureSettingsLoaded()
         {
             if (!settingsInitalized)
@@ -44,13 +48,17 @@ namespace System.Runtime.Serialization
                         {
                             appSettingsSection = ConfigurationManager.AppSettings;
                         }
-                        catch (ConfigurationErrorsException)
-                        {
-                        }
+                        catch (ConfigurationErrorsException) { }
                         finally
                         {
 #endif
-                            if ((appSettingsSection == null) || !int.TryParse(appSettingsSection[MaxMimePartsAppSettingsString], out maxMimeParts))
+                            if (
+                                (appSettingsSection == null)
+                                || !int.TryParse(
+                                    appSettingsSection[MaxMimePartsAppSettingsString],
+                                    out maxMimeParts
+                                )
+                            )
                             {
                                 maxMimeParts = DefaultMaxMimeParts;
                             }

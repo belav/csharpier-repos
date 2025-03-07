@@ -13,7 +13,7 @@ namespace System.CommandLine.NamingConventionBinder
         /// <summary>
         /// The binding context for the current invocation.
         /// </summary>
-        public virtual BindingContext GetBindingContext(ParseResult parseResult)
-            => _bindingContext ??= new BindingContext(parseResult);
+        public virtual BindingContext GetBindingContext(ParseResult parseResult) =>
+            _bindingContext ??= new BindingContext(parseResult);
     }
 }

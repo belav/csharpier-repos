@@ -25,19 +25,30 @@ namespace System.IO.Ports.Tests
         private const int DEFAULT_DATABITS = 8;
         private const int NUM_TRYS = 5;
 
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         #region Test Cases
         [ConditionalFact(nameof(HasNullModem))]
         public void StopBits_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default StopBits");
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com1.Open();
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
@@ -88,7 +99,6 @@ namespace System.IO.Ports.Tests
             VerifyException(-1, ThrowAt.Set, typeof(ArgumentOutOfRangeException));
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void StopBits_0()
         {
@@ -96,14 +106,12 @@ namespace System.IO.Ports.Tests
             VerifyException(0, ThrowAt.Set, typeof(ArgumentOutOfRangeException));
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void StopBits_4()
         {
             Debug.WriteLine("Verifying 4 StopBits");
             VerifyException(4, ThrowAt.Set, typeof(ArgumentOutOfRangeException));
         }
-
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void StopBits_Int32MaxValue()
@@ -117,7 +125,11 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(int stopBits, ThrowAt throwAt, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, stopBits, throwAt, expectedException);
 
@@ -128,14 +140,21 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
-        private void VerifyExceptionAtOpen(SerialPort com, int stopBits, ThrowAt throwAt, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            int stopBits,
+            ThrowAt throwAt,
+            Type expectedException
+        )
         {
             int origStopBits = (int)com.StopBits;
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             serPortProp.SetAllPropertiesToDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             if (ThrowAt.Open == throwAt)
                 serPortProp.SetProperty("StopBits", (StopBits)stopBits);
@@ -148,18 +167,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
@@ -167,14 +196,16 @@ namespace System.IO.Ports.Tests
             com.StopBits = (StopBits)origStopBits;
         }
 
-
         private void VerifyExceptionAfterOpen(SerialPort com, int stopBits, Type expectedException)
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
@@ -182,18 +213,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the StopBits after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the StopBits after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the StopBits after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the StopBits after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the StopBits after Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the StopBits after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
             serPortProp.VerifyPropertiesAndPrint(com);
@@ -204,15 +245,21 @@ namespace System.IO.Ports.Tests
             VerifyStopBitsBeforeOpen(stopBits, DEFAULT_DATABITS);
         }
 
-
         private void VerifyStopBitsBeforeOpen(int stopBits, int dataBits)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.DataBits = dataBits;
                 com1.StopBits = (StopBits)stopBits;
@@ -227,21 +274,26 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void VerifyStopBitsAfterOpen(int stopBits)
         {
             VerifyStopBitsAfterOpen(stopBits, DEFAULT_DATABITS);
         }
 
-
         private void VerifyStopBitsAfterOpen(int stopBits, int dataBits)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
                 com1.DataBits = dataBits;
@@ -259,14 +311,19 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void VerifyStopBits(SerialPort com1)
         {
             Random rndGen = new Random(-55);
             Stopwatch sw = new Stopwatch();
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                double expectedTime, actualTime, percentageDifference;
+                double expectedTime,
+                    actualTime,
+                    percentageDifference;
                 int numBytes = 0;
                 byte shiftMask = 0xFF;
                 double stopBits = -1;
@@ -286,7 +343,9 @@ namespace System.IO.Ports.Tests
                         break;
                 }
 
-                int numBytesToSend = (int)(((DEFAULT_TIME / 1000.0) * com1.BaudRate) / (stopBits + com1.DataBits + 1));
+                int numBytesToSend = (int)(
+                    ((DEFAULT_TIME / 1000.0) * com1.BaudRate) / (stopBits + com1.DataBits + 1)
+                );
                 byte[] xmitBytes = new byte[numBytesToSend];
                 byte[] expectedBytes = new byte[numBytesToSend];
                 byte[] rcvBytes = new byte[numBytesToSend];
@@ -316,16 +375,22 @@ namespace System.IO.Ports.Tests
                 {
                     com2.DiscardInBuffer();
 
-                    IAsyncResult beginWriteResult = com1.BaseStream.BeginWrite(xmitBytes, 0, numBytesToSend, null, null);
-                    while (0 == (initialNumBytes = com2.BytesToRead))
-                    { }
+                    IAsyncResult beginWriteResult = com1.BaseStream.BeginWrite(
+                        xmitBytes,
+                        0,
+                        numBytesToSend,
+                        null,
+                        null
+                    );
+                    while (0 == (initialNumBytes = com2.BytesToRead)) { }
 
                     sw.Start();
                     TCSupport.WaitForReadBufferToLoad(com2, numBytesToSend);
                     sw.Stop();
 
                     actualTime += sw.ElapsedMilliseconds;
-                    actualTime += ((initialNumBytes * (stopBits + com1.DataBits + 1)) / com1.BaudRate) * 1000;
+                    actualTime +=
+                        ((initialNumBytes * (stopBits + com1.DataBits + 1)) / com1.BaudRate) * 1000;
                     com1.BaseStream.EndWrite(beginWriteResult);
 
                     sw.Reset();
@@ -333,14 +398,21 @@ namespace System.IO.Ports.Tests
 
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 actualTime /= NUM_TRYS;
-                expectedTime = ((xmitBytes.Length * (stopBits + com1.DataBits + 1)) / com1.BaudRate) * 1000;
+                expectedTime =
+                    ((xmitBytes.Length * (stopBits + com1.DataBits + 1)) / com1.BaudRate) * 1000;
                 percentageDifference = Math.Abs((expectedTime - actualTime) / expectedTime);
 
                 //If the percentageDifference between the expected time and the actual time is to high
                 //then the expected baud rate must not have been used and we should report an error
                 if (MAX_ACCEPTABEL_PERCENTAGE_DIFFERENCE < percentageDifference)
                 {
-                    Fail("ERROR!!! StopBits not used Expected time:{0}, actual time:{1} percentageDifference:{2}", expectedTime, actualTime, percentageDifference, numBytes);
+                    Fail(
+                        "ERROR!!! StopBits not used Expected time:{0}, actual time:{1} percentageDifference:{2}",
+                        expectedTime,
+                        actualTime,
+                        percentageDifference,
+                        numBytes
+                    );
                 }
 
                 com2.Read(rcvBytes, 0, rcvBytes.Length);
@@ -350,7 +422,11 @@ namespace System.IO.Ports.Tests
                 {
                     if (expectedBytes[i] != rcvBytes[i])
                     {
-                        Fail("ERROR!!! Expected to read {0} actual read {1}", expectedBytes[i], rcvBytes[i]);
+                        Fail(
+                            "ERROR!!! Expected to read {0} actual read {1}",
+                            expectedBytes[i],
+                            rcvBytes[i]
+                        );
                     }
                 }
             }

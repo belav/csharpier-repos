@@ -24,7 +24,9 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception while running {typeof(BasicBlazorHybridTest).FullName}: {ex}");
+            Console.WriteLine(
+                $"Exception while running {typeof(BasicBlazorHybridTest).FullName}: {ex}"
+            );
         }
     }
 }

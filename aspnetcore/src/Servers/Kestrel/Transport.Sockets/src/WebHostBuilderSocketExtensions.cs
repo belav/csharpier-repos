@@ -41,11 +41,16 @@ public static class WebHostBuilderSocketExtensions
     /// <returns>
     /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </returns>
-    public static IWebHostBuilder UseSockets(this IWebHostBuilder hostBuilder, Action<SocketTransportOptions> configureOptions)
+    public static IWebHostBuilder UseSockets(
+        this IWebHostBuilder hostBuilder,
+        Action<SocketTransportOptions> configureOptions
+    )
     {
-        return hostBuilder.UseSockets().ConfigureServices(services =>
-        {
-            services.Configure(configureOptions);
-        });
+        return hostBuilder
+            .UseSockets()
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            });
     }
 }

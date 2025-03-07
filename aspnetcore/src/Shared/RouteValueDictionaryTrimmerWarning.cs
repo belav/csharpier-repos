@@ -5,6 +5,7 @@ namespace Microsoft.AspNetCore.Internal;
 
 internal static class RouteValueDictionaryTrimmerWarning
 {
-    public const string Warning = "This API may perform reflection on supplied parameters which may be trimmed if not referenced directly. " +
-        "Initialize a RouteValueDictionary with route values to avoid this issue.";
+    public const string Warning =
+        "This API may perform reflection on supplied parameters which may be trimmed if not referenced directly. "
+        + "Initialize a RouteValueDictionary with route values to avoid this issue.";
 }

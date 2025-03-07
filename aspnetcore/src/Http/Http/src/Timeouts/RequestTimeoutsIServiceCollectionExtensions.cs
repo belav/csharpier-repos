@@ -28,7 +28,10 @@ public static class RequestTimeoutsIServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configure">A delegate to configure the <see cref="RequestTimeoutOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddRequestTimeouts(this IServiceCollection services, Action<RequestTimeoutOptions> configure)
+    public static IServiceCollection AddRequestTimeouts(
+        this IServiceCollection services,
+        Action<RequestTimeoutOptions> configure
+    )
     {
         return services.AddRequestTimeouts().Configure(configure);
     }
