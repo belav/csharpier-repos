@@ -118,7 +118,8 @@ namespace System.Collections.Tests
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() => _ilist.Insert(bad[i], items[0])
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => _ilist.Insert(bad[i], items[0])
                     ); //"ArgumentOutOfRangeException expected."
                 }
 
@@ -211,8 +212,8 @@ namespace System.Collections.Tests
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.InsertRange(bad[i], constructIEnumerable(items))
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => list.InsertRange(bad[i], constructIEnumerable(items))
                     ); //"ArgumentOutOfRangeException expected"
                 }
 

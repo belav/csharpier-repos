@@ -261,8 +261,8 @@ public static partial class XmlSerializerTests
 #if ReflectionOnly
         // Expect exception when _using_ the serializer
         var serializer = new XmlSerializer(typeof(ReadOnlyCollection<string>));
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            Serialize(roc, null, () => serializer)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => Serialize(roc, null, () => serializer)
         );
         Assert.Equal("There was an error generating the XML document.", ex.Message);
         Assert.NotNull(ex.InnerException);
@@ -273,8 +273,8 @@ public static partial class XmlSerializerTests
         );
 #else
         // Expect exception when _creating_ the serializer
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            new XmlSerializer(typeof(ReadOnlyCollection<string>))
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => new XmlSerializer(typeof(ReadOnlyCollection<string>))
         );
         Assert.StartsWith(
             "To be XML serializable, types which inherit from ICollection must have an implementation of Add(System.String) at all levels of their inheritance hierarchy.",
@@ -1335,8 +1335,8 @@ public static partial class XmlSerializerTests
             );
             writer.Flush();
             stream.Position = 0;
-            Assert.Throws<InvalidOperationException>(() =>
-                (TypeWithByteProperty)serializer.Deserialize(stream)
+            Assert.Throws<InvalidOperationException>(
+                () => (TypeWithByteProperty)serializer.Deserialize(stream)
             );
         }
     }
@@ -1357,8 +1357,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_XmlAttributes_CtorWithNullArgument()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-            new XmlAttributes(default(ICustomAttributeProvider))
+        Assert.Throws<ArgumentNullException>(
+            () => new XmlAttributes(default(ICustomAttributeProvider))
         );
     }
 

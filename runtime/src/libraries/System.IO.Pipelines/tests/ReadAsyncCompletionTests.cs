@@ -52,8 +52,8 @@ namespace System.IO.Pipelines.Tests
             Pipe.Reader.Complete(new InvalidOperationException());
             Pipe.Reader.Complete(new Exception());
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Pipe.Writer.FlushAsync()
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await Pipe.Writer.FlushAsync()
             );
         }
 
@@ -63,8 +63,8 @@ namespace System.IO.Pipelines.Tests
             Pipe.Reader.Complete(new InvalidOperationException());
             Pipe.Reader.Complete();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Pipe.Writer.FlushAsync()
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await Pipe.Writer.FlushAsync()
             );
         }
     }

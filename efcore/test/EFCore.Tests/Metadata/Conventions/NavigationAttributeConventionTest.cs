@@ -569,7 +569,8 @@ public class NavigationAttributeConventionTest
                 nameof(SelfReferencingEntity.AnotherEntity)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(
+                    () => RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -588,7 +589,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(
+                    () => RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -607,7 +609,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(
+                    () => RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -626,7 +629,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(
+                    () => RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -1021,10 +1025,11 @@ public class NavigationAttributeConventionTest
                 nameof(FkPropertyNavigationMismatch)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    useNavigation
-                        ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder)
                 )
                 .Message
         );
@@ -1054,10 +1059,11 @@ public class NavigationAttributeConventionTest
         Assert.Equal(
             CoreStrings.CompositeFkOnProperty("Principal", nameof(CompositeFkOnProperty)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    useNavigation
-                        ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder)
                 )
                 .Message
         );
@@ -1092,10 +1098,11 @@ public class NavigationAttributeConventionTest
                 "PrincipalId1,,PrincipalId2"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    useNavigation
-                        ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder)
                 )
                 .Message
         );
@@ -1130,10 +1137,11 @@ public class NavigationAttributeConventionTest
                 "'One', 'Two'"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    useNavigation
-                        ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder)
                 )
                 .Message
         );

@@ -280,11 +280,12 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     {
         var city = new City();
 
-        return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(
-                async,
-                ss => ss.Set<Customer>().Where(c => c.City == city.Nested.InstanceFieldValue)
-            )
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().Where(c => c.City == city.Nested.InstanceFieldValue)
+                )
         );
     }
 
@@ -296,11 +297,12 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     {
         var city = new City();
 
-        return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(
-                async,
-                ss => ss.Set<Customer>().Where(c => c.City == city.Throw().InstanceFieldValue)
-            )
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().Where(c => c.City == city.Throw().InstanceFieldValue)
+                )
         );
     }
 
@@ -530,18 +532,19 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_correlated_client_eval(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .OrderBy(c1 => c1.CustomerID)
-                        .Take(5)
-                        .Where(c1 =>
-                            ss.Set<Customer>()
-                                .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
-                        )
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .OrderBy(c1 => c1.CustomerID)
+                            .Take(5)
+                            .Where(c1 =>
+                                ss.Set<Customer>()
+                                    .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
+                            )
+                )
         );
 
     [ConditionalTheory]
@@ -2745,11 +2748,12 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task EF_Constant_with_non_evaluatable_argument_throws(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(
-                async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == EF.Constant(c.CustomerID))
-            )
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().Where(c => c.CustomerID == EF.Constant(c.CustomerID))
+                )
         );
 
         Assert.Equal(CoreStrings.EFConstantWithNonEvaluableArgument, exception.Message);
@@ -2797,11 +2801,12 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task EF_Parameter_with_non_evaluatable_argument_throws(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(
-                async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == EF.Parameter(c.CustomerID))
-            )
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().Where(c => c.CustomerID == EF.Parameter(c.CustomerID))
+                )
         );
 
         Assert.Equal(CoreStrings.EFConstantWithNonEvaluableArgument, exception.Message);

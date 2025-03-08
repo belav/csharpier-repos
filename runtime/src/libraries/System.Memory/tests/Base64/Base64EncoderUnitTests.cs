@@ -427,17 +427,17 @@ namespace System.Buffers.Text.Tests
             }
 
             // integer overflow
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Base64.GetMaxEncodedToUtf8Length(1610612734)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Base64.GetMaxEncodedToUtf8Length(1610612734)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Base64.GetMaxEncodedToUtf8Length(int.MaxValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Base64.GetMaxEncodedToUtf8Length(int.MaxValue)
             );
 
             // negative input
             Assert.Throws<ArgumentOutOfRangeException>(() => Base64.GetMaxEncodedToUtf8Length(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Base64.GetMaxEncodedToUtf8Length(int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Base64.GetMaxEncodedToUtf8Length(int.MinValue)
             );
         }
 

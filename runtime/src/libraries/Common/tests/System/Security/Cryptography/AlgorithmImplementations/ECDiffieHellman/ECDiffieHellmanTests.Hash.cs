@@ -14,8 +14,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         {
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    ecdh.DeriveKeyFromHash(null, HashAlgorithmName.SHA512)
+                Assert.Throws<ArgumentNullException>(
+                    () => ecdh.DeriveKeyFromHash(null, HashAlgorithmName.SHA512)
                 );
             }
         }
@@ -28,8 +28,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create(bobSize))
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                Assert.ThrowsAny<ArgumentException>(() =>
-                    alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512)
+                Assert.ThrowsAny<ArgumentException>(
+                    () => alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512)
                 );
             }
         }
@@ -40,8 +40,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
-                Assert.Throws<ArgumentException>(() =>
-                    ecdh.DeriveKeyFromHash(publicKey, new HashAlgorithmName(""))
+                Assert.Throws<ArgumentException>(
+                    () => ecdh.DeriveKeyFromHash(publicKey, new HashAlgorithmName(""))
                 );
             }
         }

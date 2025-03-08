@@ -108,13 +108,14 @@ namespace System.Xml.XmlDocumentTests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<root />");
 
-            Assert.Throws<ArgumentNullException>(() =>
-                xmlDocument.GetElementsByTagName(null, "MyNamespace")
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.GetElementsByTagName(null, "MyNamespace")
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                xmlDocument.GetElementsByTagName("product", null)
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.GetElementsByTagName("product", null)
             );
-            Assert.Throws<ArgumentNullException>(() => xmlDocument.GetElementsByTagName(null, null)
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.GetElementsByTagName(null, null)
             );
         }
 

@@ -744,7 +744,6 @@ namespace Novell.Directory.Ldap
         /// LdapTLSSocketFactory an LdapException is thrown.
         ///
         /// </exception>
-
         public virtual void startTLS()
         {
             LdapMessage startTLS = MakeExtendedOperation(
@@ -1031,7 +1030,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual void Add(LdapEntry entry, LdapConstraints cons)
         {
             LdapResponseQueue queue = Add(entry, null, cons);
@@ -2048,7 +2046,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual LdapExtendedResponse ExtendedOperation(
             LdapExtendedOperation op,
             LdapConstraints cons
@@ -2095,7 +2092,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual LdapResponseQueue ExtendedOperation(
             LdapExtendedOperation op,
             LdapResponseQueue queue
@@ -2133,7 +2129,6 @@ namespace Novell.Directory.Ldap
         /// <exception> LdapException A general exception which includes an error
         /// message and an Ldap error code.
         /// </exception>
-
         public virtual LdapResponseQueue ExtendedOperation(
             LdapExtendedOperation op,
             LdapConstraints cons,

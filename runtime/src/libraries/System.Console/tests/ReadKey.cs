@@ -41,8 +41,8 @@ public class ReadKey
         ConsoleKeyInfo info;
         info = new ConsoleKeyInfo('\0', (ConsoleKey)0, false, false, false);
         info = new ConsoleKeyInfo('\0', (ConsoleKey)255, false, false, false);
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new ConsoleKeyInfo('\0', (ConsoleKey)256, false, false, false)
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new ConsoleKeyInfo('\0', (ConsoleKey)256, false, false, false)
         );
     }
 

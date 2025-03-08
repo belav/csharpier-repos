@@ -21,10 +21,11 @@ public class SocketTransportFactoryTests
             Options.Create(new SocketTransportOptions()),
             new LoggerFactory()
         );
-        await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await socketTransportFactory.BindAsync(
-                new UriEndPoint(new Uri("http://127.0.0.1:5554"))
-            )
+        await Assert.ThrowsAsync<NotImplementedException>(
+            async () =>
+                await socketTransportFactory.BindAsync(
+                    new UriEndPoint(new Uri("http://127.0.0.1:5554"))
+                )
         );
     }
 }

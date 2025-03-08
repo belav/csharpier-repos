@@ -156,8 +156,12 @@ namespace System.Text.Json.Serialization.Tests
                 number,
                 await Serializer.DeserializeWrapper<T>(jsonWithNumberAsNumber, s_optionWriteAsStr)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<T>(jsonWithNumberAsString, s_optionWriteAsStr)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<T>(
+                        jsonWithNumberAsString,
+                        s_optionWriteAsStr
+                    )
             );
 
             // Serialize
@@ -652,25 +656,28 @@ namespace System.Text.Json.Serialization.Tests
             );
             AssertIEnumerableEqual(numbers, deserialized);
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<T>>(
-                    json_NumbersAsStrings,
-                    s_optionWriteAsStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<T>>(
+                        json_NumbersAsStrings,
+                        s_optionWriteAsStr
+                    )
             );
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<T>>(
-                    json_NumbersAsNumbersAndStrings,
-                    s_optionWriteAsStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<T>>(
+                        json_NumbersAsNumbersAndStrings,
+                        s_optionWriteAsStr
+                    )
             );
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<T>>(
-                    json_NumbersAsNumbersAndStrings_Alternate,
-                    s_optionWriteAsStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<T>>(
+                        json_NumbersAsNumbersAndStrings_Alternate,
+                        s_optionWriteAsStr
+                    )
             );
 
             // Serialize
@@ -1018,11 +1025,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""ListOfFloats"":[""1""]}";
             // Strict handling on property overrides loose global policy.
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<MyClassWithNumbers_PropsHasAttribute>(
-                    json,
-                    s_optionReadFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<MyClassWithNumbers_PropsHasAttribute>(
+                        json,
+                        s_optionReadFromStr
+                    )
             );
 
             // Serialize
@@ -1135,11 +1143,12 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.Equal(double.NegativeInfinity, obj.DoubleNumber);
                         break;
                     default:
-                        await Assert.ThrowsAsync<JsonException>(async () =>
-                            await Serializer.DeserializeWrapper<StructWithNumbers>(
-                                testJson,
-                                s_optionsAllowFloatConstants
-                            )
+                        await Assert.ThrowsAsync<JsonException>(
+                            async () =>
+                                await Serializer.DeserializeWrapper<StructWithNumbers>(
+                                    testJson,
+                                    s_optionsAllowFloatConstants
+                                )
                         );
                         return;
                 }
@@ -1189,45 +1198,51 @@ namespace System.Text.Json.Serialization.Tests
             string testJson;
 #if NETCOREAPP
             testJson = @$"{{""HalfNumber"":{testStringAsJson}}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithNumbers>(
-                    testJson,
-                    s_optionsAllowFloatConstants
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<StructWithNumbers>(
+                        testJson,
+                        s_optionsAllowFloatConstants
+                    )
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithNumbers>(
-                    testJson,
-                    s_optionReadFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<StructWithNumbers>(
+                        testJson,
+                        s_optionReadFromStr
+                    )
             );
 #endif
             testJson = @$"{{""FloatNumber"":{testStringAsJson}}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithNumbers>(
-                    testJson,
-                    s_optionsAllowFloatConstants
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<StructWithNumbers>(
+                        testJson,
+                        s_optionsAllowFloatConstants
+                    )
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithNumbers>(
-                    testJson,
-                    s_optionReadFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<StructWithNumbers>(
+                        testJson,
+                        s_optionReadFromStr
+                    )
             );
 
             testJson = @$"{{""DoubleNumber"":{testStringAsJson}}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithNumbers>(
-                    testJson,
-                    s_optionsAllowFloatConstants
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<StructWithNumbers>(
+                        testJson,
+                        s_optionsAllowFloatConstants
+                    )
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithNumbers>(
-                    testJson,
-                    s_optionReadFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<StructWithNumbers>(
+                        testJson,
+                        s_optionReadFromStr
+                    )
             );
         }
 
@@ -1264,21 +1279,31 @@ namespace System.Text.Json.Serialization.Tests
         public async Task Unquoted_FloatingPointConstants_Read_Fail(string testString)
         {
 #if NETCOREAPP
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Half>(testString, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Half>(
+                        testString,
+                        s_optionsAllowFloatConstants
+                    )
             );
 #endif
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<float>(testString, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<float>(
+                        testString,
+                        s_optionsAllowFloatConstants
+                    )
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<double?>(testString, s_optionReadFromStr)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<double?>(testString, s_optionReadFromStr)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<double>(
-                    testString,
-                    s_optionReadFromStrAllowFloatConstants
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<double>(
+                        testString,
+                        s_optionReadFromStrAllowFloatConstants
+                    )
             );
         }
 
@@ -1313,11 +1338,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task WriteAsString_AllowFloatingPoint()
         {
             string json = @"{""IntNumber"":""1"",""FloatNumber"":""NaN""}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithNumbers>(
-                    json,
-                    s_optionWriteAsStrAllowFloatConstants
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWithNumbers>(
+                        json,
+                        s_optionWriteAsStrAllowFloatConstants
+                    )
             );
 
             var obj = new ClassWithNumbers { IntNumber = 1, FloatNumber = float.NaN };
@@ -1369,11 +1395,12 @@ namespace System.Text.Json.Serialization.Tests
 
             foreach (string test in testCases)
             {
-                await Assert.ThrowsAsync<JsonException>(async () =>
-                    await Serializer.DeserializeWrapper<T>(
-                        test,
-                        s_optionReadFromStrAllowFloatConstants
-                    )
+                await Assert.ThrowsAsync<JsonException>(
+                    async () =>
+                        await Serializer.DeserializeWrapper<T>(
+                            test,
+                            s_optionReadFromStrAllowFloatConstants
+                        )
                 );
             }
         }
@@ -1424,8 +1451,8 @@ namespace System.Text.Json.Serialization.Tests
 
             foreach (string test in testCases)
             {
-                await Assert.ThrowsAsync<JsonException>(async () =>
-                    await Serializer.DeserializeWrapper<T>(test, s_optionReadFromStr)
+                await Assert.ThrowsAsync<JsonException>(
+                    async () => await Serializer.DeserializeWrapper<T>(test, s_optionReadFromStr)
                 );
             }
         }
@@ -1452,11 +1479,15 @@ namespace System.Text.Json.Serialization.Tests
 
         private async Task AssertInvalidNumberFormatThrows<T>(string testString)
         {
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<T>(testString)
+            await Assert.ThrowsAsync<JsonException>(
+                async () => await Serializer.DeserializeWrapper<T>(testString)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<T>($@"""{testString}""", s_optionReadFromStr)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<T>(
+                        $@"""{testString}""",
+                        s_optionReadFromStr
+                    )
             );
         }
 #endif
@@ -1589,15 +1620,17 @@ namespace System.Text.Json.Serialization.Tests
             string nullAsJson = "null";
             string nullAsQuotedJson = $@"""{nullAsJson}""";
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<T>(nullAsJson, s_optionReadAndWriteFromStr)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<T>(nullAsJson, s_optionReadAndWriteFromStr)
             );
             Assert.Equal("0", await Serializer.SerializeWrapper(default(T)));
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<T>(
-                    nullAsQuotedJson,
-                    s_optionReadAndWriteFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<T>(
+                        nullAsQuotedJson,
+                        s_optionReadAndWriteFromStr
+                    )
             );
         }
 
@@ -1630,11 +1663,12 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.DeserializeWrapper<T>(nullAsJson, s_optionReadAndWriteFromStr)
             );
             Assert.Equal(nullAsJson, await Serializer.SerializeWrapper(default(T)));
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<T>(
-                    nullAsQuotedJson,
-                    s_optionReadAndWriteFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<T>(
+                        nullAsQuotedJson,
+                        s_optionReadAndWriteFromStr
+                    )
             );
         }
 
@@ -1643,92 +1677,126 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"""12345""";
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<byte>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<byte>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<sbyte>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<sbyte>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<short>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<short>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<int>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<int>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<long>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<long>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ushort>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ushort>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<uint>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<uint>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ulong>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ulong>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<float>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<float>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<double>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<double>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<decimal>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<decimal>(json, s_optionsAllowFloatConstants)
             );
 #if NETCOREAPP
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Int128>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Int128>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<UInt128>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<UInt128>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Half>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Half>(json, s_optionsAllowFloatConstants)
             );
 #endif
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<byte?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<byte?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<sbyte?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<sbyte?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<short?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<short?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<int?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<int?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<long?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<long?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ushort?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ushort?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<uint?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<uint?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ulong?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ulong?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<float?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<float?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<double?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<double?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<decimal?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<decimal?>(
+                        json,
+                        s_optionsAllowFloatConstants
+                    )
             );
 #if NETCOREAPP
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Int128?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Int128?>(json, s_optionsAllowFloatConstants)
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<UInt128?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<UInt128?>(
+                        json,
+                        s_optionsAllowFloatConstants
+                    )
             );
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Half?>(json, s_optionsAllowFloatConstants)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Half?>(json, s_optionsAllowFloatConstants)
             );
 #endif
         }
@@ -1745,8 +1813,9 @@ namespace System.Text.Json.Serialization.Tests
             // Good JSON because Float can be number.
             string floatIsNumber = @"{""Float"":1234.5,""Int"":12345}";
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_Attribute_OnNumber>(intIsString)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_Attribute_OnNumber>(intIsString)
             );
 
             ClassWith_Attribute_OnNumber obj =
@@ -1781,8 +1850,9 @@ namespace System.Text.Json.Serialization.Tests
             // Allowed
             string floatIsNan = @"{""Float"":""NaN"",""Int"":123}";
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Type_AllowFloatConstants>(floatIsString)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Type_AllowFloatConstants>(floatIsString)
             );
 
             Type_AllowFloatConstants obj =
@@ -1812,11 +1882,12 @@ namespace System.Text.Json.Serialization.Tests
 
             // Global options loose, type options strict
             json = @"{""Float"":""12345""}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_StrictAttribute>(
-                    json,
-                    s_optionReadAndWriteFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_StrictAttribute>(
+                        json,
+                        s_optionReadAndWriteFromStr
+                    )
             );
 
             var obj2 = new ClassWith_StrictAttribute() { Float = 12345 };
@@ -1844,13 +1915,14 @@ namespace System.Text.Json.Serialization.Tests
         public async Task AttributeOnMember_WinsOver_AttributeOnType()
         {
             string json = @"{""Double"":""NaN""}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_Attribute_On_TypeAndMember>(json)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_Attribute_On_TypeAndMember>(json)
             );
 
             var obj = new ClassWith_Attribute_On_TypeAndMember { Double = float.NaN };
-            await Assert.ThrowsAsync<ArgumentException>(async () =>
-                await Serializer.SerializeWrapper(obj)
+            await Assert.ThrowsAsync<ArgumentException>(
+                async () => await Serializer.SerializeWrapper(obj)
             );
         }
 
@@ -1872,10 +1944,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj.Short);
 
             string jsonWithMyObjectProperty = @"{""MyObject"":{""Float"":""1""}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_ReadAsStringAttribute>(
-                    jsonWithMyObjectProperty
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_ReadAsStringAttribute>(
+                        jsonWithMyObjectProperty
+                    )
             );
         }
 
@@ -1925,11 +1998,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Strict policy on the collection element type overrides read-as-string on the collection property
             string json = @"{""MyList"":[{""Float"":""1""}]}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithComplexListProperty>(
-                    json,
-                    s_optionReadAndWriteFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWithComplexListProperty>(
+                        json,
+                        s_optionReadAndWriteFromStr
+                    )
             );
 
             // Strict policy on the collection element type overrides write-as-string on the collection property
@@ -1954,21 +2028,29 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task NumberHandlingAttribute_NotAllowedOn_CollectionOfNonNumbers()
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_AttributeOnComplexListProperty>("")
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_AttributeOnComplexListProperty>(
+                        ""
+                    )
             );
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(new ClassWith_AttributeOnComplexListProperty())
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.SerializeWrapper(
+                        new ClassWith_AttributeOnComplexListProperty()
+                    )
             );
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_AttributeOnComplexDictionaryProperty>(
-                    ""
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_AttributeOnComplexDictionaryProperty>(
+                        ""
+                    )
             );
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(
-                    new ClassWith_AttributeOnComplexDictionaryProperty()
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.SerializeWrapper(
+                        new ClassWith_AttributeOnComplexDictionaryProperty()
+                    )
             );
         }
 
@@ -2007,11 +2089,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Strict policy on the dictionary element type overrides read-as-string on the collection property.
             string json = @"{""MyDictionary"":{""Key"":{""Float"":""1""}}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithComplexDictionaryProperty>(
-                    json,
-                    s_optionReadFromStr
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWithComplexDictionaryProperty>(
+                        json,
+                        s_optionReadFromStr
+                    )
             );
 
             // Strict policy on the collection element type overrides write-as-string on the collection property
@@ -2094,8 +2177,9 @@ namespace System.Text.Json.Serialization.Tests
             // Recursive behavior, where number handling setting on a property is applied to subsequent
             // properties in its type closure, would allow a string number. This is not supported.
             string json = @"{""NestedClass"":{""MyInt"":""1""}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<AttributeAppliedToFirstLevelProp>(json)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<AttributeAppliedToFirstLevelProp>(json)
             );
 
             var obj = new AttributeAppliedToFirstLevelProp
@@ -2125,8 +2209,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task HandlingOnMemberOverridesHandlingOnType_Enumerable()
         {
             string json = @"{""List"":[""1""]}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<MyCustomListWrapper>(json)
+            await Assert.ThrowsAsync<JsonException>(
+                async () => await Serializer.DeserializeWrapper<MyCustomListWrapper>(json)
             );
 
             var obj = new MyCustomListWrapper { List = new MyCustomList { 1 } };
@@ -2143,8 +2227,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task HandlingOnMemberOverridesHandlingOnType_Dictionary()
         {
             string json = @"{""Dictionary"":{""Key"":""1""}}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<MyCustomDictionaryWrapper>(json)
+            await Assert.ThrowsAsync<JsonException>(
+                async () => await Serializer.DeserializeWrapper<MyCustomDictionaryWrapper>(json)
             );
 
             var obj1 = new MyCustomDictionaryWrapper
@@ -2214,17 +2298,19 @@ namespace System.Text.Json.Serialization.Tests
             NotImplementedException ex;
 
             // Assert regular Read/Write methods on custom converter are called.
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWith_NumberHandlingOn_Type_WithCustomConverter>(
-                    json
-                )
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWith_NumberHandlingOn_Type_WithCustomConverter>(
+                        json
+                    )
             );
             Assert.Equal("Converter was called", ex.Message);
 
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(
-                    new ClassWith_NumberHandlingOn_Type_WithCustomConverter()
-                )
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () =>
+                    await Serializer.SerializeWrapper(
+                        new ClassWith_NumberHandlingOn_Type_WithCustomConverter()
+                    )
             );
             Assert.Equal("Converter was called", ex.Message);
         }
@@ -2319,20 +2405,20 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonNumberHandling_ArgOutOfRangeFail()
         {
             // Global options
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(-1) }
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(-1) }
             );
             Assert.Contains("value", ex.ToString());
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(8) }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(8) }
             );
 
-            ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonNumberHandlingAttribute((JsonNumberHandling)(-1))
+            ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonNumberHandlingAttribute((JsonNumberHandling)(-1))
             );
             Assert.Contains("handling", ex.ToString());
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonNumberHandlingAttribute((JsonNumberHandling)(8))
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonNumberHandlingAttribute((JsonNumberHandling)(8))
             );
         }
 
@@ -2354,8 +2440,8 @@ namespace System.Text.Json.Serialization.Tests
                 (await Serializer.DeserializeWrapper<List<int>>(@"[""1""]", options))[0]
             );
             // Converter throws this exception regardless of input.
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(list, options)
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(list, options)
             );
             Assert.Equal("Converter was called", ex.Message);
 
@@ -2364,8 +2450,8 @@ namespace System.Text.Json.Serialization.Tests
                 25,
                 (await Serializer.DeserializeWrapper<List<int?>>(@"[""1""]", options))[0]
             );
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(list2, options)
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(list2, options)
             );
             Assert.Equal("Converter was called", ex.Message);
 
@@ -2377,8 +2463,8 @@ namespace System.Text.Json.Serialization.Tests
                     options
                 );
             Assert.Equal(25, obj1.Prop[0]);
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(obj1, options)
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(obj1, options)
             );
             Assert.Equal("Converter was called", ex.Message);
 
@@ -2388,8 +2474,8 @@ namespace System.Text.Json.Serialization.Tests
                     options
                 );
             Assert.Equal(25, obj2.Prop[1]);
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(obj2, options)
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(obj2, options)
             );
             Assert.Equal("Converter was called", ex.Message);
         }
@@ -2414,18 +2500,20 @@ namespace System.Text.Json.Serialization.Tests
         public async Task InternalCollectionConverter_CustomNumberConverter_OnProperty()
         {
             // Invalid to set number handling for number collection property when number is handled with custom converter.
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithListPropAndAttribute_ConverterOnProp>(
-                    ""
-                )
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWithListPropAndAttribute_ConverterOnProp>(
+                        ""
+                    )
             );
             Assert.Contains(nameof(ClassWithListPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(
-                    new ClassWithListPropAndAttribute_ConverterOnProp()
-                )
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.SerializeWrapper(
+                        new ClassWithListPropAndAttribute_ConverterOnProp()
+                    )
             );
             Assert.Contains(nameof(ClassWithListPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
@@ -2434,18 +2522,20 @@ namespace System.Text.Json.Serialization.Tests
             // Source-gen isn't currently validating that the converter on the test prop
             // is invalid so JsonException is being thrown instead due to invalid JSON.
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/73714"]
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithDictPropAndAttribute_ConverterOnProp>(
-                    ""
-                )
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWithDictPropAndAttribute_ConverterOnProp>(
+                        ""
+                    )
             );
             Assert.Contains(nameof(ClassWithDictPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(
-                    new ClassWithDictPropAndAttribute_ConverterOnProp()
-                )
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await Serializer.SerializeWrapper(
+                        new ClassWithDictPropAndAttribute_ConverterOnProp()
+                    )
             );
             Assert.Contains(nameof(ClassWithDictPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
@@ -2507,8 +2597,8 @@ namespace System.Text.Json.Serialization.Tests
                     )
                 )[1]
             );
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(dict, options)
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(dict, options)
             );
             Assert.Equal("Converter was called", ex.Message);
 
@@ -2517,11 +2607,11 @@ namespace System.Text.Json.Serialization.Tests
                 options
             );
             Assert.Equal(25, obj.Prop[1]);
-            ex = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(obj, options)
+            ex = await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(obj, options)
             );
-            await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(dict, options)
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await Serializer.SerializeWrapper(dict, options)
             );
             Assert.Equal("Converter was called", ex.Message);
         }

@@ -32,8 +32,8 @@ public class SpaServicesExtensionsTests
         var applicationbuilder = GetApplicationBuilder(GetServiceProvider());
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            applicationbuilder.UseSpa(rb => { })
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => applicationbuilder.UseSpa(rb => { })
         );
 
         Assert.Equal("No RootPath was set on the SpaStaticFilesOptions.", exception.Message);

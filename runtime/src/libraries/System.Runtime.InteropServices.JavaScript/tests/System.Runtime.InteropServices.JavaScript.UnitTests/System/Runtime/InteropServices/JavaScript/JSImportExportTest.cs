@@ -45,23 +45,25 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public async Task CancelableImportAsync()
         {
             var cts = new CancellationTokenSource();
-            var exTask = Assert.ThrowsAsync<JSException>(async () =>
-                await JSHost.ImportAsync(
-                    "JavaScriptTestHelper",
-                    "../JavaScriptTestHelper.mjs",
-                    cts.Token
-                )
+            var exTask = Assert.ThrowsAsync<JSException>(
+                async () =>
+                    await JSHost.ImportAsync(
+                        "JavaScriptTestHelper",
+                        "../JavaScriptTestHelper.mjs",
+                        cts.Token
+                    )
             );
             cts.Cancel();
             var actualEx2 = await exTask;
             Assert.Equal("Error: OperationCanceledException", actualEx2.Message);
 
-            var actualEx = await Assert.ThrowsAsync<JSException>(async () =>
-                await JSHost.ImportAsync(
-                    "JavaScriptTestHelper",
-                    "../JavaScriptTestHelper.mjs",
-                    new CancellationToken(true)
-                )
+            var actualEx = await Assert.ThrowsAsync<JSException>(
+                async () =>
+                    await JSHost.ImportAsync(
+                        "JavaScriptTestHelper",
+                        "../JavaScriptTestHelper.mjs",
+                        new CancellationToken(true)
+                    )
             );
             Assert.Equal("Error: OperationCanceledException", actualEx.Message);
         }
@@ -109,29 +111,29 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             JSException ex;
             JSHost.DotnetInstance.SetProperty("testBool", true);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsInt32("testBool")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsInt32("testBool")
             );
             Assert.Contains("Value is not an integer", ex.Message);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsDouble("testBool")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsDouble("testBool")
             );
             Assert.Contains("Value is not a Number", ex.Message);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsString("testBool")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsString("testBool")
             );
             Assert.Contains("Value is not a String", ex.Message);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsJSObject("testBool")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsJSObject("testBool")
             );
             Assert.Contains("JSObject proxy of boolean is not supported", ex.Message);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsByteArray("testBool")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsByteArray("testBool")
             );
             Assert.Contains("Value is not an Array or Uint8Array", ex.Message);
             JSHost.DotnetInstance.SetProperty("testInt", 42);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsBoolean("testInt")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsBoolean("testInt")
             );
             Assert.Contains("Value is not a Boolean", ex.Message);
         }
@@ -141,8 +143,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             JSException ex;
             JSHost.DotnetInstance.SetProperty("testDouble", 9007199254740991L);
-            ex = Assert.Throws<JSException>(() =>
-                JSHost.DotnetInstance.GetPropertyAsInt32("testDouble")
+            ex = Assert.Throws<JSException>(
+                () => JSHost.DotnetInstance.GetPropertyAsInt32("testDouble")
             );
             Assert.Contains(
                 "Overflow: value 9007199254740991 is out of -2147483648 2147483647 range",
@@ -540,8 +542,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalObjectArrayCasesThrow))]
         public unsafe void JsImportObjectArrayThrows(object[]? expected)
         {
-            Assert.Throws<NotSupportedException>(() =>
-                JavaScriptTestHelper.echo1_ObjectArray(expected)
+            Assert.Throws<NotSupportedException>(
+                () => JavaScriptTestHelper.echo1_ObjectArray(expected)
             );
         }
 
@@ -1703,11 +1705,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public void JsExportThrows()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                JavaScriptTestHelper.invoke1_String(
-                    "-t-e-s-t-",
-                    nameof(JavaScriptTestHelper.ThrowFromJSExport)
-                )
+            var ex = Assert.Throws<ArgumentException>(
+                () =>
+                    JavaScriptTestHelper.invoke1_String(
+                        "-t-e-s-t-",
+                        nameof(JavaScriptTestHelper.ThrowFromJSExport)
+                    )
             );
             Assert.DoesNotContain("Unexpected error", ex.Message);
             Assert.Contains("-t-e-s-t-", ex.Message);
@@ -2246,15 +2249,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             int called = -1;
             Exception expected = new Exception("test!!");
-            Exception actual = Assert.Throws<Exception>(() =>
-                JavaScriptTestHelper.back3_ActionInt(
-                    (a) =>
-                    {
-                        called = a;
-                        throw expected;
-                    },
-                    42
-                )
+            Exception actual = Assert.Throws<Exception>(
+                () =>
+                    JavaScriptTestHelper.back3_ActionInt(
+                        (a) =>
+                        {
+                            called = a;
+                            throw expected;
+                        },
+                        42
+                    )
             );
             Assert.Equal(42, called);
             Assert.Same(expected, actual);

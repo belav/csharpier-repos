@@ -86,8 +86,12 @@ public partial class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTest
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
-            formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding("utf-16"))
+        await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () =>
+                formatter.WriteResponseBodyAsync(
+                    outputFormatterContext,
+                    Encoding.GetEncoding("utf-16")
+                )
         );
     }
 
@@ -292,8 +296,8 @@ public partial class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTest
         var jsonOptions = new JsonOptions();
         jsonOptions.JsonSerializerOptions.TypeInfoResolver = null;
 
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            SystemTextJsonOutputFormatter.CreateFormatter(jsonOptions)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => SystemTextJsonOutputFormatter.CreateFormatter(jsonOptions)
         );
         Assert.Equal(
             "JsonSerializerOptions instance must specify a TypeInfoResolver setting before being marked as read-only.",

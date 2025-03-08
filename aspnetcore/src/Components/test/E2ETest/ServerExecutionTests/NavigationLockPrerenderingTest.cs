@@ -54,11 +54,12 @@ public class NavigationLockPrerenderingTest
         Browser.Exists(By.Id("load-boot-script")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(() =>
-            (bool)
-                javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__started__'] === true;"
-                )
+        Browser.True(
+            () =>
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__started__'] === true;"
+                    )
         );
     }
 }

@@ -117,13 +117,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void FromStream_IOErrors()
         {
             Assert.Throws<IOException>(() => EmbeddedText.FromStream("path", new HugeStream()));
-            Assert.Throws<EndOfStreamException>(() =>
-                EmbeddedText.FromStream("path", new TruncatingStream(10))
+            Assert.Throws<EndOfStreamException>(
+                () => EmbeddedText.FromStream("path", new TruncatingStream(10))
             );
-            Assert.Throws<EndOfStreamException>(() =>
-                EmbeddedText.FromStream("path", new TruncatingStream(1000))
+            Assert.Throws<EndOfStreamException>(
+                () => EmbeddedText.FromStream("path", new TruncatingStream(1000))
             );
-            Assert.Throws<IOException>(() => EmbeddedText.FromStream("path", new ReadFailsStream())
+            Assert.Throws<IOException>(
+                () => EmbeddedText.FromStream("path", new ReadFailsStream())
             );
         }
 

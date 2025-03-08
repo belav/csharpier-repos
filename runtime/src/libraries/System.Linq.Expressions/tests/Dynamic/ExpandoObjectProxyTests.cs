@@ -137,8 +137,8 @@ namespace System.Dynamic.Tests
                 );
             }
             ConstructorInfo constructor = debugViewType.GetConstructors().Single();
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                constructor.Invoke(new object[] { null })
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => constructor.Invoke(new object[] { null })
             );
             var ane = (ArgumentNullException)tie.InnerException;
             Assert.Equal("collection", ane.ParamName);

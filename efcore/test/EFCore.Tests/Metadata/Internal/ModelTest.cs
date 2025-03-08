@@ -52,8 +52,8 @@ public class ModelTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)
+                .Throws<InvalidOperationException>(
+                    () => model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)
                 )
                 .Message
         );
@@ -174,8 +174,8 @@ public class ModelTest
         Assert.Equal(
             CoreStrings.AmbiguousSharedTypeEntityTypeName(typeof(Customer).DisplayName()),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))
+                .Throws<InvalidOperationException>(
+                    () => model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))
                 )
                 .Message
         );
@@ -267,8 +267,8 @@ public class ModelTest
                 typeof(Customer).FullName + " (Dictionary<string, object>)"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    model.AddEntityType(typeof(Customer).FullName)
+                .Throws<InvalidOperationException>(
+                    () => model.AddEntityType(typeof(Customer).FullName)
                 )
                 .Message
         );
@@ -285,8 +285,8 @@ public class ModelTest
         Assert.Equal(
             CoreStrings.CannotMarkShared(nameof(Customer)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    model.AddShared(typeof(Customer), ConfigurationSource.Explicit)
+                .Throws<InvalidOperationException>(
+                    () => model.AddShared(typeof(Customer), ConfigurationSource.Explicit)
                 )
                 .Message
         );

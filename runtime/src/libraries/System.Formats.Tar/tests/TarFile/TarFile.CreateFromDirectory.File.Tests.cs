@@ -13,33 +13,37 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void InvalidPaths_Throw()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                TarFile.CreateFromDirectory(
-                    sourceDirectoryName: null,
-                    destinationFileName: "path",
-                    includeBaseDirectory: false
-                )
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: null,
+                        destinationFileName: "path",
+                        includeBaseDirectory: false
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                TarFile.CreateFromDirectory(
-                    sourceDirectoryName: string.Empty,
-                    destinationFileName: "path",
-                    includeBaseDirectory: false
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: string.Empty,
+                        destinationFileName: "path",
+                        includeBaseDirectory: false
+                    )
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                TarFile.CreateFromDirectory(
-                    sourceDirectoryName: "path",
-                    destinationFileName: null,
-                    includeBaseDirectory: false
-                )
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: "path",
+                        destinationFileName: null,
+                        includeBaseDirectory: false
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                TarFile.CreateFromDirectory(
-                    sourceDirectoryName: "path",
-                    destinationFileName: string.Empty,
-                    includeBaseDirectory: false
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: "path",
+                        destinationFileName: string.Empty,
+                        includeBaseDirectory: false
+                    )
             );
         }
 
@@ -51,12 +55,13 @@ namespace System.Formats.Tar.Tests
             string dirPath = Path.Join(root.Path, "dir");
             string filePath = Path.Join(root.Path, "file.tar");
 
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                TarFile.CreateFromDirectory(
-                    sourceDirectoryName: "IDontExist",
-                    destinationFileName: filePath,
-                    includeBaseDirectory: false
-                )
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: "IDontExist",
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
             );
         }
 
@@ -71,12 +76,13 @@ namespace System.Formats.Tar.Tests
             string filePath = Path.Join(root.Path, "file.tar");
             File.Create(filePath).Dispose();
 
-            Assert.Throws<IOException>(() =>
-                TarFile.CreateFromDirectory(
-                    sourceDirectoryName: dirPath,
-                    destinationFileName: filePath,
-                    includeBaseDirectory: false
-                )
+            Assert.Throws<IOException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: dirPath,
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
             );
         }
 

@@ -455,8 +455,8 @@ namespace Tests.System
                     Thread.Sleep(10);
                 }
             });
-            await Assert.ThrowsAsync<TimeoutException>(() =>
-                taskFactory.WaitAsync(task5, TimeSpan.FromMilliseconds(10), provider)
+            await Assert.ThrowsAsync<TimeoutException>(
+                () => taskFactory.WaitAsync(task5, TimeSpan.FromMilliseconds(10), provider)
             );
             cts1.Cancel();
             await task5;
@@ -469,8 +469,14 @@ namespace Tests.System
                     Thread.Sleep(10);
                 }
             });
-            await Assert.ThrowsAsync<TimeoutException>(() =>
-                taskFactory.WaitAsync(task6, TimeSpan.FromMilliseconds(10), provider, cts2.Token)
+            await Assert.ThrowsAsync<TimeoutException>(
+                () =>
+                    taskFactory.WaitAsync(
+                        task6,
+                        TimeSpan.FromMilliseconds(10),
+                        provider,
+                        cts2.Token
+                    )
             );
             cts1.Cancel();
             await task5;
@@ -484,8 +490,8 @@ namespace Tests.System
                 }
                 return 100;
             });
-            await Assert.ThrowsAsync<TimeoutException>(() =>
-                taskFactory.WaitAsync<int>(task7, TimeSpan.FromMilliseconds(10), provider)
+            await Assert.ThrowsAsync<TimeoutException>(
+                () => taskFactory.WaitAsync<int>(task7, TimeSpan.FromMilliseconds(10), provider)
             );
             cts3.Cancel();
             Assert.Equal(100, await task7);
@@ -499,13 +505,14 @@ namespace Tests.System
                 }
                 return 200;
             });
-            await Assert.ThrowsAsync<TimeoutException>(() =>
-                taskFactory.WaitAsync<int>(
-                    task8,
-                    TimeSpan.FromMilliseconds(10),
-                    provider,
-                    cts4.Token
-                )
+            await Assert.ThrowsAsync<TimeoutException>(
+                () =>
+                    taskFactory.WaitAsync<int>(
+                        task8,
+                        TimeSpan.FromMilliseconds(10),
+                        provider,
+                        cts4.Token
+                    )
             );
             cts4.Cancel();
             Assert.Equal(200, await task8);
@@ -538,38 +545,41 @@ namespace Tests.System
             clock = new FastClock(0); // zero frequency
             Assert.Throws<InvalidOperationException>(() => clock.GetElapsedTime(1, 2));
 
-            Assert.Throws<ArgumentNullException>(() =>
-                TimeProvider.System.CreateTimer(
-                    null,
-                    null,
-                    Timeout.InfiniteTimeSpan,
-                    Timeout.InfiniteTimeSpan
-                )
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TimeProvider.System.CreateTimer(
+                        null,
+                        null,
+                        Timeout.InfiniteTimeSpan,
+                        Timeout.InfiniteTimeSpan
+                    )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TimeProvider.System.CreateTimer(
-                    obj => { },
-                    null,
-                    TimeSpan.FromMilliseconds(-2),
-                    Timeout.InfiniteTimeSpan
-                )
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    TimeProvider.System.CreateTimer(
+                        obj => { },
+                        null,
+                        TimeSpan.FromMilliseconds(-2),
+                        Timeout.InfiniteTimeSpan
+                    )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TimeProvider.System.CreateTimer(
-                    obj => { },
-                    null,
-                    Timeout.InfiniteTimeSpan,
-                    TimeSpan.FromMilliseconds(-2)
-                )
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    TimeProvider.System.CreateTimer(
+                        obj => { },
+                        null,
+                        Timeout.InfiniteTimeSpan,
+                        TimeSpan.FromMilliseconds(-2)
+                    )
             );
 
 #if !NETFRAMEWORK
-            Assert.Throws<ArgumentNullException>(() =>
-                new CancellationTokenSource(Timeout.InfiniteTimeSpan, null)
+            Assert.Throws<ArgumentNullException>(
+                () => new CancellationTokenSource(Timeout.InfiniteTimeSpan, null)
             );
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new PeriodicTimer(TimeSpan.FromMilliseconds(1), null)
+            Assert.Throws<ArgumentNullException>(
+                () => new PeriodicTimer(TimeSpan.FromMilliseconds(1), null)
             );
 #endif // !NETFRAMEWORK
         }

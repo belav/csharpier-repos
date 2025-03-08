@@ -72,19 +72,24 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SetMessageSendCallback_NullCallback()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                ObjectiveCMarshal.SetMessageSendCallback(MessageSendFunction.MsgSend, IntPtr.Zero)
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    ObjectiveCMarshal.SetMessageSendCallback(
+                        MessageSendFunction.MsgSend,
+                        IntPtr.Zero
+                    )
             );
         }
 
         [Fact]
         public void SetMessageSendCallback_InvalidMessageSendFunction()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ObjectiveCMarshal.SetMessageSendCallback(
-                    (MessageSendFunction)100,
-                    msgSendOverrides[0].Func
-                )
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    ObjectiveCMarshal.SetMessageSendCallback(
+                        (MessageSendFunction)100,
+                        msgSendOverrides[0].Func
+                    )
             );
         }
 
@@ -96,8 +101,8 @@ namespace System.Runtime.InteropServices.Tests
                 {
                     var (msgSend, func) = msgSendOverrides[0];
                     ObjectiveCMarshal.SetMessageSendCallback(msgSend, func);
-                    Assert.Throws<InvalidOperationException>(() =>
-                        ObjectiveCMarshal.SetMessageSendCallback(msgSend, func)
+                    Assert.Throws<InvalidOperationException>(
+                        () => ObjectiveCMarshal.SetMessageSendCallback(msgSend, func)
                     );
                 })
                 .Dispose();

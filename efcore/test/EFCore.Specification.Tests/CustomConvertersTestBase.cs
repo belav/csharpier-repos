@@ -597,8 +597,9 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
     public virtual void Value_conversion_with_property_named_value()
     {
         using var context = CreateContext();
-        Assert.Throws<InvalidOperationException>(() =>
-            context.Set<EntityWithValueWrapper>().SingleOrDefault(e => e.Wrapper.Value == "foo")
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                context.Set<EntityWithValueWrapper>().SingleOrDefault(e => e.Wrapper.Value == "foo")
         );
     }
 
@@ -697,8 +698,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         Assert.Contains(
             @"See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.",
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
+                .Throws<InvalidOperationException>(
+                    () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
                 )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -714,8 +715,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                 @"DbSet<CollectionScalar>()    .Where(c => c.Tags.Count == 2)"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
+                .Throws<InvalidOperationException>(
+                    () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
                 )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -736,8 +737,12 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         Assert.Contains(
             @"See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.",
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Set<CollectionEnum>().Where(e => e.Roles.Contains(sameRole)).ToList()
+                .Throws<InvalidOperationException>(
+                    () =>
+                        context
+                            .Set<CollectionEnum>()
+                            .Where(e => e.Roles.Contains(sameRole))
+                            .ToList()
                 )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -765,8 +770,12 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         Assert.Equal(
             "Nullable object must have a value.",
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Set<Parent>().Select(e => new { e.OwnedWithConverter.Value }).ToList()
+                .Throws<InvalidOperationException>(
+                    () =>
+                        context
+                            .Set<Parent>()
+                            .Select(e => new { e.OwnedWithConverter.Value })
+                            .ToList()
                 )
                 .Message
         );
@@ -825,19 +834,20 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         Assert.Equal(
             CoreStrings.TranslationFailed(@"l => new {     H = l.Height,     W = l.Width }"),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context
-                        .Set<Dashboard>()
-                        .AsNoTracking()
-                        .Select(d => new
-                        {
-                            d.Id,
-                            d.Name,
-                            Layouts = d
-                                .Layouts.Select(l => new { H = l.Height, W = l.Width })
-                                .ToList(),
-                        })
-                        .ToList()
+                .Throws<InvalidOperationException>(
+                    () =>
+                        context
+                            .Set<Dashboard>()
+                            .AsNoTracking()
+                            .Select(d => new
+                            {
+                                d.Id,
+                                d.Name,
+                                Layouts = d
+                                    .Layouts.Select(l => new { H = l.Height, W = l.Width })
+                                    .ToList(),
+                            })
+                            .ToList()
                 )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")

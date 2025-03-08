@@ -58,7 +58,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                 modelBuilder
                     .Entity<TestKeylessType>()
                     .HasNoKey()
-                    .ToQuery(() => context.Set<TestKeylessType>().FromSqlRaw("SELECT * FROM Vista")
+                    .ToQuery(
+                        () => context.Set<TestKeylessType>().FromSqlRaw("SELECT * FROM Vista")
                     ),
 #pragma warning restore CS0618 // Type or member is obsolete
             result => Assert.Empty(result)
@@ -2022,23 +2023,24 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
         Assert.Equal(
             RelationalStrings.NullKeyValue("dbo.Firefly", "Id"),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    Execute(
-                        common =>
-                            common.Entity(
-                                "Firefly",
-                                x =>
-                                {
-                                    x.ToTable("Firefly", "dbo");
-                                    x.Property<int>("Id");
-                                    x.HasData(new { Id = (int?)null });
-                                }
-                            ),
-                        _ => { },
-                        _ => { },
-                        upOps => { },
-                        downOps => { }
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        Execute(
+                            common =>
+                                common.Entity(
+                                    "Firefly",
+                                    x =>
+                                    {
+                                        x.ToTable("Firefly", "dbo");
+                                        x.Property<int>("Id");
+                                        x.HasData(new { Id = (int?)null });
+                                    }
+                                ),
+                            _ => { },
+                            _ => { },
+                            upOps => { },
+                            downOps => { }
+                        )
                 )
                 .Message
         );
@@ -2048,25 +2050,26 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
         Assert.Equal(
             RelationalStrings.NullKeyValue("dbo.Firefly", "Id"),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    Execute(
-                        common =>
-                            common.Entity(
-                                "Firefly",
-                                x =>
-                                {
-                                    x.ToTable("Firefly", "dbo");
-                                    x.Property<int>("Id");
-                                    x.Property<string>("Name");
-                                    x.HasKey("Id", "Name");
-                                    x.HasData(new { Id = (int?)null, Name = "Firefly 1" });
-                                }
-                            ),
-                        _ => { },
-                        _ => { },
-                        upOps => { },
-                        downOps => { }
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        Execute(
+                            common =>
+                                common.Entity(
+                                    "Firefly",
+                                    x =>
+                                    {
+                                        x.ToTable("Firefly", "dbo");
+                                        x.Property<int>("Id");
+                                        x.Property<string>("Name");
+                                        x.HasKey("Id", "Name");
+                                        x.HasData(new { Id = (int?)null, Name = "Firefly 1" });
+                                    }
+                                ),
+                            _ => { },
+                            _ => { },
+                            upOps => { },
+                            downOps => { }
+                        )
                 )
                 .Message
         );
@@ -2087,25 +2090,26 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     "dbo.Firefly"
                 ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    Execute(
-                        common =>
-                            common.Entity(
-                                "Firefly",
-                                x =>
-                                {
-                                    x.ToTable("Firefly", "dbo");
-                                    x.Property<int>("Id");
-                                    x.HasData(new { Id = 42 }, new { Id = 42 });
-                                }
-                            ),
-                        _ => { },
-                        _ => { },
-                        upOps => { },
-                        downOps => { },
-                        _ => { },
-                        enableSensitiveLogging: enableSensitiveLogging
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        Execute(
+                            common =>
+                                common.Entity(
+                                    "Firefly",
+                                    x =>
+                                    {
+                                        x.ToTable("Firefly", "dbo");
+                                        x.Property<int>("Id");
+                                        x.HasData(new { Id = 42 }, new { Id = 42 });
+                                    }
+                                ),
+                            _ => { },
+                            _ => { },
+                            upOps => { },
+                            downOps => { },
+                            _ => { },
+                            enableSensitiveLogging: enableSensitiveLogging
+                        )
                 )
                 .Message
         );
@@ -2130,42 +2134,43 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     "Name"
                 ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    Execute(
-                        common =>
-                        {
-                            common.Entity(
-                                "Firefly",
-                                x =>
-                                {
-                                    x.ToTable("Firefly");
-                                    x.Property<int>("Id");
-                                    x.Property<string>("Name");
-                                    x.HasData(new { Id = 42, Name = "1" });
-                                }
-                            );
+                .Throws<InvalidOperationException>(
+                    () =>
+                        Execute(
+                            common =>
+                            {
+                                common.Entity(
+                                    "Firefly",
+                                    x =>
+                                    {
+                                        x.ToTable("Firefly");
+                                        x.Property<int>("Id");
+                                        x.Property<string>("Name");
+                                        x.HasData(new { Id = 42, Name = "1" });
+                                    }
+                                );
 
-                            common.Entity(
-                                "FireflyDetails",
-                                x =>
-                                {
-                                    x.ToTable("Firefly");
-                                    x.Property<int>("Id");
-                                    x.Property<string>("Name");
-                                    x.HasOne("Firefly", null)
-                                        .WithOne()
-                                        .HasForeignKey("FireflyDetails", "Id");
-                                    x.HasData(new { Id = 42, Name = "2" });
-                                }
-                            );
-                        },
-                        _ => { },
-                        _ => { },
-                        upOps => { },
-                        downOps => { },
-                        _ => { },
-                        enableSensitiveLogging: enableSensitiveLogging
-                    )
+                                common.Entity(
+                                    "FireflyDetails",
+                                    x =>
+                                    {
+                                        x.ToTable("Firefly");
+                                        x.Property<int>("Id");
+                                        x.Property<string>("Name");
+                                        x.HasOne("Firefly", null)
+                                            .WithOne()
+                                            .HasForeignKey("FireflyDetails", "Id");
+                                        x.HasData(new { Id = 42, Name = "2" });
+                                    }
+                                );
+                            },
+                            _ => { },
+                            _ => { },
+                            upOps => { },
+                            downOps => { },
+                            _ => { },
+                            enableSensitiveLogging: enableSensitiveLogging
+                        )
                 )
                 .Message
         );

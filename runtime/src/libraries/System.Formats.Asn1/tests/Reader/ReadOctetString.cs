@@ -72,8 +72,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
             );
         }
 
@@ -94,12 +94,12 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
             );
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadOctetString(new byte[input.Length], out _)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadOctetString(new byte[input.Length], out _)
             );
 
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString());
@@ -470,8 +470,12 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveOctetString(out _, new Asn1Tag(TagClass.ContextSpecific, 0))
+            Assert.Throws<AsnContentException>(
+                () =>
+                    reader.TryReadPrimitiveOctetString(
+                        out _,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    )
             );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
@@ -515,20 +519,20 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString());
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveOctetString(out _, wrongTag1)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveOctetString(out _, wrongTag1)
             );
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadOctetString(output, out _, wrongTag1)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadOctetString(output, out _, wrongTag1)
             );
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString(wrongTag1));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveOctetString(out _, wrongTag2)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveOctetString(out _, wrongTag2)
             );
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadOctetString(output, out _, wrongTag2)
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadOctetString(output, out _, wrongTag2)
             );
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString(wrongTag2));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");

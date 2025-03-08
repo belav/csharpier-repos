@@ -113,8 +113,8 @@ namespace System.Reflection.Emit.Tests
                     "MyType",
                     TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
                 );
-            Assert.Throws<InvalidOperationException>(() =>
-                type.DefineDefaultConstructor(MethodAttributes.Public)
+            Assert.Throws<InvalidOperationException>(
+                () => type.DefineDefaultConstructor(MethodAttributes.Public)
             );
         }
 
@@ -128,8 +128,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder child = ab.GetDynamicModule("MyModule")
                 .DefineType("MyType", TypeAttributes.Public);
             child.SetParent(type);
-            Assert.Throws<NotSupportedException>(() =>
-                child.DefineDefaultConstructor(MethodAttributes.Public)
+            Assert.Throws<NotSupportedException>(
+                () => child.DefineDefaultConstructor(MethodAttributes.Public)
             );
         }
 
@@ -178,8 +178,8 @@ namespace System.Reflection.Emit.Tests
                 .DefineType("DerivedType", TypeAttributes.Public | TypeAttributes.Class);
             derivedType.SetParent(type);
 
-            Assert.Throws<NotSupportedException>(() =>
-                derivedType.DefineDefaultConstructor(MethodAttributes.Public)
+            Assert.Throws<NotSupportedException>(
+                () => derivedType.DefineDefaultConstructor(MethodAttributes.Public)
             );
         }
 
@@ -206,8 +206,8 @@ namespace System.Reflection.Emit.Tests
                 TypeAttributes.Public | TypeAttributes.Class
             );
             type.SetParent(baseType);
-            Assert.Throws<NotSupportedException>(() =>
-                type.DefineDefaultConstructor(MethodAttributes.Public)
+            Assert.Throws<NotSupportedException>(
+                () => type.DefineDefaultConstructor(MethodAttributes.Public)
             );
         }
 

@@ -160,13 +160,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     ProjectGuid = projectGuid,
                 };
 
-                project = _threadingContext.JoinableTaskFactory.Run(() =>
-                    _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
-                        name,
-                        StringConstants.XamlLanguageName,
-                        projectInfo,
-                        CancellationToken.None
-                    )
+                project = _threadingContext.JoinableTaskFactory.Run(
+                    () =>
+                        _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
+                            name,
+                            StringConstants.XamlLanguageName,
+                            projectInfo,
+                            CancellationToken.None
+                        )
                 );
                 _xamlProjects.Add(hierarchy, project);
             }

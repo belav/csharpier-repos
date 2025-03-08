@@ -347,8 +347,8 @@ namespace System.Reflection.Emit.Tests
             Assert.Throws<InvalidOperationException>(() => property.SetSetMethod(method));
             Assert.Throws<InvalidOperationException>(() => property.AddOtherMethod(method));
             Assert.Throws<InvalidOperationException>(() => property.SetConstant(1));
-            Assert.Throws<InvalidOperationException>(() =>
-                property.SetCustomAttribute(customAttrBuilder)
+            Assert.Throws<InvalidOperationException>(
+                () => property.SetCustomAttribute(customAttrBuilder)
             );
         }
 

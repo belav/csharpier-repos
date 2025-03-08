@@ -81,8 +81,8 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
         context.Request.Headers["custom"] = "valid";
 
-        Assert.Throws<NotSupportedException>(() =>
-            context.Request.GetTypedHeaders().Get<object>("custom")
+        Assert.Throws<NotSupportedException>(
+            () => context.Request.GetTypedHeaders().Get<object>("custom")
         );
     }
 
@@ -166,8 +166,8 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
         context.Request.Headers["custom"] = "valid";
 
-        Assert.Throws<NotSupportedException>(() =>
-            context.Request.GetTypedHeaders().GetList<object>("custom")
+        Assert.Throws<NotSupportedException>(
+            () => context.Request.GetTypedHeaders().GetList<object>("custom")
         );
     }
 

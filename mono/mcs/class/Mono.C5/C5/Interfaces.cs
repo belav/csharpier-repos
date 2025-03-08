@@ -1150,7 +1150,6 @@ namespace C5
         /// </summary>
         /// <param name="handle">On return: the handle of the item.</param>
         /// <returns>The largest item.</returns>
-
         T FindMax(out IPriorityQueueHandle<T> handle);
 
         /// <summary>
@@ -1158,7 +1157,6 @@ namespace C5
         /// </summary>
         /// <param name="handle">On return: the handle of the removed item.</param>
         /// <returns>The removed item.</returns>
-
         T DeleteMin(out IPriorityQueueHandle<T> handle);
 
         /// <summary>

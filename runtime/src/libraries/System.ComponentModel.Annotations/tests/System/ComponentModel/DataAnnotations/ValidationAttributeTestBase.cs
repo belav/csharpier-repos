@@ -59,14 +59,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
             }
             else
             {
-                Assert.Throws<ValidationException>(() =>
-                    attribute.Validate(value, validationContext)
+                Assert.Throws<ValidationException>(
+                    () => attribute.Validate(value, validationContext)
                 );
                 Assert.NotNull(attribute.GetValidationResult(value, validationContext));
 
                 // Run the validation twice, in case attributes cache anything
-                Assert.Throws<ValidationException>(() =>
-                    attribute.Validate(value, validationContext)
+                Assert.Throws<ValidationException>(
+                    () => attribute.Validate(value, validationContext)
                 );
                 Assert.NotNull(attribute.GetValidationResult(value, validationContext));
             }

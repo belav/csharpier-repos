@@ -105,8 +105,8 @@ namespace A.B
         public void GetStartPoint_Attributes()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
             );
         }
 
@@ -114,8 +114,8 @@ namespace A.B
         public void GetStartPoint_AttributesWithDelimiter()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<COMException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            Assert.Throws<COMException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
             );
         }
 
@@ -134,8 +134,8 @@ namespace A.B
         public void GetStartPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
             );
         }
 
@@ -143,8 +143,8 @@ namespace A.B
         public void GetStartPoint_Header()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartHeader)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartHeader)
             );
         }
 
@@ -152,8 +152,8 @@ namespace A.B
         public void GetStartPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
             );
         }
 
@@ -161,8 +161,8 @@ namespace A.B
         public void GetStartPoint_Name()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartName)
             );
         }
 
@@ -181,8 +181,8 @@ namespace A.B
         public void GetStartPoint_Whole()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
             );
         }
 
@@ -200,8 +200,8 @@ namespace A.B
         public void GetEndPoint_Attributes()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
             );
         }
 
@@ -209,8 +209,8 @@ namespace A.B
         public void GetEndPoint_AttributesWithDelimiter()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<COMException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            Assert.Throws<COMException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
             );
         }
 
@@ -229,8 +229,8 @@ namespace A.B
         public void GetEndPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
             );
         }
 
@@ -238,8 +238,8 @@ namespace A.B
         public void GetEndPoint_Header()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
             );
         }
 
@@ -247,8 +247,8 @@ namespace A.B
         public void GetEndPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
             );
         }
 
@@ -256,8 +256,8 @@ namespace A.B
         public void GetEndPoint_Name()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartName)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartName)
             );
         }
 
@@ -276,8 +276,8 @@ namespace A.B
         public void GetEndPoint_Whole()
         {
             var testObject = GetCodeNamespace("A.B");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
             );
         }
 

@@ -56,8 +56,8 @@ public abstract class LoggingTestBase
                 "CoreEventId.InvalidIncludePathError"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Set<Animal>().Include("Wheels").Load()
+                .Throws<InvalidOperationException>(
+                    () => context.Set<Animal>().Include("Wheels").Load()
                 )
                 .Message
         );

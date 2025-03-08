@@ -4,7 +4,6 @@ using Xunit;
 /// <summary>
 /// Tests for https://github.com/moq/moq4/issues/1199
 /// </summary>
-
 namespace Moq.Tests.Matchers.Wildcard
 {
     using static AutoIsAny; // note using static to simplify syntax

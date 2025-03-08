@@ -12,8 +12,8 @@ public class ServiceProviderExtensionsTest
     {
         var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
-        Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetRequiredService<IPilkington>()
+        Assert.Throws<InvalidOperationException>(
+            () => serviceProvider.GetRequiredService<IPilkington>()
         );
     }
 
@@ -22,8 +22,8 @@ public class ServiceProviderExtensionsTest
     {
         var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
-        Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetRequiredService(typeof(IPilkington))
+        Assert.Throws<InvalidOperationException>(
+            () => serviceProvider.GetRequiredService(typeof(IPilkington))
         );
     }
 
@@ -40,8 +40,8 @@ public class ServiceProviderExtensionsTest
         Assert.Equal(
             KarlQuote,
             Assert
-                .Throws<NotSupportedException>(() =>
-                    serviceProvider.GetRequiredService<IPilkington>()
+                .Throws<NotSupportedException>(
+                    () => serviceProvider.GetRequiredService<IPilkington>()
                 )
                 .Message
         );
@@ -61,8 +61,8 @@ public class ServiceProviderExtensionsTest
         Assert.Equal(
             KarlQuote,
             Assert
-                .Throws<NotSupportedException>(() =>
-                    serviceProvider.GetRequiredService(typeof(IPilkington))
+                .Throws<NotSupportedException>(
+                    () => serviceProvider.GetRequiredService(typeof(IPilkington))
                 )
                 .Message
         );
@@ -116,7 +116,8 @@ public class ServiceProviderExtensionsTest
         Assert.Equal(
             KarlQuote,
             Assert
-                .Throws<NotSupportedException>(() => serviceProvider.GetService(typeof(IPilkington))
+                .Throws<NotSupportedException>(
+                    () => serviceProvider.GetService(typeof(IPilkington))
                 )
                 .Message
         );

@@ -355,17 +355,18 @@ namespace System.Globalization.Tests
         [Fact]
         public void ShortestDayNames_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.ShortestDayNames = new string[]
-                {
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
-                }
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DateTimeFormatInfo.InvariantInfo.ShortestDayNames = new string[]
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                    }
             );
         }
     }

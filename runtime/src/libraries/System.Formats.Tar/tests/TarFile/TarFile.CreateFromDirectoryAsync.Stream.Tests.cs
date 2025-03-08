@@ -18,13 +18,14 @@ namespace System.Formats.Tar.Tests
 
             await using (MemoryStream archiveStream = new MemoryStream())
             {
-                await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                    TarFile.CreateFromDirectoryAsync(
-                        "directory",
-                        archiveStream,
-                        includeBaseDirectory: false,
-                        cs.Token
-                    )
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    () =>
+                        TarFile.CreateFromDirectoryAsync(
+                            "directory",
+                            archiveStream,
+                            includeBaseDirectory: false,
+                            cs.Token
+                        )
                 );
             }
         }
@@ -34,19 +35,21 @@ namespace System.Formats.Tar.Tests
         {
             await using (MemoryStream archiveStream = new MemoryStream())
             {
-                await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: null,
-                        destination: archiveStream,
-                        includeBaseDirectory: false
-                    )
+                await Assert.ThrowsAsync<ArgumentNullException>(
+                    () =>
+                        TarFile.CreateFromDirectoryAsync(
+                            sourceDirectoryName: null,
+                            destination: archiveStream,
+                            includeBaseDirectory: false
+                        )
                 );
-                await Assert.ThrowsAsync<ArgumentException>(() =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: string.Empty,
-                        destination: archiveStream,
-                        includeBaseDirectory: false
-                    )
+                await Assert.ThrowsAsync<ArgumentException>(
+                    () =>
+                        TarFile.CreateFromDirectoryAsync(
+                            sourceDirectoryName: string.Empty,
+                            destination: archiveStream,
+                            includeBaseDirectory: false
+                        )
                 );
             }
         }
@@ -56,12 +59,13 @@ namespace System.Formats.Tar.Tests
         {
             await using (MemoryStream archiveStream = new MemoryStream())
             {
-                await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: "path",
-                        destination: null,
-                        includeBaseDirectory: false
-                    )
+                await Assert.ThrowsAsync<ArgumentNullException>(
+                    () =>
+                        TarFile.CreateFromDirectoryAsync(
+                            sourceDirectoryName: "path",
+                            destination: null,
+                            includeBaseDirectory: false
+                        )
                 );
             }
         }
@@ -80,12 +84,13 @@ namespace System.Formats.Tar.Tests
                     )
                 )
                 {
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        TarFile.CreateFromDirectoryAsync(
-                            sourceDirectoryName: "path",
-                            destination: unwritable,
-                            includeBaseDirectory: false
-                        )
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () =>
+                            TarFile.CreateFromDirectoryAsync(
+                                sourceDirectoryName: "path",
+                                destination: unwritable,
+                                includeBaseDirectory: false
+                            )
                     );
                 }
             }
@@ -100,12 +105,13 @@ namespace System.Formats.Tar.Tests
 
                 await using (MemoryStream archive = new MemoryStream())
                 {
-                    await Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
-                        TarFile.CreateFromDirectoryAsync(
-                            sourceDirectoryName: dirPath,
-                            destination: archive,
-                            includeBaseDirectory: false
-                        )
+                    await Assert.ThrowsAsync<DirectoryNotFoundException>(
+                        () =>
+                            TarFile.CreateFromDirectoryAsync(
+                                sourceDirectoryName: dirPath,
+                                destination: archive,
+                                includeBaseDirectory: false
+                            )
                     );
                 }
             }

@@ -57,10 +57,11 @@ public class AsShouldWorkOnlyWithDerivedTypes
     [Fact]
     public void Should_detect_unrelated_override()
     {
-        new Action(() =>
-            new MapperConfiguration(c =>
-                c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
-            )
+        new Action(
+            () =>
+                new MapperConfiguration(c =>
+                    c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
+                )
         ).ShouldThrowException<ArgumentOutOfRangeException>(ex =>
         {
             ex.Message.ShouldStartWith(

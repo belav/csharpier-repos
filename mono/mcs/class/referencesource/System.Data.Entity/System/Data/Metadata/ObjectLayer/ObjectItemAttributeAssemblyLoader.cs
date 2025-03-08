@@ -308,16 +308,16 @@ namespace System.Data.Metadata.Edm
                     string r1Name = roleAttribute.Role1Name;
                     Type r1Type = roleAttribute.Role1Type;
                     RelationshipMultiplicity r1Multiplicity = roleAttribute.Role1Multiplicity;
-                    AddTypeResolver(() =>
-                        ResolveAssociationEnd(associationType, r1Name, r1Type, r1Multiplicity)
+                    AddTypeResolver(
+                        () => ResolveAssociationEnd(associationType, r1Name, r1Type, r1Multiplicity)
                     );
 
                     // prevent lifting of loop vars
                     string r2Name = roleAttribute.Role2Name;
                     Type r2Type = roleAttribute.Role2Type;
                     RelationshipMultiplicity r2Multiplicity = roleAttribute.Role2Multiplicity;
-                    AddTypeResolver(() =>
-                        ResolveAssociationEnd(associationType, r2Name, r2Type, r2Multiplicity)
+                    AddTypeResolver(
+                        () => ResolveAssociationEnd(associationType, r2Name, r2Type, r2Multiplicity)
                     );
 
                     // get assembly entry and add association type to the list of types in the assembly
@@ -645,8 +645,8 @@ namespace System.Data.Metadata.Edm
                 {
                     // keep the loop var from being lifted
                     PropertyInfo pi = property;
-                    _unresolvedNavigationProperties.Add(() =>
-                        ResolveNavigationProperty(structuralType, pi)
+                    _unresolvedNavigationProperties.Add(
+                        () => ResolveNavigationProperty(structuralType, pi)
                     );
                 }
                 else if (property.IsDefined(typeof(EdmScalarPropertyAttribute), false))

@@ -29,8 +29,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .LogInvalidIncludePath(new TestLogger<TestLoggingDefinitions>())
                 .GenerateMessage("ArcticMonkeys", "ArcticMonkeys"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include("ArcticMonkeys"))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => AssertQuery(async, ss => ss.Set<Order>().Include("ArcticMonkeys"))
                 )
             ).Message
         );
@@ -41,8 +41,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .LogInvalidIncludePath(new TestLogger<TestLoggingDefinitions>())
                 .GenerateMessage("OrderDate", "OrderDate"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
                 )
             ).Message
         );
@@ -53,8 +53,12 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .LogInvalidIncludePath(new TestLogger<TestLoggingDefinitions>())
                 .GenerateMessage("CustomerID", "Customer.CustomerID"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.Customer.CustomerID))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)
+                        )
                 )
             ).Message
         );
@@ -62,15 +66,15 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
     public override Task Include_property_expression_invalid(bool async)
         // Property expression cannot be converted to string include
         =>
-        Assert.ThrowsAsync<NotImplementedException>(() =>
-            base.Filtered_include_with_multiple_ordering(async)
+        Assert.ThrowsAsync<NotImplementedException>(
+            () => base.Filtered_include_with_multiple_ordering(async)
         );
 
     public override Task Then_include_property_expression_invalid(bool async)
         // Property expression cannot be converted to string include
         =>
-        Assert.ThrowsAsync<NotImplementedException>(() =>
-            base.Filtered_include_with_multiple_ordering(async)
+        Assert.ThrowsAsync<NotImplementedException>(
+            () => base.Filtered_include_with_multiple_ordering(async)
         );
 
     public override async Task Include_closes_reader(bool async)
@@ -148,22 +152,23 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
     public override Task Filtered_include_with_multiple_ordering(bool async)
         // Filtered include does not work for string based API.
         =>
-        Assert.ThrowsAsync<NotImplementedException>(() =>
-            base.Filtered_include_with_multiple_ordering(async)
+        Assert.ThrowsAsync<NotImplementedException>(
+            () => base.Filtered_include_with_multiple_ordering(async)
         );
 
     public override async Task Include_specified_on_non_entity_not_supported(bool async) =>
         Assert.Equal(
             CoreStrings.IncludeOnNonEntity("\"Item1.Orders\""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .Select(c => new Tuple<Customer, int>(c, 5))
-                                .Include(t => t.Item1.Orders)
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Customer>()
+                                    .Select(c => new Tuple<Customer, int>(c, 5))
+                                    .Include(t => t.Item1.Orders)
+                        )
                 )
             ).Message
         );

@@ -234,8 +234,8 @@ namespace System.Text.Json.Serialization.Tests
                     // Running the converter without priming the options instance
                     // for reflection-based serialization should throw NotSupportedException
                     // since it can't resolve reflection-based metadata.
-                    Assert.Throws<NotSupportedException>(() =>
-                        converter.Write(writer, value, options)
+                    Assert.Throws<NotSupportedException>(
+                        () => converter.Write(writer, value, options)
                     );
                     Assert.Equal(0, writer.BytesCommitted + writer.BytesPending);
                     options.IncludeFields = false; // options should still be mutable
@@ -252,8 +252,8 @@ namespace System.Text.Json.Serialization.Tests
                     // State change should not leak into unrelated options instances.
                     var options2 = new JsonSerializerOptions();
                     options2.AddContext<JsonContext>();
-                    Assert.Throws<NotSupportedException>(() =>
-                        converter.Write(writer, value, options2)
+                    Assert.Throws<NotSupportedException>(
+                        () => converter.Write(writer, value, options2)
                     );
                     Assert.Equal(0, writer.BytesCommitted + writer.BytesPending);
                 })
@@ -263,8 +263,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void GetConverterTypeToConvertNull()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                (new JsonSerializerOptions()).GetConverter(typeToConvert: null!)
+            Assert.Throws<ArgumentNullException>(
+                () => (new JsonSerializerOptions()).GetConverter(typeToConvert: null!)
             );
         }
 
@@ -273,8 +273,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions options = new();
             options.Converters.Add(new InvalidJsonConverterFactory());
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new InvalidTestInfo("Hello"), options)
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new InvalidTestInfo("Hello"), options)
             );
             Assert.Contains(typeof(InvalidTestInfo).Name, ex.Message);
         }

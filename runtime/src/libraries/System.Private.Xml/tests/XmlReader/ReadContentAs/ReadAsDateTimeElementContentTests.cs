@@ -366,11 +366,11 @@ namespace System.Xml.XmlReaderTests
                 "<Root>2100-02-29T23:59:59.9999999+13:60</Root>"
             );
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -379,11 +379,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>001-01-01T00:00:00+00:00</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -392,11 +392,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>0001-01-01T00:00:00-14:01Z</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -418,11 +418,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>999<?9?>9-12-31T12:59:59+15:00Z</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -431,11 +431,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>9999-12-31T12:59:60-11:00</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -444,11 +444,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>0</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -459,11 +459,11 @@ namespace System.Xml.XmlReaderTests
                 "<Root><![CDATA[9<!-- Comment inbetween-->]]>999Z</Root>"
             );
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -472,11 +472,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>ABCD</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -485,11 +485,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>yyyy-MM-ddTHH:mm</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -498,11 +498,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>2002-12-33</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -513,11 +513,11 @@ namespace System.Xml.XmlReaderTests
                 "<Root>3000-02-29T23:59:59.999999999999-13:60</Root>"
             );
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -528,11 +528,11 @@ namespace System.Xml.XmlReaderTests
                 "<Root>2100-02-29T23:59:5<![CDATA[9]]>.999999999999Z</Root>"
             );
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -543,11 +543,11 @@ namespace System.Xml.XmlReaderTests
                 "<Root>3000-02-29T2<?9?>3:59:59.99<![CDATA[9]]><?a?>99<!-- Comment inbetween-->9999999999z</Root>"
             );
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -569,11 +569,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>2002-13-30</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
-            Assert.Throws<XmlException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
+            Assert.Throws<XmlException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", "")
             );
         }
 
@@ -638,11 +638,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>999</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, null, "")
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, null, "")
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, null, "")
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, null, "")
             );
         }
 
@@ -651,11 +651,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>9999</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, null, "")
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, null, "")
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, null, "")
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, null, "")
             );
         }
 
@@ -664,11 +664,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>9999</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
             );
         }
 
@@ -677,11 +677,11 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<Root>999</Root>");
             reader.PositionOnElement("Root");
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
+            Assert.Throws<ArgumentNullException>(
+                () => reader.ReadElementContentAs(typeof(DateTime), null, "Root", null)
             );
         }
     }

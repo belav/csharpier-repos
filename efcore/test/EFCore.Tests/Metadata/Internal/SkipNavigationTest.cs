@@ -30,15 +30,16 @@ public class SkipNavigationTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    firstEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        null,
-                        secondEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        firstEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            null,
+                            secondEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -46,8 +47,8 @@ public class SkipNavigationTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    firstEntity.RemoveSkipNavigation(navigation)
+                .Throws<InvalidOperationException>(
+                    () => firstEntity.RemoveSkipNavigation(navigation)
                 )
                 .Message
         );
@@ -216,8 +217,8 @@ public class SkipNavigationTest
                 nameof(OrderProduct)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    navigation.SetForeignKey(orderProductForeignKey)
+                .Throws<InvalidOperationException>(
+                    () => navigation.SetForeignKey(orderProductForeignKey)
                 )
                 .Message
         );
@@ -259,8 +260,8 @@ public class SkipNavigationTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    navigation.SetForeignKey(orderProductForeignKey)
+                .Throws<InvalidOperationException>(
+                    () => navigation.SetForeignKey(orderProductForeignKey)
                 )
                 .Message
         );
@@ -320,8 +321,8 @@ public class SkipNavigationTest
                 nameof(Product)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    productsNavigation.SetForeignKey(orderProductForeignKey)
+                .Throws<InvalidOperationException>(
+                    () => productsNavigation.SetForeignKey(orderProductForeignKey)
                 )
                 .Message
         );
@@ -401,8 +402,8 @@ public class SkipNavigationTest
                 nameof(Product.Orders)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.RemoveSkipNavigation(productsNavigation)
+                .Throws<InvalidOperationException>(
+                    () => orderEntity.RemoveSkipNavigation(productsNavigation)
                 )
                 .Message
         );
@@ -468,8 +469,8 @@ public class SkipNavigationTest
                 nameof(Product)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    productsNavigation.SetInverse(ordersNavigation)
+                .Throws<InvalidOperationException>(
+                    () => productsNavigation.SetInverse(ordersNavigation)
                 )
                 .Message
         );
@@ -527,8 +528,8 @@ public class SkipNavigationTest
                 nameof(OrderProduct)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    productsNavigation.SetInverse(ordersNavigation)
+                .Throws<InvalidOperationException>(
+                    () => productsNavigation.SetInverse(ordersNavigation)
                 )
                 .Message
         );

@@ -38,8 +38,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void CurrencyGroupSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.CurrencyGroupSeparator = "string"
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyGroupSeparator = "string"
             );
         }
     }

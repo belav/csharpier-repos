@@ -559,13 +559,14 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_StringWithNullChar()
     {
-        Assert.Throws<InvalidOperationException>(() =>
-            SerializeWithDefaultValue<string>("Sample\0String", null)
+        Assert.Throws<InvalidOperationException>(
+            () => SerializeWithDefaultValue<string>("Sample\0String", null)
         );
-        Assert.Throws<InvalidOperationException>(() =>
-            DeserializeFromXmlString<string>(
-                "<?xml version=\"1.0\"?><string>Sample&#x0;String</string>"
-            )
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                DeserializeFromXmlString<string>(
+                    "<?xml version=\"1.0\"?><string>Sample&#x0;String</string>"
+                )
         );
     }
 
@@ -1838,8 +1839,8 @@ public static partial class XmlSerializerTests
         element3.InnerText = "Element innertext3";
         value = new TypeWithMultiNamedXmlAnyElement() { Things = new object[] { element3 } };
 
-        Assert.Throws<InvalidOperationException>(() =>
-            actual = SerializeAndDeserialize(value, string.Empty, skipStringCompare: true)
+        Assert.Throws<InvalidOperationException>(
+            () => actual = SerializeAndDeserialize(value, string.Empty, skipStringCompare: true)
         );
     }
 
@@ -2427,8 +2428,8 @@ public static partial class XmlSerializerTests
     public static void SoapEncodedSerialization_IncludeTypes_NullProvider()
     {
         var soapImporter = new SoapReflectionImporter();
-        Assert.Throws<ArgumentNullException>(() =>
-            soapImporter.IncludeTypes(default(ICustomAttributeProvider))
+        Assert.Throws<ArgumentNullException>(
+            () => soapImporter.IncludeTypes(default(ICustomAttributeProvider))
         );
     }
 
@@ -2436,45 +2437,49 @@ public static partial class XmlSerializerTests
     public static void SoapEncodedSerialization_ImportMembersMapping_NullMembers()
     {
         var soapImporter = new SoapReflectionImporter();
-        Assert.Throws<ArgumentNullException>(() =>
-            soapImporter.ImportMembersMapping(
-                elementName: null,
-                ns: null,
-                members: default(XmlReflectionMember[])
-            )
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                soapImporter.ImportMembersMapping(
+                    elementName: null,
+                    ns: null,
+                    members: default(XmlReflectionMember[])
+                )
         );
 
-        Assert.Throws<ArgumentNullException>(() =>
-            soapImporter.ImportMembersMapping(
-                elementName: null,
-                ns: null,
-                members: default(XmlReflectionMember[]),
-                hasWrapperElement: default,
-                writeAccessors: default
-            )
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                soapImporter.ImportMembersMapping(
+                    elementName: null,
+                    ns: null,
+                    members: default(XmlReflectionMember[]),
+                    hasWrapperElement: default,
+                    writeAccessors: default
+                )
         );
 
-        Assert.Throws<ArgumentNullException>(() =>
-            soapImporter.ImportMembersMapping(
-                elementName: null,
-                ns: null,
-                members: default(XmlReflectionMember[]),
-                hasWrapperElement: default,
-                writeAccessors: default,
-                validate: default
-            )
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                soapImporter.ImportMembersMapping(
+                    elementName: null,
+                    ns: null,
+                    members: default(XmlReflectionMember[]),
+                    hasWrapperElement: default,
+                    writeAccessors: default,
+                    validate: default
+                )
         );
 
-        Assert.Throws<ArgumentNullException>(() =>
-            soapImporter.ImportMembersMapping(
-                elementName: null,
-                ns: null,
-                members: default(XmlReflectionMember[]),
-                hasWrapperElement: default,
-                writeAccessors: default,
-                validate: default,
-                access: default
-            )
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                soapImporter.ImportMembersMapping(
+                    elementName: null,
+                    ns: null,
+                    members: default(XmlReflectionMember[]),
+                    hasWrapperElement: default,
+                    writeAccessors: default,
+                    validate: default,
+                    access: default
+                )
         );
     }
 
@@ -2757,8 +2762,8 @@ public static partial class XmlSerializerTests
         XmlMembersMapping mappings = importer.ImportMembersMapping("root", "", members, true);
         XmlSchemas schema = new XmlSchemas();
         XmlSchemaExporter exporter = new XmlSchemaExporter(schema);
-        AssertExtensions.Throws<XmlException, Exception>(() =>
-            exporter.ExportMembersMapping(mappings)
+        AssertExtensions.Throws<XmlException, Exception>(
+            () => exporter.ExportMembersMapping(mappings)
         );
     }
 

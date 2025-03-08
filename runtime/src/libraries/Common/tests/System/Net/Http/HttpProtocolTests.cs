@@ -440,8 +440,8 @@ namespace System.Net.Http.Functional.Tests
                                     + "\r\nConnection: close\r\nContent-Length: 0\r\n\r\n"
                             );
 
-                        await Assert.ThrowsAsync<HttpRequestException>(() =>
-                            client.GetAsync(TestAsync, url)
+                        await Assert.ThrowsAsync<HttpRequestException>(
+                            () => client.GetAsync(TestAsync, url)
                         );
                     }
                 },

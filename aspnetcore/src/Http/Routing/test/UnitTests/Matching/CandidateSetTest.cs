@@ -328,8 +328,8 @@ public class CandidateSetTest
         var comparer = new EndpointMetadataComparer(services.Object);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            candidateSet.ExpandEndpoint(0, Array.Empty<Endpoint>(), comparer)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => candidateSet.ExpandEndpoint(0, Array.Empty<Endpoint>(), comparer)
         );
 
         // Assert

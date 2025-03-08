@@ -40,11 +40,12 @@ namespace System.Tests
                 AdditionOperatorsHelper<decimal, decimal, decimal>.op_Addition(1.0m, 1.0m)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                AdditionOperatorsHelper<decimal, decimal, decimal>.op_Addition(
-                    decimal.MaxValue,
-                    1.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    AdditionOperatorsHelper<decimal, decimal, decimal>.op_Addition(
+                        decimal.MaxValue,
+                        1.0m
+                    )
             );
         }
 
@@ -75,11 +76,12 @@ namespace System.Tests
                 AdditionOperatorsHelper<decimal, decimal, decimal>.op_CheckedAddition(1.0m, 1.0m)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                AdditionOperatorsHelper<decimal, decimal, decimal>.op_CheckedAddition(
-                    decimal.MaxValue,
-                    1.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    AdditionOperatorsHelper<decimal, decimal, decimal>.op_CheckedAddition(
+                        decimal.MaxValue,
+                        1.0m
+                    )
             );
         }
 
@@ -221,8 +223,8 @@ namespace System.Tests
                 DecrementOperatorsHelper<decimal>.op_Decrement(decimal.MaxValue)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                DecrementOperatorsHelper<decimal>.op_Decrement(decimal.MinValue)
+            Assert.Throws<OverflowException>(
+                () => DecrementOperatorsHelper<decimal>.op_Decrement(decimal.MinValue)
             );
         }
 
@@ -238,8 +240,8 @@ namespace System.Tests
                 DecrementOperatorsHelper<decimal>.op_CheckedDecrement(decimal.MaxValue)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                DecrementOperatorsHelper<decimal>.op_CheckedDecrement(decimal.MinValue)
+            Assert.Throws<OverflowException>(
+                () => DecrementOperatorsHelper<decimal>.op_CheckedDecrement(decimal.MinValue)
             );
         }
 
@@ -985,8 +987,8 @@ namespace System.Tests
             Assert.Equal(1.0m, IncrementOperatorsHelper<decimal>.op_Increment(0.0m));
             Assert.Equal(2.0m, IncrementOperatorsHelper<decimal>.op_Increment(1.0m));
 
-            Assert.Throws<OverflowException>(() =>
-                IncrementOperatorsHelper<decimal>.op_Increment(decimal.MaxValue)
+            Assert.Throws<OverflowException>(
+                () => IncrementOperatorsHelper<decimal>.op_Increment(decimal.MaxValue)
             );
         }
 
@@ -1002,8 +1004,8 @@ namespace System.Tests
             Assert.Equal(1.0m, IncrementOperatorsHelper<decimal>.op_CheckedIncrement(0.0m));
             Assert.Equal(2.0m, IncrementOperatorsHelper<decimal>.op_CheckedIncrement(1.0m));
 
-            Assert.Throws<OverflowException>(() =>
-                IncrementOperatorsHelper<decimal>.op_CheckedIncrement(decimal.MaxValue)
+            Assert.Throws<OverflowException>(
+                () => IncrementOperatorsHelper<decimal>.op_CheckedIncrement(decimal.MaxValue)
             );
         }
 
@@ -1093,17 +1095,19 @@ namespace System.Tests
                 MultiplyOperatorsHelper<decimal, decimal, decimal>.op_Multiply(1.0m, 2.0m)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                MultiplyOperatorsHelper<decimal, decimal, decimal>.op_Multiply(
-                    decimal.MinValue,
-                    2.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    MultiplyOperatorsHelper<decimal, decimal, decimal>.op_Multiply(
+                        decimal.MinValue,
+                        2.0m
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                MultiplyOperatorsHelper<decimal, decimal, decimal>.op_Multiply(
-                    decimal.MaxValue,
-                    2.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    MultiplyOperatorsHelper<decimal, decimal, decimal>.op_Multiply(
+                        decimal.MaxValue,
+                        2.0m
+                    )
             );
         }
 
@@ -1127,17 +1131,19 @@ namespace System.Tests
                 MultiplyOperatorsHelper<decimal, decimal, decimal>.op_CheckedMultiply(1.0m, 2.0m)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                MultiplyOperatorsHelper<decimal, decimal, decimal>.op_CheckedMultiply(
-                    decimal.MinValue,
-                    2.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    MultiplyOperatorsHelper<decimal, decimal, decimal>.op_CheckedMultiply(
+                        decimal.MinValue,
+                        2.0m
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                MultiplyOperatorsHelper<decimal, decimal, decimal>.op_CheckedMultiply(
-                    decimal.MaxValue,
-                    2.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    MultiplyOperatorsHelper<decimal, decimal, decimal>.op_CheckedMultiply(
+                        decimal.MaxValue,
+                        2.0m
+                    )
             );
         }
 
@@ -1304,29 +1310,35 @@ namespace System.Tests
                 NumberBaseHelper<decimal>.CreateChecked<double>(-79228162514264333195497439231.0)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(+79228162514264337593543950335.0)
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<double>(
+                        +79228162514264337593543950335.0
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(-79228162514264337593543950335.0)
-            );
-
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(double.MaxValue)
-            );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(double.MinValue)
-            );
-
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(double.PositiveInfinity)
-            );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(double.NegativeInfinity)
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<double>(
+                        -79228162514264337593543950335.0
+                    )
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<double>(double.NaN)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<double>(double.MaxValue)
+            );
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<double>(double.MinValue)
+            );
+
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<double>(double.PositiveInfinity)
+            );
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<double>(double.NegativeInfinity)
+            );
+
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<double>(double.NaN)
             );
         }
 
@@ -1351,15 +1363,15 @@ namespace System.Tests
             Assert.Equal(+65504.0m, NumberBaseHelper<decimal>.CreateChecked<Half>(Half.MaxValue));
             Assert.Equal(-65504.0m, NumberBaseHelper<decimal>.CreateChecked<Half>(Half.MinValue));
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<Half>(Half.PositiveInfinity)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<Half>(Half.PositiveInfinity)
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<Half>(Half.NegativeInfinity)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<Half>(Half.NegativeInfinity)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<Half>(Half.NaN)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<Half>(Half.NaN)
             );
         }
 
@@ -1440,15 +1452,17 @@ namespace System.Tests
                 )
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<Int128>(
-                    new Int128(0x7FFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<Int128>(
+                        new Int128(0x7FFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<Int128>(
-                    new Int128(0x8000_0000_0000_0000, 0x0000_0000_0000_0000)
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<Int128>(
+                        new Int128(0x8000_0000_0000_0000, 0x0000_0000_0000_0000)
+                    )
             );
         }
 
@@ -1522,22 +1536,22 @@ namespace System.Tests
             Assert.Equal(+1.0m, NumberBaseHelper<decimal>.CreateChecked<NFloat>(+1.0f));
             Assert.Equal(-1.0m, NumberBaseHelper<decimal>.CreateChecked<NFloat>(-1.0f));
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.MaxValue)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.MaxValue)
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.MinValue)
-            );
-
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.PositiveInfinity)
-            );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.NegativeInfinity)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.MinValue)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.NaN)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.PositiveInfinity)
+            );
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.NegativeInfinity)
+            );
+
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<NFloat>(NFloat.NaN)
             );
         }
 
@@ -1578,29 +1592,35 @@ namespace System.Tests
                 NumberBaseHelper<decimal>.CreateChecked<float>(-79228160000000000000000000000.0f)
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(+79228162514264337593543950335.0f)
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<float>(
+                        +79228162514264337593543950335.0f
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(-79228162514264337593543950335.0f)
-            );
-
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(float.MaxValue)
-            );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(float.MinValue)
-            );
-
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(float.PositiveInfinity)
-            );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(float.NegativeInfinity)
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<float>(
+                        -79228162514264337593543950335.0f
+                    )
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<float>(float.NaN)
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<float>(float.MaxValue)
+            );
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<float>(float.MinValue)
+            );
+
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<float>(float.PositiveInfinity)
+            );
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<float>(float.NegativeInfinity)
+            );
+
+            Assert.Throws<OverflowException>(
+                () => NumberBaseHelper<decimal>.CreateChecked<float>(float.NaN)
             );
         }
 
@@ -1659,20 +1679,23 @@ namespace System.Tests
                 )
             );
 
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<UInt128>(
-                    new UInt128(0xFFFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<UInt128>(
+                        new UInt128(0xFFFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<UInt128>(
-                    new UInt128(0x7FFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<UInt128>(
+                        new UInt128(0x7FFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)
+                    )
             );
-            Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<decimal>.CreateChecked<UInt128>(
-                    new UInt128(0x8000_0000_0000_0000, 0x0000_0000_0000_0000)
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    NumberBaseHelper<decimal>.CreateChecked<UInt128>(
+                        new UInt128(0x8000_0000_0000_0000, 0x0000_0000_0000_0000)
+                    )
             );
         }
 
@@ -3243,11 +3266,12 @@ namespace System.Tests
                 )
             );
 
-            Assert.Throws<OverflowException>(() =>
-                SubtractionOperatorsHelper<decimal, decimal, decimal>.op_Subtraction(
-                    decimal.MinValue,
-                    1.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    SubtractionOperatorsHelper<decimal, decimal, decimal>.op_Subtraction(
+                        decimal.MinValue,
+                        1.0m
+                    )
             );
         }
 
@@ -3290,11 +3314,12 @@ namespace System.Tests
                 )
             );
 
-            Assert.Throws<OverflowException>(() =>
-                SubtractionOperatorsHelper<decimal, decimal, decimal>.op_CheckedSubtraction(
-                    decimal.MinValue,
-                    1.0m
-                )
+            Assert.Throws<OverflowException>(
+                () =>
+                    SubtractionOperatorsHelper<decimal, decimal, decimal>.op_CheckedSubtraction(
+                        decimal.MinValue,
+                        1.0m
+                    )
             );
         }
 

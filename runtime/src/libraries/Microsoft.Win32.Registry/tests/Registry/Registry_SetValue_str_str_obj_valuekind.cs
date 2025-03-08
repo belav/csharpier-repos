@@ -230,8 +230,14 @@ namespace Microsoft.Win32.RegistryTests
 
             valueName = "FooBar";
             // Should throw if passed value is null
-            Assert.Throws<ArgumentNullException>(() =>
-                Registry.SetValue(TestRegistryKey.Name, valueName, null, RegistryValueKind.QWord)
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    Registry.SetValue(
+                        TestRegistryKey.Name,
+                        valueName,
+                        null,
+                        RegistryValueKind.QWord
+                    )
             );
 
             // Should throw because valueKind is equal to -2 which is not an acceptable value

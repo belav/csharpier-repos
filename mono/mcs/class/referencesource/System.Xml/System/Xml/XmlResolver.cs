@@ -31,7 +31,6 @@ namespace System.Xml
         ///    <para>Maps a
         ///       URI to an Object containing the actual resource.</para>
         /// </devdoc>
-
         public abstract Object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn);
 
         /// <include file='doc\XmlResolver.uex' path='docs/doc[@for="XmlResolver.ResolveUri"]/*' />

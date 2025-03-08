@@ -37,8 +37,8 @@ namespace System.Security.Cryptography.Tests
             // We should see an ObjectDisposedException.
 
             theKey.Dispose();
-            Assert.ThrowsAny<ObjectDisposedException>(() =>
-                propInfo.GetValue(theKey, BindingFlags.DoNotWrapExceptions, null, null, null)
+            Assert.ThrowsAny<ObjectDisposedException>(
+                () => propInfo.GetValue(theKey, BindingFlags.DoNotWrapExceptions, null, null, null)
             );
         }
 

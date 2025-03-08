@@ -313,8 +313,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(ShadowKey).DisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Finder.Find<DifferentNamespace.ShadowKey>(context, 77)
+                    .Throws<InvalidOperationException>(
+                        () => Finder.Find<DifferentNamespace.ShadowKey>(context, 77)
                     )
                     .Message
             );
@@ -805,10 +805,15 @@ namespace Microsoft.EntityFrameworkCore
                     cancellationType == CancellationType.Wrong ? 3 : 2
                 ),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        Finder
-                            .FindAsync<IntKey>(cancellationType, context, new object[] { 77, 88 })
-                            .AsTask()
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () =>
+                            Finder
+                                .FindAsync<IntKey>(
+                                    cancellationType,
+                                    context,
+                                    new object[] { 77, 88 }
+                                )
+                                .AsTask()
                     )
                 ).Message
             );
@@ -833,10 +838,15 @@ namespace Microsoft.EntityFrameworkCore
                     )
                     : CoreStrings.FindValueCountMismatch("CompositeKey", 2, 1),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        Finder
-                            .FindAsync<CompositeKey>(cancellationType, context, new object[] { 77 })
-                            .AsTask()
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () =>
+                            Finder
+                                .FindAsync<CompositeKey>(
+                                    cancellationType,
+                                    context,
+                                    new object[] { 77 }
+                                )
+                                .AsTask()
                     )
                 ).Message
             );
@@ -854,10 +864,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(0, "IntKey", "string", "int"),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        Finder
-                            .FindAsync<IntKey>(cancellationType, context, new object[] { "77" })
-                            .AsTask()
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () =>
+                            Finder
+                                .FindAsync<IntKey>(cancellationType, context, new object[] { "77" })
+                                .AsTask()
                     )
                 ).Message
             );
@@ -875,14 +886,15 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(1, "CompositeKey", "int", "string"),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        Finder
-                            .FindAsync<CompositeKey>(
-                                cancellationType,
-                                context,
-                                new object[] { 77, 78 }
-                            )
-                            .AsTask()
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () =>
+                            Finder
+                                .FindAsync<CompositeKey>(
+                                    cancellationType,
+                                    context,
+                                    new object[] { 77, 78 }
+                                )
+                                .AsTask()
                     )
                 ).Message
             );
@@ -900,10 +912,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.InvalidSetType(nameof(Random)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        Finder
-                            .FindAsync<Random>(cancellationType, context, new object[] { 77 })
-                            .AsTask()
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            Finder
+                                .FindAsync<Random>(cancellationType, context, new object[] { 77 })
+                                .AsTask()
                     )
                 ).Message
             );
@@ -925,14 +938,15 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(ShadowKey).DisplayName()
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        Finder
-                            .FindAsync<DifferentNamespace.ShadowKey>(
-                                cancellationType,
-                                context,
-                                new object[] { 77 }
-                            )
-                            .AsTask()
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            Finder
+                                .FindAsync<DifferentNamespace.ShadowKey>(
+                                    cancellationType,
+                                    context,
+                                    new object[] { 77 }
+                                )
+                                .AsTask()
                     )
                 ).Message
             );

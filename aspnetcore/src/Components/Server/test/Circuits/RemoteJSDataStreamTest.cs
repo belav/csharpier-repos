@@ -144,8 +144,8 @@ public class RemoteJSDataStreamTest
 
         // Act & Assert 2
         using var mem = new MemoryStream();
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal("An error occurred while reading the remote stream: some error", ex.Message);
     }
@@ -164,17 +164,18 @@ public class RemoteJSDataStreamTest
         var chunk = Array.Empty<byte>();
 
         // Act & Assert 1
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await RemoteJSDataStream
-                .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
-                .DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () =>
+                await RemoteJSDataStream
+                    .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
+                    .DefaultTimeout()
         );
         Assert.Equal("The incoming data chunk cannot be empty.", ex.Message);
 
         // Act & Assert 2
         using var mem = new MemoryStream();
-        ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal("The incoming data chunk cannot be empty.", ex.Message);
     }
@@ -193,17 +194,18 @@ public class RemoteJSDataStreamTest
         var chunk = new byte[50_000]; // more than the 32k maximum chunk size
 
         // Act & Assert 1
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await RemoteJSDataStream
-                .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
-                .DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () =>
+                await RemoteJSDataStream
+                    .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
+                    .DefaultTimeout()
         );
         Assert.Equal("The incoming data chunk exceeded the permitted length.", ex.Message);
 
         // Act & Assert 2
         using var mem = new MemoryStream();
-        ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal("The incoming data chunk exceeded the permitted length.", ex.Message);
     }
@@ -230,10 +232,11 @@ public class RemoteJSDataStreamTest
         var chunk = new byte[110]; // 100 byte totalLength for stream
 
         // Act & Assert 1
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await RemoteJSDataStream
-                .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
-                .DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () =>
+                await RemoteJSDataStream
+                    .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
+                    .DefaultTimeout()
         );
         Assert.Equal(
             "The incoming data stream declared a length 100, but 110 bytes were sent.",
@@ -242,8 +245,8 @@ public class RemoteJSDataStreamTest
 
         // Act & Assert 2
         using var mem = new MemoryStream();
-        ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal(
             "The incoming data stream declared a length 100, but 110 bytes were sent.",
@@ -283,17 +286,18 @@ public class RemoteJSDataStreamTest
                 error: null
             );
         }
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await RemoteJSDataStream
-                .ReceiveData(jsRuntime, streamId, chunkId: 7, chunk, error: null)
-                .DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () =>
+                await RemoteJSDataStream
+                    .ReceiveData(jsRuntime, streamId, chunkId: 7, chunk, error: null)
+                    .DefaultTimeout()
         );
         Assert.Equal("Out of sequence chunk received, expected 5, but received 7.", ex.Message);
 
         // Act & Assert 2
         using var mem = new MemoryStream();
-        ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        ex = await Assert.ThrowsAsync<EndOfStreamException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal("Out of sequence chunk received, expected 5, but received 7.", ex.Message);
     }
@@ -335,8 +339,8 @@ public class RemoteJSDataStreamTest
         // Act & Assert 2
         // Confirm exception also raised on pipe reader
         using var mem = new MemoryStream();
-        var ex = await Assert.ThrowsAsync<TimeoutException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<TimeoutException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal("Did not receive any data in the allotted time.", ex.Message);
 
@@ -397,8 +401,8 @@ public class RemoteJSDataStreamTest
         // Act & Assert 4
         // Confirm exception also raised on pipe reader
         using var mem = new MemoryStream();
-        var ex = await Assert.ThrowsAsync<TimeoutException>(async () =>
-            await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<TimeoutException>(
+            async () => await remoteJSDataStream.CopyToAsync(mem).DefaultTimeout()
         );
         Assert.Equal("Did not receive any data in the allotted time.", ex.Message);
 

@@ -294,14 +294,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task GroupBy_Simple_1_from_LINQ_101(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from n in ss.Set<NumberForLinq>()
-                    group n by n.Value % 5 into g
-                    select new { Remainder = g.Key, Numbers = g }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from n in ss.Set<NumberForLinq>()
+                        group n by n.Value % 5 into g
+                        select new { Remainder = g.Key, Numbers = g }
+                )
         );
 
     [ConditionalTheory]
@@ -309,14 +310,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task GroupBy_Simple_2_from_LINQ_101(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from w in ss.Set<NumberForLinq>()
-                    group w by w.Name.Length into g
-                    select new { FirstLetter = g.Key, Words = g }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from w in ss.Set<NumberForLinq>()
+                        group w by w.Name.Length into g
+                        select new { FirstLetter = g.Key, Words = g }
+                )
         );
 
     [ConditionalTheory]
@@ -324,14 +326,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task GroupBy_Simple_3_from_LINQ_101(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from p in ss.Set<ProductForLinq>()
-                    group p by p.Category into g
-                    select new { Category = g.Key, Products = g }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from p in ss.Set<ProductForLinq>()
+                        group p by p.Category into g
+                        select new { Category = g.Key, Products = g }
+                )
         );
 
     [ConditionalTheory]
@@ -339,25 +342,26 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task GroupBy_Nested_from_LINQ_101(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from c in ss.Set<CustomerForLinq>()
-                    select new
-                    {
-                        c.CompanyName,
-                        YearGroups = from o in c.Orders
-                        group o by o.OrderDate.Year into yg
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from c in ss.Set<CustomerForLinq>()
                         select new
                         {
-                            Year = yg.Key,
-                            MonthGroups = from o in yg
-                            group o by o.OrderDate.Month into mg
-                            select new { Month = mg.Key, Orders = mg },
-                        },
-                    }
-            )
+                            c.CompanyName,
+                            YearGroups = from o in c.Orders
+                            group o by o.OrderDate.Year into yg
+                            select new
+                            {
+                                Year = yg.Key,
+                                MonthGroups = from o in yg
+                                group o by o.OrderDate.Month into mg
+                                select new { Month = mg.Key, Orders = mg },
+                            },
+                        }
+                )
         );
 
     [ConditionalTheory]
@@ -365,15 +369,16 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Any_Grouped_from_LINQ_101(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from p in ss.Set<ProductForLinq>()
-                    group p by p.Category into g
-                    where g.Any(p => p.UnitsInStock == 0)
-                    select new { Category = g.Key, Products = g }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from p in ss.Set<ProductForLinq>()
+                        group p by p.Category into g
+                        where g.Any(p => p.UnitsInStock == 0)
+                        select new { Category = g.Key, Products = g }
+                )
         );
 
     [ConditionalTheory]
@@ -381,15 +386,16 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task All_Grouped_from_LINQ_101(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from p in ss.Set<ProductForLinq>()
-                    group p by p.Category into g
-                    where g.All(p => p.UnitsInStock > 0)
-                    select new { Category = g.Key, Products = g }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from p in ss.Set<ProductForLinq>()
+                        group p by p.Category into g
+                        where g.All(p => p.UnitsInStock > 0)
+                        select new { Category = g.Key, Products = g }
+                )
         );
 
     [ConditionalTheory]
@@ -441,19 +447,20 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Min_Elements_from_LINQ_101(bool async)
         // Navigation expansion phase 2. Issue #23206.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from p in ss.Set<ProductForLinq>()
-                    group p by p.Category into g
-                    let minPrice = g.Min(p => p.UnitPrice)
-                    select new
-                    {
-                        Category = g.Key,
-                        CheapestProducts = g.Where(p => p.UnitPrice == minPrice),
-                    }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from p in ss.Set<ProductForLinq>()
+                        group p by p.Category into g
+                        let minPrice = g.Min(p => p.UnitPrice)
+                        select new
+                        {
+                            Category = g.Key,
+                            CheapestProducts = g.Where(p => p.UnitPrice == minPrice),
+                        }
+                )
         );
 
     [ConditionalTheory]
@@ -472,19 +479,20 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Max_Elements_from_LINQ_101(bool async)
         // Navigation expansion phase 2. Issue #23206.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from p in ss.Set<ProductForLinq>()
-                    group p by p.Category into g
-                    let minPrice = g.Max(p => p.UnitPrice)
-                    select new
-                    {
-                        Category = g.Key,
-                        MostExpensiveProducts = g.Where(p => p.UnitPrice == minPrice),
-                    }
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from p in ss.Set<ProductForLinq>()
+                        group p by p.Category into g
+                        let minPrice = g.Max(p => p.UnitPrice)
+                        select new
+                        {
+                            Category = g.Key,
+                            MostExpensiveProducts = g.Where(p => p.UnitPrice == minPrice),
+                        }
+                )
         );
 
     [ConditionalTheory]
@@ -833,14 +841,17 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory] // From #12088
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Whats_new_2021_sample_14(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Person>()
-                        .GroupBy(bp => bp.Feet)
-                        .SelectMany(g => g.OrderByDescending(bp => bp.Id).Take(1).DefaultIfEmpty())
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Person>()
+                            .GroupBy(bp => bp.Feet)
+                            .SelectMany(g =>
+                                g.OrderByDescending(bp => bp.Id).Take(1).DefaultIfEmpty()
+                            )
+                )
         );
 
     [ConditionalTheory] // From #12088
@@ -859,16 +870,17 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Whats_new_2021_sample_16(bool async)
         // GroupBy final operator. Issue #19929.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Person>()
-                        .GroupBy(c => c.LastName)
-                        .Select(g => g.OrderBy(c => c.FirstName).First())
-                        .GroupBy(c => c.MiddleInitial)
-                        .Select(g => g)
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Person>()
+                            .GroupBy(c => c.LastName)
+                            .Select(g => g.OrderBy(c => c.FirstName).First())
+                            .GroupBy(c => c.MiddleInitial)
+                            .Select(g => g)
+                )
         );
 
     protected ArubaContext CreateContext() => Fixture.CreateContext();

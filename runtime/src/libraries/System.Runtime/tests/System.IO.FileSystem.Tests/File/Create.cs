@@ -30,8 +30,8 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Create(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()))
+            Assert.Throws<DirectoryNotFoundException>(
+                () => Create(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()))
             );
         }
 
@@ -248,7 +248,8 @@ namespace System.IO.Tests
                 Assert.True(File.Exists(testFile + "aAAa"));
                 Assert.Equal(2, Directory.GetFiles(testDir.FullName).Length);
             }
-            Assert.Throws<DirectoryNotFoundException>(() => File.Create(testFile.ToLowerInvariant())
+            Assert.Throws<DirectoryNotFoundException>(
+                () => File.Create(testFile.ToLowerInvariant())
             );
         }
 
@@ -267,16 +268,17 @@ namespace System.IO.Tests
         public void WindowsWildCharacterPath_Core()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
-            Assert.ThrowsAny<IOException>(() =>
-                Create(
-                    Path.Combine(
-                        testDir.FullName,
-                        "dls;d",
-                        "442349-0",
-                        "v443094(*)(+*$#$*",
-                        new string(Path.DirectorySeparatorChar, 3)
+            Assert.ThrowsAny<IOException>(
+                () =>
+                    Create(
+                        Path.Combine(
+                            testDir.FullName,
+                            "dls;d",
+                            "442349-0",
+                            "v443094(*)(+*$#$*",
+                            new string(Path.DirectorySeparatorChar, 3)
+                        )
                     )
-                )
             );
             Assert.ThrowsAny<IOException>(() => Create(Path.Combine(testDir.FullName, "*")));
             Assert.ThrowsAny<IOException>(() => Create(Path.Combine(testDir.FullName, "Test*t")));

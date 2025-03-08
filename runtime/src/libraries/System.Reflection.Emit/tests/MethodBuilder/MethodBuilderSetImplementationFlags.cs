@@ -37,8 +37,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() =>
-                method.SetImplementationFlags(MethodImplAttributes.Unmanaged)
+            Assert.Throws<InvalidOperationException>(
+                () => method.SetImplementationFlags(MethodImplAttributes.Unmanaged)
             );
         }
     }

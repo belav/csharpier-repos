@@ -11,7 +11,6 @@ namespace System.Speech.Recognition.SrgsGrammar
     /// <summary>
     /// Compiles Xml Srgs data into a CFG
     /// </summary>
-
     public static class SrgsGrammarCompiler
     {
         #region Public Methods

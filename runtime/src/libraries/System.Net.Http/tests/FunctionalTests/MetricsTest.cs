@@ -407,7 +407,8 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Version = UseVersion,
                     };
-                    Task<HttpResponseMessage> clientTask = Task.Run(() => SendAsync(client, request)
+                    Task<HttpResponseMessage> clientTask = Task.Run(
+                        () => SendAsync(client, request)
                     );
                     await connectionStarted.Task;
                     using InstrumentRecorder<long> recorder = new(
@@ -992,8 +993,8 @@ namespace System.Net.Http.Functional.Tests
                     await requestReceived.Task.WaitAsync(TestHelper.PassingTestTimeout);
                     requestCts.Cancel();
 
-                    Exception clientException = await Assert.ThrowsAnyAsync<Exception>(() =>
-                        clientTask
+                    Exception clientException = await Assert.ThrowsAnyAsync<Exception>(
+                        () => clientTask
                     );
                     _output.WriteLine($"Client exception: {clientException}");
 
@@ -1050,8 +1051,8 @@ namespace System.Net.Http.Functional.Tests
             GetUnderlyingSocketsHttpHandler(Handler).ConnectCallback = (_, _) =>
                 throw new Exception();
 
-            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                SendAsync(client, request)
+            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(
+                () => SendAsync(client, request)
             );
             _output.WriteLine($"Client exception: {ex}");
 
@@ -1766,8 +1767,8 @@ namespace System.Net.Http.Functional.Tests
         {
             HttpClientHandler handler = new();
             handler.Dispose();
-            Assert.ThrowsAny<ObjectDisposedException>(() =>
-                handler.MeterFactory = new TestMeterFactory()
+            Assert.ThrowsAny<ObjectDisposedException>(
+                () => handler.MeterFactory = new TestMeterFactory()
             );
         }
 
@@ -1776,8 +1777,8 @@ namespace System.Net.Http.Functional.Tests
         {
             SocketsHttpHandler handler = new();
             handler.Dispose();
-            Assert.ThrowsAny<ObjectDisposedException>(() =>
-                handler.MeterFactory = new TestMeterFactory()
+            Assert.ThrowsAny<ObjectDisposedException>(
+                () => handler.MeterFactory = new TestMeterFactory()
             );
         }
 
@@ -1791,8 +1792,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = new HttpClient(handler);
                     await client.GetAsync(uri);
 
-                    Assert.Throws<InvalidOperationException>(() =>
-                        handler.MeterFactory = new TestMeterFactory()
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MeterFactory = new TestMeterFactory()
                     );
                 },
                 server => server.AcceptConnectionSendResponseAndCloseAsync()
@@ -1809,8 +1810,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = new HttpClient(handler);
                     await client.GetAsync(uri);
 
-                    Assert.Throws<InvalidOperationException>(() =>
-                        handler.MeterFactory = new TestMeterFactory()
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MeterFactory = new TestMeterFactory()
                     );
                 },
                 server => server.AcceptConnectionSendResponseAndCloseAsync()

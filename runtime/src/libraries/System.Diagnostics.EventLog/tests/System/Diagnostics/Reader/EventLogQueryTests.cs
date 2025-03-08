@@ -13,8 +13,8 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            Assert.Throws<ArgumentNullException>(() =>
-                new EventLogQuery(null, PathType.LogName, null)
+            Assert.Throws<ArgumentNullException>(
+                () => new EventLogQuery(null, PathType.LogName, null)
             );
         }
 

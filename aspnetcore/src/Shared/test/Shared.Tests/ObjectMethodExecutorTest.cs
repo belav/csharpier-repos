@@ -63,8 +63,8 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("ValueMethodWithReturnTypeThrowsException");
         var parameter = new TestObject();
         Assert.False(executor.IsMethodAsync);
-        Assert.Throws<NotImplementedException>(() =>
-            executor.Execute(_targetObject, new object[] { parameter })
+        Assert.Throws<NotImplementedException>(
+            () => executor.Execute(_targetObject, new object[] { parameter })
         );
     }
 
@@ -104,8 +104,8 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("ValueMethodWithReturnTypeThrowsExceptionAsync");
         var parameter = new TestObject();
         Assert.True(executor.IsMethodAsync);
-        await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await executor.ExecuteAsync(_targetObject, new object[] { parameter })
+        await Assert.ThrowsAsync<NotImplementedException>(
+            async () => await executor.ExecuteAsync(_targetObject, new object[] { parameter })
         );
     }
 
@@ -120,8 +120,8 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod(method);
         var parameter = new TestObject();
         Assert.True(executor.IsMethodAsync);
-        await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await executor.ExecuteAsync(_targetObject, new object[] { parameter })
+        await Assert.ThrowsAsync<NotImplementedException>(
+            async () => await executor.ExecuteAsync(_targetObject, new object[] { parameter })
         );
     }
 

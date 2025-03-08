@@ -62,8 +62,8 @@ internal sealed class TransactionShim
         var buffer = new byte[cookieSize];
         uint bytesUsed = 0;
 
-        OletxHelper.Retry(() =>
-            export.GetTransactionCookie(Transaction, cookieSize, buffer, out bytesUsed)
+        OletxHelper.Retry(
+            () => export.GetTransactionCookie(Transaction, cookieSize, buffer, out bytesUsed)
         );
 
         cookieBuffer = buffer;

@@ -41,8 +41,8 @@ public class SqliteBlobTest : IDisposable
     {
         var connection = new SqliteConnection();
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            new SqliteBlob(connection, Table, Column, Rowid)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => new SqliteBlob(connection, Table, Column, Rowid)
         );
         Assert.Equal(Resources.SqlBlobRequiresOpenConnection, ex.Message);
     }
@@ -50,8 +50,8 @@ public class SqliteBlobTest : IDisposable
     [Fact]
     public void Ctor_throws_when_error()
     {
-        var ex = Assert.Throws<SqliteException>(() =>
-            new SqliteBlob(_connection, "UnknownTable", Column, Rowid)
+        var ex = Assert.Throws<SqliteException>(
+            () => new SqliteBlob(_connection, "UnknownTable", Column, Rowid)
         );
         Assert.Equal(SQLITE_ERROR, ex.SqliteErrorCode);
     }
@@ -59,8 +59,8 @@ public class SqliteBlobTest : IDisposable
     [Fact]
     public void Ctor_throws_when_table_null()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() =>
-            new SqliteBlob(_connection, null!, Column, Rowid)
+        var ex = Assert.Throws<ArgumentNullException>(
+            () => new SqliteBlob(_connection, null!, Column, Rowid)
         );
         Assert.Equal("tableName", ex.ParamName);
     }
@@ -68,8 +68,8 @@ public class SqliteBlobTest : IDisposable
     [Fact]
     public void Ctor_throws_when_column_null()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() =>
-            new SqliteBlob(_connection, Table, null!, Rowid)
+        var ex = Assert.Throws<ArgumentNullException>(
+            () => new SqliteBlob(_connection, Table, null!, Rowid)
         );
         Assert.Equal("columnName", ex.ParamName);
     }
@@ -355,8 +355,8 @@ public class SqliteBlobTest : IDisposable
     {
         using (var stream = CreateStream())
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                stream.Write(Array.Empty<byte>(), 0, -1)
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => stream.Write(Array.Empty<byte>(), 0, -1)
             );
             Assert.Equal("count", ex.ParamName);
             Assert.Equal(-1, ex.ActualValue);
@@ -379,8 +379,8 @@ public class SqliteBlobTest : IDisposable
     {
         using (var stream = CreateStream())
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                stream.Write(new byte[] { 3, 4 }, -1, 2)
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => stream.Write(new byte[] { 3, 4 }, -1, 2)
             );
             Assert.Equal("offset", ex.ParamName);
         }
@@ -392,7 +392,8 @@ public class SqliteBlobTest : IDisposable
         using (var stream = CreateStream())
         {
             stream.Position = 2;
-            var ex = Assert.Throws<NotSupportedException>(() => stream.Write(new byte[] { 3 }, 0, 1)
+            var ex = Assert.Throws<NotSupportedException>(
+                () => stream.Write(new byte[] { 3 }, 0, 1)
             );
             Assert.Equal(Resources.ResizeNotSupported, ex.Message);
         }
@@ -403,7 +404,8 @@ public class SqliteBlobTest : IDisposable
     {
         using (var stream = CreateStream(readOnly: true))
         {
-            var ex = Assert.Throws<NotSupportedException>(() => stream.Write(new byte[] { 1 }, 0, 1)
+            var ex = Assert.Throws<NotSupportedException>(
+                () => stream.Write(new byte[] { 1 }, 0, 1)
             );
 
             Assert.Equal(Resources.WriteNotSupported, ex.Message);

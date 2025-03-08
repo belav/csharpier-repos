@@ -272,8 +272,8 @@ public class OperationExecutor : MarshalByRefObject
             var connectionString = (string?)args["connectionString"];
             var contextType = (string?)args["contextType"];
 
-            Execute(() =>
-                executor.UpdateDatabaseImpl(targetMigration, connectionString, contextType)
+            Execute(
+                () => executor.UpdateDatabaseImpl(targetMigration, connectionString, contextType)
             );
         }
     }
@@ -319,14 +319,15 @@ public class OperationExecutor : MarshalByRefObject
             var noTransactions = (bool)(args["noTransactions"] ?? false);
             var contextType = (string?)args["contextType"];
 
-            Execute(() =>
-                executor.ScriptMigrationImpl(
-                    fromMigration,
-                    toMigration,
-                    idempotent,
-                    noTransactions,
-                    contextType
-                )
+            Execute(
+                () =>
+                    executor.ScriptMigrationImpl(
+                        fromMigration,
+                        toMigration,
+                        idempotent,
+                        noTransactions,
+                        contextType
+                    )
             );
         }
     }
@@ -601,23 +602,24 @@ public class OperationExecutor : MarshalByRefObject
             var suppressOnConfiguring = (bool)(args["suppressOnConfiguring"] ?? false);
             var noPluralize = (bool)(args["noPluralize"] ?? false);
 
-            Execute(() =>
-                executor.ScaffoldContextImpl(
-                    provider,
-                    connectionString,
-                    outputDir,
-                    outputDbContextDir,
-                    dbContextClassName,
-                    schemaFilters,
-                    tableFilters,
-                    modelNamespace,
-                    contextNamespace,
-                    useDataAnnotations,
-                    overwriteFiles,
-                    useDatabaseNames,
-                    suppressOnConfiguring,
-                    noPluralize
-                )
+            Execute(
+                () =>
+                    executor.ScaffoldContextImpl(
+                        provider,
+                        connectionString,
+                        outputDir,
+                        outputDbContextDir,
+                        dbContextClassName,
+                        schemaFilters,
+                        tableFilters,
+                        modelNamespace,
+                        contextNamespace,
+                        useDataAnnotations,
+                        overwriteFiles,
+                        useDatabaseNames,
+                        suppressOnConfiguring,
+                        noPluralize
+                    )
             );
         }
     }

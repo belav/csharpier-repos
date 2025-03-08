@@ -123,10 +123,11 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             using IMeterFactory meterFactory = sp.GetRequiredService<IMeterFactory>();
 
             Assert.Throws<ArgumentNullException>(() => meterFactory.Create(name: null));
-            Assert.Throws<InvalidOperationException>(() =>
-                meterFactory.Create(
-                    new MeterOptions("name") { Name = "SomeName", Scope = new object() }
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    meterFactory.Create(
+                        new MeterOptions("name") { Name = "SomeName", Scope = new object() }
+                    )
             );
 
             Meter meter = meterFactory.Create(

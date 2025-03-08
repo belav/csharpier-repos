@@ -212,8 +212,8 @@ namespace System.Collections.Generic
                 throw new InvalidOperationException();
             };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                multiple.SingleDefaultOrError(errorAction, errorArgument)
+            Assert.Throws<InvalidOperationException>(
+                () => multiple.SingleDefaultOrError(errorAction, errorArgument)
             );
         }
 
@@ -271,11 +271,12 @@ namespace System.Collections.Generic
                 throw new InvalidOperationException();
             };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                multipleMatch.SingleOfTypeDefaultOrError<object, string, object>(
-                    errorAction,
-                    errorArgument
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    multipleMatch.SingleOfTypeDefaultOrError<object, string, object>(
+                        errorAction,
+                        errorArgument
+                    )
             );
         }
 

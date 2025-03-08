@@ -100,7 +100,6 @@ namespace System.Xml
         ///    <para>
         ///       Transforms an XML name into an object name (such as DataTable or DataColumn).</para>
         /// </devdoc>
-
         public static string DecodeName(string name)
         {
             if (name == null || name.Length == 0)

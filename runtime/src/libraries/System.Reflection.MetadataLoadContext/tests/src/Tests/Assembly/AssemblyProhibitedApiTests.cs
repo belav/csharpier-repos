@@ -19,11 +19,11 @@ namespace System.Reflection.Tests
                 // Storing as ICustomAttributeProvider so we don't accidentally pick up the CustomAttributeExtensions extension methods.
                 ICustomAttributeProvider icp = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    icp.GetCustomAttributes(inherit: false)
+                Assert.Throws<InvalidOperationException>(
+                    () => icp.GetCustomAttributes(inherit: false)
                 );
-                Assert.Throws<InvalidOperationException>(() =>
-                    icp.GetCustomAttributes(null, inherit: false)
+                Assert.Throws<InvalidOperationException>(
+                    () => icp.GetCustomAttributes(null, inherit: false)
                 );
                 Assert.Throws<InvalidOperationException>(() => icp.IsDefined(null, inherit: false));
             }
@@ -31,7 +31,8 @@ namespace System.Reflection.Tests
             Assembly coreAssembly = typeof(object).Project().Assembly;
             if (coreAssembly.ReflectionOnly)
             {
-                Assert.Throws<ArgumentException>(() => coreAssembly.CreateInstance("System.Object")
+                Assert.Throws<ArgumentException>(
+                    () => coreAssembly.CreateInstance("System.Object")
                 ); // Compat quirk: Why ArgumentException instead of InvalidOperationException?
             }
         }

@@ -580,8 +580,8 @@ public class RazorViewTest
             .Verifiable();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -632,8 +632,8 @@ public class RazorViewTest
             .Verifiable();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -686,8 +686,8 @@ public class RazorViewTest
             .Verifiable();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -812,8 +812,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page "
@@ -1053,8 +1053,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page at "
@@ -1133,8 +1133,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page at "
@@ -1173,8 +1173,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
         Assert.Equal(
             $"RenderBody has not been called for the page at '{LayoutPath}'. To ignore call IgnoreBody().",
@@ -1380,8 +1380,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -1438,8 +1438,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -1691,8 +1691,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -1745,8 +1745,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => view.RenderAsync(viewContext)
         );
         Assert.Equal(expected, ex.Message);
     }

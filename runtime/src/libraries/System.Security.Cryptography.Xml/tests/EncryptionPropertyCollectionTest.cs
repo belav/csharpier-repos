@@ -248,8 +248,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 encPropertyCollection.Add(new EncryptionProperty());
             }
             EncryptionProperty[] encPropertyArray = new EncryptionProperty[2];
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                encPropertyCollection.CopyTo(encPropertyArray, -1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => encPropertyCollection.CopyTo(encPropertyArray, -1)
             );
         }
 

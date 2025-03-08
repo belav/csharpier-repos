@@ -374,8 +374,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetRuntimeBaseDefinition()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                default(MethodInfo).GetRuntimeBaseDefinition()
+            Assert.Throws<ArgumentNullException>(
+                () => default(MethodInfo).GetRuntimeBaseDefinition()
             );
 
             MethodInfo derivedFoo = typeof(TestDerived).GetMethod(nameof(TestDerived.Foo));
@@ -395,11 +395,11 @@ namespace System.Reflection.Tests
                 "interfaceType",
                 () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(null)
             );
-            Assert.Throws<ArgumentException>(() =>
-                typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(ICloneable))
+            Assert.Throws<ArgumentException>(
+                () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(ICloneable))
             );
-            Assert.Throws<ArgumentException>(() =>
-                typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(string))
+            Assert.Throws<ArgumentException>(
+                () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(string))
             );
 
             InterfaceMapping map = typeof(TestType)

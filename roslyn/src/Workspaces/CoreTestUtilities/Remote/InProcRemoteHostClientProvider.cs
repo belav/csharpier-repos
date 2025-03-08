@@ -105,21 +105,23 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             var testSerializerServiceFactory =
                 services.ExportProvider.GetExportedValue<TestSerializerService.Factory>();
 
-            _lazyManager = new Lazy<WorkspaceManager>(() =>
-                new WorkspaceManager(
-                    _ => new SolutionAssetCache(),
-                    testSerializerServiceFactory.SharedTestGeneratorReferences,
-                    AdditionalRemoteParts,
-                    ExcludedRemoteParts
-                )
+            _lazyManager = new Lazy<WorkspaceManager>(
+                () =>
+                    new WorkspaceManager(
+                        _ => new SolutionAssetCache(),
+                        testSerializerServiceFactory.SharedTestGeneratorReferences,
+                        AdditionalRemoteParts,
+                        ExcludedRemoteParts
+                    )
             );
-            _lazyClient = new Lazy<RemoteHostClient>(() =>
-                InProcRemoteHostClient.Create(
-                    _services,
-                    callbackDispatchers,
-                    TraceListener,
-                    new RemoteHostTestData(_lazyManager.Value, isInProc: true)
-                )
+            _lazyClient = new Lazy<RemoteHostClient>(
+                () =>
+                    InProcRemoteHostClient.Create(
+                        _services,
+                        callbackDispatchers,
+                        TraceListener,
+                        new RemoteHostTestData(_lazyManager.Value, isInProc: true)
+                    )
             );
         }
 

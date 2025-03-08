@@ -238,8 +238,8 @@ namespace System.Text.Json.Nodes.Tests
         public static void CastsNotSupported()
         {
             // Since generics and boxing do not support casts, we get InvalidCastExceptions here.
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                (byte)(JsonNode)(long)3
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => (byte)(JsonNode)(long)3
             ); // narrowing
             // "A value of type 'System.Int64' cannot be converted to a 'System.Byte'."
             Assert.Contains(typeof(long).ToString(), ex.Message);

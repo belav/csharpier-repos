@@ -3367,11 +3367,11 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_DateTimeFormatIsNull()
     {
         var settings = new DataContractJsonSerializerSettings();
-        Assert.Throws<ArgumentNullException>(() =>
-            settings.DateTimeFormat = new DateTimeFormat(null)
+        Assert.Throws<ArgumentNullException>(
+            () => settings.DateTimeFormat = new DateTimeFormat(null)
         );
-        Assert.Throws<ArgumentNullException>(() =>
-            settings.DateTimeFormat = new DateTimeFormat("ddmmyyyyy", null)
+        Assert.Throws<ArgumentNullException>(
+            () => settings.DateTimeFormat = new DateTimeFormat("ddmmyyyyy", null)
         );
     }
 
@@ -3392,7 +3392,8 @@ public static partial class DataContractJsonSerializerTests
         serializer.WriteObject(ms, original);
         var serializedJsonValue = Encoding.UTF8.GetString(ms.ToArray());
         serializedJsonValue = serializedJsonValue.Replace("2011", "         2011");
-        Assert.Throws<SerializationException>(() => DeserializeString<DateTime>(serializedJsonValue)
+        Assert.Throws<SerializationException>(
+            () => DeserializeString<DateTime>(serializedJsonValue)
         );
     }
 

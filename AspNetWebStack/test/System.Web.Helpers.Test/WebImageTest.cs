@@ -45,15 +45,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void ConstructorThrowsWhenFilePathIsInvalid()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                new WebImage(
-                    GetContext(),
-                    s =>
-                    {
-                        throw new DirectoryNotFoundException();
-                    },
-                    @"x:\this\does\not\exist.jpg"
-                )
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    new WebImage(
+                        GetContext(),
+                        s =>
+                        {
+                            throw new DirectoryNotFoundException();
+                        },
+                        @"x:\this\does\not\exist.jpg"
+                    )
             );
         }
 
@@ -988,21 +989,22 @@ namespace System.Web.Helpers.Test
             var context = GetContext();
             WebImage image = new WebImage(_BmpImageBytes);
 
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                image.AddImageWatermark(
-                    context,
-                    s =>
-                    {
-                        throw new DirectoryNotFoundException();
-                    },
-                    @"x:\path\does\not\exist",
-                    width: 0,
-                    height: 0,
-                    horizontalAlign: "Right",
-                    verticalAlign: "Bottom",
-                    opacity: 100,
-                    padding: 5
-                )
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    image.AddImageWatermark(
+                        context,
+                        s =>
+                        {
+                            throw new DirectoryNotFoundException();
+                        },
+                        @"x:\path\does\not\exist",
+                        width: 0,
+                        height: 0,
+                        horizontalAlign: "Right",
+                        verticalAlign: "Bottom",
+                        opacity: 100,
+                        padding: 5
+                    )
             );
         }
 
@@ -1011,21 +1013,22 @@ namespace System.Web.Helpers.Test
         {
             var context = GetContext();
             WebImage image = new WebImage(_BmpImageBytes);
-            Assert.Throws<FileNotFoundException>(() =>
-                image.AddImageWatermark(
-                    context,
-                    s =>
-                    {
-                        throw new FileNotFoundException();
-                    },
-                    @"x:\there-is-no-file.jpg",
-                    width: 0,
-                    height: 0,
-                    horizontalAlign: "Right",
-                    verticalAlign: "Bottom",
-                    opacity: 100,
-                    padding: 5
-                )
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    image.AddImageWatermark(
+                        context,
+                        s =>
+                        {
+                            throw new FileNotFoundException();
+                        },
+                        @"x:\there-is-no-file.jpg",
+                        width: 0,
+                        height: 0,
+                        horizontalAlign: "Right",
+                        verticalAlign: "Bottom",
+                        opacity: 100,
+                        padding: 5
+                    )
             );
         }
 

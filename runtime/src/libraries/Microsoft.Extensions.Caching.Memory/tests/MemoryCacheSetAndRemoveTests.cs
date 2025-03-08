@@ -840,7 +840,8 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cache = CreateCache();
             var value = new object();
-            Assert.Throws<ArgumentNullException>(() => cache.Set(null, value, expirationToken: null)
+            Assert.Throws<ArgumentNullException>(
+                () => cache.Set(null, value, expirationToken: null)
             );
         }
 
@@ -862,8 +863,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public async Task GetOrCreateAsyncFromCacheWithNullKeyThrows()
         {
             var cache = CreateCache();
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await cache.GetOrCreateAsync<object>(null, null)
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await cache.GetOrCreateAsync<object>(null, null)
             );
         }
 

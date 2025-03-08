@@ -1236,8 +1236,8 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace();
 
-            await Assert.ThrowsAsync<FileNotFoundException>(() =>
-                workspace.OpenSolutionAsync(solutionFilePath)
+            await Assert.ThrowsAsync<FileNotFoundException>(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
             );
         }
 
@@ -1251,8 +1251,8 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace(throwOnWorkspaceFailed: false);
 
-            await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenSolutionAsync(solutionFilePath)
+            await AssertThrowsExceptionForInvalidPath(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
             );
         }
 
@@ -1362,8 +1362,8 @@ class C1
             using var workspace = CreateMSBuildWorkspace(throwOnWorkspaceFailed: false);
             workspace.SkipUnrecognizedProjects = false;
 
-            await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenSolutionAsync(solutionFilePath)
+            await AssertThrowsExceptionForInvalidPath(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
             );
         }
 
@@ -1398,8 +1398,8 @@ class C1
             using var workspace = CreateMSBuildWorkspace();
             workspace.SkipUnrecognizedProjects = false;
 
-            await Assert.ThrowsAsync<FileNotFoundException>(() =>
-                workspace.OpenSolutionAsync(solutionFilePath)
+            await Assert.ThrowsAsync<FileNotFoundException>(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
             );
         }
 
@@ -1564,8 +1564,8 @@ class C1
             using var workspace = MSBuildWorkspace.Create(
                 MefHostServices.Create(_defaultAssembliesWithoutCSharp)
             );
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                workspace.OpenProjectAsync(projectName)
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => workspace.OpenProjectAsync(projectName)
             );
 
             var expected = string.Format(
@@ -1586,8 +1586,8 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace();
 
-            await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenProjectAsync(projectFilePath)
+            await AssertThrowsExceptionForInvalidPath(
+                () => workspace.OpenProjectAsync(projectFilePath)
             );
         }
 
@@ -1644,8 +1644,8 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace(throwOnWorkspaceFailed: false);
             workspace.SkipUnrecognizedProjects = false;
-            await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenProjectAsync(projectFilePath)
+            await AssertThrowsExceptionForInvalidPath(
+                () => workspace.OpenProjectAsync(projectFilePath)
             );
         }
 
@@ -3613,11 +3613,12 @@ class C1
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
 
-            var sol = ObjectReference.CreateFromFactory(() =>
-                MSBuildWorkspace
-                    .Create()
-                    .OpenSolutionAsync(GetSolutionFileName("TestSolution.sln"))
-                    .Result
+            var sol = ObjectReference.CreateFromFactory(
+                () =>
+                    MSBuildWorkspace
+                        .Create()
+                        .OpenSolutionAsync(GetSolutionFileName("TestSolution.sln"))
+                        .Result
             );
             var workspace = sol.GetObjectReference(static s => s.Workspace);
             var project = sol.GetObjectReference(static s => s.Projects.First());
@@ -4248,8 +4249,8 @@ class C { }";
             var solutionFilePath = GetSolutionFileName(@"InvalidSolutionFilter.slnf");
 
             using var workspace = CreateMSBuildWorkspace();
-            var exception = await Assert.ThrowsAsync<Exception>(() =>
-                workspace.OpenSolutionAsync(solutionFilePath)
+            var exception = await Assert.ThrowsAsync<Exception>(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
             );
 
             Assert.Equal(0, workspace.CurrentSolution.ProjectIds.Count);

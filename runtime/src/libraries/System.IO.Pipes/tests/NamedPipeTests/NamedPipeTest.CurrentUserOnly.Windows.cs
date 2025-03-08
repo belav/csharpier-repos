@@ -280,8 +280,8 @@ namespace System.IO.Pipes.Tests
                 {
                     // Server is expected to not have received any request.
                     cts.Cancel();
-                    AggregateException ex = Assert.Throws<AggregateException>(() =>
-                        serverTask.Wait(10_000)
+                    AggregateException ex = Assert.Throws<AggregateException>(
+                        () => serverTask.Wait(10_000)
                     );
                     Assert.IsType<TaskCanceledException>(ex.InnerException);
                 }

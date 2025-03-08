@@ -607,11 +607,11 @@ namespace System.Linq.Parallel.Tests
         public static void Union_NotSupportedException()
         {
 #pragma warning disable 618
-            Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).Union(Enumerable.Range(0, 1))
+            Assert.Throws<NotSupportedException>(
+                () => ParallelEnumerable.Range(0, 1).Union(Enumerable.Range(0, 1))
             );
-            Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).Union(Enumerable.Range(0, 1), null)
+            Assert.Throws<NotSupportedException>(
+                () => ParallelEnumerable.Range(0, 1).Union(Enumerable.Range(0, 1), null)
             );
 #pragma warning restore 618
         }
@@ -621,37 +621,41 @@ namespace System.Linq.Parallel.Tests
         public static void Union_NoDuplicateSettings()
         {
             CancellationToken t = new CancellationTokenSource().Token;
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable
-                    .Range(0, 1)
-                    .WithCancellation(t)
-                    .Union(ParallelEnumerable.Range(0, 1).WithCancellation(t))
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithCancellation(t)
+                        .Union(ParallelEnumerable.Range(0, 1).WithCancellation(t))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable
-                    .Range(0, 1)
-                    .WithDegreeOfParallelism(1)
-                    .Union(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1))
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithDegreeOfParallelism(1)
+                        .Union(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable
-                    .Range(0, 1)
-                    .WithExecutionMode(ParallelExecutionMode.Default)
-                    .Union(
-                        ParallelEnumerable
-                            .Range(0, 1)
-                            .WithExecutionMode(ParallelExecutionMode.Default)
-                    )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithExecutionMode(ParallelExecutionMode.Default)
+                        .Union(
+                            ParallelEnumerable
+                                .Range(0, 1)
+                                .WithExecutionMode(ParallelExecutionMode.Default)
+                        )
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable
-                    .Range(0, 1)
-                    .WithMergeOptions(ParallelMergeOptions.Default)
-                    .Union(
-                        ParallelEnumerable
-                            .Range(0, 1)
-                            .WithMergeOptions(ParallelMergeOptions.Default)
-                    )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithMergeOptions(ParallelMergeOptions.Default)
+                        .Union(
+                            ParallelEnumerable
+                                .Range(0, 1)
+                                .WithMergeOptions(ParallelMergeOptions.Default)
+                        )
             );
         }
 

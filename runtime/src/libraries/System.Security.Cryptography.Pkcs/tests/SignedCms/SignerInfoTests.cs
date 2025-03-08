@@ -442,8 +442,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // Even though the CounterSignerInfos collection still contains this, the live
             // document doesn't.
-            Assert.Throws<CryptographicException>(() =>
-                signerInfo.RemoveCounterSignature(counterSigner)
+            Assert.Throws<CryptographicException>(
+                () => signerInfo.RemoveCounterSignature(counterSigner)
             );
 
             // Assert.NotThrows
@@ -460,8 +460,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // Even though we counter-signed ourself, the counter-signer version of us
             // is SubjectKeyIdentifier, and we're IssuerAndSerialNumber, so no match.
-            Assert.Throws<CryptographicException>(() =>
-                signerInfo.RemoveCounterSignature(signerInfo)
+            Assert.Throws<CryptographicException>(
+                () => signerInfo.RemoveCounterSignature(signerInfo)
             );
         }
 
@@ -558,7 +558,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(2, signer.CounterSignerInfos.Count);
             Assert.Single(cms.SignerInfos[0].CounterSignerInfos);
 
-            Assert.Throws<CryptographicException>(() => signer.RemoveCounterSignature(counterSigner)
+            Assert.Throws<CryptographicException>(
+                () => signer.RemoveCounterSignature(counterSigner)
             );
         }
 
@@ -573,7 +574,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.RemoveSignature(signer);
             Assert.NotEmpty(signer.CounterSignerInfos);
 
-            Assert.Throws<CryptographicException>(() => signer.RemoveCounterSignature(counterSigner)
+            Assert.Throws<CryptographicException>(
+                () => signer.RemoveCounterSignature(counterSigner)
             );
         }
 

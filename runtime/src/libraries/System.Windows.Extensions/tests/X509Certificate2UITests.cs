@@ -20,13 +20,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         X509SelectionFlag.SingleSelection
                     )
             );
-            Assert.Throws<ArgumentException>(() =>
-                X509Certificate2UI.SelectFromCollection(
-                    new X509Certificate2Collection(),
-                    string.Empty,
-                    string.Empty,
-                    (X509SelectionFlag)2
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    X509Certificate2UI.SelectFromCollection(
+                        new X509Certificate2Collection(),
+                        string.Empty,
+                        string.Empty,
+                        (X509SelectionFlag)2
+                    )
             );
         }
 
@@ -44,14 +45,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         IntPtr.Zero
                     )
             );
-            Assert.Throws<ArgumentException>(() =>
-                X509Certificate2UI.SelectFromCollection(
-                    new X509Certificate2Collection(),
-                    string.Empty,
-                    string.Empty,
-                    (X509SelectionFlag)2,
-                    IntPtr.Zero
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    X509Certificate2UI.SelectFromCollection(
+                        new X509Certificate2Collection(),
+                        string.Empty,
+                        string.Empty,
+                        (X509SelectionFlag)2,
+                        IntPtr.Zero
+                    )
             );
         }
 

@@ -17,7 +17,6 @@ namespace System.Globalization
     /// (such as month name of a leap year in genitive form.  Not likely for now,
     /// but would like to keep the option open).
     /// </summary>
-
     [Flags]
     internal enum MonthNameStyles
     {

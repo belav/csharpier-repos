@@ -34,7 +34,6 @@ namespace System.Net
     ///    object, where the programmer can query for headers or continue reading, usw.
     ///  </para>
     /// </devdoc>
-
     [Flags]
     public enum DecompressionMethods
     {

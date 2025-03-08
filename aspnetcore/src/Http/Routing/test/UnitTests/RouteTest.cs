@@ -29,15 +29,16 @@ public class RouteTest
         var template = @"{controller}/{action}/ {p1:regex(abc} ";
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
 
-        var exception = Assert.Throws<RouteCreationException>(() =>
-            new Route(
-                mockTarget.Object,
-                template,
-                defaults: null,
-                constraints: null,
-                dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver
-            )
+        var exception = Assert.Throws<RouteCreationException>(
+            () =>
+                new Route(
+                    mockTarget.Object,
+                    template,
+                    defaults: null,
+                    constraints: null,
+                    dataTokens: null,
+                    inlineConstraintResolver: _inlineConstraintResolver
+                )
         );
 
         var expected =

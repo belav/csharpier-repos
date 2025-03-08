@@ -758,7 +758,8 @@ namespace System.Data.Tests
         {
             DataColumn col = new DataColumn("col", typeof(int));
             Assert.Equal(DataSetDateTime.UnspecifiedLocal, col.DateTimeMode);
-            Assert.Throws<InvalidOperationException>(() => col.DateTimeMode = DataSetDateTime.Local
+            Assert.Throws<InvalidOperationException>(
+                () => col.DateTimeMode = DataSetDateTime.Local
             );
 
             col = new DataColumn("col", typeof(DateTime));
@@ -772,11 +773,12 @@ namespace System.Data.Tests
         public void DateTimeMode_InvalidValues()
         {
             DataColumn col = new DataColumn("col", typeof(DateTime));
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                col.DateTimeMode = (DataSetDateTime)(-1)
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => col.DateTimeMode = (DataSetDateTime)(-1)
             );
 
-            Assert.Throws<InvalidEnumArgumentException>(() => col.DateTimeMode = (DataSetDateTime)5
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => col.DateTimeMode = (DataSetDateTime)5
             );
         }
 
@@ -792,12 +794,12 @@ namespace System.Data.Tests
             table.Columns[0].DateTimeMode = DataSetDateTime.Unspecified;
             table.Columns[0].DateTimeMode = DataSetDateTime.UnspecifiedLocal;
 
-            Assert.Throws<InvalidOperationException>(() =>
-                table.Columns[0].DateTimeMode = DataSetDateTime.Local
+            Assert.Throws<InvalidOperationException>(
+                () => table.Columns[0].DateTimeMode = DataSetDateTime.Local
             );
 
-            Assert.Throws<InvalidOperationException>(() =>
-                table.Columns[0].DateTimeMode = DataSetDateTime.Utc
+            Assert.Throws<InvalidOperationException>(
+                () => table.Columns[0].DateTimeMode = DataSetDateTime.Utc
             );
         }
 

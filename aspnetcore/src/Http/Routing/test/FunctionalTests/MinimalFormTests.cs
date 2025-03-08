@@ -232,8 +232,8 @@ public class MinimalFormTests
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await client.SendAsync(request)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await client.SendAsync(request)
         );
         Assert.Equal(
             "Endpoint HTTP: POST /todo contains anti-forgery metadata, but a middleware was not found that supports anti-forgery."
@@ -255,8 +255,8 @@ public class MinimalFormTests
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        exception = Assert.Throws<InvalidOperationException>(() =>
-                            app.UseAntiforgery()
+                        exception = Assert.Throws<InvalidOperationException>(
+                            () => app.UseAntiforgery()
                         );
                         app.UseEndpoints(b => b.MapPost("/todo", ([FromForm] Todo todo) => todo));
                     })
@@ -489,8 +489,8 @@ public class MinimalFormTests
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await client.SendAsync(request)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await client.SendAsync(request)
         );
         Assert.Equal(
             "This form is being accessed with an invalid anti-forgery token. Validate the `IAntiforgeryValidationFeature` on the request before reading from the form.",
@@ -572,8 +572,8 @@ public class MinimalFormTests
 
         if (hasLimit)
         {
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await client.SendAsync(request)
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await client.SendAsync(request)
             );
             Assert.Equal("The maximum number of bytes have been read.", exception.Message);
         }

@@ -127,8 +127,8 @@ WHERE "c0"."ShippingAddress_ZipCode" <> 7728
     // purpose of knowing that it's there.
     public override async Task Project_complex_type_via_optional_navigation(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Project_complex_type_via_optional_navigation(async)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => base.Project_complex_type_via_optional_navigation(async)
         );
 
         Assert.Equal(
@@ -534,8 +534,8 @@ WHERE "v0"."ShippingAddress_ZipCode" <> 7728
     // purpose of knowing that it's there.
     public override async Task Project_struct_complex_type_via_optional_navigation(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Project_struct_complex_type_via_optional_navigation(async)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => base.Project_struct_complex_type_via_optional_navigation(async)
         );
 
         Assert.Equal(

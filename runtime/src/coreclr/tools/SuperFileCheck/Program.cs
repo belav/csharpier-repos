@@ -464,7 +464,6 @@ namespace SuperFileCheck
         /// <summary>
         /// Runs SuperFileCheck logic.
         /// </summary>
-
         static async Task<FileCheckResult> RunSuperFileCheckAsync(
             MethodDeclarationInfo methodDeclInfo,
             string[] args,
@@ -817,13 +816,14 @@ namespace SuperFileCheck
                                 {
                                     tmpFilePath = Path.Combine(tmpDirName, tmpFileName);
                                 }
-                                tasks[i] = Task.Run(() =>
-                                    RunSuperFileCheckAsync(
-                                        methodDeclInfos[index],
-                                        argsToCopy.ToArray(),
-                                        checkPrefixes,
-                                        tmpFilePath
-                                    )
+                                tasks[i] = Task.Run(
+                                    () =>
+                                        RunSuperFileCheckAsync(
+                                            methodDeclInfos[index],
+                                            argsToCopy.ToArray(),
+                                            checkPrefixes,
+                                            tmpFilePath
+                                        )
                                 );
                             }
 

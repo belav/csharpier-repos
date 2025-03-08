@@ -290,8 +290,8 @@ public class WebSocketsTransportTests : FunctionalTestBase
                 accessTokenProvider: null,
                 httpClient: null
             );
-            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
-                webSocketsTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat)
+            var exception = await Assert.ThrowsAsync<ArgumentException>(
+                () => webSocketsTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat)
             );
 
             Assert.Contains(

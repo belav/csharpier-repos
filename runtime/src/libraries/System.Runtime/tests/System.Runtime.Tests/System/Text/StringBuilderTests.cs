@@ -1443,32 +1443,35 @@ namespace System.Text.Tests
             Assert.Throws<FormatException>(() => builder.AppendFormat("{-1}", obj1)); // Format has value < 0
             Assert.Throws<FormatException>(() => builder.AppendFormat("{-1}", obj1, obj2)); // Format has value < 0
             Assert.Throws<FormatException>(() => builder.AppendFormat("{-1}", obj1, obj2, obj3)); // Format has value < 0
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat("{-1}", obj1, obj2, obj3, obj4)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat("{-1}", obj1, obj2, obj3, obj4)
             ); // Format has value < 0
             Assert.Throws<FormatException>(() => builder.AppendFormat(formatter, "{-1}", obj1)); // Format has value < 0
-            Assert.Throws<FormatException>(() => builder.AppendFormat(formatter, "{-1}", obj1, obj2)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat(formatter, "{-1}", obj1, obj2)
             ); // Format has value < 0
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat(formatter, "{-1}", obj1, obj2, obj3)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat(formatter, "{-1}", obj1, obj2, obj3)
             ); // Format has value < 0
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat(formatter, "{-1}", obj1, obj2, obj3, obj4)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat(formatter, "{-1}", obj1, obj2, obj3, obj4)
             ); // Format has value < 0
 
             Assert.Throws<FormatException>(() => builder.AppendFormat("{1}", obj1)); // Format has value >= 1
             Assert.Throws<FormatException>(() => builder.AppendFormat("{2}", obj1, obj2)); // Format has value >= 2
             Assert.Throws<FormatException>(() => builder.AppendFormat("{3}", obj1, obj2, obj3)); // Format has value >= 3
-            Assert.Throws<FormatException>(() => builder.AppendFormat("{4}", obj1, obj2, obj3, obj4)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat("{4}", obj1, obj2, obj3, obj4)
             ); // Format has value >= 4
             Assert.Throws<FormatException>(() => builder.AppendFormat(formatter, "{1}", obj1)); // Format has value >= 1
-            Assert.Throws<FormatException>(() => builder.AppendFormat(formatter, "{2}", obj1, obj2)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat(formatter, "{2}", obj1, obj2)
             ); // Format has value >= 2
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat(formatter, "{3}", obj1, obj2, obj3)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat(formatter, "{3}", obj1, obj2, obj3)
             ); // Format has value >= 3
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat(formatter, "{4}", obj1, obj2, obj3, obj4)
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat(formatter, "{4}", obj1, obj2, obj3, obj4)
             ); // Format has value >= 4
 
             Assert.Throws<FormatException>(() => builder.AppendFormat("{", "")); // Format has unescaped {
@@ -1484,7 +1487,8 @@ namespace System.Text.Tests
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0     ", "")); // Format with index and spaces is not closed
 
             Assert.Throws<FormatException>(() => builder.AppendFormat("{1000000", new string[10])); // Format index is too long
-            Assert.Throws<FormatException>(() => builder.AppendFormat("{10000000}", new string[10])
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat("{10000000}", new string[10])
             ); // Format index is too long
 
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0,", "")); // Format with comma is not closed
@@ -1494,10 +1498,11 @@ namespace System.Text.Tests
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0,-\0", "")); // Format has invalid character after minus sign
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0,-a", "")); // Format has invalid character after minus sign
 
-            Assert.Throws<FormatException>(() => builder.AppendFormat("{0,1000000", new string[10])
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat("{0,1000000", new string[10])
             ); // Format length is too long
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat("{0,10000000}", new string[10])
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat("{0,10000000}", new string[10])
             ); // Format length is too long
 
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0:", new string[10])); // Format with colon is not closed
@@ -1506,8 +1511,8 @@ namespace System.Text.Tests
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0:{", new string[10])); // Format with custom format contains unescaped {
             Assert.Throws<FormatException>(() => builder.AppendFormat("{0:{}", new string[10])); // Format with custom format contains unescaped {
 
-            Assert.Throws<FormatException>(() =>
-                builder.AppendFormat("{0}", new TooManyCharsWrittenSpanFormattable())
+            Assert.Throws<FormatException>(
+                () => builder.AppendFormat("{0}", new TooManyCharsWrittenSpanFormattable())
             ); // ISpanFormattable that returns more characters than it actually wrote
         }
 
@@ -3239,11 +3244,11 @@ namespace System.Text.Tests
 
             Assert.Throws<ArgumentNullException>(() => sb.Append((StringBuilder)null, 2, 2));
             Assert.Throws<ArgumentNullException>(() => sb.Append((StringBuilder)null, 2, 3));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new StringBuilder(3, 6).Append("Hello").Append(sb)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StringBuilder(3, 6).Append("Hello").Append(sb)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new StringBuilder(3, 6).Append("Hello").Append("Hello")
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StringBuilder(3, 6).Append("Hello").Append("Hello")
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => sb.Append(sb));

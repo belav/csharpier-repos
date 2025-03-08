@@ -80,7 +80,8 @@ WHERE (c["Discriminator"] = "Order")
     public override async Task Projection_when_arithmetic_mixed_subqueries(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Projection_when_arithmetic_mixed_subqueries(async)
+        await AssertTranslationFailed(
+            () => base.Projection_when_arithmetic_mixed_subqueries(async)
         );
 
         AssertSql();
@@ -137,8 +138,8 @@ ORDER BY c["CustomerID"]
     public override async Task Projection_of_multiple_entity_types_into_object_array(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projection_of_multiple_entity_types_into_object_array(async)
+        await AssertTranslationFailed(
+            () => base.Projection_of_multiple_entity_types_into_object_array(async)
         );
 
         AssertSql();
@@ -176,8 +177,8 @@ WHERE ((c["Discriminator"] = "Employee") AND (c["EmployeeID"] = 1))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async)
+        await AssertTranslationFailed(
+            () => base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async)
         );
 
         AssertSql();
@@ -187,8 +188,8 @@ WHERE ((c["Discriminator"] = "Employee") AND (c["EmployeeID"] = 1))
         bool async
     )
     {
-        await Assert.ThrowsAsync<CosmosException>(() =>
-            base.Select_bool_closure_with_order_parameter_with_cast_to_nullable(async)
+        await Assert.ThrowsAsync<CosmosException>(
+            () => base.Select_bool_closure_with_order_parameter_with_cast_to_nullable(async)
         );
 
         AssertSql(
@@ -449,8 +450,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = "London"))
     public override async Task Select_nested_collection_count_using_anonymous_type(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Select_nested_collection_count_using_anonymous_type(async)
+        await AssertTranslationFailed(
+            () => base.Select_nested_collection_count_using_anonymous_type(async)
         );
 
         AssertSql();
@@ -666,10 +667,11 @@ ORDER BY c["OrderID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
+                    async
+                )
         );
 
         AssertSql();
@@ -693,8 +695,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
         Assert.Equal(
             CosmosStrings.OffsetRequiresLimit,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Projection_in_a_subquery_should_be_liftable(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Projection_in_a_subquery_should_be_liftable(async)
                 )
             ).Message
         );
@@ -720,8 +722,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
+                    async
+                )
         );
 
         AssertSql();
@@ -732,8 +737,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
+                    async
+                )
         );
 
         AssertSql();
@@ -744,10 +752,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
+                    async
+                )
         );
 
         AssertSql();
@@ -758,8 +767,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
+                    async
+                )
         );
 
         AssertSql();
@@ -770,10 +782,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
+                    async
+                )
         );
 
         AssertSql();
@@ -784,10 +797,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
+                    async
+                )
         );
 
         AssertSql();
@@ -798,10 +812,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
+                    async
+                )
         );
 
         AssertSql();
@@ -812,10 +827,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
+                    async
+                )
         );
 
         AssertSql();
@@ -826,10 +842,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
+                    async
+                )
         );
 
         AssertSql();
@@ -840,10 +857,11 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] < 10300))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
+                    async
+                )
         );
 
         AssertSql();
@@ -1024,8 +1042,8 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Anonymous_projection_with_repeated_property_being_ordered_2(async)
+        await AssertTranslationFailed(
+            () => base.Anonymous_projection_with_repeated_property_being_ordered_2(async)
         );
 
         AssertSql();
@@ -1047,8 +1065,8 @@ WHERE (c["Discriminator"] = "Order")
     public override async Task Select_GetValueOrDefault_on_DateTime_with_null_values(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Select_GetValueOrDefault_on_DateTime_with_null_values(async)
+        await AssertTranslationFailed(
+            () => base.Select_GetValueOrDefault_on_DateTime_with_null_values(async)
         );
 
         AssertSql();
@@ -1093,8 +1111,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.SelectMany_without_result_selector_naked_collection_navigation(async)
+        await AssertTranslationFailed(
+            () => base.SelectMany_without_result_selector_naked_collection_navigation(async)
         );
 
         AssertSql();
@@ -1105,8 +1123,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.SelectMany_without_result_selector_collection_navigation_composed(async)
+        await AssertTranslationFailed(
+            () => base.SelectMany_without_result_selector_collection_navigation_composed(async)
         );
 
         AssertSql();
@@ -1173,8 +1191,11 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(async)
+        await AssertTranslationFailed(
+            () =>
+                base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
+                    async
+                )
         );
 
         AssertSql();
@@ -1185,8 +1206,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(async)
+        await AssertTranslationFailed(
+            () => base.Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(async)
         );
 
         AssertSql();
@@ -1196,8 +1217,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
         bool async
     )
     {
-        await AssertTranslationFailed(() =>
-            base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
+        await AssertTranslationFailed(
+            () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
         );
 
         AssertSql();
@@ -1206,8 +1227,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     public override async Task Filtered_collection_projection_is_tracked(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
+        await AssertTranslationFailed(
+            () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
         );
 
         AssertSql();
@@ -1216,8 +1237,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     public override async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Filtered_collection_projection_with_to_list_is_tracked(async)
+        await AssertTranslationFailed(
+            () => base.Filtered_collection_projection_with_to_list_is_tracked(async)
         );
 
         AssertSql();
@@ -1228,10 +1249,11 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
+                    async
+                )
         );
 
         AssertSql();
@@ -1242,8 +1264,11 @@ WHERE ((c["Discriminator"] = "Customer") AND STARTSWITH(c["CustomerID"], "A"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
+                    async
+                )
         );
 
         AssertSql();
@@ -1273,8 +1298,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] = 10250))
     public override async Task SelectMany_whose_selector_references_outer_source(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.SelectMany_whose_selector_references_outer_source(async)
+        await AssertTranslationFailed(
+            () => base.SelectMany_whose_selector_references_outer_source(async)
         );
 
         AssertSql();
@@ -1285,8 +1310,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] = 10250))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Collection_FirstOrDefault_with_entity_equality_check_in_projection(async)
+        await AssertTranslationFailed(
+            () => base.Collection_FirstOrDefault_with_entity_equality_check_in_projection(async)
         );
 
         AssertSql();
@@ -1297,8 +1322,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] = 10250))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Collection_FirstOrDefault_with_nullable_unsigned_int_column(async)
+        await AssertTranslationFailed(
+            () => base.Collection_FirstOrDefault_with_nullable_unsigned_int_column(async)
         );
 
         AssertSql();
@@ -1317,8 +1342,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["OrderID"] = 10250))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.LastOrDefault_member_access_in_projection_translates_to_server(async)
+        await AssertTranslationFailed(
+            () => base.LastOrDefault_member_access_in_projection_translates_to_server(async)
         );
 
         AssertSql();
@@ -1348,8 +1373,8 @@ WHERE (c["Discriminator"] = "Order")
     public override async Task Project_uint_through_collection_FirstOrDefault(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_uint_through_collection_FirstOrDefault(async)
+        await AssertTranslationFailed(
+            () => base.Project_uint_through_collection_FirstOrDefault(async)
         );
 
         AssertSql();
@@ -1358,8 +1383,8 @@ WHERE (c["Discriminator"] = "Order")
     public override async Task Project_keyless_entity_FirstOrDefault_without_orderby(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Project_keyless_entity_FirstOrDefault_without_orderby(async)
+        await AssertTranslationFailed(
+            () => base.Project_keyless_entity_FirstOrDefault_without_orderby(async)
         );
 
         AssertSql();
@@ -1418,8 +1443,8 @@ ORDER BY c["CustomerID"]
     public override async Task Projecting_multiple_collection_with_same_constant_works(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_multiple_collection_with_same_constant_works(async)
+        await AssertTranslationFailed(
+            () => base.Projecting_multiple_collection_with_same_constant_works(async)
         );
 
         AssertSql();
@@ -1438,10 +1463,11 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+                    async
+                )
         );
 
         AssertSql();
@@ -1452,8 +1478,9 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Correlated_collection_after_distinct_not_containing_original_identifier(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Correlated_collection_after_distinct_not_containing_original_identifier(async)
         );
 
         AssertSql();
@@ -1464,10 +1491,11 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                    async
+                )
         );
 
         AssertSql();
@@ -1478,10 +1506,11 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+                    async
+                )
         );
 
         AssertSql();
@@ -1502,8 +1531,8 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Custom_projection_reference_navigation_PK_to_FK_optimization(async)
+        await AssertTranslationFailed(
+            () => base.Custom_projection_reference_navigation_PK_to_FK_optimization(async)
         );
 
         AssertSql();
@@ -1522,10 +1551,11 @@ ORDER BY c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
+                    async
+                )
         );
 
         AssertSql();
@@ -1572,8 +1602,8 @@ OFFSET 0 LIMIT @__p_0
     )
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Projection_skip_projection_doesnt_project_intermittent_column(async)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => base.Projection_skip_projection_doesnt_project_intermittent_column(async)
             )
         ).Message;
 
@@ -1585,10 +1615,11 @@ OFFSET 0 LIMIT @__p_0
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
+                    async
+                )
         );
 
         AssertSql();
@@ -1599,8 +1630,8 @@ OFFSET 0 LIMIT @__p_0
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_count_of_navigation_which_is_generic_collection(async)
+        await AssertTranslationFailed(
+            () => base.Projecting_count_of_navigation_which_is_generic_collection(async)
         );
 
         AssertSql();
@@ -1609,8 +1640,8 @@ OFFSET 0 LIMIT @__p_0
     public override async Task Projecting_count_of_navigation_which_is_generic_list(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_count_of_navigation_which_is_generic_list(async)
+        await AssertTranslationFailed(
+            () => base.Projecting_count_of_navigation_which_is_generic_list(async)
         );
 
         AssertSql();
@@ -1626,8 +1657,8 @@ OFFSET 0 LIMIT @__p_0
                 "Navigation: Order.OrderDetails (ICollection<OrderDetail>) Collection ToDependent OrderDetail Inverse: Order"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Do_not_erase_projection_mapping_when_adding_single_projection(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Do_not_erase_projection_mapping_when_adding_single_projection(async)
                 )
             ).Message
         );
@@ -1638,8 +1669,8 @@ OFFSET 0 LIMIT @__p_0
     public override async Task Select_nested_collection_deep_distinct_no_identifiers(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Select_nested_collection_deep_distinct_no_identifiers(async)
+        await AssertTranslationFailed(
+            () => base.Select_nested_collection_deep_distinct_no_identifiers(async)
         );
 
         AssertSql();
@@ -1650,10 +1681,11 @@ OFFSET 0 LIMIT @__p_0
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+                    async
+                )
         );
 
         AssertSql();
@@ -1681,8 +1713,8 @@ ORDER BY c["OrderID"]
                 "Navigation: Customer.Orders (List<Order>) Collection ToDependent Order Inverse: Customer PropertyAccessMode.Field"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Collection_include_over_result_of_single_non_scalar(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Collection_include_over_result_of_single_non_scalar(async)
                 )
             ).Message
         );
@@ -1695,8 +1727,8 @@ ORDER BY c["OrderID"]
     )
     {
         // Cross collection join. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Collection_projection_selecting_outer_element_followed_by_take(async)
+        await AssertTranslationFailed(
+            () => base.Collection_projection_selecting_outer_element_followed_by_take(async)
         );
 
         AssertSql();
@@ -1707,8 +1739,8 @@ ORDER BY c["OrderID"]
     )
     {
         // Cross collection join. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async)
+        await AssertTranslationFailed(
+            () => base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async)
         );
 
         AssertSql();
@@ -1735,8 +1767,8 @@ ORDER BY c["OrderID"]
     )
     {
         // Cross collection join. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Client_projection_with_string_initialization_with_scalar_subquery(async)
+        await AssertTranslationFailed(
+            () => base.Client_projection_with_string_initialization_with_scalar_subquery(async)
         );
 
         AssertSql();
@@ -1747,8 +1779,9 @@ ORDER BY c["OrderID"]
     )
     {
         // Cross collection join. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_count_of_navigation_which_is_generic_collection_using_convert(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Projecting_count_of_navigation_which_is_generic_collection_using_convert(async)
         );
 
         AssertSql();
@@ -1791,8 +1824,8 @@ ORDER BY c["OrderID"]
         Assert.Equal(
             CosmosStrings.ReverseAfterSkipTakeNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Reverse_in_join_inner_with_skip(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Reverse_in_join_inner_with_skip(async)
                 )
             ).Message
         );
@@ -1827,7 +1860,8 @@ ORDER BY c["OrderID"]
     public override async Task Reverse_in_projection_subquery_single_result(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Reverse_in_projection_subquery_single_result(async)
+        await AssertTranslationFailed(
+            () => base.Reverse_in_projection_subquery_single_result(async)
         );
 
         AssertSql();
@@ -1866,8 +1900,8 @@ ORDER BY c["EmployeeID"] DESC, c["City"]
     public override async Task Reverse_after_orderBy_and_take(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Reverse_after_orderBy_and_take(async)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => base.Reverse_after_orderBy_and_take(async)
             )
         ).Message;
 
@@ -1886,10 +1920,11 @@ ORDER BY c["EmployeeID"] DESC, c["City"]
         bool async
     )
     {
-        await AssertTranslationFailed(() =>
-            base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
-                async
-            )
+        await AssertTranslationFailed(
+            () =>
+                base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
+                    async
+                )
         );
 
         AssertSql();

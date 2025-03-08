@@ -446,8 +446,8 @@ namespace System.Web.Http.ModelBinding
                 if (serviceType == typeof(IModelValidatorCache))
                 {
                     return new ModelValidatorCache(
-                        new Lazy<IEnumerable<ModelValidatorProvider>>(() =>
-                            this.GetServices<ModelValidatorProvider>()
+                        new Lazy<IEnumerable<ModelValidatorProvider>>(
+                            () => this.GetServices<ModelValidatorProvider>()
                         )
                     );
                 }

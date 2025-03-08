@@ -610,13 +610,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
         public void FromThrowsIfBinary()
         {
             var bytes = TestMetadata.ResourcesNet451.System;
-            Assert.Throws<InvalidDataException>(() =>
-                SourceText.From(bytes, bytes.Length, throwIfBinaryDetected: true)
+            Assert.Throws<InvalidDataException>(
+                () => SourceText.From(bytes, bytes.Length, throwIfBinaryDetected: true)
             );
 
             var stream = new MemoryStream(bytes);
-            Assert.Throws<InvalidDataException>(() =>
-                SourceText.From(stream, throwIfBinaryDetected: true)
+            Assert.Throws<InvalidDataException>(
+                () => SourceText.From(stream, throwIfBinaryDetected: true)
             );
         }
 
@@ -781,8 +781,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
         [Fact]
         public void WriteWithSpanStartingAfterEndThrowsOutOfRange()
         {
-            var ex = Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                SourceText.From("ABC").Write(TextWriter.Null, TextSpan.FromBounds(4, 4))
+            var ex = Assert.ThrowsAny<ArgumentOutOfRangeException>(
+                () => SourceText.From("ABC").Write(TextWriter.Null, TextSpan.FromBounds(4, 4))
             );
 
             Assert.Equal("span", ex.ParamName);
@@ -791,8 +791,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
         [Fact]
         public void WriteWithSpanEndingAfterEndThrowsOutOfRange()
         {
-            var ex = Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                SourceText.From("ABC").Write(TextWriter.Null, TextSpan.FromBounds(2, 4))
+            var ex = Assert.ThrowsAny<ArgumentOutOfRangeException>(
+                () => SourceText.From("ABC").Write(TextWriter.Null, TextSpan.FromBounds(2, 4))
             );
 
             Assert.Equal("span", ex.ParamName);

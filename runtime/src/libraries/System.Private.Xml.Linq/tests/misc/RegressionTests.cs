@@ -52,8 +52,8 @@ namespace System.Xml.Linq.Tests
         public void DuplicateNamespaceDeclarationIsAllowed()
         {
             XElement element = XElement.Parse("<A xmlns:p='ns'/>");
-            Assert.Throws<InvalidOperationException>(() =>
-                element.Add(new XAttribute(XNamespace.Xmlns + "p", "ns"))
+            Assert.Throws<InvalidOperationException>(
+                () => element.Add(new XAttribute(XNamespace.Xmlns + "p", "ns"))
             );
         }
 

@@ -479,8 +479,8 @@ public class ActionMethodExecutorTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            Execute(actionMethodExecutor, filterContext, withFilter).AsTask()
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => Execute(actionMethodExecutor, filterContext, withFilter).AsTask()
         );
 
         Assert.Equal(

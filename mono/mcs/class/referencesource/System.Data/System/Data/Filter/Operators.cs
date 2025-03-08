@@ -137,7 +137,6 @@ namespace System.Data
         /// <devdoc>
         ///     Mapping from Operator to prioritys
         ///
-
         private static readonly int[] priority = new int[]
         {
             priStart, // Noop

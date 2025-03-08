@@ -182,8 +182,8 @@ namespace System.Tests
             );
 
             value = unchecked((nuint)0x7fffffffffffffff);
-            Exception ex = Assert.ThrowsAny<Exception>(() =>
-                opExplicitToUInt32.Invoke(null, new object[] { value })
+            Exception ex = Assert.ThrowsAny<Exception>(
+                () => opExplicitToUInt32.Invoke(null, new object[] { value })
             );
 
             if (ex is TargetInvocationException)

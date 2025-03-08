@@ -230,8 +230,9 @@ namespace System.Web.Http.Dispatcher
             var activator = new DefaultHttpControllerActivator();
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                activator.Create(request, descriptorSimpleController, typeof(SimpleController))
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                    activator.Create(request, descriptorSimpleController, typeof(SimpleController))
             );
 
             Assert.Equal(

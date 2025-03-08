@@ -49,7 +49,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() => entityTypeA.AddServiceProperty(A.GProperty)
+                .Throws<InvalidOperationException>(
+                    () => entityTypeA.AddServiceProperty(A.GProperty)
                 )
                 .Message
         );
@@ -57,10 +58,11 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityTypeA.SetChangeTrackingStrategy(
-                        ChangeTrackingStrategy.ChangingAndChangedNotifications
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityTypeA.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        )
                 )
                 .Message
         );
@@ -68,8 +70,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityTypeA.SetDiscriminatorMappingComplete(true)
+                .Throws<InvalidOperationException>(
+                    () => entityTypeA.SetDiscriminatorMappingComplete(true)
                 )
                 .Message
         );
@@ -98,8 +100,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityTypeA.SetNavigationAccessMode(PropertyAccessMode.Field)
+                .Throws<InvalidOperationException>(
+                    () => entityTypeA.SetNavigationAccessMode(PropertyAccessMode.Field)
                 )
                 .Message
         );
@@ -107,8 +109,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityTypeA.SetPropertyAccessMode(PropertyAccessMode.Field)
+                .Throws<InvalidOperationException>(
+                    () => entityTypeA.SetPropertyAccessMode(PropertyAccessMode.Field)
                 )
                 .Message
         );
@@ -434,8 +436,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddKey(new[] { idProperty, nameProperty })
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddKey(new[] { idProperty, nameProperty })
                 )
                 .Message
         );
@@ -454,8 +456,8 @@ public partial class EntityTypeTest
                 Customer.IdProperty.Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddKey(new[] { idProperty, idProperty })
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddKey(new[] { idProperty, idProperty })
                 )
                 .Message
         );
@@ -497,8 +499,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddKey(new[] { idProperty, nameProperty })
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddKey(new[] { idProperty, nameProperty })
                 )
                 .Message
         );
@@ -566,7 +568,8 @@ public partial class EntityTypeTest
                 nameof(Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => orderType.RemoveKey(customerKey.Properties)
+                .Throws<InvalidOperationException>(
+                    () => orderType.RemoveKey(customerKey.Properties)
                 )
                 .Message
         );
@@ -592,8 +595,8 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerType.RemoveKey(customerKey.Properties)
+                .Throws<InvalidOperationException>(
+                    () => customerType.RemoveKey(customerKey.Properties)
                 )
                 .Message
         );
@@ -688,8 +691,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Save)
+                .Throws<InvalidOperationException>(
+                    () => nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Save)
                 )
                 .Message
         );
@@ -764,8 +767,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderType.AddForeignKey(customerFk1, customerKey, customerType)
+                .Throws<InvalidOperationException>(
+                    () => orderType.AddForeignKey(customerFk1, customerKey, customerType)
                 )
                 .Message
         );
@@ -796,12 +799,13 @@ public partial class EntityTypeTest
                 Order.CustomerIdProperty.Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderType.AddForeignKey(
-                        new[] { customerFk1, customerFk1 },
-                        customerKey,
-                        customerType
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderType.AddForeignKey(
+                            new[] { customerFk1, customerFk1 },
+                            customerKey,
+                            customerType
+                        )
                 )
                 .Message
         );
@@ -822,12 +826,13 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType1.AddForeignKey(
-                        new[] { fkProperty },
-                        entityType2.AddKey(idProperty),
-                        entityType2
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType1.AddForeignKey(
+                            new[] { fkProperty },
+                            entityType2.AddKey(idProperty),
+                            entityType2
+                        )
                 )
                 .Message
         );
@@ -846,8 +851,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ForeignKeyPropertiesWrongEntity("{'fk'}", typeof(Customer).Name),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddForeignKey(new[] { fkProperty }, key, entityType)
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddForeignKey(new[] { fkProperty }, key, entityType)
                 )
                 .Message
         );
@@ -869,8 +874,8 @@ public partial class EntityTypeTest
                 nameof(Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddForeignKey(new[] { fkProperty }, key, entityType)
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddForeignKey(new[] { fkProperty }, key, entityType)
                 )
                 .Message
         );
@@ -887,12 +892,13 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.EntityTypeModelMismatch(nameof(Customer), nameof(Order)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    dependentEntityType.AddForeignKey(
-                        new[] { fkProperty },
-                        principalEntityType.AddKey(idProperty),
-                        principalEntityType
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        dependentEntityType.AddForeignKey(
+                            new[] { fkProperty },
+                            principalEntityType.AddKey(idProperty),
+                            principalEntityType
+                        )
                 )
                 .Message
         );
@@ -1206,8 +1212,8 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetDependentToPrincipal("Customer")
+                .Throws<InvalidOperationException>(
+                    () => customerForeignKey.SetDependentToPrincipal("Customer")
                 )
                 .Message
         );
@@ -1237,8 +1243,8 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetDependentToPrincipal(nameof(Order.Customer))
+                .Throws<InvalidOperationException>(
+                    () => customerForeignKey.SetDependentToPrincipal(nameof(Order.Customer))
                 )
                 .Message
         );
@@ -1285,8 +1291,8 @@ public partial class EntityTypeTest
                 "Dictionary<string, object>"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty)
+                .Throws<InvalidOperationException>(
+                    () => customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty)
                 )
                 .Message
         );
@@ -1315,8 +1321,11 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetPrincipalToDependent(Customer.NotCollectionOrdersProperty)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        customerForeignKey.SetPrincipalToDependent(
+                            Customer.NotCollectionOrdersProperty
+                        )
                 )
                 .Message
         );
@@ -1345,10 +1354,11 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetPrincipalToDependent(
-                        SpecialCustomer.DerivedOrdersProperty
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        customerForeignKey.SetPrincipalToDependent(
+                            SpecialCustomer.DerivedOrdersProperty
+                        )
                 )
                 .Message
         );
@@ -1403,8 +1413,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetDependentToPrincipal(Order.RelatedOrderProperty)
+                .Throws<InvalidOperationException>(
+                    () => customerForeignKey.SetDependentToPrincipal(Order.RelatedOrderProperty)
                 )
                 .Message
         );
@@ -1433,8 +1443,11 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerForeignKey.SetDependentToPrincipal(SpecialOrder.DerivedCustomerProperty)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        customerForeignKey.SetDependentToPrincipal(
+                            SpecialOrder.DerivedCustomerProperty
+                        )
                 )
                 .Message
         );
@@ -1502,8 +1515,8 @@ public partial class EntityTypeTest
                 typeof(SelfRef).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    fk.SetDependentToPrincipal(SelfRef.SelfRef1Property)
+                .Throws<InvalidOperationException>(
+                    () => fk.SetDependentToPrincipal(SelfRef.SelfRef1Property)
                 )
                 .Message
         );
@@ -1761,8 +1774,8 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    customerEntity.RemoveSkipNavigation(productsNavigation)
+                .Throws<InvalidOperationException>(
+                    () => customerEntity.RemoveSkipNavigation(productsNavigation)
                 )
                 .Message
         );
@@ -1816,15 +1829,16 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        null,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -1862,15 +1876,16 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        null,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -1901,15 +1916,16 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        null,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -1940,15 +1956,16 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        null,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -1981,15 +1998,16 @@ public partial class EntityTypeTest
                 "Dictionary<string, object>"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        Order.ProductsProperty,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            Order.ProductsProperty,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -2017,15 +2035,16 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.NoClrNavigation(nameof(Order.Products), nameof(Product)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    productEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        Order.ProductsProperty,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        productEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            Order.ProductsProperty,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -2058,15 +2077,16 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        Order.ProductsProperty,
-                        orderEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            Order.ProductsProperty,
+                            orderEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -2099,15 +2119,16 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        Order.ProductsProperty,
-                        orderEntity,
-                        false,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            Order.ProductsProperty,
+                            orderEntity,
+                            false,
+                            false
+                        )
                 )
                 .Message
         );
@@ -2136,15 +2157,16 @@ public partial class EntityTypeTest
                 nameof(Order.RelatedOrder)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderEntity.AddSkipNavigation(
-                        nameof(Order.Products),
-                        null,
-                        Order.RelatedOrderProperty,
-                        productEntity,
-                        true,
-                        false
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            Order.RelatedOrderProperty,
+                            productEntity,
+                            true,
+                            false
+                        )
                 )
                 .Message
         );
@@ -2215,8 +2237,8 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType2.AddIndex(new[] { property1, property2 })
+                .Throws<InvalidOperationException>(
+                    () => entityType2.AddIndex(new[] { property1, property2 })
                 )
                 .Message
         );
@@ -2238,8 +2260,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddIndex(new[] { property1, property2 })
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddIndex(new[] { property1, property2 })
                 )
                 .Message
         );
@@ -2262,8 +2284,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddIndex(new[] { property2 }, "NamedIndex")
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddIndex(new[] { property2 }, "NamedIndex")
                 )
                 .Message
         );
@@ -2480,8 +2502,8 @@ public partial class EntityTypeTest
                 nameof(Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddProperty(Customer.NameProperty)
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddProperty(Customer.NameProperty)
                 )
                 .Message
         );
@@ -2511,8 +2533,8 @@ public partial class EntityTypeTest
                 typeof(int).ShortDisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddProperty(nameof(Customer.Name), typeof(int))
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddProperty(nameof(Customer.Name), typeof(int))
                 )
                 .Message
         );
@@ -2530,8 +2552,13 @@ public partial class EntityTypeTest
                 nameof(Customer.Name)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddProperty(nameof(Customer.Id), typeof(int), Customer.NameProperty)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.AddProperty(
+                            nameof(Customer.Id),
+                            typeof(int),
+                            Customer.NameProperty
+                        )
                 )
                 .Message
         );
@@ -2807,8 +2834,8 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderType.AddServiceProperty(Order.CustomerProperty)
+                .Throws<InvalidOperationException>(
+                    () => orderType.AddServiceProperty(Order.CustomerProperty)
                 )
                 .Message
         );
@@ -2828,8 +2855,8 @@ public partial class EntityTypeTest
                 nameof(Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddServiceProperty(Customer.OrdersProperty)
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddServiceProperty(Customer.OrdersProperty)
                 )
                 .Message
         );
@@ -2859,8 +2886,8 @@ public partial class EntityTypeTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    orderType.AddServiceProperty(Order.CustomerProperty)
+                .Throws<InvalidOperationException>(
+                    () => orderType.AddServiceProperty(Order.CustomerProperty)
                 )
                 .Message
         );
@@ -2880,8 +2907,8 @@ public partial class EntityTypeTest
                 nameof(Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddServiceProperty(Customer.OrdersProperty)
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddServiceProperty(Customer.OrdersProperty)
                 )
                 .Message
         );
@@ -2952,8 +2979,8 @@ public partial class EntityTypeTest
                 typeof(string).ShortDisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddIndexerProperty("Nation", typeof(string))
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddIndexerProperty("Nation", typeof(string))
                 )
                 .Message
         );
@@ -2965,8 +2992,12 @@ public partial class EntityTypeTest
                 typeof(string).ShortDisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    ((IConventionEntityType)entityType).AddIndexerProperty("Nation", typeof(string))
+                .Throws<InvalidOperationException>(
+                    () =>
+                        ((IConventionEntityType)entityType).AddIndexerProperty(
+                            "Nation",
+                            typeof(string)
+                        )
                 )
                 .Message
         );
@@ -2986,8 +3017,8 @@ public partial class EntityTypeTest
                 entityType.DisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddIndexerProperty("Nation", typeof(string))
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddIndexerProperty("Nation", typeof(string))
                 )
                 .Message
         );
@@ -2995,8 +3026,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.PropertyClashingNonIndexer("Name", entityType.DisplayName()),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.AddIndexerProperty("Name", typeof(string))
+                .Throws<InvalidOperationException>(
+                    () => entityType.AddIndexerProperty("Name", typeof(string))
                 )
                 .Message
         );
@@ -3040,8 +3071,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.StoreGenValue("Prop1", nameof(Level1)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    internalEntityEntry.SetStoreGeneratedValue(property, null)
+                .Throws<InvalidOperationException>(
+                    () => internalEntityEntry.SetStoreGeneratedValue(property, null)
                 )
                 .Message
         );
@@ -3487,10 +3518,11 @@ public partial class EntityTypeTest
                 "INotifyPropertyChanging"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.SetChangeTrackingStrategy(
-                        ChangeTrackingStrategy.ChangingAndChangedNotifications
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        )
                 )
                 .Message
         );
@@ -3502,10 +3534,11 @@ public partial class EntityTypeTest
                 "INotifyPropertyChanging"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.SetChangeTrackingStrategy(
-                        ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                        )
                 )
                 .Message
         );
@@ -3533,10 +3566,11 @@ public partial class EntityTypeTest
                 "INotifyPropertyChanged"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.SetChangeTrackingStrategy(
-                        ChangeTrackingStrategy.ChangedNotifications
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangedNotifications
+                        )
                 )
                 .Message
         );
@@ -3548,10 +3582,11 @@ public partial class EntityTypeTest
                 "INotifyPropertyChanged"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.SetChangeTrackingStrategy(
-                        ChangeTrackingStrategy.ChangingAndChangedNotifications
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        )
                 )
                 .Message
         );
@@ -3563,10 +3598,11 @@ public partial class EntityTypeTest
                 "INotifyPropertyChanged"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entityType.SetChangeTrackingStrategy(
-                        ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                        )
                 )
                 .Message
         );

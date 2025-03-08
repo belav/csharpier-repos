@@ -86,8 +86,8 @@ public class CookieActionFactoryTest
     public void ThrowsForInvalidIntFormat(string badInt)
     {
         var factory = new CookieActionFactory();
-        var ex = Assert.Throws<FormatException>(() =>
-            CookieActionFactory.Create("NAME:VALUE:DOMAIN:" + badInt)
+        var ex = Assert.Throws<FormatException>(
+            () => CookieActionFactory.Create("NAME:VALUE:DOMAIN:" + badInt)
         );
         Assert.Equal(Resources.FormatError_CouldNotParseInteger(badInt), ex.Message);
     }

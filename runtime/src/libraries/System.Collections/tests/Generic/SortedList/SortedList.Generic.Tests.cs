@@ -72,8 +72,8 @@ namespace System.Collections.Tests
         [Fact]
         public void SortedList_Generic_Constructor_NullIDictionary_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new SortedList<TKey, TValue>((IDictionary<TKey, TValue>)null)
+            Assert.Throws<ArgumentNullException>(
+                () => new SortedList<TKey, TValue>((IDictionary<TKey, TValue>)null)
             );
         }
 
@@ -109,8 +109,8 @@ namespace System.Collections.Tests
         public void SortedList_Generic_Constructor_NegativeCapacity_ThrowsArgumentOutOfRangeException()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new SortedList<TKey, TValue>(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new SortedList<TKey, TValue>(int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new SortedList<TKey, TValue>(int.MinValue)
             );
         }
 
@@ -313,7 +313,8 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dictionary.GetKeyAtIndex(int.MinValue)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count + 1));
@@ -346,8 +347,8 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dictionary.GetValueAtIndex(int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dictionary.GetValueAtIndex(int.MinValue)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(count + 1));
@@ -497,8 +498,8 @@ namespace System.Collections.Tests
             {
                 SortedList<TKey, TValue> dictionary =
                     (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
-                Assert.Throws<NotSupportedException>(() =>
-                    dictionary.SetValueAtIndex(0, CreateTValue(34543))
+                Assert.Throws<NotSupportedException>(
+                    () => dictionary.SetValueAtIndex(0, CreateTValue(34543))
                 );
             }
         }
@@ -556,17 +557,17 @@ namespace System.Collections.Tests
             {
                 SortedList<TKey, TValue> dictionary =
                     (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(-1, default)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dictionary.SetValueAtIndex(-1, default)
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(int.MinValue, default)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dictionary.SetValueAtIndex(int.MinValue, default)
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(count, default)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dictionary.SetValueAtIndex(count, default)
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(count + 1, default)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dictionary.SetValueAtIndex(count + 1, default)
                 );
             }
         }

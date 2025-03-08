@@ -624,7 +624,8 @@ namespace System.Tests
         public static void Duration_Invalid()
         {
             Assert.Throws<OverflowException>(() => TimeSpan.MinValue.Duration()); // TimeSpan.Ticks == TimeSpan.MinValue.Ticks
-            Assert.Throws<OverflowException>(() => new TimeSpan(TimeSpan.MinValue.Ticks).Duration()
+            Assert.Throws<OverflowException>(
+                () => new TimeSpan(TimeSpan.MinValue.Ticks).Duration()
             ); // TimeSpan.Ticks == TimeSpan.MinValue.Ticks
         }
 
@@ -891,11 +892,11 @@ namespace System.Tests
             double maxMilliseconds =
                 (double)TimeSpan.MaxValue.Ticks / (double)TimeSpan.TicksPerMillisecond + 1;
 
-            Assert.Throws<OverflowException>(() =>
-                TimeSpan.FromMilliseconds(double.PositiveInfinity)
+            Assert.Throws<OverflowException>(
+                () => TimeSpan.FromMilliseconds(double.PositiveInfinity)
             ); // Value is positive infinity
-            Assert.Throws<OverflowException>(() =>
-                TimeSpan.FromMilliseconds(double.NegativeInfinity)
+            Assert.Throws<OverflowException>(
+                () => TimeSpan.FromMilliseconds(double.NegativeInfinity)
             ); // Value is positive infinity
 
             Assert.Throws<OverflowException>(() => TimeSpan.FromMilliseconds(maxMilliseconds)); // Value > TimeSpan.MaxValue
@@ -1629,8 +1630,8 @@ namespace System.Tests
             );
             Assert.False(TimeSpan.TryParseExact("12:34:56", (string[])null, null, out result));
 
-            Assert.Throws<FormatException>(() =>
-                TimeSpan.ParseExact("12:34:56", new string[0], null)
+            Assert.Throws<FormatException>(
+                () => TimeSpan.ParseExact("12:34:56", new string[0], null)
             );
             Assert.False(TimeSpan.TryParseExact("12:34:56", new string[0], null, out result));
         }
@@ -1980,8 +1981,8 @@ namespace System.Tests
                 TimeSpan.TryParseExact("12:34:56".AsSpan(), (string[])null, null, out result)
             );
 
-            Assert.Throws<FormatException>(() =>
-                TimeSpan.ParseExact("12:34:56".AsSpan(), new string[0], null)
+            Assert.Throws<FormatException>(
+                () => TimeSpan.ParseExact("12:34:56".AsSpan(), new string[0], null)
             );
             Assert.False(
                 TimeSpan.TryParseExact("12:34:56".AsSpan(), new string[0], null, out result)
@@ -2812,16 +2813,18 @@ namespace System.Tests
         [MemberData(nameof(ToString_InvalidFormat_TestData))]
         public void TryFormat_InvalidFormat_ThrowsFormatException(string invalidFormat)
         {
-            Assert.Throws<FormatException>(() =>
-                new TimeSpan().TryFormat(new char[1], out int charsWritten, invalidFormat, null)
+            Assert.Throws<FormatException>(
+                () =>
+                    new TimeSpan().TryFormat(new char[1], out int charsWritten, invalidFormat, null)
             );
-            Assert.Throws<FormatException>(() =>
-                ((IUtf8SpanFormattable)new TimeSpan()).TryFormat(
-                    new byte[1],
-                    out int bytesWritten,
-                    invalidFormat,
-                    null
-                )
+            Assert.Throws<FormatException>(
+                () =>
+                    ((IUtf8SpanFormattable)new TimeSpan()).TryFormat(
+                        new byte[1],
+                        out int bytesWritten,
+                        invalidFormat,
+                        null
+                    )
             );
         }
 

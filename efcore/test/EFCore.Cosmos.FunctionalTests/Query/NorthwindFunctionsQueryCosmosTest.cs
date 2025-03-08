@@ -456,7 +456,8 @@ WHERE (((c["Discriminator"] = "OrderDetail") AND (c["Quantity"] < 5)) AND (ROUND
         AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection(async));
 
     public override Task Sum_over_truncate_works_correctly_in_projection_2(bool async) =>
-        AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection_2(async)
+        AssertTranslationFailed(
+            () => base.Sum_over_truncate_works_correctly_in_projection_2(async)
         );
 
     public override async Task Select_math_round_int(bool async)
@@ -1273,8 +1274,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(async)
+        await AssertTranslationFailed(
+            () => base.IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(async)
         );
 
         AssertSql();
@@ -1338,8 +1339,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (LTRIM(c["ContactTitle"]) = "Owner"
     public override async Task TrimStart_with_char_array_argument_in_predicate(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.TrimStart_with_char_array_argument_in_predicate(async)
+        await AssertTranslationFailed(
+            () => base.TrimStart_with_char_array_argument_in_predicate(async)
         );
 
         AssertSql();
@@ -1369,8 +1370,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (RTRIM(c["ContactTitle"]) = "Owner"
     public override async Task TrimEnd_with_char_array_argument_in_predicate(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.TrimEnd_with_char_array_argument_in_predicate(async)
+        await AssertTranslationFailed(
+            () => base.TrimEnd_with_char_array_argument_in_predicate(async)
         );
 
         AssertSql();
@@ -1425,8 +1426,11 @@ ORDER BY LENGTH(c["CustomerID"]), c["CustomerID"]
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(async)
+        await AssertTranslationFailed(
+            () =>
+                base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
+                    async
+                )
         );
 
         AssertSql();
@@ -1476,8 +1480,8 @@ WHERE ((c["Discriminator"] = "Order") AND false)
     public override async Task Projecting_Math_Truncate_and_ordering_by_it_twice(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_Math_Truncate_and_ordering_by_it_twice(async)
+        await AssertTranslationFailed(
+            () => base.Projecting_Math_Truncate_and_ordering_by_it_twice(async)
         );
 
         AssertSql();
@@ -1486,8 +1490,8 @@ WHERE ((c["Discriminator"] = "Order") AND false)
     public override async Task Projecting_Math_Truncate_and_ordering_by_it_twice2(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_Math_Truncate_and_ordering_by_it_twice2(async)
+        await AssertTranslationFailed(
+            () => base.Projecting_Math_Truncate_and_ordering_by_it_twice2(async)
         );
 
         AssertSql();
@@ -1496,8 +1500,8 @@ WHERE ((c["Discriminator"] = "Order") AND false)
     public override async Task Projecting_Math_Truncate_and_ordering_by_it_twice3(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() =>
-            base.Projecting_Math_Truncate_and_ordering_by_it_twice3(async)
+        await AssertTranslationFailed(
+            () => base.Projecting_Math_Truncate_and_ordering_by_it_twice3(async)
         );
 
         AssertSql();
@@ -1687,31 +1691,33 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Regex_IsMatch_MethodCall_With_Unsupported_Option(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft))
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft))
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Regex_IsMatch_MethodCall_With_Any_Unsupported_Option(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(o =>
-                            Regex.IsMatch(
-                                o.CustomerID,
-                                "^T",
-                                RegexOptions.IgnoreCase | RegexOptions.RightToLeft
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .Where(o =>
+                                Regex.IsMatch(
+                                    o.CustomerID,
+                                    "^T",
+                                    RegexOptions.IgnoreCase | RegexOptions.RightToLeft
+                                )
                             )
-                        )
-            )
+                )
         );
 
     [ConditionalTheory]

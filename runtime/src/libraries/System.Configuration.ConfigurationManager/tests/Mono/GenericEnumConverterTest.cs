@@ -212,8 +212,8 @@ namespace MonoTests.System.Configuration
         {
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
 
-            Assert.Throws<NullReferenceException>(() =>
-                cv.ConvertTo(null, null, null, typeof(string))
+            Assert.Throws<NullReferenceException>(
+                () => cv.ConvertTo(null, null, null, typeof(string))
             );
         }
 

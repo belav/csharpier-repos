@@ -188,11 +188,12 @@ namespace System.ComponentModel.Design.Tests
                         )
                         {
                             TargetInvocationException exception =
-                                Assert.Throws<TargetInvocationException>(() =>
-                                    deserializeMethod.Invoke(
-                                        null,
-                                        new object[] { stream, key, runtimeLicenseContext }
-                                    )
+                                Assert.Throws<TargetInvocationException>(
+                                    () =>
+                                        deserializeMethod.Invoke(
+                                            null,
+                                            new object[] { stream, key, runtimeLicenseContext }
+                                        )
                                 );
                             Assert.IsType<NotSupportedException>(exception.InnerException);
                         }

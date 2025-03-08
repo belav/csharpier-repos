@@ -687,8 +687,8 @@ public class MiddlewareTests
 
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-            server.CreateClient().GetAsync("article/23?p1=123&p2=abc")
+        var ex = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+            () => server.CreateClient().GetAsync("article/23?p1=123&p2=abc")
         );
 
         Assert.Equal(

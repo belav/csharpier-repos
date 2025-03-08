@@ -846,18 +846,18 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal(HttpVersion.Version20, response.Version);
 
         await serverReset.Task.DefaultTimeout();
-        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsStringAsync().DefaultTimeout()
+        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync().DefaultTimeout()
         );
         Assert.Contains(
             "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8)",
             responseEx.ToString()
         );
-        await Assert.ThrowsAsync<HttpProtocolException>(() =>
-            streamingContent.SendAsync("Hello World").DefaultTimeout()
+        await Assert.ThrowsAsync<HttpProtocolException>(
+            () => streamingContent.SendAsync("Hello World").DefaultTimeout()
         );
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            clientEcho.Task.DefaultTimeout()
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () => clientEcho.Task.DefaultTimeout()
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -924,18 +924,18 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal(HttpVersion.Version20, response.Version);
 
         await serverReset.Task.DefaultTimeout();
-        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsStringAsync().DefaultTimeout()
+        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync().DefaultTimeout()
         );
         Assert.Contains(
             "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8)",
             responseEx.ToString()
         );
-        await Assert.ThrowsAsync<HttpProtocolException>(() =>
-            streamingContent.SendAsync("Hello World").DefaultTimeout()
+        await Assert.ThrowsAsync<HttpProtocolException>(
+            () => streamingContent.SendAsync("Hello World").DefaultTimeout()
         );
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            clientEcho.Task.DefaultTimeout()
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () => clientEcho.Task.DefaultTimeout()
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -1607,8 +1607,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             request.Headers.Add("header" + i, oneKbString + i);
         }
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            client.SendAsync(request).DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => client.SendAsync(request).DefaultTimeout()
         );
         Assert.Equal(
             "The HTTP request headers length exceeded the server limit of 32768 bytes.",

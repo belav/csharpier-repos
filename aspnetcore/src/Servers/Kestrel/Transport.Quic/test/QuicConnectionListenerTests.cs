@@ -219,8 +219,8 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
 
         var options = QuicTestHelpers.CreateClientConnectionOptions(connectionListener.EndPoint);
 
-        await Assert.ThrowsAsync<AuthenticationException>(() =>
-            QuicConnection.ConnectAsync(options).AsTask()
+        await Assert.ThrowsAsync<AuthenticationException>(
+            () => QuicConnection.ConnectAsync(options).AsTask()
         );
 
         // Assert
@@ -309,8 +309,8 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
         var options = QuicTestHelpers.CreateClientConnectionOptions(connectionListener.EndPoint);
 
         var ex = await Assert
-            .ThrowsAsync<AuthenticationException>(() =>
-                QuicConnection.ConnectAsync(options).AsTask()
+            .ThrowsAsync<AuthenticationException>(
+                () => QuicConnection.ConnectAsync(options).AsTask()
             )
             .DefaultTimeout();
         Assert.Equal(
@@ -342,8 +342,8 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
         // Act & Assert
         var port = ((IPEndPoint)connectionListener.EndPoint).Port;
 
-        await Assert.ThrowsAsync<AddressInUseException>(() =>
-            QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory, port: port)
+        await Assert.ThrowsAsync<AddressInUseException>(
+            () => QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory, port: port)
         );
     }
 
@@ -359,8 +359,8 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
         // Act & Assert
         var port = ((IPEndPoint)socket.LocalEndPoint).Port;
 
-        await Assert.ThrowsAsync<AddressInUseException>(() =>
-            QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory, port: port)
+        await Assert.ThrowsAsync<AddressInUseException>(
+            () => QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory, port: port)
         );
     }
 

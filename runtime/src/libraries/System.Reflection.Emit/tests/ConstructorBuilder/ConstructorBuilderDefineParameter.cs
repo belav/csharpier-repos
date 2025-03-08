@@ -168,11 +168,11 @@ namespace System.Reflection.Emit.Tests
                 new Type[0]
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                constructor.DefineParameter(-1, ParameterAttributes.None, "p")
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => constructor.DefineParameter(-1, ParameterAttributes.None, "p")
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                constructor.DefineParameter(1, ParameterAttributes.None, "p")
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => constructor.DefineParameter(1, ParameterAttributes.None, "p")
             );
         }
 
@@ -186,8 +186,8 @@ namespace System.Reflection.Emit.Tests
                 new Type[] { typeof(int) }
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                constructor.DefineParameter(2, ParameterAttributes.None, "p")
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => constructor.DefineParameter(2, ParameterAttributes.None, "p")
             );
         }
 
@@ -204,8 +204,8 @@ namespace System.Reflection.Emit.Tests
             constructor.GetILGenerator().Emit(OpCodes.Ret);
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                constructor.DefineParameter(1, ParameterAttributes.None, "p")
+            Assert.Throws<InvalidOperationException>(
+                () => constructor.DefineParameter(1, ParameterAttributes.None, "p")
             );
         }
     }

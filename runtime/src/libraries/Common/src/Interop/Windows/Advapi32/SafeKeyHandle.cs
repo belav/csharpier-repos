@@ -63,8 +63,8 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return SafeHandleCache<SafeCapiKeyHandle>.GetInvalidHandle(() =>
-                    new SafeCapiKeyHandle()
+                return SafeHandleCache<SafeCapiKeyHandle>.GetInvalidHandle(
+                    () => new SafeCapiKeyHandle()
                 );
             }
         }

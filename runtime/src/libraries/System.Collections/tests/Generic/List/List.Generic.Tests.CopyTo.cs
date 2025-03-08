@@ -24,8 +24,8 @@ namespace System.Collections.Tests
             );
 
             var list = new List<int>() { 1, 2, 3 };
-            Assert.Throws<ArgumentException>(() =>
-                CollectionExtensions.CopyTo(list, (Span<int>)new int[2])
+            Assert.Throws<ArgumentException>(
+                () => CollectionExtensions.CopyTo(list, (Span<int>)new int[2])
             );
         }
 

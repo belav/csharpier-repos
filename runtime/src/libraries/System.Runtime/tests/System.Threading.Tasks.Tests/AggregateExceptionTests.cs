@@ -37,12 +37,12 @@ namespace System.Threading.Tasks.Tests
         public static void ConstructorInvalidArguments()
         {
             AggregateException ex = new AggregateException();
-            Assert.Throws<ArgumentNullException>(() =>
-                new AggregateException("message", (Exception)null)
+            Assert.Throws<ArgumentNullException>(
+                () => new AggregateException("message", (Exception)null)
             );
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new AggregateException("message", (IEnumerable<Exception>)null)
+            Assert.Throws<ArgumentNullException>(
+                () => new AggregateException("message", (IEnumerable<Exception>)null)
             );
 
             AssertExtensions.Throws<ArgumentException>(
@@ -106,18 +106,19 @@ namespace System.Threading.Tasks.Tests
                 new[] { new Exception(), new ArgumentException(), new ArgumentException() }
             );
             int handledCount = 0;
-            Assert.Throws<AggregateException>(() =>
-                ex.Handle(
-                    (e) =>
-                    {
-                        if (e is ArgumentException)
+            Assert.Throws<AggregateException>(
+                () =>
+                    ex.Handle(
+                        (e) =>
                         {
-                            handledCount++;
-                            return true;
+                            if (e is ArgumentException)
+                            {
+                                handledCount++;
+                                return true;
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                )
+                    )
             );
         }
 

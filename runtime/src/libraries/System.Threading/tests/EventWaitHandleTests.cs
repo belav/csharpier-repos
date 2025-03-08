@@ -48,12 +48,13 @@ namespace System.Threading.Tests
         [Fact]
         public void Ctor_NamesArentSupported_Unix()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new EventWaitHandle(false, EventResetMode.AutoReset, "anything")
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new EventWaitHandle(false, EventResetMode.AutoReset, "anything")
             );
             bool createdNew;
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new EventWaitHandle(false, EventResetMode.AutoReset, "anything", out createdNew)
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    new EventWaitHandle(false, EventResetMode.AutoReset, "anything", out createdNew)
             );
         }
 
@@ -85,8 +86,8 @@ namespace System.Threading.Tests
         {
             string name = Guid.NewGuid().ToString("N");
             using (Mutex m = new Mutex(false, name))
-                Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                    new EventWaitHandle(false, mode, name)
+                Assert.Throws<WaitHandleCannotBeOpenedException>(
+                    () => new EventWaitHandle(false, mode, name)
                 );
         }
 
@@ -158,12 +159,12 @@ namespace System.Threading.Tests
         [Fact]
         public void OpenExisting_NotSupported_Unix()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                EventWaitHandle.OpenExisting("anything")
+            Assert.Throws<PlatformNotSupportedException>(
+                () => EventWaitHandle.OpenExisting("anything")
             );
             EventWaitHandle ewh;
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                EventWaitHandle.TryOpenExisting("anything", out ewh)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => EventWaitHandle.TryOpenExisting("anything", out ewh)
             );
         }
 
@@ -187,16 +188,16 @@ namespace System.Threading.Tests
         public void OpenExisting_UnavailableName_Windows()
         {
             string name = Guid.NewGuid().ToString("N");
-            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                EventWaitHandle.OpenExisting(name)
+            Assert.Throws<WaitHandleCannotBeOpenedException>(
+                () => EventWaitHandle.OpenExisting(name)
             );
             EventWaitHandle e;
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
 
             using (e = new EventWaitHandle(false, EventResetMode.AutoReset, name)) { }
-            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                EventWaitHandle.OpenExisting(name)
+            Assert.Throws<WaitHandleCannotBeOpenedException>(
+                () => EventWaitHandle.OpenExisting(name)
             );
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
@@ -209,8 +210,8 @@ namespace System.Threading.Tests
             string name = Guid.NewGuid().ToString("N");
             using (Mutex mtx = new Mutex(true, name))
             {
-                Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                    EventWaitHandle.OpenExisting(name)
+                Assert.Throws<WaitHandleCannotBeOpenedException>(
+                    () => EventWaitHandle.OpenExisting(name)
                 );
                 EventWaitHandle ignored;
                 Assert.False(EventWaitHandle.TryOpenExisting(name, out ignored));

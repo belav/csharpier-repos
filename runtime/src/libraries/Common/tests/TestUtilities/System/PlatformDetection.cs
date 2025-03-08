@@ -23,11 +23,12 @@ namespace System
         // do it in a way that failures don't cascade.
         //
 
-        private static readonly Lazy<bool> s_IsInHelix = new Lazy<bool>(() =>
-            Environment
-                .GetEnvironmentVariables()
-                .Keys.Cast<string>()
-                .Any(key => key.StartsWith("HELIX"))
+        private static readonly Lazy<bool> s_IsInHelix = new Lazy<bool>(
+            () =>
+                Environment
+                    .GetEnvironmentVariables()
+                    .Keys.Cast<string>()
+                    .Any(key => key.StartsWith("HELIX"))
         );
         public static bool IsInHelix => s_IsInHelix.Value;
 
@@ -118,14 +119,14 @@ namespace System
 
         public static bool IsMarshalGetExceptionPointersSupported => !IsMonoRuntime && !IsNativeAot;
 
-        private static readonly Lazy<bool> s_isCheckedRuntime = new Lazy<bool>(() =>
-            AssemblyConfigurationEquals("Checked")
+        private static readonly Lazy<bool> s_isCheckedRuntime = new Lazy<bool>(
+            () => AssemblyConfigurationEquals("Checked")
         );
-        private static readonly Lazy<bool> s_isReleaseRuntime = new Lazy<bool>(() =>
-            AssemblyConfigurationEquals("Release")
+        private static readonly Lazy<bool> s_isReleaseRuntime = new Lazy<bool>(
+            () => AssemblyConfigurationEquals("Release")
         );
-        private static readonly Lazy<bool> s_isDebugRuntime = new Lazy<bool>(() =>
-            AssemblyConfigurationEquals("Debug")
+        private static readonly Lazy<bool> s_isDebugRuntime = new Lazy<bool>(
+            () => AssemblyConfigurationEquals("Debug")
         );
 
         public static bool IsCheckedRuntime => s_isCheckedRuntime.Value;
@@ -427,18 +428,20 @@ namespace System
             }
         }
 
-        private static readonly Lazy<bool> m_isInvariant = new Lazy<bool>(() =>
-            (bool?)
-                Type.GetType("System.Globalization.GlobalizationMode")
-                    ?.GetProperty("Invariant", BindingFlags.NonPublic | BindingFlags.Static)
-                    ?.GetValue(null) == true
+        private static readonly Lazy<bool> m_isInvariant = new Lazy<bool>(
+            () =>
+                (bool?)
+                    Type.GetType("System.Globalization.GlobalizationMode")
+                        ?.GetProperty("Invariant", BindingFlags.NonPublic | BindingFlags.Static)
+                        ?.GetValue(null) == true
         );
 
-        private static readonly Lazy<bool> m_isHybrid = new Lazy<bool>(() =>
-            (bool?)
-                Type.GetType("System.Globalization.GlobalizationMode")
-                    ?.GetProperty("Hybrid", BindingFlags.NonPublic | BindingFlags.Static)
-                    ?.GetValue(null) == true
+        private static readonly Lazy<bool> m_isHybrid = new Lazy<bool>(
+            () =>
+                (bool?)
+                    Type.GetType("System.Globalization.GlobalizationMode")
+                        ?.GetProperty("Hybrid", BindingFlags.NonPublic | BindingFlags.Static)
+                        ?.GetValue(null) == true
         );
 
         private static readonly Lazy<Version> m_icuVersion = new Lazy<Version>(GetICUVersion);
@@ -512,14 +515,15 @@ namespace System
             );
         }
 
-        private static readonly Lazy<bool> s_fileLockingDisabled = new Lazy<bool>(() =>
-            (bool?)
-                Type.GetType("Microsoft.Win32.SafeHandles.SafeFileHandle")
-                    ?.GetProperty(
-                        "DisableFileLocking",
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )
-                    ?.GetValue(null) == true
+        private static readonly Lazy<bool> s_fileLockingDisabled = new Lazy<bool>(
+            () =>
+                (bool?)
+                    Type.GetType("Microsoft.Win32.SafeHandles.SafeFileHandle")
+                        ?.GetProperty(
+                            "DisableFileLocking",
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        ?.GetValue(null) == true
         );
 
         public static bool IsFileLockingEnabled => IsWindows || !s_fileLockingDisabled.Value;

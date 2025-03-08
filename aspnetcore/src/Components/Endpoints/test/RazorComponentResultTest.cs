@@ -25,11 +25,11 @@ public class RazorComponentResultTest
     [Fact]
     public void RejectsNullParameters()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-            new RazorComponentResult(typeof(SimpleComponent), (object)null)
+        Assert.Throws<ArgumentNullException>(
+            () => new RazorComponentResult(typeof(SimpleComponent), (object)null)
         );
-        Assert.Throws<ArgumentNullException>(() =>
-            new RazorComponentResult(typeof(SimpleComponent), null)
+        Assert.Throws<ArgumentNullException>(
+            () => new RazorComponentResult(typeof(SimpleComponent), null)
         );
     }
 
@@ -273,8 +273,8 @@ public class RazorComponentResultTest
         {
             PreventStreamingRendering = true,
         };
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(httpContext)
         );
 
         // Assert
@@ -313,10 +313,11 @@ public class RazorComponentResultTest
         var httpContext = GetTestHttpContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-            new RazorComponentResult(typeof(ComponentThatThrowsSynchronously)).ExecuteAsync(
-                httpContext
-            )
+        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            () =>
+                new RazorComponentResult(typeof(ComponentThatThrowsSynchronously)).ExecuteAsync(
+                    httpContext
+                )
         );
 
         // Assert
@@ -330,11 +331,12 @@ public class RazorComponentResultTest
         var httpContext = GetTestHttpContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-            new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously))
-            {
-                PreventStreamingRendering = true,
-            }.ExecuteAsync(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            () =>
+                new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously))
+                {
+                    PreventStreamingRendering = true,
+                }.ExecuteAsync(httpContext)
         );
 
         // Assert
@@ -360,10 +362,11 @@ public class RazorComponentResultTest
             : "There was an unhandled exception on the current request. For more details turn on detailed exceptions by setting &#x27;DetailedErrors: true&#x27; in &#x27;appSettings.Development.json&#x27;";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-            new RazorComponentResult(
-                typeof(StreamingComponentThatThrowsAsynchronously)
-            ).ExecuteAsync(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            () =>
+                new RazorComponentResult(
+                    typeof(StreamingComponentThatThrowsAsynchronously)
+                ).ExecuteAsync(httpContext)
         );
 
         // Assert

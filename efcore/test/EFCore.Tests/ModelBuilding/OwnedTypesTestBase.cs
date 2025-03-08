@@ -377,14 +377,15 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.UnableToSetIsUnique(false, nameof(Customer.Details), nameof(Customer)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        customerBuilder.OwnsOne(
-                            c => c.Details,
-                            r =>
-                            {
-                                r.HasOne(d => d.Customer).WithMany();
-                            }
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            customerBuilder.OwnsOne(
+                                c => c.Details,
+                                r =>
+                                {
+                                    r.HasOne(d => d.Customer).WithMany();
+                                }
+                            )
                     )
                     .Message
             );
@@ -2204,8 +2205,8 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.ClashingNonOwnedEntityType(nameof(CustomerDetails)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<SpecialCustomer>().OwnsOne(c => c.Details)
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity<SpecialCustomer>().OwnsOne(c => c.Details)
                     )
                     .Message
             );
@@ -2222,8 +2223,8 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.ClashingOwnedEntityType(nameof(CustomerDetails)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<SpecialCustomer>().HasOne(c => c.Details)
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity<SpecialCustomer>().HasOne(c => c.Details)
                     )
                     .Message
             );
@@ -2252,8 +2253,8 @@ public abstract partial class ModelBuilderTest
                     ? CoreStrings.ClashingSharedType(nameof(BookLabel))
                     : CoreStrings.ClashingOwnedEntityType(nameof(BookLabel)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<AnotherBookLabel>().HasBaseType<BookLabel>()
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity<AnotherBookLabel>().HasBaseType<BookLabel>()
                     )
                     .Message
             );
@@ -2274,8 +2275,8 @@ public abstract partial class ModelBuilderTest
                     nameof(AnotherBookLabel)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<Book>().OwnsOne(c => c.Label)
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity<Book>().OwnsOne(c => c.Label)
                     )
                     .Message
             );
@@ -2471,10 +2472,11 @@ public abstract partial class ModelBuilderTest
                     typeof(OneToOneNavPrincipalOwner).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder
-                            .Entity<OneToOneNavPrincipalOwner>()
-                            .OwnsMany<OwnedNavDependent>("OwnedDependent")
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder
+                                .Entity<OneToOneNavPrincipalOwner>()
+                                .OwnsMany<OwnedNavDependent>("OwnedDependent")
                     )
                     .Message
             );
@@ -2492,10 +2494,11 @@ public abstract partial class ModelBuilderTest
                     typeof(OneToManyNavPrincipalOwner).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder
-                            .Entity<OneToManyNavPrincipalOwner>()
-                            .OwnsOne<OwnedOneToManyNavDependent>("OwnedDependents")
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder
+                                .Entity<OneToManyNavPrincipalOwner>()
+                                .OwnsOne<OwnedOneToManyNavDependent>("OwnedDependents")
                     )
                     .Message
             );
@@ -2587,8 +2590,8 @@ public abstract partial class ModelBuilderTest
                         nameof(OwnerOfSharedType.Collection)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            b.OwnsMany("Shared1", e => e.Collection)
+                        .Throws<InvalidOperationException>(
+                            () => b.OwnsMany("Shared1", e => e.Collection)
                         )
                         .Message
                 );

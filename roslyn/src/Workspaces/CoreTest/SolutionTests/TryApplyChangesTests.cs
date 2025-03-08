@@ -148,14 +148,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var exception = Assert.Throws<NotSupportedException>(() =>
-                workspace.TryApplyChanges(
-                    project
-                        .WithCompilationOptions(
-                            project.CompilationOptions!.WithMainTypeName("WrongThing")
-                        )
-                        .Solution
-                )
+            var exception = Assert.Throws<NotSupportedException>(
+                () =>
+                    workspace.TryApplyChanges(
+                        project
+                            .WithCompilationOptions(
+                                project.CompilationOptions!.WithMainTypeName("WrongThing")
+                            )
+                            .Solution
+                    )
             );
 
             Assert.Equal(
@@ -227,16 +228,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var exception = Assert.Throws<NotSupportedException>(() =>
-                workspace.TryApplyChanges(
-                    project
-                        .WithParseOptions(
-                            project.ParseOptions!.WithFeatures(
-                                new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
+            var exception = Assert.Throws<NotSupportedException>(
+                () =>
+                    workspace.TryApplyChanges(
+                        project
+                            .WithParseOptions(
+                                project.ParseOptions!.WithFeatures(
+                                    new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
+                                )
                             )
-                        )
-                        .Solution
-                )
+                            .Solution
+                    )
             );
 
             Assert.Equal(

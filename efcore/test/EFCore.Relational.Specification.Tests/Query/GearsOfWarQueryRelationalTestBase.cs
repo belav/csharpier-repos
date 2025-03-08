@@ -34,30 +34,31 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
+                            async
+                        )
                 )
             ).Message
         );
 
     public override async Task Client_eval_followed_by_aggregate_operation(bool async)
     {
-        await AssertTranslationFailed(() =>
-            AssertSum(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
+        await AssertTranslationFailed(
+            () => AssertSum(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
         );
 
-        await AssertTranslationFailed(() =>
-            AssertAverage(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
+        await AssertTranslationFailed(
+            () => AssertAverage(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
         );
 
-        await AssertTranslationFailed(() =>
-            AssertMin(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
+        await AssertTranslationFailed(
+            () => AssertMin(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
         );
 
-        await AssertTranslationFailed(() =>
-            AssertMax(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
+        await AssertTranslationFailed(
+            () => AssertMax(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
         );
     }
 
@@ -74,15 +75,15 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
     public override Task Client_side_equality_with_parameter_works_with_optional_navigations(
         bool async
     ) =>
-        AssertTranslationFailed(() =>
-            base.Client_side_equality_with_parameter_works_with_optional_navigations(async)
+        AssertTranslationFailed(
+            () => base.Client_side_equality_with_parameter_works_with_optional_navigations(async)
         );
 
     public override Task Correlated_collection_order_by_constant_null_of_non_mapped_type(
         bool async
     ) =>
-        AssertTranslationFailed(() =>
-            base.Correlated_collection_order_by_constant_null_of_non_mapped_type(async)
+        AssertTranslationFailed(
+            () => base.Correlated_collection_order_by_constant_null_of_non_mapped_type(async)
         );
 
     public override Task GetValueOrDefault_on_DateTimeOffset(bool async) =>
@@ -175,8 +176,8 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.DistinctOnCollectionNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Projecting_correlated_collection_followed_by_Distinct(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Projecting_correlated_collection_followed_by_Distinct(async)
                 )
             ).Message
         );
@@ -187,10 +188,11 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.DistinctOnCollectionNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
+                            async
+                        )
                 )
             ).Message
         );
@@ -201,10 +203,11 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.DistinctOnCollectionNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
+                            async
+                        )
                 )
             ).Message
         );
@@ -215,10 +218,11 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.DistinctOnCollectionNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
+                            async
+                        )
                 )
             ).Message
         );
@@ -229,10 +233,11 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.DistinctOnCollectionNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
+                            async
+                        )
                 )
             ).Message
         );
@@ -241,14 +246,15 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.DistinctOnCollectionNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_distinct_3_levels(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Correlated_collection_with_distinct_3_levels(async)
                 )
             ).Message
         );
 
     public override Task Include_after_SelectMany_throws(bool async) =>
-        Assert.ThrowsAsync<NullReferenceException>(() => base.Include_after_SelectMany_throws(async)
+        Assert.ThrowsAsync<NullReferenceException>(
+            () => base.Include_after_SelectMany_throws(async)
         );
 
     public override Task String_concat_on_various_types(bool async) =>
@@ -265,10 +271,11 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_after_distinct_3_levels_without_original_identifiers(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_after_distinct_3_levels_without_original_identifiers(
+                            async
+                        )
                 )
             ).Message
         );

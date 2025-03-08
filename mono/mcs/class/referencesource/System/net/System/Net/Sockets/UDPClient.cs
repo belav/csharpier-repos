@@ -47,7 +47,6 @@ namespace System.Net.Sockets
         ///       Initializes a new instance of the <see cref='System.Net.Sockets.UdpClient'/>class.
         ///    </para>
         /// </devdoc>
-
         public UdpClient(AddressFamily family)
         {
             //

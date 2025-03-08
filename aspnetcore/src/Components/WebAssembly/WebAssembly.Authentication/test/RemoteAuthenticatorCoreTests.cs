@@ -39,8 +39,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act & assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
     }
 
@@ -71,8 +71,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -107,8 +107,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -142,8 +142,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -177,12 +177,13 @@ public class RemoteAuthenticatorCoreTests
             new Dictionary<string, object> { [_action] = RemoteAuthenticationActions.LogInCallback }
         );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await renderer.Dispatcher.InvokeAsync<object>(async () =>
-            {
-                await remoteAuthenticator.SetParametersAsync(parameters);
-                return null;
-            })
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await renderer.Dispatcher.InvokeAsync<object>(async () =>
+                {
+                    await remoteAuthenticator.SetParametersAsync(parameters);
+                    return null;
+                })
         );
     }
 
@@ -208,8 +209,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -250,8 +251,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -284,8 +285,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -347,18 +348,18 @@ public class RemoteAuthenticatorCoreTests
         var finalParameters = ParameterView.FromDictionary(parameterDictionary);
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(initialParameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(initialParameters)
         );
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(initialParameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(initialParameters)
         );
 
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(finalParameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(finalParameters)
         );
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(finalParameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(finalParameters)
         );
 
         // Assert
@@ -396,8 +397,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -429,8 +430,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -471,8 +472,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -502,8 +503,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -548,8 +549,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -587,12 +588,13 @@ public class RemoteAuthenticatorCoreTests
                 }
             );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await renderer.Dispatcher.InvokeAsync<object>(async () =>
-            {
-                await remoteAuthenticator.SetParametersAsync(parameters);
-                return null;
-            })
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await renderer.Dispatcher.InvokeAsync<object>(async () =>
+                {
+                    await remoteAuthenticator.SetParametersAsync(parameters);
+                    return null;
+                })
         );
     }
 
@@ -621,8 +623,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -662,8 +664,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -699,8 +701,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            remoteAuthenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => remoteAuthenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -858,8 +860,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            authenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => authenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -895,8 +897,8 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        Task result = await renderer.Dispatcher.InvokeAsync<Task>(() =>
-            authenticator.SetParametersAsync(parameters)
+        Task result = await renderer.Dispatcher.InvokeAsync<Task>(
+            () => authenticator.SetParametersAsync(parameters)
         );
 
         // Assert
@@ -968,13 +970,13 @@ public class RemoteAuthenticatorCoreTests
         );
 
         // Act
-        await renderer.Dispatcher.InvokeAsync<object>(() =>
-            authenticator.SetParametersAsync(parameters)
+        await renderer.Dispatcher.InvokeAsync<object>(
+            () => authenticator.SetParametersAsync(parameters)
         );
         validator.RetrieveOriginalRender(authenticator);
         validator.SetupFakeRender(authenticator);
-        Task result = await renderer.Dispatcher.InvokeAsync<Task>(() =>
-            authenticator.SetParametersAsync(parameters)
+        Task result = await renderer.Dispatcher.InvokeAsync<Task>(
+            () => authenticator.SetParametersAsync(parameters)
         );
 
         // Assert

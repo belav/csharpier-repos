@@ -163,8 +163,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             var handler = new WinHttpHandler();
             using (HttpClient client = new HttpClient(handler))
             {
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.SendAsync(request)
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
+                    () => client.SendAsync(request)
                 );
                 _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
             }

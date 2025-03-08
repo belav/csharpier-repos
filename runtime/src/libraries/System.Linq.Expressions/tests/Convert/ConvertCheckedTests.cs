@@ -22361,14 +22361,15 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void CannotConvertNonVoidToVoid()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(Expression.Constant(1), typeof(void))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.ConvertChecked(Expression.Constant(1), typeof(void))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(Expression.Constant("a"), typeof(void))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.ConvertChecked(Expression.Constant("a"), typeof(void))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(Expression.Constant(DateTime.MinValue), typeof(void))
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(Expression.Constant(DateTime.MinValue), typeof(void))
             );
         }
 
@@ -22530,67 +22531,74 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void IfaceToNonSZArray()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(IList<NonSealed>[])),
-                    typeof(NonSealed[,][])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(IList<NonSealed>[])),
+                        typeof(NonSealed[,][])
+                    )
             );
         }
 
         [Fact]
         public static void NonSZArrayToIface()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(NonSealed[,][])),
-                    typeof(IList<NonSealed>[])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(NonSealed[,][])),
+                        typeof(IList<NonSealed>[])
+                    )
             );
         }
 
         [Fact]
         public static void ArrayToNonArrayCompatibleIFace()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(NonSealed[][])),
-                    typeof(IEquatable<NonSealed>[])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(NonSealed[][])),
+                        typeof(IEquatable<NonSealed>[])
+                    )
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(NonSealed[][])),
-                    typeof(IDictionary<NonSealed, NonSealed>[])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(NonSealed[][])),
+                        typeof(IDictionary<NonSealed, NonSealed>[])
+                    )
             );
         }
 
         [Fact]
         public static void NonArrayCompatibleIFaceToArray()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(IEquatable<NonSealed>[])),
-                    typeof(NonSealed[][])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(IEquatable<NonSealed>[])),
+                        typeof(NonSealed[][])
+                    )
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])),
-                    typeof(NonSealed[][])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])),
+                        typeof(NonSealed[][])
+                    )
             );
         }
 
         [Fact]
         public static void ArrayToNotRelated()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(
-                    Expression.Default(typeof(NonSealed[][][])),
-                    typeof(string[][])
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ConvertChecked(
+                        Expression.Default(typeof(NonSealed[][][])),
+                        typeof(string[][])
+                    )
             );
         }
     }

@@ -293,15 +293,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.NotNull(nameObject);
             Assert.Throws<CultureNotFoundException>(() => ToAssemblyName(nameObject));
 
-            Assert.Throws<CultureNotFoundException>(() =>
-                new AssemblyName("mscorlib, Version=2.0.0.0, Culture=nonsense")
+            Assert.Throws<CultureNotFoundException>(
+                () => new AssemblyName("mscorlib, Version=2.0.0.0, Culture=nonsense")
             );
-            Assert.Throws<CultureNotFoundException>(() =>
-                new AssemblyName("mscorlib, Version=2.0.0.0, Culture=null")
+            Assert.Throws<CultureNotFoundException>(
+                () => new AssemblyName("mscorlib, Version=2.0.0.0, Culture=null")
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                FusionAssemblyIdentity.ToAssemblyNameObject(new AssemblyName { Name = "x\0x" })
+            Assert.Throws<ArgumentException>(
+                () =>
+                    FusionAssemblyIdentity.ToAssemblyNameObject(new AssemblyName { Name = "x\0x" })
             );
 
             // invalid characters are ok in the name, the FullName can't be built though:

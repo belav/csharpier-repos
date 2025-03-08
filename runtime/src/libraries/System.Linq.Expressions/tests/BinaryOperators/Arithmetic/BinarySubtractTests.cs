@@ -549,11 +549,12 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Subtract_NoSuchOperatorDeclaredOnType_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.Add(
-                    Expression.Constant(new SubClass(0)),
-                    Expression.Constant(new SubClass(1))
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.Add(
+                        Expression.Constant(new SubClass(0)),
+                        Expression.Constant(new SubClass(1))
+                    )
             );
         }
 

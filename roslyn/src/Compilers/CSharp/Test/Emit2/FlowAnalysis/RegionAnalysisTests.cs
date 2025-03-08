@@ -3518,21 +3518,21 @@ class C
                 .DescendantNodesAndSelf()
                 .OfType<StatementSyntax>()
                 .First();
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeControlFlow(statement, null)
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeControlFlow(statement, null)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeControlFlow(null, statement)
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeControlFlow(null, statement)
             );
             Assert.Throws<ArgumentNullException>(() => semanticModel.AnalyzeControlFlow(null));
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeDataFlow(null, statement)
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeDataFlow(null, statement)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeDataFlow(statement, null)
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeDataFlow(statement, null)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeDataFlow((StatementSyntax)null)
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeDataFlow((StatementSyntax)null)
             );
         }
 

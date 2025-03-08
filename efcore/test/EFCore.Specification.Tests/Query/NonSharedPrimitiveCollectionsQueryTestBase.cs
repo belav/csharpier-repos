@@ -100,8 +100,8 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
     [ConditionalFact]
     public virtual async Task Array_of_array_is_not_supported()
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            TestArray(new[] { 1, 2, 3 }, new[] { 4, 5, 6 })
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => TestArray(new[] { 1, 2, 3 }, new[] { 4, 5, 6 })
         );
         Assert.Equal(
             CoreStrings.PropertyNotMapped("int[][]", "TestEntity", "SomeArray"),
@@ -112,10 +112,11 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
     [ConditionalFact]
     public virtual async Task Multidimensional_array_is_not_supported()
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            InitializeAsync<TestContext>(onModelCreating: mb =>
-                mb.Entity<TestEntity>().Property(typeof(int[,]), "MultidimensionalArray")
-            )
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                InitializeAsync<TestContext>(onModelCreating: mb =>
+                    mb.Entity<TestEntity>().Property(typeof(int[,]), "MultidimensionalArray")
+                )
         );
         Assert.Equal(
             CoreStrings.PropertyNotMapped("int[,]", "TestEntity", "MultidimensionalArray"),
@@ -154,8 +155,8 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
         Assert.Equal(1, result.Id);
 
         // Custom converters allow reading/writing, but not querying, as we have no idea about the internal representation
-        await AssertTranslationFailed(() =>
-            context.Set<TestEntity>().SingleAsync(m => m.Ints.Length == 2)
+        await AssertTranslationFailed(
+            () => context.Set<TestEntity>().SingleAsync(m => m.Ints.Length == 2)
         );
     }
 

@@ -55,19 +55,21 @@ public partial class ThreadPoolBoundHandleTests
     [ActiveIssue("https://github.com/mono/mono/issues/15313", TestRuntimes.Mono)]
     public unsafe void PreAllocatedOverlapped_NonBlittableTypeAsPinData_Throws()
     {
-        Assert.Throws<ArgumentException>(() =>
-            new PreAllocatedOverlapped(
-                (_, __, ___) => { },
-                new object(),
-                new NonBlittableType() { s = "foo" }
-            )
+        Assert.Throws<ArgumentException>(
+            () =>
+                new PreAllocatedOverlapped(
+                    (_, __, ___) => { },
+                    new object(),
+                    new NonBlittableType() { s = "foo" }
+                )
         );
-        Assert.Throws<ArgumentException>(() =>
-            PreAllocatedOverlapped.UnsafeCreate(
-                (_, __, ___) => { },
-                new object(),
-                new NonBlittableType() { s = "foo" }
-            )
+        Assert.Throws<ArgumentException>(
+            () =>
+                PreAllocatedOverlapped.UnsafeCreate(
+                    (_, __, ___) => { },
+                    new object(),
+                    new NonBlittableType() { s = "foo" }
+                )
         );
 
         // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
@@ -117,11 +119,11 @@ public partial class ThreadPoolBoundHandleTests
             new byte[5],
         };
 
-        Assert.Throws<ArgumentException>(() =>
-            new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array)
+        Assert.Throws<ArgumentException>(
+            () => new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array)
         );
-        Assert.Throws<ArgumentException>(() =>
-            PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)
+        Assert.Throws<ArgumentException>(
+            () => PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)
         );
 
         // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.

@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
-                    new AutoClosingViewProperty<TProperty, TTextView>(textView)
+                var properties = textView.Properties.GetOrCreateSingletonProperty(
+                    () => new AutoClosingViewProperty<TProperty, TTextView>(textView)
                 );
                 if (!properties.TryGetValue(key, out var priorValue))
                 {
@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
-                    new AutoClosingViewProperty<TProperty, TTextView>(textView)
+                var properties = textView.Properties.GetOrCreateSingletonProperty(
+                    () => new AutoClosingViewProperty<TProperty, TTextView>(textView)
                 );
                 return properties.TryGetValue(key, out value);
             }
@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
-                    new AutoClosingViewProperty<TProperty, TTextView>(textView)
+                var properties = textView.Properties.GetOrCreateSingletonProperty(
+                    () => new AutoClosingViewProperty<TProperty, TTextView>(textView)
                 );
                 properties.Add(key, value);
             }

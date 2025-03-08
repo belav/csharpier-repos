@@ -11,24 +11,28 @@ public class MinimumOSVersionAttributeTest
     [Fact]
     public void Linux_ThrowsNotImplemeneted()
     {
-        Assert.Throws<NotImplementedException>(() =>
-            new MinimumOSVersionAttribute(OperatingSystems.Linux, "2.5")
+        Assert.Throws<NotImplementedException>(
+            () => new MinimumOSVersionAttribute(OperatingSystems.Linux, "2.5")
         );
     }
 
     [Fact]
     public void Mac_ThrowsNotImplemeneted()
     {
-        Assert.Throws<NotImplementedException>(() =>
-            new MinimumOSVersionAttribute(OperatingSystems.MacOSX, "2.5")
+        Assert.Throws<NotImplementedException>(
+            () => new MinimumOSVersionAttribute(OperatingSystems.MacOSX, "2.5")
         );
     }
 
     [Fact]
     public void WindowsOrLinux_ThrowsNotImplemeneted()
     {
-        Assert.Throws<NotImplementedException>(() =>
-            new MinimumOSVersionAttribute(OperatingSystems.Linux | OperatingSystems.Windows, "2.5")
+        Assert.Throws<NotImplementedException>(
+            () =>
+                new MinimumOSVersionAttribute(
+                    OperatingSystems.Linux | OperatingSystems.Windows,
+                    "2.5"
+                )
         );
     }
 

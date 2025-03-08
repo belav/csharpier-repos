@@ -12,8 +12,8 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed subkey name is null
-            Assert.Throws<ArgumentNullException>(() =>
-                TestRegistryKey.OpenSubKey(name: null, writable: false)
+            Assert.Throws<ArgumentNullException>(
+                () => TestRegistryKey.OpenSubKey(name: null, writable: false)
             );
 
             // Should throw if subkey name greater than 255 chars

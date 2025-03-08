@@ -292,12 +292,13 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Min_no_data(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertMin(
-                async,
-                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
-                selector: o => o.OrderID
-            )
+        Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertMin(
+                    async,
+                    ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                    selector: o => o.OrderID
+                )
         );
 
     [ConditionalTheory]
@@ -331,12 +332,13 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Max_no_data(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertMax(
-                async,
-                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
-                selector: o => o.OrderID
-            )
+        Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertMax(
+                    async,
+                    ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                    selector: o => o.OrderID
+                )
         );
 
     [ConditionalTheory]
@@ -370,12 +372,13 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Average_no_data(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertAverage(
-                async,
-                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
-                selector: o => o.OrderID
-            )
+        Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AssertAverage(
+                    async,
+                    ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                    selector: o => o.OrderID
+                )
         );
 
     [ConditionalTheory]
@@ -532,84 +535,92 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_OrderBy_Count_client_eval(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss =>
-                    ss.Set<Order>()
-                        .Where(o => ClientEvalPredicate(o))
-                        .OrderBy(o => ClientEvalSelectorStateless())
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .Where(o => ClientEvalPredicate(o))
+                            .OrderBy(o => ClientEvalSelectorStateless())
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Where_Count_client_eval(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss =>
-                    ss.Set<Order>()
-                        .OrderBy(o => ClientEvalSelectorStateless())
-                        .Where(o => ClientEvalPredicate(o))
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .OrderBy(o => ClientEvalSelectorStateless())
+                            .Where(o => ClientEvalPredicate(o))
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Where_Count_client_eval_mixed(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss => ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o))
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss => ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o))
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Count_with_predicate_client_eval(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss => ss.Set<Order>().OrderBy(o => ClientEvalSelectorStateless()),
-                predicate: o => ClientEvalPredicate(o)
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss => ss.Set<Order>().OrderBy(o => ClientEvalSelectorStateless()),
+                    predicate: o => ClientEvalPredicate(o)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Count_with_predicate_client_eval_mixed(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss => ss.Set<Order>().OrderBy(o => o.OrderID),
-                predicate: o => ClientEvalPredicate(o)
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss => ss.Set<Order>().OrderBy(o => o.OrderID),
+                    predicate: o => ClientEvalPredicate(o)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Where_Count_with_predicate_client_eval(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss =>
-                    ss.Set<Order>()
-                        .OrderBy(o => ClientEvalSelectorStateless())
-                        .Where(o => ClientEvalPredicate(o)),
-                predicate: o => ClientEvalPredicate(o)
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .OrderBy(o => ClientEvalSelectorStateless())
+                            .Where(o => ClientEvalPredicate(o)),
+                    predicate: o => ClientEvalPredicate(o)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Where_Count_with_predicate_client_eval_mixed(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertCount(
-                async,
-                ss => ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o)),
-                predicate: o => o.CustomerID != "ALFKI"
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o)),
+                    predicate: o => o.CustomerID != "ALFKI"
+                )
         );
 
     [ConditionalTheory]
@@ -692,8 +703,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Single_Throws(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await AssertSingle(async, ss => ss.Set<Customer>())
+        Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await AssertSingle(async, ss => ss.Set<Customer>())
         );
 
     [ConditionalTheory]
@@ -709,8 +720,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SingleOrDefault_Throws(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await AssertSingleOrDefault(async, ss => ss.Set<Customer>())
+        Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await AssertSingleOrDefault(async, ss => ss.Set<Customer>())
         );
 
     [ConditionalTheory]

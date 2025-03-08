@@ -1355,8 +1355,11 @@ public class HubConnectionTests : FunctionalTestBase
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    connection.StreamAsChannelAsync<int>("Stream", 5, cts.Token).DefaultTimeout()
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () =>
+                        connection
+                            .StreamAsChannelAsync<int>("Stream", 5, cts.Token)
+                            .DefaultTimeout()
                 );
             }
             catch (Exception ex)
@@ -1404,8 +1407,8 @@ public class HubConnectionTests : FunctionalTestBase
                     .StreamAsChannelAsync<int>("StreamException")
                     .DefaultTimeout();
 
-                var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(
+                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "An unexpected error occurred invoking 'StreamException' on the server. InvalidOperationException: Error occurred while streaming.",
@@ -1623,8 +1626,8 @@ public class HubConnectionTests : FunctionalTestBase
                 await connection.StartAsync().DefaultTimeout();
 
                 var channel = await connection.StreamAsChannelAsync<int>("!@#$%");
-                var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(
+                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Failed to invoke '!@#$%' due to an error on the server. HubException: Method does not exist.",
@@ -1668,8 +1671,8 @@ public class HubConnectionTests : FunctionalTestBase
                 await connection.StartAsync().DefaultTimeout();
 
                 var channel = await connection.StreamAsChannelAsync<int>("Stream", 42, 42);
-                var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(
+                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Failed to invoke 'Stream' due to an error on the server. InvalidDataException: Invocation provides 2 argument(s) but target expects 1.",
@@ -1713,8 +1716,8 @@ public class HubConnectionTests : FunctionalTestBase
                 await connection.StartAsync().DefaultTimeout();
 
                 var channel = await connection.StreamAsChannelAsync<int>("Stream", "xyz");
-                var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(
+                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Failed to invoke 'Stream' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
@@ -2050,10 +2053,11 @@ public class HubConnectionTests : FunctionalTestBase
             await connection.StartAsync().DefaultTimeout();
             // List<T> will be looked at to replace with a StreamPlaceholder and should be skipped, so an error will be thrown from the
             // protocol on the server when it tries to match List<T> with a StreamPlaceholder
-            var hubException = await Assert.ThrowsAsync<HubException>(() =>
-                connection
-                    .InvokeAsync<int>("StreamEcho", new List<string> { "1", "2" })
-                    .DefaultTimeout()
+            var hubException = await Assert.ThrowsAsync<HubException>(
+                () =>
+                    connection
+                        .InvokeAsync<int>("StreamEcho", new List<string> { "1", "2" })
+                        .DefaultTimeout()
             );
             Assert.Equal(
                 "Failed to invoke 'StreamEcho' due to an error on the server. InvalidDataException: Invocation provides 1 argument(s) but target expects 0.",
@@ -2132,8 +2136,8 @@ public class HubConnectionTests : FunctionalTestBase
                 .Build();
             try
             {
-                var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
-                    hubConnection.StartAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(
+                    () => hubConnection.StartAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Response status code does not indicate success: 401 (Unauthorized).",
@@ -2619,8 +2623,8 @@ public class HubConnectionTests : FunctionalTestBase
                 )
                 .Build();
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
-                hubConnection.StartAsync().DefaultTimeout()
+            var ex = await Assert.ThrowsAsync<AggregateException>(
+                () => hubConnection.StartAsync().DefaultTimeout()
             );
             Assert.Contains(
                 "Negotiate Authentication doesn't work with HTTP/2 or higher.",

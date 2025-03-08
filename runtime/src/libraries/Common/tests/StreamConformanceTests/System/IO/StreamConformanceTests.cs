@@ -977,8 +977,8 @@ namespace System.IO.Tests
                 stream.Read(new byte[1], 0, 1);
             });
             await AssertDisposedAsync(async () => await stream.ReadAsync(new byte[1], 0, 1));
-            await AssertDisposedAsync(async () =>
-                await stream.ReadAsync(new Memory<byte>(new byte[1]))
+            await AssertDisposedAsync(
+                async () => await stream.ReadAsync(new Memory<byte>(new byte[1]))
             );
             AssertDisposed(() =>
             {
@@ -998,8 +998,8 @@ namespace System.IO.Tests
                 stream.Write(new byte[1], 0, 1);
             });
             await AssertDisposedAsync(async () => await stream.WriteAsync(new byte[1], 0, 1));
-            await AssertDisposedAsync(async () =>
-                await stream.WriteAsync(new Memory<byte>(new byte[1]))
+            await AssertDisposedAsync(
+                async () => await stream.WriteAsync(new Memory<byte>(new byte[1]))
             );
             AssertDisposed(() =>
             {
@@ -2770,21 +2770,22 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => writeable.Write(buffer));
             Assert.Throws<IOException>(() => writeable.Write(buffer, 0, buffer.Length));
             await Assert.ThrowsAsync<IOException>(() => writeable.WriteAsync(buffer).AsTask());
-            await Assert.ThrowsAsync<IOException>(() =>
-                writeable.WriteAsync(buffer, 0, buffer.Length)
+            await Assert.ThrowsAsync<IOException>(
+                () => writeable.WriteAsync(buffer, 0, buffer.Length)
             );
-            Assert.Throws<IOException>(() =>
-                writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null))
+            Assert.Throws<IOException>(
+                () => writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null))
             );
-            await Assert.ThrowsAsync<IOException>(() =>
-                Task.Factory.FromAsync(
-                    writeable.BeginWrite,
-                    writeable.EndWrite,
-                    buffer,
-                    0,
-                    buffer.Length,
-                    null
-                )
+            await Assert.ThrowsAsync<IOException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        writeable.BeginWrite,
+                        writeable.EndWrite,
+                        buffer,
+                        0,
+                        buffer.Length,
+                        null
+                    )
             );
             Assert.Throws<IOException>(() => writeable.Flush());
         }
@@ -2813,7 +2814,8 @@ namespace System.IO.Tests
 
                 await Assert.ThrowsAsync<InvalidOperationException>(async () => await r);
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().IsCompleted);
-                Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().OnCompleted(() => { })
+                Assert.Throws<InvalidOperationException>(
+                    () => r.GetAwaiter().OnCompleted(() => { })
                 );
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().GetResult());
             }
@@ -2833,7 +2835,8 @@ namespace System.IO.Tests
                 var b = new byte[1];
                 ValueTask<int> r = readable.ReadAsync(b);
                 r.GetAwaiter().OnCompleted(() => { });
-                Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().OnCompleted(() => { })
+                Assert.Throws<InvalidOperationException>(
+                    () => r.GetAwaiter().OnCompleted(() => { })
                 );
             }
         }
@@ -3075,8 +3078,8 @@ namespace System.IO.Tests
             {
                 for (int iter = 0; iter < 2; iter++)
                 {
-                    Task<int> zeroByteRead = Task.Run(() =>
-                        ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
+                    Task<int> zeroByteRead = Task.Run(
+                        () => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
                     );
 
                     if (BlocksOnZeroByteReads)
@@ -3587,8 +3590,8 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => writeable.WriteByte(1));
             Assert.Throws<IOException>(() => writeable.Write(new byte[1], 0, 1));
             Assert.Throws<IOException>(() => writeable.Write(new byte[1]));
-            Assert.Throws<IOException>(() =>
-                writeable.EndWrite(writeable.BeginWrite(new byte[1], 0, 1, null, null))
+            Assert.Throws<IOException>(
+                () => writeable.EndWrite(writeable.BeginWrite(new byte[1], 0, 1, null, null))
             );
             await Assert.ThrowsAsync<IOException>(async () =>
             {
@@ -3980,8 +3983,8 @@ namespace System.IO.Tests
                 var signalTask = tracker.WaitForZeroByteReadAsync();
 
                 // Issue zero byte read against wrapper stream.
-                Task<int> zeroByteRead = Task.Run(() =>
-                    ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
+                Task<int> zeroByteRead = Task.Run(
+                    () => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
                 );
 
                 // The tracker stream will signal us when the zero byte read actually happens.

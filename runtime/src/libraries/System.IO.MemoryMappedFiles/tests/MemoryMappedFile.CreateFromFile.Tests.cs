@@ -454,15 +454,16 @@ namespace System.IO.MemoryMappedFiles.Tests
             using (TempFile file = new TempFile(GetTestFilePath(), Capacity))
             using (FileStream fs = new FileStream(file.Path, FileMode.Open, fileAccess))
             {
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        fs,
-                        null,
-                        Capacity,
-                        mmfAccess,
-                        HandleInheritability.None,
-                        true
-                    )
+                Assert.Throws<UnauthorizedAccessException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            fs,
+                            null,
+                            Capacity,
+                            mmfAccess,
+                            HandleInheritability.None,
+                            true
+                        )
                 );
             }
         }
@@ -602,41 +603,45 @@ namespace System.IO.MemoryMappedFiles.Tests
             const int Capacity = 4096;
             using (TempFile file = new TempFile(GetTestFilePath(), Capacity))
             {
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    MemoryMappedFile.CreateFromFile(file.Path, FileMode.Open, mapName)
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => MemoryMappedFile.CreateFromFile(file.Path, FileMode.Open, mapName)
                 );
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    MemoryMappedFile.CreateFromFile(file.Path, FileMode.Open, mapName, Capacity)
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(file.Path, FileMode.Open, mapName, Capacity)
                 );
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.Open,
-                        mapName,
-                        Capacity,
-                        MemoryMappedFileAccess.ReadWrite
-                    )
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.Open,
+                            mapName,
+                            Capacity,
+                            MemoryMappedFileAccess.ReadWrite
+                        )
                 );
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.Open,
-                        mapName,
-                        Capacity,
-                        MemoryMappedFileAccess.ReadWrite
-                    )
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.Open,
+                            mapName,
+                            Capacity,
+                            MemoryMappedFileAccess.ReadWrite
+                        )
                 );
                 using (FileStream fs = File.Open(file.Path, FileMode.Open))
                 {
-                    Assert.Throws<PlatformNotSupportedException>(() =>
-                        MemoryMappedFile.CreateFromFile(
-                            fs,
-                            mapName,
-                            4096,
-                            MemoryMappedFileAccess.ReadWrite,
-                            HandleInheritability.None,
-                            true
-                        )
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () =>
+                            MemoryMappedFile.CreateFromFile(
+                                fs,
+                                mapName,
+                                4096,
+                                MemoryMappedFileAccess.ReadWrite,
+                                HandleInheritability.None,
+                                true
+                            )
                     );
                 }
             }
@@ -651,22 +656,24 @@ namespace System.IO.MemoryMappedFiles.Tests
             using (TempFile file = new TempFile(GetTestFilePath()))
             {
                 // Out of range values for capacity
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.Open,
-                        CreateUniqueMapName(),
-                        -1
-                    )
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.Open,
+                            CreateUniqueMapName(),
+                            -1
+                        )
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.Open,
-                        CreateUniqueMapName(),
-                        -1,
-                        MemoryMappedFileAccess.Read
-                    )
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.Open,
+                            CreateUniqueMapName(),
+                            -1,
+                            MemoryMappedFileAccess.Read
+                        )
                 );
 
                 // Positive capacity required when creating a map from an empty file
@@ -714,15 +721,16 @@ namespace System.IO.MemoryMappedFiles.Tests
                     Assert.Equal(0, fs.Length);
 
                     // Out of range values for capacity
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        MemoryMappedFile.CreateFromFile(
-                            fs,
-                            null,
-                            -1,
-                            MemoryMappedFileAccess.Read,
-                            HandleInheritability.None,
-                            true
-                        )
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () =>
+                            MemoryMappedFile.CreateFromFile(
+                                fs,
+                                null,
+                                -1,
+                                MemoryMappedFileAccess.Read,
+                                HandleInheritability.None,
+                                true
+                            )
                     );
 
                     // Default (0) capacity with an empty file
@@ -826,15 +834,16 @@ namespace System.IO.MemoryMappedFiles.Tests
                 )
                 {
                     // Out of range values for capacity
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        MemoryMappedFile.CreateFromFile(
-                            fileHandle,
-                            null,
-                            -1,
-                            MemoryMappedFileAccess.Read,
-                            HandleInheritability.None,
-                            true
-                        )
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () =>
+                            MemoryMappedFile.CreateFromFile(
+                                fileHandle,
+                                null,
+                                -1,
+                                MemoryMappedFileAccess.Read,
+                                HandleInheritability.None,
+                                true
+                            )
                     );
 
                     // Default (0) capacity with an empty file
@@ -1536,26 +1545,27 @@ namespace System.IO.MemoryMappedFiles.Tests
         [Fact]
         public void FileDoesNotExist_OpenFileMode()
         {
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.CreateFromFile(GetTestFilePath())
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.CreateFromFile(GetTestFilePath())
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.CreateFromFile(GetTestFilePath(), FileMode.Open)
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.CreateFromFile(GetTestFilePath(), FileMode.Open)
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.CreateFromFile(GetTestFilePath(), FileMode.Open, null)
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.CreateFromFile(GetTestFilePath(), FileMode.Open, null)
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.CreateFromFile(GetTestFilePath(), FileMode.Open, null, 4096)
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.CreateFromFile(GetTestFilePath(), FileMode.Open, null, 4096)
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.CreateFromFile(
-                    GetTestFilePath(),
-                    FileMode.Open,
-                    null,
-                    4096,
-                    MemoryMappedFileAccess.ReadWrite
-                )
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    MemoryMappedFile.CreateFromFile(
+                        GetTestFilePath(),
+                        FileMode.Open,
+                        null,
+                        4096,
+                        MemoryMappedFileAccess.ReadWrite
+                    )
             );
         }
 
@@ -1569,32 +1579,35 @@ namespace System.IO.MemoryMappedFiles.Tests
             using (TempFile file = new TempFile(GetTestFilePath()))
             {
                 // FileMode.CreateNew invalid when the file already exists
-                Assert.Throws<IOException>(() =>
-                    MemoryMappedFile.CreateFromFile(file.Path, FileMode.CreateNew)
+                Assert.Throws<IOException>(
+                    () => MemoryMappedFile.CreateFromFile(file.Path, FileMode.CreateNew)
                 );
-                Assert.Throws<IOException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.CreateNew,
-                        CreateUniqueMapName()
-                    )
+                Assert.Throws<IOException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.CreateNew,
+                            CreateUniqueMapName()
+                        )
                 );
-                Assert.Throws<IOException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.CreateNew,
-                        CreateUniqueMapName(),
-                        4096
-                    )
+                Assert.Throws<IOException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.CreateNew,
+                            CreateUniqueMapName(),
+                            4096
+                        )
                 );
-                Assert.Throws<IOException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        file.Path,
-                        FileMode.CreateNew,
-                        CreateUniqueMapName(),
-                        4096,
-                        MemoryMappedFileAccess.ReadWrite
-                    )
+                Assert.Throws<IOException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.CreateNew,
+                            CreateUniqueMapName(),
+                            4096,
+                            MemoryMappedFileAccess.ReadWrite
+                        )
                 );
             }
         }
@@ -1711,22 +1724,30 @@ namespace System.IO.MemoryMappedFiles.Tests
             using (TempFile file = new TempFile(GetTestFilePath(), 4096))
             {
                 // The FileStream created by the map doesn't have GENERIC_EXECUTE set
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    MemoryMappedFile.CreateFromFile(file.Path, FileMode.Open, null, 4096, access)
+                Assert.Throws<UnauthorizedAccessException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            file.Path,
+                            FileMode.Open,
+                            null,
+                            4096,
+                            access
+                        )
                 );
 
                 // The FileStream opened explicitly doesn't have GENERIC_EXECUTE set
                 using (FileStream fs = File.Open(file.Path, FileMode.Open))
                 {
-                    Assert.Throws<UnauthorizedAccessException>(() =>
-                        MemoryMappedFile.CreateFromFile(
-                            fs,
-                            null,
-                            4096,
-                            access,
-                            HandleInheritability.None,
-                            true
-                        )
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () =>
+                            MemoryMappedFile.CreateFromFile(
+                                fs,
+                                null,
+                                4096,
+                                access,
+                                HandleInheritability.None,
+                                true
+                            )
                     );
                 }
             }
@@ -1771,14 +1792,15 @@ namespace System.IO.MemoryMappedFiles.Tests
                     }
                     else
                     {
-                        Assert.Throws<UnauthorizedAccessException>(() =>
-                            MemoryMappedFile.CreateFromFile(
-                                file.Path,
-                                FileMode.Open,
-                                null,
-                                Capacity,
-                                access
-                            )
+                        Assert.Throws<UnauthorizedAccessException>(
+                            () =>
+                                MemoryMappedFile.CreateFromFile(
+                                    file.Path,
+                                    FileMode.Open,
+                                    null,
+                                    Capacity,
+                                    access
+                                )
                         );
                     }
                 }
@@ -2172,13 +2194,14 @@ namespace System.IO.MemoryMappedFiles.Tests
             )
             {
                 ValidateMemoryMappedFile(mmf, Capacity);
-                Assert.Throws<IOException>(() =>
-                    MemoryMappedFile.CreateFromFile(
-                        GetTestFilePath(),
-                        FileMode.CreateNew,
-                        name,
-                        Capacity
-                    )
+                Assert.Throws<IOException>(
+                    () =>
+                        MemoryMappedFile.CreateFromFile(
+                            GetTestFilePath(),
+                            FileMode.CreateNew,
+                            name,
+                            Capacity
+                        )
                 );
             }
             using (
@@ -2386,15 +2409,16 @@ namespace System.IO.MemoryMappedFiles.Tests
                 await serverStream.WaitForConnectionAsync();
             }
 
-            Assert.Throws<NotSupportedException>(() =>
-                MemoryMappedFile.CreateFromFile(
-                    clientStream,
-                    null,
-                    capacity,
-                    MemoryMappedFileAccess.ReadWrite,
-                    HandleInheritability.None,
-                    false
-                )
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    MemoryMappedFile.CreateFromFile(
+                        clientStream,
+                        null,
+                        capacity,
+                        MemoryMappedFileAccess.ReadWrite,
+                        HandleInheritability.None,
+                        false
+                    )
             );
 
             serverStream?.Dispose();
@@ -2409,14 +2433,15 @@ namespace System.IO.MemoryMappedFiles.Tests
         {
             (string pipePath, NamedPipeServerStream? serverStream) = CreatePipe();
 
-            Assert.Throws<NotSupportedException>(() =>
-                MemoryMappedFile.CreateFromFile(
-                    pipePath,
-                    FileMode.Open,
-                    null,
-                    capacity,
-                    MemoryMappedFileAccess.ReadWrite
-                )
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    MemoryMappedFile.CreateFromFile(
+                        pipePath,
+                        FileMode.Open,
+                        null,
+                        capacity,
+                        MemoryMappedFileAccess.ReadWrite
+                    )
             );
 
             serverStream?.Dispose();

@@ -40,35 +40,36 @@ public class PInvokes
     [Fact]
     public static void Strings_NotSupported()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckStringWithAnsiCharSet("")
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CheckStringWithAnsiCharSet("")
         );
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckStringWithUnicodeCharSet("")
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CheckStringWithUnicodeCharSet("")
         );
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckStructWithStructWithString(
-                new StructWithString("")
-            )
+        Assert.Throws<MarshalDirectiveException>(
+            () =>
+                DisabledRuntimeMarshallingNative.CheckStructWithStructWithString(
+                    new StructWithString("")
+                )
         );
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.GetStringWithUnicodeCharSet()
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.GetStringWithUnicodeCharSet()
         );
     }
 
     [Fact]
     public static void LayoutClass_NotSupported()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckLayoutClass(new LayoutClass())
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CheckLayoutClass(new LayoutClass())
         );
     }
 
     [Fact]
     public static void SetLastError_NotSupported()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithSetLastError()
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CallWithSetLastError()
         );
     }
 
@@ -78,8 +79,8 @@ public class PInvokes
     )]
     public static void LCID_NotSupported()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithLCID()
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CallWithLCID()
         );
     }
 
@@ -89,16 +90,16 @@ public class PInvokes
     )]
     public static void PreserveSig_False_NotSupported()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithHResultSwap()
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CallWithHResultSwap()
         );
     }
 
     [Fact]
     public static void Varargs_NotSupported()
     {
-        AssertThrowsCorrectException(() =>
-            DisabledRuntimeMarshallingNative.CallWithVarargs(__arglist(1, 2, 3))
+        AssertThrowsCorrectException(
+            () => DisabledRuntimeMarshallingNative.CallWithVarargs(__arglist(1, 2, 3))
         );
 
         static void AssertThrowsCorrectException(Action testCode)
@@ -231,11 +232,11 @@ public class PInvokes
     [SkipOnMono("Blocking this on CoreCLR should be good enough.")]
     public static void UInt128_Int128_NotSupported()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithInt128(default(Int128))
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CallWithInt128(default(Int128))
         );
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithUInt128(default(UInt128))
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CallWithUInt128(default(UInt128))
         );
     }
 }

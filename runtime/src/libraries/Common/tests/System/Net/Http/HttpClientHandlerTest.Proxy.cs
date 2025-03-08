@@ -411,8 +411,8 @@ namespace System.Net.Http.Functional.Tests
             {
                 handler.Proxy = new WebProxy($"https://{Guid.NewGuid():N}");
 
-                await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.GetAsync($"http://{Guid.NewGuid():N}")
+                await Assert.ThrowsAsync<HttpRequestException>(
+                    () => client.GetAsync($"http://{Guid.NewGuid():N}")
                 );
             }
         }

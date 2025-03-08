@@ -32,17 +32,18 @@ public class ReverseEngineeringConfigurationTests
         Assert.Equal(
             DesignStrings.ContextClassNotValidCSharpIdentifier(contextName),
             Assert
-                .Throws<ArgumentException>(() =>
-                    reverseEngineer.ScaffoldModel(
-                        "connectionstring",
-                        new DatabaseModelFactoryOptions(),
-                        new ModelReverseEngineerOptions(),
-                        new ModelCodeGenerationOptions
-                        {
-                            ModelNamespace = "FakeNamespace",
-                            ContextName = contextName,
-                        }
-                    )
+                .Throws<ArgumentException>(
+                    () =>
+                        reverseEngineer.ScaffoldModel(
+                            "connectionstring",
+                            new DatabaseModelFactoryOptions(),
+                            new ModelReverseEngineerOptions(),
+                            new ModelCodeGenerationOptions
+                            {
+                                ModelNamespace = "FakeNamespace",
+                                ContextName = contextName,
+                            }
+                        )
                 )
                 .Message
         );

@@ -35,18 +35,19 @@ namespace System.IO.MemoryMappedFiles.Tests
         [MemberData(nameof(CreateValidMapNames))]
         public void MapNamesNotSupported_Unix(string mapName)
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                MemoryMappedFile.OpenExisting(mapName)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => MemoryMappedFile.OpenExisting(mapName)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                MemoryMappedFile.OpenExisting(mapName, MemoryMappedFileRights.ReadWrite)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => MemoryMappedFile.OpenExisting(mapName, MemoryMappedFileRights.ReadWrite)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                MemoryMappedFile.OpenExisting(
-                    mapName,
-                    MemoryMappedFileRights.ReadWrite,
-                    HandleInheritability.None
-                )
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    MemoryMappedFile.OpenExisting(
+                        mapName,
+                        MemoryMappedFileRights.ReadWrite,
+                        HandleInheritability.None
+                    )
             );
         }
 
@@ -57,21 +58,23 @@ namespace System.IO.MemoryMappedFiles.Tests
         [Fact]
         public void InvalidArguments_Name_NonExistent()
         {
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(CreateUniqueMapName())
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.OpenExisting(CreateUniqueMapName())
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(
-                    CreateUniqueMapName(),
-                    MemoryMappedFileRights.ReadWrite
-                )
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    MemoryMappedFile.OpenExisting(
+                        CreateUniqueMapName(),
+                        MemoryMappedFileRights.ReadWrite
+                    )
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(
-                    CreateUniqueMapName(),
-                    MemoryMappedFileRights.ReadWrite,
-                    HandleInheritability.None
-                )
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    MemoryMappedFile.OpenExisting(
+                        CreateUniqueMapName(),
+                        MemoryMappedFileRights.ReadWrite,
+                        HandleInheritability.None
+                    )
             );
         }
 
@@ -138,18 +141,20 @@ namespace System.IO.MemoryMappedFiles.Tests
             {
                 using (MemoryMappedFile opened = MemoryMappedFile.OpenExisting(mapName))
                 {
-                    Assert.Throws<IOException>(() =>
-                        MemoryMappedFile.OpenExisting(
-                            mapName,
-                            MemoryMappedFileRights.AccessSystemSecurity
-                        )
+                    Assert.Throws<IOException>(
+                        () =>
+                            MemoryMappedFile.OpenExisting(
+                                mapName,
+                                MemoryMappedFileRights.AccessSystemSecurity
+                            )
                     );
-                    Assert.Throws<IOException>(() =>
-                        MemoryMappedFile.OpenExisting(
-                            mapName,
-                            MemoryMappedFileRights.AccessSystemSecurity,
-                            HandleInheritability.None
-                        )
+                    Assert.Throws<IOException>(
+                        () =>
+                            MemoryMappedFile.OpenExisting(
+                                mapName,
+                                MemoryMappedFileRights.AccessSystemSecurity,
+                                HandleInheritability.None
+                            )
                     );
                     ValidateMemoryMappedFile(opened, Capacity);
                 }
@@ -181,15 +186,16 @@ namespace System.IO.MemoryMappedFiles.Tests
 
             // The map no longer exists
             Assert.Throws<FileNotFoundException>(() => MemoryMappedFile.OpenExisting(mapName));
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(mapName, MemoryMappedFileRights.ReadWrite)
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.OpenExisting(mapName, MemoryMappedFileRights.ReadWrite)
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(
-                    mapName,
-                    MemoryMappedFileRights.ReadWrite,
-                    HandleInheritability.None
-                )
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    MemoryMappedFile.OpenExisting(
+                        mapName,
+                        MemoryMappedFileRights.ReadWrite,
+                        HandleInheritability.None
+                    )
             );
         }
 
@@ -221,18 +227,20 @@ namespace System.IO.MemoryMappedFiles.Tests
             {
                 using (MemoryMappedFile opened = MemoryMappedFile.OpenExisting(name))
                 {
-                    Assert.Throws<IOException>(() =>
-                        MemoryMappedFile.OpenExisting(
-                            name,
-                            MemoryMappedFileRights.AccessSystemSecurity
-                        )
+                    Assert.Throws<IOException>(
+                        () =>
+                            MemoryMappedFile.OpenExisting(
+                                name,
+                                MemoryMappedFileRights.AccessSystemSecurity
+                            )
                     );
-                    Assert.Throws<IOException>(() =>
-                        MemoryMappedFile.OpenExisting(
-                            name,
-                            MemoryMappedFileRights.AccessSystemSecurity,
-                            HandleInheritability.None
-                        )
+                    Assert.Throws<IOException>(
+                        () =>
+                            MemoryMappedFile.OpenExisting(
+                                name,
+                                MemoryMappedFileRights.AccessSystemSecurity,
+                                HandleInheritability.None
+                            )
                     );
                     ValidateMemoryMappedFile(opened, Capacity);
                 }
@@ -264,15 +272,16 @@ namespace System.IO.MemoryMappedFiles.Tests
 
             // The map no longer exists
             Assert.Throws<FileNotFoundException>(() => MemoryMappedFile.OpenExisting(name));
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(name, MemoryMappedFileRights.Read)
+            Assert.Throws<FileNotFoundException>(
+                () => MemoryMappedFile.OpenExisting(name, MemoryMappedFileRights.Read)
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                MemoryMappedFile.OpenExisting(
-                    name,
-                    MemoryMappedFileRights.Read,
-                    HandleInheritability.None
-                )
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    MemoryMappedFile.OpenExisting(
+                        name,
+                        MemoryMappedFileRights.Read,
+                        HandleInheritability.None
+                    )
             );
         }
 

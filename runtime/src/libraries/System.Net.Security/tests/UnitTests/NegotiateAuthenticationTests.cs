@@ -87,8 +87,8 @@ namespace System.Net.Security.Tests
             using (remoteIdentity as IDisposable)
             {
                 negotiateAuthentication.Dispose();
-                Assert.Throws<InvalidOperationException>(() =>
-                    negotiateAuthentication.RemoteIdentity
+                Assert.Throws<InvalidOperationException>(
+                    () => negotiateAuthentication.RemoteIdentity
                 );
             }
         }

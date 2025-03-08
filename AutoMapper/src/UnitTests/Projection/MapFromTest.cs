@@ -14,8 +14,8 @@ public class CustomMapFromExpressionTest
                 );
         });
 
-        typeof(NullReferenceException).ShouldNotBeThrownBy(() =>
-            config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()
+        typeof(NullReferenceException).ShouldNotBeThrownBy(
+            () => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()
         ); //null reference exception here
     }
 

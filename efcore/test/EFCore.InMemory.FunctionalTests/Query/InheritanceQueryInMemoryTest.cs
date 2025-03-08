@@ -18,8 +18,8 @@ public class InheritanceQueryInMemoryTest
     public override async Task Can_query_all_animal_views(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Can_query_all_animal_views(async)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => base.Can_query_all_animal_views(async)
             )
         ).Message;
 

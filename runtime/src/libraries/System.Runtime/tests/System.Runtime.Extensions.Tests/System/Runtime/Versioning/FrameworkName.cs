@@ -187,8 +187,8 @@ namespace System.Runtime.Versioning.Tests
         [Fact]
         public static void ConstructFromInvalidIdentifierVersionProfile()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new FrameworkName(null, s_testVersion, TestProfile)
+            Assert.Throws<ArgumentNullException>(
+                () => new FrameworkName(null, s_testVersion, TestProfile)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "identifier",
@@ -199,8 +199,8 @@ namespace System.Runtime.Versioning.Tests
                 () => new FrameworkName("   \r\n\t", s_testVersion, TestProfile)
             );
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new FrameworkName(TestIdentifier, null, TestProfile)
+            Assert.Throws<ArgumentNullException>(
+                () => new FrameworkName(TestIdentifier, null, TestProfile)
             );
         }
 

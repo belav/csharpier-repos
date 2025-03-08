@@ -331,8 +331,8 @@ public class ModelAttributesTest
             .FirstOrDefault(p => p.Name == nameof(BaseModel.RouteValue));
 
         // Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            ModelAttributes.GetAttributesForProperty(modelType, property)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ModelAttributes.GetAttributesForProperty(modelType, property)
         );
         Assert.Equal(
             "Only one ModelMetadataType attribute is permitted per type.",

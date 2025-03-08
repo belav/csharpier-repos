@@ -324,14 +324,12 @@ namespace System.Workflow.ComponentModel.Design
     #region Class ActivityBindPropertyDescriptor
     /// Please note that ActivityBindPropertyDescriptor is now changed so that it can support MetaProperty binds too.
     /// Although this feature is not yet enabled. Please change code in the PropertyDescritorUtils.InternalFilterProperties to support it
-
     /// We need this property descriptor for following reason:
     /// When we are not in data context we support emission of events directly by using EventBindingService
     /// When we do this the events dont get stored in the DependencyObject rather than we store them in userdata
     /// Only the event property descriptor knows how to get it back.
     /// At the same time we also support Promotion of the events (ActivityBind) when using this the information gets
     /// stored directly in the DependencyObject which we fetch from the ActivityBindPropertyDescriptor base class
-
     /// Whenever the code in this class is changed please run the following test cases
     /// 1. In ActivityDesigner Drop Code and Promote Properties. (ExecuteCode should get promoted)
     /// 2. In ActivityDesigner, change the promoted property to event handler (Event needs to be emitted with += syntax)

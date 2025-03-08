@@ -86,11 +86,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Project_json_reference_in_tracking_query_fails(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedReferenceRoot)
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    AssertQuery(
+                        async,
+                        ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedReferenceRoot)
+                    )
             )
         ).Message;
 
@@ -107,11 +108,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Project_json_collection_in_tracking_query_fails(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedCollectionRoot)
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    AssertQuery(
+                        async,
+                        ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedCollectionRoot)
+                    )
             )
         ).Message;
 
@@ -130,18 +132,19 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     )
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<JsonEntityBasic>()
-                            .Select(x => new
-                            {
-                                x,
-                                x.OwnedReferenceRoot,
-                                x.OwnedCollectionRoot,
-                            })
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<JsonEntityBasic>()
+                                .Select(x => new
+                                {
+                                    x,
+                                    x.OwnedReferenceRoot,
+                                    x.OwnedCollectionRoot,
+                                })
+                    )
             )
         ).Message;
 

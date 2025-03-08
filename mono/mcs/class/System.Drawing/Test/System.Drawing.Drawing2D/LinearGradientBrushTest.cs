@@ -406,27 +406,29 @@ namespace MonoTests.System.Drawing.Drawing2D
             var emptyWidth = new Rectangle(0, 0, 0, 1);
             var emptyHeight = new Rectangle(0, 0, 0, 1);
 
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(emptyWidth, Color.Empty, Color.Empty, 1)
+            Assert.Throws<ArgumentException>(
+                () => new LinearGradientBrush(emptyWidth, Color.Empty, Color.Empty, 1)
             );
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(emptyHeight, Color.Empty, Color.Empty, 1)
+            Assert.Throws<ArgumentException>(
+                () => new LinearGradientBrush(emptyHeight, Color.Empty, Color.Empty, 1)
             );
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(
-                    emptyWidth,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.BackwardDiagonal
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        emptyWidth,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.BackwardDiagonal
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(
-                    emptyHeight,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.BackwardDiagonal
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        emptyHeight,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.BackwardDiagonal
+                    )
             );
         }
 
@@ -436,27 +438,29 @@ namespace MonoTests.System.Drawing.Drawing2D
             var emptyWidth = new RectangleF(0, 0, 0, 1);
             var emptyHeight = new RectangleF(0, 0, 0, 1);
 
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(emptyWidth, Color.Empty, Color.Empty, 1)
+            Assert.Throws<ArgumentException>(
+                () => new LinearGradientBrush(emptyWidth, Color.Empty, Color.Empty, 1)
             );
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(emptyHeight, Color.Empty, Color.Empty, 1)
+            Assert.Throws<ArgumentException>(
+                () => new LinearGradientBrush(emptyHeight, Color.Empty, Color.Empty, 1)
             );
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(
-                    emptyWidth,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.BackwardDiagonal
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        emptyWidth,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.BackwardDiagonal
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(
-                    emptyHeight,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.BackwardDiagonal
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        emptyHeight,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.BackwardDiagonal
+                    )
             );
         }
 
@@ -466,37 +470,41 @@ namespace MonoTests.System.Drawing.Drawing2D
             var rect = new Rectangle(0, 0, 1, 1);
             var rectf = new RectangleF(0, 0, 1, 1);
 
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                new LinearGradientBrush(
-                    rect,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.Horizontal - 1
-                )
+            Assert.Throws<InvalidEnumArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        rect,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.Horizontal - 1
+                    )
             );
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                new LinearGradientBrush(
-                    rectf,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.Horizontal - 1
-                )
+            Assert.Throws<InvalidEnumArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        rectf,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.Horizontal - 1
+                    )
             );
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                new LinearGradientBrush(
-                    rect,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.BackwardDiagonal + 1
-                )
+            Assert.Throws<InvalidEnumArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        rect,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.BackwardDiagonal + 1
+                    )
             );
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                new LinearGradientBrush(
-                    rectf,
-                    Color.Empty,
-                    Color.Empty,
-                    LinearGradientMode.BackwardDiagonal + 1
-                )
+            Assert.Throws<InvalidEnumArgumentException>(
+                () =>
+                    new LinearGradientBrush(
+                        rectf,
+                        Color.Empty,
+                        Color.Empty,
+                        LinearGradientMode.BackwardDiagonal + 1
+                    )
             );
         }
 
@@ -523,14 +531,16 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void LinearColors_Empty()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => default_brush.LinearColors = new Color[0]
+            Assert.Throws<IndexOutOfRangeException>(
+                () => default_brush.LinearColors = new Color[0]
             );
         }
 
         [Test]
         public void LinearColors_One()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => default_brush.LinearColors = new Color[1]
+            Assert.Throws<IndexOutOfRangeException>(
+                () => default_brush.LinearColors = new Color[1]
             );
         }
 
@@ -596,8 +606,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Transform_NonInvertible()
         {
-            Assert.Throws<ArgumentException>(() =>
-                default_brush.Transform = new Matrix(123, 24, 82, 16, 47, 30)
+            Assert.Throws<ArgumentException>(
+                () => default_brush.Transform = new Matrix(123, 24, 82, 16, 47, 30)
             );
         }
 
@@ -624,8 +634,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void WrapMode_Invalid()
         {
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                default_brush.WrapMode = (WrapMode)Int32.MinValue
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => default_brush.WrapMode = (WrapMode)Int32.MinValue
             );
         }
 
@@ -669,8 +679,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void MultiplyTransform2_Null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                default_brush.MultiplyTransform(null, MatrixOrder.Append)
+            Assert.Throws<ArgumentNullException>(
+                () => default_brush.MultiplyTransform(null, MatrixOrder.Append)
             );
         }
 
@@ -747,8 +757,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void RotateTransform_InvalidOrder()
         {
             LinearGradientBrush lgb = new LinearGradientBrush(pt1, pt2, c1, c2);
-            Assert.Throws<ArgumentException>(() =>
-                lgb.RotateTransform(720, (MatrixOrder)Int32.MinValue)
+            Assert.Throws<ArgumentException>(
+                () => lgb.RotateTransform(720, (MatrixOrder)Int32.MinValue)
             );
         }
 
@@ -801,8 +811,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void ScaleTransform_InvalidOrder()
         {
             LinearGradientBrush lgb = new LinearGradientBrush(pt1, pt2, c1, c2);
-            Assert.Throws<ArgumentException>(() =>
-                lgb.ScaleTransform(1, 1, (MatrixOrder)Int32.MinValue)
+            Assert.Throws<ArgumentException>(
+                () => lgb.ScaleTransform(1, 1, (MatrixOrder)Int32.MinValue)
             );
         }
 
@@ -946,8 +956,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void TranslateTransform_InvalidOrder()
         {
             LinearGradientBrush lgb = new LinearGradientBrush(pt1, pt2, c1, c2);
-            Assert.Throws<ArgumentException>(() =>
-                lgb.TranslateTransform(1, 1, (MatrixOrder)Int32.MinValue)
+            Assert.Throws<ArgumentException>(
+                () => lgb.TranslateTransform(1, 1, (MatrixOrder)Int32.MinValue)
             );
         }
 
@@ -1170,8 +1180,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             Rectangle r = new Rectangle(10, 10, 0, 10);
             Assert.AreEqual(0, r.Width, "Width");
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(r, Color.Red, Color.Blue, LinearGradientMode.Vertical)
+            Assert.Throws<ArgumentException>(
+                () => new LinearGradientBrush(r, Color.Red, Color.Blue, LinearGradientMode.Vertical)
             );
         }
 
@@ -1180,8 +1190,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             RectangleF r = new RectangleF(10.0f, 10.0f, 10.0f, 0.0f);
             Assert.AreEqual(0.0f, r.Height, "Height");
-            Assert.Throws<ArgumentException>(() =>
-                new LinearGradientBrush(r, Color.Red, Color.Blue, LinearGradientMode.Vertical)
+            Assert.Throws<ArgumentException>(
+                () => new LinearGradientBrush(r, Color.Red, Color.Blue, LinearGradientMode.Vertical)
             );
         }
     }

@@ -23,23 +23,23 @@ public class ControllerLinkGeneratorExtensionsTest
         var linkGenerator = CreateLinkGenerator(endpoint1);
 
         // Act
-        var exception = Assert.Throws<ArgumentException>(() =>
-            linkGenerator.GetUriByAction("Index", "Home", null, null, new("localhost"))
+        var exception = Assert.Throws<ArgumentException>(
+            () => linkGenerator.GetUriByAction("Index", "Home", null, null, new("localhost"))
         );
         Assert.Equal("scheme", exception.ParamName);
 
-        exception = Assert.Throws<ArgumentNullException>(() =>
-            linkGenerator.GetUriByAction((string)null, "Home", null, null, new("localhost"))
+        exception = Assert.Throws<ArgumentNullException>(
+            () => linkGenerator.GetUriByAction((string)null, "Home", null, null, new("localhost"))
         );
         Assert.Equal("action", exception.ParamName);
 
-        exception = Assert.Throws<ArgumentNullException>(() =>
-            linkGenerator.GetUriByAction("Index", null, null, null, new("localhost"))
+        exception = Assert.Throws<ArgumentNullException>(
+            () => linkGenerator.GetUriByAction("Index", null, null, null, new("localhost"))
         );
         Assert.Equal("controller", exception.ParamName);
 
-        exception = Assert.Throws<ArgumentException>(() =>
-            linkGenerator.GetUriByAction("Index", "Home", null, "http", default)
+        exception = Assert.Throws<ArgumentException>(
+            () => linkGenerator.GetUriByAction("Index", "Home", null, "http", default)
         );
         Assert.Equal("host", exception.ParamName);
     }

@@ -42,21 +42,22 @@ namespace DebuggerTests
         private bool _gotRuntimeReady = false;
         private bool _gotAppReady = false;
 
-        protected static Lazy<ILoggerFactory> s_loggerFactory = new(() =>
-            LoggerFactory.Create(builder =>
-            {
-                if (TestOptions.LogToConsole)
+        protected static Lazy<ILoggerFactory> s_loggerFactory = new(
+            () =>
+                LoggerFactory.Create(builder =>
                 {
-                    builder
-                        .AddSimpleConsole(options =>
-                        {
-                            options.SingleLine = true;
-                            options.TimestampFormat = "[HH:mm:ss] ";
-                        })
-                        .AddFilter(null, LogLevel.Debug);
-                    // .AddFile(logFilePath, minimumLevel: LogLevel.Debug)
-                }
-            })
+                    if (TestOptions.LogToConsole)
+                    {
+                        builder
+                            .AddSimpleConsole(options =>
+                            {
+                                options.SingleLine = true;
+                                options.TimestampFormat = "[HH:mm:ss] ";
+                            })
+                            .AddFilter(null, LogLevel.Debug);
+                        // .AddFile(logFilePath, minimumLevel: LogLevel.Debug)
+                    }
+                })
         );
 
         protected ILogger _logger;
@@ -435,8 +436,8 @@ namespace DebuggerTests
                 await LaunchBrowser(start, span);
                 var init_cmds = getInitCmds(Client, _cancellationTokenSource.Token);
 
-                Task<Result> readyTask = Task.Run(async () =>
-                    Result.FromJson(await WaitFor(APP_READY))
+                Task<Result> readyTask = Task.Run(
+                    async () => Result.FromJson(await WaitFor(APP_READY))
                 );
                 init_cmds.Add((APP_READY, readyTask));
 

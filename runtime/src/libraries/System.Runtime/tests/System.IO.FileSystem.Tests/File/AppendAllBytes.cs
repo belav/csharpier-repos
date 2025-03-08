@@ -22,11 +22,12 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                File.AppendAllBytes(
-                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
-                    new byte[0]
-                )
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    File.AppendAllBytes(
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                        new byte[0]
+                    )
             );
         }
 
@@ -98,8 +99,8 @@ namespace System.IO.Tests
                 }
                 else
                 {
-                    Assert.Throws<UnauthorizedAccessException>(() =>
-                        File.AppendAllBytes(path, dataToAppend)
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => File.AppendAllBytes(path, dataToAppend)
                     );
                 }
             }

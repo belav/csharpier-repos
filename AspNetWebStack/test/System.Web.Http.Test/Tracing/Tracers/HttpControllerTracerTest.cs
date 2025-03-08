@@ -235,8 +235,12 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                ((IHttpController)tracer).ExecuteAsync(controllerContext, CancellationToken.None)
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    ((IHttpController)tracer).ExecuteAsync(
+                        controllerContext,
+                        CancellationToken.None
+                    )
             );
 
             // Assert

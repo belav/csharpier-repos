@@ -124,8 +124,8 @@ namespace System.ConfigurationTests
         [Fact]
         public void BaseIndexOfThrowsForNull()
         {
-            Assert.Throws<ConfigurationErrorsException>(() =>
-                new SimpleCollection().TestBaseIndexOf(null)
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new SimpleCollection().TestBaseIndexOf(null)
             );
         }
 
@@ -176,39 +176,40 @@ namespace System.ConfigurationTests
         [Fact]
         public void BaseAddIndexOutOfRangeThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() =>
-                new SimpleCollection().TestBaseAdd(-2, null)
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new SimpleCollection().TestBaseAdd(-2, null)
             );
         }
 
         [Fact]
         public void BaseAddReadOnlyThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() =>
-                new ReadOnlySimpleCollection().TestBaseAdd(null)
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new ReadOnlySimpleCollection().TestBaseAdd(null)
             );
         }
 
         [Fact]
         public void BaseAddIndexReadOnlyThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() =>
-                new ReadOnlySimpleCollection().TestBaseAdd(-1, null)
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new ReadOnlySimpleCollection().TestBaseAdd(-1, null)
             );
         }
 
         [Fact]
         public void BaseAddNullThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() =>
-                new SimpleCollection().TestBaseAdd(null)
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new SimpleCollection().TestBaseAdd(null)
             );
         }
 
         [Fact]
         public void BaseAddIndexNullThrows()
         {
-            Assert.Throws<NullReferenceException>(() => new SimpleCollection().TestBaseAdd(-1, null)
+            Assert.Throws<NullReferenceException>(
+                () => new SimpleCollection().TestBaseAdd(-1, null)
             );
         }
 

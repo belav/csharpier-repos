@@ -266,8 +266,8 @@ public class ChunkedRequestTests : LoggedTest
                     {
                         Assert.True(request.SupportsTrailers(), "SupportsTrailers");
                         Assert.False(request.CheckTrailersAvailable(), "CheckTrailersAvailable"); // Not yet
-                        Assert.Throws<InvalidOperationException>(() =>
-                            request.GetTrailer("X-Trailer-Header")
+                        Assert.Throws<InvalidOperationException>(
+                            () => request.GetTrailer("X-Trailer-Header")
                         ); // Not yet
                     }
                     // The middle requests are chunked with trailers.
@@ -275,8 +275,8 @@ public class ChunkedRequestTests : LoggedTest
                     {
                         Assert.True(request.SupportsTrailers(), "SupportsTrailers");
                         Assert.False(request.CheckTrailersAvailable(), "CheckTrailersAvailable"); // Not yet
-                        Assert.Throws<InvalidOperationException>(() =>
-                            request.GetTrailer("X-Trailer-Header")
+                        Assert.Throws<InvalidOperationException>(
+                            () => request.GetTrailer("X-Trailer-Header")
                         ); // Not yet
                         Assert.Equal("X-Trailer-Header", request.GetDeclaredTrailers().ToString());
                     }
@@ -285,8 +285,8 @@ public class ChunkedRequestTests : LoggedTest
                     {
                         Assert.True(request.SupportsTrailers(), "SupportsTrailers");
                         Assert.False(request.CheckTrailersAvailable(), "CheckTrailersAvailable");
-                        Assert.Throws<InvalidOperationException>(() =>
-                            request.GetTrailer("X-Trailer-Header")
+                        Assert.Throws<InvalidOperationException>(
+                            () => request.GetTrailer("X-Trailer-Header")
                         );
                     }
 
@@ -422,8 +422,8 @@ public class ChunkedRequestTests : LoggedTest
                     {
                         Assert.True(request.SupportsTrailers(), "SupportsTrailers");
                         Assert.False(request.CheckTrailersAvailable(), "CheckTrailersAvailable"); // Not yet
-                        Assert.Throws<InvalidOperationException>(() =>
-                            request.GetTrailer("X-Trailer-Header")
+                        Assert.Throws<InvalidOperationException>(
+                            () => request.GetTrailer("X-Trailer-Header")
                         ); // Not yet
                     }
                     // The middle requests are chunked with trailers.
@@ -431,8 +431,8 @@ public class ChunkedRequestTests : LoggedTest
                     {
                         Assert.True(request.SupportsTrailers(), "SupportsTrailers");
                         Assert.False(request.CheckTrailersAvailable(), "CheckTrailersAvailable"); // Not yet
-                        Assert.Throws<InvalidOperationException>(() =>
-                            request.GetTrailer("X-Trailer-Header")
+                        Assert.Throws<InvalidOperationException>(
+                            () => request.GetTrailer("X-Trailer-Header")
                         ); // Not yet
                         Assert.Equal("X-Trailer-Header", request.GetDeclaredTrailers().ToString());
                     }
@@ -441,8 +441,8 @@ public class ChunkedRequestTests : LoggedTest
                     {
                         Assert.True(request.SupportsTrailers(), "SupportsTrailers");
                         Assert.False(request.CheckTrailersAvailable(), "CheckTrailersAvailable");
-                        Assert.Throws<InvalidOperationException>(() =>
-                            request.GetTrailer("X-Trailer-Header")
+                        Assert.Throws<InvalidOperationException>(
+                            () => request.GetTrailer("X-Trailer-Header")
                         );
                     }
 
@@ -1127,8 +1127,8 @@ public class ChunkedRequestTests : LoggedTest
 
                     httpContext.Request.BodyReader.Complete();
 
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await request.BodyReader.ReadAsync()
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await request.BodyReader.ReadAsync()
                     );
 
                     response.Headers["Content-Length"] = new[] { "11" };

@@ -228,8 +228,8 @@ namespace Microsoft.Extensions.Options.Tests
                 .BuildServiceProvider()
                 .GetRequiredService<IOptionsFactory<FakeOptions>>();
 
-            var ex = Assert.Throws<OptionsValidationException>(() =>
-                factory.Create(Options.DefaultName)
+            var ex = Assert.Throws<OptionsValidationException>(
+                () => factory.Create(Options.DefaultName)
             );
             var message = Assert.Single(ex.Failures);
             Assert.Equal("Hello world", message);
@@ -362,8 +362,8 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var services = new ServiceCollection();
             Action<FakeOptions> act = o => o.Message = "whatev";
-            var error = Assert.Throws<InvalidOperationException>(() =>
-                services.ConfigureOptions(act)
+            var error = Assert.Throws<InvalidOperationException>(
+                () => services.ConfigureOptions(act)
             );
             Assert.Equal(
                 "No IConfigureOptions<>, IPostConfigureOptions<>, or IValidateOptions<> implementations were found, did you mean to call Configure<> or PostConfigure<>?",
@@ -376,8 +376,8 @@ namespace Microsoft.Extensions.Options.Tests
         public void ConfigureOptionsThrowsIfNothingFound()
         {
             var services = new ServiceCollection();
-            var error = Assert.Throws<InvalidOperationException>(() =>
-                services.ConfigureOptions(new object())
+            var error = Assert.Throws<InvalidOperationException>(
+                () => services.ConfigureOptions(new object())
             );
             Assert.Equal(
                 "No IConfigureOptions<>, IPostConfigureOptions<>, or IValidateOptions<> implementations were found.",

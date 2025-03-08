@@ -30,8 +30,8 @@ namespace Microsoft.Extensions.Logging.Test
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.LogInformation("Hello!")
+            var aggregateException = Assert.Throws<AggregateException>(
+                () => logger.LogInformation("Hello!")
             );
 
             // Assert
@@ -67,8 +67,8 @@ namespace Microsoft.Extensions.Logging.Test
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.BeginScope("Scope1")
+            var aggregateException = Assert.Throws<AggregateException>(
+                () => logger.BeginScope("Scope1")
             );
 
             // Assert
@@ -104,8 +104,8 @@ namespace Microsoft.Extensions.Logging.Test
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.LogInformation("Hello!")
+            var aggregateException = Assert.Throws<AggregateException>(
+                () => logger.LogInformation("Hello!")
             );
 
             // Assert
@@ -137,8 +137,8 @@ namespace Microsoft.Extensions.Logging.Test
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.LogInformation("Hello!")
+            var aggregateException = Assert.Throws<AggregateException>(
+                () => logger.LogInformation("Hello!")
             );
 
             // Assert

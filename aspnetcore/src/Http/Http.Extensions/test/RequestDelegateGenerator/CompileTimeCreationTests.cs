@@ -44,8 +44,8 @@ app.MapGet("/hello", (HttpContext context) => Task.CompletedTask);
 
         var httpContext = CreateHttpContext();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
         Assert.Equal("'invalidName' is not a route parameter.", exception.Message);
     }
@@ -511,8 +511,8 @@ app.MapGet("/", () => "Hello world!");
                 o.SerializerOptions.TypeInfoResolver = null
             );
         });
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
         );
         Assert.Equal(
             "JsonSerializerOptions instance must specify a TypeInfoResolver setting before being marked as read-only.",
@@ -569,8 +569,8 @@ app.MapGet("/", {innerSource});
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await endpoint.RequestDelegate(httpContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Equal(message, exception.Message);

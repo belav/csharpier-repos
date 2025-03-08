@@ -124,8 +124,8 @@ namespace MonoTests.System.Configuration
             {
                 string exePath = Path.Combine(temp.Path, "DoesNotExist.exe");
 
-                ConfigurationErrorsException ex = Assert.Throws<ConfigurationErrorsException>(() =>
-                    ConfigurationManager.OpenExeConfiguration(exePath)
+                ConfigurationErrorsException ex = Assert.Throws<ConfigurationErrorsException>(
+                    () => ConfigurationManager.OpenExeConfiguration(exePath)
                 );
 
                 // An error occurred loading a configuration file:
@@ -484,8 +484,8 @@ namespace MonoTests.System.Configuration
                 Assert.Equal(
                     file,
                     Assert
-                        .Throws<ConfigurationErrorsException>(() =>
-                            ConfigurationManager.OpenMappedMachineConfiguration(fileMap)
+                        .Throws<ConfigurationErrorsException>(
+                            () => ConfigurationManager.OpenMappedMachineConfiguration(fileMap)
                         )
                         .Filename
                 );

@@ -377,14 +377,15 @@ namespace System.Net.Http.Formatting
                 new DataContractJsonMediaTypeFormatter { Indent = true };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            Assert.Throws<NotSupportedException>(() =>
-                jsonFormatter.WriteToStreamAsync(
-                    typeof(SampleType),
-                    new SampleType(),
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    jsonFormatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
             );
         }
 

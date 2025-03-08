@@ -347,8 +347,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     );
                     Assert.True(feature.IsReadOnly);
 
-                    invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize
+                    invalidOpEx = Assert.Throws<InvalidOperationException>(
+                        () => feature.MaxRequestBodySize = perRequestMaxRequestBodySize
                     );
                     throw invalidOpEx;
                 },
@@ -398,8 +398,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     );
                     Assert.True(feature.IsReadOnly);
 
-                    invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                        feature.MaxRequestBodySize = 0x10
+                    invalidOpEx = Assert.Throws<InvalidOperationException>(
+                        () => feature.MaxRequestBodySize = 0x10
                     );
                     throw invalidOpEx;
                 },

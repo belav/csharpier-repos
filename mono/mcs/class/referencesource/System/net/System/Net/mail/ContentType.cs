@@ -26,7 +26,6 @@ namespace System.Net.Mime
     /// If any subcomponents are changed, isChanged is set to true and isPersisted is false
     /// ToString caches the value until a isChanged is true, then it recomputes the full value.
     /// </summary>
-
     public class ContentType
     {
         string mediaType;

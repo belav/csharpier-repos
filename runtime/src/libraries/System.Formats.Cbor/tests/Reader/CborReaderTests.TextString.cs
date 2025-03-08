@@ -226,8 +226,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                reader.ReadDefiniteLengthTextStringBytes()
+            Assert.Throws<InvalidOperationException>(
+                () => reader.ReadDefiniteLengthTextStringBytes()
             );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
             reader.ReadTextString(); // regular byte string reader should still succeed
@@ -254,8 +254,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, mode);
 
-            Exception exn = Assert.Throws<CborContentException>(() =>
-                reader.ReadDefiniteLengthTextStringBytes()
+            Exception exn = Assert.Throws<CborContentException>(
+                () => reader.ReadDefiniteLengthTextStringBytes()
             );
             Assert.IsType<DecoderFallbackException>(exn.InnerException);
             Assert.Equal(encoding.Length, reader.BytesRemaining);
@@ -395,8 +395,8 @@ namespace System.Formats.Cbor.Tests
             char[] buffer = new char[32];
             var reader = new CborReader(encoding);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                reader.TryReadTextString(buffer, out int _)
+            Assert.Throws<InvalidOperationException>(
+                () => reader.TryReadTextString(buffer, out int _)
             );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
@@ -492,8 +492,8 @@ namespace System.Formats.Cbor.Tests
         {
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, conformanceMode);
-            CborContentException exn = Assert.Throws<CborContentException>(() =>
-                reader.ReadTextString()
+            CborContentException exn = Assert.Throws<CborContentException>(
+                () => reader.ReadTextString()
             );
             Assert.NotNull(exn.InnerException);
             Assert.IsType<System.Text.DecoderFallbackException>(exn.InnerException);
@@ -531,8 +531,8 @@ namespace System.Formats.Cbor.Tests
             char[] buffer = new char[32];
             var reader = new CborReader(encoding, conformanceMode);
 
-            CborContentException exn = Assert.Throws<CborContentException>(() =>
-                reader.TryReadTextString(buffer, out int _)
+            CborContentException exn = Assert.Throws<CborContentException>(
+                () => reader.TryReadTextString(buffer, out int _)
             );
             Assert.NotNull(exn.InnerException);
             Assert.IsType<System.Text.DecoderFallbackException>(exn.InnerException);

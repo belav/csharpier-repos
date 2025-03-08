@@ -105,13 +105,14 @@ namespace MonoTests.System.Drawing
         {
             using (Bitmap bmp = new Bitmap(10, 10))
             {
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bmp.GetThumbnailImage(
-                        5,
-                        0,
-                        new Image.GetThumbnailImageAbort(CallbackFalse),
-                        IntPtr.Zero
-                    )
+                Assert.Throws<OutOfMemoryException>(
+                    () =>
+                        bmp.GetThumbnailImage(
+                            5,
+                            0,
+                            new Image.GetThumbnailImageAbort(CallbackFalse),
+                            IntPtr.Zero
+                        )
                 );
             }
         }
@@ -121,13 +122,14 @@ namespace MonoTests.System.Drawing
         {
             using (Bitmap bmp = new Bitmap(10, 10))
             {
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bmp.GetThumbnailImage(
-                        -5,
-                        5,
-                        new Image.GetThumbnailImageAbort(CallbackFalse),
-                        IntPtr.Zero
-                    )
+                Assert.Throws<OutOfMemoryException>(
+                    () =>
+                        bmp.GetThumbnailImage(
+                            -5,
+                            5,
+                            new Image.GetThumbnailImageAbort(CallbackFalse),
+                            IntPtr.Zero
+                        )
                 );
             }
         }

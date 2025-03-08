@@ -161,7 +161,6 @@ namespace System.Net
         }
 
         /// <internalonly/>
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",

@@ -105,14 +105,14 @@ namespace System.Runtime.CompilerServices.Tests
             foreach (MethodInfo m in typeof(RuntimeHelpersTests).GetMethods())
                 RuntimeHelpers.PrepareMethod(m.MethodHandle);
 
-            Assert.Throws<ArgumentException>(() =>
-                RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle))
+            Assert.Throws<ArgumentException>(
+                () => RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle))
             );
 
             if (RuntimeFeature.IsDynamicCodeSupported)
             {
-                Assert.ThrowsAny<ArgumentException>(() =>
-                    RuntimeHelpers.PrepareMethod(typeof(IList).GetMethod("Add").MethodHandle)
+                Assert.ThrowsAny<ArgumentException>(
+                    () => RuntimeHelpers.PrepareMethod(typeof(IList).GetMethod("Add").MethodHandle)
                 );
             }
         }
@@ -120,8 +120,8 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public static void PrepareGenericMethod()
         {
-            Assert.Throws<ArgumentException>(() =>
-                RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle), null)
+            Assert.Throws<ArgumentException>(
+                () => RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle), null)
             );
 
             //
@@ -140,20 +140,25 @@ namespace System.Runtime.CompilerServices.Tests
             if (RuntimeFeature.IsDynamicCodeSupported)
             {
                 // Generic definition without instantiation is invalid
-                Assert.Throws<ArgumentException>(() =>
-                    RuntimeHelpers.PrepareMethod(typeof(List<>).GetMethod("Add").MethodHandle, null)
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        RuntimeHelpers.PrepareMethod(
+                            typeof(List<>).GetMethod("Add").MethodHandle,
+                            null
+                        )
                 );
 
                 // Wrong instantiation
-                Assert.Throws<ArgumentException>(() =>
-                    RuntimeHelpers.PrepareMethod(
-                        typeof(List<>).GetMethod("Add").MethodHandle,
-                        new RuntimeTypeHandle[]
-                        {
-                            typeof(TestStruct).TypeHandle,
-                            typeof(TestStruct).TypeHandle,
-                        }
-                    )
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        RuntimeHelpers.PrepareMethod(
+                            typeof(List<>).GetMethod("Add").MethodHandle,
+                            new RuntimeTypeHandle[]
+                            {
+                                typeof(TestStruct).TypeHandle,
+                                typeof(TestStruct).TypeHandle,
+                            }
+                        )
                 );
             }
 
@@ -179,23 +184,25 @@ namespace System.Runtime.CompilerServices.Tests
             if (RuntimeFeature.IsDynamicCodeSupported)
             {
                 // Generic definition without instantiation is invalid
-                Assert.Throws<ArgumentException>(() =>
-                    RuntimeHelpers.PrepareMethod(
-                        typeof(Array).GetMethod("Resize").MethodHandle,
-                        null
-                    )
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        RuntimeHelpers.PrepareMethod(
+                            typeof(Array).GetMethod("Resize").MethodHandle,
+                            null
+                        )
                 );
 
                 // Wrong instantiation
-                Assert.Throws<ArgumentException>(() =>
-                    RuntimeHelpers.PrepareMethod(
-                        typeof(Array).GetMethod("Resize").MethodHandle,
-                        new RuntimeTypeHandle[]
-                        {
-                            typeof(TestStruct).TypeHandle,
-                            typeof(TestStruct).TypeHandle,
-                        }
-                    )
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        RuntimeHelpers.PrepareMethod(
+                            typeof(Array).GetMethod("Resize").MethodHandle,
+                            new RuntimeTypeHandle[]
+                            {
+                                typeof(TestStruct).TypeHandle,
+                                typeof(TestStruct).TypeHandle,
+                            }
+                        )
                 );
             }
         }
@@ -228,8 +235,8 @@ namespace System.Runtime.CompilerServices.Tests
             // returns true.
             if (!RuntimeHelpers.TryEnsureSufficientExecutionStack())
             {
-                Assert.Throws<InsufficientExecutionStackException>(() =>
-                    RuntimeHelpers.EnsureSufficientExecutionStack()
+                Assert.Throws<InsufficientExecutionStackException>(
+                    () => RuntimeHelpers.EnsureSufficientExecutionStack()
                 );
                 return;
             }

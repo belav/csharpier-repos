@@ -423,8 +423,8 @@ namespace System.Text.Json.Serialization.Tests
                 customConverters: new() { new ThrowingCustomConverter<List<int>>() }
             );
             string json = "{}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper(json, type, options)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await Serializer.DeserializeWrapper(json, type, options)
             );
 
             Assert.Throws<InvalidOperationException>(() => options.GetTypeInfo(type));
@@ -463,8 +463,8 @@ namespace System.Text.Json.Serialization.Tests
             );
 
             string json = "{}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper(json, type, options)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await Serializer.DeserializeWrapper(json, type, options)
             );
 
             Assert.Throws<InvalidOperationException>(() => options.GetTypeInfo(type));
@@ -513,8 +513,9 @@ namespace System.Text.Json.Serialization.Tests
             public async Task Visit<T>(JsonSerializerWrapper serializer)
             {
                 string json = """{"Property":null}""";
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>(json)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () =>
+                        await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>(json)
                 );
             }
         }
@@ -546,8 +547,9 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (typeof(T).IsValueType)
                 {
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>("{}")
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>("{}")
                     );
                 }
                 else

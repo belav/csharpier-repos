@@ -965,11 +965,12 @@ public class InputTagHelperTest
                 )
             ) // htmlAttributes
             .Returns(tagBuilder)
-            .Callback(() =>
-                viewContext.FormContext.InvariantField(
-                    tagBuilder.Attributes["name"],
-                    usesInvariantFormatting
-                )
+            .Callback(
+                () =>
+                    viewContext.FormContext.InvariantField(
+                        tagBuilder.Attributes["name"],
+                        usesInvariantFormatting
+                    )
             )
             .Verifiable();
 

@@ -146,8 +146,8 @@ namespace System.Net.Tests
         public async Task AcceptWebSocketAsync_UnsupportedProtocol_ThrowsWebSocketException()
         {
             HttpListenerContext context = await GetWebSocketContext(new string[] { "MyProtocol" });
-            await Assert.ThrowsAsync<WebSocketException>(() =>
-                context.AcceptWebSocketAsync("MyOtherProtocol")
+            await Assert.ThrowsAsync<WebSocketException>(
+                () => context.AcceptWebSocketAsync("MyOtherProtocol")
             );
         }
 
@@ -155,8 +155,8 @@ namespace System.Net.Tests
         public async Task AcceptWebSocketAsync_NoClientSubProtocol_ThrowsWebSocketException()
         {
             HttpListenerContext context = await GetWebSocketContext();
-            await Assert.ThrowsAsync<WebSocketException>(() =>
-                context.AcceptWebSocketAsync("SubProtocol")
+            await Assert.ThrowsAsync<WebSocketException>(
+                () => context.AcceptWebSocketAsync("SubProtocol")
             );
         }
 
@@ -184,8 +184,8 @@ namespace System.Net.Tests
                 new string[] { headers },
                 async context =>
                 {
-                    await Assert.ThrowsAsync<WebSocketException>(() =>
-                        context.AcceptWebSocketAsync(null)
+                    await Assert.ThrowsAsync<WebSocketException>(
+                        () => context.AcceptWebSocketAsync(null)
                     );
                 }
             );
@@ -233,8 +233,8 @@ namespace System.Net.Tests
         )
         {
             HttpListenerContext context = await GetWebSocketContext();
-            await Assert.ThrowsAsync<WebSocketException>(() =>
-                context.AcceptWebSocketAsync(subProtocol)
+            await Assert.ThrowsAsync<WebSocketException>(
+                () => context.AcceptWebSocketAsync(subProtocol)
             );
         }
 

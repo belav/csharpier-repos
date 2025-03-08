@@ -94,8 +94,8 @@ public class LocalRedirectResultTest
         var result = new LocalRedirectResult(contentPath);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteResultAsync(actionContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteResultAsync(actionContext)
         );
         Assert.Equal(
             "The supplied URL is not local. A URL with an absolute path is considered local if it does not "
@@ -117,8 +117,8 @@ public class LocalRedirectResultTest
         var result = new LocalRedirectResult(contentPath);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteResultAsync(actionContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteResultAsync(actionContext)
         );
         Assert.Equal(
             "The supplied URL is not local. A URL with an absolute path is considered local if it does not "

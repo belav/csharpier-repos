@@ -469,13 +469,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
             else if (_isSourceGeneratedOutput)
             {
-                document = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                    Workspace
-                        .CurrentSolution.GetSourceGeneratedDocumentAsync(
-                            GetDocumentId(),
-                            CancellationToken.None
-                        )
-                        .AsTask()
+                document = State.ThreadingContext.JoinableTaskFactory.Run(
+                    () =>
+                        Workspace
+                            .CurrentSolution.GetSourceGeneratedDocumentAsync(
+                                GetDocumentId(),
+                                CancellationToken.None
+                            )
+                            .AsTask()
                 );
             }
             else

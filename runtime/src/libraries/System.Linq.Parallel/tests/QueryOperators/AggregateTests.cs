@@ -315,8 +315,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Aggregate_InvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Aggregate((i, j) => i)
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Aggregate((i, j) => i)
             );
             // All other invocations return the seed value.
             Assert.Equal(-1, ParallelEnumerable.Empty<int>().Aggregate(-1, (i, j) => i + j));
@@ -542,143 +542,154 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Aggregate_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate(
-                        (i, j) =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    )
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate(
+                            (i, j) =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
             );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            throw new DeliberateTestException();
-                        },
-                        i => i
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate<int, int, int>(
-                        0,
-                        (i, j) => i,
-                        i =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            throw new DeliberateTestException();
-                        },
-                        (i, j) => i,
-                        i => i
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate<int, int, int>(
-                        0,
-                        (i, j) => i,
-                        (i, j) => i,
-                        i =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate<int, int, int>(
-                        () =>
-                        {
-                            throw new DeliberateTestException();
-                        },
-                        (i, j) => i,
-                        (i, j) => i,
-                        i => i
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate(
-                        () => 0,
-                        (i, j) =>
-                        {
-                            throw new DeliberateTestException();
-                        },
-                        (i, j) => i,
-                        (int i) => i
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(2)
-                    .Aggregate<int, int, int>(
-                        () => 0,
-                        (i, j) => i,
-                        (i, j) => i,
-                        i =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    )
-            );
-            if (Environment.ProcessorCount >= 2)
-            {
-                AssertThrows.Wrapped<DeliberateTestException>(() =>
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
                     UnorderedSources
                         .Default(2)
                         .Aggregate(
                             0,
-                            (i, j) => i,
+                            (i, j) =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate(
+                            0,
                             (i, j) =>
                             {
                                 throw new DeliberateTestException();
                             },
                             i => i
                         )
-                );
-                AssertThrows.Wrapped<DeliberateTestException>(() =>
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate<int, int, int>(
+                            0,
+                            (i, j) => i,
+                            i =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
                     UnorderedSources
                         .Default(2)
                         .Aggregate(
-                            () => 0,
-                            (i, j) => i,
+                            0,
                             (i, j) =>
                             {
                                 throw new DeliberateTestException();
                             },
+                            (i, j) => i,
+                            i => i
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate<int, int, int>(
+                            0,
+                            (i, j) => i,
+                            (i, j) => i,
+                            i =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate<int, int, int>(
+                            () =>
+                            {
+                                throw new DeliberateTestException();
+                            },
+                            (i, j) => i,
+                            (i, j) => i,
+                            i => i
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate(
+                            () => 0,
+                            (i, j) =>
+                            {
+                                throw new DeliberateTestException();
+                            },
+                            (i, j) => i,
                             (int i) => i
                         )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Aggregate<int, int, int>(
+                            () => 0,
+                            (i, j) => i,
+                            (i, j) => i,
+                            i =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
+            if (Environment.ProcessorCount >= 2)
+            {
+                AssertThrows.Wrapped<DeliberateTestException>(
+                    () =>
+                        UnorderedSources
+                            .Default(2)
+                            .Aggregate(
+                                0,
+                                (i, j) => i,
+                                (i, j) =>
+                                {
+                                    throw new DeliberateTestException();
+                                },
+                                i => i
+                            )
+                );
+                AssertThrows.Wrapped<DeliberateTestException>(
+                    () =>
+                        UnorderedSources
+                            .Default(2)
+                            .Aggregate(
+                                () => 0,
+                                (i, j) => i,
+                                (i, j) =>
+                                {
+                                    throw new DeliberateTestException();
+                                },
+                                (int i) => i
+                            )
                 );
             }
         }

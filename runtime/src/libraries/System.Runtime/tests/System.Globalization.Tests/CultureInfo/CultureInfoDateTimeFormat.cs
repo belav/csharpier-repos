@@ -66,8 +66,8 @@ namespace System.Globalization.Tests
                 "value",
                 () => new CultureInfo("en-US").DateTimeFormat = null
             ); // Value is null
-            Assert.Throws<InvalidOperationException>(() =>
-                CultureInfo.InvariantCulture.DateTimeFormat = new DateTimeFormatInfo()
+            Assert.Throws<InvalidOperationException>(
+                () => CultureInfo.InvariantCulture.DateTimeFormat = new DateTimeFormatInfo()
             ); // DateTimeFormatInfo.InvariantInfo is read only
         }
     }

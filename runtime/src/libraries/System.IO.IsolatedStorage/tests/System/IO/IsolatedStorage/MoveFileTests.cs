@@ -84,8 +84,8 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                Assert.Throws<FileNotFoundException>(() =>
-                    isf.MoveFile("MoveFile_DoesNotExist", "MoveFile_DoesNotExist_Copy")
+                Assert.Throws<FileNotFoundException>(
+                    () => isf.MoveFile("MoveFile_DoesNotExist", "MoveFile_DoesNotExist_Copy")
                 );
             }
         }

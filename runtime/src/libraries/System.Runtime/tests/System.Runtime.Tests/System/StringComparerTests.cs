@@ -135,8 +135,8 @@ namespace System.Tests
         [Fact]
         public void CreateCultureOptions_InvalidArguments_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                StringComparer.Create(null, CompareOptions.None)
+            Assert.Throws<ArgumentNullException>(
+                () => StringComparer.Create(null, CompareOptions.None)
             );
         }
 

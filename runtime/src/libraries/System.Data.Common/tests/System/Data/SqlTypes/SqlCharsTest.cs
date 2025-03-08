@@ -346,8 +346,8 @@ namespace System.Data.Tests.SqlTypes
             char[] c2 = new char[10];
             SqlChars chars = new SqlChars(c2);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                chars.Write(0, c1, c1.Length + 5, c1.Length)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => chars.Write(0, c1, c1.Length + 5, c1.Length)
             );
         }
 

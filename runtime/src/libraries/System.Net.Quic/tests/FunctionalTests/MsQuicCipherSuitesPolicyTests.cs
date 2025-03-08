@@ -67,25 +67,26 @@ namespace System.Net.Quic.Tests
                     return ValueTask.FromResult(serverOptions);
                 },
             };
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await CreateQuicListener(listenerOptions)
+            Assert.ThrowsAsync<ArgumentException>(
+                async () => await CreateQuicListener(listenerOptions)
             );
 
             var clientOptions = CreateQuicClientOptions(new IPEndPoint(IPAddress.Loopback, 5000));
             clientOptions.ClientAuthenticationOptions.CipherSuitesPolicy = policy;
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await CreateQuicConnection(clientOptions)
+            Assert.ThrowsAsync<ArgumentException>(
+                async () => await CreateQuicConnection(clientOptions)
             );
         }
 
         [Fact]
         public async Task MismatchedCipherPolicies_ConnectAsync_ThrowsQuicException()
         {
-            await Assert.ThrowsAsync<QuicException>(() =>
-                TestConnection(
-                    new CipherSuitesPolicy(new[] { TlsCipherSuite.TLS_AES_128_GCM_SHA256 }),
-                    new CipherSuitesPolicy(new[] { TlsCipherSuite.TLS_AES_256_GCM_SHA384 })
-                )
+            await Assert.ThrowsAsync<QuicException>(
+                () =>
+                    TestConnection(
+                        new CipherSuitesPolicy(new[] { TlsCipherSuite.TLS_AES_128_GCM_SHA256 }),
+                        new CipherSuitesPolicy(new[] { TlsCipherSuite.TLS_AES_256_GCM_SHA384 })
+                    )
             );
         }
     }

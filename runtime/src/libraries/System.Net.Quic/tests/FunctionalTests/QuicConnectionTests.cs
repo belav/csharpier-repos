@@ -114,8 +114,8 @@ namespace System.Net.Quic.Tests
                         QuicError.OperationAborted,
                         async () => await serverConnection.AcceptInboundStreamAsync()
                     );
-                    await Assert.ThrowsAsync<QuicException>(() =>
-                        OpenAndUseStreamAsync(serverConnection)
+                    await Assert.ThrowsAsync<QuicException>(
+                        () => OpenAndUseStreamAsync(serverConnection)
                     );
                 }
             );
@@ -147,15 +147,16 @@ namespace System.Net.Quic.Tests
 
                     // Pending ops should fail
                     await Assert.ThrowsAsync<ObjectDisposedException>(async () => await acceptTask);
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () => await connectTask
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () => await connectTask
                     );
 
                     // Subsequent attempts should fail
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                        await serverConnection.AcceptInboundStreamAsync()
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () => await serverConnection.AcceptInboundStreamAsync()
                     );
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                        await OpenAndUseStreamAsync(serverConnection)
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () => await OpenAndUseStreamAsync(serverConnection)
                     );
                 }
             );
@@ -412,8 +413,8 @@ namespace System.Net.Quic.Tests
             await RunClientServer(
                 async clientConnection =>
                 {
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await clientConnection.AcceptInboundStreamAsync()
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await clientConnection.AcceptInboundStreamAsync()
                     );
                 },
                 _ => Task.CompletedTask
@@ -432,11 +433,11 @@ namespace System.Net.Quic.Tests
             // Another task issued after the disposal.
             ValueTask<QuicStream> acceptTask2 = serverConnection.AcceptInboundStreamAsync();
 
-            var accept1Exception = await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                await acceptTask1
+            var accept1Exception = await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await acceptTask1
             );
-            var accept2Exception = await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                await acceptTask2
+            var accept2Exception = await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await acceptTask2
             );
         }
 
@@ -539,8 +540,8 @@ namespace System.Net.Quic.Tests
                 ),
             };
 
-            SocketException ex = await Assert.ThrowsAsync<SocketException>(() =>
-                QuicConnection.ConnectAsync(options).AsTask()
+            SocketException ex = await Assert.ThrowsAsync<SocketException>(
+                () => QuicConnection.ConnectAsync(options).AsTask()
             );
             Assert.Equal(SocketError.HostNotFound, ex.SocketErrorCode);
         }

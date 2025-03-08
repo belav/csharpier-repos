@@ -103,8 +103,12 @@ namespace System.Formats.Tar.Tests
                     await using (TarReader reader = new TarReader(archiveStream, leaveOpen: false))
                     {
                         TarEntry entry = await reader.GetNextEntryAsync();
-                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            entry.ExtractToFileAsync(Path.Join(root.Path, "file"), overwrite: true)
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () =>
+                                entry.ExtractToFileAsync(
+                                    Path.Join(root.Path, "file"),
+                                    overwrite: true
+                                )
                         );
                     }
                 }

@@ -484,8 +484,8 @@ public class ServerTests : LoggedTest
         using (var server = Utilities.CreatePump(LoggerFactory))
         {
             Assert.Null(server.Listener.Options.MaxConnections);
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                server.Listener.Options.MaxConnections = -2
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => server.Listener.Options.MaxConnections = -2
             );
             Assert.Null(server.Listener.Options.MaxConnections);
             server.Listener.Options.MaxConnections = null;

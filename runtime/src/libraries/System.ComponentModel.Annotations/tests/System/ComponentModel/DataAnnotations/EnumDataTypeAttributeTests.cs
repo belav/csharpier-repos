@@ -97,8 +97,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_InvalidEnumType_ThrowsInvalidOperationException(Type enumType)
         {
             var attribute = new EnumDataTypeAttribute(enumType);
-            Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("AnyValue", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(
+                () => attribute.Validate("AnyValue", new ValidationContext(new object()))
             );
         }
 

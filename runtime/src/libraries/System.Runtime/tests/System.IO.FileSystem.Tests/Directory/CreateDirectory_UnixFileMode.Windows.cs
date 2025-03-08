@@ -11,8 +11,8 @@ namespace System.IO.Tests
         public void NotSupported()
         {
             string path = GetRandomDirPath();
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Directory.CreateDirectory(path, UnixFileMode.UserRead)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Directory.CreateDirectory(path, UnixFileMode.UserRead)
             );
         }
     }

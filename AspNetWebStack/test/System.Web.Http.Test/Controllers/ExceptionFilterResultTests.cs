@@ -85,8 +85,8 @@ namespace System.Web.Http.Controllers
             );
 
             // Act & Assert
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                product.ExecuteAsync(CancellationToken.None)
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => product.ExecuteAsync(CancellationToken.None)
             );
 
             Assert.Equal(new string[] { "exceptionFilter" }, log.ToArray());
@@ -130,8 +130,8 @@ namespace System.Web.Http.Controllers
             );
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(() =>
-                product.ExecuteAsync(CancellationToken.None)
+            var exception = await Assert.ThrowsAsync<Exception>(
+                () => product.ExecuteAsync(CancellationToken.None)
             );
 
             Assert.Same(expectedException, exception);
@@ -169,8 +169,8 @@ namespace System.Web.Http.Controllers
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    product.ExecuteAsync(cancellationToken)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => product.ExecuteAsync(cancellationToken)
                 );
 
                 // Assert
@@ -369,8 +369,8 @@ namespace System.Web.Http.Controllers
                 );
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<NotImplementedException>(() =>
-                    product.ExecuteAsync(CancellationToken.None)
+                var exception = await Assert.ThrowsAsync<NotImplementedException>(
+                    () => product.ExecuteAsync(CancellationToken.None)
                 );
                 Assert.Same(expectedException, exception);
             }
@@ -404,8 +404,8 @@ namespace System.Web.Http.Controllers
                 );
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    product.ExecuteAsync(CancellationToken.None)
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => product.ExecuteAsync(CancellationToken.None)
                 );
 
                 Assert.NotNull(expectedStackTrace);

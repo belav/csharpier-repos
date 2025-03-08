@@ -21,16 +21,16 @@ namespace System.IO.Tests
         [Fact]
         public static void NegativeBufferSize_Throws_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new BufferedStream(new MemoryStream(), -1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new BufferedStream(new MemoryStream(), -1)
             );
         }
 
         [Fact]
         public static void ZeroBufferSize_Throws_ArgumentNullException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new BufferedStream(new MemoryStream(), 0)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new BufferedStream(new MemoryStream(), 0)
             );
         }
 

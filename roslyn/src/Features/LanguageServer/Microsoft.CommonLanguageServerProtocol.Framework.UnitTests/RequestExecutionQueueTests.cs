@@ -68,13 +68,14 @@ public class RequestExecutionQueueTests
         var lspServices = GetLspServices();
 
         // Act & Assert
-        await Assert.ThrowsAsync<NotImplementedException>(() =>
-            requestExecutionQueue.ExecuteAsync<int, string>(
-                1,
-                ThrowingHandler.Name,
-                lspServices,
-                CancellationToken.None
-            )
+        await Assert.ThrowsAsync<NotImplementedException>(
+            () =>
+                requestExecutionQueue.ExecuteAsync<int, string>(
+                    1,
+                    ThrowingHandler.Name,
+                    lspServices,
+                    CancellationToken.None
+                )
         );
     }
 

@@ -46,8 +46,8 @@ namespace System.Collections.Specialized.Tests
             );
 
             nameObjectCollection.Add("name", new Foo("value"));
-            Assert.Throws<ArrayTypeMismatchException>(() =>
-                nameObjectCollection.GetAllValues(typeof(string))
+            Assert.Throws<ArrayTypeMismatchException>(
+                () => nameObjectCollection.GetAllValues(typeof(string))
             );
         }
     }

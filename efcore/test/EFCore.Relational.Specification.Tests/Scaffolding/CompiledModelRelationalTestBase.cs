@@ -237,8 +237,8 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    collectionOwnedType.IsTableExcludedFromMigrations()
+                .Throws<InvalidOperationException>(
+                    () => collectionOwnedType.IsTableExcludedFromMigrations()
                 )
                 .Message
         );

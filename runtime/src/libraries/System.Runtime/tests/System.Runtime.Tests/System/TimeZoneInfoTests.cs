@@ -5246,8 +5246,8 @@ namespace System.Tests
                         {
                             // If hostInvariantMode is false, means the child process should enable the globalization invariant mode.
                             // We validate here that by trying to create a culture which should throws in such mode.
-                            Assert.Throws<CultureNotFoundException>(() =>
-                                CultureInfo.GetCultureInfo("en-US")
+                            Assert.Throws<CultureNotFoundException>(
+                                () => CultureInfo.GetCultureInfo("en-US")
                             );
                         }
 
@@ -5392,8 +5392,8 @@ namespace System.Tests
             }
             else
             {
-                Assert.Throws<TimeZoneNotFoundException>(() =>
-                    TimeZoneInfo.FindSystemTimeZoneById(s_isWindows ? ianaId : windowsId)
+                Assert.Throws<TimeZoneNotFoundException>(
+                    () => TimeZoneInfo.FindSystemTimeZoneById(s_isWindows ? ianaId : windowsId)
                 );
                 TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(
                     s_isWindows ? windowsId : ianaId
@@ -5480,8 +5480,8 @@ namespace System.Tests
         {
             string nonNativeTzName = s_isWindows ? "America/Los_Angeles" : "Pacific Standard Time";
 
-            Assert.Throws<TimeZoneNotFoundException>(() =>
-                TimeZoneInfo.FindSystemTimeZoneById(nonNativeTzName)
+            Assert.Throws<TimeZoneNotFoundException>(
+                () => TimeZoneInfo.FindSystemTimeZoneById(nonNativeTzName)
             );
 
             Assert.False(TimeZoneInfo.TryFindSystemTimeZoneById(nonNativeTzName, out _));
@@ -5861,11 +5861,12 @@ namespace System.Tests
         )
             where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTime(
-                    inputTime,
-                    TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
-                )
+            Assert.ThrowsAny<TException>(
+                () =>
+                    TimeZoneInfo.ConvertTime(
+                        inputTime,
+                        TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
+                    )
             );
         }
 
@@ -5875,11 +5876,12 @@ namespace System.Tests
         )
             where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTime(
-                    inputTime,
-                    TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
-                )
+            Assert.ThrowsAny<TException>(
+                () =>
+                    TimeZoneInfo.ConvertTime(
+                        inputTime,
+                        TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
+                    )
             );
         }
 
@@ -5890,12 +5892,13 @@ namespace System.Tests
         )
             where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTime(
-                    inputTime,
-                    TimeZoneInfo.FindSystemTimeZoneById(sourceTimeZoneId),
-                    TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
-                )
+            Assert.ThrowsAny<TException>(
+                () =>
+                    TimeZoneInfo.ConvertTime(
+                        inputTime,
+                        TimeZoneInfo.FindSystemTimeZoneById(sourceTimeZoneId),
+                        TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
+                    )
             );
         }
 
@@ -6220,8 +6223,8 @@ namespace System.Tests
         )
             where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTimeToUtc(dateTime, sourceTimeZone)
+            Assert.ThrowsAny<TException>(
+                () => TimeZoneInfo.ConvertTimeToUtc(dateTime, sourceTimeZone)
             );
         }
 

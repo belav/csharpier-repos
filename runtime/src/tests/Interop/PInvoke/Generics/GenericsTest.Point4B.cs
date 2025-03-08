@@ -44,22 +44,23 @@ unsafe partial class GenericsTest
 {
     private static void TestPoint4B()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint4B(true, false, true, false)
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint4B(true, false, true, false)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint4BOut(
-                true,
-                false,
-                true,
-                false,
-                out GenericsNative.Point4<bool> value3
-            )
+        Assert.Throws<MarshalDirectiveException>(
+            () =>
+                GenericsNative.GetPoint4BOut(
+                    true,
+                    false,
+                    true,
+                    false,
+                    out GenericsNative.Point4<bool> value3
+                )
         );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint4BRef(true, false, true, false)
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint4BRef(true, false, true, false)
         );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint4B(default, default));
@@ -73,12 +74,12 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddPoint4Bs(values, values.Length)
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint4Bs(values, values.Length)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddPoint4Bs(in values[0], values.Length)
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint4Bs(in values[0], values.Length)
         );
     }
 }

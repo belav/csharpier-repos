@@ -41,11 +41,12 @@ namespace System.Net.Sockets.Tests
                 }
                 else
                 {
-                    Assert.Throws<SocketException>(() =>
-                        socket.GetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.ReuseUnicastPort
-                        )
+                    Assert.Throws<SocketException>(
+                        () =>
+                            socket.GetSocketOption(
+                                SocketOptionLevel.Socket,
+                                SocketOptionName.ReuseUnicastPort
+                            )
                     );
                 }
             }
@@ -78,12 +79,13 @@ namespace System.Net.Sockets.Tests
                 }
                 else
                 {
-                    Assert.Throws<SocketException>(() =>
-                        socket.SetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.ReuseUnicastPort,
-                            1
-                        )
+                    Assert.Throws<SocketException>(
+                        () =>
+                            socket.SetSocketOption(
+                                SocketOptionLevel.Socket,
+                                SocketOptionName.ReuseUnicastPort,
+                                1
+                            )
                     );
                 }
             }
@@ -109,8 +111,9 @@ namespace System.Net.Sockets.Tests
                     new MulticastOption(groupIp, interfaceIndex)
                 );
 
-                Assert.Throws<SocketException>(() =>
-                    socket.GetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership)
+                Assert.Throws<SocketException>(
+                    () =>
+                        socket.GetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership)
                 );
             }
         }
@@ -198,12 +201,13 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<SocketException>(() =>
-                    s.SetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.MulticastInterface,
-                        IPAddress.HostToNetworkOrder(interfaceIndex)
-                    )
+                Assert.Throws<SocketException>(
+                    () =>
+                        s.SetSocketOption(
+                            SocketOptionLevel.IP,
+                            SocketOptionName.MulticastInterface,
+                            IPAddress.HostToNetworkOrder(interfaceIndex)
+                        )
                 );
             }
         }
@@ -393,12 +397,13 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<SocketException>(() =>
-                    s.SetSocketOption(
-                        SocketOptionLevel.IPv6,
-                        SocketOptionName.MulticastInterface,
-                        interfaceIndex
-                    )
+                Assert.Throws<SocketException>(
+                    () =>
+                        s.SetSocketOption(
+                            SocketOptionLevel.IPv6,
+                            SocketOptionName.MulticastInterface,
+                            interfaceIndex
+                        )
                 );
             }
         }
@@ -741,8 +746,8 @@ namespace System.Net.Sockets.Tests
                     )
                 )
                 {
-                    SocketException ex = Assert.ThrowsAny<SocketException>(() =>
-                        b.Bind(new IPEndPoint(IPAddress.Loopback, port))
+                    SocketException ex = Assert.ThrowsAny<SocketException>(
+                        () => b.Bind(new IPEndPoint(IPAddress.Loopback, port))
                     );
                     Assert.Equal(SocketError.AddressAlreadyInUse, ex.SocketErrorCode);
                 }
@@ -856,8 +861,8 @@ namespace System.Net.Sockets.Tests
         {
             using (var socket = new Socket(family, SocketType.Stream, ProtocolType.Tcp))
             {
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    socket.SetIPProtectionLevel(level)
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => socket.SetIPProtectionLevel(level)
                 );
             }
         }
@@ -963,8 +968,8 @@ namespace System.Net.Sockets.Tests
             using (socket1)
             using (socket2)
             {
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.GetSocketOption(SocketOptionLevel.Socket, (SocketOptionName)(-1))
+                SocketException se = Assert.Throws<SocketException>(
+                    () => socket1.GetSocketOption(SocketOptionLevel.Socket, (SocketOptionName)(-1))
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -984,12 +989,13 @@ namespace System.Net.Sockets.Tests
             using (socket2)
             {
                 var optionValue = new byte[4];
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        (SocketOptionName)(-1),
-                        optionValue
-                    )
+                SocketException se = Assert.Throws<SocketException>(
+                    () =>
+                        socket1.GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            (SocketOptionName)(-1),
+                            optionValue
+                        )
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -1008,12 +1014,13 @@ namespace System.Net.Sockets.Tests
             using (socket1)
             using (socket2)
             {
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        (SocketOptionName)(-1),
-                        optionLength: 4
-                    )
+                SocketException se = Assert.Throws<SocketException>(
+                    () =>
+                        socket1.GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            (SocketOptionName)(-1),
+                            optionLength: 4
+                        )
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -1032,12 +1039,13 @@ namespace System.Net.Sockets.Tests
             using (socket1)
             using (socket2)
             {
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.SetSocketOption(
-                        SocketOptionLevel.Socket,
-                        (SocketOptionName)(-1),
-                        optionValue: 1
-                    )
+                SocketException se = Assert.Throws<SocketException>(
+                    () =>
+                        socket1.SetSocketOption(
+                            SocketOptionLevel.Socket,
+                            (SocketOptionName)(-1),
+                            optionValue: 1
+                        )
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -1057,12 +1065,13 @@ namespace System.Net.Sockets.Tests
             using (socket2)
             {
                 var optionValue = new byte[4];
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.SetSocketOption(
-                        SocketOptionLevel.Socket,
-                        (SocketOptionName)(-1),
-                        optionValue
-                    )
+                SocketException se = Assert.Throws<SocketException>(
+                    () =>
+                        socket1.SetSocketOption(
+                            SocketOptionLevel.Socket,
+                            (SocketOptionName)(-1),
+                            optionValue
+                        )
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -1082,12 +1091,13 @@ namespace System.Net.Sockets.Tests
             using (socket2)
             {
                 bool optionValue = true;
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.SetSocketOption(
-                        SocketOptionLevel.Socket,
-                        (SocketOptionName)(-1),
-                        optionValue
-                    )
+                SocketException se = Assert.Throws<SocketException>(
+                    () =>
+                        socket1.SetSocketOption(
+                            SocketOptionLevel.Socket,
+                            (SocketOptionName)(-1),
+                            optionValue
+                        )
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -1107,8 +1117,8 @@ namespace System.Net.Sockets.Tests
             using (socket2)
             {
                 var optionValue = new byte[4];
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.GetRawSocketOption(SOL_SOCKET, -1, optionValue)
+                SocketException se = Assert.Throws<SocketException>(
+                    () => socket1.GetRawSocketOption(SOL_SOCKET, -1, optionValue)
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption
@@ -1128,8 +1138,8 @@ namespace System.Net.Sockets.Tests
             using (socket2)
             {
                 var optionValue = new byte[4];
-                SocketException se = Assert.Throws<SocketException>(() =>
-                    socket1.SetRawSocketOption(SOL_SOCKET, -1, optionValue)
+                SocketException se = Assert.Throws<SocketException>(
+                    () => socket1.SetRawSocketOption(SOL_SOCKET, -1, optionValue)
                 );
                 Assert.True(
                     se.SocketErrorCode == SocketError.ProtocolOption

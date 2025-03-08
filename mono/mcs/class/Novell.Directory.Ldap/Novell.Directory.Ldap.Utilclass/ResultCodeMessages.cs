@@ -36,7 +36,6 @@ namespace Novell.Directory.Ldap.Utilclass
     /// <summary> This class contains strings corresponding to Ldap Result Codes.
     /// The resources are accessed by the String representation of the result code.
     /// </summary>
-
     public class ResultCodeMessages : System.Resources.ResourceManager
     {
         public System.Object[][] getContents()

@@ -214,8 +214,8 @@ namespace System.Diagnostics.Tests
                 do
                 {
                     // Ensure we don't always return zero for a counter we know is not always zero
-                    val = Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                        counterSample.NextValue()
+                    val = Helpers.RetryOnAllPlatformsWithClosingResources(
+                        () => counterSample.NextValue()
                     );
                     if (val > 0f)
                     {
@@ -496,8 +496,14 @@ namespace System.Diagnostics.Tests
                         // This test ensure no failure should be encountered in this case.
                         using (
                             PerformanceCounter counterSample =
-                                Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                                    new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
+                                Helpers.RetryOnAllPlatformsWithClosingResources(
+                                    () =>
+                                        new PerformanceCounter(
+                                            "Processor",
+                                            "Interrupts/sec",
+                                            "0",
+                                            "."
+                                        )
                                 )
                         )
                         {
@@ -519,8 +525,8 @@ namespace System.Diagnostics.Tests
 
             string counterName = categoryName.Replace("_Category", "_Counter");
 
-            PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                new PerformanceCounter(categoryName, counterName, readOnly)
+            PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
+                () => new PerformanceCounter(categoryName, counterName, readOnly)
             );
 
             return counterSample;

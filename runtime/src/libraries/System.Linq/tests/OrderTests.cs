@@ -224,12 +224,13 @@ namespace System.Linq.Tests
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(() =>
-                ordered.First(i =>
-                {
-                    counter++;
-                    return false;
-                })
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ordered.First(i =>
+                    {
+                        counter++;
+                        return false;
+                    })
             );
             Assert.Equal(10, counter);
 
@@ -256,12 +257,13 @@ namespace System.Linq.Tests
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(() =>
-                orderedDescending.First(i =>
-                {
-                    counter++;
-                    return false;
-                })
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    orderedDescending.First(i =>
+                    {
+                        counter++;
+                        return false;
+                    })
             );
             Assert.Equal(10, counter);
         }

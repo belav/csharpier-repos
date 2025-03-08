@@ -33,8 +33,8 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex1 = Assert.Throws<NotSupportedException>(() =>
-                da.UpdateBatchSize = 0
+            NotSupportedException ex1 = Assert.Throws<NotSupportedException>(
+                () => da.UpdateBatchSize = 0
             );
             // Specified method is not supported
             Assert.Null(ex1.InnerException);
@@ -42,8 +42,8 @@ namespace System.Data.Tests.Common
 
             Assert.Equal(1, da.UpdateBatchSize);
 
-            NotSupportedException ex2 = Assert.Throws<NotSupportedException>(() =>
-                da.UpdateBatchSize = 0
+            NotSupportedException ex2 = Assert.Throws<NotSupportedException>(
+                () => da.UpdateBatchSize = 0
             );
             // Specified method is not supported
             Assert.Null(ex2.InnerException);
@@ -60,8 +60,8 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                da.UpdateBatchSize = -1
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                () => da.UpdateBatchSize = -1
             );
             // Specified method is not supported
             Assert.Null(ex.InnerException);
@@ -83,7 +83,8 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() => da.ExecuteBatch()
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                () => da.ExecuteBatch()
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -94,8 +95,8 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                da.GetBatchedParameter(1, 1)
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                () => da.GetBatchedParameter(1, 1)
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -122,8 +123,8 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                da.InitializeBatching()
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                () => da.InitializeBatching()
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -134,8 +135,8 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                da.TerminateBatching()
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                () => da.TerminateBatching()
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

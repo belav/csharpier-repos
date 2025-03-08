@@ -214,7 +214,8 @@ public class ViewViewComponentResultTest
         var viewComponentContext = GetViewComponentContext(view, viewData);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => result.Execute(viewComponentContext)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => result.Execute(viewComponentContext)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -272,7 +273,8 @@ public class ViewViewComponentResultTest
         var viewComponentContext = GetViewComponentContext(view, viewData);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => result.Execute(viewComponentContext)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => result.Execute(viewComponentContext)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -332,7 +334,8 @@ public class ViewViewComponentResultTest
         var viewComponentContext = GetViewComponentContext(view, viewData);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => result.Execute(viewComponentContext)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => result.Execute(viewComponentContext)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -548,8 +551,8 @@ public class ViewViewComponentResultTest
         var viewComponentContext = GetViewComponentContext(view, viewData);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(viewComponentContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(viewComponentContext)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -579,8 +582,8 @@ public class ViewViewComponentResultTest
         viewComponentContext.ViewContext.HttpContext.RequestServices = serviceProvider;
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(viewComponentContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(viewComponentContext)
         );
         Assert.Equal(expected, ex.Message);
     }

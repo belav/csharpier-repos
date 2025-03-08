@@ -60,15 +60,17 @@ namespace Microsoft.CodeAnalysis
             ); // arbitrary size
 
         private readonly ObjectPool<TreeOptions.Builder> _treeOptionsPool =
-            new ObjectPool<TreeOptions.Builder>(() =>
-                ImmutableDictionary.CreateBuilder<string, ReportDiagnostic>(
-                    Section.PropertiesKeyComparer
-                )
+            new ObjectPool<TreeOptions.Builder>(
+                () =>
+                    ImmutableDictionary.CreateBuilder<string, ReportDiagnostic>(
+                        Section.PropertiesKeyComparer
+                    )
             );
 
         private readonly ObjectPool<AnalyzerOptions.Builder> _analyzerOptionsPool =
-            new ObjectPool<AnalyzerOptions.Builder>(() =>
-                ImmutableDictionary.CreateBuilder<string, string>(Section.PropertiesKeyComparer)
+            new ObjectPool<AnalyzerOptions.Builder>(
+                () =>
+                    ImmutableDictionary.CreateBuilder<string, string>(Section.PropertiesKeyComparer)
             );
 
         private readonly ObjectPool<List<Section>> _sectionKeyPool = new ObjectPool<List<Section>>(

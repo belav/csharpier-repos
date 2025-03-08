@@ -62,7 +62,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateCategory_ItemReturnsNull_ThrowsInvalidOperationException()
         {
             var item = new NullSyndicationItem();
-            Assert.Throws<InvalidOperationException>(() => Formatter.CreateCategoryEntryPoint(item)
+            Assert.Throws<InvalidOperationException>(
+                () => Formatter.CreateCategoryEntryPoint(item)
             );
         }
 
@@ -91,7 +92,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateCategory_FeedReturnsNull_ThrowsInvalidOperationException()
         {
             var feed = new NullSyndicationFeed();
-            Assert.Throws<InvalidOperationException>(() => Formatter.CreateCategoryEntryPoint(feed)
+            Assert.Throws<InvalidOperationException>(
+                () => Formatter.CreateCategoryEntryPoint(feed)
             );
         }
 
@@ -824,14 +826,15 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void TryPrseContent_NullItem_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                Formatter.TryParseContentEntryPoint(
-                    new XElement("Name").CreateReader(),
-                    null,
-                    "contentType",
-                    "version",
-                    out SyndicationContent content
-                )
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    Formatter.TryParseContentEntryPoint(
+                        new XElement("Name").CreateReader(),
+                        null,
+                        "contentType",
+                        "version",
+                        out SyndicationContent content
+                    )
             );
         }
 

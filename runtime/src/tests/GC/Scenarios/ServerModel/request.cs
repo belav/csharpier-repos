@@ -77,7 +77,6 @@ namespace ServerSimulator
     /// <summary>
     /// This class is a finalizable version of Request that allocates inside its finalizer
     /// </summary>
-
     internal sealed class FinalizableRequest : Request
     {
         // disabling unused variable warning

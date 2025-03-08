@@ -52,14 +52,15 @@ namespace System.Reflection.Tests
                 .Returns((object)null);
 
             MethodInfo mi = GetMethod(nameof(TestClass.TakesRefToRefStructAsArg));
-            Assert.Throws<NotSupportedException>(() =>
-                mi.Invoke(
-                    null,
-                    BindingFlags.InvokeMethod,
-                    mockBinder.Object,
-                    new object[] { "hello" },
-                    null
-                )
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    mi.Invoke(
+                        null,
+                        BindingFlags.InvokeMethod,
+                        mockBinder.Object,
+                        new object[] { "hello" },
+                        null
+                    )
             );
         }
 

@@ -257,12 +257,13 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() =>
-                type.DefineConstructor(
-                    MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new Type[0]
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    type.DefineConstructor(
+                        MethodAttributes.Public,
+                        CallingConventions.Standard,
+                        new Type[0]
+                    )
             );
         }
 
@@ -272,12 +273,13 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(
                 TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                type.DefineConstructor(
-                    MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new Type[0]
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    type.DefineConstructor(
+                        MethodAttributes.Public,
+                        CallingConventions.Standard,
+                        new Type[0]
+                    )
             );
         }
 

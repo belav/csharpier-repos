@@ -1045,16 +1045,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 Assert.Throws<CryptographicException>(() => cert.MatchesHostname("fruit.example"));
 
-                Assert.Throws<CryptographicException>(() =>
-                    cert.MatchesHostname("fruit.example", allowWildcards: false)
+                Assert.Throws<CryptographicException>(
+                    () => cert.MatchesHostname("fruit.example", allowWildcards: false)
                 );
 
-                Assert.Throws<CryptographicException>(() =>
-                    cert.MatchesHostname("fruit.example", allowCommonName: false)
+                Assert.Throws<CryptographicException>(
+                    () => cert.MatchesHostname("fruit.example", allowCommonName: false)
                 );
 
-                Assert.Throws<CryptographicException>(() =>
-                    cert.MatchesHostname("fruit.example", false, false)
+                Assert.Throws<CryptographicException>(
+                    () => cert.MatchesHostname("fruit.example", false, false)
                 );
 
                 // But argument validation comes first.

@@ -184,13 +184,14 @@ public class AddressBinderTests
             endpoint => throw new AddressInUseException("already in use")
         );
 
-        await Assert.ThrowsAsync<IOException>(() =>
-            AddressBinder.BindAsync(
-                options.GetListenOptions(),
-                addressBindContext,
-                _noopUseHttps,
-                CancellationToken.None
-            )
+        await Assert.ThrowsAsync<IOException>(
+            () =>
+                AddressBinder.BindAsync(
+                    options.GetListenOptions(),
+                    addressBindContext,
+                    _noopUseHttps,
+                    CancellationToken.None
+                )
         );
     }
 
@@ -287,13 +288,14 @@ public class AddressBinderTests
             }
         );
 
-        await Assert.ThrowsAsync<OperationCanceledException>(() =>
-            AddressBinder.BindAsync(
-                options.GetListenOptions(),
-                addressBindContext,
-                _noopUseHttps,
-                new CancellationToken(true)
-            )
+        await Assert.ThrowsAsync<OperationCanceledException>(
+            () =>
+                AddressBinder.BindAsync(
+                    options.GetListenOptions(),
+                    addressBindContext,
+                    _noopUseHttps,
+                    new CancellationToken(true)
+                )
         );
     }
 

@@ -923,8 +923,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(
             CoreStrings.PropertyNotFound("Foo", nameof(Building)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    clonedBuildingValues.GetValue<string>("Foo")
+                .Throws<InvalidOperationException>(
+                    () => clonedBuildingValues.GetValue<string>("Foo")
                 )
                 .Message
         );
@@ -969,8 +969,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(
             CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    clonedBuildingValues.GetValue<string>(property)
+                .Throws<InvalidOperationException>(
+                    () => clonedBuildingValues.GetValue<string>(property)
                 )
                 .Message
         );
@@ -1043,8 +1043,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(
             CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    clonedValues.GetValue<string>("TerminationDate")
+                .Throws<InvalidOperationException>(
+                    () => clonedValues.GetValue<string>("TerminationDate")
                 )
                 .Message
         );
@@ -1115,8 +1115,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 nameof(CurrentEmployee)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    clonedValues.GetValue<string>(shadowProperty)
+                .Throws<InvalidOperationException>(
+                    () => clonedValues.GetValue<string>(shadowProperty)
                 )
                 .Message
         );
@@ -1166,7 +1166,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 nameof(CurrentEmployee)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => clonedValues.GetValue<string>(termProperty)
+                .Throws<InvalidOperationException>(
+                    () => clonedValues.GetValue<string>(termProperty)
                 )
                 .Message
         );

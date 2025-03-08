@@ -123,8 +123,8 @@ public partial class HubConnectionTests
                     }
                 }
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart)
+                testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(OnTestConnectionStart)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -245,8 +245,8 @@ public partial class HubConnectionTests
                     return Task.CompletedTask;
                 }
 
-                var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart)
+                var testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(OnTestConnectionStart)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -356,8 +356,8 @@ public partial class HubConnectionTests
                     return Task.CompletedTask;
                 }
 
-                var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart)
+                var testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(OnTestConnectionStart)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -578,7 +578,8 @@ public partial class HubConnectionTests
                     .WithUrl("http://example.com");
                 var testConnectionFactory = default(ReconnectingConnectionFactory);
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() => new TestConnection()
+                testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection()
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -679,7 +680,8 @@ public partial class HubConnectionTests
                     .WithUrl("http://example.com");
                 var testConnectionFactory = default(ReconnectingConnectionFactory);
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() => new TestConnection()
+                testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection()
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -812,8 +814,8 @@ public partial class HubConnectionTests
                 var builder = new HubConnectionBuilder()
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl("http://example.com");
-                var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(autoHandshake: false)
+                var testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(autoHandshake: false)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -883,8 +885,8 @@ public partial class HubConnectionTests
                 var builder = new HubConnectionBuilder()
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl("http://example.com");
-                var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(autoHandshake: false)
+                var testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(autoHandshake: false)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -1010,8 +1012,8 @@ public partial class HubConnectionTests
                 var builder = new HubConnectionBuilder()
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl("http://example.com");
-                var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(autoHandshake: false)
+                var testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(autoHandshake: false)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -1171,8 +1173,8 @@ public partial class HubConnectionTests
                     }
                 }
 
-                var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart)
+                var testConnectionFactory = new ReconnectingConnectionFactory(
+                    () => new TestConnection(OnTestConnectionStart)
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 

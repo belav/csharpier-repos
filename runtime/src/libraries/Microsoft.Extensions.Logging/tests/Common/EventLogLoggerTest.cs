@@ -297,12 +297,13 @@ namespace Microsoft.Extensions.Logging
         [PlatformSpecific(TestPlatforms.Windows)]
         public void NullCategoryNameThrows()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new EventLogLogger(
-                    null,
-                    new EventLogSettings() { },
-                    new LoggerExternalScopeProvider()
-                )
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new EventLogLogger(
+                        null,
+                        new EventLogSettings() { },
+                        new LoggerExternalScopeProvider()
+                    )
             );
         }
 
@@ -310,8 +311,13 @@ namespace Microsoft.Extensions.Logging
         [PlatformSpecific(TestPlatforms.Windows)]
         public void NullEventSettingsThrows()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new EventLogLogger("Something", settings: null, new LoggerExternalScopeProvider())
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new EventLogLogger(
+                        "Something",
+                        settings: null,
+                        new LoggerExternalScopeProvider()
+                    )
             );
         }
 

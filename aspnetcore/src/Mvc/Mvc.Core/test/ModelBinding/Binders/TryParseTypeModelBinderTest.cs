@@ -485,8 +485,8 @@ public class TryParseTypeModelBinderTest
     public void BindModel_ThrowsInvalidOperationException_WhenTryParseNotFound()
     {
         // Act & assert
-        Assert.Throws<InvalidOperationException>(() =>
-            new TryParseModelBinder(typeof(TestClass), NullLoggerFactory.Instance)
+        Assert.Throws<InvalidOperationException>(
+            () => new TryParseModelBinder(typeof(TestClass), NullLoggerFactory.Instance)
         );
     }
 

@@ -319,8 +319,8 @@ public class InternalNavigationBuilderTest
         Assert.Equal(
             CoreStrings.NonUniqueRequiredDependentNavigation(nameof(Order), nameof(Order.Details)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    builder.IsRequired(true, ConfigurationSource.Explicit)
+                .Throws<InvalidOperationException>(
+                    () => builder.IsRequired(true, ConfigurationSource.Explicit)
                 )
                 .Message
         );

@@ -429,14 +429,19 @@ namespace System.Threading.Tasks.Tests
                     await Task.CompletedTask;
                     await Task.FromResult(42);
                     await new ValueTask();
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(42));
                     Assert.Equal(42, await new ValueTask<int>(Task.FromResult(42)));
@@ -447,27 +452,38 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
 
                     // Incomplete
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            Task.Delay(1).ContinueWith(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                Task.Delay(1).ContinueWith(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(Task.Delay(1).ContinueWith(_ => 42)));
                     Assert.Equal(
@@ -477,16 +493,22 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     await Task.Yield();
                 }
@@ -500,14 +522,19 @@ namespace System.Threading.Tasks.Tests
                     await Task.CompletedTask;
                     await Task.FromResult(42);
                     await new ValueTask();
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(42));
                     Assert.Equal(42, await new ValueTask<int>(Task.FromResult(42)));
@@ -518,27 +545,38 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
 
                     // Incomplete
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            Task.Delay(1).ContinueWith(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                Task.Delay(1).ContinueWith(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(Task.Delay(1).ContinueWith(_ => 42)));
                     Assert.Equal(
@@ -548,16 +586,22 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     await Task.Yield();
                 }
@@ -572,14 +616,19 @@ namespace System.Threading.Tasks.Tests
                     await Task.CompletedTask;
                     await Task.FromResult(42);
                     await new ValueTask();
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(42));
                     Assert.Equal(42, await new ValueTask<int>(Task.FromResult(42)));
@@ -590,27 +639,38 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
 
                     // Incomplete
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            Task.Delay(1).ContinueWith(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                Task.Delay(1).ContinueWith(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(Task.Delay(1).ContinueWith(_ => 42)));
                     Assert.Equal(
@@ -620,16 +680,22 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     await Task.Yield();
                 }
@@ -643,14 +709,19 @@ namespace System.Threading.Tasks.Tests
                     await Task.CompletedTask;
                     await Task.FromResult(42);
                     await new ValueTask();
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(42));
                     Assert.Equal(42, await new ValueTask<int>(Task.FromResult(42)));
@@ -661,27 +732,38 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(Task.FromException<int>(new FormatException()))
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(Task.FromException<int>(new FormatException()))
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Completed(0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
 
                     // Incomplete
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            Task.Delay(1).ContinueWith(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                Task.Delay(1).ContinueWith(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     Assert.Equal(42, await new ValueTask<int>(Task.Delay(1).ContinueWith(_ => 42)));
                     Assert.Equal(
@@ -691,16 +773,22 @@ namespace System.Threading.Tasks.Tests
                             0
                         )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
+                            )
                     );
-                    await Assert.ThrowsAsync<FormatException>(async () =>
-                        await new ValueTask<int>(
-                            ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
-                            0
-                        )
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
                     );
                     await Task.Yield();
                 }

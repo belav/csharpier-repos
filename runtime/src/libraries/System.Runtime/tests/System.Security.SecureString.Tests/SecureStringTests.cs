@@ -137,17 +137,17 @@ namespace System.Security.Tests
             Assert.Throws<ObjectDisposedException>(() => ss.MakeReadOnly());
             Assert.Throws<ObjectDisposedException>(() => ss.RemoveAt(0));
             Assert.Throws<ObjectDisposedException>(() => ss.SetAt(0, 'a'));
-            Assert.Throws<ObjectDisposedException>(() =>
-                SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss)
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss)
             );
-            Assert.Throws<ObjectDisposedException>(() =>
-                SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss)
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss)
             );
-            Assert.Throws<ObjectDisposedException>(() =>
-                SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss)
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss)
             );
-            Assert.Throws<ObjectDisposedException>(() =>
-                SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss)
+            Assert.Throws<ObjectDisposedException>(
+                () => SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss)
             );
 
             ss.Dispose(); // ok to call again

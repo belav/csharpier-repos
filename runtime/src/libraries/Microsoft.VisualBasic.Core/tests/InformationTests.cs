@@ -181,8 +181,8 @@ namespace Microsoft.VisualBasic.Tests
         [Fact]
         public void IsNumeric_Invalid()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                Information.IsNumeric(new char[] { '1', '2', '3' })
+            Assert.Throws<NullReferenceException>(
+                () => Information.IsNumeric(new char[] { '1', '2', '3' })
             ); // Bug compatible
         }
 

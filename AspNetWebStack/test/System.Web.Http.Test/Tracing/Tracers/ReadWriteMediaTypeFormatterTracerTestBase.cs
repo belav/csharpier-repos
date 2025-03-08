@@ -108,13 +108,14 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                tracer.ReadFromStreamAsync(
-                    typeof(string),
-                    new MemoryStream(),
-                    request.Content,
-                    null
-                )
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () =>
+                    tracer.ReadFromStreamAsync(
+                        typeof(string),
+                        new MemoryStream(),
+                        request.Content,
+                        null
+                    )
             );
 
             // Assert
@@ -271,14 +272,15 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                tracer.WriteToStreamAsync(
-                    typeof(string),
-                    "sampleValue",
-                    new MemoryStream(),
-                    request.Content,
-                    transportContext: null
-                )
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () =>
+                    tracer.WriteToStreamAsync(
+                        typeof(string),
+                        "sampleValue",
+                        new MemoryStream(),
+                        request.Content,
+                        transportContext: null
+                    )
             );
 
             // Assert

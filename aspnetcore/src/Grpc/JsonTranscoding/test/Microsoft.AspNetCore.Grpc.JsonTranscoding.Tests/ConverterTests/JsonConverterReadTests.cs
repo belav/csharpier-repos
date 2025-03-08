@@ -767,8 +767,8 @@ public class JsonConverterReadTests
             descriptorRegistry
         );
 
-        var ex = Assert.ThrowsAny<Exception>(() =>
-            JsonSerializer.Deserialize<TValue>(value, jsonSerializerOptions)
+        var ex = Assert.ThrowsAny<Exception>(
+            () => JsonSerializer.Deserialize<TValue>(value, jsonSerializerOptions)
         );
         assertException(ex);
 

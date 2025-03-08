@@ -12,30 +12,30 @@ namespace Microsoft.AspNetCore.Cryptography.Cng;
 /// </summary>
 internal static class CachedAlgorithmHandles
 {
-    private static CachedAlgorithmInfo _aesCbc = new CachedAlgorithmInfo(() =>
-        GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_CBC)
+    private static CachedAlgorithmInfo _aesCbc = new CachedAlgorithmInfo(
+        () => GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_CBC)
     );
-    private static CachedAlgorithmInfo _aesGcm = new CachedAlgorithmInfo(() =>
-        GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_GCM)
+    private static CachedAlgorithmInfo _aesGcm = new CachedAlgorithmInfo(
+        () => GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_GCM)
     );
-    private static CachedAlgorithmInfo _hmacSha1 = new CachedAlgorithmInfo(() =>
-        GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM)
+    private static CachedAlgorithmInfo _hmacSha1 = new CachedAlgorithmInfo(
+        () => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM)
     );
-    private static CachedAlgorithmInfo _hmacSha256 = new CachedAlgorithmInfo(() =>
-        GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM)
+    private static CachedAlgorithmInfo _hmacSha256 = new CachedAlgorithmInfo(
+        () => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM)
     );
-    private static CachedAlgorithmInfo _hmacSha512 = new CachedAlgorithmInfo(() =>
-        GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
+    private static CachedAlgorithmInfo _hmacSha512 = new CachedAlgorithmInfo(
+        () => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
     );
     private static CachedAlgorithmInfo _pbkdf2 = new CachedAlgorithmInfo(GetPbkdf2Algorithm);
-    private static CachedAlgorithmInfo _sha1 = new CachedAlgorithmInfo(() =>
-        GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM)
+    private static CachedAlgorithmInfo _sha1 = new CachedAlgorithmInfo(
+        () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM)
     );
-    private static CachedAlgorithmInfo _sha256 = new CachedAlgorithmInfo(() =>
-        GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM)
+    private static CachedAlgorithmInfo _sha256 = new CachedAlgorithmInfo(
+        () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM)
     );
-    private static CachedAlgorithmInfo _sha512 = new CachedAlgorithmInfo(() =>
-        GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
+    private static CachedAlgorithmInfo _sha512 = new CachedAlgorithmInfo(
+        () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
     );
     private static CachedAlgorithmInfo _sp800_108_ctr_hmac = new CachedAlgorithmInfo(
         GetSP800_108_CTR_HMACAlgorithm

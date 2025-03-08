@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             var expected = @"        using System;";
 
             Assert.NotNull(
-                await Record.ExceptionAsync(() =>
-                    AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.None)
+                await Record.ExceptionAsync(
+                    () => AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.None)
                 )
             );
         }

@@ -116,17 +116,18 @@ namespace System.MemoryTests
         {
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             Assert.Throws<ArgumentOutOfRangeException>(() => new Memory<int>(a).Slice(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Memory<int>(a).Slice(a.Length + 1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Memory<int>(a).Slice(a.Length + 1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => new Memory<int>(a).Slice(-1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Memory<int>(a).Slice(0, a.Length + 1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Memory<int>(a).Slice(0, a.Length + 1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Memory<int>(a).Slice(2, a.Length + 1 - 2)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Memory<int>(a).Slice(2, a.Length + 1 - 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Memory<int>(a).Slice(a.Length + 1, 0)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Memory<int>(a).Slice(a.Length + 1, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => new Memory<int>(a).Slice(a.Length, 1));
 

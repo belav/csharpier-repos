@@ -403,28 +403,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentException>(() => new AssemblyIdentity(""));
             Assert.Throws<ArgumentException>(() => new AssemblyIdentity(null));
 
-            Assert.Throws<ArgumentException>(() =>
-                new AssemblyIdentity(
-                    "Goo",
-                    new Version(1, 0, 0, 0),
-                    "",
-                    ImmutableArray<byte>.Empty,
-                    hasPublicKey: true,
-                    isRetargetable: false,
-                    contentType: AssemblyContentType.Default
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new AssemblyIdentity(
+                        "Goo",
+                        new Version(1, 0, 0, 0),
+                        "",
+                        ImmutableArray<byte>.Empty,
+                        hasPublicKey: true,
+                        isRetargetable: false,
+                        contentType: AssemblyContentType.Default
+                    )
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                new AssemblyIdentity(
-                    "Goo",
-                    new Version(1, 0, 0, 0),
-                    "",
-                    new byte[] { 1, 2, 3 }.AsImmutableOrNull(),
-                    hasPublicKey: false,
-                    isRetargetable: false,
-                    contentType: AssemblyContentType.Default
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new AssemblyIdentity(
+                        "Goo",
+                        new Version(1, 0, 0, 0),
+                        "",
+                        new byte[] { 1, 2, 3 }.AsImmutableOrNull(),
+                        hasPublicKey: false,
+                        isRetargetable: false,
+                        contentType: AssemblyContentType.Default
+                    )
             );
 
             foreach (
@@ -443,21 +445,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 Assert.Throws<ArgumentOutOfRangeException>(() => new AssemblyIdentity("Goo", v));
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new AssemblyIdentity("Goo", contentType: (AssemblyContentType)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new AssemblyIdentity("Goo", contentType: (AssemblyContentType)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new AssemblyIdentity("Goo", contentType: (AssemblyContentType)int.MaxValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new AssemblyIdentity("Goo", contentType: (AssemblyContentType)int.MaxValue)
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                new AssemblyIdentity(
-                    "Goo",
-                    publicKeyOrToken: RoPublicKey1,
-                    hasPublicKey: true,
-                    isRetargetable: true,
-                    contentType: AssemblyContentType.WindowsRuntime
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new AssemblyIdentity(
+                        "Goo",
+                        publicKeyOrToken: RoPublicKey1,
+                        hasPublicKey: true,
+                        isRetargetable: true,
+                        contentType: AssemblyContentType.WindowsRuntime
+                    )
             );
         }
 

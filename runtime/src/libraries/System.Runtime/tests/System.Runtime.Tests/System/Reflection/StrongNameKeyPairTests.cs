@@ -15,16 +15,16 @@ namespace System.Reflection.Tests
         [Fact]
         public void Ctor_ByteArray_ThrowsPlatformNotSupportedException()
         {
-            AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair(new byte[] { 7, 2, 0, 0 })
+            AssertExtensions.Throws<PlatformNotSupportedException>(
+                () => new StrongNameKeyPair(new byte[] { 7, 2, 0, 0 })
             );
         }
 
         [Fact]
         public void Ctor_NullKeyPairArray_ThrowsPlatformNotSupportedException()
         {
-            AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair((byte[])null)
+            AssertExtensions.Throws<PlatformNotSupportedException>(
+                () => new StrongNameKeyPair((byte[])null)
             );
         }
 
@@ -35,8 +35,8 @@ namespace System.Reflection.Tests
             File.WriteAllBytes(tempPath, new byte[] { 7, 2, 0, 0 });
             using (FileStream fileStream = File.OpenRead(tempPath))
             {
-                AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                    new StrongNameKeyPair(fileStream)
+                AssertExtensions.Throws<PlatformNotSupportedException>(
+                    () => new StrongNameKeyPair(fileStream)
                 );
             }
         }
@@ -44,8 +44,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void Ctor_NullKeyPairFile_ThrowsPlatformNotSupportedException()
         {
-            AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair((FileStream)null)
+            AssertExtensions.Throws<PlatformNotSupportedException>(
+                () => new StrongNameKeyPair((FileStream)null)
             );
         }
 
@@ -55,16 +55,16 @@ namespace System.Reflection.Tests
         [InlineData("keyPairContainer")]
         public void Ctor_String_ThrowsPlatformNotSupportedException(string keyPairContainer)
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair(keyPairContainer)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new StrongNameKeyPair(keyPairContainer)
             );
         }
 
         [Fact]
         public void Ctor_SerializationInfo_StreamingContext_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new SubStrongNameKeyPair(null, new StreamingContext())
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new SubStrongNameKeyPair(null, new StreamingContext())
             );
         }
 

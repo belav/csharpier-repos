@@ -130,8 +130,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<Test>() { CallBase = true };
 
-            var thrown = Assert.Throws<InvalidOperationException>(() =>
-                mock.Object.ThrowingVirtualMethod()
+            var thrown = Assert.Throws<InvalidOperationException>(
+                () => mock.Object.ThrowingVirtualMethod()
             );
 
             Assert.Equal("Message", thrown.Message);

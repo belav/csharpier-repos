@@ -399,8 +399,9 @@ public partial class HttpConnectionTests
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
 
-                    token.Register(() =>
-                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    token.Register(
+                        () =>
+                            tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
                     );
 
                     return tcs.Task;
@@ -461,8 +462,8 @@ public partial class HttpConnectionTests
                     CreateConnection(testHttpHandler, loggerFactory: noErrorScope.LoggerFactory),
                     async (connection) =>
                     {
-                        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            connection.StartAsync().DefaultTimeout()
+                        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => connection.StartAsync().DefaultTimeout()
                         );
                         Assert.Equal("Negotiate redirection limit exceeded.", exception.Message);
                     }
@@ -540,8 +541,9 @@ public partial class HttpConnectionTests
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
 
-                    token.Register(() =>
-                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    token.Register(
+                        () =>
+                            tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
                     );
 
                     return tcs.Task;
@@ -637,8 +639,9 @@ public partial class HttpConnectionTests
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
 
-                    token.Register(() =>
-                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    token.Register(
+                        () =>
+                            tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
                     );
 
                     return tcs.Task;
@@ -833,8 +836,8 @@ public partial class HttpConnectionTests
                     CreateConnection(testHttpHandler, loggerFactory: noErrorScope.LoggerFactory),
                     async (connection) =>
                     {
-                        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            connection.StartAsync().DefaultTimeout()
+                        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => connection.StartAsync().DefaultTimeout()
                         );
                         Assert.Equal("Test error.", exception.Message);
                     }
@@ -859,8 +862,8 @@ public partial class HttpConnectionTests
                 CreateConnection(testHttpHandler),
                 async (connection) =>
                 {
-                    var exception = await Assert.ThrowsAsync<TException>(() =>
-                        connection.StartAsync().DefaultTimeout()
+                    var exception = await Assert.ThrowsAsync<TException>(
+                        () => connection.StartAsync().DefaultTimeout()
                     );
 
                     Assert.Equal(expectedExceptionMessage, exception.Message);

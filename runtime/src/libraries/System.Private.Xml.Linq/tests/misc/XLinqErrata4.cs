@@ -87,8 +87,8 @@ namespace System.Xml.Linq.Tests
                 + "<!-- an implausibly-versioned document -->"
                 + "<foo/>";
 
-            Assert.Throws<XmlException>(() =>
-                XDocument.Load(XmlReader.Create(new StringReader(xml)))
+            Assert.Throws<XmlException>(
+                () => XDocument.Load(XmlReader.Create(new StringReader(xml)))
             );
         }
 

@@ -244,13 +244,14 @@ public class ResponseSendFileTests : LoggedTest
                 async httpContext =>
                 {
                     var sendFile = httpContext.Features.Get<IHttpResponseBodyFeature>();
-                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                        sendFile.SendFileAsync(
-                            AbsoluteFilePath,
-                            1234567,
-                            null,
-                            CancellationToken.None
-                        )
+                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                        () =>
+                            sendFile.SendFileAsync(
+                                AbsoluteFilePath,
+                                1234567,
+                                null,
+                                CancellationToken.None
+                            )
                     );
                     completed = true;
                 },
@@ -275,8 +276,14 @@ public class ResponseSendFileTests : LoggedTest
                 async httpContext =>
                 {
                     var sendFile = httpContext.Features.Get<IHttpResponseBodyFeature>();
-                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                        sendFile.SendFileAsync(AbsoluteFilePath, 0, 1234567, CancellationToken.None)
+                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                        () =>
+                            sendFile.SendFileAsync(
+                                AbsoluteFilePath,
+                                0,
+                                1234567,
+                                CancellationToken.None
+                            )
                     );
                     completed = true;
                 },
@@ -770,8 +777,14 @@ public class ResponseSendFileTests : LoggedTest
                             }
                         });
 
-                        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                            httpContext.Response.SendFileAsync(AbsoluteFilePath, 0, null, cts.Token)
+                        await Assert.ThrowsAsync<ObjectDisposedException>(
+                            () =>
+                                httpContext.Response.SendFileAsync(
+                                    AbsoluteFilePath,
+                                    0,
+                                    null,
+                                    cts.Token
+                                )
                         );
 
                         testComplete.SetResult();

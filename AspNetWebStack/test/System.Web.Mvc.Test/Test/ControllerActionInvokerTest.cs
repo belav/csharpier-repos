@@ -3251,8 +3251,8 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
             // Act & Assert
-            Assert.Throws<AmbiguousMatchException>(() =>
-                invoker.PublicFindAction(context, controllerDescriptor, actionName: null)
+            Assert.Throws<AmbiguousMatchException>(
+                () => invoker.PublicFindAction(context, controllerDescriptor, actionName: null)
             );
         }
 

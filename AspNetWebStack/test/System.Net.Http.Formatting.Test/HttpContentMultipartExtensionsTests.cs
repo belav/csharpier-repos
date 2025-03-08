@@ -287,8 +287,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_ThrowsOnBadStreamProvider()
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
-            IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new BadStreamProvider())
+            IOException exception = await Assert.ThrowsAsync<IOException>(
+                () => content.ReadAsMultipartAsync(new BadStreamProvider())
             );
             InvalidOperationException invalidOperationException =
                 exception.InnerException as InvalidOperationException;
@@ -304,8 +304,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_ThrowsOnNullProvider()
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
-            IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new NullProvider())
+            IOException exception = await Assert.ThrowsAsync<IOException>(
+                () => content.ReadAsMultipartAsync(new NullProvider())
             );
             Assert.IsType<InvalidOperationException>(exception.InnerException);
         }
@@ -314,8 +314,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_ThrowsOnReadOnlyStream()
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
-            IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new ReadOnlyStreamProvider())
+            IOException exception = await Assert.ThrowsAsync<IOException>(
+                () => content.ReadAsMultipartAsync(new ReadOnlyStreamProvider())
             );
             Assert.IsType<InvalidOperationException>(exception.InnerException);
         }
@@ -341,8 +341,8 @@ namespace System.Net.Http
                 ValidBoundary
             );
             content.Headers.ContentType = MediaTypeHeaderValue.Parse(mediaType);
-            IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync()
+            IOException exception = await Assert.ThrowsAsync<IOException>(
+                () => content.ReadAsMultipartAsync()
             );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(ExceptionAsyncStreamMessage, exception.InnerException.Message);
@@ -352,8 +352,8 @@ namespace System.Net.Http
         public async Task ReadAsMultipartAsync_ThrowsOnWriteError()
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
-            IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new WriteErrorStreamProvider())
+            IOException exception = await Assert.ThrowsAsync<IOException>(
+                () => content.ReadAsMultipartAsync(new WriteErrorStreamProvider())
             );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(ExceptionAsyncStreamMessage, exception.InnerException.Message);

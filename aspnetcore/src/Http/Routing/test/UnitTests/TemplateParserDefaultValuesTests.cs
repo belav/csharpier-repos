@@ -57,13 +57,14 @@ public class TemplateParserDefaultValuesTests
         var routeBuilder = CreateRouteBuilder();
 
         // Act & Assert
-        var ex = Assert.Throws<RouteCreationException>(() =>
-            routeBuilder.MapRoute(
-                "mockName",
-                "{controller}/{action}/{id:int=12}",
-                defaults: new { id = 13 },
-                constraints: null
-            )
+        var ex = Assert.Throws<RouteCreationException>(
+            () =>
+                routeBuilder.MapRoute(
+                    "mockName",
+                    "{controller}/{action}/{id:int=12}",
+                    defaults: new { id = 13 },
+                    constraints: null
+                )
         );
 
         var message =
@@ -87,13 +88,14 @@ public class TemplateParserDefaultValuesTests
         var routeBuilder = CreateRouteBuilder();
 
         // Act & Assert
-        var ex = Assert.Throws<RouteCreationException>(() =>
-            routeBuilder.MapRoute(
-                "mockName",
-                "{controller}/{action}/{id:int=?}",
-                defaults: new { id = 13 },
-                constraints: null
-            )
+        var ex = Assert.Throws<RouteCreationException>(
+            () =>
+                routeBuilder.MapRoute(
+                    "mockName",
+                    "{controller}/{action}/{id:int=?}",
+                    defaults: new { id = 13 },
+                    constraints: null
+                )
         );
 
         var message =

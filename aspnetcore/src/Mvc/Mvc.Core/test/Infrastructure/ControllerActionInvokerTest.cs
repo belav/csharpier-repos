@@ -1912,8 +1912,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         );
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            invoker.InvokeAsync()
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => invoker.InvokeAsync()
         );
         Assert.Equal(expectedMessage, exception.Message);
     }

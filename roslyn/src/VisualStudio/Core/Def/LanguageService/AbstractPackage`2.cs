@@ -143,9 +143,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             {
                 if (!IVsShellExtensions.IsInCommandLineMode(JoinableTaskFactory))
                 {
-                    JoinableTaskFactory.Run(async () =>
-                        await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
-                            .ConfigureAwait(true)
+                    JoinableTaskFactory.Run(
+                        async () =>
+                            await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
+                                .ConfigureAwait(true)
                     );
                 }
 

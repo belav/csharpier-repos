@@ -74,11 +74,29 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             if (missing)
             {
-                Assert.Throws<MissingMemberException>(() =>
-                    LateBinding.LateSetComplex(obj, objType, name, args, paramNames, false, false)
+                Assert.Throws<MissingMemberException>(
+                    () =>
+                        LateBinding.LateSetComplex(
+                            obj,
+                            objType,
+                            name,
+                            args,
+                            paramNames,
+                            false,
+                            false
+                        )
                 );
-                Assert.Throws<MissingMemberException>(() =>
-                    LateBinding.LateSetComplex(obj, objType, name, args, paramNames, false, true)
+                Assert.Throws<MissingMemberException>(
+                    () =>
+                        LateBinding.LateSetComplex(
+                            obj,
+                            objType,
+                            name,
+                            args,
+                            paramNames,
+                            false,
+                            true
+                        )
                 );
                 LateBinding.LateSetComplex(obj, objType, name, args, paramNames, true, false);
                 LateBinding.LateSetComplex(obj, objType, name, args, paramNames, true, true);
@@ -86,12 +104,22 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             else if (valueType)
             {
                 LateBinding.LateSetComplex(obj, objType, name, args, paramNames, false, false);
-                Assert.Throws<Exception>(() =>
-                    LateBinding.LateSetComplex(obj, objType, name, args, paramNames, false, true)
+                Assert.Throws<Exception>(
+                    () =>
+                        LateBinding.LateSetComplex(
+                            obj,
+                            objType,
+                            name,
+                            args,
+                            paramNames,
+                            false,
+                            true
+                        )
                 );
                 LateBinding.LateSetComplex(obj, objType, name, args, paramNames, true, false);
-                Assert.Throws<Exception>(() =>
-                    LateBinding.LateSetComplex(obj, objType, name, args, paramNames, true, true)
+                Assert.Throws<Exception>(
+                    () =>
+                        LateBinding.LateSetComplex(obj, objType, name, args, paramNames, true, true)
                 );
             }
             else
@@ -128,8 +156,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [MemberData(nameof(LateIndexSet_MissingMember_TestData))]
         public void LateIndexSet_MissingMember(object obj, object[] args, string[] paramNames)
         {
-            Assert.Throws<MissingMemberException>(() =>
-                LateBinding.LateIndexSet(obj, args, paramNames)
+            Assert.Throws<MissingMemberException>(
+                () => LateBinding.LateIndexSet(obj, args, paramNames)
             );
         }
 
@@ -145,11 +173,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             if (missing)
             {
-                Assert.Throws<MissingMemberException>(() =>
-                    LateBinding.LateIndexSetComplex(obj, args, paramNames, false, false)
+                Assert.Throws<MissingMemberException>(
+                    () => LateBinding.LateIndexSetComplex(obj, args, paramNames, false, false)
                 );
-                Assert.Throws<MissingMemberException>(() =>
-                    LateBinding.LateIndexSetComplex(obj, args, paramNames, false, true)
+                Assert.Throws<MissingMemberException>(
+                    () => LateBinding.LateIndexSetComplex(obj, args, paramNames, false, true)
                 );
                 LateBinding.LateIndexSetComplex(obj, args, paramNames, true, false);
                 LateBinding.LateIndexSetComplex(obj, args, paramNames, true, true);
@@ -157,12 +185,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             else if (valueType)
             {
                 LateBinding.LateIndexSetComplex(obj, args, paramNames, false, false);
-                Assert.Throws<Exception>(() =>
-                    LateBinding.LateIndexSetComplex(obj, args, paramNames, false, true)
+                Assert.Throws<Exception>(
+                    () => LateBinding.LateIndexSetComplex(obj, args, paramNames, false, true)
                 );
                 LateBinding.LateIndexSetComplex(obj, args, paramNames, true, false);
-                Assert.Throws<Exception>(() =>
-                    LateBinding.LateIndexSetComplex(obj, args, paramNames, true, true)
+                Assert.Throws<Exception>(
+                    () => LateBinding.LateIndexSetComplex(obj, args, paramNames, true, true)
                 );
             }
             else

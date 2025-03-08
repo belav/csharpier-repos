@@ -123,8 +123,8 @@ namespace Moq.Tests
                 throw new InvalidOperationException();
             };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                mock.Raise(m => m.Added += null, EventArgs.Empty)
+            Assert.Throws<InvalidOperationException>(
+                () => mock.Raise(m => m.Added += null, EventArgs.Empty)
             );
         }
 
@@ -370,8 +370,8 @@ namespace Moq.Tests
             var prop = "";
             mock.Object.PropertyChanged += (sender, args) => prop = args.PropertyName;
 
-            Assert.Throws<ArgumentException>(() =>
-                mock.Raise(x => x.PropertyChanged -= null, EventArgs.Empty)
+            Assert.Throws<ArgumentException>(
+                () => mock.Raise(x => x.PropertyChanged -= null, EventArgs.Empty)
             );
         }
 
@@ -427,9 +427,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<WithEvent>();
 
-            Assert.Throws<ArgumentException>(() =>
-                mock.SetupSet(m => m.Value = It.IsAny<int>())
-                    .Raises(m => m.ClassEvent += null, EventArgs.Empty)
+            Assert.Throws<ArgumentException>(
+                () =>
+                    mock.SetupSet(m => m.Value = It.IsAny<int>())
+                        .Raises(m => m.ClassEvent += null, EventArgs.Empty)
             );
         }
 
@@ -898,7 +899,8 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<EventArgs>>();
 
             //Act
-            var exception = Record.Exception(() => mock.VerifyRemove(m => m.Do(It.IsAny<string>()))
+            var exception = Record.Exception(
+                () => mock.VerifyRemove(m => m.Do(It.IsAny<string>()))
             );
 
             //Assert

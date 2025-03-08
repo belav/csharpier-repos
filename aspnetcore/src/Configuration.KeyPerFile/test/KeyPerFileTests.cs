@@ -32,8 +32,8 @@ public class KeyPerFileTests
     [Fact]
     public void ThrowsWhenNotOptionalAndDirectoryDoesntExist()
     {
-        var e = Assert.Throws<ArgumentException>(() =>
-            new ConfigurationBuilder().AddKeyPerFile("nonexistent", false).Build()
+        var e = Assert.Throws<ArgumentException>(
+            () => new ConfigurationBuilder().AddKeyPerFile("nonexistent", false).Build()
         );
         Assert.Contains("The path must be absolute.", e.Message);
     }

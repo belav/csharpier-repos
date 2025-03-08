@@ -97,7 +97,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 var ignored = new JoinBlock<int, int, int>().Target3.Completion;
             });
-            Assert.Throws<ArgumentNullException>(() => new JoinBlock<int, int>().Target1.Fault(null)
+            Assert.Throws<ArgumentNullException>(
+                () => new JoinBlock<int, int>().Target1.Fault(null)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "messageHeader",
@@ -396,14 +397,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestCompletionTask()
         {
             await DataflowTestHelpers.TestCompletionTask(() => new JoinBlock<int, string>());
-            await DataflowTestHelpers.TestCompletionTask(() => new JoinBlock<int, string, double>()
+            await DataflowTestHelpers.TestCompletionTask(
+                () => new JoinBlock<int, string, double>()
             );
 
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                new JoinBlock<string, string>().Target1.Completion
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new JoinBlock<string, string>().Target1.Completion
             );
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                new JoinBlock<string, string, double>().Target1.Completion
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new JoinBlock<string, string, double>().Target1.Completion
             );
         }
 

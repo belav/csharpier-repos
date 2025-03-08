@@ -314,8 +314,8 @@ public class ClrPropertySetterFactoryTest
             typeof(ConcreteEntity1).GetProperty(nameof(ConcreteEntity1.NoSetterProperty))
         );
 
-        Assert.Throws<InvalidOperationException>(() =>
-            new ClrPropertySetterFactory().Create((IProperty)property)
+        Assert.Throws<InvalidOperationException>(
+            () => new ClrPropertySetterFactory().Create((IProperty)property)
         );
 
         entityType = CreateModel().AddEntityType(typeof(ConcreteEntity2));
@@ -323,8 +323,8 @@ public class ClrPropertySetterFactoryTest
             typeof(ConcreteEntity2).GetProperty(nameof(ConcreteEntity2.NoSetterProperty))
         );
 
-        Assert.Throws<InvalidOperationException>(() =>
-            new ClrPropertySetterFactory().Create((IProperty)property)
+        Assert.Throws<InvalidOperationException>(
+            () => new ClrPropertySetterFactory().Create((IProperty)property)
         );
     }
 

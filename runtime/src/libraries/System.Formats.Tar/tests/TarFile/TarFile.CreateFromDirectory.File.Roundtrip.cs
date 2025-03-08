@@ -94,12 +94,13 @@ namespace System.Formats.Tar.Tests
             );
 
             using FileStream archiveStream = File.OpenRead(destinationArchive);
-            Exception exception = Assert.Throws<IOException>(() =>
-                TarFile.ExtractToDirectory(
-                    archiveStream,
-                    destinationDirectoryName,
-                    overwriteFiles: true
-                )
+            Exception exception = Assert.Throws<IOException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        archiveStream,
+                        destinationDirectoryName,
+                        overwriteFiles: true
+                    )
             );
 
             Assert.Equal(

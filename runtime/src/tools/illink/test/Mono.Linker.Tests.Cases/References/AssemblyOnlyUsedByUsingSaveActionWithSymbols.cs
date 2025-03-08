@@ -11,7 +11,6 @@ namespace Mono.Linker.Tests.Cases.References
     /// save assembly that are referenced by the debug info. This includes the unused typeref, so the assemblyref referenced by the typeref
     /// must also be preserved.
     /// </summary>
-
     // Add a custom step which sets the assembly action of the test to "save"
     [SetupCompileBefore(
         "SetSaveAction_Symbols.dll",

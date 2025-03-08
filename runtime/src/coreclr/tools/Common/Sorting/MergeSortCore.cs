@@ -51,8 +51,8 @@ namespace ILCompiler.Sorting.Implementation
                 TDataStructureAccessor accessor = default(TDataStructureAccessor);
                 int halfLen = length / 2;
 
-                Task rightSortTask = Task.Run(() =>
-                    ParallelSort(arrayToSort, index + halfLen, length - halfLen, comparer)
+                Task rightSortTask = Task.Run(
+                    () => ParallelSort(arrayToSort, index + halfLen, length - halfLen, comparer)
                 );
 
                 T[] localCopyOfHalfOfArray = new T[halfLen];

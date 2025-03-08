@@ -223,16 +223,16 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void PeekEmptyThrows()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ImmutableQueue<GenericParameterHelper>.Empty.Peek()
+            Assert.Throws<InvalidOperationException>(
+                () => ImmutableQueue<GenericParameterHelper>.Empty.Peek()
             );
         }
 
         [Fact]
         public void DequeueEmptyThrows()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ImmutableQueue<GenericParameterHelper>.Empty.Dequeue()
+            Assert.Throws<InvalidOperationException>(
+                () => ImmutableQueue<GenericParameterHelper>.Empty.Dequeue()
             );
         }
 
@@ -305,8 +305,8 @@ namespace System.Collections.Immutable.Tests
         public static void TestDebuggerAttributes_Null()
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableQueue.Create<int>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null)
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
             );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }

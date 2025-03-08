@@ -205,15 +205,16 @@ public partial class TestDbContext : DbContext
                     "options"
                 ),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        generator.GenerateModel(
-                            new Model(),
-                            new ModelCodeGenerationOptions
-                            {
-                                ContextName = null,
-                                ConnectionString = "Initial Catalog=TestDatabase",
-                            }
-                        )
+                    .Throws<ArgumentException>(
+                        () =>
+                            generator.GenerateModel(
+                                new Model(),
+                                new ModelCodeGenerationOptions
+                                {
+                                    ContextName = null,
+                                    ConnectionString = "Initial Catalog=TestDatabase",
+                                }
+                            )
                     )
                     .Message
             );
@@ -224,15 +225,16 @@ public partial class TestDbContext : DbContext
                     "options"
                 ),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        generator.GenerateModel(
-                            new Model(),
-                            new ModelCodeGenerationOptions
-                            {
-                                ContextName = "TestDbContext",
-                                ConnectionString = null,
-                            }
-                        )
+                    .Throws<ArgumentException>(
+                        () =>
+                            generator.GenerateModel(
+                                new Model(),
+                                new ModelCodeGenerationOptions
+                                {
+                                    ContextName = "TestDbContext",
+                                    ConnectionString = null,
+                                }
+                            )
                     )
                     .Message
             );
@@ -1396,24 +1398,25 @@ public partial class TestDbContext : DbContext
                     "PeriodStart"
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        TestAsync(
-                            modelBuilder =>
-                                modelBuilder.Entity(
-                                    "Customer",
-                                    e =>
-                                    {
-                                        e.Property<int>("Id");
-                                        e.Property<string>("Name");
-                                        e.HasKey("Id");
-                                        e.ToTable(tb => tb.IsTemporal());
-                                    }
-                                ),
-                            new ModelCodeGenerationOptions { UseDataAnnotations = false },
-                            code =>
-                            {
-                                AssertFileContents(
-                                    $$"""
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            TestAsync(
+                                modelBuilder =>
+                                    modelBuilder.Entity(
+                                        "Customer",
+                                        e =>
+                                        {
+                                            e.Property<int>("Id");
+                                            e.Property<string>("Name");
+                                            e.HasKey("Id");
+                                            e.ToTable(tb => tb.IsTemporal());
+                                        }
+                                    ),
+                                new ModelCodeGenerationOptions { UseDataAnnotations = false },
+                                code =>
+                                {
+                                    AssertFileContents(
+                                        $$"""
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -1459,14 +1462,14 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                                    code.ContextFile
-                                );
-                            },
-                            model =>
-                            {
-                                // TODO
-                            }
-                        )
+                                        code.ContextFile
+                                    );
+                                },
+                                model =>
+                                {
+                                    // TODO
+                                }
+                            )
                     )
                 ).Message
             );

@@ -90,8 +90,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
-            await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper(jsonInput.json, typeInfo)
+            await Assert.ThrowsAsync<JsonException>(
+                () => Serializer.DeserializeWrapper(jsonInput.json, typeInfo)
             );
         }
 
@@ -259,8 +259,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ClassWithExtensionDataAndDisallowHandling_ThrowsInvalidOperationException()
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.DeserializeWrapper<ClassWithExtensionDataAndDisallowHandling>("{}")
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.DeserializeWrapper<ClassWithExtensionDataAndDisallowHandling>("{}")
             );
         }
 

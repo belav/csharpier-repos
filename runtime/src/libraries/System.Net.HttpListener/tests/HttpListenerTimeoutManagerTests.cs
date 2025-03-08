@@ -341,8 +341,8 @@ namespace System.Net.Tests
             // Set the MinSendBytesPerSecond timeout after calling Close and make sure that we get the exception.
             _listener.Start();
             _listener.Close();
-            Assert.Throws<ObjectDisposedException>(() =>
-                _listener.TimeoutManager.MinSendBytesPerSecond = 10 * 1024 * 1024
+            Assert.Throws<ObjectDisposedException>(
+                () => _listener.TimeoutManager.MinSendBytesPerSecond = 10 * 1024 * 1024
             );
         }
 

@@ -367,16 +367,16 @@ namespace System.Transactions.Tests
                 scope.Complete();
             }
 
-            TransactionAbortedException tae = Assert.Throws<TransactionAbortedException>(() =>
-                ct.Commit()
+            TransactionAbortedException tae = Assert.Throws<TransactionAbortedException>(
+                () => ct.Commit()
             );
             Assert.IsType<NotSupportedException>(tae.InnerException);
 
             irm[0].Check(1, 0, 0, 0, 0, 0, 0, "irm [0]");
             irm[1].Check(0, 1, 0, 1, 0, 0, 0, "irm [1]");
 
-            InvalidOperationException ioe = Assert.Throws<InvalidOperationException>(() =>
-                ct.Commit()
+            InvalidOperationException ioe = Assert.Throws<InvalidOperationException>(
+                () => ct.Commit()
             );
             Assert.Null(ioe.InnerException);
 

@@ -35,8 +35,8 @@ namespace System.IO.Tests
         {
             using (SafeFileHandle handle = GetHandleToExistingFile(FileAccess.Write, options))
             {
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    RandomAccess.Read(handle, new Memory<byte>[] { new byte[1] }, 0)
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => RandomAccess.Read(handle, new Memory<byte>[] { new byte[1] }, 0)
                 );
             }
         }

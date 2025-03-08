@@ -408,8 +408,8 @@ public class KestrelConfigurationLoaderTests
 
             // Since there are no configuration certs and we bypassed the CertificateManager, there will be an
             // exception about not finding any certs at all.
-            Assert.Throws<InvalidOperationException>(() =>
-                serverOptions.ConfigurationLoader.Reload()
+            Assert.Throws<InvalidOperationException>(
+                () => serverOptions.ConfigurationLoader.Reload()
             );
 
             Assert.Null(serverOptions.ConfigurationLoader.DefaultCertificate);
@@ -1028,8 +1028,8 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            serverOptions.Configure(config).Load()
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => serverOptions.Configure(config).Load()
         );
         Assert.Equal(
             CoreStrings.FormatEndpointHasUnusedHttpsConfig("End1", "Certificate"),

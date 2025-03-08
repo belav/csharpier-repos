@@ -45,8 +45,8 @@ public class HtmlRendererTest
         );
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            htmlContent.WriteHtmlTo(new StringWriter())
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => htmlContent.WriteHtmlTo(new StringWriter())
         );
         Assert.Contains("The current thread is not associated with the Dispatcher", ex.Message);
     }
@@ -1235,15 +1235,16 @@ public class HtmlRendererTest
         await htmlRenderer.Dispatcher.InvokeAsync(async () =>
         {
             // Act/Assert
-            var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-                htmlRenderer.RenderComponentAsync<ErrorThrowingComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(ErrorThrowingComponent.ThrowAsync), true },
-                        }
+            var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(
+                () =>
+                    htmlRenderer.RenderComponentAsync<ErrorThrowingComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                { nameof(ErrorThrowingComponent.ThrowAsync), true },
+                            }
+                        )
                     )
-                )
             );
             Assert.Equal("async", ex.Message);
         });

@@ -25,8 +25,8 @@ public class ServerDeferralTests
     [Fact]
     public async Task ServerSupportsAuthButDisabled_Error()
     {
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await CreateHostAsync(supportsAuth: true, isEnabled: false)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await CreateHostAsync(supportsAuth: true, isEnabled: false)
         );
         Assert.Equal(
             "The Negotiate Authentication handler cannot be used on a server that directly supports Windows Authentication."

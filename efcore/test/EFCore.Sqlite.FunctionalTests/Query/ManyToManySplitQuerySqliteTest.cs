@@ -15,8 +15,8 @@ public class ManyToManySplitQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Skip_navigation_order_by_single_or_default(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Skip_navigation_order_by_single_or_default(async)
                 )
             ).Message
         );

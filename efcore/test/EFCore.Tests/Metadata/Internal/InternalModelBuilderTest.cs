@@ -512,8 +512,8 @@ public class InternalModelBuilderTest
         Assert.Equal(
             CoreStrings.ClashingSharedType(typeof(Details).Name),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
+                .Throws<InvalidOperationException>(
+                    () => modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
                 )
                 .Message
         );
@@ -521,12 +521,13 @@ public class InternalModelBuilderTest
         Assert.Equal(
             CoreStrings.ClashingOwnedEntityType(typeof(Details).Name),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    modelBuilder.SharedTypeEntity(
-                        nameof(Details),
-                        typeof(Details),
-                        ConfigurationSource.Explicit
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.SharedTypeEntity(
+                            nameof(Details),
+                            typeof(Details),
+                            ConfigurationSource.Explicit
+                        )
                 )
                 .Message
         );
@@ -550,8 +551,8 @@ public class InternalModelBuilderTest
         Assert.Equal(
             CoreStrings.ClashingNonOwnedEntityType("Details (Details)"),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
+                .Throws<InvalidOperationException>(
+                    () => modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
                 )
                 .Message
         );
@@ -770,12 +771,13 @@ public class InternalModelBuilderTest
         Assert.Equal(
             CoreStrings.ClashingMismatchedSharedType("SpecialDetails", nameof(Product)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    modelBuilder.SharedTypeEntity(
-                        sharedTypeName,
-                        typeof(Details),
-                        ConfigurationSource.Explicit
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.SharedTypeEntity(
+                            sharedTypeName,
+                            typeof(Details),
+                            ConfigurationSource.Explicit
+                        )
                 )
                 .Message
         );
@@ -788,12 +790,13 @@ public class InternalModelBuilderTest
                 typeof(Customer).ShortDisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    modelBuilder.SharedTypeEntity(
-                        typeof(Customer).DisplayName(),
-                        typeof(Customer),
-                        ConfigurationSource.Explicit
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.SharedTypeEntity(
+                            typeof(Customer).DisplayName(),
+                            typeof(Customer),
+                            ConfigurationSource.Explicit
+                        )
                 )
                 .Message
         );

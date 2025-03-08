@@ -33,14 +33,26 @@ namespace System.Threading.Tasks.Sources.Tests
 
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(0));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetStatus(0));
-            Assert.Throws<InvalidOperationException>(() =>
-                mrvts.OnCompleted(_ => { }, new object(), 0, ValueTaskSourceOnCompletedFlags.None)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    mrvts.OnCompleted(
+                        _ => { },
+                        new object(),
+                        0,
+                        ValueTaskSourceOnCompletedFlags.None
+                    )
             );
 
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(2));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetStatus(2));
-            Assert.Throws<InvalidOperationException>(() =>
-                mrvts.OnCompleted(_ => { }, new object(), 2, ValueTaskSourceOnCompletedFlags.None)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    mrvts.OnCompleted(
+                        _ => { },
+                        new object(),
+                        2,
+                        ValueTaskSourceOnCompletedFlags.None
+                    )
             );
         }
 
@@ -272,8 +284,8 @@ namespace System.Threading.Tasks.Sources.Tests
         {
             var mrvts = new ManualResetValueTaskSource<int>();
             mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None);
-            Assert.Throws<InvalidOperationException>(() =>
-                mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None)
+            Assert.Throws<InvalidOperationException>(
+                () => mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None)
             );
         }
 

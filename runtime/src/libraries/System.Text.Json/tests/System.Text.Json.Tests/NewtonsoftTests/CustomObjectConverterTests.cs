@@ -181,8 +181,8 @@ namespace System.Text.Json.Tests
                     }
                 }]";
 
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<List<MyClass>>(validJson)
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<List<MyClass>>(validJson)
             );
 
             const string invalidJson =
@@ -193,8 +193,8 @@ namespace System.Text.Json.Tests
                     }
                 }";
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<List<MyClass>>(invalidJson)
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<List<MyClass>>(invalidJson)
             );
         }
     }

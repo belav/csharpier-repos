@@ -38,8 +38,8 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new DefaultComponentActivator(), new TestRenderer());
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>(() =>
-            factory.InstantiateComponent(GetServiceProvider(), componentType, null, null)
+        var ex = Assert.Throws<ArgumentException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, null)
         );
         Assert.StartsWith(
             $"The type {componentType.FullName} does not implement {nameof(IComponent)}.",
@@ -84,8 +84,8 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new NullResultComponentActivator(), new TestRenderer());
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            factory.InstantiateComponent(GetServiceProvider(), componentType, null, null)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, null)
         );
         Assert.Equal(
             $"The component activator returned a null value for a component of type {componentType.FullName}.",
@@ -214,8 +214,8 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(componentActivator, renderer);
 
         // Act/Assert
-        Assert.Throws<AmbiguousMatchException>(() =>
-            factory.InstantiateComponent(GetServiceProvider(), componentType, null, 1234)
+        Assert.Throws<AmbiguousMatchException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, 1234)
         );
     }
 
@@ -265,13 +265,14 @@ public class ComponentFactoryTest
         var callsiteRenderMode = componentType.GetCustomAttribute<RenderModeAttribute>().Mode;
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            factory.InstantiateComponent(
-                GetServiceProvider(),
-                componentType,
-                callsiteRenderMode,
-                1234
-            )
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                factory.InstantiateComponent(
+                    GetServiceProvider(),
+                    componentType,
+                    callsiteRenderMode,
+                    1234
+                )
         );
         Assert.Equal(
             $"The component type '{componentType}' has a fixed rendermode of '{typeof(TestRenderMode)}', so it is not valid to specify any rendermode when using this component.",

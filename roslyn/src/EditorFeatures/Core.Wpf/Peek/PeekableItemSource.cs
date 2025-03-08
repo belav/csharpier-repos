@@ -77,13 +77,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 showProgress: false,
                 action: context =>
                 {
-                    _threadingContext.JoinableTaskFactory.Run(() =>
-                        AugumentPeekSessionAsync(
-                            peekableItems,
-                            context,
-                            triggerPoint.Value,
-                            document
-                        )
+                    _threadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            AugumentPeekSessionAsync(
+                                peekableItems,
+                                context,
+                                triggerPoint.Value,
+                                document
+                            )
                     );
                 }
             );

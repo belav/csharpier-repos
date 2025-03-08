@@ -19,7 +19,6 @@ namespace System.Web.Security
     /// ClaimsIdentity has a property the holds this type.
     /// made on parameters.
     /// </summary>
-
     internal class RoleClaimProvider
     {
         RolePrincipal _rolePrincipal;

@@ -151,8 +151,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             $"{{CityId: {city.Id}}}"
                         ),
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                context.Entry(college).State = EntityState.Modified
+                            .Throws<InvalidOperationException>(
+                                () => context.Entry(college).State = EntityState.Modified
                             )
                             .Message
                     );
@@ -267,8 +267,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync()
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await context.SaveChangesAsync()
                         )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                 ).Message
@@ -309,8 +309,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             {
                 if (async)
                 {
-                    await Assert.ThrowsAsync<DbUpdateException>(async () =>
-                        await context.SaveChangesAsync()
+                    await Assert.ThrowsAsync<DbUpdateException>(
+                        async () => await context.SaveChangesAsync()
                     );
                 }
                 else
@@ -324,8 +324,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
                     (
                         async
-                            ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                                await context.SaveChangesAsync()
+                            ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                async () => await context.SaveChangesAsync()
                             )
                             : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                     ).Message
@@ -383,8 +383,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync()
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await context.SaveChangesAsync()
                         )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                 ).Message
@@ -417,8 +417,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                 if (Fixture.ForceClientNoAction)
                 {
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
                     );
                 }
                 else
@@ -540,8 +541,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     if (async)
                     {
-                        await Assert.ThrowsAsync<DbUpdateException>(async () =>
-                            await context.SaveChangesAsync()
+                        await Assert.ThrowsAsync<DbUpdateException>(
+                            async () => await context.SaveChangesAsync()
                         );
                     }
                     else
@@ -726,8 +727,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 ),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync()
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await context.SaveChangesAsync()
                         )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                 ).Message

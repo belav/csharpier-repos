@@ -30,8 +30,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NullSerializerType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
-                new DesignerSerializerAttribute((Type)null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                () => new DesignerSerializerAttribute((Type)null, typeof(int))
             );
         }
 

@@ -61,10 +61,11 @@ namespace System.IO.Tests
                         .IsCanceled
                 );
 
-                TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                    RandomAccess
-                        .ReadAsync(handle, new Memory<byte>[] { new byte[1] }, 0, token)
-                        .AsTask()
+                TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(
+                    () =>
+                        RandomAccess
+                            .ReadAsync(handle, new Memory<byte>[] { new byte[1] }, 0, token)
+                            .AsTask()
                 );
                 Assert.Equal(token, ex.CancellationToken);
             }
@@ -76,8 +77,9 @@ namespace System.IO.Tests
         {
             using (SafeFileHandle handle = GetHandleToExistingFile(FileAccess.Write, options))
             {
-                await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
-                    await RandomAccess.ReadAsync(handle, new Memory<byte>[] { new byte[1] }, 0)
+                await Assert.ThrowsAsync<UnauthorizedAccessException>(
+                    async () =>
+                        await RandomAccess.ReadAsync(handle, new Memory<byte>[] { new byte[1] }, 0)
                 );
             }
         }

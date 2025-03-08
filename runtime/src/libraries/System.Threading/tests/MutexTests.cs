@@ -277,8 +277,8 @@ namespace System.Threading.Tests
                     return;
                 }
 
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    new Mutex(false, $"Global\\{Guid.NewGuid():N}")
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => new Mutex(false, $"Global\\{Guid.NewGuid():N}")
                 );
                 Assert.True(RevertToSelf());
             });
@@ -288,10 +288,11 @@ namespace System.Threading.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void Ctor_TryCreateGlobalMutexTest_Uwp()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(() =>
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    new Mutex(false, $"Global\\{Guid.NewGuid():N}")
-                )
+            ThreadTestHelpers.RunTestInBackgroundThread(
+                () =>
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => new Mutex(false, $"Global\\{Guid.NewGuid():N}")
+                    )
             );
         }
 
@@ -551,8 +552,8 @@ namespace System.Threading.Tests
                     switch (waitType)
                     {
                         case WaitHandleWaitType.WaitOne:
-                            ame = AssertExtensions.Throws<AbandonedMutexException, bool>(() =>
-                                m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                            ame = AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
                             );
                             Assert.Equal(-1, ame.MutexIndex);
                             Assert.Null(ame.Mutex);
@@ -566,11 +567,12 @@ namespace System.Threading.Tests
                             )
                             {
                                 Assert.Equal(0, WaitHandle.WaitAny(waitHandles, 0));
-                                AssertExtensions.Throws<AbandonedMutexException, bool>(() =>
-                                    m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                                AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                    () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
                                 );
-                                AssertExtensions.Throws<AbandonedMutexException, bool>(() =>
-                                    m2.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                                AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                    () =>
+                                        m2.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
                                 );
                                 break;
                             }
@@ -599,11 +601,12 @@ namespace System.Threading.Tests
                             }
                             else
                             {
-                                ame = AssertExtensions.Throws<AbandonedMutexException, int>(() =>
-                                    WaitHandle.WaitAny(
-                                        waitHandles,
-                                        ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                    )
+                                ame = AssertExtensions.Throws<AbandonedMutexException, int>(
+                                    () =>
+                                        WaitHandle.WaitAny(
+                                            waitHandles,
+                                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                                        )
                                 );
                             }
 
@@ -630,15 +633,18 @@ namespace System.Threading.Tests
                             {
                                 if (m2 != null)
                                 {
-                                    AssertExtensions.Throws<AbandonedMutexException, bool>(() =>
-                                        m2.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                                    AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                        () =>
+                                            m2.WaitOne(
+                                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                                            )
                                     );
                                 }
                             }
                             else
                             {
-                                AssertExtensions.Throws<AbandonedMutexException, bool>(() =>
-                                    m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                                AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                    () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
                                 );
                             }
 
@@ -656,11 +662,12 @@ namespace System.Threading.Tests
                                 Assert.True(e.Set());
                             }
 
-                            ame = AssertExtensions.Throws<AbandonedMutexException, bool>(() =>
-                                WaitHandle.WaitAll(
-                                    waitHandles,
-                                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                )
+                            ame = AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                () =>
+                                    WaitHandle.WaitAll(
+                                        waitHandles,
+                                        ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                                    )
                             );
                             Assert.Equal(-1, ame.MutexIndex);
                             Assert.Null(ame.Mutex);

@@ -1244,11 +1244,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectEqual(right, left, true)
             );
         }
 
@@ -1267,8 +1267,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.CompareObjectEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.CompareObjectEqual(left, right, true)
             );
         }
 
@@ -1342,11 +1342,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectGreater(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectGreater(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectGreater(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectGreater(right, left, true)
             );
         }
 
@@ -1365,8 +1365,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.CompareObjectGreater(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.CompareObjectGreater(left, right, true)
             );
         }
 
@@ -1439,11 +1439,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectGreaterEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectGreaterEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectGreaterEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectGreaterEqual(right, left, true)
             );
         }
 
@@ -1466,8 +1466,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.CompareObjectGreaterEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.CompareObjectGreaterEqual(left, right, true)
             );
         }
 
@@ -1547,9 +1547,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectLess(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectLess(right, left, true)
             );
         }
 
@@ -1568,8 +1570,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.CompareObjectLess(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.CompareObjectLess(left, right, true)
             );
         }
 
@@ -1642,11 +1644,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectLessEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectLessEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectLessEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectLessEqual(right, left, true)
             );
         }
 
@@ -1669,8 +1671,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.CompareObjectLessEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.CompareObjectLessEqual(left, right, true)
             );
         }
 
@@ -1750,11 +1752,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectNotEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectNotEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.CompareObjectNotEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.CompareObjectNotEqual(right, left, true)
             );
         }
 
@@ -1773,8 +1775,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.CompareObjectNotEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.CompareObjectNotEqual(left, right, true)
             );
         }
 
@@ -1848,11 +1850,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectEqual(right, left, true)
             );
         }
 
@@ -1875,8 +1877,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.ConditionalCompareObjectEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.ConditionalCompareObjectEqual(left, right, true)
             );
         }
 
@@ -1954,11 +1956,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectGreater(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectGreater(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectGreater(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectGreater(right, left, true)
             );
         }
 
@@ -1981,8 +1983,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.ConditionalCompareObjectGreater(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.ConditionalCompareObjectGreater(left, right, true)
             );
         }
 
@@ -2073,11 +2075,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectGreaterEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectGreaterEqual(right, left, true)
             );
         }
 
@@ -2100,8 +2102,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
             );
         }
 
@@ -2185,11 +2187,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectLess(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectLess(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectLess(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectLess(right, left, true)
             );
         }
 
@@ -2212,8 +2214,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.ConditionalCompareObjectLess(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.ConditionalCompareObjectLess(left, right, true)
             );
         }
 
@@ -2296,11 +2298,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectLessEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectLessEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectLessEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectLessEqual(right, left, true)
             );
         }
 
@@ -2323,8 +2325,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.ConditionalCompareObjectLessEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.ConditionalCompareObjectLessEqual(left, right, true)
             );
         }
 
@@ -2408,11 +2410,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectNotEqual(left, right, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectNotEqual(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                Operators.ConditionalCompareObjectNotEqual(right, left, true)
+            Assert.Throws<InvalidCastException>(
+                () => Operators.ConditionalCompareObjectNotEqual(right, left, true)
             );
         }
 
@@ -2435,8 +2437,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<AmbiguousMatchException>(() =>
-                Operators.ConditionalCompareObjectNotEqual(left, right, true)
+            Assert.Throws<AmbiguousMatchException>(
+                () => Operators.ConditionalCompareObjectNotEqual(left, right, true)
             );
         }
 

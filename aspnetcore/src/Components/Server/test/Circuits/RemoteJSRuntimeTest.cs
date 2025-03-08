@@ -30,8 +30,8 @@ public class RemoteJSRuntimeTest
         var data = new byte[50_000]; // more than the 32k default MaximumIncomingBytes
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            jsRuntime.TestReceiveByteArray(id: 0, data)
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(
+            () => jsRuntime.TestReceiveByteArray(id: 0, data)
         );
         Assert.Equal(
             "Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')",
@@ -75,8 +75,8 @@ public class RemoteJSRuntimeTest
             jsRuntime.TestReceiveByteArray(i, Array.Empty<byte>());
         }
 
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            jsRuntime.TestReceiveByteArray(5, new byte[] { 0 })
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(
+            () => jsRuntime.TestReceiveByteArray(5, new byte[] { 0 })
         );
         Assert.Equal(
             "Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')",
@@ -92,8 +92,8 @@ public class RemoteJSRuntimeTest
 
         // Act & Assert
         jsRuntime.TestReceiveByteArray(id: 0, new byte[30000]);
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            jsRuntime.TestReceiveByteArray(1, new byte[5000])
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(
+            () => jsRuntime.TestReceiveByteArray(1, new byte[5000])
         );
         Assert.Equal(
             "Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')",

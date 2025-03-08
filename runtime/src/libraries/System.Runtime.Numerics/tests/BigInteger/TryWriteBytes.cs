@@ -62,8 +62,8 @@ namespace System.Numerics.Tests
             if (bi.Sign < 0 && isUnsigned)
             {
                 Assert.Throws<OverflowException>(() => bi.GetByteCount(isUnsigned));
-                Assert.Throws<OverflowException>(() =>
-                    bi.TryWriteBytes(Span<byte>.Empty, out _, isUnsigned, isBigEndian)
+                Assert.Throws<OverflowException>(
+                    () => bi.TryWriteBytes(Span<byte>.Empty, out _, isUnsigned, isBigEndian)
                 );
                 return;
             }

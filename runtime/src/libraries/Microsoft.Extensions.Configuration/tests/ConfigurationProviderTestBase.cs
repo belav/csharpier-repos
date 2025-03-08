@@ -114,16 +114,19 @@ Section3:
         [Fact]
         public virtual void Load_from_single_provider_with_duplicates_throws()
         {
-            AssertFormatOrArgumentException(() =>
-                BuildConfigRoot(LoadThroughProvider(TestSection.DuplicatesTestConfig))
+            AssertFormatOrArgumentException(
+                () => BuildConfigRoot(LoadThroughProvider(TestSection.DuplicatesTestConfig))
             );
         }
 
         [Fact]
         public virtual void Load_from_single_provider_with_differing_case_duplicates_throws()
         {
-            AssertFormatOrArgumentException(() =>
-                BuildConfigRoot(LoadThroughProvider(TestSection.DuplicatesDifferentCaseTestConfig))
+            AssertFormatOrArgumentException(
+                () =>
+                    BuildConfigRoot(
+                        LoadThroughProvider(TestSection.DuplicatesDifferentCaseTestConfig)
+                    )
             );
         }
 

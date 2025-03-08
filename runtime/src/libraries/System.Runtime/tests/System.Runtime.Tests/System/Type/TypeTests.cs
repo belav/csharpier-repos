@@ -153,10 +153,11 @@ namespace System.Tests
             MethodInfo mi = typeof(TypeTests).GetMethod(
                 nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
             );
-            Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterNameIgnoreCase(mi, null)
+            Assert.Throws<InvalidFilterCriteriaException>(
+                () => Type.FilterNameIgnoreCase(mi, null)
             );
-            Assert.Throws<InvalidFilterCriteriaException>(() =>
-                Type.FilterNameIgnoreCase(mi, new object())
+            Assert.Throws<InvalidFilterCriteriaException>(
+                () => Type.FilterNameIgnoreCase(mi, new object())
             );
         }
 
@@ -706,14 +707,14 @@ namespace System.Tests
         public void ReflectionOnlyGetType()
         {
 #pragma warning disable SYSLIB0018 // ReflectionOnly loading is not supported and throws PlatformNotSupportedException.
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Type.ReflectionOnlyGetType(null, true, false)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Type.ReflectionOnlyGetType(null, true, false)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Type.ReflectionOnlyGetType("", true, true)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Type.ReflectionOnlyGetType("", true, true)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Type.ReflectionOnlyGetType("System.Tests.TypeTests", false, true)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Type.ReflectionOnlyGetType("System.Tests.TypeTests", false, true)
             );
 #pragma warning restore SYSLIB0018
         }
@@ -1086,8 +1087,8 @@ namespace System.Tests
                 .Invoke(
                     marshalledTypeName =>
                     {
-                        Assert.Throws<TypeLoadException>(() =>
-                            Type.GetType(marshalledTypeName, assemblyloader, typeloader, true)
+                        Assert.Throws<TypeLoadException>(
+                            () => Type.GetType(marshalledTypeName, assemblyloader, typeloader, true)
                         );
                         Assert.Null(
                             Type.GetType(marshalledTypeName, assemblyloader, typeloader, false)
@@ -1109,14 +1110,15 @@ namespace System.Tests
                         //Type load failure due to case sensitive search of type Ptogram
                         string test3 =
                             "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [program, TestLoadAssembly]]";
-                        Assert.Throws<TypeLoadException>(() =>
-                            Type.GetType(
-                                test3,
-                                assemblyloader,
-                                typeloader,
-                                true,
-                                false //case sensitive
-                            )
+                        Assert.Throws<TypeLoadException>(
+                            () =>
+                                Type.GetType(
+                                    test3,
+                                    assemblyloader,
+                                    typeloader,
+                                    true,
+                                    false //case sensitive
+                                )
                         );
 
                         //non throwing version
@@ -1157,8 +1159,8 @@ namespace System.Tests
                 }
                 else
                 {
-                    Assert.Throws<PlatformNotSupportedException>(() =>
-                        typeof(List<>).MakeGenericType(nonRuntimeType)
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => typeof(List<>).MakeGenericType(nonRuntimeType)
                     );
                 }
             }

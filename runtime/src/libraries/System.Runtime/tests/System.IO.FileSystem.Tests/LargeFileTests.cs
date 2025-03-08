@@ -29,8 +29,8 @@ namespace System.IO.FileSystem.Tests
                 fs.SetLength(lengthOverLimit);
 
                 Assert.Throws<IOException>(() => File.ReadAllBytes(fs.Name));
-                await Assert.ThrowsAsync<IOException>(async () =>
-                    await File.ReadAllBytesAsync(fs.Name)
+                await Assert.ThrowsAsync<IOException>(
+                    async () => await File.ReadAllBytesAsync(fs.Name)
                 );
             }
         }

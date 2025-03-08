@@ -537,11 +537,11 @@ namespace System.Net.Http.Functional.Tests
                         await serverAboutToBlock.Task;
 
                         var cts = new CancellationTokenSource();
-                        Task get2 = ValidateClientCancellationAsync(() =>
-                            client.GetAsync(url, cts.Token)
+                        Task get2 = ValidateClientCancellationAsync(
+                            () => client.GetAsync(url, cts.Token)
                         );
-                        Task get3 = ValidateClientCancellationAsync(() =>
-                            client.GetAsync(url, cts.Token)
+                        Task get3 = ValidateClientCancellationAsync(
+                            () => client.GetAsync(url, cts.Token)
                         );
 
                         Task get4 = client.GetAsync(url);

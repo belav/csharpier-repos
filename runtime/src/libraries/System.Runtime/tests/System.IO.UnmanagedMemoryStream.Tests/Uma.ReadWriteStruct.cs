@@ -48,11 +48,11 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite
                 );
                 uma.Dispose();
-                Assert.Throws<ObjectDisposedException>(() =>
-                    uma.Write<UmaTestStruct>(0, ref inStruct)
+                Assert.Throws<ObjectDisposedException>(
+                    () => uma.Write<UmaTestStruct>(0, ref inStruct)
                 );
-                Assert.Throws<ObjectDisposedException>(() =>
-                    uma.Read<UmaTestStruct>(0, out inStruct)
+                Assert.Throws<ObjectDisposedException>(
+                    () => uma.Read<UmaTestStruct>(0, out inStruct)
                 );
             }
         }
@@ -72,7 +72,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(() => uma.Read<UmaTestStruct>(0, out inStruct)
+                Assert.Throws<NotSupportedException>(
+                    () => uma.Read<UmaTestStruct>(0, out inStruct)
                 );
             }
         }
@@ -92,7 +93,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(() => uma.Write<UmaTestStruct>(0, ref inStruct)
+                Assert.Throws<NotSupportedException>(
+                    () => uma.Write<UmaTestStruct>(0, ref inStruct)
                 );
             }
         }

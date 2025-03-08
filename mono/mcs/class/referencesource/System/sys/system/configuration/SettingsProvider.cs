@@ -13,7 +13,6 @@ namespace System.Configuration
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-
     public abstract class SettingsProvider : ProviderBase
     {
         public abstract SettingsPropertyValueCollection GetPropertyValues(

@@ -211,8 +211,8 @@ namespace System.Net.Http.Json.Functional.Tests
                 string strTypeOfBar = typeOfBar.ToString();
 
                 // Validate for reflection
-                Exception ex = Assert.Throws<ArgumentException>(() =>
-                    JsonContent.Create(foo, typeOfBar)
+                Exception ex = Assert.Throws<ArgumentException>(
+                    () => JsonContent.Create(foo, typeOfBar)
                 );
                 Assert.Contains(strTypeOfBar, ex.Message);
 
@@ -220,8 +220,8 @@ namespace System.Net.Http.Json.Functional.Tests
                 Assert.Contains(afterInputTypeMessage, ex.Message);
 
                 // Validate for weakly-typed JsonTypeInfo
-                ex = Assert.Throws<ArgumentException>(() =>
-                    JsonContent.Create((object)foo, FooContext.Default.Bar)
+                ex = Assert.Throws<ArgumentException>(
+                    () => JsonContent.Create((object)foo, FooContext.Default.Bar)
                 );
                 Assert.Contains(strTypeOfBar, ex.Message);
 

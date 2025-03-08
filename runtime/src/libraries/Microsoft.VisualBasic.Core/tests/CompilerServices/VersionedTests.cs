@@ -40,8 +40,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args
         )
         {
-            Assert.Throws<ArgumentException>(() =>
-                Versioned.CallByName(instance, methodName, useCallType, args)
+            Assert.Throws<ArgumentException>(
+                () => Versioned.CallByName(instance, methodName, useCallType, args)
             );
         }
 
@@ -54,8 +54,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args
         )
         {
-            Assert.Throws<MissingMemberException>(() =>
-                Versioned.CallByName(instance, methodName, useCallType, args)
+            Assert.Throws<MissingMemberException>(
+                () => Versioned.CallByName(instance, methodName, useCallType, args)
             );
         }
 

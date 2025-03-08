@@ -2219,8 +2219,8 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         string json = "{}";
-        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await Serializer.DeserializeWrapper(json, type, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await Serializer.DeserializeWrapper(json, type, options)
         );
     }
 }

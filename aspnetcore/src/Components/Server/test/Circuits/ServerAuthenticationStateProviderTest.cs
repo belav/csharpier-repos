@@ -11,8 +11,8 @@ public class ServerAuthenticationStateProviderTest
     [Fact]
     public async Task CannotProvideAuthenticationStateBeforeInitialization()
     {
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            new ServerAuthenticationStateProvider().GetAuthenticationStateAsync()
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => new ServerAuthenticationStateProvider().GetAuthenticationStateAsync()
         );
     }
 

@@ -1133,80 +1133,85 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] key = new byte[1];
             byte[] buffer = new byte[THmacTrait.HashSizeInBytes];
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                HashDataOneShot(key, Array.Empty<byte>())
+            Assert.Throws<PlatformNotSupportedException>(
+                () => HashDataOneShot(key, Array.Empty<byte>())
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                HashDataOneShot(key, ReadOnlySpan<byte>.Empty)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => HashDataOneShot(key, ReadOnlySpan<byte>.Empty)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                HashDataOneShot(key, ReadOnlySpan<byte>.Empty, buffer)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => HashDataOneShot(key, ReadOnlySpan<byte>.Empty, buffer)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                TryHashDataOneShot(key, ReadOnlySpan<byte>.Empty, buffer, out _)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => TryHashDataOneShot(key, ReadOnlySpan<byte>.Empty, buffer, out _)
             );
 
             Assert.Throws<PlatformNotSupportedException>(() => HashDataOneShot(key, Stream.Null));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                HashDataOneShot(key, Stream.Null, buffer)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => HashDataOneShot(key, Stream.Null, buffer)
             );
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                await HashDataOneShotAsync(key, Stream.Null, default(CancellationToken))
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () => await HashDataOneShotAsync(key, Stream.Null, default(CancellationToken))
             );
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                await HashDataOneShotAsync(key, Stream.Null, buffer, default(CancellationToken))
-            );
-
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacData(HashAlgorithm, key, Array.Empty<byte>())
-            );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacData(HashAlgorithm, key, ReadOnlySpan<byte>.Empty)
-            );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacData(
-                    HashAlgorithm,
-                    key,
-                    ReadOnlySpan<byte>.Empty,
-                    buffer
-                )
-            );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.TryHmacData(
-                    HashAlgorithm,
-                    key,
-                    ReadOnlySpan<byte>.Empty,
-                    buffer,
-                    out _
-                )
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () =>
+                    await HashDataOneShotAsync(key, Stream.Null, buffer, default(CancellationToken))
             );
 
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacData(HashAlgorithm, key, Stream.Null)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CryptographicOperations.HmacData(HashAlgorithm, key, Array.Empty<byte>())
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacData(
-                    HashAlgorithm,
-                    new ReadOnlySpan<byte>(key),
-                    Stream.Null
-                )
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CryptographicOperations.HmacData(HashAlgorithm, key, ReadOnlySpan<byte>.Empty)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacData(HashAlgorithm, key, Stream.Null, buffer)
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    CryptographicOperations.HmacData(
+                        HashAlgorithm,
+                        key,
+                        ReadOnlySpan<byte>.Empty,
+                        buffer
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    CryptographicOperations.TryHmacData(
+                        HashAlgorithm,
+                        key,
+                        ReadOnlySpan<byte>.Empty,
+                        buffer,
+                        out _
+                    )
             );
 
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacDataAsync(HashAlgorithm, key, Stream.Null)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CryptographicOperations.HmacData(HashAlgorithm, key, Stream.Null)
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacDataAsync(
-                    HashAlgorithm,
-                    new ReadOnlyMemory<byte>(key),
-                    Stream.Null
-                )
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    CryptographicOperations.HmacData(
+                        HashAlgorithm,
+                        new ReadOnlySpan<byte>(key),
+                        Stream.Null
+                    )
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                CryptographicOperations.HmacDataAsync(HashAlgorithm, key, Stream.Null, buffer)
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CryptographicOperations.HmacData(HashAlgorithm, key, Stream.Null, buffer)
+            );
+
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CryptographicOperations.HmacDataAsync(HashAlgorithm, key, Stream.Null)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    CryptographicOperations.HmacDataAsync(
+                        HashAlgorithm,
+                        new ReadOnlyMemory<byte>(key),
+                        Stream.Null
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CryptographicOperations.HmacDataAsync(HashAlgorithm, key, Stream.Null, buffer)
             );
         }
     }

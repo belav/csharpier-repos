@@ -45,8 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var sourceFilePath = Path.Combine(path, "SourceLink.cs");
                 File.Move(GetSourceFilePath(path), sourceFilePath);
 
-                var sourceLinkService = new Lazy<ISourceLinkService>(() =>
-                    new TestSourceLinkService(sourceFilePath: sourceFilePath)
+                var sourceLinkService = new Lazy<ISourceLinkService>(
+                    () => new TestSourceLinkService(sourceFilePath: sourceFilePath)
                 );
                 var service = new PdbSourceDocumentLoaderService(sourceLinkService, logger: null);
 
@@ -101,8 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var sourceFilePath = Path.Combine(path, "SourceLink.cs");
                 File.Move(GetSourceFilePath(path), sourceFilePath);
 
-                var sourceLinkService = new Lazy<ISourceLinkService>(() =>
-                    new TestSourceLinkService(sourceFilePath: sourceFilePath)
+                var sourceLinkService = new Lazy<ISourceLinkService>(
+                    () => new TestSourceLinkService(sourceFilePath: sourceFilePath)
                 );
                 var service = new PdbSourceDocumentLoaderService(sourceLinkService, logger: null);
 

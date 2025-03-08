@@ -51,8 +51,8 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
     [Fact]
     public void CannotCreateConnectionWithNullUrlOnOptions()
     {
-        var exception = Assert.Throws<ArgumentException>(() =>
-            new HttpConnection(new HttpConnectionOptions(), NullLoggerFactory.Instance)
+        var exception = Assert.Throws<ArgumentException>(
+            () => new HttpConnection(new HttpConnectionOptions(), NullLoggerFactory.Instance)
         );
         Assert.Equal("httpConnectionOptions", exception.ParamName);
     }
@@ -61,8 +61,8 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
     public void CannotSetConnectionId()
     {
         var connection = new HttpConnection(new Uri("http://fakeuri.org/"));
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            connection.ConnectionId = "custom conneciton ID"
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => connection.ConnectionId = "custom conneciton ID"
         );
         Assert.Equal(
             "The ConnectionId is set internally and should not be set by user code.",

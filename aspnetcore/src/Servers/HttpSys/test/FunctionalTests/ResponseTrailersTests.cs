@@ -86,8 +86,8 @@ public class ResponseTrailersTests : LoggedTest
                     Assert.True(httpContext.Response.SupportsTrailers());
                     foreach (var header in HeaderCollection.DisallowedTrailers)
                     {
-                        Assert.Throws<InvalidOperationException>(() =>
-                            httpContext.Response.AppendTrailer(header, "value")
+                        Assert.Throws<InvalidOperationException>(
+                            () => httpContext.Response.AppendTrailer(header, "value")
                         );
                     }
                     return Task.FromResult(0);
@@ -188,8 +188,8 @@ public class ResponseTrailersTests : LoggedTest
                     await httpContext.Response.WriteAsync(body);
                     try
                     {
-                        Assert.Throws<InvalidOperationException>(() =>
-                            httpContext.Response.AppendTrailer("TrailerName", "Trailer Value")
+                        Assert.Throws<InvalidOperationException>(
+                            () => httpContext.Response.AppendTrailer("TrailerName", "Trailer Value")
                         );
                         responseFinished.SetResult();
                     }

@@ -362,12 +362,12 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrInvalidValues.Length; iLoop++)
             {
                 // [] ArgumentOutOfRange for negative offset
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, iArrInvalidValues[iLoop], 0)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, iArrInvalidValues[iLoop], 0)
                 );
                 // [] ArgumentOutOfRangeException for negative count
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, 0, iArrInvalidValues[iLoop])
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, 0, iArrInvalidValues[iLoop])
                 );
             }
             dw2.Dispose();
@@ -378,12 +378,12 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrLargeValues.Length; iLoop++)
             {
                 // [] Offset out of range
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, iArrLargeValues[iLoop], 0)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, iArrLargeValues[iLoop], 0)
                 );
                 // [] Invalid count value
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, 0, iArrLargeValues[iLoop])
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(bArr, 0, iArrLargeValues[iLoop])
                 );
             }
             dw2.Dispose();
@@ -530,12 +530,12 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrInvalidValues.Length; iLoop++)
             {
                 // [] ArgumentOutOfRange for negative offset
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, iArrInvalidValues[iLoop], 0)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, iArrInvalidValues[iLoop], 0)
                 );
                 // [] negative count.
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, 0, iArrInvalidValues[iLoop])
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, 0, iArrInvalidValues[iLoop])
                 );
             }
             mstr.Dispose();
@@ -546,12 +546,12 @@ namespace System.IO.Tests
             for (int iLoop = 0; iLoop < iArrLargeValues.Length; iLoop++)
             {
                 // [] Offset out of range
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, iArrLargeValues[iLoop], 0)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, iArrLargeValues[iLoop], 0)
                 );
                 // [] Invalid count value
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, 0, iArrLargeValues[iLoop])
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => dw2.Write(chArr, 0, iArrLargeValues[iLoop])
                 );
             }
             mstr.Dispose();

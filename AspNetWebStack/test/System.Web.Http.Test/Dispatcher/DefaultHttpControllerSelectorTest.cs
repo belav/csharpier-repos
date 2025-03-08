@@ -506,8 +506,8 @@ namespace System.Web.Http.Dispatcher
             );
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                selector.SelectController(request)
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => selector.SelectController(request)
             );
 
             // Assert

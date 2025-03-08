@@ -27,8 +27,8 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void Constructor_Data_Null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new DataObject(string.Empty, string.Empty, string.Empty, null)
+            Assert.Throws<ArgumentNullException>(
+                () => new DataObject(string.Empty, string.Empty, string.Empty, null)
             );
         }
 

@@ -398,8 +398,8 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            _ = HandleInboundActivityAsync(() =>
-                Renderer.OnRenderCompletedAsync(renderId, errorMessageOrNull)
+            _ = HandleInboundActivityAsync(
+                () => Renderer.OnRenderCompletedAsync(renderId, errorMessageOrNull)
             );
         }
         catch (Exception e)
@@ -430,24 +430,25 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await HandleInboundActivityAsync(() =>
-                Renderer.Dispatcher.InvokeAsync(() =>
-                {
-                    Log.BeginInvokeDotNet(
-                        _logger,
-                        callId,
-                        assemblyName,
-                        methodIdentifier,
-                        dotNetObjectId
-                    );
-                    var invocationInfo = new DotNetInvocationInfo(
-                        assemblyName,
-                        methodIdentifier,
-                        dotNetObjectId,
-                        callId
-                    );
-                    DotNetDispatcher.BeginInvokeDotNet(JSRuntime, invocationInfo, argsJson);
-                })
+            await HandleInboundActivityAsync(
+                () =>
+                    Renderer.Dispatcher.InvokeAsync(() =>
+                    {
+                        Log.BeginInvokeDotNet(
+                            _logger,
+                            callId,
+                            assemblyName,
+                            methodIdentifier,
+                            dotNetObjectId
+                        );
+                        var invocationInfo = new DotNetInvocationInfo(
+                            assemblyName,
+                            methodIdentifier,
+                            dotNetObjectId,
+                            callId
+                        );
+                        DotNetDispatcher.BeginInvokeDotNet(JSRuntime, invocationInfo, argsJson);
+                    })
             );
         }
         catch (Exception ex)
@@ -482,21 +483,22 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await HandleInboundActivityAsync(() =>
-                Renderer.Dispatcher.InvokeAsync(() =>
-                {
-                    if (!succeeded)
+            await HandleInboundActivityAsync(
+                () =>
+                    Renderer.Dispatcher.InvokeAsync(() =>
                     {
-                        // We can log the arguments here because it is simply the JS error with the call stack.
-                        Log.EndInvokeJSFailed(_logger, asyncCall, arguments);
-                    }
-                    else
-                    {
-                        Log.EndInvokeJSSucceeded(_logger, asyncCall);
-                    }
+                        if (!succeeded)
+                        {
+                            // We can log the arguments here because it is simply the JS error with the call stack.
+                            Log.EndInvokeJSFailed(_logger, asyncCall, arguments);
+                        }
+                        else
+                        {
+                            Log.EndInvokeJSSucceeded(_logger, asyncCall);
+                        }
 
-                    DotNetDispatcher.EndInvokeJS(JSRuntime, arguments);
-                })
+                        DotNetDispatcher.EndInvokeJS(JSRuntime, arguments);
+                    })
             );
         }
         catch (Exception ex)
@@ -524,12 +526,13 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await HandleInboundActivityAsync(() =>
-                Renderer.Dispatcher.InvokeAsync(() =>
-                {
-                    Log.ReceiveByteArraySuccess(_logger, id);
-                    DotNetDispatcher.ReceiveByteArray(JSRuntime, id, data);
-                })
+            await HandleInboundActivityAsync(
+                () =>
+                    Renderer.Dispatcher.InvokeAsync(() =>
+                    {
+                        Log.ReceiveByteArraySuccess(_logger, id);
+                        DotNetDispatcher.ReceiveByteArray(JSRuntime, id, data);
+                    })
             );
         }
         catch (Exception ex)
@@ -562,17 +565,18 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await HandleInboundActivityAsync(() =>
-                Renderer.Dispatcher.InvokeAsync(() =>
-                {
-                    return RemoteJSDataStream.ReceiveData(
-                        JSRuntime,
-                        streamId,
-                        chunkId,
-                        chunk,
-                        error
-                    );
-                })
+            return await HandleInboundActivityAsync(
+                () =>
+                    Renderer.Dispatcher.InvokeAsync(() =>
+                    {
+                        return RemoteJSDataStream.ReceiveData(
+                            JSRuntime,
+                            streamId,
+                            chunkId,
+                            chunk,
+                            error
+                        );
+                    })
             );
         }
         catch (Exception ex)
@@ -603,8 +607,8 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer.Dispatcher.InvokeAsync(async () =>
-                await dotNetStreamReference.Stream.ReadAsync(buffer)
+            return await Renderer.Dispatcher.InvokeAsync(
+                async () => await dotNetStreamReference.Stream.ReadAsync(buffer)
             );
         }
         catch (Exception ex)
@@ -671,13 +675,14 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await HandleInboundActivityAsync(() =>
-                Renderer.Dispatcher.InvokeAsync(() =>
-                {
-                    Log.LocationChange(_logger, uri, CircuitId);
-                    _navigationManager.NotifyLocationChanged(uri, state, intercepted);
-                    Log.LocationChangeSucceeded(_logger, uri, CircuitId);
-                })
+            await HandleInboundActivityAsync(
+                () =>
+                    Renderer.Dispatcher.InvokeAsync(() =>
+                    {
+                        Log.LocationChange(_logger, uri, CircuitId);
+                        _navigationManager.NotifyLocationChanged(uri, state, intercepted);
+                        Log.LocationChangeSucceeded(_logger, uri, CircuitId);
+                    })
             );
         }
         // It's up to the NavigationManager implementation to validate the URI.
@@ -731,16 +736,17 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            var shouldContinueNavigation = await HandleInboundActivityAsync(() =>
-                Renderer.Dispatcher.InvokeAsync(async () =>
-                {
-                    Log.LocationChanging(_logger, uri, CircuitId);
-                    return await _navigationManager.HandleLocationChangingAsync(
-                        uri,
-                        state,
-                        intercepted
-                    );
-                })
+            var shouldContinueNavigation = await HandleInboundActivityAsync(
+                () =>
+                    Renderer.Dispatcher.InvokeAsync(async () =>
+                    {
+                        Log.LocationChanging(_logger, uri, CircuitId);
+                        return await _navigationManager.HandleLocationChangingAsync(
+                            uri,
+                            state,
+                            intercepted
+                        );
+                    })
             );
 
             await Client.SendAsync("JS.EndLocationChanging", callId, shouldContinueNavigation);

@@ -671,7 +671,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [Obsolete(
             "Serialization is obsoleted for this type.  http://go.microsoft.com/fwlink/?linkid=14202"
         )]

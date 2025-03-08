@@ -3681,14 +3681,15 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         bool withConventions = true
     )
         where T : Exception =>
-        Assert.ThrowsAsync<T>(() =>
-            Test(
-                buildCommonAction,
-                buildSourceAction,
-                buildTargetAction,
-                asserter: null,
-                withConventions
-            )
+        Assert.ThrowsAsync<T>(
+            () =>
+                Test(
+                    buildCommonAction,
+                    buildSourceAction,
+                    buildTargetAction,
+                    asserter: null,
+                    withConventions
+                )
         );
 
     protected virtual void AssertSql(params string[] expected) =>

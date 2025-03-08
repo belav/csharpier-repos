@@ -314,13 +314,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         if (testDocument.IsSourceGenerated)
                         {
                             var threadingContext = workspace.GetService<IThreadingContext>();
-                            var document = threadingContext.JoinableTaskFactory.Run(() =>
-                                workspace
-                                    .CurrentSolution.GetSourceGeneratedDocumentAsync(
-                                        testDocument.Id,
-                                        CancellationToken.None
-                                    )
-                                    .AsTask()
+                            var document = threadingContext.JoinableTaskFactory.Run(
+                                () =>
+                                    workspace
+                                        .CurrentSolution.GetSourceGeneratedDocumentAsync(
+                                            testDocument.Id,
+                                            CancellationToken.None
+                                        )
+                                        .AsTask()
                             );
                             Contract.ThrowIfNull(document);
 

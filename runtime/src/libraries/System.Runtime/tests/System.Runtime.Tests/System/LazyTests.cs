@@ -680,8 +680,8 @@ namespace System.Tests
         {
             // Func based initialization (nulls not permitted).
             string e = null;
-            Assert.Throws<InvalidOperationException>(() =>
-                LazyInitializer.EnsureInitialized(ref e, () => null)
+            Assert.Throws<InvalidOperationException>(
+                () => LazyInitializer.EnsureInitialized(ref e, () => null)
             );
 
             // Activator.CreateInstance (for a type without a default ctor).
@@ -788,8 +788,8 @@ namespace System.Tests
             NoDefaultCtor ndc = null;
             bool ndcInit = false;
             object ndcLock = null;
-            Assert.Throws<MissingMemberException>(() =>
-                LazyInitializer.EnsureInitialized(ref ndc, ref ndcInit, ref ndcLock)
+            Assert.Throws<MissingMemberException>(
+                () => LazyInitializer.EnsureInitialized(ref ndc, ref ndcInit, ref ndcLock)
             );
         }
 
@@ -890,8 +890,8 @@ namespace System.Tests
         {
             string target = null;
             object syncLock = null;
-            Assert.Throws<InvalidOperationException>(() =>
-                LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null)
+            Assert.Throws<InvalidOperationException>(
+                () => LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null)
             );
         }
 

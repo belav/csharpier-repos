@@ -14,7 +14,6 @@ namespace System.Net.Sockets
     ///       Defines socket error constants.
     ///    </para>
     /// </devdoc>
-
     public enum SocketError : int
     {
         /// <devdoc>
@@ -41,9 +40,7 @@ namespace System.Net.Sockets
         ///       offset from this value.
         ///    </para>
         /// </devdoc>
-
         ///WSABASEERR = 10000;
-
         /*
          * Windows Sockets definitions of regular Microsoft C error constants
          */

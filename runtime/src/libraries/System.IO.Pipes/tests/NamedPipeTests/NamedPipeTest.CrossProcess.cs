@@ -177,14 +177,15 @@ namespace System.IO.Pipes.Tests
 
         private static void CreateFirstPipeInstance_OtherProcess(string uniqueServerName)
         {
-            Assert.Throws<UnauthorizedAccessException>(() =>
-                new NamedPipeServerStream(
-                    uniqueServerName,
-                    PipeDirection.In,
-                    2,
-                    PipeTransmissionMode.Byte,
-                    PipeOptions.FirstPipeInstance
-                )
+            Assert.Throws<UnauthorizedAccessException>(
+                () =>
+                    new NamedPipeServerStream(
+                        uniqueServerName,
+                        PipeDirection.In,
+                        2,
+                        PipeTransmissionMode.Byte,
+                        PipeOptions.FirstPipeInstance
+                    )
             );
         }
 

@@ -101,10 +101,11 @@ namespace System.Text.Encodings.Tests
                     () => enc.GetBytes(pChars, 4, pBytes, 1)
                 );
 
-                Assert.Throws<EncoderFallbackException>(() =>
-                    enc.GetBytes(pInvalidSurrogate, 2, pBytes, 10)
+                Assert.Throws<EncoderFallbackException>(
+                    () => enc.GetBytes(pInvalidSurrogate, 2, pBytes, 10)
                 );
-                Assert.Throws<EncoderFallbackException>(() => enc.GetByteCount(pInvalidSurrogate, 2)
+                Assert.Throws<EncoderFallbackException>(
+                    () => enc.GetByteCount(pInvalidSurrogate, 2)
                 );
             }
         }
@@ -160,11 +161,11 @@ namespace System.Text.Encodings.Tests
                     () => enc.GetChars(pBytes, bytes.Length, pChars, 1)
                 );
 
-                Assert.Throws<DecoderFallbackException>(() =>
-                    enc.GetChars(pInvalid, invalid.Length, pChars, 20)
+                Assert.Throws<DecoderFallbackException>(
+                    () => enc.GetChars(pInvalid, invalid.Length, pChars, 20)
                 );
-                Assert.Throws<DecoderFallbackException>(() =>
-                    enc.GetCharCount(pInvalid, invalid.Length)
+                Assert.Throws<DecoderFallbackException>(
+                    () => enc.GetCharCount(pInvalid, invalid.Length)
                 );
             }
         }

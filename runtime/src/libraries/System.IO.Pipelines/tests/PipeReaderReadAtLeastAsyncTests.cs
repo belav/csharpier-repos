@@ -155,8 +155,8 @@ namespace System.IO.Pipelines.Tests
         {
             CancellationToken token = new CancellationToken(canceled: true);
             ValueTask<ReadResult> task = PipeReader.ReadAtLeastAsync(0, token);
-            TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await task
+            TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await task
             );
             Assert.Equal(token, tce.CancellationToken);
             Assert.Null(tce.InnerException);

@@ -297,8 +297,12 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(null));
-            Assert.Throws<ArgumentNullException>(() =>
-                ignore = new EnvelopedCms(null, new AlgorithmIdentifier(new Oid(Oids.TripleDesCbc)))
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    ignore = new EnvelopedCms(
+                        null,
+                        new AlgorithmIdentifier(new Oid(Oids.TripleDesCbc))
+                    )
             );
         }
 
@@ -307,7 +311,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             ContentInfo contentInfo = new ContentInfo(new byte[3]);
-            Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(contentInfo, null)
+            Assert.Throws<ArgumentNullException>(
+                () => ignore = new EnvelopedCms(contentInfo, null)
             );
         }
 
@@ -331,8 +336,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void EnvelopedCmsEncryptWithZeroRecipients()
         {
             EnvelopedCms ecms = new EnvelopedCms(new ContentInfo(new byte[3]));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ecms.Encrypt(new CmsRecipientCollection())
+            Assert.Throws<PlatformNotSupportedException>(
+                () => ecms.Encrypt(new CmsRecipientCollection())
             );
         }
 
@@ -355,7 +360,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             if (useSpan)
             {
 #if !NETFRAMEWORK
-                Assert.ThrowsAny<CryptographicException>(() => cms.Decode(ReadOnlySpan<byte>.Empty)
+                Assert.ThrowsAny<CryptographicException>(
+                    () => cms.Decode(ReadOnlySpan<byte>.Empty)
                 );
 #else
                 throw new Xunit.Sdk.XunitException(
@@ -532,8 +538,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             Assert.Throws<ArgumentNullException>(() => ignore = new CmsRecipient(null));
-            Assert.Throws<ArgumentNullException>(() =>
-                ignore = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, null)
+            Assert.Throws<ArgumentNullException>(
+                () => ignore = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, null)
             );
         }
 
@@ -576,15 +582,15 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                     "This test should not evaluate for .NET Framework, the API is missing."
                 );
 #else
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    ContentInfo.GetContentType(new ReadOnlySpan<byte>(encodedMessage))
+                Assert.ThrowsAny<CryptographicException>(
+                    () => ContentInfo.GetContentType(new ReadOnlySpan<byte>(encodedMessage))
                 );
 #endif
             }
             else
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    ContentInfo.GetContentType(encodedMessage)
+                Assert.ThrowsAny<CryptographicException>(
+                    () => ContentInfo.GetContentType(encodedMessage)
                 );
             }
         }
@@ -636,8 +642,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             col.Add(new AsnEncodedData(oid, new byte[3]));
 
             object ignore;
-            Assert.Throws<InvalidOperationException>(() =>
-                ignore = new CryptographicAttributeObject(wrongOid, col)
+            Assert.Throws<InvalidOperationException>(
+                () => ignore = new CryptographicAttributeObject(wrongOid, col)
             );
         }
 

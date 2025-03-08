@@ -75,42 +75,45 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void Invoke_NotEmptyParameter_Throws()
         {
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertyGetter.Invoke(
-                    _testObject,
-                    BindingFlags.GetProperty,
-                    null,
-                    new object[] { 1 },
-                    CultureInfo.InvariantCulture
-                )
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertyGetter.Invoke(
+                        _testObject,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { 1 },
+                        CultureInfo.InvariantCulture
+                    )
             );
         }
 
         [Fact]
         public void Invoke_NullObject_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                _virtualPropertyGetter.Invoke(
-                    null,
-                    BindingFlags.GetProperty,
-                    null,
-                    null,
-                    CultureInfo.InvariantCulture
-                )
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    _virtualPropertyGetter.Invoke(
+                        null,
+                        BindingFlags.GetProperty,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    )
             );
         }
 
         [Fact]
         public void Invoke_WrongObject_Throws()
         {
-            Assert.Throws<ArgumentException>(() =>
-                _virtualPropertyGetter.Invoke(
-                    "abc",
-                    BindingFlags.GetProperty,
-                    null,
-                    null,
-                    CultureInfo.InvariantCulture
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    _virtualPropertyGetter.Invoke(
+                        "abc",
+                        BindingFlags.GetProperty,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    )
             );
         }
 

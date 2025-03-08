@@ -196,11 +196,12 @@ namespace System.Text.RegularExpressions.Tests
         [Fact]
         public static void DebuggerAttributeTests_Null()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
-                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                    typeof(CaptureCollection),
-                    null
-                )
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
+                () =>
+                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                        typeof(CaptureCollection),
+                        null
+                    )
             );
             Assert.IsType<ArgumentNullException>(ex.InnerException);
         }

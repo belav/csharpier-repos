@@ -97,21 +97,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 workList,
                 e => completionRoutine(DkmEvaluationAsyncResult.CreateErrorResult(e))
             );
-            wl.ContinueWith(() =>
-                GetRootResultAndContinue(
-                    value,
-                    wl,
-                    declaredType,
-                    declaredTypeInfo,
-                    inspectionContext,
-                    resultName,
-                    resultFullName,
-                    formatSpecifiers,
-                    result =>
-                        wl.ContinueWith(() =>
-                            completionRoutine(new DkmEvaluationAsyncResult(result))
-                        )
-                )
+            wl.ContinueWith(
+                () =>
+                    GetRootResultAndContinue(
+                        value,
+                        wl,
+                        declaredType,
+                        declaredTypeInfo,
+                        inspectionContext,
+                        resultName,
+                        resultFullName,
+                        formatSpecifiers,
+                        result =>
+                            wl.ContinueWith(
+                                () => completionRoutine(new DkmEvaluationAsyncResult(result))
+                            )
+                    )
             );
         }
 
@@ -193,31 +194,32 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             void onException(Exception e) =>
                 completionRoutine(DkmGetChildrenAsyncResult.CreateErrorResult(e));
             var wl = new WorkList(workList, onException);
-            wl.ContinueWith(() =>
-                GetEvaluationResultsAndContinue(
-                    evaluationResult,
-                    rows,
-                    initialChildren,
-                    0,
-                    numRows,
-                    wl,
-                    inspectionContext,
-                    () =>
-                        wl.ContinueWith(() =>
-                        {
-                            var enumContext = DkmEvaluationResultEnumContext.Create(
-                                index,
-                                evaluationResult.StackFrame,
-                                inspectionContext,
-                                new EnumContextDataItem(evaluationResult)
-                            );
-                            completionRoutine(
-                                new DkmGetChildrenAsyncResult(initialChildren, enumContext)
-                            );
-                            rows.Free();
-                        }),
-                    onException
-                )
+            wl.ContinueWith(
+                () =>
+                    GetEvaluationResultsAndContinue(
+                        evaluationResult,
+                        rows,
+                        initialChildren,
+                        0,
+                        numRows,
+                        wl,
+                        inspectionContext,
+                        () =>
+                            wl.ContinueWith(() =>
+                            {
+                                var enumContext = DkmEvaluationResultEnumContext.Create(
+                                    index,
+                                    evaluationResult.StackFrame,
+                                    inspectionContext,
+                                    new EnumContextDataItem(evaluationResult)
+                                );
+                                completionRoutine(
+                                    new DkmGetChildrenAsyncResult(initialChildren, enumContext)
+                                );
+                                rows.Free();
+                            }),
+                        onException
+                    )
             );
         }
 
@@ -267,23 +269,24 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             void onException(Exception e) =>
                 completionRoutine(DkmEvaluationEnumAsyncResult.CreateErrorResult(e));
             var wl = new WorkList(workList, onException);
-            wl.ContinueWith(() =>
-                GetEvaluationResultsAndContinue(
-                    evaluationResult,
-                    rows,
-                    results,
-                    0,
-                    numRows,
-                    wl,
-                    inspectionContext,
-                    () =>
-                        wl.ContinueWith(() =>
-                        {
-                            completionRoutine(new DkmEvaluationEnumAsyncResult(results));
-                            rows.Free();
-                        }),
-                    onException
-                )
+            wl.ContinueWith(
+                () =>
+                    GetEvaluationResultsAndContinue(
+                        evaluationResult,
+                        rows,
+                        results,
+                        0,
+                        numRows,
+                        wl,
+                        inspectionContext,
+                        () =>
+                            wl.ContinueWith(() =>
+                            {
+                                completionRoutine(new DkmEvaluationEnumAsyncResult(results));
+                                rows.Free();
+                            }),
+                        onException
+                    )
             );
         }
 
@@ -1071,19 +1074,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                     inspectionContext,
                                     displayInfo.TypeName,
                                     displayType =>
-                                        workList.ContinueWith(() =>
-                                            completionRoutine(
-                                                GetResult(
-                                                    inspectionContext,
-                                                    result,
-                                                    declaredType,
-                                                    declaredTypeInfo,
-                                                    displayName.Result,
-                                                    displayValue.Result,
-                                                    displayType.Result,
-                                                    useDebuggerDisplay
+                                        workList.ContinueWith(
+                                            () =>
+                                                completionRoutine(
+                                                    GetResult(
+                                                        inspectionContext,
+                                                        result,
+                                                        declaredType,
+                                                        declaredTypeInfo,
+                                                        displayName.Result,
+                                                        displayValue.Result,
+                                                        displayType.Result,
+                                                        useDebuggerDisplay
+                                                    )
                                                 )
-                                            )
                                         ),
                                     onException
                                 ),

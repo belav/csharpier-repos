@@ -27,8 +27,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Constructor_RequiresNode()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new SysXmlCursor(null, KnownTypes, NamespaceSource.Instance, CursorFlags.Elements)
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new SysXmlCursor(
+                        null,
+                        KnownTypes,
+                        NamespaceSource.Instance,
+                        CursorFlags.Elements
+                    )
             );
         }
 
@@ -37,8 +43,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             var xml = Xml("<X/>");
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new SysXmlCursor(xml, null, NamespaceSource.Instance, CursorFlags.Elements)
+            Assert.Throws<ArgumentNullException>(
+                () => new SysXmlCursor(xml, null, NamespaceSource.Instance, CursorFlags.Elements)
             );
         }
 

@@ -328,8 +328,8 @@ namespace System.Web.Http.Owin
                 )
                 .Returns(CreateCanceledTask());
 
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                actual.HandleAsync(context, cancellationToken)
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => actual.HandleAsync(context, cancellationToken)
             );
 
             expected.Verify((l) => l.HandleAsync(context, cancellationToken), Times.Once());
@@ -357,8 +357,8 @@ namespace System.Web.Http.Owin
                 )
                 .Returns(CreateCanceledTask());
 
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                actual.LogAsync(context, cancellationToken)
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => actual.LogAsync(context, cancellationToken)
             );
 
             expected.Verify((l) => l.LogAsync(context, cancellationToken), Times.Once());

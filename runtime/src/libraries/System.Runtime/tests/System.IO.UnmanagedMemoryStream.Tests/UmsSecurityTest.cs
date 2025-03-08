@@ -54,8 +54,8 @@ public class UmsSecurityTests
         }
         else
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ums.PositionPointer = (byte*)ulong.MaxValue
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ums.PositionPointer = (byte*)ulong.MaxValue
             );
         }
     }

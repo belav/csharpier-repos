@@ -22,19 +22,20 @@ public class NorthwindGroupByQuerySqliteTest
     public override Task Select_uncorrelated_collection_with_groupby_multiple_collections_work(
         bool async
     ) =>
-        AssertApplyNotSupported(() =>
-            base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async)
+        AssertApplyNotSupported(
+            () => base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async)
         );
 
     public override Task Select_uncorrelated_collection_with_groupby_works(bool async) =>
-        AssertApplyNotSupported(() =>
-            base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async)
+        AssertApplyNotSupported(
+            () => base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async)
         );
 
     public override Task Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
         bool async
     ) =>
-        AssertApplyNotSupported(() => base.Select_uncorrelated_collection_with_groupby_works(async)
+        AssertApplyNotSupported(
+            () => base.Select_uncorrelated_collection_with_groupby_works(async)
         );
 
     public override Task AsEnumerable_in_subquery_for_GroupBy(bool async) =>
@@ -59,30 +60,31 @@ public class NorthwindGroupByQuerySqliteTest
         AssertApplyNotSupported(() => base.Complex_query_with_group_by_in_subquery5(async));
 
     public override Task GroupBy_aggregate_from_multiple_query_in_same_projection(bool async) =>
-        AssertApplyNotSupported(() =>
-            base.GroupBy_aggregate_from_multiple_query_in_same_projection(async)
+        AssertApplyNotSupported(
+            () => base.GroupBy_aggregate_from_multiple_query_in_same_projection(async)
         );
 
     public override Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
         bool async
     ) =>
-        AssertApplyNotSupported(() =>
-            base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
-                async
-            )
+        AssertApplyNotSupported(
+            () =>
+                base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
+                    async
+                )
         );
 
     public override Task GroupBy_aggregate_from_multiple_query_in_same_projection_3(bool async) =>
-        Assert.ThrowsAsync<SqliteException>(() =>
-            base.GroupBy_aggregate_from_multiple_query_in_same_projection_3(async)
+        Assert.ThrowsAsync<SqliteException>(
+            () => base.GroupBy_aggregate_from_multiple_query_in_same_projection_3(async)
         );
 
     public override async Task Odata_groupby_empty_key(bool async) =>
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Sum", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    base.Odata_groupby_empty_key(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    () => base.Odata_groupby_empty_key(async)
                 )
             ).Message
         );

@@ -107,8 +107,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             );
 
             // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                processor.MaxQueueLength = invalidMaxQueueLength
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => processor.MaxQueueLength = invalidMaxQueueLength
             );
         }
 
@@ -126,8 +126,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             );
 
             // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                processor.FullMode = (ConsoleLoggerQueueFullMode)10
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => processor.FullMode = (ConsoleLoggerQueueFullMode)10
             );
         }
 

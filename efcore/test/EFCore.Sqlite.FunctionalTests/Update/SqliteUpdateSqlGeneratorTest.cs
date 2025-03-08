@@ -28,16 +28,17 @@ public class SqliteUpdateSqlGeneratorTest : UpdateSqlGeneratorTestBase
 
     public override void GenerateNextSequenceValueOperation_correctly_handles_schemas()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            base.GenerateNextSequenceValueOperation_correctly_handles_schemas()
+        var ex = Assert.Throws<NotSupportedException>(
+            () => base.GenerateNextSequenceValueOperation_correctly_handles_schemas()
         );
         Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
     }
 
     public override void GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            base.GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                base.GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
         );
         Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
     }

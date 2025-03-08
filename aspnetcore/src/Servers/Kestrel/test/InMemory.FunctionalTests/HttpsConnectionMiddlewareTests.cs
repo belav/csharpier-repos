@@ -310,8 +310,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            await Assert.ThrowsAnyAsync<Exception>(() =>
-                server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/")
+            await Assert.ThrowsAnyAsync<Exception>(
+                () => server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/")
             );
         }
     }
@@ -402,11 +402,12 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [Fact]
     public void ThrowsWhenNoServerCertificateIsProvided()
     {
-        Assert.Throws<ArgumentException>(() =>
-            CreateMiddleware(
-                new HttpsConnectionAdapterOptions(),
-                ListenOptions.DefaultHttpProtocols
-            )
+        Assert.Throws<ArgumentException>(
+            () =>
+                CreateMiddleware(
+                    new HttpsConnectionAdapterOptions(),
+                    ListenOptions.DefaultHttpProtocols
+                )
         );
     }
 
@@ -599,13 +600,14 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 var stream = OpenSslStream(connection.Stream);
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                await Assert.ThrowsAsync<IOException>(() =>
-                    stream.AuthenticateAsClientAsync(
-                        "localhost",
-                        new X509CertificateCollection(),
-                        SslProtocols.Tls12 | SslProtocols.Tls11,
-                        false
-                    )
+                await Assert.ThrowsAsync<IOException>(
+                    () =>
+                        stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls12 | SslProtocols.Tls11,
+                            false
+                        )
                 );
 #pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
@@ -683,13 +685,14 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 var stream = OpenSslStream(connection.Stream);
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                await Assert.ThrowsAsync<IOException>(() =>
-                    stream.AuthenticateAsClientAsync(
-                        "localhost",
-                        new X509CertificateCollection(),
-                        SslProtocols.Tls12 | SslProtocols.Tls11,
-                        false
-                    )
+                await Assert.ThrowsAsync<IOException>(
+                    () =>
+                        stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls12 | SslProtocols.Tls11,
+                            false
+                        )
                 );
 #pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
@@ -862,8 +865,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
 
-                await Assert.ThrowsAsync<PlatformNotSupportedException>(() =>
-                    context.Connection.GetClientCertificateAsync()
+                await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                    () => context.Connection.GetClientCertificateAsync()
                 );
 
                 var lifetimeNotificationFeature =
@@ -1185,8 +1188,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.Connection.GetClientCertificateAsync()
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Connection.GetClientCertificateAsync()
                 );
                 Assert.Equal("Client stream needs to be drained before renegotiation.", ex.Message);
                 Assert.Null(tlsFeature.ClientCertificate);
@@ -1425,8 +1428,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(context.Connection.ClientCertificate);
 
                 // Request the client cert while there's still body data in the buffers
-                var ioe = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.Connection.GetClientCertificateAsync()
+                var ioe = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Connection.GetClientCertificateAsync()
                 );
                 Assert.Equal(
                     "Client stream needs to be drained before renegotiation.",
@@ -1519,13 +1522,14 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 var stream = OpenSslStreamWithCert(connection.Stream);
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                var ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
-                    await stream.AuthenticateAsClientAsync(
-                        "localhost",
-                        new X509CertificateCollection(),
-                        SslProtocols.Tls,
-                        false
-                    )
+                var ex = await Assert.ThrowsAnyAsync<Exception>(
+                    async () =>
+                        await stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls,
+                            false
+                        )
                 );
 #pragma warning restore SYSLIB0039
             }
@@ -1757,11 +1761,12 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var eku = Assert.Single(cert.Extensions.OfType<X509EnhancedKeyUsageExtension>());
         Assert.NotEmpty(eku.EnhancedKeyUsages);
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            CreateMiddleware(
-                new HttpsConnectionAdapterOptions { ServerCertificate = cert },
-                ListenOptions.DefaultHttpProtocols
-            )
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                CreateMiddleware(
+                    new HttpsConnectionAdapterOptions { ServerCertificate = cert },
+                    ListenOptions.DefaultHttpProtocols
+                )
         );
 
         Assert.Equal(CoreStrings.FormatInvalidServerCertificateEku(cert.Thumbprint), ex.Message);
@@ -1882,8 +1887,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             ServerCertificate = _x509Certificate2,
         };
 
-        Assert.Throws<NotSupportedException>(() =>
-            CreateMiddleware(httpConnectionAdapterOptions, HttpProtocols.Http2)
+        Assert.Throws<NotSupportedException>(
+            () => CreateMiddleware(httpConnectionAdapterOptions, HttpProtocols.Http2)
         );
     }
 

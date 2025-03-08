@@ -189,21 +189,22 @@ namespace System.Linq.Expressions.Tests
                 typeof(string).GetConstructor(new[] { typeof(char[]) }),
                 Expression.Constant("aaaa".ToCharArray())
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ListInit(newExp, Expression.Constant('a'))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.ListInit(newExp, Expression.Constant('a'))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ListInit(newExp, Enumerable.Repeat(Expression.Constant('a'), 1))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.ListInit(newExp, Enumerable.Repeat(Expression.Constant('a'), 1))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ListInit(newExp, default(MethodInfo), Expression.Constant('a'))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.ListInit(newExp, default(MethodInfo), Expression.Constant('a'))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ListInit(
-                    newExp,
-                    default(MethodInfo),
-                    Enumerable.Repeat(Expression.Constant('a'), 1)
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.ListInit(
+                        newExp,
+                        default(MethodInfo),
+                        Enumerable.Repeat(Expression.Constant('a'), 1)
+                    )
             );
         }
 
@@ -231,8 +232,8 @@ namespace System.Linq.Expressions.Tests
             );
 
             // this exception behavior (rather than ArgumentException) is compatible with the .NET Framework
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.ListInit(newExp, Expression.Constant(""))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.ListInit(newExp, Expression.Constant(""))
             );
 
             AssertExtensions.Throws<ArgumentException>(

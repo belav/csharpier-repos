@@ -105,7 +105,6 @@ namespace PointLocation
     /// The code assumes that the given set of edges is correct, in particular
     /// that they do not touch at interior points (e.g. cross or coincide).
     /// </summary>
-
     public class PointLocator<T>
     {
         private TreeDictionary<double, ISorted<Edge<T>>> htree;

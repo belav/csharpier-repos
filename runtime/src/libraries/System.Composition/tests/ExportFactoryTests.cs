@@ -174,8 +174,8 @@ namespace System.Composition.UnitTests
                 typeof(DataConsistencyBoundaryProvider),
                 typeof(SharedBoundedByDC)
             );
-            var x = Assert.Throws<CompositionFailedException>(() =>
-                container.GetExport<SharedBoundedByDC>()
+            var x = Assert.Throws<CompositionFailedException>(
+                () => container.GetExport<SharedBoundedByDC>()
             );
         }
 

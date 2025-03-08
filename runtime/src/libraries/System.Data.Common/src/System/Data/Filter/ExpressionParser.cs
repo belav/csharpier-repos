@@ -704,7 +704,6 @@ namespace System.Data
         ///     Builds expression tree for higher-precedence operator to be used as left
         ///     operand of current operator. May cause errors - always do ErrorCheck() upin return.
         /// </summary>
-
         private void BuildExpression(int pri)
         {
             ExpressionNode? expr;

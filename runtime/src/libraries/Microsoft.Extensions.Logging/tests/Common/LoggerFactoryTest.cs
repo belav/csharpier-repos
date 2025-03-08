@@ -23,8 +23,8 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = new LoggerFactory();
             factory.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() =>
-                ((ILoggerFactory)factory).AddProvider(CreateProvider())
+            Assert.Throws<ObjectDisposedException>(
+                () => ((ILoggerFactory)factory).AddProvider(CreateProvider())
             );
         }
 
@@ -291,13 +291,14 @@ namespace Microsoft.Extensions.Logging.Test
         [Fact]
         public void TestInvalidActivityTrackingOptions()
         {
-            Assert.Throws<ArgumentException>(() =>
-                LoggerFactory.Create(builder =>
-                {
-                    builder.Configure(o =>
-                        o.ActivityTrackingOptions = (ActivityTrackingOptions)0xFF00
-                    );
-                })
+            Assert.Throws<ArgumentException>(
+                () =>
+                    LoggerFactory.Create(builder =>
+                    {
+                        builder.Configure(o =>
+                            o.ActivityTrackingOptions = (ActivityTrackingOptions)0xFF00
+                        );
+                    })
             );
         }
 

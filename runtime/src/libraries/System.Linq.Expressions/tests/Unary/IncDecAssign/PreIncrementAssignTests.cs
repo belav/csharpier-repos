@@ -211,8 +211,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(IncDecAssignTests)
                 .GetTypeInfo()
                 .GetDeclaredMethod("SillyMethod");
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.PreIncrementAssign(variable, method)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.PreIncrementAssign(variable, method)
             );
         }
 

@@ -24,8 +24,8 @@ public class NorthwindSetOperationsQuerySqliteTest
         Assert.Equal(
             RelationalStrings.SetOperationsNotAllowedAfterClientEvaluation,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_eval_Union_FirstOrDefault(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Client_eval_Union_FirstOrDefault(async)
                 )
             ).Message
         );

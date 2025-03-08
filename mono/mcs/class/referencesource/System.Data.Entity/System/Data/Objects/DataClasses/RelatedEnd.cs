@@ -23,7 +23,6 @@ namespace System.Data.Objects.DataClasses
     /// <summary>
     /// Base class for EntityCollection and EntityReference
     /// </summary>
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
         "CA1710:IdentifiersShouldHaveCorrectSuffix"

@@ -144,16 +144,17 @@ namespace System.Web.Http.Filters
             bool continuationCalled = false;
 
             // Act & Assert
-            Exception exception = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteAuthorizationFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () =>
-                    {
-                        continuationCalled = true;
-                        return null;
-                    }
-                )
+            Exception exception = await Assert.ThrowsAsync<Exception>(
+                () =>
+                    filter.ExecuteAuthorizationFilterAsync(
+                        context,
+                        CancellationToken.None,
+                        () =>
+                        {
+                            continuationCalled = true;
+                            return null;
+                        }
+                    )
             );
 
             // Assert
@@ -199,12 +200,13 @@ namespace System.Web.Http.Filters
             var filter = (IAuthorizationFilter)filterMock.Object;
 
             // Act & Assert
-            return Assert.ThrowsAsync<TaskCanceledException>(() =>
-                filter.ExecuteAuthorizationFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => TaskHelpers.Canceled<HttpResponseMessage>()
-                )
+            return Assert.ThrowsAsync<TaskCanceledException>(
+                () =>
+                    filter.ExecuteAuthorizationFilterAsync(
+                        context,
+                        CancellationToken.None,
+                        () => TaskHelpers.Canceled<HttpResponseMessage>()
+                    )
             );
         }
 
@@ -246,12 +248,13 @@ namespace System.Web.Http.Filters
             Exception expectedException = new Exception();
 
             // Act
-            var exception = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteAuthorizationFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => TaskHelpers.FromError<HttpResponseMessage>(expectedException)
-                )
+            var exception = await Assert.ThrowsAsync<Exception>(
+                () =>
+                    filter.ExecuteAuthorizationFilterAsync(
+                        context,
+                        CancellationToken.None,
+                        () => TaskHelpers.FromError<HttpResponseMessage>(expectedException)
+                    )
             );
 
             // Assert

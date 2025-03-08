@@ -52,8 +52,8 @@ public class MapPredicateMiddlewareTests
         var noMiddleware = new ApplicationBuilder(serviceProvider: null!).Build();
         var noOptions = new MapWhenOptions();
         Assert.Throws<ArgumentNullException>(() => builder.MapWhen(null!, UseNotImplemented));
-        Assert.Throws<ArgumentNullException>(() =>
-            builder.MapWhen(NotImplementedPredicate, configuration: null!)
+        Assert.Throws<ArgumentNullException>(
+            () => builder.MapWhen(NotImplementedPredicate, configuration: null!)
         );
         Assert.Throws<ArgumentNullException>(() => new MapWhenMiddleware(null!, noOptions));
         Assert.Throws<ArgumentNullException>(() => new MapWhenMiddleware(noMiddleware, null!));

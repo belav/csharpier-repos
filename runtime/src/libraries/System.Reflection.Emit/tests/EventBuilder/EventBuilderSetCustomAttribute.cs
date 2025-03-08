@@ -76,8 +76,8 @@ namespace System.Reflection.Emit.Tests
             byte[] bytes = Enumerable.Range(0, 256).Select(i => (byte)i).ToArray();
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                eventBuilder.SetCustomAttribute(attributeConstructor, bytes)
+            Assert.Throws<InvalidOperationException>(
+                () => eventBuilder.SetCustomAttribute(attributeConstructor, bytes)
             );
         }
 
@@ -134,8 +134,8 @@ namespace System.Reflection.Emit.Tests
             );
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                eventBuilder.SetCustomAttribute(attribute)
+            Assert.Throws<InvalidOperationException>(
+                () => eventBuilder.SetCustomAttribute(attribute)
             );
         }
     }

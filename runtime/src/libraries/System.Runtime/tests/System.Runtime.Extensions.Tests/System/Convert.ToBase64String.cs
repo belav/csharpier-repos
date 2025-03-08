@@ -47,11 +47,11 @@ namespace System.Tests
         public static void InvalidOffset()
         {
             byte[] inputBytes = Convert.FromBase64String("test");
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, -1, inputBytes.Length)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Convert.ToBase64String(inputBytes, -1, inputBytes.Length)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, inputBytes.Length, inputBytes.Length)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Convert.ToBase64String(inputBytes, inputBytes.Length, inputBytes.Length)
             );
         }
 
@@ -59,14 +59,14 @@ namespace System.Tests
         public static void InvalidLength()
         {
             byte[] inputBytes = Convert.FromBase64String("test");
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, 0, -1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Convert.ToBase64String(inputBytes, 0, -1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, 0, inputBytes.Length + 1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Convert.ToBase64String(inputBytes, 0, inputBytes.Length + 1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, 1, inputBytes.Length)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Convert.ToBase64String(inputBytes, 1, inputBytes.Length)
             );
         }
 

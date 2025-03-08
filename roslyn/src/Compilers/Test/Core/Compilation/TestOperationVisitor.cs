@@ -95,9 +95,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => operation.ChildOperations.First()
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.ChildOperations.First()
                     );
-                    Assert.Throws<InvalidOperationException>(() => operation.ChildOperations.Last()
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.ChildOperations.Last()
                     );
                 }
 
@@ -977,15 +979,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     CSharp.Conversion csharpConversion = CSharp.CSharpExtensions.GetConversion(
                         operation
                     );
-                    Assert.Throws<ArgumentException>(() =>
-                        VisualBasic.VisualBasicExtensions.GetConversion(operation)
+                    Assert.Throws<ArgumentException>(
+                        () => VisualBasic.VisualBasicExtensions.GetConversion(operation)
                     );
                     break;
                 case LanguageNames.VisualBasic:
                     VisualBasic.Conversion visualBasicConversion =
                         VisualBasic.VisualBasicExtensions.GetConversion(operation);
-                    Assert.Throws<ArgumentException>(() =>
-                        CSharp.CSharpExtensions.GetConversion(operation)
+                    Assert.Throws<ArgumentException>(
+                        () => CSharp.CSharpExtensions.GetConversion(operation)
                     );
                     break;
                 default:

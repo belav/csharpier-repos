@@ -28,8 +28,8 @@ public class RequestBodyTests
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             byte[] input = new byte[100];
-            Assert.Throws<InvalidOperationException>(() =>
-                context.Request.Body.Read(input, 0, input.Length)
+            Assert.Throws<InvalidOperationException>(
+                () => context.Request.Body.Read(input, 0, input.Length)
             );
 
             context.AllowSynchronousIO = true;
@@ -189,13 +189,14 @@ public class RequestBodyTests
             );
             Assert.False(context.DisconnectToken.IsCancellationRequested);
             // The client should timeout and disconnect, making this read fail.
-            var assertTask = Assert.ThrowsAsync<IOException>(async () =>
-                await context.Request.Body.ReadAsync(
-                    input,
-                    0,
-                    input.Length,
-                    context.DisconnectToken
-                )
+            var assertTask = Assert.ThrowsAsync<IOException>(
+                async () =>
+                    await context.Request.Body.ReadAsync(
+                        input,
+                        0,
+                        input.Length,
+                        context.DisconnectToken
+                    )
             );
             client.CancelPendingRequests();
             await assertTask;

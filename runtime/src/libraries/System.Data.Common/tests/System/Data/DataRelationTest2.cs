@@ -577,8 +577,8 @@ namespace System.Data.Tests
             ds.Relations.Clear();
             t2.Columns[0].DateTimeMode = DataSetDateTime.Local;
 
-            Assert.Throws<InvalidConstraintException>(() =>
-                ds.Relations.Add("rel", t1.Columns[0], t2.Columns[0], false)
+            Assert.Throws<InvalidConstraintException>(
+                () => ds.Relations.Add("rel", t1.Columns[0], t2.Columns[0], false)
             );
         }
     }

@@ -27,11 +27,11 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             // Per context implementation, NotImplementedException thrown because the options are compatible, hence the serialization func is invoked.
             JsonContext context = new(options);
-            Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(message, context.JsonMessage)
+            Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(message, context.JsonMessage)
             );
-            Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(message, typeof(JsonMessage), context)
+            Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(message, typeof(JsonMessage), context)
             );
         }
 
@@ -45,11 +45,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             JsonMessage message = new();
 
             // Per context implementation, NotImplementedException thrown because the options are compatible, hence the serialization func is invoked.
-            Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(message, JsonContext.Default.JsonMessage)
+            Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(message, JsonContext.Default.JsonMessage)
             );
-            Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(message, typeof(JsonMessage), JsonContext.Default)
+            Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(message, typeof(JsonMessage), JsonContext.Default)
             );
 
             // NotSupportedException thrown because

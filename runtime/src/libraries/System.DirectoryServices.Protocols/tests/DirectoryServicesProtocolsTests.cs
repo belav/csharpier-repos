@@ -138,8 +138,8 @@ namespace System.DirectoryServices.Protocols.Tests
             );
             if (timeLimit < 0)
             {
-                Assert.Throws<ArgumentException>(() =>
-                    searchRequest.TimeLimit = TimeSpan.FromSeconds(timeLimit)
+                Assert.Throws<ArgumentException>(
+                    () => searchRequest.TimeLimit = TimeSpan.FromSeconds(timeLimit)
                 );
             }
             else
@@ -229,8 +229,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.NotNull(sre);
                     Assert.Equal("Protocols Group 3", (string)sre.Attributes["description"][0]);
-                    Assert.Throws<DirectoryOperationException>(() =>
-                        AddAttribute(connection, dn, "description", "Protocols Group 3")
+                    Assert.Throws<DirectoryOperationException>(
+                        () => AddAttribute(connection, dn, "description", "Protocols Group 3")
                     );
 
                     ModifyAttribute(connection, dn, "description", "Modified Protocols Group 3");
@@ -393,8 +393,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     ModifyRequest modRequest = new ModifyRequest(fullDn, mods);
                     ModifyResponse modResponse = (ModifyResponse)connection.SendRequest(modRequest);
                     Assert.Equal(ResultCode.Success, modResponse.ResultCode);
-                    Assert.Throws<DirectoryOperationException>(() =>
-                        (ModifyResponse)connection.SendRequest(modRequest)
+                    Assert.Throws<DirectoryOperationException>(
+                        () => (ModifyResponse)connection.SendRequest(modRequest)
                     );
 
                     SearchResultEntry sre = SearchOrganizationalUnit(
@@ -404,20 +404,21 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.NotNull(sre);
                     Assert.Equal("Description 5", (string)sre.Attributes["description"][0]);
-                    Assert.Throws<DirectoryOperationException>(() =>
-                        AddAttribute(connection, dn, "description", "Description 5")
+                    Assert.Throws<DirectoryOperationException>(
+                        () => AddAttribute(connection, dn, "description", "Description 5")
                     );
                     Assert.Equal(
                         "123 4th Ave NE, State, Country",
                         (string)sre.Attributes["postalAddress"][0]
                     );
-                    Assert.Throws<DirectoryOperationException>(() =>
-                        AddAttribute(
-                            connection,
-                            dn,
-                            "postalAddress",
-                            "123 4th Ave NE, State, Country"
-                        )
+                    Assert.Throws<DirectoryOperationException>(
+                        () =>
+                            AddAttribute(
+                                connection,
+                                dn,
+                                "postalAddress",
+                                "123 4th Ave NE, State, Country"
+                            )
                     );
 
                     mod1 = new DirectoryAttributeModification();
@@ -444,20 +445,21 @@ namespace System.DirectoryServices.Protocols.Tests
                         "Modified Description 5",
                         (string)sre.Attributes["description"][0]
                     );
-                    Assert.Throws<DirectoryOperationException>(() =>
-                        AddAttribute(connection, dn, "description", "Modified Description 5")
+                    Assert.Throws<DirectoryOperationException>(
+                        () => AddAttribute(connection, dn, "description", "Modified Description 5")
                     );
                     Assert.Equal(
                         "689 5th Ave NE, State, Country",
                         (string)sre.Attributes["postalAddress"][0]
                     );
-                    Assert.Throws<DirectoryOperationException>(() =>
-                        AddAttribute(
-                            connection,
-                            dn,
-                            "postalAddress",
-                            "689 5th Ave NE, State, Country"
-                        )
+                    Assert.Throws<DirectoryOperationException>(
+                        () =>
+                            AddAttribute(
+                                connection,
+                                dn,
+                                "postalAddress",
+                                "689 5th Ave NE, State, Country"
+                            )
                     );
 
                     mod1 = new DirectoryAttributeModification();

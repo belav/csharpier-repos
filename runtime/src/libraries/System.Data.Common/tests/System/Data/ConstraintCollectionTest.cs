@@ -127,8 +127,8 @@ namespace System.Data.Tests
         {
             _table.Constraints.Add(new UniqueConstraint(_table.Columns[0]));
             Assert.Null(_table.Constraints["notInCollection"]);
-            Assert.Throws<IndexOutOfRangeException>(() =>
-                _table.Constraints[_table.Constraints.Count]
+            Assert.Throws<IndexOutOfRangeException>(
+                () => _table.Constraints[_table.Constraints.Count]
             );
             Assert.Throws<IndexOutOfRangeException>(() => _table.Constraints[-1]);
         }
@@ -246,8 +246,8 @@ namespace System.Data.Tests
         [Fact]
         public void RemoveExceptions()
         {
-            Assert.Throws<IndexOutOfRangeException>(() =>
-                _table.Constraints.Remove(_table.Constraints[0])
+            Assert.Throws<IndexOutOfRangeException>(
+                () => _table.Constraints.Remove(_table.Constraints[0])
             );
         }
     }

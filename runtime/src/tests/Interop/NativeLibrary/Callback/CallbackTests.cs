@@ -41,11 +41,11 @@ public class CallbackTests
         DllImportResolver resolver = Resolver.Instance.Callback;
 
         // Invalid arguments
-        Assert.Throws<ArgumentNullException>(() =>
-            NativeLibrary.SetDllImportResolver(null, resolver)
+        Assert.Throws<ArgumentNullException>(
+            () => NativeLibrary.SetDllImportResolver(null, resolver)
         );
-        Assert.Throws<ArgumentNullException>(() =>
-            NativeLibrary.SetDllImportResolver(assembly, null)
+        Assert.Throws<ArgumentNullException>(
+            () => NativeLibrary.SetDllImportResolver(assembly, null)
         );
 
         // No callback registered yet
@@ -55,8 +55,8 @@ public class CallbackTests
         NativeLibrary.SetDllImportResolver(assembly, resolver);
 
         // Try to set the resolver again on the same assembly
-        Assert.Throws<InvalidOperationException>(() =>
-            NativeLibrary.SetDllImportResolver(assembly, resolver)
+        Assert.Throws<InvalidOperationException>(
+            () => NativeLibrary.SetDllImportResolver(assembly, resolver)
         );
 
         // Try to set another resolver on the same assembly
@@ -65,8 +65,8 @@ public class CallbackTests
             Assembly asm,
             DllImportSearchPath? dllImportSearchPath
         ) => IntPtr.Zero;
-        Assert.Throws<InvalidOperationException>(() =>
-            NativeLibrary.SetDllImportResolver(assembly, anotherResolver)
+        Assert.Throws<InvalidOperationException>(
+            () => NativeLibrary.SetDllImportResolver(assembly, anotherResolver)
         );
     }
 

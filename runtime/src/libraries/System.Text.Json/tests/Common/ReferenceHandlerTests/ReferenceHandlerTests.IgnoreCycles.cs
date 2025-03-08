@@ -320,18 +320,20 @@ namespace System.Text.Json.Serialization.Tests
             dictionary.Add("self", dictionary);
             json = await SerializeWithPreserve(dictionary);
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<RecursiveDictionary>(
-                    json,
-                    s_optionsIgnoreCycles
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<RecursiveDictionary>(
+                        json,
+                        s_optionsIgnoreCycles
+                    )
             );
             using var ms2 = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            await Assert.ThrowsAsync<JsonException>(() =>
-                StreamingSerializer.DeserializeWrapper<RecursiveDictionary>(
-                    ms2,
-                    s_optionsIgnoreCycles
-                )
+            await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    StreamingSerializer.DeserializeWrapper<RecursiveDictionary>(
+                        ms2,
+                        s_optionsIgnoreCycles
+                    )
             );
 
             // List
@@ -339,12 +341,17 @@ namespace System.Text.Json.Serialization.Tests
             list.Add(list);
             json = await SerializeWithPreserve(list);
 
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<RecursiveList>(json, s_optionsIgnoreCycles)
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<RecursiveList>(json, s_optionsIgnoreCycles)
             );
             using var ms3 = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            await Assert.ThrowsAsync<JsonException>(() =>
-                StreamingSerializer.DeserializeWrapper<RecursiveList>(ms3, s_optionsIgnoreCycles)
+            await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    StreamingSerializer.DeserializeWrapper<RecursiveList>(
+                        ms3,
+                        s_optionsIgnoreCycles
+                    )
             );
         }
 

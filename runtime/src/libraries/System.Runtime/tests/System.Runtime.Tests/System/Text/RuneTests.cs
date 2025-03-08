@@ -582,10 +582,11 @@ namespace System.Text.Tests
         {
             IComparable rune = new Rune(0);
 
-            Assert.Throws<ArgumentException>(() =>
-                rune.CompareTo(
-                    0 /* int32 */
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    rune.CompareTo(
+                        0 /* int32 */
+                    )
             );
         }
 

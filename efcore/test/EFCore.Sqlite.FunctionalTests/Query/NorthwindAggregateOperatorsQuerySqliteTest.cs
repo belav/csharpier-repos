@@ -24,8 +24,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Sum", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await base.Sum_with_division_on_decimal(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await base.Sum_with_division_on_decimal(async)
                 )
             ).Message
         );
@@ -34,8 +34,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Sum", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await base.Sum_with_division_on_decimal_no_significant_digits(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await base.Sum_with_division_on_decimal_no_significant_digits(async)
                 )
             ).Message
         );
@@ -44,8 +44,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Average", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await base.Average_with_division_on_decimal(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await base.Average_with_division_on_decimal(async)
                 )
             ).Message
         );
@@ -54,8 +54,9 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Average", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await base.Average_with_division_on_decimal_no_significant_digits(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () =>
+                        await base.Average_with_division_on_decimal_no_significant_digits(async)
                 )
             ).Message
         );
@@ -64,8 +65,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Average", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await base.Average_over_max_subquery_is_client_eval(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await base.Average_over_max_subquery_is_client_eval(async)
                 )
             ).Message
         );
@@ -74,8 +75,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.AggregateOperationNotSupported("Average", "decimal"),
             (
-                await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await base.Average_over_nested_subquery_is_client_eval(async)
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await base.Average_over_nested_subquery_is_client_eval(async)
                 )
             ).Message
         );
@@ -86,8 +87,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Multiple_collection_navigation_with_FirstOrDefault_chained(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Multiple_collection_navigation_with_FirstOrDefault_chained(async)
                 )
             ).Message
         );
@@ -95,8 +96,8 @@ public class NorthwindAggregateOperatorsQuerySqliteTest
     public override async Task Contains_with_local_anonymous_type_array_closure(bool async)
         // Aggregates. Issue #15937.
         =>
-        await AssertTranslationFailed(() =>
-            base.Contains_with_local_anonymous_type_array_closure(async)
+        await AssertTranslationFailed(
+            () => base.Contains_with_local_anonymous_type_array_closure(async)
         );
 
     public override async Task Contains_with_local_tuple_array_closure(bool async) =>

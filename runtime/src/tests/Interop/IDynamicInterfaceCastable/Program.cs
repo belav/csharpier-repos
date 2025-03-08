@@ -393,8 +393,8 @@ namespace IDynamicInterfaceCastableTests
                 ITestImpl.GetNumberStaticReturnValue,
                 testObj.CallImplemented(ImplementationToCall.InterfaceStatic)
             );
-            Assert.Throws<InvalidCastException>(() =>
-                testObj.CallImplemented(ImplementationToCall.ImplInterfacePublic)
+            Assert.Throws<InvalidCastException>(
+                () => testObj.CallImplemented(ImplementationToCall.ImplInterfacePublic)
             );
 
             Console.WriteLine(" -- Validate delegate call");

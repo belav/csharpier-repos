@@ -50,8 +50,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void TestThrowIfNoOverrideIsValid()
         {
             var attribute = new ValidationAttributeNoOverrides();
-            Assert.Throws<NotImplementedException>(() =>
-                attribute.IsValid("Does not matter - no override of IsValid")
+            Assert.Throws<NotImplementedException>(
+                () => attribute.IsValid("Does not matter - no override of IsValid")
             );
         }
 
@@ -60,11 +60,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void TestThrowIfNoOverrideIsValid01()
         {
             var attribute = new ValidationAttributeNoOverrides();
-            Assert.Throws<NotImplementedException>(() =>
-                attribute.Validate(
-                    "Object to validate does not matter - no override of IsValid",
-                    "Name to put in error message does not matter either"
-                )
+            Assert.Throws<NotImplementedException>(
+                () =>
+                    attribute.Validate(
+                        "Object to validate does not matter - no override of IsValid",
+                        "Name to put in error message does not matter either"
+                    )
             );
         }
 
@@ -73,11 +74,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void TestThrowIfNoOverrideIsValid02()
         {
             var attribute = new ValidationAttributeNoOverrides();
-            Assert.Throws<NotImplementedException>(() =>
-                attribute.Validate(
-                    "Object to validate does not matter - no override of IsValid",
-                    s_testValidationContext
-                )
+            Assert.Throws<NotImplementedException>(
+                () =>
+                    attribute.Validate(
+                        "Object to validate does not matter - no override of IsValid",
+                        s_testValidationContext
+                    )
             );
         }
 
@@ -128,11 +130,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 "Valid 1-Arg Value",
                 "Name to put in error message does not matter - no error"
             );
-            Assert.Throws<ValidationException>(() =>
-                attribute.Validate(
-                    "Valid 2-Args Value",
-                    "Name to put in error message does not matter - no error"
-                )
+            Assert.Throws<ValidationException>(
+                () =>
+                    attribute.Validate(
+                        "Valid 2-Args Value",
+                        "Name to put in error message does not matter - no error"
+                    )
             );
         }
 
@@ -141,8 +144,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void TestNoThrowIfOverrideIsValid05()
         {
             var attribute = new ValidationAttributeOverrideBothIsValids();
-            Assert.Throws<ValidationException>(() =>
-                attribute.Validate("Valid 1-Arg Value", s_testValidationContext)
+            Assert.Throws<ValidationException>(
+                () => attribute.Validate("Valid 1-Arg Value", s_testValidationContext)
             );
             attribute.Validate("Valid 2-Args Value", s_testValidationContext);
         }
@@ -210,8 +213,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessage = "SomeErrorMessage";
             attribute.ErrorMessageResourceName = "SomeErrorMessageResourceName";
-            Assert.Throws<InvalidOperationException>(() =>
-                attribute.FormatErrorMessage("Name to put in error message does not matter")
+            Assert.Throws<InvalidOperationException>(
+                () => attribute.FormatErrorMessage("Name to put in error message does not matter")
             );
         }
 
@@ -221,8 +224,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessage = "SomeErrorMessage";
             attribute.ErrorMessageResourceType = typeof(int);
-            Assert.Throws<InvalidOperationException>(() =>
-                attribute.FormatErrorMessage("Name to put in error message does not matter")
+            Assert.Throws<InvalidOperationException>(
+                () => attribute.FormatErrorMessage("Name to put in error message does not matter")
             );
         }
 
@@ -265,8 +268,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attribute = new ValidationAttributeOverrideBothIsValids();
             attribute.ErrorMessageResourceName = resourceName;
             attribute.ErrorMessageResourceType = resourceType;
-            Assert.Throws<InvalidOperationException>(() =>
-                attribute.FormatErrorMessage("Name to put in error message does not matter")
+            Assert.Throws<InvalidOperationException>(
+                () => attribute.FormatErrorMessage("Name to put in error message does not matter")
             );
         }
 
@@ -278,8 +281,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             attribute.ErrorMessage = "SomeErrorMessage with name <{0}> here";
             attribute.ErrorMessageResourceName = null;
             attribute.ErrorMessageResourceType = null;
-            var exception = Assert.Throws<ValidationException>(() =>
-                attribute.Validate("Invalid Value", "Error Message Name")
+            var exception = Assert.Throws<ValidationException>(
+                () => attribute.Validate("Invalid Value", "Error Message Name")
             );
             Assert.Equal("Invalid Value", exception.Value);
             Assert.Equal(
@@ -296,8 +299,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             attribute.ErrorMessage = string.Empty;
             attribute.ErrorMessageResourceName = "PublicErrorMessageTestPropertyWithName";
             attribute.ErrorMessageResourceType = typeof(ValidationAttributeOverrideBothIsValids);
-            var exception = Assert.Throws<ValidationException>(() =>
-                attribute.Validate("Invalid Value", "Error Message Name")
+            var exception = Assert.Throws<ValidationException>(
+                () => attribute.Validate("Invalid Value", "Error Message Name")
             );
             Assert.Equal("Invalid Value", exception.Value);
             Assert.Equal(
@@ -330,8 +333,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void TestThrowIfNullValidationContext()
         {
             var attribute = new ValidationAttributeOverrideBothIsValids();
-            Assert.Throws<ArgumentNullException>(() =>
-                attribute.GetValidationResult("Does not matter", validationContext: null)
+            Assert.Throws<ArgumentNullException>(
+                () => attribute.GetValidationResult("Does not matter", validationContext: null)
             );
         }
 

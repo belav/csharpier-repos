@@ -157,8 +157,8 @@ public static class XmlDictionaryWriterTest
 
             ms.blockAsync(true);
             var t1 = writer.WriteBase64Async(bytes, 0, byteSize);
-            var t2 = Assert.ThrowsAsync<InvalidOperationException>(() =>
-                writer.WriteBase64Async(bytes, 0, byteSize)
+            var t2 = Assert.ThrowsAsync<InvalidOperationException>(
+                () => writer.WriteBase64Async(bytes, 0, byteSize)
             );
 
             InvalidOperationException e = t2.Result;
@@ -202,8 +202,14 @@ public static class XmlDictionaryWriterTest
         using (var stream = new MemoryStream())
         {
             string startInfo = "application/soap+xml";
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                XmlDictionaryWriter.CreateMtomWriter(stream, Encoding.UTF8, int.MaxValue, startInfo)
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    XmlDictionaryWriter.CreateMtomWriter(
+                        stream,
+                        Encoding.UTF8,
+                        int.MaxValue,
+                        startInfo
+                    )
             );
         }
     }

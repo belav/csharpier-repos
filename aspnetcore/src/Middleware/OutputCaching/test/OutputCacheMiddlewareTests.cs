@@ -855,8 +855,8 @@ public abstract class OutputCacheMiddlewareTests
         OutputCacheMiddleware.AddOutputCacheFeature(context);
 
         // Should throw
-        Assert.ThrowsAny<InvalidOperationException>(() =>
-            OutputCacheMiddleware.AddOutputCacheFeature(context)
+        Assert.ThrowsAny<InvalidOperationException>(
+            () => OutputCacheMiddleware.AddOutputCacheFeature(context)
         );
     }
 

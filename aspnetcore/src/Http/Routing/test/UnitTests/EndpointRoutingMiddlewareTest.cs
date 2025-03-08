@@ -153,11 +153,11 @@ public class EndpointRoutingMiddlewareTest
         var middleware = CreateMiddleware(matcherFactory: matcherFactory.Object);
 
         // Act
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () =>
-            await middleware.Invoke(httpContext)
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            async () => await middleware.Invoke(httpContext)
         );
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () =>
-            await middleware.Invoke(httpContext)
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            async () => await middleware.Invoke(httpContext)
         );
 
         // Assert

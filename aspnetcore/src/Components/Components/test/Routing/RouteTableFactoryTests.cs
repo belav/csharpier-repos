@@ -864,11 +864,12 @@ public class RouteTableFactoryTests
     public void ThrowsForOptionalParametersAndNonOptionalParameters()
     {
         // Arrange, act & assert
-        Assert.Throws<InvalidOperationException>(() =>
-            new TestRouteTableBuilder()
-                .AddRoute("/users/{id}", typeof(TestHandler1))
-                .AddRoute("/users/{id?}", typeof(TestHandler2))
-                .Build()
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute("/users/{id}", typeof(TestHandler1))
+                    .AddRoute("/users/{id?}", typeof(TestHandler2))
+                    .Build()
         );
     }
 
@@ -884,8 +885,8 @@ public class RouteTableFactoryTests
     public void ThrowsWhenCatchAllIsNotTheLastSegment(string template)
     {
         // Arrange, act & assert
-        Assert.Throws<RoutePatternException>(() =>
-            new TestRouteTableBuilder().AddRoute(template).Build()
+        Assert.Throws<RoutePatternException>(
+            () => new TestRouteTableBuilder().AddRoute(template).Build()
         );
     }
 
@@ -899,8 +900,8 @@ public class RouteTableFactoryTests
     public void ThrowsForOptionalParametersFollowedByNonOptionalParameters(string template)
     {
         // Arrange, act & assert
-        Assert.Throws<InvalidOperationException>(() =>
-            new TestRouteTableBuilder().AddRoute(template).Build()
+        Assert.Throws<InvalidOperationException>(
+            () => new TestRouteTableBuilder().AddRoute(template).Build()
         );
     }
 
@@ -910,11 +911,12 @@ public class RouteTableFactoryTests
     public void ThrowsForAmbiguousRoutes(string first, string second)
     {
         // Arrange, act & assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            new TestRouteTableBuilder()
-                .AddRoute(first, typeof(TestHandler1))
-                .AddRoute(second, typeof(TestHandler2))
-                .Build()
+        var exception = Assert.Throws<InvalidOperationException>(
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute(first, typeof(TestHandler1))
+                    .AddRoute(second, typeof(TestHandler2))
+                    .Build()
         );
 
         exception.Message.Contains("The following routes are ambiguous");
@@ -977,8 +979,8 @@ public class RouteTableFactoryTests
     public void ThrowsForLiteralWithQuestionMark()
     {
         // Arrange, act & assert
-        Assert.Throws<RoutePatternException>(() =>
-            new TestRouteTableBuilder().AddRoute("literal?").Build()
+        Assert.Throws<RoutePatternException>(
+            () => new TestRouteTableBuilder().AddRoute("literal?").Build()
         );
     }
 
@@ -1120,8 +1122,8 @@ public class RouteTableFactoryTests
 '{right.Trim('/')}' in '{typeof(object).FullName}'
 ";
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            new TestRouteTableBuilder().AddRoute(left).AddRoute(right).Build()
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => new TestRouteTableBuilder().AddRoute(left).AddRoute(right).Build()
         );
 
         Assert.Equal(expectedMessage, exception.Message);

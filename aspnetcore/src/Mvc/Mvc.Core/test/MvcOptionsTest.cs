@@ -12,8 +12,8 @@ public class MvcOptionsTest
         var options = new MvcOptions();
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            options.MaxModelValidationErrors = -1
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(
+            () => options.MaxModelValidationErrors = -1
         );
         Assert.Equal("value", ex.ParamName);
     }

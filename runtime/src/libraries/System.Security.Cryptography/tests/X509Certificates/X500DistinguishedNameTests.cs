@@ -517,8 +517,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.False(rdn.HasMultipleElements, $"rdn.HasMultipleElements {index}");
                         Assert.Equal("2.5.4.99", rdn.GetSingleElementType().Value);
 
-                        CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                            rdn.GetSingleElementValue()
+                        CryptographicException ex = Assert.Throws<CryptographicException>(
+                            () => rdn.GetSingleElementValue()
                         );
 
                         Assert.IsType<AsnContentException>(ex.InnerException);

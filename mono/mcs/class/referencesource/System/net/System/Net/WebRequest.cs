@@ -639,7 +639,6 @@ namespace System.Net
         ///       class.
         ///    </para>
         /// </devdoc>
-
         protected WebRequest()
         {
 #if !FEATURE_PAL
@@ -989,12 +988,13 @@ namespace System.Net
             }
             else
             {
-                return Task.Run(() =>
-                    Task<Stream>.Factory.FromAsync(
-                        this.BeginGetRequestStream,
-                        this.EndGetRequestStream,
-                        null
-                    )
+                return Task.Run(
+                    () =>
+                        Task<Stream>.Factory.FromAsync(
+                            this.BeginGetRequestStream,
+                            this.EndGetRequestStream,
+                            null
+                        )
                 );
             }
         }
@@ -1042,12 +1042,13 @@ namespace System.Net
             }
             else
             {
-                return Task.Run(() =>
-                    Task<WebResponse>.Factory.FromAsync(
-                        this.BeginGetResponse,
-                        this.EndGetResponse,
-                        null
-                    )
+                return Task.Run(
+                    () =>
+                        Task<WebResponse>.Factory.FromAsync(
+                            this.BeginGetResponse,
+                            this.EndGetResponse,
+                            null
+                        )
                 );
             }
         }

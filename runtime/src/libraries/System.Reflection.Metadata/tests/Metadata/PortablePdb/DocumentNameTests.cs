@@ -271,11 +271,11 @@ namespace System.Reflection.Metadata.Tests
                 Assert.False(blobHeap.DocumentNameEquals(handle, "", ignoreCase: false));
                 Assert.False(blobHeap.DocumentNameEquals(handle, "a", ignoreCase: false));
 
-                Assert.Throws<BadImageFormatException>(() =>
-                    blobHeap.GetDocumentName(default(DocumentNameBlobHandle))
+                Assert.Throws<BadImageFormatException>(
+                    () => blobHeap.GetDocumentName(default(DocumentNameBlobHandle))
                 );
-                Assert.Throws<BadImageFormatException>(() =>
-                    blobHeap.GetDocumentName(DocumentNameBlobHandle.FromOffset(8))
+                Assert.Throws<BadImageFormatException>(
+                    () => blobHeap.GetDocumentName(DocumentNameBlobHandle.FromOffset(8))
                 );
             }
         }

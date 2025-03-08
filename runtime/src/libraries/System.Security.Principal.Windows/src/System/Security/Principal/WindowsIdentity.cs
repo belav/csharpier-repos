@@ -1043,7 +1043,6 @@ namespace System.Security.Principal
         /// <summary>
         ///   Get a property from the current token
         /// </summary>
-
         private unsafe T GetTokenInformation<T>(TokenInformationClass tokenInformationClass)
             where T : unmanaged
         {

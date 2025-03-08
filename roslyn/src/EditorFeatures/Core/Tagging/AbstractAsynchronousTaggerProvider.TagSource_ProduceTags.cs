@@ -706,8 +706,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 )
                 {
                     // Compute this as a high priority work item to have the lease amount of blocking as possible.
-                    _dataSource.ThreadingContext.JoinableTaskFactory.Run(() =>
-                        this.RecomputeTagsAsync(highPriority: true, _disposalTokenSource.Token)
+                    _dataSource.ThreadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            this.RecomputeTagsAsync(highPriority: true, _disposalTokenSource.Token)
                     );
                 }
 

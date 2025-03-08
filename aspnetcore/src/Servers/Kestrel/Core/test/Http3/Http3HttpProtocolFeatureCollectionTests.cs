@@ -55,8 +55,8 @@ public class Http3HttpProtocolFeatureCollectionTests
         Assert.NotNull(minRateFeature);
 
         Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate);
-        Assert.Throws<NotSupportedException>(() =>
-            minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2))
+        Assert.Throws<NotSupportedException>(
+            () => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2))
         );
 
         // You can set the MinDataRate to null though.

@@ -336,13 +336,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         )
         {
             var threadingContext = _componentModel.GetService<IThreadingContext>();
-            threadingContext.JoinableTaskFactory.Run(() =>
-                FormatDocumentCreatedFromTemplateAsync(
-                    hierarchy,
-                    itemid,
-                    filePath,
-                    cancellationToken
-                )
+            threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    FormatDocumentCreatedFromTemplateAsync(
+                        hierarchy,
+                        itemid,
+                        filePath,
+                        cancellationToken
+                    )
             );
         }
 

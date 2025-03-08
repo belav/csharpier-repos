@@ -63,8 +63,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             string payloadHex = "0403090807";
 
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
-            Assert.ThrowsAny<CryptographicException>(() =>
-                contents.AddSecret(new Oid("Hi", "There"), payloadHex.HexToByteArray())
+            Assert.ThrowsAny<CryptographicException>(
+                () => contents.AddSecret(new Oid("Hi", "There"), payloadHex.HexToByteArray())
             );
         }
 

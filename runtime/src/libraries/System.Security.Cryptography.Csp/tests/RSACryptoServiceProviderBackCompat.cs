@@ -112,8 +112,8 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(() =>
-                    rsa.SignHash(Array.Empty<byte>(), "SHA384-9000")
+                Assert.Throws<CryptographicException>(
+                    () => rsa.SignHash(Array.Empty<byte>(), "SHA384-9000")
                 );
             }
         }
@@ -123,8 +123,8 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.SignHash(Array.Empty<byte>(), "SHA384")
+                Assert.ThrowsAny<CryptographicException>(
+                    () => rsa.SignHash(Array.Empty<byte>(), "SHA384")
                 );
             }
         }
@@ -142,8 +142,8 @@ namespace System.Security.Cryptography.Csp.Tests
 
                 rsa.ImportParameters(publicParams);
 
-                Assert.Throws<CryptographicException>(() =>
-                    rsa.SignHash(Array.Empty<byte>(), "SHA384")
+                Assert.Throws<CryptographicException>(
+                    () => rsa.SignHash(Array.Empty<byte>(), "SHA384")
                 );
             }
         }

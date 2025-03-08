@@ -117,7 +117,6 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
     }
 
     /// <inheritdoc />
-
     IComplexType IComplexProperty.ComplexType
     {
         [DebuggerStepThrough]

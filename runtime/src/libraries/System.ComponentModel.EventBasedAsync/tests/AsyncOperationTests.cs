@@ -37,14 +37,14 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     operation.Wait();
 
                     SendOrPostCallback noopCallback = state => { };
-                    Assert.Throws<InvalidOperationException>(() =>
-                        operation.AsyncOperation.Post(noopCallback, null)
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.AsyncOperation.Post(noopCallback, null)
                     );
-                    Assert.Throws<InvalidOperationException>(() =>
-                        operation.AsyncOperation.PostOperationCompleted(noopCallback, null)
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.AsyncOperation.PostOperationCompleted(noopCallback, null)
                     );
-                    Assert.Throws<InvalidOperationException>(() =>
-                        operation.AsyncOperation.OperationCompleted()
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.AsyncOperation.OperationCompleted()
                     );
                 })
                 .GetAwaiter()
@@ -60,11 +60,11 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     operation.OperationCompleted();
 
                     SendOrPostCallback noopCallback = state => { };
-                    Assert.Throws<InvalidOperationException>(() =>
-                        operation.Post(noopCallback, null)
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.Post(noopCallback, null)
                     );
-                    Assert.Throws<InvalidOperationException>(() =>
-                        operation.PostOperationCompleted(noopCallback, null)
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.PostOperationCompleted(noopCallback, null)
                     );
                     Assert.Throws<InvalidOperationException>(() => operation.OperationCompleted());
                 })
@@ -129,8 +129,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 var state = new object();
                 var operation = AsyncOperationManager.CreateOperation(state);
                 Assert.Throws<ArgumentNullException>(() => operation.Post(null, state));
-                Assert.Throws<ArgumentNullException>(() =>
-                    operation.PostOperationCompleted(null, state)
+                Assert.Throws<ArgumentNullException>(
+                    () => operation.PostOperationCompleted(null, state)
                 );
             }
             finally

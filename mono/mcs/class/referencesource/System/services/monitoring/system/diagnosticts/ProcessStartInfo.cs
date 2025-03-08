@@ -33,7 +33,6 @@ namespace System.Diagnostics
     ///     used in conjunction with the <see cref='System.Diagnostics.Process'/>
     ///     component.
     /// </devdoc>
-
     [
         TypeConverter(typeof(ExpandableObjectConverter)),
         // Disabling partial trust scenarios

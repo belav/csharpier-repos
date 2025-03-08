@@ -333,8 +333,8 @@ public class OpaqueUpgradeTests : LoggedTest
             )
         )
         {
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await SendOpaqueRequestAsync(method, address, extraHeader)
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await SendOpaqueRequestAsync(method, address, extraHeader)
             );
             Assert.Equal("The response status code was incorrect: HTTP/1.1 200 OK", ex.Message);
         }
@@ -433,8 +433,8 @@ public class OpaqueUpgradeTests : LoggedTest
                 Assert.Equal("Upgrade requires HTTP/1.1.", ex.Message);
 
                 // Read the response headers, fail if it's not a 101
-                ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    ParseResponseAsync(stream)
+                ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => ParseResponseAsync(stream)
                 );
                 Assert.EndsWith("HTTP/1.1 500 Internal Server Error", ex.Message);
             }

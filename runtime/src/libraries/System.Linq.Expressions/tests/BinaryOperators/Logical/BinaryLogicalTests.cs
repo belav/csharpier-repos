@@ -449,22 +449,22 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void AndAlso_BinaryOperatorNotDefined_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"), null)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"), null)
             );
         }
 
         [Fact]
         public static void OrElse_BinaryOperatorNotDefined_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"), null)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"), null)
             );
         }
 
@@ -521,11 +521,11 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(NonGenericClass).GetMethod(
                 nameof(NonGenericClass.StaticIntMethod2Valid)
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
             );
         }
 
@@ -535,11 +535,11 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(NonGenericClass).GetMethod(
                 nameof(NonGenericClass.StaticIntMethod2Valid)
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
             );
         }
 
@@ -609,8 +609,8 @@ namespace System.Linq.Expressions.Tests
             Type createdType = type.CreateTypeInfo();
             object obj = Activator.CreateInstance(createdType);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
             );
         }
 
@@ -632,8 +632,8 @@ namespace System.Linq.Expressions.Tests
             Type createdType = type.CreateTypeInfo();
             object obj = Activator.CreateInstance(createdType);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
             );
         }
 
@@ -708,8 +708,8 @@ namespace System.Linq.Expressions.Tests
             Type createdType = type.CreateTypeInfo();
             object obj = Activator.CreateInstance(createdType);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
             );
         }
 
@@ -736,8 +736,8 @@ namespace System.Linq.Expressions.Tests
             Type createdType = type.CreateTypeInfo();
             object obj = Activator.CreateInstance(createdType);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
             );
         }
 
@@ -759,8 +759,8 @@ namespace System.Linq.Expressions.Tests
             Type createdType = type.CreateTypeInfo();
             object obj = Activator.CreateInstance(createdType);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
             );
         }
 
@@ -782,8 +782,8 @@ namespace System.Linq.Expressions.Tests
             Type createdType = type.CreateTypeInfo();
             object obj = Activator.CreateInstance(createdType);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
             );
         }
 
@@ -1236,11 +1236,17 @@ namespace System.Linq.Expressions.Tests
             TypeInfo createdType = builder.CreateTypeInfo();
             MethodInfo createdMethod = createdType.GetMethod("Method");
 
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant(5), createdMethod)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.AndAlso(
+                        Expression.Constant(5),
+                        Expression.Constant(5),
+                        createdMethod
+                    )
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant(5), createdMethod)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.OrElse(Expression.Constant(5), Expression.Constant(5), createdMethod)
             );
         }
 
@@ -1277,8 +1283,8 @@ namespace System.Linq.Expressions.Tests
             method.GetILGenerator().Emit(OpCodes.Ret);
 
             TypeInfo createdType = builder.CreateTypeInfo();
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
             );
         }
 
@@ -1315,8 +1321,8 @@ namespace System.Linq.Expressions.Tests
             method.GetILGenerator().Emit(OpCodes.Ret);
 
             TypeInfo createdType = builder.CreateTypeInfo();
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
             );
         }
 

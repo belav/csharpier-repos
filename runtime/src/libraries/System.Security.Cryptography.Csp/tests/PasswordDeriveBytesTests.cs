@@ -30,8 +30,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_NullPasswordString()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new PasswordDeriveBytes((string)null, s_testSalt)
+            Assert.Throws<ArgumentNullException>(
+                () => new PasswordDeriveBytes((string)null, s_testSalt)
             );
         }
 
@@ -71,22 +71,22 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_TooFewIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", 0)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", 0)
             );
         }
 
         [Fact]
         public static void Ctor_NegativeIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", -1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", -1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue / 2)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue / 2)
             );
         }
 
@@ -596,11 +596,11 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    deriveBytes.CryptDeriveKey("RC2", "SHA1", 127, s_testSalt)
+                Assert.ThrowsAny<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 127, s_testSalt)
                 );
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    deriveBytes.CryptDeriveKey("RC2", "SHA1", 129, s_testSalt)
+                Assert.ThrowsAny<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 129, s_testSalt)
                 );
             }
         }
@@ -611,8 +611,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<CryptographicException>(() =>
-                    deriveBytes.CryptDeriveKey("BADALG", "SHA1", 128, s_testSalt)
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("BADALG", "SHA1", 128, s_testSalt)
                 );
             }
         }
@@ -623,8 +623,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<CryptographicException>(() =>
-                    deriveBytes.CryptDeriveKey("RC2", "BADALG", 128, s_testSalt)
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "BADALG", 128, s_testSalt)
                 );
             }
         }
@@ -635,11 +635,11 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<CryptographicException>(() =>
-                    deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null)
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null)
                 );
-                Assert.Throws<CryptographicException>(() =>
-                    deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[1])
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[1])
                 );
             }
         }
@@ -650,8 +650,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    (deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null))
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => (deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null))
                 );
             }
         }

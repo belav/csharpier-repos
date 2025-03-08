@@ -40,8 +40,8 @@ namespace System.Management.Tests
                 // If any of the steps below fail it is likely that the new class was not deleted, likely it will have to
                 // be deleted via a tool like wbemtest.
                 newClass.Delete();
-                ManagementException managementException = Assert.Throws<ManagementException>(() =>
-                    targetClass.Get()
+                ManagementException managementException = Assert.Throws<ManagementException>(
+                    () => targetClass.Get()
                 );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
             }
@@ -94,8 +94,8 @@ namespace System.Management.Tests
                 // If any of the steps below fail it is likely that the new class was not deleted, likely it will have to
                 // be deleted via a tool like wbemtest.
                 newInstance.Delete();
-                ManagementException managementException = Assert.Throws<ManagementException>(() =>
-                    targetInstance.Get()
+                ManagementException managementException = Assert.Throws<ManagementException>(
+                    () => targetInstance.Get()
                 );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
 

@@ -52,8 +52,8 @@ public class WarningsTest
                 "InMemoryEventId.TransactionIgnoredWarning"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Database.EnlistTransaction(new CommittableTransaction())
+                .Throws<InvalidOperationException>(
+                    () => context.Database.EnlistTransaction(new CommittableTransaction())
                 )
                 .Message
         );

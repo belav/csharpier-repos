@@ -205,8 +205,8 @@ namespace System.IO.Packaging.Tests
             using (var ms = new MemoryStream())
             {
                 ms.Write(ba, 0, ba.Length);
-                Assert.Throws<IOException>(() =>
-                    Package.Open(ms, FileMode.CreateNew, FileAccess.ReadWrite)
+                Assert.Throws<IOException>(
+                    () => Package.Open(ms, FileMode.CreateNew, FileAccess.ReadWrite)
                 );
             }
         }
@@ -216,8 +216,8 @@ namespace System.IO.Packaging.Tests
         {
             using (var ms = new MemoryStream())
             {
-                Assert.Throws<FileFormatException>(() =>
-                    Package.Open(ms, FileMode.Open, FileAccess.ReadWrite)
+                Assert.Throws<FileFormatException>(
+                    () => Package.Open(ms, FileMode.Open, FileAccess.ReadWrite)
                 );
             }
         }
@@ -234,8 +234,8 @@ namespace System.IO.Packaging.Tests
                 fs.Write(bytes, 0, bytes.Length);
             }
 
-            AssertExtensions.ThrowsAny<InvalidDataException, ArgumentOutOfRangeException>(() =>
-                Package.Open(temp, FileMode.Open, FileAccess.Read, FileShare.Read)
+            AssertExtensions.ThrowsAny<InvalidDataException, ArgumentOutOfRangeException>(
+                () => Package.Open(temp, FileMode.Open, FileAccess.Read, FileShare.Read)
             );
 
             // Package should not have held a stream open on the file; if it did, this operation will
@@ -1210,11 +1210,11 @@ namespace System.IO.Packaging.Tests
 
                         Uri stylesUri = new Uri("/word/styles.xml", UriKind.Relative);
 
-                        Assert.Throws<ArgumentNullException>(() =>
-                            PackUriHelper.GetRelativeUri(null, stylesUri)
+                        Assert.Throws<ArgumentNullException>(
+                            () => PackUriHelper.GetRelativeUri(null, stylesUri)
                         );
-                        Assert.Throws<ArgumentNullException>(() =>
-                            PackUriHelper.GetRelativeUri(documentUri, null)
+                        Assert.Throws<ArgumentNullException>(
+                            () => PackUriHelper.GetRelativeUri(documentUri, null)
                         );
                         var relativeUri = PackUriHelper.GetRelativeUri(documentUri, stylesUri);
                         Assert.Equal("styles.xml", relativeUri.ToString());
@@ -1280,19 +1280,21 @@ namespace System.IO.Packaging.Tests
                             new Uri("/", UriKind.Relative),
                             docPackageRelationship.TargetUri
                         );
-                        Assert.Throws<ArgumentNullException>(() =>
-                            new PackageRelationshipSelector(
-                                null,
-                                PackageRelationshipSelectorType.Id,
-                                "rId1"
-                            )
+                        Assert.Throws<ArgumentNullException>(
+                            () =>
+                                new PackageRelationshipSelector(
+                                    null,
+                                    PackageRelationshipSelectorType.Id,
+                                    "rId1"
+                                )
                         );
-                        Assert.Throws<ArgumentNullException>(() =>
-                            new PackageRelationshipSelector(
-                                documentUri,
-                                PackageRelationshipSelectorType.Id,
-                                null
-                            )
+                        Assert.Throws<ArgumentNullException>(
+                            () =>
+                                new PackageRelationshipSelector(
+                                    documentUri,
+                                    PackageRelationshipSelectorType.Id,
+                                    null
+                                )
                         );
                         PackageRelationshipSelector prs = new PackageRelationshipSelector(
                             documentUri,
@@ -1579,8 +1581,13 @@ namespace System.IO.Packaging.Tests
 
             using (Package package = Package.Open(packagePath1.FullName, FileMode.Create))
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    package.CreatePart(null, Mime_MediaTypeNames_Text_Xml, CompressionOption.Normal)
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        package.CreatePart(
+                            null,
+                            Mime_MediaTypeNames_Text_Xml,
+                            CompressionOption.Normal
+                        )
                 );
 
                 // Add the Document part to the Package
@@ -2278,8 +2285,8 @@ namespace System.IO.Packaging.Tests
                     );
 
                     // do it again
-                    Assert.Throws<InvalidOperationException>(() =>
-                        package.CreatePart(partUriDocument, Mime_MediaTypeNames_Text_Xml)
+                    Assert.Throws<InvalidOperationException>(
+                        () => package.CreatePart(partUriDocument, Mime_MediaTypeNames_Text_Xml)
                     );
                 }
             }
@@ -2301,11 +2308,15 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Create, FileAccess.ReadWrite))
                 {
                     PackagePart packagePartDocument = null;
-                    Assert.Throws<ArgumentNullException>(() =>
-                        packagePartDocument = package.CreatePart(null, Mime_MediaTypeNames_Text_Xml)
+                    Assert.Throws<ArgumentNullException>(
+                        () =>
+                            packagePartDocument = package.CreatePart(
+                                null,
+                                Mime_MediaTypeNames_Text_Xml
+                            )
                     );
-                    Assert.Throws<ArgumentNullException>(() =>
-                        packagePartDocument = package.CreatePart(partUriDocument, null)
+                    Assert.Throws<ArgumentNullException>(
+                        () => packagePartDocument = package.CreatePart(partUriDocument, null)
                     );
                 }
             }
@@ -2430,12 +2441,13 @@ namespace System.IO.Packaging.Tests
                 Package package = Package.Open(fiGuidName.FullName, FileMode.Open, FileAccess.Read)
             )
             {
-                Assert.Throws<IOException>(() =>
-                    package.CreatePart(
-                        partUriDocument,
-                        Mime_MediaTypeNames_Text_Xml,
-                        CompressionOption.Normal
-                    )
+                Assert.Throws<IOException>(
+                    () =>
+                        package.CreatePart(
+                            partUriDocument,
+                            Mime_MediaTypeNames_Text_Xml,
+                            CompressionOption.Normal
+                        )
                 );
             }
             fiGuidName.Delete();

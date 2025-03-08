@@ -54,28 +54,30 @@ namespace MonoTests.System.Drawing.Imaging
         [Test]
         public void Constructor_TooWideArraySize()
         {
-            Assert.Throws<IndexOutOfRangeException>(() =>
-                new ColorMatrix(
-                    new float[][] { new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } }
-                )
+            Assert.Throws<IndexOutOfRangeException>(
+                () =>
+                    new ColorMatrix(
+                        new float[][] { new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } }
+                    )
             );
         }
 
         [Test]
         public void Constructor_TooTallArraySize()
         {
-            Assert.Throws<IndexOutOfRangeException>(() =>
-                new ColorMatrix(
-                    new float[][]
-                    {
-                        new float[] { 0.0f },
-                        new float[] { 1.0f },
-                        new float[] { 2.0f },
-                        new float[] { 3.0f },
-                        new float[] { 4.0f },
-                        new float[] { 5.0f },
-                    }
-                )
+            Assert.Throws<IndexOutOfRangeException>(
+                () =>
+                    new ColorMatrix(
+                        new float[][]
+                        {
+                            new float[] { 0.0f },
+                            new float[] { 1.0f },
+                            new float[] { 2.0f },
+                            new float[] { 3.0f },
+                            new float[] { 4.0f },
+                            new float[] { 5.0f },
+                        }
+                    )
             );
         }
 

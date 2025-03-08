@@ -209,8 +209,8 @@ namespace System.Linq.Tests
         {
             int[] source = { 2, 3, 1, 7, 10, 13, 19, 9 };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                source.SingleOrDefault(i => i % 2 == 0, 5)
+            Assert.Throws<InvalidOperationException>(
+                () => source.SingleOrDefault(i => i % 2 == 0, 5)
             );
         }
 

@@ -1996,8 +1996,8 @@ namespace System.Numerics.Tests
             string testingValue
         )
         {
-            Assert.Throws<OverflowException>(() =>
-                BigInteger.Parse(testingValue, NumberStyles.AllowExponent)
+            Assert.Throws<OverflowException>(
+                () => BigInteger.Parse(testingValue, NumberStyles.AllowExponent)
             );
         }
 

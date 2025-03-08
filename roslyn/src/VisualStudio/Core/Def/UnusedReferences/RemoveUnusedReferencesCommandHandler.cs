@@ -319,13 +319,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            joinableTaskFactory.Run(() =>
-                UnusedReferencesRemover.UpdateReferencesAsync(
-                    solution,
-                    projectFilePath,
-                    referenceUpdates,
-                    cancellationToken
-                )
+            joinableTaskFactory.Run(
+                () =>
+                    UnusedReferencesRemover.UpdateReferencesAsync(
+                        solution,
+                        projectFilePath,
+                        referenceUpdates,
+                        cancellationToken
+                    )
             );
         }
 

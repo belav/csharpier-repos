@@ -1786,11 +1786,15 @@ namespace System.Tests
             var absoluteUri = new Uri("http://domain");
             var relativeUri = new Uri("path", UriKind.Relative);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                absoluteUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped - 1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => absoluteUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped - 1)
             ); // Format is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                absoluteUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.SafeUnescaped + 1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    absoluteUri.GetComponents(
+                        UriComponents.AbsoluteUri,
+                        UriFormat.SafeUnescaped + 1
+                    )
             ); // Format is invalid
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -1802,20 +1806,22 @@ namespace System.Tests
                     )
             ); // Components is invalid
 
-            Assert.Throws<InvalidOperationException>(() =>
-                relativeUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.Unescaped)
+            Assert.Throws<InvalidOperationException>(
+                () => relativeUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.Unescaped)
             ); // Uri is relative
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                relativeUri.GetComponents(
-                    UriComponents.SerializationInfoString,
-                    UriFormat.UriEscaped - 1
-                )
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    relativeUri.GetComponents(
+                        UriComponents.SerializationInfoString,
+                        UriFormat.UriEscaped - 1
+                    )
             ); // Uri is relative, format is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                relativeUri.GetComponents(
-                    UriComponents.SerializationInfoString,
-                    UriFormat.SafeUnescaped + 1
-                )
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    relativeUri.GetComponents(
+                        UriComponents.SerializationInfoString,
+                        UriFormat.SafeUnescaped + 1
+                    )
             ); // Uri is relative, format is invalid
         }
     }

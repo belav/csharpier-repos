@@ -119,22 +119,23 @@ public class ConfigurationReaderTests
     [Fact]
     public void ReadCertificatesSection_ThrowsOnCaseInsensitiveDuplicate()
     {
-        var exception = Assert.Throws<ArgumentException>(() =>
-            new ConfigurationBuilder()
-                .AddInMemoryCollection(
-                    new[]
-                    {
-                        new KeyValuePair<string, string>(
-                            "Certificates:filecert:Password",
-                            "certpassword"
-                        ),
-                        new KeyValuePair<string, string>(
-                            "Certificates:FILECERT:Password",
-                            "certpassword"
-                        ),
-                    }
-                )
-                .Build()
+        var exception = Assert.Throws<ArgumentException>(
+            () =>
+                new ConfigurationBuilder()
+                    .AddInMemoryCollection(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>(
+                                "Certificates:filecert:Password",
+                                "certpassword"
+                            ),
+                            new KeyValuePair<string, string>(
+                                "Certificates:FILECERT:Password",
+                                "certpassword"
+                            ),
+                        }
+                    )
+                    .Build()
         );
 
         Assert.Contains(CoreStrings.KeyAlreadyExists, exception.Message);

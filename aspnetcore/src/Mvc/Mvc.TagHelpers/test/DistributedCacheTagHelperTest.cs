@@ -679,8 +679,8 @@ public class DistributedCacheTagHelperTest
         var task1 = Task.Run(async () =>
         {
             await event1.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
-            await Assert.ThrowsAsync<Exception>(() =>
-                cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1)
+            await Assert.ThrowsAsync<Exception>(
+                () => cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1)
             );
             event3.SetResult();
         });

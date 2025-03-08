@@ -244,8 +244,8 @@ namespace System.Web.Routing
             // Act & Assert
             if (expectedErrorMessage == null)
             {
-                Assert.DoesNotThrow(() =>
-                    AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes)
+                Assert.DoesNotThrow(
+                    () => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes)
                 );
             }
             else

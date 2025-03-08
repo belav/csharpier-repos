@@ -179,17 +179,18 @@ public class TextTemplatingModelGeneratorTest
         var generator = CreateGenerator();
         var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
 
-        var ex = Assert.Throws<OperationException>(() =>
-            generator.GenerateModel(
-                model,
-                new ModelCodeGenerationOptions
-                {
-                    ContextName = "Context",
-                    ConnectionString = @"Name=DefaultConnection",
-                    ProjectDir = projectDir,
-                    Language = "VB",
-                }
-            )
+        var ex = Assert.Throws<OperationException>(
+            () =>
+                generator.GenerateModel(
+                    model,
+                    new ModelCodeGenerationOptions
+                    {
+                        ContextName = "Context",
+                        ConnectionString = @"Name=DefaultConnection",
+                        ProjectDir = projectDir,
+                        Language = "VB",
+                    }
+                )
         );
 
         Assert.Equal(DesignStrings.NoContextTemplate, ex.Message);
@@ -416,16 +417,17 @@ My entity type configuration template
         var generator = CreateGenerator(reporter);
         var model = new ModelBuilder().FinalizeModel();
 
-        var ex = Assert.Throws<OperationException>(() =>
-            generator.GenerateModel(
-                model,
-                new ModelCodeGenerationOptions
-                {
-                    ContextName = "Context",
-                    ConnectionString = @"Name=DefaultConnection",
-                    ProjectDir = projectDir,
-                }
-            )
+        var ex = Assert.Throws<OperationException>(
+            () =>
+                generator.GenerateModel(
+                    model,
+                    new ModelCodeGenerationOptions
+                    {
+                        ContextName = "Context",
+                        ConnectionString = @"Name=DefaultConnection",
+                        ProjectDir = projectDir,
+                    }
+                )
         );
 
         Assert.Equal(DesignStrings.ErrorGeneratingOutput(contextTemplate), ex.Message);
@@ -513,16 +515,17 @@ My entity type configuration template
         var generator = CreateGenerator(reporter);
         var model = new ModelBuilder().FinalizeModel();
 
-        var ex = Assert.Throws<OperationException>(() =>
-            generator.GenerateModel(
-                model,
-                new ModelCodeGenerationOptions
-                {
-                    ContextName = "Context",
-                    ConnectionString = @"Name=DefaultConnection",
-                    ProjectDir = projectDir,
-                }
-            )
+        var ex = Assert.Throws<OperationException>(
+            () =>
+                generator.GenerateModel(
+                    model,
+                    new ModelCodeGenerationOptions
+                    {
+                        ContextName = "Context",
+                        ConnectionString = @"Name=DefaultConnection",
+                        ProjectDir = projectDir,
+                    }
+                )
         );
 
         Assert.Equal(DesignStrings.ErrorGeneratingOutput(contextTemplate), ex.Message);

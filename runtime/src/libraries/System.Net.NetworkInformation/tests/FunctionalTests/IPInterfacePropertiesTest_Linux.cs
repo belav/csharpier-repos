@@ -43,8 +43,8 @@ namespace System.Net.NetworkInformation.Tests
 
                         Assert.NotNull(ipProperties);
 
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.AnycastAddresses
+                        Assert.Throws<PlatformNotSupportedException>(
+                            () => ipProperties.AnycastAddresses
                         );
 
                         Assert.NotNull(ipProperties.DhcpServerAddresses);
@@ -79,8 +79,8 @@ namespace System.Net.NetworkInformation.Tests
 
                         _log.WriteLine("- Dns Enabled: " + ipProperties.IsDnsEnabled);
 
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.IsDynamicDnsEnabled
+                        Assert.Throws<PlatformNotSupportedException>(
+                            () => ipProperties.IsDynamicDnsEnabled
                         );
 
                         Assert.NotNull(ipProperties.MulticastAddresses);
@@ -101,16 +101,17 @@ namespace System.Net.NetworkInformation.Tests
                         foreach (UnicastIPAddressInformation uni in ipProperties.UnicastAddresses)
                         {
                             _log.WriteLine("-- " + uni.Address.ToString());
-                            Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.AddressPreferredLifetime
+                            Assert.Throws<PlatformNotSupportedException>(
+                                () => uni.AddressPreferredLifetime
                             );
-                            Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.AddressValidLifetime
+                            Assert.Throws<PlatformNotSupportedException>(
+                                () => uni.AddressValidLifetime
                             );
-                            Assert.Throws<PlatformNotSupportedException>(() => uni.DhcpLeaseLifetime
+                            Assert.Throws<PlatformNotSupportedException>(
+                                () => uni.DhcpLeaseLifetime
                             );
-                            Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.DuplicateAddressDetectionState
+                            Assert.Throws<PlatformNotSupportedException>(
+                                () => uni.DuplicateAddressDetectionState
                             );
 
                             Assert.NotNull(uni.IPv4Mask);
@@ -158,14 +159,14 @@ namespace System.Net.NetworkInformation.Tests
                         IPv4InterfaceProperties ipv4Properties = ipProperties.GetIPv4Properties();
 
                         _log.WriteLine("Index: " + ipv4Properties.Index);
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsAutomaticPrivateAddressingActive
+                        Assert.Throws<PlatformNotSupportedException>(
+                            () => ipv4Properties.IsAutomaticPrivateAddressingActive
                         );
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsAutomaticPrivateAddressingEnabled
+                        Assert.Throws<PlatformNotSupportedException>(
+                            () => ipv4Properties.IsAutomaticPrivateAddressingEnabled
                         );
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsDhcpEnabled
+                        Assert.Throws<PlatformNotSupportedException>(
+                            () => ipv4Properties.IsDhcpEnabled
                         );
                         _log.WriteLine(
                             "IsForwardingEnabled: " + ipv4Properties.IsForwardingEnabled

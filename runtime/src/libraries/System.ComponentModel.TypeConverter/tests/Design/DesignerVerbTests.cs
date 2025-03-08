@@ -99,15 +99,16 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullProperties_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new NullPropertiesDesignerVerb("Text", new EventHandler(EventHandler))
+            Assert.Throws<NullReferenceException>(
+                () => new NullPropertiesDesignerVerb("Text", new EventHandler(EventHandler))
             );
-            Assert.Throws<NullReferenceException>(() =>
-                new NullPropertiesDesignerVerb(
-                    "Text",
-                    new EventHandler(EventHandler),
-                    new CommandID(Guid.NewGuid(), 10)
-                )
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    new NullPropertiesDesignerVerb(
+                        "Text",
+                        new EventHandler(EventHandler),
+                        new CommandID(Guid.NewGuid(), 10)
+                    )
             );
         }
 

@@ -203,15 +203,16 @@ namespace System.Diagnostics.Tests
         [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Not supported on iOS and tvOS.")]
         public void ProcessStart_TryExitCommandAsFileName_ThrowsWin32Exception()
         {
-            Assert.Throws<Win32Exception>(() =>
-                Process.Start(
-                    new ProcessStartInfo
-                    {
-                        UseShellExecute = false,
-                        FileName = "exit",
-                        Arguments = "42",
-                    }
-                )
+            Assert.Throws<Win32Exception>(
+                () =>
+                    Process.Start(
+                        new ProcessStartInfo
+                        {
+                            UseShellExecute = false,
+                            FileName = "exit",
+                            Arguments = "42",
+                        }
+                    )
             );
         }
 
@@ -219,14 +220,15 @@ namespace System.Diagnostics.Tests
         [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Not supported on iOS and tvOS.")]
         public void ProcessStart_UseShellExecuteFalse_FilenameIsUrl_ThrowsWin32Exception()
         {
-            Assert.Throws<Win32Exception>(() =>
-                Process.Start(
-                    new ProcessStartInfo
-                    {
-                        UseShellExecute = false,
-                        FileName = "https://www.github.com/corefx",
-                    }
-                )
+            Assert.Throws<Win32Exception>(
+                () =>
+                    Process.Start(
+                        new ProcessStartInfo
+                        {
+                            UseShellExecute = false,
+                            FileName = "https://www.github.com/corefx",
+                        }
+                    )
             );
         }
 
@@ -234,10 +236,15 @@ namespace System.Diagnostics.Tests
         [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Not supported on iOS and tvOS.")]
         public void ProcessStart_TryOpenFolder_UseShellExecuteIsFalse_ThrowsWin32Exception()
         {
-            Assert.Throws<Win32Exception>(() =>
-                Process.Start(
-                    new ProcessStartInfo { UseShellExecute = false, FileName = Path.GetTempPath() }
-                )
+            Assert.Throws<Win32Exception>(
+                () =>
+                    Process.Start(
+                        new ProcessStartInfo
+                        {
+                            UseShellExecute = false,
+                            FileName = Path.GetTempPath(),
+                        }
+                    )
             );
         }
 
@@ -1271,7 +1278,8 @@ namespace System.Diagnostics.Tests
         public void TestInvalidPriorityClass(ProcessPriorityClass priorityClass)
         {
             var process = new Process();
-            Assert.Throws<InvalidEnumArgumentException>(() => process.PriorityClass = priorityClass
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => process.PriorityClass = priorityClass
             );
         }
 
@@ -1728,8 +1736,8 @@ namespace System.Diagnostics.Tests
             // .NET Core fixes a bug where Process.StartInfo for a unrelated process would
             // return information about the current process, not the unrelated process.
             // See https://github.com/dotnet/runtime/issues/14329.
-            Assert.Throws<InvalidOperationException>(() =>
-                process.StartInfo = new ProcessStartInfo()
+            Assert.Throws<InvalidOperationException>(
+                () => process.StartInfo = new ProcessStartInfo()
             );
 
             process.Kill();
@@ -2570,14 +2578,14 @@ namespace System.Diagnostics.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Starting process with authentication not supported on Unix
         public void Process_StartInvalidNamesTest()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Process.Start(null, "userName", new SecureString(), "thisDomain")
+            Assert.Throws<InvalidOperationException>(
+                () => Process.Start(null, "userName", new SecureString(), "thisDomain")
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Process.Start(string.Empty, "userName", new SecureString(), "thisDomain")
+            Assert.Throws<InvalidOperationException>(
+                () => Process.Start(string.Empty, "userName", new SecureString(), "thisDomain")
             );
-            Assert.Throws<Win32Exception>(() =>
-                Process.Start("exe", string.Empty, new SecureString(), "thisDomain")
+            Assert.Throws<Win32Exception>(
+                () => Process.Start("exe", string.Empty, new SecureString(), "thisDomain")
             );
         }
 
@@ -2587,16 +2595,17 @@ namespace System.Diagnostics.Tests
         public void Process_StartWithInvalidUserNamePassword()
         {
             SecureString password = AsSecureString("Value");
-            Assert.Throws<Win32Exception>(() =>
-                Process.Start(GetCurrentProcessName(), "userName", password, "thisDomain")
+            Assert.Throws<Win32Exception>(
+                () => Process.Start(GetCurrentProcessName(), "userName", password, "thisDomain")
             );
-            Assert.Throws<Win32Exception>(() =>
-                Process.Start(
-                    GetCurrentProcessName(),
-                    Environment.UserName,
-                    password,
-                    Environment.UserDomainName
-                )
+            Assert.Throws<Win32Exception>(
+                () =>
+                    Process.Start(
+                        GetCurrentProcessName(),
+                        Environment.UserName,
+                        password,
+                        Environment.UserDomainName
+                    )
             );
         }
 
@@ -2888,8 +2897,8 @@ namespace System.Diagnostics.Tests
         {
             Process containingProcess = CreateProcess(() =>
             {
-                Process parentProcess = CreateProcess(() =>
-                    RunProcessAttemptingToKillEntireTreeOnParent()
+                Process parentProcess = CreateProcess(
+                    () => RunProcessAttemptingToKillEntireTreeOnParent()
                 );
 
                 parentProcess.Start();

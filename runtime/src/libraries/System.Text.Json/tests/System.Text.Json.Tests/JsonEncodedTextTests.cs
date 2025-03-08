@@ -422,8 +422,8 @@ namespace System.Text.Json.Tests
             var valid = new char[5] { 'a', 'b', 'c', (char)0xD800, (char)0xDC00 };
             JsonEncodedText _ = JsonEncodedText.Encode(valid);
 
-            Assert.Throws<ArgumentException>(() =>
-                JsonEncodedText.Encode(new string(valid).Substring(0, 4))
+            Assert.Throws<ArgumentException>(
+                () => JsonEncodedText.Encode(new string(valid).Substring(0, 4))
             );
         }
 
@@ -452,8 +452,8 @@ namespace System.Text.Json.Tests
                 utf8Value.AsSpan().Fill((byte)'a');
 
                 Assert.Throws<ArgumentException>(() => JsonEncodedText.Encode(largeValueString));
-                Assert.Throws<ArgumentException>(() =>
-                    JsonEncodedText.Encode(largeValueString.AsSpan())
+                Assert.Throws<ArgumentException>(
+                    () => JsonEncodedText.Encode(largeValueString.AsSpan())
                 );
                 Assert.Throws<ArgumentException>(() => JsonEncodedText.Encode(utf8Value));
             }

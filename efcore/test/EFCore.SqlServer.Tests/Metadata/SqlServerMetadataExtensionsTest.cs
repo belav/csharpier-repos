@@ -316,10 +316,11 @@ public class SqlServerMetadataExtensionsTest
         Assert.Equal(
             SqlServerStrings.SequenceBadType("Name", nameof(Customer), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    property.SetValueGenerationStrategy(
-                        SqlServerValueGenerationStrategy.SequenceHiLo
-                    )
+                .Throws<ArgumentException>(
+                    () =>
+                        property.SetValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.SequenceHiLo
+                        )
                 )
                 .Message
         );
@@ -335,10 +336,11 @@ public class SqlServerMetadataExtensionsTest
         Assert.Equal(
             SqlServerStrings.IdentityBadType("Name", nameof(Customer), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    property.SetValueGenerationStrategy(
-                        SqlServerValueGenerationStrategy.IdentityColumn
-                    )
+                .Throws<ArgumentException>(
+                    () =>
+                        property.SetValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.IdentityColumn
+                        )
                 )
                 .Message
         );

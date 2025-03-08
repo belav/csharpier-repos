@@ -80,8 +80,8 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
         var userB = new IdentityUser(Guid.NewGuid().ToString());
         userB.Email = "dupe@dupe.com";
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(userB, password));
-        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await manager.FindByEmailAsync("dupe@dupe.com")
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await manager.FindByEmailAsync("dupe@dupe.com")
         );
     }
 }

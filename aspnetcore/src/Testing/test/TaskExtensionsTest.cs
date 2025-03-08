@@ -14,8 +14,9 @@ public class TaskExtensionsTest
     public async Task TimeoutAfterTest()
     {
         var cts = new CancellationTokenSource();
-        await Assert.ThrowsAsync<TimeoutException>(async () =>
-            await Task.Delay(30000, cts.Token).TimeoutAfter(TimeSpan.FromMilliseconds(50))
+        await Assert.ThrowsAsync<TimeoutException>(
+            async () =>
+                await Task.Delay(30000, cts.Token).TimeoutAfter(TimeSpan.FromMilliseconds(50))
         );
         cts.Cancel();
     }
@@ -36,8 +37,9 @@ public class TaskExtensionsTest
     public async Task DefaultTimeout_WithTimespan()
     {
         var cts = new CancellationTokenSource();
-        await Assert.ThrowsAsync<TimeoutException>(async () =>
-            await Task.Delay(30000, cts.Token).DefaultTimeout(TimeSpan.FromMilliseconds(50))
+        await Assert.ThrowsAsync<TimeoutException>(
+            async () =>
+                await Task.Delay(30000, cts.Token).DefaultTimeout(TimeSpan.FromMilliseconds(50))
         );
         cts.Cancel();
     }
@@ -46,8 +48,8 @@ public class TaskExtensionsTest
     public async Task DefaultTimeout_WithMilliseconds()
     {
         var cts = new CancellationTokenSource();
-        await Assert.ThrowsAsync<TimeoutException>(async () =>
-            await Task.Delay(30000, cts.Token).DefaultTimeout(50)
+        await Assert.ThrowsAsync<TimeoutException>(
+            async () => await Task.Delay(30000, cts.Token).DefaultTimeout(50)
         );
         cts.Cancel();
     }
@@ -56,8 +58,8 @@ public class TaskExtensionsTest
     public async Task DefaultTimeout_Message_ContainsLineNumber()
     {
         var cts = new CancellationTokenSource();
-        await Assert.ThrowsAsync<TimeoutException>(async () =>
-            await Task.Delay(30000, cts.Token).DefaultTimeout(50)
+        await Assert.ThrowsAsync<TimeoutException>(
+            async () => await Task.Delay(30000, cts.Token).DefaultTimeout(50)
         );
         cts.Cancel();
     }
@@ -77,8 +79,8 @@ public class TaskExtensionsTest
             await Task.Delay(10);
             throw new TimeoutException(message);
         }
-        var exception = await Assert.ThrowsAsync<TimeoutException>(() =>
-            ExpectedTimeout().TimeoutAfter(TimeSpan.FromMilliseconds(30000))
+        var exception = await Assert.ThrowsAsync<TimeoutException>(
+            () => ExpectedTimeout().TimeoutAfter(TimeSpan.FromMilliseconds(30000))
         );
         Assert.Equal(message, exception.Message);
     }
@@ -92,8 +94,8 @@ public class TaskExtensionsTest
             await Task.Delay(10);
             throw new TimeoutException(message);
         }
-        var exception = await Assert.ThrowsAsync<TimeoutException>(() =>
-            ExpectedTimeout().TimeoutAfter(TimeSpan.FromMilliseconds(30000))
+        var exception = await Assert.ThrowsAsync<TimeoutException>(
+            () => ExpectedTimeout().TimeoutAfter(TimeSpan.FromMilliseconds(30000))
         );
         Assert.Equal(message, exception.Message);
     }

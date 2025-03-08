@@ -257,14 +257,15 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     var classificationOptions = Presenter._globalOptions.GetClassificationOptions(
                         document.Project.Language
                     );
-                    var excerpt = Presenter.ThreadingContext.JoinableTaskFactory.Run(() =>
-                        excerptService.TryExcerptAsync(
-                            document,
-                            sourceSpan,
-                            ExcerptMode.Tooltip,
-                            classificationOptions,
-                            CancellationToken.None
-                        )
+                    var excerpt = Presenter.ThreadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            excerptService.TryExcerptAsync(
+                                document,
+                                sourceSpan,
+                                ExcerptMode.Tooltip,
+                                classificationOptions,
+                                CancellationToken.None
+                            )
                     );
                     if (excerpt != null)
                     {

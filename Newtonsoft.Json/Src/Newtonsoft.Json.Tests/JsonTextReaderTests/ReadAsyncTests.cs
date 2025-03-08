@@ -1923,8 +1923,8 @@ third line",
             };
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-                await JToken.ReadFromAsync(reader, settings)
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await JToken.ReadFromAsync(reader, settings)
             );
         }
 

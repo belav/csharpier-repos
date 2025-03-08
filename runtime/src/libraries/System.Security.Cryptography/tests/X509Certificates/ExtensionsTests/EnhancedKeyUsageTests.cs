@@ -53,8 +53,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             OidCollection oids = new OidCollection { new Oid(invalidOidValue) };
 
-            Assert.ThrowsAny<CryptographicException>(() =>
-                new X509EnhancedKeyUsageExtension(oids, false)
+            Assert.ThrowsAny<CryptographicException>(
+                () => new X509EnhancedKeyUsageExtension(oids, false)
             );
         }
 

@@ -1394,24 +1394,24 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [Fact]
         public static void XmlSchemaReadNullStream()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                XmlSchema.Read(default(Stream), validationEventHandler: null)
+            Assert.Throws<ArgumentNullException>(
+                () => XmlSchema.Read(default(Stream), validationEventHandler: null)
             );
         }
 
         [Fact]
         public static void XmlSchemaReadNullTextReader()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                XmlSchema.Read(default(TextReader), validationEventHandler: null)
+            Assert.Throws<ArgumentNullException>(
+                () => XmlSchema.Read(default(TextReader), validationEventHandler: null)
             );
         }
 
         [Fact]
         public static void XmlSchemaReadNullReader()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                XmlSchema.Read(default(XmlReader), validationEventHandler: null)
+            Assert.Throws<ArgumentNullException>(
+                () => XmlSchema.Read(default(XmlReader), validationEventHandler: null)
             );
         }
 
@@ -1419,8 +1419,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         public static void XmlSchemaWriteNullStream()
         {
             XmlSchema schema = new XmlSchema();
-            Assert.Throws<ArgumentNullException>(() =>
-                schema.Write(default(Stream), namespaceManager: null)
+            Assert.Throws<ArgumentNullException>(
+                () => schema.Write(default(Stream), namespaceManager: null)
             );
         }
 
@@ -1429,8 +1429,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             XmlSchema schema = new XmlSchema();
             Assert.Throws<ArgumentNullException>(() => schema.Write(default(TextWriter)));
-            Assert.Throws<ArgumentNullException>(() =>
-                schema.Write(default(TextWriter), namespaceManager: null)
+            Assert.Throws<ArgumentNullException>(
+                () => schema.Write(default(TextWriter), namespaceManager: null)
             );
         }
 
@@ -1439,8 +1439,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             XmlSchema schema = new XmlSchema();
             Assert.Throws<ArgumentNullException>(() => schema.Write(default(XmlWriter)));
-            Assert.Throws<ArgumentNullException>(() =>
-                schema.Write(default(XmlWriter), namespaceManager: null)
+            Assert.Throws<ArgumentNullException>(
+                () => schema.Write(default(XmlWriter), namespaceManager: null)
             );
         }
     }

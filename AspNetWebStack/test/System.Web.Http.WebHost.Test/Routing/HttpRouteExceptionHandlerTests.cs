@@ -307,8 +307,8 @@ namespace System.Web.Http.WebHost.Routing
                 contextBase.SetHttpRequestMessage(request);
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<Exception>(() =>
-                    product.ProcessRequestAsync(contextBase)
+                var exception = await Assert.ThrowsAsync<Exception>(
+                    () => product.ProcessRequestAsync(contextBase)
                 );
 
                 Assert.Same(expectedException, exception);

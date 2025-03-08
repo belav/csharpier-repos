@@ -136,8 +136,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 throw new ArgumentNullException("config");
             }
 
-            _documentationProvider = new Lazy<IModelDocumentationProvider>(() =>
-                config.Services.GetDocumentationProvider() as IModelDocumentationProvider
+            _documentationProvider = new Lazy<IModelDocumentationProvider>(
+                () => config.Services.GetDocumentationProvider() as IModelDocumentationProvider
             );
             GeneratedModels = new Dictionary<string, ModelDescription>(
                 StringComparer.OrdinalIgnoreCase

@@ -149,8 +149,8 @@ namespace System.Threading.Tasks.Tests.Status
             }
             Assert.Equal(TaskStatus.Canceled, tcs.Task.Status);
             Assert.Null(tcs.Task.Exception);
-            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(() =>
-                tcs.Task.GetAwaiter().GetResult()
+            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(
+                () => tcs.Task.GetAwaiter().GetResult()
             );
             Assert.Equal(default, tce.CancellationToken);
 
@@ -176,8 +176,8 @@ namespace System.Threading.Tasks.Tests.Status
             }
             Assert.Equal(TaskStatus.Canceled, tcs.Task.Status);
             Assert.Null(tcs.Task.Exception);
-            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(() =>
-                tcs.Task.GetAwaiter().GetResult()
+            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(
+                () => tcs.Task.GetAwaiter().GetResult()
             );
             Assert.Equal(cts.Token, tce.CancellationToken);
 
@@ -244,8 +244,8 @@ namespace System.Threading.Tasks.Tests.Status
             Assert.False(tcs.TrySetResult(default));
 
             Assert.Throws<InvalidOperationException>(() => tcs.SetException(new Exception()));
-            Assert.Throws<InvalidOperationException>(() =>
-                tcs.SetException(Enumerable.Repeat(new Exception(), 1))
+            Assert.Throws<InvalidOperationException>(
+                () => tcs.SetException(Enumerable.Repeat(new Exception(), 1))
             );
             Assert.False(tcs.TrySetException(new Exception()));
             Assert.False(tcs.TrySetException(Enumerable.Repeat(new Exception(), 1)));

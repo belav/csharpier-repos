@@ -166,8 +166,8 @@ public class DefaultControllerFactoryTest
         );
 
         // Act and Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            factory.CreateController(context)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => factory.CreateController(context)
         );
         Assert.Equal(
             $"Unable to resolve service for type '{typeof(TestService).FullName}' while attempting to activate "

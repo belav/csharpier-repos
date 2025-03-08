@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Xml.Tests
             string xml = "<a />";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            Assert.Throws<CryptographicException>(() => new EncryptionProperty(doc.DocumentElement)
+            Assert.Throws<CryptographicException>(
+                () => new EncryptionProperty(doc.DocumentElement)
             );
         }
 
@@ -62,8 +63,8 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
             EncryptionProperty encryptionProperty = new EncryptionProperty();
-            Assert.Throws<CryptographicException>(() =>
-                encryptionProperty.PropertyElement = doc.DocumentElement
+            Assert.Throws<CryptographicException>(
+                () => encryptionProperty.PropertyElement = doc.DocumentElement
             );
         }
 
@@ -91,8 +92,8 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
             EncryptionProperty encryptionProperty = new EncryptionProperty();
-            Assert.Throws<CryptographicException>(() =>
-                encryptionProperty.LoadXml(doc.DocumentElement)
+            Assert.Throws<CryptographicException>(
+                () => encryptionProperty.LoadXml(doc.DocumentElement)
             );
         }
 

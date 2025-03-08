@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _baseDirectory = baseDirectory;
             _displayFullPaths = displayFullPaths;
             _displayEndLocations = displayEndLocations;
-            _lazyNormalizedBaseDirectory = new Lazy<string>(() =>
-                FileUtilities.TryNormalizeAbsolutePath(baseDirectory)
+            _lazyNormalizedBaseDirectory = new Lazy<string>(
+                () => FileUtilities.TryNormalizeAbsolutePath(baseDirectory)
             );
         }
 

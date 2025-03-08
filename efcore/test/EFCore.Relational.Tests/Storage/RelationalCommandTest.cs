@@ -666,13 +666,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.MissingParameterValue("FirstInvariant"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await ((CommandFunc)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            null,
-                            null
-                        )
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            await ((CommandFunc)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                null,
+                                null
+                            )
                     )
                 ).Message
             );
@@ -682,13 +683,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.MissingParameterValue("FirstInvariant"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ((CommandAction)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            null,
-                            null
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            ((CommandAction)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                null,
+                                null
+                            )
                     )
                     .Message
             );
@@ -742,13 +744,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.MissingParameterValue("ThirdInvariant"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await ((CommandFunc)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            parameterValues,
-                            null
-                        )
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            await ((CommandFunc)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                parameterValues,
+                                null
+                            )
                     )
                 ).Message
             );
@@ -758,13 +761,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.MissingParameterValue("ThirdInvariant"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ((CommandAction)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            parameterValues,
-                            null
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            ((CommandAction)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                parameterValues,
+                                null
+                            )
                     )
                     .Message
             );
@@ -1009,13 +1013,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.MissingParameterValue("ThirdInvariant"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await ((CommandFunc)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            parameterValues,
-                            null
-                        )
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            await ((CommandFunc)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                parameterValues,
+                                null
+                            )
                     )
                 ).Message
             );
@@ -1025,13 +1030,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.MissingParameterValue("ThirdInvariant"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ((CommandAction)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            parameterValues,
-                            null
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            ((CommandAction)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                parameterValues,
+                                null
+                            )
                     )
                     .Message
             );
@@ -1075,13 +1081,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.ParameterNotObjectArray("CompositeInvariant"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await ((CommandFunc)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            parameterValues,
-                            null
-                        )
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            await ((CommandFunc)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                parameterValues,
+                                null
+                            )
                     )
                 ).Message
             );
@@ -1091,13 +1098,14 @@ public class RelationalCommandTest
             Assert.Equal(
                 RelationalStrings.ParameterNotObjectArray("CompositeInvariant"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ((CommandAction)commandDelegate)(
-                            fakeConnection,
-                            relationalCommand,
-                            parameterValues,
-                            null
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            ((CommandAction)commandDelegate)(
+                                fakeConnection,
+                                relationalCommand,
+                                parameterValues,
+                                null
+                            )
                     )
                     .Message
             );
@@ -1140,14 +1148,21 @@ public class RelationalCommandTest
 
         if (async)
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await ((CommandFunc)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        null,
+                        null
+                    )
             );
         }
         else
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
             );
         }
 
@@ -1173,18 +1188,20 @@ public class RelationalCommandTest
 
         if (async)
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await relationalCommand.ExecuteReaderAsync(
-                    new RelationalCommandParameterObject(fakeConnection, null, null, null, null)
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await relationalCommand.ExecuteReaderAsync(
+                        new RelationalCommandParameterObject(fakeConnection, null, null, null, null)
+                    )
             );
         }
         else
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                relationalCommand.ExecuteReader(
-                    new RelationalCommandParameterObject(fakeConnection, null, null, null, null)
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    relationalCommand.ExecuteReader(
+                        new RelationalCommandParameterObject(fakeConnection, null, null, null, null)
+                    )
             );
         }
 
@@ -1264,16 +1281,23 @@ public class RelationalCommandTest
 
         if (async)
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await ((CommandFunc)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        null,
+                        null
+                    )
             );
 
             Assert.Equal(1, fakeDbConnection.OpenAsyncCount);
         }
         else
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
             );
 
             Assert.Equal(1, fakeDbConnection.OpenCount);
@@ -1318,16 +1342,23 @@ public class RelationalCommandTest
 
         if (async)
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await ((CommandFunc)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        null,
+                        null
+                    )
             );
 
             Assert.Equal(1, fakeDbConnection.OpenAsyncCount);
         }
         else
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
             );
 
             Assert.Equal(1, fakeDbConnection.OpenCount);
@@ -1636,24 +1667,26 @@ public class RelationalCommandTest
 
         if (async)
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    parameterValues,
-                    logger
-                )
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await ((CommandFunc)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        parameterValues,
+                        logger
+                    )
             );
         }
         else
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    parameterValues,
-                    logger
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((CommandAction)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        parameterValues,
+                        logger
+                    )
             );
         }
 
@@ -1736,24 +1769,26 @@ public class RelationalCommandTest
 
         if (async)
         {
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-                await ((CommandFunc)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    parameterValues,
-                    logger
-                )
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                async () =>
+                    await ((CommandFunc)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        parameterValues,
+                        logger
+                    )
             );
         }
         else
         {
-            Assert.Throws<OperationCanceledException>(() =>
-                ((CommandAction)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    parameterValues,
-                    logger
-                )
+            Assert.Throws<OperationCanceledException>(
+                () =>
+                    ((CommandAction)commandDelegate)(
+                        fakeConnection,
+                        relationalCommand,
+                        parameterValues,
+                        logger
+                    )
             );
         }
 

@@ -16114,18 +16114,19 @@ class C
             );
 
             // the compiler should't swallow any exceptions but InvalidDataException
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                compilation1.EmitDifference(
-                    generation0,
-                    ImmutableArray.Create(
-                        SemanticEdit.Create(
-                            SemanticEditKind.Update,
-                            f0,
-                            f1,
-                            GetSyntaxMapFromMarkers(source0, source1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    compilation1.EmitDifference(
+                        generation0,
+                        ImmutableArray.Create(
+                            SemanticEdit.Create(
+                                SemanticEditKind.Update,
+                                f0,
+                                f1,
+                                GetSyntaxMapFromMarkers(source0, source1)
+                            )
                         )
                     )
-                )
             );
         }
 

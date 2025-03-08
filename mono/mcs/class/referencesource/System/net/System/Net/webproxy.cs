@@ -603,7 +603,6 @@ namespace System.Net
         ///     keep in mind the security implications when downloading and running
         ///     script from any network source configured in Internet Explorer.
         /// </summary>
-
         private AutoWebProxyScriptEngine m_ScriptEngine;
 
         internal AutoWebProxyScriptEngine ScriptEngine

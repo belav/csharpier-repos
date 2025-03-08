@@ -146,8 +146,8 @@ public class RemoteAttributeTest
         var context = GetValidationContextWithArea(currentArea: null);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            testableAttribute.InvokeGetUrl(context)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => testableAttribute.InvokeGetUrl(context)
         );
         Assert.Equal("No URL for remote validation could be found.", exception.Message);
     }

@@ -286,22 +286,24 @@ namespace System.Text.Json.Serialization.Tests
 
         private async Task TestIdTask()
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(
-                    @"{""$id"":1}",
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        @"{""$id"":1}",
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$id", ex.Path);
         }
 
         private async Task TestRefTask()
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(
-                    @"{""$ref"":1}",
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        @"{""$ref"":1}",
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$ref", ex.Path);
         }
@@ -708,8 +710,8 @@ namespace System.Text.Json.Serialization.Tests
                 }
             ]";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<List<Employee>>>(json)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () => await Serializer.DeserializeWrapper<List<List<Employee>>>(json)
             );
             Assert.Equal("$[0]", ex.Path);
         }
@@ -804,8 +806,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$ref"": ""1""
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$", ex.Path);
         }
@@ -818,11 +824,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$ref"": ""1""
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$", ex.Path);
         }
@@ -835,11 +842,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$ref"": ""1""
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Dictionary<string, Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$", ex.Path);
         }
@@ -854,8 +862,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Manager", ex.Path);
         }
@@ -870,8 +882,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Subordinates", ex.Path);
         }
@@ -886,8 +902,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Contacts", ex.Path);
         }
@@ -899,8 +919,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonPath()
         {
             string json = @"[0";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$[0]", ex.Path);
@@ -910,8 +934,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonPathObject()
         {
             string json = @"{ ""Name"": ""A";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.Name", ex.Path);
@@ -924,8 +952,12 @@ namespace System.Text.Json.Serialization.Tests
                 @"{
                 ""$id"": ""1"",
                 ""Nam";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             // Since $id was parsed correctly, the path should just be "$".
@@ -939,8 +971,12 @@ namespace System.Text.Json.Serialization.Tests
                 @"{
                 ""Name"": ""Angela"",
                 ""$i";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             // Since "Name" was parsed correctly, the path should just be "$".
@@ -953,8 +989,12 @@ namespace System.Text.Json.Serialization.Tests
             string json =
                 @"{
                 ""$id"":";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$id", ex.Path);
@@ -966,8 +1006,12 @@ namespace System.Text.Json.Serialization.Tests
             string json =
                 @"{
                 ""$id"": ""1";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$id", ex.Path);
@@ -977,8 +1021,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonPathNestedObject()
         {
             string json = @"{ ""Name"": ""A"", ""Manager"": { ""Name"": ""B";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.Manager.Name", ex.Path);
@@ -988,8 +1036,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonPathNestedArray()
         {
             string json = @"{ ""Subordinates"":";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.Subordinates", ex.Path);
@@ -1003,8 +1055,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$id"": ""1"",
                 ""$values"":[
                     1";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$values[0]", ex.Path);
@@ -1016,8 +1072,12 @@ namespace System.Text.Json.Serialization.Tests
             string json =
                 @"{
                 ""$id"": ""1";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$id", ex.Path);
@@ -1030,8 +1090,12 @@ namespace System.Text.Json.Serialization.Tests
                 @"{
                 ""$id"": ""1"",
                 ""$values"":";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$values", ex.Path);
@@ -1041,8 +1105,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonPathCurlyBraceOnArray()
         {
             string json = "{";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$", ex.Path);
@@ -1062,11 +1130,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             ]";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<EmployeeStruct>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<EmployeeStruct>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$[1].$ref", ex.Path);
             Assert.Contains($"'{typeof(EmployeeStruct)}'", ex.Message);
@@ -1104,8 +1173,12 @@ namespace System.Text.Json.Serialization.Tests
         )]
         public async Task InvalidMetadataPropertyNameIsRejected(string json, string expectedPath)
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal(expectedPath, ex.Path);
         }
@@ -1130,20 +1203,22 @@ namespace System.Text.Json.Serialization.Tests
 
             JsonException ex;
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ImmutableList<EmployeeWithImmutable>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ImmutableList<EmployeeWithImmutable>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$id", ex.Path);
             Assert.Contains($"'{typeof(ImmutableList<EmployeeWithImmutable>)}'", ex.Message);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<EmployeeWithImmutable[]>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<EmployeeWithImmutable[]>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$id", ex.Path);
             Assert.Contains($"'{typeof(EmployeeWithImmutable[])}'", ex.Message);
@@ -1158,10 +1233,11 @@ namespace System.Text.Json.Serialization.Tests
                 ""Employee1"": {}
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<
-                    ImmutableDictionary<string, EmployeeWithImmutable>
-                >(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<
+                        ImmutableDictionary<string, EmployeeWithImmutable>
+                    >(json, s_deserializerOptionsPreserve)
             );
             Assert.Equal("$.$id", ex.Path);
             Assert.Contains(
@@ -1184,11 +1260,12 @@ namespace System.Text.Json.Serialization.Tests
 
             JsonException ex;
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<EmployeeWithImmutable>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<EmployeeWithImmutable>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Subordinates.$id", ex.Path);
             Assert.Contains($"'{typeof(ImmutableList<EmployeeWithImmutable>)}'", ex.Message);
@@ -1202,11 +1279,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<EmployeeWithImmutable>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<EmployeeWithImmutable>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.SubordinatesArray.$id", ex.Path);
             Assert.Contains($"'{typeof(EmployeeWithImmutable[])}'", ex.Message);
@@ -1224,11 +1302,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<EmployeeWithImmutable>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<EmployeeWithImmutable>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Contacts.$id", ex.Path);
             Assert.Contains(
@@ -1290,27 +1369,36 @@ namespace System.Text.Json.Serialization.Tests
             JsonTokenType incorrectToken
         )
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
             );
             Assert.Equal("$.$id", ex.Path);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Dictionary<string, string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
             );
             Assert.Equal("$.$id", ex.Path);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
@@ -1333,27 +1421,36 @@ namespace System.Text.Json.Serialization.Tests
             JsonTokenType incorrectToken
         )
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
             );
             Assert.Equal("$.$ref", ex.Path);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Dictionary<string, string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
             );
             Assert.Equal("$.$ref", ex.Path);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
@@ -1376,8 +1473,12 @@ namespace System.Text.Json.Serialization.Tests
             JsonTokenType incorrectToken
         )
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.True(
                 incorrectToken == JsonTokenType.None || ex.Message.Contains($"'{incorrectToken}'")
@@ -1404,8 +1505,9 @@ namespace System.Text.Json.Serialization.Tests
                 ""Quantity"": 10
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Order>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Order>(json, s_deserializerOptionsPreserve)
             );
             Assert.Equal("$.$id", ex.Path);
 
@@ -1421,11 +1523,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             ]";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Order>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Order>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$[1].$ref", ex.Path);
         }
@@ -1445,8 +1548,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Manager.$ref", ex.Path);
 
@@ -1459,11 +1566,11 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, Dictionary<string, string>>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<
+                        Dictionary<string, Dictionary<string, string>>
+                    >(json, s_deserializerOptionsPreserve)
             );
             Assert.Equal("$.Angela.$ref", ex.Path);
 
@@ -1478,8 +1585,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Manager.Name", ex.Path);
 
@@ -1494,8 +1605,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Manager.$ref", ex.Path);
 
@@ -1510,8 +1625,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.Manager.$id", ex.Path);
         }
@@ -1530,11 +1649,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             ]";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Contains("'1'", ex.Message);
             Assert.Equal("$[0]", ex.Path);
@@ -1579,8 +1699,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$id", ex.Path);
@@ -1598,8 +1722,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Employee>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Employee>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$id", ex.Path);
 
@@ -1609,11 +1737,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$id"": ""1""
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Dictionary<string, string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$id", ex.Path);
         }
@@ -1633,11 +1762,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             ]";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$[1]", ex.Path);
@@ -1665,11 +1795,12 @@ namespace System.Text.Json.Serialization.Tests
                     }
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithTwoListProperties>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<ClassWithTwoListProperties>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.List2.$values", ex.Path);
@@ -1698,8 +1829,12 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PreservedArrayWithoutMetadata()
         {
             string json = "{}";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$", ex.Path);
@@ -1713,8 +1848,12 @@ namespace System.Text.Json.Serialization.Tests
                 @"{
                 ""$id"": ""1""
             }";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$", ex.Path);
@@ -1730,8 +1869,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$values"": []
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$values", ex.Path);
@@ -1746,8 +1889,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$values"": null
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<int>>(json, s_deserializerOptionsPreserve)
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<int>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$values", ex.Path);
@@ -1762,11 +1909,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$values"": 1
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$values", ex.Path);
@@ -1781,11 +1929,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$values"": {}
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.$values", ex.Path);
@@ -1801,11 +1950,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$values"": []
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.LeadingProperty", ex.Path);
@@ -1818,11 +1968,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""TrailingProperty"": 0
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<Employee>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<Employee>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
 
             Assert.Equal("$.TrailingProperty", ex.Path);
@@ -1849,19 +2000,21 @@ namespace System.Text.Json.Serialization.Tests
                 ""$values"": ""test""
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<EmployeeExtensionData>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<EmployeeExtensionData>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$values", ex.Path);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Dictionary<string, string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$values", ex.Path);
 
@@ -1872,19 +2025,21 @@ namespace System.Text.Json.Serialization.Tests
                 ""$test"": ""test""
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<EmployeeExtensionData>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<EmployeeExtensionData>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$test", ex.Path);
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<Dictionary<string, string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$.$test", ex.Path);
 
@@ -1919,11 +2074,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$ref"": ""1""
             }";
 
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
             Assert.Equal("$", ex.Path);
 
@@ -1949,11 +2105,12 @@ namespace System.Text.Json.Serialization.Tests
                 ""$test"": ""test""
             }";
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<List<string>>(
-                    json,
-                    s_deserializerOptionsPreserve
-                )
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await Serializer.DeserializeWrapper<List<string>>(
+                        json,
+                        s_deserializerOptionsPreserve
+                    )
             );
         }
         #endregion
@@ -2032,8 +2189,8 @@ namespace System.Text.Json.Serialization.Tests
                 ReferenceHandler = ReferenceHandler.Preserve,
                 UnknownTypeHandling = typehandling,
             };
-            await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper<object>(json, options)
+            await Assert.ThrowsAsync<JsonException>(
+                () => Serializer.DeserializeWrapper<object>(json, options)
             );
         }
 
@@ -2051,8 +2208,8 @@ namespace System.Text.Json.Serialization.Tests
             };
             string json =
                 @"[{ ""$id"" : ""1"" }, { ""$ref"" : ""1"", ""trailingProperty"" : true }]";
-            await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper<object[]>(json, options)
+            await Assert.ThrowsAsync<JsonException>(
+                () => Serializer.DeserializeWrapper<object[]>(json, options)
             );
         }
 
@@ -2124,8 +2281,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type
         )
         {
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.DeserializeWrapper(json, type, s_serializerOptionsPreserve)
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
+                () => Serializer.DeserializeWrapper(json, type, s_serializerOptionsPreserve)
             );
             Assert.Contains("LinkedList", ex.Message);
         }

@@ -237,8 +237,8 @@ namespace System.Data.Tests
             Assert.Throws<DuplicateNameException>(() => cols.Add(c2));
 
             // EvaluateException : Invalid number of arguments: function substring().
-            Assert.ThrowsAny<InvalidExpressionException>(() =>
-                cols.Add("test2", typeof(string), "substring ('fdsafewq', 2)")
+            Assert.ThrowsAny<InvalidExpressionException>(
+                () => cols.Add("test2", typeof(string), "substring ('fdsafewq', 2)")
             );
         }
 

@@ -109,8 +109,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                tracer.CreateController(_request)
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () => tracer.CreateController(_request)
             );
 
             // Assert

@@ -322,8 +322,8 @@ namespace System.Web.Mvc.Html.Test
             html.ViewContext.ViewBag.htmlAttributes = new { @class = "form-control", foo = "bar" };
 
             // Act
-            string result = RunWithoutViewEngine(() =>
-                DefaultEditorTemplates.CollectionTemplate(html)
+            string result = RunWithoutViewEngine(
+                () => DefaultEditorTemplates.CollectionTemplate(html)
             );
 
             // Assert

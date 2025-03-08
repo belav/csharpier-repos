@@ -475,8 +475,8 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
                     membersEntry.Metadata.DeclaringType.DisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        membersEntry.OriginalValue = new List<string>()
+                    .Throws<InvalidOperationException>(
+                        () => membersEntry.OriginalValue = new List<string>()
                     )
                     .Message
             );
@@ -604,8 +604,9 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
         Assert.Equal(
             CoreStrings.NullRequiredComplexProperty("Yogurt", "Milk"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
                 )
             ).Message
         );
@@ -629,8 +630,9 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
         Assert.Equal(
             CoreStrings.NullRequiredComplexProperty("Culture", "Manufacturer"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
                 )
             ).Message
         );
@@ -654,8 +656,9 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
         Assert.Equal(
             CoreStrings.NullRequiredComplexProperty("License", "Tag"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
                 )
             ).Message
         );

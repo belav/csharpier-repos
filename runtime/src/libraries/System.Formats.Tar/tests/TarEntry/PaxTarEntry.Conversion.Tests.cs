@@ -144,25 +144,29 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Constructor_ConversionFromPaxGEA_ToAny_Throw()
         {
-            Assert.Throws<ArgumentException>(() =>
-                new V7TarEntry(
-                    new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new V7TarEntry(
+                        new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                new UstarTarEntry(
-                    new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new UstarTarEntry(
+                        new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(
-                    new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new PaxTarEntry(
+                        new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
+                    )
             );
-            Assert.Throws<ArgumentException>(() =>
-                new GnuTarEntry(
-                    new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new GnuTarEntry(
+                        new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>())
+                    )
             );
         }
 

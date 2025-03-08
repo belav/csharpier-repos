@@ -129,8 +129,8 @@ namespace System.IO.Ports.Tests
                 );
                 com.Open();
 
-                Assert.Throws<TimeoutException>(() =>
-                    com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+                Assert.Throws<TimeoutException>(
+                    () => com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
                 );
 
                 VerifyTimeout(com);
@@ -336,8 +336,8 @@ namespace System.IO.Ports.Tests
             double percentageDifference;
 
             // Warm up read method
-            Assert.Throws<TimeoutException>(() =>
-                com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+            Assert.Throws<TimeoutException>(
+                () => com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
             );
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
@@ -345,8 +345,8 @@ namespace System.IO.Ports.Tests
             for (int i = 0; i < NUM_TRYS; i++)
             {
                 timer.Start();
-                Assert.Throws<TimeoutException>(() =>
-                    com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+                Assert.Throws<TimeoutException>(
+                    () => com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
                 );
 
                 timer.Stop();

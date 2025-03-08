@@ -14,8 +14,8 @@ namespace System.Net.Http.Functional.Tests
 
         [Fact]
         public Task SendAsync_Null_ThrowsArgumentNullException() =>
-            Assert.ThrowsAsync<ArgumentNullException>(() =>
-                new TestHttpClientHandler().SendNullAsync()
+            Assert.ThrowsAsync<ArgumentNullException>(
+                () => new TestHttpClientHandler().SendNullAsync()
             );
 
         public static bool SupportsSyncSend =>

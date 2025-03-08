@@ -181,8 +181,8 @@ public class OwnedFixupTest
                 "CoreEventId.DuplicateDependentEntityTypeInstanceWarning"
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.Entry(principal).Reference(p => p.Child2).TargetEntry
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(principal).Reference(p => p.Child2).TargetEntry
                 )
                 .Message
         );

@@ -259,8 +259,8 @@ namespace System.Linq.Expressions.Tests
                 )
             );
 
-            Assert.Throws<NotSupportedException>(() =>
-                attemptAssignToConstant.Compile(useInterpreter)
+            Assert.Throws<NotSupportedException>(
+                () => attemptAssignToConstant.Compile(useInterpreter)
             );
         }
 
@@ -354,8 +354,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Bind(member, Expression.Constant("ABC"))
                 )
             );
-            Assert.Throws<InvalidProgramException>(() =>
-                assignToStaticProperty.Compile(useInterpreter)
+            Assert.Throws<InvalidProgramException>(
+                () => assignToStaticProperty.Compile(useInterpreter)
             );
         }
 

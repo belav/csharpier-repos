@@ -98,14 +98,15 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordBytes_BogusHash()
         {
-            Assert.Throws<CryptographicException>(() =>
-                Rfc2898DeriveBytes.Pbkdf2(
-                    s_passwordBytes,
-                    s_salt,
-                    iterations: 1,
-                    new HashAlgorithmName("BLAH"),
-                    s_extractLength
-                )
+            Assert.Throws<CryptographicException>(
+                () =>
+                    Rfc2898DeriveBytes.Pbkdf2(
+                        s_passwordBytes,
+                        s_salt,
+                        iterations: 1,
+                        new HashAlgorithmName("BLAH"),
+                        s_extractLength
+                    )
             );
         }
 
@@ -233,14 +234,15 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordString_BogusHash()
         {
-            Assert.Throws<CryptographicException>(() =>
-                Rfc2898DeriveBytes.Pbkdf2(
-                    Password,
-                    s_salt,
-                    iterations: 1,
-                    new HashAlgorithmName("BLAH"),
-                    s_extractLength
-                )
+            Assert.Throws<CryptographicException>(
+                () =>
+                    Rfc2898DeriveBytes.Pbkdf2(
+                        Password,
+                        s_salt,
+                        iterations: 1,
+                        new HashAlgorithmName("BLAH"),
+                        s_extractLength
+                    )
             );
         }
 
@@ -290,14 +292,15 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordString_InvalidUtf8()
         {
-            Assert.Throws<EncoderFallbackException>(() =>
-                Rfc2898DeriveBytes.Pbkdf2(
-                    "\uD800",
-                    s_salt,
-                    iterations: 1,
-                    HashAlgorithmName.SHA256,
-                    s_extractLength
-                )
+            Assert.Throws<EncoderFallbackException>(
+                () =>
+                    Rfc2898DeriveBytes.Pbkdf2(
+                        "\uD800",
+                        s_salt,
+                        iterations: 1,
+                        HashAlgorithmName.SHA256,
+                        s_extractLength
+                    )
             );
         }
 
@@ -512,14 +515,15 @@ namespace System.Security.Cryptography
         public static void UnsupportedPkbdf2Algorithms(string hashAlgorithm)
         {
             HashAlgorithmName hashAlgorithmName = new HashAlgorithmName(hashAlgorithm);
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Rfc2898DeriveBytes.Pbkdf2(
-                    s_passwordBytes,
-                    s_salt,
-                    iterations: 1,
-                    hashAlgorithmName,
-                    s_extractLength
-                )
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Rfc2898DeriveBytes.Pbkdf2(
+                        s_passwordBytes,
+                        s_salt,
+                        iterations: 1,
+                        hashAlgorithmName,
+                        s_extractLength
+                    )
             );
         }
 

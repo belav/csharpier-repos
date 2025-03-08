@@ -181,8 +181,8 @@ public class AsyncEnumerableReaderTest
 
         // Act
         Assert.True(readerFactory.TryGetReader(enumerable.GetType(), out var reader));
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            reader(enumerable, default)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => reader(enumerable, default)
         );
 
         // Assert

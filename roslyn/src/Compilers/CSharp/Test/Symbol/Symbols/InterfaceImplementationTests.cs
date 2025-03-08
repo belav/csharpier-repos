@@ -81,8 +81,8 @@ interface Interface
             var baseNestedDelegate = @base.GetMembers("Delegate").Single();
             Assert.Null(@base.FindImplementationForInterfaceMember(baseNestedDelegate)); //not a method/property/event
 
-            Assert.Throws<ArgumentNullException>(() =>
-                @base.FindImplementationForInterfaceMember(null)
+            Assert.Throws<ArgumentNullException>(
+                () => @base.FindImplementationForInterfaceMember(null)
             ); //not a method/property/event
 
             var @interface = (NamedTypeSymbol)global.GetMembers("Interface").Single();

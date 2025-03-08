@@ -3485,8 +3485,8 @@ namespace System.Data.Tests
             DataSet ds = new DataSet();
             Assert.Equal(SchemaSerializationMode.IncludeSchema, ds.SchemaSerializationMode);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema
+            Assert.Throws<InvalidOperationException>(
+                () => ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema
             );
         }
 
@@ -3511,7 +3511,6 @@ namespace System.Data.Tests
         ///        </xs:complexType>
         ///    </xs:element>
         ///</xs:schema>
-
         [Fact]
         public void ParentDataTableSchema()
         {

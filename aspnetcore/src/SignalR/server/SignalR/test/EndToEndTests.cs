@@ -295,8 +295,8 @@ public class EndToEndTests : FunctionalTestBase
 
             try
             {
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    connection.StartAsync().DefaultTimeout()
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => connection.StartAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Negotiation can only be skipped when using the WebSocket transport directly.",
@@ -477,8 +477,8 @@ public class EndToEndTests : FunctionalTestBase
                 LoggerFactory
             );
 
-            var exception = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                connection.StartAsync().DefaultTimeout()
+            var exception = await Assert.ThrowsAsync<HttpRequestException>(
+                () => connection.StartAsync().DefaultTimeout()
             );
 
             Assert.Contains("401", exception.Message);
@@ -510,8 +510,8 @@ public class EndToEndTests : FunctionalTestBase
 
             var connection = new HttpConnection(options, LoggerFactory);
 
-            await Assert.ThrowsAsync<WebSocketException>(() =>
-                connection.StartAsync().DefaultTimeout()
+            await Assert.ThrowsAsync<WebSocketException>(
+                () => connection.StartAsync().DefaultTimeout()
             );
         }
     }

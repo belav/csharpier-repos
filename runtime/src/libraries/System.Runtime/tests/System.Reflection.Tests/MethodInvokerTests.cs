@@ -122,8 +122,8 @@ namespace System.Reflection.Tests
             MethodInvoker invoker = MethodInvoker.Create(
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_2))
             );
-            Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, "1", "2", 42)
+            Assert.Throws<TargetParameterCountException>(
+                () => invoker.Invoke(obj: null, "1", "2", 42)
             );
         }
 
@@ -133,8 +133,8 @@ namespace System.Reflection.Tests
             MethodInvoker invoker = MethodInvoker.Create(
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_3))
             );
-            Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, "1", "2", "3", 42)
+            Assert.Throws<TargetParameterCountException>(
+                () => invoker.Invoke(obj: null, "1", "2", "3", 42)
             );
         }
 
@@ -144,8 +144,8 @@ namespace System.Reflection.Tests
             MethodInvoker invoker = MethodInvoker.Create(
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_1))
             );
-            Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>(new object[] { "1", "2" }))
+            Assert.Throws<TargetParameterCountException>(
+                () => invoker.Invoke(obj: null, new Span<object?>(new object[] { "1", "2" }))
             );
         }
 
@@ -185,8 +185,8 @@ namespace System.Reflection.Tests
             MethodInvoker invoker = MethodInvoker.Create(
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_1))
             );
-            Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>())
+            Assert.Throws<TargetParameterCountException>(
+                () => invoker.Invoke(obj: null, new Span<object?>())
             );
         }
 
@@ -268,15 +268,15 @@ namespace System.Reflection.Tests
             {
                 if (parameters.GetType().GetElementType() == typeof(object))
                 {
-                    Assert.Throws<ArgumentException>(() =>
-                        invoker.Invoke(obj, new Span<object?>(parameters))
+                    Assert.Throws<ArgumentException>(
+                        () => invoker.Invoke(obj, new Span<object?>(parameters))
                     );
                 }
                 else
                 {
                     // Using 'string[]', for example, is not supported with Span<object>.
-                    Assert.Throws<ArrayTypeMismatchException>(() =>
-                        invoker.Invoke(obj, new Span<object?>(parameters))
+                    Assert.Throws<ArrayTypeMismatchException>(
+                        () => invoker.Invoke(obj, new Span<object?>(parameters))
                     );
                 }
             }
@@ -320,8 +320,8 @@ namespace System.Reflection.Tests
                 }
                 else
                 {
-                    Assert.Throws<ArrayTypeMismatchException>(() =>
-                        invoker.Invoke(obj, new Span<object?>(parameters))
+                    Assert.Throws<ArrayTypeMismatchException>(
+                        () => invoker.Invoke(obj, new Span<object?>(parameters))
                     );
                 }
             }
@@ -350,8 +350,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetMethod(nameof(TestClass.Throw_0))
             );
             Assert.Throws<InvalidOperationException>(() => invoker.Invoke(obj: null));
-            Assert.Throws<InvalidOperationException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>())
+            Assert.Throws<InvalidOperationException>(
+                () => invoker.Invoke(obj: null, new Span<object?>())
             );
         }
 
@@ -362,8 +362,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetMethod(nameof(TestClass.Throw_1))
             );
             Assert.Throws<InvalidOperationException>(() => invoker.Invoke(obj: null, "1"));
-            Assert.Throws<InvalidOperationException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>(new object[] { "1" }))
+            Assert.Throws<InvalidOperationException>(
+                () => invoker.Invoke(obj: null, new Span<object?>(new object[] { "1" }))
             );
         }
 
@@ -373,11 +373,12 @@ namespace System.Reflection.Tests
             MethodInvoker invoker = MethodInvoker.Create(
                 typeof(TestClass).GetMethod(nameof(TestClass.Throw_5))
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                invoker.Invoke(
-                    obj: null,
-                    new Span<object?>(new object[] { "1", "2", "3", "4", "5" })
-                )
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    invoker.Invoke(
+                        obj: null,
+                        new Span<object?>(new object[] { "1", "2", "3", "4", "5" })
+                    )
             );
         }
 

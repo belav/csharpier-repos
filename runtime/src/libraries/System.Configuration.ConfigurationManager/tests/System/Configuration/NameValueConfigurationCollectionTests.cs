@@ -27,8 +27,8 @@ namespace System.ConfigurationTests
         public void Add_NullKeyValue_Throws()
         {
             var element = new NameValueConfigurationElement(null, null);
-            Assert.Throws<ConfigurationErrorsException>(() =>
-                new NameValueConfigurationCollection().Add(element)
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new NameValueConfigurationCollection().Add(element)
             );
         }
 

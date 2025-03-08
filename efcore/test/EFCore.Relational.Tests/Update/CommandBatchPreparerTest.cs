@@ -458,11 +458,12 @@ public class CommandBatchPreparerTest
         Assert.Equal(
             CoreStrings.TempValue(nameof(FakeEntity.Value), nameof(FakeEntity)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entry.SetTemporaryValue(
-                        entry.EntityType.FindProperty(nameof(FakeEntity.Value)),
-                        "Test"
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entry.SetTemporaryValue(
+                            entry.EntityType.FindProperty(nameof(FakeEntity.Value)),
+                            "Test"
+                        )
                 )
                 .Message
         );
@@ -498,12 +499,13 @@ ForeignKeyConstraint { 'RelatedId' } FakeEntity [Added]" + CoreStrings.Sensitive
         Assert.Equal(
             CoreStrings.CircularDependency(ListLoggerFactory.NormalizeLineEndings(expectedCycle)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    CreateBatches(
-                        new[] { fakeEntry, relatedFakeEntry },
-                        modelData,
-                        sensitiveLogging
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        CreateBatches(
+                            new[] { fakeEntry, relatedFakeEntry },
+                            modelData,
+                            sensitiveLogging
+                        )
                 )
                 .Message
         );
@@ -559,12 +561,13 @@ Index { 'UniqueValue' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabled;
         Assert.Equal(
             CoreStrings.CircularDependency(ListLoggerFactory.NormalizeLineEndings(expectedCycle)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    CreateBatches(
-                        new[] { fakeEntry, relatedFakeEntry, fakeEntry2 },
-                        modelData,
-                        sensitiveLogging
-                    )
+                .Throws<InvalidOperationException>(
+                    () =>
+                        CreateBatches(
+                            new[] { fakeEntry, relatedFakeEntry, fakeEntry2 },
+                            modelData,
+                            sensitiveLogging
+                        )
                 )
                 .Message
         );
@@ -843,12 +846,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                     EntityState.Added
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        CreateBatches(
-                            new[] { firstEntry, secondEntry },
-                            modelData,
-                            sensitiveLogging: true
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            CreateBatches(
+                                new[] { firstEntry, secondEntry },
+                                modelData,
+                                sensitiveLogging: true
+                            )
                     )
                     .Message
             );
@@ -863,12 +867,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                     EntityState.Added
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        CreateBatches(
-                            new[] { firstEntry, secondEntry },
-                            modelData,
-                            sensitiveLogging: false
-                        )
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            CreateBatches(
+                                new[] { firstEntry, secondEntry },
+                                modelData,
+                                sensitiveLogging: false
+                            )
                     )
                     .Message
             );
@@ -925,12 +930,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         "RelatedId"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            CreateBatches(
-                                new[] { firstEntry, secondEntry },
-                                modelData,
-                                sensitiveLogging: true
-                            )
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                CreateBatches(
+                                    new[] { firstEntry, secondEntry },
+                                    modelData,
+                                    sensitiveLogging: true
+                                )
                         )
                         .Message
                 );
@@ -946,12 +952,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         "RelatedId"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            CreateBatches(
-                                new[] { firstEntry, secondEntry },
-                                modelData,
-                                sensitiveLogging: false
-                            )
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                CreateBatches(
+                                    new[] { firstEntry, secondEntry },
+                                    modelData,
+                                    sensitiveLogging: false
+                                )
                         )
                         .Message
                 );
@@ -971,12 +978,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         "RelatedId"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            CreateBatches(
-                                new[] { firstEntry, secondEntry },
-                                modelData,
-                                sensitiveLogging: true
-                            )
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                CreateBatches(
+                                    new[] { firstEntry, secondEntry },
+                                    modelData,
+                                    sensitiveLogging: true
+                                )
                         )
                         .Message
                 );
@@ -992,12 +1000,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         "RelatedId"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            CreateBatches(
-                                new[] { firstEntry, secondEntry },
-                                modelData,
-                                sensitiveLogging: false
-                            )
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                CreateBatches(
+                                    new[] { firstEntry, secondEntry },
+                                    modelData,
+                                    sensitiveLogging: false
+                                )
                         )
                         .Message
                 );

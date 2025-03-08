@@ -173,10 +173,11 @@ namespace DbLinqTest
         [Test]
         public void Ctor_ConnectionString_ExtraParameters_Munging()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                new DataContext(
-                    "Server=localhost;User id=test;Database=test;DbLinqProvider=Sqlite;DbLinqConnectionType=Mono.Data.Sqlite.SqliteConnection, Mono.Data.Sqlite"
-                )
+            var ex = Assert.Throws<ArgumentException>(
+                () =>
+                    new DataContext(
+                        "Server=localhost;User id=test;Database=test;DbLinqProvider=Sqlite;DbLinqConnectionType=Mono.Data.Sqlite.SqliteConnection, Mono.Data.Sqlite"
+                    )
             );
             // Keyword not supported: 'dblinqprovider'
             Assert.Null(ex.InnerException);

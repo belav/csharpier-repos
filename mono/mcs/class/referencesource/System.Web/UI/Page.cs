@@ -5032,7 +5032,6 @@ window.onload = WebForm_RestoreScrollPosition;
         /// For now this early initialization includes
         /// theme loading.
         ///
-
         private void PerformPreInit()
         {
             OnPreInit(EventArgs.Empty);
@@ -5853,7 +5852,6 @@ window.onload = WebForm_RestoreScrollPosition;
                 }
 
                 /// Async Point here
-
                 if (_legacyAsyncInfo == null || _legacyAsyncInfo.CallerIsBlocking)
                 {
                     // for non-async pages with registered async tasks - run the tasks here
@@ -6369,7 +6367,6 @@ window.onload = WebForm_RestoreScrollPosition;
                 }
 
                 /// Async Point here
-
                 if (_legacyAsyncInfo == null || _legacyAsyncInfo.CallerIsBlocking)
                 {
                     // for non-async pages with registered async tasks - run the tasks here

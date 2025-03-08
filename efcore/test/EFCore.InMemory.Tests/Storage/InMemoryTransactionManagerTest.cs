@@ -55,8 +55,8 @@ public class InMemoryTransactionManagerTest
         Assert.Equal(
             CoreStrings.TransactionsNotSupported,
             Assert
-                .Throws<NotSupportedException>(() =>
-                    context.Database.EnlistTransaction(Transaction.Current)
+                .Throws<NotSupportedException>(
+                    () => context.Database.EnlistTransaction(Transaction.Current)
                 )
                 .Message
         );
@@ -83,11 +83,12 @@ public class InMemoryTransactionManagerTest
 
     [ConditionalFact]
     public void Throws_on_BeginTransactionAsync() =>
-        AssertThrows(() =>
-            new InMemoryTransactionManager(CreateLogger())
-                .BeginTransactionAsync()
-                .GetAwaiter()
-                .GetResult()
+        AssertThrows(
+            () =>
+                new InMemoryTransactionManager(CreateLogger())
+                    .BeginTransactionAsync()
+                    .GetAwaiter()
+                    .GetResult()
         );
 
     [ConditionalFact]
@@ -96,11 +97,12 @@ public class InMemoryTransactionManagerTest
 
     [ConditionalFact]
     public void Throws_on_CommitTransactionAsync() =>
-        AssertThrows(() =>
-            new InMemoryTransactionManager(CreateLogger())
-                .CommitTransactionAsync()
-                .GetAwaiter()
-                .GetResult()
+        AssertThrows(
+            () =>
+                new InMemoryTransactionManager(CreateLogger())
+                    .CommitTransactionAsync()
+                    .GetAwaiter()
+                    .GetResult()
         );
 
     [ConditionalFact]
@@ -109,11 +111,12 @@ public class InMemoryTransactionManagerTest
 
     [ConditionalFact]
     public void Throws_on_RollbackTransactionAsync() =>
-        AssertThrows(() =>
-            new InMemoryTransactionManager(CreateLogger())
-                .RollbackTransactionAsync()
-                .GetAwaiter()
-                .GetResult()
+        AssertThrows(
+            () =>
+                new InMemoryTransactionManager(CreateLogger())
+                    .RollbackTransactionAsync()
+                    .GetAwaiter()
+                    .GetResult()
         );
 
     private static void AssertThrows(Action action) =>

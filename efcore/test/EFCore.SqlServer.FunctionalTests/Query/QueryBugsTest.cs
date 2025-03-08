@@ -3404,15 +3404,16 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
                 })
                 .ToList();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                context
-                    .Blogs.Select(b => new
-                    {
-                        Collection1 = b.Posts1.OrderBy(p => p.Id),
-                        Collection2 = b.Posts2.OrderBy(p => p.Id),
-                        Collection3 = b.Posts3.OrderBy(p => p.Id),
-                    })
-                    .ToList()
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    context
+                        .Blogs.Select(b => new
+                        {
+                            Collection1 = b.Posts1.OrderBy(p => p.Id),
+                            Collection2 = b.Posts2.OrderBy(p => p.Id),
+                            Collection3 = b.Posts3.OrderBy(p => p.Id),
+                        })
+                        .ToList()
             );
         }
     }
@@ -6640,8 +6641,11 @@ FROM [MockEntities] AS [m]
             var id = 1;
 
             var message = Assert
-                .Throws<InvalidOperationException>(() =>
-                    queryBase.Cast<IssueContext18087.IDummyEntity>().FirstOrDefault(x => x.Id == id)
+                .Throws<InvalidOperationException>(
+                    () =>
+                        queryBase
+                            .Cast<IssueContext18087.IDummyEntity>()
+                            .FirstOrDefault(x => x.Id == id)
                 )
                 .Message;
 
@@ -7399,8 +7403,12 @@ ORDER BY [p].[Id]
                     )
                     .GenerateMessage(),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Parents.Include(p => p.Children1).Include(p => p.Children2).ToList()
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            context
+                                .Parents.Include(p => p.Children1)
+                                .Include(p => p.Children2)
+                                .ToList()
                     )
                     .Message
             );
@@ -8962,8 +8970,8 @@ ORDER BY [d].[Id], [p].[Id]
                     "'PrincipalManyToMany.Dependents', 'DependentManyToMany.Principals'"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<MyContext22568.PrincipalManyToMany>().ToList()
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<MyContext22568.PrincipalManyToMany>().ToList()
                     )
                     .Message
             );
@@ -8973,8 +8981,8 @@ ORDER BY [d].[Id], [p].[Id]
                     "'DependentManyToMany.Principals', 'PrincipalManyToMany.Dependents'"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<MyContext22568.DependentManyToMany>().ToList()
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<MyContext22568.DependentManyToMany>().ToList()
                     )
                     .Message
             );
@@ -9001,8 +9009,8 @@ FROM [DependentManyToMany] AS [d]
             Assert.Equal(
                 CoreStrings.AutoIncludeNavigationCycle("'CycleA.Bs', 'CycleB.C', 'CycleC.As'"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<MyContext22568.CycleA>().ToList()
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<MyContext22568.CycleA>().ToList()
                     )
                     .Message
             );
@@ -9010,8 +9018,8 @@ FROM [DependentManyToMany] AS [d]
             Assert.Equal(
                 CoreStrings.AutoIncludeNavigationCycle("'CycleB.C', 'CycleC.As', 'CycleA.Bs'"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<MyContext22568.CycleB>().ToList()
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<MyContext22568.CycleB>().ToList()
                     )
                     .Message
             );
@@ -9019,8 +9027,8 @@ FROM [DependentManyToMany] AS [d]
             Assert.Equal(
                 CoreStrings.AutoIncludeNavigationCycle("'CycleC.As', 'CycleA.Bs', 'CycleB.C'"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<MyContext22568.CycleC>().ToList()
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<MyContext22568.CycleC>().ToList()
                     )
                     .Message
             );

@@ -247,10 +247,11 @@ namespace System.Net.Tests
             {
                 Assert.False(outputStream.CanRead);
 
-                Assert.Throws<InvalidOperationException>(() => outputStream.Read(new byte[0], 0, 0)
+                Assert.Throws<InvalidOperationException>(
+                    () => outputStream.Read(new byte[0], 0, 0)
                 );
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    outputStream.ReadAsync(new byte[0], 0, 0)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => outputStream.ReadAsync(new byte[0], 0, 0)
                 );
                 Assert.Throws<InvalidOperationException>(() => outputStream.EndRead(null));
             }
@@ -295,11 +296,11 @@ namespace System.Net.Tests
             using (HttpListenerResponse response = await _helper.GetResponse())
             using (Stream outputStream = response.OutputStream)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    outputStream.Write(new byte[2], offset, 0)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => outputStream.Write(new byte[2], offset, 0)
                 );
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                    outputStream.WriteAsync(new byte[2], offset, 0)
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    () => outputStream.WriteAsync(new byte[2], offset, 0)
                 );
             }
         }
@@ -316,11 +317,11 @@ namespace System.Net.Tests
             using (HttpListenerResponse response = await _helper.GetResponse())
             using (Stream outputStream = response.OutputStream)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    outputStream.Write(new byte[2], offset, size)
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => outputStream.Write(new byte[2], offset, size)
                 );
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                    outputStream.WriteAsync(new byte[2], offset, size)
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    () => outputStream.WriteAsync(new byte[2], offset, size)
                 );
             }
         }
@@ -340,11 +341,11 @@ namespace System.Net.Tests
                     response.ContentLength64 = responseBuffer.Length - 1;
                     try
                     {
-                        Assert.Throws<ProtocolViolationException>(() =>
-                            output.Write(responseBuffer, 0, responseBuffer.Length)
+                        Assert.Throws<ProtocolViolationException>(
+                            () => output.Write(responseBuffer, 0, responseBuffer.Length)
                         );
-                        await Assert.ThrowsAsync<ProtocolViolationException>(() =>
-                            output.WriteAsync(responseBuffer, 0, responseBuffer.Length)
+                        await Assert.ThrowsAsync<ProtocolViolationException>(
+                            () => output.WriteAsync(responseBuffer, 0, responseBuffer.Length)
                         );
                     }
                     finally
@@ -442,8 +443,8 @@ namespace System.Net.Tests
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<HttpListenerException>(() =>
-                        context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length)
+                    await Assert.ThrowsAsync<HttpListenerException>(
+                        () => context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length)
                     );
                 }
                 // Closing a response from a closed client if a writing has already failed should not fail.
@@ -484,8 +485,8 @@ namespace System.Net.Tests
                 }
                 else
                 {
-                    Assert.Throws<HttpListenerException>(() =>
-                        context.Response.OutputStream.Write(buffer, 0, buffer.Length)
+                    Assert.Throws<HttpListenerException>(
+                        () => context.Response.OutputStream.Write(buffer, 0, buffer.Length)
                     );
                 }
 
@@ -531,8 +532,8 @@ namespace System.Net.Tests
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<HttpListenerException>(() =>
-                        context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length)
+                    await Assert.ThrowsAsync<HttpListenerException>(
+                        () => context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length)
                     );
                 }
 
@@ -581,8 +582,8 @@ namespace System.Net.Tests
                 }
                 else
                 {
-                    Assert.Throws<HttpListenerException>(() =>
-                        context.Response.OutputStream.Write(buffer, 0, buffer.Length)
+                    Assert.Throws<HttpListenerException>(
+                        () => context.Response.OutputStream.Write(buffer, 0, buffer.Length)
                     );
                 }
 
@@ -653,8 +654,8 @@ namespace System.Net.Tests
                 );
                 outputStream.EndWrite(beginWriteResult);
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    outputStream.EndWrite(beginWriteResult)
+                Assert.Throws<InvalidOperationException>(
+                    () => outputStream.EndWrite(beginWriteResult)
                 );
             }
         }

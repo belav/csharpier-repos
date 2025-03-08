@@ -22,8 +22,8 @@ public class RoutingBuilderExtensionsTest
         var router = Mock.Of<IRouter>();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            applicationBuilderMock.Object.UseRouter(router)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => applicationBuilderMock.Object.UseRouter(router)
         );
 
         Assert.Equal(

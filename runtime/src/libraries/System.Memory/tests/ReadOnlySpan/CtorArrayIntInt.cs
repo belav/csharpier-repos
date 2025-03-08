@@ -38,8 +38,8 @@ namespace System.SpanTests
         public static void CtorArrayIntIntNegativeStart()
         {
             int[] a = new int[3];
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, -1, 0).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, -1, 0).DontBox()
             );
         }
 
@@ -47,8 +47,8 @@ namespace System.SpanTests
         public static void CtorArrayIntIntStartTooLarge()
         {
             int[] a = new int[3];
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 4, 0).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, 4, 0).DontBox()
             );
         }
 
@@ -56,8 +56,8 @@ namespace System.SpanTests
         public static void CtorArrayIntIntNegativeLength()
         {
             int[] a = new int[3];
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 0, -1).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, 0, -1).DontBox()
             );
         }
 
@@ -65,20 +65,20 @@ namespace System.SpanTests
         public static void CtorArrayIntIntStartAndLengthTooLarge()
         {
             int[] a = new int[3];
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 3, 1).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, 3, 1).DontBox()
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 2, 2).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, 2, 2).DontBox()
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 1, 3).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, 1, 3).DontBox()
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 0, 4).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, 0, 4).DontBox()
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, int.MaxValue, int.MaxValue).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlySpan<int>(a, int.MaxValue, int.MaxValue).DontBox()
             );
         }
 

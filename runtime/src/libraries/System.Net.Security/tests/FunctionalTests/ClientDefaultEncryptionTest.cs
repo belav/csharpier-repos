@@ -142,13 +142,14 @@ namespace System.Net.Security.Tests
                     Task serverTask = server.AuthenticateAsServerAsync(
                         TestConfiguration.ServerCertificate
                     );
-                    await Assert.ThrowsAsync<AuthenticationException>(() =>
-                        client.AuthenticateAsClientAsync(
-                            "localhost",
-                            null,
-                            SslProtocolSupport.DefaultSslProtocols,
-                            false
-                        )
+                    await Assert.ThrowsAsync<AuthenticationException>(
+                        () =>
+                            client.AuthenticateAsClientAsync(
+                                "localhost",
+                                null,
+                                SslProtocolSupport.DefaultSslProtocols,
+                                false
+                            )
                     );
                     try
                     {

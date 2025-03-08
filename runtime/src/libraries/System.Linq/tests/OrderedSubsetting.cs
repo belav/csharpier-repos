@@ -45,19 +45,19 @@ namespace System.Linq.Tests
         [Fact]
         public void FirstNoTruePredicateResult()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Range(1, 99).OrderBy(i => i).First(x => x > 1000)
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Range(1, 99).OrderBy(i => i).First(x => x > 1000)
             );
         }
 
         [Fact]
         public void FirstEmptyOrderedEnumerable()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().OrderBy(i => i).First()
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().OrderBy(i => i).First()
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().OrderBy(i => i).First(x => true)
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().OrderBy(i => i).First(x => true)
             );
         }
 
@@ -130,19 +130,19 @@ namespace System.Linq.Tests
         [Fact]
         public void LastNoTruePredicateResult()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Range(1, 99).OrderBy(i => i).Last(x => x > 1000)
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Range(1, 99).OrderBy(i => i).Last(x => x > 1000)
             );
         }
 
         [Fact]
         public void LastEmptyOrderedEnumerable()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().OrderBy(i => i).Last()
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().OrderBy(i => i).Last()
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().OrderBy(i => i).Last(x => true)
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().OrderBy(i => i).Last(x => true)
             );
         }
 
@@ -227,8 +227,8 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipExcessiveThenFirstThrows()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Range(2, 10).Shuffle().OrderBy(i => i).Skip(20).First()
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Range(2, 10).Shuffle().OrderBy(i => i).Skip(20).First()
             );
         }
 
@@ -259,8 +259,8 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipExcessiveThenLastThrows()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Range(2, 10).Shuffle().OrderBy(i => i).Skip(20).Last()
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Range(2, 10).Shuffle().OrderBy(i => i).Skip(20).Last()
             );
         }
 

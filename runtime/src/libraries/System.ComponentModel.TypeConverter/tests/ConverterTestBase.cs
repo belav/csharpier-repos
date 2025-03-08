@@ -24,8 +24,8 @@ namespace System.ComponentModel.Tests
 
         public static void ConvertTo_WithContext(object[,] data, TypeConverter converter)
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                converter.ConvertTo(TypeConverterTests.s_context, null, "", null)
+            Assert.Throws<ArgumentNullException>(
+                () => converter.ConvertTo(TypeConverterTests.s_context, null, "", null)
             );
             // This type converter should had thrown ArgumentNullException in ConvertTo, because the destination type is null.");
 

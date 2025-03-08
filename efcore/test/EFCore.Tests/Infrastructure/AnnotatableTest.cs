@@ -147,8 +147,8 @@ public class AnnotatableTest
         Assert.Equal(
             CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    annotatable.AddRuntimeAnnotation("Foo", "Bar")
+                .Throws<InvalidOperationException>(
+                    () => annotatable.AddRuntimeAnnotation("Foo", "Bar")
                 )
                 .Message
         );

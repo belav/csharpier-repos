@@ -75,22 +75,23 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     public virtual Task Client_Join_select_many(bool async)
         // Translation failed message. Issue #17328.
         =>
-        AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from e1 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(2)
-                    join e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(2)
-                        on e1.EmployeeID equals GetEmployeeID(e2)
-                    from e3 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Skip(6).Take(2)
-                    select new
-                    {
-                        e1,
-                        e2,
-                        e3,
-                    },
-                e => (e.e1.EmployeeID, e.e2.EmployeeID, e.e3.EmployeeID)
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from e1 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(2)
+                        join e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(2)
+                            on e1.EmployeeID equals GetEmployeeID(e2)
+                        from e3 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Skip(6).Take(2)
+                        select new
+                        {
+                            e1,
+                            e2,
+                            e3,
+                        },
+                    e => (e.e1.EmployeeID, e.e2.EmployeeID, e.e3.EmployeeID)
+                )
         );
 
     private static uint GetEmployeeID(Employee employee) => employee.EmployeeID;
@@ -270,25 +271,27 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     public virtual async Task Join_local_string_closure_is_cached_correctly(bool async)
     {
         var ids = "12";
-        await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
-            )
+        await AssertTranslationFailed(
+            () =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        from e in ss.Set<Employee>()
+                        join id in ids on e.EmployeeID equals id
+                        select e.EmployeeID
+                )
         );
 
         ids = "3";
-        await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
-            )
+        await AssertTranslationFailed(
+            () =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        from e in ss.Set<Employee>()
+                        join id in ids on e.EmployeeID equals id
+                        select e.EmployeeID
+                )
         );
     }
 
@@ -298,25 +301,27 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ids = new byte[] { 1, 2 };
 
-        await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
-            )
+        await AssertTranslationFailed(
+            () =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        from e in ss.Set<Employee>()
+                        join id in ids on e.EmployeeID equals id
+                        select e.EmployeeID
+                )
         );
 
         ids = new byte[] { 3 };
-        await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
-            )
+        await AssertTranslationFailed(
+            () =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        from e in ss.Set<Employee>()
+                        join id in ids on e.EmployeeID equals id
+                        select e.EmployeeID
+                )
         );
     }
 

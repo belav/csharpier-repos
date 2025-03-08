@@ -42,7 +42,6 @@ namespace Novell.Directory.Ldap
     /// object classes a particular object class may be subordinate to in the DIT.
     ///
     /// </summary>
-
     public class LdapDITStructureRuleSchema : LdapSchemaElement
     {
         /// <summary> Returns the rule ID for this structure rule.

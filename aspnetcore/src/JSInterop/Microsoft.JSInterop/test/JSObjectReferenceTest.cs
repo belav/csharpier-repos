@@ -47,11 +47,12 @@ public class JSObjectReferenceTest
         _ = jsObject.DisposeAsync();
 
         // Assert
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-            await jsObject.InvokeAsync<object>("test", "arg1", "arg2")
+        await Assert.ThrowsAsync<ObjectDisposedException>(
+            async () => await jsObject.InvokeAsync<object>("test", "arg1", "arg2")
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-            await jsObject.InvokeAsync<object>("test", CancellationToken.None, "arg1", "arg2")
+        await Assert.ThrowsAsync<ObjectDisposedException>(
+            async () =>
+                await jsObject.InvokeAsync<object>("test", CancellationToken.None, "arg1", "arg2")
         );
     }
 
@@ -66,7 +67,8 @@ public class JSObjectReferenceTest
         _ = jsObject.DisposeAsync();
 
         // Assert
-        Assert.Throws<ObjectDisposedException>(() => jsObject.Invoke<object>("test", "arg1", "arg2")
+        Assert.Throws<ObjectDisposedException>(
+            () => jsObject.Invoke<object>("test", "arg1", "arg2")
         );
     }
 

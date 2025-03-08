@@ -320,8 +320,8 @@ namespace ComInterfaceGenerator.Tests
 
             var obj = CreateWrapper<ICollectionMarshallingFailsImpl, ICollectionMarshallingFails>();
 
-            Assert.Throws<MarshallingFailureException>(() =>
-                obj.Set(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }, 10)
+            Assert.Throws<MarshallingFailureException>(
+                () => obj.Set(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }, 10)
             );
 
             Assert.Throws(hrExceptionType, () => _ = obj.GetConstSize());

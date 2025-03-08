@@ -24,14 +24,14 @@ namespace System.IO.Compression.Tests
                     string entryName = "added.txt";
                     string sourceFilePath = zmodified(Path.Combine("addFile", entryName));
 
-                    Assert.Throws<ArgumentNullException>(() =>
-                        ((ZipArchive)null).CreateEntryFromFile(sourceFilePath, entryName)
+                    Assert.Throws<ArgumentNullException>(
+                        () => ((ZipArchive)null).CreateEntryFromFile(sourceFilePath, entryName)
                     );
-                    Assert.Throws<ArgumentNullException>(() =>
-                        archive.CreateEntryFromFile(null, entryName)
+                    Assert.Throws<ArgumentNullException>(
+                        () => archive.CreateEntryFromFile(null, entryName)
                     );
-                    Assert.Throws<ArgumentNullException>(() =>
-                        archive.CreateEntryFromFile(sourceFilePath, null)
+                    Assert.Throws<ArgumentNullException>(
+                        () => archive.CreateEntryFromFile(sourceFilePath, null)
                     );
 
                     ZipArchiveEntry e = withCompressionLevel

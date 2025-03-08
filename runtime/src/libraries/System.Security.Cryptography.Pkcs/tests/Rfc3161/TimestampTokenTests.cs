@@ -95,11 +95,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         && signedCms.SignerInfos[0].DigestAlgorithm.Value == Oids.Sha1
                     )
                     {
-                        Assert.ThrowsAny<CryptographicException>(() =>
-                            signedCms.CheckSignature(
-                                new X509Certificate2Collection(signerCert),
-                                true
-                            )
+                        Assert.ThrowsAny<CryptographicException>(
+                            () =>
+                                signedCms.CheckSignature(
+                                    new X509Certificate2Collection(signerCert),
+                                    true
+                                )
                         );
                         return;
                     }

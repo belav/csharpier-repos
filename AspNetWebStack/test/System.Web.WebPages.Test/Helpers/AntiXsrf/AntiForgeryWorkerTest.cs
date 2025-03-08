@@ -29,24 +29,24 @@ namespace System.Web.Helpers.AntiXsrf.Test
             );
 
             // Act & assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                worker.Validate(mockHttpContext.Object, "session-token", "field-token")
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => worker.Validate(mockHttpContext.Object, "session-token", "field-token")
             );
             Assert.Equal(
                 @"The anti-forgery system has the configuration value AntiForgeryConfig.RequireSsl = true, but the current request is not an SSL request.",
                 ex.Message
             );
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                worker.Validate(mockHttpContext.Object)
+            ex = Assert.Throws<InvalidOperationException>(
+                () => worker.Validate(mockHttpContext.Object)
             );
             Assert.Equal(
                 @"The anti-forgery system has the configuration value AntiForgeryConfig.RequireSsl = true, but the current request is not an SSL request.",
                 ex.Message
             );
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                worker.GetFormInputElement(mockHttpContext.Object)
+            ex = Assert.Throws<InvalidOperationException>(
+                () => worker.GetFormInputElement(mockHttpContext.Object)
             );
             Assert.Equal(
                 @"The anti-forgery system has the configuration value AntiForgeryConfig.RequireSsl = true, but the current request is not an SSL request.",
@@ -526,8 +526,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             );
 
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                worker.Validate(mockHttpContext.Object, "cookie-token", "form-token")
+            var ex = Assert.Throws<HttpAntiForgeryException>(
+                () => worker.Validate(mockHttpContext.Object, "cookie-token", "form-token")
             );
             Assert.Equal("my-message", ex.Message);
         }
@@ -605,8 +605,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             );
 
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                worker.Validate(mockHttpContext.Object)
+            var ex = Assert.Throws<HttpAntiForgeryException>(
+                () => worker.Validate(mockHttpContext.Object)
             );
             Assert.Equal("my-message", ex.Message);
         }

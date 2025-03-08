@@ -12,13 +12,13 @@ namespace System.Reflection.Tests
         public void GetMetadataToken_ArraysAndTheirMembers_DoNotHaveMetadataTokens()
         {
             Assert.False(typeof(byte[]).GetTypeInfo().HasMetadataToken());
-            Assert.Throws<InvalidOperationException>(() =>
-                typeof(byte[]).GetTypeInfo().GetMetadataToken()
+            Assert.Throws<InvalidOperationException>(
+                () => typeof(byte[]).GetTypeInfo().GetMetadataToken()
             );
 
             Assert.False(typeof(byte[]).GetMethods()[0].HasMetadataToken());
-            Assert.Throws<InvalidOperationException>(() =>
-                typeof(byte[]).GetTypeInfo().GetMetadataToken()
+            Assert.Throws<InvalidOperationException>(
+                () => typeof(byte[]).GetTypeInfo().GetMetadataToken()
             );
         }
 

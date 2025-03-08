@@ -394,10 +394,11 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal(
             SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    propertyBuilder.HasValueGenerationStrategy(
-                        SqlServerValueGenerationStrategy.SequenceHiLo
-                    )
+                .Throws<ArgumentException>(
+                    () =>
+                        propertyBuilder.HasValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.SequenceHiLo
+                        )
                 )
                 .Message
         );
@@ -405,8 +406,8 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal(
             SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseHiLo()
+                .Throws<ArgumentException>(
+                    () => new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseHiLo()
                 )
                 .Message
         );
@@ -422,10 +423,11 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal(
             SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    propertyBuilder.HasValueGenerationStrategy(
-                        SqlServerValueGenerationStrategy.Sequence
-                    )
+                .Throws<ArgumentException>(
+                    () =>
+                        propertyBuilder.HasValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.Sequence
+                        )
                 )
                 .Message
         );
@@ -433,8 +435,11 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal(
             SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseSequence()
+                .Throws<ArgumentException>(
+                    () =>
+                        new PropertyBuilder(
+                            (IMutableProperty)propertyBuilder.Metadata
+                        ).UseSequence()
                 )
                 .Message
         );
@@ -450,10 +455,11 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal(
             SqlServerStrings.IdentityBadType("Name", nameof(Splot), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    propertyBuilder.HasValueGenerationStrategy(
-                        SqlServerValueGenerationStrategy.IdentityColumn
-                    )
+                .Throws<ArgumentException>(
+                    () =>
+                        propertyBuilder.HasValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.IdentityColumn
+                        )
                 )
                 .Message
         );
@@ -461,10 +467,11 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal(
             SqlServerStrings.IdentityBadType("Name", nameof(Splot), "string"),
             Assert
-                .Throws<ArgumentException>(() =>
-                    new PropertyBuilder(
-                        (IMutableProperty)propertyBuilder.Metadata
-                    ).UseIdentityColumn()
+                .Throws<ArgumentException>(
+                    () =>
+                        new PropertyBuilder(
+                            (IMutableProperty)propertyBuilder.Metadata
+                        ).UseIdentityColumn()
                 )
                 .Message
         );

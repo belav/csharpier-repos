@@ -50,8 +50,8 @@ public abstract class InternalEntityEntryTestBase<
         Assert.Equal(
             CoreStrings.ValueCannotBeNull("Id", "SomeSimpleEntityBase", "int"),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    entry.SetStoreGeneratedValue(keyProperty, null)
+                .Throws<InvalidOperationException>(
+                    () => entry.SetStoreGeneratedValue(keyProperty, null)
                 )
                 .Message
         );

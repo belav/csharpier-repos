@@ -167,15 +167,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 {
                     CertificateRevocationListBuilder builder =
                         new CertificateRevocationListBuilder();
-                    ArgumentException e = Assert.Throws<ArgumentException>(() =>
-                        builder.Build(
-                            cert,
-                            0,
-                            now,
-                            HashAlgorithmName.SHA256,
-                            null,
-                            now.AddSeconds(1)
-                        )
+                    ArgumentException e = Assert.Throws<ArgumentException>(
+                        () =>
+                            builder.Build(
+                                cert,
+                                0,
+                                now,
+                                HashAlgorithmName.SHA256,
+                                null,
+                                now.AddSeconds(1)
+                            )
                     );
 
                     Assert.Null(e.ParamName);
@@ -187,16 +188,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
                         X500DistinguishedName dn = cert.SubjectName;
 
-                        e = Assert.Throws<ArgumentException>(() =>
-                            builder.Build(
-                                dn,
-                                gen,
-                                0,
-                                now,
-                                HashAlgorithmName.SHA256,
-                                null,
-                                now.AddSeconds(1)
-                            )
+                        e = Assert.Throws<ArgumentException>(
+                            () =>
+                                builder.Build(
+                                    dn,
+                                    gen,
+                                    0,
+                                    now,
+                                    HashAlgorithmName.SHA256,
+                                    null,
+                                    now.AddSeconds(1)
+                                )
                         );
 
                         Assert.Null(e.ParamName);
@@ -414,15 +416,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         new CertificateRevocationListBuilder();
                     ArgumentException e;
 
-                    e = Assert.Throws<ArgumentException>(() =>
-                        builder.Build(
-                            cert,
-                            0,
-                            now.AddMinutes(5),
-                            HashAlgorithmName.SHA256,
-                            null,
-                            now
-                        )
+                    e = Assert.Throws<ArgumentException>(
+                        () =>
+                            builder.Build(
+                                cert,
+                                0,
+                                now.AddMinutes(5),
+                                HashAlgorithmName.SHA256,
+                                null,
+                                now
+                            )
                     );
 
                     Assert.Null(e.ParamName);
@@ -480,16 +483,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         )
                 );
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                    builder.Build(
-                        issuerName,
-                        generator,
-                        0,
-                        now.AddYears(-10),
-                        default,
-                        default,
-                        thisUpdate
-                    )
+                ArgumentException ex = Assert.Throws<ArgumentException>(
+                    () =>
+                        builder.Build(
+                            issuerName,
+                            generator,
+                            0,
+                            now.AddYears(-10),
+                            default,
+                            default,
+                            thisUpdate
+                        )
                 );
                 Assert.Null(ex.ParamName);
                 Assert.Contains("thisUpdate", ex.Message);
@@ -1487,18 +1491,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             BigInteger crlNumber = BigInteger.MinusOne;
             int bytesConsumed = -1;
 
-            Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.Load(invalid, out crlNumber)
+            Assert.Throws<CryptographicException>(
+                () => CertificateRevocationListBuilder.Load(invalid, out crlNumber)
             );
 
             Assert.Equal(BigInteger.MinusOne, crlNumber);
 
-            Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.Load(
-                    new ReadOnlySpan<byte>(invalid),
-                    out crlNumber,
-                    out bytesConsumed
-                )
+            Assert.Throws<CryptographicException>(
+                () =>
+                    CertificateRevocationListBuilder.Load(
+                        new ReadOnlySpan<byte>(invalid),
+                        out crlNumber,
+                        out bytesConsumed
+                    )
             );
 
             Assert.Equal(BigInteger.MinusOne, crlNumber);
@@ -1620,8 +1625,8 @@ AQAB
 
             BigInteger crlNumber = BigInteger.MinusOne;
 
-            Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.Load(oversized, out crlNumber)
+            Assert.Throws<CryptographicException>(
+                () => CertificateRevocationListBuilder.Load(oversized, out crlNumber)
             );
 
             Assert.Equal(BigInteger.MinusOne, crlNumber);
@@ -1639,8 +1644,8 @@ AQAB
 
             BigInteger currentCrlNumber = BigInteger.MinusOne;
 
-            Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.LoadPem(pem, out currentCrlNumber)
+            Assert.Throws<CryptographicException>(
+                () => CertificateRevocationListBuilder.LoadPem(pem, out currentCrlNumber)
             );
 
             Assert.Equal(BigInteger.MinusOne, currentCrlNumber);
@@ -1651,11 +1656,12 @@ AQAB
         {
             BigInteger currentCrlNumber = BigInteger.MinusOne;
 
-            Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.LoadPem(
-                    System.Text.Encoding.ASCII.GetString(TestData.Pkcs7ChainPemBytes),
-                    out currentCrlNumber
-                )
+            Assert.Throws<CryptographicException>(
+                () =>
+                    CertificateRevocationListBuilder.LoadPem(
+                        System.Text.Encoding.ASCII.GetString(TestData.Pkcs7ChainPemBytes),
+                        out currentCrlNumber
+                    )
             );
 
             Assert.Equal(BigInteger.MinusOne, currentCrlNumber);

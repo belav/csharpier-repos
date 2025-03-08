@@ -305,15 +305,16 @@ SELECT AddGeometryColumn('Geometries', 'Geometry', 4326, 'GEOMETRYZM', -1, 0);
     [ConditionalFact]
     public void RestartSequenceOperation_not_supported()
     {
-        var ex = Assert.Throws<NotSupportedException>(() => Generate(new RestartSequenceOperation())
+        var ex = Assert.Throws<NotSupportedException>(
+            () => Generate(new RestartSequenceOperation())
         );
         Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
     }
 
     public override void AddForeignKeyOperation_without_principal_columns()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            base.AddForeignKeyOperation_without_principal_columns()
+        var ex = Assert.Throws<NotSupportedException>(
+            () => base.AddForeignKeyOperation_without_principal_columns()
         );
         Assert.Equal(
             SqliteStrings.InvalidMigrationOperation(nameof(AddForeignKeyOperation)),
@@ -323,8 +324,8 @@ SELECT AddGeometryColumn('Geometries', 'Geometry', 4326, 'GEOMETRYZM', -1, 0);
 
     public override void AlterColumnOperation_without_column_type()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            base.AlterColumnOperation_without_column_type()
+        var ex = Assert.Throws<NotSupportedException>(
+            () => base.AlterColumnOperation_without_column_type()
         );
         Assert.Equal(
             SqliteStrings.InvalidMigrationOperation(nameof(AlterColumnOperation)),
@@ -335,16 +336,17 @@ SELECT AddGeometryColumn('Geometries', 'Geometry', 4326, 'GEOMETRYZM', -1, 0);
     [ConditionalFact]
     public void AlterColumnOperation_computed()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(
-                new AlterColumnOperation
-                {
-                    Table = "People",
-                    Name = "FullName",
-                    ClrType = typeof(string),
-                    ComputedColumnSql = "FirstName || ' ' || LastName",
-                }
-            )
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                Generate(
+                    new AlterColumnOperation
+                    {
+                        Table = "People",
+                        Name = "FullName",
+                        ClrType = typeof(string),
+                        ComputedColumnSql = "FirstName || ' ' || LastName",
+                    }
+                )
         );
         Assert.Equal(
             SqliteStrings.InvalidMigrationOperation(nameof(AlterColumnOperation)),
@@ -363,8 +365,8 @@ SELECT AddGeometryColumn('Geometries', 'Geometry', 4326, 'GEOMETRYZM', -1, 0);
             newName: "IX_Person_FullName"
         );
 
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(migrationBuilder.Operations.ToArray())
+        var ex = Assert.Throws<NotSupportedException>(
+            () => Generate(migrationBuilder.Operations.ToArray())
         );
 
         Assert.Equal(SqliteStrings.InvalidMigrationOperation("RenameIndexOperation"), ex.Message);
@@ -744,8 +746,8 @@ SELECT changes();
 
     public override void Sequence_restart_operation(long? startsAt)
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            base.Sequence_restart_operation(startsAt)
+        var ex = Assert.Throws<NotSupportedException>(
+            () => base.Sequence_restart_operation(startsAt)
         );
         Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
     }
@@ -753,15 +755,16 @@ SELECT changes();
     [ConditionalFact]
     public virtual void AddPrimaryKey_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(
-                new AddPrimaryKeyOperation
-                {
-                    Table = "Blogs",
-                    Name = "PK_Blogs",
-                    Columns = new[] { "Id" },
-                }
-            )
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                Generate(
+                    new AddPrimaryKeyOperation
+                    {
+                        Table = "Blogs",
+                        Name = "PK_Blogs",
+                        Columns = new[] { "Id" },
+                    }
+                )
         );
 
         Assert.Equal(SqliteStrings.InvalidMigrationOperation("AddPrimaryKeyOperation"), ex.Message);
@@ -770,15 +773,16 @@ SELECT changes();
     [ConditionalFact]
     public virtual void AddUniqueConstraint_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(
-                new AddUniqueConstraintOperation
-                {
-                    Table = "Blogs",
-                    Name = "AK_Blogs_Uri",
-                    Columns = new[] { "Uri" },
-                }
-            )
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                Generate(
+                    new AddUniqueConstraintOperation
+                    {
+                        Table = "Blogs",
+                        Name = "AK_Blogs_Uri",
+                        Columns = new[] { "Uri" },
+                    }
+                )
         );
 
         Assert.Equal(
@@ -790,15 +794,16 @@ SELECT changes();
     [ConditionalFact]
     public virtual void AddCheckConstraint_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(
-                new AddCheckConstraintOperation
-                {
-                    Table = "Blogs",
-                    Name = "CK_Blogs_Rating",
-                    Sql = "Rating BETWEEN 1 AND 5",
-                }
-            )
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                Generate(
+                    new AddCheckConstraintOperation
+                    {
+                        Table = "Blogs",
+                        Name = "CK_Blogs_Rating",
+                        Sql = "Rating BETWEEN 1 AND 5",
+                    }
+                )
         );
 
         Assert.Equal(
@@ -818,8 +823,9 @@ SELECT changes();
     [ConditionalFact]
     public virtual void DropForeignKey_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(new DropForeignKeyOperation { Table = "Posts", Name = "FK_Posts_BlogId" })
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                Generate(new DropForeignKeyOperation { Table = "Posts", Name = "FK_Posts_BlogId" })
         );
 
         Assert.Equal(
@@ -831,8 +837,8 @@ SELECT changes();
     [ConditionalFact]
     public virtual void DropPrimaryKey_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(new DropPrimaryKeyOperation { Table = "Blogs", Name = "PK_Blogs" })
+        var ex = Assert.Throws<NotSupportedException>(
+            () => Generate(new DropPrimaryKeyOperation { Table = "Blogs", Name = "PK_Blogs" })
         );
 
         Assert.Equal(
@@ -844,8 +850,11 @@ SELECT changes();
     [ConditionalFact]
     public virtual void DropUniqueConstraint_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(new DropUniqueConstraintOperation { Table = "Blogs", Name = "AK_Blogs_Uri" })
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                Generate(
+                    new DropUniqueConstraintOperation { Table = "Blogs", Name = "AK_Blogs_Uri" }
+                )
         );
 
         Assert.Equal(
@@ -857,8 +866,8 @@ SELECT changes();
     [ConditionalFact]
     public virtual void DropColumn_throws_when_no_model()
     {
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            Generate(new DropColumnOperation { Table = "Posts", Name = "Rating" })
+        var ex = Assert.Throws<NotSupportedException>(
+            () => Generate(new DropColumnOperation { Table = "Posts", Name = "Rating" })
         );
 
         Assert.Equal(SqliteStrings.InvalidMigrationOperation("DropColumnOperation"), ex.Message);

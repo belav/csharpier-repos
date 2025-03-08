@@ -33,8 +33,8 @@ public class DbContextActivatorTest
                 "Bang!"
             ),
             Assert
-                .Throws<OperationException>(() =>
-                    DbContextActivator.CreateInstance(typeof(ThrowingTestContext))
+                .Throws<OperationException>(
+                    () => DbContextActivator.CreateInstance(typeof(ThrowingTestContext))
                 )
                 .Message
         );
@@ -56,8 +56,8 @@ public class DbContextActivatorTest
     public void CreateInstance_throws_if_constructor_not_parameterless()
     {
         var message = Assert
-            .Throws<OperationException>(() =>
-                DbContextActivator.CreateInstance(typeof(ParameterTestContext))
+            .Throws<OperationException>(
+                () => DbContextActivator.CreateInstance(typeof(ParameterTestContext))
             )
             .Message;
 

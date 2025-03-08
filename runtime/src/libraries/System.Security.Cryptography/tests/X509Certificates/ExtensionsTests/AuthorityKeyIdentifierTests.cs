@@ -867,12 +867,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             byte[] invalidEncoding = { 0x05, 0x00 };
 
-            Assert.Throws<CryptographicException>(() =>
-                new X509AuthorityKeyIdentifierExtension(invalidEncoding)
+            Assert.Throws<CryptographicException>(
+                () => new X509AuthorityKeyIdentifierExtension(invalidEncoding)
             );
 
-            Assert.Throws<CryptographicException>(() =>
-                new X509AuthorityKeyIdentifierExtension(new ReadOnlySpan<byte>(invalidEncoding))
+            Assert.Throws<CryptographicException>(
+                () =>
+                    new X509AuthorityKeyIdentifierExtension(new ReadOnlySpan<byte>(invalidEncoding))
             );
 
             X509Extension untypedExt = new X509Extension("0.1", invalidEncoding, critical: true);
@@ -906,20 +907,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     )
                 )
                 {
-                    Assert.Throws<CryptographicException>(() =>
-                        X509AuthorityKeyIdentifierExtension.CreateFromCertificate(
-                            cert,
-                            includeKeyIdentifier: true,
-                            includeIssuerAndSerial: false
-                        )
+                    Assert.Throws<CryptographicException>(
+                        () =>
+                            X509AuthorityKeyIdentifierExtension.CreateFromCertificate(
+                                cert,
+                                includeKeyIdentifier: true,
+                                includeIssuerAndSerial: false
+                            )
                     );
 
-                    Assert.Throws<CryptographicException>(() =>
-                        X509AuthorityKeyIdentifierExtension.CreateFromCertificate(
-                            cert,
-                            includeKeyIdentifier: true,
-                            includeIssuerAndSerial: true
-                        )
+                    Assert.Throws<CryptographicException>(
+                        () =>
+                            X509AuthorityKeyIdentifierExtension.CreateFromCertificate(
+                                cert,
+                                includeKeyIdentifier: true,
+                                includeIssuerAndSerial: true
+                            )
                     );
 
                     // Assert.NoThrow

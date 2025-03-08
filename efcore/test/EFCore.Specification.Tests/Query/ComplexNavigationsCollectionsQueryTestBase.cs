@@ -1599,28 +1599,30 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_after_Select(bool async) =>
-        AssertIncludeOnNonEntity(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Level1>()
-                        .Select(l1 => l1.OneToOne_Optional_FK1)
-                        .Include(l2 => l2.OneToMany_Optional2)
-            )
+        AssertIncludeOnNonEntity(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Level1>()
+                            .Select(l1 => l1.OneToOne_Optional_FK1)
+                            .Include(l2 => l2.OneToMany_Optional2)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_after_SelectMany_and_reference_navigation(bool async) =>
-        AssertIncludeOnNonEntity(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Level1>()
-                        .SelectMany(l1 => l1.OneToMany_Required1)
-                        .Select(l2 => l2.OneToOne_Optional_FK2)
-                        .Include(l3 => l3.OneToMany_Optional3)
-            )
+        AssertIncludeOnNonEntity(
+            () =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Level1>()
+                            .SelectMany(l1 => l1.OneToMany_Required1)
+                            .Select(l2 => l2.OneToOne_Optional_FK2)
+                            .Include(l3 => l3.OneToMany_Optional3)
+                )
         );
 
     [ConditionalTheory]
@@ -2478,22 +2480,23 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 .Replace("\r", "")
                 .Replace("\n", ""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Include(l1 =>
-                                    l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
-                                        .OrderBy(x => x.Id)
-                                        .Take(3)
-                                )
-                                .Include(l1 =>
-                                    l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
-                                        .OrderByDescending(x => x.Name)
-                                        .Take(3)
-                                )
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(l1 =>
+                                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                                            .OrderBy(x => x.Id)
+                                            .Take(3)
+                                    )
+                                    .Include(l1 =>
+                                        l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
+                                            .OrderByDescending(x => x.Name)
+                                            .Take(3)
+                                    )
+                        )
                 )
             )
                 .Message.Replace("\r", "")
@@ -2514,16 +2517,21 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 .Replace("\r", "")
                 .Replace("\n", ""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo"))
-                                .ThenInclude(l2 => l2.OneToMany_Optional2)
-                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
-                                .ThenInclude(l2 => l2.OneToOne_Required_FK2)
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(l1 =>
+                                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                                    )
+                                    .ThenInclude(l2 => l2.OneToMany_Optional2)
+                                    .Include(l1 =>
+                                        l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
+                                    )
+                                    .ThenInclude(l2 => l2.OneToOne_Required_FK2)
+                        )
                 )
             )
                 .Message.Replace("\r", "")
@@ -2958,11 +2966,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
         Assert.Equal(
             CoreStrings.InvalidIncludeExpression("l1.OneToMany_Optional1.AsQueryable().Distinct()"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
+                        )
                 )
             ).Message
         );
@@ -2975,14 +2984,15 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
         Assert.Equal(
             CoreStrings.InvalidIncludeExpression("l2.AsQueryable().Where(xx => (xx.Id != 42))"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Include(l1 => l1.OneToMany_Optional1)
-                                .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(l1 => l1.OneToMany_Optional1)
+                                    .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
+                        )
                 )
             ).Message
         );
@@ -3343,37 +3353,39 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_over_conditional_null_source(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    ss.Set<Level2>()
-                        .SelectMany(l2 =>
-                            l2.Id == 1
-                                ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
-                                    e.Id
-                                )
-                                : null
-                        )
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        ss.Set<Level2>()
+                            .SelectMany(l2 =>
+                                l2.Id == 1
+                                    ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
+                                        e.Id
+                                    )
+                                    : null
+                            )
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_over_conditional_empty_source(bool async) =>
-        AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    ss.Set<Level2>()
-                        .SelectMany(l2 =>
-                            l2.Id == 1
-                                ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
-                                    e.Id
-                                )
-                                : Enumerable.Empty<int>()
-                        )
-            )
+        AssertTranslationFailed(
+            () =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        ss.Set<Level2>()
+                            .SelectMany(l2 =>
+                                l2.Id == 1
+                                    ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
+                                        e.Id
+                                    )
+                                    : Enumerable.Empty<int>()
+                            )
+                )
         );
 
     [ConditionalTheory]

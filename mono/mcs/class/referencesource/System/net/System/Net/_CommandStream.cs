@@ -149,7 +149,6 @@ namespace System.Net
         ///     perform any initalization if needed
         ///    </para>
         /// </devdoc>
-
         internal Stream SubmitRequest(
             WebRequest request,
             bool async,

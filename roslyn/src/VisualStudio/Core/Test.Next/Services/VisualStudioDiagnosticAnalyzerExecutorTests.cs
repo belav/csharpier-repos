@@ -191,14 +191,15 @@ End Class";
 
                 try
                 {
-                    var task = Task.Run(() =>
-                        AnalyzeAsync(
-                            workspace,
-                            workspace.CurrentSolution.ProjectIds.First(),
-                            analyzerType,
-                            ideAnalyzerOptions,
-                            source.Token
-                        )
+                    var task = Task.Run(
+                        () =>
+                            AnalyzeAsync(
+                                workspace,
+                                workspace.CurrentSolution.ProjectIds.First(),
+                                analyzerType,
+                                ideAnalyzerOptions,
+                                source.Token
+                            )
                     );
 
                     // wait random milli-second

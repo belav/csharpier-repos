@@ -103,8 +103,8 @@ public class GearsOfWarQuerySqliteTest
 
     public override async Task DateTimeOffset_Contains_Less_than_Greater_than(bool async)
     {
-        await AssertTranslationFailed(() =>
-            base.DateTimeOffset_Contains_Less_than_Greater_than(async)
+        await AssertTranslationFailed(
+            () => base.DateTimeOffset_Contains_Less_than_Greater_than(async)
         );
 
         AssertSql();
@@ -127,10 +127,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collections_inner_subquery_predicate_references_outer_qsre(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collections_inner_subquery_predicate_references_outer_qsre(
+                            async
+                        )
                 )
             ).Message
         );
@@ -145,8 +146,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collections_inner_subquery_selector_references_outer_qsre(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collections_inner_subquery_selector_references_outer_qsre(
+                            async
+                        )
                 )
             ).Message
         );
@@ -161,10 +165,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(
+                            async
+                        )
                 )
             ).Message
         );
@@ -179,10 +184,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(
+                            async
+                        )
                 )
             ).Message
         );
@@ -195,8 +201,8 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Outer_parameter_in_group_join_with_DefaultIfEmpty(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Outer_parameter_in_group_join_with_DefaultIfEmpty(async)
                 )
             ).Message
         );
@@ -209,8 +215,8 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Outer_parameter_in_join_key(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Outer_parameter_in_join_key(async)
                 )
             ).Message
         );
@@ -223,8 +229,8 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Outer_parameter_in_join_key_inner_and_outer(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Outer_parameter_in_join_key_inner_and_outer(async)
                 )
             ).Message
         );
@@ -239,10 +245,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(
+                            async
+                        )
                 )
             ).Message
         );
@@ -257,10 +264,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(
+                            async
+                        )
                 )
             ).Message
         );
@@ -275,10 +283,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(
+                            async
+                        )
                 )
             ).Message
         );
@@ -293,10 +302,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(
+                            async
+                        )
                 )
             ).Message
         );
@@ -311,10 +321,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(
+                            async
+                        )
                 )
             ).Message
         );
@@ -329,10 +340,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_inner_collection_references_element_two_levels_up(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_inner_collection_references_element_two_levels_up(
+                            async
+                        )
                 )
             ).Message
         );
@@ -347,10 +359,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
+                            async
+                        )
                 )
             ).Message
         );
@@ -365,10 +378,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection_multiple_grouping_keys(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_groupby_not_projecting_identifier_column_with_group_aggregate_in_final_projection_multiple_grouping_keys(
+                            async
+                        )
                 )
             ).Message
         );
@@ -383,10 +397,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_groupby_not_projecting_identifier_column_but_only_grouping_key_in_final_projection(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_groupby_not_projecting_identifier_column_but_only_grouping_key_in_final_projection(
+                            async
+                        )
                 )
             ).Message
         );
@@ -401,8 +416,9 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_distinct_projecting_identifier_column(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_distinct_projecting_identifier_column(async)
                 )
             ).Message
         );
@@ -417,8 +433,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_distinct_not_projecting_identifier_column(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_distinct_not_projecting_identifier_column(
+                            async
+                        )
                 )
             ).Message
         );
@@ -433,10 +452,11 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_via_SelectMany_with_Distinct_missing_indentifying_columns_in_projection(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_via_SelectMany_with_Distinct_missing_indentifying_columns_in_projection(
+                            async
+                        )
                 )
             ).Message
         );
@@ -460,8 +480,8 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_after_distinct_3_levels(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Correlated_collection_after_distinct_3_levels(async)
                 )
             ).Message
         );
@@ -474,8 +494,8 @@ public class GearsOfWarQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collections_with_Distinct(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Correlated_collections_with_Distinct(async)
                 )
             ).Message
         );
@@ -9934,10 +9954,11 @@ LIMIT 1
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
-                        async
-                    )
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
+                            async
+                        )
                 )
             ).Message
         );
@@ -10588,8 +10609,8 @@ WHERE NOT EXISTS (
     public override async Task Where_subquery_with_ElementAt_using_column_as_index(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<SqliteException>(() =>
-                base.Where_subquery_with_ElementAt_using_column_as_index(async)
+            await Assert.ThrowsAsync<SqliteException>(
+                () => base.Where_subquery_with_ElementAt_using_column_as_index(async)
             )
         ).Message;
 

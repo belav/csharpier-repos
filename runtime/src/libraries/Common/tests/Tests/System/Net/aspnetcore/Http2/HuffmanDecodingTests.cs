@@ -309,8 +309,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void ThrowsOnPaddingLongerThanSevenBits(byte[] encoded)
         {
             byte[] dst = new byte[encoded.Length * 2];
-            Exception exception = Assert.Throws<HuffmanDecodingException>(() =>
-                Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
+            Exception exception = Assert.Throws<HuffmanDecodingException>(
+                () => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
             );
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
         }
@@ -328,8 +328,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void ThrowsOnEOS(byte[] encoded)
         {
             byte[] dst = new byte[encoded.Length * 2];
-            Exception exception = Assert.Throws<HuffmanDecodingException>(() =>
-                Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
+            Exception exception = Assert.Throws<HuffmanDecodingException>(
+                () => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
             );
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
         }
@@ -377,8 +377,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void ThrowsOnIncompleteSymbol(byte[] encoded)
         {
             byte[] dst = new byte[encoded.Length * 2];
-            Exception exception = Assert.Throws<HuffmanDecodingException>(() =>
-                Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
+            Exception exception = Assert.Throws<HuffmanDecodingException>(
+                () => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
             );
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
         }

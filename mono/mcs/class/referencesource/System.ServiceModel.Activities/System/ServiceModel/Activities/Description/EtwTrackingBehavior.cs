@@ -68,12 +68,13 @@ namespace System.ServiceModel.Activities.Description
                     this.ProfileName,
                     workflowDisplayName
                 );
-                workflowServiceHost.WorkflowExtensions.Add(() =>
-                    new EtwTrackingParticipant
-                    {
-                        ApplicationReference = hostReference,
-                        TrackingProfile = trackingProfile,
-                    }
+                workflowServiceHost.WorkflowExtensions.Add(
+                    () =>
+                        new EtwTrackingParticipant
+                        {
+                            ApplicationReference = hostReference,
+                            TrackingProfile = trackingProfile,
+                        }
                 );
             }
         }

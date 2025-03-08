@@ -142,8 +142,8 @@ namespace System.Diagnostics.Tests
                 CancellationToken token = cts.Token;
                 Process process = Process.GetCurrentProcess();
                 OperationCanceledException ex =
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                        process.WaitForExitAsync(token)
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        () => process.WaitForExitAsync(token)
                     );
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.False(process.HasExited);
@@ -358,8 +358,8 @@ namespace System.Diagnostics.Tests
             {
                 CancellationToken token = cts.Token;
                 OperationCanceledException ex =
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                        p.WaitForExitAsync(token)
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        () => p.WaitForExitAsync(token)
                     );
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.False(p.HasExited);

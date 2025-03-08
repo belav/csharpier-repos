@@ -642,8 +642,8 @@ namespace System.Net.WebSockets.Client.Tests
                                 await t;
                             });
 
-                            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                                receiveTask
+                            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                                () => receiveTask
                             );
                         }
                     }

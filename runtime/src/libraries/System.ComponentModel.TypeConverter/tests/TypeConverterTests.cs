@@ -53,7 +53,8 @@ namespace System.ComponentModel.Tests
         {
             Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom("1"));
             Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom(null));
-            Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom(s_context, null, "1")
+            Assert.Throws<NotSupportedException>(
+                () => s_converter.ConvertFrom(s_context, null, "1")
             );
         }
 
@@ -188,8 +189,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public static void ConvertFromString_WithContext()
         {
-            Assert.Throws<NotSupportedException>(() =>
-                s_converter.ConvertFromString(s_context, null, "1")
+            Assert.Throws<NotSupportedException>(
+                () => s_converter.ConvertFromString(s_context, null, "1")
             );
         }
 
@@ -205,12 +206,13 @@ namespace System.ComponentModel.Tests
         {
             using (new ThreadCultureChange("pl-PL"))
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    s_converter.ConvertTo(s_context, null, c_conversionInputValue, null)
+                Assert.Throws<ArgumentNullException>(
+                    () => s_converter.ConvertTo(s_context, null, c_conversionInputValue, null)
                 );
 
-                Assert.Throws<NotSupportedException>(() =>
-                    s_converter.ConvertTo(s_context, null, c_conversionInputValue, typeof(int))
+                Assert.Throws<NotSupportedException>(
+                    () =>
+                        s_converter.ConvertTo(s_context, null, c_conversionInputValue, typeof(int))
                 );
 
                 object o = s_converter.ConvertTo(
@@ -296,13 +298,15 @@ namespace System.ComponentModel.Tests
 
                 Assert.Throws<NotSupportedException>(() => GetConvertFromException(null));
                 Assert.Throws<NotSupportedException>(() => GetConvertFromException("1"));
-                Assert.Throws<NotSupportedException>(() => GetConvertFromException(new BaseClass())
+                Assert.Throws<NotSupportedException>(
+                    () => GetConvertFromException(new BaseClass())
                 );
-                Assert.Throws<NotSupportedException>(() => GetConvertToException(null, typeof(int))
+                Assert.Throws<NotSupportedException>(
+                    () => GetConvertToException(null, typeof(int))
                 );
                 Assert.Throws<NotSupportedException>(() => GetConvertToException("1", typeof(int)));
-                Assert.Throws<NotSupportedException>(() =>
-                    GetConvertToException(new BaseClass(), typeof(BaseClass))
+                Assert.Throws<NotSupportedException>(
+                    () => GetConvertToException(new BaseClass(), typeof(BaseClass))
                 );
             }
         }

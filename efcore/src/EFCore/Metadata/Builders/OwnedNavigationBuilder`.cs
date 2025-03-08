@@ -103,17 +103,18 @@ public class OwnedNavigationBuilder<
     public virtual PropertyBuilder<TProperty> Property<TProperty>(
         Expression<Func<TDependentEntity, TProperty>> propertyExpression
     ) =>
-        UpdateBuilder(() =>
-            new PropertyBuilder<TProperty>(
-                DependentEntityType
-                    .Builder.Property(
-                        Check
-                            .NotNull(propertyExpression, nameof(propertyExpression))
-                            .GetMemberAccess(),
-                        ConfigurationSource.Explicit
-                    )!
-                    .Metadata
-            )
+        UpdateBuilder(
+            () =>
+                new PropertyBuilder<TProperty>(
+                    DependentEntityType
+                        .Builder.Property(
+                            Check
+                                .NotNull(propertyExpression, nameof(propertyExpression))
+                                .GetMemberAccess(),
+                            ConfigurationSource.Explicit
+                        )!
+                        .Metadata
+                )
         );
 
     /// <summary>
@@ -136,17 +137,18 @@ public class OwnedNavigationBuilder<
     public virtual PropertyBuilder<TProperty> PrimitiveCollection<TProperty>(
         Expression<Func<TDependentEntity, TProperty>> propertyExpression
     ) =>
-        UpdateBuilder(() =>
-            new PropertyBuilder<TProperty>(
-                DependentEntityType
-                    .Builder.PrimitiveCollection(
-                        Check
-                            .NotNull(propertyExpression, nameof(propertyExpression))
-                            .GetMemberAccess(),
-                        ConfigurationSource.Explicit
-                    )!
-                    .Metadata
-            )
+        UpdateBuilder(
+            () =>
+                new PropertyBuilder<TProperty>(
+                    DependentEntityType
+                        .Builder.PrimitiveCollection(
+                            Check
+                                .NotNull(propertyExpression, nameof(propertyExpression))
+                                .GetMemberAccess(),
+                            ConfigurationSource.Explicit
+                        )!
+                        .Metadata
+                )
         );
 
     /// <summary>

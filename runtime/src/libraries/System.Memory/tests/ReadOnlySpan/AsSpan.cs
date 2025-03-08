@@ -57,20 +57,21 @@ namespace System.SpanTests
             Assert.Throws<ArgumentOutOfRangeException>(() => str.AsSpan(-1, -1).DontBox());
 
             Assert.Throws<ArgumentOutOfRangeException>(() => str.AsSpan(new Index(1)).DontBox());
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                str.AsSpan(new Index(0, fromEnd: true)).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => str.AsSpan(new Index(0, fromEnd: true)).DontBox()
             );
 
             Assert.Throws<ArgumentNullException>(() => str.AsSpan(0..1).DontBox());
-            Assert.Throws<ArgumentNullException>(() =>
-                str.AsSpan(new Range(new Index(0), new Index(0, fromEnd: true))).DontBox()
+            Assert.Throws<ArgumentNullException>(
+                () => str.AsSpan(new Range(new Index(0), new Index(0, fromEnd: true))).DontBox()
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                str.AsSpan(new Range(new Index(0, fromEnd: true), new Index(0))).DontBox()
+            Assert.Throws<ArgumentNullException>(
+                () => str.AsSpan(new Range(new Index(0, fromEnd: true), new Index(0))).DontBox()
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                str.AsSpan(new Range(new Index(0, fromEnd: true), new Index(0, fromEnd: true)))
-                    .DontBox()
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    str.AsSpan(new Range(new Index(0, fromEnd: true), new Index(0, fromEnd: true)))
+                        .DontBox()
             );
         }
 

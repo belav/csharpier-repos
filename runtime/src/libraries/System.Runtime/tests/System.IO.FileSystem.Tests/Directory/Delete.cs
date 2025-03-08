@@ -78,8 +78,8 @@ namespace System.IO.Tests
         [OuterLoop]
         public void DeleteRoot()
         {
-            Assert.Throws<IOException>(() =>
-                Delete(Path.GetPathRoot(Directory.GetCurrentDirectory()))
+            Assert.Throws<IOException>(
+                () => Delete(Path.GetPathRoot(Directory.GetCurrentDirectory()))
             );
         }
 
@@ -254,8 +254,8 @@ namespace System.IO.Tests
         {
             ReadOnly_FileSystemHelper(readOnlyDirectory =>
             {
-                Assert.Throws<DirectoryNotFoundException>(() =>
-                    Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"))
+                Assert.Throws<DirectoryNotFoundException>(
+                    () => Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"))
                 );
             });
         }

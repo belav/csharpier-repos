@@ -47,14 +47,15 @@ public class DefaultTransportFactoryTests
         HttpTransportType transportType
     )
     {
-        var exception = Assert.Throws<ArgumentException>(() =>
-            new DefaultTransportFactory(
-                transportType,
-                new LoggerFactory(),
-                httpClient: null,
-                httpConnectionOptions: null,
-                accessTokenProvider: null
-            )
+        var exception = Assert.Throws<ArgumentException>(
+            () =>
+                new DefaultTransportFactory(
+                    transportType,
+                    new LoggerFactory(),
+                    httpClient: null,
+                    httpConnectionOptions: null,
+                    accessTokenProvider: null
+                )
         );
 
         Assert.Equal("httpClient", exception.ParamName);
@@ -111,8 +112,8 @@ public class DefaultTransportFactoryTests
             httpConnectionOptions: null,
             accessTokenProvider: null
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            transportFactory.CreateTransport(~requestedTransport, useStatefulReconnect: true)
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => transportFactory.CreateTransport(~requestedTransport, useStatefulReconnect: true)
         );
 
         Assert.Equal("No requested transports available on the server.", ex.Message);
@@ -173,8 +174,9 @@ public class DefaultTransportFactoryTests
                 httpConnectionOptions: null,
                 accessTokenProvider: null
             );
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                transportFactory.CreateTransport(AllTransportTypes, useStatefulReconnect: true)
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    transportFactory.CreateTransport(AllTransportTypes, useStatefulReconnect: true)
             );
 
             Assert.Equal("No requested transports available on the server.", ex.Message);

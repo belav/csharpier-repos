@@ -177,8 +177,8 @@ namespace Tests.Integration
 
             Assert.Throws<ChangeRejectedException>(() => aggCat.Catalogs.Remove(typeCat));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                aggCat.Catalogs.Add(new TypeCatalog(typeof(Foo)))
+            Assert.Throws<ChangeRejectedException>(
+                () => aggCat.Catalogs.Add(new TypeCatalog(typeof(Foo)))
             );
         }
 

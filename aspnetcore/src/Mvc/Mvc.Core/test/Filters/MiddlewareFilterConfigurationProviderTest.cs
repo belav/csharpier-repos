@@ -21,8 +21,8 @@ public class MiddlewareFilterConfigurationProviderTest
         var provider = new MiddlewareFilterConfigurationProvider();
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(configurationType)
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(configurationType)
         );
 
         // Assert

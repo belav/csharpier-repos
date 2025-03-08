@@ -391,7 +391,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // Android does not support an empty custom root trust
                     // Only self-issued certs are treated as trusted anchors, so building the chain
                     // should throw PNSE regardless of whether or not testCert is added to the store
-                    Assert.Throws<PlatformNotSupportedException>(() => chain.Build(microsoftDotCom)
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => chain.Build(microsoftDotCom)
                     );
                 }
                 else
@@ -568,8 +569,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var chainHolder = new ChainHolder())
             {
                 X509Chain chain = chainHolder.Chain;
-                Assert.Throws<ArgumentException>(() =>
-                    chain.ChainPolicy.TrustMode = (X509ChainTrustMode)trustMode
+                Assert.Throws<ArgumentException>(
+                    () => chain.ChainPolicy.TrustMode = (X509ChainTrustMode)trustMode
                 );
             }
         }

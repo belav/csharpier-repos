@@ -14,11 +14,11 @@ namespace Microsoft.Win32.RegistryTests
             const string name = "Test";
 
             // Should throw if passed subkey name is null
-            Assert.Throws<ArgumentNullException>(() =>
-                TestRegistryKey.DeleteSubKeyTree(null, throwOnMissingSubKey: true)
+            Assert.Throws<ArgumentNullException>(
+                () => TestRegistryKey.DeleteSubKeyTree(null, throwOnMissingSubKey: true)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                TestRegistryKey.DeleteSubKeyTree(null, throwOnMissingSubKey: false)
+            Assert.Throws<ArgumentNullException>(
+                () => TestRegistryKey.DeleteSubKeyTree(null, throwOnMissingSubKey: false)
             );
 
             // Should throw if target subkey is system subkey and name is empty
@@ -37,8 +37,8 @@ namespace Microsoft.Win32.RegistryTests
             // Should throw because RegistryKey is readonly
             using (var rk = TestRegistryKey.OpenSubKey(string.Empty, false))
             {
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    rk.DeleteSubKeyTree(name, throwOnMissingSubKey: false)
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => rk.DeleteSubKeyTree(name, throwOnMissingSubKey: false)
                 );
             }
 

@@ -13,7 +13,6 @@ namespace System.Web.UI.WebControls
     /// <devdoc>
     /// <para>Provides data for some <see cref='System.Web.UI.WebControls.DetailsView'/> events.</para>
     /// </devdoc>
-
     public class DetailsViewInsertedEventArgs : EventArgs
     {
         private int _affectedRows;

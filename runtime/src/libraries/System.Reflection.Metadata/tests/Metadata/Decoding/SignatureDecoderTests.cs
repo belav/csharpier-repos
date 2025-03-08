@@ -469,14 +469,14 @@ namespace System.Reflection.Metadata.Decoding.Tests
                         .Signature
                 );
 
-                Assert.Throws<BadImageFormatException>(() =>
-                    decoder.DecodeMethodSignature(ref fieldSignature)
+                Assert.Throws<BadImageFormatException>(
+                    () => decoder.DecodeMethodSignature(ref fieldSignature)
                 );
-                Assert.Throws<BadImageFormatException>(() =>
-                    decoder.DecodeFieldSignature(ref methodSignature)
+                Assert.Throws<BadImageFormatException>(
+                    () => decoder.DecodeFieldSignature(ref methodSignature)
                 );
-                Assert.Throws<BadImageFormatException>(() =>
-                    decoder.DecodeLocalSignature(ref propertySignature)
+                Assert.Throws<BadImageFormatException>(
+                    () => decoder.DecodeLocalSignature(ref propertySignature)
                 );
             }
         }
@@ -589,12 +589,13 @@ namespace System.Reflection.Metadata.Decoding.Tests
             fixed (byte* bytes = signature)
             {
                 BlobReader reader = new BlobReader(bytes, signature.Length);
-                Assert.Throws<BadImageFormatException>(() =>
-                    new SignatureDecoder<string, DisassemblingGenericContext>(
-                        new OpaqueTokenTypeProvider(),
-                        metadataReader: null,
-                        genericContext: null
-                    ).DecodeType(ref reader)
+                Assert.Throws<BadImageFormatException>(
+                    () =>
+                        new SignatureDecoder<string, DisassemblingGenericContext>(
+                            new OpaqueTokenTypeProvider(),
+                            metadataReader: null,
+                            genericContext: null
+                        ).DecodeType(ref reader)
                 );
             }
         }

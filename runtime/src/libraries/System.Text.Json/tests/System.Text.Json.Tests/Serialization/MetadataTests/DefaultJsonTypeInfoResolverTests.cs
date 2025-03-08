@@ -18,8 +18,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             DefaultJsonTypeInfoResolver r = new();
             Assert.Throws<ArgumentNullException>(() => r.GetTypeInfo(null, null));
-            Assert.Throws<ArgumentNullException>(() =>
-                r.GetTypeInfo(null, new JsonSerializerOptions())
+            Assert.Throws<ArgumentNullException>(
+                () => r.GetTypeInfo(null, new JsonSerializerOptions())
             );
             Assert.Throws<ArgumentNullException>(() => r.GetTypeInfo(typeof(string), null));
         }

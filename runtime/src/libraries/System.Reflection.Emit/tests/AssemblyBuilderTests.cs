@@ -906,15 +906,16 @@ namespace System.Reflection.Emit.Tests
                     var assemblyName = new AssemblyName("TestName");
                     AssemblyBuilderAccess access = AssemblyBuilderAccess.Run;
 
-                    Assert.Throws<PlatformNotSupportedException>(() =>
-                        AssemblyBuilder.DefineDynamicAssembly(assemblyName, access)
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => AssemblyBuilder.DefineDynamicAssembly(assemblyName, access)
                     );
-                    Assert.Throws<PlatformNotSupportedException>(() =>
-                        AssemblyBuilder.DefineDynamicAssembly(
-                            assemblyName,
-                            access,
-                            assemblyAttributes: null
-                        )
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () =>
+                            AssemblyBuilder.DefineDynamicAssembly(
+                                assemblyName,
+                                access,
+                                assemblyAttributes: null
+                            )
                     );
                 },
                 options

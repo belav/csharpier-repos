@@ -56,8 +56,8 @@ public class TextInputFormatterTest
         context.HttpContext.Request.ContentLength = 1;
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() =>
-            formatter.TestSelectCharacterEncoding(context)
+        Assert.Throws<InvalidOperationException>(
+            () => formatter.TestSelectCharacterEncoding(context)
         );
     }
 

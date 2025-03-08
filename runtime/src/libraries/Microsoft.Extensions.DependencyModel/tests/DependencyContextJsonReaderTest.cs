@@ -66,9 +66,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50872", TestPlatforms.Android)]
         public void ReadsRuntimeTargetInfoWithCommentsIsInvalid()
         {
-            var exception = Assert.ThrowsAny<JsonException>(() =>
-                Read(
-                    @"{
+            var exception = Assert.ThrowsAny<JsonException>(
+                () =>
+                    Read(
+                        @"{
     ""runtimeTarget"": {
         ""name"":"".NETCoreApp,Version=v1.0/osx.10.10-x64"",
         ""signature"":""target-signature""
@@ -81,7 +82,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         */
     }
 }"
-                )
+                    )
             );
 
             Assert.Equal(
@@ -362,9 +363,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50872", TestPlatforms.Android)]
         public void RejectsMissingLibrary()
         {
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                Read(
-                    @"{
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                    Read(
+                        @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""System.Banana/1.0.0"": {}
@@ -372,7 +374,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     },
     ""libraries"": {}
 }"
-                )
+                    )
             );
 
             Assert.Equal(
@@ -854,9 +856,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void FailsToReadInvalidDefines()
         {
             Assert
-                .Throws<FormatException>(() =>
-                    Read(
-                        @"{
+                .Throws<FormatException>(
+                    () =>
+                        Read(
+                            @"{
     ""compilationOptions"": {
         ""defines"": ""MY"",
     },
@@ -864,7 +867,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
 }"
-                    )
+                        )
                 )
                 .Message.Should()
                 .Contain("line 2 position 23");
@@ -911,9 +914,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [Fact]
         public void FailsToReadNullLibraryType()
         {
-            Assert.Throws<FormatException>(() =>
-                Read(
-                    @"{
+            Assert.Throws<FormatException>(
+                () =>
+                    Read(
+                        @"{
     ""libraries"":{
         ""System.Banana/1.0.0"": {
             ""type"": null,
@@ -923,30 +927,32 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     }
 }
 "
-                )
+                    )
             );
         }
 
         [Fact]
         public void FailsToReadEmptyTargetName()
         {
-            Assert.Throws<FormatException>(() =>
-                Read(
-                    @"{
+            Assert.Throws<FormatException>(
+                () =>
+                    Read(
+                        @"{
      ""targets"": {
         """": {}
     }
  }"
-                )
+                    )
             );
         }
 
         [Fact]
         public void FailsToReadEmptyLibraryType()
         {
-            Assert.Throws<FormatException>(() =>
-                Read(
-                    @"{
+            Assert.Throws<FormatException>(
+                () =>
+                    Read(
+                        @"{
     ""libraries"":{
         ""System.Banana/1.0.0"": {
             ""type"": """",
@@ -956,7 +962,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     }
 }
 "
-                )
+                    )
             );
         }
     }

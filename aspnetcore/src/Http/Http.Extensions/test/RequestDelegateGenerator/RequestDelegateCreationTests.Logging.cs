@@ -180,8 +180,8 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
         httpContext.Request.RouteValues["tryParsable"] = "invalid!";
         httpContext.Request.RouteValues["tryParsable2"] = "invalid again!";
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);
@@ -225,8 +225,8 @@ app.MapGet("/", TestAction);
             new Dictionary<string, StringValues>() { ["values"] = new(new[] { "1", "NAN", "3" }) }
         );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
 
         // The httpContext should be untouched.
@@ -326,8 +326,8 @@ app.MapGet("/", TestAction);
         // Not supplying any headers will cause the HttpContext BindAsync overload to return null.
         var httpContext = CreateHttpContext();
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);
@@ -422,8 +422,8 @@ app.MapGet("/", TestAction);
 
         // Not supplying any headers will cause the HttpContext BindAsync overload to return null.
         var httpContext = CreateHttpContext();
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);
@@ -680,8 +680,8 @@ app.MapPost("/", TestAction);
             new RequestBodyDetectionFeature(true)
         );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);
@@ -777,8 +777,8 @@ app.MapPost("/", TestAction);
             new RequestBodyDetectionFeature(true)
         );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);

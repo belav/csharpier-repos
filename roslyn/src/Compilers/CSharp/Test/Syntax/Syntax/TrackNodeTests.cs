@@ -207,8 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestTrackNodeThatIsNotInTheSubtreeThrows()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            Assert.Throws<ArgumentException>(() =>
-                expr.TrackNodes(SyntaxFactory.IdentifierName("c"))
+            Assert.Throws<ArgumentException>(
+                () => expr.TrackNodes(SyntaxFactory.IdentifierName("c"))
             );
         }
     }

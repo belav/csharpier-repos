@@ -173,16 +173,18 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 null,
                 () => ECCurve.CreateFromFriendlyName("")
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ECDsaFactory
-                    .Create(ECCurve.CreateFromFriendlyName("Invalid"))
-                    .ExportExplicitParameters(false)
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    ECDsaFactory
+                        .Create(ECCurve.CreateFromFriendlyName("Invalid"))
+                        .ExportExplicitParameters(false)
             );
             AssertExtensions.Throws<ArgumentException>(null, () => ECCurve.CreateFromValue(""));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ECDsaFactory
-                    .Create(ECCurve.CreateFromValue("Invalid"))
-                    .ExportExplicitParameters(false)
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    ECDsaFactory
+                        .Create(ECCurve.CreateFromValue("Invalid"))
+                        .ExportExplicitParameters(false)
             );
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -324,7 +326,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
                     temp = p;
                     temp.Curve = ECCurve.CreateFromOid(new Oid("Invalid", "Invalid"));
-                    Assert.ThrowsAny<PlatformNotSupportedException>(() => ec.ImportParameters(temp)
+                    Assert.ThrowsAny<PlatformNotSupportedException>(
+                        () => ec.ImportParameters(temp)
                     );
                 }
             }
@@ -386,8 +389,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
                 if (ECExplicitCurvesSupported)
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        cavs.ExportExplicitParameters(true)
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => cavs.ExportExplicitParameters(true)
                     );
                 }
             }

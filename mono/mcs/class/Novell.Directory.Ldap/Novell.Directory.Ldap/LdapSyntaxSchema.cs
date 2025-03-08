@@ -46,7 +46,6 @@ namespace Novell.Directory.Ldap
     /// matching getSyntaxNames method in LdapSchema. Note also that adding and
     /// removing syntaxes is not typically a supported feature of Ldap servers.
     /// </summary>
-
     public class LdapSyntaxSchema : LdapSchemaElement
     {
         /// <summary> Constructs a syntax for adding to or deleting from the schema.

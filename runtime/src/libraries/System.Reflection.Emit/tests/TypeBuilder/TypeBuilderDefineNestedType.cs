@@ -507,8 +507,8 @@ namespace System.Reflection.Emit.Tests
         public void GetNestedType_TypeNotCreated_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            Assert.Throws<NotSupportedException>(() =>
-                type.AsType().GetNestedType("Any", Helpers.AllFlags)
+            Assert.Throws<NotSupportedException>(
+                () => type.AsType().GetNestedType("Any", Helpers.AllFlags)
             );
         }
 
@@ -516,8 +516,8 @@ namespace System.Reflection.Emit.Tests
         public void GetNestedTypes_TypeNotCreated_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            Assert.Throws<NotSupportedException>(() =>
-                type.AsType().GetNestedTypes(Helpers.AllFlags)
+            Assert.Throws<NotSupportedException>(
+                () => type.AsType().GetNestedTypes(Helpers.AllFlags)
             );
         }
     }

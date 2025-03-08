@@ -252,25 +252,26 @@ namespace System.Text.RegularExpressions.Tests
             // pattern is invalid
 #pragma warning disable RE0001 // invalid regex pattern
             AssertExtensions.Throws<RegexParseException>(() => Regex.Count("input", @"[abc"));
-            AssertExtensions.Throws<RegexParseException>(() =>
-                Regex.Count("input".AsSpan(), @"[abc")
+            AssertExtensions.Throws<RegexParseException>(
+                () => Regex.Count("input".AsSpan(), @"[abc")
             );
-            AssertExtensions.Throws<RegexParseException>(() =>
-                Regex.Count("input", @"[abc", RegexOptions.None)
+            AssertExtensions.Throws<RegexParseException>(
+                () => Regex.Count("input", @"[abc", RegexOptions.None)
             );
-            AssertExtensions.Throws<RegexParseException>(() =>
-                Regex.Count("input".AsSpan(), @"[abc", RegexOptions.None)
+            AssertExtensions.Throws<RegexParseException>(
+                () => Regex.Count("input".AsSpan(), @"[abc", RegexOptions.None)
             );
-            AssertExtensions.Throws<RegexParseException>(() =>
-                Regex.Count("input", @"[abc", RegexOptions.None, TimeSpan.FromMilliseconds(1))
+            AssertExtensions.Throws<RegexParseException>(
+                () => Regex.Count("input", @"[abc", RegexOptions.None, TimeSpan.FromMilliseconds(1))
             );
-            AssertExtensions.Throws<RegexParseException>(() =>
-                Regex.Count(
-                    "input".AsSpan(),
-                    @"[abc",
-                    RegexOptions.None,
-                    TimeSpan.FromMilliseconds(1)
-                )
+            AssertExtensions.Throws<RegexParseException>(
+                () =>
+                    Regex.Count(
+                        "input".AsSpan(),
+                        @"[abc",
+                        RegexOptions.None,
+                        TimeSpan.FromMilliseconds(1)
+                    )
             );
 #pragma warning restore RE0001
 
@@ -351,21 +352,23 @@ namespace System.Text.RegularExpressions.Tests
                 case RegexEngine.Interpreter:
                 case RegexEngine.Compiled:
                     sw = Stopwatch.StartNew();
-                    Assert.Throws<RegexMatchTimeoutException>(() =>
-                        Regex.Count(
-                            Input,
-                            Pattern,
-                            RegexHelpers.OptionsFromEngine(engine),
-                            TimeSpan.FromMilliseconds(1)
-                        )
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            Regex.Count(
+                                Input,
+                                Pattern,
+                                RegexHelpers.OptionsFromEngine(engine),
+                                TimeSpan.FromMilliseconds(1)
+                            )
                     );
-                    Assert.Throws<RegexMatchTimeoutException>(() =>
-                        Regex.Count(
-                            Input.AsSpan(),
-                            Pattern,
-                            RegexHelpers.OptionsFromEngine(engine),
-                            TimeSpan.FromMilliseconds(1)
-                        )
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            Regex.Count(
+                                Input.AsSpan(),
+                                Pattern,
+                                RegexHelpers.OptionsFromEngine(engine),
+                                TimeSpan.FromMilliseconds(1)
+                            )
                     );
                     Assert.InRange(sw.Elapsed.TotalSeconds, 0, 30); // arbitrary upper bound that should be well above what's needed with a 1ms timeout
                     break;

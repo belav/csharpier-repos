@@ -643,12 +643,13 @@ public class BuiltInDataTypesSqlServerTest
         Assert.Contains(
             "text",
             Assert
-                .Throws<SqlException>(() =>
-                    ExecuteQueryString(
-                        context,
-                        id,
-                        set.Where(e => e.Id == id && e.StringAsText == stringAsText)
-                    )
+                .Throws<SqlException>(
+                    () =>
+                        ExecuteQueryString(
+                            context,
+                            id,
+                            set.Where(e => e.Id == id && e.StringAsText == stringAsText)
+                        )
                 )
                 .Message
         );
@@ -656,12 +657,13 @@ public class BuiltInDataTypesSqlServerTest
         Assert.Contains(
             "ntext",
             Assert
-                .Throws<SqlException>(() =>
-                    ExecuteQueryString(
-                        context,
-                        id,
-                        set.Where(e => e.Id == id && e.StringAsNtext == gumballRulesOk)
-                    )
+                .Throws<SqlException>(
+                    () =>
+                        ExecuteQueryString(
+                            context,
+                            id,
+                            set.Where(e => e.Id == id && e.StringAsNtext == gumballRulesOk)
+                        )
                 )
                 .Message
         );
@@ -669,12 +671,13 @@ public class BuiltInDataTypesSqlServerTest
         Assert.Contains(
             "image",
             Assert
-                .Throws<SqlException>(() =>
-                    ExecuteQueryString(
-                        context,
-                        id,
-                        set.Where(e => e.Id == id && e.BytesAsImage == bytesAsImage)
-                    )
+                .Throws<SqlException>(
+                    () =>
+                        ExecuteQueryString(
+                            context,
+                            id,
+                            set.Where(e => e.Id == id && e.BytesAsImage == bytesAsImage)
+                        )
                 )
                 .Message
         );
@@ -682,12 +685,13 @@ public class BuiltInDataTypesSqlServerTest
         Assert.Contains(
             "text",
             Assert
-                .Throws<SqlException>(() =>
-                    ExecuteQueryString(
-                        context,
-                        id,
-                        set.Where(e => e.Id == id && e.CharAsText == charAsText)
-                    )
+                .Throws<SqlException>(
+                    () =>
+                        ExecuteQueryString(
+                            context,
+                            id,
+                            set.Where(e => e.Id == id && e.CharAsText == charAsText)
+                        )
                 )
                 .Message
         );
@@ -695,12 +699,13 @@ public class BuiltInDataTypesSqlServerTest
         Assert.Contains(
             "ntext",
             Assert
-                .Throws<SqlException>(() =>
-                    ExecuteQueryString(
-                        context,
-                        id,
-                        set.Where(e => e.Id == id && e.CharAsNtext == charAsNtext)
-                    )
+                .Throws<SqlException>(
+                    () =>
+                        ExecuteQueryString(
+                            context,
+                            id,
+                            set.Where(e => e.Id == id && e.CharAsNtext == charAsNtext)
+                        )
                 )
                 .Message
         );

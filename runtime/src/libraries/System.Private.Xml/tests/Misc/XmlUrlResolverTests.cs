@@ -13,14 +13,15 @@ namespace System.Xml.Tests
         public void Resolving_RelativeBase_Throws()
         {
             var resolver = new XmlUrlResolver();
-            Assert.Throws<NotSupportedException>(() =>
-                resolver.ResolveUri(
-                    new Uri(
-                        Environment.CurrentDirectory + Path.DirectorySeparatorChar,
-                        UriKind.Relative
-                    ),
-                    "test.xml"
-                )
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    resolver.ResolveUri(
+                        new Uri(
+                            Environment.CurrentDirectory + Path.DirectorySeparatorChar,
+                            UriKind.Relative
+                        ),
+                        "test.xml"
+                    )
             );
         }
 

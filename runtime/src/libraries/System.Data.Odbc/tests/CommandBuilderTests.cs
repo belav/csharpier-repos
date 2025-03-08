@@ -33,14 +33,15 @@ namespace System.Data.Odbc.Tests
             );
 
             // Needs an active connection
-            Assert.Throws<InvalidOperationException>(() =>
-                commandBuilder.QuoteIdentifier("Test", null)
+            Assert.Throws<InvalidOperationException>(
+                () => commandBuilder.QuoteIdentifier("Test", null)
             );
             Assert.Throws<InvalidOperationException>(() => commandBuilder.QuoteIdentifier("Test"));
-            Assert.Throws<InvalidOperationException>(() =>
-                commandBuilder.UnquoteIdentifier("Test", null)
+            Assert.Throws<InvalidOperationException>(
+                () => commandBuilder.UnquoteIdentifier("Test", null)
             );
-            Assert.Throws<InvalidOperationException>(() => commandBuilder.UnquoteIdentifier("Test")
+            Assert.Throws<InvalidOperationException>(
+                () => commandBuilder.UnquoteIdentifier("Test")
             );
         }
 

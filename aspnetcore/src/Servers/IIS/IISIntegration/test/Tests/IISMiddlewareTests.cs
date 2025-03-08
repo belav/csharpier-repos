@@ -124,8 +124,8 @@ public class IISMiddlewareTests
                     {
                         var appLifetime =
                             app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() =>
-                            applicationStoppingFired.SetResult()
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
                         );
 
                         app.Run(context =>
@@ -190,8 +190,8 @@ public class IISMiddlewareTests
                     {
                         var appLifetime =
                             app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() =>
-                            applicationStoppingFired.SetResult()
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
                         );
 
                         app.Run(context =>
@@ -242,8 +242,8 @@ public class IISMiddlewareTests
                     {
                         var appLifetime =
                             app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() =>
-                            applicationStoppingFired.SetResult()
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
                         );
 
                         app.Run(context =>
@@ -294,8 +294,8 @@ public class IISMiddlewareTests
                     {
                         var appLifetime =
                             app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() =>
-                            applicationStoppingFired.SetResult()
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
                         );
 
                         app.Run(context =>

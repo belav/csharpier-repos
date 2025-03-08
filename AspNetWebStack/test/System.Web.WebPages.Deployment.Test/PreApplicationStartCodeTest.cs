@@ -548,18 +548,19 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             };
 
             // Act
-            var ex = Assert.Throws<HttpCompileException>(() =>
-                PreApplicationStartCode.StartCore(
-                    fileSystem,
-                    "",
-                    @"site\bin",
-                    nameValueCollection,
-                    loadedAssemblies,
-                    buildManager,
-                    loadWebPages,
-                    registerForChange,
-                    null
-                )
+            var ex = Assert.Throws<HttpCompileException>(
+                () =>
+                    PreApplicationStartCode.StartCore(
+                        fileSystem,
+                        "",
+                        @"site\bin",
+                        nameValueCollection,
+                        loadedAssemblies,
+                        buildManager,
+                        loadWebPages,
+                        registerForChange,
+                        null
+                    )
             );
 
             // Assert

@@ -35,37 +35,47 @@ public class VirtualizationRenderModesTest
             () => Browser.FindElement(By.Id("virtualize-webassembly")).GetAttribute("class")
         );
 
-        Browser.True(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-server"))).Contains("Item 1")
+        Browser.True(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-server"))).Contains("Item 1")
         );
-        Browser.True(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
-                .Contains("Item 1")
+        Browser.True(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
+                    .Contains("Item 1")
         );
-        Browser.False(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-server"))).Contains("Item 50")
+        Browser.False(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-server")))
+                    .Contains("Item 50")
         );
-        Browser.False(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
-                .Contains("Item 50")
+        Browser.False(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
+                    .Contains("Item 50")
         );
 
         ScrollTopToEnd(Browser, Browser.FindElement(By.Id("virtualize-server")));
         ScrollTopToEnd(Browser, Browser.FindElement(By.Id("virtualize-webassembly")));
 
-        Browser.False(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-server"))).Contains("Item 1")
+        Browser.False(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-server"))).Contains("Item 1")
         );
-        Browser.False(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
-                .Contains("Item 1")
+        Browser.False(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
+                    .Contains("Item 1")
         );
-        Browser.True(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-server"))).Contains("Item 50")
+        Browser.True(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-server")))
+                    .Contains("Item 50")
         );
-        Browser.True(() =>
-            GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
-                .Contains("Item 50")
+        Browser.True(
+            () =>
+                GetRenderedItems(Browser.FindElement(By.Id("virtualize-webassembly")))
+                    .Contains("Item 50")
         );
     }
 

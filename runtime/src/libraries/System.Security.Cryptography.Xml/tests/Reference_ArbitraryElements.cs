@@ -156,12 +156,13 @@ namespace System.Security.Cryptography.Xml.Tests
                     || includeURI.LastIndexOf("U") != includeURI.IndexOf("U")
                     || includeType.LastIndexOf("T") != includeType.IndexOf("T");
                 if (throwsXmlException)
-                    Assert.Throws<XmlException>(() =>
-                        Helpers.VerifyCryptoExceptionOnLoad(
-                            xml,
-                            false,
-                            checkSignatureThrows: !SignatureSupport.SupportsRsaSha1Signatures
-                        )
+                    Assert.Throws<XmlException>(
+                        () =>
+                            Helpers.VerifyCryptoExceptionOnLoad(
+                                xml,
+                                false,
+                                checkSignatureThrows: !SignatureSupport.SupportsRsaSha1Signatures
+                            )
                     );
                 else
                 {

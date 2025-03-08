@@ -133,12 +133,13 @@ public class WebViewManagerTests
         );
 
         // Act & assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await webViewManager.AddRootComponentAsync(
-                typeof(MyComponent),
-                arbitraryComponentSelector,
-                ParameterView.Empty
-            )
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await webViewManager.AddRootComponentAsync(
+                    typeof(MyComponent),
+                    arbitraryComponentSelector,
+                    ParameterView.Empty
+                )
         );
 
         Assert.Equal(

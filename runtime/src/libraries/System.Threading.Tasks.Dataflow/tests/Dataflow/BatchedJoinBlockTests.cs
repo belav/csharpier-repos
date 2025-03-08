@@ -89,18 +89,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
                     )
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                ((IDataflowBlock)new BatchedJoinBlock<int, string>(2)).Fault(null)
+            Assert.Throws<ArgumentNullException>(
+                () => ((IDataflowBlock)new BatchedJoinBlock<int, string>(2)).Fault(null)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                new BatchedJoinBlock<int, string>(2).Target1.Fault(null)
+            Assert.Throws<ArgumentNullException>(
+                () => new BatchedJoinBlock<int, string>(2).Target1.Fault(null)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new BatchedJoinBlock<int, string, double>(-1)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new BatchedJoinBlock<int, string, double>(-1)
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                new BatchedJoinBlock<int, string, double>(2, null)
+            Assert.Throws<ArgumentNullException>(
+                () => new BatchedJoinBlock<int, string, double>(2, null)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "dataflowBlockOptions",
@@ -118,8 +118,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
                     )
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                ((IDataflowBlock)new BatchedJoinBlock<int, string, double>(2)).Fault(null)
+            Assert.Throws<ArgumentNullException>(
+                () => ((IDataflowBlock)new BatchedJoinBlock<int, string, double>(2)).Fault(null)
             );
 
             DataflowTestHelpers.TestArgumentsExceptions(new BatchedJoinBlock<int, string>(1));
@@ -153,17 +153,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestCompletionTask()
         {
-            await DataflowTestHelpers.TestCompletionTask(() => new BatchedJoinBlock<int, string>(2)
+            await DataflowTestHelpers.TestCompletionTask(
+                () => new BatchedJoinBlock<int, string>(2)
             );
-            await DataflowTestHelpers.TestCompletionTask(() =>
-                new BatchedJoinBlock<int, string, double>(2)
+            await DataflowTestHelpers.TestCompletionTask(
+                () => new BatchedJoinBlock<int, string, double>(2)
             );
 
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                new BatchedJoinBlock<int, string>(2).Target1.Completion
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new BatchedJoinBlock<int, string>(2).Target1.Completion
             );
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                new BatchedJoinBlock<int, string, double>(2).Target1.Completion
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new BatchedJoinBlock<int, string, double>(2).Target1.Completion
             );
         }
 

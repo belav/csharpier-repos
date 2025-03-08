@@ -21,8 +21,8 @@ public class MvcApplicationBuilderExtensionsTest
             .Returns(Mock.Of<IServiceProvider>());
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            applicationBuilderMock.Object.UseMvc(rb => { })
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => applicationBuilderMock.Object.UseMvc(rb => { })
         );
 
         Assert.Equal(

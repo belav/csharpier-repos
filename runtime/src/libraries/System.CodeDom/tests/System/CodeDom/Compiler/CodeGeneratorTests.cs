@@ -202,8 +202,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
             generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<NullReferenceException>(() =>
-                generator.GenerateBinaryOperatorExpression(e)
+            Assert.Throws<NullReferenceException>(
+                () => generator.GenerateBinaryOperatorExpression(e)
             );
         }
 
@@ -473,12 +473,13 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             PerformActionWithOutput(writer =>
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    generator.GenerateCodeFromMember(
-                        new CodeTypeMember(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        generator.GenerateCodeFromMember(
+                            new CodeTypeMember(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
                 );
             });
         }
@@ -1844,8 +1845,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputDirectionAction = (actualDirection, baseMethod) =>
                 baseMethod(actualDirection);
             generator.OutputTypeAction = (actualType) => { };
-            Assert.Throws<NullReferenceException>(() =>
-                generator.GenerateParameterDeclarationExpression(e)
+            Assert.Throws<NullReferenceException>(
+                () => generator.GenerateParameterDeclarationExpression(e)
             );
         }
 
@@ -3215,8 +3216,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualAttributes);
             generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
             generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
-            Assert.Throws<NullReferenceException>(() =>
-                generator.OutputAttributeDeclarations(attributes)
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputAttributeDeclarations(attributes)
             );
         }
 
@@ -3343,8 +3344,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
-            Assert.Throws<NullReferenceException>(() =>
-                generator.OutputFieldScopeModifier(attributes)
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputFieldScopeModifier(attributes)
             );
         }
 
@@ -3629,8 +3630,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
-            Assert.Throws<NullReferenceException>(() =>
-                generator.OutputMemberAccessModifier(attributes)
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputMemberAccessModifier(attributes)
             );
         }
 
@@ -3884,8 +3885,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
-            Assert.Throws<NullReferenceException>(() =>
-                generator.OutputMemberScopeModifier(attributes)
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputMemberScopeModifier(attributes)
             );
         }
 
@@ -4193,8 +4194,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
                 baseMethod(actualTypeRef, actualName);
             generator.OutputTypeAction = (actualTypeRef) => { };
-            Assert.Throws<NullReferenceException>(() =>
-                generator.OutputTypeNamePair(typeRef, "name")
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputTypeNamePair(typeRef, "name")
             );
         }
 
@@ -4322,8 +4323,8 @@ namespace System.CodeDom.Compiler.Tests
                 isEnum,
                 baseMethod
             ) => baseMethod(actualAttributes, isStruct, isEnum);
-            Assert.Throws<NullReferenceException>(() =>
-                generator.OutputTypeAttributes(attributes, isStruct, isEnum)
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputTypeAttributes(attributes, isStruct, isEnum)
             );
         }
 

@@ -361,10 +361,11 @@ END IS NULL
     )
     {
         // DefaultIfEmpty on child collection. Issue #19095.
-        await Assert.ThrowsAsync<EqualException>(async () =>
-            await base.Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
-                async
-            )
+        await Assert.ThrowsAsync<EqualException>(
+            async () =>
+                await base.Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
+                    async
+                )
         );
 
         AssertSql(
@@ -1434,8 +1435,8 @@ END
     )
     {
         // Expression cannot be used for return type. Issue #23302.
-        await Assert.ThrowsAsync<ArgumentException>(() =>
-            base.Join_with_result_selector_returning_queryable_throws_validation_error(async)
+        await Assert.ThrowsAsync<ArgumentException>(
+            () => base.Join_with_result_selector_returning_queryable_throws_validation_error(async)
         );
 
         AssertSql();

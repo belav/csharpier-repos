@@ -26,11 +26,12 @@ namespace System.IO.Tests
         [InlineData(FileMode.Truncate)]
         public void ModesThatRequireWriteAccessThrowWhenReadAccessIsProvided(FileMode fileMode)
         {
-            Assert.Throws<ArgumentException>(() =>
-                new FileStream(
-                    GetTestFilePath(),
-                    new FileStreamOptions { Mode = fileMode, Access = FileAccess.Read }
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new FileStream(
+                        GetTestFilePath(),
+                        new FileStreamOptions { Mode = fileMode, Access = FileAccess.Read }
+                    )
             );
         }
 
@@ -39,11 +40,12 @@ namespace System.IO.Tests
         [InlineData(FileAccess.ReadWrite)]
         public void AppendWorksOnlyForWriteAccess(FileAccess fileAccess)
         {
-            Assert.Throws<ArgumentException>(() =>
-                new FileStream(
-                    GetTestFilePath(),
-                    new FileStreamOptions { Mode = FileMode.Append, Access = fileAccess }
-                )
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new FileStream(
+                        GetTestFilePath(),
+                        new FileStreamOptions { Mode = FileMode.Append, Access = fileAccess }
+                    )
             );
         }
 
@@ -59,11 +61,11 @@ namespace System.IO.Tests
                 Assert.Equal(validValue, (new FileStreamOptions { Mode = validValue }).Mode);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Mode = validValues.Min() - 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Mode = validValues.Min() - 1 }
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Mode = validValues.Max() + 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Mode = validValues.Max() + 1 }
             );
         }
 
@@ -79,11 +81,11 @@ namespace System.IO.Tests
                 Assert.Equal(validValue, (new FileStreamOptions { Access = validValue }).Access);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Access = validValues.Min() - 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Access = validValues.Min() - 1 }
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Access = validValues.Max() + 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Access = validValues.Max() + 1 }
             );
         }
 
@@ -102,11 +104,11 @@ namespace System.IO.Tests
             FileShare all = validValues.Aggregate((x, y) => x | y);
             Assert.Equal(all, (new FileStreamOptions { Share = all }).Share);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Share = validValues.Min() - 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Share = validValues.Min() - 1 }
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Share = all + 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Share = all + 1 }
             );
         }
 
@@ -125,11 +127,11 @@ namespace System.IO.Tests
             FileOptions all = validValues.Aggregate((x, y) => x | y);
             Assert.Equal(all, (new FileStreamOptions { Options = all }).Options);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Options = validValues.Min() - 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Options = validValues.Min() - 1 }
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { Options = all + 1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Options = all + 1 }
             );
         }
 
@@ -142,8 +144,8 @@ namespace System.IO.Tests
             Assert.Equal(1, new FileStreamOptions { PreallocationSize = 1 }.PreallocationSize);
             Assert.Equal(123, new FileStreamOptions { PreallocationSize = 123 }.PreallocationSize);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { PreallocationSize = -1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { PreallocationSize = -1 }
             );
         }
 
@@ -156,8 +158,8 @@ namespace System.IO.Tests
             Assert.Equal(1, new FileStreamOptions { BufferSize = 1 }.BufferSize);
             Assert.Equal(123, new FileStreamOptions { BufferSize = 123 }.BufferSize);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new FileStreamOptions { BufferSize = -1 }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { BufferSize = -1 }
             );
         }
 
@@ -280,14 +282,14 @@ namespace System.IO.Tests
         [Fact]
         public void UnixCreateMode_Unsupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new FileStreamOptions { UnixCreateMode = null }
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new FileStreamOptions { UnixCreateMode = null }
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new FileStreamOptions { UnixCreateMode = UnixFileMode.None }
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new FileStreamOptions { UnixCreateMode = UnixFileMode.None }
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new FileStreamOptions { UnixCreateMode = UnixFileMode.UserRead }
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new FileStreamOptions { UnixCreateMode = UnixFileMode.UserRead }
             );
         }
 
@@ -305,8 +307,8 @@ namespace System.IO.Tests
                 new FileStreamOptions { UnixCreateMode = UnixFileMode.UserRead }.UnixCreateMode
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                new FileStreamOptions { UnixCreateMode = (UnixFileMode)(1 << 12) }
+            Assert.Throws<ArgumentException>(
+                () => new FileStreamOptions { UnixCreateMode = (UnixFileMode)(1 << 12) }
             );
         }
     }

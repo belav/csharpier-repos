@@ -186,8 +186,8 @@ namespace System.Net.Quic.Tests
             };
             QuicListener listener = await CreateQuicListener(listenerOptions);
 
-            await Assert.ThrowsAsync<AuthenticationException>(async () =>
-                await CreateConnectedQuicConnection(listener)
+            await Assert.ThrowsAsync<AuthenticationException>(
+                async () => await CreateConnectedQuicConnection(listener)
             );
 
             // Dispose everything and check if all weak references are dead.
@@ -472,8 +472,8 @@ namespace System.Net.Quic.Tests
                 async () => await CreateQuicConnection(clientOptions)
             );
             Assert.True(exception.InnerException is ArithmeticException);
-            await Assert.ThrowsAsync<AuthenticationException>(async () =>
-                await listener.AcceptConnectionAsync()
+            await Assert.ThrowsAsync<AuthenticationException>(
+                async () => await listener.AcceptConnectionAsync()
             );
 
             // Make sure the listener is still usable and there is no lingering bad connection
@@ -563,8 +563,8 @@ namespace System.Net.Quic.Tests
             var authEx = await Assert.ThrowsAsync<AuthenticationException>(() => clientTask);
             Assert.Contains(TlsAlertMessage.UserCanceled.ToString(), authEx.Message);
             Assert.Equal(clientOptions.ClientAuthenticationOptions.TargetHost, receivedHostName);
-            await Assert.ThrowsAsync<ArgumentException>(async () =>
-                await listener.AcceptConnectionAsync()
+            await Assert.ThrowsAsync<ArgumentException>(
+                async () => await listener.AcceptConnectionAsync()
             );
 
             // Do this last to make sure Listener is still functional.
@@ -670,8 +670,8 @@ namespace System.Net.Quic.Tests
                     return SslPolicyErrors.None == errors;
                 };
 
-                await Assert.ThrowsAsync<AuthenticationException>(async () =>
-                    await CreateQuicConnection(clientOptions)
+                await Assert.ThrowsAsync<AuthenticationException>(
+                    async () => await CreateQuicConnection(clientOptions)
                 );
             }
             finally
@@ -902,11 +902,12 @@ namespace System.Net.Quic.Tests
                 QuicStreamType.Unidirectional
             );
             await stream.WriteAsync(new byte[64 * 1024], completeWrites: true);
-            await Assert.ThrowsAsync<TimeoutException>(() =>
-                clientConnection
-                    .OpenOutboundStreamAsync(QuicStreamType.Unidirectional)
-                    .AsTask()
-                    .WaitAsync(TimeSpan.FromSeconds(1))
+            await Assert.ThrowsAsync<TimeoutException>(
+                () =>
+                    clientConnection
+                        .OpenOutboundStreamAsync(QuicStreamType.Unidirectional)
+                        .AsTask()
+                        .WaitAsync(TimeSpan.FromSeconds(1))
             );
 
             await clientConnection.DisposeAsync();
@@ -953,8 +954,8 @@ namespace System.Net.Quic.Tests
             cts.Cancel();
 
             // awaiting the task should throw
-            var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                waitTask.AsTask().WaitAsync(TimeSpan.FromSeconds(3))
+            var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () => waitTask.AsTask().WaitAsync(TimeSpan.FromSeconds(3))
             );
             Assert.Equal(cts.Token, ex.CancellationToken);
 
@@ -1009,10 +1010,11 @@ namespace System.Net.Quic.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                OpenStreamAsync(clientConnection, cts.Token)
-                    .AsTask()
-                    .WaitAsync(TimeSpan.FromSeconds(3))
+            var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () =>
+                    OpenStreamAsync(clientConnection, cts.Token)
+                        .AsTask()
+                        .WaitAsync(TimeSpan.FromSeconds(3))
             );
             Assert.Equal(cts.Token, ex.CancellationToken);
 
@@ -1601,8 +1603,8 @@ namespace System.Net.Quic.Tests
                 new SslApplicationProtocol("someprotocol");
 
             await Assert
-                .ThrowsAsync<AuthenticationException>(async () =>
-                    await CreateQuicConnection(clientOptions)
+                .ThrowsAsync<AuthenticationException>(
+                    async () => await CreateQuicConnection(clientOptions)
                 )
                 .WaitAsync(TimeSpan.FromSeconds(30));
         }

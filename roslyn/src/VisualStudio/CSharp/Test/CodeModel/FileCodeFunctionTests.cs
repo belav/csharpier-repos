@@ -269,8 +269,8 @@ public class Ref<T> where T : Entity
         public void GetStartPoint_Attributes()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
             );
         }
 
@@ -278,8 +278,8 @@ public class Ref<T> where T : Entity
         public void GetStartPoint_AttributesWithDelimiter()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<COMException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            Assert.Throws<COMException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
             );
         }
 
@@ -298,8 +298,8 @@ public class Ref<T> where T : Entity
         public void GetStartPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
             );
         }
 
@@ -318,8 +318,8 @@ public class Ref<T> where T : Entity
         public void GetStartPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
             );
         }
 
@@ -327,8 +327,8 @@ public class Ref<T> where T : Entity
         public void GetStartPoint_Name()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartName)
             );
         }
 
@@ -358,8 +358,8 @@ public class Ref<T> where T : Entity
         public void GetStartPoint_Whole()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
             );
         }
 
@@ -378,8 +378,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_Attributes()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
             );
         }
 
@@ -387,8 +387,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_AttributesWithDelimiter()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<COMException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            Assert.Throws<COMException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
             );
         }
 
@@ -407,8 +407,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
             );
         }
 
@@ -416,8 +416,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_Header()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
             );
         }
 
@@ -425,8 +425,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
             );
         }
 
@@ -434,8 +434,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_Name()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartName)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartName)
             );
         }
 
@@ -454,8 +454,8 @@ public class Ref<T> where T : Entity
         public void GetEndPoint_Whole()
         {
             var testObject = GetCodeFunction("A", "MethodA");
-            Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
             );
         }
 
@@ -540,8 +540,12 @@ public class Ref<T> where T : Entity
             var virtualTreePoint = new VirtualTreePoint(tree, text, position);
             var textPoint = new MockTextPoint(virtualTreePoint);
 
-            Assert.Throws<COMException>(() =>
-                (GetCodeModel()).CodeElementFromPoint(textPoint, vsCMElement.vsCMElementFunction)
+            Assert.Throws<COMException>(
+                () =>
+                    (GetCodeModel()).CodeElementFromPoint(
+                        textPoint,
+                        vsCMElement.vsCMElementFunction
+                    )
             );
 
             var element = (GetCodeModel()).CodeElementFromPoint(

@@ -16,11 +16,11 @@ namespace System.Security.Cryptography.Tests
             var rsa = new EmptyRSA();
             Assert.Throws<NotImplementedException>(() => rsa.Decrypt(null, null));
             Assert.Throws<NotImplementedException>(() => rsa.Encrypt(null, null));
-            Assert.Throws<NotImplementedException>(() =>
-                rsa.SignHash(null, HashAlgorithmName.SHA256, null)
+            Assert.Throws<NotImplementedException>(
+                () => rsa.SignHash(null, HashAlgorithmName.SHA256, null)
             );
-            Assert.Throws<NotImplementedException>(() =>
-                rsa.VerifyHash(null, null, HashAlgorithmName.SHA256, null)
+            Assert.Throws<NotImplementedException>(
+                () => rsa.VerifyHash(null, null, HashAlgorithmName.SHA256, null)
             );
         }
 
@@ -674,12 +674,13 @@ namespace System.Security.Cryptography.Tests
                 rsa.KeySize = KeySizeInBits;
                 rsa.TrySignDataDelegate = TrySignData;
 
-                Assert.Throws<CryptographicException>(() =>
-                    rsa.SignData(
-                        (ReadOnlySpan<byte>)new byte[] { 1, 2, 3 },
-                        HashAlgorithmName.SHA256,
-                        RSASignaturePadding.Pss
-                    )
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        rsa.SignData(
+                            (ReadOnlySpan<byte>)new byte[] { 1, 2, 3 },
+                            HashAlgorithmName.SHA256,
+                            RSASignaturePadding.Pss
+                        )
                 );
             }
         }
@@ -1035,12 +1036,13 @@ namespace System.Security.Cryptography.Tests
                 rsa.KeySize = KeySizeInBits;
                 rsa.TrySignHashDelegate = TrySignHash;
 
-                Assert.Throws<CryptographicException>(() =>
-                    rsa.SignHash(
-                        (ReadOnlySpan<byte>)new byte[20],
-                        HashAlgorithmName.SHA1,
-                        RSASignaturePadding.Pkcs1
-                    )
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        rsa.SignHash(
+                            (ReadOnlySpan<byte>)new byte[20],
+                            HashAlgorithmName.SHA1,
+                            RSASignaturePadding.Pkcs1
+                        )
                 );
             }
         }
@@ -1392,11 +1394,12 @@ namespace System.Security.Cryptography.Tests
                 rsa.KeySize = KeySizeInBits;
                 rsa.TryEncryptDelegate = TryEncrypt;
 
-                Assert.Throws<CryptographicException>(() =>
-                    rsa.Encrypt(
-                        (ReadOnlySpan<byte>)new byte[] { 1, 2, 3 },
-                        RSAEncryptionPadding.Pkcs1
-                    )
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        rsa.Encrypt(
+                            (ReadOnlySpan<byte>)new byte[] { 1, 2, 3 },
+                            RSAEncryptionPadding.Pkcs1
+                        )
                 );
             }
         }
@@ -1499,11 +1502,12 @@ namespace System.Security.Cryptography.Tests
                 rsa.KeySize = KeySizeInBits;
                 rsa.TryDecryptDelegate = TryDecrypt;
 
-                Assert.Throws<CryptographicException>(() =>
-                    rsa.Decrypt(
-                        new ReadOnlySpan<byte>(new byte[KeySizeInBits / 8]),
-                        RSAEncryptionPadding.Pkcs1
-                    )
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        rsa.Decrypt(
+                            new ReadOnlySpan<byte>(new byte[KeySizeInBits / 8]),
+                            RSAEncryptionPadding.Pkcs1
+                        )
                 );
             }
         }

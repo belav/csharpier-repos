@@ -137,8 +137,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            middleware.Invoke(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => middleware.Invoke(httpContext)
         );
 
         // Assert
@@ -176,8 +176,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            middleware.Invoke(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => middleware.Invoke(httpContext)
         );
 
         // Assert
@@ -299,8 +299,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            middleware.Invoke(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => middleware.Invoke(httpContext)
         );
 
         // Assert
@@ -423,8 +423,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            middleware.Invoke(httpContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => middleware.Invoke(httpContext)
         );
 
         // Assert
