@@ -685,8 +685,8 @@ public class DbFunctionTest
                 nameof(MyDerivedContext.QueryableNoParams)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => modelBuilder.HasDbFunction(queryableNoParams).IsNullable()
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder.HasDbFunction(queryableNoParams).IsNullable()
                 )
                 .Message
         );
@@ -845,9 +845,8 @@ public class DbFunctionTest
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty"))
+                .Throws<InvalidOperationException>(() =>
+                    dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty"))
                 )
                 .Message
         );
@@ -857,11 +856,10 @@ public class DbFunctionTest
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty")
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    ((IConventionDbFunction)dbFunction).SetTranslation(
+                        args => new SqlFragmentExpression("Empty")
+                    )
                 )
                 .Message
         );
@@ -869,12 +867,11 @@ public class DbFunctionTest
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty"),
-                            fromDataAnnotation: true
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    ((IConventionDbFunction)dbFunction).SetTranslation(
+                        args => new SqlFragmentExpression("Empty"),
+                        fromDataAnnotation: true
+                    )
                 )
                 .Message
         );
@@ -882,8 +879,8 @@ public class DbFunctionTest
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => dbFunction.Translation = args => new SqlFragmentExpression("Empty")
+                .Throws<InvalidOperationException>(() =>
+                    dbFunction.Translation = args => new SqlFragmentExpression("Empty")
                 )
                 .Message
         );

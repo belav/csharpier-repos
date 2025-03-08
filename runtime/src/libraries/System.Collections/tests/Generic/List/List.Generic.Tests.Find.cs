@@ -54,8 +54,8 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(int.MinValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MinValue, predicate)
             ); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             if (0 < list.Count)
@@ -65,18 +65,18 @@ namespace System.Collections.Tests
             }
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count + 1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count + 1, predicate)
             ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count, predicate)
             ); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(int.MaxValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MaxValue, predicate)
             ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
         }
 
@@ -98,47 +98,47 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(int.MinValue, 0, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(int.MinValue, 0, predicate)
             ); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify index=-1
             Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(-1, 0, predicate)); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(list.Count + 1, 0, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(list.Count + 1, 0, predicate)
             ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(list.Count, 1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(list.Count, 1, predicate)
             ); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(int.MaxValue, 0, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(int.MaxValue, 0, predicate)
             ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
             count
             ******************************************************************************/
             //[] Verify count=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(0, int.MinValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(0, int.MinValue, predicate)
             ); //Err_948ahid Expected count=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify count=-1
             Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(0, -1, predicate)); //"Err_328ahuaw Expected count=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(0, list.Count + 1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(0, list.Count + 1, predicate)
             ); //"Err_488ajdi Expected count=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(0, int.MaxValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(0, int.MaxValue, predicate)
             ); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
@@ -147,13 +147,12 @@ namespace System.Collections.Tests
             if (0 < count)
             {
                 //[] Verify index=1 count=list.Length
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => list.FindIndex(1, count, predicate)
+                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(1, count, predicate)
                 ); //"Err_018188avbiw Expected index=1 count=list.Length to throw ArgumentOutOfRangeException"
 
                 //[] Verify index=0 count=list.Length + 1
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => list.FindIndex(0, count + 1, predicate)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindIndex(0, count + 1, predicate)
                 ); //"Err_6848ajiodxbz Expected index=0 count=list.Length + 1 to throw ArgumentOutOfRangeException"
             }
         }
@@ -173,54 +172,54 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(int.MinValue, 0, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MinValue, 0, predicate)
             ); //Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             if (0 < list.Count)
             {
                 //[] Verify index=-1
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => list.FindLastIndex(-1, 0, predicate)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindLastIndex(-1, 0, predicate)
                 ); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
             }
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count + 1, 0, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count + 1, 0, predicate)
             ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count, 1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count, 1, predicate)
             ); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(int.MaxValue, 0, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MaxValue, 0, predicate)
             ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
             count
             ******************************************************************************/
             //[] Verify count=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count - 1, int.MinValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, int.MinValue, predicate)
             ); //"Err_948ahid Expected count=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify count=-1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count - 1, -1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, -1, predicate)
             ); //"Err_328ahuaw Expected count=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count - 1, list.Count + 1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, list.Count + 1, predicate)
             ); //"Err_488ajdi Expected count=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindLastIndex(list.Count - 1, int.MaxValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, int.MaxValue, predicate)
             ); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
@@ -229,13 +228,13 @@ namespace System.Collections.Tests
             if (0 < count)
             {
                 //[] Verify index=1 count=list.Length
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => list.FindLastIndex(count - 2, count, predicate)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindLastIndex(count - 2, count, predicate)
                 ); //"Err_018188avbiw Expected index=1 count=list.Length to throw ArgumentOutOfRangeException"
 
                 //[] Verify index=0 count=list.Length + 1
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => list.FindLastIndex(count - 1, count + 1, predicate)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindLastIndex(count - 1, count + 1, predicate)
                 ); //"Err_6848ajiodxbz Expected index=0 count=list.Length + 1 to throw ArgumentOutOfRangeException"
             }
         }
@@ -258,21 +257,19 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(int.MinValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MinValue, predicate)
             ); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify index=-1
             Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(-1, predicate)); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(list.Count + 1, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(list.Count + 1, predicate)
             ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.FindIndex(int.MaxValue, predicate)
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MaxValue, predicate)
             ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
         }
 

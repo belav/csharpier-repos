@@ -23,25 +23,24 @@ namespace System.Net.Http.Formatting
         // sample only; avoids types DataContractJsonSerializer fails to round trip (e.g. Guid, Uint16).  May require
         // known types or similar (de)serializer configuration.
         public static readonly RefTypeTestData<object> BunchOfTypedObjectsTestData =
-            new RefTypeTestData<object>(
-                () =>
-                    new List<object>
-                    {
-                        null,
-                        String.Empty,
-                        "This is a string",
-                        false,
-                        true,
-                        Double.MinValue,
-                        Double.MaxValue,
-                        Int32.MinValue,
-                        Int32.MaxValue,
-                        Int64.MinValue,
-                        Int64.MaxValue,
+            new RefTypeTestData<object>(() =>
+                new List<object>
+                {
+                    null,
+                    String.Empty,
+                    "This is a string",
+                    false,
+                    true,
+                    Double.MinValue,
+                    Double.MaxValue,
+                    Int32.MinValue,
+                    Int32.MaxValue,
+                    Int64.MinValue,
+                    Int64.MaxValue,
 #if !NETCOREAPP2_1 // DBNull not serializable on .NET Core 2.1.
-                        DBNull.Value,
+                    DBNull.Value,
 #endif
-                    }
+                }
             );
 
         public static readonly TheoryDataSet<Type> AFewValidTypes = new()
@@ -133,8 +132,8 @@ namespace System.Net.Http.Formatting
                 null
             );
             stream.Position = 0;
-            await Assert.ThrowsAsync<SerializationException>(
-                () => formatter.ReadFromStreamAsync(typeof(SampleType), stream, null, null)
+            await Assert.ThrowsAsync<SerializationException>(() =>
+                formatter.ReadFromStreamAsync(typeof(SampleType), stream, null, null)
             );
         }
 #endif

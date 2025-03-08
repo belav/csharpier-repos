@@ -55,8 +55,8 @@ namespace System.Text.Json.Serialization.Tests
             var factory = (JsonConverterFactory)Activator.CreateInstance(converterType);
 
             Assert.False(factory.CanConvert(unsupportedType));
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () => factory.CreateConverter(unsupportedType, options)
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                factory.CreateConverter(unsupportedType, options)
             );
             Assert.Contains(unsupportedType.FullName, ex.Message);
         }
@@ -104,8 +104,8 @@ namespace System.Text.Json.Serialization.Tests
             var factory = (JsonConverterFactory)Activator.CreateInstance(converterType);
 
             Assert.False(factory.CanConvert(unsupportedType));
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () => factory.CreateConverter(unsupportedType, options)
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                factory.CreateConverter(unsupportedType, options)
             );
             Assert.Contains(unsupportedType.FullName, ex.Message);
         }
@@ -160,26 +160,25 @@ namespace System.Text.Json.Serialization.Tests
 
             // Quoted numbers should throw
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DayOfWeek>("1", options));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>("-1", options)
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DayOfWeek>("-1", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@"""1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@"""1""", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@"""+1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@"""+1""", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@"""-1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@"""-1""", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@""" 1 """, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@""" 1 """, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@""" +1 """, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@""" +1 """, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@""" -1 """, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@""" -1 """, options)
             );
 
             day = JsonSerializer.Deserialize<DayOfWeek>(@"""Monday""", options);
@@ -199,8 +198,8 @@ namespace System.Text.Json.Serialization.Tests
                 new ToLowerNamingPolicy(),
                 false
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DayOfWeek>(@"""1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>(@"""1""", options)
             );
         }
 
@@ -290,34 +289,34 @@ namespace System.Text.Json.Serialization.Tests
                 allowIntegerValues: false
             );
             // Not permitting integers should throw
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Serialize((FileAttributes)(-1), options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Serialize((FileAttributes)(-1), options)
             );
 
             // Numbers should throw
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>("1", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>("1", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>("-1", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>("-1", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>(@"""1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>(@"""1""", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>(@"""+1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>(@"""+1""", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>(@"""-1""", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>(@"""-1""", options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>(@""" 1 """, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>(@""" 1 """, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>(@""" +1 """, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>(@""" +1 """, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<FileAttributes>(@""" -1 """, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<FileAttributes>(@""" -1 """, options)
             );
 
             attributes = JsonSerializer.Deserialize<FileAttributes>(@"""ReadOnly""", options);
@@ -863,8 +862,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(BindingFlags.Static | BindingFlags.Public, bindingFlags);
 
             // Null not supported.
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<BindingFlags>("null", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<BindingFlags>("null", options)
             );
 
             // Null supported for nullable enum.
@@ -889,21 +888,19 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, dict[BindingFlags.NonPublic | BindingFlags.Public]);
 
             // DictionaryKeyPolicy not honored for dict key deserialization.
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<Dictionary<BindingFlags, int>>(
-                        @"{""NonPublic0, Public0"": 1}",
-                        options
-                    )
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<BindingFlags, int>>(
+                    @"{""NonPublic0, Public0"": 1}",
+                    options
+                )
             );
 
             // EnumConverter naming policy not honored.
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<Dictionary<BindingFlags, int>>(
-                        @"{""non_public, static"": 0, ""NonPublic, Public"": 1}",
-                        options
-                    )
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<BindingFlags, int>>(
+                    @"{""non_public, static"": 0, ""NonPublic, Public"": 1}",
+                    options
+                )
             );
         }
 
@@ -919,12 +916,11 @@ namespace System.Text.Json.Serialization.Tests
             options.DictionaryKeyPolicy = JsonNamingPolicy.KebabCaseUpper;
 
             // DictionaryKeyPolicy not honored for dict key deserialization.
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<Dictionary<BindingFlags, int>>(
-                        @"{""NON-PUBLIC, PUBLIC"": 1}",
-                        options
-                    )
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<BindingFlags, int>>(
+                    @"{""NON-PUBLIC, PUBLIC"": 1}",
+                    options
+                )
             );
 
             // EnumConverter naming policy honored.
@@ -990,41 +986,41 @@ namespace System.Text.Json.Serialization.Tests
                 allowIntegerValues: false
             );
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@"""1""", enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@"""1""", enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@"""+1""", enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@"""+1""", enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@"""-1""", enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@"""-1""", enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@""" 1 """, enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@""" 1 """, enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@""" +1 """, enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@""" +1 """, enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@""" -1 """, enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@""" -1 """, enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@$"""{ulong.MaxValue}""", enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@$"""{ulong.MaxValue}""", enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@$""" {ulong.MaxValue} """, enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@$""" {ulong.MaxValue} """, enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@$"""+{ulong.MaxValue}""", enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@$"""+{ulong.MaxValue}""", enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@$""" +{ulong.MaxValue} """, enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@$""" +{ulong.MaxValue} """, enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@$"""{long.MinValue}""", enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@$"""{long.MinValue}""", enumType, options)
             );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize(@$""" {long.MinValue} """, enumType, options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize(@$""" {long.MinValue} """, enumType, options)
             );
         }
 

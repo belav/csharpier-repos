@@ -410,35 +410,33 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
     public virtual async Task Include_Union_only_on_one_side_throws(bool async)
     {
         var message1 = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .Where(c => c.City == "Berlin")
-                                .Include(c => c.Orders)
-                                .Union(ss.Set<Customer>().Where(c => c.City == "London"))
-                    )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .Where(c => c.City == "Berlin")
+                            .Include(c => c.Orders)
+                            .Union(ss.Set<Customer>().Where(c => c.City == "London"))
+                )
             )
         ).Message;
 
         Assert.Equal(CoreStrings.SetOperationWithDifferentIncludesInOperands, message1);
 
         var message2 = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .Where(c => c.City == "Berlin")
-                                .Union(
-                                    ss.Set<Customer>()
-                                        .Where(c => c.City == "London")
-                                        .Include(c => c.Orders)
-                                )
-                    )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .Where(c => c.City == "Berlin")
+                            .Union(
+                                ss.Set<Customer>()
+                                    .Where(c => c.City == "London")
+                                    .Include(c => c.Orders)
+                            )
+                )
             )
         ).Message;
 
@@ -450,21 +448,20 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
     public virtual async Task Include_Union_different_includes_throws(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .Where(c => c.City == "Berlin")
-                                .Include(c => c.Orders)
-                                .Union(
-                                    ss.Set<Customer>()
-                                        .Where(c => c.City == "London")
-                                        .Include(c => c.Orders)
-                                        .ThenInclude(o => o.OrderDetails)
-                                )
-                    )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .Where(c => c.City == "Berlin")
+                            .Include(c => c.Orders)
+                            .Union(
+                                ss.Set<Customer>()
+                                    .Where(c => c.City == "London")
+                                    .Include(c => c.Orders)
+                                    .ThenInclude(o => o.OrderDetails)
+                            )
+                )
             )
         ).Message;
 

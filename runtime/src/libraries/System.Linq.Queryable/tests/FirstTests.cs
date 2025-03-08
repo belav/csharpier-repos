@@ -40,8 +40,8 @@ namespace System.Linq.Tests
         public void ManyElementsPredicateFalseForAll()
         {
             int[] source = { 9, 5, 1, 3, 17, 21 };
-            Assert.Throws<InvalidOperationException>(
-                () => source.AsQueryable().First(i => i % 2 == 0)
+            Assert.Throws<InvalidOperationException>(() =>
+                source.AsQueryable().First(i => i % 2 == 0)
             );
         }
 

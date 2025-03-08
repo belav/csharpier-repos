@@ -162,8 +162,8 @@ namespace System.IO.Tests
         [Fact]
         public static void FileSystemEventArgs_ctor_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new FileSystemEventArgs((WatcherChangeTypes)0, null, "foo.txt")
+            Assert.Throws<ArgumentNullException>(() =>
+                new FileSystemEventArgs((WatcherChangeTypes)0, null, "foo.txt")
             );
         }
     }

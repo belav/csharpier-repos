@@ -42,8 +42,8 @@ public abstract class TPCInheritanceQueryTestBase<TFixture> : InheritanceQueryTe
         using var context = CreateContext();
 
         var message = Assert
-            .Throws<InvalidOperationException>(
-                () => context.Set<Bird>().FromSqlRaw("Select * from Birds")
+            .Throws<InvalidOperationException>(() =>
+                context.Set<Bird>().FromSqlRaw("Select * from Birds")
             )
             .Message;
 
@@ -53,8 +53,8 @@ public abstract class TPCInheritanceQueryTestBase<TFixture> : InheritanceQueryTe
         );
 
         message = Assert
-            .Throws<InvalidOperationException>(
-                () => context.Set<Bird>().FromSqlInterpolated($"Select * from Birds")
+            .Throws<InvalidOperationException>(() =>
+                context.Set<Bird>().FromSqlInterpolated($"Select * from Birds")
             )
             .Message;
 
@@ -67,8 +67,8 @@ public abstract class TPCInheritanceQueryTestBase<TFixture> : InheritanceQueryTe
         );
 
         message = Assert
-            .Throws<InvalidOperationException>(
-                () => context.Set<Bird>().FromSql($"Select * from Birds")
+            .Throws<InvalidOperationException>(() =>
+                context.Set<Bird>().FromSql($"Select * from Birds")
             )
             .Message;
 

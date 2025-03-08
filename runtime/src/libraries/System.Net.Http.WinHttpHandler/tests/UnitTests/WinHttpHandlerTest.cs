@@ -272,8 +272,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     TestServer.FakeServerEndpoint
                 );
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => client.SendAsync(request)
+                await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
                 );
             }
         }
@@ -451,8 +450,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     TestServer.FakeServerEndpoint
                 );
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => client.SendAsync(request)
+                await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
                 );
             }
         }
@@ -472,8 +470,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     TestServer.FakeServerEndpoint
                 );
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => client.SendAsync(request)
+                await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
                 );
             }
         }
@@ -1217,13 +1214,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 var content = new StringContent(new string('a', 1000));
                 request.Content = content;
 
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () =>
-                        client.SendAsync(
-                            request,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        )
+                await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                    client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token)
                 );
             }
         }
@@ -1238,13 +1230,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, TestServer.FakeServerEndpoint);
 
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () =>
-                        client.SendAsync(
-                            request,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        )
+                await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                    client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token)
                 );
             }
         }
@@ -1259,13 +1246,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, TestServer.FakeServerEndpoint);
 
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () =>
-                        client.SendAsync(
-                            request,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        )
+                await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                    client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token)
                 );
             }
         }
@@ -1279,8 +1261,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
             TestControl.WinHttpOpen.ErrorWithApiCall = true;
 
-            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(
-                () => client.SendAsync(request)
+            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                client.SendAsync(request)
             );
             Assert.Equal(typeof(WinHttpException), ex.InnerException.GetType());
         }

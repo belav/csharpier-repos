@@ -255,8 +255,8 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
             envConfigSrc.Load(dict);
 
             Assert.Equal("connection", envConfigSrc.Get("test:ConnectionString"));
-            Assert.Throws<InvalidOperationException>(
-                () => envConfigSrc.Get("ConnectionStrings:db1_ProviderName")
+            Assert.Throws<InvalidOperationException>(() =>
+                envConfigSrc.Get("ConnectionStrings:db1_ProviderName")
             );
         }
 

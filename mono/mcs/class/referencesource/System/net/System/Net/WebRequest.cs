@@ -988,13 +988,12 @@ namespace System.Net
             }
             else
             {
-                return Task.Run(
-                    () =>
-                        Task<Stream>.Factory.FromAsync(
-                            this.BeginGetRequestStream,
-                            this.EndGetRequestStream,
-                            null
-                        )
+                return Task.Run(() =>
+                    Task<Stream>.Factory.FromAsync(
+                        this.BeginGetRequestStream,
+                        this.EndGetRequestStream,
+                        null
+                    )
                 );
             }
         }
@@ -1042,13 +1041,12 @@ namespace System.Net
             }
             else
             {
-                return Task.Run(
-                    () =>
-                        Task<WebResponse>.Factory.FromAsync(
-                            this.BeginGetResponse,
-                            this.EndGetResponse,
-                            null
-                        )
+                return Task.Run(() =>
+                    Task<WebResponse>.Factory.FromAsync(
+                        this.BeginGetResponse,
+                        this.EndGetResponse,
+                        null
+                    )
                 );
             }
         }

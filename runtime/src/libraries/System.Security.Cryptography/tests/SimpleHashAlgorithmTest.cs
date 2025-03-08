@@ -120,8 +120,7 @@ namespace System.Security.Cryptography.Tests
             using (HashAlgorithm hash = new Length32Hash())
             {
                 Assert.Throws<ArgumentNullException>(() => hash.ComputeHash((byte[])null, 0, 0));
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => hash.ComputeHash(s_tenBytes, -1, 0)
+                Assert.Throws<ArgumentOutOfRangeException>(() => hash.ComputeHash(s_tenBytes, -1, 0)
                 );
                 AssertExtensions.Throws<ArgumentException>(
                     null,

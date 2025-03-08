@@ -241,8 +241,8 @@ class Tester : Base
     async Task<int> ArrayAccessTest_8()
     {
         var s = new byte?[] { 3, 2, 1 };
-        var r = s[await Task.Factory.StartNew(() => 1)] += await Task.Factory.StartNew(
-            () => (byte)30
+        var r = s[await Task.Factory.StartNew(() => 1)] += await Task.Factory.StartNew(() =>
+            (byte)30
         );
         if (r != 32)
             return 1;

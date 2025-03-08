@@ -607,25 +607,23 @@ namespace System.Reflection.Metadata
             );
 
             // Tests fail on non-runtime assemblies
-            Assert.Throws<ArgumentException>(
-                () =>
-                    MetadataUpdater.ApplyUpdate(
-                        new NonRuntimeAssembly(),
-                        new ReadOnlySpan<byte>(metadataDelta),
-                        new ReadOnlySpan<byte>(ilDelta),
-                        ReadOnlySpan<byte>.Empty
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                MetadataUpdater.ApplyUpdate(
+                    new NonRuntimeAssembly(),
+                    new ReadOnlySpan<byte>(metadataDelta),
+                    new ReadOnlySpan<byte>(ilDelta),
+                    ReadOnlySpan<byte>.Empty
+                )
             );
 
             // Tests that this assembly isn't not editable
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    MetadataUpdater.ApplyUpdate(
-                        typeof(AssemblyExtensions).Assembly,
-                        new ReadOnlySpan<byte>(metadataDelta),
-                        new ReadOnlySpan<byte>(ilDelta),
-                        ReadOnlySpan<byte>.Empty
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataUpdater.ApplyUpdate(
+                    typeof(AssemblyExtensions).Assembly,
+                    new ReadOnlySpan<byte>(metadataDelta),
+                    new ReadOnlySpan<byte>(ilDelta),
+                    ReadOnlySpan<byte>.Empty
+                )
             );
         }
 
@@ -1159,8 +1157,8 @@ namespace System.Reflection.Metadata
 
                 ApplyUpdateUtil.ApplyUpdate(assm);
 
-                InvalidOperationException exn = Assert.Throws<InvalidOperationException>(
-                    () => x.ExistingMethod("spqr")
+                InvalidOperationException exn = Assert.Throws<InvalidOperationException>(() =>
+                    x.ExistingMethod("spqr")
                 );
 
                 Assert.Equal("spqr", exn.Message);

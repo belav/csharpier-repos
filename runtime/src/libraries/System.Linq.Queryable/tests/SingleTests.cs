@@ -33,8 +33,8 @@ namespace System.Linq.Tests
         public void EmptySourceWithPredicate()
         {
             int[] source = { };
-            Assert.Throws<InvalidOperationException>(
-                () => source.AsQueryable().Single(i => i % 2 == 0)
+            Assert.Throws<InvalidOperationException>(() =>
+                source.AsQueryable().Single(i => i % 2 == 0)
             );
         }
 
@@ -42,8 +42,8 @@ namespace System.Linq.Tests
         public void ManyElementsPredicateFalseForAll()
         {
             int[] source = { 3, 1, 7, 9, 13, 19 };
-            Assert.Throws<InvalidOperationException>(
-                () => source.AsQueryable().Single(i => i % 2 == 0)
+            Assert.Throws<InvalidOperationException>(() =>
+                source.AsQueryable().Single(i => i % 2 == 0)
             );
         }
 

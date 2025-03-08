@@ -57,8 +57,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceProvider = new RequiredServiceSupportingProvider();
 
             // Act + Assert
-            AssertExtensions.Throws<RankException>(
-                () => serviceProvider.GetRequiredService<IFoo>()
+            AssertExtensions.Throws<RankException>(() => serviceProvider.GetRequiredService<IFoo>()
             );
         }
 
@@ -82,8 +81,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceProvider = new RequiredServiceSupportingProvider();
 
             // Act + Assert
-            AssertExtensions.Throws<RankException>(
-                () => serviceProvider.GetRequiredService(typeof(IFoo))
+            AssertExtensions.Throws<RankException>(() =>
+                serviceProvider.GetRequiredService(typeof(IFoo))
             );
         }
 

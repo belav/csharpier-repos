@@ -138,8 +138,8 @@ public class PropertyBagEntityTypeTest
                 "Dictionary<string, object>"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => orderEntityType.HasOne("Customer", "Customer")
+                .Throws<InvalidOperationException>(() =>
+                    orderEntityType.HasOne("Customer", "Customer")
                 )
                 .Message
         );
@@ -154,8 +154,8 @@ public class PropertyBagEntityTypeTest
         Assert.Equal(
             CoreStrings.NoClrNavigation("CustomerNavigation", typeof(Order).ShortDisplayName()),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
+                .Throws<InvalidOperationException>(() =>
+                    orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
                 )
                 .Message
         );

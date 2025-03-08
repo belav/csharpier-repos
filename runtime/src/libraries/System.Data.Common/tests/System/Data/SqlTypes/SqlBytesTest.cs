@@ -309,8 +309,8 @@ namespace System.Data.Tests.SqlTypes
             byte[] b2 = new byte[10];
             SqlBytes bytes = new SqlBytes(b2);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => bytes.Write(0, b1, b1.Length + 5, b1.Length)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                bytes.Write(0, b1, b1.Length + 5, b1.Length)
             );
         }
 

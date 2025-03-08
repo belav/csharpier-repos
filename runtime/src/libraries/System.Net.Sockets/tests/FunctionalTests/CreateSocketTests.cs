@@ -99,8 +99,7 @@ namespace System.Net.Sockets.Tests
             ProtocolType protocolType
         )
         {
-            Assert.Throws<SocketException>(
-                () => new Socket(addressFamily, socketType, protocolType)
+            Assert.Throws<SocketException>(() => new Socket(addressFamily, socketType, protocolType)
             );
         }
 
@@ -133,8 +132,8 @@ namespace System.Net.Sockets.Tests
             ProtocolType protocolType
         )
         {
-            SocketException e = Assert.Throws<SocketException>(
-                () => new Socket(addressFamily, SocketType.Raw, protocolType)
+            SocketException e = Assert.Throws<SocketException>(() =>
+                new Socket(addressFamily, SocketType.Raw, protocolType)
             );
             Assert.Contains(
                 e.SocketErrorCode,
@@ -586,8 +585,8 @@ namespace System.Net.Sockets.Tests
                     );
                     Assert.False(listenerCopy.Connected);
                     // This will throw if _isListening is set internally. (before reaching any real code)
-                    Assert.Throws<InvalidOperationException>(
-                        () => listenerCopy.Connect(new IPEndPoint(IPAddress.Loopback, 0))
+                    Assert.Throws<InvalidOperationException>(() =>
+                        listenerCopy.Connect(new IPEndPoint(IPAddress.Loopback, 0))
                     );
 
                     Assert.Equal(listener.AddressFamily, listenerCopy.AddressFamily);

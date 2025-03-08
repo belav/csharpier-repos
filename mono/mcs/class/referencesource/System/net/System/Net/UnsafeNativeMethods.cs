@@ -4296,8 +4296,8 @@ namespace System.Net
         internal class AppXHelper
         {
             [SecuritySafeCritical]
-            internal static Lazy<IntPtr> PrimaryWindowHandle = new Lazy<IntPtr>(
-                () => GetPrimaryWindowHandle()
+            internal static Lazy<IntPtr> PrimaryWindowHandle = new Lazy<IntPtr>(() =>
+                GetPrimaryWindowHandle()
             );
 
             [SecuritySafeCritical]

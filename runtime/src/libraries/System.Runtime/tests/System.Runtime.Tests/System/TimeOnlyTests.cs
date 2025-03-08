@@ -805,11 +805,11 @@ namespace System.Tests
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "r"));
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "O"));
 
-                Assert.Throws<FormatException>(
-                    () => timeOnly.TryFormat(stackalloc char[100], out charsWritten, "u")
+                Assert.Throws<FormatException>(() =>
+                    timeOnly.TryFormat(stackalloc char[100], out charsWritten, "u")
                 );
-                Assert.Throws<FormatException>(
-                    () => timeOnly.TryFormat(stackalloc char[100], out charsWritten, "dd-yyyy")
+                Assert.Throws<FormatException>(() =>
+                    timeOnly.TryFormat(stackalloc char[100], out charsWritten, "dd-yyyy")
                 );
                 Assert.Throws<FormatException>(() => $"{timeOnly:u}");
                 Assert.Throws<FormatException>(() => $"{timeOnly:dd-yyyy}");
@@ -838,11 +838,11 @@ namespace System.Tests
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out bytesWritten, "r"));
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out bytesWritten, "O"));
 
-                Assert.Throws<FormatException>(
-                    () => timeOnly.TryFormat(new byte[100], out bytesWritten, "u")
+                Assert.Throws<FormatException>(() =>
+                    timeOnly.TryFormat(new byte[100], out bytesWritten, "u")
                 );
-                Assert.Throws<FormatException>(
-                    () => timeOnly.TryFormat(new byte[100], out bytesWritten, "dd-yyyy")
+                Assert.Throws<FormatException>(() =>
+                    timeOnly.TryFormat(new byte[100], out bytesWritten, "dd-yyyy")
                 );
                 Assert.Throws<FormatException>(() => $"{timeOnly:u}");
                 Assert.Throws<FormatException>(() => $"{timeOnly:dd-yyyy}");

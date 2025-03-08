@@ -110,8 +110,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_InvalidPattern_ThrowsInvalidOperationException(string pattern)
         {
             var attribute = new RegularExpressionAttribute(pattern);
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 
@@ -139,12 +139,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
             {
                 MatchTimeoutInMilliseconds = 1,
             };
-            Assert.Throws<RegexMatchTimeoutException>(
-                () =>
-                    attribute.Validate(
-                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaa>",
-                        new ValidationContext(new object())
-                    )
+            Assert.Throws<RegexMatchTimeoutException>(() =>
+                attribute.Validate(
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaa>",
+                    new ValidationContext(new object())
+                )
             );
         }
 
@@ -152,8 +151,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_InvalidPattern_ThrowsArgumentException()
         {
             RegularExpressionAttribute attribute = new RegularExpressionAttribute("foo(?<1bar)");
-            Assert.ThrowsAny<ArgumentException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.ThrowsAny<ArgumentException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 

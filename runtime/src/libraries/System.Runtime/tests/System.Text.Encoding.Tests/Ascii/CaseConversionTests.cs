@@ -20,76 +20,72 @@ namespace System.Text.Tests
             char[] charBuffer = new char[10];
 
             // byte -> byte
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToLower(byteBuffer, byteBuffer, out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(byteBuffer, byteBuffer, out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToLower(byteBuffer.AsSpan(1, 3), byteBuffer.AsSpan(3, 5), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(byteBuffer.AsSpan(1, 3), byteBuffer.AsSpan(3, 5), out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToUpper(byteBuffer, byteBuffer, out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(byteBuffer, byteBuffer, out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToUpper(byteBuffer.AsSpan(1, 3), byteBuffer.AsSpan(3, 5), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(byteBuffer.AsSpan(1, 3), byteBuffer.AsSpan(3, 5), out _)
             );
             // byte -> char
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToLower(byteBuffer, MemoryMarshal.Cast<byte, char>(byteBuffer), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(byteBuffer, MemoryMarshal.Cast<byte, char>(byteBuffer), out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Ascii.ToLower(
-                        byteBuffer,
-                        MemoryMarshal.Cast<byte, char>(byteBuffer).Slice(1, 3),
-                        out _
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(
+                    byteBuffer,
+                    MemoryMarshal.Cast<byte, char>(byteBuffer).Slice(1, 3),
+                    out _
+                )
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToUpper(byteBuffer, MemoryMarshal.Cast<byte, char>(byteBuffer), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(byteBuffer, MemoryMarshal.Cast<byte, char>(byteBuffer), out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Ascii.ToUpper(
-                        byteBuffer,
-                        MemoryMarshal.Cast<byte, char>(byteBuffer).Slice(1, 3),
-                        out _
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(
+                    byteBuffer,
+                    MemoryMarshal.Cast<byte, char>(byteBuffer).Slice(1, 3),
+                    out _
+                )
             );
             // char -> char
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToLower(charBuffer, charBuffer, out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(charBuffer, charBuffer, out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToLower(charBuffer.AsSpan(1, 3), charBuffer.AsSpan(3, 5), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(charBuffer.AsSpan(1, 3), charBuffer.AsSpan(3, 5), out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToUpper(charBuffer, charBuffer, out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(charBuffer, charBuffer, out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToUpper(charBuffer.AsSpan(1, 3), charBuffer.AsSpan(3, 5), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(charBuffer.AsSpan(1, 3), charBuffer.AsSpan(3, 5), out _)
             );
             // char -> byte
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToLower(charBuffer, MemoryMarshal.Cast<char, byte>(charBuffer), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(charBuffer, MemoryMarshal.Cast<char, byte>(charBuffer), out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Ascii.ToLower(
-                        charBuffer,
-                        MemoryMarshal.Cast<char, byte>(charBuffer).Slice(1, 3),
-                        out _
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToLower(
+                    charBuffer,
+                    MemoryMarshal.Cast<char, byte>(charBuffer).Slice(1, 3),
+                    out _
+                )
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Ascii.ToUpper(charBuffer, MemoryMarshal.Cast<char, byte>(charBuffer), out _)
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(charBuffer, MemoryMarshal.Cast<char, byte>(charBuffer), out _)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Ascii.ToUpper(
-                        charBuffer,
-                        MemoryMarshal.Cast<char, byte>(charBuffer).Slice(1, 3),
-                        out _
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Ascii.ToUpper(
+                    charBuffer,
+                    MemoryMarshal.Cast<char, byte>(charBuffer).Slice(1, 3),
+                    out _
+                )
             );
         }
 

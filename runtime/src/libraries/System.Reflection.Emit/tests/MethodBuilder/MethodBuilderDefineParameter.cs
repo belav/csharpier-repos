@@ -167,8 +167,8 @@ namespace System.Reflection.Emit.Tests
 
             Type resultType = type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(
-                () => method.DefineParameter(1, ParameterAttributes.Retval, "param1")
+            Assert.Throws<InvalidOperationException>(() =>
+                method.DefineParameter(1, ParameterAttributes.Retval, "param1")
             );
         }
 
@@ -185,8 +185,8 @@ namespace System.Reflection.Emit.Tests
 
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam")
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam")
             );
         }
 
@@ -221,11 +221,11 @@ namespace System.Reflection.Emit.Tests
                 paramTypes
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => method.DefineParameter(-1, parameterAttributes, "Param1")
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                method.DefineParameter(-1, parameterAttributes, "Param1")
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => method.DefineParameter(paramTypes.Length + 1, parameterAttributes, "Param1")
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                method.DefineParameter(paramTypes.Length + 1, parameterAttributes, "Param1")
             );
         }
 
@@ -245,11 +245,11 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod("TestMethod", methodAttributes);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => method.DefineParameter(1, parameterAttributes, "Param1")
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                method.DefineParameter(1, parameterAttributes, "Param1")
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => method.DefineParameter(-1, parameterAttributes, "Param1")
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                method.DefineParameter(-1, parameterAttributes, "Param1")
             );
         }
 

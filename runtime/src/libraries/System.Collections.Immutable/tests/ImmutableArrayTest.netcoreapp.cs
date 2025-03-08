@@ -22,8 +22,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void AsSpanEmptyRangeNotInitialized()
         {
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AsSpan(new Range(0, 0))
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AsSpan(new Range(0, 0))
             );
         }
 
@@ -43,17 +43,17 @@ namespace System.Collections.Immutable.Tests
         {
             ImmutableArray<int> array = source.ToImmutableArray();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                () => array.AsSpan(new Range(-1, 0))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                array.AsSpan(new Range(-1, 0))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                () => array.AsSpan(new Range(array.Length + 1, array.Length + 2))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                array.AsSpan(new Range(array.Length + 1, array.Length + 2))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                () => array.AsSpan(new Range(0, -1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                array.AsSpan(new Range(0, -1))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                () => array.AsSpan(new Range(0, array.Length + 1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                array.AsSpan(new Range(0, array.Length + 1))
             );
         }
     }

@@ -150,8 +150,7 @@ namespace System.Net.Http.Functional.Tests
             cts.Cancel();
 
             using var ms = new MemoryStream();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => content.CopyToAsync(ms, cts.Token)
+            await Assert.ThrowsAsync<TaskCanceledException>(() => content.CopyToAsync(ms, cts.Token)
             );
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(0, content.CreateContentReadStreamCount);
@@ -167,8 +166,7 @@ namespace System.Net.Http.Functional.Tests
             cts.Cancel();
 
             using var ms = new MemoryStream();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => content.CopyToAsync(ms, cts.Token)
+            await Assert.ThrowsAsync<TaskCanceledException>(() => content.CopyToAsync(ms, cts.Token)
             );
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(0, content.CreateContentReadStreamCount);
@@ -750,8 +748,8 @@ namespace System.Net.Http.Functional.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsStringAsync(cts.Token)
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsStringAsync(cts.Token)
                     );
                 },
                 async server =>
@@ -783,8 +781,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpCompletionOption.ResponseHeadersRead
                     );
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsStringAsync(cts.Token)
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsStringAsync(cts.Token)
                     );
                 },
                 async server =>
@@ -861,8 +859,8 @@ namespace System.Net.Http.Functional.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsByteArrayAsync(cts.Token)
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsByteArrayAsync(cts.Token)
                     );
                 },
                 async server =>
@@ -894,8 +892,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpCompletionOption.ResponseHeadersRead
                     );
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsByteArrayAsync(cts.Token)
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsByteArrayAsync(cts.Token)
                     );
                 },
                 async server =>
@@ -1010,8 +1008,8 @@ namespace System.Net.Http.Functional.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => content.ReadAsStreamAsync(cts.Token)
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                content.ReadAsStreamAsync(cts.Token)
             );
         }
 

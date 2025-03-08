@@ -35,22 +35,21 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetNullableC(true, '1'));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetNullableCOut(true, '1', out char? value3)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetNullableCOut(true, '1', out char? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddNullableC(default, default)
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableC(default, default)
         );
 
         char?[] values = new char?[] { default, default, default, default, default };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddNullableCs(values, values.Length)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableCs(values, values.Length)
         );
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddNullableCs(in values[0], values.Length)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableCs(in values[0], values.Length)
         );
     }
 }

@@ -22,29 +22,29 @@ public class NorthwindMiscellaneousQueryInMemoryTest
     public override Task Where_query_composition_entity_equality_one_element_Single(bool async)
         // Sequence contains no elements.
         =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Where_query_composition_entity_equality_one_element_Single(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Where_query_composition_entity_equality_one_element_Single(async)
         );
 
     public override Task Where_query_composition_entity_equality_one_element_First(bool async)
         // Sequence contains no elements.
         =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Where_query_composition_entity_equality_one_element_First(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Where_query_composition_entity_equality_one_element_First(async)
         );
 
     public override Task Where_query_composition_entity_equality_no_elements_Single(bool async)
         // Sequence contains no elements.
         =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Where_query_composition_entity_equality_no_elements_Single(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Where_query_composition_entity_equality_no_elements_Single(async)
         );
 
     public override Task Where_query_composition_entity_equality_no_elements_First(bool async)
         // Sequence contains no elements.
         =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Where_query_composition_entity_equality_no_elements_First(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Where_query_composition_entity_equality_no_elements_First(async)
         );
 
     public override Task Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
@@ -52,11 +52,8 @@ public class NorthwindMiscellaneousQueryInMemoryTest
     )
         // Sequence contains more than one element.
         =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
-                    async
-                )
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(async)
         );
 
     public override Task Where_query_composition_entity_equality_multiple_elements_Single(
@@ -64,13 +61,12 @@ public class NorthwindMiscellaneousQueryInMemoryTest
     )
         // Sequence contains more than one element.
         =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Where_query_composition_entity_equality_multiple_elements_Single(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Where_query_composition_entity_equality_multiple_elements_Single(async)
         );
 
     public override Task Max_on_empty_sequence_throws(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Max_on_empty_sequence_throws(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() => base.Max_on_empty_sequence_throws(async)
         );
 
     public override async Task Entity_equality_through_subquery_composite_key(bool async) =>
@@ -80,8 +76,8 @@ public class NorthwindMiscellaneousQueryInMemoryTest
                 nameof(OrderDetail)
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Entity_equality_through_subquery_composite_key(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Entity_equality_through_subquery_composite_key(async)
                 )
             ).Message
         );

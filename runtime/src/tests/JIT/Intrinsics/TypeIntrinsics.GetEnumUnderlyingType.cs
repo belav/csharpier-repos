@@ -56,8 +56,8 @@ public class GetEnumUnderlyingType
         AssertThrowsArgumentException(() => NoInline(typeof(object).GetEnumUnderlyingType()));
         AssertThrowsNullReferenceException(() => NoInline(null).GetEnumUnderlyingType());
 
-        AssertThrowsArgumentException(
-            () => typeof(GenericEnumClass<>).GetGenericArguments()[0].GetEnumUnderlyingType()
+        AssertThrowsArgumentException(() =>
+            typeof(GenericEnumClass<>).GetGenericArguments()[0].GetEnumUnderlyingType()
         );
     }
 

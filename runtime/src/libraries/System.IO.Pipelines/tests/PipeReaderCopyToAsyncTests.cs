@@ -44,8 +44,8 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public async Task CopyToAsyncThrowsTaskCanceledExceptionForAlreadyCancelledToken()
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => PipeReader.CopyToAsync(new MemoryStream(), new CancellationToken(true))
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                PipeReader.CopyToAsync(new MemoryStream(), new CancellationToken(true))
             );
         }
 

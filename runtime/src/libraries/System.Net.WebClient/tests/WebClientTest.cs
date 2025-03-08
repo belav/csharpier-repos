@@ -1132,8 +1132,8 @@ namespace System.Net.Tests
         {
             var wc = new WebClient();
             wc.Headers[headerName] = headerValue;
-            await Assert.ThrowsAsync<WebException>(
-                () => wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
+            await Assert.ThrowsAsync<WebException>(() =>
+                wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
             );
         }
 
@@ -1155,8 +1155,8 @@ namespace System.Net.Tests
             wc.Headers["Host"] = hostHeaderValue;
             if (throwsWebException)
             {
-                await Assert.ThrowsAsync<WebException>(
-                    () => wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
+                await Assert.ThrowsAsync<WebException>(() =>
+                    wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
                 );
             }
             else

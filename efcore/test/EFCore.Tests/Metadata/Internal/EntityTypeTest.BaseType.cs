@@ -201,8 +201,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.DiscriminatorPropertyMustBeOnRoot(nameof(SpecialCustomer)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => derivedType.SetDiscriminatorProperty(property)
+                .Throws<InvalidOperationException>(() =>
+                    derivedType.SetDiscriminatorProperty(property)
                 )
                 .Message
         );
@@ -222,8 +222,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.DiscriminatorPropertyNotFound("D", nameof(SpecialCustomer)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => otherType.SetDiscriminatorProperty(property)
+                .Throws<InvalidOperationException>(() =>
+                    otherType.SetDiscriminatorProperty(property)
                 )
                 .Message
         );
@@ -927,8 +927,8 @@ public partial class EntityTypeTest
                 "{'CustomerId'}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
+                .Throws<InvalidOperationException>(() =>
+                    specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
                 )
                 .Message
         );
@@ -972,8 +972,8 @@ public partial class EntityTypeTest
                 "{'CustomerId'}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => specialCustomerForeignKey.SetPrincipalToDependent("Orders")
+                .Throws<InvalidOperationException>(() =>
+                    specialCustomerForeignKey.SetPrincipalToDependent("Orders")
                 )
                 .Message
         );
@@ -1019,8 +1019,8 @@ public partial class EntityTypeTest
                 "{'Id'}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => customerForeignKey.SetPrincipalToDependent("Orders")
+                .Throws<InvalidOperationException>(() =>
+                    customerForeignKey.SetPrincipalToDependent("Orders")
                 )
                 .Message
         );
@@ -1064,8 +1064,8 @@ public partial class EntityTypeTest
                 "{'Id'}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
+                .Throws<InvalidOperationException>(() =>
+                    customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
                 )
                 .Message
         );
@@ -1213,8 +1213,8 @@ public partial class EntityTypeTest
                 nameof(Order.Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => verySpecialOrderType.BaseType = specialOrderType
+                .Throws<InvalidOperationException>(() =>
+                    verySpecialOrderType.BaseType = specialOrderType
                 )
                 .Message
         );
@@ -1412,13 +1412,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        specialOrderType.AddForeignKey(
-                            foreignKeyProperty,
-                            customerKey,
-                            customerType
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    specialOrderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
                 )
                 .Message
         );
@@ -1451,13 +1446,12 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        verySpecialOrderType.AddForeignKey(
-                            foreignKeyProperty,
-                            customerKey,
-                            customerType
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    verySpecialOrderType.AddForeignKey(
+                        foreignKeyProperty,
+                        customerKey,
+                        customerType
+                    )
                 )
                 .Message
         );
@@ -1487,8 +1481,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                .Throws<InvalidOperationException>(() =>
+                    orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
                 )
                 .Message
         );
@@ -1521,8 +1515,8 @@ public partial class EntityTypeTest
                 typeof(Customer).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                .Throws<InvalidOperationException>(() =>
+                    orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
                 )
                 .Message
         );
@@ -1733,8 +1727,8 @@ public partial class EntityTypeTest
                 Customer.IdProperty.Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => entityType.AddIndex(new[] { idProperty, idProperty })
+                .Throws<InvalidOperationException>(() =>
+                    entityType.AddIndex(new[] { idProperty, idProperty })
                 )
                 .Message
         );
@@ -1786,8 +1780,8 @@ public partial class EntityTypeTest
                 typeof(Order).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => verySpecialOrderType.AddIndex(indexProperty)
+                .Throws<InvalidOperationException>(() =>
+                    verySpecialOrderType.AddIndex(indexProperty)
                 )
                 .Message
         );

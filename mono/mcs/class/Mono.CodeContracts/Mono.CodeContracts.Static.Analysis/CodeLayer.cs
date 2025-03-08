@@ -54,14 +54,13 @@ namespace Mono.CodeContracts.Static.Analysis
             MetaDataProvider = metadataDecoder;
             ContractProvider = contractDecoder;
 
-            this.printer = new Lazy<ILPrinter<APC>>(
-                () =>
-                    PrinterFactory.Create(
-                        ILDecoder,
-                        MetaDataProvider,
-                        ExpressionToString,
-                        VariableToString
-                    )
+            this.printer = new Lazy<ILPrinter<APC>>(() =>
+                PrinterFactory.Create(
+                    ILDecoder,
+                    MetaDataProvider,
+                    ExpressionToString,
+                    VariableToString
+                )
             );
         }
 

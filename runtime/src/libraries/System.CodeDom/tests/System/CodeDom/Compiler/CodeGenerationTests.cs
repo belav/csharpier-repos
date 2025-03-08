@@ -46,39 +46,35 @@ namespace System.CodeDom.Compiler.Tests
             {
                 File.WriteAllText(tempPath, GetEmptyProgramSource());
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => provider.CompileAssemblyFromFile(options, tempPath)
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    provider.CompileAssemblyFromFile(options, tempPath)
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => provider.CompileAssemblyFromDom(options, cu)
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    provider.CompileAssemblyFromDom(options, cu)
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => provider.CompileAssemblyFromSource(options, GetEmptyProgramSource())
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    provider.CompileAssemblyFromSource(options, GetEmptyProgramSource())
                 );
 
 #pragma warning disable 0618 // obsolete
                 ICodeCompiler cc = provider.CreateCompiler();
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => cc.CompileAssemblyFromDom(options, cu)
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.CompileAssemblyFromDom(options, cu)
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => cc.CompileAssemblyFromDomBatch(options, new[] { cu })
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.CompileAssemblyFromDomBatch(options, new[] { cu })
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => cc.CompileAssemblyFromFile(options, tempPath)
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.CompileAssemblyFromFile(options, tempPath)
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => cc.CompileAssemblyFromFileBatch(options, new[] { tempPath })
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.CompileAssemblyFromFileBatch(options, new[] { tempPath })
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => cc.CompileAssemblyFromSource(options, GetEmptyProgramSource())
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.CompileAssemblyFromSource(options, GetEmptyProgramSource())
                 );
-                Assert.Throws<PlatformNotSupportedException>(
-                    () =>
-                        cc.CompileAssemblyFromSourceBatch(
-                            options,
-                            new[] { GetEmptyProgramSource() }
-                        )
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.CompileAssemblyFromSourceBatch(options, new[] { GetEmptyProgramSource() })
                 );
 #pragma warning restore 0618
             }

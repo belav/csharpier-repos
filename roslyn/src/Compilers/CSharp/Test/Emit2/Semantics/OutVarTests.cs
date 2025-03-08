@@ -38765,8 +38765,7 @@ class Program
 
                 if (model.IsSpeculativeSemanticModel)
                 {
-                    Assert.Throws<NotSupportedException>(
-                        () => model.AnalyzeDataFlow(dataFlowParent)
+                    Assert.Throws<NotSupportedException>(() => model.AnalyzeDataFlow(dataFlowParent)
                     );
                 }
                 else

@@ -2595,30 +2595,27 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task VisitLambda_should_not_be_visited_trivially(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                    {
-                        var orders = ss.Set<Order>()
-                            .Where(o => o.CustomerID.StartsWith("A"))
-                            .ToList();
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                {
+                    var orders = ss.Set<Order>().Where(o => o.CustomerID.StartsWith("A")).ToList();
 
-                        return ss.Set<Customer>()
-                            .Select(c => new
-                            {
-                                Customer = c,
-                                HasOrder = orders.Any(o => o.CustomerID == c.CustomerID),
-                            });
-                    },
-                    elementSorter: e => e.Customer.CustomerID,
-                    elementAsserter: (e, a) =>
-                    {
-                        AssertEqual(e.Customer, a.Customer);
-                        AssertEqual(e.HasOrder, a.HasOrder);
-                    }
-                )
+                    return ss.Set<Customer>()
+                        .Select(c => new
+                        {
+                            Customer = c,
+                            HasOrder = orders.Any(o => o.CustomerID == c.CustomerID),
+                        });
+                },
+                elementSorter: e => e.Customer.CustomerID,
+                elementAsserter: (e, a) =>
+                {
+                    AssertEqual(e.Customer, a.Customer);
+                    AssertEqual(e.HasOrder, a.HasOrder);
+                }
+            )
         );
 
     [ConditionalTheory]

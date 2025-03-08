@@ -91,8 +91,8 @@ namespace BinderTracingTests
         public static BindOperation FindInLoadContext_CustomALC_IncompatibleVersion()
         {
             var assemblyName = new AssemblyName($"{SubdirectoryAssemblyName}, Version=4.3.2.1");
-            Assert.Throws<FileNotFoundException>(
-                () => alcInstance.LoadFromAssemblyName(assemblyName)
+            Assert.Throws<FileNotFoundException>(() =>
+                alcInstance.LoadFromAssemblyName(assemblyName)
             );
 
             return new BindOperation()
@@ -158,8 +158,8 @@ namespace BinderTracingTests
         public static BindOperation FindInLoadContext_DefaultALC_IncompatibleVersion()
         {
             var assemblyName = new AssemblyName($"{DependentAssemblyName}, Version=4.3.2.1");
-            Assert.Throws<FileNotFoundException>(
-                () => AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
+            Assert.Throws<FileNotFoundException>(() =>
+                AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
             );
 
             return new BindOperation()
@@ -238,8 +238,8 @@ namespace BinderTracingTests
         public static BindOperation ApplicationAssemblies_IncompatibleVersion()
         {
             var assemblyName = new AssemblyName($"{DependentAssemblyName}, Version=4.3.2.1");
-            Assert.Throws<FileNotFoundException>(
-                () => AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
+            Assert.Throws<FileNotFoundException>(() =>
+                AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
             );
 
             return new BindOperation()
@@ -299,8 +299,8 @@ namespace BinderTracingTests
             try
             {
                 File.Copy(Helpers.GetAssemblyInAppPath(DependentAssemblyName), assemblyPath, true);
-                Assert.Throws<FileNotFoundException>(
-                    () => AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
+                Assert.Throws<FileNotFoundException>(() =>
+                    AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
                 );
             }
             finally
@@ -399,8 +399,8 @@ namespace BinderTracingTests
                 true /*throwOnLoad*/
             );
 
-            AssertExtensions.ThrowsWithInnerException<FileLoadException, Exception>(
-                () => alc.LoadFromAssemblyName(assemblyName)
+            AssertExtensions.ThrowsWithInnerException<FileLoadException, Exception>(() =>
+                alc.LoadFromAssemblyName(assemblyName)
             );
 
             return new BindOperation()
@@ -1069,8 +1069,8 @@ namespace BinderTracingTests
         {
             var assemblyPath = Helpers.GetAssemblyInSubdirectoryPath($"{DependentAssemblyName}_V2");
 
-            Assert.Throws<FileLoadException>(
-                () => AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath)
+            Assert.Throws<FileLoadException>(() =>
+                AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath)
             );
 
             var assemblyName = new AssemblyName($"{DependentAssemblyName}, Version=2.0.0.0");

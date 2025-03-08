@@ -477,17 +477,16 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 // This is the DSA-512 test case, with an unfinished closing element.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue xmlns:yep=""urn:ignored:yep"" xmlns:nope=""urn:ignored:nope"" xmlns:ign=""urn:ignored:ign"">
   <yep:P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</yep:P>
   <nope:Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</nope:Q>
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <ign:Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</ign:Y>
 </DSA"
-                        )
+                    )
                 );
             }
         }
@@ -531,10 +530,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 // This is the DSA-576 test case, but with an element missing.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</Y>
   <Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</Q>
@@ -542,7 +540,7 @@ S      9      R      /       j       6       9        C        v        C
   <X>Lj16hMhbZnheH2/nlpgrIrDLmLw=</X>
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }
@@ -553,10 +551,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 // This is the DSA-576 test case, but with an element missing.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</Y>
   <BananaWeight unit=""lbs"">30000</BananaWeight>
@@ -564,7 +561,7 @@ S      9      R      /       j       6       9        C        v        C
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }
@@ -575,10 +572,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 // This is the DSA-576 test case, but with an element missing.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</Y>
   <Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</Q>
@@ -586,7 +582,7 @@ S      9      R      /       j       6       9        C        v        C
   <X>Lj16hMhbZnheH2/nlpgrIrDLmLw=</X>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }
@@ -597,10 +593,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 // This is the DSA-576 test case, but with an element missing.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</Q>
   <BananaWeight unit=""lbs"">30000</BananaWeight>
@@ -608,7 +603,7 @@ S      9      R      /       j       6       9        C        v        C
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }
@@ -700,10 +695,9 @@ S      9      R      /       j       6       9        C        v        C
 
             using (DSA dsa = DSAFactory.Create())
             {
-                Assert.Throws<FormatException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<FormatException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -723,7 +717,7 @@ S      9      R      /       j       6       9        C        v        C
   <PgenCounter>aQ==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }
@@ -830,10 +824,9 @@ S      9      R      /       j       6       9        C        v        C
 
             using (DSA dsa = DSAFactory.Create())
             {
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -852,7 +845,7 @@ S      9      R      /       j       6       9        C        v        C
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }
@@ -865,10 +858,9 @@ S      9      R      /       j       6       9        C        v        C
 
             using (DSA dsa = DSAFactory.Create())
             {
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        dsa.FromXmlString(
-                            @"
+                Assert.Throws<CryptographicException>(() =>
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -887,7 +879,7 @@ S      9      R      /       j       6       9        C        v        C
   <PgenCounter>aQ==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
 </DSAKeyValue>"
-                        )
+                    )
                 );
             }
         }

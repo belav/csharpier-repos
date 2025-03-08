@@ -264,20 +264,16 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => labeled.Item.WithDegreeOfParallelism(degree)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                labeled.Item.WithDegreeOfParallelism(degree)
             );
         }
 
         [Fact]
         public static void DegreeOfParallelism_Multiple()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .WithDegreeOfParallelism(2)
-                        .WithDegreeOfParallelism(2)
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, 2).WithDegreeOfParallelism(2).WithDegreeOfParallelism(2)
             );
         }
 

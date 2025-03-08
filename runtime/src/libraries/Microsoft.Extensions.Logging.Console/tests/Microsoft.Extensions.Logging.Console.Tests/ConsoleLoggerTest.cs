@@ -445,8 +445,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             var logger = (ILogger)t.Logger;
 
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(
-                () => logger.Log<object>(LogLevel.Trace, 1, "empty", new Exception(), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                logger.Log<object>(LogLevel.Trace, 1, "empty", new Exception(), null)
             );
         }
 
@@ -1681,8 +1681,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void ConsoleLoggerOptions_InvalidFormat_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConsoleLoggerOptions() { Format = (ConsoleLoggerFormat)10 }
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConsoleLoggerOptions() { Format = (ConsoleLoggerFormat)10 }
             );
         }
 
@@ -1694,16 +1694,16 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [InlineData(0)]
         public void ConsoleLoggerOptions_SetInvalidMaxQueueLength_Throws(int invalidMaxQueueLength)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConsoleLoggerOptions() { MaxQueueLength = invalidMaxQueueLength }
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConsoleLoggerOptions() { MaxQueueLength = invalidMaxQueueLength }
             );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void ConsoleLoggerOptions_SetInvalidBufferMode_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConsoleLoggerOptions() { QueueFullMode = (ConsoleLoggerQueueFullMode)10 }
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConsoleLoggerOptions() { QueueFullMode = (ConsoleLoggerQueueFullMode)10 }
             );
         }
 

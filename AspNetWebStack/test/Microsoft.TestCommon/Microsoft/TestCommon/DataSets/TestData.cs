@@ -207,23 +207,22 @@ namespace Microsoft.TestCommon
         /// Expected permutations of invalid file paths.
         /// </summary>
         public static readonly TestData<string> InvalidNonNullFilePaths =
-            new RefTypeTestData<string>(
-                () =>
-                    new List<string>()
-                    {
-                        String.Empty,
-                        "",
-                        " ",
-                        "  ",
-                        "\t\t \n ",
-                        "c:\\a<b",
-                        "c:\\a>b",
-                        "c:\\a\"b",
-                        "c:\\a\tb",
-                        "c:\\a|b",
-                        "c:\\a\bb",
-                        "c:\\a\0b",
-                    }
+            new RefTypeTestData<string>(() =>
+                new List<string>()
+                {
+                    String.Empty,
+                    "",
+                    " ",
+                    "  ",
+                    "\t\t \n ",
+                    "c:\\a<b",
+                    "c:\\a>b",
+                    "c:\\a\"b",
+                    "c:\\a\tb",
+                    "c:\\a|b",
+                    "c:\\a\bb",
+                    "c:\\a\0b",
+                }
             );
 
         /// <summary>
@@ -236,8 +235,8 @@ namespace Microsoft.TestCommon
         /// <summary>
         /// All expected permutations of an empty string.
         /// </summary>
-        public static readonly TestData<string> EmptyStrings = new RefTypeTestData<string>(
-            () => new List<string>() { null, String.Empty, " ", "\t\r\n" }
+        public static readonly TestData<string> EmptyStrings = new RefTypeTestData<string>(() =>
+            new List<string>() { null, String.Empty, " ", "\t\r\n" }
         );
 
         /// <summary>

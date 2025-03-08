@@ -148,15 +148,14 @@ namespace System.Web.Mvc.Async
                 asyncManager.OutstandingOperations.Increment();
 
                 // to simplify the logic, force the rest of the pipeline to execute in an asynchronous callback
-                listener.SetContinuation(
-                    () =>
-                        ThreadPool.QueueUserWorkItem(_ =>
-                            asyncResult.MarkCompleted(
-                                false /* completedSynchronously */
-                                ,
-                                asyncCallback
-                            )
+                listener.SetContinuation(() =>
+                    ThreadPool.QueueUserWorkItem(_ =>
+                        asyncResult.MarkCompleted(
+                            false /* completedSynchronously */
+                            ,
+                            asyncCallback
                         )
+                    )
                 );
 
                 // the inner operation might complete synchronously, so all setup work has to be done before this point

@@ -591,8 +591,8 @@ namespace System.Collections.Specialized.Tests
             //     - the current offset is 30, and the current mask requires more than the remaining 1 bit.
             Assert.InRange(CountBitsRequired(overflow.Mask), 2, 15);
 
-            Assert.Throws<InvalidOperationException>(
-                () => BitVector32.CreateSection(invalid, overflow)
+            Assert.Throws<InvalidOperationException>(() =>
+                BitVector32.CreateSection(invalid, overflow)
             );
         }
 

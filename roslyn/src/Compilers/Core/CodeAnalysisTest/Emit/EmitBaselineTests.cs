@@ -38,45 +38,41 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                     mdBytes.Length
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        EmitBaseline.CreateInitialBaseline(
-                            null,
-                            peModule,
-                            debugInfoProvider,
-                            localSigProvider,
-                            true
-                        )
+                Assert.Throws<ArgumentNullException>(() =>
+                    EmitBaseline.CreateInitialBaseline(
+                        null,
+                        peModule,
+                        debugInfoProvider,
+                        localSigProvider,
+                        true
+                    )
                 );
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        EmitBaseline.CreateInitialBaseline(
-                            compilation,
-                            null,
-                            debugInfoProvider,
-                            localSigProvider,
-                            true
-                        )
+                Assert.Throws<ArgumentNullException>(() =>
+                    EmitBaseline.CreateInitialBaseline(
+                        compilation,
+                        null,
+                        debugInfoProvider,
+                        localSigProvider,
+                        true
+                    )
                 );
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        EmitBaseline.CreateInitialBaseline(
-                            compilation,
-                            peModule,
-                            null,
-                            localSigProvider,
-                            true
-                        )
+                Assert.Throws<ArgumentNullException>(() =>
+                    EmitBaseline.CreateInitialBaseline(
+                        compilation,
+                        peModule,
+                        null,
+                        localSigProvider,
+                        true
+                    )
                 );
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        EmitBaseline.CreateInitialBaseline(
-                            compilation,
-                            mdModule,
-                            debugInfoProvider,
-                            null,
-                            true
-                        )
+                Assert.Throws<ArgumentNullException>(() =>
+                    EmitBaseline.CreateInitialBaseline(
+                        compilation,
+                        mdModule,
+                        debugInfoProvider,
+                        null,
+                        true
+                    )
                 );
                 Assert.NotNull(
                     EmitBaseline.CreateInitialBaseline(

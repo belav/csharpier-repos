@@ -435,8 +435,8 @@ namespace MonoTests.System.Drawing.Imaging
         [Test]
         public void Metafile_IntPtrRectangle_Zero()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Metafile(IntPtr.Zero, new Rectangle(1, 2, 3, 4))
+            Assert.Throws<ArgumentException>(() =>
+                new Metafile(IntPtr.Zero, new Rectangle(1, 2, 3, 4))
             );
         }
 
@@ -464,8 +464,8 @@ namespace MonoTests.System.Drawing.Imaging
         [Test]
         public void Metafile_IntPtrRectangleF_Zero()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Metafile(IntPtr.Zero, new RectangleF(1, 2, 3, 4))
+            Assert.Throws<ArgumentException>(() =>
+                new Metafile(IntPtr.Zero, new RectangleF(1, 2, 3, 4))
             );
         }
 
@@ -513,8 +513,8 @@ namespace MonoTests.System.Drawing.Imaging
         [Test]
         public void Metafile_StreamIntPtrEmfType_Null()
         {
-            Assert.Throws<NullReferenceException>(
-                () => Metafile_StreamEmfType(null, EmfType.EmfOnly)
+            Assert.Throws<NullReferenceException>(() =>
+                Metafile_StreamEmfType(null, EmfType.EmfOnly)
             );
         }
 
@@ -532,8 +532,8 @@ namespace MonoTests.System.Drawing.Imaging
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () => Metafile_StreamEmfType(ms, (EmfType)Int32.MinValue)
+                Assert.Throws<ArgumentException>(() =>
+                    Metafile_StreamEmfType(ms, (EmfType)Int32.MinValue)
                 );
             }
         }

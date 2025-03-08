@@ -84,8 +84,8 @@ namespace System.Text.Json.Serialization.Tests
             string json = $"\"{long.MaxValue}0\"";
 
             var options = new JsonSerializerOptions { Converters = { new LongArrayConverter() } };
-            JsonException ex = Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<long[]>(json, options)
+            JsonException ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<long[]>(json, options)
             );
 
             Assert.Null(ex.InnerException);

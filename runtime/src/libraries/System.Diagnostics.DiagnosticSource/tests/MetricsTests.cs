@@ -139,41 +139,38 @@ namespace System.Diagnostics.Metrics.Tests
                 {
                     Meter meter = new Meter("CreateInstrumentParametersTest");
 
-                    Assert.Throws<ArgumentNullException>(
-                        () => meter.CreateCounter<byte>(null, "seconds", "Seconds Counter")
+                    Assert.Throws<ArgumentNullException>(() =>
+                        meter.CreateCounter<byte>(null, "seconds", "Seconds Counter")
                     );
-                    Assert.Throws<ArgumentNullException>(
-                        () => meter.CreateUpDownCounter<float>(null, "items", "Items UpDownCounter")
+                    Assert.Throws<ArgumentNullException>(() =>
+                        meter.CreateUpDownCounter<float>(null, "items", "Items UpDownCounter")
                     );
-                    Assert.Throws<ArgumentNullException>(
-                        () => meter.CreateHistogram<short>(null, "seconds", "Seconds Counter")
+                    Assert.Throws<ArgumentNullException>(() =>
+                        meter.CreateHistogram<short>(null, "seconds", "Seconds Counter")
                     );
-                    Assert.Throws<ArgumentNullException>(
-                        () =>
-                            meter.CreateObservableCounter<long>(
-                                null,
-                                () => 0,
-                                "seconds",
-                                "Seconds ObservableCounter"
-                            )
+                    Assert.Throws<ArgumentNullException>(() =>
+                        meter.CreateObservableCounter<long>(
+                            null,
+                            () => 0,
+                            "seconds",
+                            "Seconds ObservableCounter"
+                        )
                     );
-                    Assert.Throws<ArgumentNullException>(
-                        () =>
-                            meter.CreateObservableUpDownCounter<Decimal>(
-                                null,
-                                () => 0,
-                                "items",
-                                "Items ObservableUpDownCounter"
-                            )
+                    Assert.Throws<ArgumentNullException>(() =>
+                        meter.CreateObservableUpDownCounter<Decimal>(
+                            null,
+                            () => 0,
+                            "items",
+                            "Items ObservableUpDownCounter"
+                        )
                     );
-                    Assert.Throws<ArgumentNullException>(
-                        () =>
-                            meter.CreateObservableGauge<double>(
-                                null,
-                                () => 0,
-                                "seconds",
-                                "Seconds ObservableGauge"
-                            )
+                    Assert.Throws<ArgumentNullException>(() =>
+                        meter.CreateObservableGauge<double>(
+                            null,
+                            () => 0,
+                            "seconds",
+                            "Seconds ObservableGauge"
+                        )
                     );
                 })
                 .Dispose();
@@ -438,42 +435,30 @@ namespace System.Diagnostics.Metrics.Tests
                             "Seconds ObservableGauge"
                         );
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => meter.CreateCounter<uint>("Counter", "seconds", "Seconds Counter")
+                    Assert.Throws<InvalidOperationException>(() =>
+                        meter.CreateCounter<uint>("Counter", "seconds", "Seconds Counter")
                     );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            meter.CreateUpDownCounter<uint>(
-                                "UpDownCounter",
-                                "items",
-                                "Items Counter"
-                            )
+                    Assert.Throws<InvalidOperationException>(() =>
+                        meter.CreateUpDownCounter<uint>("UpDownCounter", "items", "Items Counter")
                     );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            meter.CreateHistogram<ulong>(
-                                "histogram1",
-                                "seconds",
-                                "Seconds histogram"
-                            )
+                    Assert.Throws<InvalidOperationException>(() =>
+                        meter.CreateHistogram<ulong>("histogram1", "seconds", "Seconds histogram")
                     );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            meter.CreateObservableCounter<sbyte>(
-                                "observableCounter3",
-                                () => 0,
-                                "seconds",
-                                "Seconds ObservableCounter"
-                            )
+                    Assert.Throws<InvalidOperationException>(() =>
+                        meter.CreateObservableCounter<sbyte>(
+                            "observableCounter3",
+                            () => 0,
+                            "seconds",
+                            "Seconds ObservableCounter"
+                        )
                     );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            meter.CreateObservableGauge<ushort>(
-                                "observableGauge7",
-                                () => 0,
-                                "seconds",
-                                "Seconds ObservableGauge"
-                            )
+                    Assert.Throws<InvalidOperationException>(() =>
+                        meter.CreateObservableGauge<ushort>(
+                            "observableGauge7",
+                            () => 0,
+                            "seconds",
+                            "Seconds ObservableGauge"
+                        )
                     );
                 })
                 .Dispose();
@@ -639,8 +624,8 @@ namespace System.Diagnostics.Metrics.Tests
                             (inst, measurement, tags, state) => accumulated += measurement
                         );
 
-                        Exception exception = Record.Exception(
-                            () => listener.RecordObservableInstruments()
+                        Exception exception = Record.Exception(() =>
+                            listener.RecordObservableInstruments()
                         );
                         Assert.NotNull(exception);
                         Assert.IsType<AggregateException>(exception);
@@ -2480,8 +2465,8 @@ namespace System.Diagnostics.Metrics.Tests
                     counter.Add(1);
                     Assert.Equal(1, count);
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => listener.SetMeasurementEventCallback<ulong>(null)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        listener.SetMeasurementEventCallback<ulong>(null)
                     );
                 })
                 .Dispose();
@@ -2959,8 +2944,8 @@ namespace System.Diagnostics.Metrics.Tests
                     Assert.Equal("Scope", meter3.Scope);
 
                     Assert.Throws<ArgumentNullException>(() => new MeterOptions(null!));
-                    Assert.Throws<ArgumentNullException>(
-                        () => new MeterOptions("Something").Name = null!
+                    Assert.Throws<ArgumentNullException>(() =>
+                        new MeterOptions("Something").Name = null!
                     );
 
                     using Meter meter4 = new Meter(

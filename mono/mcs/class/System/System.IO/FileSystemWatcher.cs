@@ -582,31 +582,28 @@ namespace System.IO
                 case FileAction.Added:
                     lastData.Name = filename;
                     lastData.ChangeType = WatcherChangeTypes.Created;
-                    Task.Run(
-                        () =>
-                            OnCreated(
-                                new FileSystemEventArgs(WatcherChangeTypes.Created, path, filename)
-                            )
+                    Task.Run(() =>
+                        OnCreated(
+                            new FileSystemEventArgs(WatcherChangeTypes.Created, path, filename)
+                        )
                     );
                     break;
                 case FileAction.Removed:
                     lastData.Name = filename;
                     lastData.ChangeType = WatcherChangeTypes.Deleted;
-                    Task.Run(
-                        () =>
-                            OnDeleted(
-                                new FileSystemEventArgs(WatcherChangeTypes.Deleted, path, filename)
-                            )
+                    Task.Run(() =>
+                        OnDeleted(
+                            new FileSystemEventArgs(WatcherChangeTypes.Deleted, path, filename)
+                        )
                     );
                     break;
                 case FileAction.Modified:
                     lastData.Name = filename;
                     lastData.ChangeType = WatcherChangeTypes.Changed;
-                    Task.Run(
-                        () =>
-                            OnChanged(
-                                new FileSystemEventArgs(WatcherChangeTypes.Changed, path, filename)
-                            )
+                    Task.Run(() =>
+                        OnChanged(
+                            new FileSystemEventArgs(WatcherChangeTypes.Changed, path, filename)
+                        )
                     );
                     break;
                 case FileAction.RenamedOldName:

@@ -43,12 +43,8 @@ public unsafe class Program
         if (ValidateMismatch)
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
-            Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                    PInvokesCS.DefaultDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(
-                        a,
-                        null
-                    )
+            Assert.Throws<EntryPointNotFoundException>(() =>
+                PInvokesCS.DefaultDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(a, null)
             );
         }
     }
@@ -81,12 +77,11 @@ public unsafe class Program
         if (ValidateMismatch)
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
-            Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                    PInvokesCS.DefaultDllImport.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
-                        a,
-                        null
-                    )
+            Assert.Throws<EntryPointNotFoundException>(() =>
+                PInvokesCS.DefaultDllImport.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
+                    a,
+                    null
+                )
             );
         }
     }
@@ -119,12 +114,8 @@ public unsafe class Program
         if (ValidateMismatch)
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
-            Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                    PInvokesCS.WinapiDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(
-                        a,
-                        null
-                    )
+            Assert.Throws<EntryPointNotFoundException>(() =>
+                PInvokesCS.WinapiDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(a, null)
             );
         }
     }
@@ -157,12 +148,11 @@ public unsafe class Program
         if (ValidateMismatch)
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
-            Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                    PInvokesCS.WinapiDllImport.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
-                        a,
-                        null
-                    )
+            Assert.Throws<EntryPointNotFoundException>(() =>
+                PInvokesCS.WinapiDllImport.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
+                    a,
+                    null
+                )
             );
         }
     }
@@ -195,12 +185,8 @@ public unsafe class Program
         if (ValidateMismatch)
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
-            Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                    PInvokesIL.UnsetPInvokeImpl.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(
-                        a,
-                        null
-                    )
+            Assert.Throws<EntryPointNotFoundException>(() =>
+                PInvokesIL.UnsetPInvokeImpl.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(a, null)
             );
         }
     }
@@ -233,12 +219,11 @@ public unsafe class Program
         if (ValidateMismatch)
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
-            Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                    PInvokesIL.UnsetPInvokeImpl.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
-                        a,
-                        null
-                    )
+            Assert.Throws<EntryPointNotFoundException>(() =>
+                PInvokesIL.UnsetPInvokeImpl.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
+                    a,
+                    null
+                )
             );
         }
     }

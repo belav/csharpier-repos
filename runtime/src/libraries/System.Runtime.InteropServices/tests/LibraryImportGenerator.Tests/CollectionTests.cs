@@ -439,8 +439,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .Stateless
                 .ListGuaranteedUnmarshal<int, int>
                 .AllocateContainerForManagedElementsFinallyCalled = false;
-            Assert.Throws<Exception>(
-                () => NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<int> _)
+            Assert.Throws<Exception>(() =>
+                NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<int> _)
             );
             Assert.True(
                 NativeExportsNE
@@ -456,8 +456,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .ListGuaranteedUnmarshal<int, int>
                 .Marshaller
                 .ToManagedFinallyCalled = false;
-            Assert.Throws<Exception>(
-                () => NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<int> _)
+            Assert.Throws<Exception>(() =>
+                NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<int> _)
             );
             Assert.True(
                 NativeExportsNE
@@ -590,11 +590,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .Stateless
                 .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                 .AllocateContainerForManagedElementsFinallyCalled = false;
-            Assert.Throws<Exception>(
-                () =>
-                    NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(
-                        out List<BoolStruct> _
-                    )
+            Assert.Throws<Exception>(() =>
+                NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<BoolStruct> _)
             );
             Assert.True(
                 NativeExportsNE
@@ -610,9 +607,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                 .Marshaller
                 .ToManagedFinallyCalled = false;
-            Assert.Throws<Exception>(
-                () =>
-                    NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<BoolStruct> _)
+            Assert.Throws<Exception>(() =>
+                NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<BoolStruct> _)
             );
             Assert.True(
                 NativeExportsNE

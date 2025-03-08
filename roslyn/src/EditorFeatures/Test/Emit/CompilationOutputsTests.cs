@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.Emit.UnitTests
                 openPdbStream: () => new TestStream(canRead, canSeek, canWrite: true)
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () => outputs.OpenAssemblyMetadata(prefetch: false)
+            Assert.Throws<InvalidOperationException>(() =>
+                outputs.OpenAssemblyMetadata(prefetch: false)
             );
             Assert.Throws<InvalidOperationException>(() => outputs.OpenPdb());
         }

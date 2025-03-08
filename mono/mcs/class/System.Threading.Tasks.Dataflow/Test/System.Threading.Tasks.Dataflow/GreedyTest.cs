@@ -267,24 +267,22 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
         [Test]
         public void NonGreedyBatchedJoinTest()
         {
-            AssertEx.Throws<ArgumentException>(
-                () =>
-                    new BatchedJoinBlock<int, int>(
-                        2,
-                        new GroupingDataflowBlockOptions { Greedy = false }
-                    )
+            AssertEx.Throws<ArgumentException>(() =>
+                new BatchedJoinBlock<int, int>(
+                    2,
+                    new GroupingDataflowBlockOptions { Greedy = false }
+                )
             );
         }
 
         [Test]
         public void NonGreedyBatchedJoin3Test()
         {
-            AssertEx.Throws<ArgumentException>(
-                () =>
-                    new BatchedJoinBlock<int, int, int>(
-                        2,
-                        new GroupingDataflowBlockOptions { Greedy = false }
-                    )
+            AssertEx.Throws<ArgumentException>(() =>
+                new BatchedJoinBlock<int, int, int>(
+                    2,
+                    new GroupingDataflowBlockOptions { Greedy = false }
+                )
             );
         }
 

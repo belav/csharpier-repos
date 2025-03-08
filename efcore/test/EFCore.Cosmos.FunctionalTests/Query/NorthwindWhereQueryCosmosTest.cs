@@ -132,8 +132,8 @@ WHERE ((c["Discriminator"] = "Customer") AND ((c["CustomerID"] = "ALFKI") & (c["
         Assert.Equal(
             CosmosStrings.UnsupportedOperatorForSqlExpression("ExclusiveOr", "SqlBinaryExpression"),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Where_bitwise_xor(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Where_bitwise_xor(async)
                 )
             ).Message
         );
@@ -548,8 +548,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = @__city_0))
     public override async Task Where_method_call_nullable_type_closure_via_query_cache(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_method_call_nullable_type_closure_via_query_cache(async)
+        await AssertTranslationFailed(() =>
+            base.Where_method_call_nullable_type_closure_via_query_cache(async)
         );
 
         AssertSql();
@@ -560,8 +560,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = @__city_0))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_method_call_nullable_type_reverse_closure_via_query_cache(async)
+        await AssertTranslationFailed(() =>
+            base.Where_method_call_nullable_type_reverse_closure_via_query_cache(async)
         );
 
         AssertSql();
@@ -777,8 +777,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = @__InstanceFieldValue_
     public override async Task Where_simple_closure_via_query_cache_nullable_type(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_simple_closure_via_query_cache_nullable_type(async)
+        await AssertTranslationFailed(() =>
+            base.Where_simple_closure_via_query_cache_nullable_type(async)
         );
 
         AssertSql();
@@ -789,8 +789,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = @__InstanceFieldValue_
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_simple_closure_via_query_cache_nullable_type_reverse(async)
+        await AssertTranslationFailed(() =>
+            base.Where_simple_closure_via_query_cache_nullable_type_reverse(async)
         );
 
         AssertSql();
@@ -1988,8 +1988,7 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_constructed_multi_value_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_constructed_multi_value_equal(async)
+        await AssertTranslationFailed(() => base.Where_compare_constructed_multi_value_equal(async)
         );
 
         AssertSql();
@@ -1998,8 +1997,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_constructed_multi_value_not_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_constructed_multi_value_not_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_constructed_multi_value_not_equal(async)
         );
 
         AssertSql();
@@ -2016,8 +2015,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_tuple_constructed_multi_value_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_tuple_constructed_multi_value_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_tuple_constructed_multi_value_equal(async)
         );
 
         AssertSql();
@@ -2026,8 +2025,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_tuple_constructed_multi_value_not_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_tuple_constructed_multi_value_not_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_tuple_constructed_multi_value_not_equal(async)
         );
 
         AssertSql();
@@ -2036,8 +2035,7 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_tuple_create_constructed_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_tuple_create_constructed_equal(async)
+        await AssertTranslationFailed(() => base.Where_compare_tuple_create_constructed_equal(async)
         );
 
         AssertSql();
@@ -2046,8 +2044,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_tuple_create_constructed_multi_value_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_tuple_create_constructed_multi_value_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_tuple_create_constructed_multi_value_equal(async)
         );
 
         AssertSql();
@@ -2058,8 +2056,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     )
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(
-            () => base.Where_compare_tuple_create_constructed_multi_value_not_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_tuple_create_constructed_multi_value_not_equal(async)
         );
 
         AssertSql();
@@ -2107,8 +2105,8 @@ WHERE (((c["Discriminator"] = "Order") AND (c["CustomerID"] = "QUICK")) AND (c["
     public override async Task Where_navigation_contains(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Where_navigation_contains(async)
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_navigation_contains(async)
             )
         ).Message;
 
@@ -2140,8 +2138,7 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = @__p_0))
     public override async Task Where_multiple_contains_in_subquery_with_or(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_multiple_contains_in_subquery_with_or(async)
+        await AssertTranslationFailed(() => base.Where_multiple_contains_in_subquery_with_or(async)
         );
 
         AssertSql();
@@ -2150,8 +2147,7 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = @__p_0))
     public override async Task Where_multiple_contains_in_subquery_with_and(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_multiple_contains_in_subquery_with_and(async)
+        await AssertTranslationFailed(() => base.Where_multiple_contains_in_subquery_with_and(async)
         );
 
         AssertSql();
@@ -2176,8 +2172,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = @__p_0))
     public override async Task Where_subquery_FirstOrDefault_compared_to_entity(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_subquery_FirstOrDefault_compared_to_entity(async)
+        await AssertTranslationFailed(() =>
+            base.Where_subquery_FirstOrDefault_compared_to_entity(async)
         );
 
         AssertSql();
@@ -2237,8 +2233,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(async)
+        await AssertTranslationFailed(() =>
+            base.Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(async)
         );
 
         AssertSql();
@@ -2255,8 +2251,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Like_with_non_string_column_using_double_cast(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Like_with_non_string_column_using_double_cast(async)
+        await AssertTranslationFailed(() =>
+            base.Like_with_non_string_column_using_double_cast(async)
         );
 
         AssertSql();
@@ -2267,8 +2263,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Using_same_parameter_twice_in_query_generates_one_sql_parameter(async)
+        await AssertTranslationFailed(() =>
+            base.Using_same_parameter_twice_in_query_generates_one_sql_parameter(async)
         );
 
         AssertSql();
@@ -2349,8 +2345,7 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_ToList_Contains(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_collection_navigation_ToList_Contains(async)
+        await AssertTranslationFailed(() => base.Where_collection_navigation_ToList_Contains(async)
         );
 
         AssertSql();
@@ -2367,8 +2362,7 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_ToArray_Contains(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_collection_navigation_ToArray_Contains(async)
+        await AssertTranslationFailed(() => base.Where_collection_navigation_ToArray_Contains(async)
         );
 
         AssertSql();
@@ -2377,8 +2371,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_AsEnumerable_Count(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_collection_navigation_AsEnumerable_Count(async)
+        await AssertTranslationFailed(() =>
+            base.Where_collection_navigation_AsEnumerable_Count(async)
         );
 
         AssertSql();
@@ -2387,8 +2381,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_AsEnumerable_Contains(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_collection_navigation_AsEnumerable_Contains(async)
+        await AssertTranslationFailed(() =>
+            base.Where_collection_navigation_AsEnumerable_Contains(async)
         );
 
         AssertSql();
@@ -2397,8 +2391,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_ToList_Count_member(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_collection_navigation_ToList_Count_member(async)
+        await AssertTranslationFailed(() =>
+            base.Where_collection_navigation_ToList_Count_member(async)
         );
 
         AssertSql();
@@ -2407,8 +2401,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_ToArray_Length_member(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_collection_navigation_ToArray_Length_member(async)
+        await AssertTranslationFailed(() =>
+            base.Where_collection_navigation_ToArray_Length_member(async)
         );
 
         AssertSql();
@@ -2417,8 +2411,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_Queryable_AsEnumerable_Contains_negated(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Where_Queryable_AsEnumerable_Contains_negated(async)
+        await AssertTranslationFailed(() =>
+            base.Where_Queryable_AsEnumerable_Contains_negated(async)
         );
 
         AssertSql();
@@ -2479,8 +2473,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task FirstOrDefault_over_scalar_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.FirstOrDefault_over_scalar_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.FirstOrDefault_over_scalar_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2491,8 +2485,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.FirstOrDefault_over_scalar_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.FirstOrDefault_over_scalar_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2501,8 +2495,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task FirstOrDefault_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.FirstOrDefault_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.FirstOrDefault_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2513,8 +2507,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.FirstOrDefault_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.FirstOrDefault_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2523,8 +2517,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task SingleOrDefault_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.SingleOrDefault_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.SingleOrDefault_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2535,8 +2529,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.SingleOrDefault_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.SingleOrDefault_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2545,8 +2539,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task LastOrDefault_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.LastOrDefault_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.LastOrDefault_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2555,8 +2549,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task LastOrDefault_over_custom_projection_compared_to_not_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.LastOrDefault_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.LastOrDefault_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2565,8 +2559,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task First_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.First_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.First_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2575,8 +2569,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task First_over_custom_projection_compared_to_not_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.First_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.First_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2585,8 +2579,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task ElementAt_over_custom_projection_compared_to_not_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.ElementAt_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.ElementAt_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2597,8 +2591,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     )
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.ElementAtOrDefault_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.ElementAtOrDefault_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2607,8 +2601,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task Single_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Single_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.Single_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2617,8 +2611,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task Single_over_custom_projection_compared_to_not_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Single_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.Single_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();
@@ -2627,8 +2621,7 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task Last_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Last_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() => base.Last_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();
@@ -2637,8 +2630,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task Last_over_custom_projection_compared_to_not_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(
-            () => base.Last_over_custom_projection_compared_to_not_null(async)
+        await AssertTranslationFailed(() =>
+            base.Last_over_custom_projection_compared_to_not_null(async)
         );
 
         AssertSql();

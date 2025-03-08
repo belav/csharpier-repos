@@ -56,15 +56,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestArgumentExceptions()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new TransformBlock<int, int>((Func<int, int>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new TransformBlock<int, int>((Func<int, int>)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => new TransformBlock<int, int>((Func<int, Task<int>>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new TransformBlock<int, int>((Func<int, Task<int>>)null)
             );
             Assert.Throws<ArgumentNullException>(() => new TransformBlock<int, int>(i => i, null));
-            Assert.Throws<ArgumentNullException>(
-                () => new TransformBlock<int, int>(i => Task.Run(() => i), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new TransformBlock<int, int>(i => Task.Run(() => i), null)
             );
 
             DataflowTestHelpers.TestArgumentsExceptions(new TransformBlock<int, int>(i => i));
@@ -148,8 +148,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public Task TestCompletionTask()
         {
-            return DataflowTestHelpers.TestCompletionTask(
-                () => new TransformBlock<int, int>(i => i)
+            return DataflowTestHelpers.TestCompletionTask(() => new TransformBlock<int, int>(i => i)
             );
         }
 

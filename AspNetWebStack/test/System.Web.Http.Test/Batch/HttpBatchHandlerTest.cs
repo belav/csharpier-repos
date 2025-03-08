@@ -219,8 +219,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<Exception>(
-                    () => product.SendAsync(expectedRequest, cancellationToken)
+                await Assert.ThrowsAsync<Exception>(() =>
+                    product.SendAsync(expectedRequest, cancellationToken)
                 );
 
                 // Assert
@@ -285,8 +285,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () => product.SendAsync(expectedRequest, cancellationToken)
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    product.SendAsync(expectedRequest, cancellationToken)
                 );
             }
         }
@@ -329,8 +329,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                var exception = await Assert.ThrowsAsync<Exception>(
-                    () => product.SendAsync(request, cancellationToken)
+                var exception = await Assert.ThrowsAsync<Exception>(() =>
+                    product.SendAsync(request, cancellationToken)
                 );
 
                 // Assert

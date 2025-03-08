@@ -29,8 +29,8 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetSpanB(true));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetSpanBOut(true, out Span<bool> value3)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetSpanBOut(true, out Span<bool> value3)
         );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetSpanBRef(true));

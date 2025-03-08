@@ -147,8 +147,8 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void SignWithNullContent()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
-                () => Sign(null!, GetCoseSigner(DefaultKey, DefaultHash))
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                Sign(null!, GetCoseSigner(DefaultKey, DefaultHash))
             );
             Assert.True(ex.ParamName == "embeddedContent" || ex.ParamName == "detachedContent");
         }
@@ -176,12 +176,11 @@ namespace System.Security.Cryptography.Cose.Tests
                 ) in GetKeyHashAlgorithmPaddingQuadruplet(useNonPrivateKey: true)
             )
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        Sign(
-                            s_sampleContent,
-                            GetCoseSigner(nonPrivateKey, hashAlgorithm, padding: padding)
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    Sign(
+                        s_sampleContent,
+                        GetCoseSigner(nonPrivateKey, hashAlgorithm, padding: padding)
+                    )
                 );
             }
         }

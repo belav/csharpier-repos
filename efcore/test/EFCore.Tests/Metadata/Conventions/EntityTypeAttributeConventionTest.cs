@@ -76,12 +76,8 @@ public class EntityTypeAttributeConventionTest
         Assert.Equal(
             CoreStrings.ClashingOwnedEntityType(nameof(Address)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder
-                            .Entity<Customer>()
-                            .HasOne(e => e.Address)
-                            .WithOne(e => e.Customer)
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder.Entity<Customer>().HasOne(e => e.Address).WithOne(e => e.Customer)
                 )
                 .Message
         );

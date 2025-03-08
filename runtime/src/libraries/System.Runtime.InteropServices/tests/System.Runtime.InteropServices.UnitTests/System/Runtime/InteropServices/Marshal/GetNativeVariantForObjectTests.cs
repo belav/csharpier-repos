@@ -408,11 +408,11 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetNativeVariantForObject_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetNativeVariantForObject(new object(), IntPtr.Zero)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetNativeVariantForObject(new object(), IntPtr.Zero)
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetNativeVariantForObject(1, IntPtr.Zero)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetNativeVariantForObject(1, IntPtr.Zero)
             );
         }
 
@@ -459,11 +459,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr pNative = Marshal.AllocHGlobal(Marshal.SizeOf(v));
             try
             {
-                Assert.Throws<SafeArrayTypeMismatchException>(
-                    () => Marshal.GetNativeVariantForObject(new int[][] { }, pNative)
+                Assert.Throws<SafeArrayTypeMismatchException>(() =>
+                    Marshal.GetNativeVariantForObject(new int[][] { }, pNative)
                 );
-                Assert.Throws<SafeArrayTypeMismatchException>(
-                    () => Marshal.GetNativeVariantForObject<object>(new int[][] { }, pNative)
+                Assert.Throws<SafeArrayTypeMismatchException>(() =>
+                    Marshal.GetNativeVariantForObject<object>(new int[][] { }, pNative)
                 );
             }
             finally
@@ -549,8 +549,8 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 Marshal.GetNativeVariantForObject<char>('a', pNative);
-                Assert.Throws<InvalidCastException>(
-                    () => Marshal.GetObjectForNativeVariant<char>(pNative)
+                Assert.Throws<InvalidCastException>(() =>
+                    Marshal.GetObjectForNativeVariant<char>(pNative)
                 );
             }
             finally

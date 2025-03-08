@@ -99,8 +99,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             else
             {
                 Assert.Throws<InvalidOperationException>(() => attribute.GetDataTypeName());
-                Assert.Throws<InvalidOperationException>(
-                    () => attribute.Validate(new object(), s_testValidationContext)
+                Assert.Throws<InvalidOperationException>(() =>
+                    attribute.Validate(new object(), s_testValidationContext)
                 );
             }
         }

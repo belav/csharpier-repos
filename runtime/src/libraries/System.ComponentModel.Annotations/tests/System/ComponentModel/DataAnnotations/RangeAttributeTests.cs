@@ -1150,8 +1150,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )
         {
             var attribute = new RangeAttribute(type, minimum, maximum);
-            AssertExtensions.Throws<ArgumentException, Exception>(
-                () => attribute.Validate("abc", new ValidationContext(new object()))
+            AssertExtensions.Throws<ArgumentException, Exception>(() =>
+                attribute.Validate("abc", new ValidationContext(new object()))
             );
             AssertExtensions.Throws<ArgumentException, Exception>(() => attribute.IsValid("abc"));
         }
@@ -1217,8 +1217,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_InvalidOperandType_ThrowsInvalidOperationException(Type type)
         {
             var attribute = new RangeAttribute(type, "someMinimum", "someMaximum");
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 
@@ -1226,18 +1226,18 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_MinimumGreaterThanMaximum_ThrowsInvalidOperationException()
         {
             var attribute = new RangeAttribute(3, 1);
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
 
             attribute = new RangeAttribute(3.0, 1.0);
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
 
             attribute = new RangeAttribute(typeof(int), "3", "1");
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
 
             attribute = new RangeAttribute(
@@ -1245,13 +1245,13 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 (3.0).ToString("F1"),
                 (1.0).ToString("F1")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
 
             attribute = new RangeAttribute(typeof(string), "z", "a");
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 
@@ -1265,8 +1265,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Equal(attribute.Minimum, attribute.Maximum);
             Assert.True(attribute.MinimumIsExclusive || attribute.MaximumIsExclusive);
             // Validate SUT
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate(attribute.Minimum, new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate(attribute.Minimum, new ValidationContext(new object()))
             );
         }
 
@@ -1324,8 +1324,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )
         {
             RangeAttribute attribute = new RangeAttribute(typeof(int), minimum, maximum);
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 
@@ -1341,8 +1341,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )
         {
             RangeAttribute attribute = new RangeAttribute(type, minimum, maximum);
-            AssertExtensions.Throws<ArgumentException, Exception>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            AssertExtensions.Throws<ArgumentException, Exception>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 
@@ -1356,8 +1356,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )
         {
             RangeAttribute attribute = new RangeAttribute(type, minimum, maximum);
-            Assert.Throws<FormatException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
+            Assert.Throws<FormatException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object()))
             );
         }
 
@@ -1371,8 +1371,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )
         {
             RangeAttribute attribute = new RangeAttribute(minimum, maximum);
-            Assert.Throws<OverflowException>(
-                () => attribute.Validate(value, new ValidationContext(new object()))
+            Assert.Throws<OverflowException>(() =>
+                attribute.Validate(value, new ValidationContext(new object()))
             );
         }
 
@@ -1380,12 +1380,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_IConvertibleThrowsCustomException_IsNotCaught()
         {
             RangeAttribute attribute = new RangeAttribute(typeof(int), "1", "1");
-            Assert.Throws<ValidationException>(
-                () =>
-                    attribute.Validate(
-                        new IConvertibleImplementor() { IntThrow = new ArithmeticException() },
-                        new ValidationContext(new object())
-                    )
+            Assert.Throws<ValidationException>(() =>
+                attribute.Validate(
+                    new IConvertibleImplementor() { IntThrow = new ArithmeticException() },
+                    new ValidationContext(new object())
+                )
             );
         }
     }

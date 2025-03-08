@@ -90,8 +90,8 @@ namespace System.Formats.Tar.Tests
             using (TarReader reader = new TarReader(archiveStream, leaveOpen: false))
             {
                 TarEntry entry = reader.GetNextEntry();
-                Assert.Throws<InvalidOperationException>(
-                    () => entry.ExtractToFile(Path.Join(root.Path, "file"), overwrite: true)
+                Assert.Throws<InvalidOperationException>(() =>
+                    entry.ExtractToFile(Path.Join(root.Path, "file"), overwrite: true)
                 );
             }
         }

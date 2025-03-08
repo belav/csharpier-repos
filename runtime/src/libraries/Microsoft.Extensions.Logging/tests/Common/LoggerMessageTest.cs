@@ -332,8 +332,8 @@ namespace Microsoft.Extensions.Logging.Test
                 + $"of named parameters. Expected 0 parameter(s) but found 1 parameter(s).";
 
             // Act
-            var exception = Assert.Throws<ArgumentException>(
-                () => LoggerMessage.Define(LogLevel.Error, 0, formatString)
+            var exception = Assert.Throws<ArgumentException>(() =>
+                LoggerMessage.Define(LogLevel.Error, 0, formatString)
             );
 
             // Assert
@@ -363,53 +363,49 @@ namespace Microsoft.Extensions.Logging.Test
             switch (expectedNamedParameterCount)
             {
                 case 1:
-                    exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string>(LogLevel.Error, 0, formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.Define<string>(LogLevel.Error, 0, formatString)
                     );
                     break;
                 case 2:
-                    exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string, string>(LogLevel.Error, 0, formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.Define<string, string>(LogLevel.Error, 0, formatString)
                     );
                     break;
                 case 3:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.Define<string, string, string>(
-                                LogLevel.Error,
-                                0,
-                                formatString
-                            )
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.Define<string, string, string>(
+                            LogLevel.Error,
+                            0,
+                            formatString
+                        )
                     );
                     break;
                 case 4:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.Define<string, string, string, string>(
-                                LogLevel.Error,
-                                0,
-                                formatString
-                            )
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.Define<string, string, string, string>(
+                            LogLevel.Error,
+                            0,
+                            formatString
+                        )
                     );
                     break;
                 case 5:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.Define<string, string, string, string, string>(
-                                LogLevel.Error,
-                                0,
-                                formatString
-                            )
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.Define<string, string, string, string, string>(
+                            LogLevel.Error,
+                            0,
+                            formatString
+                        )
                     );
                     break;
                 case 6:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.Define<string, string, string, string, string, string>(
-                                LogLevel.Error,
-                                0,
-                                formatString
-                            )
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.Define<string, string, string, string, string, string>(
+                            LogLevel.Error,
+                            0,
+                            formatString
+                        )
                     );
                     break;
                 default:
@@ -432,8 +428,8 @@ namespace Microsoft.Extensions.Logging.Test
                 + $"of named parameters. Expected 0 parameter(s) but found 1 parameter(s).";
 
             // Act
-            var exception = Assert.Throws<ArgumentException>(
-                () => LoggerMessage.DefineScope(formatString)
+            var exception = Assert.Throws<ArgumentException>(() =>
+                LoggerMessage.DefineScope(formatString)
             );
 
             // Assert
@@ -463,45 +459,37 @@ namespace Microsoft.Extensions.Logging.Test
             switch (expectedNamedParameterCount)
             {
                 case 1:
-                    exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string>(formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.DefineScope<string>(formatString)
                     );
                     break;
                 case 2:
-                    exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string>(formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.DefineScope<string, string>(formatString)
                     );
                     break;
                 case 3:
-                    exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string, string>(formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.DefineScope<string, string, string>(formatString)
                     );
                     break;
                 case 4:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.DefineScope<string, string, string, string>(formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.DefineScope<string, string, string, string>(formatString)
                     );
                     break;
                 case 5:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.DefineScope<string, string, string, string, string>(
-                                formatString
-                            )
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.DefineScope<string, string, string, string, string>(
+                            formatString
+                        )
                     );
                     break;
                 case 6:
-                    exception = Assert.Throws<ArgumentException>(
-                        () =>
-                            LoggerMessage.DefineScope<
-                                string,
-                                string,
-                                string,
-                                string,
-                                string,
-                                string
-                            >(formatString)
+                    exception = Assert.Throws<ArgumentException>(() =>
+                        LoggerMessage.DefineScope<string, string, string, string, string, string>(
+                            formatString
+                        )
                     );
                     break;
                 default:
@@ -521,8 +509,8 @@ namespace Microsoft.Extensions.Logging.Test
         )
         {
             // Act
-            var exception = Assert.Throws<TargetInvocationException>(
-                () => method.DynamicInvoke(parameters)
+            var exception = Assert.Throws<TargetInvocationException>(() =>
+                method.DynamicInvoke(parameters)
             );
 
             // Assert

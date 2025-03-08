@@ -87,8 +87,8 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(15E+108, SqlDouble.Add(test1, test0).Value);
             Assert.Equal(1.5E+109, SqlDouble.Add(test1, test2).Value);
 
-            Assert.Throws<OverflowException>(
-                () => SqlDouble.Add(SqlDouble.MaxValue, SqlDouble.MaxValue)
+            Assert.Throws<OverflowException>(() =>
+                SqlDouble.Add(SqlDouble.MaxValue, SqlDouble.MaxValue)
             );
 
             // Divide()
@@ -106,8 +106,8 @@ namespace System.Data.Tests.SqlTypes
             // Subtract()
             Assert.Equal(1.5E+109, SqlDouble.Subtract(test1, test3).Value);
 
-            Assert.Throws<OverflowException>(
-                () => SqlDouble.Subtract(SqlDouble.MinValue, SqlDouble.MaxValue)
+            Assert.Throws<OverflowException>(() =>
+                SqlDouble.Subtract(SqlDouble.MinValue, SqlDouble.MaxValue)
             );
         }
 
@@ -501,8 +501,8 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml1, test1, "BA01");
             ReadWriteXmlTestInternal(xml2, test2, "BA02");
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => ReadWriteXmlTestInternal(xml3, test3, "BA03")
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                ReadWriteXmlTestInternal(xml3, test3, "BA03")
             );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }

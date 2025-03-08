@@ -25,26 +25,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
         {
             byte[] cdi;
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                        new byte[0],
-                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                    new byte[0],
+                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                )
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                        new byte[] { 1 },
-                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                    new byte[] { 1 },
+                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                )
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                        new byte[] { 1, 2 },
-                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                    new byte[] { 1, 2 },
+                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                )
             );
 
             // unknown version
@@ -94,12 +91,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 0,
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                        cdi,
-                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                    cdi,
+                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                )
             );
 
             // invalid record size = Int32.MinValue
@@ -123,12 +119,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 0,
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                        cdi,
-                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                    cdi,
+                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                )
             );
 
             // empty record
@@ -175,12 +170,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 0xab,
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                        cdi,
-                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                    cdi,
+                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                )
             );
 
             // valid record
@@ -374,32 +368,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
         {
             using (new EnsureEnglishUICulture())
             {
-                var e = Assert.Throws<InvalidDataException>(
-                    () =>
-                        EditAndContinueMethodDebugInformation.Create(
-                            ImmutableArray.Create(new byte[] { 0x01, 0x68, 0xff }),
-                            ImmutableArray<byte>.Empty
-                        )
+                var e = Assert.Throws<InvalidDataException>(() =>
+                    EditAndContinueMethodDebugInformation.Create(
+                        ImmutableArray.Create(new byte[] { 0x01, 0x68, 0xff }),
+                        ImmutableArray<byte>.Empty
+                    )
                 );
                 Assert.Equal("Invalid data at offset 3: 01-68-FF*", e.Message);
 
-                e = Assert.Throws<InvalidDataException>(
-                    () =>
-                        EditAndContinueMethodDebugInformation.Create(
-                            ImmutableArray.Create(
-                                new byte[] { 0x01, 0x68, 0xff, 0xff, 0xff, 0xff }
-                            ),
-                            ImmutableArray<byte>.Empty
-                        )
+                e = Assert.Throws<InvalidDataException>(() =>
+                    EditAndContinueMethodDebugInformation.Create(
+                        ImmutableArray.Create(new byte[] { 0x01, 0x68, 0xff, 0xff, 0xff, 0xff }),
+                        ImmutableArray<byte>.Empty
+                    )
                 );
                 Assert.Equal("Invalid data at offset 3: 01-68-FF*FF-FF-FF", e.Message);
 
-                e = Assert.Throws<InvalidDataException>(
-                    () =>
-                        EditAndContinueMethodDebugInformation.Create(
-                            ImmutableArray.Create(new byte[] { 0xff, 0xff, 0xff, 0xff }),
-                            ImmutableArray<byte>.Empty
-                        )
+                e = Assert.Throws<InvalidDataException>(() =>
+                    EditAndContinueMethodDebugInformation.Create(
+                        ImmutableArray.Create(new byte[] { 0xff, 0xff, 0xff, 0xff }),
+                        ImmutableArray<byte>.Empty
+                    )
                 );
                 Assert.Equal("Invalid data at offset 1: FF*FF-FF-FF", e.Message);
 
@@ -411,12 +400,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 largeData[404] = 0xff;
                 largeData[405] = 0xff;
 
-                e = Assert.Throws<InvalidDataException>(
-                    () =>
-                        EditAndContinueMethodDebugInformation.Create(
-                            ImmutableArray.Create(largeData),
-                            ImmutableArray<byte>.Empty
-                        )
+                e = Assert.Throws<InvalidDataException>(() =>
+                    EditAndContinueMethodDebugInformation.Create(
+                        ImmutableArray.Create(largeData),
+                        ImmutableArray<byte>.Empty
+                    )
                 );
                 Assert.Equal(
                     "Invalid data at offset 401: 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"
@@ -742,28 +730,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
         public void StateMachineStateDebugInfo_BadData()
         {
             // not sorted:
-            Assert.Throws<InvalidDataException>(
-                () =>
-                    EditAndContinueMethodDebugInformation.Create(
-                        compressedSlotMap: ImmutableArray<byte>.Empty,
-                        compressedLambdaMap: ImmutableArray<byte>.Empty,
-                        compressedStateMachineStateMap: ImmutableArray.Create<byte>(
-                            0x06,
-                            0x00,
-                            0x02,
-                            0x20,
-                            0x04,
-                            0x10,
-                            0x00,
-                            0x10,
-                            0x06,
-                            0x20,
-                            0x08,
-                            0x20,
-                            0x0A,
-                            0x30
-                        )
+            Assert.Throws<InvalidDataException>(() =>
+                EditAndContinueMethodDebugInformation.Create(
+                    compressedSlotMap: ImmutableArray<byte>.Empty,
+                    compressedLambdaMap: ImmutableArray<byte>.Empty,
+                    compressedStateMachineStateMap: ImmutableArray.Create<byte>(
+                        0x06,
+                        0x00,
+                        0x02,
+                        0x20,
+                        0x04,
+                        0x10,
+                        0x00,
+                        0x10,
+                        0x06,
+                        0x20,
+                        0x08,
+                        0x20,
+                        0x0A,
+                        0x30
                     )
+                )
             );
         }
 
@@ -1683,8 +1670,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 0x00,
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () => CustomDebugInfoReader.GetCustomDebugInfoRecords(bytes).ToArray()
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.GetCustomDebugInfoRecords(bytes).ToArray()
             );
         }
 
@@ -1714,8 +1701,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 0x06,
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () => CustomDebugInfoReader.GetCustomDebugInfoRecords(bytes).ToArray()
+            Assert.Throws<InvalidOperationException>(() =>
+                CustomDebugInfoReader.GetCustomDebugInfoRecords(bytes).ToArray()
             );
         }
 

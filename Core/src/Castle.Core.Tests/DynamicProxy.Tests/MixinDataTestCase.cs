@@ -259,32 +259,30 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Ctor_throws_when_multiple_delegate_mixins_for_same_Invoke_signature()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new MixinData(
-                        new object[]
-                        {
-                            new NotADelegate(),
-                            new Func<object, bool>(_ => true),
-                            new Predicate<object>(_ => false),
-                        }
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                new MixinData(
+                    new object[]
+                    {
+                        new NotADelegate(),
+                        new Func<object, bool>(_ => true),
+                        new Predicate<object>(_ => false),
+                    }
+                )
             );
         }
 
         [Test]
         public void Ctor_throws_when_multiple_delegate_type_mixins_for_same_Invoke_signature()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new MixinData(
-                        new object[]
-                        {
-                            typeof(Func<object, bool>),
-                            new NotADelegate(),
-                            typeof(Predicate<object>),
-                        }
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                new MixinData(
+                    new object[]
+                    {
+                        typeof(Func<object, bool>),
+                        new NotADelegate(),
+                        typeof(Predicate<object>),
+                    }
+                )
             );
         }
 

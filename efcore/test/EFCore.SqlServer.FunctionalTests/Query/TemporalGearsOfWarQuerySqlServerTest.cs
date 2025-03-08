@@ -56,8 +56,8 @@ public class TemporalGearsOfWarQuerySqlServerTest
 
     public override async Task Include_where_list_contains_navigation(bool async)
     {
-        await Assert.ThrowsAsync<EqualException>(
-            () => base.Include_where_list_contains_navigation(async)
+        await Assert.ThrowsAsync<EqualException>(() =>
+            base.Include_where_list_contains_navigation(async)
         );
 
         AssertSql(
@@ -82,8 +82,8 @@ WHERE [t].[Id] IS NOT NULL AND EXISTS (
 
     public override async Task Include_where_list_contains_navigation2(bool async)
     {
-        await Assert.ThrowsAsync<EqualException>(
-            () => base.Include_where_list_contains_navigation2(async)
+        await Assert.ThrowsAsync<EqualException>(() =>
+            base.Include_where_list_contains_navigation2(async)
         );
 
         AssertSql(
@@ -109,8 +109,8 @@ WHERE [c].[Location] IS NOT NULL AND EXISTS (
 
     public override async Task Navigation_accessed_twice_outside_and_inside_subquery(bool async)
     {
-        await Assert.ThrowsAsync<EqualException>(
-            () => base.Navigation_accessed_twice_outside_and_inside_subquery(async)
+        await Assert.ThrowsAsync<EqualException>(() =>
+            base.Navigation_accessed_twice_outside_and_inside_subquery(async)
         );
 
         AssertSql(
@@ -138,11 +138,8 @@ WHERE [t].[Id] IS NOT NULL AND EXISTS (
     )
     {
         // Test infra issue
-        await Assert.ThrowsAsync<EqualException>(
-            () =>
-                base.Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(
-                    async
-                )
+        await Assert.ThrowsAsync<EqualException>(() =>
+            base.Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(async)
         );
 
         AssertSql(
@@ -661,8 +658,8 @@ WHERE [g0].[Discriminator] = N'Officer'
             .Concat(ctx.Set<Gear>().TemporalAsOf(date2));
 
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => async ? query.ToListAsync() : Task.FromResult(query.ToList())
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                async ? query.ToListAsync() : Task.FromResult(query.ToList())
             )
         ).Message;
 

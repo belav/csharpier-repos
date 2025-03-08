@@ -105,8 +105,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void CipherReference_CipherValueSet()
         {
             CipherData cipherData = new CipherData(new byte[0]);
-            Assert.Throws<CryptographicException>(
-                () => cipherData.CipherReference = new CipherReference()
+            Assert.Throws<CryptographicException>(() =>
+                cipherData.CipherReference = new CipherReference()
             );
         }
 
@@ -139,8 +139,8 @@ namespace System.Security.Cryptography.Xml.Tests
 
             CipherData cipherData = new CipherData();
 
-            Assert.Throws<CryptographicException>(
-                () => cipherData.LoadXml(xmlDocument.DocumentElement)
+            Assert.Throws<CryptographicException>(() =>
+                cipherData.LoadXml(xmlDocument.DocumentElement)
             );
         }
 

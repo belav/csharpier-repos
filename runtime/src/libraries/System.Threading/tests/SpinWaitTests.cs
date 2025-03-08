@@ -22,8 +22,8 @@ namespace System.Threading.Tests
             //test SpinUntil
             Assert.Throws<ArgumentNullException>(() => SpinWait.SpinUntil(null));
             // Failure Case:  SpinUntil didn't throw ANE when null condition  passed
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => SpinWait.SpinUntil(() => true, TimeSpan.MaxValue)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                SpinWait.SpinUntil(() => true, TimeSpan.MaxValue)
             );
             // Failure Case:  SpinUntil didn't throw AORE when milliseconds > int.Max passed
             Assert.Throws<ArgumentOutOfRangeException>(() => SpinWait.SpinUntil(() => true, -2));

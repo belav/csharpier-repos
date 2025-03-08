@@ -20,17 +20,17 @@ namespace System.IO.Tests
             FakeSafeBuffer fakeBuffer = new FakeSafeBuffer(99);
             Assert.Throws<ArgumentNullException>(() => new UnmanagedMemoryStream(nullBuffer, 0, 1));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryStream(fakeBuffer, 2, -1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryStream(fakeBuffer, 2, -1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryStream(fakeBuffer, -1, 1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryStream(fakeBuffer, -1, 1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)42)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)42)
             );
 
             AssertExtensions.Throws<ArgumentException>(
@@ -85,21 +85,21 @@ namespace System.IO.Tests
                 Assert.False(stream.CanWrite);
                 Assert.False(stream.CanTimeout);
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Initialize(pByte, -1, 4, FileAccess.Read)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    stream.Initialize(pByte, -1, 4, FileAccess.Read)
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Initialize(pByte, 1, -4, FileAccess.Read)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    stream.Initialize(pByte, 1, -4, FileAccess.Read)
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Initialize(pByte, 5, 4, FileAccess.Read)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    stream.Initialize(pByte, 5, 4, FileAccess.Read)
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Initialize(pByte, 1, 4, (FileAccess)12345)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    stream.Initialize(pByte, 1, 4, (FileAccess)12345)
                 );
                 stream.Initialize(pByte, 1, 4, FileAccess.ReadWrite);
-                Assert.Throws<InvalidOperationException>(
-                    () => stream.Initialize(pByte, 1, 4, FileAccess.ReadWrite)
+                Assert.Throws<InvalidOperationException>(() =>
+                    stream.Initialize(pByte, 1, 4, FileAccess.ReadWrite)
                 );
 
                 Assert.True(stream.CanRead);
@@ -143,8 +143,8 @@ namespace System.IO.Tests
                 Assert.False(stream.CanWrite);
 
                 stream.Initialize(buffer, 0, length, FileAccess.Write);
-                Assert.Throws<InvalidOperationException>(
-                    () => stream.Initialize(buffer, 0, length, FileAccess.Write)
+                Assert.Throws<InvalidOperationException>(() =>
+                    stream.Initialize(buffer, 0, length, FileAccess.Write)
                 );
 
                 Assert.False(stream.CanRead);

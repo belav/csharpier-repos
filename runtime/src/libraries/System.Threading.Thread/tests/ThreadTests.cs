@@ -83,8 +83,7 @@ namespace System.Threading.Threads.Tests
             Assert.Throws<ArgumentNullException>(() => new Thread((ThreadStart)null));
             Assert.Throws<ArgumentNullException>(() => new Thread((ThreadStart)null, 0));
             Assert.Throws<ArgumentNullException>(() => new Thread((ParameterizedThreadStart)null));
-            Assert.Throws<ArgumentNullException>(
-                () => new Thread((ParameterizedThreadStart)null, 0)
+            Assert.Throws<ArgumentNullException>(() => new Thread((ParameterizedThreadStart)null, 0)
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Thread(() => { }, -1));
@@ -235,8 +234,8 @@ namespace System.Threading.Threads.Tests
                 .Invoke(() =>
                 {
                     Assert.Equal(ApartmentState.Unknown, Thread.CurrentThread.GetApartmentState());
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.MTA)
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        Thread.CurrentThread.SetApartmentState(ApartmentState.MTA)
                     );
                 })
                 .Dispose();
@@ -252,8 +251,8 @@ namespace System.Threading.Threads.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
                     );
                     Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
                 })
@@ -267,8 +266,8 @@ namespace System.Threading.Threads.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
                     );
                 })
                 .Dispose();
@@ -609,9 +608,8 @@ namespace System.Threading.Threads.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void ExecutionContextTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                    Assert.Equal(ExecutionContext.Capture(), Thread.CurrentThread.ExecutionContext)
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+                Assert.Equal(ExecutionContext.Capture(), Thread.CurrentThread.ExecutionContext)
             );
         }
 
@@ -793,13 +791,13 @@ namespace System.Threading.Threads.Tests
             Assert.Equal(ThreadState.Unstarted | ThreadState.Background, t.ThreadState);
 
             t.Start();
-            ThreadTestHelpers.WaitForCondition(
-                () => t.ThreadState == (ThreadState.WaitSleepJoin | ThreadState.Background)
+            ThreadTestHelpers.WaitForCondition(() =>
+                t.ThreadState == (ThreadState.WaitSleepJoin | ThreadState.Background)
             );
 
             e0.Set();
-            ThreadTestHelpers.WaitForCondition(
-                () => t.ThreadState == (ThreadState.Running | ThreadState.Background)
+            ThreadTestHelpers.WaitForCondition(() =>
+                t.ThreadState == (ThreadState.Running | ThreadState.Background)
             );
 
             e1.Set();
@@ -1038,8 +1036,8 @@ namespace System.Threading.Threads.Tests
                 () =>
                 {
                     threadReady.Set();
-                    ThreadTestHelpers.WaitForConditionWithoutBlocking(
-                        () => Volatile.Read(ref continueThreadBool)
+                    ThreadTestHelpers.WaitForConditionWithoutBlocking(() =>
+                        Volatile.Read(ref continueThreadBool)
                     );
                     threadReady.Set();
                     Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait());
@@ -1076,8 +1074,8 @@ namespace System.Threading.Threads.Tests
             );
             t.IsBackground = true;
             t.Start();
-            ThreadTestHelpers.WaitForCondition(
-                () => (t.ThreadState & ThreadState.WaitSleepJoin) != 0
+            ThreadTestHelpers.WaitForCondition(() =>
+                (t.ThreadState & ThreadState.WaitSleepJoin) != 0
             );
             t.Interrupt();
             waitForThread();
@@ -1109,8 +1107,7 @@ namespace System.Threading.Threads.Tests
                     try { }
                     finally
                     {
-                        Assert.Throws<ThreadInterruptedException>(
-                            () => continueThread.CheckedWait()
+                        Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait()
                         );
                     }
                 }
@@ -1140,14 +1137,14 @@ namespace System.Threading.Threads.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => t.Join(-2));
             Assert.Throws<ArgumentOutOfRangeException>(() => t.Join(TimeSpan.FromMilliseconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => t.Join(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                t.Join(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
             );
 
             Assert.Throws<ThreadStateException>(() => t.Join());
             Assert.Throws<ThreadStateException>(() => t.Join(UnexpectedTimeoutMilliseconds));
-            Assert.Throws<ThreadStateException>(
-                () => t.Join(TimeSpan.FromMilliseconds(UnexpectedTimeoutMilliseconds))
+            Assert.Throws<ThreadStateException>(() =>
+                t.Join(TimeSpan.FromMilliseconds(UnexpectedTimeoutMilliseconds))
             );
 
             t.Start();
@@ -1165,11 +1162,11 @@ namespace System.Threading.Threads.Tests
         public static void SleepTest()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Thread.Sleep(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Thread.Sleep(TimeSpan.FromMilliseconds(-2))
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Thread.Sleep(TimeSpan.FromMilliseconds(-2))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Thread.Sleep(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Thread.Sleep(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
             );
 
             Thread.Sleep(0);
@@ -1313,11 +1310,10 @@ namespace System.Threading.Threads.Tests
             Thread.EndThreadAffinity();
 
 #pragma warning disable SYSLIB0003 // obsolete members
-            Assert.Throws<InvalidOperationException>(
-                () => Thread.CurrentThread.GetCompressedStack()
+            Assert.Throws<InvalidOperationException>(() => Thread.CurrentThread.GetCompressedStack()
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Thread.CurrentThread.SetCompressedStack(CompressedStack.Capture())
+            Assert.Throws<InvalidOperationException>(() =>
+                Thread.CurrentThread.SetCompressedStack(CompressedStack.Capture())
             );
 #pragma warning restore SYSLIB0003 // obsolete members
 

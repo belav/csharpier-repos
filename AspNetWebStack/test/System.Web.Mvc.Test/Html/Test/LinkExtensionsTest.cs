@@ -727,217 +727,202 @@ namespace System.Web.Mvc.Html.Test
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.ActionLink(
-                                String.Empty,
-                                "actionName",
-                                new Object(),
-                                null /* htmlAttributes */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.ActionLink(
+                            String.Empty,
+                            "actionName",
+                            new Object(),
+                            null /* htmlAttributes */
+                        )
                     ),
                 },
                 // ActionLink(string linkText, string actionName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.ActionLink(
-                                String.Empty,
-                                "actionName",
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary()
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.ActionLink(
+                            String.Empty,
+                            "actionName",
+                            new RouteValueDictionary(),
+                            new RouteValueDictionary()
+                        )
                     ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName")
+                    Action = new Action(() =>
+                        htmlHelper.ActionLink(String.Empty, "actionName", "controllerName")
                     ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName, object routeValues, object htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.ActionLink(
-                                String.Empty,
-                                "actionName",
-                                "controllerName",
-                                new Object(),
-                                null /* htmlAttributes */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.ActionLink(
+                            String.Empty,
+                            "actionName",
+                            "controllerName",
+                            new Object(),
+                            null /* htmlAttributes */
+                        )
                     ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.ActionLink(
-                                String.Empty,
-                                "actionName",
-                                "controllerName",
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary()
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.ActionLink(
+                            String.Empty,
+                            "actionName",
+                            "controllerName",
+                            new RouteValueDictionary(),
+                            new RouteValueDictionary()
+                        )
                     ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.ActionLink(
-                                String.Empty,
-                                "actionName",
-                                "controllerName",
-                                null,
-                                null,
-                                null,
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary()
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.ActionLink(
+                            String.Empty,
+                            "actionName",
+                            "controllerName",
+                            null,
+                            null,
+                            null,
+                            new RouteValueDictionary(),
+                            new RouteValueDictionary()
+                        )
                     ),
                 },
                 // RouteLink(string linkText, object routeValues, object htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                new Object(),
-                                null /* htmlAttributes */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            new Object(),
+                            null /* htmlAttributes */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary()
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            new RouteValueDictionary(),
+                            new RouteValueDictionary()
+                        )
                     ),
                 },
                 // RouteLink(string linkText, string routeName, object routeValues)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                "routeName",
-                                null /* routeValues */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            "routeName",
+                            null /* routeValues */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                "routeName",
-                                new RouteValueDictionary() /* routeValues */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            "routeName",
+                            new RouteValueDictionary() /* routeValues */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, string routeName)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                (string)null /* routeName */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            (string)null /* routeName */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, object routeValues)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                (object)null /* routeValues */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            (object)null /* routeValues */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, RouteValueDictionary routeValues)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                new RouteValueDictionary() /* routeValues */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            new RouteValueDictionary() /* routeValues */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, string routeName, object routeValues, object htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                "routeName",
-                                new Object(),
-                                null /* htmlAttributes */
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            "routeName",
+                            new Object(),
+                            null /* htmlAttributes */
+                        )
                     ),
                 },
                 // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                "routeName",
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary()
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            "routeName",
+                            new RouteValueDictionary(),
+                            new RouteValueDictionary()
+                        )
                     ),
                 },
                 // RouteLink(string linkText, string routeName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(
-                        () =>
-                            htmlHelper.RouteLink(
-                                String.Empty,
-                                "routeName",
-                                null,
-                                null,
-                                null,
-                                new RouteValueDictionary(),
-                                new RouteValueDictionary()
-                            )
+                    Action = new Action(() =>
+                        htmlHelper.RouteLink(
+                            String.Empty,
+                            "routeName",
+                            null,
+                            null,
+                            null,
+                            new RouteValueDictionary(),
+                            new RouteValueDictionary()
+                        )
                     ),
                 },
             };

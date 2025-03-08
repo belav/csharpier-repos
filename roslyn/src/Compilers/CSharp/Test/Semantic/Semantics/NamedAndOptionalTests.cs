@@ -2234,8 +2234,8 @@ public class C
 
                     Assert.False(parameters[0].IsOptional);
                     Assert.False(parameters[0].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[0].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[0].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[0].ExplicitDefaultConstantValue);
                     Assert.Equal(0, parameters[0].GetAttributes().Length);
@@ -2260,16 +2260,16 @@ public class C
 
                     Assert.True(parameters[3].IsOptional);
                     Assert.False(parameters[3].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[3].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[3].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[3].ExplicitDefaultConstantValue);
                     Assert.Equal(isFromSource ? 1 : 0, parameters[3].GetAttributes().Length);
 
                     Assert.False(parameters[4].IsOptional);
                     Assert.False(parameters[4].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[4].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[4].ExplicitDefaultValue
                     );
                     Assert.True(parameters[4].HasMetadataConstantValue);
                     Assert.Equal(
@@ -2280,8 +2280,8 @@ public class C
 
                     Assert.False(parameters[5].IsOptional);
                     Assert.False(parameters[5].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[5].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[5].ExplicitDefaultValue
                     );
                     Assert.True(parameters[5].HasMetadataConstantValue);
                     Assert.Equal(
@@ -2354,8 +2354,8 @@ public struct S
                     Assert.False(parameters[0].IsOptional);
                     Assert.False(parameters[0].HasExplicitDefaultValue);
                     Assert.Null(parameters[0].ExplicitDefaultConstantValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[0].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[0].ExplicitDefaultValue
                     );
                     Assert.Equal(0, parameters[0].GetAttributes().Length);
 
@@ -2367,8 +2367,8 @@ public struct S
 
                     Assert.True(parameters[2].IsOptional);
                     Assert.False(parameters[2].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[2].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[2].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[2].ExplicitDefaultConstantValue);
                     Assert.Equal(isFromSource ? 1 : 0, parameters[2].GetAttributes().Length);
@@ -2419,8 +2419,8 @@ public class C
 
                     Assert.False(parameters[0].IsOptional);
                     Assert.False(parameters[0].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[0].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[0].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[0].ExplicitDefaultConstantValue);
                     Assert.Equal(0, parameters[0].GetAttributes().Length);
@@ -2442,16 +2442,16 @@ public class C
 
                     Assert.True(parameters[3].IsOptional);
                     Assert.False(parameters[3].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[3].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[3].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[3].ExplicitDefaultConstantValue);
                     Assert.Equal(isFromSource ? 1 : 0, parameters[3].GetAttributes().Length);
 
                     Assert.False(parameters[4].IsOptional);
                     Assert.False(parameters[4].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[4].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[4].ExplicitDefaultValue
                     );
                     Assert.True(parameters[4].HasMetadataConstantValue);
                     Assert.Equal(ConstantValue.Null, parameters[4].ExplicitDefaultConstantValue);
@@ -2465,8 +2465,8 @@ public class C
 
                     Assert.False(parameters[6].IsOptional);
                     Assert.False(parameters[6].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[6].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[6].ExplicitDefaultValue
                     );
                     Assert.True(parameters[6].HasMetadataConstantValue);
                     Assert.Equal(
@@ -2530,8 +2530,8 @@ public class C
 
                     Assert.False(parameters[0].IsOptional);
                     Assert.False(parameters[0].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[0].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[0].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[0].ExplicitDefaultConstantValue);
                     Assert.Equal(0, parameters[0].GetAttributes().Length);
@@ -2556,16 +2556,16 @@ public class C
 
                     Assert.True(parameters[3].IsOptional);
                     Assert.False(parameters[3].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[3].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[3].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[3].ExplicitDefaultConstantValue);
                     Assert.Equal(isFromSource ? 1 : 0, parameters[3].GetAttributes().Length);
 
                     Assert.False(parameters[4].IsOptional);
                     Assert.False(parameters[4].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[4].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[4].ExplicitDefaultValue
                     );
                     Assert.False(parameters[4].HasMetadataConstantValue);
                     Assert.Equal(
@@ -2576,8 +2576,8 @@ public class C
 
                     Assert.False(parameters[5].IsOptional);
                     Assert.False(parameters[5].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[5].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[5].ExplicitDefaultValue
                     );
                     Assert.False(parameters[5].HasMetadataConstantValue);
                     Assert.Equal(
@@ -2649,8 +2649,8 @@ public class C
 
                     Assert.False(parameters[0].IsOptional);
                     Assert.False(parameters[0].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[0].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[0].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[0].ExplicitDefaultConstantValue);
                     Assert.Equal(0, parameters[0].GetAttributes().Length);
@@ -2663,16 +2663,16 @@ public class C
 
                     Assert.True(parameters[2].IsOptional);
                     Assert.False(parameters[2].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[2].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[2].ExplicitDefaultValue
                     );
                     Assert.Null(parameters[2].ExplicitDefaultConstantValue);
                     Assert.Equal(isFromSource ? 1 : 0, parameters[2].GetAttributes().Length);
 
                     Assert.False(parameters[3].IsOptional);
                     Assert.False(parameters[3].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[3].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[3].ExplicitDefaultValue
                     );
                     Assert.False(parameters[3].HasMetadataConstantValue);
                     Assert.Equal(
@@ -2683,8 +2683,8 @@ public class C
 
                     Assert.False(parameters[4].IsOptional);
                     Assert.False(parameters[4].HasExplicitDefaultValue);
-                    Assert.Throws<InvalidOperationException>(
-                        () => parameters[4].ExplicitDefaultValue
+                    Assert.Throws<InvalidOperationException>(() =>
+                        parameters[4].ExplicitDefaultValue
                     );
                     Assert.False(parameters[4].HasMetadataConstantValue);
                     Assert.Equal(

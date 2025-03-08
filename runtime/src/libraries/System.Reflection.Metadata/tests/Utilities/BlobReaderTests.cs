@@ -112,8 +112,8 @@ namespace System.Reflection.Metadata.Tests
             fixed (byte* bufferPtr = buffer)
             {
                 bufferPtrForLambda = bufferPtr;
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => new BlobReader(bufferPtrForLambda, -1)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    new BlobReader(bufferPtrForLambda, -1)
                 );
             }
 
@@ -332,11 +332,11 @@ namespace System.Reflection.Metadata.Tests
                 Assert.Equal(0x01FFU, block.PeekTaggedReference(6, smallRefSize: true));
 
                 // large ref size throws on > RIDMask when tagged variant is not used.
-                Assert.Throws<BadImageFormatException>(
-                    () => block.PeekReference(0, smallRefSize: false)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekReference(0, smallRefSize: false)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.PeekReference(4, smallRefSize: false)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekReference(4, smallRefSize: false)
                 );
 
                 // large ref size does not throw when Tagged variant is used.
@@ -344,11 +344,11 @@ namespace System.Reflection.Metadata.Tests
                 Assert.Equal(0x01FFFFFFU, block.PeekTaggedReference(4, smallRefSize: false));
 
                 // bounds check applies in all cases
-                Assert.Throws<BadImageFormatException>(
-                    () => block.PeekReference(7, smallRefSize: true)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekReference(7, smallRefSize: true)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.PeekReference(5, smallRefSize: false)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekReference(5, smallRefSize: false)
                 );
             }
         }
@@ -377,49 +377,37 @@ namespace System.Reflection.Metadata.Tests
                 int bytesRead;
 
                 MetadataStringDecoder stringDecoder = MetadataStringDecoder.DefaultUTF8;
-                Assert.Throws<BadImageFormatException>(
-                    () =>
-                        block.PeekUtf8NullTerminated(
-                            int.MaxValue,
-                            null,
-                            stringDecoder,
-                            out bytesRead
-                        )
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekUtf8NullTerminated(int.MaxValue, null, stringDecoder, out bytesRead)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.PeekUtf8NullTerminated(-1, null, stringDecoder, out bytesRead)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekUtf8NullTerminated(-1, null, stringDecoder, out bytesRead)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () =>
-                        block.PeekUtf8NullTerminated(
-                            int.MinValue,
-                            null,
-                            stringDecoder,
-                            out bytesRead
-                        )
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekUtf8NullTerminated(int.MinValue, null, stringDecoder, out bytesRead)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.PeekUtf8NullTerminated(5, null, stringDecoder, out bytesRead)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekUtf8NullTerminated(5, null, stringDecoder, out bytesRead)
                 );
 
                 Assert.Throws<BadImageFormatException>(() => block.GetMemoryBlockAt(-1, 1));
                 Assert.Throws<BadImageFormatException>(() => block.GetMemoryBlockAt(1, -1));
                 Assert.Throws<BadImageFormatException>(() => block.GetMemoryBlockAt(0, -1));
                 Assert.Throws<BadImageFormatException>(() => block.GetMemoryBlockAt(-1, 0));
-                Assert.Throws<BadImageFormatException>(
-                    () => block.GetMemoryBlockAt(-int.MaxValue, int.MaxValue)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.GetMemoryBlockAt(-int.MaxValue, int.MaxValue)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.GetMemoryBlockAt(int.MaxValue, -int.MaxValue)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.GetMemoryBlockAt(int.MaxValue, -int.MaxValue)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.GetMemoryBlockAt(int.MaxValue, int.MaxValue)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.GetMemoryBlockAt(int.MaxValue, int.MaxValue)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.GetMemoryBlockAt(block.Length, -1)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.GetMemoryBlockAt(block.Length, -1)
                 );
-                Assert.Throws<BadImageFormatException>(
-                    () => block.GetMemoryBlockAt(-1, block.Length)
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.GetMemoryBlockAt(-1, block.Length)
                 );
 
                 Assert.Equal(

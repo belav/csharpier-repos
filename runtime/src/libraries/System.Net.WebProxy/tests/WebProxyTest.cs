@@ -391,8 +391,8 @@ namespace System.Net.Tests
                 // On Unix, getaddrinfo returns host not found, if all the machine discovery settings on the local network
                 // is turned off. Hence dns lookup for it's own hostname fails.
                 Assert.Equal(SocketError.HostNotFound, exception.SocketErrorCode);
-                Assert.Throws<SocketException>(
-                    () => Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult()
+                Assert.Throws<SocketException>(() =>
+                    Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult()
                 );
                 Assert.True(OperatingSystem.IsLinux() || OperatingSystem.IsMacOS());
             }

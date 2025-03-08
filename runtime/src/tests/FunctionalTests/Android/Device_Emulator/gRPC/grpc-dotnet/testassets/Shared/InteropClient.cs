@@ -512,8 +512,8 @@ namespace Grpc.Shared.TestAssets
                 // step 1: test unary call
                 var request = new SimpleRequest { ResponseStatus = echoStatus };
 
-                var e = await ExceptionAssert.ThrowsAsync<RpcException>(
-                    async () => await client.UnaryCallAsync(request)
+                var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () =>
+                    await client.UnaryCallAsync(request)
                 );
                 Assert.AreEqual(StatusCode.Unknown, e.Status.StatusCode);
                 Assert.AreEqual(echoStatus.Message, e.Status.Detail);
@@ -553,8 +553,8 @@ namespace Grpc.Shared.TestAssets
         {
             var client = CreateClient<UnimplementedService.UnimplementedServiceClient>(channel);
 
-            var e = await ExceptionAssert.ThrowsAsync<RpcException>(
-                async () => await client.UnimplementedCallAsync(new Empty())
+            var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () =>
+                await client.UnimplementedCallAsync(new Empty())
             );
 
             Assert.AreEqual(StatusCode.Unimplemented, e.Status.StatusCode);
@@ -567,8 +567,8 @@ namespace Grpc.Shared.TestAssets
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
-            var e = await ExceptionAssert.ThrowsAsync<RpcException>(
-                async () => await client.UnimplementedCallAsync(new Empty())
+            var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () =>
+                await client.UnimplementedCallAsync(new Empty())
             );
 
             Assert.AreEqual(StatusCode.Unimplemented, e.Status.StatusCode);
@@ -590,12 +590,8 @@ namespace Grpc.Shared.TestAssets
                 ResponseSize = 314159,
                 Payload = CreateZerosPayload(271828),
             };
-            var e = await ExceptionAssert.ThrowsAsync<RpcException>(
-                async () =>
-                    await client.UnaryCallAsync(
-                        probeRequest,
-                        CreateClientCompressionMetadata(false)
-                    )
+            var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () =>
+                await client.UnaryCallAsync(probeRequest, CreateClientCompressionMetadata(false))
             );
             Assert.AreEqual(StatusCode.InvalidArgument, e.Status.StatusCode);
 

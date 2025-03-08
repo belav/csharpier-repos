@@ -32,9 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // We will defer creation of this reference manager until we have to to avoid it being constructed too
                 // early and potentially causing deadlocks. We do initialize it on the UI thread in the
                 // VisualStudioWorkspaceImpl.DeferredState constructor to ensure it gets created there.
-                _manager = new Lazy<VisualStudioMetadataReferenceManager>(
-                    () =>
-                        workspaceServices.GetRequiredService<VisualStudioMetadataReferenceManager>()
+                _manager = new Lazy<VisualStudioMetadataReferenceManager>(() =>
+                    workspaceServices.GetRequiredService<VisualStudioMetadataReferenceManager>()
                 );
             }
 

@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _parentRemappedSymbolsOpt = parentRemappedSymbolsOpt;
 
             this.RootBinder = rootBinder.WithAdditionalFlags(GetSemanticModelBinderFlags());
-            _operationFactory = new Lazy<CSharpOperationFactory>(
-                () => new CSharpOperationFactory(this)
+            _operationFactory = new Lazy<CSharpOperationFactory>(() =>
+                new CSharpOperationFactory(this)
             );
         }
 

@@ -113,14 +113,13 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Throws<PlatformNotSupportedException>(() => statistics.DefaultTtl);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ForwardingEnabled);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketRequests);
-            Assert.Throws<PlatformNotSupportedException>(
-                () => statistics.OutputPacketRoutingDiscards
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                statistics.OutputPacketRoutingDiscards
             );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketsDiscarded);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketsWithNoRoute);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketFragmentFailures);
-            Assert.Throws<PlatformNotSupportedException>(
-                () => statistics.PacketReassembliesRequired
+            Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassembliesRequired
             );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassemblyFailures);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassemblyTimeout);
@@ -130,14 +129,14 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsDelivered);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsDiscarded);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsForwarded);
-            Assert.Throws<PlatformNotSupportedException>(
-                () => statistics.ReceivedPacketsWithAddressErrors
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                statistics.ReceivedPacketsWithAddressErrors
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => statistics.ReceivedPacketsWithHeadersErrors
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                statistics.ReceivedPacketsWithHeadersErrors
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => statistics.ReceivedPacketsWithUnknownProtocol
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                statistics.ReceivedPacketsWithUnknownProtocol
             );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.NumberOfRoutes);
         }

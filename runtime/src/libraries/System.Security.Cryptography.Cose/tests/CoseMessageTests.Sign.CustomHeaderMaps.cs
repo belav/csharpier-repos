@@ -154,15 +154,14 @@ namespace System.Security.Cryptography.Cose.Tests
                 {
                     var protectedHeaders = GetEmptyHeaderMap();
                     protectedHeaders.Add(CoseHeaderLabel.Algorithm, edgeValue);
-                    Assert.Throws<CryptographicException>(
-                        () =>
-                            Sign(
-                                s_sampleContent,
-                                key,
-                                hashAlgorithm,
-                                protectedHeaders,
-                                padding: padding
-                            )
+                    Assert.Throws<CryptographicException>(() =>
+                        Sign(
+                            s_sampleContent,
+                            key,
+                            hashAlgorithm,
+                            protectedHeaders,
+                            padding: padding
+                        )
                     );
                 }
             }
@@ -182,15 +181,8 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 var protectedHeaders = GetEmptyHeaderMap();
                 protectedHeaders.Add(CoseHeaderLabel.Algorithm, "FOO");
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        Sign(
-                            s_sampleContent,
-                            key,
-                            hashAlgorithm,
-                            protectedHeaders,
-                            padding: padding
-                        )
+                Assert.Throws<CryptographicException>(() =>
+                    Sign(s_sampleContent, key, hashAlgorithm, protectedHeaders, padding: padding)
                 );
             }
         }
@@ -198,16 +190,15 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void SignWithUnsupportedCoseAlgorithm()
         {
-            Assert.Throws<CryptographicException>(
-                () =>
-                    Sign(
-                        s_sampleContent,
-                        DefaultKey,
-                        DefaultHash,
-                        GetHeaderMapWithAlgorithm(
-                            (CoseAlgorithm)(-47) /*ES256K*/
-                        )
+            Assert.Throws<CryptographicException>(() =>
+                Sign(
+                    s_sampleContent,
+                    DefaultKey,
+                    DefaultHash,
+                    GetHeaderMapWithAlgorithm(
+                        (CoseAlgorithm)(-47) /*ES256K*/
                     )
+                )
             );
         }
 
@@ -762,8 +753,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 encodedValue
             );
 
-            Assert.Throws<CryptographicException>(
-                () => Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
+            Assert.Throws<CryptographicException>(() =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
             );
         }
 
@@ -783,8 +774,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 encodedValue
             );
 
-            Assert.Throws<CryptographicException>(
-                () => Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
+            Assert.Throws<CryptographicException>(() =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
             );
         }
 
@@ -804,8 +795,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 encodedValue
             );
 
-            Assert.Throws<CryptographicException>(
-                () => Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
+            Assert.Throws<CryptographicException>(() =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
             );
         }
 

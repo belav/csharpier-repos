@@ -62,8 +62,8 @@ namespace System.Data.Tests
         [Fact]
         public void Constructor3_DataType_Null()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
-                () => new DataColumn("ColName", null)
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                new DataColumn("ColName", null)
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -164,8 +164,8 @@ namespace System.Data.Tests
 
             // The DateTimeMode can be set only on DataColumns
             // of type DateTime
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => col.DateTimeMode = DataSetDateTime.Local
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                col.DateTimeMode = DataSetDateTime.Local
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -178,8 +178,8 @@ namespace System.Data.Tests
             DataColumn col = new DataColumn("birthdate", typeof(DateTime));
 
             // The DataSetDateTime enumeration value, 666, is invalid
-            InvalidEnumArgumentException ex = Assert.Throws<InvalidEnumArgumentException>(
-                () => col.DateTimeMode = (DataSetDateTime)666
+            InvalidEnumArgumentException ex = Assert.Throws<InvalidEnumArgumentException>(() =>
+                col.DateTimeMode = (DataSetDateTime)666
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -310,8 +310,8 @@ namespace System.Data.Tests
             t.Columns.Add("aaa");
             t.Rows.Add(new object[] { "xxx" });
             DataColumn c = t.Columns.Add("bbb");
-            Assert.Throws<OverflowException>(
-                () => c.Expression = "SUBSTRING(aaa, 6000000000000000, 2)"
+            Assert.Throws<OverflowException>(() =>
+                c.Expression = "SUBSTRING(aaa, 6000000000000000, 2)"
             );
         }
 
@@ -363,20 +363,18 @@ namespace System.Data.Tests
             // Exceptions
             //
 
-            Assert.ThrowsAny<InvalidExpressionException>(
-                () => c.Expression = "iff (age = 24, 'hurrey', 'boo')"
+            Assert.ThrowsAny<InvalidExpressionException>(() =>
+                c.Expression = "iff (age = 24, 'hurrey', 'boo')"
             );
             //The following two cases fail on mono. MS.net evaluates the expression
             //immediately upon assignment. We don't do this yet hence we don't throw
             //an exception at this point.
             // Cannot find column [nimi].
-            Assert.Throws<EvaluateException>(
-                () => c.Expression = "iif (nimi = 24, 'hurrey', 'boo')"
+            Assert.Throws<EvaluateException>(() => c.Expression = "iif (nimi = 24, 'hurrey', 'boo')"
             );
 
             // Cannot perform '=' operation on System.String and System.Int32.
-            Assert.Throws<EvaluateException>(
-                () => c.Expression = "iif (name = 24, 'hurrey', 'boo')"
+            Assert.Throws<EvaluateException>(() => c.Expression = "iif (name = 24, 'hurrey', 'boo')"
             );
 
             // Invalid type name 'Boolean'.
@@ -557,8 +555,8 @@ namespace System.Data.Tests
             ds.Tables.Add("MyType");
             ds.Tables["MyType"]
                 .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
-            Assert.Throws<ArgumentException>(
-                () => ds.Tables["MyType"].Columns["Desc"].MaxLength = 32
+            Assert.Throws<ArgumentException>(() =>
+                ds.Tables["MyType"].Columns["Desc"].MaxLength = 32
             );
         }
 
@@ -714,37 +712,37 @@ namespace System.Data.Tests
             ds.Relations.Add(rel2);
 
             // Aggregation Functions cannot be called on Columns Returning Single Row (Parent Column)
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "count(parent.test)")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "count(parent.test)")
             );
 
             // Numerical or Functions cannot be called on Columns Returning Multiple Rows (Child Column);
             // Check arithmetic operator
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "10*(child.test)")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "10*(child.test)")
             );
 
             // Check rel operator
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "(child.test) > 10")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "(child.test) > 10")
             );
 
             // Check predicates
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "(child.test) IN (1,2,3)")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "(child.test) IN (1,2,3)")
             );
 
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "(child.test) LIKE 1")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "(child.test) LIKE 1")
             );
 
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "(child.test) IS null")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "(child.test) IS null")
             );
 
             // Check Calc Functions
-            Assert.Throws<SyntaxErrorException>(
-                () => table2.Columns.Add("result", typeof(int), "isnull(child.test,10)")
+            Assert.Throws<SyntaxErrorException>(() =>
+                table2.Columns.Add("result", typeof(int), "isnull(child.test,10)")
             );
         }
 
@@ -821,8 +819,8 @@ namespace System.Data.Tests
             var t = new DataTable();
             var c1 = t.Columns.Add("c1", typeof(NullableTypeWithNullProperty));
             var c2 = t.Columns.Add("c2", typeof(NullableTypeWithNullField));
-            Assert.Throws<ArgumentException>(
-                () => t.Columns.Add("c3", typeof(NullableTypeWithoutNullMember))
+            Assert.Throws<ArgumentException>(() =>
+                t.Columns.Add("c3", typeof(NullableTypeWithoutNullMember))
             );
         }
 

@@ -991,10 +991,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void FullDateTimePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    DateTimeFormatInfo.InvariantInfo.FullDateTimePattern =
-                        "dddd, dd MMMM yyyy HH:mm:ss"
+            Assert.Throws<InvalidOperationException>(() =>
+                DateTimeFormatInfo.InvariantInfo.FullDateTimePattern = "dddd, dd MMMM yyyy HH:mm:ss"
             );
         }
     }

@@ -94,8 +94,8 @@ public class TextTemplatingEngineHostTest
     {
         var host = new TextTemplatingEngineHost();
 
-        var ex = Assert.Throws<FileNotFoundException>(
-            () => _engine.ProcessTemplate(@"<#@ test processor=""TestDirectiveProcessor"" #>", host)
+        var ex = Assert.Throws<FileNotFoundException>(() =>
+            _engine.ProcessTemplate(@"<#@ test processor=""TestDirectiveProcessor"" #>", host)
         );
 
         Assert.Equal(DesignStrings.UnknownDirectiveProcessor("TestDirectiveProcessor"), ex.Message);

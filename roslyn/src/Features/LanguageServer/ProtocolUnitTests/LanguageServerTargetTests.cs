@@ -143,13 +143,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                     Uri = ProtocolConversions.CreateAbsoluteUri(@"C:\location\file.json"),
                 },
             };
-            var ex = await Assert.ThrowsAsync<RemoteInvocationException>(
-                async () =>
-                    await server.ExecuteRequestAsync<DidOpenTextDocumentParams, object>(
-                        Methods.TextDocumentDidOpenName,
-                        didOpenParams,
-                        CancellationToken.None
-                    )
+            var ex = await Assert.ThrowsAsync<RemoteInvocationException>(async () =>
+                await server.ExecuteRequestAsync<DidOpenTextDocumentParams, object>(
+                    Methods.TextDocumentDidOpenName,
+                    didOpenParams,
+                    CancellationToken.None
+                )
             );
             Assert.Equal("'initialized' has not been called.", ex.Message);
         }

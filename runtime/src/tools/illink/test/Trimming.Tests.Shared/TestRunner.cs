@@ -116,36 +116,34 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 .ToArray();
 
             var additionalDefines = GetAdditionalDefines();
-            var inputTask = Task.Run(
-                () =>
-                    inputCompiler.CompileTestIn(
-                        sandbox.InputDirectory,
-                        assemblyName,
-                        sourceFiles,
-                        commonReferences,
-                        mainAssemblyReferences,
-                        additionalDefines?.ToArray(),
-                        resources,
-                        additionalArguments
-                    )
+            var inputTask = Task.Run(() =>
+                inputCompiler.CompileTestIn(
+                    sandbox.InputDirectory,
+                    assemblyName,
+                    sourceFiles,
+                    commonReferences,
+                    mainAssemblyReferences,
+                    additionalDefines?.ToArray(),
+                    resources,
+                    additionalArguments
+                )
             );
 
             var expectationsDefines = new string[] { "INCLUDE_EXPECTATIONS" };
             if (additionalDefines != null)
                 expectationsDefines = expectationsDefines.Concat(additionalDefines).ToArray();
 
-            var expectationsTask = Task.Run(
-                () =>
-                    expectationsCompiler.CompileTestIn(
-                        sandbox.ExpectationsDirectory,
-                        assemblyName,
-                        sourceFiles,
-                        expectationsCommonReferences,
-                        expectationsMainAssemblyReferences,
-                        expectationsDefines,
-                        resources,
-                        additionalArguments
-                    )
+            var expectationsTask = Task.Run(() =>
+                expectationsCompiler.CompileTestIn(
+                    sandbox.ExpectationsDirectory,
+                    assemblyName,
+                    sourceFiles,
+                    expectationsCommonReferences,
+                    expectationsMainAssemblyReferences,
+                    expectationsDefines,
+                    resources,
+                    additionalArguments
+                )
             );
 
             NPath? inputAssemblyPath = null;

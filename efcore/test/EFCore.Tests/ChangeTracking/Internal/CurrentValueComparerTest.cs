@@ -88,13 +88,12 @@ public class CurrentValueComparerTest
                 nameof(NotComparable)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        factory.Create(
-                            context
-                                .Model.FindEntityType(typeof(Godzilla))
-                                .FindProperty(nameof(Godzilla.NotComparable))
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    factory.Create(
+                        context
+                            .Model.FindEntityType(typeof(Godzilla))
+                            .FindProperty(nameof(Godzilla.NotComparable))
+                    )
                 )
                 .Message
         );
@@ -115,13 +114,12 @@ public class CurrentValueComparerTest
                 nameof(NotComparable)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        factory.Create(
-                            context
-                                .Model.FindEntityType(typeof(Godzilla))
-                                .FindProperty(nameof(Godzilla.NotComparableConverted))
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    factory.Create(
+                        context
+                            .Model.FindEntityType(typeof(Godzilla))
+                            .FindProperty(nameof(Godzilla.NotComparableConverted))
+                    )
                 )
                 .Message
         );

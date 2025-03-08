@@ -289,8 +289,8 @@ namespace System.Data.Tests
                 );
 
                 table = new DataTable();
-                Assert.Throws<InvalidOperationException>(
-                    () => table.ReadXml(new StringReader(asXml))
+                Assert.Throws<InvalidOperationException>(() =>
+                    table.ReadXml(new StringReader(asXml))
                 );
             }
             finally

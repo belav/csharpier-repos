@@ -155,8 +155,8 @@ namespace System.Data.Tests
             // Ctor - add existing column
             dtParent.Rows.Add(new object[] { 99, "str1", "str2" });
             dtParent.Constraints.Add(uc);
-            Assert.Throws<ConstraintException>(
-                () => dtParent.Rows.Add(new object[] { 99, "str1", "str2" })
+            Assert.Throws<ConstraintException>(() =>
+                dtParent.Rows.Add(new object[] { 99, "str1", "str2" })
             );
 
             DataTable dtChild = DataProvider.CreateChildDataTable();
@@ -222,8 +222,8 @@ namespace System.Data.Tests
             // Ctor - add existing column
             dtParent.Rows.Add(new object[] { 99, "str1", "str2" });
             dtParent.Constraints.Add(uc);
-            Assert.Throws<ConstraintException>(
-                () => dtParent.Rows.Add(new object[] { 99, "str1", "str2" })
+            Assert.Throws<ConstraintException>(() =>
+                dtParent.Rows.Add(new object[] { 99, "str1", "str2" })
             );
 
             DataTable dtChild = DataProvider.CreateChildDataTable();

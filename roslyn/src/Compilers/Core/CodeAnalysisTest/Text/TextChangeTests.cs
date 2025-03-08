@@ -228,11 +228,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, -1, 2));
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, 0, -1));
             Assert.Throws<ArgumentNullException>(() => newText.CopyTo(0, null, 0, 2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => newText.CopyTo(newText.Length - 1, destination, 0, 2)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                newText.CopyTo(newText.Length - 1, destination, 0, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => newText.CopyTo(0, destination, destination.Length - 1, 2)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                newText.CopyTo(0, destination, destination.Length - 1, 2)
             );
         }
 

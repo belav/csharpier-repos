@@ -1155,8 +1155,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             Assert.Equal(
                 CosmosStrings.InvalidResourceId,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.Set<CustomerWithResourceId>().Find(1, "")
+                    .Throws<InvalidOperationException>(() =>
+                        context.Set<CustomerWithResourceId>().Find(1, "")
                     )
                     .Message
             );
@@ -1771,8 +1771,8 @@ OFFSET 0 LIMIT 1
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
                 (
-                    await Assert.ThrowsAsync<CosmosException>(
-                        () => context.Set<Customer>().SingleAsync()
+                    await Assert.ThrowsAsync<CosmosException>(() =>
+                        context.Set<Customer>().SingleAsync()
                     )
                 ).Message
             );

@@ -14,8 +14,8 @@ namespace System.Threading.RateLimiting.Tests
         public void ThrowsWhenAcquiringLessThanZero()
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => limiter.AttemptAcquire(string.Empty, -1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                limiter.AttemptAcquire(string.Empty, -1)
             );
         }
 
@@ -23,8 +23,8 @@ namespace System.Threading.RateLimiting.Tests
         public async Task ThrowsWhenWaitingForLessThanZero()
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                async () => await limiter.AcquireAsync(string.Empty, -1)
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                await limiter.AcquireAsync(string.Empty, -1)
             );
         }
 
@@ -32,8 +32,8 @@ namespace System.Threading.RateLimiting.Tests
         public async Task WaitAsyncThrowsWhenPassedACanceledToken()
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await limiter.AcquireAsync(string.Empty, 1, new CancellationToken(true))
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await limiter.AcquireAsync(string.Empty, 1, new CancellationToken(true))
             );
         }
 
@@ -381,8 +381,8 @@ namespace System.Threading.RateLimiting.Tests
             limiter.AttemptAcquire("1");
             limiter.AttemptAcquire("2");
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(
-                () => limiter.DisposeAsync().AsTask()
+            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
+                limiter.DisposeAsync().AsTask()
             );
             Assert.Equal(2, ex.InnerExceptions.Count);
         }
@@ -617,8 +617,7 @@ namespace System.Threading.RateLimiting.Tests
             innerLimiter2.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
             // Run Timer
-            var ex = await Assert.ThrowsAsync<AggregateException>(
-                () => Utils.RunTimerFunc(limiter)
+            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter)
             );
 
             Assert.True(dispose1Called);
@@ -677,8 +676,7 @@ namespace System.Threading.RateLimiting.Tests
             };
             idleLimiter.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(
-                () => Utils.RunTimerFunc(limiter)
+            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter)
             );
             Assert.Single(ex.InnerExceptions);
 

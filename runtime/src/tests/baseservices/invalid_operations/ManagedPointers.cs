@@ -59,17 +59,15 @@ public unsafe class ManagedPointers
     {
         Console.WriteLine($"Running {nameof(Validate_IntrinsicMethodsWithByRef_NullByRef)}...");
 
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Increment(ref Unsafe.NullRef<int>())
+        Assert.Throws<NullReferenceException>(() => Interlocked.Increment(ref Unsafe.NullRef<int>())
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Increment(ref Unsafe.NullRef<long>())
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Increment(ref Unsafe.NullRef<long>())
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Decrement(ref Unsafe.NullRef<int>())
+        Assert.Throws<NullReferenceException>(() => Interlocked.Decrement(ref Unsafe.NullRef<int>())
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Decrement(ref Unsafe.NullRef<long>())
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Decrement(ref Unsafe.NullRef<long>())
         );
 
         Assert.Throws<NullReferenceException>(() => Interlocked.And(ref Unsafe.NullRef<int>(), 0));
@@ -77,52 +75,46 @@ public unsafe class ManagedPointers
         Assert.Throws<NullReferenceException>(() => Interlocked.Or(ref Unsafe.NullRef<int>(), 0));
         Assert.Throws<NullReferenceException>(() => Interlocked.Or(ref Unsafe.NullRef<long>(), 0));
 
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Exchange(ref Unsafe.NullRef<int>(), 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Exchange(ref Unsafe.NullRef<int>(), 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Exchange(ref Unsafe.NullRef<long>(), 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Exchange(ref Unsafe.NullRef<long>(), 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Exchange(ref Unsafe.NullRef<float>(), 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Exchange(ref Unsafe.NullRef<float>(), 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Exchange(ref Unsafe.NullRef<double>(), 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Exchange(ref Unsafe.NullRef<double>(), 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Exchange(ref Unsafe.NullRef<object>(), new object())
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Exchange(ref Unsafe.NullRef<object>(), new object())
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.Exchange<object>(ref Unsafe.NullRef<object>(), new object())
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Exchange<object>(ref Unsafe.NullRef<object>(), new object())
         );
 
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.CompareExchange(ref Unsafe.NullRef<int>(), 0, 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.CompareExchange(ref Unsafe.NullRef<int>(), 0, 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.CompareExchange(ref Unsafe.NullRef<long>(), 0, 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.CompareExchange(ref Unsafe.NullRef<long>(), 0, 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.CompareExchange(ref Unsafe.NullRef<float>(), 0, 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.CompareExchange(ref Unsafe.NullRef<float>(), 0, 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () => Interlocked.CompareExchange(ref Unsafe.NullRef<double>(), 0, 0)
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.CompareExchange(ref Unsafe.NullRef<double>(), 0, 0)
         );
-        Assert.Throws<NullReferenceException>(
-            () =>
-                Interlocked.CompareExchange(
-                    ref Unsafe.NullRef<object>(),
-                    new object(),
-                    new object()
-                )
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.CompareExchange(ref Unsafe.NullRef<object>(), new object(), new object())
         );
-        Assert.Throws<NullReferenceException>(
-            () =>
-                Interlocked.CompareExchange<object>(
-                    ref Unsafe.NullRef<object>(),
-                    new object(),
-                    new object()
-                )
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.CompareExchange<object>(
+                ref Unsafe.NullRef<object>(),
+                new object(),
+                new object()
+            )
         );
     }
 }

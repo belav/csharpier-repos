@@ -146,11 +146,10 @@ namespace System.IO.Tests
         [Fact]
         public void InvalidSearchOption()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetEntries(".", "*", (SearchOption)100)
+            Assert.Throws<ArgumentOutOfRangeException>(() => GetEntries(".", "*", (SearchOption)100)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetEntries(".", "*", (SearchOption)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetEntries(".", "*", (SearchOption)(-1))
             );
         }
     }

@@ -200,8 +200,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentNullException>(() => ((ISourceBlock<int>)null).AsObservable());
             Assert.Throws<ArgumentNullException>(() => ((ITargetBlock<int>)null).AsObserver());
-            Assert.Throws<ArgumentNullException>(
-                () => new BufferBlock<int>().AsObservable().Subscribe(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new BufferBlock<int>().AsObservable().Subscribe(null)
             );
         }
 
@@ -311,8 +311,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 if (beforeSubscription)
                 {
                     tb.Post(42);
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () => await tb.Completion
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                        await tb.Completion
                     );
                 }
 
@@ -537,20 +537,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var target = new ActionBlock<int>(i => { });
 
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(null));
-            Assert.Throws<ArgumentNullException>(
-                () => ((IPropagatorBlock<int, int>)null).LinkTo(target)
+            Assert.Throws<ArgumentNullException>(() =>
+                ((IPropagatorBlock<int, int>)null).LinkTo(target)
             );
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(null, i => true));
-            Assert.Throws<ArgumentNullException>(
-                () => source.LinkTo(null, new DataflowLinkOptions(), i => true)
+            Assert.Throws<ArgumentNullException>(() =>
+                source.LinkTo(null, new DataflowLinkOptions(), i => true)
             );
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(target, null));
-            Assert.Throws<ArgumentNullException>(
-                () => source.LinkTo(target, new DataflowLinkOptions(), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                source.LinkTo(target, new DataflowLinkOptions(), null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ((IPropagatorBlock<int, int>)null).LinkTo(null, new DataflowLinkOptions(), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ((IPropagatorBlock<int, int>)null).LinkTo(null, new DataflowLinkOptions(), null)
             );
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(target, null, i => true));
         }
@@ -660,12 +659,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         nopPropagator.ReleaseReservation(header, target);
 
                         // Make sure its LinkTo doesn't work; that wouldn't make sense
-                        Assert.Throws<NotSupportedException>(
-                            () =>
-                                nopPropagator.LinkTo(
-                                    DataflowBlock.NullTarget<int>(),
-                                    new DataflowLinkOptions()
-                                )
+                        Assert.Throws<NotSupportedException>(() =>
+                            nopPropagator.LinkTo(
+                                DataflowBlock.NullTarget<int>(),
+                                new DataflowLinkOptions()
+                            )
                         );
                     }
                     return DataflowMessageStatus.Accepted;
@@ -756,11 +754,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestLinkTo_MaxMessages()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new DataflowLinkOptions { MaxMessages = -2 }
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new DataflowLinkOptions { MaxMessages = -2 }
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new DataflowLinkOptions { MaxMessages = 0 }
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new DataflowLinkOptions { MaxMessages = 0 }
             );
 
             const int MaxMessages = 3,
@@ -1064,8 +1062,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.NotNull(sendSource);
 
             DataflowTestHelpers.TestConsumeReserveReleaseArgumentsExceptions(sendSource);
-            Assert.Throws<NotSupportedException>(
-                () => sendSource.LinkTo(DataflowBlock.NullTarget<int>())
+            Assert.Throws<NotSupportedException>(() =>
+                sendSource.LinkTo(DataflowBlock.NullTarget<int>())
             );
             Assert.Throws<NotSupportedException>(() => sendSource.Fault(new Exception()));
             Assert.Throws<NotSupportedException>(() => sendSource.Complete());
@@ -1109,14 +1107,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var buffer = new BufferBlock<int>();
             int item;
-            Assert.Throws<ArgumentNullException>(
-                () => ((IReceivableSourceBlock<int>)null).TryReceive(out item)
+            Assert.Throws<ArgumentNullException>(() =>
+                ((IReceivableSourceBlock<int>)null).TryReceive(out item)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ((IReceivableSourceBlock<int>)null).Receive()
+            Assert.Throws<ArgumentNullException>(() => ((IReceivableSourceBlock<int>)null).Receive()
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ((IReceivableSourceBlock<int>)null).Receive(new CancellationToken(true))
+            Assert.Throws<ArgumentNullException>(() =>
+                ((IReceivableSourceBlock<int>)null).Receive(new CancellationToken(true))
             );
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -1126,8 +1123,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 ((IReceivableSourceBlock<int>)null).ReceiveAsync(new CancellationToken(true));
             });
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => buffer.Receive(TimeSpan.FromSeconds(-2))
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                buffer.Receive(TimeSpan.FromSeconds(-2))
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -1217,16 +1214,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var bb = new BufferBlock<int>();
 
             Assert.Throws<TimeoutException>(() => bb.Receive(TimeSpan.FromMilliseconds(1)));
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => bb.ReceiveAsync(TimeSpan.FromMilliseconds(1))
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                bb.ReceiveAsync(TimeSpan.FromMilliseconds(1))
             );
 
             var cts = new CancellationTokenSource();
-            Assert.Throws<TimeoutException>(
-                () => bb.Receive(TimeSpan.FromMilliseconds(1), cts.Token)
+            Assert.Throws<TimeoutException>(() =>
+                bb.Receive(TimeSpan.FromMilliseconds(1), cts.Token)
             );
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => bb.ReceiveAsync(TimeSpan.FromMilliseconds(1), cts.Token)
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                bb.ReceiveAsync(TimeSpan.FromMilliseconds(1), cts.Token)
             );
         }
 
@@ -1235,8 +1232,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var bb = new BufferBlock<int>();
             Assert.Throws<TimeoutException>(() => bb.Receive(TimeSpan.FromMilliseconds(0)));
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => bb.ReceiveAsync(TimeSpan.FromMilliseconds(0))
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                bb.ReceiveAsync(TimeSpan.FromMilliseconds(0))
             );
         }
 
@@ -2157,17 +2154,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestEncapsulate_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => DataflowBlock.Encapsulate<int, int>(null, new BufferBlock<int>())
+            Assert.Throws<ArgumentNullException>(() =>
+                DataflowBlock.Encapsulate<int, int>(null, new BufferBlock<int>())
             );
-            Assert.Throws<ArgumentNullException>(
-                () => DataflowBlock.Encapsulate<int, int>(new BufferBlock<int>(), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                DataflowBlock.Encapsulate<int, int>(new BufferBlock<int>(), null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    DataflowBlock
-                        .Encapsulate<int, int>(new BufferBlock<int>(), new BufferBlock<int>())
-                        .Fault(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                DataflowBlock
+                    .Encapsulate<int, int>(new BufferBlock<int>(), new BufferBlock<int>())
+                    .Fault(null)
             );
         }
 

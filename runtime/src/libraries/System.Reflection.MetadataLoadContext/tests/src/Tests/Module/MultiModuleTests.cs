@@ -235,8 +235,8 @@ namespace System.Reflection.Tests
             )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
-                Assert.Throws<ArgumentNullException>(
-                    () => a.LoadModule(null, TestData.s_JoeNetModuleImage)
+                Assert.Throws<ArgumentNullException>(() =>
+                    a.LoadModule(null, TestData.s_JoeNetModuleImage)
                 );
                 Assert.Throws<ArgumentNullException>(() => a.LoadModule("Bob.netmodule", null));
             }
@@ -252,8 +252,8 @@ namespace System.Reflection.Tests
             )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
-                Assert.Throws<ArgumentException>(
-                    () => a.LoadModule("Main.dll", TestData.s_JoeNetModuleImage)
+                Assert.Throws<ArgumentException>(() =>
+                    a.LoadModule("Main.dll", TestData.s_JoeNetModuleImage)
                 );
             }
         }
@@ -268,8 +268,8 @@ namespace System.Reflection.Tests
             )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
-                Assert.Throws<ArgumentException>(
-                    () => a.LoadModule("NotInManifest.dll", TestData.s_JoeNetModuleImage)
+                Assert.Throws<ArgumentException>(() =>
+                    a.LoadModule("NotInManifest.dll", TestData.s_JoeNetModuleImage)
                 );
             }
         }
@@ -715,11 +715,11 @@ namespace System.Reflection.Tests
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Module m1 = a.LoadModule("Bob.netmodule", TestData.s_JoeNetModuleImage);
-                TestUtils.AssertNewObjectReturnedEachTime(
-                    () => a.GetLoadedModules(getResourceModules: true)
+                TestUtils.AssertNewObjectReturnedEachTime(() =>
+                    a.GetLoadedModules(getResourceModules: true)
                 );
-                TestUtils.AssertNewObjectReturnedEachTime(
-                    () => a.GetLoadedModules(getResourceModules: false)
+                TestUtils.AssertNewObjectReturnedEachTime(() =>
+                    a.GetLoadedModules(getResourceModules: false)
                 );
             }
         }

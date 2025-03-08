@@ -66,9 +66,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             byte[] pkcs10 = TestData.BigExponentPkcs10Bytes;
             Array.Resize(ref pkcs10, pkcs10.Length + 1);
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    CertificateRequest.LoadSigningRequest(pkcs10, HashAlgorithmName.SHA384, options)
+            Assert.Throws<CryptographicException>(() =>
+                CertificateRequest.LoadSigningRequest(pkcs10, HashAlgorithmName.SHA384, options)
             );
         }
 
@@ -188,18 +187,17 @@ More Text.
 AQAB
 -----END CERTIFICATE-----";
 
-            ex = Assert.Throws<CryptographicException>(
-                () => CertificateRequest.LoadSigningRequestPem(NoMatchPem, HashAlgorithmName.SHA256)
+            ex = Assert.Throws<CryptographicException>(() =>
+                CertificateRequest.LoadSigningRequestPem(NoMatchPem, HashAlgorithmName.SHA256)
             );
 
             Assert.Contains("CERTIFICATE REQUEST", ex.Message);
 
-            ex = Assert.Throws<CryptographicException>(
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        NoMatchPem.AsSpan(),
-                        HashAlgorithmName.SHA256
-                    )
+            ex = Assert.Throws<CryptographicException>(() =>
+                CertificateRequest.LoadSigningRequestPem(
+                    NoMatchPem.AsSpan(),
+                    HashAlgorithmName.SHA256
+                )
             );
 
             Assert.Contains("CERTIFICATE REQUEST", ex.Message);
@@ -272,13 +270,12 @@ fwAAAYcQAAAAAAAAAAAAAAAAAAAAAYIJbG9jYWxob3N0MBMGCSqGSIb3DQEJBzEG
 DAQxMjM0MA0GCSqGSIb3DQEBCwUAAwIHgA==
 -----END CERTIFICATE REQUEST-----";
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        Pkcs10Pem,
-                        HashAlgorithmName.SHA256,
-                        CertificateRequestLoadOptions.SkipSignatureValidation
-                    )
+            Assert.Throws<CryptographicException>(() =>
+                CertificateRequest.LoadSigningRequestPem(
+                    Pkcs10Pem,
+                    HashAlgorithmName.SHA256,
+                    CertificateRequestLoadOptions.SkipSignatureValidation
+                )
             );
         }
 
@@ -308,13 +305,12 @@ AAAAAAAAAAAAAAGCCWxvY2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
 -----END CERTIFICATE REQUEST-----
 ";
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        Pkcs10Pem,
-                        HashAlgorithmName.SHA256,
-                        CertificateRequestLoadOptions.SkipSignatureValidation
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                CertificateRequest.LoadSigningRequestPem(
+                    Pkcs10Pem,
+                    HashAlgorithmName.SHA256,
+                    CertificateRequestLoadOptions.SkipSignatureValidation
+                )
             );
 
             Assert.Contains("Extension Request", ex.Message);
@@ -345,13 +341,12 @@ Y2FsaG9zdDAuMCwGA1UdEQQlMCOHBH8AAAGHEAAAAAAAAAAAAAAAAAAAAAGCCWxv
 Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
 -----END CERTIFICATE REQUEST-----";
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        Pkcs10Pem,
-                        HashAlgorithmName.SHA256,
-                        CertificateRequestLoadOptions.SkipSignatureValidation
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                CertificateRequest.LoadSigningRequestPem(
+                    Pkcs10Pem,
+                    HashAlgorithmName.SHA256,
+                    CertificateRequestLoadOptions.SkipSignatureValidation
+                )
             );
 
             Assert.Contains("Extension Request", ex.Message);
@@ -387,9 +382,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
                     }
                     else
                     {
-                        Assert.ThrowsAny<CryptographicException>(
-                            () =>
-                                first.CreateSigningRequest(new RSASha1Pkcs1SignatureGenerator(key))
+                        Assert.ThrowsAny<CryptographicException>(() =>
+                            first.CreateSigningRequest(new RSASha1Pkcs1SignatureGenerator(key))
                         );
                         return;
                     }
@@ -404,8 +398,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
 
                 pkcs10[^1] ^= 0xFF;
 
-                Assert.Throws<CryptographicException>(
-                    () => CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
+                Assert.Throws<CryptographicException>(() =>
+                    CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
                 );
 
                 // Assert.NoThrow
@@ -446,8 +440,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
                     }
                     else
                     {
-                        Assert.ThrowsAny<CryptographicException>(
-                            () => first.CreateSigningRequest(new RSASha1PssSignatureGenerator(key))
+                        Assert.ThrowsAny<CryptographicException>(() =>
+                            first.CreateSigningRequest(new RSASha1PssSignatureGenerator(key))
                         );
                         return;
                     }
@@ -462,8 +456,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
 
                 pkcs10[^1] ^= 0xFF;
 
-                Assert.Throws<CryptographicException>(
-                    () => CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
+                Assert.Throws<CryptographicException>(() =>
+                    CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
                 );
 
                 // Assert.NoThrow
@@ -496,8 +490,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
                 byte[] pkcs10 = first.CreateSigningRequest(generator);
 
                 // The inbox version doesn't support DSA
-                Assert.Throws<NotSupportedException>(
-                    () => CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
+                Assert.Throws<NotSupportedException>(() =>
+                    CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
                 );
 
                 // Assert.NoThrow
@@ -540,8 +534,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
 
                     byte[] serial = new byte[] { 0x02, 0x04, 0x06, 0x08 };
 
-                    Exception ex = Assert.Throws<InvalidOperationException>(
-                        () => req.Create(rootCert, notBefore, notAfter, serial)
+                    Exception ex = Assert.Throws<InvalidOperationException>(() =>
+                        req.Create(rootCert, notBefore, notAfter, serial)
                     );
 
                     Assert.Contains(nameof(RSASignaturePadding), ex.Message);

@@ -164,8 +164,8 @@ namespace System.Numerics.Tests
         public void ToStringFormatFormatProviderTest()
         {
             Vector<bool> vector = default;
-            Assert.Throws<NotSupportedException>(
-                () => vector.ToString("G", CultureInfo.InvariantCulture)
+            Assert.Throws<NotSupportedException>(() =>
+                vector.ToString("G", CultureInfo.InvariantCulture)
             );
         }
 

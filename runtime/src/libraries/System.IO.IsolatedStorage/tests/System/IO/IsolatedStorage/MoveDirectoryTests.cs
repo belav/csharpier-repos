@@ -83,12 +83,11 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                Assert.Throws<DirectoryNotFoundException>(
-                    () =>
-                        isf.MoveDirectory(
-                            "MoveDirectory_DoesNotExist",
-                            "MoveDirectory_DoesNotExist_Copy"
-                        )
+                Assert.Throws<DirectoryNotFoundException>(() =>
+                    isf.MoveDirectory(
+                        "MoveDirectory_DoesNotExist",
+                        "MoveDirectory_DoesNotExist_Copy"
+                    )
                 );
             }
         }

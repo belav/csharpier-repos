@@ -1352,8 +1352,8 @@ namespace System.ServiceModel.Channels
         /// <summary>
         /// Indicates weather the running application is an immersive (or modern) Windows 8 (or later) application.
         /// </summary>
-        internal static Lazy<bool> IsTailoredApplication = new Lazy<bool>(
-            () => _IsTailoredApplication()
+        internal static Lazy<bool> IsTailoredApplication = new Lazy<bool>(() =>
+            _IsTailoredApplication()
         );
 #endif //!FEATURE_CORECLR
     }

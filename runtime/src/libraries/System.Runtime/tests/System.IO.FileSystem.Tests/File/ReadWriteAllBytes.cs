@@ -99,8 +99,8 @@ namespace System.IO.Tests
                     Assert.Equal("text"u8.ToArray(), File.ReadAllBytes(path));
                 }
                 else
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () => File.WriteAllBytes(path, "text"u8.ToArray())
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        File.WriteAllBytes(path, "text"u8.ToArray())
                     );
             }
             finally

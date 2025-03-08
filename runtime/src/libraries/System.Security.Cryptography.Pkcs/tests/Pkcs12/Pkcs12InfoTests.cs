@@ -181,8 +181,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContents authSafe = authSafes[0];
             Assert.Equal(Pkcs12ConfidentialityMode.Password, authSafe.ConfidentialityMode);
             // Wrong password
-            Assert.ThrowsAny<CryptographicException>(
-                () => authSafe.Decrypt(ReadOnlySpan<char>.Empty)
+            Assert.ThrowsAny<CryptographicException>(() =>
+                authSafe.Decrypt(ReadOnlySpan<char>.Empty)
             );
             authSafe.Decrypt(Pkcs12Documents.OracleWalletPassword);
 

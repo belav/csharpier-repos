@@ -49,8 +49,8 @@ namespace MonoTests.System.Runtime.Remoting
             {
                 var assembly = Assembly.GetAssembly(typeof(AppDomainObject));
                 var name = "AppDomainWithCall" + i;
-                tasks[i] = Task.Factory.StartNew(
-                    () => AppDomainWithRemotingSerialization(assembly, name)
+                tasks[i] = Task.Factory.StartNew(() =>
+                    AppDomainWithRemotingSerialization(assembly, name)
                 );
             }
 

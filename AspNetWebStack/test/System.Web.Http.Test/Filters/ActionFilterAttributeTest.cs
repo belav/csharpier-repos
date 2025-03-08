@@ -127,17 +127,16 @@ namespace System.Web.Http.Filters
             bool continuationCalled = false;
 
             // Act
-            var exception = await Assert.ThrowsAsync<Exception>(
-                () =>
-                    filter.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () =>
-                        {
-                            continuationCalled = true;
-                            return null;
-                        }
-                    )
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteActionFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () =>
+                    {
+                        continuationCalled = true;
+                        return null;
+                    }
+                )
             );
 
             // Assert
@@ -194,13 +193,12 @@ namespace System.Web.Http.Filters
             var filter = (IActionFilter)filterMock.Object;
 
             // Act & Assert
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    filter.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () => TaskHelpers.Canceled<HttpResponseMessage>()
-                    )
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                filter.ExecuteActionFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () => TaskHelpers.Canceled<HttpResponseMessage>()
+                )
             );
         }
 
@@ -253,8 +251,8 @@ namespace System.Web.Http.Filters
                 TaskHelpers.FromError<HttpResponseMessage>(exception);
 
             // Act & Assert
-            await Assert.ThrowsAsync<Exception>(
-                () => filter.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
+            await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
             );
 
             // Assert
@@ -420,13 +418,12 @@ namespace System.Web.Http.Filters
                 });
 
             // Act
-            Exception result = await Assert.ThrowsAsync<Exception>(
-                () =>
-                    filter.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () => TaskHelpers.FromError<HttpResponseMessage>(exception)
-                    )
+            Exception result = await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteActionFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () => TaskHelpers.FromError<HttpResponseMessage>(exception)
+                )
             );
 
             // Assert
@@ -486,13 +483,12 @@ namespace System.Web.Http.Filters
                 });
 
             // Act
-            Exception actual = await Assert.ThrowsAsync<Exception>(
-                () =>
-                    filter.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () => Task.FromResult(new HttpResponseMessage())
-                    )
+            Exception actual = await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteActionFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () => Task.FromResult(new HttpResponseMessage())
+                )
             );
 
             // Assert
@@ -611,13 +607,8 @@ namespace System.Web.Http.Filters
                     CreateFaultedTask<HttpResponseMessage>(CreateException());
 
                 // Act
-                Exception exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        product.ExecuteActionFilterAsync(
-                            context,
-                            CancellationToken.None,
-                            continuation
-                        )
+                Exception exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    product.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
                 );
 
                 // Assert
@@ -640,13 +631,8 @@ namespace System.Web.Http.Filters
                     CreateFaultedTask<HttpResponseMessage>(originalException);
 
                 // Act
-                Exception exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        product.ExecuteActionFilterAsync(
-                            context,
-                            CancellationToken.None,
-                            continuation
-                        )
+                Exception exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    product.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
                 );
 
                 // Assert

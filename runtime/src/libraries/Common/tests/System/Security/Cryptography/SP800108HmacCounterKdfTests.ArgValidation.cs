@@ -71,15 +71,14 @@ namespace System.Security.Cryptography.Tests
                     )
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_unknownHash,
-                        s_labelBytes,
-                        s_contextBytes,
-                        42
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_unknownHash,
+                    s_labelBytes,
+                    s_contextBytes,
+                    42
+                )
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
@@ -157,8 +156,8 @@ namespace System.Security.Cryptography.Tests
                 () => SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_emptyHash, Label, Context, 42)
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_unknownHash, Label, Context, 42)
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_unknownHash, Label, Context, 42)
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
@@ -214,15 +213,14 @@ namespace System.Security.Cryptography.Tests
                     )
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk.AsSpan(),
-                        s_unknownHash,
-                        s_labelBytes.AsSpan(),
-                        s_contextBytes.AsSpan(),
-                        42
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk.AsSpan(),
+                    s_unknownHash,
+                    s_labelBytes.AsSpan(),
+                    s_contextBytes.AsSpan(),
+                    42
+                )
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
@@ -280,15 +278,14 @@ namespace System.Security.Cryptography.Tests
                     )
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_unknownHash,
-                        s_labelBytes,
-                        s_contextBytes,
-                        destination
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_unknownHash,
+                    s_labelBytes,
+                    s_contextBytes,
+                    destination
+                )
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
@@ -332,15 +329,14 @@ namespace System.Security.Cryptography.Tests
                     )
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_unknownHash,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        42
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_unknownHash,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    42
+                )
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
@@ -398,15 +394,14 @@ namespace System.Security.Cryptography.Tests
                     )
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_unknownHash,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        destination
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_unknownHash,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    destination
+                )
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
@@ -441,8 +436,8 @@ namespace System.Security.Cryptography.Tests
                 () => new SP800108HmacCounterKdf(s_kdk, s_emptyHash)
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => new SP800108HmacCounterKdf(s_kdk, s_unknownHash)
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new SP800108HmacCounterKdf(s_kdk, s_unknownHash)
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
         }
@@ -460,8 +455,8 @@ namespace System.Security.Cryptography.Tests
                 () => new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_emptyHash)
             );
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_unknownHash)
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_unknownHash)
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
         }
@@ -607,12 +602,12 @@ namespace System.Security.Cryptography.Tests
             );
             byte[] derivedKey = new byte[42];
 
-            Assert.Throws<EncoderFallbackException>(
-                () => kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), derivedKey)
+            Assert.Throws<EncoderFallbackException>(() =>
+                kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), derivedKey)
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () => kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), derivedKey)
+            Assert.Throws<EncoderFallbackException>(() =>
+                kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), derivedKey)
             );
         }
 
@@ -624,12 +619,12 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () => kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), 42)
+            Assert.Throws<EncoderFallbackException>(() =>
+                kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), 42)
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () => kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), 42)
+            Assert.Throws<EncoderFallbackException>(() =>
+                kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), 42)
             );
         }
 
@@ -638,78 +633,72 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] destination = new byte[42];
 
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label.AsSpan(),
-                        "\uD800".AsSpan(),
-                        destination
-                    )
+            Assert.Throws<EncoderFallbackException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label.AsSpan(),
+                    "\uD800".AsSpan(),
+                    destination
+                )
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        "\uD800".AsSpan(),
-                        Context.AsSpan(),
-                        destination
-                    )
+            Assert.Throws<EncoderFallbackException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    "\uD800".AsSpan(),
+                    Context.AsSpan(),
+                    destination
+                )
             );
         }
 
         [Fact]
         public static void DeriveBytes_Allocating_SpanChars_InvalidUTF8()
         {
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label.AsSpan(),
-                        "\uD800".AsSpan(),
-                        42
-                    )
+            Assert.Throws<EncoderFallbackException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label.AsSpan(),
+                    "\uD800".AsSpan(),
+                    42
+                )
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        "\uD800".AsSpan(),
-                        Context.AsSpan(),
-                        42
-                    )
+            Assert.Throws<EncoderFallbackException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    "\uD800".AsSpan(),
+                    Context.AsSpan(),
+                    42
+                )
             );
         }
 
         [Fact]
         public static void DeriveBytes_Allocating_String_InvalidUTF8()
         {
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label,
-                        "\uD800",
-                        42
-                    )
+            Assert.Throws<EncoderFallbackException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label,
+                    "\uD800",
+                    42
+                )
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        "\uD800",
-                        Context,
-                        42
-                    )
+            Assert.Throws<EncoderFallbackException>(() =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    "\uD800",
+                    Context,
+                    42
+                )
             );
         }
 

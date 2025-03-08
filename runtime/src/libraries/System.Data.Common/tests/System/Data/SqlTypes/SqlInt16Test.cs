@@ -256,8 +256,8 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<FormatException>(() => SqlInt16.Parse("not-a-number"));
 
-            Assert.Throws<OverflowException>(
-                () => SqlInt16.Parse(((int)SqlInt16.MaxValue + 1).ToString())
+            Assert.Throws<OverflowException>(() =>
+                SqlInt16.Parse(((int)SqlInt16.MaxValue + 1).ToString())
             );
 
             Assert.Equal((short)150, SqlInt16.Parse("150").Value);
@@ -623,8 +623,8 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml1, test1, "BA01");
             ReadWriteXmlTestInternal(xml2, test2, "BA02");
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => ReadWriteXmlTestInternal(xml3, test3, "BA03")
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                ReadWriteXmlTestInternal(xml3, test3, "BA03")
             );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }

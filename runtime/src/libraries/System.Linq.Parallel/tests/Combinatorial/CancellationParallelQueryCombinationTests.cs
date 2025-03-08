@@ -1597,8 +1597,8 @@ namespace System.Linq.Parallel.Tests
                 throw new OperationCanceledException(cs.Token);
             };
 
-            AggregateException outer = Assert.Throws<AggregateException>(
-                () => query(new CancellationTokenSource().Token, canceler)
+            AggregateException outer = Assert.Throws<AggregateException>(() =>
+                query(new CancellationTokenSource().Token, canceler)
             );
             Exception inner = Assert.Single(outer.InnerExceptions);
             AggregateException ae = Assert.IsType<AggregateException>(inner);
@@ -1615,8 +1615,8 @@ namespace System.Linq.Parallel.Tests
                 throw new OperationCanceledException(token);
             };
 
-            AggregateException outer = Assert.Throws<AggregateException>(
-                () => query(token, canceler)
+            AggregateException outer = Assert.Throws<AggregateException>(() =>
+                query(token, canceler)
             );
             Exception inner = Assert.Single(outer.InnerExceptions);
             AggregateException ae = Assert.IsType<AggregateException>(inner);

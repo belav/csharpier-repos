@@ -121,8 +121,7 @@ public class DataProtectionCommonExtensionsTests
         var services = new Mock<IServiceProvider>().Object;
 
         // Act & assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => services.GetDataProtectionProvider()
+        var ex = Assert.Throws<InvalidOperationException>(() => services.GetDataProtectionProvider()
         );
         Assert.Equal(
             Resources.FormatDataProtectionExtensions_NoService(

@@ -1051,8 +1051,8 @@ i",
                 .Default.WithEmitDebugInformation(false)
                 .WithFilePath(null)
                 .WithFileEncoding(null);
-            return VerifyStackTraceAsync(
-                () => CSharpScript.Create("throw new System.Exception();", opts)
+            return VerifyStackTraceAsync(() =>
+                CSharpScript.Create("throw new System.Exception();", opts)
             );
         }
 
@@ -1066,8 +1066,8 @@ i",
                 .Default.WithEmitDebugInformation(false)
                 .WithFilePath("debug.csx")
                 .WithFileEncoding(Encoding.UTF8);
-            return VerifyStackTraceAsync(
-                () => CSharpScript.Create("throw new System.Exception();", opts)
+            return VerifyStackTraceAsync(() =>
+                CSharpScript.Create("throw new System.Exception();", opts)
             );
         }
 
@@ -1099,12 +1099,11 @@ i",
             var opts = ScriptOptions
                 .Default.WithEmitDebugInformation(false)
                 .WithFilePath("debug.csx");
-            return VerifyStackTraceAsync(
-                () =>
-                    CSharpScript.Create(
-                        new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
-                        opts
-                    )
+            return VerifyStackTraceAsync(() =>
+                CSharpScript.Create(
+                    new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
+                    opts
+                )
             );
         }
 
@@ -1146,8 +1145,8 @@ i",
         public Task Pdb_CreateFromString_InlineCode_WithoutEmitDebugInformation_WithoutFileEncoding_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFileEncoding(null);
-            return VerifyStackTraceAsync(
-                () => CSharpScript.Create("throw new System.Exception();", opts)
+            return VerifyStackTraceAsync(() =>
+                CSharpScript.Create("throw new System.Exception();", opts)
             );
         }
 
@@ -1157,8 +1156,8 @@ i",
             var opts = ScriptOptions
                 .Default.WithEmitDebugInformation(false)
                 .WithFileEncoding(Encoding.UTF8);
-            return VerifyStackTraceAsync(
-                () => CSharpScript.Create("throw new System.Exception();", opts)
+            return VerifyStackTraceAsync(() =>
+                CSharpScript.Create("throw new System.Exception();", opts)
             );
         }
 
@@ -1186,12 +1185,11 @@ i",
         public Task Pdb_CreateFromStream_InlineCode_WithoutEmitDebugInformation_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(false);
-            return VerifyStackTraceAsync(
-                () =>
-                    CSharpScript.Create(
-                        new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
-                        opts
-                    )
+            return VerifyStackTraceAsync(() =>
+                CSharpScript.Create(
+                    new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
+                    opts
+                )
             );
         }
 

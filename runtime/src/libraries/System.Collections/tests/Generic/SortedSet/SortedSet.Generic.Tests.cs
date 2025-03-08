@@ -65,8 +65,8 @@ namespace System.Collections.Tests
         public void SortedSet_Generic_Constructor_IEnumerable_Null()
         {
             Assert.Throws<ArgumentNullException>(() => new SortedSet<T>((IEnumerable<T>)null));
-            Assert.Throws<ArgumentNullException>(
-                () => new SortedSet<T>((IEnumerable<T>)null, Comparer<T>.Default)
+            Assert.Throws<ArgumentNullException>(() =>
+                new SortedSet<T>((IEnumerable<T>)null, Comparer<T>.Default)
             );
         }
 
@@ -225,8 +225,8 @@ namespace System.Collections.Tests
                 )
                 {
                     SortedSet<T> view = set.GetViewBetween(firstElement, middleElement);
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => view.GetViewBetween(middleElement, lastElement)
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        view.GetViewBetween(middleElement, lastElement)
                     );
                 }
             }

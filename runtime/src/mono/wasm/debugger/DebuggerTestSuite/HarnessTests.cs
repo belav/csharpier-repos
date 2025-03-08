@@ -21,15 +21,14 @@ namespace DebuggerTests
         public async Task TimedOutWaitingForInvalidBreakpoint()
         {
             await SetBreakpoint("dotnet://debugger-test.dll/debugger-test.cs", 100, 0);
-            var tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                async () =>
-                    await EvaluateAndCheck(
-                        "window.setTimeout(function() { invoke_add(); }, 1);",
-                        null,
-                        -1,
-                        -1,
-                        null
-                    )
+            var tce = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await EvaluateAndCheck(
+                    "window.setTimeout(function() { invoke_add(); }, 1);",
+                    null,
+                    -1,
+                    -1,
+                    null
+                )
             );
             Assert.Contains("timed out", tce.Message);
         }
@@ -37,15 +36,14 @@ namespace DebuggerTests
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task ExceptionThrown()
         {
-            var ae = await Assert.ThrowsAsync<ArgumentException>(
-                async () =>
-                    await EvaluateAndCheck(
-                        "window.setTimeout(function() { non_existent_fn(); }, 3000);",
-                        null,
-                        -1,
-                        -1,
-                        null
-                    )
+            var ae = await Assert.ThrowsAsync<ArgumentException>(async () =>
+                await EvaluateAndCheck(
+                    "window.setTimeout(function() { non_existent_fn(); }, 3000);",
+                    null,
+                    -1,
+                    -1,
+                    null
+                )
             );
             Assert.Contains("non_existent_fn is not defined", ae.Message);
         }
@@ -96,8 +94,8 @@ namespace DebuggerTests
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task InspectorWaitForMessageThatNeverArrives()
         {
-            var tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await insp.WaitFor("Message.that.never.arrives")
+            var tce = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await insp.WaitFor("Message.that.never.arrives")
             );
             Assert.Contains("timed out", tce.Message);
         }

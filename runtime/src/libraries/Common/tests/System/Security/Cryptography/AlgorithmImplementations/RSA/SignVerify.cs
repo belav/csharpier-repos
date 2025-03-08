@@ -298,13 +298,12 @@ namespace System.Security.Cryptography.Rsa.Tests
             {
                 rsaPub.ImportParameters(rsa.ExportParameters(false));
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        rsaPub.SignData(
-                            TestData.HelloBytes,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    rsaPub.SignData(
+                        TestData.HelloBytes,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
             }
         }
@@ -314,14 +313,13 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        SignHash(
-                            rsa,
-                            Array.Empty<byte>(),
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(
+                        rsa,
+                        Array.Empty<byte>(),
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
             }
         }
@@ -3215,18 +3213,18 @@ namespace System.Security.Cryptography.Rsa.Tests
                 byte[] data152 = new byte[152 / 8];
                 byte[] data168 = new byte[168 / 8];
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignHash(rsa, data152, HashAlgorithmName.SHA1, padding)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(rsa, data152, HashAlgorithmName.SHA1, padding)
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignHash(rsa, data168, HashAlgorithmName.SHA1, padding)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(rsa, data168, HashAlgorithmName.SHA1, padding)
                 );
 
                 byte[] data160 = new byte[160 / 8];
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignHash(rsa, data160, HashAlgorithmName.SHA256, padding)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(rsa, data160, HashAlgorithmName.SHA256, padding)
                 );
             }
         }
@@ -4645,14 +4643,14 @@ namespace System.Security.Cryptography.Rsa.Tests
                 }
                 else
                 {
-                    Assert.ThrowsAny<CryptographicException>(
-                        () => SignData(privateKey, data, hashAlgorithm, padding)
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                        SignData(privateKey, data, hashAlgorithm, padding)
                     );
 
                     byte[] signature = new byte[privateParameters.Modulus.Length];
 
-                    Assert.ThrowsAny<CryptographicException>(
-                        () => VerifyData(privateKey, data, signature, hashAlgorithm, padding)
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                        VerifyData(privateKey, data, signature, hashAlgorithm, padding)
                     );
                 }
             }
@@ -5626,14 +5624,13 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Exception ex = Assert.ThrowsAny<Exception>(
-                    () =>
-                        SignData(
-                            rsa,
-                            new byte[] { 1 },
-                            new HashAlgorithmName(hashAlgorithm),
-                            RSASignaturePadding.Pkcs1
-                        )
+                Exception ex = Assert.ThrowsAny<Exception>(() =>
+                    SignData(
+                        rsa,
+                        new byte[] { 1 },
+                        new HashAlgorithmName(hashAlgorithm),
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
 
                 Assert.True(
@@ -5641,15 +5638,14 @@ namespace System.Security.Cryptography.Rsa.Tests
                     "ex is PlatformNotSupportedException or CryptographicException"
                 );
 
-                ex = Assert.ThrowsAny<Exception>(
-                    () =>
-                        VerifyData(
-                            rsa,
-                            new byte[] { 1 },
-                            new byte[] { 1 },
-                            new HashAlgorithmName(hashAlgorithm),
-                            RSASignaturePadding.Pkcs1
-                        )
+                ex = Assert.ThrowsAny<Exception>(() =>
+                    VerifyData(
+                        rsa,
+                        new byte[] { 1 },
+                        new byte[] { 1 },
+                        new HashAlgorithmName(hashAlgorithm),
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
 
                 Assert.True(
@@ -5667,14 +5663,13 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Exception ex = Assert.ThrowsAny<Exception>(
-                    () =>
-                        SignData(
-                            rsa,
-                            new byte[] { 1 },
-                            new HashAlgorithmName(hashAlgorithm),
-                            RSASignaturePadding.Pss
-                        )
+                Exception ex = Assert.ThrowsAny<Exception>(() =>
+                    SignData(
+                        rsa,
+                        new byte[] { 1 },
+                        new HashAlgorithmName(hashAlgorithm),
+                        RSASignaturePadding.Pss
+                    )
                 );
 
                 Assert.True(
@@ -5682,15 +5677,14 @@ namespace System.Security.Cryptography.Rsa.Tests
                     "ex is CryptographicException or PlatformNotSupportedException"
                 );
 
-                ex = Assert.ThrowsAny<Exception>(
-                    () =>
-                        VerifyData(
-                            rsa,
-                            new byte[] { 1 },
-                            new byte[] { 1 },
-                            new HashAlgorithmName(hashAlgorithm),
-                            RSASignaturePadding.Pss
-                        )
+                ex = Assert.ThrowsAny<Exception>(() =>
+                    VerifyData(
+                        rsa,
+                        new byte[] { 1 },
+                        new byte[] { 1 },
+                        new HashAlgorithmName(hashAlgorithm),
+                        RSASignaturePadding.Pss
+                    )
                 );
 
                 Assert.True(
@@ -5752,12 +5746,12 @@ namespace System.Security.Cryptography.Rsa.Tests
                 }
                 else
                 {
-                    Assert.ThrowsAny<CryptographicException>(
-                        () => VerifyData(rsaPublic, data, signature, hashAlgorithm, padding)
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                        VerifyData(rsaPublic, data, signature, hashAlgorithm, padding)
                     );
 
-                    Assert.ThrowsAny<CryptographicException>(
-                        () => VerifyData(rsaPrivate, data, signature, hashAlgorithm, padding)
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                        VerifyData(rsaPrivate, data, signature, hashAlgorithm, padding)
                     );
                 }
             }
@@ -5813,18 +5807,18 @@ namespace System.Security.Cryptography.Rsa.Tests
                 byte[] data152 = new byte[152 / 8];
                 byte[] data168 = new byte[168 / 8];
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignHash(rsa, data152, HashAlgorithmName.SHA1, padding)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(rsa, data152, HashAlgorithmName.SHA1, padding)
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignHash(rsa, data168, HashAlgorithmName.SHA1, padding)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(rsa, data168, HashAlgorithmName.SHA1, padding)
                 );
 
                 byte[] data160 = new byte[160 / 8];
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignHash(rsa, data160, HashAlgorithmName.SHA256, padding)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignHash(rsa, data160, HashAlgorithmName.SHA256, padding)
                 );
             }
         }

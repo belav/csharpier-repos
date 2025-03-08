@@ -410,15 +410,11 @@ namespace System.IO.Tests
         {
             using (var writer = new StreamWriter(Stream.Null))
             {
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => writer.WriteAsync(ReadOnlyMemory<char>.Empty, new CancellationToken(true))
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    writer.WriteAsync(ReadOnlyMemory<char>.Empty, new CancellationToken(true))
                 );
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        writer.WriteLineAsync(
-                            ReadOnlyMemory<char>.Empty,
-                            new CancellationToken(true)
-                        )
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    writer.WriteLineAsync(ReadOnlyMemory<char>.Empty, new CancellationToken(true))
                 );
             }
         }

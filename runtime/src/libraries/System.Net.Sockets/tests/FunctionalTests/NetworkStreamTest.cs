@@ -72,11 +72,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Ctor_NotConnected_Throws()
         {
-            Assert.Throws<IOException>(
-                () =>
-                    new NetworkStream(
-                        new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                    )
+            Assert.Throws<IOException>(() =>
+                new NetworkStream(
+                    new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                )
             );
         }
 
@@ -615,8 +614,8 @@ namespace System.Net.Sockets.Tests
                     serverStream.Readable = false;
                     Assert.False(serverStream.Readable);
                     Assert.False(serverStream.CanRead);
-                    Assert.Throws<InvalidOperationException>(
-                        () => serverStream.Read(new byte[1], 0, 1)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        serverStream.Read(new byte[1], 0, 1)
                     );
 
                     serverStream.Readable = true;
@@ -631,8 +630,8 @@ namespace System.Net.Sockets.Tests
                     serverStream.Writeable = false;
                     Assert.False(serverStream.Writeable);
                     Assert.False(serverStream.CanWrite);
-                    Assert.Throws<InvalidOperationException>(
-                        () => serverStream.Write(new byte[1], 0, 1)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        serverStream.Write(new byte[1], 0, 1)
                     );
 
                     serverStream.Writeable = true;

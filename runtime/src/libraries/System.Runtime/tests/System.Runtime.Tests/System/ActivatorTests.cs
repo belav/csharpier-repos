@@ -135,15 +135,14 @@ namespace System.Tests
         [Fact]
         public void CreateInstance_PublicOnlyTypeWithPrivateDefaultConstructor_ThrowsMissingMethodException()
         {
-            Assert.Throws<MissingMethodException>(
-                () => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor))
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor))
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(TypeWithPrivateDefaultConstructor),
-                        nonPublic: false
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(TypeWithPrivateDefaultConstructor),
+                    nonPublic: false
+                )
             );
 
             // Put the private default constructor into the cache and make sure we still throw if public only.
@@ -151,15 +150,14 @@ namespace System.Tests
                 Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: true)
             );
 
-            Assert.Throws<MissingMethodException>(
-                () => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor))
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor))
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(TypeWithPrivateDefaultConstructor),
-                        nonPublic: false
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(TypeWithPrivateDefaultConstructor),
+                    nonPublic: false
+                )
             );
         }
 
@@ -185,8 +183,8 @@ namespace System.Tests
         [Fact]
         public static void CreateInstance_MultipleMatchingConstructors_ThrowsAmbiguousMatchException()
         {
-            Assert.Throws<AmbiguousMatchException>(
-                () => Activator.CreateInstance(typeof(Choice1), new object[] { null })
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Activator.CreateInstance(typeof(Choice1), new object[] { null })
             );
         }
 
@@ -235,8 +233,7 @@ namespace System.Tests
         public void CreateInstance_InvalidType_ThrowsNotSupportedException(Type type)
         {
             Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(type));
-            Assert.Throws<NotSupportedException>(
-                () => Activator.CreateInstance(type, new object[0])
+            Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(type, new object[0])
             );
         }
 
@@ -244,23 +241,22 @@ namespace System.Tests
         public void CreateInstance_DesignatedOptionalParameters_ThrowsMissingMemberException()
         {
             // C# designated optional parameters are not optional as far as Activator.CreateInstance() is concerned.
-            Assert.ThrowsAny<MissingMemberException>(
-                () => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1 })
+            Assert.ThrowsAny<MissingMemberException>(() =>
+                Activator.CreateInstance(typeof(Choice1), new object[] { 5.1 })
             );
-            Assert.ThrowsAny<MissingMemberException>(
-                () => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1, Type.Missing })
+            Assert.ThrowsAny<MissingMemberException>(() =>
+                Activator.CreateInstance(typeof(Choice1), new object[] { 5.1, Type.Missing })
             );
         }
 
         [Fact]
         public void CreateInstance_InvalidParamArgs_ThrowsMissingMemberException()
         {
-            Assert.ThrowsAny<MissingMemberException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(Choice1),
-                        new object[] { new VarStringArgs(), 5, 6 }
-                    )
+            Assert.ThrowsAny<MissingMemberException>(() =>
+                Activator.CreateInstance(
+                    typeof(Choice1),
+                    new object[] { new VarStringArgs(), 5, 6 }
+                )
             );
         }
 
@@ -273,12 +269,11 @@ namespace System.Tests
             // params array element type and gives it the go-ahead if it is. Unfortunately, the binder then bollixes itself by using Array.Copy() to copy
             // the params arguments. Since Array.Copy() doesn't tolerate this sort of type mismatch, it throws an InvalidCastException which bubbles out
             // out of Activator.CreateInstance. Accidental or not, we'll inherit that behavior on .NET Native.)
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(Choice1),
-                        new object[] { new VarIntArgs(), 1, (short)2 }
-                    )
+            Assert.Throws<InvalidCastException>(() =>
+                Activator.CreateInstance(
+                    typeof(Choice1),
+                    new object[] { new VarIntArgs(), 1, (short)2 }
+                )
             );
         }
 
@@ -324,8 +319,8 @@ namespace System.Tests
         [Fact]
         public void CreateInstance_InterfaceType_ThrowsMissingMemberException()
         {
-            Assert.ThrowsAny<MissingMemberException>(
-                () => Activator.CreateInstance(typeof(IInterfaceType))
+            Assert.ThrowsAny<MissingMemberException>(() =>
+                Activator.CreateInstance(typeof(IInterfaceType))
             );
         }
 
@@ -335,11 +330,11 @@ namespace System.Tests
         public void CreateInstance_ConstructorThrows_ThrowsTargetInvocationException()
         {
             // Put the constructor into the cache and make sure we still throw if cached.
-            Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows))
+            Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows))
             );
-            Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows))
+            Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows))
             );
         }
 
@@ -350,8 +345,8 @@ namespace System.Tests
             Assert.IsType<TypeWithDefaultCtorThatThrowsOnSecondCall>(
                 Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall))
             );
-            Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall))
+            Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall))
             );
         }
 
@@ -363,11 +358,11 @@ namespace System.Tests
         )
         {
             // Activation Attributes are not supported in .NET Core.
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Activator.CreateInstance(type, null, new object[] { 1 })
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(type, null, new object[] { 1 })
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Activator.CreateInstance(type, null, new object[] { 1, 2 })
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(type, null, new object[] { 1, 2 })
             );
         }
 
@@ -428,30 +423,26 @@ namespace System.Tests
                 typeof(PrivateTypeWithDefaultCtor),
                 Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), true).GetType()
             );
-            Assert.Throws<MissingMethodException>(
-                () => Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), false).GetType()
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), false).GetType()
             );
 
-            Assert.Throws<TargetInvocationException>(
-                () =>
-                    Activator
-                        .CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), true)
-                        .GetType()
+            Assert.Throws<TargetInvocationException>(() =>
+                Activator
+                    .CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), true)
+                    .GetType()
             );
-            Assert.Throws<TargetInvocationException>(
-                () =>
-                    Activator
-                        .CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), false)
-                        .GetType()
+            Assert.Throws<TargetInvocationException>(() =>
+                Activator
+                    .CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), false)
+                    .GetType()
             );
 
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), true).GetType()
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), true).GetType()
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), false).GetType()
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), false).GetType()
             );
         }
 
@@ -675,25 +666,23 @@ namespace System.Tests
         )]
         public static void TestingBindingFlags()
         {
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        new object[] { 1, 2, 3 },
-                        CultureInfo.CurrentCulture
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    new object[] { 1, 2, 3 },
+                    CultureInfo.CurrentCulture
+                )
             );
 
             Flag.Reset(0);
@@ -761,91 +750,83 @@ namespace System.Tests
             );
             Assert.Equal(900, Flag.cnt);
 
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Static,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Static,
-                        null,
-                        new object[] { 122 },
-                        CultureInfo.CurrentCulture
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    new object[] { 122 },
+                    CultureInfo.CurrentCulture
+                )
             );
         }
 
         [Fact]
         public static void TestingBindingFlagsInstanceOnly()
         {
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(HasPublicCtor),
-                        default(BindingFlags),
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(HasPublicCtor),
+                    default(BindingFlags),
+                    null,
+                    null,
+                    null
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(HasPublicCtor),
-                        BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(HasPublicCtor),
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    null,
+                    null
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(HasPublicCtor),
-                        BindingFlags.Public | BindingFlags.Static,
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(HasPublicCtor),
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    null,
+                    null
+                )
             );
 
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(HasPrivateCtor),
-                        default(BindingFlags),
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(HasPrivateCtor),
+                    default(BindingFlags),
+                    null,
+                    null,
+                    null
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(HasPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(HasPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    null,
+                    null
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(HasPrivateCtor),
-                        BindingFlags.NonPublic | BindingFlags.Static,
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(HasPrivateCtor),
+                    BindingFlags.NonPublic | BindingFlags.Static,
+                    null,
+                    null,
+                    null
+                )
             );
 
             {
@@ -876,121 +857,110 @@ namespace System.Tests
         [Fact]
         public static void TestingBindingFlags1()
         {
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture,
+                    null
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        new object[] { 1, 2, 3 },
-                        CultureInfo.CurrentCulture,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    new object[] { 1, 2, 3 },
+                    CultureInfo.CurrentCulture,
+                    null
+                )
             );
 
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Static,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture,
+                    null
+                )
             );
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithPrivateCtor),
-                        BindingFlags.Public | BindingFlags.Static,
-                        null,
-                        new object[] { 122 },
-                        CultureInfo.CurrentCulture,
-                        null
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithPrivateCtor),
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    new object[] { 122 },
+                    CultureInfo.CurrentCulture,
+                    null
+                )
             );
         }
 
         [Fact]
         public static void TestingActivationAttributes()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithIsTestedAttribute),
-                        null,
-                        new object[] { new object() }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithIsTestedAttribute),
+                    null,
+                    new object[] { new object() }
+                )
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithIsTestedAttribute),
-                        null,
-                        new object[] { new IsTestedAttribute(true) }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithIsTestedAttribute),
+                    null,
+                    new object[] { new IsTestedAttribute(true) }
+                )
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithSerializableAttribute),
-                        null,
-                        new object[] { new ClassWithIsTestedAttribute() }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithSerializableAttribute),
+                    null,
+                    new object[] { new ClassWithIsTestedAttribute() }
+                )
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(MBRWithIsTestedAttribute),
-                        null,
-                        new object[] { new IsTestedAttribute(true) }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(MBRWithIsTestedAttribute),
+                    null,
+                    new object[] { new IsTestedAttribute(true) }
+                )
             );
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithIsTestedAttribute),
-                        0,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture,
-                        new object[] { new IsTestedAttribute(true) }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithIsTestedAttribute),
+                    0,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture,
+                    new object[] { new IsTestedAttribute(true) }
+                )
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(ClassWithSerializableAttribute),
-                        0,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture,
-                        new object[] { new ClassWithIsTestedAttribute() }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(ClassWithSerializableAttribute),
+                    0,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture,
+                    new object[] { new ClassWithIsTestedAttribute() }
+                )
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Activator.CreateInstance(
-                        typeof(MBRWithIsTestedAttribute),
-                        0,
-                        null,
-                        null,
-                        CultureInfo.CurrentCulture,
-                        new object[] { new IsTestedAttribute(true) }
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Activator.CreateInstance(
+                    typeof(MBRWithIsTestedAttribute),
+                    0,
+                    null,
+                    null,
+                    CultureInfo.CurrentCulture,
+                    new object[] { new IsTestedAttribute(true) }
+                )
             );
         }
 
@@ -1092,16 +1062,16 @@ namespace System.Tests
             Type type = typeBuilder.CreateType();
 
             Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(type));
-            Assert.Throws<MissingMethodException>(
-                () => Activator.CreateInstance(type, nonPublic: false)
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(type, nonPublic: false)
             );
 
             // Put the private default constructor into the cache and make sure we still throw if public only.
             Assert.NotNull(Activator.CreateInstance(type, nonPublic: true));
 
             Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(type));
-            Assert.Throws<MissingMethodException>(
-                () => Activator.CreateInstance(type, nonPublic: false)
+            Assert.Throws<MissingMethodException>(() =>
+                Activator.CreateInstance(type, nonPublic: false)
             );
         }
 
@@ -1662,8 +1632,8 @@ namespace System.Tests
                         Assembly.LoadFile(
                             Path.Combine(Directory.GetCurrentDirectory(), "TestLoadAssembly.dll")
                         );
-                    Assert.Throws<FileLoadException>(
-                        () => Activator.CreateInstance(",,,,", "PublicClassSample")
+                    Assert.Throws<FileLoadException>(() =>
+                        Activator.CreateInstance(",,,,", "PublicClassSample")
                     );
                 })
                 .Dispose();
@@ -1684,8 +1654,8 @@ namespace System.Tests
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type", TypeAttributes.Public);
 
             Assert.Throws<ArgumentException>("type", () => Activator.CreateInstance(typeBuilder));
-            Assert.Throws<NotSupportedException>(
-                () => Activator.CreateInstance(typeBuilder, new object[0])
+            Assert.Throws<NotSupportedException>(() =>
+                Activator.CreateInstance(typeBuilder, new object[0])
             );
         }
     }

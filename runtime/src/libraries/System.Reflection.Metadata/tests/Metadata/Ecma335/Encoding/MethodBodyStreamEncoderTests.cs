@@ -49,53 +49,41 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var streamBuilder = new BlobBuilder();
             var il = new InstructionEncoder(new BlobBuilder());
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        default(InstructionEncoder)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
+                    default(InstructionEncoder)
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(il, -1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(il, -1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        il,
-                        ushort.MaxValue + 1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(il, ushort.MaxValue + 1)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(codeSize: -1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(codeSize: -1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        maxStack: -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(codeSize: 1, maxStack: -1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        maxStack: ushort.MaxValue + 1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
+                    codeSize: 1,
+                    maxStack: ushort.MaxValue + 1
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        exceptionRegionCount: -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
+                    codeSize: 1,
+                    exceptionRegionCount: -1
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        exceptionRegionCount: 699051
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
+                    codeSize: 1,
+                    exceptionRegionCount: 699051
+                )
             );
         }
 
@@ -1214,8 +1202,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var l0 = il.DefineLabel();
 
             AssertExtensions.Throws<ArgumentException>("opCode", () => il.Branch(ILOpCode.Nop, l0));
-            Assert.Throws<ArgumentNullException>(
-                () => il.Branch(ILOpCode.Br, default(LabelHandle))
+            Assert.Throws<ArgumentNullException>(() => il.Branch(ILOpCode.Br, default(LabelHandle))
             );
             AssertExtensions.Throws<ArgumentException>("label", () => il.Branch(ILOpCode.Br, l2));
         }
@@ -1232,8 +1219,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.Branch(ILOpCode.Br_s, l);
             il.OpCode(ILOpCode.Ret);
 
-            Assert.Throws<InvalidOperationException>(
-                () => new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(il)
+            Assert.Throws<InvalidOperationException>(() =>
+                new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(il)
             );
         }
     }

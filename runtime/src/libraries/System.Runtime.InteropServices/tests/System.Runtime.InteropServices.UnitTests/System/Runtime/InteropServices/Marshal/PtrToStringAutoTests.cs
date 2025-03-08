@@ -29,8 +29,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.StringToCoTaskMemAuto(s);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
-                    () => Marshal.PtrToStringAuto(ptr, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(() =>
+                    Marshal.PtrToStringAuto(ptr, -1)
                 );
             }
             finally

@@ -79,14 +79,13 @@ namespace System.IO.Tests
                 )
             )
             {
-                FSAssert.ThrowsSharingViolation(
-                    () =>
-                        CreateFileStream(
-                            fileName,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.ReadWrite | FileShare.Delete
-                        )
+                FSAssert.ThrowsSharingViolation(() =>
+                    CreateFileStream(
+                        fileName,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.ReadWrite | FileShare.Delete
+                    )
                 );
             }
 
@@ -100,9 +99,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                FSAssert.ThrowsSharingViolation(
-                    () =>
-                        CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.None)
+                FSAssert.ThrowsSharingViolation(() =>
+                    CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.None)
                 );
             }
         }

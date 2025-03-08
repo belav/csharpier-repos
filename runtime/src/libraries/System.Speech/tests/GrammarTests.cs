@@ -65,14 +65,8 @@ namespace SampleSynthesisTests
             string temp = GetTestFilePath();
 
             // Cannot compile to assemblies on .NET Core
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    SrgsGrammarCompiler.CompileClassLibrary(
-                        srgsDoc,
-                        temp,
-                        new string[0],
-                        keyFile: null
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                SrgsGrammarCompiler.CompileClassLibrary(srgsDoc, temp, new string[0], keyFile: null)
             );
         }
 

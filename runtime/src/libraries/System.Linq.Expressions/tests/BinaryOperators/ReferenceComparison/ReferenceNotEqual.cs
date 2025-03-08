@@ -81,8 +81,7 @@ namespace System.Linq.Expressions.Tests
         {
             Expression xExp = Expression.Constant(x);
             Expression yExp = Expression.Constant(y);
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.ReferenceNotEqual(xExp, yExp)
+            Assert.Throws<InvalidOperationException>(() => Expression.ReferenceNotEqual(xExp, yExp)
             );
         }
 
@@ -92,8 +91,7 @@ namespace System.Linq.Expressions.Tests
         {
             Expression xExp = Expression.Constant(x);
             Expression yExp = Expression.Constant(y);
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.ReferenceNotEqual(xExp, yExp)
+            Assert.Throws<InvalidOperationException>(() => Expression.ReferenceNotEqual(xExp, yExp)
             );
         }
 

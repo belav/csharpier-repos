@@ -211,8 +211,8 @@ namespace System.Net.Http.Functional.Tests
 
                 if (exceptionExpected)
                 {
-                    await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.GetAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<HttpRequestException>(() =>
+                        client.GetAsync(CreateFakeUri())
                     );
                 }
                 else
@@ -233,11 +233,11 @@ namespace System.Net.Http.Functional.Tests
             {
                 (await client.GetAsync(CreateFakeUri())).Dispose();
                 Assert.Throws<InvalidOperationException>(() => client.BaseAddress = null);
-                Assert.Throws<InvalidOperationException>(
-                    () => client.Timeout = TimeSpan.FromSeconds(1)
+                Assert.Throws<InvalidOperationException>(() =>
+                    client.Timeout = TimeSpan.FromSeconds(1)
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () => client.MaxResponseContentBufferSize = 1
+                Assert.Throws<InvalidOperationException>(() =>
+                    client.MaxResponseContentBufferSize = 1
                 );
             }
         }
@@ -309,18 +309,18 @@ namespace System.Net.Http.Functional.Tests
             {
                 HttpRequestException ex;
 
-                ex = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetStringAsync(CreateFakeUri())
+                ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetStringAsync(CreateFakeUri())
                 );
                 Assert.Equal(HttpStatusCode.BadRequest, ex.StatusCode);
 
-                ex = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetByteArrayAsync(CreateFakeUri())
+                ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetByteArrayAsync(CreateFakeUri())
                 );
                 Assert.Equal(HttpStatusCode.BadRequest, ex.StatusCode);
 
-                ex = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetStreamAsync(CreateFakeUri())
+                ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetStreamAsync(CreateFakeUri())
                 );
                 Assert.Equal(HttpStatusCode.BadRequest, ex.StatusCode);
             }
@@ -342,8 +342,8 @@ namespace System.Net.Http.Functional.Tests
             };
 
             using var client = CreateHttpClient(handler);
-            HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                () => client.GetStreamAsync($"http://{Host}")
+            HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                client.GetStreamAsync($"http://{Host}")
             );
             Assert.Contains(Host, ex.Message);
         }
@@ -357,8 +357,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                await Assert.ThrowsAnyAsync<InvalidOperationException>(
-                    () => client.GetStringAsync(CreateFakeUri())
+                await Assert.ThrowsAnyAsync<InvalidOperationException>(() =>
+                    client.GetStringAsync(CreateFakeUri())
                 );
             }
         }
@@ -406,20 +406,20 @@ namespace System.Net.Http.Functional.Tests
             {
                 Assert.Same(
                     e,
-                    await Assert.ThrowsAsync<FormatException>(
-                        () => client.GetStringAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<FormatException>(() =>
+                        client.GetStringAsync(CreateFakeUri())
                     )
                 );
                 Assert.Same(
                     e,
-                    await Assert.ThrowsAsync<FormatException>(
-                        () => client.GetByteArrayAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<FormatException>(() =>
+                        client.GetByteArrayAsync(CreateFakeUri())
                     )
                 );
                 Assert.Same(
                     e,
-                    await Assert.ThrowsAsync<FormatException>(
-                        () => client.GetStreamAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<FormatException>(() =>
+                        client.GetStreamAsync(CreateFakeUri())
                     )
                 );
             }
@@ -445,20 +445,20 @@ namespace System.Net.Http.Functional.Tests
             {
                 Assert.Same(
                     e,
-                    await Assert.ThrowsAsync<FormatException>(
-                        () => client.GetStringAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<FormatException>(() =>
+                        client.GetStringAsync(CreateFakeUri())
                     )
                 );
                 Assert.Same(
                     e,
-                    await Assert.ThrowsAsync<FormatException>(
-                        () => client.GetByteArrayAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<FormatException>(() =>
+                        client.GetByteArrayAsync(CreateFakeUri())
                     )
                 );
                 Assert.Same(
                     e,
-                    await Assert.ThrowsAsync<FormatException>(
-                        () => client.GetStreamAsync(CreateFakeUri())
+                    await Assert.ThrowsAsync<FormatException>(() =>
+                        client.GetStreamAsync(CreateFakeUri())
                     )
                 );
             }
@@ -572,8 +572,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                FormatException thrown = await Assert.ThrowsAsync<FormatException>(
-                    () => client.GetAsync(CreateFakeUri())
+                FormatException thrown = await Assert.ThrowsAsync<FormatException>(() =>
+                    client.GetAsync(CreateFakeUri())
                 );
                 Assert.Same(e, thrown);
             }
@@ -589,8 +589,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                FormatException thrown = await Assert.ThrowsAsync<FormatException>(
-                    () => client.GetAsync(CreateFakeUri())
+                FormatException thrown = await Assert.ThrowsAsync<FormatException>(() =>
+                    client.GetAsync(CreateFakeUri())
                 );
                 Assert.Same(e, thrown);
             }
@@ -1126,8 +1126,8 @@ namespace System.Net.Http.Functional.Tests
                     cts.Token
                 );
                 cts.Cancel();
-                OperationCanceledException e = Assert.ThrowsAny<OperationCanceledException>(
-                    () => task.GetAwaiter().GetResult()
+                OperationCanceledException e = Assert.ThrowsAny<OperationCanceledException>(() =>
+                    task.GetAwaiter().GetResult()
                 );
                 Assert.Equal(e.CancellationToken, cts.Token);
             }
@@ -1169,8 +1169,8 @@ namespace System.Net.Http.Functional.Tests
             using var client = CreateHttpClient(handler);
             client.Timeout = TimeSpan.FromSeconds(42);
 
-            TaskCanceledException e = await Assert.ThrowsAsync<TaskCanceledException>(
-                () => client.GetAsync(CreateFakeUri())
+            TaskCanceledException e = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                client.GetAsync(CreateFakeUri())
             );
 
             TimeoutException connectTimeoutException = Assert.IsType<TimeoutException>(
@@ -1266,8 +1266,7 @@ namespace System.Net.Http.Functional.Tests
 
                 cts.Cancel();
 
-                TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => t1
+                TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(() => t1
                 );
                 Assert.Equal(cts.Token, tce.CancellationToken);
             }
@@ -1458,8 +1457,8 @@ namespace System.Net.Http.Functional.Tests
                         );
                     });
 
-                    TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => sendTask
+                    TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        sendTask
                     );
                     Assert.Equal(cts.Token, ex.CancellationToken);
                     Assert.IsNotType<TimeoutException>(ex.InnerException);
@@ -1516,8 +1515,8 @@ namespace System.Net.Http.Functional.Tests
                         );
                     });
 
-                    TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => sendTask
+                    TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        sendTask
                     );
                     Assert.IsType<TimeoutException>(ex.InnerException);
                 },
@@ -1569,8 +1568,8 @@ namespace System.Net.Http.Functional.Tests
                         );
                     });
 
-                    TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => sendTask
+                    TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        sendTask
                     );
                     Assert.Equal(cts.Token, ex.CancellationToken);
                     Assert.IsNotType<TimeoutException>(ex.InnerException);
@@ -1781,8 +1780,8 @@ namespace System.Net.Http.Functional.Tests
 
                     if (expectedResult is Type type)
                     {
-                        Exception exception = await Assert.ThrowsAnyAsync<Exception>(
-                            () => client.SendAsync(request)
+                        Exception exception = await Assert.ThrowsAnyAsync<Exception>(() =>
+                            client.SendAsync(request)
                         );
                         Assert.IsType(type, exception);
                         _output.WriteLine("Client expected exception: " + exception.ToString());
@@ -1863,8 +1862,8 @@ namespace System.Net.Http.Functional.Tests
             using HttpClient client = CreateHttpClient();
             if (expectedResult is Type type)
             {
-                Exception exception = await Assert.ThrowsAnyAsync<Exception>(
-                    () => client.SendAsync(request)
+                Exception exception = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    client.SendAsync(request)
                 );
                 Assert.IsType(type, exception);
                 _output.WriteLine(exception.ToString());
@@ -1924,8 +1923,8 @@ namespace System.Net.Http.Functional.Tests
                     "http://doesntmatter",
                     HttpCompletionOption.ResponseHeadersRead
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () => client.DefaultRequestVersion = new Version(1, 1)
+                Assert.Throws<InvalidOperationException>(() =>
+                    client.DefaultRequestVersion = new Version(1, 1)
                 );
             }
         }
@@ -2075,8 +2074,8 @@ namespace System.Net.Http.Functional.Tests
                 using (var request = new HttpRequestMessage(HttpMethod.Get, CreateFakeUri()))
                 {
                     (await client.SendAsync(TestAsync, request)).Dispose();
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => client.SendAsync(TestAsync, request)
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        client.SendAsync(TestAsync, request)
                     );
                 }
             }
@@ -2163,13 +2162,12 @@ namespace System.Net.Http.Functional.Tests
                             == ExceptionScenario.OperationCanceledException_WithOriginalCancellationToken
                         )
                         {
-                            InterestingMethodInTheStackTrace(
-                                () =>
-                                    new OperationCanceledException(
-                                        InterestingExceptionMessage,
-                                        innerEx,
-                                        cancellationToken
-                                    )
+                            InterestingMethodInTheStackTrace(() =>
+                                new OperationCanceledException(
+                                    InterestingExceptionMessage,
+                                    innerEx,
+                                    cancellationToken
+                                )
                             );
                         }
 
@@ -2178,13 +2176,12 @@ namespace System.Net.Http.Functional.Tests
                             == ExceptionScenario.OperationCanceledException_UnknownCancellationToken
                         )
                         {
-                            InterestingMethodInTheStackTrace(
-                                () =>
-                                    new OperationCanceledException(
-                                        InterestingExceptionMessage,
-                                        innerEx,
-                                        new CancellationTokenSource().Token
-                                    )
+                            InterestingMethodInTheStackTrace(() =>
+                                new OperationCanceledException(
+                                    InterestingExceptionMessage,
+                                    innerEx,
+                                    new CancellationTokenSource().Token
+                                )
                             );
                         }
 
@@ -2193,8 +2190,8 @@ namespace System.Net.Http.Functional.Tests
                             || scenario == ExceptionScenario.HttpRequestException_DuringCancellation
                         )
                         {
-                            InterestingMethodInTheStackTrace(
-                                () => new HttpRequestException(InterestingExceptionMessage, innerEx)
+                            InterestingMethodInTheStackTrace(() =>
+                                new HttpRequestException(InterestingExceptionMessage, innerEx)
                             );
                         }
 
@@ -2203,8 +2200,8 @@ namespace System.Net.Http.Functional.Tests
                             || scenario == ExceptionScenario.UnknownException_DuringCancellation
                         )
                         {
-                            InterestingMethodInTheStackTrace(
-                                () => new Exception(InterestingExceptionMessage, innerEx)
+                            InterestingMethodInTheStackTrace(() =>
+                                new Exception(InterestingExceptionMessage, innerEx)
                             );
                         }
 

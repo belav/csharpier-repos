@@ -256,13 +256,13 @@ namespace System.ComponentModel.Tests
         public void GetDefaultAttribute_InvalidType_ReturnsNull()
         {
             var collection = new SubAttributeCollection();
-            Assert.Throws<InvalidCastException>(
-                () => collection.GetDefaultAttribute(typeof(AttributeCollectionTests))
+            Assert.Throws<InvalidCastException>(() =>
+                collection.GetDefaultAttribute(typeof(AttributeCollectionTests))
             );
 
             // Call again.
-            Assert.Throws<InvalidCastException>(
-                () => collection.GetDefaultAttribute(typeof(AttributeCollectionTests))
+            Assert.Throws<InvalidCastException>(() =>
+                collection.GetDefaultAttribute(typeof(AttributeCollectionTests))
             );
         }
 

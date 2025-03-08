@@ -105,27 +105,21 @@ namespace System.IO.IsolatedStorage
         [Fact]
         public void GetStore_ThrowsPlatformNotSupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => IsolatedStorageFile.GetStore(IsolatedStorageScope.User, typeof(object))
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                IsolatedStorageFile.GetStore(IsolatedStorageScope.User, typeof(object))
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    IsolatedStorageFile.GetStore(
-                        IsolatedStorageScope.User,
-                        typeof(object),
-                        typeof(object)
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                IsolatedStorageFile.GetStore(
+                    IsolatedStorageScope.User,
+                    typeof(object),
+                    typeof(object)
+                )
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => IsolatedStorageFile.GetStore(IsolatedStorageScope.User, new object())
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                IsolatedStorageFile.GetStore(IsolatedStorageScope.User, new object())
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    IsolatedStorageFile.GetStore(
-                        IsolatedStorageScope.User,
-                        new object(),
-                        new object()
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                IsolatedStorageFile.GetStore(IsolatedStorageScope.User, new object(), new object())
             );
         }
 

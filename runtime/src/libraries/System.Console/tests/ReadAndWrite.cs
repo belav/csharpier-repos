@@ -474,8 +474,8 @@ public class ReadAndWrite
         {
             s.Flush();
             await s.FlushAsync();
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () => await s.FlushAsync(new CancellationToken(canceled: true))
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await s.FlushAsync(new CancellationToken(canceled: true))
             );
         }
     }

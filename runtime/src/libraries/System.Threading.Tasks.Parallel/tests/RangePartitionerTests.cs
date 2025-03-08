@@ -59,12 +59,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public static void RunPartitionerStaticTest_SingleChunking_Negative()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    Partitioner.Create(
-                        new int[] { 1, 2, 3, 4, 5 },
-                        (EnumerablePartitionerOptions)1000
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Partitioner.Create(new int[] { 1, 2, 3, 4, 5 }, (EnumerablePartitionerOptions)1000)
             );
         }
 

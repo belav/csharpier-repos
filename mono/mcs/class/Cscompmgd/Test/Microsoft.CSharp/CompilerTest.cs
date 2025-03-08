@@ -23,8 +23,8 @@ namespace MonoTests.Cscompmgd
         [TestCase]
         public void EmptySourceTexts()
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () => Compiler.Compile(Array.Empty<string>(), Array.Empty<string>(), "", null, null)
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                Compiler.Compile(Array.Empty<string>(), Array.Empty<string>(), "", null, null)
             );
         }
     }

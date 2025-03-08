@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // not XML:
             appConfig.WriteAllText("garbage");
             stream.Position = 0;
-            Assert.Throws<COMException>(
-                () => FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
+            Assert.Throws<COMException>(() =>
+                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
             );
             Assert.Throws<XmlException>(() => AssemblyPortabilityPolicy.LoadFromXml(stream));
 
@@ -133,8 +133,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             stream.Position = 0;
 
-            Assert.Throws<COMException>(
-                () => FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
+            Assert.Throws<COMException>(() =>
+                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
             );
             Assert.Throws<XmlException>(() => AssemblyPortabilityPolicy.LoadFromXml(stream));
 
@@ -152,8 +152,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             stream.Position = 0;
 
-            Assert.Throws<COMException>(
-                () => FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
+            Assert.Throws<COMException>(() =>
+                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
             );
             Assert.Throws<XmlException>(() => AssemblyPortabilityPolicy.LoadFromXml(stream));
         }

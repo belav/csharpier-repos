@@ -189,26 +189,24 @@ namespace System.Security.Cryptography.Rsa.Tests
             {
                 byte[] signature = new byte[2048 / 8];
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        rsa.TrySignHash(
-                            ReadOnlySpan<byte>.Empty,
-                            signature,
-                            HashAlgorithmName.SHA1,
-                            RSASignaturePadding.Pkcs1,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    rsa.TrySignHash(
+                        ReadOnlySpan<byte>.Empty,
+                        signature,
+                        HashAlgorithmName.SHA1,
+                        RSASignaturePadding.Pkcs1,
+                        out _
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        rsa.TrySignHash(
-                            ReadOnlySpan<byte>.Empty,
-                            signature,
-                            HashAlgorithmName.SHA1,
-                            RSASignaturePadding.Pss,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    rsa.TrySignHash(
+                        ReadOnlySpan<byte>.Empty,
+                        signature,
+                        HashAlgorithmName.SHA1,
+                        RSASignaturePadding.Pss,
+                        out _
+                    )
                 );
             }
         }

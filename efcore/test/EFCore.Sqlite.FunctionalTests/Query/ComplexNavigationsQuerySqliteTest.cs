@@ -15,8 +15,8 @@ public class ComplexNavigationsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Let_let_contains_from_outer_let(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Let_let_contains_from_outer_let(async)
                 )
             ).Message
         );
@@ -25,8 +25,8 @@ public class ComplexNavigationsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Prune_does_not_throw_null_ref(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Prune_does_not_throw_null_ref(async)
                 )
             ).Message
         );
@@ -37,11 +37,10 @@ public class ComplexNavigationsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Join_with_result_selector_returning_queryable_throws_validation_error(
-                            async
-                        )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Join_with_result_selector_returning_queryable_throws_validation_error(
+                        async
+                    )
                 )
             ).Message
         );
@@ -52,11 +51,10 @@ public class ComplexNavigationsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
-                            async
-                        )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
+                        async
+                    )
                 )
             ).Message
         );
@@ -74,8 +72,8 @@ public class ComplexNavigationsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.GroupJoin_with_subquery_on_inner(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.GroupJoin_with_subquery_on_inner(async)
                 )
             ).Message
         );
@@ -84,8 +82,8 @@ public class ComplexNavigationsQuerySqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(async)
                 )
             ).Message
         );

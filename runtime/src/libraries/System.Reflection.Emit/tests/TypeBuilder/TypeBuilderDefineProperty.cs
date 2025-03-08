@@ -367,28 +367,26 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    type.DefineProperty(
-                        "TestProperty",
-                        PropertyAttributes.HasDefault,
-                        typeof(int),
-                        null,
-                        null,
-                        new Type[] { typeof(int) },
-                        null,
-                        null
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                type.DefineProperty(
+                    "TestProperty",
+                    PropertyAttributes.HasDefault,
+                    typeof(int),
+                    null,
+                    null,
+                    new Type[] { typeof(int) },
+                    null,
+                    null
+                )
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    type.DefineProperty(
-                        "TestProperty",
-                        PropertyAttributes.None,
-                        typeof(int),
-                        new Type[] { typeof(int) }
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                type.DefineProperty(
+                    "TestProperty",
+                    PropertyAttributes.None,
+                    typeof(int),
+                    new Type[] { typeof(int) }
+                )
             );
         }
 

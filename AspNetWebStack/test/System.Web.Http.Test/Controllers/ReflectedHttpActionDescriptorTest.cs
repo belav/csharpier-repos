@@ -217,8 +217,8 @@ namespace System.Web.Http
                 MethodInfo = action.Method,
             };
 
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                () => actionDescriptor.ExecuteAsync(_context, _arguments, cts.Token)
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                actionDescriptor.ExecuteAsync(_context, _arguments, cts.Token)
             );
         }
 
@@ -343,8 +343,8 @@ namespace System.Web.Http
             };
             _arguments["id"] = null;
 
-            var exception = await Assert.ThrowsAsync<HttpResponseException>(
-                () => actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
+            var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
             );
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
@@ -367,8 +367,8 @@ namespace System.Web.Http
             };
             _arguments["otherId"] = 6;
 
-            var exception = await Assert.ThrowsAsync<HttpResponseException>(
-                () => actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
+            var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
             );
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
@@ -391,8 +391,8 @@ namespace System.Web.Http
             };
             _arguments["id"] = new DateTime();
 
-            var exception = await Assert.ThrowsAsync<HttpResponseException>(
-                () => actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
+            var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
             );
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);

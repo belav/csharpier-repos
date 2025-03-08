@@ -120,8 +120,8 @@ namespace System.Linq.Expressions.Tests
                 }
                 catch (Exception ex)
                 {
-                    Exception proxyEx = Assert.ThrowsAny<Exception>(
-                        () => proxyProperty.GetValue(view)
+                    Exception proxyEx = Assert.ThrowsAny<Exception>(() =>
+                        proxyProperty.GetValue(view)
                     );
                     Assert.IsType(ex.GetType(), proxyEx);
                     continue;
@@ -188,8 +188,8 @@ namespace System.Linq.Expressions.Tests
                 throw new SkipTestException($"Didn't find DebuggerTypeProxyAttribute on {type}.");
             }
             ConstructorInfo ctor = viewType.GetConstructors().Single();
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
-                () => ctor.Invoke(new object[] { null })
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                ctor.Invoke(new object[] { null })
             );
             ArgumentNullException ane = (ArgumentNullException)tie.InnerException;
             Assert.Equal(ctor.GetParameters()[0].Name, ane.ParamName);

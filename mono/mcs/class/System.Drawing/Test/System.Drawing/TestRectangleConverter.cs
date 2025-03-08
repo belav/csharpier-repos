@@ -500,15 +500,10 @@ namespace MonoTests.System.Drawing
         public void ConvertFromString_string_exc_1()
         {
             CultureInfo culture = CultureInfo.CurrentCulture;
-            Assert.Throws<ArgumentException>(
-                () =>
-                    rconv.ConvertFromString(
-                        string.Format(
-                            culture,
-                            "1{0} 2{0} 3{0} 4{0} 5",
-                            culture.TextInfo.ListSeparator
-                        )
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                rconv.ConvertFromString(
+                    string.Format(culture, "1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator)
+                )
             );
         }
 

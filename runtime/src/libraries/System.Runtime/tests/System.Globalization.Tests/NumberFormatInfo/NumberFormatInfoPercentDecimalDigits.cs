@@ -53,8 +53,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void PercentDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => NumberFormatInfo.InvariantInfo.PercentDecimalDigits = 1
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PercentDecimalDigits = 1
             );
         }
     }

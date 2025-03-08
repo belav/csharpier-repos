@@ -314,8 +314,8 @@ namespace PInvokeTests
         {
             Console.WriteLine($"Running {nameof(RecursiveNativeLayout)}...");
 
-            Assert.Throws<TypeLoadException>(
-                () => RecursiveNativeLayoutInvalid(new RecursiveTestStruct())
+            Assert.Throws<TypeLoadException>(() =>
+                RecursiveNativeLayoutInvalid(new RecursiveTestStruct())
             );
         }
 

@@ -41,24 +41,23 @@ class C1
         [Fact]
         public void IsAccessibleNullArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => s_testModel.IsAccessible(s_testPosition, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                s_testModel.IsAccessible(s_testPosition, null)
             );
         }
 
         [Fact]
         public void IsAccessibleLocationNotInSource()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => s_testModel.IsAccessible(-1, s_testSymbol)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                s_testModel.IsAccessible(-1, s_testSymbol)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    s_testModel.IsAccessible(
-                        s_testModel.SyntaxTree.GetCompilationUnitRoot().FullSpan.End + 1,
-                        s_testSymbol
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                s_testModel.IsAccessible(
+                    s_testModel.SyntaxTree.GetCompilationUnitRoot().FullSpan.End + 1,
+                    s_testSymbol
+                )
             );
         }
 

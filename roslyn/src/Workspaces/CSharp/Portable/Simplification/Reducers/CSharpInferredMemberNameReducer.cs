@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     /// </summary>
     internal partial class CSharpInferredMemberNameReducer : AbstractCSharpReducer
     {
-        private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool)
+        private static readonly ObjectPool<IReductionRewriter> s_pool = new(() =>
+            new Rewriter(s_pool)
         );
 
         public CSharpInferredMemberNameReducer()

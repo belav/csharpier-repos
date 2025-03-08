@@ -36,8 +36,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type = GetNullableOfTUnderlyingType(typeof(T), out bool isNullableOfT);
             string fullName = type.FullName;
 
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.DeserializeWrapper<T>(json)
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.DeserializeWrapper<T>(json)
             );
             string exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
@@ -45,8 +45,8 @@ namespace System.Text.Json.Serialization.Tests
 
             json = $@"{{""Prop"":{json}}}";
 
-            ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.DeserializeWrapper<ClassWithType<T>>(json)
+            ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.DeserializeWrapper<ClassWithType<T>>(json)
             );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
@@ -74,16 +74,16 @@ namespace System.Text.Json.Serialization.Tests
             Type type = GetNullableOfTUnderlyingType(typeof(T), out bool isNullableOfT);
             string fullName = type.FullName;
 
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.SerializeWrapper(value)
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.SerializeWrapper(value)
             );
             string exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
             Assert.Contains("$", exAsStr);
 
             ClassWithType<T> obj = new ClassWithType<T> { Prop = value };
-            ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.SerializeWrapper(obj)
+            ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.SerializeWrapper(obj)
             );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
@@ -120,16 +120,16 @@ namespace System.Text.Json.Serialization.Tests
             fullName = GetNullableOfTUnderlyingType(value.GetType(), out bool _).FullName;
 #endif
 
-            ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.SerializeWrapper<object>(value)
+            ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.SerializeWrapper<object>(value)
             );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
             Assert.Contains("$", exAsStr);
 
             ClassWithType<object> polyObj = new ClassWithType<object> { Prop = value };
-            ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.SerializeWrapper(polyObj)
+            ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.SerializeWrapper(polyObj)
             );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
@@ -228,11 +228,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.True(string.IsNullOrEmpty(ctorInfo.GetParameters()[0].Name));
             object value = ctorInfo.Invoke(new object[] { (byte)0 });
 
-            await Assert.ThrowsAnyAsync<NotSupportedException>(
-                () => Serializer.SerializeWrapper(value)
+            await Assert.ThrowsAnyAsync<NotSupportedException>(() =>
+                Serializer.SerializeWrapper(value)
             );
-            await Assert.ThrowsAnyAsync<NotSupportedException>(
-                () => Serializer.DeserializeWrapper("{}", type)
+            await Assert.ThrowsAnyAsync<NotSupportedException>(() =>
+                Serializer.DeserializeWrapper("{}", type)
             );
         }
 #endif

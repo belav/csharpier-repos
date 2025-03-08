@@ -12,9 +12,8 @@
                     cfg.CreateProjection<Source, Destination>();
                 });
 
-                typeof(NullReferenceException).ShouldNotBeThrownBy(
-                    () =>
-                        config.Internal().ProjectionBuilder.GetMapExpression<Source, Destination>()
+                typeof(NullReferenceException).ShouldNotBeThrownBy(() =>
+                    config.Internal().ProjectionBuilder.GetMapExpression<Source, Destination>()
                 );
             }
 

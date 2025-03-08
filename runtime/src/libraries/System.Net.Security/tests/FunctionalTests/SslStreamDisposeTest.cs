@@ -140,8 +140,8 @@ namespace System.Net.Security.Tests
                     client.Dispose();
                 }
 
-                await Assert.ThrowsAnyAsync<ObjectDisposedException>(
-                    () => client.ReadAsync(readBuffer, cts.Token).AsTask()
+                await Assert.ThrowsAnyAsync<ObjectDisposedException>(() =>
+                    client.ReadAsync(readBuffer, cts.Token).AsTask()
                 );
             }
         }

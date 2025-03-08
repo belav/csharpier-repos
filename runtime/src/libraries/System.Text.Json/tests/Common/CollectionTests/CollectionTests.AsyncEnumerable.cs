@@ -164,14 +164,13 @@ namespace System.Text.Json.Serialization.Tests
             using var cts = new CancellationTokenSource(
                 delay: TimeSpan.FromMilliseconds(cancellationTokenSourceDelayMilliseconds)
             );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () =>
-                    await JsonSerializer.SerializeAsync(
-                        utf8Stream,
-                        longRunningEnumerable,
-                        Serializer.DefaultOptions,
-                        cancellationToken: cts.Token
-                    )
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await JsonSerializer.SerializeAsync(
+                    utf8Stream,
+                    longRunningEnumerable,
+                    Serializer.DefaultOptions,
+                    cancellationToken: cts.Token
+                )
             );
 
             Assert.Equal(1, longRunningEnumerable.TotalCreatedEnumerators);
@@ -282,16 +281,15 @@ namespace System.Text.Json.Serialization.Tests
             IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(
                 Enumerable.Range(1, 10)
             );
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Serialize(asyncEnumerable, Serializer.DefaultOptions)
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(asyncEnumerable, Serializer.DefaultOptions)
             );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new MemoryStream(),
-                        asyncEnumerable,
-                        Serializer.DefaultOptions
-                    )
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(
+                    new MemoryStream(),
+                    asyncEnumerable,
+                    Serializer.DefaultOptions
+                )
             );
         }
 
@@ -301,20 +299,18 @@ namespace System.Text.Json.Serialization.Tests
             IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(
                 Enumerable.Range(1, 10)
             );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new AsyncEnumerableDto<int> { Data = asyncEnumerable },
-                        Serializer.DefaultOptions
-                    )
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(
+                    new AsyncEnumerableDto<int> { Data = asyncEnumerable },
+                    Serializer.DefaultOptions
+                )
             );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new MemoryStream(),
-                        new AsyncEnumerableDto<int> { Data = asyncEnumerable },
-                        Serializer.DefaultOptions
-                    )
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(
+                    new MemoryStream(),
+                    new AsyncEnumerableDto<int> { Data = asyncEnumerable },
+                    Serializer.DefaultOptions
+                )
             );
         }
 
@@ -331,12 +327,11 @@ namespace System.Text.Json.Serialization.Tests
                 Enumerable.Repeat(ThrowingEnumerable(), 2)
             );
 
-            await Assert.ThrowsAsync<DivideByZeroException>(
-                async () =>
-                    await StreamingSerializer.SerializeWrapper(
-                        stream,
-                        new AsyncEnumerableDto<IEnumerable<int>> { Data = asyncEnumerable }
-                    )
+            await Assert.ThrowsAsync<DivideByZeroException>(async () =>
+                await StreamingSerializer.SerializeWrapper(
+                    stream,
+                    new AsyncEnumerableDto<IEnumerable<int>> { Data = asyncEnumerable }
+                )
             );
             Assert.Equal(1, asyncEnumerable.TotalCreatedEnumerators);
             Assert.Equal(1, asyncEnumerable.TotalDisposedEnumerators);
@@ -409,11 +404,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             var utf8Stream = new Utf8MemoryStream("[0,1,2,3,4]");
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await StreamingSerializer.DeserializeWrapper<MockedAsyncEnumerable<int>>(
-                        utf8Stream
-                    )
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await StreamingSerializer.DeserializeWrapper<MockedAsyncEnumerable<int>>(utf8Stream)
             );
         }
 
@@ -471,14 +463,13 @@ namespace System.Text.Json.Serialization.Tests
             // Regression test for https://github.com/dotnet/runtime/issues/57360
             using var stream = new Utf8MemoryStream();
             using var cts = new CancellationTokenSource(millisecondsDelay: 1000);
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () =>
-                    await JsonSerializer.SerializeAsync(
-                        stream,
-                        GetNumbersAsync(),
-                        Serializer.DefaultOptions,
-                        cancellationToken: cts.Token
-                    )
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await JsonSerializer.SerializeAsync(
+                    stream,
+                    GetNumbersAsync(),
+                    Serializer.DefaultOptions,
+                    cancellationToken: cts.Token
+                )
             );
 
             static async IAsyncEnumerable<int> GetNumbersAsync()
@@ -502,12 +493,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Regression test for https://github.com/dotnet/aspnetcore/issues/36977
             using var stream = new MemoryStream();
-            await Assert.ThrowsAsync<NotImplementedException>(
-                async () =>
-                    await StreamingSerializer.SerializeWrapper(
-                        stream,
-                        new AsyncEnumerableDto<int> { Data = GetFailingAsyncEnumerable() }
-                    )
+            await Assert.ThrowsAsync<NotImplementedException>(async () =>
+                await StreamingSerializer.SerializeWrapper(
+                    stream,
+                    new AsyncEnumerableDto<int> { Data = GetFailingAsyncEnumerable() }
+                )
             );
             Assert.Equal(0, stream.Length);
 

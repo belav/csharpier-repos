@@ -329,16 +329,15 @@ namespace Roslyn.Utilities
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullPath));
 
-            return RethrowExceptionsAsIOException(
-                () =>
-                    new FileStream(
-                        fullPath,
-                        FileMode.Open,
-                        FileAccess.Read,
-                        FileShare.Read,
-                        4096,
-                        FileOptions.Asynchronous
-                    )
+            return RethrowExceptionsAsIOException(() =>
+                new FileStream(
+                    fullPath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    4096,
+                    FileOptions.Asynchronous
+                )
             );
         }
 

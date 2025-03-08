@@ -86,13 +86,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
                     var lazyAllAnalyzers = new Lazy<
                         ImmutableArray<IUnitTestingIncrementalAnalyzer>
-                    >(
-                        () =>
-                            GetIncrementalAnalyzers(
-                                _registration,
-                                analyzersGetter,
-                                onlyHighPriorityAnalyzer: false
-                            )
+                    >(() =>
+                        GetIncrementalAnalyzers(
+                            _registration,
+                            analyzersGetter,
+                            onlyHighPriorityAnalyzer: false
+                        )
                     );
 
 #if false // Not used in unit testing crawling

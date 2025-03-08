@@ -255,8 +255,8 @@ namespace System.Reflection.Tests
         )]
         public void GetMethod_AmbiguousMatch()
         {
-            var ex = Assert.Throws<AmbiguousMatchException>(
-                () => TestModule.GetMethod("TestMethodFoo")
+            var ex = Assert.Throws<AmbiguousMatchException>(() =>
+                TestModule.GetMethod("TestMethodFoo")
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

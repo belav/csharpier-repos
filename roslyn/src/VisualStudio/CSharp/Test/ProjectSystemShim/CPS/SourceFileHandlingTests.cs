@@ -448,27 +448,26 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             project.AddSourceFile(sourceFileFullPath4);
 
             // This should throw due to not passing all of the files.
-            Assert.Throws<ArgumentException>(
-                () => project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
+            Assert.Throws<ArgumentException>(() =>
+                project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
             );
 
             // This should throw because the path does not exist in the project.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    project.ReorderSourceFiles(
-                        new[]
-                        {
-                            @"C:\invalid source file",
-                            sourceFileFullPath2,
-                            sourceFileFullPath3,
-                            sourceFileFullPath4,
-                            sourceFileFullPath5,
-                        }
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                project.ReorderSourceFiles(
+                    new[]
+                    {
+                        @"C:\invalid source file",
+                        sourceFileFullPath2,
+                        sourceFileFullPath3,
+                        sourceFileFullPath4,
+                        sourceFileFullPath5,
+                    }
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => project.ReorderSourceFiles(new List<string>())
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                project.ReorderSourceFiles(new List<string>())
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => project.ReorderSourceFiles(null));
         }
@@ -491,28 +490,28 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
 
             project.StartBatch();
 
-            Assert.Throws<ArgumentException>(
-                () => project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
+            Assert.Throws<ArgumentException>(() =>
+                project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
             );
-            Assert.Throws<ArgumentException>(
-                () => project.ReorderSourceFiles(new[] { @"C:\invalid source file" })
+            Assert.Throws<ArgumentException>(() =>
+                project.ReorderSourceFiles(new[] { @"C:\invalid source file" })
             ); // no files were added, therefore we should get an argument exception
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => project.ReorderSourceFiles(new List<string>())
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                project.ReorderSourceFiles(new List<string>())
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => project.ReorderSourceFiles(null));
 
             project.AddSourceFile(sourceFileFullPath1);
 
             // Test before we add/remove the rest of source files in the batch.
-            Assert.Throws<ArgumentException>(
-                () => project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
+            Assert.Throws<ArgumentException>(() =>
+                project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
             );
-            Assert.Throws<InvalidOperationException>(
-                () => project.ReorderSourceFiles(new[] { @"C:\invalid source file" })
+            Assert.Throws<InvalidOperationException>(() =>
+                project.ReorderSourceFiles(new[] { @"C:\invalid source file" })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => project.ReorderSourceFiles(new List<string>())
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                project.ReorderSourceFiles(new List<string>())
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => project.ReorderSourceFiles(null));
 
@@ -527,24 +526,23 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             project.RemoveSourceFile(sourceFileFullPath4);
             project.AddSourceFile(sourceFileFullPath4);
 
-            Assert.Throws<ArgumentException>(
-                () => project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
+            Assert.Throws<ArgumentException>(() =>
+                project.ReorderSourceFiles(new[] { sourceFileFullPath4, sourceFileFullPath5 })
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    project.ReorderSourceFiles(
-                        new[]
-                        {
-                            @"C:\invalid source file",
-                            sourceFileFullPath2,
-                            sourceFileFullPath3,
-                            sourceFileFullPath4,
-                            sourceFileFullPath5,
-                        }
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                project.ReorderSourceFiles(
+                    new[]
+                    {
+                        @"C:\invalid source file",
+                        sourceFileFullPath2,
+                        sourceFileFullPath3,
+                        sourceFileFullPath4,
+                        sourceFileFullPath5,
+                    }
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => project.ReorderSourceFiles(new List<string>())
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                project.ReorderSourceFiles(new List<string>())
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => project.ReorderSourceFiles(null));
 
@@ -570,8 +568,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             project.StartBatch();
 
             project.RemoveSourceFile(sourceFileFullPath2);
-            Assert.Throws<InvalidOperationException>(
-                () => project.ReorderSourceFiles(new[] { sourceFileFullPath2 })
+            Assert.Throws<InvalidOperationException>(() =>
+                project.ReorderSourceFiles(new[] { sourceFileFullPath2 })
             );
 
             await project.EndBatchAsync();

@@ -223,11 +223,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(
                 MixedModeContext.Default.StructWithCustomConverterFactoryProperty.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => MixedModeContext.Default.ClassWithBadCustomConverter.SerializeHandler
+            Assert.Throws<InvalidOperationException>(() =>
+                MixedModeContext.Default.ClassWithBadCustomConverter.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => MixedModeContext.Default.StructWithBadCustomConverter.SerializeHandler
+            Assert.Throws<InvalidOperationException>(() =>
+                MixedModeContext.Default.StructWithBadCustomConverter.SerializeHandler
             );
             Assert.Null(MixedModeContext.Default.NullablePersonStruct.SerializeHandler);
             Assert.NotNull(MixedModeContext.Default.PersonStruct.SerializeHandler);

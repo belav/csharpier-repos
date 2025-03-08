@@ -6834,23 +6834,22 @@ class C
             var comp = CSharpCompilation.Create("test", references: new[] { MscorlibRef }); // no ValueTuple
             TypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
 
-            Assert.Throws<ArgumentNullException>(
-                () => comp.CreateTupleTypeSymbol(null, default(ImmutableArray<string>))
+            Assert.Throws<ArgumentNullException>(() =>
+                comp.CreateTupleTypeSymbol(null, default(ImmutableArray<string>))
             );
 
             // if names are provided, you need one for each element
             var vt2 = comp.GetWellKnownType(WellKnownType.System_ValueTuple_T2)
                 .Construct(intType, intType);
-            var e = Assert.Throws<ArgumentException>(
-                () => comp.CreateTupleTypeSymbol(vt2, new[] { "Item1" }.AsImmutable())
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(vt2, new[] { "Item1" }.AsImmutable())
             );
             Assert.Contains(CodeAnalysisResources.TupleElementNameCountMismatch, e.Message);
 
             var tree = CSharpSyntaxTree.ParseText("class C { }");
             var loc1 = Location.Create(tree, new TextSpan(0, 1));
-            e = Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(vt2, elementLocations: new[] { loc1 }.AsImmutable())
+            e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(vt2, elementLocations: new[] { loc1 }.AsImmutable())
             );
             Assert.Contains(CodeAnalysisResources.TupleElementLocationCountMismatch, e.Message);
         }
@@ -7668,16 +7667,16 @@ namespace System
             var vbComp = CreateVisualBasicCompilation("");
             Assert.Throws<ArgumentNullException>(() => comp.CreateErrorTypeSymbol(null, null, 2));
             Assert.Throws<ArgumentException>(() => comp.CreateErrorTypeSymbol(null, "a", -1));
-            Assert.Throws<ArgumentException>(
-                () => comp.CreateErrorTypeSymbol(vbComp.GlobalNamespace, "a", 1)
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateErrorTypeSymbol(vbComp.GlobalNamespace, "a", 1)
             );
 
             Assert.Throws<ArgumentNullException>(() => comp.CreateErrorNamespaceSymbol(null, "a"));
-            Assert.Throws<ArgumentNullException>(
-                () => comp.CreateErrorNamespaceSymbol(vbComp.GlobalNamespace, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                comp.CreateErrorNamespaceSymbol(vbComp.GlobalNamespace, null)
             );
-            Assert.Throws<ArgumentException>(
-                () => comp.CreateErrorNamespaceSymbol(vbComp.GlobalNamespace, "a")
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateErrorNamespaceSymbol(vbComp.GlobalNamespace, "a")
             );
 
             var ns = comp.CreateErrorNamespaceSymbol(comp.GlobalNamespace, "a");
@@ -7788,8 +7787,8 @@ namespace System
                 .Construct(intType, intType);
 
             // illegal C# identifiers and blank
-            var e = Assert.Throws<ArgumentException>(
-                () => comp.CreateTupleTypeSymbol(vt2, ImmutableArray.Create("123", ""))
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(vt2, ImmutableArray.Create("123", ""))
             );
             Assert.Contains(CodeAnalysisResources.TupleElementNameEmpty, e.Message);
             Assert.Contains("elementNames[1]", e.Message);
@@ -7815,8 +7814,8 @@ End Class";
                 vbComp.GlobalNamespace.GetMembers("C").Single();
 
             var comp = CSharpCompilation.Create("test", references: new[] { MscorlibRef });
-            var e = Assert.Throws<ArgumentException>(
-                () => comp.CreateTupleTypeSymbol(vbType, default(ImmutableArray<string>))
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(vbType, default(ImmutableArray<string>))
             );
             Assert.Contains(CSharpResources.NotACSharpSymbol, e.Message);
         }
@@ -7840,12 +7839,11 @@ End Class";
             var vbType = (ITypeSymbol)vbComp.GlobalNamespace.GetMembers("C").Single();
 
             var comp = CSharpCompilation.Create("test", references: new[] { MscorlibRef });
-            var e = Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create(vbType),
-                        ImmutableArray.Create("m1")
-                    )
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create(vbType),
+                    ImmutableArray.Create("m1")
+                )
             );
             Assert.Contains(CSharpResources.NotACSharpSymbol, e.Message);
         }
@@ -7856,56 +7854,50 @@ End Class";
             var comp = CSharpCompilation.Create("test", references: new[] { MscorlibRef }); // no ValueTuple
             TypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        default(ImmutableArray<ITypeSymbol>),
-                        default(ImmutableArray<string>)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    default(ImmutableArray<ITypeSymbol>),
+                    default(ImmutableArray<string>)
+                )
             );
 
             // 0-tuple and 1-tuple are not supported at this point
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        ImmutableArray<ITypeSymbol>.Empty,
-                        default(ImmutableArray<string>)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    ImmutableArray<ITypeSymbol>.Empty,
+                    default(ImmutableArray<string>)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        new[] { intType }.AsImmutable(),
-                        default(ImmutableArray<string>)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    new[] { intType }.AsImmutable(),
+                    default(ImmutableArray<string>)
+                )
             );
 
             // if names are provided, you need one for each element
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        new[] { intType, intType }.AsImmutable(),
-                        new[] { "Item1" }.AsImmutable()
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    new[] { intType, intType }.AsImmutable(),
+                    new[] { "Item1" }.AsImmutable()
+                )
             );
 
             var syntaxTree = CSharpSyntaxTree.ParseText("class C { }");
             var loc1 = Location.Create(syntaxTree, new TextSpan(0, 1));
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        new[] { intType, intType }.AsImmutable(),
-                        elementLocations: ImmutableArray.Create(loc1)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    new[] { intType, intType }.AsImmutable(),
+                    elementLocations: ImmutableArray.Create(loc1)
+                )
             );
 
             // null types aren't allowed
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        new[] { intType, null }.AsImmutable(),
-                        default(ImmutableArray<string>)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    new[] { intType, null }.AsImmutable(),
+                    default(ImmutableArray<string>)
+                )
             );
         }
 
@@ -8346,12 +8338,11 @@ End Class";
             INamedTypeSymbol intType = comp.GetSpecialType(SpecialType.System_String)
                 .GetPublicSymbol();
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        ImmutableArray.Create(intType, vbType),
-                        default(ImmutableArray<string>)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    ImmutableArray.Create(intType, vbType),
+                    default(ImmutableArray<string>)
+                )
             );
         }
 
@@ -8652,12 +8643,11 @@ class C
             );
             Assert.True(tuple1.Equals(tuple2, TypeCompareKind.ConsiderEverything));
 
-            var e = Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        underlyingType,
-                        elementNullableAnnotations: ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
-                    )
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    underlyingType,
+                    elementNullableAnnotations: ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
+                )
             );
             Assert.Contains(
                 CodeAnalysisResources.TupleElementNullableAnnotationCountMismatch,
@@ -8728,15 +8718,14 @@ class C
                 tuple2.ToTestDisplayString(includeNonNullable: true)
             );
 
-            var e = Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        underlyingType,
-                        elementNullableAnnotations: CreateAnnotations(
-                            CodeAnalysis.NullableAnnotation.NotAnnotated,
-                            8
-                        )
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    underlyingType,
+                    elementNullableAnnotations: CreateAnnotations(
+                        CodeAnalysis.NullableAnnotation.NotAnnotated,
+                        8
                     )
+                )
             );
             Assert.Contains(
                 CodeAnalysisResources.TupleElementNullableAnnotationCountMismatch,
@@ -8797,12 +8786,11 @@ class C
             );
             Assert.True(tuple1.Equals(tuple2));
 
-            var e = Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        elementTypes,
-                        elementNullableAnnotations: ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
-                    )
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    elementTypes,
+                    elementNullableAnnotations: ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
+                )
             );
             Assert.Contains(
                 CodeAnalysisResources.TupleElementNullableAnnotationCountMismatch,
@@ -8873,15 +8861,14 @@ class C
                 tuple2.ToTestDisplayString(includeNonNullable: true)
             );
 
-            var e = Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateTupleTypeSymbol(
-                        elementTypes,
-                        elementNullableAnnotations: CreateAnnotations(
-                            CodeAnalysis.NullableAnnotation.NotAnnotated,
-                            8
-                        )
+            var e = Assert.Throws<ArgumentException>(() =>
+                comp.CreateTupleTypeSymbol(
+                    elementTypes,
+                    elementNullableAnnotations: CreateAnnotations(
+                        CodeAnalysis.NullableAnnotation.NotAnnotated,
+                        8
                     )
+                )
             );
             Assert.Contains(
                 CodeAnalysisResources.TupleElementNullableAnnotationCountMismatch,
@@ -13998,8 +13985,7 @@ CS0151ERR_IntegralTypeValueExpected}
             Assert.Equal("7.0", Compilation.GetRequiredLanguageVersion(comp.GetDiagnostics()[1]));
             Assert.Equal("7.0", Compilation.GetRequiredLanguageVersion(comp.GetDiagnostics()[2]));
             Assert.Null(Compilation.GetRequiredLanguageVersion(comp.GetDiagnostics()[3]));
-            Assert.Throws<ArgumentNullException>(
-                () => Compilation.GetRequiredLanguageVersion(null)
+            Assert.Throws<ArgumentNullException>(() => Compilation.GetRequiredLanguageVersion(null)
             );
         }
 

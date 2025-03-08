@@ -92,8 +92,7 @@ namespace Wasm.Build.Tests
             _testOutput.WriteLine(
                 $"[{_label}] Executing (Captured Output) - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}"
             );
-            return Task.Run(
-                async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)
+            return Task.Run(async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)
             ).Result;
         }
 

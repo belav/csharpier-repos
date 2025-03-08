@@ -89,10 +89,9 @@ namespace System.ConfigurationTests
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
 
-                Assert.Throws<ConfigurationErrorsException>(
-                    () =>
-                        config.GetSection("simpleCustomSectionRequiredValue")
-                        as SimpleCustomSectionRequiredValue
+                Assert.Throws<ConfigurationErrorsException>(() =>
+                    config.GetSection("simpleCustomSectionRequiredValue")
+                    as SimpleCustomSectionRequiredValue
                 );
             }
         }

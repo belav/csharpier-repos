@@ -97,11 +97,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 _afterOpenTokenIndentationTrivia = generator.Whitespace(
                     GetAfterOpenTokenIndentation()
                 );
-                _singleIndentationTrivia = new Lazy<SyntaxTrivia>(
-                    () => generator.Whitespace(GetSingleIndentation())
+                _singleIndentationTrivia = new Lazy<SyntaxTrivia>(() =>
+                    generator.Whitespace(GetSingleIndentation())
                 );
-                _braceIndentationTrivia = new Lazy<SyntaxTrivia>(
-                    () => generator.Whitespace(GetBraceTokenIndentation())
+                _braceIndentationTrivia = new Lazy<SyntaxTrivia>(() =>
+                    generator.Whitespace(GetBraceTokenIndentation())
                 );
             }
 

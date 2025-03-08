@@ -393,8 +393,8 @@ namespace Castle.DynamicProxy.Tests
 
             StandardInterceptor interceptor = new StandardInterceptor();
 
-            Assert.Throws<ArgumentException>(
-                () => generator.CreateClassProxy(typeof(SimpleClass), options, interceptor)
+            Assert.Throws<ArgumentException>(() =>
+                generator.CreateClassProxy(typeof(SimpleClass), options, interceptor)
             );
         }
 

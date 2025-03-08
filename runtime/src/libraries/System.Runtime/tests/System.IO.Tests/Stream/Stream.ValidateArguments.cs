@@ -59,19 +59,18 @@ namespace System.IO.Tests
             var dstDisposed = new MemoryStream();
             dstDisposed.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1)
+            Assert.Throws<ObjectDisposedException>(() =>
+                ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1)
+            Assert.Throws<ObjectDisposedException>(() =>
+                ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1)
             );
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    ExposeProtectedStream.ValidateCopyToArguments(
-                        new MemoryStream(new byte[1], writable: false),
-                        1
-                    )
+            Assert.Throws<NotSupportedException>(() =>
+                ExposeProtectedStream.ValidateCopyToArguments(
+                    new MemoryStream(new byte[1], writable: false),
+                    1
+                )
             );
         }
 

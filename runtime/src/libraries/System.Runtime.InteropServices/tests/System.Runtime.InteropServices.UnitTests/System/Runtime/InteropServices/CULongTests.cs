@@ -43,8 +43,7 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(nameof(NativeIntConstructorCanOverflow))]
         public void Ctor_NUInt_OutOfRange()
         {
-            Assert.Throws<OverflowException>(
-                () => new CULong(unchecked(((nuint)uint.MaxValue) + 1))
+            Assert.Throws<OverflowException>(() => new CULong(unchecked(((nuint)uint.MaxValue) + 1))
             );
         }
 

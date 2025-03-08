@@ -295,8 +295,7 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void GetEnumerator_BadType_Throws()
         {
-            Assert.Throws<ArgumentException>(
-                () => OleDbEnumerator.GetEnumerator(typeof(Exception))
+            Assert.Throws<ArgumentException>(() => OleDbEnumerator.GetEnumerator(typeof(Exception))
             );
         }
 

@@ -525,8 +525,8 @@ namespace System.Net.Http.Functional.Tests
                 var stream = await response.Content.ReadAsStreamAsync();
                 await stream.ReadAsync(new byte[1024]);
                 semaphore.Release();
-                var ex = await Assert.ThrowsAsync<HttpProtocolException>(
-                    async () => await stream.ReadAsync(new byte[1024])
+                var ex = await Assert.ThrowsAsync<HttpProtocolException>(async () =>
+                    await stream.ReadAsync(new byte[1024])
                 );
                 Assert.Equal(GeneralProtocolError, ex.ErrorCode);
             });
@@ -1085,8 +1085,8 @@ namespace System.Net.Http.Functional.Tests
                 CancellationToken readCt =
                     type == CancellationType.CancellationToken ? cts.Token : default;
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
-                    () => stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask()
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask()
                 );
 
                 if (type == CancellationType.CancellationToken)
@@ -1184,8 +1184,8 @@ namespace System.Net.Http.Functional.Tests
                 var cts = new CancellationTokenSource(200);
                 cts.Token.Register(() => response.Dispose());
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
-                    () => stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask()
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask()
                 );
 
                 // exact exception depends on who won the race
@@ -1299,8 +1299,8 @@ namespace System.Net.Http.Functional.Tests
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    async () => await client.SendAsync(request, cts.Token)
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await client.SendAsync(request, cts.Token)
                 );
 
                 // Next call must succeed
@@ -1379,8 +1379,8 @@ namespace System.Net.Http.Functional.Tests
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
                 );
 
                 Assert.IsType<AuthenticationException>(ex.InnerException);
@@ -1412,13 +1412,13 @@ namespace System.Net.Http.Functional.Tests
                 Version = HttpVersion30,
                 VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
-            HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                () => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+            HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
             );
 
             // second request should throw the same exception as inner as the first one
-            HttpRequestException ex2 = await Assert.ThrowsAsync<HttpRequestException>(
-                () => client.SendAsync(request2).WaitAsync(TimeSpan.FromSeconds(10))
+            HttpRequestException ex2 = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                client.SendAsync(request2).WaitAsync(TimeSpan.FromSeconds(10))
             );
 
             Assert.Equal(ex, ex2.InnerException);
@@ -1641,8 +1641,8 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(TimeSpan.FromSeconds(11)); // longer than client.Timeout
 
                 // Http3WriteStream is disposed after cancellation fired
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => requestStream.WriteAsync(message).AsTask()
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    requestStream.WriteAsync(message).AsTask()
                 );
                 // client is properly canceled on timeout
                 var tce = await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
@@ -1719,8 +1719,8 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(250);
 
                 // Http3WriteStream is disposed after cancellation fired
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => requestStream.WriteAsync(message).AsTask()
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    requestStream.WriteAsync(message).AsTask()
                 );
                 // client is properly canceled
                 await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);

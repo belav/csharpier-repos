@@ -68,8 +68,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.ReferralChasing);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.ReferralChasing = ReferralChasingOptions.All
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.ReferralChasing = ReferralChasingOptions.All
             );
         }
 
@@ -95,11 +95,10 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.SecureSocketLayer
+            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SecureSocketLayer
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.SecureSocketLayer = true
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.SecureSocketLayer = true
             );
         }
 
@@ -135,11 +134,10 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.ReferralHopLimit
+            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.ReferralHopLimit
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.ReferralHopLimit = 10
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.ReferralHopLimit = 10
             );
         }
 
@@ -178,8 +176,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.ProtocolVersion);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.ProtocolVersion = 10
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.ProtocolVersion = 10
             );
         }
 
@@ -234,8 +232,7 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.DomainName);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.DomainName = null
+            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.DomainName = null
             );
         }
 
@@ -262,8 +259,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.LocatorFlag);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.LocatorFlag = LocatorFlags.AvoidSelf
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.LocatorFlag = LocatorFlags.AvoidSelf
             );
         }
 
@@ -324,11 +321,11 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.PingKeepAliveTimeout
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.PingKeepAliveTimeout
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.PingKeepAliveTimeout = TimeSpan.Zero
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.PingKeepAliveTimeout = TimeSpan.Zero
             );
         }
 
@@ -403,8 +400,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.PingWaitTimeout);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.PingWaitTimeout = TimeSpan.Zero
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.PingWaitTimeout = TimeSpan.Zero
             );
         }
 
@@ -431,8 +428,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.AutoReconnect);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.AutoReconnect = false
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.AutoReconnect = false
             );
         }
 
@@ -574,8 +571,7 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SaslMethod);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.SaslMethod = null
+            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SaslMethod = null
             );
         }
 
@@ -602,8 +598,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.RootDseCache);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.RootDseCache = false
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.RootDseCache = false
             );
         }
 
@@ -630,8 +626,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.TcpKeepAlive);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.TcpKeepAlive = false
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.TcpKeepAlive = false
             );
         }
 
@@ -670,8 +666,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SendTimeout);
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.SendTimeout = TimeSpan.Zero
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.SendTimeout = TimeSpan.Zero
             );
         }
 
@@ -715,11 +711,10 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.ReferralCallback
+            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.ReferralCallback
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.ReferralCallback = null
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.ReferralCallback = null
             );
         }
 
@@ -751,11 +746,11 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.QueryClientCertificate
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.QueryClientCertificate
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.QueryClientCertificate = null
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.QueryClientCertificate = null
             );
         }
 
@@ -787,11 +782,11 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.VerifyServerCertificate
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.VerifyServerCertificate
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.VerifyServerCertificate = null
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.VerifyServerCertificate = null
             );
         }
 
@@ -801,8 +796,8 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.FastConcurrentBind()
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.FastConcurrentBind()
             );
         }
 
@@ -812,8 +807,8 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.StartTransportLayerSecurity(null)
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.StartTransportLayerSecurity(null)
             );
         }
 
@@ -834,8 +829,8 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => connection.SessionOptions.StopTransportLayerSecurity()
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.StopTransportLayerSecurity()
             );
         }
     }

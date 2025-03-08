@@ -118,8 +118,8 @@ namespace System.Reflection.Emit.Tests
                 CallingConventions.Standard,
                 new Type[0]
             );
-            Assert.Throws<NotSupportedException>(
-                () => constructor.IsDefined(typeof(IntAllAttribute))
+            Assert.Throws<NotSupportedException>(() =>
+                constructor.IsDefined(typeof(IntAllAttribute))
             );
         }
     }

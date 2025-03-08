@@ -236,15 +236,14 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetValue_NoGetter_Throws()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    _noGetterVirtualProperty.GetValue(
-                        _testObject,
-                        BindingFlags.Default,
-                        null,
-                        null,
-                        CultureInfo.InvariantCulture
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                _noGetterVirtualProperty.GetValue(
+                    _testObject,
+                    BindingFlags.Default,
+                    null,
+                    null,
+                    CultureInfo.InvariantCulture
+                )
             );
         }
 
@@ -264,16 +263,15 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void SetValue_NoSetter_Throws()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    _noSetterVirtualProperty.SetValue(
-                        _testObject,
-                        42,
-                        BindingFlags.Default,
-                        null,
-                        null,
-                        CultureInfo.InvariantCulture
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                _noSetterVirtualProperty.SetValue(
+                    _testObject,
+                    42,
+                    BindingFlags.Default,
+                    null,
+                    null,
+                    CultureInfo.InvariantCulture
+                )
             );
         }
 

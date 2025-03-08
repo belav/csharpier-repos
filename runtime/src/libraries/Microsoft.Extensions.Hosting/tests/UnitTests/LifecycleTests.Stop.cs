@@ -351,8 +351,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             using (IHost host = hostBuilder.Build())
             {
                 await host.StartAsync();
-                AggregateException ex = await Assert.ThrowsAnyAsync<AggregateException>(
-                    async () => await host.StopAsync()
+                AggregateException ex = await Assert.ThrowsAnyAsync<AggregateException>(async () =>
+                    await host.StopAsync()
                 );
 
                 Assert.True(impl.StartingCalled);

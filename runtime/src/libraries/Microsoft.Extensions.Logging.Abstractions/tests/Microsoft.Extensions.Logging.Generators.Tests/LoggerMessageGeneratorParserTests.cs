@@ -905,18 +905,17 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task Cancellation()
         {
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () =>
-                    await RunGenerator(
-                        @"
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                await RunGenerator(
+                    @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static partial void M1(ILogger logger);
                 }
             ",
-                        cancellationToken: new CancellationToken(true)
-                    )
+                    cancellationToken: new CancellationToken(true)
+                )
             );
         }
 

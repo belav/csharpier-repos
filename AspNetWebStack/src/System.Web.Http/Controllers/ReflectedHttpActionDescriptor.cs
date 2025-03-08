@@ -60,8 +60,8 @@ namespace System.Web.Http.Controllers
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
         public ReflectedHttpActionDescriptor()
         {
-            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(
-                () => InitializeParameterDescriptors()
+            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() =>
+                InitializeParameterDescriptors()
             );
             _supportedHttpMethods = new Collection<HttpMethod>();
         }
@@ -78,8 +78,8 @@ namespace System.Web.Http.Controllers
             }
 
             InitializeProperties(methodInfo);
-            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(
-                () => InitializeParameterDescriptors()
+            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() =>
+                InitializeParameterDescriptors()
             );
         }
 

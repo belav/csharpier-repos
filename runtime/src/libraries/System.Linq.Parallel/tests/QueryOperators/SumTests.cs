@@ -70,29 +70,29 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Sum_Int_Overflow()
         {
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { int.MaxValue, 1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { int.MaxValue, 1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { (int?)int.MaxValue, 1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { (int?)int.MaxValue, 1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { int.MinValue, -1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { int.MinValue, -1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { (int?)int.MinValue, -1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { (int?)int.MinValue, -1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MaxValue : x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MaxValue : x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MaxValue : (int?)x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MaxValue : (int?)x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MinValue : -x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MinValue : -x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MinValue : -(int?)x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? int.MinValue : -(int?)x)
             );
         }
 
@@ -162,29 +162,29 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Sum_Long_Overflow()
         {
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { long.MaxValue, 1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { long.MaxValue, 1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { (long?)long.MaxValue, 1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { (long?)long.MaxValue, 1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { long.MinValue, -1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { long.MinValue, -1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { (long?)long.MinValue, -1 }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { (long?)long.MinValue, -1 }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MaxValue : x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MaxValue : x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MaxValue : (long?)x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MaxValue : (long?)x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MinValue : -x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MinValue : -x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MinValue : -(long?)x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? long.MinValue : -(long?)x)
             );
         }
 
@@ -543,33 +543,29 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Sum_Decimal_Overflow()
         {
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { decimal.MaxValue, 1M }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { decimal.MaxValue, 1M }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { (decimal?)decimal.MaxValue, 1M }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { (decimal?)decimal.MaxValue, 1M }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { decimal.MinValue, -1M }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { decimal.MinValue, -1M }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => new[] { (decimal?)decimal.MinValue, -1M }.AsParallel().Sum()
+            AssertThrows.Wrapped<OverflowException>(() =>
+                new[] { (decimal?)decimal.MinValue, -1M }.AsParallel().Sum()
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MaxValue : x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MaxValue : x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MaxValue : (decimal?)x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MaxValue : (decimal?)x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () => ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MinValue : -x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MinValue : -x)
             );
-            AssertThrows.Wrapped<OverflowException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(x => x == 0 ? decimal.MinValue : -(decimal?)x)
+            AssertThrows.Wrapped<OverflowException>(() =>
+                ParallelEnumerable.Range(0, 2).Sum(x => x == 0 ? decimal.MinValue : -(decimal?)x)
             );
         }
 
@@ -887,139 +883,129 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Sum_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, int?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, int?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, long>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, long>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, long?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, long?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, float>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, float>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, float?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, float?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, double>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, double>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, double?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, double?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, decimal>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, decimal>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 2)
-                        .Sum(
-                            (Func<int, decimal?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 2)
+                    .Sum(
+                        (Func<int, decimal?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
+                    )
             );
         }
 

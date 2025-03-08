@@ -125,8 +125,8 @@ namespace System.Net.Http.Functional.Tests
                     );
                     request.Headers.Protocol = "foo";
 
-                    HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.SendAsync(request)
+                    HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                        client.SendAsync(request)
                     );
                     Assert.Equal(HttpRequestError.ExtendedConnectNotSupported, ex.HttpRequestError);
 
@@ -216,8 +216,8 @@ namespace System.Net.Http.Functional.Tests
                 );
                 request.Headers.Protocol = "foo";
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
-                    () => client.SendAsync(request)
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    client.SendAsync(request)
                 );
                 clientCompleted.SetResult();
                 if (useSsl)

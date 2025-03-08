@@ -1136,8 +1136,8 @@ class D
             Assert.Throws<ArgumentException>(() => comp.ReplaceSyntaxTree(t1, comp.SyntaxTrees[0]));
 
             // SyntaxTrees have reference equality. This removal should fail.
-            Assert.Throws<ArgumentException>(
-                () => comp = comp.RemoveSyntaxTrees(SyntaxFactory.ParseSyntaxTree(s1))
+            Assert.Throws<ArgumentException>(() =>
+                comp = comp.RemoveSyntaxTrees(SyntaxFactory.ParseSyntaxTree(s1))
             );
             Assert.Equal(4, comp.SyntaxTrees.Length);
 
@@ -1170,8 +1170,8 @@ class D
             compCollection = CSharpCompilation.Create("Compilation", syntaxTrees: col);
             compCollection = compCollection.RemoveSyntaxTrees(t4, t5, t6);
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
-            Assert.Throws<ArgumentException>(
-                () => compCollection = compCollection.AddSyntaxTrees(t4, t5).RemoveSyntaxTrees(col)
+            Assert.Throws<ArgumentException>(() =>
+                compCollection = compCollection.AddSyntaxTrees(t4, t5).RemoveSyntaxTrees(col)
             );
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
 
@@ -1183,9 +1183,8 @@ class D
             compCollection = CSharpCompilation.Create("Compilation", syntaxTrees: stack);
             compCollection = compCollection.RemoveSyntaxTrees(t4, t6, t5);
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compCollection = compCollection.AddSyntaxTrees(t4, t6).RemoveSyntaxTrees(stack)
+            Assert.Throws<ArgumentException>(() =>
+                compCollection = compCollection.AddSyntaxTrees(t4, t6).RemoveSyntaxTrees(stack)
             );
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
 
@@ -1197,9 +1196,8 @@ class D
             compCollection = CSharpCompilation.Create("Compilation", syntaxTrees: queue);
             compCollection = compCollection.RemoveSyntaxTrees(t4, t6, t5);
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compCollection = compCollection.AddSyntaxTrees(t4, t6).RemoveSyntaxTrees(queue)
+            Assert.Throws<ArgumentException>(() =>
+                compCollection = compCollection.AddSyntaxTrees(t4, t6).RemoveSyntaxTrees(queue)
             );
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
 
@@ -1241,20 +1239,16 @@ class D
                 withExpressionRootTree.HasCompilationUnitRoot,
                 "how did we get a CompilationUnit root?"
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.Create(
-                        "Compilation",
-                        new SyntaxTree[] { withExpressionRootTree }
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.Create("Compilation", new SyntaxTree[] { withExpressionRootTree })
             );
 
             // AddSyntaxTrees with a non-CompilationUnit root node: should throw an ArgumentException.
             Assert.Throws<ArgumentException>(() => comp.AddSyntaxTrees(withExpressionRootTree));
 
             // ReplaceSyntaxTrees syntaxtree with a non-CompilationUnit root node: should throw an ArgumentException.
-            Assert.Throws<ArgumentException>(
-                () => comp.ReplaceSyntaxTree(comp.SyntaxTrees[0], withExpressionRootTree)
+            Assert.Throws<ArgumentException>(() =>
+                comp.ReplaceSyntaxTree(comp.SyntaxTrees[0], withExpressionRootTree)
             );
         }
 
@@ -1297,11 +1291,8 @@ class D
             listSyntaxTree.Add(t1);
             listSyntaxTree.Add(t1);
             // Chained operation count > 2
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp = comp.AddSyntaxTrees(listSyntaxTree)
-                        .AddReferences()
-                        .ReplaceSyntaxTree(t1, t2)
+            Assert.Throws<ArgumentException>(() =>
+                comp = comp.AddSyntaxTrees(listSyntaxTree).AddReferences().ReplaceSyntaxTree(t1, t2)
             );
             comp = comp.AddSyntaxTrees(t1).AddReferences().ReplaceSyntaxTree(t1, t2);
 
@@ -1746,11 +1737,11 @@ var a = new C2();
         [Fact]
         public void NegCreateCompilation()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => CSharpCompilation.Create("goo", syntaxTrees: new SyntaxTree[] { null })
+            Assert.Throws<ArgumentNullException>(() =>
+                CSharpCompilation.Create("goo", syntaxTrees: new SyntaxTree[] { null })
             );
-            Assert.Throws<ArgumentNullException>(
-                () => CSharpCompilation.Create("goo", references: new MetadataReference[] { null })
+            Assert.Throws<ArgumentNullException>(() =>
+                CSharpCompilation.Create("goo", references: new MetadataReference[] { null })
             );
         }
 
@@ -1843,12 +1834,11 @@ var a = new C2();
             Assert.Equal(1, comp.ExternalReferences.Length);
             Assert.Equal(MetadataImageKind.Assembly, comp.ExternalReferences[0].Properties.Kind);
             Assert.Equal(ref2, comp.ExternalReferences[0]);
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.AddReferences(listRef)
-                        .AddReferences(ref2)
-                        .RemoveReferences(ref1, ref2, ref3, ref4)
-                        .ReplaceReference(ref2, ref2)
+            Assert.Throws<ArgumentException>(() =>
+                comp.AddReferences(listRef)
+                    .AddReferences(ref2)
+                    .RemoveReferences(ref1, ref2, ref3, ref4)
+                    .ReplaceReference(ref2, ref2)
             );
         }
 
@@ -1914,12 +1904,11 @@ var a = new C2();
                 }
             );
             Assert.Equal(0, comp.SyntaxTrees.Length);
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.ReplaceSyntaxTree(
-                        newTree: SyntaxFactory.ParseSyntaxTree("Using System;"),
-                        oldTree: t1
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.ReplaceSyntaxTree(
+                    newTree: SyntaxFactory.ParseSyntaxTree("Using System;"),
+                    oldTree: t1
+                )
             );
             Assert.Equal(0, comp.SyntaxTrees.Length);
         }
@@ -3076,117 +3065,105 @@ public class C { public static FrameworkName Goo() { return null; }}";
             var ptr = typeof(int).MakePointerType();
             var byref = typeof(int).MakeByRefType();
 
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", returnType: genericParameter)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", returnType: genericParameter)
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", returnType: open)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", returnType: open)
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", returnType: typeof(void))
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", returnType: typeof(void))
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", returnType: byref)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", returnType: byref)
             );
 
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", globalsType: genericParameter)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", globalsType: genericParameter)
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", globalsType: open)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", globalsType: open)
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", globalsType: typeof(void))
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", globalsType: typeof(void))
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", globalsType: typeof(int))
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", globalsType: typeof(int))
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", globalsType: ptr)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", globalsType: ptr)
             );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("a", globalsType: byref)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", globalsType: byref)
             );
 
             var s0 = CSharpCompilation.CreateScriptCompilation(
                 "a0",
                 globalsType: typeof(List<int>)
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a1",
-                        previousScriptCompilation: s0,
-                        globalsType: typeof(List<bool>)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a1",
+                    previousScriptCompilation: s0,
+                    globalsType: typeof(List<bool>)
+                )
             );
 
             // invalid options:
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation("a", options: TestOptions.ReleaseExe)
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("a", options: TestOptions.ReleaseExe)
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.NetModule)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.NetModule)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsRuntimeMetadata
-                        )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithOutputKind(
+                        OutputKind.WindowsRuntimeMetadata
                     )
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsRuntimeApplication
-                        )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithOutputKind(
+                        OutputKind.WindowsRuntimeApplication
                     )
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsApplication
-                        )
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.WindowsApplication)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithCryptoKeyContainer("goo")
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithCryptoKeyContainer("goo")
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithCryptoKeyFile("goo.snk")
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithCryptoKeyFile("goo.snk")
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithDelaySign(true)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithDelaySign(true)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation.CreateScriptCompilation(
-                        "a",
-                        options: TestOptions.ReleaseDll.WithDelaySign(false)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation(
+                    "a",
+                    options: TestOptions.ReleaseDll.WithDelaySign(false)
+                )
             );
         }
 
@@ -3258,8 +3235,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 arrayType.ElementType.NullableAnnotation
             );
 
-            Assert.Throws<ArgumentException>(
-                () => comp.CreateArrayTypeSymbol(elementType, default)
+            Assert.Throws<ArgumentException>(() => comp.CreateArrayTypeSymbol(elementType, default)
             );
             Assert.Throws<ArgumentException>(() => comp.CreateArrayTypeSymbol(elementType, 0));
 
@@ -3271,11 +3247,10 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 arrayType.ElementType.NullableAnnotation
             );
 
-            Assert.Throws<ArgumentException>(
-                () => comp.CreateArrayTypeSymbol(elementType, rank: default)
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateArrayTypeSymbol(elementType, rank: default)
             );
-            Assert.Throws<ArgumentException>(
-                () => comp.CreateArrayTypeSymbol(elementType, rank: 0)
+            Assert.Throws<ArgumentException>(() => comp.CreateArrayTypeSymbol(elementType, rank: 0)
             );
 
             arrayType = comp.CreateArrayTypeSymbol(elementType, elementNullableAnnotation: default);
@@ -3364,12 +3339,11 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_IncorrectLengths()
         {
             var compilation = CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create((ITypeSymbol)null),
-                        ImmutableArray.Create("m1", "m2")
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create((ITypeSymbol)null),
+                    ImmutableArray.Create("m1", "m2")
+                )
             );
         }
 
@@ -3377,16 +3351,15 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_IncorrectLengths_IsReadOnly()
         {
             var compilation = (Compilation)CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create(
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
-                        ),
-                        ImmutableArray.Create("m1", "m2"),
-                        ImmutableArray.Create(true)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create(
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
+                    ),
+                    ImmutableArray.Create("m1", "m2"),
+                    ImmutableArray.Create(true)
+                )
             );
         }
 
@@ -3394,16 +3367,15 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_IncorrectLengths_Locations()
         {
             var compilation = (Compilation)CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create(
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
-                        ),
-                        ImmutableArray.Create("m1", "m2"),
-                        memberLocations: ImmutableArray.Create(Location.None)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create(
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
+                    ),
+                    ImmutableArray.Create("m1", "m2"),
+                    memberLocations: ImmutableArray.Create(Location.None)
+                )
             );
         }
 
@@ -3411,16 +3383,15 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_WritableProperty()
         {
             var compilation = (Compilation)CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create(
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
-                        ),
-                        ImmutableArray.Create("m1", "m2"),
-                        ImmutableArray.Create(false, false)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create(
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
+                    ),
+                    ImmutableArray.Create("m1", "m2"),
+                    ImmutableArray.Create(false, false)
+                )
             );
         }
 
@@ -3428,16 +3399,15 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_NullLocations()
         {
             var compilation = (Compilation)CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create(
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
-                        ),
-                        ImmutableArray.Create("m1", "m2"),
-                        memberLocations: ImmutableArray.Create(Location.None, null)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create(
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32),
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
+                    ),
+                    ImmutableArray.Create("m1", "m2"),
+                    memberLocations: ImmutableArray.Create(Location.None, null)
+                )
             );
         }
 
@@ -3445,12 +3415,11 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_NullArgument1()
         {
             var compilation = CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        default(ImmutableArray<ITypeSymbol>),
-                        ImmutableArray.Create("m1")
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    default(ImmutableArray<ITypeSymbol>),
+                    ImmutableArray.Create("m1")
+                )
             );
         }
 
@@ -3458,12 +3427,11 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_NullArgument2()
         {
             var compilation = CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create((ITypeSymbol)null),
-                        default(ImmutableArray<string>)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create((ITypeSymbol)null),
+                    default(ImmutableArray<string>)
+                )
             );
         }
 
@@ -3471,12 +3439,11 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_NullArgument3()
         {
             var compilation = CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create((ITypeSymbol)null),
-                        ImmutableArray.Create("m1")
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create((ITypeSymbol)null),
+                    ImmutableArray.Create("m1")
+                )
             );
         }
 
@@ -3484,14 +3451,13 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void CreateAnonymousType_NullArgument4()
         {
             var compilation = (Compilation)CSharpCompilation.Create("HelloWorld");
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    compilation.CreateAnonymousTypeSymbol(
-                        ImmutableArray.Create(
-                            (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
-                        ),
-                        ImmutableArray.Create((string)null)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                compilation.CreateAnonymousTypeSymbol(
+                    ImmutableArray.Create(
+                        (ITypeSymbol)compilation.GetSpecialType(SpecialType.System_Int32)
+                    ),
+                    ImmutableArray.Create((string)null)
+                )
             );
         }
 
@@ -3681,15 +3647,14 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 GetAnonymousTypeNullableAnnotations(type)
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateAnonymousTypeSymbol(
-                        memberTypes,
-                        memberNames,
-                        memberNullableAnnotations: ImmutableArray.Create(
-                            CodeAnalysis.NullableAnnotation.NotAnnotated
-                        )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateAnonymousTypeSymbol(
+                    memberTypes,
+                    memberNames,
+                    memberNullableAnnotations: ImmutableArray.Create(
+                        CodeAnalysis.NullableAnnotation.NotAnnotated
                     )
+                )
             );
 
             type = comp.CreateAnonymousTypeSymbol(
@@ -3800,14 +3765,13 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 "Int32",
                 arity: 0
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.AdditionOperatorName,
-                        fakeIntType,
-                        fakeIntType,
-                        fakeIntType
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.AdditionOperatorName,
+                    fakeIntType,
+                    fakeIntType,
+                    fakeIntType
+                )
             );
         }
 
@@ -4314,19 +4278,17 @@ class C
                 comp.GetSpecialType(SpecialType.System_String)
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericType.Construct(
-                        default(ImmutableArray<ITypeSymbol>),
-                        default(ImmutableArray<CodeAnalysis.NullableAnnotation>)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                genericType.Construct(
+                    default(ImmutableArray<ITypeSymbol>),
+                    default(ImmutableArray<CodeAnalysis.NullableAnnotation>)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericType.Construct(
-                        typeArguments: default,
-                        typeArgumentNullableAnnotations: default
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                genericType.Construct(
+                    typeArguments: default,
+                    typeArgumentNullableAnnotations: default
+                )
             );
 
             var type = genericType.Construct(typeArguments, default);
@@ -4351,15 +4313,14 @@ class C
                 type.TypeArgumentNullableAnnotations()
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericType.Construct(
-                        typeArguments,
-                        ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                genericType.Construct(
+                    typeArguments,
+                    ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () => genericType.Construct(ImmutableArray.Create<ITypeSymbol>(null, null), default)
+            Assert.Throws<ArgumentException>(() =>
+                genericType.Construct(ImmutableArray.Create<ITypeSymbol>(null, null), default)
             );
 
             type = genericType.Construct(
@@ -4415,19 +4376,17 @@ class C
                 comp.GetSpecialType(SpecialType.System_String)
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericMethod.Construct(
-                        default(ImmutableArray<ITypeSymbol>),
-                        default(ImmutableArray<CodeAnalysis.NullableAnnotation>)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                genericMethod.Construct(
+                    default(ImmutableArray<ITypeSymbol>),
+                    default(ImmutableArray<CodeAnalysis.NullableAnnotation>)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericMethod.Construct(
-                        typeArguments: default,
-                        typeArgumentNullableAnnotations: default
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                genericMethod.Construct(
+                    typeArguments: default,
+                    typeArgumentNullableAnnotations: default
+                )
             );
 
             var type = genericMethod.Construct(typeArguments, default);
@@ -4452,16 +4411,14 @@ class C
                 type.TypeArgumentNullableAnnotations()
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericMethod.Construct(
-                        typeArguments,
-                        ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                genericMethod.Construct(
+                    typeArguments,
+                    ImmutableArray<CodeAnalysis.NullableAnnotation>.Empty
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    genericMethod.Construct(ImmutableArray.Create<ITypeSymbol>(null, null), default)
+            Assert.Throws<ArgumentException>(() =>
+                genericMethod.Construct(ImmutableArray.Create<ITypeSymbol>(null, null), default)
             );
 
             type = genericMethod.Construct(

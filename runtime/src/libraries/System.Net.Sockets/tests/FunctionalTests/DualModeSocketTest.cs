@@ -584,13 +584,8 @@ namespace System.Net.Sockets.Tests
             using (Socket socket = new Socket(SocketType.Stream, ProtocolType.Tcp))
             {
                 socket.DualMode = false;
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        socket.BeginConnect(
-                            new IPEndPoint(IPAddress.Loopback, UnusedPort),
-                            null,
-                            null
-                        )
+                Assert.Throws<NotSupportedException>(() =>
+                    socket.BeginConnect(new IPEndPoint(IPAddress.Loopback, UnusedPort), null, null)
                 );
             }
         }
@@ -1165,13 +1160,12 @@ namespace System.Net.Sockets.Tests
         {
             using Socket socket = new Socket(SocketType.Dgram, ProtocolType.Udp);
             socket.DualMode = false;
-            await Assert.ThrowsAsync<SocketException>(
-                () =>
-                    SendToAsync(
-                        socket,
-                        new byte[1],
-                        new IPEndPoint(IPAddress.Loopback, DualModeBase.UnusedPort)
-                    )
+            await Assert.ThrowsAsync<SocketException>(() =>
+                SendToAsync(
+                    socket,
+                    new byte[1],
+                    new IPEndPoint(IPAddress.Loopback, DualModeBase.UnusedPort)
+                )
             );
         }
 
@@ -1275,8 +1269,8 @@ namespace System.Net.Sockets.Tests
 
             _ = SendToAsync(client, new byte[1], new IPEndPoint(connectTo, port))
                 .WaitAsync(TestSettings.PassingTestTimeout);
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => server.ReceiveAsync(new byte[1]).WaitAsync(TestSettings.FailingTestTimeout)
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                server.ReceiveAsync(new byte[1]).WaitAsync(TestSettings.FailingTestTimeout)
             );
         }
     }
@@ -1333,8 +1327,8 @@ namespace System.Net.Sockets.Tests
             socket.DualMode = false;
 
             EndPoint receivedFrom = new IPEndPoint(IPAddress.Loopback, DualModeBase.UnusedPort);
-            await Assert.ThrowsAsync<ArgumentException>(
-                () => ReceiveFromAsync(socket, new byte[1], receivedFrom)
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                ReceiveFromAsync(socket, new byte[1], receivedFrom)
             );
         }
 
@@ -1350,8 +1344,8 @@ namespace System.Net.Sockets.Tests
                 port,
                 AddressFamily.InterNetworkV6
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                () => ReceiveFromAsync(socket, new byte[1], receivedFrom)
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                ReceiveFromAsync(socket, new byte[1], receivedFrom)
             );
         }
 
@@ -1428,10 +1422,9 @@ namespace System.Net.Sockets.Tests
             _ = client
                 .SendToAsync(new byte[1], new IPEndPoint(connectTo, port))
                 .WaitAsync(TestSettings.PassingTestTimeout);
-            await Assert.ThrowsAsync<TimeoutException>(
-                () =>
-                    ReceiveFromAsync(serverSocket, new byte[1], new IPEndPoint(connectTo, port))
-                        .WaitAsync(TestSettings.FailingTestTimeout)
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                ReceiveFromAsync(serverSocket, new byte[1], new IPEndPoint(connectTo, port))
+                    .WaitAsync(TestSettings.FailingTestTimeout)
             );
         }
     }
@@ -1495,16 +1488,15 @@ namespace System.Net.Sockets.Tests
                 byte[] buf = new byte[1];
                 SocketFlags flags = SocketFlags.None;
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () =>
-                        sock.ReceiveMessageFrom(
-                            buf,
-                            0,
-                            buf.Length,
-                            ref flags,
-                            ref ep,
-                            out IPPacketInformation packetInfo
-                        )
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    sock.ReceiveMessageFrom(
+                        buf,
+                        0,
+                        buf.Length,
+                        ref flags,
+                        ref ep,
+                        out IPPacketInformation packetInfo
+                    )
                 );
             }
         }
@@ -1525,8 +1517,8 @@ namespace System.Net.Sockets.Tests
                 args.SetBuffer(buf, 0, buf.Length);
                 args.RemoteEndPoint = ep;
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => sock.ReceiveMessageFromAsync(args)
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    sock.ReceiveMessageFromAsync(args)
                 );
             }
         }
@@ -2388,17 +2380,16 @@ namespace System.Net.Sockets.Tests
 
                 byte[] buf = new byte[1];
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () =>
-                        sock.BeginReceiveMessageFrom(
-                            buf,
-                            0,
-                            buf.Length,
-                            SocketFlags.None,
-                            ref ep,
-                            null,
-                            null
-                        )
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    sock.BeginReceiveMessageFrom(
+                        buf,
+                        0,
+                        buf.Length,
+                        SocketFlags.None,
+                        ref ep,
+                        null,
+                        null
+                    )
                 );
             }
         }

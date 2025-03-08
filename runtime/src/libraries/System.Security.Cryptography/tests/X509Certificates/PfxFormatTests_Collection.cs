@@ -90,8 +90,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection coll = new X509Certificate2Collection();
 
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => coll.Import(pfxBytes, wrongPassword, s_importFlags)
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                coll.Import(pfxBytes, wrongPassword, s_importFlags)
             );
 
             AssertMessageContains("password", ex);
@@ -108,8 +108,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection coll = new X509Certificate2Collection();
 
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => coll.Import(pfxBytes, bestPassword, importFlags)
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                coll.Import(pfxBytes, bestPassword, importFlags)
             );
 
             if (OperatingSystem.IsWindows())

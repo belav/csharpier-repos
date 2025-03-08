@@ -133,8 +133,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var storage = service.CreateTemporaryStreamStorage();
 
             // Nothing has been written yet
-            Assert.Throws<InvalidOperationException>(
-                () => storage.ReadStream(CancellationToken.None)
+            Assert.Throws<InvalidOperationException>(() =>
+                storage.ReadStream(CancellationToken.None)
             );
             Assert.Throws<AggregateException>(() => storage.ReadStreamAsync().Result);
 

@@ -115,8 +115,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         PfxInfo pfxInfo = s_certificatesDictionary[certName];
 
-                        CryptographicException ce = Assert.Throws<CryptographicException>(
-                            () => Import(pfxInfo.Blob)
+                        CryptographicException ce = Assert.Throws<CryptographicException>(() =>
+                            Import(pfxInfo.Blob)
                         );
                         Assert.Contains(PfxIterationCountTests.FwlinkId, ce.Message);
                     },
@@ -168,8 +168,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         PfxInfo pfxInfo = s_certificatesDictionary[certName];
 
-                        CryptographicException ce = Assert.Throws<CryptographicException>(
-                            () => Import(pfxInfo.Blob)
+                        CryptographicException ce = Assert.Throws<CryptographicException>(() =>
+                            Import(pfxInfo.Blob)
                         );
                         Assert.Contains(PfxIterationCountTests.FwlinkId, ce.Message);
                     },

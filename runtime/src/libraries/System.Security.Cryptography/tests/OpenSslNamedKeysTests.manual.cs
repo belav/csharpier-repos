@@ -70,11 +70,11 @@ namespace System.Security.Cryptography.Tests
         )]
         public static void NotSupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => SafeEvpPKeyHandle.OpenPublicKeyFromEngine(TestEngineName, TestEngineKeyId)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                SafeEvpPKeyHandle.OpenPublicKeyFromEngine(TestEngineName, TestEngineKeyId)
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(TestEngineName, TestEngineKeyId)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(TestEngineName, TestEngineKeyId)
             );
         }
 
@@ -109,19 +109,11 @@ namespace System.Security.Cryptography.Tests
         )]
         public static void NonExistingEngine()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(
-                        NonExistingEngineName,
-                        TestEngineKeyId
-                    )
+            Assert.ThrowsAny<CryptographicException>(() =>
+                SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(NonExistingEngineName, TestEngineKeyId)
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    SafeEvpPKeyHandle.OpenPublicKeyFromEngine(
-                        NonExistingEngineName,
-                        TestEngineKeyId
-                    )
+            Assert.ThrowsAny<CryptographicException>(() =>
+                SafeEvpPKeyHandle.OpenPublicKeyFromEngine(NonExistingEngineName, TestEngineKeyId)
             );
         }
 
@@ -131,19 +123,11 @@ namespace System.Security.Cryptography.Tests
         )]
         public static void NonExistingKey()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(
-                        TestEngineName,
-                        NonExistingEngineKeyName
-                    )
+            Assert.ThrowsAny<CryptographicException>(() =>
+                SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(TestEngineName, NonExistingEngineKeyName)
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    SafeEvpPKeyHandle.OpenPublicKeyFromEngine(
-                        TestEngineName,
-                        NonExistingEngineKeyName
-                    )
+            Assert.ThrowsAny<CryptographicException>(() =>
+                SafeEvpPKeyHandle.OpenPublicKeyFromEngine(TestEngineName, NonExistingEngineKeyName)
             );
         }
 
@@ -180,8 +164,8 @@ namespace System.Security.Cryptography.Tests
                 TestEngineKeyId
             );
             using RSA pubKey = new RSAOpenSsl(pubKeyHandle);
-            Assert.ThrowsAny<CryptographicException>(
-                () => pubKey.ExportParameters(includePrivateParameters: true)
+            Assert.ThrowsAny<CryptographicException>(() =>
+                pubKey.ExportParameters(includePrivateParameters: true)
             );
             RSAParameters rsaParams = pubKey.ExportParameters(includePrivateParameters: false);
             Assert.Null(rsaParams.D);

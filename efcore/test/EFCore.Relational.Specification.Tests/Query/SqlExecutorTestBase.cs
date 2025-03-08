@@ -80,11 +80,10 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
 
         using var synchronizationEvent = new ManualResetEventSlim(false);
         using var blockingSemaphore = new SemaphoreSlim(0);
-        var blockingTask = Task.Run(
-            () =>
-                context
-                    .Customers.Select(c => Process(c, synchronizationEvent, blockingSemaphore))
-                    .ToList()
+        var blockingTask = Task.Run(() =>
+            context
+                .Customers.Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                .ToList()
         );
 
         if (async)
@@ -95,9 +94,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(
                     CoreStrings.ConcurrentMethodInvocation,
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            () =>
-                                context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers""")
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers""")
                         )
                     ).Message
                 );
@@ -113,8 +111,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(
                     CoreStrings.ConcurrentMethodInvocation,
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers""")
+                        .Throws<InvalidOperationException>(() =>
+                            context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers""")
                         )
                         .Message
                 );

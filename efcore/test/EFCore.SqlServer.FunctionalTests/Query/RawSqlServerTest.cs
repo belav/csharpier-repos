@@ -40,10 +40,8 @@ SELECT o.Amount From Orders AS o -- RAW
             modelBuilder
                 .Entity<OrderSummary13346>()
                 .HasNoKey()
-                .ToQuery(
-                    () =>
-                        Set<OrderSummary13346>()
-                            .FromSqlRaw("SELECT o.Amount From Orders AS o -- RAW")
+                .ToQuery(() =>
+                    Set<OrderSummary13346>().FromSqlRaw("SELECT o.Amount From Orders AS o -- RAW")
                 );
 #pragma warning restore CS0618 // Type or member is obsolete
         }

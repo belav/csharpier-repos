@@ -24,9 +24,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PopNewWriter_CustomTag(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
             );
         }
 
@@ -53,9 +52,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushOctetString();
             writer.PopOctetString();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
             );
         }
 
@@ -80,9 +78,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.PushOctetString();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
             );
         }
 

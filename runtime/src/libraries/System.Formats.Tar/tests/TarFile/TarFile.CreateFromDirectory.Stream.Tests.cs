@@ -12,21 +12,19 @@ namespace System.Formats.Tar.Tests
         public void InvalidPath_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TarFile.CreateFromDirectory(
-                        sourceDirectoryName: null,
-                        destination: archive,
-                        includeBaseDirectory: false
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: null,
+                    destination: archive,
+                    includeBaseDirectory: false
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    TarFile.CreateFromDirectory(
-                        sourceDirectoryName: string.Empty,
-                        destination: archive,
-                        includeBaseDirectory: false
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: string.Empty,
+                    destination: archive,
+                    includeBaseDirectory: false
+                )
             );
         }
 
@@ -34,13 +32,12 @@ namespace System.Formats.Tar.Tests
         public void NullStream_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TarFile.CreateFromDirectory(
-                        sourceDirectoryName: "path",
-                        destination: null,
-                        includeBaseDirectory: false
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: "path",
+                    destination: null,
+                    includeBaseDirectory: false
+                )
             );
         }
 
@@ -54,13 +51,12 @@ namespace System.Formats.Tar.Tests
                 canWrite: false,
                 canSeek: true
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    TarFile.CreateFromDirectory(
-                        sourceDirectoryName: "path",
-                        destination: unwritable,
-                        includeBaseDirectory: false
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: "path",
+                    destination: unwritable,
+                    includeBaseDirectory: false
+                )
             );
         }
 
@@ -71,13 +67,12 @@ namespace System.Formats.Tar.Tests
             string dirPath = Path.Join(root.Path, "dir");
 
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                    TarFile.CreateFromDirectory(
-                        sourceDirectoryName: dirPath,
-                        destination: archive,
-                        includeBaseDirectory: false
-                    )
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: dirPath,
+                    destination: archive,
+                    includeBaseDirectory: false
+                )
             );
         }
     }

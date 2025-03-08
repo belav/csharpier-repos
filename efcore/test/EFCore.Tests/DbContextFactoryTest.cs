@@ -920,8 +920,8 @@ public class DbContextFactoryTest
             && contextLifetime == ServiceLifetime.Singleton
         )
         {
-            Assert.Throws<InvalidOperationException>(
-                () => scope.ServiceProvider.GetRequiredService<WoolacombeContext>()
+            Assert.Throws<InvalidOperationException>(() =>
+                scope.ServiceProvider.GetRequiredService<WoolacombeContext>()
             );
         }
         else
@@ -1177,8 +1177,8 @@ public class DbContextFactoryTest
             )
         )
         {
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<WoolacombeContext>()
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<WoolacombeContext>()
             );
         }
         else
@@ -1188,8 +1188,8 @@ public class DbContextFactoryTest
 
         if (validateScopes && factoryLifetime == ServiceLifetime.Scoped)
         {
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
             );
         }
         else
@@ -1448,8 +1448,8 @@ public class DbContextFactoryTest
             && effectiveOptionsLifetime == ServiceLifetime.Scoped
         )
         {
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
             );
         }
         else
@@ -1707,8 +1707,8 @@ public class DbContextFactoryTest
             )
         )
         {
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<WoolacombeContext>()
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<WoolacombeContext>()
             );
         }
         else
@@ -1724,8 +1724,8 @@ public class DbContextFactoryTest
             )
         )
         {
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
             );
         }
         else

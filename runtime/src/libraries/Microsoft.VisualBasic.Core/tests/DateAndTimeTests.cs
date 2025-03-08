@@ -30,8 +30,8 @@ namespace Microsoft.VisualBasic.Tests
             DateTime dateValue
         )
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => DateAndTime.DateAdd(interval, number, dateValue)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                DateAndTime.DateAdd(interval, number, dateValue)
             );
         }
 
@@ -411,8 +411,8 @@ namespace Microsoft.VisualBasic.Tests
             object dateValue
         )
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => DateAndTime.DateAdd(interval, number, dateValue)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                DateAndTime.DateAdd(interval, number, dateValue)
             );
         }
 
@@ -809,11 +809,11 @@ namespace Microsoft.VisualBasic.Tests
                 Assert.Equal("December", DateAndTime.MonthName(12, Abbreviate: false));
                 Assert.Equal("Dec", DateAndTime.MonthName(12, Abbreviate: true));
 
-                Assert.Throws<ArgumentException>(
-                    () => DateAndTime.MonthName(int.MaxValue, Abbreviate: false)
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.MonthName(int.MaxValue, Abbreviate: false)
                 );
-                Assert.Throws<ArgumentException>(
-                    () => DateAndTime.MonthName(int.MaxValue, Abbreviate: true)
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.MonthName(int.MaxValue, Abbreviate: true)
                 );
             }
             finally
@@ -862,11 +862,9 @@ namespace Microsoft.VisualBasic.Tests
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-                Assert.Throws<ArgumentException>(
-                    () => DateAndTime.WeekdayName(0, Abbreviate: false)
+                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: false)
                 );
-                Assert.Throws<ArgumentException>(
-                    () => DateAndTime.WeekdayName(0, Abbreviate: true)
+                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: true)
                 );
 
                 Assert.Equal("Sunday", DateAndTime.WeekdayName(1, Abbreviate: false));
@@ -875,11 +873,11 @@ namespace Microsoft.VisualBasic.Tests
                 Assert.Equal("Saturday", DateAndTime.WeekdayName(7, Abbreviate: false));
                 Assert.Equal("Sat", DateAndTime.WeekdayName(7, Abbreviate: true));
 
-                Assert.Throws<ArgumentException>(
-                    () => DateAndTime.WeekdayName(int.MaxValue, Abbreviate: false)
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.WeekdayName(int.MaxValue, Abbreviate: false)
                 );
-                Assert.Throws<ArgumentException>(
-                    () => DateAndTime.WeekdayName(int.MaxValue, Abbreviate: true)
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.WeekdayName(int.MaxValue, Abbreviate: true)
                 );
             }
             finally

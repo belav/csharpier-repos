@@ -121,11 +121,11 @@ namespace System.Globalization.Tests
         public void TestInvalidCultureNames(string name)
         {
             Assert.Throws<CultureNotFoundException>(() => CultureInfo.GetCultureInfo(name));
-            Assert.Throws<CultureNotFoundException>(
-                () => CultureInfo.GetCultureInfo(name, predefinedOnly: false)
+            Assert.Throws<CultureNotFoundException>(() =>
+                CultureInfo.GetCultureInfo(name, predefinedOnly: false)
             );
-            Assert.Throws<CultureNotFoundException>(
-                () => CultureInfo.GetCultureInfo(name, predefinedOnly: true)
+            Assert.Throws<CultureNotFoundException>(() =>
+                CultureInfo.GetCultureInfo(name, predefinedOnly: true)
             );
         }
 
@@ -149,8 +149,8 @@ namespace System.Globalization.Tests
         {
             Assert.Equal(name, CultureInfo.GetCultureInfo(name).Name);
             Assert.Equal(name, CultureInfo.GetCultureInfo(name, predefinedOnly: false).Name);
-            Assert.Throws<CultureNotFoundException>(
-                () => CultureInfo.GetCultureInfo(name, predefinedOnly: true)
+            Assert.Throws<CultureNotFoundException>(() =>
+                CultureInfo.GetCultureInfo(name, predefinedOnly: true)
             );
         }
 
@@ -179,8 +179,8 @@ namespace System.Globalization.Tests
                     {
                         if (predefined == "1")
                         {
-                            AssertExtensions.Throws<CultureNotFoundException>(
-                                () => new CultureInfo(culture)
+                            AssertExtensions.Throws<CultureNotFoundException>(() =>
+                                new CultureInfo(culture)
                             );
                         }
                         else
@@ -250,23 +250,23 @@ namespace System.Globalization.Tests
 
                             // Throwing exception is testing accessing the resources in this restricted mode.
                             // We should retrieve the resources from the neutral resources in the main assemblies.
-                            AssertExtensions.Throws<CultureNotFoundException>(
-                                () => new CultureInfo("en-US")
+                            AssertExtensions.Throws<CultureNotFoundException>(() =>
+                                new CultureInfo("en-US")
                             );
-                            AssertExtensions.Throws<CultureNotFoundException>(
-                                () => new CultureInfo("en")
+                            AssertExtensions.Throws<CultureNotFoundException>(() =>
+                                new CultureInfo("en")
                             );
 
-                            AssertExtensions.Throws<CultureNotFoundException>(
-                                () => new CultureInfo("ja-JP")
+                            AssertExtensions.Throws<CultureNotFoundException>(() =>
+                                new CultureInfo("ja-JP")
                             );
-                            AssertExtensions.Throws<CultureNotFoundException>(
-                                () => new CultureInfo("es")
+                            AssertExtensions.Throws<CultureNotFoundException>(() =>
+                                new CultureInfo("es")
                             );
 
                             // Test throwing exceptions from non-core assemblies.
-                            Exception exception = Record.Exception(
-                                () => new ConcurrentBag<string>(null)
+                            Exception exception = Record.Exception(() =>
+                                new ConcurrentBag<string>(null)
                             );
                             Assert.NotNull(exception);
                             Assert.IsType<ArgumentNullException>(exception);

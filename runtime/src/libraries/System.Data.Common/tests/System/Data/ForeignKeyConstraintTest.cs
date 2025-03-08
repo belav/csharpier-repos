@@ -239,8 +239,8 @@ namespace System.Data.Tests
             constraints[1] = new UniqueConstraint(column2);
             constraints[2] = foreignKeyConstraint;
 
-            Exception ex2 = Assert.ThrowsAny<Exception>(
-                () => table2.Constraints.AddRange(constraints)
+            Exception ex2 = Assert.ThrowsAny<Exception>(() =>
+                table2.Constraints.AddRange(constraints)
             );
             Assert.True(ex2 is ArgumentException || ex2 is InvalidConstraintException);
         }

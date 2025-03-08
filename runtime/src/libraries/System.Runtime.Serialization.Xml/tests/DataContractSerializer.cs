@@ -4401,8 +4401,8 @@ public static partial class DataContractSerializerTests
 
         var value2 = new TypeWithSerializableEnum();
         value2.EnumField = SerializableEnumWithNonSerializedValue.Two;
-        Assert.Throws<SerializationException>(
-            () => DataContractSerializerHelper.SerializeAndDeserialize(value2, "")
+        Assert.Throws<SerializationException>(() =>
+            DataContractSerializerHelper.SerializeAndDeserialize(value2, "")
         );
     }
 
@@ -7267,12 +7267,11 @@ public static partial class DataContractSerializerTests
         static void DeserializeObjectAndThrow(string input)
         {
             // Might be ArgumentException, InvalidOperationException, etc. Honestly it doesn't matter.
-            Assert.ThrowsAny<Exception>(
-                () =>
-                    (MemoryStream)
-                        new DataContractSerializer(typeof(MemoryStream)).ReadObject(
-                            new XmlTextReader(new StringReader(input))
-                        )
+            Assert.ThrowsAny<Exception>(() =>
+                (MemoryStream)
+                    new DataContractSerializer(typeof(MemoryStream)).ReadObject(
+                        new XmlTextReader(new StringReader(input))
+                    )
             );
         }
     }

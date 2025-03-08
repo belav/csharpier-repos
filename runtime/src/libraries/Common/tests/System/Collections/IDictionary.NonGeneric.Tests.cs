@@ -324,8 +324,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = NonGenericIDictionaryFactory(count);
                 object missingKey = GetNewKey(dictionary);
-                Assert.Throws<NotSupportedException>(
-                    () => dictionary[missingKey] = CreateTValue(5312)
+                Assert.Throws<NotSupportedException>(() =>
+                    dictionary[missingKey] = CreateTValue(5312)
                 );
             }
         }
@@ -559,8 +559,8 @@ namespace System.Collections.Tests
             if (IsReadOnly)
             {
                 IDictionary dictionary = NonGenericIDictionaryFactory(count);
-                Assert.Throws<NotSupportedException>(
-                    () => dictionary.Add(CreateTKey(0), CreateTValue(0))
+                Assert.Throws<NotSupportedException>(() =>
+                    dictionary.Add(CreateTKey(0), CreateTValue(0))
                 );
             }
         }
@@ -642,8 +642,7 @@ namespace System.Collections.Tests
                 IDictionary dictionary = NonGenericIDictionaryFactory(count);
                 object missingKey = GetNewKey(dictionary);
                 dictionary.Add(missingKey, CreateTValue(34251));
-                Assert.Throws<ArgumentException>(
-                    () => dictionary.Add(missingKey, CreateTValue(134))
+                Assert.Throws<ArgumentException>(() => dictionary.Add(missingKey, CreateTValue(134))
                 );
             }
         }

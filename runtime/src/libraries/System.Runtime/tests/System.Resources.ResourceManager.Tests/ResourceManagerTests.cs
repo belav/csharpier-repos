@@ -529,8 +529,8 @@ namespace System.Resources.Tests
             if (requiresBinaryFormatter)
             {
                 Assert.Throws<NotSupportedException>(() => manager.GetObject(key));
-                Assert.Throws<NotSupportedException>(
-                    () => manager.GetObject(key, new CultureInfo("en-US"))
+                Assert.Throws<NotSupportedException>(() =>
+                    manager.GetObject(key, new CultureInfo("en-US"))
                 );
             }
             else

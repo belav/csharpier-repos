@@ -1161,8 +1161,7 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.False(property.ShouldSerialize(null, null));
                         Assert.False(property.ShouldSerialize(null, ""));
                         Assert.False(property.ShouldSerialize(null, "asd"));
-                        Assert.Throws<InvalidCastException>(
-                            () => property.ShouldSerialize(null, 0)
+                        Assert.Throws<InvalidCastException>(() => property.ShouldSerialize(null, 0)
                         );
 
                         Assert.Null(property.Get);
@@ -1173,11 +1172,11 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.False(property.ShouldSerialize(null, 0));
                         Assert.True(property.ShouldSerialize(null, 1));
                         Assert.True(property.ShouldSerialize(null, -1));
-                        Assert.Throws<NullReferenceException>(
-                            () => property.ShouldSerialize(null, null)
+                        Assert.Throws<NullReferenceException>(() =>
+                            property.ShouldSerialize(null, null)
                         );
-                        Assert.Throws<InvalidCastException>(
-                            () => property.ShouldSerialize(null, "string")
+                        Assert.Throws<InvalidCastException>(() =>
+                            property.ShouldSerialize(null, "string")
                         );
                         break;
                     case JsonIgnoreCondition.WhenWritingNull:
@@ -1185,8 +1184,7 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.False(property.ShouldSerialize(null, null));
                         Assert.True(property.ShouldSerialize(null, ""));
                         Assert.True(property.ShouldSerialize(null, "asd"));
-                        Assert.Throws<InvalidCastException>(
-                            () => property.ShouldSerialize(null, 0)
+                        Assert.Throws<InvalidCastException>(() => property.ShouldSerialize(null, 0)
                         );
                         break;
                     case JsonIgnoreCondition.Never:
@@ -1194,8 +1192,7 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.True(property.ShouldSerialize(null, null));
                         Assert.True(property.ShouldSerialize(null, ""));
                         Assert.True(property.ShouldSerialize(null, "asd"));
-                        Assert.Throws<InvalidCastException>(
-                            () => property.ShouldSerialize(null, 0)
+                        Assert.Throws<InvalidCastException>(() => property.ShouldSerialize(null, 0)
                         );
                         break;
                 }
@@ -1567,8 +1564,7 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             var value = new ClassWithTwoExtensionDataLikeProperties();
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(value, options)
+            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(value, options)
             );
             Assert.True(resolverRanToCompletion);
         }
@@ -1928,8 +1924,8 @@ namespace System.Text.Json.Serialization.Tests
             // Regression test for https://github.com/dotnet/runtime/issues/76807
 
             // Sanity check -- metadata resolution for the unsupported type is failing
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializerOptions.Default.GetTypeInfo(typeof(UnsupportedType))
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializerOptions.Default.GetTypeInfo(typeof(UnsupportedType))
             );
 
             // Serialization works as expected
@@ -2038,8 +2034,8 @@ namespace System.Text.Json.Serialization.Tests
                 typeof(List<int>),
                 "List"
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => propertyInfo.ObjectCreationHandling = handling
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                propertyInfo.ObjectCreationHandling = handling
             );
         }
 

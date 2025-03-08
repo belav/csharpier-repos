@@ -49,12 +49,11 @@ namespace System.Web.Http.Routing
                 .Setup(r => r.ResolveConstraint("constraint"))
                 .Returns<IHttpRouteConstraint>(null);
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                    BuildWithResolver(
-                        @"hello/{param:constraint}",
-                        constraintResolver: constraintResolver.Object
-                    )
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                BuildWithResolver(
+                    @"hello/{param:constraint}",
+                    constraintResolver: constraintResolver.Object
+                )
             );
             Assert.Matches(
                 "The inline constraint resolver of type 'IInlineConstraintResolverProxy' was unable to resolve the following inline constraint: 'constraint'.",

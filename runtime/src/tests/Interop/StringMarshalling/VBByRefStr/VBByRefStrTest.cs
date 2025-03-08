@@ -30,11 +30,11 @@ public class Test
 
             StringBuilder builder = new StringBuilder();
 
-            Assert.Throws<MarshalDirectiveException>(
-                () => VBByRefStrNative.Marshal_StringBuilder(ref builder)
+            Assert.Throws<MarshalDirectiveException>(() =>
+                VBByRefStrNative.Marshal_StringBuilder(ref builder)
             );
-            Assert.Throws<MarshalDirectiveException>(
-                () => VBByRefStrNative.Marshal_ByVal(string.Empty)
+            Assert.Throws<MarshalDirectiveException>(() =>
+                VBByRefStrNative.Marshal_ByVal(string.Empty)
             );
         }
         catch (Exception e)

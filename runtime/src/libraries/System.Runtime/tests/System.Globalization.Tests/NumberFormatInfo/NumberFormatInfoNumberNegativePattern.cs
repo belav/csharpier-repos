@@ -48,8 +48,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void NumberNegativePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => NumberFormatInfo.InvariantInfo.NumberNegativePattern = 1
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.NumberNegativePattern = 1
             );
         }
     }

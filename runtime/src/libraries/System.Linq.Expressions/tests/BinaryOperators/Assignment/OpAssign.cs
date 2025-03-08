@@ -577,11 +577,11 @@ namespace System.Linq.Expressions.Tests
             var lhs = Expression.Variable(typeof(int));
             var rhs = Expression.Constant(0);
             Expression<Func<int, int>> identity = x => x;
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.MakeBinary(type, lhs, rhs, false, null, identity)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.MakeBinary(type, lhs, rhs, false, null, identity)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.MakeBinary(type, lhs, rhs, true, null, identity)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.MakeBinary(type, lhs, rhs, true, null, identity)
             );
         }
 
@@ -632,8 +632,8 @@ namespace System.Linq.Expressions.Tests
             var lhs = Expression.Parameter(typeof(int));
             var rhs = Expression.Constant(25);
             MethodInfo meth = GetType().GetMethod(nameof(FiftyNinthBear));
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.MakeBinary(type, lhs, rhs, false, meth, conversion)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.MakeBinary(type, lhs, rhs, false, meth, conversion)
             );
         }
 
@@ -649,8 +649,8 @@ namespace System.Linq.Expressions.Tests
             var lhs = Expression.Parameter(typeof(int));
             var rhs = Expression.Constant(25);
             MethodInfo meth = GetType().GetMethod(nameof(FiftyNinthBear));
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.MakeBinary(type, lhs, rhs, false, meth, conversion)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.MakeBinary(type, lhs, rhs, false, meth, conversion)
             );
         }
 

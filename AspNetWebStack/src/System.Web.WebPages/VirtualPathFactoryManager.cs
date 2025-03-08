@@ -11,8 +11,8 @@ namespace System.Web.WebPages
     public class VirtualPathFactoryManager : IVirtualPathFactory
     {
         private static readonly Lazy<VirtualPathFactoryManager> _instance =
-            new Lazy<VirtualPathFactoryManager>(
-                () => new VirtualPathFactoryManager(new BuildManagerWrapper())
+            new Lazy<VirtualPathFactoryManager>(() =>
+                new VirtualPathFactoryManager(new BuildManagerWrapper())
             );
         private static Func<string, bool> _instancePathExists;
         private readonly LinkedList<IVirtualPathFactory> _virtualPathFactories =

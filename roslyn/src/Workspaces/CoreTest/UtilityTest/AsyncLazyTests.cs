@@ -343,8 +343,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 : new AsyncLazy<object>(asynchronousComputeFunction, synchronousComputeFunction);
 
             var actual = consumerAsync
-                ? await Assert.ThrowsAsync<ArgumentException>(
-                    async () => await lazy.GetValueAsync(CancellationToken.None)
+                ? await Assert.ThrowsAsync<ArgumentException>(async () =>
+                    await lazy.GetValueAsync(CancellationToken.None)
                 )
                 : Assert.Throws<ArgumentException>(() => lazy.GetValue(CancellationToken.None));
 
@@ -460,8 +460,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             // Steps 1 and 2: start asynchronous computation and wait until it's running; this will cancel itself once it's started
-            var asynchronousRequest = Task.Run(
-                () => lazy.GetValueAsync(asynchronousRequestCancellationToken.Token)
+            var asynchronousRequest = Task.Run(() =>
+                lazy.GetValueAsync(asynchronousRequestCancellationToken.Token)
             );
 
             asynchronousComputationReadyToComplete.WaitOne();

@@ -99,8 +99,8 @@ public class OptionsValidationTests
         var validModel = new CustomValidationAttributeModel { Val = "NOT PASS" };
 
         var modelValidator = new CustomValidationAttributeModelValidator();
-        Assert.Throws<ValidationException>(
-            () => modelValidator.Validate(nameof(validModel), validModel)
+        Assert.Throws<ValidationException>(() =>
+            modelValidator.Validate(nameof(validModel), validModel)
         );
     }
 
@@ -262,8 +262,8 @@ public class OptionsValidationTests
         };
 
         var modelValidator = new CustomTypeCustomValidationAttributeModelValidator();
-        Assert.Throws<ValidationException>(
-            () => modelValidator.Validate(nameof(validModel), validModel)
+        Assert.Throws<ValidationException>(() =>
+            modelValidator.Validate(nameof(validModel), validModel)
         );
     }
 

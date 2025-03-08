@@ -121,8 +121,8 @@ public class CriticalHandleArrayTest
     {
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
         MyCriticalHandle[] myCriticalHandleArray;
-        Assert.Throws<MarshalDirectiveException>(
-            () => Native.Out(handleValue, out myCriticalHandleArray)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.Out(handleValue, out myCriticalHandleArray)
         );
     }
 
@@ -154,8 +154,8 @@ public class CriticalHandleArrayTest
         {
             new MyCriticalHandle() { Handle = handleValue1 },
         };
-        Assert.Throws<MarshalDirectiveException>(
-            () => Native.RefModify(handleValue2, ref myCriticalHandleArray)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.RefModify(handleValue2, ref myCriticalHandleArray)
         );
     }
 

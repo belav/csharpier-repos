@@ -50,8 +50,8 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
         //
         // If the caller didn't provide us with the checksum, then we'll compute it on demand.  This happens on the OOP
         // side when we're actually producing the SG doc in the first place.
-        var lazyTextChecksum = new Lazy<Checksum>(
-            () => originalSourceTextChecksum ?? ComputeContentHash(generatedSourceText)
+        var lazyTextChecksum = new Lazy<Checksum>(() =>
+            originalSourceTextChecksum ?? ComputeContentHash(generatedSourceText)
         );
         return Create(
             documentIdentity,

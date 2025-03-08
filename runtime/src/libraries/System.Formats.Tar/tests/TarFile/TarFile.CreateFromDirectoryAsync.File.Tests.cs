@@ -17,51 +17,46 @@ namespace System.Formats.Tar.Tests
         {
             CancellationTokenSource cs = new CancellationTokenSource();
             cs.Cancel();
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    TarFile.CreateFromDirectoryAsync(
-                        "directory",
-                        "file.tar",
-                        includeBaseDirectory: false,
-                        cs.Token
-                    )
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    "directory",
+                    "file.tar",
+                    includeBaseDirectory: false,
+                    cs.Token
+                )
             );
         }
 
         [Fact]
         public async Task InvalidPaths_Throw_Async()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                () =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: null,
-                        destinationFileName: "path",
-                        includeBaseDirectory: false
-                    )
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: null,
+                    destinationFileName: "path",
+                    includeBaseDirectory: false
+                )
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                () =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: string.Empty,
-                        destinationFileName: "path",
-                        includeBaseDirectory: false
-                    )
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: string.Empty,
+                    destinationFileName: "path",
+                    includeBaseDirectory: false
+                )
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                () =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: "path",
-                        destinationFileName: null,
-                        includeBaseDirectory: false
-                    )
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: "path",
+                    destinationFileName: null,
+                    includeBaseDirectory: false
+                )
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                () =>
-                    TarFile.CreateFromDirectoryAsync(
-                        sourceDirectoryName: "path",
-                        destinationFileName: string.Empty,
-                        includeBaseDirectory: false
-                    )
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: "path",
+                    destinationFileName: string.Empty,
+                    includeBaseDirectory: false
+                )
             );
         }
 
@@ -73,13 +68,12 @@ namespace System.Formats.Tar.Tests
                 string dirPath = Path.Join(root.Path, "dir");
                 string filePath = Path.Join(root.Path, "file.tar");
 
-                await Assert.ThrowsAsync<DirectoryNotFoundException>(
-                    () =>
-                        TarFile.CreateFromDirectoryAsync(
-                            sourceDirectoryName: "IDontExist",
-                            destinationFileName: filePath,
-                            includeBaseDirectory: false
-                        )
+                await Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+                    TarFile.CreateFromDirectoryAsync(
+                        sourceDirectoryName: "IDontExist",
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
                 );
             }
         }
@@ -95,13 +89,12 @@ namespace System.Formats.Tar.Tests
                 string filePath = Path.Join(root.Path, "file.tar");
                 File.Create(filePath).Dispose();
 
-                await Assert.ThrowsAsync<IOException>(
-                    () =>
-                        TarFile.CreateFromDirectoryAsync(
-                            sourceDirectoryName: dirPath,
-                            destinationFileName: filePath,
-                            includeBaseDirectory: false
-                        )
+                await Assert.ThrowsAsync<IOException>(() =>
+                    TarFile.CreateFromDirectoryAsync(
+                        sourceDirectoryName: dirPath,
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
                 );
             }
         }

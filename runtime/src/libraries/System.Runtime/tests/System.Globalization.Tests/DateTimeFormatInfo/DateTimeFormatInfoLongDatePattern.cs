@@ -1006,8 +1006,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void LongDatePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => DateTimeFormatInfo.InvariantInfo.LongDatePattern = "dddd, dd MMMM yyyy"
+            Assert.Throws<InvalidOperationException>(() =>
+                DateTimeFormatInfo.InvariantInfo.LongDatePattern = "dddd, dd MMMM yyyy"
             );
         }
     }

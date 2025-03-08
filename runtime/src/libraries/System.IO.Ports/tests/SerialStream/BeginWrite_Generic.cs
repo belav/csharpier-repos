@@ -342,8 +342,8 @@ namespace System.IO.Ports.Tests
                 com1.BaseStream.BeginWrite(new byte[] { (byte)'A' }, 0, 1, null, null);
                 Thread.Sleep(250);
 
-                Assert.Throws<TimeoutException>(
-                    () => Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}")
+                Assert.Throws<TimeoutException>(() =>
+                    Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}")
                 );
 
                 // Setup to ensure write will succeed
@@ -366,8 +366,8 @@ namespace System.IO.Ports.Tests
                 }
 
                 Assert.Equal((byte)'A', com2.ReadByte());
-                Assert.Throws<TimeoutException>(
-                    () => Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}")
+                Assert.Throws<TimeoutException>(() =>
+                    Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}")
                 );
                 Assert.Equal(0, com1.BytesToWrite);
 

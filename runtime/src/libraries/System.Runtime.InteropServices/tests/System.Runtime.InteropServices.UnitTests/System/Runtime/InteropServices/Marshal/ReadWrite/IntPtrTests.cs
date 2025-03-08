@@ -199,11 +199,11 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void ReadIntPtr_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.ReadIntPtr(IntPtr.Zero)
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.ReadIntPtr(IntPtr.Zero)
             );
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.ReadIntPtr(IntPtr.Zero, 2)
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.ReadIntPtr(IntPtr.Zero, 2)
             );
         }
 
@@ -246,11 +246,11 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void WriteIntPtr_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.WriteIntPtr(IntPtr.Zero, (IntPtr)0)
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.WriteIntPtr(IntPtr.Zero, (IntPtr)0)
             );
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.WriteIntPtr(IntPtr.Zero, 2, (IntPtr)0)
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.WriteIntPtr(IntPtr.Zero, 2, (IntPtr)0)
             );
         }
 

@@ -98,30 +98,23 @@ namespace System.Diagnostics.Tests
                                                     "Total Words Typed"
                                                 )
                                         ),
-                                        wordsTypedInInterval = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Words Typed In Interval"
-                                                )
+                                        wordsTypedInInterval = Helpers.RetryOnAllPlatforms(() =>
+                                            new PerformanceCounter(
+                                                "Typing",
+                                                "Words Typed In Interval"
+                                            )
                                         ),
-                                        aKeyPressed = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter("Typing", "Letter A Pressed")
+                                        aKeyPressed = Helpers.RetryOnAllPlatforms(() =>
+                                            new PerformanceCounter("Typing", "Letter A Pressed")
                                         ),
-                                        wordsContainingA = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Words Containing A"
-                                                )
+                                        wordsContainingA = Helpers.RetryOnAllPlatforms(() =>
+                                            new PerformanceCounter("Typing", "Words Containing A")
                                         ),
-                                        percentofWordsContaingA = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Percent of Words Containing A"
-                                                )
+                                        percentofWordsContaingA = Helpers.RetryOnAllPlatforms(() =>
+                                            new PerformanceCounter(
+                                                "Typing",
+                                                "Percent of Words Containing A"
+                                            )
                                         )
                                 )
                                 {
@@ -201,8 +194,8 @@ namespace System.Diagnostics.Tests
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => typingCounterSet.CreateCounterSetInstance("Typing Instance")
+                Assert.Throws<InvalidOperationException>(() =>
+                    typingCounterSet.CreateCounterSetInstance("Typing Instance")
                 );
             }
         }
@@ -381,8 +374,8 @@ namespace System.Diagnostics.Tests
             )
             {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
-                Assert.Throws<ArgumentException>(
-                    () => typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base")
+                Assert.Throws<ArgumentException>(() =>
+                    typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base")
                 );
             }
         }

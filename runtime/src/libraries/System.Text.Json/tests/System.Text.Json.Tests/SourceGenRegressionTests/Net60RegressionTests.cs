@@ -110,13 +110,11 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
             DateTime value = DateTime.MinValue;
             string json = JsonSerializer.Serialize(value);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Serialize(value, value.GetType(), Net60GeneratedContext.Default)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(value, value.GetType(), Net60GeneratedContext.Default)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize(json, value.GetType(), Net60GeneratedContext.Default)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize(json, value.GetType(), Net60GeneratedContext.Default)
             );
         }
 
@@ -212,8 +210,8 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
 
             // v6 Contexts do not implement IJsonTypeInfoResolver so combined resolvers will throw by default.
             // We're fine with this since it doesn't introduce any regressions to existing code.
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(new HighLowTemps(), options)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(new HighLowTemps(), options)
             );
         }
     }

@@ -50,8 +50,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             ms.Position = 0;
 
             BinaryFormatter reader = new BinaryFormatter();
-            SerializationException se = Assert.Throws<SerializationException>(
-                () => reader.Deserialize(ms)
+            SerializationException se = Assert.Throws<SerializationException>(() =>
+                reader.Deserialize(ms)
             );
             Assert.IsAssignableFrom<TargetInvocationException>(se.InnerException);
         }

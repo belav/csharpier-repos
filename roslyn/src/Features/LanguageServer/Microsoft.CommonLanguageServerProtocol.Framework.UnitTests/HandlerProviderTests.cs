@@ -72,13 +72,12 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices: false);
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                handlerProvider.GetMethodHandler(
-                    "UndefinedMethod",
-                    TestMethodHandler.RequestType,
-                    TestMethodHandler.ResponseType
-                )
+        Assert.Throws<InvalidOperationException>(() =>
+            handlerProvider.GetMethodHandler(
+                "UndefinedMethod",
+                TestMethodHandler.RequestType,
+                TestMethodHandler.ResponseType
+            )
         );
     }
 
@@ -87,13 +86,12 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices: false);
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                handlerProvider.GetMethodHandler(
-                    TestMethodHandler.Name,
-                    TestMethodHandler.RequestType,
-                    responseType: typeof(long)
-                )
+        Assert.Throws<InvalidOperationException>(() =>
+            handlerProvider.GetMethodHandler(
+                TestMethodHandler.Name,
+                TestMethodHandler.RequestType,
+                responseType: typeof(long)
+            )
         );
     }
 

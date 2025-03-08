@@ -79,8 +79,8 @@ public class PropertyExtensionsTest
                 "int"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => property1.SetValueConverter(new CastingConverter<long, decimal>())
+                .Throws<InvalidOperationException>(() =>
+                    property1.SetValueConverter(new CastingConverter<long, decimal>())
                 )
                 .Message
         );

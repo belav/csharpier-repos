@@ -72,8 +72,8 @@ namespace System.Security.Cryptography.Tests
                 hmac.Key = Array.Empty<byte>();
 
                 byte[] ignored;
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => ignored = hmac.ComputeHash(Array.Empty<byte>())
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    ignored = hmac.ComputeHash(Array.Empty<byte>())
                 );
             }
         }

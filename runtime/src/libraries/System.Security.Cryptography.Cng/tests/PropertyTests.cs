@@ -79,8 +79,8 @@ namespace System.Security.Cryptography.Cng.Tests
                 )
             )
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.GetProperty("DOES NOT EXIST", CngPropertyOptions.CustomProperty)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.GetProperty("DOES NOT EXIST", CngPropertyOptions.CustomProperty)
                 );
             }
         }

@@ -179,13 +179,12 @@ class A
             Assert.Null(cache.GetCachedEntry(firstResultId));
 
             // Assert that the request throws because the item no longer exists in the cache.
-            await Assert.ThrowsAsync<RemoteInvocationException>(
-                async () =>
-                    await testLspServer.ExecuteRequestAsync<LSP.InlayHint, LSP.InlayHint>(
-                        LSP.Methods.InlayHintResolveName,
-                        firstInlayHint,
-                        CancellationToken.None
-                    )
+            await Assert.ThrowsAsync<RemoteInvocationException>(async () =>
+                await testLspServer.ExecuteRequestAsync<LSP.InlayHint, LSP.InlayHint>(
+                    LSP.Methods.InlayHintResolveName,
+                    firstInlayHint,
+                    CancellationToken.None
+                )
             );
 
             // Assert that the server did not shutdown and that we can resolve the latest inlay hint request we made.

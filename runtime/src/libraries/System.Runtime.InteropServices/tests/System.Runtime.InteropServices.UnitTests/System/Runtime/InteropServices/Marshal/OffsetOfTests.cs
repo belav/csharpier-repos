@@ -335,8 +335,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void OffsetOf_NullFieldName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Marshal.OffsetOf(new object().GetType(), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                Marshal.OffsetOf(new object().GetType(), null)
             );
             Assert.Throws<ArgumentNullException>(() => Marshal.OffsetOf<object>(null));
         }
@@ -344,11 +344,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void OffsetOf_NoSuchFieldName_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(
-                () => Marshal.OffsetOf(typeof(NonExistField), "NonExistField")
+            Assert.Throws<ArgumentException>(() =>
+                Marshal.OffsetOf(typeof(NonExistField), "NonExistField")
             );
-            Assert.Throws<ArgumentException>(
-                () => Marshal.OffsetOf<NonExistField>("NonExistField")
+            Assert.Throws<ArgumentException>(() => Marshal.OffsetOf<NonExistField>("NonExistField")
             );
         }
 

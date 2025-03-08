@@ -1055,13 +1055,13 @@ Parameter name: value",
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
                 ArgumentOutOfRangeException ex =
-                    ExceptionAssert.Throws<ArgumentOutOfRangeException>(
-                        () => jsonWriter.WriteToken((JsonToken)int.MinValue)
+                    ExceptionAssert.Throws<ArgumentOutOfRangeException>(() =>
+                        jsonWriter.WriteToken((JsonToken)int.MinValue)
                     );
                 Assert.AreEqual("token", ex.ParamName);
 
-                ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(
-                    () => jsonWriter.WriteToken((JsonToken)int.MinValue, "test")
+                ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(() =>
+                    jsonWriter.WriteToken((JsonToken)int.MinValue, "test")
                 );
                 Assert.AreEqual("token", ex.ParamName);
             }

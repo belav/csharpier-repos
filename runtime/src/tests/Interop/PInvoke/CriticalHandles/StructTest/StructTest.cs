@@ -148,8 +148,8 @@ public class CriticalHandleStructTest
             Handle = new MyCriticalHandle() { Handle = handleValue1 },
         };
 
-        Assert.Throws<NotSupportedException>(
-            () => Native.RefModify(handleValue2, ref handleStruct, null)
+        Assert.Throws<NotSupportedException>(() =>
+            Native.RefModify(handleValue2, ref handleStruct, null)
         );
     }
 

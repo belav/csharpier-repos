@@ -58,8 +58,8 @@ namespace System.Text.Json.Serialization.Tests
         [MemberData(nameof(PointerTypes))]
         public void DeserializeInvalidType(Type type)
         {
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize("", type)
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize("", type)
             );
             Assert.Contains(type.ToString(), ex.ToString());
         }
@@ -86,18 +86,18 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             object obj = Activator.CreateInstance(classType);
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.SerializeWrapper(obj, classType)
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(obj, classType)
             );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.SerializeWrapper(null, classType)
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(null, classType)
             );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
 
-            ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize("", classType)
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize("", classType)
             );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
         }
@@ -117,8 +117,7 @@ namespace System.Text.Json.Serialization.Tests
                 obj = Activator.CreateInstance(type.MakeGenericType(typeof(string), typeof(int)));
             }
 
-            await Assert.ThrowsAsync<ArgumentException>(
-                () => Serializer.SerializeWrapper(obj, type)
+            await Assert.ThrowsAsync<ArgumentException>(() => Serializer.SerializeWrapper(obj, type)
             );
         }
 
@@ -126,8 +125,8 @@ namespace System.Text.Json.Serialization.Tests
         [MemberData(nameof(OpenGenericTypes))]
         public async Task SerializeInvalidTypes_NullValue(Type type)
         {
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.SerializeWrapper(null, type)
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(null, type)
             );
             Assert.Contains(type.ToString(), ex.ToString());
         }
@@ -138,8 +137,8 @@ namespace System.Text.Json.Serialization.Tests
             Type openNullableType = typeof(Nullable<>);
             object obj = Activator.CreateInstance(openNullableType.MakeGenericType(typeof(int)));
 
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.SerializeWrapper(obj, openNullableType)
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(obj, openNullableType)
             );
             Assert.Contains(openNullableType.ToString(), ex.ToString());
         }
@@ -220,8 +219,8 @@ namespace System.Text.Json.Serialization.Tests
             string serialized = JsonSerializer.Serialize(obj);
             Assert.Equal(@"{""ArraySegment"":[1]}", serialized);
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<ClassWithArraySegment>(serialized)
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<ClassWithArraySegment>(serialized)
             );
             Assert.Contains(typeof(ArraySegment<byte>).ToString(), ex.ToString());
         }

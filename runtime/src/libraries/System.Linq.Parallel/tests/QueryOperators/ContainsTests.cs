@@ -126,8 +126,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Contains_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () => ParallelEnumerable.Range(0, 1).Contains(1, new FailingEqualityComparer<int>())
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable.Range(0, 1).Contains(1, new FailingEqualityComparer<int>())
             );
         }
 

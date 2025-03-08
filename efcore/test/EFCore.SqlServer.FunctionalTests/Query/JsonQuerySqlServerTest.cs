@@ -848,11 +848,8 @@ FROM [JsonEntitiesBasic] AS [j]
     )
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    base.Json_collection_index_in_projection_using_untranslatable_client_method(
-                        async
-                    )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Json_collection_index_in_projection_using_untranslatable_client_method(async)
             )
         ).Message;
 
@@ -870,11 +867,8 @@ FROM [JsonEntitiesBasic] AS [j]
     )
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    base.Json_collection_index_in_projection_using_untranslatable_client_method2(
-                        async
-                    )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Json_collection_index_in_projection_using_untranslatable_client_method2(async)
             )
         ).Message;
 

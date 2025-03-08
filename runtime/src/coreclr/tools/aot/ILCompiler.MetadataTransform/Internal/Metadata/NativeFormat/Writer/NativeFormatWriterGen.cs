@@ -2006,8 +2006,8 @@ namespace Internal.Metadata.NativeFormat.Writer
     {
         public CustomAttribute()
         {
-            _equalsReentrancyGuard = new ThreadLocal<ReentrancyGuardStack>(
-                () => new ReentrancyGuardStack()
+            _equalsReentrancyGuard = new ThreadLocal<ReentrancyGuardStack>(() =>
+                new ReentrancyGuardStack()
             );
         }
 

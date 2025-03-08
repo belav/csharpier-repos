@@ -403,8 +403,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
 
                     await innerContext.SaveChangesAsync();
 
-                    await Assert.ThrowsAnyAsync<DbUpdateException>(
-                        () => context.SaveChangesAsync()
+                    await Assert.ThrowsAnyAsync<DbUpdateException>(() => context.SaveChangesAsync()
                     );
                 }
             );
@@ -832,8 +831,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                     storeChange(innerContext);
                     await innerContext.SaveChangesAsync();
 
-                    var updateException = await Assert.ThrowsAnyAsync<TException>(
-                        () => context.SaveChangesAsync()
+                    var updateException = await Assert.ThrowsAnyAsync<TException>(() =>
+                        context.SaveChangesAsync()
                     );
 
                     if (typeof(TException) == typeof(DbUpdateConcurrencyException))

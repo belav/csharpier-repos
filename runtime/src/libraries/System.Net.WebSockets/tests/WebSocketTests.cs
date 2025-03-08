@@ -85,79 +85,73 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public static void CreateClientWebSocket_InvalidArguments_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    WebSocket.CreateClientWebSocket(
-                        null,
-                        "subProtocol",
-                        16480,
-                        9856,
-                        TimeSpan.FromSeconds(30),
-                        false,
-                        WebSocket.CreateClientBuffer(16480, 9856)
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                WebSocket.CreateClientWebSocket(
+                    null,
+                    "subProtocol",
+                    16480,
+                    9856,
+                    TimeSpan.FromSeconds(30),
+                    false,
+                    WebSocket.CreateClientBuffer(16480, 9856)
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    WebSocket.CreateClientWebSocket(
-                        new MemoryStream(),
-                        "    ",
-                        16480,
-                        9856,
-                        TimeSpan.FromSeconds(30),
-                        false,
-                        WebSocket.CreateClientBuffer(16480, 9856)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                WebSocket.CreateClientWebSocket(
+                    new MemoryStream(),
+                    "    ",
+                    16480,
+                    9856,
+                    TimeSpan.FromSeconds(30),
+                    false,
+                    WebSocket.CreateClientBuffer(16480, 9856)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    WebSocket.CreateClientWebSocket(
-                        new MemoryStream(),
-                        "\xFF",
-                        16480,
-                        9856,
-                        TimeSpan.FromSeconds(30),
-                        false,
-                        WebSocket.CreateClientBuffer(16480, 9856)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                WebSocket.CreateClientWebSocket(
+                    new MemoryStream(),
+                    "\xFF",
+                    16480,
+                    9856,
+                    TimeSpan.FromSeconds(30),
+                    false,
+                    WebSocket.CreateClientBuffer(16480, 9856)
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    WebSocket.CreateClientWebSocket(
-                        new MemoryStream(),
-                        "subProtocol",
-                        0,
-                        9856,
-                        TimeSpan.FromSeconds(30),
-                        false,
-                        WebSocket.CreateClientBuffer(16480, 9856)
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                WebSocket.CreateClientWebSocket(
+                    new MemoryStream(),
+                    "subProtocol",
+                    0,
+                    9856,
+                    TimeSpan.FromSeconds(30),
+                    false,
+                    WebSocket.CreateClientBuffer(16480, 9856)
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    WebSocket.CreateClientWebSocket(
-                        new MemoryStream(),
-                        "subProtocol",
-                        16480,
-                        0,
-                        TimeSpan.FromSeconds(30),
-                        false,
-                        WebSocket.CreateClientBuffer(16480, 9856)
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                WebSocket.CreateClientWebSocket(
+                    new MemoryStream(),
+                    "subProtocol",
+                    16480,
+                    0,
+                    TimeSpan.FromSeconds(30),
+                    false,
+                    WebSocket.CreateClientBuffer(16480, 9856)
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    WebSocket.CreateClientWebSocket(
-                        new MemoryStream(),
-                        "subProtocol",
-                        16480,
-                        9856,
-                        TimeSpan.FromSeconds(-2),
-                        false,
-                        WebSocket.CreateClientBuffer(16480, 9856)
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                WebSocket.CreateClientWebSocket(
+                    new MemoryStream(),
+                    "subProtocol",
+                    16480,
+                    9856,
+                    TimeSpan.FromSeconds(-2),
+                    false,
+                    WebSocket.CreateClientBuffer(16480, 9856)
+                )
             );
         }
 
@@ -210,8 +204,8 @@ namespace System.Net.WebSockets.Tests
             WebSocketState[] validStates
         )
         {
-            WebSocketException wse = Assert.Throws<WebSocketException>(
-                () => ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates)
+            WebSocketException wse = Assert.Throws<WebSocketException>(() =>
+                ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates)
             );
             if (PlatformDetection.IsNetCore) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
             {

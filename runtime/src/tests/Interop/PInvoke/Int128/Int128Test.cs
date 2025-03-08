@@ -219,18 +219,18 @@ unsafe partial class Int128Native
         // Until we implement the correct abi for Int128, validate that we don't marshal to native
 
         // Checking return value
-        Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(
-            () => GetInt128(0, 1)
+        Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(() =>
+            GetInt128(0, 1)
         );
 
         // Checking input value as Int128 itself
-        Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(
-            () => GetInt128Lower(default(Int128))
+        Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(() =>
+            GetInt128Lower(default(Int128))
         );
 
         // Checking input value as structure wrapping Int128
-        Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(
-            () => GetInt128Lower_S(default(StructJustInt128))
+        Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(() =>
+            GetInt128Lower_S(default(StructJustInt128))
         );
     }
 

@@ -760,8 +760,8 @@ namespace System.ComponentModel.Tests
         public void ApplySort_Invoke_ThrowsNotSupportedException()
         {
             IBindingList bindingList = new BindingList<object>();
-            Assert.Throws<NotSupportedException>(
-                () => bindingList.ApplySort(null, ListSortDirection.Descending)
+            Assert.Throws<NotSupportedException>(() =>
+                bindingList.ApplySort(null, ListSortDirection.Descending)
             );
         }
 

@@ -181,17 +181,16 @@ namespace System.Linq.Expressions.Tests
         public static void ArgumentCountMismatchLambda()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.Invoke(adder, Expression.Constant(1))
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Invoke(adder, Expression.Constant(1))
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Invoke(
-                        adder,
-                        Expression.Constant(1),
-                        Expression.Constant(1),
-                        Expression.Constant(1)
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Invoke(
+                    adder,
+                    Expression.Constant(1),
+                    Expression.Constant(1),
+                    Expression.Constant(1)
+                )
             );
         }
 
@@ -213,17 +212,16 @@ namespace System.Linq.Expressions.Tests
         public static void ArgumentCountMismatchDelegate()
         {
             Func<int, int, int> adder = (x, y) => x + y;
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1))
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Invoke(Expression.Constant(adder), Expression.Constant(1))
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Invoke(
-                        Expression.Constant(adder),
-                        Expression.Constant(1),
-                        Expression.Constant(1),
-                        Expression.Constant(1)
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Invoke(
+                    Expression.Constant(adder),
+                    Expression.Constant(1),
+                    Expression.Constant(1),
+                    Expression.Constant(1)
+                )
             );
         }
 

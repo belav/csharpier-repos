@@ -126,11 +126,11 @@ namespace System.Net.Security.Tests
                 serverOptions.ServerCertificate = certificate;
                 serverOptions.RemoteCertificateValidationCallback = AllowAnyServerCertificate;
 
-                Task t1 = Assert.ThrowsAsync<InvalidOperationException>(
-                    () => client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions)
+                Task t1 = Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions)
                 );
-                Task t2 = Assert.ThrowsAsync<InvalidOperationException>(
-                    () => server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
+                Task t2 = Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
                 );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
@@ -199,18 +199,13 @@ namespace System.Net.Security.Tests
                 // Test ALPN failure only on platforms that supports ALPN.
                 if (BackendSupportsAlpn)
                 {
-                    Task t1 = Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            clientStream.AuthenticateAsClientAsync(
-                                TestAuthenticateAsync,
-                                clientOptions
-                            )
+                    Task t1 = Assert.ThrowsAsync<AuthenticationException>(() =>
+                        clientStream.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions)
                     );
-                    await Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            serverStream
-                                .AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
-                                .WaitAsync(TestConfiguration.PassingTestTimeout)
+                    await Assert.ThrowsAsync<AuthenticationException>(() =>
+                        serverStream
+                            .AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
+                            .WaitAsync(TestConfiguration.PassingTestTimeout)
                     );
                     serverStream.Dispose();
 

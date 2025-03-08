@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private static readonly ObjectPool<
             Stack<SingleNamespaceOrTypeDeclaration>
-        > s_declarationStack = new ObjectPool<Stack<SingleNamespaceOrTypeDeclaration>>(
-            () => new Stack<SingleNamespaceOrTypeDeclaration>()
+        > s_declarationStack = new ObjectPool<Stack<SingleNamespaceOrTypeDeclaration>>(() =>
+            new Stack<SingleNamespaceOrTypeDeclaration>()
         );
 
         private State _lazyState;
@@ -376,14 +376,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref DeclarationTable declTable
         )
         {
-            var lazyRoot = new Lazy<RootSingleNamespaceDeclaration>(
-                () =>
-                    DeclarationTreeBuilder.ForTree(
-                        tree,
-                        scriptClassName,
-                        isSubmission,
-                        lastComputedMemberNames
-                    )
+            var lazyRoot = new Lazy<RootSingleNamespaceDeclaration>(() =>
+                DeclarationTreeBuilder.ForTree(
+                    tree,
+                    scriptClassName,
+                    isSubmission,
+                    lastComputedMemberNames
+                )
             );
             declMapBuilder.Add(tree, lazyRoot); // Callers are responsible for checking for existing entries.
             declTable = declTable.AddRootDeclaration(lazyRoot);

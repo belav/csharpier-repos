@@ -29,12 +29,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var context = new DirectoryContext(DirectoryContextType.Forest);
             if (!PlatformDetection.IsDomainJoinedMachine)
             {
-                Assert.Throws<ActiveDirectoryOperationException>(
-                    () =>
-                        ActiveDirectoryInterSiteTransport.FindByTransportType(
-                            context,
-                            ActiveDirectoryTransportType.Rpc
-                        )
+                Assert.Throws<ActiveDirectoryOperationException>(() =>
+                    ActiveDirectoryInterSiteTransport.FindByTransportType(
+                        context,
+                        ActiveDirectoryTransportType.Rpc
+                    )
                 );
             }
         }
@@ -101,12 +100,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindByTransportType_InvalidContextTypeWithName(DirectoryContextType type)
         {
             var context = new DirectoryContext(type, "Name");
-            Exception exception = Record.Exception(
-                () =>
-                    ActiveDirectoryInterSiteTransport.FindByTransportType(
-                        context,
-                        ActiveDirectoryTransportType.Rpc
-                    )
+            Exception exception = Record.Exception(() =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(
+                    context,
+                    ActiveDirectoryTransportType.Rpc
+                )
             );
             Assert.NotNull(exception);
             Assert.True(
@@ -120,12 +118,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindByTransportType_ConfigurationSetTypeWithName_Throws()
         {
             var context = new DirectoryContext(DirectoryContextType.ConfigurationSet, "Name");
-            Assert.Throws<ActiveDirectoryOperationException>(
-                () =>
-                    ActiveDirectoryInterSiteTransport.FindByTransportType(
-                        context,
-                        ActiveDirectoryTransportType.Rpc
-                    )
+            Assert.Throws<ActiveDirectoryOperationException>(() =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(
+                    context,
+                    ActiveDirectoryTransportType.Rpc
+                )
             );
         }
 

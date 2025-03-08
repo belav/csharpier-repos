@@ -84,8 +84,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var json = JsonConvert.SerializeObject(fooBar, SerializeSettings(maxDepth));
 
-            var ex = ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth))
+            var ex = ExceptionAssert.Throws<JsonReaderException>(() =>
+                JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth))
             );
             Assert.IsTrue(ex.Message.StartsWith("The reader's MaxDepth of 512 has been exceeded."));
         }
@@ -107,8 +107,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var json = JsonConvert.SerializeObject(fooBar, SerializeSettings(maxDepth));
 
-            var ex = ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth))
+            var ex = ExceptionAssert.Throws<JsonReaderException>(() =>
+                JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth))
             );
             Assert.IsTrue(ex.Message.StartsWith("The reader's MaxDepth of 10 has been exceeded."));
         }

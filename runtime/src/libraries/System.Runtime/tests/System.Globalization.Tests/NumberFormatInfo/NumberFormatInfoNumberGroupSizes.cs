@@ -75,8 +75,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void NumberGroupSizes_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => NumberFormatInfo.InvariantInfo.NumberGroupSizes = new int[] { 1, 2, 3 }
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.NumberGroupSizes = new int[] { 1, 2, 3 }
             );
         }
     }

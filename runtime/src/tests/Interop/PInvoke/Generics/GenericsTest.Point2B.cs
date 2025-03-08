@@ -35,8 +35,8 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2B(true, false));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetPoint2BOut(true, false, out GenericsNative.Point2<bool> value3)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetPoint2BOut(true, false, out GenericsNative.Point2<bool> value3)
         );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2BRef(true, false));
@@ -52,12 +52,12 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddPoint2Bs(values, values.Length)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddPoint2Bs(values, values.Length)
         );
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddPoint2Bs(in values[0], values.Length)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddPoint2Bs(in values[0], values.Length)
         );
     }
 }

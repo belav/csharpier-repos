@@ -31,8 +31,8 @@ public partial class DbContextTest
     public void Set_throws_for_type_not_in_model_same_type_with_different_namespace()
     {
         using var context = new EarlyLearningCenter();
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => context.Set<DifferentNamespace.Category>().Local
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            context.Set<DifferentNamespace.Category>().Local
         );
 
         Assert.Equal(
@@ -195,8 +195,8 @@ public partial class DbContextTest
             }
         );
 
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => context.SaveChangesAsync(new CancellationToken(canceled: true))
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            context.SaveChangesAsync(new CancellationToken(canceled: true))
         );
 
         Assert.Contains(CoreEventId.SaveChangesCanceled, loggerFactory.Log.Select(l => l.Id));
@@ -1444,8 +1444,8 @@ public partial class DbContextTest
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
             (
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => context.AddAsync(new object()).AsTask()
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    context.AddAsync(new object()).AsTask()
                 )
             ).Message
         );
@@ -1453,8 +1453,8 @@ public partial class DbContextTest
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
             (
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => context.FindAsync(typeof(Random), 77).AsTask()
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    context.FindAsync(typeof(Random), 77).AsTask()
                 )
             ).Message
         );
@@ -1506,8 +1506,8 @@ public partial class DbContextTest
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
             Assert
-                .Throws<ObjectDisposedException>(
-                    () => ((IInfrastructure<IServiceProvider>)context).Instance
+                .Throws<ObjectDisposedException>(() =>
+                    ((IInfrastructure<IServiceProvider>)context).Instance
                 )
                 .Message
         );

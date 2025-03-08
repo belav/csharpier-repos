@@ -421,11 +421,10 @@ namespace System.Tests
         public static void CreateFromCultureAndOptionsOrdinal()
         {
             CultureInfo ci = CultureInfo.GetCultureInfo("en-US");
-            Assert.Throws<ArgumentException>(
-                () => StringComparer.Create(ci, CompareOptions.Ordinal)
+            Assert.Throws<ArgumentException>(() => StringComparer.Create(ci, CompareOptions.Ordinal)
             );
-            Assert.Throws<ArgumentException>(
-                () => StringComparer.Create(ci, CompareOptions.OrdinalIgnoreCase)
+            Assert.Throws<ArgumentException>(() =>
+                StringComparer.Create(ci, CompareOptions.OrdinalIgnoreCase)
             );
         }
     }

@@ -47,47 +47,41 @@ class StackTraceDumper
 
         Catch(() => InnerClass.ThrowException("Stack trace with inner class"));
 
-        Catch(
-            () => InnerGenericClass<string>.ThrowException("Stack trace with inner generic class")
+        Catch(() => InnerGenericClass<string>.ThrowException("Stack trace with inner generic class")
         );
 
-        Catch(
-            () =>
-                InnerGenericClass<string>.ThrowException(
-                    "Stack trace with inner generic class and method generic parameter",
-                    "string"
-                )
+        Catch(() =>
+            InnerGenericClass<string>.ThrowException(
+                "Stack trace with inner generic class and method generic parameter",
+                "string"
+            )
         );
 
-        Catch(
-            () =>
-                InnerGenericClass<string>.ThrowException<string>(
-                    "Stack trace with inner generic class and generic overload",
-                    "string"
-                )
+        Catch(() =>
+            InnerGenericClass<string>.ThrowException<string>(
+                "Stack trace with inner generic class and generic overload",
+                "string"
+            )
         );
 
-        Catch(
-            () =>
-                InnerGenericClass<string>.InnerInnerGenericClass<int>.ThrowException(
-                    "Stack trace with 2 inner generic class and generic overload"
-                )
+        Catch(() =>
+            InnerGenericClass<string>.InnerInnerGenericClass<int>.ThrowException(
+                "Stack trace with 2 inner generic class and generic overload"
+            )
         );
 
-        Catch(
-            () =>
-                InnerGenericClass<int>.InnerInnerGenericClass<string>.ThrowException(
-                    "Stack trace with 2 inner generic class and generic overload"
-                )
+        Catch(() =>
+            InnerGenericClass<int>.InnerInnerGenericClass<string>.ThrowException(
+                "Stack trace with 2 inner generic class and generic overload"
+            )
         );
 
-        Catch(
-            () =>
-                InnerGenericClass<int>.ThrowException(
-                    "Stack trace with nested type argument",
-                    "string",
-                    null
-                )
+        Catch(() =>
+            InnerGenericClass<int>.ThrowException(
+                "Stack trace with nested type argument",
+                "string",
+                null
+            )
         );
 
         Catch(() =>

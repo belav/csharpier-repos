@@ -71,13 +71,12 @@ namespace Microsoft.NET.HostModel.Tests
                 );
                 string appBinaryFilePath = "Test/App/Binary/Path.dll";
 
-                Assert.Throws<PlaceHolderNotFoundInAppHostException>(
-                    () =>
-                        HostWriter.CreateAppHost(
-                            sourceAppHostMock,
-                            destinationFilePath,
-                            appBinaryFilePath
-                        )
+                Assert.Throws<PlaceHolderNotFoundInAppHostException>(() =>
+                    HostWriter.CreateAppHost(
+                        sourceAppHostMock,
+                        destinationFilePath,
+                        appBinaryFilePath
+                    )
                 );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
@@ -96,13 +95,12 @@ namespace Microsoft.NET.HostModel.Tests
                 );
                 string appBinaryFilePath = new string('a', 1024 + 5);
 
-                Assert.Throws<AppNameTooLongException>(
-                    () =>
-                        HostWriter.CreateAppHost(
-                            sourceAppHostMock,
-                            destinationFilePath,
-                            appBinaryFilePath
-                        )
+                Assert.Throws<AppNameTooLongException>(() =>
+                    HostWriter.CreateAppHost(
+                        sourceAppHostMock,
+                        destinationFilePath,
+                        appBinaryFilePath
+                    )
                 );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
@@ -160,14 +158,13 @@ namespace Microsoft.NET.HostModel.Tests
                 );
                 string appBinaryFilePath = "Test/App/Binary/Path.dll";
 
-                Assert.Throws<AppHostNotPEFileException>(
-                    () =>
-                        HostWriter.CreateAppHost(
-                            sourceAppHostMock,
-                            destinationFilePath,
-                            appBinaryFilePath,
-                            windowsGraphicalUserInterface: true
-                        )
+                Assert.Throws<AppHostNotPEFileException>(() =>
+                    HostWriter.CreateAppHost(
+                        sourceAppHostMock,
+                        destinationFilePath,
+                        appBinaryFilePath,
+                        windowsGraphicalUserInterface: true
+                    )
                 );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
@@ -194,14 +191,13 @@ namespace Microsoft.NET.HostModel.Tests
                 string appBinaryFilePath = "Test/App/Binary/Path.dll";
 
                 Assert.Equal(42, PEUtils.GetWindowsGraphicalUserInterfaceBit(sourceAppHostMock));
-                Assert.Throws<AppHostNotCUIException>(
-                    () =>
-                        HostWriter.CreateAppHost(
-                            sourceAppHostMock,
-                            destinationFilePath,
-                            appBinaryFilePath,
-                            windowsGraphicalUserInterface: true
-                        )
+                Assert.Throws<AppHostNotCUIException>(() =>
+                    HostWriter.CreateAppHost(
+                        sourceAppHostMock,
+                        destinationFilePath,
+                        appBinaryFilePath,
+                        windowsGraphicalUserInterface: true
+                    )
                 );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
@@ -382,15 +378,14 @@ namespace Microsoft.NET.HostModel.Tests
 
                 // Run CreateAppHost again to sign the apphost a second time,
                 // causing codesign to fail.
-                var exception = Assert.Throws<AppHostSigningException>(
-                    () =>
-                        HostWriter.CreateAppHost(
-                            sourceAppHostMock,
-                            destinationFilePath,
-                            appBinaryFilePath,
-                            windowsGraphicalUserInterface: false,
-                            enableMacOSCodeSign: true
-                        )
+                var exception = Assert.Throws<AppHostSigningException>(() =>
+                    HostWriter.CreateAppHost(
+                        sourceAppHostMock,
+                        destinationFilePath,
+                        appBinaryFilePath,
+                        windowsGraphicalUserInterface: false,
+                        enableMacOSCodeSign: true
+                    )
                 );
                 Assert.Contains($"{destinationFilePath}: is already signed", exception.Message);
                 Assert.True(

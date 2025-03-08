@@ -30,8 +30,8 @@ namespace System.Formats.Tar.Tests
 
             Directory.CreateDirectory(destination);
 
-            Assert.Throws<UnauthorizedAccessException>(
-                () => TarFile.ExtractToDirectory(archive, destination, overwriteFiles: false)
+            Assert.Throws<UnauthorizedAccessException>(() =>
+                TarFile.ExtractToDirectory(archive, destination, overwriteFiles: false)
             );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(destination).Count());

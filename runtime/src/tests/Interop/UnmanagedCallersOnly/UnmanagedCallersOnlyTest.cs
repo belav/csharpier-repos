@@ -238,33 +238,25 @@ public unsafe class Program
         Console.WriteLine($"Running {nameof(TestPInvokeMarkedWithUnmanagedCallersOnly)}...");
 
         // Call P/Invoke directly
-        Assert.Throws<NotSupportedException>(
-            () => CallingUnmanagedCallersOnlyDirectly.CallPInvokeMarkedWithUnmanagedCallersOnly(0)
+        Assert.Throws<NotSupportedException>(() =>
+            CallingUnmanagedCallersOnlyDirectly.CallPInvokeMarkedWithUnmanagedCallersOnly(0)
         );
 
         // Call P/Invoke via reflection
         var method = typeof(CallingUnmanagedCallersOnlyDirectly).GetMethod(
             nameof(CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly)
         );
-        Assert.Throws<NotSupportedException>(
-            () =>
-                method.Invoke(
-                    null,
-                    BindingFlags.DoNotWrapExceptions,
-                    null,
-                    new[] { (object)0 },
-                    null
-                )
+        Assert.Throws<NotSupportedException>(() =>
+            method.Invoke(null, BindingFlags.DoNotWrapExceptions, null, new[] { (object)0 }, null)
         );
 
         // Call P/Invoke as a function pointer
         int n = 1234;
-        Assert.Throws<NotSupportedException>(
-            () =>
-                (
-                    (delegate* unmanaged<int, int>)
-                        &CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly
-                )(n)
+        Assert.Throws<NotSupportedException>(() =>
+            (
+                (delegate* unmanaged<int, int>)
+                    &CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly
+            )(n)
         );
     }
 
@@ -284,24 +276,22 @@ public unsafe class Program
             )
         );
 
-        Assert.Throws<InvalidProgramException>(
-            () =>
-                (
-                    (delegate* unmanaged<nint, int>)
-                        (void*)
-                            (delegate* unmanaged<NotBlittable<int>, int>)
-                                &InvalidGenericUnmanagedCallersOnlyParameters.GenericClass
-                )((nint)1)
+        Assert.Throws<InvalidProgramException>(() =>
+            (
+                (delegate* unmanaged<nint, int>)
+                    (void*)
+                        (delegate* unmanaged<NotBlittable<int>, int>)
+                            &InvalidGenericUnmanagedCallersOnlyParameters.GenericClass
+            )((nint)1)
         );
 
-        Assert.Throws<InvalidProgramException>(
-            () =>
-                (
-                    (delegate* unmanaged<nint, int>)
-                        (void*)
-                            (delegate* unmanaged<MaybeBlittable<object>, int>)
-                                &InvalidGenericUnmanagedCallersOnlyParameters.GenericStructWithObjectField
-                )((nint)1)
+        Assert.Throws<InvalidProgramException>(() =>
+            (
+                (delegate* unmanaged<nint, int>)
+                    (void*)
+                        (delegate* unmanaged<MaybeBlittable<object>, int>)
+                            &InvalidGenericUnmanagedCallersOnlyParameters.GenericStructWithObjectField
+            )((nint)1)
         );
     }
 

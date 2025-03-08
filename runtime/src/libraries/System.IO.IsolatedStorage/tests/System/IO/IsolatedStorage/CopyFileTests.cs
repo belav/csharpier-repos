@@ -99,8 +99,8 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                Assert.Throws<FileNotFoundException>(
-                    () => isf.CopyFile("CopyFile_DoesNotExist", "CopyFile_DoesNotExist_Copy")
+                Assert.Throws<FileNotFoundException>(() =>
+                    isf.CopyFile("CopyFile_DoesNotExist", "CopyFile_DoesNotExist_Copy")
                 );
             }
         }
@@ -115,8 +115,8 @@ namespace System.IO.IsolatedStorage
                 isf.CreateTestFile("foo", "CopyFile_CopyOver_Foo");
                 isf.CreateTestFile("bar", "CopyFile_CopyOver_Bar");
                 Assert.Throws<IsolatedStorageException>(() => isf.CopyFile("foo", "bar"));
-                Assert.Throws<IsolatedStorageException>(
-                    () => isf.CopyFile("foo", "bar", overwrite: false)
+                Assert.Throws<IsolatedStorageException>(() =>
+                    isf.CopyFile("foo", "bar", overwrite: false)
                 );
                 isf.CopyFile("foo", "bar", overwrite: true);
                 Assert.Equal("CopyFile_CopyOver_Foo", isf.ReadAllText("bar"));

@@ -140,8 +140,8 @@ namespace CoreXml.Test.XLinq
             var newElement = new XElement(elementName, elementValue);
             xmlDocument.Root.Add(newElement);
 
-            Assert.Throws<XmlSchemaValidationException>(
-                () => ExtensionsClass.Validate(xmlDocument, schemaSet, null)
+            Assert.Throws<XmlSchemaValidationException>(() =>
+                ExtensionsClass.Validate(xmlDocument, schemaSet, null)
             );
         }
 
@@ -345,14 +345,13 @@ namespace CoreXml.Test.XLinq
             // change and re-validate attribute value
             XAttribute date = xmlDocument.Element(elementName).Attribute(attributeName);
             date.SetValue(attributeValue);
-            Assert.Throws<XmlSchemaValidationException>(
-                () =>
-                    ExtensionsClass.Validate(
-                        date,
-                        date.GetSchemaInfo().SchemaAttribute,
-                        schemaSet,
-                        null
-                    )
+            Assert.Throws<XmlSchemaValidationException>(() =>
+                ExtensionsClass.Validate(
+                    date,
+                    date.GetSchemaInfo().SchemaAttribute,
+                    schemaSet,
+                    null
+                )
             );
         }
 
@@ -443,14 +442,8 @@ namespace CoreXml.Test.XLinq
             XElement root = xmlDocument.Element(parentElementName);
             root.SetElementValue(childElementName, childElementValue);
 
-            Assert.Throws<XmlSchemaValidationException>(
-                () =>
-                    ExtensionsClass.Validate(
-                        root,
-                        root.GetSchemaInfo().SchemaElement,
-                        schemaSet,
-                        null
-                    )
+            Assert.Throws<XmlSchemaValidationException>(() =>
+                ExtensionsClass.Validate(root, root.GetSchemaInfo().SchemaElement, schemaSet, null)
             );
         }
 

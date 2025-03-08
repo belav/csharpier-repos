@@ -639,8 +639,8 @@ namespace System.Net.Quic.Tests
                     CancellationTokenSource cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAsync<OperationCanceledException>(
-                        () => stream.WriteAsync(new byte[1], cts.Token).AsTask()
+                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                        stream.WriteAsync(new byte[1], cts.Token).AsTask()
                     );
 
                     // aborting write causes the write direction to throw on subsequent operations
@@ -686,8 +686,8 @@ namespace System.Net.Quic.Tests
                     }
 
                     // a write would eventually be canceled
-                    await Assert.ThrowsAsync<OperationCanceledException>(
-                        () => WriteUntilCanceled().WaitAsync(TimeSpan.FromSeconds(3))
+                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                        WriteUntilCanceled().WaitAsync(TimeSpan.FromSeconds(3))
                     );
 
                     // next write would also throw

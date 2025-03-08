@@ -12,8 +12,8 @@ namespace System.Buffers.Text.Tests
         public static void StandardFormatCtorNegative()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new StandardFormat((char)256));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StandardFormat('D', StandardFormat.MaxPrecision + 1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StandardFormat('D', StandardFormat.MaxPrecision + 1)
             );
         }
 

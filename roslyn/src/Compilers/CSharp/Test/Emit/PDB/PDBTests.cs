@@ -169,16 +169,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                         )
                     );
 
-                    Assert.Throws<ArgumentException>(
-                        () =>
-                            context.AddSource(
-                                "hint3",
-                                SourceText.From(
-                                    "class G3 { void F() {} }",
-                                    encoding: null,
-                                    checksumAlgorithm: SourceHashAlgorithm.Sha256
-                                )
+                    Assert.Throws<ArgumentException>(() =>
+                        context.AddSource(
+                            "hint3",
+                            SourceText.From(
+                                "class G3 { void F() {} }",
+                                encoding: null,
+                                checksumAlgorithm: SourceHashAlgorithm.Sha256
                             )
+                        )
                     );
                 },
             };

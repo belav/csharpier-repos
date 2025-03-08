@@ -149,9 +149,8 @@ namespace System.Net.Sockets.Tests
             ArraySegment<byte> buffer,
             EndPoint endPoint
         ) =>
-            Task.Run(
-                () =>
-                    s.SendTo(buffer.Array, buffer.Offset, buffer.Count, SocketFlags.None, endPoint)
+            Task.Run(() =>
+                s.SendTo(buffer.Array, buffer.Offset, buffer.Count, SocketFlags.None, endPoint)
             );
 
         public override Task SendFileAsync(Socket s, string fileName) =>

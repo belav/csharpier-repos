@@ -161,8 +161,7 @@ namespace System.Linq.Expressions.Tests
         public void InvalidOperandType(Type type)
         {
             ParameterExpression variable = Expression.Variable(type);
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.PostDecrementAssign(variable)
+            Assert.Throws<InvalidOperationException>(() => Expression.PostDecrementAssign(variable)
             );
         }
 
@@ -211,8 +210,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(IncDecAssignTests)
                 .GetTypeInfo()
                 .GetDeclaredMethod("SillyMethod");
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.PostDecrementAssign(variable, method)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.PostDecrementAssign(variable, method)
             );
         }
 

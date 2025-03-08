@@ -173,12 +173,11 @@ public class ClientMarshalArrayAsSizeParamIndexByRefTest
 
         short short_Array_Size = (short)10;
         short[] arrShort = Helper.InitArray<short>(10);
-        Assert.Throws<OverflowException>(
-            () =>
-                MarshalCStyleArrayShortReturnNegative_AsByRef_AsSizeParamIndex(
-                    ref short_Array_Size,
-                    ref arrShort
-                )
+        Assert.Throws<OverflowException>(() =>
+            MarshalCStyleArrayShortReturnNegative_AsByRef_AsSizeParamIndex(
+                ref short_Array_Size,
+                ref arrShort
+            )
         );
         Console.WriteLine(strDescription + " Ends!");
     }

@@ -210,8 +210,8 @@ namespace System.Xml.Linq.Tests
         public void PrefixOfNamespaceNull(string xml, string ns)
         {
             XElement e = XElement.Parse(xml);
-            Assert.Throws<ArgumentNullException>(
-                () => (e.FirstNode as XElement).GetPrefixOfNamespace(ns)
+            Assert.Throws<ArgumentNullException>(() =>
+                (e.FirstNode as XElement).GetPrefixOfNamespace(ns)
             );
         }
 

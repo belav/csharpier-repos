@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
         /// </summary>
         private sealed class BasicBlockAnalysisData : IDisposable
         {
-            private static readonly ObjectPool<BasicBlockAnalysisData> s_pool = new(
-                () => new BasicBlockAnalysisData()
+            private static readonly ObjectPool<BasicBlockAnalysisData> s_pool = new(() =>
+                new BasicBlockAnalysisData()
             );
 
             /// <summary>

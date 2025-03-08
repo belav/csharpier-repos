@@ -9,8 +9,8 @@ public class MethodCallCodeFragmentTest
     public virtual void Ctor_throw_when_too_many_parameters_extension()
     {
         _ = new MethodCallCodeFragment(_extensionFuncMethodInfo, 1);
-        Assert.Throws<ArgumentException>(
-            () => new MethodCallCodeFragment(_extensionFuncMethodInfo, 1, 2)
+        Assert.Throws<ArgumentException>(() =>
+            new MethodCallCodeFragment(_extensionFuncMethodInfo, 1, 2)
         );
     }
 
@@ -18,8 +18,8 @@ public class MethodCallCodeFragmentTest
     public virtual void Ctor_throw_when_too_many_parameters_instance()
     {
         _ = new MethodCallCodeFragment(_instanceFuncMethodInfo, 1);
-        Assert.Throws<ArgumentException>(
-            () => new MethodCallCodeFragment(_instanceFuncMethodInfo, 1, 2)
+        Assert.Throws<ArgumentException>(() =>
+            new MethodCallCodeFragment(_instanceFuncMethodInfo, 1, 2)
         );
     }
 

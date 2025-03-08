@@ -54,8 +54,8 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(1);
         Native.InCallback callback = (handle) => { };
-        Assert.Throws<MarshalDirectiveException>(
-            () => Native.InvokeInCallback(callback, handleValue)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeInCallback(callback, handleValue)
         );
         GC.KeepAlive(callback);
     }
@@ -72,8 +72,8 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(3);
         Native.OutCallback callback = (out MyCriticalHandle handle) => handle = null;
-        Assert.Throws<MarshalDirectiveException>(
-            () => Native.InvokeOutCallback(callback, ref handleValue)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeOutCallback(callback, ref handleValue)
         );
         GC.KeepAlive(callback);
     }
@@ -82,8 +82,8 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(4);
         Native.InRefCallback callback = (ref MyCriticalHandle handle) => { };
-        Assert.Throws<MarshalDirectiveException>(
-            () => Native.InvokeInRefCallback(callback, ref handleValue)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeInRefCallback(callback, ref handleValue)
         );
         GC.KeepAlive(callback);
     }
@@ -92,8 +92,8 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(5);
         Native.RefCallback callback = (ref MyCriticalHandle handle) => { };
-        Assert.Throws<MarshalDirectiveException>(
-            () => Native.InvokeRefCallback(callback, ref handleValue)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeRefCallback(callback, ref handleValue)
         );
         GC.KeepAlive(callback);
     }

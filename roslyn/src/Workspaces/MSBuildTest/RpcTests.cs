@@ -246,14 +246,13 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             rpcPair.Server.AddTarget(new ObjectWithThrowingMethod());
 
-            var exception = await Assert.ThrowsAsync<RemoteInvocationException>(
-                () =>
-                    rpcPair.Client.InvokeAsync(
-                        targetObject: 0,
-                        nameof(ObjectWithThrowingMethod.ThrowException),
-                        [],
-                        CancellationToken.None
-                    )
+            var exception = await Assert.ThrowsAsync<RemoteInvocationException>(() =>
+                rpcPair.Client.InvokeAsync(
+                    targetObject: 0,
+                    nameof(ObjectWithThrowingMethod.ThrowException),
+                    [],
+                    CancellationToken.None
+                )
             );
 
             Assert.Contains("Exception thrown by test method!", exception.Message);

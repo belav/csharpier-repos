@@ -220,9 +220,8 @@ public class ReverseMapIgnoreAttributeTests
     [Fact]
     public void Sould_not_throw_exception_when_reverse_property_does_not_exist()
     {
-        typeof(ArgumentOutOfRangeException).ShouldNotBeThrownBy(
-            () =>
-                new MapperConfiguration(cfg => cfg.CreateMap<Source2, Destination2>().ReverseMap())
+        typeof(ArgumentOutOfRangeException).ShouldNotBeThrownBy(() =>
+            new MapperConfiguration(cfg => cfg.CreateMap<Source2, Destination2>().ReverseMap())
         );
     }
 }

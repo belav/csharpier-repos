@@ -18,8 +18,8 @@ namespace System.Diagnostics.Tests
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
             )
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => session.GetLogInformation(null, PathType.LogName)
+                Assert.Throws<ArgumentNullException>(() =>
+                    session.GetLogInformation(null, PathType.LogName)
                 );
             }
         }

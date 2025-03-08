@@ -42,9 +42,8 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                    Write(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text")
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                Write(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text")
             );
         }
 

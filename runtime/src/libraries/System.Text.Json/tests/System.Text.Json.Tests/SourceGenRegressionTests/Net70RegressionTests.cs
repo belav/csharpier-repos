@@ -110,13 +110,11 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
             DateTime value = DateTime.MinValue;
             string json = JsonSerializer.Serialize(value);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Serialize(value, value.GetType(), Net70GeneratedContext.Default)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(value, value.GetType(), Net70GeneratedContext.Default)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize(json, value.GetType(), Net70GeneratedContext.Default)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize(json, value.GetType(), Net70GeneratedContext.Default)
             );
         }
 

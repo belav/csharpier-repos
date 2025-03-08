@@ -149,8 +149,8 @@ namespace System.Web.Http.ModelBinding
             }
             sb.Append("=1");
 
-            return Assert.ThrowsAsync<InsufficientExecutionStackException>(
-                () => ParseJQueryAsync<Nest>(sb.ToString())
+            return Assert.ThrowsAsync<InsufficientExecutionStackException>(() =>
+                ParseJQueryAsync<Nest>(sb.ToString())
             );
         }
 
@@ -164,8 +164,8 @@ namespace System.Web.Http.ModelBinding
             }
             sb.Append("=1");
 
-            return Assert.ThrowsAsync<InsufficientExecutionStackException>(
-                () => ParseJQueryAsync<Nest>(sb.ToString())
+            return Assert.ThrowsAsync<InsufficientExecutionStackException>(() =>
+                ParseJQueryAsync<Nest>(sb.ToString())
             );
         }
 
@@ -302,8 +302,7 @@ namespace System.Web.Http.ModelBinding
             FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>();
 
             // Act/Assert
-            Assert.Throws<ArgumentNullException>(
-                () => formData.ReadAs<int>((HttpActionContext)null)
+            Assert.Throws<ArgumentNullException>(() => formData.ReadAs<int>((HttpActionContext)null)
             );
         }
 

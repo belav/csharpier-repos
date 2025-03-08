@@ -17,28 +17,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Ctor_Errors()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.CreateFromImage(default(ImmutableArray<byte>))
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.CreateFromImage(default(ImmutableArray<byte>))
             );
 
             IEnumerable<byte> enumerableImage = null;
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.CreateFromImage(enumerableImage)
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.CreateFromImage(enumerableImage)
             );
 
             byte[] arrayImage = null;
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.CreateFromImage(arrayImage)
+            Assert.Throws<ArgumentNullException>(() => AssemblyMetadata.CreateFromImage(arrayImage)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.Create((ModuleMetadata)null)
+            Assert.Throws<ArgumentNullException>(() => AssemblyMetadata.Create((ModuleMetadata)null)
             );
-            Assert.Throws<ArgumentException>(
-                () => AssemblyMetadata.Create(default(ImmutableArray<ModuleMetadata>))
+            Assert.Throws<ArgumentException>(() =>
+                AssemblyMetadata.Create(default(ImmutableArray<ModuleMetadata>))
             );
-            Assert.Throws<ArgumentException>(
-                () => AssemblyMetadata.Create(ImmutableArray.Create<ModuleMetadata>())
+            Assert.Throws<ArgumentException>(() =>
+                AssemblyMetadata.Create(ImmutableArray.Create<ModuleMetadata>())
             );
 
             var m1 = ModuleMetadata.CreateFromImage(
@@ -48,23 +46,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var m3 = ModuleMetadata.CreateFromImage(TestResources.SymbolsTests.MultiModule.mod3);
 
             Assert.Throws<ArgumentException>(() => AssemblyMetadata.Create(m1, m2.Copy(), m3));
-            Assert.Throws<ArgumentException>(
-                () =>
-                    AssemblyMetadata.Create(
-                        new List<ModuleMetadata>(
-                            new ModuleMetadata[] { m1.Copy(), m2.Copy(), m3.Copy() }
-                        )
+            Assert.Throws<ArgumentException>(() =>
+                AssemblyMetadata.Create(
+                    new List<ModuleMetadata>(
+                        new ModuleMetadata[] { m1.Copy(), m2.Copy(), m3.Copy() }
                     )
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.Create(ImmutableArray.Create(m1, m2, null))
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.Create(ImmutableArray.Create(m1, m2, null))
             );
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.Create(ImmutableArray.Create((ModuleMetadata)null))
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.Create(ImmutableArray.Create((ModuleMetadata)null))
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () => AssemblyMetadata.CreateFromFile((string)null)
+            Assert.Throws<ArgumentNullException>(() => AssemblyMetadata.CreateFromFile((string)null)
             );
         }
 

@@ -35,8 +35,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflict("SingleKey", "{'Id'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
                 )
                 .Message
         );
@@ -89,8 +89,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.KeyReadOnly(nameof(SingleKey.AlternateId), nameof(SingleKey)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
                 )
                 .Message
         );
@@ -108,8 +108,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflict("SingleKey", "{'Id'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
                 )
                 .Message
         );
@@ -124,8 +124,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflict("SingleKey", "{'AlternateId'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
                 )
                 .Message
         );
@@ -142,8 +142,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.KeyReadOnly(nameof(SingleKey.Id), nameof(SingleKey)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
                 )
                 .Message
         );
@@ -169,8 +169,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflict("SingleKey", "{'AlternateId'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
                 )
                 .Message
         );
@@ -195,16 +195,15 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflictOwned("SingleKeyOwned", "{'SingleKeyId'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new SingleKey
-                            {
-                                Id = 78,
-                                AlternateId = 67,
-                                Owned = duplicateOwned,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new SingleKey
+                        {
+                            Id = 78,
+                            AlternateId = 67,
+                            Owned = duplicateOwned,
+                        }
+                    )
                 )
                 .Message
         );
@@ -268,17 +267,16 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflict("CompositeKey", "{'Id1', 'Id2'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 77,
-                                Id2 = 78,
-                                AlternateId1 = 66,
-                                AlternateId2 = 68,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 77,
+                            Id2 = 78,
+                            AlternateId1 = 66,
+                            AlternateId2 = 68,
+                        }
+                    )
                 )
                 .Message
         );
@@ -340,17 +338,16 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflict("CompositeKey", "{'AlternateId1', 'AlternateId2'}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 77,
-                                Id2 = 79,
-                                AlternateId1 = 66,
-                                AlternateId2 = 67,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 77,
+                            Id2 = 79,
+                            AlternateId1 = 66,
+                            AlternateId2 = 67,
+                        }
+                    )
                 )
                 .Message
         );
@@ -381,18 +378,17 @@ public class StateManagerTest
                 "{'CompositeKeyId1', 'CompositeKeyId2'}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 177,
-                                Id2 = 178,
-                                AlternateId1 = 166,
-                                AlternateId2 = 168,
-                                Owned = duplicateOwned,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 177,
+                            Id2 = 178,
+                            AlternateId1 = 166,
+                            AlternateId2 = 168,
+                            Owned = duplicateOwned,
+                        }
+                    )
                 )
                 .Message
         );
@@ -407,8 +403,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflictSensitive("SingleKey", "{Id: 77}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 77, AlternateId = 67 })
                 )
                 .Message
         );
@@ -423,8 +419,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflictSensitive("SingleKey", "{AlternateId: 66}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 78, AlternateId = 66 })
                 )
                 .Message
         );
@@ -449,16 +445,15 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflictOwnedSensitive("SingleKeyOwned", "{SingleKeyId: 77}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new SingleKey
-                            {
-                                Id = 78,
-                                AlternateId = 67,
-                                Owned = duplicateOwned,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new SingleKey
+                        {
+                            Id = 78,
+                            AlternateId = 67,
+                            Owned = duplicateOwned,
+                        }
+                    )
                 )
                 .Message
         );
@@ -481,17 +476,16 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.IdentityConflictSensitive("CompositeKey", "{Id1: 77, Id2: 78}"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 77,
-                                Id2 = 78,
-                                AlternateId1 = 66,
-                                AlternateId2 = 68,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 77,
+                            Id2 = 78,
+                            AlternateId1 = 66,
+                            AlternateId2 = 68,
+                        }
+                    )
                 )
                 .Message
         );
@@ -517,17 +511,16 @@ public class StateManagerTest
                 "{AlternateId1: 66, AlternateId2: 67}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 77,
-                                Id2 = 79,
-                                AlternateId1 = 66,
-                                AlternateId2 = 67,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 77,
+                            Id2 = 79,
+                            AlternateId1 = 66,
+                            AlternateId2 = 67,
+                        }
+                    )
                 )
                 .Message
         );
@@ -558,18 +551,17 @@ public class StateManagerTest
                 "{CompositeKeyId1: 77, CompositeKeyId2: 78}"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 177,
-                                Id2 = 178,
-                                AlternateId1 = 166,
-                                AlternateId2 = 168,
-                                Owned = duplicateOwned,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 177,
+                            Id2 = 178,
+                            AlternateId1 = 166,
+                            AlternateId2 = 168,
+                            Owned = duplicateOwned,
+                        }
+                    )
                 )
                 .Message
         );
@@ -582,8 +574,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.InvalidKeyValue("SingleKey", "Id"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = null, AlternateId = 67 })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = null, AlternateId = 67 })
                 )
                 .Message
         );
@@ -596,8 +588,8 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.InvalidAlternateKeyValue("SingleKey", "AlternateId"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Attach(new SingleKey { Id = 77, AlternateId = null })
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(new SingleKey { Id = 77, AlternateId = null })
                 )
                 .Message
         );
@@ -610,17 +602,16 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.InvalidKeyValue("CompositeKey", "Id2"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 77,
-                                Id2 = null,
-                                AlternateId1 = 66,
-                                AlternateId2 = 68,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 77,
+                            Id2 = null,
+                            AlternateId1 = 66,
+                            AlternateId2 = 68,
+                        }
+                    )
                 )
                 .Message
         );
@@ -633,17 +624,16 @@ public class StateManagerTest
         Assert.Equal(
             CoreStrings.InvalidAlternateKeyValue("CompositeKey", "AlternateId2"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Attach(
-                            new CompositeKey
-                            {
-                                Id1 = 77,
-                                Id2 = 79,
-                                AlternateId1 = 66,
-                                AlternateId2 = null,
-                            }
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    context.Attach(
+                        new CompositeKey
+                        {
+                            Id1 = 77,
+                            Id2 = 79,
+                            AlternateId1 = 66,
+                            AlternateId2 = null,
+                        }
+                    )
                 )
                 .Message
         );

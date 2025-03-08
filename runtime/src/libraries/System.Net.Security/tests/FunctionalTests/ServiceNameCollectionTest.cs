@@ -50,8 +50,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         public void Constructor_NonStringCollection_Throws()
         {
             Assert.Throws<InvalidCastException>(() => new ServiceNameCollection(new[] { 1 }));
-            Assert.Throws<InvalidCastException>(
-                () => new ServiceNameCollection(new[] { new object() })
+            Assert.Throws<InvalidCastException>(() =>
+                new ServiceNameCollection(new[] { new object() })
             );
         }
 

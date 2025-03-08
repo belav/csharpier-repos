@@ -39,12 +39,12 @@ namespace System.Net.Http.Functional.Tests
         public void Ctor_InvalidStatusCodeRange_Throw()
         {
             int x = -1;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new HttpResponseMessage((HttpStatusCode)x)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HttpResponseMessage((HttpStatusCode)x)
             );
             x = 1000;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new HttpResponseMessage((HttpStatusCode)x)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HttpResponseMessage((HttpStatusCode)x)
             );
         }
 
@@ -329,8 +329,8 @@ namespace System.Net.Http.Functional.Tests
             Assert.Throws<NotSupportedException>(() => s.WriteByte(0));
             Assert.Throws<NotSupportedException>(() => s.Write(new byte[1], 0, 1));
             await Assert.ThrowsAsync<NotSupportedException>(() => s.WriteAsync(new byte[1], 0, 1));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await s.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]))
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await s.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]))
             );
         }
 

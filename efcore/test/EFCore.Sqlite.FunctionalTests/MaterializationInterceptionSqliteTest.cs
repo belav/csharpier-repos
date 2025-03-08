@@ -20,11 +20,10 @@ public class MaterializationInterceptionSqliteTest
         Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Intercept_query_materialization_with_owned_types_projecting_collection(
-                            async
-                        )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Intercept_query_materialization_with_owned_types_projecting_collection(
+                        async
+                    )
                 )
             ).Message
         );

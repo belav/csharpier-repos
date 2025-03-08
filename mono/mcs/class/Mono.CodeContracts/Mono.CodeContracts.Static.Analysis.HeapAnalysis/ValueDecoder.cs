@@ -53,12 +53,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             IILDecoder<APC, int, int, TContext, Dummy> stackDecoder
         )
         {
-            this.context = new Lazy<IValueContextProvider<SymbolicValue>>(
-                () =>
-                    new ValueContextProvider<TContext>(
-                        this.parent,
-                        this.stack_decoder.ContextProvider
-                    )
+            this.context = new Lazy<IValueContextProvider<SymbolicValue>>(() =>
+                new ValueContextProvider<TContext>(this.parent, this.stack_decoder.ContextProvider)
             );
             this.parent = parent;
             this.stack_decoder = stackDecoder;

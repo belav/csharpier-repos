@@ -14,8 +14,8 @@ namespace System.Reflection.Tests
             MethodInfo method = typeof(TestClassThatThrows).GetMethod(
                 nameof(TestClassThatThrows.Throw)
             )!;
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                () => method.Invoke(null, null)
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                method.Invoke(null, null)
             );
             Exception exInner = ex.InnerException;
 
@@ -28,8 +28,8 @@ namespace System.Reflection.Tests
         public static void VerifyInvokeIsUsingEmit_Constructor()
         {
             ConstructorInfo ctor = typeof(TestClassThatThrows).GetConstructor(Type.EmptyTypes)!;
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                () => ctor.Invoke(null)
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                ctor.Invoke(null)
             );
             Exception exInner = ex.InnerException;
 

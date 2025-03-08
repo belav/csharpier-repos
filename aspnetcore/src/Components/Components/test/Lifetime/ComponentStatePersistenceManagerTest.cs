@@ -51,8 +51,7 @@ public class ComponentStatePersistenceManagerTest
         await lifetime.RestoreStateAsync(store);
 
         // Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => lifetime.RestoreStateAsync(store)
+        await Assert.ThrowsAsync<InvalidOperationException>(() => lifetime.RestoreStateAsync(store)
         );
     }
 
@@ -77,8 +76,8 @@ public class ComponentStatePersistenceManagerTest
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => lifetime.PersistStateAsync(store, renderer)
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            lifetime.PersistStateAsync(store, renderer)
         );
     }
 

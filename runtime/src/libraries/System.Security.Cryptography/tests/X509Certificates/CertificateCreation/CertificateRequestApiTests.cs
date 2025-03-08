@@ -442,8 +442,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             DateTimeOffset notBefore = DateTimeOffset.UtcNow;
             DateTimeOffset notAfter = notBefore.AddMinutes(1);
 
-            ex = Assert.Throws<InvalidOperationException>(
-                () => req.CreateSelfSigned(notBefore, notAfter)
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                req.CreateSelfSigned(notBefore, notAfter)
             );
             Assert.Contains(nameof(X509SignatureGenerator), ex.Message);
         }
@@ -683,8 +683,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 pkcs10[^1] ^= 0xFF;
 
-                Assert.Throws<CryptographicException>(
-                    () => CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
+                Assert.Throws<CryptographicException>(() =>
+                    CertificateRequest.LoadSigningRequest(pkcs10, hashAlgorithmName, out _)
                 );
 
                 // Assert.NoThrow

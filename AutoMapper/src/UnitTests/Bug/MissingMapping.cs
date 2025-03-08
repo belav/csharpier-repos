@@ -17,8 +17,7 @@ public class MissingMapping : AutoMapperSpecBase
     [Fact]
     public void Can_not_map_unmapped_type()
     {
-        new Action(
-            () => Mapper.Map<Source, Dest>(new Source())
+        new Action(() => Mapper.Map<Source, Dest>(new Source())
         ).ShouldThrow<AutoMapperMappingException>();
     }
 }

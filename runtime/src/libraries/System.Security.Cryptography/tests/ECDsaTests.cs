@@ -24,8 +24,8 @@ namespace System.Security.Cryptography.Tests
         public void Create_InvalidECCurveFriendlyName_ThrowsPlatformNotSupportedException()
         {
             ECCurve curve = ECCurve.CreateFromFriendlyName("bad potato");
-            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(
-                () => ECDsa.Create(curve)
+            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(() =>
+                ECDsa.Create(curve)
             );
             Assert.Contains("'bad potato'", pnse.Message);
         }
@@ -37,8 +37,8 @@ namespace System.Security.Cryptography.Tests
             {
                 Assert.Throws<NotSupportedException>(() => ecdsa.ExportParameters(false));
                 Assert.Throws<NotSupportedException>(() => ecdsa.ExportExplicitParameters(false));
-                Assert.Throws<NotSupportedException>(
-                    () => ecdsa.ImportParameters(default(ECParameters))
+                Assert.Throws<NotSupportedException>(() =>
+                    ecdsa.ImportParameters(default(ECParameters))
                 );
                 Assert.Throws<NotSupportedException>(() => ecdsa.GenerateKey(default(ECCurve)));
 

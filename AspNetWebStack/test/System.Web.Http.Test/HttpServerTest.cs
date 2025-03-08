@@ -468,8 +468,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<Exception>(
-                    () => product.SendAsync(expectedRequest, cancellationToken)
+                await Assert.ThrowsAsync<Exception>(() =>
+                    product.SendAsync(expectedRequest, cancellationToken)
                 );
 
                 // Assert
@@ -535,8 +535,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () => product.SendAsync(expectedRequest, cancellationToken)
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    product.SendAsync(expectedRequest, cancellationToken)
                 );
 
                 // The mock handler and logger will throw if they are called, so this test verifies that
@@ -583,8 +583,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<Exception>(
-                    () => product.SendAsync(request, cancellationToken)
+                var exception = await Assert.ThrowsAsync<Exception>(() =>
+                    product.SendAsync(request, cancellationToken)
                 );
 
                 Assert.Same(expectedException, exception);

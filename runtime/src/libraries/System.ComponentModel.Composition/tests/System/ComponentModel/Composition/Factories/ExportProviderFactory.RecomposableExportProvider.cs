@@ -69,11 +69,10 @@ namespace System.ComponentModel.Composition.Factories
                         new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition)
                     );
 
-                    atomicComposition.AddCompleteAction(
-                        () =>
-                            this.OnExportsChanged(
-                                new ExportsChangeEventArgs(addedExports, removedExports, null)
-                            )
+                    atomicComposition.AddCompleteAction(() =>
+                        this.OnExportsChanged(
+                            new ExportsChangeEventArgs(addedExports, removedExports, null)
+                        )
                     );
 
                     atomicComposition.Complete();

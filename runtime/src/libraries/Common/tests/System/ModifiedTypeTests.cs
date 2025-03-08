@@ -52,11 +52,10 @@ namespace System.Tests.Types
                 var _ = t.GUID; // Just ensure it doesn't throw.
                 Assert.Throws<InvalidOperationException>(() => t.GenericParameterAttributes);
                 Assert.Throws<InvalidOperationException>(() => t.GenericParameterPosition);
-                Assert.Throws<InvalidOperationException>(
-                    () => t.GetFunctionPointerCallingConventions()
+                Assert.Throws<InvalidOperationException>(() =>
+                    t.GetFunctionPointerCallingConventions()
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () => t.GetFunctionPointerParameterTypes()
+                Assert.Throws<InvalidOperationException>(() => t.GetFunctionPointerParameterTypes()
                 );
                 Assert.Throws<InvalidOperationException>(() => t.GetFunctionPointerReturnType());
                 Assert.False(t.HasElementType);

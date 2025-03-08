@@ -901,8 +901,8 @@ namespace System.Text.Json.Serialization.Tests
             bob.Spouse = angela;
 
             // Nothing is preserved, hence MaxDepth will be reached.
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.SerializeWrapper(angela, options)
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.SerializeWrapper(angela, options)
             );
         }
 
@@ -990,33 +990,30 @@ namespace System.Text.Json.Serialization.Tests
 
             // A JSON object that contains a '$ref' metadata property must not contain any other properties.
             string testJson = baseJson + @"{""foo"":""value"",""$ref"":""1""}}";
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
-                        testJson,
-                        s_serializerOptionsPreserve
-                    )
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
+                await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
+                    testJson,
+                    s_serializerOptionsPreserve
+                )
             );
             Assert.Equal("$.Sibling", ex.Path);
 
             testJson = baseJson + @"{""$ref"":""1"",""bar"":""value""}}";
-            ex = await Assert.ThrowsAsync<JsonException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
-                        testJson,
-                        s_serializerOptionsPreserve
-                    )
+            ex = await Assert.ThrowsAsync<JsonException>(async () =>
+                await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
+                    testJson,
+                    s_serializerOptionsPreserve
+                )
             );
             Assert.Equal("$.Sibling", ex.Path);
 
             // The '$id' and '$ref' metadata properties must be JSON strings.
             testJson = baseJson + @"{""$ref"":1}}";
-            ex = await Assert.ThrowsAsync<JsonException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
-                        testJson,
-                        s_serializerOptionsPreserve
-                    )
+            ex = await Assert.ThrowsAsync<JsonException>(async () =>
+                await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
+                    testJson,
+                    s_serializerOptionsPreserve
+                )
             );
             Assert.Equal("$.Sibling", ex.Path);
         }

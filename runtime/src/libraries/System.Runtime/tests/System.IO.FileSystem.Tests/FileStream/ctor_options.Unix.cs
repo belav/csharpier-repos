@@ -107,18 +107,17 @@ namespace System.IO.Tests
             }
             else
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        CreateFileStream(
-                            filename,
-                            fileMode,
-                            FileAccess.Write,
-                            FileShare.None,
-                            bufferSize: 1,
-                            FileOptions.None,
-                            preallocationSize: 0,
-                            unixMode
-                        )
+                Assert.Throws<ArgumentException>(() =>
+                    CreateFileStream(
+                        filename,
+                        fileMode,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize: 1,
+                        FileOptions.None,
+                        preallocationSize: 0,
+                        unixMode
+                    )
                 );
             }
         }

@@ -148,8 +148,8 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = new Bitmap(100, 100, PixelFormat.Format8bppIndexed))
             {
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(
-                    () => bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
+                Assert.Throws<ArgumentException>(() =>
+                    bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
                 );
             }
         }
@@ -161,14 +161,8 @@ namespace MonoTests.System.Drawing
             {
                 BitmapData bd = new BitmapData();
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        bmp.LockBits(
-                            rect,
-                            ImageLockMode.ReadWrite,
-                            PixelFormat.Format8bppIndexed,
-                            bd
-                        )
+                Assert.Throws<ArgumentException>(() =>
+                    bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed, bd)
                 );
 
                 // test to see if there's a leak or not in this case
@@ -230,8 +224,8 @@ namespace MonoTests.System.Drawing
                 );
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb)
                     );
                 }
                 finally
@@ -247,8 +241,8 @@ namespace MonoTests.System.Drawing
             Bitmap bmp = new Bitmap(100, 100, PixelFormat.Format32bppRgb);
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
             bmp.Dispose();
-            Assert.Throws<ArgumentException>(
-                () => bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
+            Assert.Throws<ArgumentException>(() =>
+                bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
             );
         }
 
@@ -284,14 +278,8 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = new Bitmap(100, 100, PixelFormat.Format32bppRgb))
             {
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        bmp.LockBits(
-                            rect,
-                            ImageLockMode.ReadWrite,
-                            PixelFormat.Format24bppRgb,
-                            null
-                        )
+                Assert.Throws<ArgumentException>(() =>
+                    bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb, null)
                 );
             }
         }
@@ -2080,8 +2068,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void BitmapImageIntIntCtor()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Bitmap((Image)null, Int32.MinValue, Int32.MaxValue)
+            Assert.Throws<ArgumentException>(() =>
+                new Bitmap((Image)null, Int32.MinValue, Int32.MaxValue)
             );
         }
 
@@ -2100,8 +2088,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void BitmapIntIntPixelFormatCtor()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Bitmap(Int32.MinValue, Int32.MaxValue, PixelFormat.Format1bppIndexed)
+            Assert.Throws<ArgumentException>(() =>
+                new Bitmap(Int32.MinValue, Int32.MaxValue, PixelFormat.Format1bppIndexed)
             );
         }
 
@@ -2188,8 +2176,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void SetResolution_NegativeInfinity()
         {
-            Assert.Throws<ArgumentException>(
-                () => SetResolution(Single.NegativeInfinity, Single.NegativeInfinity)
+            Assert.Throws<ArgumentException>(() =>
+                SetResolution(Single.NegativeInfinity, Single.NegativeInfinity)
             );
         }
     }

@@ -2094,99 +2094,90 @@ unsafe class C
                         ImmutableArray.Create((INamedTypeSymbol)null!)
                     )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray.Create(RefKind.None)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray.Create(RefKind.None)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.Out,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.Out,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: (SignatureCallingConvention)10
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: (SignatureCallingConvention)10
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.Default,
-                        callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.Default,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.StdCall,
-                        callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.StdCall,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.FastCall,
-                        callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.FastCall,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.CDecl,
-                        callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.CDecl,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.ThisCall,
-                        callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.ThisCall,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    comp.CreateFunctionPointerTypeSymbol(
-                        returnType: @string,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.Unmanaged,
-                        callingConventionTypes: ImmutableArray.Create(@string)!
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.Unmanaged,
+                    callingConventionTypes: ImmutableArray.Create(@string)!
+                )
             );
         }
 
@@ -2835,18 +2826,15 @@ namespace System
             );
             Assert.True(FunctionPointerTypeSymbol.IsCallingConventionModifier(testConvention));
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    mainComp.CreateFunctionPointerTypeSymbol(
-                        returnType!,
-                        returnRefKind: RefKind.None,
-                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        callingConvention: SignatureCallingConvention.Unmanaged,
-                        callingConventionTypes: ImmutableArray.Create(
-                            testConvention.GetPublicSymbol()!
-                        )
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                mainComp.CreateFunctionPointerTypeSymbol(
+                    returnType!,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.Unmanaged,
+                    callingConventionTypes: ImmutableArray.Create(testConvention.GetPublicSymbol()!)
+                )
             );
         }
 

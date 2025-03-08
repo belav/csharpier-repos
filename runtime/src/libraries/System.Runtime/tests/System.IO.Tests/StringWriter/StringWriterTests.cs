@@ -471,11 +471,11 @@ namespace System.IO.Tests
         {
             var writer = new StringWriter();
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => writer.WriteAsync(Memory<char>.Empty, new CancellationToken(true))
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                writer.WriteAsync(Memory<char>.Empty, new CancellationToken(true))
             );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => writer.WriteLineAsync(Memory<char>.Empty, new CancellationToken(true))
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                writer.WriteLineAsync(Memory<char>.Empty, new CancellationToken(true))
             );
         }
 

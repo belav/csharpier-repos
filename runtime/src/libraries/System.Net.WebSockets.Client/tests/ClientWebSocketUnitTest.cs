@@ -68,13 +68,12 @@ namespace System.Net.WebSockets.Client.Tests
                     )
                 )
                 {
-                    exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            cws.CloseOutputAsync(
-                                WebSocketCloseStatus.Empty,
-                                "",
-                                new CancellationToken()
-                            )
+                    exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        cws.CloseOutputAsync(
+                            WebSocketCloseStatus.Empty,
+                            "",
+                            new CancellationToken()
+                        )
                     );
                 }
 
@@ -122,8 +121,8 @@ namespace System.Net.WebSockets.Client.Tests
                     )
                 )
                 {
-                    exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.ReceiveAsync(segment, ct)
+                    exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        cws.ReceiveAsync(segment, ct)
                     );
                 }
 
@@ -170,8 +169,8 @@ namespace System.Net.WebSockets.Client.Tests
                     )
                 )
                 {
-                    exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
+                    exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
                     );
                 }
 

@@ -283,13 +283,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(
-                () =>
-                    tracer.ExecuteBindingAsync(
-                        metadataProvider,
-                        actionContext,
-                        CancellationToken.None
-                    )
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                tracer.ExecuteBindingAsync(metadataProvider, actionContext, CancellationToken.None)
             );
 
             // Assert

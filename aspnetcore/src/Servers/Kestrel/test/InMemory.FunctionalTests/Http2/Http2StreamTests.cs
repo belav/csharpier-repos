@@ -1805,8 +1805,8 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.StartAsync();
-            ex = Assert.Throws<InvalidOperationException>(
-                () => context.Response.OnStarting(_ => Task.CompletedTask, null)
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                context.Response.OnStarting(_ => Task.CompletedTask, null)
             );
         });
 
@@ -2512,17 +2512,17 @@ public class Http2StreamTests : Http2TestBase
     {
         await InitializeConnectionAsync(async context =>
         {
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Headers.Append("Custom你好Name", "Custom Value")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.ContentType = "Custom 你好 Type"
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.ContentType = "Custom 你好 Type"
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Headers.Append("CustomName", "Custom 你好 Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Headers.Append("CustomName", "Custom 你好 Value")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Headers.Append("CustomName", "Custom \r Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Headers.Append("CustomName", "Custom \r Value")
             );
             await context.Response.WriteAsync("Hello World");
         });
@@ -2567,11 +2567,11 @@ public class Http2StreamTests : Http2TestBase
 
         await InitializeConnectionAsync(async context =>
         {
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Headers.Append("Custom你好Name", "Custom Value")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Headers.Append("CustomName", "Custom \r Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Headers.Append("CustomName", "Custom \r Value")
             );
             context.Response.ContentType = "Custom 你好 Type";
             context.Response.Headers.Append("CustomName", "Custom 你好 Value");
@@ -2909,25 +2909,23 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.AppendTrailer("Custom你好Name", "Custom Value")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.AppendTrailer("CustomName", "Custom 你好 Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.AppendTrailer("CustomName", "Custom 你好 Value")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.AppendTrailer("CustomName", "Custom \r Value")
             );
             // ETag is one of the few special cased trailers. Accept is not.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
-                        "Custom 你好 Tag"
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
+                    "Custom 你好 Tag"
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
-                        "Custom 你好 Tag"
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
+                    "Custom 你好 Tag"
             );
         });
 
@@ -2972,11 +2970,11 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.AppendTrailer("Custom你好Name", "Custom Value")
             );
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.AppendTrailer("CustomName", "Custom \r Value")
             );
             context.Response.AppendTrailer("CustomName", "Custom 你好 Value");
             // ETag is one of the few special cased trailers. Accept is not.
@@ -3629,8 +3627,8 @@ public class Http2StreamTests : Http2TestBase
             context.Abort();
 
             var buffer = new byte[100];
-            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
+            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
             );
 
             Assert.True(thrownExTask.IsCompleted);
@@ -3660,8 +3658,8 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             var buffer = new byte[100];
-            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
+            var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
             );
 
             Assert.False(thrownExTask.IsCompleted);
@@ -3794,8 +3792,8 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             // The cancellation is checked at the start of WriteAsync and no application state is changed.
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () => context.Response.WriteAsync("hello,", new CancellationToken(true))
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                context.Response.WriteAsync("hello,", new CancellationToken(true))
             );
             Assert.False(context.Response.HasStarted);
         });
@@ -4781,8 +4779,8 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             context.Response.BodyWriter.Complete();
-            writeEx = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => context.Response.WriteAsync("")
+            writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.WriteAsync("")
             );
         });
 
@@ -5028,8 +5026,8 @@ public class Http2StreamTests : Http2TestBase
                 context.Response.ContentLength = 25;
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => context.Response.CompleteAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    context.Response.CompleteAsync().DefaultTimeout()
                 );
                 Assert.Equal(CoreStrings.FormatTooFewBytesWritten(0, 25), ex.Message);
 
@@ -5185,8 +5183,8 @@ public class Http2StreamTests : Http2TestBase
                     context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                 );
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    context.Response.WriteAsync("2 Hello World").DefaultTimeout()
                 );
                 Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
@@ -5260,8 +5258,8 @@ public class Http2StreamTests : Http2TestBase
                     context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                 );
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    context.Response.WriteAsync("2 Hello World").DefaultTimeout()
                 );
                 Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
@@ -5582,8 +5580,8 @@ public class Http2StreamTests : Http2TestBase
 
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => context.Response.CompleteAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    context.Response.CompleteAsync().DefaultTimeout()
                 );
                 Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
@@ -5672,8 +5670,8 @@ public class Http2StreamTests : Http2TestBase
 
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => context.Response.BodyWriter.Complete()
+                var ex = Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.BodyWriter.Complete()
                 );
                 Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
@@ -5879,8 +5877,8 @@ public class Http2StreamTests : Http2TestBase
                 context.Abort();
 
                 await Assert.ThrowsAsync<TaskCanceledException>(async () => await requestBodyTask);
-                await Assert.ThrowsAsync<ConnectionAbortedException>(
-                    async () => await context.Request.BodyReader.ReadAsync()
+                await Assert.ThrowsAsync<ConnectionAbortedException>(async () =>
+                    await context.Request.BodyReader.ReadAsync()
                 );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -6088,8 +6086,8 @@ public class Http2StreamTests : Http2TestBase
                 resetFeature.Reset((int)Http2ErrorCode.NO_ERROR);
 
                 await Assert.ThrowsAsync<TaskCanceledException>(async () => await requestBodyTask);
-                await Assert.ThrowsAsync<ConnectionAbortedException>(
-                    async () => await context.Request.BodyReader.ReadAsync()
+                await Assert.ThrowsAsync<ConnectionAbortedException>(async () =>
+                    await context.Request.BodyReader.ReadAsync()
                 );
 
                 // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.

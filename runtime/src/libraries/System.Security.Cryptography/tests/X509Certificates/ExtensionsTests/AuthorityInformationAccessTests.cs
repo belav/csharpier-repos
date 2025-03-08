@@ -132,20 +132,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 ArgumentException ex = Assert.Throws<ArgumentException>(action);
                 Assert.Null(ex.ParamName);
             }
-            AssertProperException(
-                () =>
-                    new X509AuthorityInformationAccessExtension(
-                        Enumerable.Empty<string>(),
-                        Enumerable.Empty<string>()
-                    )
+            AssertProperException(() =>
+                new X509AuthorityInformationAccessExtension(
+                    Enumerable.Empty<string>(),
+                    Enumerable.Empty<string>()
+                )
             );
 
-            AssertProperException(
-                () => new X509AuthorityInformationAccessExtension(Enumerable.Empty<string>(), null)
+            AssertProperException(() =>
+                new X509AuthorityInformationAccessExtension(Enumerable.Empty<string>(), null)
             );
 
-            AssertProperException(
-                () => new X509AuthorityInformationAccessExtension(null, Enumerable.Empty<string>())
+            AssertProperException(() =>
+                new X509AuthorityInformationAccessExtension(null, Enumerable.Empty<string>())
             );
 
             AssertProperException(() => new X509AuthorityInformationAccessExtension(null, null));
@@ -221,12 +220,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             const string BadEntry = "\u212C is not a B";
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    new X509AuthorityInformationAccessExtension(
-                        new[] { "A", BadEntry, "C" },
-                        new[] { "D" }
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(
+                    new[] { "A", BadEntry, "C" },
+                    new[] { "D" }
+                )
             );
         }
 
@@ -235,24 +233,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             const string BadEntry = "\u212B is not an A";
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () =>
-                    new X509AuthorityInformationAccessExtension(
-                        new[] { "D" },
-                        new[] { "C", "B", BadEntry }
-                    )
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(
+                    new[] { "D" },
+                    new[] { "C", "B", BadEntry }
+                )
             );
         }
 
         [Fact]
         public static void BuildNullOcspValue()
         {
-            ArgumentException ex = Assert.Throws<ArgumentException>(
-                () =>
-                    new X509AuthorityInformationAccessExtension(
-                        new[] { "A", null, "C" },
-                        new[] { "D" }
-                    )
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                new X509AuthorityInformationAccessExtension(new[] { "A", null, "C" }, new[] { "D" })
             );
 
             Assert.Null(ex.ParamName);
@@ -261,12 +254,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         [Fact]
         public static void BuildNullCAIssuerValue()
         {
-            ArgumentException ex = Assert.Throws<ArgumentException>(
-                () =>
-                    new X509AuthorityInformationAccessExtension(
-                        new[] { "D" },
-                        new[] { "C", "B", null }
-                    )
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                new X509AuthorityInformationAccessExtension(new[] { "D" }, new[] { "C", "B", null })
             );
 
             Assert.Null(ex.ParamName);
@@ -450,15 +439,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             byte[] invalidEncoding = Convert.FromHexString(invalidEncodingHex);
 
-            Assert.Throws<CryptographicException>(
-                () => new X509AuthorityInformationAccessExtension(invalidEncoding)
+            Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(invalidEncoding)
             );
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    new X509AuthorityInformationAccessExtension(
-                        new ReadOnlySpan<byte>(invalidEncoding)
-                    )
+            Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(new ReadOnlySpan<byte>(invalidEncoding))
             );
 
             X509Extension unverified = new X509Extension(

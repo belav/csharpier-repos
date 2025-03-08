@@ -52,8 +52,8 @@ public class Color
     public static void ForegroundColor_Throws_PlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.ForegroundColor);
-        Assert.Throws<PlatformNotSupportedException>(
-            () => Console.ForegroundColor = ConsoleColor.Red
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            Console.ForegroundColor = ConsoleColor.Red
         );
     }
 
@@ -62,8 +62,8 @@ public class Color
     public static void BackgroundColor_Throws_PlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.BackgroundColor);
-        Assert.Throws<PlatformNotSupportedException>(
-            () => Console.BackgroundColor = ConsoleColor.Red
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            Console.BackgroundColor = ConsoleColor.Red
         );
     }
 

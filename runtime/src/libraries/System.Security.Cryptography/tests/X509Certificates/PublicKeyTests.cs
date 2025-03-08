@@ -448,8 +448,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.Equal(160, ec.KeySize);
 
                         // The public key should be unable to sign.
-                        Assert.ThrowsAny<CryptographicException>(
-                            () => ec.SignData(helloBytes, HashAlgorithmName.SHA256)
+                        Assert.ThrowsAny<CryptographicException>(() =>
+                            ec.SignData(helloBytes, HashAlgorithmName.SHA256)
                         );
                     }
                 }
@@ -473,8 +473,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(384, publicKey.KeySize);
 
                 // The public key should be unable to sign.
-                Assert.ThrowsAny<CryptographicException>(
-                    () => publicKey.SignData(helloBytes, HashAlgorithmName.SHA256)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    publicKey.SignData(helloBytes, HashAlgorithmName.SHA256)
                 );
             }
         }
@@ -491,9 +491,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(256, publicKey.KeySize);
 
                 // The public key should be unable to derive a secret private parameters.
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        publicKey.DeriveKeyFromHash(otherParty.PublicKey, HashAlgorithmName.SHA256)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    publicKey.DeriveKeyFromHash(otherParty.PublicKey, HashAlgorithmName.SHA256)
                 );
             }
         }
@@ -1075,8 +1074,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void CreateFromSubjectPublicKeyInfo_BadEncoding()
         {
-            Assert.Throws<CryptographicException>(
-                () => PublicKey.CreateFromSubjectPublicKeyInfo(new byte[] { 0xFF }, out _)
+            Assert.Throws<CryptographicException>(() =>
+                PublicKey.CreateFromSubjectPublicKeyInfo(new byte[] { 0xFF }, out _)
             );
         }
 

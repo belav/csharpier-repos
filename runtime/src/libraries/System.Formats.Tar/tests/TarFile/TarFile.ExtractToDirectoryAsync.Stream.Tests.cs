@@ -20,27 +20,25 @@ namespace System.Formats.Tar.Tests
             cs.Cancel();
             using (MemoryStream archiveStream = new MemoryStream())
             {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () =>
-                        TarFile.ExtractToDirectoryAsync(
-                            archiveStream,
-                            "directory",
-                            overwriteFiles: true,
-                            cs.Token
-                        )
+                await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                    TarFile.ExtractToDirectoryAsync(
+                        archiveStream,
+                        "directory",
+                        overwriteFiles: true,
+                        cs.Token
+                    )
                 );
             }
         }
 
         [Fact]
         public Task NullStream_Throws_Async() =>
-            Assert.ThrowsAsync<ArgumentNullException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        source: null,
-                        destinationDirectoryName: "path",
-                        overwriteFiles: false
-                    )
+            Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    source: null,
+                    destinationDirectoryName: "path",
+                    overwriteFiles: false
+                )
             );
 
         [Fact]
@@ -48,21 +46,19 @@ namespace System.Formats.Tar.Tests
         {
             using (MemoryStream archive = new MemoryStream())
             {
-                await Assert.ThrowsAsync<ArgumentNullException>(
-                    () =>
-                        TarFile.ExtractToDirectoryAsync(
-                            archive,
-                            destinationDirectoryName: null,
-                            overwriteFiles: false
-                        )
+                await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                    TarFile.ExtractToDirectoryAsync(
+                        archive,
+                        destinationDirectoryName: null,
+                        overwriteFiles: false
+                    )
                 );
-                await Assert.ThrowsAsync<ArgumentException>(
-                    () =>
-                        TarFile.ExtractToDirectoryAsync(
-                            archive,
-                            destinationDirectoryName: string.Empty,
-                            overwriteFiles: false
-                        )
+                await Assert.ThrowsAsync<ArgumentException>(() =>
+                    TarFile.ExtractToDirectoryAsync(
+                        archive,
+                        destinationDirectoryName: string.Empty,
+                        overwriteFiles: false
+                    )
                 );
             }
         }
@@ -81,13 +77,12 @@ namespace System.Formats.Tar.Tests
                     )
                 )
                 {
-                    await Assert.ThrowsAsync<ArgumentException>(
-                        () =>
-                            TarFile.ExtractToDirectoryAsync(
-                                unreadable,
-                                destinationDirectoryName: "path",
-                                overwriteFiles: false
-                            )
+                    await Assert.ThrowsAsync<ArgumentException>(() =>
+                        TarFile.ExtractToDirectoryAsync(
+                            unreadable,
+                            destinationDirectoryName: "path",
+                            overwriteFiles: false
+                        )
                     );
                 }
             }
@@ -102,13 +97,12 @@ namespace System.Formats.Tar.Tests
 
                 using (MemoryStream archive = new MemoryStream())
                 {
-                    await Assert.ThrowsAsync<DirectoryNotFoundException>(
-                        () =>
-                            TarFile.ExtractToDirectoryAsync(
-                                archive,
-                                destinationDirectoryName: dirPath,
-                                overwriteFiles: false
-                            )
+                    await Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+                        TarFile.ExtractToDirectoryAsync(
+                            archive,
+                            destinationDirectoryName: dirPath,
+                            overwriteFiles: false
+                        )
                     );
                 }
             }
@@ -250,13 +244,8 @@ namespace System.Formats.Tar.Tests
 
                 using (TempDirectory root = new TempDirectory())
                 {
-                    await Assert.ThrowsAnyAsync<IOException>(
-                        () =>
-                            TarFile.ExtractToDirectoryAsync(
-                                archive,
-                                root.Path,
-                                overwriteFiles: false
-                            )
+                    await Assert.ThrowsAnyAsync<IOException>(() =>
+                        TarFile.ExtractToDirectoryAsync(archive, root.Path, overwriteFiles: false)
                     );
                     Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
                 }
@@ -801,13 +790,12 @@ namespace System.Formats.Tar.Tests
             }
             archive.Position = 0;
 
-            await Assert.ThrowsAsync<IOException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        archive,
-                        destinationFolderPath,
-                        overwriteFiles: false
-                    )
+            await Assert.ThrowsAsync<IOException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    archive,
+                    destinationFolderPath,
+                    overwriteFiles: false
+                )
             );
             Assert.False(File.Exists(entryFilePath), $"File should not exist: {entryFilePath}");
         }

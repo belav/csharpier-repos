@@ -127,8 +127,8 @@ public class HandshakeProtocolTests
     {
         var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(payload));
 
-        var exception = Assert.Throws<InvalidDataException>(
-            () => Assert.True(HandshakeProtocol.TryParseRequestMessage(ref message, out _))
+        var exception = Assert.Throws<InvalidDataException>(() =>
+            Assert.True(HandshakeProtocol.TryParseRequestMessage(ref message, out _))
         );
 
         Assert.Equal(expectedMessage, exception.Message);
@@ -147,8 +147,8 @@ public class HandshakeProtocolTests
     {
         var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(payload));
 
-        var exception = Assert.Throws<InvalidDataException>(
-            () => HandshakeProtocol.TryParseResponseMessage(ref message, out _)
+        var exception = Assert.Throws<InvalidDataException>(() =>
+            HandshakeProtocol.TryParseResponseMessage(ref message, out _)
         );
 
         Assert.Equal(expectedMessage, exception.Message);

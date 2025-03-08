@@ -230,12 +230,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             Assert.Throws<ArgumentException>(() => asc.Add("file4.cs", SourceText.From("")));
 
             // explicit null encoding
-            Assert.Throws<ArgumentException>(
-                () => asc.Add("file5.cs", SourceText.From("", encoding: null))
+            Assert.Throws<ArgumentException>(() =>
+                asc.Add("file5.cs", SourceText.From("", encoding: null))
             );
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => asc.Add("file5.cs", SourceText.From("", encoding: null))
+            var exception = Assert.Throws<ArgumentException>(() =>
+                asc.Add("file5.cs", SourceText.From("", encoding: null))
             );
 
             // check the exception contains the expected hintName

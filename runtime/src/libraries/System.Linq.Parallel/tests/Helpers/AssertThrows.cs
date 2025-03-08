@@ -16,8 +16,8 @@ namespace System.Linq.Parallel.Tests
                 .ThrowOnEnumeration(new ShouldNotBeInvokedException(), 2)
                 .AsParallel()
                 .WithCancellation(new CancellationToken(canceled: true));
-            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(
-                () => query(s)
+            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
+                query(s)
             );
         }
 
@@ -36,8 +36,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> s = ParallelEnumerable
                 .Range(0, EventualCancellationSize)
                 .WithCancellation(source.Token);
-            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(
-                () => query(s, cancel)
+            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
+                query(s, cancel)
             );
             Assert.Equal(source.Token, oce.CancellationToken);
         }
@@ -60,8 +60,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> s = ParallelEnumerable
                 .Range(0, EventualCancellationSize)
                 .WithCancellation(source.Token);
-            OperationCanceledException oce = Wrapped<OperationCanceledException>(
-                () => query(s, cancel)
+            OperationCanceledException oce = Wrapped<OperationCanceledException>(() =>
+                query(s, cancel)
             );
             Assert.NotEqual(source.Token, oce.CancellationToken);
         }
@@ -81,8 +81,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> s = ParallelEnumerable
                 .Range(0, EventualCancellationSize)
                 .WithCancellation(source.Token);
-            OperationCanceledException oce = Wrapped<OperationCanceledException>(
-                () => query(s, cancel)
+            OperationCanceledException oce = Wrapped<OperationCanceledException>(() =>
+                query(s, cancel)
             );
             Assert.Equal(source.Token, oce.CancellationToken);
         }

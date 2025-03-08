@@ -1484,10 +1484,9 @@ public class IncludeMembersWithGenericsInvalidStrings
     {
         new MapperConfiguration(cfg =>
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
-                        .IncludeMembers("dInnerSource", "fOtherInnerSource")
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
+                    .IncludeMembers("dInnerSource", "fOtherInnerSource")
             );
         });
     }

@@ -328,8 +328,8 @@ namespace System.Diagnostics.TraceSourceConfigTests
 
             // The referenced S.R.ConfigurationManager.dll is NetStandard, which does not support EventLogTraceListener.
             mySource = new("EventLogTraceListener");
-            Exception e = Assert.Throws<ConfigurationErrorsException>(
-                () => mySource.Listeners[1].Name
+            Exception e = Assert.Throws<ConfigurationErrorsException>(() =>
+                mySource.Listeners[1].Name
             );
             Assert.IsType<PlatformNotSupportedException>(e.InnerException);
 
@@ -360,8 +360,8 @@ namespace System.Diagnostics.TraceSourceConfigTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/74244", TestPlatforms.tvOS)]
         public void Switch_MissingValue_Throws()
         {
-            Exception e = Assert.Throws<ConfigurationErrorsException>(
-                () => CreateAndLoadConfigFile("testhost_Switch_MissingValue_Throws.config")
+            Exception e = Assert.Throws<ConfigurationErrorsException>(() =>
+                CreateAndLoadConfigFile("testhost_Switch_MissingValue_Throws.config")
             );
 
             Assert.Contains("'value'", e.ToString());

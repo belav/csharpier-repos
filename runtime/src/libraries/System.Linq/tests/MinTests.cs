@@ -1011,8 +1011,7 @@ namespace System.Linq.Tests
         public void Min_DateTime_EmptySource_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Min());
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<DateTime>().Min(x => x)
+            Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Min(x => x)
             );
             Assert.Throws<InvalidOperationException>(() => Array.Empty<DateTime>().Min());
             Assert.Throws<InvalidOperationException>(() => new List<DateTime>().Min());
@@ -1373,11 +1372,11 @@ namespace System.Linq.Tests
         public static void Min_Generic_EmptyStructSource_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<int>().Min());
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<int>().Min(comparer: null)
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().Min(comparer: null)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<int>().Min(Comparer<int>.Create((_, _) => 0))
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().Min(Comparer<int>.Create((_, _) => 0))
             );
         }
 
@@ -1485,17 +1484,16 @@ namespace System.Linq.Tests
         [Fact]
         public static void MinBy_Generic_EmptyStructSource_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<int>().MinBy(x => x.ToString())
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().MinBy(x => x.ToString())
             );
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<int>().MinBy(x => x.ToString(), comparer: null)
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().MinBy(x => x.ToString(), comparer: null)
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Enumerable
-                        .Empty<int>()
-                        .MinBy(x => x.ToString(), Comparer<string>.Create((_, _) => 0))
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable
+                    .Empty<int>()
+                    .MinBy(x => x.ToString(), Comparer<string>.Create((_, _) => 0))
             );
         }
 

@@ -637,8 +637,8 @@ namespace System.Tests
         [InlineData("Yellow,Orange")]
         public static void Parse_NonExistentValue_IncludedInErrorMessage(string value)
         {
-            ArgumentException e = Assert.Throws<ArgumentException>(
-                () => Enum.Parse(typeof(SimpleEnum), value)
+            ArgumentException e = Assert.Throws<ArgumentException>(() =>
+                Enum.Parse(typeof(SimpleEnum), value)
             );
             Assert.Contains(value, e.Message);
         }
@@ -1117,8 +1117,7 @@ namespace System.Tests
         [MemberData(nameof(IsDefined_NonIntegerValue_TestData))]
         public void IsDefined_NonIntegerValue_ThrowsThrowsInvalidOperationException(object value)
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Enum.IsDefined(typeof(SimpleEnum), value)
+            Assert.Throws<InvalidOperationException>(() => Enum.IsDefined(typeof(SimpleEnum), value)
             );
         }
 
@@ -2633,20 +2632,18 @@ namespace System.Tests
                 typeof(ClassWithEnumConstraint<>).GetGenericArguments()[0];
             Assert.True(genericArgumentWithEnumConstraint.IsEnum);
 
-            Assert.Throws<ArgumentException>(
-                () => Enum.GetUnderlyingType(genericArgumentWithEnumConstraint)
+            Assert.Throws<ArgumentException>(() =>
+                Enum.GetUnderlyingType(genericArgumentWithEnumConstraint)
             );
-            Assert.Throws<ArgumentException>(
-                () => Enum.IsDefined(genericArgumentWithEnumConstraint, 1)
+            Assert.Throws<ArgumentException>(() =>
+                Enum.IsDefined(genericArgumentWithEnumConstraint, 1)
             );
-            Assert.Throws<ArgumentException>(
-                () => Enum.GetName(genericArgumentWithEnumConstraint, 1)
+            Assert.Throws<ArgumentException>(() =>
+                Enum.GetName(genericArgumentWithEnumConstraint, 1)
             );
-            Assert.Throws<ArgumentException>(
-                () => Enum.GetNames(genericArgumentWithEnumConstraint)
+            Assert.Throws<ArgumentException>(() => Enum.GetNames(genericArgumentWithEnumConstraint)
             );
-            Assert.Throws<ArgumentException>(
-                () => Enum.GetValues(genericArgumentWithEnumConstraint)
+            Assert.Throws<ArgumentException>(() => Enum.GetValues(genericArgumentWithEnumConstraint)
             );
         }
 
@@ -4398,8 +4395,8 @@ namespace System.Tests
             int charsWritten = 0;
             char[] destination = new char[expected.Length];
 
-            Assert.Throws<FormatException>(
-                () => Enum.TryFormat(expecedEnum, destination, out charsWritten, format)
+            Assert.Throws<FormatException>(() =>
+                Enum.TryFormat(expecedEnum, destination, out charsWritten, format)
             );
             Assert.Equal(new string('\0', expected.Length), new string(destination));
             Assert.Equal(0, charsWritten);
@@ -4440,14 +4437,13 @@ namespace System.Tests
                 () => Enum.Format(typeof(SimpleEnum), "Red", "F")
             ); // Value is of the wrong integral
 
-            Assert.Throws<FormatException>(
-                () => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "")
+            Assert.Throws<FormatException>(() => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "")
             ); // Format is empty
-            Assert.Throws<FormatException>(
-                () => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "   \t")
+            Assert.Throws<FormatException>(() =>
+                Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "   \t")
             ); // Format is whitespace
-            Assert.Throws<FormatException>(
-                () => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "t")
+            Assert.Throws<FormatException>(() =>
+                Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "t")
             ); // No such format
         }
 

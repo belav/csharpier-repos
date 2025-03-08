@@ -65,11 +65,11 @@ namespace XLinqTests
         public void XDocumentSave_NullParameter()
         {
             Assert.Throws<ArgumentNullException>(() => new XDocument().Save((string)null));
-            Assert.Throws<ArgumentNullException>(
-                () => new XDocument().Save((string)null, SaveOptions.DisableFormatting)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XDocument().Save((string)null, SaveOptions.DisableFormatting)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => new XDocument().Save((string)null, SaveOptions.None)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XDocument().Save((string)null, SaveOptions.None)
             );
         }
 
@@ -121,25 +121,24 @@ namespace XLinqTests
         public void XElementSave_NullParameter()
         {
             Assert.Throws<ArgumentNullException>(() => new XElement("e").Save((string)null));
-            Assert.Throws<ArgumentNullException>(
-                () => new XElement("e").Save((string)null, SaveOptions.DisableFormatting)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XElement("e").Save((string)null, SaveOptions.DisableFormatting)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => new XElement("e").Save((string)null, SaveOptions.None)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XElement("e").Save((string)null, SaveOptions.None)
             );
         }
 
         [Fact]
         public void XStreamingElementSave_NullParameter()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new XStreamingElement("e").Save((string)null)
+            Assert.Throws<ArgumentNullException>(() => new XStreamingElement("e").Save((string)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => new XStreamingElement("e").Save((string)null, SaveOptions.None)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XStreamingElement("e").Save((string)null, SaveOptions.None)
             );
         }
 

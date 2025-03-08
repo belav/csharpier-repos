@@ -1712,8 +1712,8 @@ namespace System.Xml.XslTransformApiTests
 
             using XmlReader reader = XmlReader.Create(xslFile);
             XslTransform xslt = new XslTransform();
-            XsltCompileException compilationException = Assert.Throws<XsltCompileException>(
-                () => xslt.Load(reader)
+            XsltCompileException compilationException = Assert.Throws<XsltCompileException>(() =>
+                xslt.Load(reader)
             );
             Assert.True(
                 compilationException.InnerException != null
@@ -2105,9 +2105,8 @@ namespace System.Xml.XslTransformApiTests
             CustomNullResolver myResolver = new CustomNullResolver(_output);
             if (inputType == InputType.URI)
             {
-                var e = Assert.Throws<XmlException>(
-                    () =>
-                        LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
+                var e = Assert.Throws<XmlException>(() =>
+                    LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
                 );
                 var absoluteUri = new Uri(
                     Path.Combine(Environment.CurrentDirectory, FullFilePath("XmlResolver_Main.xsl"))
@@ -2116,9 +2115,8 @@ namespace System.Xml.XslTransformApiTests
             }
             else
             {
-                var e = Assert.Throws<XsltCompileException>(
-                    () =>
-                        LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
+                var e = Assert.Throws<XsltCompileException>(() =>
+                    LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
                 );
                 var xsltException = Assert.IsType<XsltException>(e.InnerException);
                 var absoluteUri = new Uri(
@@ -2155,8 +2153,8 @@ namespace System.Xml.XslTransformApiTests
         {
             AppContext.TryGetSwitch("Switch.System.Xml.AllowDefaultResolver", out bool isEnabled);
             Assert.False(isEnabled);
-            var e = Assert.Throws<XsltCompileException>(
-                () => LoadXSL("XmlResolver_Main.xsl", inputType, readerType)
+            var e = Assert.Throws<XsltCompileException>(() =>
+                LoadXSL("XmlResolver_Main.xsl", inputType, readerType)
             );
             var xmlException = Assert.IsType<XmlException>(e.InnerException);
 
@@ -4469,8 +4467,7 @@ namespace System.Xml.XslTransformApiTests
 
             if (LoadXSL("showParam.xsl", inputType, readerType) == 1)
             {
-                Assert.Throws<System.ArgumentException>(
-                    () => xslt.Transform(szFullFilename, "    ")
+                Assert.Throws<System.ArgumentException>(() => xslt.Transform(szFullFilename, "    ")
                 );
                 return;
             }

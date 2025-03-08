@@ -108,8 +108,8 @@ namespace System.Net.WebSockets.Client.Tests
             }
             else
             {
-                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(
-                    () => connectTask
+                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() =>
+                    connectTask
                 );
                 Assert.NotNull(ex.InnerException);
                 Assert.Contains("ConnectCallback", ex.InnerException.Message);
@@ -154,8 +154,8 @@ namespace System.Net.WebSockets.Client.Tests
             using (var cws = new ClientWebSocket())
             {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
-                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(
-                    () => ConnectAsync(cws, server, cts.Token)
+                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() =>
+                    ConnectAsync(cws, server, cts.Token)
                 );
 
                 if (PlatformDetection.IsNetCore && !PlatformDetection.IsInAppContainer) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
@@ -166,17 +166,17 @@ namespace System.Net.WebSockets.Client.Tests
                 Assert.Equal(exceptionMessage, ex.Message);
 
                 // Other operations throw after failed connect
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => cws.ReceiveAsync(new byte[1], default)
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    cws.ReceiveAsync(new byte[1], default)
                 );
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => cws.SendAsync(new byte[1], WebSocketMessageType.Binary, true, default)
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    cws.SendAsync(new byte[1], WebSocketMessageType.Binary, true, default)
                 );
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => cws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default)
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    cws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default)
                 );
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => cws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, default)
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    cws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, default)
                 );
             }
         }
@@ -369,8 +369,8 @@ namespace System.Net.WebSockets.Client.Tests
                 var ub = new UriBuilder(server);
                 ub.Query = "subprotocol=" + AcceptedProtocol;
 
-                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(
-                    () => ConnectAsync(cws, ub.Uri, cts.Token)
+                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() =>
+                    ConnectAsync(cws, ub.Uri, cts.Token)
                 );
                 _output.WriteLine(ex.Message);
                 if (PlatformDetection.IsNetCore) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960

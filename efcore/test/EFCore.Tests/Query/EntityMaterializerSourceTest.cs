@@ -28,16 +28,11 @@ public class EntityMaterializerSourceTest
         Assert.Equal(
             CoreStrings.CannotMaterializeAbstractType(nameof(SomeAbstractEntity)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        source.CreateMaterializeExpression(
-                            new EntityMaterializerSourceParameters(
-                                (IEntityType)entityType,
-                                "",
-                                null
-                            ),
-                            null!
-                        )
+                .Throws<InvalidOperationException>(() =>
+                    source.CreateMaterializeExpression(
+                        new EntityMaterializerSourceParameters((IEntityType)entityType, "", null),
+                        null!
+                    )
                 )
                 .Message
         );

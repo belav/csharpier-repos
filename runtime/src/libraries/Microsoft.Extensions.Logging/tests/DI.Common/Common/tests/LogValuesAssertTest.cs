@@ -122,8 +122,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         )
         {
             // Act && Assert
-            Assert.Throws<EqualException>(
-                () => LogValuesAssert.Contains(expectedValues, actualValues)
+            Assert.Throws<EqualException>(() =>
+                LogValuesAssert.Contains(expectedValues, actualValues)
             );
         }
 
@@ -211,8 +211,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         )
         {
             // Act && Assert
-            Assert.Throws<EqualException>(
-                () => LogValuesAssert.Contains(expectedValues, actualValues)
+            Assert.Throws<EqualException>(() =>
+                LogValuesAssert.Contains(expectedValues, actualValues)
             );
         }
 

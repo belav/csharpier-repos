@@ -110,8 +110,8 @@ namespace System.Xml.XmlDocumentTests
             var child1 = xmlDocument.DocumentElement.FirstChild;
             var attribute = xmlDocument.CreateAttribute("attr");
 
-            Assert.Throws<InvalidOperationException>(
-                () => xmlDocument.DocumentElement.ReplaceChild(attribute, child1)
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.ReplaceChild(attribute, child1)
             );
         }
 
@@ -125,8 +125,8 @@ namespace System.Xml.XmlDocumentTests
             var attributeChild = attribute.FirstChild;
             var newElement = xmlDocument.CreateElement("newElement");
 
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.ReplaceChild(newElement, attributeChild)
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.ReplaceChild(newElement, attributeChild)
             );
             Assert.Null(attribute.FirstChild);
         }
@@ -141,8 +141,8 @@ namespace System.Xml.XmlDocumentTests
             var attributeChild = attribute.FirstChild;
             var newAttribute = xmlDocument.CreateAttribute("newAttribute");
 
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.ReplaceChild(newAttribute, attributeChild)
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.ReplaceChild(newAttribute, attributeChild)
             );
             Assert.Null(attribute.FirstChild);
         }
@@ -173,8 +173,8 @@ namespace System.Xml.XmlDocumentTests
             var attributeChild = attribute.FirstChild;
             var newText = xmlDocument.CreateProcessingInstruction("PI", "instructions");
 
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.ReplaceChild(newText, attributeChild)
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.ReplaceChild(newText, attributeChild)
             );
         }
 

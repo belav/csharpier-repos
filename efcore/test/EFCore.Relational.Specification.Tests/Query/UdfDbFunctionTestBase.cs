@@ -687,19 +687,18 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        Assert.Throws<NotImplementedException>(
-            () =>
-                (
-                    from c in context.Customers
-                    where c.Id == 1
-                    select new
-                    {
-                        c.FirstName,
-                        OrderCount = UDFSqlContext.CustomerOrderCountStatic(
-                            UDFSqlContext.AddFiveStatic(c.Id - 5)
-                        ),
-                    }
-                ).Single()
+        Assert.Throws<NotImplementedException>(() =>
+            (
+                from c in context.Customers
+                where c.Id == 1
+                select new
+                {
+                    c.FirstName,
+                    OrderCount = UDFSqlContext.CustomerOrderCountStatic(
+                        UDFSqlContext.AddFiveStatic(c.Id - 5)
+                    ),
+                }
+            ).Single()
         );
     }
 
@@ -933,13 +932,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where 2 == UDFSqlContext.AddOneStatic(c.Id)
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where 2 == UDFSqlContext.AddOneStatic(c.Id)
+                select c.Id
+            ).Single()
         );
     }
 
@@ -948,13 +946,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    orderby UDFSqlContext.AddOneStatic(c.Id)
-                    select c.Id
-                ).ToList()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                orderby UDFSqlContext.AddOneStatic(c.Id)
+                select c.Id
+            ).ToList()
         );
     }
 
@@ -978,17 +975,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == UDFSqlContext.AddOneStatic(
-                            Math.Abs(UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == UDFSqlContext.AddOneStatic(
+                        Math.Abs(UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -997,17 +993,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == UDFSqlContext.AddOneStatic(
-                            UDFSqlContext.CustomerOrderCountWithClientStatic(Math.Abs(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == UDFSqlContext.AddOneStatic(
+                        UDFSqlContext.CustomerOrderCountWithClientStatic(Math.Abs(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1016,19 +1011,18 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == Math.Abs(
-                            UDFSqlContext.AddOneStatic(
-                                UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id)
-                            )
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == Math.Abs(
+                        UDFSqlContext.AddOneStatic(
+                            UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id)
                         )
-                    select c.Id
-                ).Single()
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1037,19 +1031,18 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        1
-                        == Math.Abs(
-                            UDFSqlContext.CustomerOrderCountWithClientStatic(
-                                UDFSqlContext.AddOneStatic(c.Id)
-                            )
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    1
+                    == Math.Abs(
+                        UDFSqlContext.CustomerOrderCountWithClientStatic(
+                            UDFSqlContext.AddOneStatic(c.Id)
                         )
-                    select c.Id
-                ).Single()
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1058,17 +1051,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        1
-                        == UDFSqlContext.CustomerOrderCountWithClientStatic(
-                            Math.Abs(UDFSqlContext.AddOneStatic(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    1
+                    == UDFSqlContext.CustomerOrderCountWithClientStatic(
+                        Math.Abs(UDFSqlContext.AddOneStatic(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1077,17 +1069,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        1
-                        == UDFSqlContext.CustomerOrderCountWithClientStatic(
-                            UDFSqlContext.AddOneStatic(Math.Abs(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    1
+                    == UDFSqlContext.CustomerOrderCountWithClientStatic(
+                        UDFSqlContext.AddOneStatic(Math.Abs(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1096,13 +1087,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where 3 == UDFSqlContext.AddOneStatic(Math.Abs(c.Id))
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where 3 == UDFSqlContext.AddOneStatic(Math.Abs(c.Id))
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1111,17 +1101,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == UDFSqlContext.AddOneStatic(
-                            UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id)
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == UDFSqlContext.AddOneStatic(
+                        UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id)
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1130,13 +1119,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where 3 == Math.Abs(UDFSqlContext.AddOneStatic(c.Id))
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where 3 == Math.Abs(UDFSqlContext.AddOneStatic(c.Id))
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1159,17 +1147,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == UDFSqlContext.CustomerOrderCountWithClientStatic(
-                            UDFSqlContext.AddOneStatic(c.Id)
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == UDFSqlContext.CustomerOrderCountWithClientStatic(
+                        UDFSqlContext.AddOneStatic(c.Id)
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1293,11 +1280,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                context
-                    .Customers.Where(c => c.Id == UDFSqlContext.NullableValueReturnType())
-                    .ToList()
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            context.Customers.Where(c => c.Id == UDFSqlContext.NullableValueReturnType()).ToList()
         );
 
         Assert.Equal(
@@ -1367,19 +1351,18 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        Assert.Throws<NotImplementedException>(
-            () =>
-                (
-                    from c in context.Customers
-                    where c.Id == 1
-                    select new
-                    {
-                        c.FirstName,
-                        OrderCount = context.CustomerOrderCountInstance(
-                            context.AddFiveInstance(c.Id - 5)
-                        ),
-                    }
-                ).Single()
+        Assert.Throws<NotImplementedException>(() =>
+            (
+                from c in context.Customers
+                where c.Id == 1
+                select new
+                {
+                    c.FirstName,
+                    OrderCount = context.CustomerOrderCountInstance(
+                        context.AddFiveInstance(c.Id - 5)
+                    ),
+                }
+            ).Single()
         );
     }
 
@@ -1609,13 +1592,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where 2 == context.AddOneInstance(c.Id)
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where 2 == context.AddOneInstance(c.Id)
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1624,13 +1606,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    orderby context.AddOneInstance(c.Id)
-                    select c.Id
-                ).ToList()
+        AssertTranslationFailed(() =>
+            (from c in context.Customers orderby context.AddOneInstance(c.Id) select c.Id).ToList()
         );
     }
 
@@ -1654,17 +1631,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == context.AddOneInstance(
-                            Math.Abs(context.CustomerOrderCountWithClientInstance(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == context.AddOneInstance(
+                        Math.Abs(context.CustomerOrderCountWithClientInstance(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1673,17 +1649,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == context.AddOneInstance(
-                            context.CustomerOrderCountWithClientInstance(Math.Abs(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == context.AddOneInstance(
+                        context.CustomerOrderCountWithClientInstance(Math.Abs(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1692,19 +1667,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == Math.Abs(
-                            context.AddOneInstance(
-                                context.CustomerOrderCountWithClientInstance(c.Id)
-                            )
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2
+                    == Math.Abs(
+                        context.AddOneInstance(context.CustomerOrderCountWithClientInstance(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1713,19 +1685,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        1
-                        == Math.Abs(
-                            context.CustomerOrderCountWithClientInstance(
-                                context.AddOneInstance(c.Id)
-                            )
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    1
+                    == Math.Abs(
+                        context.CustomerOrderCountWithClientInstance(context.AddOneInstance(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1734,17 +1703,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        1
-                        == context.CustomerOrderCountWithClientInstance(
-                            Math.Abs(context.AddOneInstance(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    1
+                    == context.CustomerOrderCountWithClientInstance(
+                        Math.Abs(context.AddOneInstance(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1753,17 +1721,16 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        1
-                        == context.CustomerOrderCountWithClientInstance(
-                            context.AddOneInstance(Math.Abs(c.Id))
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    1
+                    == context.CustomerOrderCountWithClientInstance(
+                        context.AddOneInstance(Math.Abs(c.Id))
+                    )
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1772,13 +1739,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where 3 == context.AddOneInstance(Math.Abs(c.Id))
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where 3 == context.AddOneInstance(Math.Abs(c.Id))
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1787,17 +1753,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == context.AddOneInstance(
-                            context.CustomerOrderCountWithClientInstance(c.Id)
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2 == context.AddOneInstance(context.CustomerOrderCountWithClientInstance(c.Id))
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1806,13 +1768,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where 3 == Math.Abs(context.AddOneInstance(c.Id))
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where 3 == Math.Abs(context.AddOneInstance(c.Id))
+                select c.Id
+            ).Single()
         );
     }
 
@@ -1842,17 +1803,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
 
-        AssertTranslationFailed(
-            () =>
-                (
-                    from c in context.Customers
-                    where
-                        2
-                        == context.CustomerOrderCountWithClientInstance(
-                            context.AddOneInstance(c.Id)
-                        )
-                    select c.Id
-                ).Single()
+        AssertTranslationFailed(() =>
+            (
+                from c in context.Customers
+                where
+                    2 == context.CustomerOrderCountWithClientInstance(context.AddOneInstance(c.Id))
+                select c.Id
+            ).Single()
         );
     }
 
@@ -2015,12 +1972,11 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             var message = Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        (
-                            from c in context.Customers
-                            select new { c.Id, Prods = context.GetTopTwoSellingProducts().ToList() }
-                        ).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    (
+                        from c in context.Customers
+                        select new { c.Id, Prods = context.GetTopTwoSellingProducts().ToList() }
+                    ).ToList()
                 )
                 .Message;
 
@@ -2137,26 +2093,25 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             var message = Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        (
-                            from c in context.Customers
-                            select new
-                            {
-                                c.Id,
-                                OrderCountYear = context
-                                    .GetOrdersWithMultipleProducts(c.Id)
-                                    .Where(o => o.OrderDate.Day == 21)
-                                    .Select(o => new
-                                    {
-                                        OrderCountYearNested = context
-                                            .GetOrdersWithMultipleProducts(o.CustomerId)
-                                            .ToList(),
-                                        Prods = context.GetTopTwoSellingProducts().ToList(),
-                                    })
-                                    .ToList(),
-                            }
-                        ).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    (
+                        from c in context.Customers
+                        select new
+                        {
+                            c.Id,
+                            OrderCountYear = context
+                                .GetOrdersWithMultipleProducts(c.Id)
+                                .Where(o => o.OrderDate.Day == 21)
+                                .Select(o => new
+                                {
+                                    OrderCountYearNested = context
+                                        .GetOrdersWithMultipleProducts(o.CustomerId)
+                                        .ToList(),
+                                    Prods = context.GetTopTwoSellingProducts().ToList(),
+                                })
+                                .ToList(),
+                        }
+                    ).ToList()
                 )
                 .Message;
 
@@ -2173,21 +2128,20 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             var message = Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        (
-                            from c in context.Customers
-                            select new
-                            {
-                                c.Id,
-                                Addresses = c.Addresses.Where(a => a.State == "NY").ToList(),
-                                Prods = context
-                                    .GetTopTwoSellingProducts()
-                                    .Where(p => p.AmountSold == 249)
-                                    .Select(p => p.ProductId)
-                                    .ToList(),
-                            }
-                        ).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    (
+                        from c in context.Customers
+                        select new
+                        {
+                            c.Id,
+                            Addresses = c.Addresses.Where(a => a.State == "NY").ToList(),
+                            Prods = context
+                                .GetTopTwoSellingProducts()
+                                .Where(p => p.AmountSold == 249)
+                                .Select(p => p.ProductId)
+                                .ToList(),
+                        }
+                    ).ToList()
                 )
                 .Message;
 
@@ -2204,19 +2158,18 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             var message = Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        (
-                            from c in context.Customers
-                            select new
-                            {
-                                c.Id,
-                                Prods = context
-                                    .GetTopTwoSellingProducts()
-                                    .Select(p => p.ProductId)
-                                    .ToList(),
-                            }
-                        ).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    (
+                        from c in context.Customers
+                        select new
+                        {
+                            c.Id,
+                            Prods = context
+                                .GetTopTwoSellingProducts()
+                                .Select(p => p.ProductId)
+                                .ToList(),
+                        }
+                    ).ToList()
                 )
                 .Message;
 
@@ -2234,20 +2187,19 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         {
             var amount = 27;
             var message = Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        (
-                            from c in context.Customers
-                            select new
-                            {
-                                c.Id,
-                                Prods = context
-                                    .GetTopTwoSellingProducts()
-                                    .Where(p => p.AmountSold == amount)
-                                    .Select(p => p.ProductId)
-                                    .ToList(),
-                            }
-                        ).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    (
+                        from c in context.Customers
+                        select new
+                        {
+                            c.Id,
+                            Prods = context
+                                .GetTopTwoSellingProducts()
+                                .Where(p => p.AmountSold == amount)
+                                .Select(p => p.ProductId)
+                                .ToList(),
+                        }
+                    ).ToList()
                 )
                 .Message;
 

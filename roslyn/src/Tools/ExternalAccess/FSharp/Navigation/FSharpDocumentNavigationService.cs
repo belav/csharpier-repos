@@ -42,14 +42,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    service.CanNavigateToSpanAsync(
-                        workspace,
-                        documentId,
-                        textSpan,
-                        cancellationToken
-                    )
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                service.CanNavigateToSpanAsync(workspace, documentId, textSpan, cancellationToken)
             );
         }
 
@@ -77,15 +71,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    service.CanNavigateToLineAndOffsetAsync(
-                        workspace,
-                        documentId,
-                        lineNumber,
-                        offset,
-                        cancellationToken
-                    )
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                service.CanNavigateToLineAndOffsetAsync(
+                    workspace,
+                    documentId,
+                    lineNumber,
+                    offset,
+                    cancellationToken
+                )
             );
         }
 
@@ -113,15 +106,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    service.CanNavigateToPositionAsync(
-                        workspace,
-                        documentId,
-                        position,
-                        virtualSpace,
-                        cancellationToken
-                    )
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                service.CanNavigateToPositionAsync(
+                    workspace,
+                    documentId,
+                    position,
+                    virtualSpace,
+                    cancellationToken
+                )
             );
         }
 
@@ -141,19 +133,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    service.TryNavigateToSpanAsync(
-                        _threadingContext,
-                        workspace,
-                        documentId,
-                        textSpan,
-                        NavigationOptions.Default with
-                        {
-                            PreferProvisionalTab = true,
-                        },
-                        cancellationToken
-                    )
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                service.TryNavigateToSpanAsync(
+                    _threadingContext,
+                    workspace,
+                    documentId,
+                    textSpan,
+                    NavigationOptions.Default with
+                    {
+                        PreferProvisionalTab = true,
+                    },
+                    cancellationToken
+                )
             );
         }
 
@@ -182,20 +173,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    service.TryNavigateToPositionAsync(
-                        _threadingContext,
-                        workspace,
-                        documentId,
-                        lineNumber,
-                        offset,
-                        NavigationOptions.Default with
-                        {
-                            PreferProvisionalTab = true,
-                        },
-                        cancellationToken
-                    )
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                service.TryNavigateToPositionAsync(
+                    _threadingContext,
+                    workspace,
+                    documentId,
+                    lineNumber,
+                    offset,
+                    NavigationOptions.Default with
+                    {
+                        PreferProvisionalTab = true,
+                    },
+                    cancellationToken
+                )
             );
         }
 
@@ -224,20 +214,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    service.TryNavigateToPositionAsync(
-                        _threadingContext,
-                        workspace,
-                        documentId,
-                        position,
-                        virtualSpace,
-                        NavigationOptions.Default with
-                        {
-                            PreferProvisionalTab = true,
-                        },
-                        cancellationToken
-                    )
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                service.TryNavigateToPositionAsync(
+                    _threadingContext,
+                    workspace,
+                    documentId,
+                    position,
+                    virtualSpace,
+                    NavigationOptions.Default with
+                    {
+                        PreferProvisionalTab = true,
+                    },
+                    cancellationToken
+                )
             );
         }
     }

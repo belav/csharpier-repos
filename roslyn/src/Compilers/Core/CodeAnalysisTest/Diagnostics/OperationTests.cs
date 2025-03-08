@@ -72,16 +72,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             // Index out of range: Negative index
             Assert.Throws<ArgumentOutOfRangeException>(() => dynamicExpression.GetArgumentName(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => dynamicExpression.GetArgumentRefKind(-1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                dynamicExpression.GetArgumentRefKind(-1)
             );
 
             // Index out of range: Index > Length
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => dynamicExpression.GetArgumentName(100)
+            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicExpression.GetArgumentName(100)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => dynamicExpression.GetArgumentRefKind(100)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                dynamicExpression.GetArgumentRefKind(100)
             );
         }
 
@@ -176,23 +175,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         [Fact]
         public void TestGetFlowGraphNullArgument()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ControlFlowGraph.Create((IBlockOperation)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ControlFlowGraph.Create((IBlockOperation)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ControlFlowGraph.Create((IFieldInitializerOperation)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ControlFlowGraph.Create((IFieldInitializerOperation)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ControlFlowGraph.Create((IPropertyInitializerOperation)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ControlFlowGraph.Create((IPropertyInitializerOperation)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ControlFlowGraph.Create((IParameterInitializerOperation)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ControlFlowGraph.Create((IParameterInitializerOperation)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ControlFlowGraph.Create((IConstructorBodyOperation)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ControlFlowGraph.Create((IConstructorBodyOperation)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ControlFlowGraph.Create((IMethodBodyOperation)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ControlFlowGraph.Create((IMethodBodyOperation)null)
             );
         }
 

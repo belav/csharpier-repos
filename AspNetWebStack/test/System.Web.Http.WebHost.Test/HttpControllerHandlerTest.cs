@@ -308,8 +308,8 @@ namespace System.Web.Http.WebHost
             HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context);
 
             // Assert
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () => actualRequest.Content.ReadAsStringAsync()
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                actualRequest.Content.ReadAsStringAsync()
             );
         }
 
@@ -691,8 +691,8 @@ namespace System.Web.Http.WebHost
                 );
 
                 // Act & Assert
-                await Assert.ThrowsAsync<EncoderFallbackException>(
-                    () => product.ProcessRequestAsyncCore(context)
+                await Assert.ThrowsAsync<EncoderFallbackException>(() =>
+                    product.ProcessRequestAsyncCore(context)
                 );
 
                 Assert.True(spy.Disposed);
@@ -1660,15 +1660,14 @@ namespace System.Web.Http.WebHost
                 CancellationToken expectedCancellationToken = tokenSource.Token;
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () =>
-                        HttpControllerHandler.WriteStreamedResponseContentAsync(
-                            contextBase,
-                            expectedRequest,
-                            expectedResponse,
-                            logger,
-                            expectedCancellationToken
-                        )
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    HttpControllerHandler.WriteStreamedResponseContentAsync(
+                        contextBase,
+                        expectedRequest,
+                        expectedResponse,
+                        logger,
+                        expectedCancellationToken
+                    )
                 );
             }
         }
@@ -1696,16 +1695,15 @@ namespace System.Web.Http.WebHost
                 CancellationToken expectedCancellationToken = tokenSource.Token;
 
                 // Act & Assert
-                await Assert.ThrowsAsync<EncoderFallbackException>(
-                    () =>
-                        HttpControllerHandler.WriteBufferedResponseContentAsync(
-                            contextBase,
-                            expectedRequest,
-                            expectedResponse,
-                            logger,
-                            handler,
-                            expectedCancellationToken
-                        )
+                await Assert.ThrowsAsync<EncoderFallbackException>(() =>
+                    HttpControllerHandler.WriteBufferedResponseContentAsync(
+                        contextBase,
+                        expectedRequest,
+                        expectedResponse,
+                        logger,
+                        handler,
+                        expectedCancellationToken
+                    )
                 );
 
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -1762,16 +1760,15 @@ namespace System.Web.Http.WebHost
                 CancellationToken expectedCancellationToken = tokenSource.Token;
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () =>
-                        HttpControllerHandler.WriteBufferedResponseContentAsync(
-                            contextBase,
-                            expectedRequest,
-                            expectedResponse,
-                            logger,
-                            handler,
-                            expectedCancellationToken
-                        )
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    HttpControllerHandler.WriteBufferedResponseContentAsync(
+                        contextBase,
+                        expectedRequest,
+                        expectedResponse,
+                        logger,
+                        handler,
+                        expectedCancellationToken
+                    )
                 );
             }
         }
@@ -1854,16 +1851,15 @@ namespace System.Web.Http.WebHost
                 CancellationToken expectedCancellationToken = CancellationToken.None;
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<EncoderFallbackException>(
-                    () =>
-                        HttpControllerHandler.WriteBufferedResponseContentAsync(
-                            contextBase,
-                            request,
-                            response,
-                            logger,
-                            handler,
-                            expectedCancellationToken
-                        )
+                var exception = await Assert.ThrowsAsync<EncoderFallbackException>(() =>
+                    HttpControllerHandler.WriteBufferedResponseContentAsync(
+                        contextBase,
+                        request,
+                        response,
+                        logger,
+                        handler,
+                        expectedCancellationToken
+                    )
                 );
 
                 Assert.Same(expectedException, exception);
@@ -1999,16 +1995,15 @@ namespace System.Web.Http.WebHost
                 CancellationToken expectedCancellationToken = tokenSource.Token;
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () =>
-                        HttpControllerHandler.WriteBufferedResponseContentAsync(
-                            contextBase,
-                            expectedRequest,
-                            expectedOriginalResponse,
-                            logger,
-                            handler,
-                            expectedCancellationToken
-                        )
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    HttpControllerHandler.WriteBufferedResponseContentAsync(
+                        contextBase,
+                        expectedRequest,
+                        expectedOriginalResponse,
+                        logger,
+                        handler,
+                        expectedCancellationToken
+                    )
                 );
 
                 loggerMock.Verify(

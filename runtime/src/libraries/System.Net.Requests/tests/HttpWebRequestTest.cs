@@ -587,20 +587,19 @@ namespace System.Net.Tests
                     await server.AcceptConnectionSendResponseAndCloseAsync();
                     using (WebResponse response = await getResponse)
                     {
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.AutomaticDecompression = DecompressionMethods.Deflate
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.AutomaticDecompression = DecompressionMethods.Deflate
                         );
                         Assert.Throws<InvalidOperationException>(() => request.ContentLength = 255);
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.ContinueTimeout = 255
+                        Assert.Throws<InvalidOperationException>(() => request.ContinueTimeout = 255
                         );
                         Assert.Throws<InvalidOperationException>(() => request.Host = "localhost");
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.MaximumResponseHeadersLength = 255
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.MaximumResponseHeadersLength = 255
                         );
                         Assert.Throws<InvalidOperationException>(() => request.SendChunked = true);
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.Proxy = WebRequest.DefaultWebProxy
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.Proxy = WebRequest.DefaultWebProxy
                         );
                         Assert.Throws<InvalidOperationException>(() => request.Headers = null);
                     }
@@ -757,8 +756,7 @@ namespace System.Net.Tests
                     request.Timeout = 30; // ms.
 
                     var sw = Stopwatch.StartNew();
-                    WebException exception = Assert.Throws<WebException>(
-                        () => request.GetResponse()
+                    WebException exception = Assert.Throws<WebException>(() => request.GetResponse()
                     );
                     sw.Stop();
 
@@ -1587,8 +1585,8 @@ namespace System.Net.Tests
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
-            WebException ex = Assert.Throws<WebException>(
-                () => request.BeginGetRequestStream(null, null)
+            WebException ex = Assert.Throws<WebException>(() =>
+                request.BeginGetRequestStream(null, null)
             );
             Assert.Equal(WebExceptionStatus.RequestCanceled, ex.Status);
         }
@@ -1635,8 +1633,8 @@ namespace System.Net.Tests
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(url);
                     request.BeginGetResponse(null, null);
-                    Assert.Throws<InvalidOperationException>(
-                        () => request.BeginGetResponse(null, null)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        request.BeginGetResponse(null, null)
                     );
                     return Task.FromResult<object>(null);
                 }
@@ -1649,8 +1647,7 @@ namespace System.Net.Tests
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
-            WebException ex = Assert.Throws<WebException>(
-                () => request.BeginGetResponse(null, null)
+            WebException ex = Assert.Throws<WebException>(() => request.BeginGetResponse(null, null)
             );
             Assert.Equal(WebExceptionStatus.RequestCanceled, ex.Status);
         }
@@ -1664,8 +1661,8 @@ namespace System.Net.Tests
                     HttpWebRequest request = WebRequest.CreateHttp(uri);
                     request.AllowAutoRedirect = true;
                     request.MaximumAutomaticRedirections = 1;
-                    WebException ex = await Assert.ThrowsAsync<WebException>(
-                        async () => await GetResponseAsync(request)
+                    WebException ex = await Assert.ThrowsAsync<WebException>(async () =>
+                        await GetResponseAsync(request)
                     );
                     Assert.Equal(WebExceptionStatus.ProtocolError, ex.Status);
                 },
@@ -1699,8 +1696,8 @@ namespace System.Net.Tests
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(uri);
                     request.AllowAutoRedirect = false;
-                    WebException ex = await Assert.ThrowsAsync<WebException>(
-                        async () => await GetResponseAsync(request)
+                    WebException ex = await Assert.ThrowsAsync<WebException>(async () =>
+                        await GetResponseAsync(request)
                     );
                     Assert.Equal(WebExceptionStatus.ProtocolError, ex.Status);
                 },
@@ -1902,8 +1899,7 @@ namespace System.Net.Tests
         {
             string serverUrl = string.Format("http://www.{0}.com/", Guid.NewGuid().ToString());
             HttpWebRequest request = WebRequest.CreateHttp(serverUrl);
-            WebException ex = await Assert.ThrowsAsync<WebException>(
-                () => GetResponseAsync(request)
+            WebException ex = await Assert.ThrowsAsync<WebException>(() => GetResponseAsync(request)
             );
             Assert.Equal(WebExceptionStatus.NameResolutionFailure, ex.Status);
         }
@@ -1915,8 +1911,8 @@ namespace System.Net.Tests
                 async uri =>
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(uri);
-                    WebException ex = await Assert.ThrowsAsync<WebException>(
-                        () => GetResponseAsync(request)
+                    WebException ex = await Assert.ThrowsAsync<WebException>(() =>
+                        GetResponseAsync(request)
                     );
                     Assert.Equal(WebExceptionStatus.ProtocolError, ex.Status);
                 },
@@ -2677,8 +2673,8 @@ namespace System.Net.Tests
             request.CachePolicy = isHttpCachePolicy
                 ? new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheOnly)
                 : new RequestCachePolicy(RequestCacheLevel.CacheOnly);
-            WebException exception = await Assert.ThrowsAsync<WebException>(
-                () => GetResponseAsync(request)
+            WebException exception = await Assert.ThrowsAsync<WebException>(() =>
+                GetResponseAsync(request)
             );
             Assert.Equal(SR.CacheEntryNotFound, exception.Message);
         }
@@ -2859,8 +2855,8 @@ namespace System.Net.Tests
                 // System.Runtime.Serialization.SerializationException:
                 //  Type 'System.Net.HttpWebRequest' in Assembly 'System.Net.Requests, Version=4.0.0.
                 //        0, Culture=neutral, PublicKeyToken=b77a5c561934e089' is not marked as serializable.
-                Assert.Throws<System.Runtime.Serialization.SerializationException>(
-                    () => formatter.Serialize(fs, hwr)
+                Assert.Throws<System.Runtime.Serialization.SerializationException>(() =>
+                    formatter.Serialize(fs, hwr)
                 );
             }
         }

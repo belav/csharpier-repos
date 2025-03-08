@@ -3704,8 +3704,8 @@ namespace System.Data.SqlClient
                             new TaskCompletionSource<object>();
                         if (cts.CanBeCanceled)
                         {
-                            regReconnectCancel = cts.Register(
-                                () => cancellableReconnectTS.TrySetCanceled()
+                            regReconnectCancel = cts.Register(() =>
+                                cancellableReconnectTS.TrySetCanceled()
                             );
                         }
                         AsyncHelper.ContinueTask(

@@ -113,14 +113,13 @@ namespace System.IO.Compression.Tests
                 using (ZipArchive archive = ZipFile.Open(zipFileName, ZipArchiveMode.Read))
                 {
                     archive.ExtractToDirectory(tempFolder.Path);
-                    Assert.Throws<IOException>(
-                        () =>
-                            archive.ExtractToDirectory(
-                                tempFolder.Path /* default false */
-                            )
+                    Assert.Throws<IOException>(() =>
+                        archive.ExtractToDirectory(
+                            tempFolder.Path /* default false */
+                        )
                     );
-                    Assert.Throws<IOException>(
-                        () => archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: false)
+                    Assert.Throws<IOException>(() =>
+                        archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: false)
                     );
                     archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: true);
 

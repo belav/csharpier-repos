@@ -40,8 +40,8 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             );
             await hubConnection.StartAsync().DefaultTimeout();
 
-            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await hubConnection.InvokeAsync<int>("test").DefaultTimeout()
+            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await hubConnection.InvokeAsync<int>("test").DefaultTimeout()
             );
             Assert.Same(exception, actualException);
         }
@@ -60,8 +60,8 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             );
             await hubConnection.StartAsync().DefaultTimeout();
 
-            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await hubConnection.SendAsync("test").DefaultTimeout()
+            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await hubConnection.SendAsync("test").DefaultTimeout()
             );
             Assert.Same(exception, actualException);
         }
@@ -204,8 +204,8 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var exception = new InvalidOperationException();
             connection.CompleteFromTransport(exception);
 
-            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await invokeTask
+            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await invokeTask
             );
             Assert.Equal(exception, actualException);
         }
@@ -241,14 +241,13 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    hubConnection
-                        .InvokeAsync<int>(
-                            "testMethod",
-                            cancellationToken: new CancellationToken(canceled: true)
-                        )
-                        .DefaultTimeout()
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                hubConnection
+                    .InvokeAsync<int>(
+                        "testMethod",
+                        cancellationToken: new CancellationToken(canceled: true)
+                    )
+                    .DefaultTimeout()
             );
 
             await hubConnection.StopAsync().DefaultTimeout();
@@ -270,14 +269,13 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    hubConnection
-                        .SendAsync(
-                            "testMethod",
-                            cancellationToken: new CancellationToken(canceled: true)
-                        )
-                        .DefaultTimeout()
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                hubConnection
+                    .SendAsync(
+                        "testMethod",
+                        cancellationToken: new CancellationToken(canceled: true)
+                    )
+                    .DefaultTimeout()
             );
 
             await hubConnection.StopAsync().DefaultTimeout();
@@ -330,14 +328,13 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    hubConnection
-                        .StreamAsChannelAsync<int>(
-                            "testMethod",
-                            cancellationToken: new CancellationToken(canceled: true)
-                        )
-                        .DefaultTimeout()
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                hubConnection
+                    .StreamAsChannelAsync<int>(
+                        "testMethod",
+                        cancellationToken: new CancellationToken(canceled: true)
+                    )
+                    .DefaultTimeout()
             );
 
             await hubConnection.StopAsync().DefaultTimeout();
@@ -363,8 +360,8 @@ public partial class HubConnectionTests : VerifiableLoggedTest
                 "testMethod",
                 cancellationToken: new CancellationToken(canceled: true)
             );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => result.GetAsyncEnumerator().MoveNextAsync().DefaultTimeout()
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                result.GetAsyncEnumerator().MoveNextAsync().DefaultTimeout()
             );
 
             await hubConnection.StopAsync().DefaultTimeout();
@@ -949,8 +946,7 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         {
             HttpConnectionOptions originalOptions = null,
                 resolvedOptions = null;
-            var accessTokenFactory = new Func<Task<string>>(
-                () => Task.FromResult("fakeAccessToken")
+            var accessTokenFactory = new Func<Task<string>>(() => Task.FromResult("fakeAccessToken")
             );
             var fakeHeader = "fakeHeader";
 
@@ -976,8 +972,8 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             try
             {
                 // since we returned null WebSocket it would fail
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => connection.StartAsync().DefaultTimeout()
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    connection.StartAsync().DefaultTimeout()
                 );
             }
             finally

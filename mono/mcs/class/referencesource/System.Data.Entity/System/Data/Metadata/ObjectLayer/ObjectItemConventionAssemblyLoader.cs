@@ -230,12 +230,11 @@ namespace System.Data.Metadata.Edm
                 if (TypesMatchByConvention(type.BaseType, cspaceType.BaseType))
                 {
                     TrackClosure(type.BaseType);
-                    referenceResolutionListForCurrentType.Add(
-                        () =>
-                            ospaceType.BaseType = ResolveBaseType(
-                                (StructuralType)cspaceType.BaseType,
-                                type
-                            )
+                    referenceResolutionListForCurrentType.Add(() =>
+                        ospaceType.BaseType = ResolveBaseType(
+                            (StructuralType)cspaceType.BaseType,
+                            type
+                        )
                     );
                 }
                 else
@@ -580,8 +579,8 @@ namespace System.Data.Metadata.Edm
                 var ot = ospaceType;
                 var cp = typeToTrack.Key;
                 var clrp = typeToTrack.Value;
-                referenceResolutionListForCurrentType.Add(
-                    () => CreateAndAddComplexType(type, ot, cp, clrp)
+                referenceResolutionListForCurrentType.Add(() =>
+                    CreateAndAddComplexType(type, ot, cp, clrp)
                 );
             }
 
@@ -641,8 +640,8 @@ namespace System.Data.Metadata.Edm
                 var cp = typeToTrack.Key;
                 var clrp = typeToTrack.Value;
 
-                referenceResolutionListForCurrentType.Add(
-                    () => CreateAndAddNavigationProperty(ct, ot, cp, clrp)
+                referenceResolutionListForCurrentType.Add(() =>
+                    CreateAndAddNavigationProperty(ct, ot, cp, clrp)
                 );
             }
 
@@ -919,8 +918,8 @@ namespace System.Data.Metadata.Edm
                 var ot = ospaceType;
                 var cp = typeToTrack.Key;
                 var clrp = typeToTrack.Value;
-                referenceResolutionListForCurrentType.Add(
-                    () => CreateAndAddEnumProperty(type, ot, cp, clrp)
+                referenceResolutionListForCurrentType.Add(() =>
+                    CreateAndAddEnumProperty(type, ot, cp, clrp)
                 );
             }
 

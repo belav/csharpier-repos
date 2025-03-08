@@ -66,8 +66,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetObjectForIUnknown_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetObjectForIUnknown(IntPtr.Zero)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetObjectForIUnknown(IntPtr.Zero)
             );
         }
 

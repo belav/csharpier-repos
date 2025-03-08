@@ -30,11 +30,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PathAssemblyResolverEmptyFile()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new PathAssemblyResolver(
-                        new string[] { Path.DirectorySeparatorChar.ToString() }
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                new PathAssemblyResolver(new string[] { Path.DirectorySeparatorChar.ToString() })
             );
         }
 
@@ -49,8 +46,7 @@ namespace System.Reflection.Tests
         public static void PathAssemblyResolverWithNoPath()
         {
             var resolver = new PathAssemblyResolver(new string[] { });
-            Assert.Throws<FileNotFoundException>(
-                () => new MetadataLoadContext(resolver, "mscorlib")
+            Assert.Throws<FileNotFoundException>(() => new MetadataLoadContext(resolver, "mscorlib")
             );
         }
 
@@ -189,8 +185,7 @@ namespace System.Reflection.Tests
                     // PublicKeyToken
 
                     assemblyName.SetPublicKeyToken(new byte[] { 1 });
-                    Assert.Throws<FileNotFoundException>(
-                        () => lc.LoadFromAssemblyName(assemblyName)
+                    Assert.Throws<FileNotFoundException>(() => lc.LoadFromAssemblyName(assemblyName)
                     );
 
                     {

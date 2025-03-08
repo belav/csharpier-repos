@@ -90,8 +90,8 @@ namespace System.Data.Tests.Common
         public void FillLoadOption_Invalid()
         {
             DataAdapter da = new MyAdapter();
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () => da.FillLoadOption = (LoadOption)666
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                da.FillLoadOption = (LoadOption)666
             );
             // The LoadOption enumeration value, 666, is invalid
             Assert.Null(ex.InnerException);
@@ -118,8 +118,8 @@ namespace System.Data.Tests.Common
         public void MissingMappingAction_Invalid()
         {
             DataAdapter da = new MyAdapter();
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () => da.MissingMappingAction = (MissingMappingAction)666
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                da.MissingMappingAction = (MissingMappingAction)666
             );
             // The MissingMappingAction enumeration value, 666, is invalid
             Assert.Null(ex.InnerException);
@@ -146,8 +146,8 @@ namespace System.Data.Tests.Common
         public void MissingSchemaAction_Invalid()
         {
             DataAdapter da = new MyAdapter();
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () => da.MissingSchemaAction = (MissingSchemaAction)666
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                da.MissingSchemaAction = (MissingSchemaAction)666
             );
             // The MissingSchemaAction enumeration value, 666, is invalid
             Assert.Null(ex.InnerException);

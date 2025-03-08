@@ -30,8 +30,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                 typeof(string)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<Product>().Where(p => p.ProductID != 1).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Product>().Where(p => p.ProductID != 1).ToList()
                 )
                 .Message
         );
@@ -48,8 +48,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                 typeof(int)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<Product>().Where(p => p.ProductID != 2).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Product>().Where(p => p.ProductID != 2).ToList()
                 )
                 .Message
         );
@@ -67,8 +67,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                 typeof(int)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<Product>().Where(p => p.ProductID != 3).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Product>().Where(p => p.ProductID != 3).ToList()
                 )
                 .Message
         );
@@ -81,13 +81,12 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
         Assert.Equal(
             RelationalStrings.ErrorMaterializingValueInvalidCast(typeof(string), typeof(int)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context
-                            .Set<Product>()
-                            .Where(p => p.ProductID != 4)
-                            .Select(p => p.ProductName)
-                            .ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context
+                        .Set<Product>()
+                        .Where(p => p.ProductID != 4)
+                        .Select(p => p.ProductName)
+                        .ToList()
                 )
                 .Message
         );
@@ -105,9 +104,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                 typeof(string)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Set<Product>().Where(p => p.ProductID != 5).AsNoTracking().ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Product>().Where(p => p.ProductID != 5).AsNoTracking().ToList()
                 )
                 .Message
         );
@@ -124,8 +122,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                 typeof(bool)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<Product>().Where(p => p.ProductID != 6).ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Product>().Where(p => p.ProductID != 6).ToList()
                 )
                 .Message
         );
@@ -138,13 +136,12 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
         Assert.Equal(
             RelationalStrings.ErrorMaterializingValueNullReference(typeof(bool)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context
-                            .Set<Product>()
-                            .Where(p => p.ProductID != 7)
-                            .Select(p => p.Discontinued)
-                            .ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context
+                        .Set<Product>()
+                        .Where(p => p.ProductID != 7)
+                        .Select(p => p.Discontinued)
+                        .ToList()
                 )
                 .Message
         );
@@ -161,9 +158,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                 typeof(int)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Set<Product>().Where(p => p.ProductID != 8).AsNoTracking().ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Product>().Where(p => p.ProductID != 8).AsNoTracking().ToList()
                 )
                 .Message
         );

@@ -728,8 +728,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                         + "To enable DTD processing set the DtdProcessing property on XmlReaderSettings "
                         + "to Parse and pass the settings into XmlReader.Create method.";
 
-                var exception = Assert.Throws<System.Xml.XmlException>(
-                    () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+                var exception = Assert.Throws<System.Xml.XmlException>(() =>
+                    xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
                 );
 
                 Assert.Equal(expectedMsg, exception.Message);
@@ -758,8 +758,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 SR.Format(SR.Msg_LineInfo, 1, 11)
             );
 
-            var exception = Assert.Throws<FormatException>(
-                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            var exception = Assert.Throws<FormatException>(() =>
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
             );
 
             Assert.Equal(expectedMsg, exception.Message);
@@ -770,8 +770,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => new ConfigurationBuilder().AddXmlFile(path: null)
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddXmlFile(path: null)
             );
 
             Assert.Equal(expectedMsg, exception.Message);
@@ -782,8 +782,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => new ConfigurationBuilder().AddXmlFile(string.Empty)
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddXmlFile(string.Empty)
             );
 
             Assert.Equal(expectedMsg, exception.Message);
@@ -811,8 +811,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 SR.Format(SR.Msg_LineInfo, 8, 52)
             );
 
-            var exception = Assert.Throws<FormatException>(
-                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            var exception = Assert.Throws<FormatException>(() =>
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
             );
 
             Assert.Equal(expectedMsg, exception.Message);
@@ -840,8 +840,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 SR.Format(SR.Msg_LineInfo, 8, 52)
             );
 
-            var exception = Assert.Throws<FormatException>(
-                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            var exception = Assert.Throws<FormatException>(() =>
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
             );
 
             Assert.Equal(expectedMsg, exception.Message);
@@ -870,8 +870,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 SR.Format(SR.Msg_LineInfo, 9, 43)
             );
 
-            var exception = Assert.Throws<FormatException>(
-                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            var exception = Assert.Throws<FormatException>(() =>
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
             );
 
             Assert.Equal(expectedMsg, exception.Message);
@@ -880,11 +880,10 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         [Fact]
         public void XmlConfiguration_Throws_On_Missing_Configuration_File()
         {
-            var ex = Assert.Throws<FileNotFoundException>(
-                () =>
-                    new ConfigurationBuilder()
-                        .AddXmlFile("NotExistingConfig.xml", optional: false)
-                        .Build()
+            var ex = Assert.Throws<FileNotFoundException>(() =>
+                new ConfigurationBuilder()
+                    .AddXmlFile("NotExistingConfig.xml", optional: false)
+                    .Build()
             );
             Assert.StartsWith(
                 $"The configuration file 'NotExistingConfig.xml' was not found and is not optional. The expected physical path was '",

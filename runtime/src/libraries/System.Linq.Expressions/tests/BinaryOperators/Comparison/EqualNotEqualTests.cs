@@ -483,8 +483,8 @@ namespace System.Linq.Expressions.Tests
         public static void CannotDoNullComparisonWithoutOperatorIfBothNullConstants()
         {
             var typedNullConst = Expression.Constant(null, typeof(UselessValue?));
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.Equal(typedNullConst, typedNullConst)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Equal(typedNullConst, typedNullConst)
             );
         }
 

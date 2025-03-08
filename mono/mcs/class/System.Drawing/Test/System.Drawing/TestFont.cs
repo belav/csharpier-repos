@@ -267,8 +267,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void Font_String_Float_FontStyle_GraphicsUnit_Display()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Font(name, 12.5f, FontStyle.Italic, GraphicsUnit.Display)
+            Assert.Throws<ArgumentException>(() =>
+                new Font(name, 12.5f, FontStyle.Italic, GraphicsUnit.Display)
             );
         }
 
@@ -391,14 +391,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Display()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new Font(
-                        FontFamily.GenericMonospace,
-                        12.5f,
-                        FontStyle.Italic,
-                        GraphicsUnit.Display
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                new Font(FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Display)
             );
         }
 
@@ -557,8 +551,8 @@ namespace MonoTests.System.Drawing
         {
             // Marked NotWorking because it is dependent on what fonts/styles are available
             // on the OS.  This test is written for Windows.
-            Assert.Throws<ArgumentException>(
-                () => new Font("Monotype Corsiva", 8, FontStyle.Regular)
+            Assert.Throws<ArgumentException>(() =>
+                new Font("Monotype Corsiva", 8, FontStyle.Regular)
             );
         }
 

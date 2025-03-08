@@ -236,8 +236,8 @@ namespace System.Web.Http.Results
 
                 // Act & Assert
                 InvalidOperationException exception =
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => result.ExecuteAsync(CancellationToken.None)
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        result.ExecuteAsync(CancellationToken.None)
                     );
                 Assert.Equal("UrlHelper.Link must not return null.", exception.Message);
             }

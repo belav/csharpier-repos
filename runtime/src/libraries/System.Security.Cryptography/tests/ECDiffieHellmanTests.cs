@@ -55,8 +55,8 @@ namespace System.Security.Cryptography.Tests
         public void Create_InvalidECCurveFriendlyName_ThrowsPlatformNotSupportedException()
         {
             ECCurve curve = ECCurve.CreateFromFriendlyName("bad potato");
-            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(
-                () => ECDiffieHellman.Create(curve)
+            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(() =>
+                ECDiffieHellman.Create(curve)
             );
             Assert.Contains("'bad potato'", pnse.Message);
         }

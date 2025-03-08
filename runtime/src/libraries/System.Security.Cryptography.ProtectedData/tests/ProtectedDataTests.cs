@@ -103,8 +103,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
             {
                 byte[] plain = { 1, 2, 3 };
                 byte[] encrypted = ProtectedData.Protect(plain, entropy1, scope);
-                Assert.ThrowsAny<CryptographicException>(
-                    () => ProtectedData.Unprotect(encrypted, entropy2, scope)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    ProtectedData.Unprotect(encrypted, entropy2, scope)
                 );
             }
         }

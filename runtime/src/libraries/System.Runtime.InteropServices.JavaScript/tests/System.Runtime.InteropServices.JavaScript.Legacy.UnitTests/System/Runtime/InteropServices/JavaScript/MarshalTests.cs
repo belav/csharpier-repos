@@ -210,14 +210,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void InvokeUnboxLongFail()
         {
-            var ex = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @"
+            var ex = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @"
                 console.log(""the exception in InvokeReturnLong after this is intentional"");
                 App.call_test_method (""InvokeReturnLong"");
             "
-                    )
+                )
             );
             Assert.Contains("int64 not available", ex.Message);
         }
@@ -528,14 +527,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void BoundStaticMethodMissingArgs()
         {
             HelperMarshal._intValue = 1;
-            var ex = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @$"
+            var ex = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @$"
                 var invoke_int = BINDING.bind_static_method (""{HelperMarshal.INTEROP_CLASS}InvokeInt"");
                 invoke_int ();
             "
-                    )
+                )
             );
             Assert.Contains("Value is not an integer: undefined (undefined)", ex.Message);
             Assert.Equal(1, HelperMarshal._intValue);
@@ -559,14 +557,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             HelperMarshal._intValue = 0;
             // no numbers bigger than 32 bits
-            var ex = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @$"
+            var ex = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @$"
                 var invoke_int = BINDING.bind_static_method (""{HelperMarshal.INTEROP_CLASS}InvokeInt"");
                 invoke_int (Number.MAX_SAFE_INTEGER);
             "
-                    )
+                )
             );
             Assert.Contains(
                 "Overflow: value 9007199254740991 is out of -2147483648 2147483647 range",
@@ -580,14 +577,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             HelperMarshal._intValue = 0;
             // no floating point rounding
-            var ex = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @$"
+            var ex = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @$"
                 var invoke_int = BINDING.bind_static_method (""{HelperMarshal.INTEROP_CLASS}InvokeInt"");
                 invoke_int (3.14);
             "
-                    )
+                )
             );
             Assert.Contains("Value is not an integer: 3.14 (number)", ex.Message);
             Assert.Equal(0, HelperMarshal._intValue);
@@ -598,14 +594,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             HelperMarshal._intValue = 0;
             // no string conversion
-            var ex = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @$"
+            var ex = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @$"
                 var invoke_int = BINDING.bind_static_method (""{HelperMarshal.INTEROP_CLASS}InvokeInt"");
                 invoke_int (""200"");
             "
-                    )
+                )
             );
             Assert.Contains("Value is not an integer: 200 (string)", ex.Message);
             Assert.Equal(0, HelperMarshal._intValue);
@@ -658,14 +653,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void PassUintEnumByNameIsNotImplemented()
         {
             HelperMarshal._enumValue = TestEnum.Zero;
-            var exc = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @$"
+            var exc = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @$"
                     var set_enum = BINDING.bind_static_method (""{HelperMarshal.INTEROP_CLASS}SetEnumValue"", ""j"");
                     set_enum (""BigValue"");
                 "
-                    )
+                )
             );
             Assert.StartsWith(
                 "Error: Expected numeric value for enum argument, got 'BigValue'",
@@ -676,14 +670,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void CannotUnboxUint64()
         {
-            var exc = Assert.Throws<JSException>(
-                () =>
-                    Utils.InvokeJS(
-                        @$"
+            var exc = Assert.Throws<JSException>(() =>
+                Utils.InvokeJS(
+                    @$"
                     var get_u64 = BINDING.bind_static_method (""{HelperMarshal.INTEROP_CLASS}GetUInt64"", """");
                     var u64 = get_u64();
                 "
-                    )
+                )
             );
             Assert.StartsWith("Error: int64 not available", exc.Message);
         }

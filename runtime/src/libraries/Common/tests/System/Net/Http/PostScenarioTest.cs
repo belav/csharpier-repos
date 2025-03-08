@@ -339,15 +339,14 @@ namespace System.Net.Http.Functional.Tests
                 new CustomContent.CustomStream(Encoding.UTF8.GetBytes(ExpectedContent), false)
             );
             var credential = new NetworkCredential(UserName, Password);
-            await Assert.ThrowsAsync<HttpRequestException>(
-                () =>
-                    PostUsingAuthHelper(
-                        remoteServer,
-                        ExpectedContent,
-                        content,
-                        credential,
-                        preAuthenticate: false
-                    )
+            await Assert.ThrowsAsync<HttpRequestException>(() =>
+                PostUsingAuthHelper(
+                    remoteServer,
+                    ExpectedContent,
+                    content,
+                    credential,
+                    preAuthenticate: false
+                )
             );
         }
 

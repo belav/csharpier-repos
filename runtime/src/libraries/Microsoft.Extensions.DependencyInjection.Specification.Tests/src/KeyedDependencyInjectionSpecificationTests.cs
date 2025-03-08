@@ -298,8 +298,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             Assert.Null(provider.GetService<IService>());
             Assert.NotNull(provider.GetKeyedService<IService>(87));
-            Assert.ThrowsAny<InvalidOperationException>(
-                () => provider.GetKeyedService<IService>(new object())
+            Assert.ThrowsAny<InvalidOperationException>(() =>
+                provider.GetKeyedService<IService>(new object())
             );
         }
 

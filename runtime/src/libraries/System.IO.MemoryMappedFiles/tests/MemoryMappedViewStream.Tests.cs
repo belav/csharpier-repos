@@ -66,29 +66,23 @@ namespace System.IO.MemoryMappedFiles.Tests
                     else
                     {
                         Assert.Throws<IOException>(() => mmf.CreateViewStream(0, long.MaxValue));
-                        Assert.Throws<IOException>(
-                            () =>
-                                mmf.CreateViewStream(
-                                    0,
-                                    long.MaxValue,
-                                    MemoryMappedFileAccess.ReadWrite
-                                )
+                        Assert.Throws<IOException>(() =>
+                            mmf.CreateViewStream(0, long.MaxValue, MemoryMappedFileAccess.ReadWrite)
                         );
                     }
 
                     // Offset + Size
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () => mmf.CreateViewStream(0, mapLength + 1)
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        mmf.CreateViewStream(0, mapLength + 1)
                     );
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () =>
-                            mmf.CreateViewStream(0, mapLength + 1, MemoryMappedFileAccess.ReadWrite)
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        mmf.CreateViewStream(0, mapLength + 1, MemoryMappedFileAccess.ReadWrite)
                     );
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () => mmf.CreateViewStream(mapLength, 1)
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        mmf.CreateViewStream(mapLength, 1)
                     );
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () => mmf.CreateViewStream(mapLength, 1, MemoryMappedFileAccess.ReadWrite)
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        mmf.CreateViewStream(mapLength, 1, MemoryMappedFileAccess.ReadWrite)
                     );
 
                     // Access
@@ -197,8 +191,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             const int Capacity = 4096;
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew(null, Capacity, mapAccess))
             {
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => mmf.CreateViewStream(0, Capacity, viewAccess)
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    mmf.CreateViewStream(0, Capacity, viewAccess)
                 );
             }
         }
@@ -216,8 +210,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             const int Capacity = 4096;
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew(null, Capacity, mapAccess))
             {
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => mmf.CreateViewStream(0, Capacity, viewAccess)
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    mmf.CreateViewStream(0, Capacity, viewAccess)
                 );
             }
         }

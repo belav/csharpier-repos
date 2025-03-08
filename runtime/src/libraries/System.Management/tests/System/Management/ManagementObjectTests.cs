@@ -17,11 +17,10 @@ namespace System.Management.Tests
         {
             // The underlying delegate usage can cause some cases to have the PNSE as the inner exception but there is a best effort
             // to throw PNSE for such case.
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    new ManagementObject(
-                        $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
-                    )
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new ManagementObject(
+                    $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                )
             );
         }
 

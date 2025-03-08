@@ -2774,11 +2774,10 @@ ORDER BY [t].[CustomerID]
     )
     {
         // Allow binding of expressions after projection has turned to client eval. Issue #24478.
-        await Assert.ThrowsAsync<TrueException>(
-            () =>
-                base.Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(
-                    async
-                )
+        await Assert.ThrowsAsync<TrueException>(() =>
+            base.Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(
+                async
+            )
         );
 
         AssertSql(
@@ -6465,9 +6464,8 @@ ORDER BY [c].[CustomerID]
 
     [ConditionalFact]
     public async Task Single_Predicate_Cancellation() =>
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () =>
-                await Single_Predicate_Cancellation_test(Fixture.TestSqlLoggerFactory.CancelQuery())
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await Single_Predicate_Cancellation_test(Fixture.TestSqlLoggerFactory.CancelQuery())
         );
 
     [ConditionalFact]
@@ -6516,8 +6514,8 @@ ORDER BY [c].[CustomerID]
             task = context.Customers;
         }
 
-        return Assert.ThrowsAsync<ObjectDisposedException>(
-            () => task.SingleAsync(c => c.CustomerID == "ALFKI")
+        return Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            task.SingleAsync(c => c.CustomerID == "ALFKI")
         );
     }
 
@@ -6867,8 +6865,8 @@ WHERE EXISTS (
 
     public override async Task Max_on_empty_sequence_throws(bool async)
     {
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Max_on_empty_sequence_throws(async)
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Max_on_empty_sequence_throws(async)
         );
 
         AssertSql(
@@ -7476,8 +7474,8 @@ FROM [Orders] AS [o]
                 "InstanceMethod"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Client_code_using_instance_method_throws(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Client_code_using_instance_method_throws(async)
                 )
             ).Message
         );
@@ -7493,8 +7491,8 @@ FROM [Orders] AS [o]
                 "StaticMethod"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Client_code_using_instance_in_static_method(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Client_code_using_instance_in_static_method(async)
                 )
             ).Message
         );
@@ -7509,8 +7507,8 @@ FROM [Orders] AS [o]
                 "Microsoft.EntityFrameworkCore.Query.NorthwindMiscellaneousQuerySqlServerTest"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Client_code_using_instance_in_anonymous_type(async)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Client_code_using_instance_in_anonymous_type(async)
                 )
             ).Message
         );
@@ -7676,8 +7674,8 @@ FROM [Orders] AS [o]
     public override async Task Entity_equality_through_subquery_composite_key(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Entity_equality_through_subquery_composite_key(async)
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Entity_equality_through_subquery_composite_key(async)
             )
         ).Message;
 

@@ -538,8 +538,8 @@ public class CollectionComparerTest
         Assert.Equal(
             CoreStrings.BadListType("HashSet<string>", "IList<string>"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => comparer.Equals(new List<string>(), new HashSet<string>())
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new List<string>(), new HashSet<string>())
                 )
                 .Message
         );
@@ -547,8 +547,8 @@ public class CollectionComparerTest
         Assert.Equal(
             CoreStrings.BadListType("HashSet<string>", "IList<string>"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => comparer.Equals(new HashSet<string>(), new List<string>())
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new HashSet<string>(), new List<string>())
                 )
                 .Message
         );
@@ -571,8 +571,8 @@ public class CollectionComparerTest
         Assert.Equal(
             CoreStrings.BadListType("HashSet<int?>", "IList<int?>"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => comparer.Equals(new List<int?>(), new HashSet<int?>())
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new List<int?>(), new HashSet<int?>())
                 )
                 .Message
         );
@@ -580,8 +580,8 @@ public class CollectionComparerTest
         Assert.Equal(
             CoreStrings.BadListType("HashSet<int?>", "IList<int?>"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => comparer.Equals(new HashSet<int?>(), new List<int?>())
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new HashSet<int?>(), new List<int?>())
                 )
                 .Message
         );

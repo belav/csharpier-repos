@@ -182,62 +182,62 @@ namespace Mono.CodeContracts.Static.AST
 
         private void InitializeLazyTypes()
         {
-            this.typeVoid = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(void)))
+            this.typeVoid = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(void)))
             );
-            this.typeSByte = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(SByte)))
+            this.typeSByte = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(SByte)))
             );
-            this.typeByte = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Byte)))
+            this.typeByte = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Byte)))
             );
-            this.typeInt16 = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Int16)))
+            this.typeInt16 = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Int16)))
             );
-            this.typeInt32 = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Int32)))
+            this.typeInt32 = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Int32)))
             );
-            this.typeInt64 = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Int64)))
+            this.typeInt64 = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Int64)))
             );
-            this.typeUInt16 = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(UInt16)))
+            this.typeUInt16 = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(UInt16)))
             );
-            this.typeUInt32 = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(UInt32)))
+            this.typeUInt32 = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(UInt32)))
             );
-            this.typeUInt64 = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(UInt64)))
+            this.typeUInt64 = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(UInt64)))
             );
-            this.typeSingle = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Single)))
+            this.typeSingle = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Single)))
             );
-            this.typeDouble = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Double)))
+            this.typeDouble = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Double)))
             );
-            this.typeBoolean = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Boolean)))
+            this.typeBoolean = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Boolean)))
             );
-            this.typeObject = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(object)))
+            this.typeObject = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(object)))
             );
-            this.typeString = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(string)))
+            this.typeString = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(string)))
             );
-            this.typeArray = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Array)))
+            this.typeArray = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Array)))
             );
-            this.typeIntPtr = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(IntPtr)))
+            this.typeIntPtr = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(IntPtr)))
             );
-            this.typeUIntPtr = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(UIntPtr)))
+            this.typeUIntPtr = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(UIntPtr)))
             );
-            this.typeChar = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(char)))
+            this.typeChar = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(char)))
             );
-            this.typeSystemType = new Lazy<TypeNode>(
-                () => TypeNode.Create(this.Module.Import(typeof(Type)))
+            this.typeSystemType = new Lazy<TypeNode>(() =>
+                TypeNode.Create(this.Module.Import(typeof(Type)))
             );
 
             this.systemAssembly = new Lazy<AssemblyNode>(() => AssemblyNode.GetSystemAssembly());

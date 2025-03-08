@@ -16,19 +16,16 @@ namespace System.Threading.RateLimiting.Tests
         public void ThrowsWhenNoLimitersProvided()
         {
             Assert.Throws<ArgumentException>(() => PartitionedRateLimiter.CreateChained<string>());
-            Assert.Throws<ArgumentException>(
-                () =>
-                    PartitionedRateLimiter.CreateChained<string>(
-                        new PartitionedRateLimiter<string>[0]
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                PartitionedRateLimiter.CreateChained<string>(new PartitionedRateLimiter<string>[0])
             );
         }
 
         [Fact]
         public void ThrowsWhenNullPassedIn()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => PartitionedRateLimiter.CreateChained<string>(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                PartitionedRateLimiter.CreateChained<string>(null)
             );
         }
 
@@ -65,8 +62,8 @@ namespace System.Threading.RateLimiting.Tests
 
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.GetStatistics(""));
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.AttemptAcquire(""));
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
         }
 
@@ -103,8 +100,8 @@ namespace System.Threading.RateLimiting.Tests
 
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.GetStatistics(""));
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.AttemptAcquire(""));
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
         }
 
@@ -755,8 +752,8 @@ namespace System.Threading.RateLimiting.Tests
                 limiter1,
                 limiter2
             );
-            await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            await Assert.ThrowsAsync<NotImplementedException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
             Assert.Equal(1, concurrencyLimiter.GetStatistics().CurrentAvailablePermits);
         }
@@ -782,8 +779,8 @@ namespace System.Threading.RateLimiting.Tests
             });
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1);
-            await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            await Assert.ThrowsAsync<NotImplementedException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
         }
 
@@ -968,8 +965,8 @@ namespace System.Threading.RateLimiting.Tests
                 limiter2,
                 limiter3
             );
-            var ex = await Assert.ThrowsAsync<AggregateException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            var ex = await Assert.ThrowsAsync<AggregateException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
             Assert.Equal(2, ex.InnerExceptions.Count);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[0]);
@@ -1071,8 +1068,8 @@ namespace System.Threading.RateLimiting.Tests
                 limiter2,
                 limiter3
             );
-            var ex = await Assert.ThrowsAsync<AggregateException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            var ex = await Assert.ThrowsAsync<AggregateException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
             Assert.Equal(3, ex.InnerExceptions.Count);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[0]);
@@ -1546,8 +1543,8 @@ namespace System.Threading.RateLimiting.Tests
             customizableLimiter2.AcquireAsyncCoreImpl = (_, _) =>
                 new ValueTask<RateLimitLease>(customizableLease2);
 
-            await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await chainedLimiter.AcquireAsync("")
+            await Assert.ThrowsAsync<NotImplementedException>(async () =>
+                await chainedLimiter.AcquireAsync("")
             );
         }
 

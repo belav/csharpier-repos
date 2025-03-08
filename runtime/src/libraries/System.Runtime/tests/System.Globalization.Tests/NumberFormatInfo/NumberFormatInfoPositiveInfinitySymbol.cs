@@ -47,8 +47,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void PositiveInfinitySymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => NumberFormatInfo.InvariantInfo.PositiveInfinitySymbol = ""
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PositiveInfinitySymbol = ""
             );
         }
     }

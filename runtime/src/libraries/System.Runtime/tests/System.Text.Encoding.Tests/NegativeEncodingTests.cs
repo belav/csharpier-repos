@@ -697,19 +697,19 @@ namespace System.Text.Tests
                 Assert.Throws<EncoderFallbackException>(() => encoding.GetBytes(charsArray));
             }
 
-            Assert.Throws<EncoderFallbackException>(
-                () => encoding.GetByteCount(charsArray, index, count)
+            Assert.Throws<EncoderFallbackException>(() =>
+                encoding.GetByteCount(charsArray, index, count)
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () => encoding.GetBytes(charsArray, index, count)
+            Assert.Throws<EncoderFallbackException>(() =>
+                encoding.GetBytes(charsArray, index, count)
             );
 
-            Assert.Throws<EncoderFallbackException>(
-                () => encoding.GetBytes(chars, index, count, bytes, 0)
+            Assert.Throws<EncoderFallbackException>(() =>
+                encoding.GetBytes(chars, index, count, bytes, 0)
             );
-            Assert.Throws<EncoderFallbackException>(
-                () => encoding.GetBytes(charsArray, index, count, bytes, 0)
+            Assert.Throws<EncoderFallbackException>(() =>
+                encoding.GetBytes(charsArray, index, count, bytes, 0)
             );
 
             fixed (char* pChars = chars)
@@ -718,11 +718,11 @@ namespace System.Text.Tests
                 char* pCharsLocal = pChars;
                 byte* pBytesLocal = pBytes;
 
-                Assert.Throws<EncoderFallbackException>(
-                    () => encoding.GetByteCount(pCharsLocal + index, count)
+                Assert.Throws<EncoderFallbackException>(() =>
+                    encoding.GetByteCount(pCharsLocal + index, count)
                 );
-                Assert.Throws<EncoderFallbackException>(
-                    () => encoding.GetBytes(pCharsLocal + index, count, pBytesLocal, bytes.Length)
+                Assert.Throws<EncoderFallbackException>(() =>
+                    encoding.GetBytes(pCharsLocal + index, count, pBytesLocal, bytes.Length)
                 );
             }
         }
@@ -746,15 +746,14 @@ namespace System.Text.Tests
                 Assert.Throws<DecoderFallbackException>(() => encoding.GetString(bytes));
             }
 
-            Assert.Throws<DecoderFallbackException>(
-                () => encoding.GetCharCount(bytes, index, count)
+            Assert.Throws<DecoderFallbackException>(() => encoding.GetCharCount(bytes, index, count)
             );
 
             Assert.Throws<DecoderFallbackException>(() => encoding.GetChars(bytes, index, count));
             Assert.Throws<DecoderFallbackException>(() => encoding.GetString(bytes, index, count));
 
-            Assert.Throws<DecoderFallbackException>(
-                () => encoding.GetChars(bytes, index, count, chars, 0)
+            Assert.Throws<DecoderFallbackException>(() =>
+                encoding.GetChars(bytes, index, count, chars, 0)
             );
 
             fixed (byte* pBytes = bytes)
@@ -763,15 +762,15 @@ namespace System.Text.Tests
                 byte* pBytesLocal = pBytes;
                 char* pCharsLocal = pChars;
 
-                Assert.Throws<DecoderFallbackException>(
-                    () => encoding.GetCharCount(pBytesLocal + index, count)
+                Assert.Throws<DecoderFallbackException>(() =>
+                    encoding.GetCharCount(pBytesLocal + index, count)
                 );
 
-                Assert.Throws<DecoderFallbackException>(
-                    () => encoding.GetChars(pBytesLocal + index, count, pCharsLocal, chars.Length)
+                Assert.Throws<DecoderFallbackException>(() =>
+                    encoding.GetChars(pBytesLocal + index, count, pCharsLocal, chars.Length)
                 );
-                Assert.Throws<DecoderFallbackException>(
-                    () => encoding.GetString(pBytesLocal + index, count)
+                Assert.Throws<DecoderFallbackException>(() =>
+                    encoding.GetString(pBytesLocal + index, count)
                 );
             }
         }

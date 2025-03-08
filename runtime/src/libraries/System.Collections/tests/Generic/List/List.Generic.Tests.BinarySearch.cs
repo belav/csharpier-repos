@@ -68,11 +68,11 @@ namespace System.Collections.Tests
                 null,
                 () => list.BinarySearch(0, count + 1, element, GetIComparer())
             ); //"Finding items longer than array should throw ArgumentException"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.BinarySearch(-1, count, element, GetIComparer())
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.BinarySearch(-1, count, element, GetIComparer())
             ); //"ArgumentOutOfRangeException should be thrown on negative index."
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.BinarySearch(0, -1, element, GetIComparer())
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.BinarySearch(0, -1, element, GetIComparer())
             ); //"ArgumentOutOfRangeException should be thrown on negative count."
             AssertExtensions.Throws<ArgumentException>(
                 null,

@@ -131,8 +131,8 @@ namespace System.Text.Json.Tests
         public void SerializeDefaultArray()
         {
             // The call to .GetEnumerator() throws this exception. Json.NET fails in the same way.
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(default(ImmutableArray<int>), s_indentedOption)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(default(ImmutableArray<int>), s_indentedOption)
             );
         }
         #endregion

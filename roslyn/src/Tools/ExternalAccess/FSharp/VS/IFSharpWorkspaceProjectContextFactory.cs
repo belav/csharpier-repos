@@ -83,16 +83,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp
             string? binOutputPath
         ) =>
             new(
-                _threadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        _factory.CreateProjectContextAsync(
-                            id: projectGuid,
-                            uniqueName: projectUniqueName,
-                            languageName: LanguageNames.FSharp,
-                            data: new FSharpEvaluationData(projectFilePath, binOutputPath),
-                            hostObject: hierarchy,
-                            CancellationToken.None
-                        )
+                _threadingContext.JoinableTaskFactory.Run(() =>
+                    _factory.CreateProjectContextAsync(
+                        id: projectGuid,
+                        uniqueName: projectUniqueName,
+                        languageName: LanguageNames.FSharp,
+                        data: new FSharpEvaluationData(projectFilePath, binOutputPath),
+                        hostObject: hierarchy,
+                        CancellationToken.None
+                    )
                 )
             );
 

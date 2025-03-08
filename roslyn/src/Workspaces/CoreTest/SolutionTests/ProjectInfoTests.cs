@@ -20,57 +20,52 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Create_Errors_NullReferences()
         {
             var pid = ProjectId.CreateNewId();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        id: null,
-                        version: VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: "C#"
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    id: null,
+                    version: VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: "C#"
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: null,
-                        assemblyName: "Bar",
-                        language: "C#"
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: null,
+                    assemblyName: "Bar",
+                    language: "C#"
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: null,
-                        language: "C#"
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: null,
+                    language: "C#"
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: null
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: null
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: "C#",
-                        documents: new DocumentInfo[] { null }
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: "C#",
+                    documents: new DocumentInfo[] { null }
+                )
             );
         }
 
@@ -93,16 +88,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: "C#",
-                        additionalDocuments: new DocumentInfo[] { null }
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: "C#",
+                    additionalDocuments: new DocumentInfo[] { null }
+                )
             );
 
             Assert.Throws<ArgumentException>(
@@ -118,16 +112,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: "C#",
-                        projectReferences: new ProjectReference[] { null }
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: "C#",
+                    projectReferences: new ProjectReference[] { null }
+                )
             );
 
             var projectReference = new ProjectReference(ProjectId.CreateNewId());
@@ -171,16 +164,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: "C#",
-                        metadataReferences: new MetadataReference[] { null }
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: "C#",
+                    metadataReferences: new MetadataReference[] { null }
+                )
             );
 
             var metadataReference = new TestMetadataReference();

@@ -2077,21 +2077,19 @@ namespace System.Net.Sockets.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await server.SendAsync(
-                                (ReadOnlyMemory<byte>)new byte[0],
-                                SocketFlags.None,
-                                cts.Token
-                            )
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await server.SendAsync(
+                            (ReadOnlyMemory<byte>)new byte[0],
+                            SocketFlags.None,
+                            cts.Token
+                        )
                     );
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await server.ReceiveAsync(
-                                (Memory<byte>)new byte[0],
-                                SocketFlags.None,
-                                cts.Token
-                            )
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await server.ReceiveAsync(
+                            (Memory<byte>)new byte[0],
+                            SocketFlags.None,
+                            cts.Token
+                        )
                     );
                 }
             }
@@ -2245,21 +2243,19 @@ namespace System.Net.Sockets.Tests
                     cts.Cancel();
 
                     server.Shutdown(SocketShutdown.Both);
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await server.SendAsync(
-                                (ReadOnlyMemory<byte>)new byte[0],
-                                SocketFlags.None,
-                                cts.Token
-                            )
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await server.SendAsync(
+                            (ReadOnlyMemory<byte>)new byte[0],
+                            SocketFlags.None,
+                            cts.Token
+                        )
                     );
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await server.ReceiveAsync(
-                                (Memory<byte>)new byte[0],
-                                SocketFlags.None,
-                                cts.Token
-                            )
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await server.ReceiveAsync(
+                            (Memory<byte>)new byte[0],
+                            SocketFlags.None,
+                            cts.Token
+                        )
                     );
                 }
             }

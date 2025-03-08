@@ -165,17 +165,17 @@ namespace System.Threading.ThreadPools.Tests
         public static void QueueRegisterNegativeTest()
         {
             Assert.Throws<ArgumentNullException>(() => ThreadPool.QueueUserWorkItem(null));
-            Assert.Throws<ArgumentNullException>(
-                () => ThreadPool.UnsafeQueueUserWorkItem(null, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.UnsafeQueueUserWorkItem(null, null)
             );
 
             WaitHandle waitHandle = new ManualResetEvent(true);
             WaitOrTimerCallback callback = (state, timedOut) => { };
-            Assert.Throws<ArgumentNullException>(
-                () => ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true)
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ThreadPool.RegisterWaitForSingleObject(waitHandle, null, null, 0, true)
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.RegisterWaitForSingleObject(waitHandle, null, null, 0, true)
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "millisecondsTimeOutInterval",
@@ -229,11 +229,11 @@ namespace System.Threading.ThreadPools.Tests
                     )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () => ThreadPool.UnsafeRegisterWaitForSingleObject(null, callback, null, 0, true)
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.UnsafeRegisterWaitForSingleObject(null, callback, null, 0, true)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, null, null, 0, true)
+            Assert.Throws<ArgumentNullException>(() =>
+                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, null, null, 0, true)
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "millisecondsTimeOutInterval",

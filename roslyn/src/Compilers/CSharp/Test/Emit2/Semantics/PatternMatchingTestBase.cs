@@ -451,8 +451,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                 if (model.IsSpeculativeSemanticModel)
                 {
-                    Assert.Throws<NotSupportedException>(
-                        () => model.AnalyzeDataFlow(dataFlowParent)
+                    Assert.Throws<NotSupportedException>(() => model.AnalyzeDataFlow(dataFlowParent)
                     );
                 }
                 else

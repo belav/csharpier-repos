@@ -283,8 +283,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
                     Assert.True(feature.IsReadOnly);
 
-                    invalidOpEx = Assert.Throws<InvalidOperationException>(
-                        () => feature.MaxRequestBodySize = perRequestMaxRequestBodySize
+                    invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
+                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize
                     );
                     throw invalidOpEx;
                 },

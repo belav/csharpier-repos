@@ -25,8 +25,8 @@ namespace System.Formats.Tar.Tests
                     TarWriter writer = new TarWriter(archiveStream, format, leaveOpen: false)
                 )
                 {
-                    await Assert.ThrowsAsync<ArgumentNullException>(
-                        () => writer.WriteEntryAsync(null)
+                    await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                        writer.WriteEntryAsync(null)
                     );
                 }
             }

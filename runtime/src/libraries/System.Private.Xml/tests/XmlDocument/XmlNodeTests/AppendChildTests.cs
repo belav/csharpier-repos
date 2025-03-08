@@ -58,8 +58,8 @@ namespace System.Xml.XmlDocumentTests
 
             var text = xmlDocument.CreateTextNode("text");
 
-            Assert.Throws<InvalidOperationException>(
-                () => xmlDocument.DocumentElement.FirstChild.AppendChild(text)
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.FirstChild.AppendChild(text)
             );
         }
 
@@ -71,8 +71,8 @@ namespace System.Xml.XmlDocumentTests
 
             var text = xmlDocument.CreateTextNode("text");
 
-            Assert.Throws<InvalidOperationException>(
-                () => xmlDocument.DocumentElement.FirstChild.AppendChild(text)
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.FirstChild.AppendChild(text)
             );
         }
 
@@ -84,8 +84,8 @@ namespace System.Xml.XmlDocumentTests
 
             var text = xmlDocument.CreateTextNode("text");
 
-            Assert.Throws<InvalidOperationException>(
-                () => xmlDocument.DocumentElement.FirstChild.AppendChild(text)
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.FirstChild.AppendChild(text)
             );
         }
     }

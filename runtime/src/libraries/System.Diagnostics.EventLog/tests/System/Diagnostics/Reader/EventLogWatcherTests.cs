@@ -32,16 +32,15 @@ namespace System.Diagnostics.Tests
         {
             EventBookmark bookmark = GetBookmark();
             Assert.Throws<ArgumentNullException>(() => new EventLogWatcher(null, bookmark, true));
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    new EventLogWatcher(
-                        new EventLogQuery("Application", PathType.LogName, "*[System]")
-                        {
-                            ReverseDirection = true,
-                        },
-                        bookmark,
-                        true
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                new EventLogWatcher(
+                    new EventLogQuery("Application", PathType.LogName, "*[System]")
+                    {
+                        ReverseDirection = true,
+                    },
+                    bookmark,
+                    true
+                )
             );
 
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]");
@@ -94,8 +93,7 @@ namespace System.Diagnostics.Tests
                         signal.Set();
                     };
                     Helpers.Retry(() => eventLogWatcher.Enabled = waitOnEvent);
-                    Helpers.Retry(
-                        () => eventLog.WriteEntry(message, EventLogEntryType.Information)
+                    Helpers.Retry(() => eventLog.WriteEntry(message, EventLogEntryType.Information)
                     );
                     if (waitOnEvent)
                     {

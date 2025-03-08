@@ -157,8 +157,8 @@ namespace System.Composition.Hosting.Tests
         {
             var configuration = new ContainerConfiguration();
             configuration.WithDefaultConventions(new ConventionBuilder());
-            Assert.Throws<InvalidOperationException>(
-                () => configuration.WithDefaultConventions(new ConventionBuilder())
+            Assert.Throws<InvalidOperationException>(() =>
+                configuration.WithDefaultConventions(new ConventionBuilder())
             );
         }
 
@@ -622,8 +622,7 @@ namespace System.Composition.Hosting.Tests
             );
             CompositionHost container = configuration.CreateContainer();
 
-            Assert.Throws<CompositionFailedException>(
-                () => container.GetExport<MetadataProperty>()
+            Assert.Throws<CompositionFailedException>(() => container.GetExport<MetadataProperty>()
             );
         }
 
@@ -663,8 +662,7 @@ namespace System.Composition.Hosting.Tests
             );
             CompositionHost container = configuration.CreateContainer();
 
-            Assert.Throws<CompositionFailedException>(
-                () => container.GetExport<MetadataProperty>()
+            Assert.Throws<CompositionFailedException>(() => container.GetExport<MetadataProperty>()
             );
         }
 

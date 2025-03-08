@@ -217,8 +217,8 @@ namespace Microsoft.Extensions.Http.Logging
             }
             else
             {
-                _ = Assert.Throws<HttpRequestException>(
-                    () => client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
+                _ = Assert.Throws<HttpRequestException>(() =>
+                    client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
                 );
             }
 
@@ -232,8 +232,8 @@ namespace Microsoft.Extensions.Http.Logging
                 }
                 else
                 {
-                    _ = await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, Url))
+                    _ = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                        client.SendAsync(new HttpRequestMessage(HttpMethod.Get, Url))
                     );
                 }
 
@@ -253,8 +253,8 @@ namespace Microsoft.Extensions.Http.Logging
                 }
                 else
                 {
-                    _ = Assert.Throws<HttpRequestException>(
-                        () => client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
+                    _ = Assert.Throws<HttpRequestException>(() =>
+                        client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
                     );
                 }
 

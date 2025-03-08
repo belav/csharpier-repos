@@ -24,8 +24,8 @@ namespace System.IO.Tests
         [Fact]
         public void SetToNonExistentDirectory_ThrowsDirectoryNotFoundException()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () => Directory.SetCurrentDirectory(GetTestFilePath())
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                Directory.SetCurrentDirectory(GetTestFilePath())
             );
         }
 

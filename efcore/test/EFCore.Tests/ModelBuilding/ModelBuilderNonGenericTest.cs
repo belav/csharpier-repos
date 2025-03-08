@@ -53,14 +53,13 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Assert.Equal(
                 CoreStrings.NoClrNavigation("Snoop", nameof(Dre)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            (
-                                (NonGenericTestOwnedNavigationBuilder<Dr, Dre>)
-                                    modelBuilder.Entity<Dr>().OwnsOne(e => e.Dre)
-                            )
-                                .GetInfrastructure()
-                                .HasOne("Snoop")
+                    .Throws<InvalidOperationException>(() =>
+                        (
+                            (NonGenericTestOwnedNavigationBuilder<Dr, Dre>)
+                                modelBuilder.Entity<Dr>().OwnsOne(e => e.Dre)
+                        )
+                            .GetInfrastructure()
+                            .HasOne("Snoop")
                     )
                     .Message
             );
@@ -85,11 +84,10 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Assert.Equal(
                 CoreStrings.NoClrNavigation("Snoop", nameof(Dr)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
-                                .GetInfrastructure()
-                                .HasOne("Snoop")
+                    .Throws<InvalidOperationException>(() =>
+                        ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
+                            .GetInfrastructure()
+                            .HasOne("Snoop")
                     )
                     .Message
             );
@@ -103,11 +101,10 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Assert.Equal(
                 CoreStrings.NoClrNavigation("Snoop", nameof(Dr)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
-                                .GetInfrastructure()
-                                .HasMany("Snoop")
+                    .Throws<InvalidOperationException>(() =>
+                        ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
+                            .GetInfrastructure()
+                            .HasMany("Snoop")
                     )
                     .Message
             );
@@ -121,11 +118,10 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Assert.Equal(
                 CoreStrings.NavigationCollectionWrongClrType("Dre", nameof(Dr), nameof(Dre), "T"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
-                                .GetInfrastructure()
-                                .HasMany("Dre")
+                    .Throws<InvalidOperationException>(() =>
+                        ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
+                            .GetInfrastructure()
+                            .HasMany("Dre")
                     )
                     .Message
             );

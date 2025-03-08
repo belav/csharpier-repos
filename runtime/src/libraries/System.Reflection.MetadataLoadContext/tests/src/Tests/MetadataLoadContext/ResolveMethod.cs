@@ -84,8 +84,8 @@ namespace System.Reflection.Tests
                     TestData.s_DerivedClassWithVariationsOnFooImage
                 );
                 Type t = derived.GetType("Derived1", throwOnError: true);
-                TargetParameterCountException e = Assert.Throws<TargetParameterCountException>(
-                    () => t.BaseType
+                TargetParameterCountException e = Assert.Throws<TargetParameterCountException>(() =>
+                    t.BaseType
                 );
 
                 Assert.Same(lc, resolver.Context);

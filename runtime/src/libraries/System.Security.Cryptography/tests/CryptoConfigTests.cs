@@ -409,8 +409,8 @@ namespace System.Security.Cryptography.Tests
         {
             Assert.Throws<ArgumentNullException>(() => CryptoConfig.CreateFromName(null));
             Assert.Throws<ArgumentNullException>(() => CryptoConfig.CreateFromName(null, null));
-            Assert.Throws<ArgumentNullException>(
-                () => CryptoConfig.CreateFromName(null, string.Empty)
+            Assert.Throws<ArgumentNullException>(() =>
+                CryptoConfig.CreateFromName(null, string.Empty)
             );
             Assert.Null(CryptoConfig.CreateFromName(string.Empty, null));
             Assert.Null(CryptoConfig.CreateFromName("SHA", 1, 2));
@@ -1043,8 +1043,7 @@ namespace System.Security.Cryptography.Tests
             string s = new StringBuilder(valueToRepeat.Length * 0x80)
                 .Insert(0, valueToRepeat, 0x80)
                 .ToString();
-            Assert.Throws<CryptographicUnexpectedOperationException>(
-                () => CryptoConfig.EncodeOID(s)
+            Assert.Throws<CryptographicUnexpectedOperationException>(() => CryptoConfig.EncodeOID(s)
             );
 
             // Try again with one less separator for the boundary case, but the particular output is really long

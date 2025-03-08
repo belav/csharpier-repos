@@ -100,8 +100,7 @@ namespace System.Net.Tests
             using (var listener = new HttpListener())
             {
                 Assert.Throws<InvalidOperationException>(() => listener.GetContext());
-                Assert.Throws<InvalidOperationException>(
-                    () => listener.BeginGetContext(null, null)
+                Assert.Throws<InvalidOperationException>(() => listener.BeginGetContext(null, null)
                 );
             }
         }
@@ -164,8 +163,8 @@ namespace System.Net.Tests
                 IAsyncResult beginGetContextResult = listener.BeginGetContext(null, null);
                 listener.EndGetContext(beginGetContextResult);
 
-                Assert.Throws<InvalidOperationException>(
-                    () => listener.EndGetContext(beginGetContextResult)
+                Assert.Throws<InvalidOperationException>(() =>
+                    listener.EndGetContext(beginGetContextResult)
                 );
             }
         }
@@ -177,8 +176,8 @@ namespace System.Net.Tests
             using var listenerFactory = new HttpListenerFactory();
             var listener = listenerFactory.GetListener();
             listener.Start();
-            var listenerTask = Task.Run(
-                () => Assert.Throws<HttpListenerException>(() => listener.GetContext())
+            var listenerTask = Task.Run(() =>
+                Assert.Throws<HttpListenerException>(() => listener.GetContext())
             );
             await Task.Delay(1000); // Wait for listenerTask to call GetContext.
             listener.Stop();

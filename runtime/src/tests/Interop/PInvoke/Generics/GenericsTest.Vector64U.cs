@@ -50,8 +50,8 @@ unsafe partial class GenericsTest
         Assert.Equal(value2.GetElement(0), 1u);
         Assert.Equal(value2.GetElement(1), 2u);
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetVector64UOut(1u, 2u, out Vector64<uint> value3)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector64UOut(1u, 2u, out Vector64<uint> value3)
         );
 
         Vector64<uint>* value4 = GenericsNative.GetVector64UPtr(1u, 2u);
@@ -60,8 +60,7 @@ unsafe partial class GenericsTest
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector64URef(1u, 2u));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector64U(default, default)
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64U(default, default)
         );
 
         Vector64<uint>[] values = new Vector64<uint>[]
@@ -81,12 +80,12 @@ unsafe partial class GenericsTest
             }
         });
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector64Us(values, values.Length)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector64Us(values, values.Length)
         );
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector64Us(in values[0], values.Length)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector64Us(in values[0], values.Length)
         );
     }
 }

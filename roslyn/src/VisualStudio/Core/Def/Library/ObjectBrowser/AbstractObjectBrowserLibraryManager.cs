@@ -58,11 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Workspace = workspace;
             Workspace.WorkspaceChanged += OnWorkspaceChanged;
 
-            _libraryService = new Lazy<ILibraryService>(
-                () =>
-                    Workspace
-                        .Services.GetLanguageServices(_languageName)
-                        .GetService<ILibraryService>()
+            _libraryService = new Lazy<ILibraryService>(() =>
+                Workspace.Services.GetLanguageServices(_languageName).GetService<ILibraryService>()
             );
         }
 

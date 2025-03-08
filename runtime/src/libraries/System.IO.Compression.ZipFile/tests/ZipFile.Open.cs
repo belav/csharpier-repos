@@ -12,8 +12,8 @@ public class ZipFile_Open : ZipFileTestBase
     public void InvalidConstructors()
     {
         //out of range enum values
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () => ZipFile.Open("bad file", (ZipArchiveMode)(10))
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            ZipFile.Open("bad file", (ZipArchiveMode)(10))
         );
     }
 
@@ -23,8 +23,8 @@ public class ZipFile_Open : ZipFileTestBase
         Assert.Throws<InvalidDataException>(() => ZipFile.OpenRead(bad("EOCDmissing.zip")));
         using (TempFile testArchive = CreateTempCopyFile(bad("EOCDmissing.zip"), GetTestFilePath()))
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
 
@@ -36,8 +36,8 @@ public class ZipFile_Open : ZipFileTestBase
             )
         )
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
 
@@ -56,8 +56,8 @@ public class ZipFile_Open : ZipFileTestBase
             )
         )
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
 
@@ -75,8 +75,8 @@ public class ZipFile_Open : ZipFileTestBase
             )
         )
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
 
@@ -100,8 +100,8 @@ public class ZipFile_Open : ZipFileTestBase
             )
         )
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
 
@@ -119,8 +119,8 @@ public class ZipFile_Open : ZipFileTestBase
             )
         )
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
 
@@ -138,8 +138,8 @@ public class ZipFile_Open : ZipFileTestBase
             )
         )
         {
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
             );
         }
     }

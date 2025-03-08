@@ -104,8 +104,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
         public void Deserialize_BadToken(string serializedToken)
         {
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(
-                () => _testSerializer.Deserialize(serializedToken)
+            var ex = Assert.Throws<HttpAntiForgeryException>(() =>
+                _testSerializer.Deserialize(serializedToken)
             );
             Assert.Equal(
                 @"The anti-forgery token could not be decrypted. If this application is hosted by a Web Farm or cluster, ensure that all machines are running the same version of ASP.NET Web Pages and that the <machineKey> configuration specifies explicit encryption and validation keys. AutoGenerate cannot be used in a cluster.",

@@ -93,17 +93,16 @@ namespace System.Reflection.Tests
                 typeof(Sample).GetMethod("NoDefaultParameterMethod"),
             };
             object[] methodArgs = new object[] { "value", 1 };
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    binder.BindToMethod(
-                        flags,
-                        methods,
-                        ref methodArgs,
-                        null,
-                        null,
-                        new[] { "param1", "param2" },
-                        out var _
-                    )
+            Assert.Throws<MissingMethodException>(() =>
+                binder.BindToMethod(
+                    flags,
+                    methods,
+                    ref methodArgs,
+                    null,
+                    null,
+                    new[] { "param1", "param2" },
+                    out var _
+                )
             );
         }
 
@@ -166,9 +165,8 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { true, "value", 3.14, 1 };
-            Assert.Throws<MissingMethodException>(
-                () =>
-                    binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _)
+            Assert.Throws<MissingMethodException>(() =>
+                binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _)
             );
         }
 

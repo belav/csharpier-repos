@@ -51,79 +51,75 @@ namespace System.Security.Cryptography.Rsa.Tests
                 subjectPublicKeyInfo = rsa.ExportSubjectPublicKeyInfo();
             }
 
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportRSAPublicKey(pkcs1Public, out _)
+            Assert.Throws<ObjectDisposedException>(() => rsa.ImportRSAPublicKey(pkcs1Public, out _)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportRSAPrivateKey(pkcs1Private, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportRSAPrivateKey(pkcs1Private, out _)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportPkcs8PrivateKey(pkcs8Private, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportPkcs8PrivateKey(pkcs8Private, out _)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportEncryptedPkcs8PrivateKey(pwStr, pkcs8EncryptedPrivate, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportEncryptedPkcs8PrivateKey(pwStr, pkcs8EncryptedPrivate, out _)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportEncryptedPkcs8PrivateKey(pwBytes, pkcs8EncryptedPrivate, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportEncryptedPkcs8PrivateKey(pwBytes, pkcs8EncryptedPrivate, out _)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportSubjectPublicKeyInfo(subjectPublicKeyInfo, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportSubjectPublicKeyInfo(subjectPublicKeyInfo, out _)
             );
 
             Assert.Throws<ObjectDisposedException>(() => rsa.ExportRSAPublicKey());
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.TryExportRSAPublicKey(pkcs1Public, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.TryExportRSAPublicKey(pkcs1Public, out _)
             );
             Assert.Throws<ObjectDisposedException>(() => rsa.ExportRSAPrivateKey());
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.TryExportRSAPrivateKey(pkcs1Private, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.TryExportRSAPrivateKey(pkcs1Private, out _)
             );
             Assert.Throws<ObjectDisposedException>(() => rsa.ExportPkcs8PrivateKey());
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.TryExportPkcs8PrivateKey(pkcs8Private, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.TryExportPkcs8PrivateKey(pkcs8Private, out _)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ExportEncryptedPkcs8PrivateKey(pwStr, pbeParameters)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ExportEncryptedPkcs8PrivateKey(pwStr, pbeParameters)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    rsa.TryExportEncryptedPkcs8PrivateKey(
-                        pwStr,
-                        pbeParameters,
-                        pkcs8EncryptedPrivate,
-                        out _
-                    )
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.TryExportEncryptedPkcs8PrivateKey(
+                    pwStr,
+                    pbeParameters,
+                    pkcs8EncryptedPrivate,
+                    out _
+                )
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ExportEncryptedPkcs8PrivateKey(pwBytes, pbeParameters)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ExportEncryptedPkcs8PrivateKey(pwBytes, pbeParameters)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    rsa.TryExportEncryptedPkcs8PrivateKey(
-                        pwBytes,
-                        pbeParameters,
-                        pkcs8EncryptedPrivate,
-                        out _
-                    )
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.TryExportEncryptedPkcs8PrivateKey(
+                    pwBytes,
+                    pbeParameters,
+                    pkcs8EncryptedPrivate,
+                    out _
+                )
             );
             Assert.Throws<ObjectDisposedException>(() => rsa.ExportSubjectPublicKeyInfo());
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.TryExportSubjectPublicKeyInfo(subjectPublicKeyInfo, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.TryExportSubjectPublicKeyInfo(subjectPublicKeyInfo, out _)
             );
 
             // Check encrypted import with the wrong password.
             // It shouldn't do enough work to realize it was wrong.
             pwBytes = Array.Empty<byte>();
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    rsa.ImportEncryptedPkcs8PrivateKey(
-                        (ReadOnlySpan<char>)"",
-                        pkcs8EncryptedPrivate,
-                        out _
-                    )
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportEncryptedPkcs8PrivateKey(
+                    (ReadOnlySpan<char>)"",
+                    pkcs8EncryptedPrivate,
+                    out _
+                )
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => rsa.ImportEncryptedPkcs8PrivateKey(pwBytes, pkcs8EncryptedPrivate, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportEncryptedPkcs8PrivateKey(pwBytes, pkcs8EncryptedPrivate, out _)
             );
         }
 
@@ -969,24 +965,24 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                 int bytesRead = -1;
                 byte[] rsaPriv = key.ExportRSAPrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPublicKey(rsaPriv, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPublicKey(rsaPriv, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] spki = key.ExportSubjectPublicKeyInfo();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPublicKey(spki, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPublicKey(spki, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] pkcs8 = key.ExportPkcs8PrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPublicKey(pkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPublicKey(pkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1002,8 +998,8 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                     )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPublicKey(encryptedPkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPublicKey(encryptedPkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1018,24 +1014,24 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                 int bytesRead = -1;
                 byte[] rsaPriv = key.ExportRSAPrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportSubjectPublicKeyInfo(rsaPriv, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportSubjectPublicKeyInfo(rsaPriv, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] rsaPub = key.ExportRSAPrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportSubjectPublicKeyInfo(rsaPub, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportSubjectPublicKeyInfo(rsaPub, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] pkcs8 = key.ExportPkcs8PrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportSubjectPublicKeyInfo(pkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportSubjectPublicKeyInfo(pkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1051,8 +1047,8 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                     )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportSubjectPublicKeyInfo(encryptedPkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportSubjectPublicKeyInfo(encryptedPkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1067,24 +1063,24 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                 int bytesRead = -1;
                 byte[] rsaPub = key.ExportRSAPublicKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPrivateKey(rsaPub, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPrivateKey(rsaPub, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] spki = key.ExportSubjectPublicKeyInfo();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPrivateKey(spki, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPrivateKey(spki, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] pkcs8 = key.ExportPkcs8PrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPrivateKey(pkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPrivateKey(pkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1100,8 +1096,8 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                     )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportRSAPrivateKey(encryptedPkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportRSAPrivateKey(encryptedPkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1117,24 +1113,24 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
 
                 byte[] rsaPub = key.ExportRSAPublicKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportPkcs8PrivateKey(rsaPub, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportPkcs8PrivateKey(rsaPub, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] spki = key.ExportSubjectPublicKeyInfo();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportPkcs8PrivateKey(spki, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportPkcs8PrivateKey(spki, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] rsaPriv = key.ExportRSAPrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportPkcs8PrivateKey(rsaPriv, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportPkcs8PrivateKey(rsaPriv, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1150,8 +1146,8 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                     )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportPkcs8PrivateKey(encryptedPkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportPkcs8PrivateKey(encryptedPkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1167,32 +1163,32 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                 byte[] empty = Array.Empty<byte>();
                 byte[] rsaPub = key.ExportRSAPublicKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportEncryptedPkcs8PrivateKey(empty, rsaPub, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportEncryptedPkcs8PrivateKey(empty, rsaPub, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] spki = key.ExportSubjectPublicKeyInfo();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportEncryptedPkcs8PrivateKey(empty, spki, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportEncryptedPkcs8PrivateKey(empty, spki, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] rsaPriv = key.ExportRSAPrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportEncryptedPkcs8PrivateKey(empty, rsaPriv, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportEncryptedPkcs8PrivateKey(empty, rsaPriv, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
 
                 byte[] pkcs8 = key.ExportPkcs8PrivateKey();
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportEncryptedPkcs8PrivateKey(empty, pkcs8, out bytesRead)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportEncryptedPkcs8PrivateKey(empty, pkcs8, out bytesRead)
                 );
 
                 Assert.Equal(-1, bytesRead);
@@ -1215,40 +1211,38 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
 
                 Assert.ThrowsAny<CryptographicException>(() => key.ExportRSAPrivateKey());
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.TryExportRSAPrivateKey(Span<byte>.Empty, out _)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportRSAPrivateKey(Span<byte>.Empty, out _)
                 );
 
                 Assert.ThrowsAny<CryptographicException>(() => key.ExportPkcs8PrivateKey());
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.TryExportPkcs8PrivateKey(Span<byte>.Empty, out _)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportPkcs8PrivateKey(Span<byte>.Empty, out _)
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.Aes192Cbc,
-                                HashAlgorithmName.SHA256,
-                                72
-                            )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.Aes192Cbc,
+                            HashAlgorithmName.SHA256,
+                            72
                         )
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.Aes192Cbc,
-                                HashAlgorithmName.SHA256,
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.Aes192Cbc,
+                            HashAlgorithmName.SHA256,
+                            72
+                        ),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
             }
         }
@@ -1258,213 +1252,181 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
         {
             using (RSA key = RSAFactory.Create())
             {
-                Assert.ThrowsAny<ArgumentNullException>(
-                    () => key.ExportEncryptedPkcs8PrivateKey(ReadOnlySpan<byte>.Empty, null)
+                Assert.ThrowsAny<ArgumentNullException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(ReadOnlySpan<byte>.Empty, null)
                 );
 
-                Assert.ThrowsAny<ArgumentNullException>(
-                    () => key.ExportEncryptedPkcs8PrivateKey(ReadOnlySpan<char>.Empty, null)
+                Assert.ThrowsAny<ArgumentNullException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(ReadOnlySpan<char>.Empty, null)
                 );
 
-                Assert.ThrowsAny<ArgumentNullException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            null,
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<ArgumentNullException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        null,
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
-                Assert.ThrowsAny<ArgumentNullException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<char>.Empty,
-                            null,
-                            Span<byte>.Empty,
-                            out _
-                        )
-                );
-
-                // PKCS12 requires SHA-1
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
-                                HashAlgorithmName.SHA256,
-                                72
-                            )
-                        )
-                );
-
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
-                                HashAlgorithmName.SHA256,
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<ArgumentNullException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<char>.Empty,
+                        null,
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
                 // PKCS12 requires SHA-1
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
-                                HashAlgorithmName.MD5,
-                                72
-                            )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                            HashAlgorithmName.SHA256,
+                            72
                         )
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            ReadOnlySpan<byte>.Empty,
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
-                                HashAlgorithmName.MD5,
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                            HashAlgorithmName.SHA256,
+                            72
+                        ),
+                        Span<byte>.Empty,
+                        out _
+                    )
+                );
+
+                // PKCS12 requires SHA-1
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                            HashAlgorithmName.MD5,
+                            72
                         )
+                    )
+                );
+
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        ReadOnlySpan<byte>.Empty,
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                            HashAlgorithmName.MD5,
+                            72
+                        ),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
                 // PKCS12 requires a char-based password
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
-                                HashAlgorithmName.SHA1,
-                                72
-                            )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                            HashAlgorithmName.SHA1,
+                            72
                         )
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
-                                HashAlgorithmName.SHA1,
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                            HashAlgorithmName.SHA1,
+                            72
+                        ),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
                 // Unknown encryption algorithm
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(0, HashAlgorithmName.SHA1, 72)
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters(0, HashAlgorithmName.SHA1, 72)
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(0, HashAlgorithmName.SHA1, 72),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters(0, HashAlgorithmName.SHA1, 72),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
                 // Unknown encryption algorithm (negative enum value)
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                (PbeEncryptionAlgorithm)(-5),
-                                HashAlgorithmName.SHA1,
-                                72
-                            )
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72)
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                (PbeEncryptionAlgorithm)(-5),
-                                HashAlgorithmName.SHA1,
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
                 // Unknown encryption algorithm (overly-large enum value)
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                (PbeEncryptionAlgorithm)15,
-                                HashAlgorithmName.SHA1,
-                                72
-                            )
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72)
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                (PbeEncryptionAlgorithm)15,
-                                HashAlgorithmName.SHA1,
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
 
                 // Unknown hash algorithm
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.Aes192Cbc,
-                                new HashAlgorithmName("Potato"),
-                                72
-                            )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.Aes192Cbc,
+                            new HashAlgorithmName("Potato"),
+                            72
                         )
+                    )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.TryExportEncryptedPkcs8PrivateKey(
-                            new byte[3],
-                            new PbeParameters(
-                                PbeEncryptionAlgorithm.Aes192Cbc,
-                                new HashAlgorithmName("Potato"),
-                                72
-                            ),
-                            Span<byte>.Empty,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportEncryptedPkcs8PrivateKey(
+                        new byte[3],
+                        new PbeParameters(
+                            PbeEncryptionAlgorithm.Aes192Cbc,
+                            new HashAlgorithmName("Potato"),
+                            72
+                        ),
+                        Span<byte>.Empty,
+                        out _
+                    )
                 );
             }
         }
@@ -1486,8 +1448,8 @@ pWre7nAO4O6sP1JzXvVmwrS5C/hw";
                     )
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportEncryptedPkcs8PrivateKey(byteBased, encrypted, out _)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportEncryptedPkcs8PrivateKey(byteBased, encrypted, out _)
                 );
             }
         }
@@ -1526,13 +1488,12 @@ gms2YM+honjUS1sXk1zdm/8="
 
             using (RSA key = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        key.ImportEncryptedPkcs8PrivateKey(
-                            (ReadOnlySpan<char>)"test",
-                            high3DesIterationKey,
-                            out _
-                        )
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.ImportEncryptedPkcs8PrivateKey(
+                        (ReadOnlySpan<char>)"test",
+                        high3DesIterationKey,
+                        out _
+                    )
                 );
             }
         }
@@ -1738,12 +1699,12 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
 
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () => readAction(rsa, arrayExport.AsSpan(1), out _)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    readAction(rsa, arrayExport.AsSpan(1), out _)
                 );
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => readAction(rsa, arrayExport.AsSpan(0, arrayExport.Length - 1), out _)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    readAction(rsa, arrayExport.AsSpan(0, arrayExport.Length - 1), out _)
                 );
 
                 readAction(rsa, arrayExport, out int bytesRead);

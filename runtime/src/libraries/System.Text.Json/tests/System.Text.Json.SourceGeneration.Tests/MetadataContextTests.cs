@@ -278,19 +278,17 @@ namespace System.Text.Json.SourceGeneration.Tests
                     .StructWithCustomConverterFactoryProperty
                     .SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    MetadataWithPerTypeAttributeContext
-                        .Default
-                        .ClassWithBadCustomConverter
-                        .SerializeHandler
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithBadCustomConverter
+                    .SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    MetadataWithPerTypeAttributeContext
-                        .Default
-                        .StructWithBadCustomConverter
-                        .SerializeHandler
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .StructWithBadCustomConverter
+                    .SerializeHandler
             );
             Assert.Null(
                 MetadataWithPerTypeAttributeContext.Default.NullablePersonStruct.SerializeHandler
@@ -437,11 +435,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(
                 MetadataContext.Default.StructWithCustomConverterFactoryProperty.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler
             );
             Assert.Null(MetadataContext.Default.NullablePersonStruct.SerializeHandler);
             Assert.Null(MetadataContext.Default.PersonStruct.SerializeHandler);

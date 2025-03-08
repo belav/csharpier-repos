@@ -60,8 +60,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         protected override void ReadEmptyPfx(byte[] pfxBytes, string correctPassword)
         {
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => new X509Certificate2(pfxBytes, correctPassword, s_importFlags)
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new X509Certificate2(pfxBytes, correctPassword, s_importFlags)
             );
 
             AssertMessageContains("no certificates", ex);
@@ -69,8 +69,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         protected override void ReadWrongPassword(byte[] pfxBytes, string wrongPassword)
         {
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(pfxBytes, wrongPassword, s_importFlags)
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(pfxBytes, wrongPassword, s_importFlags)
             );
 
             AssertMessageContains("password", ex);
@@ -85,8 +85,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int altWin32Error
         )
         {
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(pfxBytes, bestPassword, importFlags)
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(pfxBytes, bestPassword, importFlags)
             );
 
             if (OperatingSystem.IsWindows())
@@ -104,8 +104,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static void CheckBadKeyset(X509Certificate2 cert)
         {
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => cert.GetRSAPrivateKey()
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                cert.GetRSAPrivateKey()
             );
 
             // NTE_BAD_KEYSET

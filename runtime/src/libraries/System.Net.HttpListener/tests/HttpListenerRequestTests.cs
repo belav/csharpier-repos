@@ -529,8 +529,8 @@ namespace System.Net.Tests
             );
             request.EndGetClientCertificate(beginGetClientCertificateResult);
 
-            Assert.Throws<InvalidOperationException>(
-                () => request.EndGetClientCertificate(beginGetClientCertificateResult)
+            Assert.Throws<InvalidOperationException>(() =>
+                request.EndGetClientCertificate(beginGetClientCertificateResult)
             );
         }
 
@@ -551,8 +551,8 @@ namespace System.Net.Tests
         )
         {
             HttpListenerRequest request = await GetRequest("POST", null, null);
-            Assert.Throws<NotSupportedException>(
-                () => request.TransportContext.GetChannelBinding(kind)
+            Assert.Throws<NotSupportedException>(() =>
+                request.TransportContext.GetChannelBinding(kind)
             );
         }
 

@@ -57,9 +57,8 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         string json = """{"Property":null}""";
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                Serializer.DeserializeWrapper<ClassWithReadOnlyProperty_SimpleClass>(json, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            Serializer.DeserializeWrapper<ClassWithReadOnlyProperty_SimpleClass>(json, options)
         );
     }
 
@@ -227,21 +226,19 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         string json = """{"Property":null}""";
-        await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<StructWithWritableProperty_SimpleStruct>(
-                    json,
-                    options
-                )
+        await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<StructWithWritableProperty_SimpleStruct>(
+                json,
+                options
+            )
         );
 
         json = """{"Property":{}, "Property":null}""";
-        await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<StructWithWritableProperty_SimpleStruct>(
-                    json,
-                    options
-                )
+        await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<StructWithWritableProperty_SimpleStruct>(
+                json,
+                options
+            )
         );
     }
 
@@ -322,12 +319,11 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         string json = """{"Property":null}""";
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithReadOnlyProperty_SimpleClassWithSmallParametrizedCtor>(
-                    json,
-                    options
-                )
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithReadOnlyProperty_SimpleClassWithSmallParametrizedCtor>(
+                json,
+                options
+            )
         );
     }
 
@@ -465,12 +461,11 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         string json = """{"Property":null}""";
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithReadOnlyProperty_SimpleClassWithLargeParametrizedCtor>(
-                    json,
-                    options
-                )
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithReadOnlyProperty_SimpleClassWithLargeParametrizedCtor>(
+                json,
+                options
+            )
         );
     }
 
@@ -659,18 +654,17 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         ClassWithProperty_BaseClassWithPolymorphism obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
         string json =
             """{"Property":{"$type":"derived","BaseClassProp":"BaseNewValue","DerivedClassProp":"DerivedNewValue"}}""";
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithProperty_BaseClassWithPolymorphism>(
-                    json,
-                    options
-                )
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithProperty_BaseClassWithPolymorphism>(
+                json,
+                options
+            )
         );
     }
 
@@ -703,19 +697,19 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         // This may happen if polymorphism is setup after properties are configured.
         JsonSerializerOptions options = Serializer.CreateOptions();
         BaseClassRecursive obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
         string json =
             """{"Next":{"$type":"derived","BaseClassProp":"BaseNewValue","DerivedClassProp":"DerivedNewValue"}}""";
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.DeserializeWrapper<BaseClassRecursive>(json, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<BaseClassRecursive>(json, options)
         );
 
         json = """{}""";
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.DeserializeWrapper<BaseClassRecursive>(json, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<BaseClassRecursive>(json, options)
         );
     }
 
@@ -745,15 +739,15 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         );
 
         ClassWithReadOnlyInitializedProperty<SimpleClass> obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithReadOnlyInitializedProperty<SimpleClass>
-                >("{}", options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithReadOnlyInitializedProperty<SimpleClass>>(
+                "{}",
+                options
+            )
         );
     }
 
@@ -838,16 +832,15 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         );
 
         ClassWithReadOnlyInitializedField<SimpleClass> obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithReadOnlyInitializedField<SimpleClass>>(
-                    "{}",
-                    options
-                )
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithReadOnlyInitializedField<SimpleClass>>(
+                "{}",
+                options
+            )
         );
     }
 
@@ -886,16 +879,15 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         );
 
         ClassWithInitializedProperty<SimpleClass> obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithInitializedProperty<SimpleClass>>(
-                    "{}",
-                    options
-                )
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithInitializedProperty<SimpleClass>>(
+                "{}",
+                options
+            )
         );
     }
 
@@ -911,15 +903,14 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         );
 
         ClassWithWritablePropertyWithoutPopulate<SimpleClass> obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithWritablePropertyWithoutPopulate<SimpleClass>
-                >("{}", options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<
+                ClassWithWritablePropertyWithoutPopulate<SimpleClass>
+            >("{}", options)
         );
     }
 
@@ -934,15 +925,15 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         );
 
         ClassWithDefaultPopulateAndProperty<SimpleClass> obj = new();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await Serializer.SerializeWrapper(obj, options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.SerializeWrapper(obj, options)
         );
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithDefaultPopulateAndProperty<SimpleClass>
-                >("{}", options)
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithDefaultPopulateAndProperty<SimpleClass>>(
+                "{}",
+                options
+            )
         );
     }
 
@@ -958,11 +949,10 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         Assert.Equal("NewValue", obj.Property.RequiredValue);
 
         json = """{"Property":{}}""";
-        var exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithInitializedProperty<ClassWithRequiredProperty>
-                >(json, options)
+        var exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<
+                ClassWithInitializedProperty<ClassWithRequiredProperty>
+            >(json, options)
         );
         Assert.Contains(nameof(ClassWithRequiredProperty.RequiredValue), exception.Message);
 
@@ -973,20 +963,18 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         Assert.Null(obj.Property);
 
         json = """{"Property":null,"Property":{}}""";
-        exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithInitializedProperty<ClassWithRequiredProperty>
-                >(json, options)
+        exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<
+                ClassWithInitializedProperty<ClassWithRequiredProperty>
+            >(json, options)
         );
         Assert.Contains(nameof(ClassWithRequiredProperty.RequiredValue), exception.Message);
 
         json = """{"Property":null,"Property":{"RequiredValue":"NewValue"},"Property":{}}""";
-        exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithInitializedProperty<ClassWithRequiredProperty>
-                >(json, options)
+        exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<
+                ClassWithInitializedProperty<ClassWithRequiredProperty>
+            >(json, options)
         );
         Assert.Contains(nameof(ClassWithRequiredProperty.RequiredValue), exception.Message);
 
@@ -1000,21 +988,19 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
 
         json =
             """{"Property":{"RequiredValue":"NewValue", "OptionalValue":"test"},"Property":{}}""";
-        exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithInitializedProperty<ClassWithRequiredProperty>
-                >(json, options)
+        exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<
+                ClassWithInitializedProperty<ClassWithRequiredProperty>
+            >(json, options)
         );
         Assert.Contains(nameof(ClassWithRequiredProperty.RequiredValue), exception.Message);
 
         json =
             """{"Property":{"RequiredValue":"NewValue", "OptionalValue":"test"},"Property":{"OptionalValue":"aaa"}}""";
-        exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<
-                    ClassWithInitializedProperty<ClassWithRequiredProperty>
-                >(json, options)
+        exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<
+                ClassWithInitializedProperty<ClassWithRequiredProperty>
+            >(json, options)
         );
         Assert.Contains(nameof(ClassWithRequiredProperty.RequiredValue), exception.Message);
 
@@ -1053,12 +1039,8 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         Check(obj, 1);
 
         json = """{"Value":1}""";
-        var exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithRecursiveRequiredProperty>(
-                    json,
-                    options
-                )
+        var exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithRecursiveRequiredProperty>(json, options)
         );
         Assert.Contains(nameof(ClassWithRecursiveRequiredProperty.Next), exception.Message);
 
@@ -1071,22 +1053,14 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         Check(obj, 3);
 
         json = """{"Value":1,"Next":{"Value":2,"Next":null},"Next":{"Next":{"Value":3}}}""";
-        exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithRecursiveRequiredProperty>(
-                    json,
-                    options
-                )
+        exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithRecursiveRequiredProperty>(json, options)
         );
         Assert.Contains(nameof(ClassWithRecursiveRequiredProperty.Next), exception.Message);
 
         json = """{"Value":1,"Next":{"Value":2},"Next":{"Next":{"Value":3,"Next":null}}}""";
-        exception = await Assert.ThrowsAsync<JsonException>(
-            async () =>
-                await Serializer.DeserializeWrapper<ClassWithRecursiveRequiredProperty>(
-                    json,
-                    options
-                )
+        exception = await Assert.ThrowsAsync<JsonException>(async () =>
+            await Serializer.DeserializeWrapper<ClassWithRecursiveRequiredProperty>(json, options)
         );
         Assert.Contains(nameof(ClassWithRecursiveRequiredProperty.Next), exception.Message);
 
@@ -1391,12 +1365,11 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
 
         if (expectError)
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<SimpleClassWitNonPopulatableProperty>(
-                        json,
-                        options
-                    )
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await Serializer.DeserializeWrapper<SimpleClassWitNonPopulatableProperty>(
+                    json,
+                    options
+                )
             );
         }
         else
@@ -1528,8 +1501,8 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         JsonObjectCreationHandling handling
     )
     {
-        ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => new JsonObjectCreationHandlingAttribute(handling)
+        ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new JsonObjectCreationHandlingAttribute(handling)
         );
 
         Assert.Contains("handling", ex.ToString());
@@ -1538,11 +1511,11 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     [Fact]
     public async Task JsonObjectCreationHandlingAttribute_InvalidAnnotations_ThrowsArgumentOutOfRangeException()
     {
-        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-            () => Serializer.SerializeWrapper(new ClassWithInvalidTypeAnnotation())
+        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+            Serializer.SerializeWrapper(new ClassWithInvalidTypeAnnotation())
         );
-        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-            () => Serializer.SerializeWrapper(new ClassWithInvalidPropertyAnnotation())
+        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+            Serializer.SerializeWrapper(new ClassWithInvalidPropertyAnnotation())
         );
     }
 
@@ -1565,11 +1538,11 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         object instance = Activator.CreateInstance(type, "Jim");
         string json = """{"Username":"Jim","PhoneNumbers":["123456"]}""";
 
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => Serializer.SerializeWrapper(instance, type)
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            Serializer.SerializeWrapper(instance, type)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => Serializer.DeserializeWrapper(json, type)
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            Serializer.DeserializeWrapper(json, type)
         );
         Assert.Throws<NotSupportedException>(() => Serializer.GetTypeInfo(type));
     }

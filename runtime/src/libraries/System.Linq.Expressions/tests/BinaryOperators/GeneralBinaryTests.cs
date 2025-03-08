@@ -188,14 +188,14 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(BinaryTypesData))]
         public void MakeBinaryLeftNull(ExpressionType type)
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Expression.MakeBinary(type, null, Expression.Constant(0))
+            Assert.Throws<ArgumentNullException>(() =>
+                Expression.MakeBinary(type, null, Expression.Constant(0))
             );
-            Assert.Throws<ArgumentNullException>(
-                () => Expression.MakeBinary(type, null, Expression.Constant(0), false, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                Expression.MakeBinary(type, null, Expression.Constant(0), false, null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () => Expression.MakeBinary(type, null, Expression.Constant(0), false, null, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                Expression.MakeBinary(type, null, Expression.Constant(0), false, null, null)
             );
         }
 
@@ -203,29 +203,21 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(BinaryTypesData))]
         public void MakeBinaryRightNull(ExpressionType type)
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Expression.MakeBinary(type, Expression.Variable(typeof(object)), null)
+            Assert.Throws<ArgumentNullException>(() =>
+                Expression.MakeBinary(type, Expression.Variable(typeof(object)), null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    Expression.MakeBinary(
-                        type,
-                        Expression.Variable(typeof(object)),
-                        null,
-                        false,
-                        null
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                Expression.MakeBinary(type, Expression.Variable(typeof(object)), null, false, null)
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    Expression.MakeBinary(
-                        type,
-                        Expression.Variable(typeof(object)),
-                        null,
-                        false,
-                        null,
-                        null
-                    )
+            Assert.Throws<ArgumentNullException>(() =>
+                Expression.MakeBinary(
+                    type,
+                    Expression.Variable(typeof(object)),
+                    null,
+                    false,
+                    null,
+                    null
+                )
             );
         }
 

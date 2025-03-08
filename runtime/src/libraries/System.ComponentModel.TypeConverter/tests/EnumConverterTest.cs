@@ -70,13 +70,12 @@ namespace System.ComponentModel.Tests
         [Fact]
         public static void ConvertFrom_WithContext_Negative()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                    EnumConverterTests.s_someEnumConverter.ConvertFrom(
-                        TypeConverterTests.s_context,
-                        null,
-                        "<random string>"
-                    )
+            Assert.Throws<FormatException>(() =>
+                EnumConverterTests.s_someEnumConverter.ConvertFrom(
+                    TypeConverterTests.s_context,
+                    null,
+                    "<random string>"
+                )
             );
         }
 

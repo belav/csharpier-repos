@@ -388,11 +388,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 throw new ArgumentNullException(nameof(documentId));
             }
 
-            var document = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    CurrentSolution
-                        .GetDocumentAsync(documentId, includeSourceGenerated: true)
-                        .AsTask()
+            var document = _threadingContext.JoinableTaskFactory.Run(() =>
+                CurrentSolution.GetDocumentAsync(documentId, includeSourceGenerated: true).AsTask()
             );
             if (document == null)
             {
@@ -800,8 +797,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // Instead, we invoke this in JTF run which will mitigate deadlocks when the ConfigureAwait(true)
             // tries to switch back to the main thread in the LSP client.
             // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
-            var mappedChanges = _threadingContext.JoinableTaskFactory.Run(
-                () => GetMappedTextChangesAsync(solutionChanges)
+            var mappedChanges = _threadingContext.JoinableTaskFactory.Run(() =>
+                GetMappedTextChangesAsync(solutionChanges)
             );
 
             // Group the mapped text changes by file, then apply all mapped text changes for the file.

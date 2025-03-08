@@ -152,14 +152,14 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
                 pubKey.Dispose();
                 Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHash(pubKey, hash));
-                Assert.Throws<ObjectDisposedException>(
-                    () => key.DeriveKeyFromHmac(pubKey, hash, null)
+                Assert.Throws<ObjectDisposedException>(() =>
+                    key.DeriveKeyFromHmac(pubKey, hash, null)
                 );
-                Assert.Throws<ObjectDisposedException>(
-                    () => key.DeriveKeyFromHmac(pubKey, hash, new byte[3])
+                Assert.Throws<ObjectDisposedException>(() =>
+                    key.DeriveKeyFromHmac(pubKey, hash, new byte[3])
                 );
-                Assert.Throws<ObjectDisposedException>(
-                    () => key.DeriveKeyTls(pubKey, new byte[4], new byte[64])
+                Assert.Throws<ObjectDisposedException>(() =>
+                    key.DeriveKeyTls(pubKey, new byte[4], new byte[64])
                 );
 
                 pubKey = key.PublicKey;
@@ -169,17 +169,17 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
             Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHash(pubKey, hash));
             Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHmac(pubKey, hash, null));
-            Assert.Throws<ObjectDisposedException>(
-                () => key.DeriveKeyFromHmac(pubKey, hash, new byte[3])
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.DeriveKeyFromHmac(pubKey, hash, new byte[3])
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => key.DeriveKeyTls(pubKey, new byte[4], new byte[64])
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.DeriveKeyTls(pubKey, new byte[4], new byte[64])
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => key.GenerateKey(ECCurve.NamedCurves.nistP256)
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.GenerateKey(ECCurve.NamedCurves.nistP256)
             );
-            Assert.Throws<ObjectDisposedException>(
-                () => key.ImportParameters(EccTestData.GetNistP256ReferenceKey())
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.ImportParameters(EccTestData.GetNistP256ReferenceKey())
             );
 
             // Either set_KeySize or the ExportParameters should throw.

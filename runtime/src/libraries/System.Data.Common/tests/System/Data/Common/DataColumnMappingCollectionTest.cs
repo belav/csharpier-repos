@@ -208,8 +208,8 @@ namespace System.Data.Tests.Common
             DataColumnMappingCollection dataColumnMappingCollection =
                 new DataColumnMappingCollection();
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () => dataColumnMappingCollection.GetByDataSetColumn((string)null)
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                dataColumnMappingCollection.GetByDataSetColumn((string)null)
             );
         }
 
@@ -337,8 +337,8 @@ namespace System.Data.Tests.Common
             DataColumnMappingCollection dataColumnMappingCollection =
                 new DataColumnMappingCollection();
 
-            Assert.Throws<ArgumentNullException>(
-                () => dataColumnMappingCollection.Remove((DataColumnMapping)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                dataColumnMappingCollection.Remove((DataColumnMapping)null)
             );
         }
 
@@ -431,8 +431,8 @@ namespace System.Data.Tests.Common
             DataColumnMappingCollection dataColumnMappingCollection =
                 new DataColumnMappingCollection();
 
-            Assert.Throws<ArgumentNullException>(
-                () => dataColumnMappingCollection.Insert(123, (DataColumnMapping)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                dataColumnMappingCollection.Insert(123, (DataColumnMapping)null)
             );
         }
 
@@ -471,16 +471,15 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetDataColumn_DataColumnMappingCollection_String_Type_DataTable_MissingMappingAction_MissingSchemaAction_MissingMappingActionErrorThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    DataColumnMappingCollection.GetDataColumn(
-                        (DataColumnMappingCollection)null,
-                        "not null",
-                        typeof(string),
-                        new DataTable(),
-                        MissingMappingAction.Error,
-                        new MissingSchemaAction()
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                DataColumnMappingCollection.GetDataColumn(
+                    (DataColumnMappingCollection)null,
+                    "not null",
+                    typeof(string),
+                    new DataTable(),
+                    MissingMappingAction.Error,
+                    new MissingSchemaAction()
+                )
             );
         }
 

@@ -181,20 +181,20 @@ namespace System.IO.Tests
             var token = tokenSource.Token;
             var chars = new char[2];
             OperationCanceledException ex;
-            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () => await input.ReadAsync(chars.AsMemory(), token)
+            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await input.ReadAsync(chars.AsMemory(), token)
             );
             Assert.Equal(token, ex.CancellationToken);
-            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () => await input.ReadBlockAsync(chars.AsMemory(), token)
+            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await input.ReadBlockAsync(chars.AsMemory(), token)
             );
             Assert.Equal(token, ex.CancellationToken);
-            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () => await input.ReadLineAsync(token)
+            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await input.ReadLineAsync(token)
             );
             Assert.Equal(token, ex.CancellationToken);
-            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () => await input.ReadToEndAsync(token)
+            ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await input.ReadToEndAsync(token)
             );
             Assert.Equal(token, ex.CancellationToken);
             input.Dispose();

@@ -293,12 +293,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             workspace.AddTestProject(project1);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    workspace.OnProjectReferenceAdded(
-                        project1.Id,
-                        new ProjectReference(project2.Id)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                workspace.OnProjectReferenceAdded(project1.Id, new ProjectReference(project2.Id))
             );
         }
 
@@ -341,12 +337,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             workspace.OnProjectReferenceAdded(project1.Id, new ProjectReference(project2.Id));
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    workspace.OnProjectReferenceAdded(
-                        project1.Id,
-                        new ProjectReference(project2.Id)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                workspace.OnProjectReferenceAdded(project1.Id, new ProjectReference(project2.Id))
             );
         }
 
@@ -386,12 +378,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             workspace.OnProjectReferenceAdded(project1.Id, new ProjectReference(project2.Id));
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    workspace.OnProjectReferenceAdded(
-                        project2.Id,
-                        new ProjectReference(project1.Id)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                workspace.OnProjectReferenceAdded(project2.Id, new ProjectReference(project1.Id))
             );
         }
 

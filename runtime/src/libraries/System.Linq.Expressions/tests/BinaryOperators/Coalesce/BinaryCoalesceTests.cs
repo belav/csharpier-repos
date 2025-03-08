@@ -994,12 +994,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<int, int>> conversion = x => x * 2;
 
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.Coalesce(Expression.Constant(5), Expression.Constant(5))
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Coalesce(Expression.Constant(5), Expression.Constant(5))
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Coalesce(Expression.Constant(5), Expression.Constant(5), conversion)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Coalesce(Expression.Constant(5), Expression.Constant(5), conversion)
             );
         }
 
@@ -1063,23 +1062,21 @@ namespace System.Linq.Expressions.Tests
         public static void Conversion_ReturnTypeNotEquivilientToRightType_ThrowsInvalidOperationException()
         {
             Expression<Func<int?, int>> nullableNotEquivalent = x => x ?? 5;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(5, typeof(int?)),
-                        Expression.Constant(5, typeof(int?)),
-                        nullableNotEquivalent
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Coalesce(
+                    Expression.Constant(5, typeof(int?)),
+                    Expression.Constant(5, typeof(int?)),
+                    nullableNotEquivalent
+                )
             );
 
             Expression<Func<string, bool>> stringNotEquivalent = x => x == "";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(""),
-                        Expression.Constant(""),
-                        stringNotEquivalent
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Coalesce(
+                    Expression.Constant(""),
+                    Expression.Constant(""),
+                    stringNotEquivalent
+                )
             );
         }
 
@@ -1087,21 +1084,19 @@ namespace System.Linq.Expressions.Tests
         public static void Conversion_ParameterTypeNotEquivalentToLeftType_ThrowsInvalidOperationException()
         {
             Expression<Func<bool, string>> boolNotEquivalent = x => x.ToString();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(""),
-                        Expression.Constant(""),
-                        boolNotEquivalent
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Coalesce(
+                    Expression.Constant(""),
+                    Expression.Constant(""),
+                    boolNotEquivalent
+                )
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(0, typeof(int?)),
-                        Expression.Constant(""),
-                        boolNotEquivalent
-                    )
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Coalesce(
+                    Expression.Constant(0, typeof(int?)),
+                    Expression.Constant(""),
+                    boolNotEquivalent
+                )
             );
         }
 

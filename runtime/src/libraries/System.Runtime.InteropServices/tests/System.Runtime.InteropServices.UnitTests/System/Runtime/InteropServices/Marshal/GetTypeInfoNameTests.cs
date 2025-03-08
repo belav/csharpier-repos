@@ -20,8 +20,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetTypeInfoName_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetTypeInfoName((ITypeInfo)null)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetTypeInfoName((ITypeInfo)null)
             );
         }
 

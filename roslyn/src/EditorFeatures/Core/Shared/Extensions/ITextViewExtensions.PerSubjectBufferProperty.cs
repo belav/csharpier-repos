@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(
-                    () => new PerSubjectBufferProperty<TProperty, TTextView>(textView)
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new PerSubjectBufferProperty<TProperty, TTextView>(textView)
                 );
                 if (!properties.TryGetValue(subjectBuffer, key, out var priorValue))
                 {
@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(
-                    () => new PerSubjectBufferProperty<TProperty, TTextView>(textView)
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new PerSubjectBufferProperty<TProperty, TTextView>(textView)
                 );
                 return properties.TryGetValue(subjectBuffer, key, out value);
             }
@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(
-                    () => new PerSubjectBufferProperty<TProperty, TTextView>(textView)
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new PerSubjectBufferProperty<TProperty, TTextView>(textView)
                 );
                 properties.Add(subjectBuffer, key, value);
             }

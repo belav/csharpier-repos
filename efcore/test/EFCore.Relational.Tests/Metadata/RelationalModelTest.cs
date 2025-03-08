@@ -18,8 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 CoreStrings.ModelNotFinalized("GetRelationalModel"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ((IModel)modelBuilder.Model).GetRelationalModel()
+                    .Throws<InvalidOperationException>(() =>
+                        ((IModel)modelBuilder.Model).GetRelationalModel()
                     )
                     .Message
             );
@@ -251,8 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersTable.IsOptional(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersTable.IsOptional(specialCustomerType)
                     )
                     .Message
             );
@@ -285,8 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         customerTable.Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => customerTable.IsOptional(specialCustomerType)
+                        .Throws<InvalidOperationException>(() =>
+                            customerTable.IsOptional(specialCustomerType)
                         )
                         .Message
                 );
@@ -459,8 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersView.SchemaQualifiedName
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersView.GetReferencingRowInternalForeignKeys(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersView.GetReferencingRowInternalForeignKeys(specialCustomerType)
                     )
                     .Message
             );
@@ -470,8 +470,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersView.SchemaQualifiedName
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersView.GetRowInternalForeignKeys(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersView.GetRowInternalForeignKeys(specialCustomerType)
                     )
                     .Message
             );
@@ -483,8 +483,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersView.SchemaQualifiedName
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersView.IsOptional(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersView.IsOptional(specialCustomerType)
                     )
                     .Message
             );
@@ -517,8 +517,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         customerView.SchemaQualifiedName
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => customerView.IsOptional(specialCustomerType)
+                        .Throws<InvalidOperationException>(() =>
+                            customerView.IsOptional(specialCustomerType)
                         )
                         .Message
                 );
@@ -885,8 +885,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersTable.GetReferencingRowInternalForeignKeys(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersTable.GetReferencingRowInternalForeignKeys(specialCustomerType)
                     )
                     .Message
             );
@@ -896,8 +896,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersTable.GetRowInternalForeignKeys(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersTable.GetRowInternalForeignKeys(specialCustomerType)
                     )
                     .Message
             );
@@ -909,8 +909,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersTable.IsOptional(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersTable.IsOptional(specialCustomerType)
                     )
                     .Message
             );
@@ -1046,8 +1046,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         customerTable.Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => customerTable.IsOptional(specialCustomerType)
+                        .Throws<InvalidOperationException>(() =>
+                            customerTable.IsOptional(specialCustomerType)
                         )
                         .Message
                 );
@@ -1110,14 +1110,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "Customer"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                specialtyProperty.IsColumnNullable(
-                                    StoreObjectIdentifier.Table(
-                                        customerTable.Name,
-                                        customerTable.Schema
-                                    )
+                        .Throws<InvalidOperationException>(() =>
+                            specialtyProperty.IsColumnNullable(
+                                StoreObjectIdentifier.Table(
+                                    customerTable.Name,
+                                    customerTable.Schema
                                 )
+                            )
                         )
                         .Message
                 );
@@ -1664,11 +1663,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersInsertSproc.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            ordersInsertSproc.GetReferencingRowInternalForeignKeys(
-                                specialCustomerType
-                            )
+                    .Throws<InvalidOperationException>(() =>
+                        ordersInsertSproc.GetReferencingRowInternalForeignKeys(specialCustomerType)
                     )
                     .Message
             );
@@ -1678,8 +1674,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersInsertSproc.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersInsertSproc.GetRowInternalForeignKeys(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersInsertSproc.GetRowInternalForeignKeys(specialCustomerType)
                     )
                     .Message
             );
@@ -1690,8 +1686,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersInsertSproc.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersInsertSproc.IsOptional(orderDetailsType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersInsertSproc.IsOptional(orderDetailsType)
                     )
                     .Message
             );
@@ -1701,8 +1697,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersInsertSproc.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => ordersInsertSproc.IsOptional(specialCustomerType)
+                    .Throws<InvalidOperationException>(() =>
+                        ordersInsertSproc.IsOptional(specialCustomerType)
                     )
                     .Message
             );
@@ -1838,8 +1834,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         customerInsertSproc.Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => customerInsertSproc.IsOptional(specialCustomerType)
+                        .Throws<InvalidOperationException>(() =>
+                            customerInsertSproc.IsOptional(specialCustomerType)
                         )
                         .Message
                 );
@@ -1863,8 +1859,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         customerUpdateSproc.Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => customerUpdateSproc.IsOptional(specialCustomerType)
+                        .Throws<InvalidOperationException>(() =>
+                            customerUpdateSproc.IsOptional(specialCustomerType)
                         )
                         .Message
                 );
@@ -1888,8 +1884,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         customerDeleteSproc.Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => customerDeleteSproc.IsOptional(specialCustomerType)
+                        .Throws<InvalidOperationException>(() =>
+                            customerDeleteSproc.IsOptional(specialCustomerType)
                         )
                         .Message
                 );
@@ -2123,14 +2119,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "Customer_Insert"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                specialtyProperty.IsColumnNullable(
-                                    StoreObjectIdentifier.InsertStoredProcedure(
-                                        customerInsertSproc.Name,
-                                        customerInsertSproc.Schema
-                                    )
+                        .Throws<InvalidOperationException>(() =>
+                            specialtyProperty.IsColumnNullable(
+                                StoreObjectIdentifier.InsertStoredProcedure(
+                                    customerInsertSproc.Name,
+                                    customerInsertSproc.Schema
                                 )
+                            )
                         )
                         .Message
                 );

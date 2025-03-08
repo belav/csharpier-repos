@@ -2780,16 +2780,15 @@ namespace N1
             );
             comp.VerifyDiagnostics();
 
-            Assert.Throws<System.ArgumentException>(
-                () =>
-                    CreateCompilation(
-                        new[]
-                        {
-                            Parse(text1, filename: "text1", DefaultParseOptions),
-                            Parse(text1, filename: "text2", TestOptions.Regular6),
-                        },
-                        options: TestOptions.DebugExe
-                    )
+            Assert.Throws<System.ArgumentException>(() =>
+                CreateCompilation(
+                    new[]
+                    {
+                        Parse(text1, filename: "text1", DefaultParseOptions),
+                        Parse(text1, filename: "text2", TestOptions.Regular6),
+                    },
+                    options: TestOptions.DebugExe
+                )
             );
 
             comp = CreateCompilation(

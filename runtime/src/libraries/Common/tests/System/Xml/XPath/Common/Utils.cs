@@ -120,8 +120,8 @@ namespace XPathTests.Common
         )
             where T : Exception
         {
-            Assert.Throws<T>(
-                () => XPathMatch(kind, xml, testExpression, namespaceManager, startingNodePath)
+            Assert.Throws<T>(() =>
+                XPathMatch(kind, xml, testExpression, namespaceManager, startingNodePath)
             );
         }
 
@@ -173,8 +173,8 @@ namespace XPathTests.Common
         )
             where T : Exception
         {
-            Assert.Throws<T>(
-                () => XPathObject<string>(kind, xml, testExpression, null, startingNodePath)
+            Assert.Throws<T>(() =>
+                XPathObject<string>(kind, xml, testExpression, null, startingNodePath)
             );
         }
 
@@ -225,15 +225,8 @@ namespace XPathTests.Common
         )
             where T : Exception
         {
-            Assert.Throws<T>(
-                () =>
-                    XPathObject<double>(
-                        kind,
-                        xml,
-                        testExpression,
-                        namespaceManager,
-                        startingNodePath
-                    )
+            Assert.Throws<T>(() =>
+                XPathObject<double>(kind, xml, testExpression, namespaceManager, startingNodePath)
             );
         }
 

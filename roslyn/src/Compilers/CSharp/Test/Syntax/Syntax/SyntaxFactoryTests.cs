@@ -108,8 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void PassExpressionToSyntaxToken()
         {
             // Verify that the Token factory method does validation for cases when the argument is not a valid token.
-            Assert.Throws<ArgumentException>(
-                () => SyntaxFactory.Token(SyntaxKind.NumericLiteralExpression)
+            Assert.Throws<ArgumentException>(() =>
+                SyntaxFactory.Token(SyntaxKind.NumericLiteralExpression)
             );
         }
 
@@ -169,35 +169,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestFreeFormTokenFactory_SpecialTokenKinds()
         {
             // Factory method won't do the right thing for these SyntaxKinds - throws instead.
-            Assert.Throws<ArgumentException>(
-                () =>
-                    SyntaxFactory.Token(
-                        default(SyntaxTriviaList),
-                        SyntaxKind.IdentifierToken,
-                        "text",
-                        "valueText",
-                        default(SyntaxTriviaList)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                SyntaxFactory.Token(
+                    default(SyntaxTriviaList),
+                    SyntaxKind.IdentifierToken,
+                    "text",
+                    "valueText",
+                    default(SyntaxTriviaList)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    SyntaxFactory.Token(
-                        default(SyntaxTriviaList),
-                        SyntaxKind.CharacterLiteralToken,
-                        "text",
-                        "valueText",
-                        default(SyntaxTriviaList)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                SyntaxFactory.Token(
+                    default(SyntaxTriviaList),
+                    SyntaxKind.CharacterLiteralToken,
+                    "text",
+                    "valueText",
+                    default(SyntaxTriviaList)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    SyntaxFactory.Token(
-                        default(SyntaxTriviaList),
-                        SyntaxKind.NumericLiteralToken,
-                        "text",
-                        "valueText",
-                        default(SyntaxTriviaList)
-                    )
+            Assert.Throws<ArgumentException>(() =>
+                SyntaxFactory.Token(
+                    default(SyntaxTriviaList),
+                    SyntaxKind.NumericLiteralToken,
+                    "text",
+                    "valueText",
+                    default(SyntaxTriviaList)
+                )
             );
 
             // Ensure that when they throw, the appropriate message is used

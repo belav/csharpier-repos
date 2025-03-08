@@ -103,8 +103,7 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(
-            () => context.Set<PropertyMethodCallFilter>().ToList()
+        Assert.Throws<NullReferenceException>(() => context.Set<PropertyMethodCallFilter>().ToList()
         );
 
         context.IndirectionFlag = new Indirection();
@@ -190,8 +189,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(
-            () => context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+        Assert.Throws<NullReferenceException>(() =>
+            context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
         );
 
         context.IndirectionFlag = new Indirection { Enabled = false };
@@ -236,8 +235,7 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(
-            () => context.Set<RemoteMethodParamsFilter>().ToList()
+        Assert.Throws<NullReferenceException>(() => context.Set<RemoteMethodParamsFilter>().ToList()
         );
 
         context.IndirectionFlag = new Indirection();
@@ -326,8 +324,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
                 "value(Microsoft.EntityFrameworkCore.Query.QueryFilterFuncletizationContext+<>c__DisplayClass29_0).flag.Enabled"
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<LocalVariableErrorFilter>().ToList()
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<LocalVariableErrorFilter>().ToList()
                 )
                 .Message
         );
