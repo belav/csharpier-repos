@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Symbols
         TypeKind TypeKind { get; }
 
         /// <summary>
-        /// An enumerated value that identifies certain 'special' types such as <see cref="System.Object"/>. 
+        /// An enumerated value that identifies certain 'special' types such as <see cref="System.Object"/>.
         /// Returns <see cref="Microsoft.CodeAnalysis.SpecialType.None"/> if the type is not special.
         /// </summary>
         SpecialType SpecialType { get; }

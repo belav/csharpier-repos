@@ -14,21 +14,28 @@ namespace System.IO.Tests
         [Fact]
         public void NullPath_ThrowsArgumentNullException()
         {
-            Assert.All(TimeFunctions(), (item) =>
-            {
-                Assert.Throws<ArgumentNullException>(() => item.Setter(null, DateTime.Today));
-                Assert.Throws<ArgumentNullException>(() => item.Getter(null));
-            });
+            Assert.All(
+                TimeFunctions(),
+                (item) =>
+                {
+                    Assert.Throws<ArgumentNullException>(() => item.Setter(null, DateTime.Today));
+                    Assert.Throws<ArgumentNullException>(() => item.Getter(null));
+                }
+            );
         }
 
         [Fact]
         public void EmptyPath_ThrowsArgumentException()
         {
-            Assert.All(TimeFunctions(), (item) =>
-            {
-                Assert.Throws<ArgumentException>(() => item.Setter(string.Empty, DateTime.Today));
-                Assert.Throws<ArgumentException>(() => item.Getter(string.Empty));
-            });
+            Assert.All(
+                TimeFunctions(),
+                (item) =>
+                {
+                    Assert.Throws<ArgumentException>(() => item.Setter(string.Empty, DateTime.Today)
+                    );
+                    Assert.Throws<ArgumentException>(() => item.Getter(string.Empty));
+                }
+            );
         }
     }
 }

@@ -27,9 +27,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="metadataWorkspace"></param>
         internal ClrPerspective(MetadataWorkspace metadataWorkspace)
-            : base(metadataWorkspace, DataSpace.CSpace)
-        {
-        }
+            : base(metadataWorkspace, DataSpace.CSpace) { }
         #endregion //Constructors
 
         #region Methods
@@ -42,15 +40,18 @@ namespace System.Data.Metadata.Edm
         /// <returns>true if a TypeUsage can be found for the target type</returns>
         internal bool TryGetType(Type clrType, out TypeUsage outTypeUsage)
         {
-            return TryGetTypeByName(clrType.FullName, 
-                                    false /*ignoreCase*/, 
-                                    out outTypeUsage);
+            return TryGetTypeByName(
+                clrType.FullName,
+                false /*ignoreCase*/
+                ,
+                out outTypeUsage
+            );
         }
 
         /// <summary>
         /// Given the type in the target space and the member name in the source space,
         /// get the corresponding member in the target space
-        /// For e.g.  consider a Conceptual Type Foo with a member bar and a CLR type 
+        /// For e.g.  consider a Conceptual Type Foo with a member bar and a CLR type
         /// XFoo with a member YBar. If one has a reference to Foo one can
         /// invoke GetMember(Foo,"YBar") to retrieve the member metadata for bar
         /// </summary>
@@ -59,7 +60,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="outMember">returns the edmMember if a match is found</param>
         /// <returns>true if a match is found, otherwise false</returns>
-        internal override bool TryGetMember(StructuralType type, String memberName, bool ignoreCase, out EdmMember outMember)
+        internal override bool TryGetMember(
+            StructuralType type,
+            String memberName,
+            bool ignoreCase,
+            out EdmMember outMember
+        )
         {
             outMember = null;
             Map map = null;
@@ -68,9 +74,12 @@ namespace System.Data.Metadata.Edm
             {
                 ObjectTypeMapping objectTypeMap = map as ObjectTypeMapping;
 
-                if (objectTypeMap!=null)
+                if (objectTypeMap != null)
                 {
-                    ObjectMemberMapping objPropertyMapping = objectTypeMap.GetMemberMapForClrMember(memberName, ignoreCase);
+                    ObjectMemberMapping objPropertyMapping = objectTypeMap.GetMemberMapForClrMember(
+                        memberName,
+                        ignoreCase
+                    );
                     if (null != objPropertyMapping)
                     {
                         outMember = objPropertyMapping.EdmMember;
@@ -88,23 +97,40 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="typeUsage">The type usage object to return</param>
         /// <returns>True if the retrieval succeeded</returns>
-        internal override bool TryGetTypeByName(string fullName, bool ignoreCase, out TypeUsage typeUsage)
+        internal override bool TryGetTypeByName(
+            string fullName,
+            bool ignoreCase,
+            out TypeUsage typeUsage
+        )
         {
             typeUsage = null;
             Map map = null;
 
             // From ClrPerspective, we should not allow anything from SSpace. So make sure that the CSpace type does not
             // have the Target attribute
-            if (this.MetadataWorkspace.TryGetMap(fullName, DataSpace.OSpace, ignoreCase, DataSpace.OCSpace, out map))
+            if (
+                this.MetadataWorkspace.TryGetMap(
+                    fullName,
+                    DataSpace.OSpace,
+                    ignoreCase,
+                    DataSpace.OCSpace,
+                    out map
+                )
+            )
             {
                 // Check if it's primitive type, if so, then use the MetadataWorkspace to get the mapped primitive type
                 if (map.EdmItem.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
                 {
                     // Reassign the variable with the provider primitive type, then create the type usage
-                    PrimitiveType primitiveType = this.MetadataWorkspace.GetMappedPrimitiveType(((PrimitiveType)map.EdmItem).PrimitiveTypeKind, DataSpace.CSpace);
+                    PrimitiveType primitiveType = this.MetadataWorkspace.GetMappedPrimitiveType(
+                        ((PrimitiveType)map.EdmItem).PrimitiveTypeKind,
+                        DataSpace.CSpace
+                    );
                     if (primitiveType != null)
                     {
-                        typeUsage = EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(primitiveType.PrimitiveTypeKind);
+                        typeUsage = EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(
+                            primitiveType.PrimitiveTypeKind
+                        );
                     }
                 }
                 else
@@ -131,9 +157,18 @@ namespace System.Data.Metadata.Edm
             EntityContainer container = null;
             if (!String.IsNullOrEmpty(defaultContainerName))
             {
-                if (!MetadataWorkspace.TryGetEntityContainer(defaultContainerName, DataSpace.CSpace, out container))
+                if (
+                    !MetadataWorkspace.TryGetEntityContainer(
+                        defaultContainerName,
+                        DataSpace.CSpace,
+                        out container
+                    )
+                )
                 {
-                    throw EntityUtil.InvalidDefaultContainerName("defaultContainerName", defaultContainerName);
+                    throw EntityUtil.InvalidDefaultContainerName(
+                        "defaultContainerName",
+                        defaultContainerName
+                    );
                 }
             }
             _defaultContainer = container;
@@ -153,7 +188,7 @@ namespace System.Data.Metadata.Edm
             {
                 MetadataItem item = map.EdmItem;
                 EdmType edmItem = item as EdmType;
-                if (null != item && edmItem!=null)
+                if (null != item && edmItem != null)
                 {
                     typeUsage = TypeUsage.Create(edmItem);
                 }

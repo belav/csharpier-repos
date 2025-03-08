@@ -29,6 +29,9 @@ public class EntityTypeConfigurationAttribute : Attribute
     /// <summary>
     ///     Type of the entity type configuration.
     /// </summary>
-    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)]
+    [DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            | DynamicallyAccessedMemberTypes.Interfaces
+    )]
     public Type EntityTypeConfigurationType { get; }
 }

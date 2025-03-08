@@ -24,35 +24,33 @@
 
 using System;
 using System.Collections.Concurrent;
-
 using MonoTests.System.Threading.Tasks;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-	[TestFixture()]
-	public class ParallelConcurrentQueueTests
-	{
-		ConcurrentQueue<int> queue;
-		
-		[SetUpAttribute]
-		public void Setup()
-		{
-			queue = new ConcurrentQueue<int>();
-		}
-		
-		[Test]
-		[Category ("MultiThreaded")]
-		public void CountTestCase()
-		{
-			const int numThread = 5;
-			ParallelTestHelper.ParallelAdder(queue, numThread);
-			Assert.AreEqual(10 * numThread, queue.Count, "#1");
-			int value;
-			queue.TryPeek(out value);
-			ParallelTestHelper.ParallelRemover(queue, numThread, 3);
-			Assert.AreEqual(10 * numThread - 3, queue.Count, "#2");
-		}
-	}
+    [TestFixture()]
+    public class ParallelConcurrentQueueTests
+    {
+        ConcurrentQueue<int> queue;
+
+        [SetUpAttribute]
+        public void Setup()
+        {
+            queue = new ConcurrentQueue<int>();
+        }
+
+        [Test]
+        [Category("MultiThreaded")]
+        public void CountTestCase()
+        {
+            const int numThread = 5;
+            ParallelTestHelper.ParallelAdder(queue, numThread);
+            Assert.AreEqual(10 * numThread, queue.Count, "#1");
+            int value;
+            queue.TryPeek(out value);
+            ParallelTestHelper.ParallelRemover(queue, numThread, 3);
+            Assert.AreEqual(10 * numThread - 3, queue.Count, "#2");
+        }
+    }
 }

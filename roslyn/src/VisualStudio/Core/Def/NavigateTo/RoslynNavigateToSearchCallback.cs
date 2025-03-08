@@ -26,7 +26,8 @@ internal sealed partial class RoslynSearchItemsSourceProvider
 
         public RoslynNavigateToSearchCallback(
             RoslynSearchItemsSourceProvider provider,
-            ISearchCallback searchCallback)
+            ISearchCallback searchCallback
+        )
         {
             _provider = provider;
             _searchCallback = searchCallback;
@@ -38,8 +39,8 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             // our search routine.
         }
 
-        public void ReportProgress(int current, int maximum)
-            => _searchCallback.ReportProgress(current, maximum);
+        public void ReportProgress(int current, int maximum) =>
+            _searchCallback.ReportProgress(current, maximum);
 
         public void ReportIncomplete()
         {
@@ -51,54 +52,68 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             _searchCallback.ReportIncomplete(IncompleteReason.Parsing);
         }
 
-        public Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+        public Task AddItemAsync(
+            Project project,
+            INavigateToSearchResult result,
+            CancellationToken cancellationToken
+        )
         {
             // Convert roslyn pattern matches to the platform type.
             var matches = result.Matches.SelectAsArray(static m => new PatternMatch(
                 ConvertKind(m.Kind),
                 punctuationStripped: false,
                 m.IsCaseSensitive,
-                m.MatchedSpans.SelectAsArray(static s => s.ToSpan())));
+                m.MatchedSpans.SelectAsArray(static s => s.ToSpan())
+            ));
 
             // Weight the items based on the overall pattern matching weights.  We want the items that have the best
             // pattern matches (low .Kind values) to have the highest float values (as higher is better for the VS
             // api).
-            var perProviderItemPriority = float.MaxValue - Enumerable.Sum(result.Matches.Select(m => (int)m.Kind));
+            var perProviderItemPriority =
+                float.MaxValue - Enumerable.Sum(result.Matches.Select(m => (int)m.Kind));
 
-            _searchCallback.AddItem(new RoslynCodeSearchResult(
-                _provider,
-                result,
-                GetResultType(result.Kind),
-                result.Name,
-                result.SecondarySort,
-                matches,
-                result.NavigableItem.Document.FilePath,
-                perProviderItemPriority,
-                project.Language));
+            _searchCallback.AddItem(
+                new RoslynCodeSearchResult(
+                    _provider,
+                    result,
+                    GetResultType(result.Kind),
+                    result.Name,
+                    result.SecondarySort,
+                    matches,
+                    result.NavigableItem.Document.FilePath,
+                    perProviderItemPriority,
+                    project.Language
+                )
+            );
 
             return Task.CompletedTask;
         }
 
-        private static PatternMatchKind ConvertKind(PatternMatching.PatternMatchKind kind)
-            => kind switch
+        private static PatternMatchKind ConvertKind(PatternMatching.PatternMatchKind kind) =>
+            kind switch
             {
                 PatternMatching.PatternMatchKind.Exact => PatternMatchKind.Exact,
                 PatternMatching.PatternMatchKind.Prefix => PatternMatchKind.Prefix,
-                PatternMatching.PatternMatchKind.NonLowercaseSubstring => PatternMatchKind.Substring,
+                PatternMatching.PatternMatchKind.NonLowercaseSubstring =>
+                    PatternMatchKind.Substring,
                 PatternMatching.PatternMatchKind.StartOfWordSubstring => PatternMatchKind.Substring,
                 PatternMatching.PatternMatchKind.CamelCaseExact => PatternMatchKind.CamelCaseExact,
-                PatternMatching.PatternMatchKind.CamelCasePrefix => PatternMatchKind.CamelCasePrefix,
-                PatternMatching.PatternMatchKind.CamelCaseNonContiguousPrefix => PatternMatchKind.CamelCaseNonContiguousPrefix,
-                PatternMatching.PatternMatchKind.CamelCaseSubstring => PatternMatchKind.CamelCaseSubstring,
-                PatternMatching.PatternMatchKind.CamelCaseNonContiguousSubstring => PatternMatchKind.CamelCaseNonContiguousSubstring,
+                PatternMatching.PatternMatchKind.CamelCasePrefix =>
+                    PatternMatchKind.CamelCasePrefix,
+                PatternMatching.PatternMatchKind.CamelCaseNonContiguousPrefix =>
+                    PatternMatchKind.CamelCaseNonContiguousPrefix,
+                PatternMatching.PatternMatchKind.CamelCaseSubstring =>
+                    PatternMatchKind.CamelCaseSubstring,
+                PatternMatching.PatternMatchKind.CamelCaseNonContiguousSubstring =>
+                    PatternMatchKind.CamelCaseNonContiguousSubstring,
                 PatternMatching.PatternMatchKind.Fuzzy => PatternMatchKind.Fuzzy,
                 // Map our value to 'Fuzzy' as that's the lower value the platform supports.
                 PatternMatching.PatternMatchKind.LowercaseSubstring => PatternMatchKind.Fuzzy,
                 _ => PatternMatchKind.Fuzzy,
             };
 
-        private static string GetResultType(string kind)
-            => kind switch
+        private static string GetResultType(string kind) =>
+            kind switch
             {
                 NavigateToItemKind.Class => CodeSearchResultType.Class,
                 NavigateToItemKind.Constant => CodeSearchResultType.Constant,
@@ -113,7 +128,7 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                 NavigateToItemKind.OtherSymbol => CodeSearchResultType.OtherSymbol,
                 NavigateToItemKind.Property => CodeSearchResultType.Property,
                 NavigateToItemKind.Structure => CodeSearchResultType.Structure,
-                _ => kind
+                _ => kind,
             };
     }
 }

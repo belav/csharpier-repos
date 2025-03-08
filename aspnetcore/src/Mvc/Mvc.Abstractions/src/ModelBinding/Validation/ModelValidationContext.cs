@@ -21,7 +21,8 @@ public class ModelValidationContext : ModelValidationContextBase
         ModelMetadata modelMetadata,
         IModelMetadataProvider metadataProvider,
         object? container,
-        object? model)
+        object? model
+    )
         : base(actionContext, modelMetadata, metadataProvider)
     {
         Container = container;

@@ -21,7 +21,11 @@ namespace System.Net
     /// In other words, <see cref="BaseAddress"/> is always the first usable address of the network.
     /// The constructor and the parsing methods will throw in case there are non-zero bits after the prefix.
     /// </remarks>
-    public readonly struct IPNetwork : IEquatable<IPNetwork>, ISpanFormattable, ISpanParsable<IPNetwork>, IUtf8SpanFormattable
+    public readonly struct IPNetwork
+        : IEquatable<IPNetwork>,
+            ISpanFormattable,
+            ISpanParsable<IPNetwork>,
+            IUtf8SpanFormattable
     {
         private readonly IPAddress? _baseAddress;
 
@@ -61,10 +65,15 @@ namespace System.Net
             PrefixLength = prefixLength;
 
             [DoesNotReturn]
-            static void ThrowArgumentOutOfRangeException() => throw new ArgumentOutOfRangeException(nameof(prefixLength));
+            static void ThrowArgumentOutOfRangeException() =>
+                throw new ArgumentOutOfRangeException(nameof(prefixLength));
 
             [DoesNotReturn]
-            static void ThrowInvalidBaseAddressException() => throw new ArgumentException(SR.net_bad_ip_network_invalid_baseaddress, nameof(baseAddress));
+            static void ThrowInvalidBaseAddressException() =>
+                throw new ArgumentException(
+                    SR.net_bad_ip_network_invalid_baseaddress,
+                    nameof(baseAddress)
+                );
         }
 
         // Non-validating ctor
@@ -110,9 +119,15 @@ namespace System.Net
                 UInt128 baseAddressValue = default;
                 UInt128 otherAddressValue = default;
 
-                BaseAddress.TryWriteBytes(MemoryMarshal.AsBytes(new Span<UInt128>(ref baseAddressValue)), out int bytesWritten);
+                BaseAddress.TryWriteBytes(
+                    MemoryMarshal.AsBytes(new Span<UInt128>(ref baseAddressValue)),
+                    out int bytesWritten
+                );
                 Debug.Assert(bytesWritten == IPAddressParserStatics.IPv6AddressBytes);
-                address.TryWriteBytes(MemoryMarshal.AsBytes(new Span<UInt128>(ref otherAddressValue)), out bytesWritten);
+                address.TryWriteBytes(
+                    MemoryMarshal.AsBytes(new Span<UInt128>(ref otherAddressValue)),
+                    out bytesWritten
+                );
                 Debug.Assert(bytesWritten == IPAddressParserStatics.IPv6AddressBytes);
 
                 UInt128 mask = UInt128.MaxValue << (128 - PrefixLength);
@@ -185,10 +200,17 @@ namespace System.Net
                 ReadOnlySpan<char> ipAddressSpan = s.Slice(0, separatorIndex);
                 ReadOnlySpan<char> prefixLengthSpan = s.Slice(separatorIndex + 1);
 
-                if (IPAddress.TryParse(ipAddressSpan, out IPAddress? address) &&
-                    int.TryParse(prefixLengthSpan, NumberStyles.None, CultureInfo.InvariantCulture, out int prefixLength) &&
-                    prefixLength <= GetMaxPrefixLength(address) &&
-                    !HasNonZeroBitsAfterNetworkPrefix(address, prefixLength))
+                if (
+                    IPAddress.TryParse(ipAddressSpan, out IPAddress? address)
+                    && int.TryParse(
+                        prefixLengthSpan,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out int prefixLength
+                    )
+                    && prefixLength <= GetMaxPrefixLength(address)
+                    && !HasNonZeroBitsAfterNetworkPrefix(address, prefixLength)
+                )
                 {
                     Debug.Assert(prefixLength >= 0); // Parsing with NumberStyles.None should ensure that prefixLength is always non-negative.
                     result = new IPNetwork(address, prefixLength, false);
@@ -200,9 +222,13 @@ namespace System.Net
             return false;
         }
 
-        private static int GetMaxPrefixLength(IPAddress baseAddress) => baseAddress.AddressFamily == AddressFamily.InterNetwork ? 32 : 128;
+        private static int GetMaxPrefixLength(IPAddress baseAddress) =>
+            baseAddress.AddressFamily == AddressFamily.InterNetwork ? 32 : 128;
 
-        private static bool HasNonZeroBitsAfterNetworkPrefix(IPAddress baseAddress, int prefixLength)
+        private static bool HasNonZeroBitsAfterNetworkPrefix(
+            IPAddress baseAddress,
+            int prefixLength
+        )
         {
             if (baseAddress.AddressFamily == AddressFamily.InterNetwork)
             {
@@ -218,7 +244,10 @@ namespace System.Net
             else
             {
                 UInt128 value = default;
-                baseAddress.TryWriteBytes(MemoryMarshal.AsBytes(new Span<UInt128>(ref value)), out int bytesWritten);
+                baseAddress.TryWriteBytes(
+                    MemoryMarshal.AsBytes(new Span<UInt128>(ref value)),
+                    out int bytesWritten
+                );
                 Debug.Assert(bytesWritten == IPAddressParserStatics.IPv6AddressBytes);
                 if (prefixLength == 0)
                 {
@@ -240,7 +269,11 @@ namespace System.Net
         /// </summary>
         /// <returns>The <see cref="string"/> containing the <see cref="IPNetwork"/>'s CIDR notation.</returns>
         public override string ToString() =>
-            string.Create(CultureInfo.InvariantCulture, stackalloc char[128], $"{BaseAddress}/{(uint)PrefixLength}");
+            string.Create(
+                CultureInfo.InvariantCulture,
+                stackalloc char[128],
+                $"{BaseAddress}/{(uint)PrefixLength}"
+            );
 
         /// <summary>
         /// Attempts to write the <see cref="IPNetwork"/>'s CIDR notation to the given <paramref name="destination"/> span and returns a value indicating whether the operation succeeded.
@@ -249,7 +282,11 @@ namespace System.Net
         /// <param name="charsWritten">When this method returns, contains the number of characters that were written to <paramref name="destination"/>.</param>
         /// <returns><see langword="true"/> if the formatting was succesful; otherwise <see langword="false"/>.</returns>
         public bool TryFormat(Span<char> destination, out int charsWritten) =>
-            destination.TryWrite(CultureInfo.InvariantCulture, $"{BaseAddress}/{(uint)PrefixLength}", out charsWritten);
+            destination.TryWrite(
+                CultureInfo.InvariantCulture,
+                $"{BaseAddress}/{(uint)PrefixLength}",
+                out charsWritten
+            );
 
         /// <summary>
         /// Attempts to write the <see cref="IPNetwork"/>'s CIDR notation to the given <paramref name="utf8Destination"/> UTF-8 span and returns a value indicating whether the operation succeeded.
@@ -258,7 +295,12 @@ namespace System.Net
         /// <param name="bytesWritten">When this method returns, contains the number of bytes that were written to <paramref name="utf8Destination"/>.</param>
         /// <returns><see langword="true"/> if the formatting was succesful; otherwise <see langword="false"/>.</returns>
         public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten) =>
-            Utf8.TryWrite(utf8Destination, CultureInfo.InvariantCulture, $"{BaseAddress}/{(uint)PrefixLength}", out bytesWritten);
+            Utf8.TryWrite(
+                utf8Destination,
+                CultureInfo.InvariantCulture,
+                $"{BaseAddress}/{(uint)PrefixLength}",
+                out bytesWritten
+            );
 
         /// <summary>
         /// Determines whether two <see cref="IPNetwork"/> instances are equal.
@@ -267,8 +309,7 @@ namespace System.Net
         /// <returns><see langword="true"/> if the networks are equal; otherwise <see langword="false"/>.</returns>
         /// <exception cref="InvalidOperationException">Uninitialized <see cref="IPNetwork"/> instance.</exception>
         public bool Equals(IPNetwork other) =>
-            PrefixLength == other.PrefixLength &&
-            BaseAddress.Equals(other.BaseAddress);
+            PrefixLength == other.PrefixLength && BaseAddress.Equals(other.BaseAddress);
 
         /// <summary>
         /// Determines whether two <see cref="IPNetwork"/> instances are equal.
@@ -277,8 +318,7 @@ namespace System.Net
         /// <returns><see langword="true"/> if <paramref name="obj"/> is an <see cref="IPNetwork"/> instance and the networks are equal; otherwise <see langword="false"/>.</returns>
         /// <exception cref="InvalidOperationException">Uninitialized <see cref="IPNetwork"/> instance.</exception>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is IPNetwork other &&
-            Equals(other);
+            obj is IPNetwork other && Equals(other);
 
         /// <summary>
         /// Determines whether the specified instances of <see cref="IPNetwork"/> are equal.
@@ -306,25 +346,49 @@ namespace System.Net
         string IFormattable.ToString(string? format, IFormatProvider? provider) => ToString();
 
         /// <inheritdoc />
-        bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
+        bool ISpanFormattable.TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        ) =>
             // format and provider are ignored
             TryFormat(destination, out charsWritten);
 
         /// <inheritdoc />
-        bool IUtf8SpanFormattable.TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
+        bool IUtf8SpanFormattable.TryFormat(
+            Span<byte> utf8Destination,
+            out int bytesWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        ) =>
             // format and provider are ignored
             TryFormat(utf8Destination, out bytesWritten);
 
         /// <inheritdoc />
-        static IPNetwork IParsable<IPNetwork>.Parse([NotNull] string s, IFormatProvider? provider) => Parse(s);
+        static IPNetwork IParsable<IPNetwork>.Parse(
+            [NotNull] string s,
+            IFormatProvider? provider
+        ) => Parse(s);
 
         /// <inheritdoc />
-        static bool IParsable<IPNetwork>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out IPNetwork result) => TryParse(s, out result);
+        static bool IParsable<IPNetwork>.TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out IPNetwork result
+        ) => TryParse(s, out result);
 
         /// <inheritdoc />
-        static IPNetwork ISpanParsable<IPNetwork>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s);
+        static IPNetwork ISpanParsable<IPNetwork>.Parse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider
+        ) => Parse(s);
 
         /// <inheritdoc />
-        static bool ISpanParsable<IPNetwork>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out IPNetwork result) => TryParse(s, out result);
+        static bool ISpanParsable<IPNetwork>.TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out IPNetwork result
+        ) => TryParse(s, out result);
     }
 }

@@ -14,22 +14,21 @@
 
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
-	using System;
+    using System;
+    using Castle.DynamicProxy.Tests.Interfaces;
 
-	using Castle.DynamicProxy.Tests.Interfaces;
+    public sealed class WithCallbackSimple : ISimple
+    {
+        private readonly Action method;
 
-	public sealed class WithCallbackSimple : ISimple
-	{
-		private readonly Action method;
+        public WithCallbackSimple(Action method)
+        {
+            this.method = method;
+        }
 
-		public WithCallbackSimple(Action method)
-		{
-			this.method = method;
-		}
-
-		public void Method()
-		{
-			this.method?.Invoke();
-		}
-	}
+        public void Method()
+        {
+            this.method?.Invoke();
+        }
+    }
 }

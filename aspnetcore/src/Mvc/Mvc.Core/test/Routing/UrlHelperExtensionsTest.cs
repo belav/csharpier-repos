@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
@@ -16,19 +16,11 @@ public class UrlHelperExtensionsTest
     {
         // Arrange
         UrlRouteContext actual = null;
-        var routeData = new RouteData
-        {
-            Values =
-                {
-                    { "page", "ambient-page" },
-                }
-        };
-        var actionContext = new ActionContext
-        {
-            RouteData = routeData,
-        };
+        var routeData = new RouteData { Values = { { "page", "ambient-page" } } };
+        var actionContext = new ActionContext { RouteData = routeData };
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -38,12 +30,14 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("/TestPage", value.Value);
-            });
+            }
+        );
         Assert.Null(actual.Host);
         Assert.Null(actual.Protocol);
         Assert.Null(actual.Fragment);
@@ -51,21 +45,12 @@ public class UrlHelperExtensionsTest
 
     public static TheoryData Page_WithNameAndRouteValues_WorksData
     {
-        get => new TheoryData<object>
+        get =>
+            new TheoryData<object>
             {
                 { new { id = 10 } },
-                {
-                    new Dictionary<string, object>
-                    {
-                        ["id"] = 10,
-                    }
-                },
-                {
-                    new RouteValueDictionary
-                    {
-                        ["id"] = 10,
-                    }
-                },
+                { new Dictionary<string, object> { ["id"] = 10 } },
+                { new RouteValueDictionary { ["id"] = 10 } },
             };
     }
 
@@ -76,7 +61,8 @@ public class UrlHelperExtensionsTest
         // Arrange
         UrlRouteContext actual = null;
         var urlHelper = CreateMockUrlHelper();
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -86,7 +72,8 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -96,7 +83,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("/TestPage", value.Value);
-            });
+            }
+        );
         Assert.Null(actual.Host);
         Assert.Null(actual.Protocol);
         Assert.Null(actual.Fragment);
@@ -108,17 +96,24 @@ public class UrlHelperExtensionsTest
         // Arrange
         UrlRouteContext actual = null;
         var urlHelper = CreateMockUrlHelper();
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper.Object.Page("/TestPage", pageHandler: null, values: new { id = 13 }, protocol: "https");
+        urlHelper.Object.Page(
+            "/TestPage",
+            pageHandler: null,
+            values: new { id = 13 },
+            protocol: "https"
+        );
 
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -128,7 +123,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("/TestPage", value.Value);
-            });
+            }
+        );
         Assert.Equal("https", actual.Protocol);
         Assert.Null(actual.Host);
         Assert.Null(actual.Fragment);
@@ -140,17 +136,25 @@ public class UrlHelperExtensionsTest
         // Arrange
         UrlRouteContext actual = null;
         var urlHelper = CreateMockUrlHelper();
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper.Object.Page("/TestPage", pageHandler: null, values: new { id = 13 }, protocol: "https", host: "mytesthost");
+        urlHelper.Object.Page(
+            "/TestPage",
+            pageHandler: null,
+            values: new { id = 13 },
+            protocol: "https",
+            host: "mytesthost"
+        );
 
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -160,7 +164,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("/TestPage", value.Value);
-            });
+            }
+        );
         Assert.Equal("https", actual.Protocol);
         Assert.Equal("mytesthost", actual.Host);
         Assert.Null(actual.Fragment);
@@ -172,17 +177,26 @@ public class UrlHelperExtensionsTest
         // Arrange
         UrlRouteContext actual = null;
         var urlHelper = CreateMockUrlHelper();
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper.Object.Page("/TestPage", "test-handler", new { id = 13 }, "https", "mytesthost", "#toc");
+        urlHelper.Object.Page(
+            "/TestPage",
+            "test-handler",
+            new { id = 13 },
+            "https",
+            "mytesthost",
+            "#toc"
+        );
 
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -197,7 +211,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("handler", value.Key);
                 Assert.Equal("test-handler", value.Value);
-            });
+            }
+        );
         Assert.Equal("https", actual.Protocol);
         Assert.Equal("mytesthost", actual.Host);
         Assert.Equal("#toc", actual.Fragment);
@@ -208,20 +223,12 @@ public class UrlHelperExtensionsTest
     {
         // Arrange
         UrlRouteContext actual = null;
-        var routeData = new RouteData
-        {
-            Values =
-                {
-                    { "page", "ambient-page" },
-                }
-        };
-        var actionContext = new ActionContext
-        {
-            RouteData = routeData,
-        };
+        var routeData = new RouteData { Values = { { "page", "ambient-page" } } };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -232,7 +239,8 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -242,7 +250,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("ambient-page", value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -254,24 +263,25 @@ public class UrlHelperExtensionsTest
         var routeData = new RouteData
         {
             Values =
-                {
-                    { "page", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)) },
-                }
+            {
+                { "page", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)) },
+            },
         };
         var actionContext = new ActionContext
         {
             ActionDescriptor = new ActionDescriptor
             {
                 RouteValues = new Dictionary<string, string>
-                    {
-                        { "page", "10/31/2018 07:37:38 -07:00" },
-                    },
+                {
+                    { "page", "10/31/2018 07:37:38 -07:00" },
+                },
             },
             RouteData = routeData,
         };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -281,7 +291,8 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -291,7 +302,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("10/31/New Page", value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -301,19 +313,13 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values =
-                {
-                    { "page", "ambient-page" },
-                    { "handler", "ambient-handler" },
-                }
+            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" } },
         };
-        var actionContext = new ActionContext
-        {
-            RouteData = routeData,
-        };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -324,7 +330,8 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("id", value.Key);
@@ -339,7 +346,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("handler", value.Key);
                 Assert.Null(value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -349,19 +357,13 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values =
-                {
-                    { "page", "ambient-page" },
-                    { "handler", "ambient-handler" },
-                }
+            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" } },
         };
-        var actionContext = new ActionContext
-        {
-            RouteData = routeData,
-        };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -372,7 +374,8 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("handler", value.Key);
@@ -382,7 +385,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("ambient-page", value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -392,30 +396,29 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values =
-                {
-                    { "page", "ambient-page" },
-                    { "handler", "ambient-handler" },
-                }
+            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" } },
         };
-        var actionContext = new ActionContext
-        {
-            RouteData = routeData,
-        };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
         string page = null;
-        urlHelper.Object.Page(page, pageHandler: null, values: new { handler = "route-value-handler" });
+        urlHelper.Object.Page(
+            page,
+            pageHandler: null,
+            values: new { handler = "route-value-handler" }
+        );
 
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("handler", value.Key);
@@ -425,14 +428,18 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("ambient-page", value.Value);
-            });
+            }
+        );
     }
 
     [Theory]
     [InlineData("Sibling", "/Dir1/Dir2/Sibling")]
     [InlineData("Dir3/Sibling", "/Dir1/Dir2/Dir3/Sibling")]
     [InlineData("Dir4/Dir5/Index", "/Dir1/Dir2/Dir4/Dir5/Index")]
-    public void Page_CalculatesPathRelativeToViewEnginePath_WhenNotRooted(string pageName, string expected)
+    public void Page_CalculatesPathRelativeToViewEnginePath_WhenNotRooted(
+        string pageName,
+        string expected
+    )
     {
         // Arrange
         UrlRouteContext actual = null;
@@ -440,7 +447,8 @@ public class UrlHelperExtensionsTest
         var actionContext = GetActionContextForPage("/Dir1/Dir2/About");
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -450,12 +458,14 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal(expected, value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -467,7 +477,8 @@ public class UrlHelperExtensionsTest
         var actionContext = GetActionContextForPage("/Dir1/Dir2/");
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -477,12 +488,14 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal(expected, value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -496,22 +509,14 @@ public class UrlHelperExtensionsTest
         {
             ActionDescriptor = new ActionDescriptor
             {
-                RouteValues = new Dictionary<string, string>
-                    {
-                        { "page", "/Home" },
-                    },
+                RouteValues = new Dictionary<string, string> { { "page", "/Home" } },
             },
-            RouteData = new RouteData
-            {
-                Values =
-                    {
-                        [ "page" ] = "/Home"
-                    },
-            },
+            RouteData = new RouteData { Values = { ["page"] = "/Home" } },
         };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -521,12 +526,14 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal(expected, value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -536,22 +543,21 @@ public class UrlHelperExtensionsTest
         var expected = "SiblingName";
         UrlRouteContext actual = null;
         var routeData = new RouteData();
-        var actionContext = new ActionContext
-        {
-            RouteData = new RouteData(),
-        };
+        var actionContext = new ActionContext { RouteData = new RouteData() };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() => urlHelper.Object.Page(expected));
         Assert.Equal(
-            $"The relative page path '{expected}' can only be used while executing a Razor Page. " +
-            "Specify a root relative path with a leading '/' to generate a URL outside of a Razor Page. " +
-            "If you are using LinkGenerator then you must provide the current HttpContext to use relative pages.",
-            ex.Message);
+            $"The relative page path '{expected}' can only be used while executing a Razor Page. "
+                + "Specify a root relative path with a leading '/' to generate a URL outside of a Razor Page. "
+                + "If you are using LinkGenerator then you must provide the current HttpContext to use relative pages.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -561,19 +567,13 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values =
-                {
-                    { "page", "ambient-page" },
-                    { "area", "ambient-area" },
-                }
+            Values = { { "page", "ambient-page" }, { "area", "ambient-area" } },
         };
-        var actionContext = new ActionContext
-        {
-            RouteData = routeData,
-        };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -584,7 +584,8 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values).OrderBy(v => v.Key),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values).OrderBy(v => v.Key),
             value =>
             {
                 Assert.Equal("area", value.Key);
@@ -594,7 +595,8 @@ public class UrlHelperExtensionsTest
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("ambient-page", value.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -608,15 +610,12 @@ public class UrlHelperExtensionsTest
 
         var httpContext = new DefaultHttpContext
         {
-            Request =
-                {
-                    Scheme = expectedProtocol,
-                    Host = new HostString(expectedHost),
-                }
+            Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost) },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.Action(It.IsAny<UrlActionContext>()))
+        urlHelper
+            .Setup(h => h.Action(It.IsAny<UrlActionContext>()))
             .Callback((UrlActionContext context) => actual = context);
 
         // Act
@@ -643,15 +642,12 @@ public class UrlHelperExtensionsTest
 
         var httpContext = new DefaultHttpContext
         {
-            Request =
-                {
-                    Scheme = "http://",
-                    Host = new HostString(expectedHost),
-                }
+            Request = { Scheme = "http://", Host = new HostString(expectedHost) },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.Action(It.IsAny<UrlActionContext>()))
+        urlHelper
+            .Setup(h => h.Action(It.IsAny<UrlActionContext>()))
             .Callback((UrlActionContext context) => actual = context);
 
         // Act
@@ -678,15 +674,12 @@ public class UrlHelperExtensionsTest
 
         var httpContext = new DefaultHttpContext
         {
-            Request =
-                {
-                    Scheme = expectedProtocol,
-                    Host = new HostString("www.asp.net"),
-                }
+            Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net") },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.Action(It.IsAny<UrlActionContext>()))
+        urlHelper
+            .Setup(h => h.Action(It.IsAny<UrlActionContext>()))
             .Callback((UrlActionContext context) => actual = context);
 
         // Act
@@ -716,22 +709,13 @@ public class UrlHelperExtensionsTest
         {
             HttpContext = new DefaultHttpContext
             {
-                Request =
-                    {
-                        Scheme = expectedProtocol,
-                        Host = new HostString(expectedHost),
-                    }
+                Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost) },
             },
-            RouteData = new RouteData
-            {
-                Values =
-                    {
-                        { "page", "ambient-page" },
-                    }
-            },
+            RouteData = new RouteData { Values = { { "page", "ambient-page" } } },
         };
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -740,12 +724,14 @@ public class UrlHelperExtensionsTest
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal(expectedPage, value.Value);
-            });
+            }
+        );
         Assert.Null(actual.RouteName);
 
         Assert.Equal(expectedProtocol, actual.Protocol);
@@ -764,22 +750,13 @@ public class UrlHelperExtensionsTest
         {
             HttpContext = new DefaultHttpContext
             {
-                Request =
-                    {
-                        Scheme = "http://",
-                        Host = new HostString(expectedHost),
-                    }
+                Request = { Scheme = "http://", Host = new HostString(expectedHost) },
             },
-            RouteData = new RouteData
-            {
-                Values =
-                    {
-                        { "page", "ambient-page" },
-                    }
-            },
+            RouteData = new RouteData { Values = { { "page", "ambient-page" } } },
         };
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -788,12 +765,14 @@ public class UrlHelperExtensionsTest
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("ambient-page", value.Value);
-            });
+            }
+        );
         Assert.Null(actual.RouteName);
 
         Assert.Equal(expectedProtocol, actual.Protocol);
@@ -812,22 +791,13 @@ public class UrlHelperExtensionsTest
         {
             HttpContext = new DefaultHttpContext
             {
-                Request =
-                    {
-                        Scheme = expectedProtocol,
-                        Host = new HostString("www.asp.net"),
-                    }
+                Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net") },
             },
-            RouteData = new RouteData
-            {
-                Values =
-                    {
-                        { "page", "ambient-page" },
-                    }
-            },
+            RouteData = new RouteData { Values = { { "page", "ambient-page" } } },
         };
         var urlHelper = CreateMockUrlHelper(actionContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
@@ -836,12 +806,14 @@ public class UrlHelperExtensionsTest
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(actual.Values),
             value =>
             {
                 Assert.Equal("page", value.Key);
                 Assert.Equal("ambient-page", value.Value);
-            });
+            }
+        );
         Assert.Null(actual.RouteName);
 
         Assert.Equal(expectedProtocol, actual.Protocol);
@@ -856,8 +828,7 @@ public class UrlHelperExtensionsTest
         }
 
         var urlHelper = new Mock<IUrlHelper>();
-        urlHelper.SetupGet(h => h.ActionContext)
-            .Returns(context);
+        urlHelper.SetupGet(h => h.ActionContext).Returns(context);
         return urlHelper;
     }
 
@@ -867,18 +838,9 @@ public class UrlHelperExtensionsTest
         {
             ActionDescriptor = new ActionDescriptor
             {
-                RouteValues = new Dictionary<string, string>
-                    {
-                        { "page", page },
-                    },
+                RouteValues = new Dictionary<string, string> { { "page", page } },
             },
-            RouteData = new RouteData
-            {
-                Values =
-                    {
-                        [ "page" ] = page
-                    },
-            },
+            RouteData = new RouteData { Values = { ["page"] = page } },
         };
     }
 }

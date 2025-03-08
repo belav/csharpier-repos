@@ -29,8 +29,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             var hostServices = EditorTestCompositions.EditorFeatures.GetHostServices();
 
             using var workspace = new AdhocWorkspace(hostServices);
-            var textBufferFactoryService = ((IMefHostExportProvider)hostServices).GetExports<ITextBufferFactoryService>().Single().Value;
-            var buffer = textBufferFactoryService.CreateTextBuffer("Hello", textBufferFactoryService.TextContentType);
+            var textBufferFactoryService = ((IMefHostExportProvider)hostServices)
+                .GetExports<ITextBufferFactoryService>()
+                .Single()
+                .Value;
+            var buffer = textBufferFactoryService.CreateTextBuffer(
+                "Hello",
+                textBufferFactoryService.TextContentType
+            );
             var sourceTextContainer = buffer.AsTextContainer();
 
             // We're going to add two projects that both consume the same file
@@ -40,7 +46,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             {
                 var projectId = workspace.AddProject($"Project{i}", LanguageNames.CSharp).Id;
                 var documentId = DocumentId.CreateNewId(projectId);
-                workspace.AddDocument(DocumentInfo.Create(documentId, "Foo.cs", filePath: FilePath));
+                workspace.AddDocument(
+                    DocumentInfo.Create(documentId, "Foo.cs", filePath: FilePath)
+                );
                 workspace.OnDocumentOpened(documentId, sourceTextContainer);
 
                 documentIds.Add(documentId);
@@ -48,27 +56,55 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
 
             // Confirm the files have been linked by file path. This isn't the core part of this test but without it
             // nothing else will work.
-            Assert.Equal(documentIds, workspace.CurrentSolution.GetDocumentIdsWithFilePath(FilePath));
-            Assert.Equal(new[] { documentIds.Last() }, workspace.CurrentSolution.GetDocument(documentIds.First()).GetLinkedDocumentIds());
+            Assert.Equal(
+                documentIds,
+                workspace.CurrentSolution.GetDocumentIdsWithFilePath(FilePath)
+            );
+            Assert.Equal(
+                new[] { documentIds.Last() },
+                workspace.CurrentSolution.GetDocument(documentIds.First()).GetLinkedDocumentIds()
+            );
 
             // Now the core test: first, if we make a modified version of the source text, and attempt to get the document for it,
             // both copies should be updated.
             var originalSnapshot = buffer.CurrentSnapshot;
             buffer.Insert(5, ", World!");
 
-            var newDocumentWithChanges = buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var newDocumentWithChanges =
+                buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
 
             // Since we're calling this on the current snapshot and we observed the text edit synchronously,
             // no forking actually should have happened.
             Assert.Same(workspace.CurrentSolution, newDocumentWithChanges.Project.Solution);
-            Assert.Equal("Hello, World!", newDocumentWithChanges.GetTextSynchronously(CancellationToken.None).ToString());
-            Assert.Equal("Hello, World!", newDocumentWithChanges.GetLinkedDocuments().Single().GetTextSynchronously(CancellationToken.None).ToString());
+            Assert.Equal(
+                "Hello, World!",
+                newDocumentWithChanges.GetTextSynchronously(CancellationToken.None).ToString()
+            );
+            Assert.Equal(
+                "Hello, World!",
+                newDocumentWithChanges
+                    .GetLinkedDocuments()
+                    .Single()
+                    .GetTextSynchronously(CancellationToken.None)
+                    .ToString()
+            );
 
             // Now let's fetch back for the original snapshot. Both linked copies should be updated.
-            var originalDocumentWithChanges = originalSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var originalDocumentWithChanges =
+                originalSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             Assert.NotSame(workspace.CurrentSolution, originalDocumentWithChanges.Project.Solution);
-            Assert.Equal("Hello", originalDocumentWithChanges.GetTextSynchronously(CancellationToken.None).ToString());
-            Assert.Equal("Hello", originalDocumentWithChanges.GetLinkedDocuments().Single().GetTextSynchronously(CancellationToken.None).ToString());
+            Assert.Equal(
+                "Hello",
+                originalDocumentWithChanges.GetTextSynchronously(CancellationToken.None).ToString()
+            );
+            Assert.Equal(
+                "Hello",
+                originalDocumentWithChanges
+                    .GetLinkedDocuments()
+                    .Single()
+                    .GetTextSynchronously(CancellationToken.None)
+                    .ToString()
+            );
         }
     }
 }

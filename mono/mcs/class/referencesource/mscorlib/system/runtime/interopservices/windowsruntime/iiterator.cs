@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>LadiPro</OWNER>
@@ -19,16 +19,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     internal interface IIterator<T>
     {
         [Pure]
-        T Current
-        {
-            get;
-        }
+        T Current { get; }
 
         [Pure]
-        bool HasCurrent
-        {
-            get;
-        }
+        bool HasCurrent { get; }
 
         bool MoveNext();
 
@@ -42,16 +36,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     internal interface IBindableIterator
     {
         [Pure]
-        object Current
-        {
-            get;
-        }
+        object Current { get; }
 
         [Pure]
-        bool HasCurrent
-        {
-            get;
-        }
+        bool HasCurrent { get; }
 
         bool MoveNext();
     }

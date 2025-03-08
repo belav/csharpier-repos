@@ -30,7 +30,10 @@ public class RedirectResultTests : RedirectResultTestBase
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     protected override Task ExecuteAsync(HttpContext httpContext, string contentPath)

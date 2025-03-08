@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Expressions.Visitors;
 
 namespace Moq
@@ -63,7 +62,7 @@ namespace Moq
     public abstract class Match : IMatcher
     {
         /// <devdoc>
-        /// Provided for the sole purpose of rendering the delegate passed to the 
+        /// Provided for the sole purpose of rendering the delegate passed to the
         /// matcher constructor if no friendly render lambda is provided.
         /// </devdoc>
         internal static TValue Matcher<TValue>()
@@ -75,9 +74,11 @@ namespace Moq
 
         internal abstract void SetupEvaluatedSuccessfully(object argument, Type parameterType);
 
-        bool IMatcher.Matches(object argument, Type parameterType) => this.Matches(argument, parameterType);
+        bool IMatcher.Matches(object argument, Type parameterType) =>
+            this.Matches(argument, parameterType);
 
-        void IMatcher.SetupEvaluatedSuccessfully(object value, Type parameterType) => this.SetupEvaluatedSuccessfully(value, parameterType);
+        void IMatcher.SetupEvaluatedSuccessfully(object value, Type parameterType) =>
+            this.SetupEvaluatedSuccessfully(value, parameterType);
 
         internal Expression RenderExpression { get; set; }
 
@@ -125,7 +126,10 @@ namespace Moq
         /// <param name="renderExpression">
         ///   A lambda representation of the matcher.
         /// </param>
-        public static T Create<T>(Func<object, Type, bool> condition, Expression<Func<T>> renderExpression)
+        public static T Create<T>(
+            Func<object, Type, bool> condition,
+            Expression<Func<T>> renderExpression
+        )
         {
             Guard.NotNull(condition, nameof(condition));
             Guard.NotNull(renderExpression, nameof(renderExpression));
@@ -165,7 +169,11 @@ namespace Moq
         internal Predicate<T> Condition { get; set; }
         internal Action<T> Success { get; set; }
 
-        internal Match(Predicate<T> condition, Expression<Func<T>> renderExpression, Action<T> success = null)
+        internal Match(
+            Predicate<T> condition,
+            Expression<Func<T>> renderExpression,
+            Action<T> success = null
+        )
         {
             this.Condition = condition;
             this.RenderExpression = renderExpression.Body.Apply(EvaluateCaptures.Rewriter);
@@ -215,7 +223,8 @@ namespace Moq
             else
             {
                 var t = typeof(T);
-                return !t.IsValueType || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>));
+                return !t.IsValueType
+                    || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>));
             }
         }
 
@@ -236,16 +245,24 @@ namespace Moq
             {
                 return false;
             }
-            else if (!(this.RenderExpression is MethodCallExpression ce && ce.Method.DeclaringType == typeof(Match)))
+            else if (
+                !(
+                    this.RenderExpression is MethodCallExpression ce
+                    && ce.Method.DeclaringType == typeof(Match)
+                )
+            )
             {
-                return ExpressionComparer.Default.Equals(this.RenderExpression, other.RenderExpression);
+                return ExpressionComparer.Default.Equals(
+                    this.RenderExpression,
+                    other.RenderExpression
+                );
             }
             else
             {
-                return false;  // The test documented in `MatchFixture.Equality_ambiguity` is caused by this.
-                               // Returning true would break equality even worse. The only way to resolve the
-                               // ambiguity is to either add a render expression to your custom matcher, or
-                               // to test both `Condition.Target` objects for structural equality.
+                return false; // The test documented in `MatchFixture.Equality_ambiguity` is caused by this.
+                // Returning true would break equality even worse. The only way to resolve the
+                // ambiguity is to either add a render expression to your custom matcher, or
+                // to test both `Condition.Target` objects for structural equality.
             }
         }
 
@@ -275,7 +292,6 @@ namespace Moq
     }
 
     sealed class MatchFactory : Match
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Func<object, Type, bool> condition;
@@ -310,7 +326,12 @@ namespace Moq
 
         internal override bool Matches(object argument, Type parameterType)
         {
-            var canCast = (Predicate<object>)Delegate.CreateDelegate(typeof(Predicate<object>), canCastMethod.MakeGenericMethod(parameterType));
+            var canCast =
+                (Predicate<object>)
+                    Delegate.CreateDelegate(
+                        typeof(Predicate<object>),
+                        canCastMethod.MakeGenericMethod(parameterType)
+                    );
             return canCast(argument) && condition(argument, parameterType);
         }
 
@@ -349,7 +370,8 @@ namespace Moq
             else
             {
                 var t = typeof(T);
-                return !t.IsValueType || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>));
+                return !t.IsValueType
+                    || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>));
 
                 /* Unmerged change from project 'Moq(netstandard2.0)'
                 Before:
@@ -374,7 +396,10 @@ namespace Moq
             }
         }
 
-        static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod("CanCast", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
+        static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod(
+            "CanCast",
+            BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly
+        );
 
         // TODO: Check whether we need to implement `IEquatable<>` to make this work with delegate-based
         // setup & verification methods such as `SetupSet`!

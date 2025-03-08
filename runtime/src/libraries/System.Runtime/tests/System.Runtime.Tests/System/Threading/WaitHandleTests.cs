@@ -27,11 +27,12 @@ namespace System.Threading.Tests
         [Fact]
         public static void WaitAny()
         {
-            var handles = new ManualResetEvent[] {
-            new ManualResetEvent(false),
-            new ManualResetEvent(false),
-            new ManualResetEvent(true)
-        };
+            var handles = new ManualResetEvent[]
+            {
+                new ManualResetEvent(false),
+                new ManualResetEvent(false),
+                new ManualResetEvent(true),
+            };
 
             Assert.Equal(2, WaitHandle.WaitAny(handles));
             Assert.Equal(2, WaitHandle.WaitAny(handles, 1));
@@ -40,7 +41,10 @@ namespace System.Threading.Tests
             handles[2].Reset();
 
             Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(handles, 1));
-            Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(handles, TimeSpan.FromMilliseconds(1)));
+            Assert.Equal(
+                WaitHandle.WaitTimeout,
+                WaitHandle.WaitAny(handles, TimeSpan.FromMilliseconds(1))
+            );
         }
 
         [Fact]
@@ -49,22 +53,54 @@ namespace System.Threading.Tests
             WaitHandle[] handles = null;
 
             Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAny(handles));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAny(handles, 0));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAny(handles, TimeSpan.Zero));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAny(handles, 0, exitContext: false));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAny(handles, TimeSpan.Zero, exitContext: false));
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAny(handles, 0)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAny(handles, TimeSpan.Zero)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAny(handles, 0, exitContext: false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAny(handles, TimeSpan.Zero, exitContext: false)
+            );
         }
 
         [Fact]
         public static void WaitAny_NullHandle_Throws()
         {
-            var handles = new WaitHandle[] { new ManualResetEvent(true), null, new AutoResetEvent(true) };
+            var handles = new WaitHandle[]
+            {
+                new ManualResetEvent(true),
+                null,
+                new AutoResetEvent(true),
+            };
 
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAny(handles));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAny(handles, 0));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAny(handles, TimeSpan.Zero));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAny(handles, 0, exitContext: false));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAny(handles, TimeSpan.Zero, exitContext: false));
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAny(handles)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAny(handles, 0)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAny(handles, TimeSpan.Zero)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAny(handles, 0, exitContext: false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAny(handles, TimeSpan.Zero, exitContext: false)
+            );
         }
 
         [Fact]
@@ -89,18 +125,30 @@ namespace System.Threading.Tests
         public static void WaitAny_MaxHandles()
         {
             Assert.Equal(0, WaitHandle.WaitAny(CreateManualResetEvents(64)));
-            Assert.Throws<NotSupportedException>(() => WaitHandle.WaitAny(CreateManualResetEvents(65)));
+            Assert.Throws<NotSupportedException>(() =>
+                WaitHandle.WaitAny(CreateManualResetEvents(65))
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34366", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34366",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [PlatformSpecific(TestPlatforms.Windows)]
         public static void WaitAny_MaxHandles_STA()
         {
             Thread t = new Thread(() =>
             {
                 Assert.Equal(0, WaitHandle.WaitAny(CreateManualResetEvents(63)));
-                Assert.Throws<NotSupportedException>(() => WaitHandle.WaitAny(CreateManualResetEvents(64)));
+                Assert.Throws<NotSupportedException>(() =>
+                    WaitHandle.WaitAny(CreateManualResetEvents(64))
+                );
             });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -128,22 +176,54 @@ namespace System.Threading.Tests
             WaitHandle[] handles = null;
 
             Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAll(handles));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAll(handles, 0));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAll(handles, TimeSpan.Zero));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAll(handles, 0, exitContext: false));
-            Assert.Throws<ArgumentNullException>("waitHandles", () => WaitHandle.WaitAll(handles, TimeSpan.Zero, exitContext: false));
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAll(handles, 0)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAll(handles, TimeSpan.Zero)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAll(handles, 0, exitContext: false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles",
+                () => WaitHandle.WaitAll(handles, TimeSpan.Zero, exitContext: false)
+            );
         }
 
         [Fact]
         public static void WaitAll_NullHandle_Throws()
         {
-            var handles = new WaitHandle[] { new ManualResetEvent(true), null, new AutoResetEvent(true) };
+            var handles = new WaitHandle[]
+            {
+                new ManualResetEvent(true),
+                null,
+                new AutoResetEvent(true),
+            };
 
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAll(handles));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAll(handles, 0));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAll(handles, TimeSpan.Zero));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAll(handles, 0, exitContext: false));
-            Assert.Throws<ArgumentNullException>("waitHandles[1]", () => WaitHandle.WaitAll(handles, TimeSpan.Zero, exitContext: false));
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAll(handles)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAll(handles, 0)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAll(handles, TimeSpan.Zero)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAll(handles, 0, exitContext: false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "waitHandles[1]",
+                () => WaitHandle.WaitAll(handles, TimeSpan.Zero, exitContext: false)
+            );
         }
 
         [Fact]
@@ -157,7 +237,12 @@ namespace System.Threading.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34366", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34366",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [PlatformSpecific(TestPlatforms.Windows)] // names aren't supported on Unix
         public static void WaitAll_SameNames()
         {
@@ -171,7 +256,10 @@ namespace System.Threading.Tests
         [Fact]
         public static void WaitTimeout()
         {
-            Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(new[] { new ManualResetEvent(false) }, 0));
+            Assert.Equal(
+                WaitHandle.WaitTimeout,
+                WaitHandle.WaitAny(new[] { new ManualResetEvent(false) }, 0)
+            );
         }
 
         [Fact]
@@ -250,11 +338,17 @@ namespace System.Threading.Tests
 
         [Fact]
         public static void SetSafeWaitHandleOnNull() =>
-            AssertExtensions.Throws<ArgumentNullException>("waitHandle", () => default(WaitHandle).SetSafeWaitHandle(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "waitHandle",
+                () => default(WaitHandle).SetSafeWaitHandle(null)
+            );
 
         [Fact]
         public static void GetSafeWaitHandleOnNull() =>
-            AssertExtensions.Throws<ArgumentNullException>("waitHandle", () => default(WaitHandle).GetSafeWaitHandle());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "waitHandle",
+                () => default(WaitHandle).GetSafeWaitHandle()
+            );
 
         private static void Unsignal(WaitHandle wh)
         {
@@ -296,41 +390,50 @@ namespace System.Threading.Tests
 
         public static IEnumerable<object[]> SignalAndWait_MemberData()
         {
-            var toSignal = new WaitHandle[] { new ManualResetEvent(false), new Mutex(), new Semaphore(1, 1) };
+            var toSignal = new WaitHandle[]
+            {
+                new ManualResetEvent(false),
+                new Mutex(),
+                new Semaphore(1, 1),
+            };
             var toWaitOn = new AutoResetEvent(false);
-            var callSignalAndWait =
-                new Func<WaitHandle, WaitHandle, bool>[]
-                {
-                    (s, w) => WaitHandle.SignalAndWait(s, w),
-                    (s, w) => WaitHandle.SignalAndWait(s, w, 0, false),
-                    (s, w) => WaitHandle.SignalAndWait(s, w, TimeSpan.Zero, false),
-                };
+            var callSignalAndWait = new Func<WaitHandle, WaitHandle, bool>[]
+            {
+                (s, w) => WaitHandle.SignalAndWait(s, w),
+                (s, w) => WaitHandle.SignalAndWait(s, w, 0, false),
+                (s, w) => WaitHandle.SignalAndWait(s, w, TimeSpan.Zero, false),
+            };
 
             for (int signalIndex = 0; signalIndex < toSignal.Length; ++signalIndex)
             {
                 for (int callIndex = 0; callIndex < callSignalAndWait.Length; ++callIndex)
                 {
                     var skipInfiniteWaitTests = callIndex == 0;
-                    yield return
-                        new object[]
-                        {
-                            toSignal[signalIndex],
-                            toWaitOn,
-                            callSignalAndWait[callIndex],
-                            skipInfiniteWaitTests
-                        };
+                    yield return new object[]
+                    {
+                        toSignal[signalIndex],
+                        toWaitOn,
+                        callSignalAndWait[callIndex],
+                        skipInfiniteWaitTests,
+                    };
                 }
             }
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34366", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34366",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(SignalAndWait_MemberData))]
         public static void SignalAndWait(
             WaitHandle toSignal,
             AutoResetEvent toWaitOn,
             Func<WaitHandle, WaitHandle, bool> callSignalAndWait,
-            bool skipInfiniteWaitTests)
+            bool skipInfiniteWaitTests
+        )
         {
             // Verify that signaling is done, and the wait succeeds
             Unsignal(toSignal);
@@ -364,7 +467,8 @@ namespace System.Threading.Tests
             else
             {
                 Assert.True(toSignal is Semaphore);
-                Assert.Throws<InvalidOperationException>(() => callSignalAndWait(toSignal, toWaitOn));
+                Assert.Throws<InvalidOperationException>(() => callSignalAndWait(toSignal, toWaitOn)
+                );
                 Assert.True(toWaitOn.WaitOne(0));
             }
         }
@@ -380,16 +484,22 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentNullException>(() => WaitHandle.SignalAndWait(toSignal, null));
             Assert.False(toSignal.WaitOne(0));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => WaitHandle.SignalAndWait(toSignal, toWaitOn, -2, false));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                WaitHandle.SignalAndWait(toSignal, toWaitOn, -2, false)
+            );
             Assert.False(toSignal.WaitOne(0));
             Assert.True(WaitHandle.SignalAndWait(toSignal, toWaitOn, -1, false));
             Assert.True(toSignal.WaitOne(0));
             toSignal.Reset();
 
             var invalidWh = new TestWaitHandle();
-            Assert.Throws<ObjectDisposedException>(() => WaitHandle.SignalAndWait(invalidWh, toWaitOn));
+            Assert.Throws<ObjectDisposedException>(() =>
+                WaitHandle.SignalAndWait(invalidWh, toWaitOn)
+            );
             Assert.False(toSignal.WaitOne(0));
-            Assert.Throws<ObjectDisposedException>(() => WaitHandle.SignalAndWait(toSignal, invalidWh));
+            Assert.Throws<ObjectDisposedException>(() =>
+                WaitHandle.SignalAndWait(toSignal, invalidWh)
+            );
             Assert.False(toSignal.WaitOne(0));
         }
 

@@ -21,8 +21,12 @@ internal static class ExpressionFormatter
 
     private delegate void CapturedValueFormatter(object closure, ref ReverseStringBuilder builder);
 
-    private static readonly ConcurrentDictionary<MemberInfo, CapturedValueFormatter> s_capturedValueFormatterCache = new();
-    private static readonly ConcurrentDictionary<MethodInfo, MethodInfoData> s_methodInfoDataCache = new();
+    private static readonly ConcurrentDictionary<
+        MemberInfo,
+        CapturedValueFormatter
+    > s_capturedValueFormatterCache = new();
+    private static readonly ConcurrentDictionary<MethodInfo, MethodInfoData> s_methodInfoDataCache =
+        new();
 
     public static void ClearCache()
     {
@@ -74,7 +78,7 @@ internal static class ExpressionFormatter
                     builder.InsertFront("]");
                     FormatIndexArgument(methodCallExpression.Arguments[0], ref builder);
                     builder.InsertFront("[");
-                    
+
                     break;
 
                 case ExpressionType.ArrayIndex:
@@ -112,7 +116,9 @@ internal static class ExpressionFormatter
                     wasLastExpressionMemberAccess = true;
                     wasLastExpressionIndexer = false;
 
-                    var name = memberExpression.Member.GetCustomAttribute<DataMemberAttribute>()?.Name ?? memberExpression.Member.Name;
+                    var name =
+                        memberExpression.Member.GetCustomAttribute<DataMemberAttribute>()?.Name
+                        ?? memberExpression.Member.Name;
                     builder.InsertFront(name);
 
                     break;
@@ -142,7 +148,10 @@ internal static class ExpressionFormatter
 
     internal static bool IsSingleArgumentIndexer(Expression expression)
     {
-        if (expression is not MethodCallExpression methodExpression || methodExpression.Arguments.Count != 1)
+        if (
+            expression is not MethodCallExpression methodExpression
+            || methodExpression.Arguments.Count != 1
+        )
         {
             return false;
         }
@@ -161,7 +170,11 @@ internal static class ExpressionFormatter
 
         return methodInfoData;
 
-        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The relevant members should be preserved since they were referenced in a LINQ expression")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2072",
+            Justification = "The relevant members should be preserved since they were referenced in a LINQ expression"
+        )]
         static MethodInfoData GetMethodInfoData(MethodInfo methodInfo)
         {
             var declaringType = methodInfo.DeclaringType;
@@ -172,7 +185,9 @@ internal static class ExpressionFormatter
 
             // Check whether GetDefaultMembers() (if present in CoreCLR) would return a member of this type. Compiler
             // names the indexer property, if any, in a generated [DefaultMember] attribute for the containing type.
-            var defaultMember = declaringType.GetCustomAttribute<DefaultMemberAttribute>(inherit: true);
+            var defaultMember = declaringType.GetCustomAttribute<DefaultMemberAttribute>(
+                inherit: true
+            );
             if (defaultMember is null)
             {
                 return new(isSingleArgumentIndexer: false);
@@ -187,8 +202,10 @@ internal static class ExpressionFormatter
 
             foreach (var property in runtimeProperties)
             {
-                if (string.Equals(defaultMember.MemberName, property.Name, StringComparison.Ordinal) &&
-                    property.GetMethod == methodInfo)
+                if (
+                    string.Equals(defaultMember.MemberName, property.Name, StringComparison.Ordinal)
+                    && property.GetMethod == methodInfo
+                )
                 {
                     return new(isSingleArgumentIndexer: true);
                 }
@@ -200,23 +217,26 @@ internal static class ExpressionFormatter
 
     private static void FormatIndexArgument(
         Expression indexExpression,
-        ref ReverseStringBuilder builder)
+        ref ReverseStringBuilder builder
+    )
     {
         switch (indexExpression)
         {
-            case MemberExpression memberExpression when memberExpression.Expression is ConstantExpression constantExpression:
+            case MemberExpression memberExpression
+                when memberExpression.Expression is ConstantExpression constantExpression:
                 FormatCapturedValue(memberExpression, constantExpression, ref builder);
                 break;
             case ConstantExpression constantExpression:
                 FormatConstantValue(constantExpression, ref builder);
                 break;
             default:
-                throw new InvalidOperationException($"Unable to evaluate index expressions of type '{indexExpression.GetType().Name}'.");
+                throw new InvalidOperationException(
+                    $"Unable to evaluate index expressions of type '{indexExpression.GetType().Name}'."
+                );
         }
     }
 
-    internal static string FormatIndexArgument(
-        Expression indexExpression)
+    internal static string FormatIndexArgument(Expression indexExpression)
     {
         var builder = new ReverseStringBuilder(stackalloc char[StackAllocBufferSize]);
         try
@@ -231,7 +251,11 @@ internal static class ExpressionFormatter
         }
     }
 
-    private static void FormatCapturedValue(MemberExpression memberExpression, ConstantExpression constantExpression, ref ReverseStringBuilder builder)
+    private static void FormatCapturedValue(
+        MemberExpression memberExpression,
+        ConstantExpression constantExpression,
+        ref ReverseStringBuilder builder
+    )
     {
         var member = memberExpression.Member;
         if (!s_capturedValueFormatterCache.TryGetValue(member, out var format))
@@ -243,46 +267,65 @@ internal static class ExpressionFormatter
         format(constantExpression.Value!, ref builder);
     }
 
-    private static CapturedValueFormatter CreateCapturedValueFormatter(MemberExpression memberExpression)
+    private static CapturedValueFormatter CreateCapturedValueFormatter(
+        MemberExpression memberExpression
+    )
     {
         var memberType = memberExpression.Type;
 
         if (memberType == typeof(int))
         {
             var func = CompileMemberEvaluator<int>(memberExpression);
-            return (object closure, ref ReverseStringBuilder builder) => builder.InsertFront(func.Invoke(closure));
+            return (object closure, ref ReverseStringBuilder builder) =>
+                builder.InsertFront(func.Invoke(closure));
         }
         else if (memberType == typeof(string))
         {
             var func = CompileMemberEvaluator<string>(memberExpression);
-            return (object closure, ref ReverseStringBuilder builder) => builder.InsertFront(func.Invoke(closure));
+            return (object closure, ref ReverseStringBuilder builder) =>
+                builder.InsertFront(func.Invoke(closure));
         }
         else if (typeof(ISpanFormattable).IsAssignableFrom(memberType))
         {
             var func = CompileMemberEvaluator<ISpanFormattable>(memberExpression);
-            return (object closure, ref ReverseStringBuilder builder) => builder.InsertFront(func.Invoke(closure));
+            return (object closure, ref ReverseStringBuilder builder) =>
+                builder.InsertFront(func.Invoke(closure));
         }
         else if (typeof(IFormattable).IsAssignableFrom(memberType))
         {
             var func = CompileMemberEvaluator<IFormattable>(memberExpression);
-            return (object closure, ref ReverseStringBuilder builder) => builder.InsertFront(func.Invoke(closure));
+            return (object closure, ref ReverseStringBuilder builder) =>
+                builder.InsertFront(func.Invoke(closure));
         }
         else
         {
-            throw new InvalidOperationException($"Cannot format an index argument of type '{memberType}'.");
+            throw new InvalidOperationException(
+                $"Cannot format an index argument of type '{memberType}'."
+            );
         }
 
-        static Func<object, TResult> CompileMemberEvaluator<TResult>(MemberExpression memberExpression)
+        static Func<object, TResult> CompileMemberEvaluator<TResult>(
+            MemberExpression memberExpression
+        )
         {
             var parameterExpression = Expression.Parameter(typeof(object));
-            var convertExpression = Expression.Convert(parameterExpression, memberExpression.Member.DeclaringType!);
+            var convertExpression = Expression.Convert(
+                parameterExpression,
+                memberExpression.Member.DeclaringType!
+            );
             var replacedMemberExpression = memberExpression.Update(convertExpression);
-            var replacedExpression = Expression.Lambda<Func<object, TResult>>(replacedMemberExpression, parameterExpression);
+            var replacedExpression = Expression.Lambda<Func<object, TResult>>(
+                replacedMemberExpression,
+                parameterExpression
+            );
             return replacedExpression.Compile();
         }
     }
 
-    private static void FormatConstantValue(ConstantExpression constantExpression, ref ReverseStringBuilder builder)
+    private static void FormatConstantValue(
+        ConstantExpression constantExpression,
+        ref ReverseStringBuilder builder
+    )
     {
         switch (constantExpression.Value)
         {
@@ -300,7 +343,9 @@ internal static class ExpressionFormatter
                 builder.InsertFront("null");
                 break;
             case var x:
-                throw new InvalidOperationException($"Unable to format constant values of type '{x.GetType()}'.");
+                throw new InvalidOperationException(
+                    $"Unable to format constant values of type '{x.GetType()}'."
+                );
         }
     }
 

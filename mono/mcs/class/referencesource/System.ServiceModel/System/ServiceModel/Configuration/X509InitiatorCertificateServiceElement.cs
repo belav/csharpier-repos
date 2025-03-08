@@ -5,36 +5,44 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Security.Cryptography.X509Certificates;
 
     public sealed partial class X509InitiatorCertificateServiceElement : ConfigurationElement
     {
-        public X509InitiatorCertificateServiceElement()
-        {
-        }
+        public X509InitiatorCertificateServiceElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.Certificate)]
         public X509ClientCertificateCredentialsElement Certificate
         {
-            get { return (X509ClientCertificateCredentialsElement)base[ConfigurationStrings.Certificate]; }
+            get
+            {
+                return (X509ClientCertificateCredentialsElement)
+                    base[ConfigurationStrings.Certificate];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Authentication)]
         public X509ClientCertificateAuthenticationElement Authentication
         {
-            get { return (X509ClientCertificateAuthenticationElement)base[ConfigurationStrings.Authentication]; }
+            get
+            {
+                return (X509ClientCertificateAuthenticationElement)
+                    base[ConfigurationStrings.Authentication];
+            }
         }
 
         public void Copy(X509InitiatorCertificateServiceElement from)
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -52,17 +60,20 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("cert");
             }
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.Authentication].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.Authentication].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.Authentication.ApplyConfiguration(cert.Authentication);
             }
-            if (propertyInfo[ConfigurationStrings.Certificate].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.Certificate].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.Certificate.ApplyConfiguration(cert);
             }
         }
     }
 }
-
-
-

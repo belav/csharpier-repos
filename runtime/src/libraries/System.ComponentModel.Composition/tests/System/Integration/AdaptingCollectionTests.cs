@@ -13,31 +13,27 @@ namespace System.ComponentModel.Composition
     public class FilteringCollection<T, M> : AdaptingCollection<T, M>
     {
         public FilteringCollection(Func<Lazy<T, M>, bool> filter)
-            : base(e => e.Where(filter))
-        {
-        }
+            : base(e => e.Where(filter)) { }
     }
 
     public class OrderingCollection<T, M> : AdaptingCollection<T, M>
     {
         public OrderingCollection(Func<Lazy<T, M>, object> keySelector)
-            : this(keySelector, false)
-        {
-        }
+            : this(keySelector, false) { }
 
         public OrderingCollection(Func<Lazy<T, M>, object> keySelector, bool descending)
-            : base(e => descending ? e.OrderByDescending(keySelector) : e.OrderBy(keySelector))
-        {
-        }
+            : base(e => descending ? e.OrderByDescending(keySelector) : e.OrderBy(keySelector)) { }
     }
 
     public class AdaptingCollection<T> : AdaptingCollection<T, IDictionary<string, object>>
     {
-        public AdaptingCollection(Func<IEnumerable<Lazy<T, IDictionary<string, object>>>,
-                                       IEnumerable<Lazy<T, IDictionary<string, object>>>> adaptor)
-            : base(adaptor)
-        {
-        }
+        public AdaptingCollection(
+            Func<
+                IEnumerable<Lazy<T, IDictionary<string, object>>>,
+                IEnumerable<Lazy<T, IDictionary<string, object>>>
+            > adaptor
+        )
+            : base(adaptor) { }
     }
 
     public class AdaptingCollection<T, M> : ICollection<Lazy<T, M>>, INotifyCollectionChanged
@@ -46,9 +42,8 @@ namespace System.ComponentModel.Composition
         private readonly Func<IEnumerable<Lazy<T, M>>, IEnumerable<Lazy<T, M>>> _adaptor = null;
         private List<Lazy<T, M>> _adaptedItems = null;
 
-        public AdaptingCollection() : this(null)
-        {
-        }
+        public AdaptingCollection()
+            : this(null) { }
 
         public AdaptingCollection(Func<IEnumerable<Lazy<T, M>>, IEnumerable<Lazy<T, M>>> adaptor)
         {
@@ -62,7 +57,9 @@ namespace System.ComponentModel.Composition
             if (this._adaptedItems != null)
             {
                 this._adaptedItems = null;
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                this.OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+                );
             }
         }
 
@@ -157,6 +154,7 @@ namespace System.ComponentModel.Composition
     public class AdaptingCollectionTests
     {
         public interface IContract { }
+
         public interface INetworkAwareMetadata
         {
             [DefaultValue(false)]
@@ -175,9 +173,12 @@ namespace System.ComponentModel.Composition
             public FilterExports()
             {
                 this.OnlineOnly = new AdaptingCollection<IContract, INetworkAwareMetadata>(e =>
-                    e.Where(p => p.Metadata.RequiresOnline));
+                    e.Where(p => p.Metadata.RequiresOnline)
+                );
 
-                this.OnlineOnly2 = new FilteringCollection<IContract, INetworkAwareMetadata>(p => p.Metadata.RequiresOnline);
+                this.OnlineOnly2 = new FilteringCollection<IContract, INetworkAwareMetadata>(p =>
+                    p.Metadata.RequiresOnline
+                );
             }
 
             [ImportMany]
@@ -190,7 +191,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TestFilteringImports()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(NetworkExport), typeof(NonNetworkExport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(NetworkExport),
+                typeof(NonNetworkExport)
+            );
 
             var filterExports = new FilterExports();
             container.ComposeParts(filterExports);
@@ -221,9 +225,12 @@ namespace System.ComponentModel.Composition
             public OrderExportsByMetadata()
             {
                 this.OrderedItems = new AdaptingCollection<IContract, IOrderMetadata>(e =>
-                    e.OrderBy(p => p.Metadata.Order));
+                    e.OrderBy(p => p.Metadata.Order)
+                );
 
-                this.OrderedItems2 = new OrderingCollection<IContract, IOrderMetadata>(p => p.Metadata.Order);
+                this.OrderedItems2 = new OrderingCollection<IContract, IOrderMetadata>(p =>
+                    p.Metadata.Order
+                );
             }
 
             [ImportMany]
@@ -236,7 +243,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TestOrderingImportsByMetadata()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(BExport), typeof(AExport), typeof(CExport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(BExport),
+                typeof(AExport),
+                typeof(CExport)
+            );
             var orderExports = new OrderExportsByMetadata();
 
             container.ComposeParts(orderExports);
@@ -257,12 +268,14 @@ namespace System.ComponentModel.Composition
                 if (descending)
                 {
                     this.OrderedItems = new AdaptingCollection<IContract>(e =>
-                        e.OrderByDescending(p => p.Value.GetType().FullName));
+                        e.OrderByDescending(p => p.Value.GetType().FullName)
+                    );
                 }
                 else
                 {
                     this.OrderedItems = new AdaptingCollection<IContract>(e =>
-                        e.OrderBy(p => p.Value.GetType().FullName));
+                        e.OrderBy(p => p.Value.GetType().FullName)
+                    );
                 }
             }
 
@@ -273,7 +286,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TestOrderingImportsByTypeName()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(BExport), typeof(AExport), typeof(CExport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(BExport),
+                typeof(AExport),
+                typeof(CExport)
+            );
             var orderExports = new OrderExportsByName(false);
 
             container.ComposeParts(orderExports);
@@ -308,11 +325,10 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Dynamic", false)]
         public class NonDynamic1 : IContract { }
 
-        public class DynamicFilteredCollection<T, M> : AdaptingCollection<T, M> where M : IDynamicFilteredMetadata
+        public class DynamicFilteredCollection<T, M> : AdaptingCollection<T, M>
+            where M : IDynamicFilteredMetadata
         {
-            public DynamicFilteredCollection()
-            {
-            }
+            public DynamicFilteredCollection() { }
 
             private bool _includeDynamic = false;
             public bool IncludeDynamic
@@ -338,13 +354,20 @@ namespace System.ComponentModel.Composition
         public class DynamicExports
         {
             [ImportMany]
-            public DynamicFilteredCollection<IContract, IDynamicFilteredMetadata> DynamicCollection { get; set; }
+            public DynamicFilteredCollection<
+                IContract,
+                IDynamicFilteredMetadata
+            > DynamicCollection { get; set; }
         }
 
         [Fact]
         public void TestDyamicallyFilteringImports()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Dynamic1), typeof(Dynamic2), typeof(NonDynamic1));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(Dynamic1),
+                typeof(Dynamic2),
+                typeof(NonDynamic1)
+            );
             var dynamicExports = new DynamicExports();
 
             container.ComposeParts(dynamicExports);
@@ -360,8 +383,10 @@ namespace System.ComponentModel.Composition
         {
             public DynamicExportsNoSubType()
             {
-                this.DynamicCollection = new AdaptingCollection<IContract, IDynamicFilteredMetadata>(e =>
-                    e.Where(p => !p.Metadata.Dynamic || this.IncludeDynamic));
+                this.DynamicCollection = new AdaptingCollection<
+                    IContract,
+                    IDynamicFilteredMetadata
+                >(e => e.Where(p => !p.Metadata.Dynamic || this.IncludeDynamic));
             }
 
             private bool _includeDynamic = false;
@@ -380,13 +405,20 @@ namespace System.ComponentModel.Composition
             }
 
             [ImportMany]
-            public AdaptingCollection<IContract, IDynamicFilteredMetadata> DynamicCollection { get; set; }
+            public AdaptingCollection<
+                IContract,
+                IDynamicFilteredMetadata
+            > DynamicCollection { get; set; }
         }
 
         [Fact]
         public void TestDyamicallyFilteringNoSubTypeImports()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Dynamic1), typeof(Dynamic2), typeof(NonDynamic1));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(Dynamic1),
+                typeof(Dynamic2),
+                typeof(NonDynamic1)
+            );
             var dynamicExports = new DynamicExportsNoSubType();
 
             container.ComposeParts(dynamicExports);

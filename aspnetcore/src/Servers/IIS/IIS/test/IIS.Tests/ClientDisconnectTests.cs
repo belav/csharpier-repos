@@ -5,8 +5,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
-using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
@@ -14,7 +14,11 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 [SkipIfHostableWebCoreNotAvailable]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class ClientDisconnectTests : StrictTestServerTests
 {
@@ -26,30 +30,38 @@ public class ClientDisconnectTests : StrictTestServerTests
         var requestAborted = CreateTaskCompletionSource();
 
         var data = new byte[1024];
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                requestStartedCompletionSource.SetResult(true);
-                ctx.RequestAborted.Register(() => requestAborted.SetResult(true));
-
-                await requestAborted.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
-                for (var i = 0; i < 1000; i++)
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
                 {
-                    await ctx.Response.Body.WriteAsync(data);
-                }
+                    requestStartedCompletionSource.SetResult(true);
+                    ctx.RequestAborted.Register(() => requestAborted.SetResult(true));
 
-                requestCompletedCompletionSource.SetResult(true);
-            }, LoggerFactory))
+                    await requestAborted.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                    for (var i = 0; i < 1000; i++)
+                    {
+                        await ctx.Response.Body.WriteAsync(data);
+                    }
+
+                    requestCompletedCompletionSource.SetResult(true);
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
-                await requestStartedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestStartedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
             }
 
             await requestAborted.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
-            await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+            await requestCompletedCompletionSource.Task.TimeoutAfter(
+                TimeoutExtensions.DefaultTimeoutValue
+            );
         }
 
         AssertConnectionDisconnectLog();
@@ -64,33 +76,42 @@ public class ClientDisconnectTests : StrictTestServerTests
         Exception exception = null;
 
         var data = new byte[1];
-        using (var testServer = await TestServer.Create(async ctx =>
-        {
-            requestStartedCompletionSource.SetResult(true);
-            try
-            {
-                while (true)
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
                 {
-                    await ctx.Response.Body.WriteAsync(data, ctx.RequestAborted);
-                    await Task.Delay(10); // Small delay to not constantly call WriteAsync.
-                }
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
+                    requestStartedCompletionSource.SetResult(true);
+                    try
+                    {
+                        while (true)
+                        {
+                            await ctx.Response.Body.WriteAsync(data, ctx.RequestAborted);
+                            await Task.Delay(10); // Small delay to not constantly call WriteAsync.
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        exception = e;
+                    }
 
-            requestCompletedCompletionSource.SetResult(true);
-        }, LoggerFactory))
+                    requestCompletedCompletionSource.SetResult(true);
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
 
-                await requestStartedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestStartedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
             }
 
-            await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+            await requestCompletedCompletionSource.Task.TimeoutAfter(
+                TimeoutExtensions.DefaultTimeoutValue
+            );
 
             Assert.IsType<OperationCanceledException>(exception);
         }
@@ -107,28 +128,37 @@ public class ClientDisconnectTests : StrictTestServerTests
         Exception exception = null;
 
         var data = new byte[1024];
-        using (var testServer = await TestServer.Create(async ctx =>
-        {
-            requestStartedCompletionSource.SetResult(true);
-            try
-            {
-                await ctx.Request.Body.ReadAsync(data);
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    requestStartedCompletionSource.SetResult(true);
+                    try
+                    {
+                        await ctx.Request.Body.ReadAsync(data);
+                    }
+                    catch (Exception e)
+                    {
+                        exception = e;
+                    }
 
-            requestCompletedCompletionSource.SetResult(true);
-        }, LoggerFactory))
+                    requestCompletedCompletionSource.SetResult(true);
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
-                await requestStartedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestStartedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
             }
 
-            await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+            await requestCompletedCompletionSource.Task.TimeoutAfter(
+                TimeoutExtensions.DefaultTimeoutValue
+            );
         }
 
         Assert.IsType<ConnectionResetException>(exception);
@@ -147,31 +177,40 @@ public class ClientDisconnectTests : StrictTestServerTests
         var cancellationTokenSource = new CancellationTokenSource();
 
         var data = new byte[1];
-        using (var testServer = await TestServer.Create(async ctx =>
-        {
-            requestStartedCompletionSource.SetResult(true);
-            try
-            {
-                while (true)
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
                 {
-                    await ctx.Response.Body.WriteAsync(data, cancellationTokenSource.Token);
-                }
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
+                    requestStartedCompletionSource.SetResult(true);
+                    try
+                    {
+                        while (true)
+                        {
+                            await ctx.Response.Body.WriteAsync(data, cancellationTokenSource.Token);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        exception = e;
+                    }
 
-            requestCompletedCompletionSource.SetResult(true);
-        }, LoggerFactory))
+                    requestCompletedCompletionSource.SetResult(true);
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
 
-                await requestStartedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestStartedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
                 cancellationTokenSource.Cancel();
-                await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestCompletedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
             }
 
             Assert.IsType<OperationCanceledException>(exception);
@@ -189,28 +228,37 @@ public class ClientDisconnectTests : StrictTestServerTests
         var cancellationTokenSource = new CancellationTokenSource();
 
         var data = new byte[1024];
-        using (var testServer = await TestServer.Create(async ctx =>
-        {
-            try
-            {
-                var task = ctx.Request.Body.ReadAsync(data, cancellationTokenSource.Token);
-                readIsAsyncCompletionSource.SetResult(true);
-                await task;
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    try
+                    {
+                        var task = ctx.Request.Body.ReadAsync(data, cancellationTokenSource.Token);
+                        readIsAsyncCompletionSource.SetResult(true);
+                        await task;
+                    }
+                    catch (Exception e)
+                    {
+                        exception = e;
+                    }
 
-            requestCompletedCompletionSource.SetResult(true);
-        }, LoggerFactory))
+                    requestCompletedCompletionSource.SetResult(true);
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
-                await readIsAsyncCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await readIsAsyncCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
                 cancellationTokenSource.Cancel();
-                await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestCompletedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
             }
 
             try
@@ -234,19 +282,24 @@ public class ClientDisconnectTests : StrictTestServerTests
         Exception exception = null;
 
         var data = new byte[1024];
-        using (var testServer = await TestServer.Create(async ctx =>
-        {
-            requestStartedCompletionSource.SetResult(true);
-            try
-            {
-                await ctx.Request.Body.ReadAsync(data);
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
-            requestCompletedCompletionSource.SetResult(true);
-        }, LoggerFactory))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    requestStartedCompletionSource.SetResult(true);
+                    try
+                    {
+                        await ctx.Request.Body.ReadAsync(data);
+                    }
+                    catch (Exception e)
+                    {
+                        exception = e;
+                    }
+                    requestCompletedCompletionSource.SetResult(true);
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -256,19 +309,17 @@ public class ClientDisconnectTests : StrictTestServerTests
                     "Host: localhost",
                     "Connection: close",
                     "",
-                    "");
+                    ""
+                );
 
                 await requestStartedCompletionSource.Task;
-                await connection.Send(
-                    "ZZZZZZZZZZZZZ");
+                await connection.Send("ZZZZZZZZZZZZZ");
 
-                await connection.Receive(
-                    "HTTP/1.1 400 Bad Request",
-                    ""
-                    );
-
+                await connection.Receive("HTTP/1.1 400 Bad Request", "");
             }
-            await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+            await requestCompletedCompletionSource.Task.TimeoutAfter(
+                TimeoutExtensions.DefaultTimeoutValue
+            );
         }
 
         Assert.IsType<ConnectionResetException>(exception);
@@ -287,31 +338,33 @@ public class ClientDisconnectTests : StrictTestServerTests
             var requestCompletedCompletionSource = CreateTaskCompletionSource();
 
             var data = new byte[1024];
-            using (var testServer = await TestServer.Create(async ctx =>
-            {
-                var task = ctx.Request.Body.ReadAsync(data);
-                Assert.True(!task.IsCompleted);
-                requestStartedCompletionSource.SetResult(true);
-                await task;
+            using (
+                var testServer = await TestServer.Create(
+                    async ctx =>
+                    {
+                        var task = ctx.Request.Body.ReadAsync(data);
+                        Assert.True(!task.IsCompleted);
+                        requestStartedCompletionSource.SetResult(true);
+                        await task;
 
-                requestCompletedCompletionSource.SetResult(true);
-            }, LoggerFactory))
+                        requestCompletedCompletionSource.SetResult(true);
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
 
                     await requestStartedCompletionSource.Task;
-                    await connection.Send(
-                        "a");
+                    await connection.Send("a");
 
-                    await connection.Receive(
-                        "HTTP/1.1 200 OK",
-                        ""
-                        );
-
+                    await connection.Receive("HTTP/1.1 200 OK", "");
                 }
-                await requestCompletedCompletionSource.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                await requestCompletedCompletionSource.Task.TimeoutAfter(
+                    TimeoutExtensions.DefaultTimeoutValue
+                );
             }
         }
     }
@@ -322,13 +375,17 @@ public class ClientDisconnectTests : StrictTestServerTests
         var requestStarted = CreateTaskCompletionSource();
         var requestAborted = CreateTaskCompletionSource();
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                ctx.RequestAborted.Register(() => requestAborted.SetResult(true));
-                requestStarted.SetResult(true);
-                await requestAborted.Task;
-            }, LoggerFactory))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    ctx.RequestAborted.Register(() => requestAborted.SetResult(true));
+                    requestStarted.SetResult(true);
+                    await requestAborted.Task;
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -354,6 +411,7 @@ public class ClientDisconnectTests : StrictTestServerTests
             "Host: localhost",
             "Connection: close",
             "",
-            "");
+            ""
+        );
     }
 }

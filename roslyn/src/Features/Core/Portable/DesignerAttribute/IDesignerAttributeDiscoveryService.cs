@@ -13,10 +13,18 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
     {
         public interface ICallback
         {
-            ValueTask ReportDesignerAttributeDataAsync(ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken);
+            ValueTask ReportDesignerAttributeDataAsync(
+                ImmutableArray<DesignerAttributeData> data,
+                CancellationToken cancellationToken
+            );
         }
 
         ValueTask ProcessSolutionAsync(
-            Solution solution, DocumentId? priorityDocumentId, bool useFrozenSnapshots, ICallback callback, CancellationToken cancellationToken);
+            Solution solution,
+            DocumentId? priorityDocumentId,
+            bool useFrozenSnapshots,
+            ICallback callback,
+            CancellationToken cancellationToken
+        );
     }
 }

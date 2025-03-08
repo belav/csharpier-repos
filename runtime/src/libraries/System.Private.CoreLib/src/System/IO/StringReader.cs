@@ -298,9 +298,13 @@ namespace System.IO
             return Task.FromResult(ReadBlock(buffer, index, count));
         }
 
-        public override ValueTask<int> ReadBlockAsync(Memory<char> buffer, CancellationToken cancellationToken = default) =>
-            cancellationToken.IsCancellationRequested ? ValueTask.FromCanceled<int>(cancellationToken) :
-            new ValueTask<int>(ReadBlock(buffer.Span));
+        public override ValueTask<int> ReadBlockAsync(
+            Memory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<int>(cancellationToken)
+                : new ValueTask<int>(ReadBlock(buffer.Span));
 
         public override Task<int> ReadAsync(char[] buffer, int index, int count)
         {
@@ -316,9 +320,13 @@ namespace System.IO
             return Task.FromResult(Read(buffer, index, count));
         }
 
-        public override ValueTask<int> ReadAsync(Memory<char> buffer, CancellationToken cancellationToken = default) =>
-            cancellationToken.IsCancellationRequested ? ValueTask.FromCanceled<int>(cancellationToken) :
-            new ValueTask<int>(Read(buffer.Span));
+        public override ValueTask<int> ReadAsync(
+            Memory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<int>(cancellationToken)
+                : new ValueTask<int>(Read(buffer.Span));
         #endregion
 
         [DoesNotReturn]

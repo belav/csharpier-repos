@@ -11,9 +11,8 @@ public class InteractiveAutoRenderMode : IComponentRenderMode
     /// <summary>
     /// Constructs an instance of <see cref="InteractiveAutoRenderMode"/>.
     /// </summary>
-    public InteractiveAutoRenderMode() : this(true)
-    {
-    }
+    public InteractiveAutoRenderMode()
+        : this(true) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="InteractiveAutoRenderMode"/>

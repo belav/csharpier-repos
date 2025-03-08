@@ -46,11 +46,26 @@ namespace System.Collections.Specialized.Tests
 
             Assert.Throws<ArgumentNullException>(() => stringDictionary.CopyTo(null, 0));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => stringDictionary.CopyTo(new string[count], -1));
-            AssertExtensions.Throws<ArgumentException>(null, () => stringDictionary.CopyTo(new string[count], count / 2 + 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => stringDictionary.CopyTo(new string[count], count));
-            AssertExtensions.Throws<ArgumentException>(null, () => stringDictionary.CopyTo(new string[count], count + 1));
-            AssertExtensions.Throws<ArgumentException>("array", null, () => stringDictionary.CopyTo(new string[count, count], 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                stringDictionary.CopyTo(new string[count], -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => stringDictionary.CopyTo(new string[count], count / 2 + 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => stringDictionary.CopyTo(new string[count], count)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => stringDictionary.CopyTo(new string[count], count + 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                null,
+                () => stringDictionary.CopyTo(new string[count, count], 0)
+            );
         }
     }
 }

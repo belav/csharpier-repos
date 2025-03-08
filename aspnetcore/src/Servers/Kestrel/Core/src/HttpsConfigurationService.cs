@@ -24,7 +24,11 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
     private bool _isInitialized;
 
     private TlsConfigurationLoader? _tlsConfigurationLoader;
-    private Action<FeatureCollection, ListenOptions, ILogger<HttpsConnectionMiddleware>>? _populateMultiplexedTransportFeatures;
+    private Action<
+        FeatureCollection,
+        ListenOptions,
+        ILogger<HttpsConnectionMiddleware>
+    >? _populateMultiplexedTransportFeatures;
     private Func<ListenOptions, ListenOptions>? _useHttpsWithDefaults;
 
     private ILogger<HttpsConnectionMiddleware>? _httpsLogger;
@@ -33,9 +37,7 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
     /// Create an uninitialized <see cref="HttpsConfigurationService"/>.
     /// To initialize it later, call <see cref="Initialize"/>.
     /// </summary>
-    public HttpsConfigurationService()
-    {
-    }
+    public HttpsConfigurationService() { }
 
     /// <summary>
     /// Create an initialized <see cref="HttpsConfigurationService"/>.
@@ -57,7 +59,8 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
     public void Initialize(
         IHostEnvironment hostEnvironment,
         ILogger<KestrelServer> serverLogger,
-        ILogger<HttpsConnectionMiddleware> httpsLogger)
+        ILogger<HttpsConnectionMiddleware> httpsLogger
+    )
     {
         if (_isInitialized)
         {
@@ -66,7 +69,11 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
 
         _isInitialized = true;
 
-        _tlsConfigurationLoader = new TlsConfigurationLoader(hostEnvironment, serverLogger, httpsLogger);
+        _tlsConfigurationLoader = new TlsConfigurationLoader(
+            hostEnvironment,
+            serverLogger,
+            httpsLogger
+        );
         _populateMultiplexedTransportFeatures = PopulateMultiplexedTransportFeaturesWorker;
         _useHttpsWithDefaults = UseHttpsWithDefaultsWorker;
         _httpsLogger = httpsLogger;
@@ -78,14 +85,25 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
         EndpointConfig endpoint,
         KestrelServerOptions serverOptions,
         CertificateConfig? defaultCertificateConfig,
-        ConfigurationReader configurationReader)
+        ConfigurationReader configurationReader
+    )
     {
         EnsureInitialized(CoreStrings.NeedHttpsConfigurationToApplyHttpsConfiguration);
-        _tlsConfigurationLoader.ApplyHttpsConfiguration(httpsOptions, endpoint, serverOptions, defaultCertificateConfig, configurationReader);
+        _tlsConfigurationLoader.ApplyHttpsConfiguration(
+            httpsOptions,
+            endpoint,
+            serverOptions,
+            defaultCertificateConfig,
+            configurationReader
+        );
     }
 
     /// <inheritdoc/>
-    public ListenOptions UseHttpsWithSni(ListenOptions listenOptions, HttpsConnectionAdapterOptions httpsOptions, EndpointConfig endpoint)
+    public ListenOptions UseHttpsWithSni(
+        ListenOptions listenOptions,
+        HttpsConnectionAdapterOptions httpsOptions,
+        EndpointConfig endpoint
+    )
     {
         // This doesn't get a distinct string since it won't actually throw - it's always called after ApplyHttpsConfiguration
         EnsureInitialized(CoreStrings.NeedHttpsConfigurationToApplyHttpsConfiguration);
@@ -100,7 +118,10 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
     }
 
     /// <inheritdoc/>
-    public void PopulateMultiplexedTransportFeatures(FeatureCollection features, ListenOptions listenOptions)
+    public void PopulateMultiplexedTransportFeatures(
+        FeatureCollection features,
+        ListenOptions listenOptions
+    )
     {
         EnsureInitialized(CoreStrings.NeedHttpsConfigurationToUseHttp3);
         _populateMultiplexedTransportFeatures.Invoke(features, listenOptions, _httpsLogger);
@@ -117,7 +138,12 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
     /// If this instance has not been initialized, initialize it if possible and throw otherwise.
     /// </summary>
     /// <exception cref="InvalidOperationException">If initialization is not possible.</exception>
-    [MemberNotNull(nameof(_useHttpsWithDefaults), nameof(_tlsConfigurationLoader), nameof(_populateMultiplexedTransportFeatures), nameof(_httpsLogger))]
+    [MemberNotNull(
+        nameof(_useHttpsWithDefaults),
+        nameof(_tlsConfigurationLoader),
+        nameof(_populateMultiplexedTransportFeatures),
+        nameof(_httpsLogger)
+    )]
     private void EnsureInitialized(string uninitializedError)
     {
         if (!_isInitialized)
@@ -141,37 +167,56 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
     /// <summary>
     /// The initialized implementation of <see cref="PopulateMultiplexedTransportFeatures"/>.
     /// </summary>
-    internal static void PopulateMultiplexedTransportFeaturesWorker(FeatureCollection features, ListenOptions listenOptions, ILogger<HttpsConnectionMiddleware> logger)
+    internal static void PopulateMultiplexedTransportFeaturesWorker(
+        FeatureCollection features,
+        ListenOptions listenOptions,
+        ILogger<HttpsConnectionMiddleware> logger
+    )
     {
         // HttpsOptions or HttpsCallbackOptions should always be set in production, but it's not set for InMemory tests.
         // The QUIC transport will check if TlsConnectionCallbackOptions is missing.
         if (listenOptions.HttpsOptions != null)
         {
-            var sslServerAuthenticationOptions = HttpsConnectionMiddleware.CreateHttp3Options(listenOptions.HttpsOptions, logger);
-            features.Set(new TlsConnectionCallbackOptions
-            {
-                ApplicationProtocols = sslServerAuthenticationOptions.ApplicationProtocols ?? new List<SslApplicationProtocol> { SslApplicationProtocol.Http3 },
-                OnConnection = (context, cancellationToken) => ValueTask.FromResult(sslServerAuthenticationOptions),
-                OnConnectionState = null,
-            });
+            var sslServerAuthenticationOptions = HttpsConnectionMiddleware.CreateHttp3Options(
+                listenOptions.HttpsOptions,
+                logger
+            );
+            features.Set(
+                new TlsConnectionCallbackOptions
+                {
+                    ApplicationProtocols =
+                        sslServerAuthenticationOptions.ApplicationProtocols
+                        ?? new List<SslApplicationProtocol> { SslApplicationProtocol.Http3 },
+                    OnConnection = (context, cancellationToken) =>
+                        ValueTask.FromResult(sslServerAuthenticationOptions),
+                    OnConnectionState = null,
+                }
+            );
         }
         else if (listenOptions.HttpsCallbackOptions != null)
         {
-            features.Set(new TlsConnectionCallbackOptions
-            {
-                ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http3 },
-                OnConnection = (context, cancellationToken) =>
+            features.Set(
+                new TlsConnectionCallbackOptions
                 {
-                    return listenOptions.HttpsCallbackOptions.OnConnection(new TlsHandshakeCallbackContext
+                    ApplicationProtocols = new List<SslApplicationProtocol>
                     {
-                        ClientHelloInfo = context.ClientHelloInfo,
-                        CancellationToken = cancellationToken,
-                        State = context.State,
-                        Connection = new ConnectionContextAdapter(context.Connection),
-                    });
-                },
-                OnConnectionState = listenOptions.HttpsCallbackOptions.OnConnectionState,
-            });
+                        SslApplicationProtocol.Http3,
+                    },
+                    OnConnection = (context, cancellationToken) =>
+                    {
+                        return listenOptions.HttpsCallbackOptions.OnConnection(
+                            new TlsHandshakeCallbackContext
+                            {
+                                ClientHelloInfo = context.ClientHelloInfo,
+                                CancellationToken = cancellationToken,
+                                State = context.State,
+                                Connection = new ConnectionContextAdapter(context.Connection),
+                            }
+                        );
+                    },
+                    OnConnectionState = listenOptions.HttpsCallbackOptions.OnConnectionState,
+                }
+            );
         }
     }
 
@@ -223,6 +268,7 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
             get => _inner.ConnectionClosed;
             set => _inner.ConnectionClosed = value;
         }
+
         public override ValueTask DisposeAsync() => _inner.DisposeAsync();
     }
 
@@ -247,7 +293,8 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
         public Initializer(
             IHostEnvironment hostEnvironment,
             ILogger<KestrelServer> serverLogger,
-            ILogger<HttpsConnectionMiddleware> httpsLogger)
+            ILogger<HttpsConnectionMiddleware> httpsLogger
+        )
         {
             _hostEnvironment = hostEnvironment;
             _serverLogger = serverLogger;
@@ -261,4 +308,3 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
         }
     }
 }
-

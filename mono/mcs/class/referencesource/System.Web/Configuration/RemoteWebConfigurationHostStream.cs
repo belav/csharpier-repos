@@ -4,34 +4,45 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Configuration;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
-    using System.Security.Principal;
     using System.IO;
-    using System.Web.Hosting;
     using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
     [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
     internal class RemoteWebConfigurationHostStream : Stream
     {
-        private string                      _FileName;
-        private string                      _TemplateFileName;
-        private string                      _Server;
-        private MemoryStream                _MemoryStream;
-        private bool                        _IsDirty = false;
-        private long                        _ReadTime = 0;
-        private WindowsIdentity             _Identity;
-        private string                      _Username;
-        private string                      _Domain;
-        private string                      _Password;
-        private bool                        _streamForWrite;
+        private string _FileName;
+        private string _TemplateFileName;
+        private string _Server;
+        private MemoryStream _MemoryStream;
+        private bool _IsDirty = false;
+        private long _ReadTime = 0;
+        private WindowsIdentity _Identity;
+        private string _Username;
+        private string _Domain;
+        private string _Password;
+        private bool _streamForWrite;
 
-        internal RemoteWebConfigurationHostStream(bool streamForWrite, string serverName, string streamName, string templateStreamName, string username, string domain, string password, WindowsIdentity identity) {
+        internal RemoteWebConfigurationHostStream(
+            bool streamForWrite,
+            string serverName,
+            string streamName,
+            string templateStreamName,
+            string username,
+            string domain,
+            string password,
+            WindowsIdentity identity
+        )
+        {
             _Server = serverName;
             _FileName = streamName;
             _TemplateFileName = templateStreamName;
@@ -48,8 +59,8 @@ namespace System.Web.Configuration {
             if (_MemoryStream != null)
                 return;
 
-            byte[]                            buf     = null;
-            WindowsImpersonationContext       wiContext = null;
+            byte[] buf = null;
+            WindowsImpersonationContext wiContext = null;
 
             try
             {
@@ -62,7 +73,13 @@ namespace System.Web.Configuration {
 
                 try
                 {
-                    IRemoteWebConfigurationHostServer remoteSrv = RemoteWebConfigurationHost.CreateRemoteObject(_Server, _Username, _Domain, _Password);
+                    IRemoteWebConfigurationHostServer remoteSrv =
+                        RemoteWebConfigurationHost.CreateRemoteObject(
+                            _Server,
+                            _Username,
+                            _Domain,
+                            _Password
+                        );
                     try
                     {
                         // If we open the stream for writing, we only need to get the _ReadTime because
@@ -71,9 +88,7 @@ namespace System.Web.Configuration {
                     }
                     finally
                     {
-                        while (Marshal.ReleaseComObject(remoteSrv) > 0)
-                        {
-                        }
+                        while (Marshal.ReleaseComObject(remoteSrv) > 0) { }
                     }
                 }
                 catch
@@ -108,9 +123,18 @@ namespace System.Web.Configuration {
 #endif // !FEATURE_PAL
         }
 
-        public override bool CanRead { get { return true; } }
-        public override bool CanSeek { get { return true; } }
-        public override bool CanWrite { get { return true; } }
+        public override bool CanRead
+        {
+            get { return true; }
+        }
+        public override bool CanSeek
+        {
+            get { return true; }
+        }
+        public override bool CanWrite
+        {
+            get { return true; }
+        }
         public override long Length
         {
             get
@@ -134,13 +158,25 @@ namespace System.Web.Configuration {
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             Init();
             return _MemoryStream.BeginRead(buffer, offset, count, callback, state);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             _IsDirty = true;
             Init();
@@ -151,13 +187,16 @@ namespace System.Web.Configuration {
 
         protected override void Dispose(bool disposing)
         {
-            try {
-                if (disposing && _MemoryStream != null) {
+            try
+            {
+                if (disposing && _MemoryStream != null)
+                {
                     Flush();
                     _MemoryStream.Close();
                 }
             }
-            finally {
+            finally
+            {
                 base.Dispose(disposing);
             }
         }
@@ -179,7 +218,7 @@ namespace System.Web.Configuration {
             _MemoryStream.EndWrite(asyncResult);
         }
 
-        public override void Flush() 
+        public override void Flush()
         {
             // It's a memory stream.  Don't need to flush anything.
         }
@@ -202,10 +241,21 @@ namespace System.Web.Configuration {
 
                     try
                     {
-                        IRemoteWebConfigurationHostServer remoteSrv = RemoteWebConfigurationHost.CreateRemoteObject(_Server, _Username, _Domain, _Password);
+                        IRemoteWebConfigurationHostServer remoteSrv =
+                            RemoteWebConfigurationHost.CreateRemoteObject(
+                                _Server,
+                                _Username,
+                                _Domain,
+                                _Password
+                            );
                         try
                         {
-                            remoteSrv.WriteData(_FileName, _TemplateFileName, _MemoryStream.ToArray(), ref _ReadTime);
+                            remoteSrv.WriteData(
+                                _FileName,
+                                _TemplateFileName,
+                                _MemoryStream.ToArray(),
+                                ref _ReadTime
+                            );
                         }
                         catch
                         {
@@ -213,9 +263,7 @@ namespace System.Web.Configuration {
                         }
                         finally
                         {
-                            while (Marshal.ReleaseComObject(remoteSrv) > 0)
-                            {
-                            }
+                            while (Marshal.ReleaseComObject(remoteSrv) > 0) { }
                         }
                     }
                     catch
@@ -242,6 +290,7 @@ namespace System.Web.Configuration {
             throw new NotSupportedException();
 #endif // !FEATURE_PAL
         }
+
         public override object InitializeLifetimeService()
         {
             Init();
@@ -280,7 +329,6 @@ namespace System.Web.Configuration {
             if (offset + count > _MemoryStream.Length)
                 _MemoryStream.SetLength(offset + count);
             _MemoryStream.Write(buffer, offset, count);
-
         }
 
         public override void WriteByte(byte val)

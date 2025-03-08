@@ -19,14 +19,18 @@ namespace Microsoft.Extensions.Logging.Test
             var callbackCalled = false;
             var source = new MemoryConfigurationSource();
             var configuration = new ConfigurationBuilder().Add(source).Build();
-            var provider = (MemoryConfigurationProvider) configuration.Providers.Single();
+            var provider = (MemoryConfigurationProvider)configuration.Providers.Single();
 
-            var serviceCollection = new  ServiceCollection();
+            var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging(builder => builder.AddConfiguration(configuration));
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var loggerProviderConfiguration = serviceProvider.GetService<ILoggerProviderConfiguration<ConsoleLoggerProvider>>();
-            loggerProviderConfiguration.Configuration.GetReloadToken().RegisterChangeCallback(o => callbackCalled = true, null);
+            var loggerProviderConfiguration = serviceProvider.GetService<
+                ILoggerProviderConfiguration<ConsoleLoggerProvider>
+            >();
+            loggerProviderConfiguration
+                .Configuration.GetReloadToken()
+                .RegisterChangeCallback(o => callbackCalled = true, null);
 
             provider.Add("Console:IncludeScopes", "false");
             configuration.Reload();

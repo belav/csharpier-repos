@@ -11,10 +11,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CSharp.DocumentationCo
 {
     internal static class OmniSharpDocCommentConverter
     {
-        public static SyntaxNode ConvertToRegularComments(SyntaxNode node, Project project, CancellationToken cancellationToken)
+        public static SyntaxNode ConvertToRegularComments(
+            SyntaxNode node,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            var formattingService = project.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
-            return DocCommentConverter.ConvertToRegularComments(node, formattingService, cancellationToken);
+            var formattingService =
+                project.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
+            return DocCommentConverter.ConvertToRegularComments(
+                node,
+                formattingService,
+                cancellationToken
+            );
         }
     }
 }

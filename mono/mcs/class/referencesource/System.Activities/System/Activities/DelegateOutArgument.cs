@@ -11,15 +11,12 @@ namespace System.Activities
         {
             this.Direction = ArgumentDirection.Out;
         }
-
     }
 
     public sealed class DelegateOutArgument<T> : DelegateOutArgument
     {
         public DelegateOutArgument()
-            : base()
-        {
-        }
+            : base() { }
 
         public DelegateOutArgument(string name)
             : base()
@@ -29,10 +26,7 @@ namespace System.Activities
 
         protected override Type TypeCore
         {
-            get
-            {
-                return typeof(T);
-            }
+            get { return typeof(T); }
         }
 
         // Soft-Link: This method is referenced through reflection by

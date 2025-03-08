@@ -22,36 +22,52 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
 using System.Drawing;
 
+namespace System.Windows.Forms
+{
+    public class StatusBarDrawItemEventArgs : DrawItemEventArgs
+    {
+        private StatusBarPanel panel;
 
-namespace System.Windows.Forms {
+        public StatusBarDrawItemEventArgs(
+            Graphics g,
+            Font font,
+            Rectangle r,
+            int itemId,
+            DrawItemState itemState,
+            StatusBarPanel panel
+        )
+            : this(
+                g,
+                font,
+                r,
+                itemId,
+                itemState,
+                panel,
+                Control.DefaultForeColor,
+                Control.DefaultBackColor
+            ) { }
 
-	public class StatusBarDrawItemEventArgs : DrawItemEventArgs {
+        public StatusBarDrawItemEventArgs(
+            Graphics g,
+            Font font,
+            Rectangle r,
+            int itemId,
+            DrawItemState itemState,
+            StatusBarPanel panel,
+            Color foreColor,
+            Color backColor
+        )
+            : base(g, font, r, itemId, itemState)
+        {
+            this.panel = panel;
+        }
 
-		private StatusBarPanel panel;
-
-		public StatusBarDrawItemEventArgs (Graphics g, Font font, Rectangle r,
-				int itemId, DrawItemState itemState, StatusBarPanel panel) :
-			this (g, font, r, itemId, itemState, panel, Control.DefaultForeColor,
-				Control.DefaultBackColor)
-		
-		{
-		}
-
-		public StatusBarDrawItemEventArgs (Graphics g, Font font, Rectangle r,
-				int itemId, DrawItemState itemState, StatusBarPanel panel,
-				Color foreColor, Color backColor) : base (g, font, r,
-						itemId, itemState)
-		{
-			this.panel = panel;
-		}
-
-		public StatusBarPanel Panel {
-			get { return panel; }
-		}
-	}
+        public StatusBarPanel Panel
+        {
+            get { return panel; }
+        }
+    }
 }
-

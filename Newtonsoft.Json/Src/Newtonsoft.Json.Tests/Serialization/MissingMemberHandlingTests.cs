@@ -65,10 +65,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  ]
             //}
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                ProductShort deserializedProductShort = (ProductShort)JsonConvert.DeserializeObject(output, typeof(ProductShort), new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error });
-            }, @"Could not find member 'Price' on object of type 'ProductShort'. Path 'Price', line 4, position 10.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    ProductShort deserializedProductShort = (ProductShort)
+                        JsonConvert.DeserializeObject(
+                            output,
+                            typeof(ProductShort),
+                            new JsonSerializerSettings
+                            {
+                                MissingMemberHandling = MissingMemberHandling.Error,
+                            }
+                        );
+                },
+                @"Could not find member 'Price' on object of type 'ProductShort'. Path 'Price', line 4, position 10."
+            );
         }
 
         [Test]
@@ -115,12 +126,17 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void MissingMemberIgnoreComplexValue()
         {
-            JsonSerializer serializer = new JsonSerializer { MissingMemberHandling = MissingMemberHandling.Ignore };
+            JsonSerializer serializer = new JsonSerializer
+            {
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+            };
             serializer.Converters.Add(new JavaScriptDateTimeConverter());
 
-            string response = @"{""PreProperty"":1,""DateProperty"":new Date(1225962698973),""PostProperty"":2}";
+            string response =
+                @"{""PreProperty"":1,""DateProperty"":new Date(1225962698973),""PostProperty"":2}";
 
-            MyClass myClass = (MyClass)serializer.Deserialize(new StringReader(response), typeof(MyClass));
+            MyClass myClass = (MyClass)
+                serializer.Deserialize(new StringReader(response), typeof(MyClass));
 
             Assert.AreEqual(1, myClass.PreProperty);
             Assert.AreEqual(2, myClass.PostProperty);
@@ -131,7 +147,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{""height"":1}";
 
-            DoubleClass c = JsonConvert.DeserializeObject<DoubleClass>(json, new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error });
+            DoubleClass c = JsonConvert.DeserializeObject<DoubleClass>(
+                json,
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
+            );
 
             Assert.AreEqual(1d, c.Height);
         }
@@ -141,7 +160,19 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{""Missing"":1}";
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => { JsonConvert.DeserializeObject<DoubleClass>(json, new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }); }, "Could not find member 'Missing' on object of type 'DoubleClass'. Path 'Missing', line 1, position 11.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<DoubleClass>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            MissingMemberHandling = MissingMemberHandling.Error,
+                        }
+                    );
+                },
+                "Could not find member 'Missing' on object of type 'DoubleClass'. Path 'Missing', line 1, position 11."
+            );
         }
 
         [Test]
@@ -149,10 +180,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{}";
 
-            JsonConvert.DeserializeObject<DoubleClass>(json, new JsonSerializerSettings
-            {
-                MissingMemberHandling = MissingMemberHandling.Error
-            });
+            JsonConvert.DeserializeObject<DoubleClass>(
+                json,
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
+            );
         }
 
         [Test]
@@ -160,7 +191,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{""Missing"":1}";
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => { JsonConvert.DeserializeObject<NameWithMissingError>(json); }, "Could not find member 'Missing' on object of type 'NameWithMissingError'. Path 'Missing', line 1, position 11.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<NameWithMissingError>(json);
+                },
+                "Could not find member 'Missing' on object of type 'NameWithMissingError'. Path 'Missing', line 1, position 11."
+            );
         }
 
         [JsonObject(MissingMemberHandling = MissingMemberHandling.Error)]
@@ -194,7 +231,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     // A more concrete error type would be nice but we are limited by Newtonsofts library here.
                     errors.Add(args.ErrorContext.Error.Message);
                     args.ErrorContext.Handled = true;
-                }
+                },
             };
 
             Person p = new Person();
@@ -202,7 +239,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             JsonConvert.PopulateObject(@"{nameERROR:{""first"":""hi""}}", p, settings);
 
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("Could not find member 'nameERROR' on object of type 'Person'. Path 'nameERROR', line 1, position 11.", errors[0]);
+            Assert.AreEqual(
+                "Could not find member 'nameERROR' on object of type 'Person'. Path 'nameERROR', line 1, position 11.",
+                errors[0]
+            );
         }
 
         [Test]
@@ -220,7 +260,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     // A more concrete error type would be nice but we are limited by Newtonsofts library here.
                     errors.Add(args.ErrorContext.Error.Message);
                     args.ErrorContext.Handled = true;
-                }
+                },
             };
 
             Person p = new Person();
@@ -228,7 +268,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             JsonConvert.PopulateObject(@"{name:{""firstERROR"":""hi""}}", p, settings);
 
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("Could not find member 'firstERROR' on object of type 'Name'. Path 'name.firstERROR', line 1, position 20.", errors[0]);
+            Assert.AreEqual(
+                "Could not find member 'firstERROR' on object of type 'Name'. Path 'name.firstERROR', line 1, position 20.",
+                errors[0]
+            );
         }
 
         [JsonObject(MissingMemberHandling = MissingMemberHandling.Ignore)]
@@ -247,7 +290,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void TestMissingMemberHandlingForDirectObjects()
         {
             string json = @"{""extensionData1"": [1,2,3]}";
-            SimpleExtendableObject e2 = JsonConvert.DeserializeObject<SimpleExtendableObject>(json, new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error });
+            SimpleExtendableObject e2 = JsonConvert.DeserializeObject<SimpleExtendableObject>(
+                json,
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
+            );
             JArray o1 = (JArray)e2.Data["extensionData1"];
             Assert.AreEqual(JTokenType.Array, o1.Type);
         }
@@ -256,7 +302,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void TestMissingMemberHandlingForChildObjects()
         {
             string json = @"{""Data"":{""extensionData1"": [1,2,3]}}";
-            ObjectWithExtendableChild e3 = JsonConvert.DeserializeObject<ObjectWithExtendableChild>(json, new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error });
+            ObjectWithExtendableChild e3 = JsonConvert.DeserializeObject<ObjectWithExtendableChild>(
+                json,
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
+            );
             JArray o1 = (JArray)e3.Data.Data["extensionData1"];
             Assert.AreEqual(JTokenType.Array, o1.Type);
         }
@@ -266,10 +315,19 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{""InvalidData"":{""extensionData1"": [1,2,3]}}";
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<ObjectWithExtendableChild>(json, new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error });
-            }, "Could not find member 'InvalidData' on object of type 'ObjectWithExtendableChild'. Path 'InvalidData', line 1, position 15.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<ObjectWithExtendableChild>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            MissingMemberHandling = MissingMemberHandling.Error,
+                        }
+                    );
+                },
+                "Could not find member 'InvalidData' on object of type 'ObjectWithExtendableChild'. Path 'InvalidData', line 1, position 15."
+            );
         }
     }
 }

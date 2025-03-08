@@ -15,113 +15,79 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal static readonly DynamicTypeSymbol Instance = new DynamicTypeSymbol();
 
-        private DynamicTypeSymbol()
-        {
-        }
+        private DynamicTypeSymbol() { }
 
         public override string Name
         {
-            get
-            {
-                return "dynamic";
-            }
+            get { return "dynamic"; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsReferenceType
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.DynamicType;
-            }
+            get { return SymbolKind.DynamicType; }
         }
 
         public override TypeKind TypeKind
         {
-            get
-            {
-                return TypeKind.Dynamic;
-            }
+            get { return TypeKind.Dynamic; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         internal override NamedTypeSymbol? BaseTypeNoUseSiteDiagnostics => null;
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol>? basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol>? basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsValueType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        internal sealed override ManagedKind GetManagedKind(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo) => ManagedKind.Managed;
+        internal sealed override ManagedKind GetManagedKind(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) => ManagedKind.Managed;
 
         public sealed override bool IsRefLikeType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override ObsoleteAttributeData? ObsoleteAttributeData
@@ -149,7 +115,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitDynamicType(this, argument);
         }
@@ -166,21 +135,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol? ContainingSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
-        internal override bool GetUnificationUseSiteDiagnosticRecursive(ref DiagnosticInfo result, Symbol owner, ref HashSet<TypeSymbol> checkedTypes)
+        internal override bool GetUnificationUseSiteDiagnosticRecursive(
+            ref DiagnosticInfo result,
+            Symbol owner,
+            ref HashSet<TypeSymbol> checkedTypes
+        )
         {
             return false;
         }
@@ -207,30 +174,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if ((comparison & TypeCompareKind.IgnoreDynamic) != 0)
             {
                 var other = t2 as NamedTypeSymbol;
-                return (object?)other != null && other.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object;
+                return (object?)other != null
+                    && other.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object;
             }
 
             return false;
         }
 
-        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms)
-        {
-        }
+        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms) { }
 
-        internal override bool ApplyNullableTransforms(byte defaultTransformFlag, ImmutableArray<byte> transforms, ref int position, out TypeSymbol result)
+        internal override bool ApplyNullableTransforms(
+            byte defaultTransformFlag,
+            ImmutableArray<byte> transforms,
+            ref int position,
+            out TypeSymbol result
+        )
         {
             result = this;
             return true;
         }
 
-        internal override TypeSymbol SetNullabilityForReferenceTypes(Func<TypeWithAnnotations, TypeWithAnnotations> transform)
+        internal override TypeSymbol SetNullabilityForReferenceTypes(
+            Func<TypeWithAnnotations, TypeWithAnnotations> transform
+        )
         {
             return this;
         }
 
         internal override TypeSymbol MergeEquivalentTypes(TypeSymbol other, VarianceKind variance)
         {
-            Debug.Assert(this.Equals(other, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+            Debug.Assert(
+                this.Equals(
+                    other,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+            );
             return this;
         }
 
@@ -239,7 +218,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return new PublicModel.DynamicTypeSymbol(this, DefaultNullableAnnotation);
         }
 
-        protected sealed override ITypeSymbol CreateITypeSymbol(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected sealed override ITypeSymbol CreateITypeSymbol(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.DynamicTypeSymbol(this, nullableAnnotation);
@@ -249,9 +230,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsRecordStruct => false;
 
-        internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+        internal override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls()
         {
-            return SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+            return SpecializedCollections.EmptyEnumerable<(
+                MethodSymbol Body,
+                MethodSymbol Implemented
+            )>();
         }
 
         internal override bool HasInlineArrayAttribute(out int length)

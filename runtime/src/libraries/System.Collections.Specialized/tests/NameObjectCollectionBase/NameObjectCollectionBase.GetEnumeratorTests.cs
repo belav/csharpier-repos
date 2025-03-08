@@ -13,7 +13,10 @@ namespace System.Collections.Specialized.Tests
         public void GetEnumerator(int count)
         {
             MyNameObjectCollection nameObjectCollection = Helpers.CreateNameObjectCollection(count);
-            Assert.NotSame(nameObjectCollection.GetEnumerator(), nameObjectCollection.GetEnumerator());
+            Assert.NotSame(
+                nameObjectCollection.GetEnumerator(),
+                nameObjectCollection.GetEnumerator()
+            );
 
             IEnumerator enumerator = nameObjectCollection.GetEnumerator();
             for (int i = 0; i < 2; i++)
@@ -41,7 +44,8 @@ namespace System.Collections.Specialized.Tests
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             // Has finished enumerating
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             // Has reset enumerating

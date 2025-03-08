@@ -33,7 +33,9 @@ namespace System
                     return ToLocalTime(utcDateTime, true);
                 }
 
-                object? localDateTimeOffset = AppContext.GetData("System.TimeZoneInfo.LocalDateTimeOffset");
+                object? localDateTimeOffset = AppContext.GetData(
+                    "System.TimeZoneInfo.LocalDateTimeOffset"
+                );
                 if (localDateTimeOffset == null) // If no offset property provided through monovm app context, default
                 {
                     // no need to create the thread, load tzdata now
@@ -57,11 +59,17 @@ namespace System
                         {
                             s_androidTZDataLoaded = 1;
                         }
-                    }) { IsBackground = true }.Start();
+                    })
+                    {
+                        IsBackground = true,
+                    }.Start();
                 }
 
                 // Fast path obtained offset incorporated into ToLocalTime(DateTime.UtcNow, true) logic
-                int localDateTimeOffsetSeconds = Convert.ToInt32(localDateTimeOffset, CultureInfo.InvariantCulture);
+                int localDateTimeOffsetSeconds = Convert.ToInt32(
+                    localDateTimeOffset,
+                    CultureInfo.InvariantCulture
+                );
                 TimeSpan offset = TimeSpan.FromSeconds(localDateTimeOffsetSeconds);
                 long localTicks = utcDateTime.Ticks + offset.Ticks;
                 if (localTicks < DateTime.MinTicks || localTicks > DateTime.MaxTicks)

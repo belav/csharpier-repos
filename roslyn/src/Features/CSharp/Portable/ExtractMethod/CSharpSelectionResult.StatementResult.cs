@@ -23,8 +23,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             SemanticDocument document,
             SyntaxAnnotation firstTokenAnnotation,
             SyntaxAnnotation lastTokenAnnotation,
-            bool selectionChanged) : CSharpSelectionResult(
-                originalSpan, finalSpan, options, selectionInExpression, document, firstTokenAnnotation, lastTokenAnnotation, selectionChanged)
+            bool selectionChanged
+        )
+            : CSharpSelectionResult(
+                originalSpan,
+                finalSpan,
+                options,
+                selectionInExpression,
+                document,
+                firstTokenAnnotation,
+                lastTokenAnnotation,
+                selectionChanged
+            )
         {
             public override bool ContainingScopeHasAsyncKeyword()
             {
@@ -34,9 +44,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     AccessorDeclarationSyntax _ => false,
                     MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                    ParenthesizedLambdaExpressionSyntax lambda => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
-                    SimpleLambdaExpressionSyntax lambda => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
-                    AnonymousMethodExpressionSyntax anonymous => anonymous.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                    ParenthesizedLambdaExpressionSyntax lambda => lambda.AsyncKeyword.Kind()
+                        == SyntaxKind.AsyncKeyword,
+                    SimpleLambdaExpressionSyntax lambda => lambda.AsyncKeyword.Kind()
+                        == SyntaxKind.AsyncKeyword,
+                    AnonymousMethodExpressionSyntax anonymous => anonymous.AsyncKeyword.Kind()
+                        == SyntaxKind.AsyncKeyword,
                     _ => false,
                 };
             }
@@ -48,17 +61,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 // it contains statements
                 var firstToken = GetFirstTokenInSelection();
-                return firstToken.GetAncestors<SyntaxNode>().FirstOrDefault(n =>
-                {
-                    return n is AccessorDeclarationSyntax or
-                           LocalFunctionStatementSyntax or
-                           BaseMethodDeclarationSyntax or
-                           AccessorDeclarationSyntax or
-                           ParenthesizedLambdaExpressionSyntax or
-                           SimpleLambdaExpressionSyntax or
-                           AnonymousMethodExpressionSyntax or
-                           CompilationUnitSyntax;
-                });
+                return firstToken
+                    .GetAncestors<SyntaxNode>()
+                    .FirstOrDefault(n =>
+                    {
+                        return n
+                            is AccessorDeclarationSyntax
+                                or LocalFunctionStatementSyntax
+                                or BaseMethodDeclarationSyntax
+                                or AccessorDeclarationSyntax
+                                or ParenthesizedLambdaExpressionSyntax
+                                or SimpleLambdaExpressionSyntax
+                                or AnonymousMethodExpressionSyntax
+                                or CompilationUnitSyntax;
+                    });
             }
 
             public override (ITypeSymbol returnType, bool returnsByRef) GetReturnType()
@@ -77,24 +93,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                         return semanticModel.GetDeclaredSymbol(access.Parent.Parent) switch
                         {
-                            IPropertySymbol propertySymbol => (propertySymbol.Type, propertySymbol.ReturnsByRef),
+                            IPropertySymbol propertySymbol => (
+                                propertySymbol.Type,
+                                propertySymbol.ReturnsByRef
+                            ),
                             IEventSymbol eventSymbol => (eventSymbol.Type, false),
                             _ => default,
                         };
 
                     case MethodDeclarationSyntax methodDeclaration:
-                        {
-                            return semanticModel.GetDeclaredSymbol(methodDeclaration) is not IMethodSymbol method
-                                ? default
-                                : (method.ReturnType, method.ReturnsByRef);
-                        }
+                    {
+                        return
+                            semanticModel.GetDeclaredSymbol(methodDeclaration)
+                                is not IMethodSymbol method
+                            ? default
+                            : (method.ReturnType, method.ReturnsByRef);
+                    }
 
                     case AnonymousFunctionExpressionSyntax function:
-                        {
-                            return semanticModel.GetSymbolInfo(function).Symbol is not IMethodSymbol method
-                                ? default
-                                : (method.ReturnType, method.ReturnsByRef);
-                        }
+                    {
+                        return
+                            semanticModel.GetSymbolInfo(function).Symbol is not IMethodSymbol method
+                            ? default
+                            : (method.ReturnType, method.ReturnsByRef);
+                    }
 
                     default:
                         return default;

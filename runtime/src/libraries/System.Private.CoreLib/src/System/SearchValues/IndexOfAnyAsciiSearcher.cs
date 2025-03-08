@@ -25,16 +25,24 @@ namespace System.Buffers
                 new AsciiState(~Bitmap._lower, Lookup.CreateInverse());
         }
 
-        public struct AnyByteState(Vector128<byte> bitmap0, Vector128<byte> bitmap1, BitVector256 lookup)
+        public struct AnyByteState(
+            Vector128<byte> bitmap0,
+            Vector128<byte> bitmap1,
+            BitVector256 lookup
+        )
         {
             public Vector256<byte> Bitmap0 = Vector256.Create(bitmap0, bitmap0);
             public Vector256<byte> Bitmap1 = Vector256.Create(bitmap1, bitmap1);
             public BitVector256 Lookup = lookup;
         }
 
-        internal static bool IsVectorizationSupported => Ssse3.IsSupported || AdvSimd.Arm64.IsSupported || PackedSimd.IsSupported;
+        internal static bool IsVectorizationSupported =>
+            Ssse3.IsSupported || AdvSimd.Arm64.IsSupported || PackedSimd.IsSupported;
 
-        internal static unsafe void ComputeAnyByteState(ReadOnlySpan<byte> values, out AnyByteState state)
+        internal static unsafe void ComputeAnyByteState(
+            ReadOnlySpan<byte> values,
+            out AnyByteState state
+        )
         {
             // The exact format of these bitmaps differs from the other ComputeBitmap overloads as it's meant for the full [0, 255] range algorithm.
             // See http://0x80.pl/articles/simd-byte-lookup.html#universal-algorithm
@@ -65,7 +73,10 @@ namespace System.Buffers
             state = new AnyByteState(bitmapSpace0, bitmapSpace1, lookupLocal);
         }
 
-        internal static unsafe void ComputeAsciiState<T>(ReadOnlySpan<T> values, out AsciiState state)
+        internal static unsafe void ComputeAsciiState<T>(
+            ReadOnlySpan<T> values,
+            out AsciiState state
+        )
             where T : struct, IUnsignedNumber<T>
         {
             Debug.Assert(typeof(T) == typeof(byte) || typeof(T) == typeof(char));
@@ -95,7 +106,11 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe bool TryComputeBitmap(ReadOnlySpan<char> values, byte* bitmap, out bool needleContainsZero)
+        private static unsafe bool TryComputeBitmap(
+            ReadOnlySpan<char> values,
+            byte* bitmap,
+            out bool needleContainsZero
+        )
         {
             byte* bitmapLocal = bitmap; // https://github.com/dotnet/runtime/issues/9040
 
@@ -118,23 +133,68 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryIndexOfAny(ref char searchSpace, int searchSpaceLength, ReadOnlySpan<char> asciiValues, out int index) =>
-            TryIndexOfAny<DontNegate>(ref Unsafe.As<char, short>(ref searchSpace), searchSpaceLength, asciiValues, out index);
+        public static bool TryIndexOfAny(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> asciiValues,
+            out int index
+        ) =>
+            TryIndexOfAny<DontNegate>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                searchSpaceLength,
+                asciiValues,
+                out index
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryIndexOfAnyExcept(ref char searchSpace, int searchSpaceLength, ReadOnlySpan<char> asciiValues, out int index) =>
-            TryIndexOfAny<Negate>(ref Unsafe.As<char, short>(ref searchSpace), searchSpaceLength, asciiValues, out index);
+        public static bool TryIndexOfAnyExcept(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> asciiValues,
+            out int index
+        ) =>
+            TryIndexOfAny<Negate>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                searchSpaceLength,
+                asciiValues,
+                out index
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryLastIndexOfAny(ref char searchSpace, int searchSpaceLength, ReadOnlySpan<char> asciiValues, out int index) =>
-            TryLastIndexOfAny<DontNegate>(ref Unsafe.As<char, short>(ref searchSpace), searchSpaceLength, asciiValues, out index);
+        public static bool TryLastIndexOfAny(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> asciiValues,
+            out int index
+        ) =>
+            TryLastIndexOfAny<DontNegate>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                searchSpaceLength,
+                asciiValues,
+                out index
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryLastIndexOfAnyExcept(ref char searchSpace, int searchSpaceLength, ReadOnlySpan<char> asciiValues, out int index) =>
-            TryLastIndexOfAny<Negate>(ref Unsafe.As<char, short>(ref searchSpace), searchSpaceLength, asciiValues, out index);
+        public static bool TryLastIndexOfAnyExcept(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> asciiValues,
+            out int index
+        ) =>
+            TryLastIndexOfAny<Negate>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                searchSpaceLength,
+                asciiValues,
+                out index
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe bool TryIndexOfAny<TNegator>(ref short searchSpace, int searchSpaceLength, ReadOnlySpan<char> asciiValues, out int index)
+        private static unsafe bool TryIndexOfAny<TNegator>(
+            ref short searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> asciiValues,
+            out int index
+        )
             where TNegator : struct, INegator
         {
             Debug.Assert(searchSpaceLength >= Vector128<short>.Count);
@@ -143,15 +203,30 @@ namespace System.Buffers
             {
                 AsciiState state = default;
 
-                if (TryComputeBitmap(asciiValues, (byte*)&state.Bitmap._lower, out bool needleContainsZero))
+                if (
+                    TryComputeBitmap(
+                        asciiValues,
+                        (byte*)&state.Bitmap._lower,
+                        out bool needleContainsZero
+                    )
+                )
                 {
                     // Only initializing the bitmap here is okay as we can only get here if the search space is long enough
                     // and we support vectorization, so the IndexOfAnyVectorized implementation will never touch state.Lookup.
                     state.Bitmap = Vector256.Create(state.Bitmap._lower, state.Bitmap._lower);
 
-                    index = (Ssse3.IsSupported || PackedSimd.IsSupported) && needleContainsZero
-                        ? IndexOfAnyVectorized<TNegator, Ssse3AndWasmHandleZeroInNeedle>(ref searchSpace, searchSpaceLength, ref state)
-                        : IndexOfAnyVectorized<TNegator, Default>(ref searchSpace, searchSpaceLength, ref state);
+                    index =
+                        (Ssse3.IsSupported || PackedSimd.IsSupported) && needleContainsZero
+                            ? IndexOfAnyVectorized<TNegator, Ssse3AndWasmHandleZeroInNeedle>(
+                                ref searchSpace,
+                                searchSpaceLength,
+                                ref state
+                            )
+                            : IndexOfAnyVectorized<TNegator, Default>(
+                                ref searchSpace,
+                                searchSpaceLength,
+                                ref state
+                            );
                     return true;
                 }
             }
@@ -161,7 +236,12 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe bool TryLastIndexOfAny<TNegator>(ref short searchSpace, int searchSpaceLength, ReadOnlySpan<char> asciiValues, out int index)
+        private static unsafe bool TryLastIndexOfAny<TNegator>(
+            ref short searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> asciiValues,
+            out int index
+        )
             where TNegator : struct, INegator
         {
             Debug.Assert(searchSpaceLength >= Vector128<short>.Count);
@@ -170,15 +250,30 @@ namespace System.Buffers
             {
                 AsciiState state = default;
 
-                if (TryComputeBitmap(asciiValues, (byte*)&state.Bitmap._lower, out bool needleContainsZero))
+                if (
+                    TryComputeBitmap(
+                        asciiValues,
+                        (byte*)&state.Bitmap._lower,
+                        out bool needleContainsZero
+                    )
+                )
                 {
                     // Only initializing the bitmap here is okay as we can only get here if the search space is long enough
                     // and we support vectorization, so the LastIndexOfAnyVectorized implementation will never touch state.Lookup.
                     state.Bitmap = Vector256.Create(state.Bitmap._lower, state.Bitmap._lower);
 
-                    index = (Ssse3.IsSupported || PackedSimd.IsSupported) && needleContainsZero
-                        ? LastIndexOfAnyVectorized<TNegator, Ssse3AndWasmHandleZeroInNeedle>(ref searchSpace, searchSpaceLength, ref state)
-                        : LastIndexOfAnyVectorized<TNegator, Default>(ref searchSpace, searchSpaceLength, ref state);
+                    index =
+                        (Ssse3.IsSupported || PackedSimd.IsSupported) && needleContainsZero
+                            ? LastIndexOfAnyVectorized<TNegator, Ssse3AndWasmHandleZeroInNeedle>(
+                                ref searchSpace,
+                                searchSpaceLength,
+                                ref state
+                            )
+                            : LastIndexOfAnyVectorized<TNegator, Default>(
+                                ref searchSpace,
+                                searchSpaceLength,
+                                ref state
+                            );
                     return true;
                 }
             }
@@ -190,7 +285,11 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        internal static int IndexOfAnyVectorized<TNegator, TOptimizations>(ref short searchSpace, int searchSpaceLength, ref AsciiState state)
+        internal static int IndexOfAnyVectorized<TNegator, TOptimizations>(
+            ref short searchSpace,
+            int searchSpaceLength,
+            ref AsciiState state
+        )
             where TNegator : struct, INegator
             where TOptimizations : struct, IOptimizations
         {
@@ -205,7 +304,10 @@ namespace System.Buffers
                     char c = (char)currentSearchSpace;
                     if (TNegator.NegateIfNeeded(state.Lookup.Contains128(c)))
                     {
-                        return (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref currentSearchSpace) / sizeof(char));
+                        return (int)(
+                            (nuint)Unsafe.ByteOffset(ref searchSpace, ref currentSearchSpace)
+                            / sizeof(char)
+                        );
                     }
 
                     currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 1);
@@ -228,41 +330,77 @@ namespace System.Buffers
                     // If the input length is a multiple of 32, don't consume the last 32 characters in this loop.
                     // Let the fallback below handle it instead. This is why the condition is
                     // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                    ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - (2 * Vector256<short>.Count));
+                    ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                        ref searchSpace,
+                        searchSpaceLength - (2 * Vector256<short>.Count)
+                    );
 
                     do
                     {
                         Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                        Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                        Vector256<short> source1 = Vector256.LoadUnsafe(
+                            ref currentSearchSpace,
+                            (nuint)Vector256<short>.Count
+                        );
 
-                        Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap256);
+                        Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                            source0,
+                            source1,
+                            bitmap256
+                        );
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndex<short, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                            return ComputeFirstIndex<short, TNegator>(
+                                ref searchSpace,
+                                ref currentSearchSpace,
+                                result
+                            );
                         }
 
-                        currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector256<short>.Count);
-                    }
-                    while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                        currentSearchSpace = ref Unsafe.Add(
+                            ref currentSearchSpace,
+                            2 * Vector256<short>.Count
+                        );
+                    } while (
+                        Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd)
+                    );
                 }
 
                 // We have 1-32 characters remaining. Process the first and last vector in the search space.
                 // They may overlap, but we'll handle that in the index calculation if we do get a match.
-                Debug.Assert(searchSpaceLength >= Vector256<short>.Count, "We expect that the input is long enough for us to load a whole vector.");
+                Debug.Assert(
+                    searchSpaceLength >= Vector256<short>.Count,
+                    "We expect that the input is long enough for us to load a whole vector."
+                );
                 {
-                    ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector256<short>.Count);
+                    ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                        ref searchSpace,
+                        searchSpaceLength - Vector256<short>.Count
+                    );
 
-                    ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                    ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                        ref currentSearchSpace,
+                        ref oneVectorAwayFromEnd
+                    )
                         ? ref oneVectorAwayFromEnd
                         : ref currentSearchSpace;
 
                     Vector256<short> source0 = Vector256.LoadUnsafe(ref firstVector);
                     Vector256<short> source1 = Vector256.LoadUnsafe(ref oneVectorAwayFromEnd);
 
-                    Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap256);
+                    Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                        source0,
+                        source1,
+                        bitmap256
+                    );
                     if (result != Vector256<byte>.Zero)
                     {
-                        return ComputeFirstIndexOverlapped<short, TNegator>(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                        return ComputeFirstIndexOverlapped<short, TNegator>(
+                            ref searchSpace,
+                            ref firstVector,
+                            ref oneVectorAwayFromEnd,
+                            result
+                        );
                     }
                 }
 
@@ -281,41 +419,77 @@ namespace System.Buffers
                 // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                 // Let the fallback below handle it instead. This is why the condition is
                 // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - (2 * Vector128<short>.Count));
+                ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                    ref searchSpace,
+                    searchSpaceLength - (2 * Vector128<short>.Count)
+                );
 
                 do
                 {
                     Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                    Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                    Vector128<short> source1 = Vector128.LoadUnsafe(
+                        ref currentSearchSpace,
+                        (nuint)Vector128<short>.Count
+                    );
 
-                    Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap);
+                    Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                        source0,
+                        source1,
+                        bitmap
+                    );
                     if (result != Vector128<byte>.Zero)
                     {
-                        return ComputeFirstIndex<short, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                        return ComputeFirstIndex<short, TNegator>(
+                            ref searchSpace,
+                            ref currentSearchSpace,
+                            result
+                        );
                     }
 
-                    currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector128<short>.Count);
-                }
-                while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                    currentSearchSpace = ref Unsafe.Add(
+                        ref currentSearchSpace,
+                        2 * Vector128<short>.Count
+                    );
+                } while (
+                    Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd)
+                );
             }
 
             // We have 1-16 characters remaining. Process the first and last vector in the search space.
             // They may overlap, but we'll handle that in the index calculation if we do get a match.
-            Debug.Assert(searchSpaceLength >= Vector128<short>.Count, "We expect that the input is long enough for us to load a whole vector.");
+            Debug.Assert(
+                searchSpaceLength >= Vector128<short>.Count,
+                "We expect that the input is long enough for us to load a whole vector."
+            );
             {
-                ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector128<short>.Count);
+                ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                    ref searchSpace,
+                    searchSpaceLength - Vector128<short>.Count
+                );
 
-                ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                    ref currentSearchSpace,
+                    ref oneVectorAwayFromEnd
+                )
                     ? ref oneVectorAwayFromEnd
                     : ref currentSearchSpace;
 
                 Vector128<short> source0 = Vector128.LoadUnsafe(ref firstVector);
                 Vector128<short> source1 = Vector128.LoadUnsafe(ref oneVectorAwayFromEnd);
 
-                Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap);
+                Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                    source0,
+                    source1,
+                    bitmap
+                );
                 if (result != Vector128<byte>.Zero)
                 {
-                    return ComputeFirstIndexOverlapped<short, TNegator>(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                    return ComputeFirstIndexOverlapped<short, TNegator>(
+                        ref searchSpace,
+                        ref firstVector,
+                        ref oneVectorAwayFromEnd,
+                        result
+                    );
                 }
             }
 
@@ -325,7 +499,11 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        internal static int LastIndexOfAnyVectorized<TNegator, TOptimizations>(ref short searchSpace, int searchSpaceLength, ref AsciiState state)
+        internal static int LastIndexOfAnyVectorized<TNegator, TOptimizations>(
+            ref short searchSpace,
+            int searchSpaceLength,
+            ref AsciiState state
+        )
             where TNegator : struct, INegator
             where TOptimizations : struct, IOptimizations
         {
@@ -359,41 +537,79 @@ namespace System.Buffers
                     // If the input length is a multiple of 32, don't consume the last 32 characters in this loop.
                     // Let the fallback below handle it instead. This is why the condition is
                     // ">" instead of ">=" above, and why "IsAddressGreaterThan" is used instead of "!IsAddressLessThan".
-                    ref short twoVectorsAfterStart = ref Unsafe.Add(ref searchSpace, 2 * Vector256<short>.Count);
+                    ref short twoVectorsAfterStart = ref Unsafe.Add(
+                        ref searchSpace,
+                        2 * Vector256<short>.Count
+                    );
 
                     do
                     {
-                        currentSearchSpace = ref Unsafe.Subtract(ref currentSearchSpace, 2 * Vector256<short>.Count);
+                        currentSearchSpace = ref Unsafe.Subtract(
+                            ref currentSearchSpace,
+                            2 * Vector256<short>.Count
+                        );
 
                         Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                        Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                        Vector256<short> source1 = Vector256.LoadUnsafe(
+                            ref currentSearchSpace,
+                            (nuint)Vector256<short>.Count
+                        );
 
-                        Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap256);
+                        Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                            source0,
+                            source1,
+                            bitmap256
+                        );
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeLastIndex<short, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                            return ComputeLastIndex<short, TNegator>(
+                                ref searchSpace,
+                                ref currentSearchSpace,
+                                result
+                            );
                         }
-                    }
-                    while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref twoVectorsAfterStart));
+                    } while (
+                        Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref twoVectorsAfterStart
+                        )
+                    );
                 }
 
                 // We have 1-32 characters remaining. Process the first and last vector in the search space.
                 // They may overlap, but we'll handle that in the index calculation if we do get a match.
-                Debug.Assert(searchSpaceLength >= Vector256<short>.Count, "We expect that the input is long enough for us to load a whole vector.");
+                Debug.Assert(
+                    searchSpaceLength >= Vector256<short>.Count,
+                    "We expect that the input is long enough for us to load a whole vector."
+                );
                 {
-                    ref short oneVectorAfterStart = ref Unsafe.Add(ref searchSpace, Vector256<short>.Count);
+                    ref short oneVectorAfterStart = ref Unsafe.Add(
+                        ref searchSpace,
+                        Vector256<short>.Count
+                    );
 
-                    ref short secondVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAfterStart)
+                    ref short secondVector = ref Unsafe.IsAddressGreaterThan(
+                        ref currentSearchSpace,
+                        ref oneVectorAfterStart
+                    )
                         ? ref Unsafe.Subtract(ref currentSearchSpace, Vector256<short>.Count)
                         : ref searchSpace;
 
                     Vector256<short> source0 = Vector256.LoadUnsafe(ref searchSpace);
                     Vector256<short> source1 = Vector256.LoadUnsafe(ref secondVector);
 
-                    Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap256);
+                    Vector256<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                        source0,
+                        source1,
+                        bitmap256
+                    );
                     if (result != Vector256<byte>.Zero)
                     {
-                        return ComputeLastIndexOverlapped<short, TNegator>(ref searchSpace, ref secondVector, result);
+                        return ComputeLastIndexOverlapped<short, TNegator>(
+                            ref searchSpace,
+                            ref secondVector,
+                            result
+                        );
                     }
                 }
 
@@ -410,41 +626,76 @@ namespace System.Buffers
                 // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                 // Let the fallback below handle it instead. This is why the condition is
                 // ">" instead of ">=" above, and why "IsAddressGreaterThan" is used instead of "!IsAddressLessThan".
-                ref short twoVectorsAfterStart = ref Unsafe.Add(ref searchSpace, 2 * Vector128<short>.Count);
+                ref short twoVectorsAfterStart = ref Unsafe.Add(
+                    ref searchSpace,
+                    2 * Vector128<short>.Count
+                );
 
                 do
                 {
-                    currentSearchSpace = ref Unsafe.Subtract(ref currentSearchSpace, 2 * Vector128<short>.Count);
+                    currentSearchSpace = ref Unsafe.Subtract(
+                        ref currentSearchSpace,
+                        2 * Vector128<short>.Count
+                    );
 
                     Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                    Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                    Vector128<short> source1 = Vector128.LoadUnsafe(
+                        ref currentSearchSpace,
+                        (nuint)Vector128<short>.Count
+                    );
 
-                    Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap);
+                    Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                        source0,
+                        source1,
+                        bitmap
+                    );
                     if (result != Vector128<byte>.Zero)
                     {
-                        return ComputeLastIndex<short, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                        return ComputeLastIndex<short, TNegator>(
+                            ref searchSpace,
+                            ref currentSearchSpace,
+                            result
+                        );
                     }
-                }
-                while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref twoVectorsAfterStart));
+                } while (
+                    Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref twoVectorsAfterStart)
+                );
             }
 
             // We have 1-16 characters remaining. Process the first and last vector in the search space.
             // They may overlap, but we'll handle that in the index calculation if we do get a match.
-            Debug.Assert(searchSpaceLength >= Vector128<short>.Count, "We expect that the input is long enough for us to load a whole vector.");
+            Debug.Assert(
+                searchSpaceLength >= Vector128<short>.Count,
+                "We expect that the input is long enough for us to load a whole vector."
+            );
             {
-                ref short oneVectorAfterStart = ref Unsafe.Add(ref searchSpace, Vector128<short>.Count);
+                ref short oneVectorAfterStart = ref Unsafe.Add(
+                    ref searchSpace,
+                    Vector128<short>.Count
+                );
 
-                ref short secondVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAfterStart)
+                ref short secondVector = ref Unsafe.IsAddressGreaterThan(
+                    ref currentSearchSpace,
+                    ref oneVectorAfterStart
+                )
                     ? ref Unsafe.Subtract(ref currentSearchSpace, Vector128<short>.Count)
                     : ref searchSpace;
 
                 Vector128<short> source0 = Vector128.LoadUnsafe(ref searchSpace);
                 Vector128<short> source1 = Vector128.LoadUnsafe(ref secondVector);
 
-                Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(source0, source1, bitmap);
+                Vector128<byte> result = IndexOfAnyLookup<TNegator, TOptimizations>(
+                    source0,
+                    source1,
+                    bitmap
+                );
                 if (result != Vector128<byte>.Zero)
                 {
-                    return ComputeLastIndexOverlapped<short, TNegator>(ref searchSpace, ref secondVector, result);
+                    return ComputeLastIndexOverlapped<short, TNegator>(
+                        ref searchSpace,
+                        ref secondVector,
+                        result
+                    );
                 }
             }
 
@@ -454,7 +705,11 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        internal static int IndexOfAnyVectorized<TNegator>(ref byte searchSpace, int searchSpaceLength, ref AsciiState state)
+        internal static int IndexOfAnyVectorized<TNegator>(
+            ref byte searchSpace,
+            int searchSpaceLength,
+            ref AsciiState state
+        )
             where TNegator : struct, INegator
         {
             ref byte currentSearchSpace = ref searchSpace;
@@ -489,30 +744,52 @@ namespace System.Buffers
                     // If the input length is a multiple of 32, don't consume the last 32 characters in this loop.
                     // Let the fallback below handle it instead. This is why the condition is
                     // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                    ref byte vectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector256<byte>.Count);
+                    ref byte vectorAwayFromEnd = ref Unsafe.Add(
+                        ref searchSpace,
+                        searchSpaceLength - Vector256<byte>.Count
+                    );
 
                     do
                     {
                         Vector256<byte> source = Vector256.LoadUnsafe(ref currentSearchSpace);
 
-                        Vector256<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap256));
+                        Vector256<byte> result = TNegator.NegateIfNeeded(
+                            IndexOfAnyLookupCore(source, bitmap256)
+                        );
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                            return ComputeFirstIndex<byte, TNegator>(
+                                ref searchSpace,
+                                ref currentSearchSpace,
+                                result
+                            );
                         }
 
-                        currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, Vector256<byte>.Count);
-                    }
-                    while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd));
+                        currentSearchSpace = ref Unsafe.Add(
+                            ref currentSearchSpace,
+                            Vector256<byte>.Count
+                        );
+                    } while (
+                        Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd)
+                    );
                 }
 
                 // We have 1-32 bytes remaining. Process the first and last half vectors in the search space.
                 // They may overlap, but we'll handle that in the index calculation if we do get a match.
-                Debug.Assert(searchSpaceLength >= Vector128<byte>.Count, "We expect that the input is long enough for us to load a Vector128.");
+                Debug.Assert(
+                    searchSpaceLength >= Vector128<byte>.Count,
+                    "We expect that the input is long enough for us to load a Vector128."
+                );
                 {
-                    ref byte halfVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector128<byte>.Count);
+                    ref byte halfVectorAwayFromEnd = ref Unsafe.Add(
+                        ref searchSpace,
+                        searchSpaceLength - Vector128<byte>.Count
+                    );
 
-                    ref byte firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAwayFromEnd)
+                    ref byte firstVector = ref Unsafe.IsAddressGreaterThan(
+                        ref currentSearchSpace,
+                        ref halfVectorAwayFromEnd
+                    )
                         ? ref halfVectorAwayFromEnd
                         : ref currentSearchSpace;
 
@@ -520,10 +797,17 @@ namespace System.Buffers
                     Vector128<byte> source1 = Vector128.LoadUnsafe(ref halfVectorAwayFromEnd);
                     Vector256<byte> source = Vector256.Create(source0, source1);
 
-                    Vector256<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap256));
+                    Vector256<byte> result = TNegator.NegateIfNeeded(
+                        IndexOfAnyLookupCore(source, bitmap256)
+                    );
                     if (result != Vector256<byte>.Zero)
                     {
-                        return ComputeFirstIndexOverlapped<byte, TNegator>(ref searchSpace, ref firstVector, ref halfVectorAwayFromEnd, result);
+                        return ComputeFirstIndexOverlapped<byte, TNegator>(
+                            ref searchSpace,
+                            ref firstVector,
+                            ref halfVectorAwayFromEnd,
+                            result
+                        );
                     }
                 }
 
@@ -538,30 +822,50 @@ namespace System.Buffers
                 // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                 // Let the fallback below handle it instead. This is why the condition is
                 // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                ref byte vectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector128<byte>.Count);
+                ref byte vectorAwayFromEnd = ref Unsafe.Add(
+                    ref searchSpace,
+                    searchSpaceLength - Vector128<byte>.Count
+                );
 
                 do
                 {
                     Vector128<byte> source = Vector128.LoadUnsafe(ref currentSearchSpace);
 
-                    Vector128<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap));
+                    Vector128<byte> result = TNegator.NegateIfNeeded(
+                        IndexOfAnyLookupCore(source, bitmap)
+                    );
                     if (result != Vector128<byte>.Zero)
                     {
-                        return ComputeFirstIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                        return ComputeFirstIndex<byte, TNegator>(
+                            ref searchSpace,
+                            ref currentSearchSpace,
+                            result
+                        );
                     }
 
-                    currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, Vector128<byte>.Count);
-                }
-                while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd));
+                    currentSearchSpace = ref Unsafe.Add(
+                        ref currentSearchSpace,
+                        Vector128<byte>.Count
+                    );
+                } while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd));
             }
 
             // We have 1-16 bytes remaining. Process the first and last half vectors in the search space.
             // They may overlap, but we'll handle that in the index calculation if we do get a match.
-            Debug.Assert(searchSpaceLength >= sizeof(ulong), "We expect that the input is long enough for us to load a ulong.");
+            Debug.Assert(
+                searchSpaceLength >= sizeof(ulong),
+                "We expect that the input is long enough for us to load a ulong."
+            );
             {
-                ref byte halfVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - sizeof(ulong));
+                ref byte halfVectorAwayFromEnd = ref Unsafe.Add(
+                    ref searchSpace,
+                    searchSpaceLength - sizeof(ulong)
+                );
 
-                ref byte firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAwayFromEnd)
+                ref byte firstVector = ref Unsafe.IsAddressGreaterThan(
+                    ref currentSearchSpace,
+                    ref halfVectorAwayFromEnd
+                )
                     ? ref halfVectorAwayFromEnd
                     : ref currentSearchSpace;
 
@@ -569,10 +873,17 @@ namespace System.Buffers
                 ulong source1 = Unsafe.ReadUnaligned<ulong>(ref halfVectorAwayFromEnd);
                 Vector128<byte> source = Vector128.Create(source0, source1).AsByte();
 
-                Vector128<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap));
+                Vector128<byte> result = TNegator.NegateIfNeeded(
+                    IndexOfAnyLookupCore(source, bitmap)
+                );
                 if (result != Vector128<byte>.Zero)
                 {
-                    return ComputeFirstIndexOverlapped<byte, TNegator>(ref searchSpace, ref firstVector, ref halfVectorAwayFromEnd, result);
+                    return ComputeFirstIndexOverlapped<byte, TNegator>(
+                        ref searchSpace,
+                        ref firstVector,
+                        ref halfVectorAwayFromEnd,
+                        result
+                    );
                 }
             }
 
@@ -582,7 +893,11 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        internal static int LastIndexOfAnyVectorized<TNegator>(ref byte searchSpace, int searchSpaceLength, ref AsciiState state)
+        internal static int LastIndexOfAnyVectorized<TNegator>(
+            ref byte searchSpace,
+            int searchSpaceLength,
+            ref AsciiState state
+        )
             where TNegator : struct, INegator
         {
             if (searchSpaceLength < sizeof(ulong))
@@ -613,30 +928,52 @@ namespace System.Buffers
                     // If the input length is a multiple of 32, don't consume the last 32 characters in this loop.
                     // Let the fallback below handle it instead. This is why the condition is
                     // ">" instead of ">=" above, and why "IsAddressGreaterThan" is used instead of "!IsAddressLessThan".
-                    ref byte vectorAfterStart = ref Unsafe.Add(ref searchSpace, Vector256<byte>.Count);
+                    ref byte vectorAfterStart = ref Unsafe.Add(
+                        ref searchSpace,
+                        Vector256<byte>.Count
+                    );
 
                     do
                     {
-                        currentSearchSpace = ref Unsafe.Subtract(ref currentSearchSpace, Vector256<byte>.Count);
+                        currentSearchSpace = ref Unsafe.Subtract(
+                            ref currentSearchSpace,
+                            Vector256<byte>.Count
+                        );
 
                         Vector256<byte> source = Vector256.LoadUnsafe(ref currentSearchSpace);
 
-                        Vector256<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap256));
+                        Vector256<byte> result = TNegator.NegateIfNeeded(
+                            IndexOfAnyLookupCore(source, bitmap256)
+                        );
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeLastIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                            return ComputeLastIndex<byte, TNegator>(
+                                ref searchSpace,
+                                ref currentSearchSpace,
+                                result
+                            );
                         }
-                    }
-                    while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart));
+                    } while (
+                        Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart)
+                    );
                 }
 
                 // We have 1-32 bytes remaining. Process the first and last half vectors in the search space.
                 // They may overlap, but we'll handle that in the index calculation if we do get a match.
-                Debug.Assert(searchSpaceLength >= Vector128<byte>.Count, "We expect that the input is long enough for us to load a Vector128.");
+                Debug.Assert(
+                    searchSpaceLength >= Vector128<byte>.Count,
+                    "We expect that the input is long enough for us to load a Vector128."
+                );
                 {
-                    ref byte halfVectorAfterStart = ref Unsafe.Add(ref searchSpace, Vector128<byte>.Count);
+                    ref byte halfVectorAfterStart = ref Unsafe.Add(
+                        ref searchSpace,
+                        Vector128<byte>.Count
+                    );
 
-                    ref byte secondVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAfterStart)
+                    ref byte secondVector = ref Unsafe.IsAddressGreaterThan(
+                        ref currentSearchSpace,
+                        ref halfVectorAfterStart
+                    )
                         ? ref Unsafe.Subtract(ref currentSearchSpace, Vector128<byte>.Count)
                         : ref searchSpace;
 
@@ -644,10 +981,16 @@ namespace System.Buffers
                     Vector128<byte> source1 = Vector128.LoadUnsafe(ref secondVector);
                     Vector256<byte> source = Vector256.Create(source0, source1);
 
-                    Vector256<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap256));
+                    Vector256<byte> result = TNegator.NegateIfNeeded(
+                        IndexOfAnyLookupCore(source, bitmap256)
+                    );
                     if (result != Vector256<byte>.Zero)
                     {
-                        return ComputeLastIndexOverlapped<byte, TNegator>(ref searchSpace, ref secondVector, result);
+                        return ComputeLastIndexOverlapped<byte, TNegator>(
+                            ref searchSpace,
+                            ref secondVector,
+                            result
+                        );
                     }
                 }
 
@@ -666,26 +1009,40 @@ namespace System.Buffers
 
                 do
                 {
-                    currentSearchSpace = ref Unsafe.Subtract(ref currentSearchSpace, Vector128<byte>.Count);
+                    currentSearchSpace = ref Unsafe.Subtract(
+                        ref currentSearchSpace,
+                        Vector128<byte>.Count
+                    );
 
                     Vector128<byte> source = Vector128.LoadUnsafe(ref currentSearchSpace);
 
-                    Vector128<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap));
+                    Vector128<byte> result = TNegator.NegateIfNeeded(
+                        IndexOfAnyLookupCore(source, bitmap)
+                    );
                     if (result != Vector128<byte>.Zero)
                     {
-                        return ComputeLastIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                        return ComputeLastIndex<byte, TNegator>(
+                            ref searchSpace,
+                            ref currentSearchSpace,
+                            result
+                        );
                     }
-                }
-                while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart));
+                } while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart));
             }
 
             // We have 1-16 bytes remaining. Process the first and last half vectors in the search space.
             // They may overlap, but we'll handle that in the index calculation if we do get a match.
-            Debug.Assert(searchSpaceLength >= sizeof(ulong), "We expect that the input is long enough for us to load a ulong.");
+            Debug.Assert(
+                searchSpaceLength >= sizeof(ulong),
+                "We expect that the input is long enough for us to load a ulong."
+            );
             {
                 ref byte halfVectorAfterStart = ref Unsafe.Add(ref searchSpace, sizeof(ulong));
 
-                ref byte secondVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAfterStart)
+                ref byte secondVector = ref Unsafe.IsAddressGreaterThan(
+                    ref currentSearchSpace,
+                    ref halfVectorAfterStart
+                )
                     ? ref Unsafe.Subtract(ref currentSearchSpace, sizeof(ulong))
                     : ref searchSpace;
 
@@ -693,10 +1050,16 @@ namespace System.Buffers
                 ulong source1 = Unsafe.ReadUnaligned<ulong>(ref secondVector);
                 Vector128<byte> source = Vector128.Create(source0, source1).AsByte();
 
-                Vector128<byte> result = TNegator.NegateIfNeeded(IndexOfAnyLookupCore(source, bitmap));
+                Vector128<byte> result = TNegator.NegateIfNeeded(
+                    IndexOfAnyLookupCore(source, bitmap)
+                );
                 if (result != Vector128<byte>.Zero)
                 {
-                    return ComputeLastIndexOverlapped<byte, TNegator>(ref searchSpace, ref secondVector, result);
+                    return ComputeLastIndexOverlapped<byte, TNegator>(
+                        ref searchSpace,
+                        ref secondVector,
+                        result
+                    );
                 }
             }
 
@@ -706,7 +1069,11 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        internal static int IndexOfAnyVectorizedAnyByte<TNegator>(ref byte searchSpace, int searchSpaceLength, ref AnyByteState state)
+        internal static int IndexOfAnyVectorizedAnyByte<TNegator>(
+            ref byte searchSpace,
+            int searchSpaceLength,
+            ref AnyByteState state
+        )
             where TNegator : struct, INegator
         {
             ref byte currentSearchSpace = ref searchSpace;
@@ -742,30 +1109,54 @@ namespace System.Buffers
                     // If the input length is a multiple of 32, don't consume the last 32 characters in this loop.
                     // Let the fallback below handle it instead. This is why the condition is
                     // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                    ref byte vectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector256<byte>.Count);
+                    ref byte vectorAwayFromEnd = ref Unsafe.Add(
+                        ref searchSpace,
+                        searchSpaceLength - Vector256<byte>.Count
+                    );
 
                     do
                     {
                         Vector256<byte> source = Vector256.LoadUnsafe(ref currentSearchSpace);
 
-                        Vector256<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap256_0, bitmap256_1);
+                        Vector256<byte> result = IndexOfAnyLookup<TNegator>(
+                            source,
+                            bitmap256_0,
+                            bitmap256_1
+                        );
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                            return ComputeFirstIndex<byte, TNegator>(
+                                ref searchSpace,
+                                ref currentSearchSpace,
+                                result
+                            );
                         }
 
-                        currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, Vector256<byte>.Count);
-                    }
-                    while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd));
+                        currentSearchSpace = ref Unsafe.Add(
+                            ref currentSearchSpace,
+                            Vector256<byte>.Count
+                        );
+                    } while (
+                        Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd)
+                    );
                 }
 
                 // We have 1-32 bytes remaining. Process the first and last half vectors in the search space.
                 // They may overlap, but we'll handle that in the index calculation if we do get a match.
-                Debug.Assert(searchSpaceLength >= Vector128<byte>.Count, "We expect that the input is long enough for us to load a Vector128.");
+                Debug.Assert(
+                    searchSpaceLength >= Vector128<byte>.Count,
+                    "We expect that the input is long enough for us to load a Vector128."
+                );
                 {
-                    ref byte halfVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector128<byte>.Count);
+                    ref byte halfVectorAwayFromEnd = ref Unsafe.Add(
+                        ref searchSpace,
+                        searchSpaceLength - Vector128<byte>.Count
+                    );
 
-                    ref byte firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAwayFromEnd)
+                    ref byte firstVector = ref Unsafe.IsAddressGreaterThan(
+                        ref currentSearchSpace,
+                        ref halfVectorAwayFromEnd
+                    )
                         ? ref halfVectorAwayFromEnd
                         : ref currentSearchSpace;
 
@@ -773,10 +1164,19 @@ namespace System.Buffers
                     Vector128<byte> source1 = Vector128.LoadUnsafe(ref halfVectorAwayFromEnd);
                     Vector256<byte> source = Vector256.Create(source0, source1);
 
-                    Vector256<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap256_0, bitmap256_1);
+                    Vector256<byte> result = IndexOfAnyLookup<TNegator>(
+                        source,
+                        bitmap256_0,
+                        bitmap256_1
+                    );
                     if (result != Vector256<byte>.Zero)
                     {
-                        return ComputeFirstIndexOverlapped<byte, TNegator>(ref searchSpace, ref firstVector, ref halfVectorAwayFromEnd, result);
+                        return ComputeFirstIndexOverlapped<byte, TNegator>(
+                            ref searchSpace,
+                            ref firstVector,
+                            ref halfVectorAwayFromEnd,
+                            result
+                        );
                     }
                 }
 
@@ -794,7 +1194,10 @@ namespace System.Buffers
                 // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                 // Let the fallback below handle it instead. This is why the condition is
                 // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                ref byte vectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - Vector128<byte>.Count);
+                ref byte vectorAwayFromEnd = ref Unsafe.Add(
+                    ref searchSpace,
+                    searchSpaceLength - Vector128<byte>.Count
+                );
 
                 do
                 {
@@ -803,21 +1206,36 @@ namespace System.Buffers
                     Vector128<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap0, bitmap1);
                     if (result != Vector128<byte>.Zero)
                     {
-                        return ComputeFirstIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                        return ComputeFirstIndex<byte, TNegator>(
+                            ref searchSpace,
+                            ref currentSearchSpace,
+                            result
+                        );
                     }
 
-                    currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, Vector128<byte>.Count);
-                }
-                while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd));
+                    currentSearchSpace = ref Unsafe.Add(
+                        ref currentSearchSpace,
+                        Vector128<byte>.Count
+                    );
+                } while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref vectorAwayFromEnd));
             }
 
             // We have 1-16 bytes remaining. Process the first and last half vectors in the search space.
             // They may overlap, but we'll handle that in the index calculation if we do get a match.
-            Debug.Assert(searchSpaceLength >= sizeof(ulong), "We expect that the input is long enough for us to load a ulong.");
+            Debug.Assert(
+                searchSpaceLength >= sizeof(ulong),
+                "We expect that the input is long enough for us to load a ulong."
+            );
             {
-                ref byte halfVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength - sizeof(ulong));
+                ref byte halfVectorAwayFromEnd = ref Unsafe.Add(
+                    ref searchSpace,
+                    searchSpaceLength - sizeof(ulong)
+                );
 
-                ref byte firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAwayFromEnd)
+                ref byte firstVector = ref Unsafe.IsAddressGreaterThan(
+                    ref currentSearchSpace,
+                    ref halfVectorAwayFromEnd
+                )
                     ? ref halfVectorAwayFromEnd
                     : ref currentSearchSpace;
 
@@ -828,7 +1246,12 @@ namespace System.Buffers
                 Vector128<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap0, bitmap1);
                 if (result != Vector128<byte>.Zero)
                 {
-                    return ComputeFirstIndexOverlapped<byte, TNegator>(ref searchSpace, ref firstVector, ref halfVectorAwayFromEnd, result);
+                    return ComputeFirstIndexOverlapped<byte, TNegator>(
+                        ref searchSpace,
+                        ref firstVector,
+                        ref halfVectorAwayFromEnd,
+                        result
+                    );
                 }
             }
 
@@ -838,7 +1261,11 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        internal static int LastIndexOfAnyVectorizedAnyByte<TNegator>(ref byte searchSpace, int searchSpaceLength, ref AnyByteState state)
+        internal static int LastIndexOfAnyVectorizedAnyByte<TNegator>(
+            ref byte searchSpace,
+            int searchSpaceLength,
+            ref AnyByteState state
+        )
             where TNegator : struct, INegator
         {
             if (!IsVectorizationSupported || searchSpaceLength < sizeof(ulong))
@@ -870,30 +1297,54 @@ namespace System.Buffers
                     // If the input length is a multiple of 32, don't consume the last 32 characters in this loop.
                     // Let the fallback below handle it instead. This is why the condition is
                     // ">" instead of ">=" above, and why "IsAddressGreaterThan" is used instead of "!IsAddressLessThan".
-                    ref byte vectorAfterStart = ref Unsafe.Add(ref searchSpace, Vector256<byte>.Count);
+                    ref byte vectorAfterStart = ref Unsafe.Add(
+                        ref searchSpace,
+                        Vector256<byte>.Count
+                    );
 
                     do
                     {
-                        currentSearchSpace = ref Unsafe.Subtract(ref currentSearchSpace, Vector256<byte>.Count);
+                        currentSearchSpace = ref Unsafe.Subtract(
+                            ref currentSearchSpace,
+                            Vector256<byte>.Count
+                        );
 
                         Vector256<byte> source = Vector256.LoadUnsafe(ref currentSearchSpace);
 
-                        Vector256<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap256_0, bitmap256_1);
+                        Vector256<byte> result = IndexOfAnyLookup<TNegator>(
+                            source,
+                            bitmap256_0,
+                            bitmap256_1
+                        );
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeLastIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                            return ComputeLastIndex<byte, TNegator>(
+                                ref searchSpace,
+                                ref currentSearchSpace,
+                                result
+                            );
                         }
-                    }
-                    while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart));
+                    } while (
+                        Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart)
+                    );
                 }
 
                 // We have 1-32 bytes remaining. Process the first and last half vectors in the search space.
                 // They may overlap, but we'll handle that in the index calculation if we do get a match.
-                Debug.Assert(searchSpaceLength >= Vector128<byte>.Count, "We expect that the input is long enough for us to load a Vector128.");
+                Debug.Assert(
+                    searchSpaceLength >= Vector128<byte>.Count,
+                    "We expect that the input is long enough for us to load a Vector128."
+                );
                 {
-                    ref byte halfVectorAfterStart = ref Unsafe.Add(ref searchSpace, Vector128<byte>.Count);
+                    ref byte halfVectorAfterStart = ref Unsafe.Add(
+                        ref searchSpace,
+                        Vector128<byte>.Count
+                    );
 
-                    ref byte secondVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAfterStart)
+                    ref byte secondVector = ref Unsafe.IsAddressGreaterThan(
+                        ref currentSearchSpace,
+                        ref halfVectorAfterStart
+                    )
                         ? ref Unsafe.Subtract(ref currentSearchSpace, Vector128<byte>.Count)
                         : ref searchSpace;
 
@@ -901,10 +1352,18 @@ namespace System.Buffers
                     Vector128<byte> source1 = Vector128.LoadUnsafe(ref secondVector);
                     Vector256<byte> source = Vector256.Create(source0, source1);
 
-                    Vector256<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap256_0, bitmap256_1);
+                    Vector256<byte> result = IndexOfAnyLookup<TNegator>(
+                        source,
+                        bitmap256_0,
+                        bitmap256_1
+                    );
                     if (result != Vector256<byte>.Zero)
                     {
-                        return ComputeLastIndexOverlapped<byte, TNegator>(ref searchSpace, ref secondVector, result);
+                        return ComputeLastIndexOverlapped<byte, TNegator>(
+                            ref searchSpace,
+                            ref secondVector,
+                            result
+                        );
                     }
                 }
 
@@ -926,26 +1385,38 @@ namespace System.Buffers
 
                 do
                 {
-                    currentSearchSpace = ref Unsafe.Subtract(ref currentSearchSpace, Vector128<byte>.Count);
+                    currentSearchSpace = ref Unsafe.Subtract(
+                        ref currentSearchSpace,
+                        Vector128<byte>.Count
+                    );
 
                     Vector128<byte> source = Vector128.LoadUnsafe(ref currentSearchSpace);
 
                     Vector128<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap0, bitmap1);
                     if (result != Vector128<byte>.Zero)
                     {
-                        return ComputeLastIndex<byte, TNegator>(ref searchSpace, ref currentSearchSpace, result);
+                        return ComputeLastIndex<byte, TNegator>(
+                            ref searchSpace,
+                            ref currentSearchSpace,
+                            result
+                        );
                     }
-                }
-                while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart));
+                } while (Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref vectorAfterStart));
             }
 
             // We have 1-16 bytes remaining. Process the first and last half vectors in the search space.
             // They may overlap, but we'll handle that in the index calculation if we do get a match.
-            Debug.Assert(searchSpaceLength >= sizeof(ulong), "We expect that the input is long enough for us to load a ulong.");
+            Debug.Assert(
+                searchSpaceLength >= sizeof(ulong),
+                "We expect that the input is long enough for us to load a ulong."
+            );
             {
                 ref byte halfVectorAfterStart = ref Unsafe.Add(ref searchSpace, sizeof(ulong));
 
-                ref byte secondVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref halfVectorAfterStart)
+                ref byte secondVector = ref Unsafe.IsAddressGreaterThan(
+                    ref currentSearchSpace,
+                    ref halfVectorAfterStart
+                )
                     ? ref Unsafe.Subtract(ref currentSearchSpace, sizeof(ulong))
                     : ref searchSpace;
 
@@ -956,7 +1427,11 @@ namespace System.Buffers
                 Vector128<byte> result = IndexOfAnyLookup<TNegator>(source, bitmap0, bitmap1);
                 if (result != Vector128<byte>.Zero)
                 {
-                    return ComputeLastIndexOverlapped<byte, TNegator>(ref searchSpace, ref secondVector, result);
+                    return ComputeLastIndexOverlapped<byte, TNegator>(
+                        ref searchSpace,
+                        ref secondVector,
+                        result
+                    );
                 }
             }
 
@@ -967,11 +1442,18 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Sse2))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        private static Vector128<byte> IndexOfAnyLookup<TNegator, TOptimizations>(Vector128<short> source0, Vector128<short> source1, Vector128<byte> bitmapLookup)
+        private static Vector128<byte> IndexOfAnyLookup<TNegator, TOptimizations>(
+            Vector128<short> source0,
+            Vector128<short> source1,
+            Vector128<byte> bitmapLookup
+        )
             where TNegator : struct, INegator
             where TOptimizations : struct, IOptimizations
         {
-            Vector128<byte> source = TOptimizations.PackSources(source0.AsUInt16(), source1.AsUInt16());
+            Vector128<byte> source = TOptimizations.PackSources(
+                source0.AsUInt16(),
+                source1.AsUInt16()
+            );
 
             Vector128<byte> result = IndexOfAnyLookupCore(source, bitmapLookup);
 
@@ -982,7 +1464,10 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        private static Vector128<byte> IndexOfAnyLookupCore(Vector128<byte> source, Vector128<byte> bitmapLookup)
+        private static Vector128<byte> IndexOfAnyLookupCore(
+            Vector128<byte> source,
+            Vector128<byte> bitmapLookup
+        )
         {
             // On X86, the Ssse3.Shuffle instruction will already perform an implicit 'AND 0xF' on the indices, so we can skip it.
             // For values above 127, Ssse3.Shuffle will also set the result to 0. This is fine as we don't want non-ASCII values to match anyway.
@@ -1002,7 +1487,10 @@ namespace System.Buffers
             Vector128<byte> bitMask = Vector128.ShuffleUnsafe(bitmapLookup, lowNibbles);
 
             // For values above 127, the high nibble will be above 7. We construct the positions vector for the shuffle such that those values map to 0.
-            Vector128<byte> bitPositions = Vector128.ShuffleUnsafe(Vector128.Create(0x8040201008040201, 0).AsByte(), highNibbles);
+            Vector128<byte> bitPositions = Vector128.ShuffleUnsafe(
+                Vector128.Create(0x8040201008040201, 0).AsByte(),
+                highNibbles
+            );
 
             Vector128<byte> result = bitMask & bitPositions;
             return result;
@@ -1010,11 +1498,18 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static Vector256<byte> IndexOfAnyLookup<TNegator, TOptimizations>(Vector256<short> source0, Vector256<short> source1, Vector256<byte> bitmapLookup)
+        private static Vector256<byte> IndexOfAnyLookup<TNegator, TOptimizations>(
+            Vector256<short> source0,
+            Vector256<short> source1,
+            Vector256<byte> bitmapLookup
+        )
             where TNegator : struct, INegator
             where TOptimizations : struct, IOptimizations
         {
-            Vector256<byte> source = TOptimizations.PackSources(source0.AsUInt16(), source1.AsUInt16());
+            Vector256<byte> source = TOptimizations.PackSources(
+                source0.AsUInt16(),
+                source1.AsUInt16()
+            );
 
             Vector256<byte> result = IndexOfAnyLookupCore(source, bitmapLookup);
 
@@ -1023,12 +1518,18 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static Vector256<byte> IndexOfAnyLookupCore(Vector256<byte> source, Vector256<byte> bitmapLookup)
+        private static Vector256<byte> IndexOfAnyLookupCore(
+            Vector256<byte> source,
+            Vector256<byte> bitmapLookup
+        )
         {
             // See comments in IndexOfAnyLookupCore(Vector128<byte>) above for more details.
             Vector256<byte> highNibbles = source >>> 4;
             Vector256<byte> bitMask = Avx2.Shuffle(bitmapLookup, source);
-            Vector256<byte> bitPositions = Avx2.Shuffle(Vector256.Create(0x8040201008040201).AsByte(), highNibbles);
+            Vector256<byte> bitPositions = Avx2.Shuffle(
+                Vector256.Create(0x8040201008040201).AsByte(),
+                highNibbles
+            );
             Vector256<byte> result = bitMask & bitPositions;
             return result;
         }
@@ -1037,20 +1538,31 @@ namespace System.Buffers
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
         [CompExactlyDependsOn(typeof(PackedSimd))]
-        private static Vector128<byte> IndexOfAnyLookup<TNegator>(Vector128<byte> source, Vector128<byte> bitmapLookup0, Vector128<byte> bitmapLookup1)
+        private static Vector128<byte> IndexOfAnyLookup<TNegator>(
+            Vector128<byte> source,
+            Vector128<byte> bitmapLookup0,
+            Vector128<byte> bitmapLookup1
+        )
             where TNegator : struct, INegator
         {
             // http://0x80.pl/articles/simd-byte-lookup.html#universal-algorithm
 
             Vector128<byte> lowNibbles = source & Vector128.Create((byte)0xF);
-            Vector128<byte> highNibbles = Vector128.ShiftRightLogical(source.AsInt32(), 4).AsByte() & Vector128.Create((byte)0xF);
+            Vector128<byte> highNibbles =
+                Vector128.ShiftRightLogical(source.AsInt32(), 4).AsByte()
+                & Vector128.Create((byte)0xF);
 
             Vector128<byte> row0 = Vector128.ShuffleUnsafe(bitmapLookup0, lowNibbles);
             Vector128<byte> row1 = Vector128.ShuffleUnsafe(bitmapLookup1, lowNibbles);
 
-            Vector128<byte> bitmask = Vector128.ShuffleUnsafe(Vector128.Create(0x8040201008040201).AsByte(), highNibbles);
+            Vector128<byte> bitmask = Vector128.ShuffleUnsafe(
+                Vector128.Create(0x8040201008040201).AsByte(),
+                highNibbles
+            );
 
-            Vector128<byte> mask = Vector128.GreaterThan(highNibbles.AsSByte(), Vector128.Create((sbyte)0x7)).AsByte();
+            Vector128<byte> mask = Vector128
+                .GreaterThan(highNibbles.AsSByte(), Vector128.Create((sbyte)0x7))
+                .AsByte();
             Vector128<byte> bitsets = Vector128.ConditionalSelect(mask, row1, row0);
 
             Vector128<byte> result = Vector128.Equals(bitsets & bitmask, bitmask);
@@ -1060,20 +1572,31 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static Vector256<byte> IndexOfAnyLookup<TNegator>(Vector256<byte> source, Vector256<byte> bitmapLookup0, Vector256<byte> bitmapLookup1)
+        private static Vector256<byte> IndexOfAnyLookup<TNegator>(
+            Vector256<byte> source,
+            Vector256<byte> bitmapLookup0,
+            Vector256<byte> bitmapLookup1
+        )
             where TNegator : struct, INegator
         {
             // http://0x80.pl/articles/simd-byte-lookup.html#universal-algorithm
 
             Vector256<byte> lowNibbles = source & Vector256.Create((byte)0xF);
-            Vector256<byte> highNibbles = Vector256.ShiftRightLogical(source.AsInt32(), 4).AsByte() & Vector256.Create((byte)0xF);
+            Vector256<byte> highNibbles =
+                Vector256.ShiftRightLogical(source.AsInt32(), 4).AsByte()
+                & Vector256.Create((byte)0xF);
 
             Vector256<byte> row0 = Avx2.Shuffle(bitmapLookup0, lowNibbles);
             Vector256<byte> row1 = Avx2.Shuffle(bitmapLookup1, lowNibbles);
 
-            Vector256<byte> bitmask = Avx2.Shuffle(Vector256.Create(0x8040201008040201).AsByte(), highNibbles);
+            Vector256<byte> bitmask = Avx2.Shuffle(
+                Vector256.Create(0x8040201008040201).AsByte(),
+                highNibbles
+            );
 
-            Vector256<byte> mask = Vector256.GreaterThan(highNibbles.AsSByte(), Vector256.Create((sbyte)0x7)).AsByte();
+            Vector256<byte> mask = Vector256
+                .GreaterThan(highNibbles.AsSByte(), Vector256.Create((sbyte)0x7))
+                .AsByte();
             Vector256<byte> bitsets = Vector256.ConditionalSelect(mask, row1, row0);
 
             Vector256<byte> result = Vector256.Equals(bitsets & bitmask, bitmask);
@@ -1082,16 +1605,26 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe int ComputeFirstIndex<T, TNegator>(ref T searchSpace, ref T current, Vector128<byte> result)
+        private static unsafe int ComputeFirstIndex<T, TNegator>(
+            ref T searchSpace,
+            ref T current,
+            Vector128<byte> result
+        )
             where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result);
             int offsetInVector = BitOperations.TrailingZeroCount(mask);
-            return offsetInVector + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
+            return offsetInVector
+                + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe int ComputeFirstIndexOverlapped<T, TNegator>(ref T searchSpace, ref T current0, ref T current1, Vector128<byte> result)
+        private static unsafe int ComputeFirstIndexOverlapped<T, TNegator>(
+            ref T searchSpace,
+            ref T current0,
+            ref T current1,
+            Vector128<byte> result
+        )
             where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result);
@@ -1102,20 +1635,30 @@ namespace System.Buffers
                 current0 = ref current1;
                 offsetInVector -= Vector128<short>.Count;
             }
-            return offsetInVector + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current0) / (nuint)sizeof(T));
+            return offsetInVector
+                + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current0) / (nuint)sizeof(T));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe int ComputeLastIndex<T, TNegator>(ref T searchSpace, ref T current, Vector128<byte> result)
+        private static unsafe int ComputeLastIndex<T, TNegator>(
+            ref T searchSpace,
+            ref T current,
+            Vector128<byte> result
+        )
             where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result) & 0xFFFF;
             int offsetInVector = 31 - BitOperations.LeadingZeroCount(mask);
-            return offsetInVector + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
+            return offsetInVector
+                + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe int ComputeLastIndexOverlapped<T, TNegator>(ref T searchSpace, ref T secondVector, Vector128<byte> result)
+        private static unsafe int ComputeLastIndexOverlapped<T, TNegator>(
+            ref T searchSpace,
+            ref T secondVector,
+            Vector128<byte> result
+        )
             where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result) & 0xFFFF;
@@ -1126,12 +1669,20 @@ namespace System.Buffers
             }
 
             // We matched within the second vector
-            return offsetInVector - Vector128<short>.Count + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref secondVector) / (nuint)sizeof(T));
+            return offsetInVector
+                - Vector128<short>.Count
+                + (int)(
+                    (nuint)Unsafe.ByteOffset(ref searchSpace, ref secondVector) / (nuint)sizeof(T)
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static unsafe int ComputeFirstIndex<T, TNegator>(ref T searchSpace, ref T current, Vector256<byte> result)
+        private static unsafe int ComputeFirstIndex<T, TNegator>(
+            ref T searchSpace,
+            ref T current,
+            Vector256<byte> result
+        )
             where TNegator : struct, INegator
         {
             if (typeof(T) == typeof(short))
@@ -1142,12 +1693,18 @@ namespace System.Buffers
             uint mask = TNegator.ExtractMask(result);
 
             int offsetInVector = BitOperations.TrailingZeroCount(mask);
-            return offsetInVector + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
+            return offsetInVector
+                + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static unsafe int ComputeFirstIndexOverlapped<T, TNegator>(ref T searchSpace, ref T current0, ref T current1, Vector256<byte> result)
+        private static unsafe int ComputeFirstIndexOverlapped<T, TNegator>(
+            ref T searchSpace,
+            ref T current0,
+            ref T current1,
+            Vector256<byte> result
+        )
             where TNegator : struct, INegator
         {
             if (typeof(T) == typeof(short))
@@ -1164,12 +1721,17 @@ namespace System.Buffers
                 current0 = ref current1;
                 offsetInVector -= Vector256<short>.Count;
             }
-            return offsetInVector + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current0) / (nuint)sizeof(T));
+            return offsetInVector
+                + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current0) / (nuint)sizeof(T));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static unsafe int ComputeLastIndex<T, TNegator>(ref T searchSpace, ref T current, Vector256<byte> result)
+        private static unsafe int ComputeLastIndex<T, TNegator>(
+            ref T searchSpace,
+            ref T current,
+            Vector256<byte> result
+        )
             where TNegator : struct, INegator
         {
             if (typeof(T) == typeof(short))
@@ -1180,12 +1742,17 @@ namespace System.Buffers
             uint mask = TNegator.ExtractMask(result);
 
             int offsetInVector = 31 - BitOperations.LeadingZeroCount(mask);
-            return offsetInVector + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
+            return offsetInVector
+                + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref current) / (nuint)sizeof(T));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static unsafe int ComputeLastIndexOverlapped<T, TNegator>(ref T searchSpace, ref T secondVector, Vector256<byte> result)
+        private static unsafe int ComputeLastIndexOverlapped<T, TNegator>(
+            ref T searchSpace,
+            ref T secondVector,
+            Vector256<byte> result
+        )
             where TNegator : struct, INegator
         {
             if (typeof(T) == typeof(short))
@@ -1202,7 +1769,11 @@ namespace System.Buffers
             }
 
             // We matched within the second vector
-            return offsetInVector - Vector256<short>.Count + (int)((nuint)Unsafe.ByteOffset(ref searchSpace, ref secondVector) / (nuint)sizeof(T));
+            return offsetInVector
+                - Vector256<short>.Count
+                + (int)(
+                    (nuint)Unsafe.ByteOffset(ref searchSpace, ref secondVector) / (nuint)sizeof(T)
+                );
         }
 
         internal interface INegator
@@ -1217,21 +1788,35 @@ namespace System.Buffers
         internal readonly struct DontNegate : INegator
         {
             public static bool NegateIfNeeded(bool result) => result;
+
             public static Vector128<byte> NegateIfNeeded(Vector128<byte> result) => result;
+
             public static Vector256<byte> NegateIfNeeded(Vector256<byte> result) => result;
-            public static uint ExtractMask(Vector128<byte> result) => ~Vector128.Equals(result, Vector128<byte>.Zero).ExtractMostSignificantBits();
-            public static uint ExtractMask(Vector256<byte> result) => ~Vector256.Equals(result, Vector256<byte>.Zero).ExtractMostSignificantBits();
+
+            public static uint ExtractMask(Vector128<byte> result) =>
+                ~Vector128.Equals(result, Vector128<byte>.Zero).ExtractMostSignificantBits();
+
+            public static uint ExtractMask(Vector256<byte> result) =>
+                ~Vector256.Equals(result, Vector256<byte>.Zero).ExtractMostSignificantBits();
         }
 
         internal readonly struct Negate : INegator
         {
             public static bool NegateIfNeeded(bool result) => !result;
+
             // This is intentionally testing for equality with 0 instead of "~result".
             // We want to know if any character didn't match, as that means it should be treated as a match for the -Except method.
-            public static Vector128<byte> NegateIfNeeded(Vector128<byte> result) => Vector128.Equals(result, Vector128<byte>.Zero);
-            public static Vector256<byte> NegateIfNeeded(Vector256<byte> result) => Vector256.Equals(result, Vector256<byte>.Zero);
-            public static uint ExtractMask(Vector128<byte> result) => result.ExtractMostSignificantBits();
-            public static uint ExtractMask(Vector256<byte> result) => result.ExtractMostSignificantBits();
+            public static Vector128<byte> NegateIfNeeded(Vector128<byte> result) =>
+                Vector128.Equals(result, Vector128<byte>.Zero);
+
+            public static Vector256<byte> NegateIfNeeded(Vector256<byte> result) =>
+                Vector256.Equals(result, Vector256<byte>.Zero);
+
+            public static uint ExtractMask(Vector128<byte> result) =>
+                result.ExtractMostSignificantBits();
+
+            public static uint ExtractMask(Vector256<byte> result) =>
+                result.ExtractMostSignificantBits();
         }
 
         internal interface IOptimizations
@@ -1242,8 +1827,14 @@ namespace System.Buffers
             // - Values  > 32767 result in 0. Because of this we must do more work to handle needles that contain 0.
             // Otherwise: Do narrowing saturation over unsigned values.
             // - All values result in min(value, 255)
-            static abstract Vector128<byte> PackSources(Vector128<ushort> lower, Vector128<ushort> upper);
-            static abstract Vector256<byte> PackSources(Vector256<ushort> lower, Vector256<ushort> upper);
+            static abstract Vector128<byte> PackSources(
+                Vector128<ushort> lower,
+                Vector128<ushort> upper
+            );
+            static abstract Vector256<byte> PackSources(
+                Vector256<ushort> lower,
+                Vector256<ushort> upper
+            );
         }
 
         internal readonly struct Ssse3AndWasmHandleZeroInNeedle : IOptimizations
@@ -1252,10 +1843,17 @@ namespace System.Buffers
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             [CompExactlyDependsOn(typeof(Sse2))]
             [CompExactlyDependsOn(typeof(PackedSimd))]
-            public static Vector128<byte> PackSources(Vector128<ushort> lower, Vector128<ushort> upper)
+            public static Vector128<byte> PackSources(
+                Vector128<ushort> lower,
+                Vector128<ushort> upper
+            )
             {
-                Vector128<short> lowerMin = Vector128.Min(lower, Vector128.Create((ushort)255)).AsInt16();
-                Vector128<short> upperMin = Vector128.Min(upper, Vector128.Create((ushort)255)).AsInt16();
+                Vector128<short> lowerMin = Vector128
+                    .Min(lower, Vector128.Create((ushort)255))
+                    .AsInt16();
+                Vector128<short> upperMin = Vector128
+                    .Min(upper, Vector128.Create((ushort)255))
+                    .AsInt16();
 
                 return Sse2.IsSupported
                     ? Sse2.PackUnsignedSaturate(lowerMin, upperMin)
@@ -1265,11 +1863,15 @@ namespace System.Buffers
             // Replace with Vector256.NarrowWithSaturation once https://github.com/dotnet/runtime/issues/75724 is implemented.
             [CompExactlyDependsOn(typeof(Avx2))]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> PackSources(Vector256<ushort> lower, Vector256<ushort> upper)
+            public static Vector256<byte> PackSources(
+                Vector256<ushort> lower,
+                Vector256<ushort> upper
+            )
             {
                 return Avx2.PackUnsignedSaturate(
                     Vector256.Min(lower, Vector256.Create((ushort)255)).AsInt16(),
-                    Vector256.Min(upper, Vector256.Create((ushort)255)).AsInt16());
+                    Vector256.Min(upper, Vector256.Create((ushort)255)).AsInt16()
+                );
             }
         }
 
@@ -1279,17 +1881,27 @@ namespace System.Buffers
             [CompExactlyDependsOn(typeof(Sse2))]
             [CompExactlyDependsOn(typeof(AdvSimd))]
             [CompExactlyDependsOn(typeof(PackedSimd))]
-            public static Vector128<byte> PackSources(Vector128<ushort> lower, Vector128<ushort> upper)
+            public static Vector128<byte> PackSources(
+                Vector128<ushort> lower,
+                Vector128<ushort> upper
+            )
             {
-                return
-                    Sse2.IsSupported ? Sse2.PackUnsignedSaturate(lower.AsInt16(), upper.AsInt16()) :
-                    AdvSimd.IsSupported ? AdvSimd.ExtractNarrowingSaturateUpper(AdvSimd.ExtractNarrowingSaturateLower(lower), upper) :
-                    PackedSimd.ConvertNarrowingSaturateUnsigned(lower.AsInt16(), upper.AsInt16());
+                return Sse2.IsSupported
+                        ? Sse2.PackUnsignedSaturate(lower.AsInt16(), upper.AsInt16())
+                    : AdvSimd.IsSupported
+                        ? AdvSimd.ExtractNarrowingSaturateUpper(
+                            AdvSimd.ExtractNarrowingSaturateLower(lower),
+                            upper
+                        )
+                    : PackedSimd.ConvertNarrowingSaturateUnsigned(lower.AsInt16(), upper.AsInt16());
             }
 
             [CompExactlyDependsOn(typeof(Avx2))]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> PackSources(Vector256<ushort> lower, Vector256<ushort> upper)
+            public static Vector256<byte> PackSources(
+                Vector256<ushort> lower,
+                Vector256<ushort> upper
+            )
             {
                 return Avx2.PackUnsignedSaturate(lower.AsInt16(), upper.AsInt16());
             }

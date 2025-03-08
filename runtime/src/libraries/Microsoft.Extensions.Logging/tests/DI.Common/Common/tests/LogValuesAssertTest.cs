@@ -12,25 +12,27 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
     {
         public static TheoryData<
             IEnumerable<KeyValuePair<string, object>>,
-            IEnumerable<KeyValuePair<string, object>>> ExpectedValues_SubsetOf_ActualValuesData
+            IEnumerable<KeyValuePair<string, object>>
+        > ExpectedValues_SubsetOf_ActualValuesData
         {
             get
             {
                 return new TheoryData<
                     IEnumerable<KeyValuePair<string, object>>,
-                    IEnumerable<KeyValuePair<string, object>>>()
+                    IEnumerable<KeyValuePair<string, object>>
+                >()
                 {
                     {
-                        new KeyValuePair<string,object>[] { },
-                        new KeyValuePair<string,object>[] { }
+                        new KeyValuePair<string, object>[] { },
+                        new KeyValuePair<string, object>[] { }
                     },
                     {
                         // subset
-                        new KeyValuePair<string,object>[] { },
+                        new KeyValuePair<string, object>[] { },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         }
                     },
                     {
@@ -38,13 +40,13 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id"),
-                            new KeyValuePair<string, object>("RouteConstraint", "Something")
+                            new KeyValuePair<string, object>("RouteConstraint", "Something"),
                         }
                     },
                     {
@@ -52,14 +54,14 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id"),
                         }
-                    }
+                    },
                 };
             }
         }
@@ -68,7 +70,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         [MemberData(nameof(ExpectedValues_SubsetOf_ActualValuesData))]
         public void Asserts_Success_ExpectedValues_SubsetOf_ActualValues(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
-            IEnumerable<KeyValuePair<string, object>> actualValues)
+            IEnumerable<KeyValuePair<string, object>> actualValues
+        )
         {
             // Act && Assert
             LogValuesAssert.Contains(expectedValues, actualValues);
@@ -76,35 +79,37 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
 
         public static TheoryData<
             IEnumerable<KeyValuePair<string, object>>,
-            IEnumerable<KeyValuePair<string, object>>> ExpectedValues_MoreThan_ActualValuesData
+            IEnumerable<KeyValuePair<string, object>>
+        > ExpectedValues_MoreThan_ActualValuesData
         {
             get
             {
                 return new TheoryData<
                     IEnumerable<KeyValuePair<string, object>>,
-                    IEnumerable<KeyValuePair<string, object>>>()
+                    IEnumerable<KeyValuePair<string, object>>
+                >()
                 {
                     {
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         },
-                        new KeyValuePair<string,object>[] { }
+                        new KeyValuePair<string, object>[] { }
                     },
                     {
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id"),
-                            new KeyValuePair<string, object>("RouteConstraint", "Something")
+                            new KeyValuePair<string, object>("RouteConstraint", "Something"),
                         },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         }
-                    }
+                    },
                 };
             }
         }
@@ -113,11 +118,13 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         [MemberData(nameof(ExpectedValues_MoreThan_ActualValuesData))]
         public void Asserts_Failure_ExpectedValues_MoreThan_ActualValues(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
-            IEnumerable<KeyValuePair<string, object>> actualValues)
+            IEnumerable<KeyValuePair<string, object>> actualValues
+        )
         {
             // Act && Assert
-            Assert.Throws<EqualException>(
-                () => LogValuesAssert.Contains(expectedValues, actualValues));
+            Assert.Throws<EqualException>(() =>
+                LogValuesAssert.Contains(expectedValues, actualValues)
+            );
         }
 
         [Fact]
@@ -128,7 +135,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
             {
                 new KeyValuePair<string, object>("RouteConstraint", "Something"),
                 new KeyValuePair<string, object>("RouteValue", "Failure"),
-                new KeyValuePair<string, object>("RouteKey", "id")
+                new KeyValuePair<string, object>("RouteKey", "id"),
             };
             var actualLogValues = new[]
             {
@@ -158,13 +165,15 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
 
         public static TheoryData<
             IEnumerable<KeyValuePair<string, object>>,
-            IEnumerable<KeyValuePair<string, object>>> CaseSensitivityComparisonData
+            IEnumerable<KeyValuePair<string, object>>
+        > CaseSensitivityComparisonData
         {
             get
             {
                 return new TheoryData<
                     IEnumerable<KeyValuePair<string, object>>,
-                    IEnumerable<KeyValuePair<string, object>>>()
+                    IEnumerable<KeyValuePair<string, object>>
+                >()
                 {
                     {
                         new[]
@@ -189,7 +198,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                             new KeyValuePair<string, object>("RouteKey", "id"),
                             new KeyValuePair<string, object>("RouteValue", "FAILURE"),
                         }
-                    }
+                    },
                 };
             }
         }
@@ -198,18 +207,20 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         [MemberData(nameof(CaseSensitivityComparisonData))]
         public void DefaultComparer_Performs_CaseSensitiveComparison(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
-            IEnumerable<KeyValuePair<string, object>> actualValues)
+            IEnumerable<KeyValuePair<string, object>> actualValues
+        )
         {
             // Act && Assert
-            Assert.Throws<EqualException>(
-                () => LogValuesAssert.Contains(expectedValues, actualValues));
+            Assert.Throws<EqualException>(() =>
+                LogValuesAssert.Contains(expectedValues, actualValues)
+            );
         }
 
         private string GetString(IEnumerable<KeyValuePair<string, object>> logValues)
         {
-            return logValues == null ?
-                "Null" :
-                string.Join(",", logValues.Select(kvp => $"[{kvp.Key} {kvp.Value}]"));
+            return logValues == null
+                ? "Null"
+                : string.Join(",", logValues.Select(kvp => $"[{kvp.Key} {kvp.Value}]"));
         }
     }
 }

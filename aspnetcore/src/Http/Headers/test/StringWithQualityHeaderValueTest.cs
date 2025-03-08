@@ -28,8 +28,10 @@ public class StringWithQualityHeaderValueTest
         Assert.Throws<ArgumentException>(() => new StringWithQualityHeaderValue("", 0.1));
         Assert.Throws<FormatException>(() => new StringWithQualityHeaderValue("in valid", 0.1));
 
-        Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", 1.1));
-        Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", -0.1));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", 1.1)
+        );
+        Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", -0.1)
+        );
     }
 
     [Fact]
@@ -108,7 +110,10 @@ public class StringWithQualityHeaderValueTest
         CheckValidParse("text ; q = 0.5", new StringWithQualityHeaderValue("text", 0.5));
         CheckValidParse("\r\n text ; q = 0.5 ", new StringWithQualityHeaderValue("text", 0.5));
         CheckValidParse("  text  ", new StringWithQualityHeaderValue("text"));
-        CheckValidParse(" \r\n text \r\n ; \r\n q = 0.123", new StringWithQualityHeaderValue("text", 0.123));
+        CheckValidParse(
+            " \r\n text \r\n ; \r\n q = 0.123",
+            new StringWithQualityHeaderValue("text", 0.123)
+        );
         CheckValidParse(" text ; q = 0.123 ", new StringWithQualityHeaderValue("text", 0.123));
         CheckValidParse("text;q=1 ", new StringWithQualityHeaderValue("text", 1));
         CheckValidParse("*", new StringWithQualityHeaderValue("*"));
@@ -169,7 +174,10 @@ public class StringWithQualityHeaderValueTest
         CheckValidTryParse("text ; q = 0.5", new StringWithQualityHeaderValue("text", 0.5));
         CheckValidTryParse("\r\n text ; q = 0.5 ", new StringWithQualityHeaderValue("text", 0.5));
         CheckValidTryParse("  text  ", new StringWithQualityHeaderValue("text"));
-        CheckValidTryParse(" \r\n text \r\n ; \r\n q = 0.123", new StringWithQualityHeaderValue("text", 0.123));
+        CheckValidTryParse(
+            " \r\n text \r\n ; \r\n q = 0.123",
+            new StringWithQualityHeaderValue("text", 0.123)
+        );
     }
 
     [Fact]
@@ -203,34 +211,36 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text2,",
-                "textA,textB",
-                "text3;q=0.5",
-                "text4;q=0.5,",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
-        IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseList(inputs);
+            "",
+            "text1",
+            "text2,",
+            "textA,textB",
+            "text3;q=0.5",
+            "text4;q=0.5,",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
+        IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseList(
+            inputs
+        );
 
         var expectedResults = new[]
         {
-                new StringWithQualityHeaderValue("text1"),
-                new StringWithQualityHeaderValue("text2"),
-                new StringWithQualityHeaderValue("textA"),
-                new StringWithQualityHeaderValue("textB"),
-                new StringWithQualityHeaderValue("text3", 0.5),
-                new StringWithQualityHeaderValue("text4", 0.5),
-                new StringWithQualityHeaderValue("text5", 0.5),
-                new StringWithQualityHeaderValue("text6", 0.05),
-                new StringWithQualityHeaderValue("text7"),
-                new StringWithQualityHeaderValue("text8", 0.5),
-                new StringWithQualityHeaderValue("text9"),
-                new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            new StringWithQualityHeaderValue("text1"),
+            new StringWithQualityHeaderValue("text2"),
+            new StringWithQualityHeaderValue("textA"),
+            new StringWithQualityHeaderValue("textB"),
+            new StringWithQualityHeaderValue("text3", 0.5),
+            new StringWithQualityHeaderValue("text4", 0.5),
+            new StringWithQualityHeaderValue("text5", 0.5),
+            new StringWithQualityHeaderValue("text6", 0.05),
+            new StringWithQualityHeaderValue("text7"),
+            new StringWithQualityHeaderValue("text8", 0.5),
+            new StringWithQualityHeaderValue("text9"),
+            new StringWithQualityHeaderValue("text10", 0.5),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -240,34 +250,36 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text2,",
-                "textA,textB",
-                "text3;q=0.5",
-                "text4;q=0.5,",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
-        IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseStrictList(inputs);
+            "",
+            "text1",
+            "text2,",
+            "textA,textB",
+            "text3;q=0.5",
+            "text4;q=0.5,",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
+        IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseStrictList(
+            inputs
+        );
 
         var expectedResults = new[]
         {
-                new StringWithQualityHeaderValue("text1"),
-                new StringWithQualityHeaderValue("text2"),
-                new StringWithQualityHeaderValue("textA"),
-                new StringWithQualityHeaderValue("textB"),
-                new StringWithQualityHeaderValue("text3", 0.5),
-                new StringWithQualityHeaderValue("text4", 0.5),
-                new StringWithQualityHeaderValue("text5", 0.5),
-                new StringWithQualityHeaderValue("text6", 0.05),
-                new StringWithQualityHeaderValue("text7"),
-                new StringWithQualityHeaderValue("text8", 0.5),
-                new StringWithQualityHeaderValue("text9"),
-                new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            new StringWithQualityHeaderValue("text1"),
+            new StringWithQualityHeaderValue("text2"),
+            new StringWithQualityHeaderValue("textA"),
+            new StringWithQualityHeaderValue("textB"),
+            new StringWithQualityHeaderValue("text3", 0.5),
+            new StringWithQualityHeaderValue("text4", 0.5),
+            new StringWithQualityHeaderValue("text5", 0.5),
+            new StringWithQualityHeaderValue("text6", 0.05),
+            new StringWithQualityHeaderValue("text7"),
+            new StringWithQualityHeaderValue("text8", 0.5),
+            new StringWithQualityHeaderValue("text9"),
+            new StringWithQualityHeaderValue("text10", 0.5),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -277,34 +289,34 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text2,",
-                "textA,textB",
-                "text3;q=0.5",
-                "text4;q=0.5,",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
+            "",
+            "text1",
+            "text2,",
+            "textA,textB",
+            "text3;q=0.5",
+            "text4;q=0.5,",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
         Assert.True(StringWithQualityHeaderValue.TryParseList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new StringWithQualityHeaderValue("text1"),
-                new StringWithQualityHeaderValue("text2"),
-                new StringWithQualityHeaderValue("textA"),
-                new StringWithQualityHeaderValue("textB"),
-                new StringWithQualityHeaderValue("text3", 0.5),
-                new StringWithQualityHeaderValue("text4", 0.5),
-                new StringWithQualityHeaderValue("text5", 0.5),
-                new StringWithQualityHeaderValue("text6", 0.05),
-                new StringWithQualityHeaderValue("text7"),
-                new StringWithQualityHeaderValue("text8", 0.5),
-                new StringWithQualityHeaderValue("text9"),
-                new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            new StringWithQualityHeaderValue("text1"),
+            new StringWithQualityHeaderValue("text2"),
+            new StringWithQualityHeaderValue("textA"),
+            new StringWithQualityHeaderValue("textB"),
+            new StringWithQualityHeaderValue("text3", 0.5),
+            new StringWithQualityHeaderValue("text4", 0.5),
+            new StringWithQualityHeaderValue("text5", 0.5),
+            new StringWithQualityHeaderValue("text6", 0.05),
+            new StringWithQualityHeaderValue("text7"),
+            new StringWithQualityHeaderValue("text8", 0.5),
+            new StringWithQualityHeaderValue("text9"),
+            new StringWithQualityHeaderValue("text10", 0.5),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -314,34 +326,34 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text2,",
-                "textA,textB",
-                "text3;q=0.5",
-                "text4;q=0.5,",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
+            "",
+            "text1",
+            "text2,",
+            "textA,textB",
+            "text3;q=0.5",
+            "text4;q=0.5,",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
         Assert.True(StringWithQualityHeaderValue.TryParseStrictList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new StringWithQualityHeaderValue("text1"),
-                new StringWithQualityHeaderValue("text2"),
-                new StringWithQualityHeaderValue("textA"),
-                new StringWithQualityHeaderValue("textB"),
-                new StringWithQualityHeaderValue("text3", 0.5),
-                new StringWithQualityHeaderValue("text4", 0.5),
-                new StringWithQualityHeaderValue("text5", 0.5),
-                new StringWithQualityHeaderValue("text6", 0.05),
-                new StringWithQualityHeaderValue("text7"),
-                new StringWithQualityHeaderValue("text8", 0.5),
-                new StringWithQualityHeaderValue("text9"),
-                new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            new StringWithQualityHeaderValue("text1"),
+            new StringWithQualityHeaderValue("text2"),
+            new StringWithQualityHeaderValue("textA"),
+            new StringWithQualityHeaderValue("textB"),
+            new StringWithQualityHeaderValue("text3", 0.5),
+            new StringWithQualityHeaderValue("text4", 0.5),
+            new StringWithQualityHeaderValue("text5", 0.5),
+            new StringWithQualityHeaderValue("text6", 0.05),
+            new StringWithQualityHeaderValue("text7"),
+            new StringWithQualityHeaderValue("text8", 0.5),
+            new StringWithQualityHeaderValue("text9"),
+            new StringWithQualityHeaderValue("text10", 0.5),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -351,35 +363,35 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text 1",
-                "text2",
-                "\"text 2\",",
-                "text3;q=0.5",
-                "text4;q=0.5, extra stuff",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
+            "",
+            "text1",
+            "text 1",
+            "text2",
+            "\"text 2\",",
+            "text3;q=0.5",
+            "text4;q=0.5, extra stuff",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
         var results = StringWithQualityHeaderValue.ParseList(inputs);
 
         var expectedResults = new[]
         {
-                new StringWithQualityHeaderValue("text1"),
-                new StringWithQualityHeaderValue("1"),
-                new StringWithQualityHeaderValue("text2"),
-                new StringWithQualityHeaderValue("text3", 0.5),
-                new StringWithQualityHeaderValue("text4", 0.5),
-                new StringWithQualityHeaderValue("stuff"),
-                new StringWithQualityHeaderValue("text5", 0.5),
-                new StringWithQualityHeaderValue("text6", 0.05),
-                new StringWithQualityHeaderValue("text7"),
-                new StringWithQualityHeaderValue("text8", 0.5),
-                new StringWithQualityHeaderValue("text9"),
-                new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            new StringWithQualityHeaderValue("text1"),
+            new StringWithQualityHeaderValue("1"),
+            new StringWithQualityHeaderValue("text2"),
+            new StringWithQualityHeaderValue("text3", 0.5),
+            new StringWithQualityHeaderValue("text4", 0.5),
+            new StringWithQualityHeaderValue("stuff"),
+            new StringWithQualityHeaderValue("text5", 0.5),
+            new StringWithQualityHeaderValue("text6", 0.05),
+            new StringWithQualityHeaderValue("text7"),
+            new StringWithQualityHeaderValue("text8", 0.5),
+            new StringWithQualityHeaderValue("text9"),
+            new StringWithQualityHeaderValue("text10", 0.5),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -389,18 +401,18 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text 1",
-                "text2",
-                "\"text 2\",",
-                "text3;q=0.5",
-                "text4;q=0.5, extra stuff",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
+            "",
+            "text1",
+            "text 1",
+            "text2",
+            "\"text 2\",",
+            "text3;q=0.5",
+            "text4;q=0.5, extra stuff",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
         Assert.Throws<FormatException>(() => StringWithQualityHeaderValue.ParseStrictList(inputs));
     }
 
@@ -409,35 +421,35 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text 1",
-                "text2",
-                "\"text 2\",",
-                "text3;q=0.5",
-                "text4;q=0.5, extra stuff",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
+            "",
+            "text1",
+            "text 1",
+            "text2",
+            "\"text 2\",",
+            "text3;q=0.5",
+            "text4;q=0.5, extra stuff",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
         Assert.True(StringWithQualityHeaderValue.TryParseList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new StringWithQualityHeaderValue("text1"),
-                new StringWithQualityHeaderValue("1"),
-                new StringWithQualityHeaderValue("text2"),
-                new StringWithQualityHeaderValue("text3", 0.5),
-                new StringWithQualityHeaderValue("text4", 0.5),
-                new StringWithQualityHeaderValue("stuff"),
-                new StringWithQualityHeaderValue("text5", 0.5),
-                new StringWithQualityHeaderValue("text6", 0.05),
-                new StringWithQualityHeaderValue("text7"),
-                new StringWithQualityHeaderValue("text8", 0.5),
-                new StringWithQualityHeaderValue("text9"),
-                new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            new StringWithQualityHeaderValue("text1"),
+            new StringWithQualityHeaderValue("1"),
+            new StringWithQualityHeaderValue("text2"),
+            new StringWithQualityHeaderValue("text3", 0.5),
+            new StringWithQualityHeaderValue("text4", 0.5),
+            new StringWithQualityHeaderValue("stuff"),
+            new StringWithQualityHeaderValue("text5", 0.5),
+            new StringWithQualityHeaderValue("text6", 0.05),
+            new StringWithQualityHeaderValue("text7"),
+            new StringWithQualityHeaderValue("text8", 0.5),
+            new StringWithQualityHeaderValue("text9"),
+            new StringWithQualityHeaderValue("text10", 0.5),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -447,18 +459,18 @@ public class StringWithQualityHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "text1",
-                "text 1",
-                "text2",
-                "\"text 2\",",
-                "text3;q=0.5",
-                "text4;q=0.5, extra stuff",
-                " text5 ; q = 0.50 ",
-                "\r\n text6 ; q = 0.05 ",
-                "text7,text8;q=0.5",
-                " text9 , text10 ; q = 0.5 ",
-            };
+            "",
+            "text1",
+            "text 1",
+            "text2",
+            "\"text 2\",",
+            "text3;q=0.5",
+            "text4;q=0.5, extra stuff",
+            " text5 ; q = 0.50 ",
+            "\r\n text6 ; q = 0.05 ",
+            "text7,text8;q=0.5",
+            " text9 , text10 ; q = 0.5 ",
+        };
         Assert.False(StringWithQualityHeaderValue.TryParseStrictList(inputs, out var results));
     }
 

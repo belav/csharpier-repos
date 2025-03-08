@@ -18,7 +18,13 @@ namespace System.Runtime.Caching.Configuration
         internal const string ThrowOnDisposed = "throwOnDisposed";
         internal const int DefaultPollingTimeMilliseconds = 120000;
 
-        internal static int GetIntValue(NameValueCollection config, string valueName, int defaultValue, bool zeroAllowed, int maxValueAllowed)
+        internal static int GetIntValue(
+            NameValueCollection config,
+            string valueName,
+            int defaultValue,
+            bool zeroAllowed,
+            int maxValueAllowed
+        )
         {
             string sValue = config[valueName];
 
@@ -28,30 +34,43 @@ namespace System.Runtime.Caching.Configuration
             }
 
             int iValue;
-            if (!int.TryParse(sValue, out iValue)
-                || iValue < 0
-                || (!zeroAllowed && iValue == 0))
+            if (!int.TryParse(sValue, out iValue) || iValue < 0 || (!zeroAllowed && iValue == 0))
             {
                 if (zeroAllowed)
                 {
-                    throw new ArgumentException(RH.Format(SR.Value_must_be_non_negative_integer, valueName, sValue), nameof(config));
+                    throw new ArgumentException(
+                        RH.Format(SR.Value_must_be_non_negative_integer, valueName, sValue),
+                        nameof(config)
+                    );
                 }
 
-                throw new ArgumentException(RH.Format(SR.Value_must_be_positive_integer, valueName, sValue), nameof(config));
+                throw new ArgumentException(
+                    RH.Format(SR.Value_must_be_positive_integer, valueName, sValue),
+                    nameof(config)
+                );
             }
 
             if (maxValueAllowed > 0 && iValue > maxValueAllowed)
             {
-                throw new ArgumentException(RH.Format(SR.Value_too_big,
-                                                      valueName,
-                                                      sValue,
-                                                      maxValueAllowed.ToString(CultureInfo.InvariantCulture)), nameof(config));
+                throw new ArgumentException(
+                    RH.Format(
+                        SR.Value_too_big,
+                        valueName,
+                        sValue,
+                        maxValueAllowed.ToString(CultureInfo.InvariantCulture)
+                    ),
+                    nameof(config)
+                );
             }
 
             return iValue;
         }
 
-        internal static int GetIntValueFromTimeSpan(NameValueCollection config, string valueName, int defaultValue)
+        internal static int GetIntValueFromTimeSpan(
+            NameValueCollection config,
+            string valueName,
+            int defaultValue
+        )
         {
             string sValue = config[valueName];
 
@@ -68,7 +87,10 @@ namespace System.Runtime.Caching.Configuration
             TimeSpan tValue;
             if (!TimeSpan.TryParse(sValue, out tValue) || tValue <= TimeSpan.Zero)
             {
-                throw new ArgumentException(RH.Format(SR.TimeSpan_invalid_format, valueName, sValue), nameof(config));
+                throw new ArgumentException(
+                    RH.Format(SR.TimeSpan_invalid_format, valueName, sValue),
+                    nameof(config)
+                );
             }
 
             double milliseconds = tValue.TotalMilliseconds;
@@ -76,7 +98,11 @@ namespace System.Runtime.Caching.Configuration
             return iValue;
         }
 
-        internal static bool GetBooleanValue(NameValueCollection config, string valueName, bool defaultValue)
+        internal static bool GetBooleanValue(
+            NameValueCollection config,
+            string valueName,
+            bool defaultValue
+        )
         {
             string sValue = config[valueName];
 
@@ -88,7 +114,10 @@ namespace System.Runtime.Caching.Configuration
             bool bValue;
             if (!bool.TryParse(sValue, out bValue))
             {
-                throw new ArgumentException(RH.Format(SR.Value_must_be_boolean, valueName, sValue), nameof(config));
+                throw new ArgumentException(
+                    RH.Format(SR.Value_must_be_boolean, valueName, sValue),
+                    nameof(config)
+                );
             }
 
             return bValue;

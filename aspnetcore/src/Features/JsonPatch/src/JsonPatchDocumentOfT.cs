@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.JsonPatch;
 // including type data in the JsonPatchDocument serialized as JSON (to allow for correct deserialization) - that's
 // not according to RFC 6902, and would thus break cross-platform compatibility.
 [JsonConverter(typeof(TypedJsonPatchDocumentConverter))]
-public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
+public class JsonPatchDocument<TModel> : IJsonPatchDocument
+    where TModel : class
 {
     public List<Operation<TModel>> Operations { get; private set; }
 
@@ -39,7 +40,8 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument(List<Operation<TModel>> operations, IContractResolver contractResolver)
     {
         Operations = operations ?? throw new ArgumentNullException(nameof(operations));
-        ContractResolver = contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+        ContractResolver =
+            contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
     }
 
     /// <summary>
@@ -54,11 +56,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "add",
-            GetPath(path, null),
-            from: null,
-            value: value));
+        Operations.Add(new Operation<TModel>("add", GetPath(path, null), from: null, value: value));
 
         return this;
     }
@@ -74,15 +72,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Add<TProp>(
         Expression<Func<TModel, IList<TProp>>> path,
         TProp value,
-        int position)
+        int position
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "add",
-            GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-            from: null,
-            value: value));
+        Operations.Add(
+            new Operation<TModel>(
+                "add",
+                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                from: null,
+                value: value
+            )
+        );
 
         return this;
     }
@@ -94,15 +96,14 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="path">target location</param>
     /// <param name="value">value</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Add<TProp>(Expression<Func<TModel, IList<TProp>>> path, TProp value)
+    public JsonPatchDocument<TModel> Add<TProp>(
+        Expression<Func<TModel, IList<TProp>>> path,
+        TProp value
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "add",
-            GetPath(path, "-"),
-            from: null,
-            value: value));
+        Operations.Add(new Operation<TModel>("add", GetPath(path, "-"), from: null, value: value));
 
         return this;
     }
@@ -129,14 +130,20 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="path">target location</param>
     /// <param name="position">position</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Remove<TProp>(Expression<Func<TModel, IList<TProp>>> path, int position)
+    public JsonPatchDocument<TModel> Remove<TProp>(
+        Expression<Func<TModel, IList<TProp>>> path,
+        int position
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "remove",
-            GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-            from: null));
+        Operations.Add(
+            new Operation<TModel>(
+                "remove",
+                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                from: null
+            )
+        );
 
         return this;
     }
@@ -151,10 +158,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "remove",
-            GetPath(path, "-"),
-            from: null));
+        Operations.Add(new Operation<TModel>("remove", GetPath(path, "-"), from: null));
 
         return this;
     }
@@ -166,15 +170,16 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="path">target location</param>
     /// <param name="value">value</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Replace<TProp>(Expression<Func<TModel, TProp>> path, TProp value)
+    public JsonPatchDocument<TModel> Replace<TProp>(
+        Expression<Func<TModel, TProp>> path,
+        TProp value
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "replace",
-            GetPath(path, null),
-            from: null,
-            value: value));
+        Operations.Add(
+            new Operation<TModel>("replace", GetPath(path, null), from: null, value: value)
+        );
 
         return this;
     }
@@ -187,16 +192,22 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="value">value</param>
     /// <param name="position">position</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Replace<TProp>(Expression<Func<TModel, IList<TProp>>> path,
-        TProp value, int position)
+    public JsonPatchDocument<TModel> Replace<TProp>(
+        Expression<Func<TModel, IList<TProp>>> path,
+        TProp value,
+        int position
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "replace",
-            GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-            from: null,
-            value: value));
+        Operations.Add(
+            new Operation<TModel>(
+                "replace",
+                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                from: null,
+                value: value
+            )
+        );
 
         return this;
     }
@@ -208,15 +219,16 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="path">target location</param>
     /// <param name="value">value</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Replace<TProp>(Expression<Func<TModel, IList<TProp>>> path, TProp value)
+    public JsonPatchDocument<TModel> Replace<TProp>(
+        Expression<Func<TModel, IList<TProp>>> path,
+        TProp value
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "replace",
-            GetPath(path, "-"),
-            from: null,
-            value: value));
+        Operations.Add(
+            new Operation<TModel>("replace", GetPath(path, "-"), from: null, value: value)
+        );
 
         return this;
     }
@@ -232,11 +244,9 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "test",
-            GetPath(path, null),
-            from: null,
-            value: value));
+        Operations.Add(
+            new Operation<TModel>("test", GetPath(path, null), from: null, value: value)
+        );
 
         return this;
     }
@@ -249,16 +259,22 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="value">value</param>
     /// <param name="position">position</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Test<TProp>(Expression<Func<TModel, IList<TProp>>> path,
-        TProp value, int position)
+    public JsonPatchDocument<TModel> Test<TProp>(
+        Expression<Func<TModel, IList<TProp>>> path,
+        TProp value,
+        int position
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "test",
-            GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-            from: null,
-            value: value));
+        Operations.Add(
+            new Operation<TModel>(
+                "test",
+                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                from: null,
+                value: value
+            )
+        );
 
         return this;
     }
@@ -270,15 +286,14 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="path">target location</param>
     /// <param name="value">value</param>
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-    public JsonPatchDocument<TModel> Test<TProp>(Expression<Func<TModel, IList<TProp>>> path, TProp value)
+    public JsonPatchDocument<TModel> Test<TProp>(
+        Expression<Func<TModel, IList<TProp>>> path,
+        TProp value
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "test",
-            GetPath(path, "-"),
-            from: null,
-            value: value));
+        Operations.Add(new Operation<TModel>("test", GetPath(path, "-"), from: null, value: value));
 
         return this;
     }
@@ -292,15 +307,13 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
     public JsonPatchDocument<TModel> Move<TProp>(
         Expression<Func<TModel, TProp>> from,
-        Expression<Func<TModel, TProp>> path)
+        Expression<Func<TModel, TProp>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "move",
-            GetPath(path, null),
-            GetPath(from, null)));
+        Operations.Add(new Operation<TModel>("move", GetPath(path, null), GetPath(from, null)));
 
         return this;
     }
@@ -316,15 +329,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Move<TProp>(
         Expression<Func<TModel, IList<TProp>>> from,
         int positionFrom,
-        Expression<Func<TModel, TProp>> path)
+        Expression<Func<TModel, TProp>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "move",
-            GetPath(path, null),
-            GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+        Operations.Add(
+            new Operation<TModel>(
+                "move",
+                GetPath(path, null),
+                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+            )
+        );
 
         return this;
     }
@@ -340,15 +357,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Move<TProp>(
         Expression<Func<TModel, TProp>> from,
         Expression<Func<TModel, IList<TProp>>> path,
-        int positionTo)
+        int positionTo
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "move",
-            GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-            GetPath(from, null)));
+        Operations.Add(
+            new Operation<TModel>(
+                "move",
+                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                GetPath(from, null)
+            )
+        );
 
         return this;
     }
@@ -366,15 +387,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
         Expression<Func<TModel, IList<TProp>>> from,
         int positionFrom,
         Expression<Func<TModel, IList<TProp>>> path,
-        int positionTo)
+        int positionTo
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "move",
-            GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-            GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+        Operations.Add(
+            new Operation<TModel>(
+                "move",
+                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+            )
+        );
 
         return this;
     }
@@ -390,15 +415,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Move<TProp>(
         Expression<Func<TModel, IList<TProp>>> from,
         int positionFrom,
-        Expression<Func<TModel, IList<TProp>>> path)
+        Expression<Func<TModel, IList<TProp>>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "move",
-            GetPath(path, "-"),
-            GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+        Operations.Add(
+            new Operation<TModel>(
+                "move",
+                GetPath(path, "-"),
+                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+            )
+        );
 
         return this;
     }
@@ -412,15 +441,13 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
     public JsonPatchDocument<TModel> Move<TProp>(
         Expression<Func<TModel, TProp>> from,
-        Expression<Func<TModel, IList<TProp>>> path)
+        Expression<Func<TModel, IList<TProp>>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "move",
-            GetPath(path, "-"),
-            GetPath(from, null)));
+        Operations.Add(new Operation<TModel>("move", GetPath(path, "-"), GetPath(from, null)));
 
         return this;
     }
@@ -434,15 +461,13 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
     public JsonPatchDocument<TModel> Copy<TProp>(
         Expression<Func<TModel, TProp>> from,
-        Expression<Func<TModel, TProp>> path)
+        Expression<Func<TModel, TProp>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "copy",
-            GetPath(path, null),
-            GetPath(from, null)));
+        Operations.Add(new Operation<TModel>("copy", GetPath(path, null), GetPath(from, null)));
 
         return this;
     }
@@ -458,15 +483,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Copy<TProp>(
         Expression<Func<TModel, IList<TProp>>> from,
         int positionFrom,
-        Expression<Func<TModel, TProp>> path)
+        Expression<Func<TModel, TProp>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "copy",
-            GetPath(path, null),
-            GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+        Operations.Add(
+            new Operation<TModel>(
+                "copy",
+                GetPath(path, null),
+                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+            )
+        );
 
         return this;
     }
@@ -482,15 +511,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Copy<TProp>(
         Expression<Func<TModel, TProp>> from,
         Expression<Func<TModel, IList<TProp>>> path,
-        int positionTo)
+        int positionTo
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "copy",
-            GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-            GetPath(from, null)));
+        Operations.Add(
+            new Operation<TModel>(
+                "copy",
+                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                GetPath(from, null)
+            )
+        );
 
         return this;
     }
@@ -508,15 +541,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
         Expression<Func<TModel, IList<TProp>>> from,
         int positionFrom,
         Expression<Func<TModel, IList<TProp>>> path,
-        int positionTo)
+        int positionTo
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "copy",
-            GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-            GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+        Operations.Add(
+            new Operation<TModel>(
+                "copy",
+                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+            )
+        );
 
         return this;
     }
@@ -532,15 +569,19 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     public JsonPatchDocument<TModel> Copy<TProp>(
         Expression<Func<TModel, IList<TProp>>> from,
         int positionFrom,
-        Expression<Func<TModel, IList<TProp>>> path)
+        Expression<Func<TModel, IList<TProp>>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "copy",
-            GetPath(path, "-"),
-            GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+        Operations.Add(
+            new Operation<TModel>(
+                "copy",
+                GetPath(path, "-"),
+                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+            )
+        );
 
         return this;
     }
@@ -554,15 +595,13 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
     public JsonPatchDocument<TModel> Copy<TProp>(
         Expression<Func<TModel, TProp>> from,
-        Expression<Func<TModel, IList<TProp>>> path)
+        Expression<Func<TModel, IList<TProp>>> path
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation<TModel>(
-            "copy",
-            GetPath(path, "-"),
-            GetPath(from, null)));
+        Operations.Add(new Operation<TModel>("copy", GetPath(path, "-"), GetPath(from, null)));
 
         return this;
     }
@@ -585,7 +624,11 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="logErrorAction">Action to log errors</param>
     public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction)
     {
-        ApplyTo(objectToApplyTo, new ObjectAdapter(ContractResolver, logErrorAction, AdapterFactory.Default), logErrorAction);
+        ApplyTo(
+            objectToApplyTo,
+            new ObjectAdapter(ContractResolver, logErrorAction, AdapterFactory.Default),
+            logErrorAction
+        );
     }
 
     /// <summary>
@@ -594,7 +637,11 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     /// <param name="objectToApplyTo">Object to apply the JsonPatchDocument to</param>
     /// <param name="adapter">IObjectAdapter instance to use when applying</param>
     /// <param name="logErrorAction">Action to log errors</param>
-    public void ApplyTo(TModel objectToApplyTo, IObjectAdapter adapter, Action<JsonPatchError> logErrorAction)
+    public void ApplyTo(
+        TModel objectToApplyTo,
+        IObjectAdapter adapter,
+        Action<JsonPatchError> logErrorAction
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(objectToApplyTo);
         ArgumentNullThrowHelper.ThrowIfNull(adapter);
@@ -646,7 +693,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
                     op = op.op,
                     value = op.value,
                     path = op.path,
-                    from = op.from
+                    from = op.from,
                 };
 
                 allOps.Add(untypedOp);
@@ -706,17 +753,23 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
                 return listOfSegments;
 
             default:
-                throw new InvalidOperationException(Resources.FormatExpressionTypeNotSupported(expr));
+                throw new InvalidOperationException(
+                    Resources.FormatExpressionTypeNotSupported(expr)
+                );
         }
     }
 
     private string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
     {
-        var jsonObjectContract = ContractResolver.ResolveContract(memberExpression.Expression.Type) as JsonObjectContract;
+        var jsonObjectContract =
+            ContractResolver.ResolveContract(memberExpression.Expression.Type)
+            as JsonObjectContract;
         if (jsonObjectContract != null)
         {
-            return jsonObjectContract.Properties
-                .First(jsonProperty => jsonProperty.UnderlyingName == memberExpression.Member.Name)
+            return jsonObjectContract
+                .Properties.First(jsonProperty =>
+                    jsonProperty.UnderlyingName == memberExpression.Member.Name
+                )
                 .PropertyName;
         }
 

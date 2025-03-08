@@ -31,9 +31,7 @@ namespace System.Linq.Expressions.Compiler
                 EmitStore();
             }
 
-            internal virtual void FreeLocal()
-            {
-            }
+            internal virtual void FreeLocal() { }
         }
 
         private sealed class LocalStorage : Storage
@@ -49,7 +47,9 @@ namespace System.Linq.Expressions.Compiler
                 // from being exposed to user created trees.
 
                 // Set name if DebugInfoGenerator support is brought back.
-                _local = compiler.GetLocal(variable.IsByRef ? variable.Type.MakeByRefType() : variable.Type);
+                _local = compiler.GetLocal(
+                    variable.IsByRef ? variable.Type.MakeByRefType() : variable.Type
+                );
             }
 
             internal override void EmitLoad()

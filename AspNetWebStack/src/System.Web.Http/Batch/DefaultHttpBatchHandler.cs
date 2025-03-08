@@ -43,15 +43,16 @@ namespace System.Web.Http.Batch
         /// <exception cref="System.ComponentModel.InvalidEnumArgumentException">value</exception>
         public BatchExecutionOrder ExecutionOrder
         {
-            get
-            {
-                return _executionOrder;
-            }
+            get { return _executionOrder; }
             set
             {
                 if (!Enum.IsDefined(typeof(BatchExecutionOrder), value))
                 {
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(BatchExecutionOrder));
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(BatchExecutionOrder)
+                    );
                 }
                 _executionOrder = value;
             }
@@ -69,8 +70,16 @@ namespace System.Web.Http.Batch
         /// <param name="request">The original request containing all the batch requests.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>The batch response message.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller is responsible for disposing the object.")]
-        public virtual Task<HttpResponseMessage> CreateResponseMessageAsync(IList<HttpResponseMessage> responses, HttpRequestMessage request, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller is responsible for disposing the object."
+        )]
+        public virtual Task<HttpResponseMessage> CreateResponseMessageAsync(
+            IList<HttpResponseMessage> responses,
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (responses == null)
             {
@@ -94,7 +103,10 @@ namespace System.Web.Http.Batch
         }
 
         /// <inheritdoc/>
-        public override async Task<HttpResponseMessage> ProcessBatchAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public override async Task<HttpResponseMessage> ProcessBatchAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -103,11 +115,17 @@ namespace System.Web.Http.Batch
 
             ValidateRequest(request);
 
-            IList<HttpRequestMessage> subRequests = await ParseBatchRequestsAsync(request, cancellationToken);
+            IList<HttpRequestMessage> subRequests = await ParseBatchRequestsAsync(
+                request,
+                cancellationToken
+            );
 
             try
             {
-                IList<HttpResponseMessage> responses = await ExecuteRequestMessagesAsync(subRequests, cancellationToken);
+                IList<HttpResponseMessage> responses = await ExecuteRequestMessagesAsync(
+                    subRequests,
+                    cancellationToken
+                );
                 return await CreateResponseMessageAsync(responses, request, cancellationToken);
             }
             finally
@@ -126,8 +144,15 @@ namespace System.Web.Http.Batch
         /// <param name="requests">The collection of batch request messages.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A collection of <see cref="HttpResponseMessage"/> for the batch requests.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "We need to return a collection of response messages asynchronously.")]
-        public virtual async Task<IList<HttpResponseMessage>> ExecuteRequestMessagesAsync(IEnumerable<HttpRequestMessage> requests, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "We need to return a collection of response messages asynchronously."
+        )]
+        public virtual async Task<IList<HttpResponseMessage>> ExecuteRequestMessagesAsync(
+            IEnumerable<HttpRequestMessage> requests,
+            CancellationToken cancellationToken
+        )
         {
             if (requests == null)
             {
@@ -148,7 +173,13 @@ namespace System.Web.Http.Batch
                         break;
 
                     case BatchExecutionOrder.NonSequential:
-                        responses.AddRange(await Task.WhenAll(requests.Select(request => Invoker.SendAsync(request, cancellationToken))));
+                        responses.AddRange(
+                            await Task.WhenAll(
+                                requests.Select(request =>
+                                    Invoker.SendAsync(request, cancellationToken)
+                                )
+                            )
+                        );
                         break;
                 }
             }
@@ -173,8 +204,15 @@ namespace System.Web.Http.Batch
         /// <param name="request">The request containing the batch request messages.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A collection of <see cref="HttpRequestMessage"/>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "We need to return a collection of request messages asynchronously.")]
-        public virtual async Task<IList<HttpRequestMessage>> ParseBatchRequestsAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "We need to return a collection of request messages asynchronously."
+        )]
+        public virtual async Task<IList<HttpRequestMessage>> ParseBatchRequestsAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -187,7 +225,12 @@ namespace System.Web.Http.Batch
             foreach (HttpContent httpContent in streamProvider.Contents)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                HttpRequestMessage innerRequest = request.RequestUri == null ? await httpContent.ReadAsHttpRequestMessageAsync() : await httpContent.ReadAsHttpRequestMessageAsync(request.RequestUri.Scheme);
+                HttpRequestMessage innerRequest =
+                    request.RequestUri == null
+                        ? await httpContent.ReadAsHttpRequestMessageAsync()
+                        : await httpContent.ReadAsHttpRequestMessageAsync(
+                            request.RequestUri.Scheme
+                        );
                 innerRequest.CopyBatchRequestProperties(request);
                 requests.Add(innerRequest);
             }
@@ -198,7 +241,11 @@ namespace System.Web.Http.Batch
         /// Validates the incoming request that contains the batch request messages.
         /// </summary>
         /// <param name="request">The request containing the batch request messages.</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller is responsible for disposing the object.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller is responsible for disposing the object."
+        )]
         public virtual void ValidateRequest(HttpRequestMessage request)
         {
             if (request == null)
@@ -208,24 +255,38 @@ namespace System.Web.Http.Batch
 
             if (request.Content == null)
             {
-                throw new HttpResponseException(request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    SRResources.BatchRequestMissingContent));
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        SRResources.BatchRequestMissingContent
+                    )
+                );
             }
 
             MediaTypeHeaderValue contentType = request.Content.Headers.ContentType;
             if (contentType == null)
             {
-                throw new HttpResponseException(request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    SRResources.BatchContentTypeMissing));
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        SRResources.BatchContentTypeMissing
+                    )
+                );
             }
 
-            if (!SupportedContentTypes.Contains(contentType.MediaType, StringComparer.OrdinalIgnoreCase))
+            if (
+                !SupportedContentTypes.Contains(
+                    contentType.MediaType,
+                    StringComparer.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new HttpResponseException(request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    Error.Format(SRResources.BatchMediaTypeNotSupported, contentType.MediaType)));
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        Error.Format(SRResources.BatchMediaTypeNotSupported, contentType.MediaType)
+                    )
+                );
             }
         }
     }

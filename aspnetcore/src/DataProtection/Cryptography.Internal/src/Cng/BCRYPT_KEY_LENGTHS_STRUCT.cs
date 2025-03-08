@@ -21,7 +21,12 @@ internal struct BCRYPT_KEY_LENGTHS_STRUCT
     {
         if (!IsValidKeyLength(keyLengthInBits))
         {
-            string message = Resources.FormatBCRYPT_KEY_LENGTHS_STRUCT_InvalidKeyLength(keyLengthInBits, dwMinLength, dwMaxLength, dwIncrement);
+            string message = Resources.FormatBCRYPT_KEY_LENGTHS_STRUCT_InvalidKeyLength(
+                keyLengthInBits,
+                dwMinLength,
+                dwMaxLength,
+                dwIncrement
+            );
             throw new ArgumentOutOfRangeException(nameof(keyLengthInBits), message);
         }
         CryptoUtil.Assert(keyLengthInBits % 8 == 0, "keyLengthInBits % 8 == 0");

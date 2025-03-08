@@ -8,7 +8,6 @@ namespace DebuggerTests
 {
     public class PointerTests
     {
-
         public static unsafe void LocalPointers()
         {
             int ivalue0 = 5;
@@ -33,23 +32,45 @@ namespace DebuggerTests
             DateTime* dtp_null = null;
             DateTime*[] dtpa = new DateTime*[] { dtp, dtp_null };
             DateTime**[] dtppa = new DateTime**[] { &dtp, &dtp_null, null };
-            Console.WriteLine($"-- break here: ip_null==null: {ip_null == null}, ipp_null: {ipp_null == null}, *ipp_null==ip_null: {*ipp_null == ip_null}, *ipp_null==null: {*ipp_null == null}");
+            Console.WriteLine(
+                $"-- break here: ip_null==null: {ip_null == null}, ipp_null: {ipp_null == null}, *ipp_null==ip_null: {*ipp_null == ip_null}, *ipp_null==null: {*ipp_null == null}"
+            );
 
-            var gs = new GenericStructWithUnmanagedT<DateTime> { Value = new DateTime(1, 2, 3, 4, 5, 6), IntField = 4, DTPP = &dtp };
-            var gs_null = new GenericStructWithUnmanagedT<DateTime> { Value = new DateTime(1, 2, 3, 4, 5, 6), IntField = 4, DTPP = &dtp_null };
+            var gs = new GenericStructWithUnmanagedT<DateTime>
+            {
+                Value = new DateTime(1, 2, 3, 4, 5, 6),
+                IntField = 4,
+                DTPP = &dtp,
+            };
+            var gs_null = new GenericStructWithUnmanagedT<DateTime>
+            {
+                Value = new DateTime(1, 2, 3, 4, 5, 6),
+                IntField = 4,
+                DTPP = &dtp_null,
+            };
             var gsp = &gs;
             var gsp_null = &gs_null;
             var gspa = new GenericStructWithUnmanagedT<DateTime>*[] { null, gsp, gsp_null };
 
             var cwp = new GenericClassWithPointers<DateTime> { Ptr = dtp };
             var cwp_null = new GenericClassWithPointers<DateTime>();
-            Console.WriteLine($"{(int)*ip}, {(int)**ipp}, {ipp_null == null}, {ip_null == null}, {ippa == null}, {ipa}, {(char)*cp}, {(vp == null ? "null" : "not null")}, {dtp->Second}, {gsp->IntField}, {cwp}, {cwp_null}, {gs_null}");
+            Console.WriteLine(
+                $"{(int)*ip}, {(int)**ipp}, {ipp_null == null}, {ip_null == null}, {ippa == null}, {ipa}, {(char)*cp}, {(vp == null ? "null" : "not null")}, {dtp->Second}, {gsp->IntField}, {cwp}, {cwp_null}, {gs_null}"
+            );
 
             PointersAsArgsTest(ip, ipp, ipa, ippa, &dt, &dtp, dtpa, dtppa);
         }
 
-        static unsafe void PointersAsArgsTest(int* ip, int** ipp, int*[] ipa, int**[] ippa,
-                            DateTime* dtp, DateTime** dtpp, DateTime*[] dtpa, DateTime**[] dtppa)
+        static unsafe void PointersAsArgsTest(
+            int* ip,
+            int** ipp,
+            int*[] ipa,
+            int**[] ippa,
+            DateTime* dtp,
+            DateTime** dtpp,
+            DateTime*[] dtpa,
+            DateTime**[] dtppa
+        )
         {
             Console.WriteLine($"break here!");
             if (ip == null)
@@ -81,23 +102,39 @@ namespace DebuggerTests
             DateTime* dtp_null = null;
             DateTime*[] dtpa = new DateTime*[] { dtp, dtp_null };
             DateTime**[] dtppa = new DateTime**[] { &dtp, &dtp_null, null };
-            Console.WriteLine($"-- break here: ip_null==null: {ip_null == null}, ipp_null: {ipp_null == null}, *ipp_null==ip_null: {*ipp_null == ip_null}, *ipp_null==null: {*ipp_null == null}");
+            Console.WriteLine(
+                $"-- break here: ip_null==null: {ip_null == null}, ipp_null: {ipp_null == null}, *ipp_null==ip_null: {*ipp_null == ip_null}, *ipp_null==null: {*ipp_null == null}"
+            );
 
-            var gs = new GenericStructWithUnmanagedT<DateTime> { Value = new DateTime(1, 2, 3, 4, 5, 6), IntField = 4, DTPP = &dtp };
-            var gs_null = new GenericStructWithUnmanagedT<DateTime> { Value = new DateTime(1, 2, 3, 4, 5, 6), IntField = 4, DTPP = &dtp_null };
+            var gs = new GenericStructWithUnmanagedT<DateTime>
+            {
+                Value = new DateTime(1, 2, 3, 4, 5, 6),
+                IntField = 4,
+                DTPP = &dtp,
+            };
+            var gs_null = new GenericStructWithUnmanagedT<DateTime>
+            {
+                Value = new DateTime(1, 2, 3, 4, 5, 6),
+                IntField = 4,
+                DTPP = &dtp_null,
+            };
             var gsp = &gs;
             var gsp_null = &gs_null;
             var gspa = new GenericStructWithUnmanagedT<DateTime>*[] { null, gsp, gsp_null };
 
             var cwp = new GenericClassWithPointers<DateTime> { Ptr = dtp };
             var cwp_null = new GenericClassWithPointers<DateTime>();
-            Console.WriteLine($"{(int)*ip}, {(int)**ipp}, {ipp_null == null}, {ip_null == null}, {ippa == null}, {ipa}, {(char)*cp}, {(vp == null ? "null" : "not null")}, {dtp->Second}, {gsp->IntField}, {cwp}, {cwp_null}, {gs_null}"); return Task.CompletedTask;
+            Console.WriteLine(
+                $"{(int)*ip}, {(int)**ipp}, {ipp_null == null}, {ip_null == null}, {ippa == null}, {ipa}, {(char)*cp}, {(vp == null ? "null" : "not null")}, {dtp->Second}, {gsp->IntField}, {cwp}, {cwp_null}, {gs_null}"
+            );
+            return Task.CompletedTask;
         }
 
         // async methods cannot have unsafe params, so no test for that
     }
 
-    public unsafe struct GenericStructWithUnmanagedT<T> where T : unmanaged
+    public unsafe struct GenericStructWithUnmanagedT<T>
+        where T : unmanaged
     {
         public T Value;
         public int IntField;
@@ -105,7 +142,8 @@ namespace DebuggerTests
         public DateTime** DTPP;
     }
 
-    public unsafe class GenericClassWithPointers<T> where T : unmanaged
+    public unsafe class GenericClassWithPointers<T>
+        where T : unmanaged
     {
         public unsafe T* Ptr;
     }

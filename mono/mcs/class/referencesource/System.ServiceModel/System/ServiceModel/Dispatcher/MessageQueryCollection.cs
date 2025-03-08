@@ -10,7 +10,11 @@ namespace System.ServiceModel.Dispatcher
 
     public abstract class MessageQueryCollection : Collection<MessageQuery>
     {
-        public abstract IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(Message message);
-        public abstract IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(MessageBuffer buffer);
+        public abstract IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+            Message message
+        );
+        public abstract IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+            MessageBuffer buffer
+        );
     }
 }

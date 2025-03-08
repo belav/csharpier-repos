@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -10,7 +10,7 @@
 // <OWNER>Microsoft</OWNER>
 //
 // Compiler-targeted type for switching back into the current execution context, e.g.
-// 
+//
 //   await Task.Yield();
 //   =====================
 //   var $awaiter = Task.Yield().GetAwaiter();
@@ -25,13 +25,13 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
-using System.Security;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Diagnostics.Tracing;
+using System.Security;
+using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Security.Permissions;
 
 namespace System.Runtime.CompilerServices
 {
@@ -47,7 +47,10 @@ namespace System.Runtime.CompilerServices
         /// <summary>Gets an awaiter for this <see cref="YieldAwaitable"/>.</summary>
         /// <returns>An awaiter for this awaitable.</returns>
         /// <remarks>This method is intended for compiler user rather than use directly in code.</remarks>
-        public YieldAwaiter GetAwaiter() { return new YieldAwaiter(); }
+        public YieldAwaiter GetAwaiter()
+        {
+            return new YieldAwaiter();
+        }
 
         /// <summary>Provides an awaiter that switches into a target environment.</summary>
         /// <remarks>This type is intended for compiler use only.</remarks>
@@ -56,7 +59,10 @@ namespace System.Runtime.CompilerServices
         {
             /// <summary>Gets whether a yield is not required.</summary>
             /// <remarks>This property is intended for compiler user rather than use directly in code.</remarks>
-            public bool IsCompleted { get { return false; } } // yielding is always required for YieldAwaiter, hence false
+            public bool IsCompleted
+            {
+                get { return false; }
+            } // yielding is always required for YieldAwaiter, hence false
 
             /// <summary>Posts the <paramref name="continuation"/> back to the current context.</summary>
             /// <param name="continuation">The action to invoke asynchronously.</param>
@@ -84,7 +90,8 @@ namespace System.Runtime.CompilerServices
             private static void QueueContinuation(Action continuation, bool flowContext)
             {
                 // Validate arguments
-                if (continuation == null) throw new ArgumentNullException("continuation");
+                if (continuation == null)
+                    throw new ArgumentNullException("continuation");
                 Contract.EndContractBlock();
 
 #if !MONO
@@ -116,59 +123,81 @@ namespace System.Runtime.CompilerServices
                         }
                         else
                         {
-                            ThreadPool.UnsafeQueueUserWorkItem(s_waitCallbackRunAction, continuation);
+                            ThreadPool.UnsafeQueueUserWorkItem(
+                                s_waitCallbackRunAction,
+                                continuation
+                            );
                         }
                     }
                     // We're targeting a custom scheduler, so queue a task.
                     else
                     {
-                        Task.Factory.StartNew(continuation, default(CancellationToken), TaskCreationOptions.PreferFairness, scheduler);
+                        Task.Factory.StartNew(
+                            continuation,
+                            default(CancellationToken),
+                            TaskCreationOptions.PreferFairness,
+                            scheduler
+                        );
                     }
                 }
             }
+
 #if !MONO
             private static Action OutputCorrelationEtwEvent(Action continuation)
             {
                 int continuationId = Task.NewId();
                 Task currentTask = Task.InternalCurrent;
                 // fire the correlation ETW event
-                TplEtwProvider.Log.AwaitTaskContinuationScheduled(TaskScheduler.Current.Id, (currentTask != null) ? currentTask.Id : 0, continuationId);
+                TplEtwProvider.Log.AwaitTaskContinuationScheduled(
+                    TaskScheduler.Current.Id,
+                    (currentTask != null) ? currentTask.Id : 0,
+                    continuationId
+                );
 
-                return AsyncMethodBuilderCore.CreateContinuationWrapper(continuation, () =>
-                {
-                    var etwLog = TplEtwProvider.Log;
-                    etwLog.TaskWaitContinuationStarted(continuationId);
+                return AsyncMethodBuilderCore.CreateContinuationWrapper(
+                    continuation,
+                    () =>
+                    {
+                        var etwLog = TplEtwProvider.Log;
+                        etwLog.TaskWaitContinuationStarted(continuationId);
 
-                    // ETW event for Task Wait End.
-                    Guid prevActivityId = new Guid();
-                    // Ensure the continuation runs under the correlated activity ID generated above
-                    if (etwLog.TasksSetActivityIds)
-                        EventSource.SetCurrentThreadActivityId(TplEtwProvider.CreateGuidForTaskID(continuationId), out prevActivityId);
+                        // ETW event for Task Wait End.
+                        Guid prevActivityId = new Guid();
+                        // Ensure the continuation runs under the correlated activity ID generated above
+                        if (etwLog.TasksSetActivityIds)
+                            EventSource.SetCurrentThreadActivityId(
+                                TplEtwProvider.CreateGuidForTaskID(continuationId),
+                                out prevActivityId
+                            );
 
-                    // Invoke the original continuation provided to OnCompleted.
-                    continuation();
-                    // Restore activity ID
+                        // Invoke the original continuation provided to OnCompleted.
+                        continuation();
+                        // Restore activity ID
 
-                    if (etwLog.TasksSetActivityIds)
-                        EventSource.SetCurrentThreadActivityId(prevActivityId);
+                        if (etwLog.TasksSetActivityIds)
+                            EventSource.SetCurrentThreadActivityId(prevActivityId);
 
-                    etwLog.TaskWaitContinuationComplete(continuationId);
-                });
-                
+                        etwLog.TaskWaitContinuationComplete(continuationId);
+                    }
+                );
             }
-#endif            
+#endif
 
             /// <summary>WaitCallback that invokes the Action supplied as object state.</summary>
             private static readonly WaitCallback s_waitCallbackRunAction = RunAction;
+
             /// <summary>SendOrPostCallback that invokes the Action supplied as object state.</summary>
             private static readonly SendOrPostCallback s_sendOrPostCallbackRunAction = RunAction;
 
             /// <summary>Runs an Action delegate provided as state.</summary>
             /// <param name="state">The Action delegate to invoke.</param>
-            private static void RunAction(object state) { ((Action)state)(); }
+            private static void RunAction(object state)
+            {
+                ((Action)state)();
+            }
 
             /// <summary>Ends the await operation.</summary>
-            public void GetResult() {} // Nop. It exists purely because the compiler pattern demands it.
+            public void GetResult() { } // Nop. It exists purely because the compiler pattern demands it.
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-// SoftwarePublisherCertificate.cs 
+// SoftwarePublisherCertificate.cs
 //	- Software Publisher Certificates Implementation
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,96 +34,109 @@ using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-
 using Mono.Security;
 using Mono.Security.X509;
 
-namespace Mono.Security.Authenticode {
+namespace Mono.Security.Authenticode
+{
+    public class SoftwarePublisherCertificate
+    {
+        private PKCS7.SignedData pkcs7;
 
-	public class SoftwarePublisherCertificate {
+        public SoftwarePublisherCertificate()
+        {
+            pkcs7 = new PKCS7.SignedData();
+            pkcs7.ContentInfo.ContentType = PKCS7.Oid.data;
+        }
 
-		private PKCS7.SignedData pkcs7;
+        public SoftwarePublisherCertificate(byte[] data)
+            : this()
+        {
+            if (data == null)
+                throw new ArgumentNullException("data");
 
-		public SoftwarePublisherCertificate () 
-		{
-			pkcs7 = new PKCS7.SignedData ();
-			pkcs7.ContentInfo.ContentType = PKCS7.Oid.data;
-		}
+            PKCS7.ContentInfo ci = new PKCS7.ContentInfo(data);
+            if (ci.ContentType != PKCS7.Oid.signedData)
+            {
+                throw new ArgumentException(Locale.GetText("Unsupported ContentType"));
+            }
+            pkcs7 = new PKCS7.SignedData(ci.Content);
+        }
 
-		public SoftwarePublisherCertificate (byte[] data) : this ()
-		{
-			if (data == null)
-				throw new ArgumentNullException ("data");
+        public X509CertificateCollection Certificates
+        {
+            get { return pkcs7.Certificates; }
+        }
 
-			PKCS7.ContentInfo ci = new PKCS7.ContentInfo (data);
-			if (ci.ContentType != PKCS7.Oid.signedData) {
-				throw new ArgumentException (
-					Locale.GetText ("Unsupported ContentType"));
-			}
-			pkcs7 = new PKCS7.SignedData (ci.Content);
-		}
+        public ArrayList Crls
+        {
+            get { return pkcs7.Crls; }
+        }
 
-		public X509CertificateCollection Certificates {
-			get { return pkcs7.Certificates; }
-		}
+        public byte[] GetBytes()
+        {
+            PKCS7.ContentInfo ci = new PKCS7.ContentInfo(PKCS7.Oid.signedData);
+            ci.Content.Add(pkcs7.ASN1);
+            return ci.GetBytes();
+        }
 
-		public ArrayList Crls {
-			get { return pkcs7.Crls; }
-		}
+        public static SoftwarePublisherCertificate CreateFromFile(string filename)
+        {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
 
-		public byte[] GetBytes () 
-		{
-			PKCS7.ContentInfo ci = new PKCS7.ContentInfo (PKCS7.Oid.signedData);
-			ci.Content.Add (pkcs7.ASN1);
-			return ci.GetBytes ();
-		}
+            byte[] data = null;
+            using (
+                FileStream fs = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read)
+            )
+            {
+                data = new byte[fs.Length];
+                fs.Read(data, 0, data.Length);
+                fs.Close();
+            }
 
-		static public SoftwarePublisherCertificate CreateFromFile (string filename) 
-		{
-			if (filename == null)
-				throw new ArgumentNullException ("filename");
+            // It seems that VeriSign send the SPC file in Unicode
+            // (base64 encoded) and Windows accept them.
+            if (data.Length < 2)
+                return null;
 
-			byte[] data = null;
-			using (FileStream fs = File.Open (filename, FileMode.Open, FileAccess.Read, FileShare.Read)) {
-				data = new byte [fs.Length];
-				fs.Read (data, 0, data.Length);
-				fs.Close ();
-			}
-
-			// It seems that VeriSign send the SPC file in Unicode
-			// (base64 encoded) and Windows accept them.
-			if (data.Length < 2)
-				return null;
-
-			if (data [0] != 0x30) {
-				// this isn't an ASN.1 SEQUENCE (so not legal), check for PEM/base64 encoding
-				try {
-					data = PEM (data);
-				}
-				catch (Exception ex) {
-					throw new CryptographicException ("Invalid encoding", ex);
-				}
-			}
+            if (data[0] != 0x30)
+            {
+                // this isn't an ASN.1 SEQUENCE (so not legal), check for PEM/base64 encoding
+                try
+                {
+                    data = PEM(data);
+                }
+                catch (Exception ex)
+                {
+                    throw new CryptographicException("Invalid encoding", ex);
+                }
+            }
 #if DEBUG
-			using (FileStream fs = File.OpenWrite (filename + ".der")) {
-				fs.Write (data, 0, data.Length);
-				fs.Close ();
-			}
+            using (FileStream fs = File.OpenWrite(filename + ".der"))
+            {
+                fs.Write(data, 0, data.Length);
+                fs.Close();
+            }
 #endif
-			return new SoftwarePublisherCertificate (data);
-		}
+            return new SoftwarePublisherCertificate(data);
+        }
 
-		const string header = "-----BEGIN PKCS7-----";
-		const string footer = "-----END PKCS7-----";
+        const string header = "-----BEGIN PKCS7-----";
+        const string footer = "-----END PKCS7-----";
 
-		static byte[] PEM (byte[] data) 
-		{
-			// this could be base64/unicode (e.g. VeriSign) otherwise default to ASCII
-			string pem = (data [1] == 0x00) ? Encoding.Unicode.GetString (data) : Encoding.ASCII.GetString (data);
-			int start = pem.IndexOf (header) + header.Length;
-			int end = pem.IndexOf (footer, start);
-			string base64 = ((start == -1) || (end == -1)) ? pem : pem.Substring (start, (end - start));
-			return Convert.FromBase64String (base64);
-		}
-	}
+        static byte[] PEM(byte[] data)
+        {
+            // this could be base64/unicode (e.g. VeriSign) otherwise default to ASCII
+            string pem =
+                (data[1] == 0x00)
+                    ? Encoding.Unicode.GetString(data)
+                    : Encoding.ASCII.GetString(data);
+            int start = pem.IndexOf(header) + header.Length;
+            int end = pem.IndexOf(footer, start);
+            string base64 =
+                ((start == -1) || (end == -1)) ? pem : pem.Substring(start, (end - start));
+            return Convert.FromBase64String(base64);
+        }
+    }
 }

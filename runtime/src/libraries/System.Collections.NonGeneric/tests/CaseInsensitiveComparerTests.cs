@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Tests;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Collections.Tests
 {
@@ -65,7 +65,10 @@ namespace System.Collections.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/37069", TestPlatforms.Android | TestPlatforms.LinuxBionic)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/37069",
+            TestPlatforms.Android | TestPlatforms.LinuxBionic
+        )]
         public void Ctor_CultureInfo_Compare_TurkishI()
         {
             var cultureNames = Helpers.TestCultureNames;
@@ -100,7 +103,10 @@ namespace System.Collections.Tests
         [Fact]
         public void Ctor_CultureInfo_NullCulture_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("culture", () => new CaseInsensitiveComparer(null)); // Culture is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "culture",
+                () => new CaseInsensitiveComparer(null)
+            ); // Culture is null
         }
 
         [Theory]
@@ -137,7 +143,8 @@ namespace System.Collections.Tests
                 using (new ThreadCultureChange(culture, culture))
                 {
                     // All cultures should sort the same way, irrespective of the thread's culture
-                    CaseInsensitiveComparer defaultInvComparer = CaseInsensitiveComparer.DefaultInvariant;
+                    CaseInsensitiveComparer defaultInvComparer =
+                        CaseInsensitiveComparer.DefaultInvariant;
                     Assert.Equal(expected, Math.Sign(defaultInvComparer.Compare(a, b)));
                 }
             }

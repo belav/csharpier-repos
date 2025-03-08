@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseUtf8StringLiteralDiagnosticAnalyzer,
-        UseUtf8StringLiteralCodeFixProvider>;
+        UseUtf8StringLiteralCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseUtf8StringLiteral)]
     public class UseUtf8StringLiteralTests
@@ -26,25 +27,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class MyAttribute : System.Attribute
-                {
-                    public MyAttribute(byte[] data)
+                TestCode = """
+                    public class MyAttribute : System.Attribute
                     {
+                        public MyAttribute(byte[] data)
+                        {
+                        }
                     }
-                }
 
-                public class C
-                {
-                    [MyAttribute(new byte[] { 65, 66, 67 })]
-                    public void M()
+                    public class C
                     {
+                        [MyAttribute(new byte[] { 65, 66, 67 })]
+                        public void M()
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -53,17 +53,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 65, 66, 67 };
+                        public void M()
+                        {
+                            var x = new byte[] { 65, 66, 67 };
+                        }
                     }
-                }
-                """,
-                LanguageVersion = LanguageVersion.CSharp10
+                    """,
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -72,18 +71,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 65, 66, 67 };
+                        public void M()
+                        {
+                            var x = new byte[] { 65, 66, 67 };
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.NetFramework.Net20.Default,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -92,18 +90,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[10];
+                        public void M()
+                        {
+                            var x = new byte[10];
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -112,25 +109,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                using System;
-                using System.Linq.Expressions;
+                TestCode = """
+                    using System;
+                    using System.Linq.Expressions;
 
-                public class C
-                {
-                    public void M()
+                    public class C
                     {
-                        N(() => new byte[] { 65, 66, 67 });
-                    }
+                        public void M()
+                        {
+                            N(() => new byte[] { 65, 66, 67 });
+                        }
 
-                    public void N(Expression<Func<byte[]>> f)
-                    {
+                        public void N(Expression<Func<byte[]>> f)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -139,18 +135,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new int[] { 65, 66, 67 };
+                        public void M()
+                        {
+                            var x = new int[] { 65, 66, 67 };
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -159,22 +154,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 65, 66, 67 };
+                        public void M()
+                        {
+                            var x = new byte[] { 65, 66, 67 };
+                        }
                     }
-                }
-                """,
+                    """,
                 EditorConfig = """
-                [*.cs]
-                csharp_style_prefer_utf8_string_literals = false
-                """,
+                    [*.cs]
+                    csharp_style_prefer_utf8_string_literals = false
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -183,20 +177,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 65, GetB(), 67 };
-                    }
+                        public void M()
+                        {
+                            var x = new byte[] { 65, GetB(), 67 };
+                        }
 
-                    public byte GetB() => 66;
-                }
-                """,
+                        public byte GetB() => 66;
+                    }
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -205,18 +198,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[,] { { 65, 66 }, { 67, 68 }, { 69, 70 } };
+                        public void M()
+                        {
+                            var x = new byte[,] { { 65, 66 }, { 67, 68 }, { 69, 70 } };
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -225,29 +217,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 65, 66, 67 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 65, 66, 67 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -256,31 +246,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    private const byte B = 66;
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 65, B, 67 };
+                        private const byte B = 66;
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 65, B, 67 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    private const byte B = 66;
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
+                        private const byte B = 66;
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -289,29 +277,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] [] { (byte)65, (byte)66, (byte)67 };
+                        public void M()
+                        {
+                            var x = [|new|] [] { (byte)65, (byte)66, (byte)67 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -320,29 +306,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 65, (byte)'B', 67 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 65, (byte)'B', 67 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -351,29 +335,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 0x41, 0x42, 0x43 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 0x41, 0x42, 0x43 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -382,29 +364,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 60 + 5, 60 + 6, 60 + 7 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 60 + 5, 60 + 6, 60 + 7 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -413,28 +393,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = ""u8.ToArray();
+                        public void M()
+                        {
+                            var x = ""u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -443,29 +421,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 65, 66, 67 }; // I wish this byte array was easier to read
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 65, 66, 67 }; // I wish this byte array was easier to read
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray(); // I wish this byte array was easier to read
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray(); // I wish this byte array was easier to read
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -474,29 +450,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(/* arrays are */ [|new|] byte[] { 65, 66, 67 } /* cool */);
+                        public void M(byte[] b)
+                        {
+                            M(/* arrays are */ [|new|] byte[] { 65, 66, 67 } /* cool */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(/* arrays are */ "ABC"u8.ToArray() /* cool */);
+                        public void M(byte[] b)
+                        {
+                            M(/* arrays are */ "ABC"u8.ToArray() /* cool */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -505,33 +479,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 0x41, 0x42, 0x43 };
-                        var y = [|new|] byte[] { 0x44, 0x45, 0x46 };
-                        var z = [|new|] byte[] { 0x47, 0x48, 0x49 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 0x41, 0x42, 0x43 };
+                            var y = [|new|] byte[] { 0x44, 0x45, 0x46 };
+                            var z = [|new|] byte[] { 0x47, 0x48, 0x49 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "ABC"u8.ToArray();
-                        var y = "DEF"u8.ToArray();
-                        var z = "GHI"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "ABC"u8.ToArray();
+                            var y = "DEF"u8.ToArray();
+                            var z = "GHI"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -540,29 +512,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 34, 92, 10, 13, 9 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 34, 92, 10, 13, 9 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "\"\\\n\r\t"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "\"\\\n\r\t"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -571,29 +541,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 240, 159, 152, 128 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 240, 159, 152, 128 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "😀"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "😀"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -602,19 +570,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 240, 159 };
+                        public void M()
+                        {
+                            var x = new byte[] { 240, 159 };
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -623,19 +590,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 152, 128 };
+                        public void M()
+                        {
+                            var x = new byte[] { 152, 128 };
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -644,19 +610,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = new byte[] { 65, 152, 128, 66 };
+                        public void M()
+                        {
+                            var x = new byte[] { 65, 152, 128, 66 };
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -668,29 +633,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
             // that character isn't being used to detect a failure state of some kind.
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M()
+                TestCode = """
+                    public class C
                     {
-                        var x = [|new|] byte[] { 239, 191, 189 };
+                        public void M()
+                        {
+                            var x = [|new|] byte[] { 239, 191, 189 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M()
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        var x = "�"u8.ToArray();
+                        public void M()
+                        {
+                            var x = "�"u8.ToArray();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -699,79 +662,77 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                using System.Collections;
-                using System.Collections.Generic;
+                TestCode = """
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                class C : IEnumerable<int>
-                {
-                    void M(C c)
+                    class C : IEnumerable<int>
                     {
-                        // Each literal of the three is a separate IArrayCreationOperation
-                        // Lowered code is similar to:
-                        /*
-                            C c = new C();
-                            c.Add(new byte[] { 65 });
-                            c.Add(new byte[] { 66 });
-                            c.Add(new byte[] { 67 });
-                        */
-                        c = new() { [|65|], [|66|], [|67|] };
-                    }
+                        void M(C c)
+                        {
+                            // Each literal of the three is a separate IArrayCreationOperation
+                            // Lowered code is similar to:
+                            /*
+                                C c = new C();
+                                c.Add(new byte[] { 65 });
+                                c.Add(new byte[] { 66 });
+                                c.Add(new byte[] { 67 });
+                            */
+                            c = new() { [|65|], [|66|], [|67|] };
+                        }
 
-                    public void Add(params byte[] bytes)
-                    {
-                    }
+                        public void Add(params byte[] bytes)
+                        {
+                        }
 
-                    public IEnumerator<int> GetEnumerator()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public IEnumerator<int> GetEnumerator()
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    IEnumerator IEnumerable.GetEnumerator()
-                    {
-                        throw new System.NotImplementedException();
+                        IEnumerator IEnumerable.GetEnumerator()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System.Collections;
-                using System.Collections.Generic;
+                    """,
+                FixedCode = """
+                    using System.Collections;
+                    using System.Collections.Generic;
 
-                class C : IEnumerable<int>
-                {
-                    void M(C c)
+                    class C : IEnumerable<int>
                     {
-                        // Each literal of the three is a separate IArrayCreationOperation
-                        // Lowered code is similar to:
-                        /*
-                            C c = new C();
-                            c.Add(new byte[] { 65 });
-                            c.Add(new byte[] { 66 });
-                            c.Add(new byte[] { 67 });
-                        */
-                        c = new() { "A"u8.ToArray(), "B"u8.ToArray(), "C"u8.ToArray() };
-                    }
+                        void M(C c)
+                        {
+                            // Each literal of the three is a separate IArrayCreationOperation
+                            // Lowered code is similar to:
+                            /*
+                                C c = new C();
+                                c.Add(new byte[] { 65 });
+                                c.Add(new byte[] { 66 });
+                                c.Add(new byte[] { 67 });
+                            */
+                            c = new() { "A"u8.ToArray(), "B"u8.ToArray(), "C"u8.ToArray() };
+                        }
 
-                    public void Add(params byte[] bytes)
-                    {
-                    }
+                        public void Add(params byte[] bytes)
+                        {
+                        }
 
-                    public IEnumerator<int> GetEnumerator()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                        public IEnumerator<int> GetEnumerator()
+                        {
+                            throw new System.NotImplementedException();
+                        }
 
-                    IEnumerator IEnumerable.GetEnumerator()
-                    {
-                        throw new System.NotImplementedException();
+                        IEnumerator IEnumerable.GetEnumerator()
+                        {
+                            throw new System.NotImplementedException();
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -782,24 +743,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
             // There is an array creation operation for the param array
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    public static void M1()
+                TestCode = """
+                    class C
                     {
-                        using(var s = new S())
-                        { 
+                        public static void M1()
+                        {
+                            using(var s = new S())
+                            { 
+                            }
                         }
                     }
-                }
-                ref struct S
-                {
-                    public void Dispose(int a = 1, bool b = true, params byte[] others) { }
-                }
-                """,
+                    ref struct S
+                    {
+                        public void Dispose(int a = 1, bool b = true, params byte[] others) { }
+                    }
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -809,13 +769,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         // Various cases copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http2/HuffmanDecodingTests.cs
         [InlineData(new byte[] { 0xff, 0xcf })]
         [InlineData(new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111 })]
-        [InlineData(new byte[] { 0xb6, 0xb9, 0xac, 0x1c, 0x85, 0x58, 0xd5, 0x20, 0xa4, 0xb6, 0xc2, 0xad, 0x61, 0x7b, 0x5a, 0x54, 0x25, 0x1f })]
+        [InlineData(
+            new byte[]
+            {
+                0xb6,
+                0xb9,
+                0xac,
+                0x1c,
+                0x85,
+                0x58,
+                0xd5,
+                0x20,
+                0xa4,
+                0xb6,
+                0xc2,
+                0xad,
+                0x61,
+                0x7b,
+                0x5a,
+                0x54,
+                0x25,
+                0x1f,
+            }
+        )]
         [InlineData(new byte[] { 0xfe, 0x53 })]
         [InlineData(new byte[] { 0xff, 0xff, 0xf6, 0xff, 0xff, 0xfd, 0x68 })]
         [InlineData(new byte[] { 0xff, 0xff, 0xf9, 0xff, 0xff, 0xfd, 0x86 })]
         // Various cases copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http3/QPackDecoderTest.cs
         [InlineData(new byte[] { 0xa8, 0xbe, 0x16, 0x9c, 0xa3, 0x90, 0xb6, 0x7f })]
-        [InlineData(new byte[] { 0x37, 0x02, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x6c, 0x61, 0x74, 0x65 })]
+        [InlineData(
+            new byte[] { 0x37, 0x02, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x6c, 0x61, 0x74, 0x65 }
+        )]
         [InlineData(new byte[] { 0x3f, 0x01 })]
         // DaysInMonth365 from https://github.com/dotnet/runtime/blob/b5a8ece073110140e2d9696cdfdc047ec78c2fa1/src/libraries/System.Private.CoreLib/src/System/DateTime.cs
         [InlineData(new byte[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 })]
@@ -824,7 +808,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
             await new VerifyCS.Test
             {
                 TestCode =
-$@"
+                    $@"
 public class C
 {{
     private static readonly byte[] _bytes = new byte[] {{ {string.Join(", ", bytes)} }};
@@ -832,7 +816,7 @@ public class C
 ",
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -887,7 +871,7 @@ public class C
                 TestCode = input,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -896,29 +880,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M([|new|] byte[] { 65, 66, 67 });
+                        public void M(params byte[] b)
+                        {
+                            M([|new|] byte[] { 65, 66, 67 });
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M("ABC"u8.ToArray());
+                        public void M(params byte[] b)
+                        {
+                            M("ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -927,29 +909,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int i, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(1, [|new|] byte[] { 65, 66, 67 });
+                        public void M(int i, params byte[] b)
+                        {
+                            M(1, [|new|] byte[] { 65, 66, 67 });
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int i, params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(1, "ABC"u8.ToArray());
+                        public void M(int i, params byte[] b)
+                        {
+                            M(1, "ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -958,29 +938,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M([|65|]);
+                        public void M(params byte[] b)
+                        {
+                            M([|65|]);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M("A"u8.ToArray());
+                        public void M(params byte[] b)
+                        {
+                            M("A"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -989,29 +967,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(/* hi */ [|65|] /* there */);
+                        public void M(params byte[] b)
+                        {
+                            M(/* hi */ [|65|] /* there */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(/* hi */ "A"u8.ToArray() /* there */);
+                        public void M(params byte[] b)
+                        {
+                            M(/* hi */ "A"u8.ToArray() /* there */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1020,29 +996,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M([|65, 66, 67|]);
+                        public void M(params byte[] b)
+                        {
+                            M([|65, 66, 67|]);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M("ABC"u8.ToArray());
+                        public void M(params byte[] b)
+                        {
+                            M("ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1051,29 +1025,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(/* hi */ [|65, 66, 67|] /* there */);
+                        public void M(params byte[] b)
+                        {
+                            M(/* hi */ [|65, 66, 67|] /* there */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(/* hi */ "ABC"u8.ToArray() /* there */);
+                        public void M(params byte[] b)
+                        {
+                            M(/* hi */ "ABC"u8.ToArray() /* there */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1082,18 +1054,17 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(1);
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1);
+                        }
                     }
-                }
-                """,
+                    """,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1102,29 +1073,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(1, [|65, 66, 67|]);
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1, [|65, 66, 67|]);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(1, "ABC"u8.ToArray());
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1, "ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1133,29 +1102,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(1, /* hi */ [|65|] /* there */);
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1, /* hi */ [|65|] /* there */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(1, /* hi */ "A"u8.ToArray() /* there */);
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1, /* hi */ "A"u8.ToArray() /* there */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1164,29 +1131,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(1, /* hi */ [|65, 66, 67|] /* there */);
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1, /* hi */ [|65, 66, 67|] /* there */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int x, params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(1, /* hi */ "ABC"u8.ToArray() /* there */);
+                        public void M(int x, params byte[] b)
+                        {
+                            M(1, /* hi */ "ABC"u8.ToArray() /* there */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1195,29 +1160,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int x, int y, int z, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M( /* b1 */ 1 /* a1 */, /* b2 */ 2 /* a2 */, /* b3 */ 3 /* a3 */, /* b4 */ [|65, /* x1 */ 66, /* x2 */  67|] /* a4 */);
+                        public void M(int x, int y, int z, params byte[] b)
+                        {
+                            M( /* b1 */ 1 /* a1 */, /* b2 */ 2 /* a2 */, /* b3 */ 3 /* a3 */, /* b4 */ [|65, /* x1 */ 66, /* x2 */  67|] /* a4 */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int x, int y, int z, params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M( /* b1 */ 1 /* a1 */, /* b2 */ 2 /* a2 */, /* b3 */ 3 /* a3 */, /* b4 */ "ABC"u8.ToArray() /* a4 */);
+                        public void M(int x, int y, int z, params byte[] b)
+                        {
+                            M( /* b1 */ 1 /* a1 */, /* b2 */ 2 /* a2 */, /* b3 */ 3 /* a3 */, /* b4 */ "ABC"u8.ToArray() /* a4 */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1226,29 +1189,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public C(params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        new C([|65, 66, 67|]);
+                        public C(params byte[] b)
+                        {
+                            new C([|65, 66, 67|]);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public C(params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        new C("ABC"u8.ToArray());
+                        public C(params byte[] b)
+                        {
+                            new C("ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1257,39 +1218,37 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public int this[params byte[] bytes]
+                TestCode = """
+                    public class C
                     {
-                        get => 0;
-                    }
+                        public int this[params byte[] bytes]
+                        {
+                            get => 0;
+                        }
 
-                    public void M()
-                    {
-                        _ = this[[|65, 66, 67|]];
+                        public void M()
+                        {
+                            _ = this[[|65, 66, 67|]];
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public int this[params byte[] bytes]
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        get => 0;
-                    }
+                        public int this[params byte[] bytes]
+                        {
+                            get => 0;
+                        }
 
-                    public void M()
-                    {
-                        _ = this["ABC"u8.ToArray()];
+                        public void M()
+                        {
+                            _ = this["ABC"u8.ToArray()];
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1298,53 +1257,51 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public record C1(int x) : B([|65, 66, 67|]);
+                TestCode = """
+                    public record C1(int x) : B([|65, 66, 67|]);
 
-                public record C2(params byte[] Bytes) : B(Bytes);
+                    public record C2(params byte[] Bytes) : B(Bytes);
 
-                public record B(params byte[] Bytes)
-                {
-                    public void M()
+                    public record B(params byte[] Bytes)
                     {
-                        new C1(1);
-                        new C2([|65, 66, 67|]);
-                        new B([|65, 66, 67|]);
+                        public void M()
+                        {
+                            new C1(1);
+                            new C2([|65, 66, 67|]);
+                            new B([|65, 66, 67|]);
+                        }
                     }
-                }
-                namespace System.Runtime.CompilerServices
-                {
-                    public sealed class IsExternalInit
+                    namespace System.Runtime.CompilerServices
                     {
+                        public sealed class IsExternalInit
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public record C1(int x) : B("ABC"u8.ToArray());
+                    """,
+                FixedCode = """
+                    public record C1(int x) : B("ABC"u8.ToArray());
 
-                public record C2(params byte[] Bytes) : B(Bytes);
+                    public record C2(params byte[] Bytes) : B(Bytes);
 
-                public record B(params byte[] Bytes)
-                {
-                    public void M()
+                    public record B(params byte[] Bytes)
                     {
-                        new C1(1);
-                        new C2("ABC"u8.ToArray());
-                        new B("ABC"u8.ToArray());
+                        public void M()
+                        {
+                            new C1(1);
+                            new C2("ABC"u8.ToArray());
+                            new B("ABC"u8.ToArray());
+                        }
                     }
-                }
-                namespace System.Runtime.CompilerServices
-                {
-                    public sealed class IsExternalInit
+                    namespace System.Runtime.CompilerServices
                     {
+                        public sealed class IsExternalInit
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1353,87 +1310,85 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C1 : B
-                {
-                    public C1(int x)
-                        : base([|65, 66, 67|])
+                TestCode = """
+                    public class C1 : B
                     {
-                    }
-                }
-
-                public class C2 : B
-                {
-                    public C2(params byte[] Bytes)
-                        : base(Bytes)
-                    {
-                    }
-                }
-
-                public class B
-                {
-                    public B(string x, params byte[] bytes)
-                        : this(bytes)
-                    {
+                        public C1(int x)
+                            : base([|65, 66, 67|])
+                        {
+                        }
                     }
 
-                    public B(int x)
-                        : this([|65, 66, 67|])
+                    public class C2 : B
                     {
+                        public C2(params byte[] Bytes)
+                            : base(Bytes)
+                        {
+                        }
                     }
 
-                    public B(params byte[] bytes)
+                    public class B
                     {
-                        new C1(1);
-                        new C2([|65, 66, 67|]);
-                        new B([|65, 66, 67|]);
-                        new B("a", [|65, 66, 67|]);
-                    }
-                }
-                """,
-                FixedCode =
-                """
-                public class C1 : B
-                {
-                    public C1(int x)
-                        : base("ABC"u8.ToArray())
-                    {
-                    }
-                }
+                        public B(string x, params byte[] bytes)
+                            : this(bytes)
+                        {
+                        }
 
-                public class C2 : B
-                {
-                    public C2(params byte[] Bytes)
-                        : base(Bytes)
-                    {
-                    }
-                }
+                        public B(int x)
+                            : this([|65, 66, 67|])
+                        {
+                        }
 
-                public class B
-                {
-                    public B(string x, params byte[] bytes)
-                        : this(bytes)
+                        public B(params byte[] bytes)
+                        {
+                            new C1(1);
+                            new C2([|65, 66, 67|]);
+                            new B([|65, 66, 67|]);
+                            new B("a", [|65, 66, 67|]);
+                        }
+                    }
+                    """,
+                FixedCode = """
+                    public class C1 : B
                     {
+                        public C1(int x)
+                            : base("ABC"u8.ToArray())
+                        {
+                        }
                     }
 
-                    public B(int x)
-                        : this("ABC"u8.ToArray())
+                    public class C2 : B
                     {
+                        public C2(params byte[] Bytes)
+                            : base(Bytes)
+                        {
+                        }
                     }
 
-                    public B(params byte[] bytes)
+                    public class B
                     {
-                        new C1(1);
-                        new C2("ABC"u8.ToArray());
-                        new B("ABC"u8.ToArray());
-                        new B("a", "ABC"u8.ToArray());
+                        public B(string x, params byte[] bytes)
+                            : this(bytes)
+                        {
+                        }
+
+                        public B(int x)
+                            : this("ABC"u8.ToArray())
+                        {
+                        }
+
+                        public B(params byte[] bytes)
+                        {
+                            new C1(1);
+                            new C2("ABC"u8.ToArray());
+                            new B("ABC"u8.ToArray());
+                            new B("a", "ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1442,29 +1397,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int[] i, byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(new int[] { 1 }, [|new|] byte[] { 65, 66, 67 });
+                        public void M(int[] i, byte[] b)
+                        {
+                            M(new int[] { 1 }, [|new|] byte[] { 65, 66, 67 });
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int[] i, byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(new int[] { 1 }, "ABC"u8.ToArray());
+                        public void M(int[] i, byte[] b)
+                        {
+                            M(new int[] { 1 }, "ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1473,29 +1426,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(int[] i, params byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(new int[] { 1 }, [|65, 66, 67|]);
+                        public void M(int[] i, params byte[] b)
+                        {
+                            M(new int[] { 1 }, [|65, 66, 67|]);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(int[] i, params byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(new int[] { 1 }, "ABC"u8.ToArray());
+                        public void M(int[] i, params byte[] b)
+                        {
+                            M(new int[] { 1 }, "ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1504,29 +1455,27 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                public class C
-                {
-                    public void M(byte[][] i, byte[] b)
+                TestCode = """
+                    public class C
                     {
-                        M(new byte[][] { [|new|] byte[] { 65, 66, 67 }, [|new|] byte[] { 65, 66, 67 } }, [|new|] byte[] { 65, 66, 67 });
+                        public void M(byte[][] i, byte[] b)
+                        {
+                            M(new byte[][] { [|new|] byte[] { 65, 66, 67 }, [|new|] byte[] { 65, 66, 67 } }, [|new|] byte[] { 65, 66, 67 });
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                public class C
-                {
-                    public void M(byte[][] i, byte[] b)
+                    """,
+                FixedCode = """
+                    public class C
                     {
-                        M(new byte[][] { "ABC"u8.ToArray(), "ABC"u8.ToArray() }, "ABC"u8.ToArray());
+                        public void M(byte[][] i, byte[] b)
+                        {
+                            M(new byte[][] { "ABC"u8.ToArray(), "ABC"u8.ToArray() }, "ABC"u8.ToArray());
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1535,33 +1484,31 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                using System;
+                TestCode = """
+                    using System;
 
-                public class C
-                {
-                    public void M()
+                    public class C
                     {
-                        ReadOnlySpan<byte> x = [|new|] byte[] { 65, 66, 67 };
+                        public void M()
+                        {
+                            ReadOnlySpan<byte> x = [|new|] byte[] { 65, 66, 67 };
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System;
+                    """,
+                FixedCode = """
+                    using System;
 
-                public class C
-                {
-                    public void M()
+                    public class C
                     {
-                        ReadOnlySpan<byte> x = "ABC"u8;
+                        public void M()
+                        {
+                            ReadOnlySpan<byte> x = "ABC"u8;
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
 
@@ -1570,33 +1517,31 @@ public class C
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                using System;
+                TestCode = """
+                    using System;
 
-                public class C
-                {
-                    public void M(ReadOnlySpan<byte> x)
+                    public class C
                     {
-                        M(/* 1 */[|new|] byte[] { 65, 66, 67 }/* 2 */);
+                        public void M(ReadOnlySpan<byte> x)
+                        {
+                            M(/* 1 */[|new|] byte[] { 65, 66, 67 }/* 2 */);
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System;
+                    """,
+                FixedCode = """
+                    using System;
 
-                public class C
-                {
-                    public void M(ReadOnlySpan<byte> x)
+                    public class C
                     {
-                        M(/* 1 */"ABC"u8/* 2 */);
+                        public void M(ReadOnlySpan<byte> x)
+                        {
+                            M(/* 1 */"ABC"u8/* 2 */);
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
-                LanguageVersion = LanguageVersion.CSharp12
+                LanguageVersion = LanguageVersion.CSharp12,
             }.RunAsync();
         }
     }

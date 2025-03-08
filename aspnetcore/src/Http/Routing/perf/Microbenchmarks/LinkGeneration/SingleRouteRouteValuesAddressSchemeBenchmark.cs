@@ -20,7 +20,14 @@ public class SingleRouteRouteValuesAddressSchemeBenchmark : EndpointRoutingBench
         var defaults = new { controller = "Products", action = "Details" };
         var requiredValues = new { controller = "Products", action = "Details" };
 
-        SetupEndpoints(CreateEndpoint(template, defaults, requiredValues: requiredValues, routeName: "ProductDetails"));
+        SetupEndpoints(
+            CreateEndpoint(
+                template,
+                defaults,
+                requiredValues: requiredValues,
+                routeName: "ProductDetails"
+            )
+        );
         var services = CreateServices();
         _implementation = services.GetRequiredService<IEndpointAddressScheme<RouteValuesAddress>>();
         _baseline = new TestAddressScheme(Endpoints[0]);
@@ -37,22 +44,28 @@ public class SingleRouteRouteValuesAddressSchemeBenchmark : EndpointRoutingBench
     [Benchmark]
     public void RouteValues()
     {
-        var actual = _implementation.FindEndpoints(new RouteValuesAddress
-        {
-            AmbientValues = _requestContext.AmbientValues,
-            ExplicitValues = new RouteValueDictionary(new { controller = "Products", action = "Details" }),
-            RouteName = null
-        });
+        var actual = _implementation.FindEndpoints(
+            new RouteValuesAddress
+            {
+                AmbientValues = _requestContext.AmbientValues,
+                ExplicitValues = new RouteValueDictionary(
+                    new { controller = "Products", action = "Details" }
+                ),
+                RouteName = null,
+            }
+        );
     }
 
     [Benchmark]
     public void RouteName()
     {
-        var actual = _implementation.FindEndpoints(new RouteValuesAddress
-        {
-            AmbientValues = _requestContext.AmbientValues,
-            RouteName = "ProductDetails"
-        });
+        var actual = _implementation.FindEndpoints(
+            new RouteValuesAddress
+            {
+                AmbientValues = _requestContext.AmbientValues,
+                RouteName = "ProductDetails",
+            }
+        );
     }
 
     private sealed class TestAddressScheme : IEndpointAddressScheme<int>

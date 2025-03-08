@@ -51,16 +51,22 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
 
         builder.AppendFormat(
             CultureInfo.InvariantCulture,
-@"<!DOCTYPE html>
-<html lang=""{0}"">", CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+            @"<!DOCTYPE html>
+<html lang=""{0}"">",
+            CultureInfo.CurrentUICulture.TwoLetterISOLanguageName
+        );
 
         builder.AppendFormat(
             CultureInfo.InvariantCulture,
-@"
+            @"
 <head>
-  <title>{0} {1}</title>", HtmlEncode(Resources.HtmlDir_IndexOf), HtmlEncode(requestPath.Value!));
+  <title>{0} {1}</title>",
+            HtmlEncode(Resources.HtmlDir_IndexOf),
+            HtmlEncode(requestPath.Value!)
+        );
 
-        builder.Append(@"
+        builder.Append(
+            @"
   <style>
     body {
         font-family: ""Segoe UI"", ""Segoe WP"", ""Helvetica Neue"", 'RobotoRegular', sans-serif;
@@ -96,35 +102,43 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
   </style>
 </head>
 <body>
-  <section id=""main"">");
+  <section id=""main"">"
+        );
         builder.AppendFormat(
             CultureInfo.InvariantCulture,
             @"
-    <header><h1>{0} <a href=""/"">/</a>", HtmlEncode(Resources.HtmlDir_IndexOf));
+    <header><h1>{0} <a href=""/"">/</a>",
+            HtmlEncode(Resources.HtmlDir_IndexOf)
+        );
 
         string cumulativePath = "/";
-        foreach (var segment in requestPath.Value!.Split('/', StringSplitOptions.RemoveEmptyEntries))
+        foreach (
+            var segment in requestPath.Value!.Split('/', StringSplitOptions.RemoveEmptyEntries)
+        )
         {
             cumulativePath = cumulativePath + segment + "/";
             builder.AppendFormat(
                 CultureInfo.InvariantCulture,
                 @"<a href=""{0}"">{1}/</a>",
-                HtmlEncode(cumulativePath), HtmlEncode(segment));
+                HtmlEncode(cumulativePath),
+                HtmlEncode(segment)
+            );
         }
 
         builder.AppendFormat(
             CultureInfo.InvariantCulture,
-@"</h1></header>
+            @"</h1></header>
     <table id=""index"" summary=""{0}"">
     <thead>
       <tr><th abbr=""{1}"">{1}</th><th abbr=""{2}"">{2}</th><th abbr=""{3}"">{4}</th></tr>
     </thead>
     <tbody>",
-        HtmlEncode(Resources.HtmlDir_TableSummary),
-        HtmlEncode(Resources.HtmlDir_Name),
-        HtmlEncode(Resources.HtmlDir_Size),
-        HtmlEncode(Resources.HtmlDir_Modified),
-        HtmlEncode(Resources.HtmlDir_LastModified));
+            HtmlEncode(Resources.HtmlDir_TableSummary),
+            HtmlEncode(Resources.HtmlDir_Name),
+            HtmlEncode(Resources.HtmlDir_Size),
+            HtmlEncode(Resources.HtmlDir_Modified),
+            HtmlEncode(Resources.HtmlDir_LastModified)
+        );
 
         foreach (var subdir in contents.Where(info => info.IsDirectory))
         {
@@ -142,7 +156,8 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
         <td class=""modified"">{1}</td>
       </tr>",
                     HtmlEncode(subdir.Name),
-                    HtmlEncode(subdir.LastModified.ToString(CultureInfo.CurrentCulture)));
+                    HtmlEncode(subdir.LastModified.ToString(CultureInfo.CurrentCulture))
+                );
             }
             catch (DirectoryNotFoundException)
             {
@@ -179,7 +194,8 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
       </tr>",
                     HtmlEncode(file.Name),
                     HtmlEncode(file.Length.ToString("n0", CultureInfo.CurrentCulture)),
-                    HtmlEncode(file.LastModified.ToString(CultureInfo.CurrentCulture)));
+                    HtmlEncode(file.LastModified.ToString(CultureInfo.CurrentCulture))
+                );
             }
             catch (DirectoryNotFoundException)
             {
@@ -194,12 +210,14 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
             }
         }
 
-        builder.Append(@"
+        builder.Append(
+            @"
     </tbody>
     </table>
   </section>
 </body>
-</html>");
+</html>"
+        );
         string data = builder.ToString();
         byte[] bytes = Encoding.UTF8.GetBytes(data);
         context.Response.ContentLength = bytes.Length;

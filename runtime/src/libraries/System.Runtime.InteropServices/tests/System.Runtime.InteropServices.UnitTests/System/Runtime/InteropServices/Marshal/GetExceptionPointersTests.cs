@@ -7,7 +7,10 @@ namespace System.Runtime.InteropServices.Tests
 {
     public class GetExceptionPointersTests
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsMarshalGetExceptionPointersSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMarshalGetExceptionPointersSupported)
+        )]
         public void GetExceptionPointers_ReturnsExpected()
         {
             Assert.Equal(IntPtr.Zero, Marshal.GetExceptionPointers());

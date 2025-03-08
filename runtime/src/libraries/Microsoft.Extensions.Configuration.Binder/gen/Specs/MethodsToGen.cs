@@ -85,9 +85,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         ConfigBinder_GetValue_T_key_defaultValue = 0x400,
 
         // Method groups
-        ConfigBinder_Bind = ConfigBinder_Bind_instance | ConfigBinder_Bind_instance_BinderOptions | ConfigBinder_Bind_key_instance,
-        ConfigBinder_Get = ConfigBinder_Get_T | ConfigBinder_Get_T_BinderOptions | ConfigBinder_Get_TypeOf | ConfigBinder_Get_TypeOf_BinderOptions,
-        ConfigBinder_GetValue = ConfigBinder_GetValue_T_key | ConfigBinder_GetValue_T_key_defaultValue | ConfigBinder_GetValue_TypeOf_key | ConfigBinder_GetValue_TypeOf_key_defaultValue,
+        ConfigBinder_Bind =
+            ConfigBinder_Bind_instance
+            | ConfigBinder_Bind_instance_BinderOptions
+            | ConfigBinder_Bind_key_instance,
+        ConfigBinder_Get =
+            ConfigBinder_Get_T
+            | ConfigBinder_Get_T_BinderOptions
+            | ConfigBinder_Get_TypeOf
+            | ConfigBinder_Get_TypeOf_BinderOptions,
+        ConfigBinder_GetValue =
+            ConfigBinder_GetValue_T_key
+            | ConfigBinder_GetValue_T_key_defaultValue
+            | ConfigBinder_GetValue_TypeOf_key
+            | ConfigBinder_GetValue_TypeOf_key_defaultValue,
 
         ConfigBinder_Any = ConfigBinder_Bind | ConfigBinder_Get | ConfigBinder_GetValue,
         #endregion ConfigurationBinder ext. method overloads.
@@ -111,7 +122,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         // Method group. BindConfiguration_T is its own method group.
         OptionsBuilderExt_Bind = OptionsBuilderExt_Bind_T | OptionsBuilderExt_Bind_T_BinderOptions,
 
-        OptionsBuilderExt_BindConfiguration = OptionsBuilderExt_BindConfiguration_T_path_BinderOptions,
+        OptionsBuilderExt_BindConfiguration =
+            OptionsBuilderExt_BindConfiguration_T_path_BinderOptions,
 
         OptionsBuilderExt_Any = OptionsBuilderExt_Bind | OptionsBuilderExt_BindConfiguration,
         #endregion OptionsBuilder ext. method overloads.
@@ -137,7 +149,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         /// </summary>
         ServiceCollectionExt_Configure_T_name_BinderOptions = 0x20000,
 
-        ServiceCollectionExt_Configure = ServiceCollectionExt_Configure_T | ServiceCollectionExt_Configure_T_name | ServiceCollectionExt_Configure_T_BinderOptions | ServiceCollectionExt_Configure_T_name_BinderOptions,
+        ServiceCollectionExt_Configure =
+            ServiceCollectionExt_Configure_T
+            | ServiceCollectionExt_Configure_T_name
+            | ServiceCollectionExt_Configure_T_BinderOptions
+            | ServiceCollectionExt_Configure_T_name_BinderOptions,
 
         ServiceCollectionExt_Any = ServiceCollectionExt_Configure,
         #endregion IServiceCollection ext. method overloads: 0x4000 - 0x20000

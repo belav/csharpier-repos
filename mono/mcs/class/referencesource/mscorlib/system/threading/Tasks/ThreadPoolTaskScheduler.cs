@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -9,14 +9,14 @@
 //
 // <OWNER>Microsoft</OWNER>
 //
-// This file contains the primary interface and management of tasks and queues.  
+// This file contains the primary interface and management of tasks and queues.
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
-using System.Security;
-using System.Diagnostics.Contracts;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Security;
 using System.Text;
 #if !FEATURE_PAL && !FEATURE_CORECLR    // PAL and CoreClr don't support  eventing
 using System.Diagnostics.Tracing;
@@ -27,7 +27,7 @@ namespace System.Threading.Tasks
     /// <summary>
     /// An implementation of TaskScheduler that uses the ThreadPool scheduler
     /// </summary>
-    internal sealed class ThreadPoolTaskScheduler: TaskScheduler
+    internal sealed class ThreadPoolTaskScheduler : TaskScheduler
     {
         /// <summary>
         /// Constructs a new ThreadPool task scheduler object
@@ -38,7 +38,8 @@ namespace System.Threading.Tasks
         }
 
         // static delegate for threads allocated to handle LongRunning tasks.
-        private static readonly ParameterizedThreadStart s_longRunningThreadWork = new ParameterizedThreadStart(LongRunningThreadWork);
+        private static readonly ParameterizedThreadStart s_longRunningThreadWork =
+            new ParameterizedThreadStart(LongRunningThreadWork);
 
         private static void LongRunningThreadWork(object obj)
         {
@@ -65,16 +66,18 @@ namespace System.Threading.Tasks
             else
             {
                 // Normal handling for non-LongRunning tasks.
-                bool forceToGlobalQueue = ((task.Options & TaskCreationOptions.PreferFairness) != 0);
+                bool forceToGlobalQueue = (
+                    (task.Options & TaskCreationOptions.PreferFairness) != 0
+                );
                 ThreadPool.UnsafeQueueCustomWorkItem(task, forceToGlobalQueue);
             }
         }
-        
+
         /// <summary>
         /// This internal function will do this:
         ///   (1) If the task had previously been queued, attempt to pop it and return false if that fails.
         ///   (2) Propagate the return value from Task.ExecuteEntry() back to the caller.
-        /// 
+        ///
         /// IMPORTANT NOTE: TryExecuteTaskInline will NOT throw task exceptions itself. Any wait code path using this function needs
         /// to account for exceptions that need to be propagated, and throw themselves accordingly.
         /// </summary>
@@ -94,7 +97,8 @@ namespace System.Threading.Tasks
             finally
             {
                 //   Only call NWIP() if task was previously queued
-                if(taskWasPreviouslyQueued) NotifyWorkItemProgress();
+                if (taskWasPreviouslyQueued)
+                    NotifyWorkItemProgress();
             }
 
             return rval;
@@ -113,7 +117,9 @@ namespace System.Threading.Tasks
             return FilterTasksFromWorkItems(ThreadPool.GetQueuedWorkItems());
         }
 
-        private IEnumerable<Task> FilterTasksFromWorkItems(IEnumerable<IThreadPoolWorkItem> tpwItems)
+        private IEnumerable<Task> FilterTasksFromWorkItems(
+            IEnumerable<IThreadPoolWorkItem> tpwItems
+        )
         {
             foreach (IThreadPoolWorkItem tpwi in tpwItems)
             {

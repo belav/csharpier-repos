@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
                 NullValueHandling = NullValueHandling.Ignore,
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 TypeNameHandling = TypeNameHandling.None,
-                Converters = new[] { new LsifConverter() }
+                Converters = new[] { new LsifConverter() },
             };
 
             _jsonSerializer = JsonSerializer.Create(settings);

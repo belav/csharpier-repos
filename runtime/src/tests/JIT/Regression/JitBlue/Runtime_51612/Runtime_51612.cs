@@ -16,7 +16,7 @@ namespace Runtime_51612
 
         abstract class Base
         {
-            public unsafe abstract PassedViaReturnBuffer HasEspBasedFrame();
+            public abstract unsafe PassedViaReturnBuffer HasEspBasedFrame();
         }
 
         class Derived : Base

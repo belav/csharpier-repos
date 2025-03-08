@@ -64,24 +64,23 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.ReadState, ReadState.Initial, "ReadState=Initial");
                 CError.Compare(DataReader.EOF, false, "EOF==false");
             }
-
             else if (GetDescription() == "AfterReadIsFalse")
             {
                 IntegrityVer = EINTEGRITY.AFTER_READ_FALSE;
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
                 CError.Compare(DataReader.ReadState, ReadState.EndOfFile, "ReadState=EOF");
                 CError.Compare(DataReader.EOF, true, "EOF==true");
             }
-
             else if (GetDescription() == "AfterClose")
             {
                 IntegrityVer = EINTEGRITY.AFTER_CLOSE;
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
                 DataReader.Close();
                 CError.Compare(DataReader.ReadState, ReadState.Closed, "ReadState=Closed");
                 CError.Compare(DataReader.EOF, false, "EOF==true");
             }
-
             else if (GetDescription() == "AfterCloseInTheMiddle")
             {
                 IntegrityVer = EINTEGRITY.CLOSE_IN_THE_MIDDLE;
@@ -89,7 +88,11 @@ namespace System.Xml.Tests
                 {
                     if (false == DataReader.Read())
                         iRetVal = TEST_FAIL;
-                    CError.Compare(DataReader.ReadState, ReadState.Interactive, "ReadState=Interactive");
+                    CError.Compare(
+                        DataReader.ReadState,
+                        ReadState.Interactive,
+                        "ReadState=Interactive"
+                    );
                 }
                 DataReader.Close();
                 CError.Compare(DataReader.ReadState, ReadState.Closed, "ReadState=Closed");
@@ -106,7 +109,6 @@ namespace System.Xml.Tests
 
                 CError.Compare(DataReader.ReadState, ReadState.Initial, "ReadState=Initial");
             }
-
 
             CError.WriteLine("ReadState = " + (DataReader.ReadState).ToString());
             return iRetVal;
@@ -255,7 +257,11 @@ namespace System.Xml.Tests
         [Variation("GetAttribute(String.Empty, String.Empty)")]
         public int GetAttributeEmptyNameNamespace()
         {
-            CError.Compare(DataReader.GetAttribute(string.Empty, string.Empty), null, "Compare the GetAttribute");
+            CError.Compare(
+                DataReader.GetAttribute(string.Empty, string.Empty),
+                null,
+                "Compare the GetAttribute"
+            );
             return TEST_PASS;
         }
 
@@ -368,8 +374,10 @@ namespace System.Xml.Tests
         [Variation("Read")]
         public int ReadTestAfterClose()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                    IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -413,7 +421,10 @@ namespace System.Xml.Tests
             }
 
             // Closed State
-            if ((IntegrityVer == EINTEGRITY.AFTER_CLOSE) || (IntegrityVer == EINTEGRITY.CLOSE_IN_THE_MIDDLE))
+            if (
+                (IntegrityVer == EINTEGRITY.AFTER_CLOSE)
+                || (IntegrityVer == EINTEGRITY.CLOSE_IN_THE_MIDDLE)
+            )
             {
                 iState = ReadState.Closed;
             }
@@ -470,8 +481,10 @@ namespace System.Xml.Tests
         [Variation("MoveToContent")]
         public int TestMoveToContent()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -487,8 +500,10 @@ namespace System.Xml.Tests
         [Variation("IsStartElement")]
         public int TestIsStartElement()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -503,8 +518,10 @@ namespace System.Xml.Tests
         [Variation("IsStartElement(name)")]
         public int TestIsStartElementName()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -519,8 +536,10 @@ namespace System.Xml.Tests
         [Variation("IsStartElement(String.Empty)")]
         public int TestIsStartElementName2()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -535,8 +554,10 @@ namespace System.Xml.Tests
         [Variation("IsStartElement(name, ns)")]
         public int TestIsStartElementNameNs()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -551,15 +572,21 @@ namespace System.Xml.Tests
         [Variation("IsStartElement(String.Empty,String.Empty)")]
         public int TestIsStartElementNameNs2()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
             }
             else
             {
-                CError.Compare(DataReader.IsStartElement(string.Empty, string.Empty), false, CurVariation.Desc);
+                CError.Compare(
+                    DataReader.IsStartElement(string.Empty, string.Empty),
+                    false,
+                    CurVariation.Desc
+                );
             }
             return TEST_PASS;
         }
@@ -567,8 +594,10 @@ namespace System.Xml.Tests
         [Variation("ReadStartElement")]
         public int TestReadStartElement()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -590,8 +619,10 @@ namespace System.Xml.Tests
         [Variation("ReadStartElement(name)")]
         public int TestReadStartElementName()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -613,8 +644,10 @@ namespace System.Xml.Tests
         [Variation("ReadStartElement(String.Empty)")]
         public int TestReadStartElementName2()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -636,8 +669,10 @@ namespace System.Xml.Tests
         [Variation("ReadStartElement(name, ns)")]
         public int TestReadStartElementNameNs()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -659,8 +694,10 @@ namespace System.Xml.Tests
         [Variation("ReadStartElement(String.Empty,String.Empty)")]
         public int TestReadStartElementNameNs2()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -682,8 +719,10 @@ namespace System.Xml.Tests
         [Variation("ReadEndElement")]
         public int TestReadEndElement()
         {
-            if (IntegrityVer == EINTEGRITY.BEFORE_READ ||
-                IntegrityVer == EINTEGRITY.AFTER_RESETSTATE)
+            if (
+                IntegrityVer == EINTEGRITY.BEFORE_READ
+                || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
+            )
             {
                 // not interesting for test
                 return TEST_SKIPPED;
@@ -706,13 +745,26 @@ namespace System.Xml.Tests
         public int LookupNamespace()
         {
             ReloadSource();
-            string[] astr = { "a", "Foo", /*String.Empty,*/ "Foo1", "Foo_S" };  // for String.Empty XmlTextReader returns null, while xmlreader returns ""
+            string[] astr =
+            {
+                "a",
+                "Foo", /*String.Empty,*/
+                "Foo1",
+                "Foo_S",
+            }; // for String.Empty XmlTextReader returns null, while xmlreader returns ""
 
             for (int i = 0; i < astr.Length; i++)
             {
                 if (DataReader.LookupNamespace(astr[i]) != null)
                 {
-                    CError.WriteLine("Not NULL " + i + " LookupNameSpace " + DataReader.LookupNamespace(astr[i]) + "," + DataReader.NodeType);
+                    CError.WriteLine(
+                        "Not NULL "
+                            + i
+                            + " LookupNameSpace "
+                            + DataReader.LookupNamespace(astr[i])
+                            + ","
+                            + DataReader.NodeType
+                    );
                 }
                 CError.Compare(DataReader.LookupNamespace(astr[i]), null, CurVariation.Desc);
             }

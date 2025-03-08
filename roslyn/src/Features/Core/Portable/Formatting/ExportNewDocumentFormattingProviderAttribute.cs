@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    internal class ExportNewDocumentFormattingProviderAttribute(string languageName) : ExportAttribute(typeof(INewDocumentFormattingProvider))
+    internal class ExportNewDocumentFormattingProviderAttribute(string languageName)
+        : ExportAttribute(typeof(INewDocumentFormattingProvider))
     {
         public string Language { get; } = languageName;
     }

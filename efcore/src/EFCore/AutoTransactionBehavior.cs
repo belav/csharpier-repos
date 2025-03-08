@@ -25,5 +25,5 @@ public enum AutoTransactionBehavior
     ///     Transactions are never created automatically. Use this options with caution, since the database could be left in an inconsistent
     ///     state if a failure occurs.
     /// </summary>
-    Never
+    Never,
 }

@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,19 +27,19 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ChartValueType
-	{
-		Auto = 0,
-		Double = 1,
-		Single = 2,
-		Int32 = 3,
-		Int64 = 4,
-		UInt32 = 5,
-		UInt64 = 6,
-		String = 7,
-		DateTime = 8,
-		Date = 9,
-		Time = 10,
-		DateTimeOffset = 11
-	}
+    public enum ChartValueType
+    {
+        Auto = 0,
+        Double = 1,
+        Single = 2,
+        Int32 = 3,
+        Int64 = 4,
+        UInt32 = 5,
+        UInt64 = 6,
+        String = 7,
+        DateTime = 8,
+        Date = 9,
+        Time = 10,
+        DateTimeOffset = 11,
+    }
 }

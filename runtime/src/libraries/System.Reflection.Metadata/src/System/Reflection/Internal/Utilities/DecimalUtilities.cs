@@ -16,7 +16,14 @@ namespace System.Reflection.Internal
 #endif
         }
 
-        public static void GetBits(this decimal value, out bool isNegative, out byte scale, out uint low, out uint mid, out uint high)
+        public static void GetBits(
+            this decimal value,
+            out bool isNegative,
+            out byte scale,
+            out uint low,
+            out uint mid,
+            out uint high
+        )
         {
 #if NETCOREAPP
             Span<int> bits = stackalloc int[4];

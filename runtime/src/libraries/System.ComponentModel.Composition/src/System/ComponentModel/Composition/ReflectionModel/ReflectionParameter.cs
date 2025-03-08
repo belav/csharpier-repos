@@ -29,7 +29,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         public override string GetDisplayName() =>
-            $"{UnderlyingParameter.Member.GetDisplayName()} (Parameter=\"{UnderlyingParameter.Name}\")";  // NOLOC
+            $"{UnderlyingParameter.Member.GetDisplayName()} (Parameter=\"{UnderlyingParameter.Name}\")"; // NOLOC
 
         public override Type ReturnType
         {

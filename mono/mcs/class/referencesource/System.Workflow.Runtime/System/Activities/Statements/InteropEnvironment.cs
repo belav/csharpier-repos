@@ -9,19 +9,22 @@ namespace System.Activities.Statements
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.Transactions;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Tracking;
-    using System.Runtime;
-    using System.Globalization;
 
     class InteropEnvironment : IDisposable, IServiceProvider
     {
-        static readonly ReadOnlyCollection<IComparable> emptyList = new ReadOnlyCollection<IComparable>(new IComparable[] { });
+        static readonly ReadOnlyCollection<IComparable> emptyList =
+            new ReadOnlyCollection<IComparable>(new IComparable[] { });
 
-        static MethodInfo getServiceMethod = typeof(NativeActivityContext).GetMethod("GetExtension");
+        static MethodInfo getServiceMethod = typeof(NativeActivityContext).GetMethod(
+            "GetExtension"
+        );
 
         NativeActivityContext nativeActivityContext;
 
@@ -36,8 +39,13 @@ namespace System.Activities.Statements
         Exception uncaughtException;
         Transaction transaction;
 
-        public InteropEnvironment(InteropExecutor interopExecutor, NativeActivityContext nativeActivityContext,
-            BookmarkCallback bookmarkCallback, Interop activity, Transaction transaction)
+        public InteropEnvironment(
+            InteropExecutor interopExecutor,
+            NativeActivityContext nativeActivityContext,
+            BookmarkCallback bookmarkCallback,
+            Interop activity,
+            Transaction transaction
+        )
         {
             //setup environment;
             this.executor = interopExecutor;
@@ -60,12 +68,19 @@ namespace System.Activities.Statements
             }
         }
 
-        public void Execute(System.Workflow.ComponentModel.Activity definition, NativeActivityContext context)
+        public void Execute(
+            System.Workflow.ComponentModel.Activity definition,
+            NativeActivityContext context
+        )
         {
             Debug.Assert(!disposed, "Cannot access disposed object");
             try
             {
-                this.executor.Initialize(definition, this.Activity.GetInputArgumentValues(context), this.Activity.HasNameCollision);
+                this.executor.Initialize(
+                    definition,
+                    this.Activity.GetInputArgumentValues(context),
+                    this.Activity.HasNameCollision
+                );
                 ProcessExecutionStatus(this.executor.Execute());
             }
             catch (Exception e)
@@ -104,10 +119,14 @@ namespace System.Activities.Statements
             }
         }
 
-        public void TrackActivityStatusChange(System.Workflow.ComponentModel.Activity activity, int eventCounter)
+        public void TrackActivityStatusChange(
+            System.Workflow.ComponentModel.Activity activity,
+            int eventCounter
+        )
         {
             this.nativeActivityContext.Track(
-                new InteropTrackingRecord(this.Activity.DisplayName,
+                new InteropTrackingRecord(
+                    this.Activity.DisplayName,
                     new ActivityTrackingRecord(
                         activity.GetType(),
                         activity.QualifiedName,
@@ -122,10 +141,16 @@ namespace System.Activities.Statements
             );
         }
 
-        public void TrackData(System.Workflow.ComponentModel.Activity activity, int eventCounter, string key, object data)
+        public void TrackData(
+            System.Workflow.ComponentModel.Activity activity,
+            int eventCounter,
+            string key,
+            object data
+        )
         {
             this.nativeActivityContext.Track(
-                new InteropTrackingRecord(this.Activity.DisplayName,
+                new InteropTrackingRecord(
+                    this.Activity.DisplayName,
                     new UserTrackingRecord(
                         activity.GetType(),
                         activity.QualifiedName,
@@ -189,7 +214,7 @@ namespace System.Activities.Statements
             this.initialBookmarks = this.executor.Queues;
 
             // This method sets up the ambient transaction for the current thread.
-            // Since the runtime can execute us on different threads, 
+            // Since the runtime can execute us on different threads,
             // we have to set up the transaction scope everytime we enter the interop environment and clear it when we leave the environment.
             this.executor.SetAmbientTransactionAndServiceEnvironment(this.transaction);
         }
@@ -206,7 +231,7 @@ namespace System.Activities.Statements
             }
 
             // This method clears the ambient transaction for the current thread.
-            // Since the runtime can execute us on different threads, 
+            // Since the runtime can execute us on different threads,
             // we have to set up the transaction scope everytime we enter the interop environment and clear it when we leave the environment.
             this.executor.ClearAmbientTransactionAndServiceEnvironment();
 
@@ -219,7 +244,9 @@ namespace System.Activities.Statements
                 this.Activity.OnClose(this.nativeActivityContext, this.uncaughtException);
 
                 this.Activity.SetOutputArgumentValues(
-                    this.executor.Outputs, this.nativeActivityContext);
+                    this.executor.Outputs,
+                    this.nativeActivityContext
+                );
 
                 this.nativeActivityContext.RemoveAllBookmarks();
                 this.executor.BookmarkQueueMap.Clear();
@@ -257,18 +284,23 @@ namespace System.Activities.Statements
                     foreach (IComparable bookmark in newBookmarks)
                     {
                         //
-                        Bookmark v2Bookmark = this.nativeActivityContext.CreateBookmark(bookmark.ToString(),
-                            this.bookmarkCallback, BookmarkOptions.MultipleResume);
+                        Bookmark v2Bookmark = this.nativeActivityContext.CreateBookmark(
+                            bookmark.ToString(),
+                            this.bookmarkCallback,
+                            BookmarkOptions.MultipleResume
+                        );
                         this.executor.BookmarkQueueMap.Add(v2Bookmark, bookmark);
                     }
                 }
 
-                // Delete removed queues.    
+                // Delete removed queues.
                 foreach (IComparable bookmark in deletedBookmarks)
                 {
                     this.nativeActivityContext.RemoveBookmark(bookmark.ToString());
                     List<Bookmark> bookmarksToRemove = new List<Bookmark>();
-                    foreach (KeyValuePair<Bookmark, IComparable> entry in this.executor.BookmarkQueueMap)
+                    foreach (
+                        KeyValuePair<Bookmark, IComparable> entry in this.executor.BookmarkQueueMap
+                    )
                     {
                         if (entry.Value == bookmark)
                         {
@@ -284,26 +316,34 @@ namespace System.Activities.Statements
             }
         }
 
-        void ProcessExecutionStatus(System.Workflow.ComponentModel.ActivityExecutionStatus executionStatus)
+        void ProcessExecutionStatus(
+            System.Workflow.ComponentModel.ActivityExecutionStatus executionStatus
+        )
         {
-            this.completed = (executionStatus == System.Workflow.ComponentModel.ActivityExecutionStatus.Closed);
+            this.completed = (
+                executionStatus == System.Workflow.ComponentModel.ActivityExecutionStatus.Closed
+            );
         }
 
         public static class ParameterHelper
         {
             static readonly Type activityType = typeof(System.Workflow.ComponentModel.Activity);
-            static readonly Type compositeActivityType = typeof(System.Workflow.ComponentModel.CompositeActivity);
-            static readonly Type dependencyObjectType = typeof(System.Workflow.ComponentModel.DependencyObject);
-            static readonly Type activityConditionType = typeof(System.Workflow.ComponentModel.ActivityCondition);
+            static readonly Type compositeActivityType =
+                typeof(System.Workflow.ComponentModel.CompositeActivity);
+            static readonly Type dependencyObjectType =
+                typeof(System.Workflow.ComponentModel.DependencyObject);
+            static readonly Type activityConditionType =
+                typeof(System.Workflow.ComponentModel.ActivityCondition);
+
             // Interop Property Names
             internal const string interopPropertyActivityType = "ActivityType";
             internal const string interopPropertyActivityProperties = "ActivityProperties";
             internal const string interopPropertyActivityMetaProperties = "ActivityMetaProperties";
+
             // Allowed Meta-Properties
             internal const string activityNameMetaProperty = "Name";
 
-
-            //Check property names for any Property/PropertyOut pairs that would conflict with our naming scheme 
+            //Check property names for any Property/PropertyOut pairs that would conflict with our naming scheme
             public static bool HasPropertyNameCollision(IList<PropertyInfo> properties)
             {
                 bool hasNameCollision = false;
@@ -313,9 +353,11 @@ namespace System.Activities.Statements
                     propertyNames.Add(propertyInfo.Name);
                 }
 
-                if (propertyNames.Contains(interopPropertyActivityType) ||
-                    propertyNames.Contains(interopPropertyActivityProperties) ||
-                    propertyNames.Contains(interopPropertyActivityMetaProperties))
+                if (
+                    propertyNames.Contains(interopPropertyActivityType)
+                    || propertyNames.Contains(interopPropertyActivityProperties)
+                    || propertyNames.Contains(interopPropertyActivityMetaProperties)
+                )
                 {
                     hasNameCollision = true;
                 }
@@ -343,21 +385,32 @@ namespace System.Activities.Statements
                 return !isMetaProperty;
             }
 
-            public static bool IsBindableOrMetaProperty(PropertyInfo propertyInfo, out bool isMetaProperty)
+            public static bool IsBindableOrMetaProperty(
+                PropertyInfo propertyInfo,
+                out bool isMetaProperty
+            )
             {
                 isMetaProperty = false;
 
                 // Validate the declaring type: CompositeActivity and DependencyObject
-                if (propertyInfo.DeclaringType.Equals(compositeActivityType) ||
-                    propertyInfo.DeclaringType.Equals(dependencyObjectType))
+                if (
+                    propertyInfo.DeclaringType.Equals(compositeActivityType)
+                    || propertyInfo.DeclaringType.Equals(dependencyObjectType)
+                )
                 {
                     return false;
                 }
 
                 // Validate the declaring type: Activity
                 // We allow certain meta-properties on System.Workflow.ComponentModel.Activity to be visible
-                if (propertyInfo.DeclaringType.Equals(activityType) &&
-                    !String.Equals(propertyInfo.Name, activityNameMetaProperty, StringComparison.Ordinal))
+                if (
+                    propertyInfo.DeclaringType.Equals(activityType)
+                    && !String.Equals(
+                        propertyInfo.Name,
+                        activityNameMetaProperty,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     return false;
                 }
@@ -371,8 +424,11 @@ namespace System.Activities.Statements
                 //Validate whether there is DP(Meta) backup
                 string dependencyPropertyName = propertyInfo.Name;
 
-                System.Workflow.ComponentModel.DependencyProperty dependencyProperty = System.Workflow.ComponentModel.DependencyProperty.FromName(dependencyPropertyName,
-                    propertyInfo.DeclaringType);
+                System.Workflow.ComponentModel.DependencyProperty dependencyProperty =
+                    System.Workflow.ComponentModel.DependencyProperty.FromName(
+                        dependencyPropertyName,
+                        propertyInfo.DeclaringType
+                    );
 
                 if (dependencyProperty != null && dependencyProperty.DefaultMetadata.IsMetaProperty)
                 {

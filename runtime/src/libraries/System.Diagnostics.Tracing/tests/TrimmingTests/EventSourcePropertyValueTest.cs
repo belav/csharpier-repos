@@ -31,7 +31,8 @@ internal class Program
         public const string EventSourceName = "MyTest";
         public static TestEventSource Log = new TestEventSource();
 
-        public TestEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+        public TestEventSource()
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         [Event(1)]
         public void LogData(TestData data)
@@ -44,7 +45,7 @@ internal class Program
     private class PrimitiveOnlyEventSource : EventSource
     {
         public const string EventSourceName = "PrimitiveOnly";
-        public readonly static PrimitiveOnlyEventSource Log = new PrimitiveOnlyEventSource();
+        public static readonly PrimitiveOnlyEventSource Log = new PrimitiveOnlyEventSource();
 
         [Event(1)]
         public void LogBoolInt(bool b1, int i1)
@@ -90,26 +91,28 @@ internal class Program
             var testData = new TestData()
             {
                 TestInt = 5,
-                SubData = new TestSubData()
-                {
-                    SubInt = 6
-                }
+                SubData = new TestSubData() { SubInt = 6 },
             };
             TestEventSource.Log.LogData(testData);
 
-            if (listener.LogDataPayload?.Count != 2 ||
-                (int)listener.LogDataPayload[0] != testData.TestInt ||
-                (int)((IDictionary<string, object>)listener.LogDataPayload[1])["SubInt"] != testData.SubData.SubInt)
+            if (
+                listener.LogDataPayload?.Count != 2
+                || (int)listener.LogDataPayload[0] != testData.TestInt
+                || (int)((IDictionary<string, object>)listener.LogDataPayload[1])["SubInt"]
+                    != testData.SubData.SubInt
+            )
             {
                 return -1;
             }
 
             PrimitiveOnlyEventSource.Log.LogStringIntStringInt("a", 1, "b", 2);
-            if (listener.LogDataPayload?.Count != 4 ||
-                (string)listener.LogDataPayload[0] != "a" ||
-                (int)listener.LogDataPayload[1] != 1 ||
-                (string)listener.LogDataPayload[2] != "b" ||
-                (int)listener.LogDataPayload[3] != 2)
+            if (
+                listener.LogDataPayload?.Count != 4
+                || (string)listener.LogDataPayload[0] != "a"
+                || (int)listener.LogDataPayload[1] != 1
+                || (string)listener.LogDataPayload[2] != "b"
+                || (int)listener.LogDataPayload[3] != 2
+            )
             {
                 return -2;
             }

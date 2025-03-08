@@ -14,13 +14,15 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 /// Base class for the Entity Framework database context used for identity.
 /// </summary>
 /// <typeparam name="TUser">The type of the user objects.</typeparam>
-public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string> where TUser : IdentityUser
+public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string>
+    where TUser : IdentityUser
 {
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityUserContext{TUser}"/>.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityUserContext(DbContextOptions options) : base(options) { }
+    public IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="IdentityUserContext{TUser}" /> class.
@@ -33,7 +35,14 @@ public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string> whe
 /// </summary>
 /// <typeparam name="TUser">The type of user objects.</typeparam>
 /// <typeparam name="TKey">The type of the primary key for users and roles.</typeparam>
-public class IdentityUserContext<TUser, TKey> : IdentityUserContext<TUser, TKey, IdentityUserClaim<TKey>, IdentityUserLogin<TKey>, IdentityUserToken<TKey>>
+public class IdentityUserContext<TUser, TKey>
+    : IdentityUserContext<
+        TUser,
+        TKey,
+        IdentityUserClaim<TKey>,
+        IdentityUserLogin<TKey>,
+        IdentityUserToken<TKey>
+    >
     where TUser : IdentityUser<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -41,7 +50,8 @@ public class IdentityUserContext<TUser, TKey> : IdentityUserContext<TUser, TKey,
     /// Initializes a new instance of the db context.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityUserContext(DbContextOptions options) : base(options) { }
+    public IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     /// <summary>
     /// Initializes a new instance of the class.
@@ -57,7 +67,8 @@ public class IdentityUserContext<TUser, TKey> : IdentityUserContext<TUser, TKey,
 /// <typeparam name="TUserClaim">The type of the user claim object.</typeparam>
 /// <typeparam name="TUserLogin">The type of the user login object.</typeparam>
 /// <typeparam name="TUserToken">The type of the user token object.</typeparam>
-public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken> : DbContext
+public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
+    : DbContext
     where TUser : IdentityUser<TKey>
     where TKey : IEquatable<TKey>
     where TUserClaim : IdentityUserClaim<TKey>
@@ -68,7 +79,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     /// Initializes a new instance of the class.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityUserContext(DbContextOptions options) : base(options) { }
+    public IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     /// <summary>
     /// Initializes a new instance of the class.
@@ -98,18 +110,22 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     /// <summary>
     /// Gets the schema version used for versioning.
     /// </summary>
-    protected virtual Version SchemaVersion { get => GetStoreOptions()?.SchemaVersion ?? IdentitySchemaVersions.Version1; }
+    protected virtual Version SchemaVersion
+    {
+        get => GetStoreOptions()?.SchemaVersion ?? IdentitySchemaVersions.Version1;
+    }
 
-    private StoreOptions? GetStoreOptions() => this.GetService<IDbContextOptions>()
-                        .Extensions.OfType<CoreOptionsExtension>()
-                        .FirstOrDefault()?.ApplicationServiceProvider
-                        ?.GetService<IOptions<IdentityOptions>>()
-                        ?.Value?.Stores;
+    private StoreOptions? GetStoreOptions() =>
+        this.GetService<IDbContextOptions>()
+            .Extensions.OfType<CoreOptionsExtension>()
+            .FirstOrDefault()
+            ?.ApplicationServiceProvider?.GetService<IOptions<IdentityOptions>>()
+            ?.Value?.Stores;
 
     private sealed class PersonalDataConverter : ValueConverter<string, string>
     {
-        public PersonalDataConverter(IPersonalDataProtector protector) : base(s => protector.Protect(s), s => protector.Unprotect(s), default)
-        { }
+        public PersonalDataConverter(IPersonalDataProtector protector)
+            : base(s => protector.Protect(s), s => protector.Unprotect(s), default) { }
     }
 
     /// <summary>
@@ -181,8 +197,11 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
             if (encryptPersonalData)
             {
                 converter = new PersonalDataConverter(this.GetService<IPersonalDataProtector>());
-                var personalDataProps = typeof(TUser).GetProperties().Where(
-                                prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute)));
+                var personalDataProps = typeof(TUser)
+                    .GetProperties()
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    );
                 foreach (var p in personalDataProps)
                 {
                     if (p.PropertyType != typeof(string))
@@ -219,7 +238,12 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
 
         builder.Entity<TUserToken>(b =>
         {
-            b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+            b.HasKey(t => new
+            {
+                t.UserId,
+                t.LoginProvider,
+                t.Name,
+            });
 
             if (maxKeyLength > 0)
             {
@@ -229,8 +253,11 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
 
             if (encryptPersonalData)
             {
-                var tokenProps = typeof(TUserToken).GetProperties().Where(
-                                prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute)));
+                var tokenProps = typeof(TUserToken)
+                    .GetProperties()
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    );
                 foreach (var p in tokenProps)
                 {
                     if (p.PropertyType != typeof(string))
@@ -274,8 +301,11 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
             if (encryptPersonalData)
             {
                 converter = new PersonalDataConverter(this.GetService<IPersonalDataProtector>());
-                var personalDataProps = typeof(TUser).GetProperties().Where(
-                                prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute)));
+                var personalDataProps = typeof(TUser)
+                    .GetProperties()
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    );
                 foreach (var p in personalDataProps)
                 {
                     if (p.PropertyType != typeof(string))
@@ -312,7 +342,12 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
 
         builder.Entity<TUserToken>(b =>
         {
-            b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+            b.HasKey(t => new
+            {
+                t.UserId,
+                t.LoginProvider,
+                t.Name,
+            });
 
             if (maxKeyLength > 0)
             {
@@ -322,8 +357,11 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
 
             if (encryptPersonalData)
             {
-                var tokenProps = typeof(TUserToken).GetProperties().Where(
-                                prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute)));
+                var tokenProps = typeof(TUserToken)
+                    .GetProperties()
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    );
                 foreach (var p in tokenProps)
                 {
                     if (p.PropertyType != typeof(string))

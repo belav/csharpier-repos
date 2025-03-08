@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,85 +29,83 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [Serializable]
+    public sealed class GacIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    {
+        private const int version = 1;
 
-	[ComVisible (true)]
-	[Serializable]
-	public sealed class GacIdentityPermission : CodeAccessPermission, IBuiltInPermission {
+        public GacIdentityPermission() { }
 
-		private const int version = 1;
+        public GacIdentityPermission(PermissionState state)
+        {
+            // false == do not allow Unrestricted for Identity Permissions
+            CheckPermissionState(state, false);
+        }
 
-		public GacIdentityPermission ()
-		{
-		}
+        public override IPermission Copy()
+        {
+            return (IPermission)new GacIdentityPermission();
+        }
 
-		public GacIdentityPermission (PermissionState state)
-		{
-			// false == do not allow Unrestricted for Identity Permissions
-			CheckPermissionState (state, false);
-		}
+        public override IPermission Intersect(IPermission target)
+        {
+            GacIdentityPermission gip = Cast(target);
+            if (gip == null)
+                return null;
 
-		public override IPermission Copy ()
-		{
-			return (IPermission) new GacIdentityPermission ();
-		}
+            return Copy();
+        }
 
-		public override IPermission Intersect (IPermission target)
-		{
-			GacIdentityPermission gip = Cast (target);
-			if (gip == null)
-				return null;
+        public override bool IsSubsetOf(IPermission target)
+        {
+            GacIdentityPermission gip = Cast(target);
+            return (gip != null);
+        }
 
-			return Copy ();
-		}
+        public override IPermission Union(IPermission target)
+        {
+            Cast(target);
+            return Copy();
+        }
 
-		public override bool IsSubsetOf (IPermission target)
-		{
-			GacIdentityPermission gip = Cast (target);
-			return (gip != null);
-		}
+        public override void FromXml(SecurityElement securityElement)
+        {
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(securityElement, "securityElement", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
+        }
 
-		public override IPermission Union (IPermission target)
-		{
-			Cast (target);
-			return Copy ();
-		}
+        public override SecurityElement ToXml()
+        {
+            SecurityElement se = Element(version);
+            return se;
+        }
 
-		public override void FromXml (SecurityElement securityElement)
-		{
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (securityElement, "securityElement", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
-		}
+        // IBuildInPermission
 
-		public override SecurityElement ToXml ()
-		{
-			SecurityElement se = Element (version);
-			return se;
-		}
+        int IBuiltInPermission.GetTokenIndex()
+        {
+            return (int)BuiltInToken.GacIdentity;
+        }
 
-		// IBuildInPermission
+        // helpers
 
-		int IBuiltInPermission.GetTokenIndex ()
-		{
-			return (int) BuiltInToken.GacIdentity;
-		}
+        private GacIdentityPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		// helpers
+            GacIdentityPermission uip = (target as GacIdentityPermission);
+            if (uip == null)
+            {
+                ThrowInvalidPermission(target, typeof(GacIdentityPermission));
+            }
 
-		private GacIdentityPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
-
-			GacIdentityPermission uip = (target as GacIdentityPermission);
-			if (uip == null) {
-				ThrowInvalidPermission (target, typeof (GacIdentityPermission));
-			}
-
-			return uip;
-		}
-	}
+            return uip;
+        }
+    }
 }
-

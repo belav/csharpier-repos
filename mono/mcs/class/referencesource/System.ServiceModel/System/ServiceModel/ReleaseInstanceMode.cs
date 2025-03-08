@@ -16,15 +16,13 @@ namespace System.ServiceModel
 
     static class ReleaseInstanceModeHelper
     {
-        static public bool IsDefined(ReleaseInstanceMode x)
+        public static bool IsDefined(ReleaseInstanceMode x)
         {
-            return
-                x == ReleaseInstanceMode.None ||
-                x == ReleaseInstanceMode.BeforeCall ||
-                x == ReleaseInstanceMode.AfterCall ||
-                x == ReleaseInstanceMode.BeforeAndAfterCall ||
-                false;
+            return x == ReleaseInstanceMode.None
+                || x == ReleaseInstanceMode.BeforeCall
+                || x == ReleaseInstanceMode.AfterCall
+                || x == ReleaseInstanceMode.BeforeAndAfterCall
+                || false;
         }
     }
-
 }

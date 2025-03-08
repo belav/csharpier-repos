@@ -10,7 +10,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// This attribute can be used on action parameters and types, to indicate model level metadata.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Parameter,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class BindAttribute : Attribute, IModelNameProvider, IPropertyFilterProvider
 {
     private static readonly Func<ModelMetadata, bool> _default = (m) => true;
@@ -75,6 +79,7 @@ public class BindAttribute : Attribute, IModelNameProvider, IPropertyFilterProvi
         }
     }
 
-    private static IEnumerable<string> SplitString(string original)
-        => original?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+    private static IEnumerable<string> SplitString(string original) =>
+        original?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+        ?? Array.Empty<string>();
 }

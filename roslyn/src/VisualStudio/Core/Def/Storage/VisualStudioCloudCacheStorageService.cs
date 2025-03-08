@@ -19,42 +19,70 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
 {
     internal class VisualStudioCloudCacheStorageService : AbstractCloudCachePersistentStorageService
     {
-        [ExportWorkspaceServiceFactory(typeof(ICloudCacheStorageService), ServiceLayer.Host), Shared]
+        [
+            ExportWorkspaceServiceFactory(typeof(ICloudCacheStorageService), ServiceLayer.Host),
+            Shared
+        ]
         internal class ServiceFactory : IWorkspaceServiceFactory
         {
             private readonly IVsService<IBrokeredServiceContainer> _brokeredServiceContainer;
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ServiceFactory(IVsService<SVsBrokeredServiceContainer, IBrokeredServiceContainer> brokeredServiceContainer)
+            public ServiceFactory(
+                IVsService<
+                    SVsBrokeredServiceContainer,
+                    IBrokeredServiceContainer
+                > brokeredServiceContainer
+            )
             {
                 _brokeredServiceContainer = brokeredServiceContainer;
             }
 
-            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                => new VisualStudioCloudCacheStorageService(_brokeredServiceContainer, workspaceServices.GetRequiredService<IPersistentStorageConfiguration>());
+            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                new VisualStudioCloudCacheStorageService(
+                    _brokeredServiceContainer,
+                    workspaceServices.GetRequiredService<IPersistentStorageConfiguration>()
+                );
         }
 
         private readonly IVsService<IBrokeredServiceContainer> _brokeredServiceContainer;
 
-        public VisualStudioCloudCacheStorageService(IVsService<IBrokeredServiceContainer> brokeredServiceContainer, IPersistentStorageConfiguration configuration)
+        public VisualStudioCloudCacheStorageService(
+            IVsService<IBrokeredServiceContainer> brokeredServiceContainer,
+            IPersistentStorageConfiguration configuration
+        )
             : base(configuration)
         {
             _brokeredServiceContainer = brokeredServiceContainer;
         }
 
-        protected sealed override async ValueTask<ICacheService> CreateCacheServiceAsync(string solutionFolder, CancellationToken cancellationToken)
+        protected sealed override async ValueTask<ICacheService> CreateCacheServiceAsync(
+            string solutionFolder,
+            CancellationToken cancellationToken
+        )
         {
-            var serviceContainer = await _brokeredServiceContainer.GetValueAsync(cancellationToken).ConfigureAwait(false);
+            var serviceContainer = await _brokeredServiceContainer
+                .GetValueAsync(cancellationToken)
+                .ConfigureAwait(false);
             var serviceBroker = serviceContainer.GetFullAccessServiceBroker();
 
 #pragma warning disable ISB001 // Dispose of proxies
             // cache service will be disposed inside VisualStudioCloudCachePersistentStorage.Dispose
-            var cacheService = await serviceBroker.GetProxyAsync<ICacheService>(
-                VisualStudioServices.VS2019_10.CacheService,
-                // replace with CacheService.RelativePathBaseActivationArgKey once available.
-                new ServiceActivationOptions { ActivationArguments = ImmutableDictionary<string, string>.Empty.Add("RelativePathBase", solutionFolder) },
-                cancellationToken).ConfigureAwait(false);
+            var cacheService = await serviceBroker
+                .GetProxyAsync<ICacheService>(
+                    VisualStudioServices.VS2019_10.CacheService,
+                    // replace with CacheService.RelativePathBaseActivationArgKey once available.
+                    new ServiceActivationOptions
+                    {
+                        ActivationArguments = ImmutableDictionary<string, string>.Empty.Add(
+                            "RelativePathBase",
+                            solutionFolder
+                        ),
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 #pragma warning restore ISB001 // Dispose of proxies
 
             Contract.ThrowIfNull(cacheService);

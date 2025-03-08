@@ -11,20 +11,33 @@ internal sealed class DefaultMessagePackHubProtocolWorker : MessagePackHubProtoc
 {
     private readonly MessagePackSerializerOptions _messagePackSerializerOptions;
 
-    public DefaultMessagePackHubProtocolWorker(MessagePackSerializerOptions messagePackSerializerOptions)
+    public DefaultMessagePackHubProtocolWorker(
+        MessagePackSerializerOptions messagePackSerializerOptions
+    )
     {
         _messagePackSerializerOptions = messagePackSerializerOptions;
     }
 
-    protected override object? DeserializeObject(ref MessagePackReader reader, Type type, string field)
+    protected override object? DeserializeObject(
+        ref MessagePackReader reader,
+        Type type,
+        string field
+    )
     {
         try
         {
-            return MessagePackSerializer.Deserialize(type, ref reader, _messagePackSerializerOptions);
+            return MessagePackSerializer.Deserialize(
+                type,
+                ref reader,
+                _messagePackSerializerOptions
+            );
         }
         catch (Exception ex)
         {
-            throw new InvalidDataException($"Deserializing object of the `{type.Name}` type for '{field}' failed.", ex);
+            throw new InvalidDataException(
+                $"Deserializing object of the `{type.Name}` type for '{field}' failed.",
+                ex
+            );
         }
     }
 

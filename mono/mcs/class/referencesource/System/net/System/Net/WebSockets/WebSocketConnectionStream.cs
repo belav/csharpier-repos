@@ -18,9 +18,14 @@ namespace System.Net.WebSockets
 
     internal class WebSocketConnectionStream : BufferedReadStream, WebSocketBase.IWebSocketStream
     {
-        private static readonly Func<Exception, bool> s_CanHandleException = new Func<Exception, bool>(CanHandleException);
+        private static readonly Func<Exception, bool> s_CanHandleException = new Func<
+            Exception,
+            bool
+        >(CanHandleException);
         private static readonly Action<object> s_OnCancel = new Action<object>(OnCancel);
-        private static readonly Action<object> s_OnCancelWebSocketConnection = new Action<object>(WebSocketConnection.OnCancel);
+        private static readonly Action<object> s_OnCancelWebSocketConnection = new Action<object>(
+            WebSocketConnection.OnCancel
+        );
         private static readonly Type s_NetworkStreamType = typeof(NetworkStream);
         private readonly ConnectStream m_ConnectStream;
         private readonly string m_ConnectionGroupName;
@@ -32,20 +37,26 @@ namespace System.Net.WebSockets
         public WebSocketConnectionStream(ConnectStream connectStream, string connectionGroupName)
             : base(new WebSocketConnection(connectStream.Connection), false)
         {
-            Contract.Assert(connectStream != null,
-                "'connectStream' MUST NOT be NULL.");
-            Contract.Assert(connectStream.Connection != null,
-                "'connectStream.Conection' MUST NOT be NULL.");
-            Contract.Assert(connectStream.Connection.NetworkStream != null,
-                "'connectStream.Conection.NetworkStream' MUST NOT be NULL.");
-            Contract.Assert(!string.IsNullOrEmpty(connectionGroupName), 
-                "connectionGroupName should not be null or empty.");
+            Contract.Assert(connectStream != null, "'connectStream' MUST NOT be NULL.");
+            Contract.Assert(
+                connectStream.Connection != null,
+                "'connectStream.Conection' MUST NOT be NULL."
+            );
+            Contract.Assert(
+                connectStream.Connection.NetworkStream != null,
+                "'connectStream.Conection.NetworkStream' MUST NOT be NULL."
+            );
+            Contract.Assert(
+                !string.IsNullOrEmpty(connectionGroupName),
+                "connectionGroupName should not be null or empty."
+            );
 
             m_ConnectStream = connectStream;
             m_ConnectionGroupName = connectionGroupName;
             m_CloseConnectStreamLock = new object();
             // Make sure we don't short circuit for TlsStream or custom NetworkStream implementations
-            m_IsFastPathAllowed = m_ConnectStream.Connection.NetworkStream.GetType() == s_NetworkStreamType;
+            m_IsFastPathAllowed =
+                m_ConnectStream.Connection.NetworkStream.GetType() == s_NetworkStreamType;
 
             if (WebSocketBase.LoggingEnabled)
             {
@@ -57,34 +68,22 @@ namespace System.Net.WebSockets
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool SupportsMultipleWrite
         {
-            get
-            {
-                return ((WebSocketConnection)this.BaseStream).SupportsMultipleWrite;
-            }
+            get { return ((WebSocketConnection)this.BaseStream).SupportsMultipleWrite; }
         }
 
         public async Task CloseNetworkConnectionAsync(CancellationToken cancellationToken)
@@ -93,44 +92,71 @@ namespace System.Net.WebSockets
             await Task.Yield();
             if (WebSocketBase.LoggingEnabled)
             {
-                Logging.Enter(Logging.WebSockets, this, Methods.CloseNetworkConnectionAsync, string.Empty);
+                Logging.Enter(
+                    Logging.WebSockets,
+                    this,
+                    Methods.CloseNetworkConnectionAsync,
+                    string.Empty
+                );
             }
 
             CancellationTokenSource reasonableTimeoutCancellationTokenSource = null;
             CancellationTokenSource linkedCancellationTokenSource = null;
             CancellationToken linkedCancellationToken = CancellationToken.None;
 
-            CancellationTokenRegistration cancellationTokenRegistration = new CancellationTokenRegistration();
-            
+            CancellationTokenRegistration cancellationTokenRegistration =
+                new CancellationTokenRegistration();
+
             int bytesRead = 0;
             try
             {
-                reasonableTimeoutCancellationTokenSource = 
-                    new CancellationTokenSource(WebSocketHelpers.ClientTcpCloseTimeout);
+                reasonableTimeoutCancellationTokenSource = new CancellationTokenSource(
+                    WebSocketHelpers.ClientTcpCloseTimeout
+                );
                 linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
                     reasonableTimeoutCancellationTokenSource.Token,
-                    cancellationToken);
+                    cancellationToken
+                );
                 linkedCancellationToken = linkedCancellationTokenSource.Token;
-                cancellationTokenRegistration = linkedCancellationToken.Register(s_OnCancel, this, false);
+                cancellationTokenRegistration = linkedCancellationToken.Register(
+                    s_OnCancel,
+                    this,
+                    false
+                );
 
                 WebSocketHelpers.ThrowIfConnectionAborted(m_ConnectStream.Connection, true);
                 byte[] buffer = new byte[1];
                 if (m_WebSocketConnection != null && m_InOpaqueMode)
                 {
-                    bytesRead = await m_WebSocketConnection.ReadAsyncCore(buffer, 0, 1, linkedCancellationToken, true).SuppressContextFlow<int>();
+                    bytesRead = await m_WebSocketConnection
+                        .ReadAsyncCore(buffer, 0, 1, linkedCancellationToken, true)
+                        .SuppressContextFlow<int>();
                 }
                 else
                 {
-                    bytesRead = await base.ReadAsync(buffer, 0, 1, linkedCancellationToken).SuppressContextFlow<int>();
+                    bytesRead = await base.ReadAsync(buffer, 0, 1, linkedCancellationToken)
+                        .SuppressContextFlow<int>();
                 }
 
                 if (bytesRead != 0)
                 {
-                    Contract.Assert(false, "'bytesRead' MUST be '0' at this point. Instead more payload was received ('" + buffer[0].ToString() + "')");
+                    Contract.Assert(
+                        false,
+                        "'bytesRead' MUST be '0' at this point. Instead more payload was received ('"
+                            + buffer[0].ToString()
+                            + "')"
+                    );
 
                     if (WebSocketBase.LoggingEnabled)
                     {
-                        Logging.Dump(Logging.WebSockets, this, Methods.CloseNetworkConnectionAsync, buffer, 0, bytesRead);
+                        Logging.Dump(
+                            Logging.WebSockets,
+                            this,
+                            Methods.CloseNetworkConnectionAsync,
+                            buffer,
+                            0,
+                            bytesRead
+                        );
                     }
 
                     throw new WebSocketException(WebSocketError.NotAWebSocket);
@@ -162,7 +188,12 @@ namespace System.Net.WebSockets
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Exit(Logging.WebSockets, this, Methods.CloseNetworkConnectionAsync, bytesRead);
+                    Logging.Exit(
+                        Logging.WebSockets,
+                        this,
+                        Methods.CloseNetworkConnectionAsync,
+                        bytesRead
+                    );
                 }
             }
         }
@@ -176,12 +207,17 @@ namespace System.Net.WebSockets
 
             try
             {
-                // Taking a lock to avoid a race condition between ConnectStream.CloseEx (called in OnCancel) and 
+                // Taking a lock to avoid a race condition between ConnectStream.CloseEx (called in OnCancel) and
                 // ServicePoint.CloseConnectionGroup (called in Close) which can result in a deadlock
                 lock (m_CloseConnectStreamLock)
                 {
-                    Contract.Assert(this.m_ConnectStream.Connection.ServicePoint != null, "connection.ServicePoint should not be null.");
-                    this.m_ConnectStream.Connection.ServicePoint.CloseConnectionGroup(this.m_ConnectionGroupName);
+                    Contract.Assert(
+                        this.m_ConnectStream.Connection.ServicePoint != null,
+                        "connection.ServicePoint should not be null."
+                    );
+                    this.m_ConnectStream.Connection.ServicePoint.CloseConnectionGroup(
+                        this.m_ConnectionGroupName
+                    );
                 }
                 base.Close();
             }
@@ -194,30 +230,52 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (WebSocketBase.LoggingEnabled)
             {
-                Logging.Enter(Logging.WebSockets, this, Methods.ReadAsync,
-                    WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken));
+                Logging.Enter(
+                    Logging.WebSockets,
+                    this,
+                    Methods.ReadAsync,
+                    WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken)
+                );
             }
 
-            CancellationTokenRegistration cancellationTokenRegistration = new CancellationTokenRegistration();
+            CancellationTokenRegistration cancellationTokenRegistration =
+                new CancellationTokenRegistration();
 
             int bytesRead = 0;
             try
             {
                 if (cancellationToken.CanBeCanceled)
                 {
-                    cancellationTokenRegistration = cancellationToken.Register(s_OnCancel, this, false);
+                    cancellationTokenRegistration = cancellationToken.Register(
+                        s_OnCancel,
+                        this,
+                        false
+                    );
                 }
 
                 WebSocketHelpers.ThrowIfConnectionAborted(m_ConnectStream.Connection, true);
-                bytesRead = await base.ReadAsync(buffer, offset, count, cancellationToken).SuppressContextFlow<int>();
+                bytesRead = await base.ReadAsync(buffer, offset, count, cancellationToken)
+                    .SuppressContextFlow<int>();
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Dump(Logging.WebSockets, this, Methods.ReadAsync, buffer, offset, bytesRead);
+                    Logging.Dump(
+                        Logging.WebSockets,
+                        this,
+                        Methods.ReadAsync,
+                        buffer,
+                        offset,
+                        bytesRead
+                    );
                 }
             }
             catch (Exception error)
@@ -242,28 +300,50 @@ namespace System.Net.WebSockets
             return bytesRead;
         }
 
-        public async override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (WebSocketBase.LoggingEnabled)
             {
-                Logging.Enter(Logging.WebSockets, this, Methods.WriteAsync,
-                    WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken));
+                Logging.Enter(
+                    Logging.WebSockets,
+                    this,
+                    Methods.WriteAsync,
+                    WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken)
+                );
             }
-            CancellationTokenRegistration cancellationTokenRegistration = new CancellationTokenRegistration();
+            CancellationTokenRegistration cancellationTokenRegistration =
+                new CancellationTokenRegistration();
 
             try
             {
                 if (cancellationToken.CanBeCanceled)
                 {
-                    cancellationTokenRegistration = cancellationToken.Register(s_OnCancel, this, false);
+                    cancellationTokenRegistration = cancellationToken.Register(
+                        s_OnCancel,
+                        this,
+                        false
+                    );
                 }
 
                 WebSocketHelpers.ThrowIfConnectionAborted(m_ConnectStream.Connection, false);
-                await base.WriteAsync(buffer, offset, count, cancellationToken).SuppressContextFlow();
+                await base.WriteAsync(buffer, offset, count, cancellationToken)
+                    .SuppressContextFlow();
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Dump(Logging.WebSockets, this, Methods.WriteAsync, buffer, offset, count);
+                    Logging.Dump(
+                        Logging.WebSockets,
+                        this,
+                        Methods.WriteAsync,
+                        buffer,
+                        offset,
+                        count
+                    );
                 }
             }
             catch (Exception error)
@@ -281,7 +361,7 @@ namespace System.Net.WebSockets
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Exit(Logging.WebSockets, this,  Methods.WriteAsync, string.Empty);
+                    Logging.Exit(Logging.WebSockets, this, Methods.WriteAsync, string.Empty);
                 }
             }
         }
@@ -289,7 +369,10 @@ namespace System.Net.WebSockets
         public void SwitchToOpaqueMode(WebSocketBase webSocket)
         {
             Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL.");
-            Contract.Assert(!m_InOpaqueMode, "SwitchToOpaqueMode MUST NOT be called multiple times.");
+            Contract.Assert(
+                !m_InOpaqueMode,
+                "SwitchToOpaqueMode MUST NOT be called multiple times."
+            );
 
             if (m_InOpaqueMode)
             {
@@ -310,31 +393,51 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async Task MultipleWriteAsync(IList<ArraySegment<byte>> sendBuffers, CancellationToken cancellationToken)
+        public async Task MultipleWriteAsync(
+            IList<ArraySegment<byte>> sendBuffers,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.Assert(this.SupportsMultipleWrite, "This method MUST NOT be used for custom NetworkStream implementations.");
+            Contract.Assert(
+                this.SupportsMultipleWrite,
+                "This method MUST NOT be used for custom NetworkStream implementations."
+            );
 
             if (WebSocketBase.LoggingEnabled)
             {
                 Logging.Enter(Logging.WebSockets, this, Methods.MultipleWriteAsync, string.Empty);
             }
-            CancellationTokenRegistration cancellationTokenRegistration = new CancellationTokenRegistration();
+            CancellationTokenRegistration cancellationTokenRegistration =
+                new CancellationTokenRegistration();
 
             try
             {
                 if (cancellationToken.CanBeCanceled)
                 {
-                    cancellationTokenRegistration = cancellationToken.Register(s_OnCancel, this, false);
+                    cancellationTokenRegistration = cancellationToken.Register(
+                        s_OnCancel,
+                        this,
+                        false
+                    );
                 }
 
                 WebSocketHelpers.ThrowIfConnectionAborted(m_ConnectStream.Connection, false);
-                await ((WebSocketBase.IWebSocketStream)base.BaseStream).MultipleWriteAsync(sendBuffers, cancellationToken).SuppressContextFlow();
+                await ((WebSocketBase.IWebSocketStream)base.BaseStream)
+                    .MultipleWriteAsync(sendBuffers, cancellationToken)
+                    .SuppressContextFlow();
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    foreach(ArraySegment<byte> buffer in sendBuffers)
+                    foreach (ArraySegment<byte> buffer in sendBuffers)
                     {
-                        Logging.Dump(Logging.WebSockets, this, Methods.MultipleWriteAsync, buffer.Array, buffer.Offset, buffer.Count);
+                        Logging.Dump(
+                            Logging.WebSockets,
+                            this,
+                            Methods.MultipleWriteAsync,
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count
+                        );
                     }
                 }
             }
@@ -353,17 +456,22 @@ namespace System.Net.WebSockets
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Exit(Logging.WebSockets, this, Methods.MultipleWriteAsync, string.Empty);
+                    Logging.Exit(
+                        Logging.WebSockets,
+                        this,
+                        Methods.MultipleWriteAsync,
+                        string.Empty
+                    );
                 }
             }
         }
 
         private static bool CanHandleException(Exception error)
         {
-            return error is SocketException ||
-                error is ObjectDisposedException ||
-                error is WebException ||
-                error is IOException;
+            return error is SocketException
+                || error is ObjectDisposedException
+                || error is WebException
+                || error is IOException;
         }
 
         private static void OnCancel(object state)
@@ -379,7 +487,7 @@ namespace System.Net.WebSockets
 
             try
             {
-                // Taking a lock to avoid a race condition between ConnectStream.CloseEx (called in OnCancel) and 
+                // Taking a lock to avoid a race condition between ConnectStream.CloseEx (called in OnCancel) and
                 // ServicePoint.CloseConnectionGroup (called in Close) which can result in a deadlock
                 lock (thisPtr.m_CloseConnectStreamLock)
                 {
@@ -430,7 +538,14 @@ namespace System.Net.WebSockets
             {
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Dump(Logging.WebSockets, this, "ConsumeConnectStreamBuffer", buffer, 0, count);
+                    Logging.Dump(
+                        Logging.WebSockets,
+                        this,
+                        "ConsumeConnectStreamBuffer",
+                        buffer,
+                        0,
+                        count
+                    );
                 }
 
                 Append(buffer, 0, count);
@@ -455,8 +570,17 @@ namespace System.Net.WebSockets
                 new EventHandler<SocketAsyncEventArgs>(OnReadCompleted);
             private static readonly EventHandler<SocketAsyncEventArgs> s_OnWriteCompleted =
                 new EventHandler<SocketAsyncEventArgs>(OnWriteCompleted);
-            private static readonly Func<IList<ArraySegment<byte>>, AsyncCallback, object, IAsyncResult> s_BeginMultipleWrite =
-                new Func<IList<ArraySegment<byte>>, AsyncCallback, object, IAsyncResult>(BeginMultipleWrite);
+            private static readonly Func<
+                IList<ArraySegment<byte>>,
+                AsyncCallback,
+                object,
+                IAsyncResult
+            > s_BeginMultipleWrite = new Func<
+                IList<ArraySegment<byte>>,
+                AsyncCallback,
+                object,
+                IAsyncResult
+            >(BeginMultipleWrite);
             private static readonly Action<IAsyncResult> s_EndMultipleWrite =
                 new Action<IAsyncResult>(EndMultipleWrite);
 
@@ -467,7 +591,8 @@ namespace System.Net.WebSockets
                 internal int m_Writes;
             }
 
-            private readonly OutstandingOperations m_OutstandingOperations = new OutstandingOperations();
+            private readonly OutstandingOperations m_OutstandingOperations =
+                new OutstandingOperations();
 #endif //DEBUG
 
             private readonly Connection m_InnerStream;
@@ -485,52 +610,41 @@ namespace System.Net.WebSockets
                 : base(connection)
             {
                 Contract.Assert(connection != null, "'connection' MUST NOT be NULL.");
-                Contract.Assert(connection.NetworkStream != null, "'connection.NetworkStream' MUST NOT be NULL.");
+                Contract.Assert(
+                    connection.NetworkStream != null,
+                    "'connection.NetworkStream' MUST NOT be NULL."
+                );
 
                 m_InnerStream = connection;
                 m_InOpaqueMode = false;
                 // NetworkStream.Multiplewrite is internal. So custom NetworkStream implementations might not support it.
-                m_SupportsMultipleWrites = connection.NetworkStream.GetType().Assembly == s_NetworkStreamType.Assembly;
+                m_SupportsMultipleWrites =
+                    connection.NetworkStream.GetType().Assembly == s_NetworkStreamType.Assembly;
             }
 
             internal Socket InnerSocket
             {
-                get
-                {
-                    return GetInnerSocket(false);
-                }
+                get { return GetInnerSocket(false); }
             }
 
             public override bool CanSeek
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool CanRead
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override bool CanWrite
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public bool SupportsMultipleWrite
             {
-                get
-                {
-                    return m_SupportsMultipleWrites;
-                }
+                get { return m_SupportsMultipleWrites; }
             }
 
             public Task CloseNetworkConnectionAsync(CancellationToken cancellationToken)
@@ -582,7 +696,10 @@ namespace System.Net.WebSockets
                 }
                 try
                 {
-                    Contract.Assert(m_InnerStream.NetworkStream != null, "'m_InnerStream.NetworkStream' MUST NOT be NULL.");
+                    Contract.Assert(
+                        m_InnerStream.NetworkStream != null,
+                        "'m_InnerStream.NetworkStream' MUST NOT be NULL."
+                    );
                     returnValue = m_InnerStream.NetworkStream.InternalSocket;
                 }
                 catch (ObjectDisposedException)
@@ -594,7 +711,11 @@ namespace System.Net.WebSockets
                 return returnValue;
             }
 
-            private static IAsyncResult BeginMultipleWrite(IList<ArraySegment<byte>> sendBuffers, AsyncCallback callback, object asyncState)
+            private static IAsyncResult BeginMultipleWrite(
+                IList<ArraySegment<byte>> sendBuffers,
+                AsyncCallback callback,
+                object asyncState
+            )
             {
                 Contract.Assert(sendBuffers != null, "'sendBuffers' MUST NOT be NULL.");
                 Contract.Assert(asyncState != null, "'asyncState' MUST NOT be NULL.");
@@ -602,21 +723,33 @@ namespace System.Net.WebSockets
                 Contract.Assert(connection != null, "'connection' MUST NOT be NULL.");
 
                 BufferOffsetSize[] buffers = new BufferOffsetSize[sendBuffers.Count];
-                
+
                 for (int index = 0; index < sendBuffers.Count; index++)
                 {
                     ArraySegment<byte> sendBuffer = sendBuffers[index];
-                    buffers[index] = new BufferOffsetSize(sendBuffer.Array, sendBuffer.Offset, sendBuffer.Count, false);
+                    buffers[index] = new BufferOffsetSize(
+                        sendBuffer.Array,
+                        sendBuffer.Offset,
+                        sendBuffer.Count,
+                        false
+                    );
                 }
 
                 WebSocketHelpers.ThrowIfConnectionAborted(connection.m_InnerStream, false);
-                return connection.m_InnerStream.NetworkStream.BeginMultipleWrite(buffers, callback, asyncState);
+                return connection.m_InnerStream.NetworkStream.BeginMultipleWrite(
+                    buffers,
+                    callback,
+                    asyncState
+                );
             }
 
             private static void EndMultipleWrite(IAsyncResult asyncResult)
             {
                 Contract.Assert(asyncResult != null, "'asyncResult' MUST NOT be NULL.");
-                Contract.Assert(asyncResult.AsyncState != null, "'asyncResult.AsyncState' MUST NOT be NULL.");
+                Contract.Assert(
+                    asyncResult.AsyncState != null,
+                    "'asyncResult.AsyncState' MUST NOT be NULL."
+                );
                 WebSocketConnection connection = asyncResult.AsyncState as WebSocketConnection;
                 Contract.Assert(connection != null, "'connection' MUST NOT be NULL.");
 
@@ -624,21 +757,35 @@ namespace System.Net.WebSockets
                 connection.m_InnerStream.NetworkStream.EndMultipleWrite(asyncResult);
             }
 
-            public Task MultipleWriteAsync(IList<ArraySegment<byte>> sendBuffers, 
-                CancellationToken cancellationToken)
+            public Task MultipleWriteAsync(
+                IList<ArraySegment<byte>> sendBuffers,
+                CancellationToken cancellationToken
+            )
             {
-                Contract.Assert(this.SupportsMultipleWrite, "This method MUST NOT be used for custom NetworkStream implementations.");
+                Contract.Assert(
+                    this.SupportsMultipleWrite,
+                    "This method MUST NOT be used for custom NetworkStream implementations."
+                );
 
                 if (!m_InOpaqueMode)
                 {
                     // We can't use fast path over SSL
-                    return Task.Factory.FromAsync<IList<ArraySegment<byte>>>(s_BeginMultipleWrite, s_EndMultipleWrite, 
-                        sendBuffers, this);
+                    return Task.Factory.FromAsync<IList<ArraySegment<byte>>>(
+                        s_BeginMultipleWrite,
+                        s_EndMultipleWrite,
+                        sendBuffers,
+                        this
+                    );
                 }
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Enter(Logging.WebSockets, this, Methods.MultipleWriteAsync, string.Empty);
+                    Logging.Enter(
+                        Logging.WebSockets,
+                        this,
+                        Methods.MultipleWriteAsync,
+                        string.Empty
+                    );
                 }
 
                 bool completedAsynchronously = false;
@@ -649,8 +796,10 @@ namespace System.Net.WebSockets
                     // When using fast path only one outstanding read is permitted. By switching into opaque mode
                     // via IWebSocketStream.SwitchToOpaqueMode (see more detailed comments in interface definition)
                     // caller takes responsibility for enforcing this constraint.
-                    Contract.Assert(Interlocked.Increment(ref m_OutstandingOperations.m_Writes) == 1,
-                        "Only one outstanding write allowed at any given time.");
+                    Contract.Assert(
+                        Interlocked.Increment(ref m_OutstandingOperations.m_Writes) == 1,
+                        "Only one outstanding write allowed at any given time."
+                    );
 #endif
                     WebSocketHelpers.ThrowIfConnectionAborted(m_InnerStream, false);
                     m_WriteTaskCompletionSource = new TaskCompletionSource<object>();
@@ -673,12 +822,22 @@ namespace System.Net.WebSockets
                 {
                     if (WebSocketBase.LoggingEnabled)
                     {
-                        Logging.Exit(Logging.WebSockets, this, Methods.MultipleWriteAsync, completedAsynchronously);
+                        Logging.Exit(
+                            Logging.WebSockets,
+                            this,
+                            Methods.MultipleWriteAsync,
+                            completedAsynchronously
+                        );
                     }
                 }
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 WebSocketHelpers.ValidateBuffer(buffer, offset, count);
 
@@ -689,8 +848,12 @@ namespace System.Net.WebSockets
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Enter(Logging.WebSockets, this, Methods.WriteAsync,
-                        WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken));
+                    Logging.Enter(
+                        Logging.WebSockets,
+                        this,
+                        Methods.WriteAsync,
+                        WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken)
+                    );
                 }
 
                 bool completedAsynchronously = false;
@@ -701,8 +864,10 @@ namespace System.Net.WebSockets
                     // When using fast path only one outstanding read is permitted. By switching into opaque mode
                     // via IWebSocketStream.SwitchToOpaqueMode (see more detailed comments in interface definition)
                     // caller takes responsibility for enforcing this constraint.
-                    Contract.Assert(Interlocked.Increment(ref m_OutstandingOperations.m_Writes) == 1,
-                        "Only one outstanding write allowed at any given time.");
+                    Contract.Assert(
+                        Interlocked.Increment(ref m_OutstandingOperations.m_Writes) == 1,
+                        "Only one outstanding write allowed at any given time."
+                    );
 #endif
                     WebSocketHelpers.ThrowIfConnectionAborted(m_InnerStream, false);
                     m_WriteTaskCompletionSource = new TaskCompletionSource<object>();
@@ -725,12 +890,22 @@ namespace System.Net.WebSockets
                 {
                     if (WebSocketBase.LoggingEnabled)
                     {
-                        Logging.Exit(Logging.WebSockets, this, Methods.WriteAsync, completedAsynchronously);
+                        Logging.Exit(
+                            Logging.WebSockets,
+                            this,
+                            Methods.WriteAsync,
+                            completedAsynchronously
+                        );
                     }
                 }
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 WebSocketHelpers.ValidateBuffer(buffer, offset, count);
 
@@ -742,13 +917,22 @@ namespace System.Net.WebSockets
                 return ReadAsyncCore(buffer, offset, count, cancellationToken, false);
             }
 
-            internal Task<int> ReadAsyncCore(byte[] buffer, int offset, int count, CancellationToken cancellationToken, 
-                bool ignoreReadError)
+            internal Task<int> ReadAsyncCore(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken,
+                bool ignoreReadError
+            )
             {
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Enter(Logging.WebSockets, this, Methods.ReadAsyncCore,
-                        WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken));
+                    Logging.Enter(
+                        Logging.WebSockets,
+                        this,
+                        Methods.ReadAsyncCore,
+                        WebSocketHelpers.GetTraceMsgForParameters(offset, count, cancellationToken)
+                    );
                 }
 
                 bool completedAsynchronously = false;
@@ -760,8 +944,10 @@ namespace System.Net.WebSockets
                     // When using fast path only one outstanding read is permitted. By switching into opaque mode
                     // via IWebSocketStream.SwitchToOpaqueMode (see more detailed comments in interface definition)
                     // caller takes responsibility for enforcing this constraint.
-                    Contract.Assert(Interlocked.Increment(ref m_OutstandingOperations.m_Reads) == 1,
-                        "Only one outstanding read allowed at any given time.");
+                    Contract.Assert(
+                        Interlocked.Increment(ref m_OutstandingOperations.m_Reads) == 1,
+                        "Only one outstanding read allowed at any given time."
+                    );
 #endif
                     WebSocketHelpers.ThrowIfConnectionAborted(m_InnerStream, true);
                     m_ReadTaskCompletionSource = new TaskCompletionSource<int>();
@@ -802,7 +988,12 @@ namespace System.Net.WebSockets
                 {
                     if (WebSocketBase.LoggingEnabled)
                     {
-                        Logging.Exit(Logging.WebSockets, this, Methods.ReadAsyncCore, completedAsynchronously);
+                        Logging.Exit(
+                            Logging.WebSockets,
+                            this,
+                            Methods.ReadAsyncCore,
+                            completedAsynchronously
+                        );
                     }
                 }
             }
@@ -823,9 +1014,9 @@ namespace System.Net.WebSockets
                 // No op - the abort is handled by the WebSocketConnectionStream
             }
 
-            // According to my tests even when aborting the underlying Socket the completionEvent for 
+            // According to my tests even when aborting the underlying Socket the completionEvent for
             // SocketAsyncEventArgs is not always fired, which can result in not cancelling the underlying
-            // IO. Cancelling the TaskCompletionSources below is safe, because CompletionSource.Tryxxx 
+            // IO. Cancelling the TaskCompletionSources below is safe, because CompletionSource.Tryxxx
             // is handling the race condition (whoever is completing the CompletionSource first wins.)
             internal static void OnCancel(object state)
             {
@@ -840,14 +1031,16 @@ namespace System.Net.WebSockets
 
                 try
                 {
-                    TaskCompletionSource<int> readTaskCompletionSourceSnapshot = thisPtr.m_ReadTaskCompletionSource;
+                    TaskCompletionSource<int> readTaskCompletionSourceSnapshot =
+                        thisPtr.m_ReadTaskCompletionSource;
 
                     if (readTaskCompletionSourceSnapshot != null)
                     {
                         readTaskCompletionSourceSnapshot.TrySetCanceled();
                     }
 
-                    TaskCompletionSource<object> writeTaskCompletionSourceSnapshot = thisPtr.m_WriteTaskCompletionSource;
+                    TaskCompletionSource<object> writeTaskCompletionSourceSnapshot =
+                        thisPtr.m_WriteTaskCompletionSource;
 
                     if (writeTaskCompletionSourceSnapshot != null)
                     {
@@ -866,7 +1059,10 @@ namespace System.Net.WebSockets
             public void SwitchToOpaqueMode(WebSocketBase webSocket)
             {
                 Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL.");
-                Contract.Assert(!m_InOpaqueMode, "SwitchToOpaqueMode MUST NOT be called multiple times.");
+                Contract.Assert(
+                    !m_InOpaqueMode,
+                    "SwitchToOpaqueMode MUST NOT be called multiple times."
+                );
                 m_WebSocket = webSocket;
                 m_InOpaqueMode = true;
                 m_ReadEventArgs = new SocketAsyncEventArgs();
@@ -880,10 +1076,12 @@ namespace System.Net.WebSockets
             private static string GetIOCompletionTraceMsg(SocketAsyncEventArgs eventArgs)
             {
                 Contract.Assert(eventArgs != null, "'eventArgs' MUST NOT be NULL.");
-                return string.Format(CultureInfo.InvariantCulture,
+                return string.Format(
+                    CultureInfo.InvariantCulture,
                     "LastOperation: {0}, SocketError: {1}",
                     eventArgs.LastOperation,
-                    eventArgs.SocketError);
+                    eventArgs.SocketError
+                );
             }
 
             private static void OnWriteCompleted(object sender, SocketAsyncEventArgs eventArgs)
@@ -893,19 +1091,27 @@ namespace System.Net.WebSockets
                 Contract.Assert(thisPtr != null, "'thisPtr' MUST NOT be NULL.");
 
 #if DEBUG
-                Contract.Assert(Interlocked.Decrement(ref thisPtr.m_OutstandingOperations.m_Writes) >= 0,
-                    "'thisPtr.m_OutstandingOperations.m_Writes' MUST NOT be negative.");
+                Contract.Assert(
+                    Interlocked.Decrement(ref thisPtr.m_OutstandingOperations.m_Writes) >= 0,
+                    "'thisPtr.m_OutstandingOperations.m_Writes' MUST NOT be negative."
+                );
 #endif
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Enter(Logging.WebSockets, thisPtr, Methods.OnWriteCompleted, 
-                        GetIOCompletionTraceMsg(eventArgs));
+                    Logging.Enter(
+                        Logging.WebSockets,
+                        thisPtr,
+                        Methods.OnWriteCompleted,
+                        GetIOCompletionTraceMsg(eventArgs)
+                    );
                 }
 
                 if (eventArgs.SocketError != SocketError.Success)
                 {
-                    thisPtr.m_WriteTaskCompletionSource.TrySetException(new SocketException(eventArgs.SocketError));
+                    thisPtr.m_WriteTaskCompletionSource.TrySetException(
+                        new SocketException(eventArgs.SocketError)
+                    );
                 }
                 else
                 {
@@ -914,7 +1120,12 @@ namespace System.Net.WebSockets
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Exit(Logging.WebSockets, thisPtr, Methods.OnWriteCompleted, string.Empty);
+                    Logging.Exit(
+                        Logging.WebSockets,
+                        thisPtr,
+                        Methods.OnWriteCompleted,
+                        string.Empty
+                    );
                 }
             }
 
@@ -924,21 +1135,29 @@ namespace System.Net.WebSockets
                 WebSocketConnection thisPtr = eventArgs.UserToken as WebSocketConnection;
                 Contract.Assert(thisPtr != null, "'thisPtr' MUST NOT be NULL.");
 #if DEBUG
-                Contract.Assert(Interlocked.Decrement(ref thisPtr.m_OutstandingOperations.m_Reads) >= 0,
-                    "'thisPtr.m_OutstandingOperations.m_Reads' MUST NOT be negative.");
+                Contract.Assert(
+                    Interlocked.Decrement(ref thisPtr.m_OutstandingOperations.m_Reads) >= 0,
+                    "'thisPtr.m_OutstandingOperations.m_Reads' MUST NOT be negative."
+                );
 #endif
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Enter(Logging.WebSockets, thisPtr, Methods.OnReadCompleted,
-                        GetIOCompletionTraceMsg(eventArgs));
+                    Logging.Enter(
+                        Logging.WebSockets,
+                        thisPtr,
+                        Methods.OnReadCompleted,
+                        GetIOCompletionTraceMsg(eventArgs)
+                    );
                 }
 
                 if (eventArgs.SocketError != SocketError.Success)
                 {
                     if (!thisPtr.m_IgnoreReadError)
                     {
-                        thisPtr.m_ReadTaskCompletionSource.TrySetException(new SocketException(eventArgs.SocketError));
+                        thisPtr.m_ReadTaskCompletionSource.TrySetException(
+                            new SocketException(eventArgs.SocketError)
+                        );
                     }
                     else
                     {
@@ -952,7 +1171,12 @@ namespace System.Net.WebSockets
 
                 if (WebSocketBase.LoggingEnabled)
                 {
-                    Logging.Exit(Logging.WebSockets, thisPtr, Methods.OnReadCompleted, string.Empty);
+                    Logging.Exit(
+                        Logging.WebSockets,
+                        thisPtr,
+                        Methods.OnReadCompleted,
+                        string.Empty
+                    );
                 }
             }
 

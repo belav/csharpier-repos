@@ -23,10 +23,13 @@ internal sealed class RazorHotReload
         ITagHelperFactory tagHelperFactory,
         IViewCompilerProvider viewCompilerProvider,
         ITagHelperComponentPropertyActivator tagHelperComponentPropertyActivator,
-        ApplicationPartManager applicationPartManager)
+        ApplicationPartManager applicationPartManager
+    )
     {
         // For Razor view services, use the service locator pattern because they views not be registered by default.
-        _razorCompiledItemFeatureProvider = applicationPartManager.FeatureProviders.OfType<RazorCompiledItemFeatureProvider>().FirstOrDefault();
+        _razorCompiledItemFeatureProvider = applicationPartManager
+            .FeatureProviders.OfType<RazorCompiledItemFeatureProvider>()
+            .FirstOrDefault();
 
         if (viewCompilerProvider is DefaultViewCompilerProvider defaultViewCompilerProvider)
         {
@@ -48,7 +51,10 @@ internal sealed class RazorHotReload
             _defaultTagHelperFactory = defaultTagHelperFactory;
         }
 
-        if (tagHelperComponentPropertyActivator is TagHelperComponentPropertyActivator defaultTagHelperComponentPropertyActivator)
+        if (
+            tagHelperComponentPropertyActivator
+            is TagHelperComponentPropertyActivator defaultTagHelperComponentPropertyActivator
+        )
         {
             _tagHelperComponentPropertyActivator = defaultTagHelperComponentPropertyActivator;
         }

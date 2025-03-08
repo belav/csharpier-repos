@@ -13,9 +13,7 @@ namespace System.Security.Cryptography
 
         //Public Constructor will call internal constructor.
         public CspKeyContainerInfo(CspParameters parameters)
-            : this(parameters, false)
-        {
-        }
+            : this(parameters, false) { }
 
         /// <summary>
         ///Internal constructor for creating the CspKeyContainerInfo object
@@ -27,8 +25,10 @@ namespace System.Security.Cryptography
             _parameters = new CspParameters(parameters);
             if (_parameters.KeyNumber == -1)
             {
-                if (_parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_RSA_FULL ||
-                    _parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_RSA_AES)
+                if (
+                    _parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_RSA_FULL
+                    || _parameters.ProviderType == (int)CapiHelper.ProviderType.PROV_RSA_AES
+                )
                 {
                     _parameters.KeyNumber = (int)KeyNumber.Exchange;
                 }
@@ -47,7 +47,10 @@ namespace System.Security.Cryptography
         {
             get
             {
-                object? retVal = ReadKeyParameterSilent(CapiHelper.ClrPropertyId.CLR_ACCESSIBLE, throwOnNotFound: false);
+                object? retVal = ReadKeyParameterSilent(
+                    CapiHelper.ClrPropertyId.CLR_ACCESSIBLE,
+                    throwOnNotFound: false
+                );
 
                 if (retVal == null)
                 {
@@ -83,7 +86,9 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return (bool)ReadDeviceParameterVerifyContext(CapiHelper.ClrPropertyId.CLR_HARDWARE);
+                return (bool)ReadDeviceParameterVerifyContext(
+                    CapiHelper.ClrPropertyId.CLR_HARDWARE
+                );
             }
         }
 
@@ -92,10 +97,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string? KeyContainerName
         {
-            get
-            {
-                return _parameters.KeyContainerName;
-            }
+            get { return _parameters.KeyContainerName; }
         }
 
         /// <summary>
@@ -103,10 +105,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public KeyNumber KeyNumber
         {
-            get
-            {
-                return (KeyNumber)_parameters.KeyNumber;
-            }
+            get { return (KeyNumber)_parameters.KeyNumber; }
         }
 
         /// <summary>
@@ -116,7 +115,10 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return CapiHelper.IsFlagBitSet((uint)_parameters.Flags, (uint)CspProviderFlags.UseMachineKeyStore);
+                return CapiHelper.IsFlagBitSet(
+                    (uint)_parameters.Flags,
+                    (uint)CspProviderFlags.UseMachineKeyStore
+                );
             }
         }
 
@@ -142,10 +144,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string? ProviderName
         {
-            get
-            {
-                return _parameters.ProviderName;
-            }
+            get { return _parameters.ProviderName; }
         }
 
         /// <summary>
@@ -153,10 +152,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public int ProviderType
         {
-            get
-            {
-                return _parameters.ProviderType;
-            }
+            get { return _parameters.ProviderType; }
         }
 
         /// <summary>
@@ -164,10 +160,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public bool RandomlyGenerated
         {
-            get
-            {
-                return _randomKeyContainer;
-            }
+            get { return _randomKeyContainer; }
         }
 
         /// <summary>
@@ -177,7 +170,9 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return (bool)ReadDeviceParameterVerifyContext(CapiHelper.ClrPropertyId.CLR_REMOVABLE);
+                return (bool)ReadDeviceParameterVerifyContext(
+                    CapiHelper.ClrPropertyId.CLR_REMOVABLE
+                );
             }
         }
 
@@ -188,14 +183,18 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return (string)ReadKeyParameterSilent(CapiHelper.ClrPropertyId.CLR_UNIQUE_CONTAINER)!;
+                return (string)
+                    ReadKeyParameterSilent(CapiHelper.ClrPropertyId.CLR_UNIQUE_CONTAINER)!;
             }
         }
 
         /// <summary>
         /// Read a parameter from the current key using CRYPT_SILENT, to avoid any potential UI prompts.
         /// </summary>
-        private object? ReadKeyParameterSilent(CapiHelper.ClrPropertyId keyParam, bool throwOnNotFound = true)
+        private object? ReadKeyParameterSilent(
+            CapiHelper.ClrPropertyId keyParam,
+            bool throwOnNotFound = true
+        )
         {
             const uint SilentFlags = (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_SILENT;
 
@@ -214,7 +213,11 @@ namespace System.Security.Cryptography
                     return null;
                 }
 
-                object retVal = CapiHelper.GetProviderParameter(safeProvHandle, _parameters.KeyNumber, keyParam);
+                object retVal = CapiHelper.GetProviderParameter(
+                    safeProvHandle,
+                    _parameters.KeyNumber,
+                    keyParam
+                );
                 return retVal;
             }
         }
@@ -232,7 +235,8 @@ namespace System.Security.Cryptography
             // In order to ask about the device, instead of a key, we need to ensure that no key is named.
             parameters.KeyContainerName = null;
 
-            const uint OpenDeviceFlags = (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT;
+            const uint OpenDeviceFlags = (uint)
+                Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT;
 
             SafeProvHandle safeProvHandle;
             int hr = CapiHelper.OpenCSP(parameters, OpenDeviceFlags, out safeProvHandle);
@@ -244,7 +248,11 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_CSP_NotFound);
                 }
 
-                object retVal = CapiHelper.GetProviderParameter(safeProvHandle, parameters.KeyNumber, keyParam);
+                object retVal = CapiHelper.GetProviderParameter(
+                    safeProvHandle,
+                    parameters.KeyNumber,
+                    keyParam
+                );
                 return retVal;
             }
         }

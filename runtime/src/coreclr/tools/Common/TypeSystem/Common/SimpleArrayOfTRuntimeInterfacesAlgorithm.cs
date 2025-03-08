@@ -26,17 +26,23 @@ namespace Internal.TypeSystem
             _systemModule = systemModule;
 
             // initialize interfaces
-            _arrayRuntimeInterfaces = _systemModule.GetType("System", "Array")?.RuntimeInterfaces
+            _arrayRuntimeInterfaces =
+                _systemModule.GetType("System", "Array")?.RuntimeInterfaces
                 ?? Array.Empty<DefType>();
 
             _genericRuntimeInterfaces = new MetadataType[s_genericRuntimeInterfacesNames.Length];
             int count = 0;
             for (int i = 0; i < s_genericRuntimeInterfacesNames.Length; ++i)
             {
-                MetadataType runtimeInterface =_systemModule.GetType("System.Collections.Generic", s_genericRuntimeInterfacesNames[i], throwIfNotFound: false);
+                MetadataType runtimeInterface = _systemModule.GetType(
+                    "System.Collections.Generic",
+                    s_genericRuntimeInterfacesNames[i],
+                    throwIfNotFound: false
+                );
                 if (runtimeInterface != null)
                     _genericRuntimeInterfaces[count++] = runtimeInterface;
-            };
+            }
+            ;
             Array.Resize(ref _genericRuntimeInterfaces, count);
         }
 
@@ -47,7 +53,9 @@ namespace Internal.TypeSystem
             Debug.Assert(arrayType.IsSzArray);
 
             // first copy runtime interfaces from System.Array
-            var result = new DefType[_arrayRuntimeInterfaces.Length + _genericRuntimeInterfaces.Length];
+            var result = new DefType[
+                _arrayRuntimeInterfaces.Length + _genericRuntimeInterfaces.Length
+            ];
             Array.Copy(_arrayRuntimeInterfaces, result, _arrayRuntimeInterfaces.Length);
 
             // then copy instantiated generic interfaces

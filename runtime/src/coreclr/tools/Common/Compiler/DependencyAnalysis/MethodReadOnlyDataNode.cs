@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
@@ -18,13 +17,16 @@ namespace ILCompiler.DependencyAnalysis
             _owningMethod = owningMethod;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
+
         public override bool StaticDependenciesAreComputed => _data != null;
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append("__readonlydata_" + nameMangler.GetMangledMethodName(_owningMethod));
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
@@ -39,7 +41,8 @@ namespace ILCompiler.DependencyAnalysis
             return _data;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
 #if !SUPPORT_JIT
         public override int ClassCode => 674507768;

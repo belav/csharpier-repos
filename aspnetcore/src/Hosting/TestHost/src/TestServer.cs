@@ -33,9 +33,7 @@ public class TestServer : IServer
     /// <param name="services"></param>
     /// <param name="optionsAccessor"></param>
     public TestServer(IServiceProvider services, IOptions<TestServerOptions> optionsAccessor)
-        : this(services, CreateTestFeatureCollection(), optionsAccessor)
-    {
-    }
+        : this(services, CreateTestFeatureCollection(), optionsAccessor) { }
 
     /// <summary>
     /// For use with IHostBuilder.
@@ -43,11 +41,16 @@ public class TestServer : IServer
     /// <param name="services"></param>
     /// <param name="featureCollection"></param>
     /// <param name="optionsAccessor"></param>
-    public TestServer(IServiceProvider services, IFeatureCollection featureCollection, IOptions<TestServerOptions> optionsAccessor)
+    public TestServer(
+        IServiceProvider services,
+        IFeatureCollection featureCollection,
+        IOptions<TestServerOptions> optionsAccessor
+    )
     {
         Services = services ?? throw new ArgumentNullException(nameof(services));
         Features = featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
-        var options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
+        var options =
+            optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
         AllowSynchronousIO = options.AllowSynchronousIO;
         PreserveExecutionContext = options.PreserveExecutionContext;
         BaseAddress = options.BaseAddress;
@@ -58,9 +61,7 @@ public class TestServer : IServer
     /// </summary>
     /// <param name="services"></param>
     public TestServer(IServiceProvider services)
-        : this(services, CreateTestFeatureCollection())
-    {
-    }
+        : this(services, CreateTestFeatureCollection()) { }
 
     /// <summary>
     /// For use with IHostBuilder.
@@ -79,9 +80,7 @@ public class TestServer : IServer
     /// </summary>
     /// <param name="builder"></param>
     public TestServer(IWebHostBuilder builder)
-        : this(builder, CreateTestFeatureCollection())
-    {
-    }
+        : this(builder, CreateTestFeatureCollection()) { }
 
     /// <summary>
     /// For use with IWebHostBuilder.
@@ -114,7 +113,9 @@ public class TestServer : IServer
         get
         {
             return _hostInstance
-                ?? throw new InvalidOperationException("The TestServer constructor was not called with a IWebHostBuilder so IWebHost is not available.");
+                ?? throw new InvalidOperationException(
+                    "The TestServer constructor was not called with a IWebHostBuilder so IWebHost is not available."
+                );
         }
     }
 
@@ -140,10 +141,15 @@ public class TestServer : IServer
 
     private ApplicationWrapper Application
     {
-        get => _application ?? throw new InvalidOperationException("The server has not been started or no web application was configured.");
+        get =>
+            _application
+            ?? throw new InvalidOperationException(
+                "The server has not been started or no web application was configured."
+            );
     }
 
-    private PathString PathBase => BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
+    private PathString PathBase =>
+        BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
 
     /// <summary>
     /// Creates a custom <see cref="HttpMessageHandler" /> for processing HTTP requests/responses with the test server.
@@ -153,7 +159,7 @@ public class TestServer : IServer
         return new ClientHandler(PathBase, Application)
         {
             AllowSynchronousIO = AllowSynchronousIO,
-            PreserveExecutionContext = PreserveExecutionContext
+            PreserveExecutionContext = PreserveExecutionContext,
         };
     }
 
@@ -165,7 +171,7 @@ public class TestServer : IServer
         return new ClientHandler(PathBase, Application, additionalContextConfiguration)
         {
             AllowSynchronousIO = AllowSynchronousIO,
-            PreserveExecutionContext = PreserveExecutionContext
+            PreserveExecutionContext = PreserveExecutionContext,
         };
     }
 
@@ -186,8 +192,13 @@ public class TestServer : IServer
     /// </summary>
     public WebSocketClient CreateWebSocketClient()
     {
-        var pathBase = BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
-        return new WebSocketClient(pathBase, Application) { AllowSynchronousIO = AllowSynchronousIO, PreserveExecutionContext = PreserveExecutionContext };
+        var pathBase =
+            BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
+        return new WebSocketClient(pathBase, Application)
+        {
+            AllowSynchronousIO = AllowSynchronousIO,
+            PreserveExecutionContext = PreserveExecutionContext,
+        };
     }
 
     /// <summary>
@@ -204,27 +215,36 @@ public class TestServer : IServer
     /// Creates, configures, sends, and returns a <see cref="HttpContext"/>. This completes as soon as the response is started.
     /// </summary>
     /// <returns></returns>
-    public async Task<HttpContext> SendAsync(Action<HttpContext> configureContext, CancellationToken cancellationToken = default)
+    public async Task<HttpContext> SendAsync(
+        Action<HttpContext> configureContext,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(configureContext);
 
-        var builder = new HttpContextBuilder(Application, AllowSynchronousIO, PreserveExecutionContext);
-        builder.Configure((context, reader) =>
-        {
-            var request = context.Request;
-            request.Scheme = BaseAddress.Scheme;
-            request.Host = HostString.FromUriComponent(BaseAddress);
-            if (BaseAddress.IsDefaultPort)
+        var builder = new HttpContextBuilder(
+            Application,
+            AllowSynchronousIO,
+            PreserveExecutionContext
+        );
+        builder.Configure(
+            (context, reader) =>
             {
-                request.Host = new HostString(request.Host.Host);
+                var request = context.Request;
+                request.Scheme = BaseAddress.Scheme;
+                request.Host = HostString.FromUriComponent(BaseAddress);
+                if (BaseAddress.IsDefaultPort)
+                {
+                    request.Host = new HostString(request.Host.Host);
+                }
+                var pathBase = PathString.FromUriComponent(BaseAddress);
+                if (pathBase.HasValue && pathBase.Value.EndsWith('/'))
+                {
+                    pathBase = new PathString(pathBase.Value[..^1]); // All but the last character.
+                }
+                request.PathBase = pathBase;
             }
-            var pathBase = PathString.FromUriComponent(BaseAddress);
-            if (pathBase.HasValue && pathBase.Value.EndsWith('/'))
-            {
-                pathBase = new PathString(pathBase.Value[..^1]); // All but the last character.
-            }
-            request.PathBase = pathBase;
-        });
+        );
         builder.Configure((context, reader) => configureContext(context));
         // TODO: Wrap the request body if any?
         return await builder.SendAsync(cancellationToken).ConfigureAwait(false);
@@ -242,12 +262,18 @@ public class TestServer : IServer
         }
     }
 
-    Task IServer.StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+    Task IServer.StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    )
     {
-        _application = new ApplicationWrapper<TContext>(application, () =>
-        {
-            ObjectDisposedException.ThrowIf(_disposed, this);
-        });
+        _application = new ApplicationWrapper<TContext>(
+            application,
+            () =>
+            {
+                ObjectDisposedException.ThrowIf(_disposed, this);
+            }
+        );
 
         return Task.CompletedTask;
     }

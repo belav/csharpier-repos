@@ -47,7 +47,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         bool propertyBag,
         int derivedTypesCount,
         int propertyCount,
-        int complexPropertyCount)
+        int complexPropertyCount
+    )
     {
         Name = name;
         ClrType = type;
@@ -61,7 +62,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         _changeTrackingStrategy = changeTrackingStrategy;
         _indexerPropertyInfo = indexerPropertyInfo;
         _isPropertyBag = propertyBag;
-        _properties = new OrderedDictionary<string, RuntimeProperty>(propertyCount, new PropertyNameComparer(this));
+        _properties = new OrderedDictionary<string, RuntimeProperty>(
+            propertyCount,
+            new PropertyNameComparer(this)
+        );
         if (complexPropertyCount > 0)
         {
             _complexProperties = new(complexPropertyCount, StringComparer.Ordinal);
@@ -71,7 +75,11 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// <summary>
     ///     Gets the name of this type.
     /// </summary>
-    public virtual string Name { [DebuggerStepThrough] get; }
+    public virtual string Name
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <inheritdoc />
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
@@ -80,22 +88,25 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// <summary>
     ///     Gets the model that this type belongs to.
     /// </summary>
-    public virtual RuntimeModel Model { get => _model; set => _model = value; }
+    public virtual RuntimeModel Model
+    {
+        get => _model;
+        set => _model = value;
+    }
 
     /// <summary>
     ///     Gets the base type of this type. Returns <see langword="null" /> if this is not a
     ///     derived type in an inheritance hierarchy.
     /// </summary>
-    public virtual RuntimeTypeBase? BaseType
-        => _baseType;
+    public virtual RuntimeTypeBase? BaseType => _baseType;
 
     /// <summary>
     ///     Gets all types in the model that directly derive from this type.
     /// </summary>
     /// <returns>The derived types.</returns>
     [EntityFrameworkInternal]
-    protected virtual IEnumerable<RuntimeTypeBase> DirectlyDerivedTypes
-        => _directlyDerivedTypes ?? Enumerable.Empty<RuntimeTypeBase>();
+    protected virtual IEnumerable<RuntimeTypeBase> DirectlyDerivedTypes =>
+        _directlyDerivedTypes ?? Enumerable.Empty<RuntimeTypeBase>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,9 +115,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual bool HasDirectlyDerivedTypes
-        => _directlyDerivedTypes != null
-        && _directlyDerivedTypes.Count > 0;
+    protected virtual bool HasDirectlyDerivedTypes =>
+        _directlyDerivedTypes != null && _directlyDerivedTypes.Count > 0;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -115,8 +125,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual IEnumerable<RuntimeTypeBase> GetDerivedTypes()
-        => GetDerivedTypes<RuntimeTypeBase>();
+    public virtual IEnumerable<RuntimeTypeBase> GetDerivedTypes() =>
+        GetDerivedTypes<RuntimeTypeBase>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -138,9 +148,7 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         while (type != null)
         {
             derivedTypes.AddRange(type.DirectlyDerivedTypes.Cast<T>());
-            type = derivedTypes.Count > currentTypeIndex
-                ? derivedTypes[currentTypeIndex]
-                : null;
+            type = derivedTypes.Count > currentTypeIndex ? derivedTypes[currentTypeIndex] : null;
             currentTypeIndex++;
         }
 
@@ -203,7 +211,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         ValueComparer? providerValueComparer = null,
         JsonValueReaderWriter? jsonValueReaderWriter = null,
         CoreTypeMapping? typeMapping = null,
-        object? sentinel = null)
+        object? sentinel = null
+    )
     {
         var property = new RuntimeProperty(
             name,
@@ -229,7 +238,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
             providerValueComparer,
             jsonValueReaderWriter,
             typeMapping,
-            sentinel);
+            sentinel
+        );
 
         _properties.Add(property.Name, property);
 
@@ -244,8 +254,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// </remarks>
     /// <param name="name">The name of the property.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    public virtual RuntimeProperty? FindProperty(string name)
-        => FindDeclaredProperty(name) ?? _baseType?.FindProperty(name);
+    public virtual RuntimeProperty? FindProperty(string name) =>
+        FindDeclaredProperty(name) ?? _baseType?.FindProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -254,11 +264,9 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual RuntimeProperty? FindDeclaredProperty(string name)
-        => _properties.TryGetValue(name, out var property)
-            ? property
-            : null;
-    
+    protected virtual RuntimeProperty? FindDeclaredProperty(string name) =>
+        _properties.TryGetValue(name, out var property) ? property : null;
+
     /// <summary>
     ///     Gets all scalar properties declared on this type.
     /// </summary>
@@ -268,11 +276,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     Use <see cref="GetProperties" /> to also return properties declared on base types.
     /// </remarks>
     /// <returns>Declared scalar properties.</returns>
-    public virtual IEnumerable<RuntimeProperty> GetDeclaredProperties()
-        => _properties.Values;
+    public virtual IEnumerable<RuntimeProperty> GetDeclaredProperties() => _properties.Values;
 
-    private IEnumerable<RuntimeProperty> GetDerivedProperties()
-        => !HasDirectlyDerivedTypes
+    private IEnumerable<RuntimeProperty> GetDerivedProperties() =>
+        !HasDirectlyDerivedTypes
             ? Enumerable.Empty<RuntimeProperty>()
             : GetDerivedTypes().SelectMany(et => et.GetDeclaredProperties());
 
@@ -305,8 +312,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     Gets the properties with the given name on this type, base types or derived types.
     /// </summary>
     /// <returns>Type properties.</returns>
-    public virtual IEnumerable<RuntimeProperty> FindPropertiesInHierarchy(string propertyName)
-        => !HasDirectlyDerivedTypes
+    public virtual IEnumerable<RuntimeProperty> FindPropertiesInHierarchy(string propertyName) =>
+        !HasDirectlyDerivedTypes
             ? ToEnumerable(FindProperty(propertyName))
             : ToEnumerable(FindProperty(propertyName)).Concat(FindDerivedProperties(propertyName));
 
@@ -316,8 +323,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
 
         return !HasDirectlyDerivedTypes
             ? Enumerable.Empty<RuntimeProperty>()
-            : (IEnumerable<RuntimeProperty>)GetDerivedTypes()
-                .Select(et => et.FindDeclaredProperty(propertyName)).Where(p => p != null);
+            : (IEnumerable<RuntimeProperty>)
+                GetDerivedTypes()
+                    .Select(et => et.FindDeclaredProperty(propertyName))
+                    .Where(p => p != null);
     }
 
     /// <summary>
@@ -327,15 +336,14 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual IEnumerable<RuntimeProperty> GetProperties()
-        => _baseType != null
+    protected virtual IEnumerable<RuntimeProperty> GetProperties() =>
+        _baseType != null
             ? _baseType.GetProperties().Concat(_properties.Values)
             : _properties.Values;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    public virtual PropertyInfo? FindIndexerPropertyInfo()
-        => _indexerPropertyInfo;
+    public virtual PropertyInfo? FindIndexerPropertyInfo() => _indexerPropertyInfo;
 
     /// <summary>
     ///     Returns the default indexer property that takes a <see cref="string" /> value if one exists.
@@ -343,9 +351,12 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// <param name="type">The type to look for the indexer on.</param>
     /// <returns>An indexer property or <see langword="null" />.</returns>
     public static PropertyInfo? FindIndexerProperty(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        Type type)
-        => type.FindIndexerProperty();
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+            Type type
+    ) => type.FindIndexerProperty();
 
     /// <summary>
     ///     Adds a complex property to this entity type.
@@ -382,7 +393,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         PropertyInfo? indexerPropertyInfo = null,
         bool propertyBag = false,
         int propertyCount = 0,
-        int complexPropertyCount = 0)
+        int complexPropertyCount = 0
+    )
     {
         var property = new RuntimeComplexProperty(
             name,
@@ -399,7 +411,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
             indexerPropertyInfo,
             propertyBag,
             propertyCount: propertyCount,
-            complexPropertyCount: complexPropertyCount);
+            complexPropertyCount: complexPropertyCount
+        );
 
         _complexProperties ??= new(StringComparer.Ordinal);
         _complexProperties.Add(property.Name, property);
@@ -412,12 +425,11 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// </summary>
     /// <param name="name">The name of the property.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    public virtual RuntimeComplexProperty? FindComplexProperty(string name)
-        => FindDeclaredComplexProperty(name) ?? BaseType?.FindComplexProperty(name);
+    public virtual RuntimeComplexProperty? FindComplexProperty(string name) =>
+        FindDeclaredComplexProperty(name) ?? BaseType?.FindComplexProperty(name);
 
-    private RuntimeComplexProperty? FindDeclaredComplexProperty(string name)
-        => _complexProperties != null
-            && _complexProperties.TryGetValue(name, out var property)
+    private RuntimeComplexProperty? FindDeclaredComplexProperty(string name) =>
+        _complexProperties != null && _complexProperties.TryGetValue(name, out var property)
             ? property
             : null;
 
@@ -425,13 +437,15 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     Gets the complex properties declared on this type.
     /// </summary>
     /// <returns>Declared complex properties.</returns>
-    public virtual IEnumerable<RuntimeComplexProperty> GetDeclaredComplexProperties()
-        => _complexProperties?.Values ?? Enumerable.Empty<RuntimeComplexProperty>();
+    public virtual IEnumerable<RuntimeComplexProperty> GetDeclaredComplexProperties() =>
+        _complexProperties?.Values ?? Enumerable.Empty<RuntimeComplexProperty>();
 
-    private IEnumerable<RuntimeComplexProperty> GetDerivedComplexProperties()
-        => !HasDirectlyDerivedTypes
+    private IEnumerable<RuntimeComplexProperty> GetDerivedComplexProperties() =>
+        !HasDirectlyDerivedTypes
             ? Enumerable.Empty<RuntimeComplexProperty>()
-            : GetDerivedTypes().Cast<RuntimeEntityType>().SelectMany(et => et.GetDeclaredComplexProperties());
+            : GetDerivedTypes()
+                .Cast<RuntimeEntityType>()
+                .SelectMany(et => et.GetDeclaredComplexProperties());
 
     /// <summary>
     ///     Gets the complex properties defined on this type.
@@ -440,8 +454,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     This API only returns complex properties and does not find navigation, scalar or service properties.
     /// </remarks>
     /// <returns>The complex properties defined on this type.</returns>
-    public virtual IEnumerable<RuntimeComplexProperty> GetComplexProperties()
-        => BaseType != null
+    public virtual IEnumerable<RuntimeComplexProperty> GetComplexProperties() =>
+        BaseType != null
             ? _complexProperties != null
                 ? BaseType.GetComplexProperties().Concat(_complexProperties.Values)
                 : BaseType.GetComplexProperties()
@@ -451,10 +465,13 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     Gets the complex properties with the given name on this type, base types or derived types.
     /// </summary>
     /// <returns>Type complex properties.</returns>
-    public virtual IEnumerable<RuntimeComplexProperty> FindComplexPropertiesInHierarchy(string propertyName)
-        => !HasDirectlyDerivedTypes
+    public virtual IEnumerable<RuntimeComplexProperty> FindComplexPropertiesInHierarchy(
+        string propertyName
+    ) =>
+        !HasDirectlyDerivedTypes
             ? ToEnumerable(FindComplexProperty(propertyName))
-            : ToEnumerable(FindComplexProperty(propertyName)).Concat(FindDerivedComplexProperties(propertyName));
+            : ToEnumerable(FindComplexProperty(propertyName))
+                .Concat(FindDerivedComplexProperties(propertyName));
 
     private IEnumerable<RuntimeComplexProperty> FindDerivedComplexProperties(string propertyName)
     {
@@ -462,8 +479,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
 
         return !HasDirectlyDerivedTypes
             ? Enumerable.Empty<RuntimeComplexProperty>()
-            : (IEnumerable<RuntimeComplexProperty>)GetDerivedTypes()
-                .Select(et => et.FindDeclaredComplexProperty(propertyName)).Where(p => p != null);
+            : (IEnumerable<RuntimeComplexProperty>)
+                GetDerivedTypes()
+                    .Select(et => et.FindDeclaredComplexProperty(propertyName))
+                    .Where(p => p != null);
     }
 
     /// <summary>
@@ -510,8 +529,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     public virtual IEnumerable<RuntimeProperty> GetFlattenedProperties()
     {
         return NonCapturingLazyInitializer.EnsureInitialized(
-            ref _flattenedProperties, this,
-            static type => Create(type).ToArray());
+            ref _flattenedProperties,
+            this,
+            static type => Create(type).ToArray()
+        );
 
         static IEnumerable<RuntimeProperty> Create(RuntimeTypeBase type)
         {
@@ -537,8 +558,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     public virtual IEnumerable<RuntimeComplexProperty> GetFlattenedComplexProperties()
     {
         return NonCapturingLazyInitializer.EnsureInitialized(
-            ref _flattenedComplexProperties, this,
-            static type => Create(type).ToArray());
+            ref _flattenedComplexProperties,
+            this,
+            static type => Create(type).ToArray()
+        );
 
         static IEnumerable<RuntimeComplexProperty> Create(RuntimeTypeBase type)
         {
@@ -546,7 +569,9 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
             {
                 yield return complexProperty;
 
-                foreach (var nestedComplexProperty in complexProperty.ComplexType.GetFlattenedComplexProperties())
+                foreach (
+                    var nestedComplexProperty in complexProperty.ComplexType.GetFlattenedComplexProperties()
+                )
                 {
                     yield return nestedComplexProperty;
                 }
@@ -561,8 +586,10 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     public virtual IEnumerable<RuntimeProperty> GetFlattenedDeclaredProperties()
     {
         return NonCapturingLazyInitializer.EnsureInitialized(
-            ref _flattenedDeclaredProperties, this,
-            static type => Create(type).ToArray());
+            ref _flattenedDeclaredProperties,
+            this,
+            static type => Create(type).ToArray()
+        );
 
         static IEnumerable<RuntimeProperty> Create(RuntimeTypeBase type)
         {
@@ -573,7 +600,9 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
 
             foreach (var complexProperty in type.GetDeclaredComplexProperties())
             {
-                foreach (var property in complexProperty.ComplexType.GetFlattenedDeclaredProperties())
+                foreach (
+                    var property in complexProperty.ComplexType.GetFlattenedDeclaredProperties()
+                )
                 {
                     yield return property;
                 }
@@ -596,9 +625,7 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual void FinalizeType()
-    {
-    }
+    public virtual void FinalizeType() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -607,10 +634,7 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected static IEnumerable<T> ToEnumerable<T>(T? element)
-        where T : class
-        => element == null
-            ? Enumerable.Empty<T>()
-            : new[] { element };
+        where T : class => element == null ? Enumerable.Empty<T>() : new[] { element };
 
     /// <inheritdoc />
     bool IReadOnlyTypeBase.HasSharedClrType
@@ -642,176 +666,161 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyProperty? IReadOnlyTypeBase.FindDeclaredProperty(string name)
-        => FindDeclaredProperty(name);
+    IReadOnlyProperty? IReadOnlyTypeBase.FindDeclaredProperty(string name) =>
+        FindDeclaredProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IProperty? ITypeBase.FindDeclaredProperty(string name)
-        => FindDeclaredProperty(name);
+    IProperty? ITypeBase.FindDeclaredProperty(string name) => FindDeclaredProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyList<IReadOnlyProperty>? IReadOnlyTypeBase.FindProperties(IReadOnlyList<string> propertyNames)
-        => FindProperties(propertyNames);
+    IReadOnlyList<IReadOnlyProperty>? IReadOnlyTypeBase.FindProperties(
+        IReadOnlyList<string> propertyNames
+    ) => FindProperties(propertyNames);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyProperty? IReadOnlyTypeBase.FindProperty(string name)
-        => FindProperty(name);
+    IReadOnlyProperty? IReadOnlyTypeBase.FindProperty(string name) => FindProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IProperty? ITypeBase.FindProperty(string name)
-        => FindProperty(name);
+    IProperty? ITypeBase.FindProperty(string name) => FindProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDeclaredProperties()
-        => GetDeclaredProperties();
+    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDeclaredProperties() =>
+        GetDeclaredProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IProperty> ITypeBase.GetDeclaredProperties()
-        => GetDeclaredProperties();
+    IEnumerable<IProperty> ITypeBase.GetDeclaredProperties() => GetDeclaredProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDerivedProperties()
-        => GetDerivedProperties();
+    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDerivedProperties() =>
+        GetDerivedProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetProperties()
-        => GetProperties();
+    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetProperties() => GetProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IProperty> ITypeBase.GetProperties()
-        => GetProperties();
+    IEnumerable<IProperty> ITypeBase.GetProperties() => GetProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IComplexProperty> ITypeBase.GetComplexProperties()
-        => GetComplexProperties();
+    IEnumerable<IComplexProperty> ITypeBase.GetComplexProperties() => GetComplexProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetComplexProperties()
-        => GetComplexProperties();
+    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetComplexProperties() =>
+        GetComplexProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IComplexProperty> ITypeBase.GetDeclaredComplexProperties()
-        => GetDeclaredComplexProperties();
+    IEnumerable<IComplexProperty> ITypeBase.GetDeclaredComplexProperties() =>
+        GetDeclaredComplexProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDeclaredComplexProperties()
-        => GetDeclaredComplexProperties();
+    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDeclaredComplexProperties() =>
+        GetDeclaredComplexProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDerivedComplexProperties()
-        => GetDerivedComplexProperties();
+    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDerivedComplexProperties() =>
+        GetDerivedComplexProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IComplexProperty? ITypeBase.FindComplexProperty(string name)
-        => FindComplexProperty(name);
+    IComplexProperty? ITypeBase.FindComplexProperty(string name) => FindComplexProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindComplexProperty(string name)
-        => FindComplexProperty(name);
+    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindComplexProperty(string name) =>
+        FindComplexProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindDeclaredComplexProperty(string name)
-        => FindDeclaredComplexProperty(name);
+    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindDeclaredComplexProperty(string name) =>
+        FindDeclaredComplexProperty(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ChangeTrackingStrategy IReadOnlyTypeBase.GetChangeTrackingStrategy()
-        => _changeTrackingStrategy;
+    ChangeTrackingStrategy IReadOnlyTypeBase.GetChangeTrackingStrategy() => _changeTrackingStrategy;
 
     /// <inheritdoc />
-    PropertyAccessMode IReadOnlyTypeBase.GetPropertyAccessMode()
-        => throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
+    PropertyAccessMode IReadOnlyTypeBase.GetPropertyAccessMode() =>
+        throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
 
     /// <inheritdoc />
-    ConfigurationSource? IRuntimeTypeBase.GetConstructorBindingConfigurationSource()
-        => throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
+    ConfigurationSource? IRuntimeTypeBase.GetConstructorBindingConfigurationSource() =>
+        throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
 
     /// <inheritdoc />
-    ConfigurationSource? IRuntimeTypeBase.GetServiceOnlyConstructorBindingConfigurationSource()
-        => throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
-
-    /// <inheritdoc />
-    [DebuggerStepThrough]
-    IEnumerable<IPropertyBase> ITypeBase.GetMembers()
-        => GetMembers();
+    ConfigurationSource? IRuntimeTypeBase.GetServiceOnlyConstructorBindingConfigurationSource() =>
+        throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetMembers()
-        => GetMembers();
+    IEnumerable<IPropertyBase> ITypeBase.GetMembers() => GetMembers();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetDeclaredMembers()
-        => GetDeclaredMembers();
+    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetMembers() => GetMembers();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IPropertyBase> ITypeBase.GetDeclaredMembers()
-        => GetDeclaredMembers();
+    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetDeclaredMembers() =>
+        GetDeclaredMembers();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyPropertyBase? IReadOnlyTypeBase.FindMember(string name)
-        => FindMember(name);
+    IEnumerable<IPropertyBase> ITypeBase.GetDeclaredMembers() => GetDeclaredMembers();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IPropertyBase? ITypeBase.FindMember(string name)
-        => FindMember(name);
+    IReadOnlyPropertyBase? IReadOnlyTypeBase.FindMember(string name) => FindMember(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.FindMembersInHierarchy(string name)
-        => FindMembersInHierarchy(name);
+    IPropertyBase? ITypeBase.FindMember(string name) => FindMember(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IPropertyBase> ITypeBase.FindMembersInHierarchy(string name)
-        => FindMembersInHierarchy(name);
+    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.FindMembersInHierarchy(string name) =>
+        FindMembersInHierarchy(name);
+
+    /// <inheritdoc />
+    [DebuggerStepThrough]
+    IEnumerable<IPropertyBase> ITypeBase.FindMembersInHierarchy(string name) =>
+        FindMembersInHierarchy(name);
 
     /// <summary>
     ///     Returns all members that may need a snapshot value when change tracking.
     /// </summary>
     /// <returns>The members.</returns>
-    IEnumerable<IPropertyBase> ITypeBase.GetSnapshottableMembers()
-        => GetSnapshottableMembers();
+    IEnumerable<IPropertyBase> ITypeBase.GetSnapshottableMembers() => GetSnapshottableMembers();
 
     /// <summary>
     ///     Returns all properties that implement <see cref="IProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IProperty> ITypeBase.GetFlattenedProperties()
-        => GetFlattenedProperties();
+    IEnumerable<IProperty> ITypeBase.GetFlattenedProperties() => GetFlattenedProperties();
 
     /// <summary>
     ///     Returns all properties that implement <see cref="IComplexProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IComplexProperty> ITypeBase.GetFlattenedComplexProperties()
-        => GetFlattenedComplexProperties();
+    IEnumerable<IComplexProperty> ITypeBase.GetFlattenedComplexProperties() =>
+        GetFlattenedComplexProperties();
 
     /// <summary>
     ///     Returns all properties declared properties that implement <see cref="IProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IProperty> ITypeBase.GetFlattenedDeclaredProperties()
-        => GetFlattenedDeclaredProperties();
+    IEnumerable<IProperty> ITypeBase.GetFlattenedDeclaredProperties() =>
+        GetFlattenedDeclaredProperties();
 }

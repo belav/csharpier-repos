@@ -24,24 +24,24 @@ public class OpenIdConnectChallengeProperties : OAuthChallengeProperties
     /// <summary>
     /// Initializes a new instance of <see cref="OpenIdConnectChallengeProperties"/>.
     /// </summary>
-    public OpenIdConnectChallengeProperties()
-    { }
+    public OpenIdConnectChallengeProperties() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OpenIdConnectChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
     public OpenIdConnectChallengeProperties(IDictionary<string, string?> items)
-        : base(items)
-    { }
+        : base(items) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OpenIdConnectChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
-    public OpenIdConnectChallengeProperties(IDictionary<string, string?> items, IDictionary<string, object?> parameters)
-        : base(items, parameters)
-    { }
+    public OpenIdConnectChallengeProperties(
+        IDictionary<string, string?> items,
+        IDictionary<string, object?> parameters
+    )
+        : base(items, parameters) { }
 
     /// <summary>
     /// The "max_age" parameter value being used for a challenge request.

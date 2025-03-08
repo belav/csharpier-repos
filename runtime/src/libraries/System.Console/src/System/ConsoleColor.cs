@@ -23,6 +23,6 @@ namespace System
         Red = 12,
         Magenta = 13,
         Yellow = 14,
-        White = 15
+        White = 15,
     }
 }

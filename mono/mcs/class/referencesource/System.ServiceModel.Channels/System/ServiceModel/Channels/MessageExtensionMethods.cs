@@ -17,11 +17,14 @@ namespace System.ServiceModel.Channels
     /// </summary>
     public static class MessageExtensionMethods
     {
-        private const string MessageHeadersPropertyKey = "System.ServiceModel.Channels.MessageHeaders";
+        private const string MessageHeadersPropertyKey =
+            "System.ServiceModel.Channels.MessageHeaders";
         private const string ToHttpRequestMessageMethodName = "ToHttpRequestMessage()";
         private const string ToHttpResponseMessageMethodName = "ToHttpResponseMessage()";
-        private static readonly string HttpRequestMessagePropertyTypeName = typeof(HttpRequestMessageProperty).Name;
-        private static readonly string HttpResponseMessagePropertyTypeName = typeof(HttpResponseMessageProperty).Name;
+        private static readonly string HttpRequestMessagePropertyTypeName =
+            typeof(HttpRequestMessageProperty).Name;
+        private static readonly string HttpResponseMessagePropertyTypeName =
+            typeof(HttpResponseMessageProperty).Name;
 
         /// <summary>
         /// An extension method for getting a <see cref="HttpRequestMessage"/> instance
@@ -37,17 +40,24 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("message");
             }
 
-            HttpRequestMessage httpRequestMessage = HttpRequestMessageProperty.GetHttpRequestMessageFromMessage(message);
+            HttpRequestMessage httpRequestMessage =
+                HttpRequestMessageProperty.GetHttpRequestMessageFromMessage(message);
             if (httpRequestMessage == null)
             {
-                HttpRequestMessageProperty requestMessageProperty = message.Properties.GetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name);
+                HttpRequestMessageProperty requestMessageProperty =
+                    message.Properties.GetValue<HttpRequestMessageProperty>(
+                        HttpRequestMessageProperty.Name
+                    );
                 if (requestMessageProperty == null)
                 {
                     throw FxTrace.Exception.AsError(
                         new InvalidOperationException(
                             SR.MissingHttpMessageProperty(
                                 ToHttpRequestMessageMethodName,
-                                HttpRequestMessagePropertyTypeName)));
+                                HttpRequestMessagePropertyTypeName
+                            )
+                        )
+                    );
                 }
 
                 httpRequestMessage = CreateRequestMessage(message, requestMessageProperty);
@@ -70,17 +80,24 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("message");
             }
 
-            HttpResponseMessage httpResponseMessage = HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
+            HttpResponseMessage httpResponseMessage =
+                HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
             if (httpResponseMessage == null)
             {
-                HttpResponseMessageProperty responseMessageProperty = message.Properties.GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
+                HttpResponseMessageProperty responseMessageProperty =
+                    message.Properties.GetValue<HttpResponseMessageProperty>(
+                        HttpResponseMessageProperty.Name
+                    );
                 if (responseMessageProperty == null)
                 {
                     throw FxTrace.Exception.AsError(
                         new InvalidOperationException(
                             SR.MissingHttpMessageProperty(
                                 ToHttpResponseMessageMethodName,
-                                HttpResponseMessagePropertyTypeName)));
+                                HttpResponseMessagePropertyTypeName
+                            )
+                        )
+                    );
                 }
 
                 httpResponseMessage = CreateResponseMessage(message, responseMessageProperty);
@@ -89,21 +106,39 @@ namespace System.ServiceModel.Channels
             return httpResponseMessage;
         }
 
-        internal static void ConfigureAsHttpMessage(this Message message, HttpRequestMessage httpRequestMessage)
+        internal static void ConfigureAsHttpMessage(
+            this Message message,
+            HttpRequestMessage httpRequestMessage
+        )
         {
             Fx.Assert(message != null, "The 'message' parameter should never be null.");
-            Fx.Assert(httpRequestMessage != null, "The 'httpRequestMessage' parameter should never be null.");
+            Fx.Assert(
+                httpRequestMessage != null,
+                "The 'httpRequestMessage' parameter should never be null."
+            );
 
-            message.Properties.Add(HttpRequestMessageProperty.Name, new HttpRequestMessageProperty(httpRequestMessage));
+            message.Properties.Add(
+                HttpRequestMessageProperty.Name,
+                new HttpRequestMessageProperty(httpRequestMessage)
+            );
             CopyPropertiesToMessage(message, httpRequestMessage.Properties);
         }
 
-        internal static void ConfigureAsHttpMessage(this Message message, HttpResponseMessage httpResponseMessage)
+        internal static void ConfigureAsHttpMessage(
+            this Message message,
+            HttpResponseMessage httpResponseMessage
+        )
         {
             Fx.Assert(message != null, "The 'message' parameter should never be null.");
-            Fx.Assert(httpResponseMessage != null, "The 'httpResponseMessage' parameter should never be null.");
+            Fx.Assert(
+                httpResponseMessage != null,
+                "The 'httpResponseMessage' parameter should never be null."
+            );
 
-            message.Properties.Add(HttpResponseMessageProperty.Name, new HttpResponseMessageProperty(httpResponseMessage));
+            message.Properties.Add(
+                HttpResponseMessageProperty.Name,
+                new HttpResponseMessageProperty(httpResponseMessage)
+            );
             HttpRequestMessage httpRequestMessage = httpResponseMessage.RequestMessage;
             if (httpRequestMessage != null)
             {
@@ -111,7 +146,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        private static void CopyPropertiesToMessage(Message message, IDictionary<string, object> properties)
+        private static void CopyPropertiesToMessage(
+            Message message,
+            IDictionary<string, object> properties
+        )
         {
             Fx.Assert(message != null, "The 'message' parameter should not be null.");
             Fx.Assert(properties != null, "The 'properties' parameter should not be null.");
@@ -119,9 +157,15 @@ namespace System.ServiceModel.Channels
             foreach (KeyValuePair<string, object> property in properties)
             {
                 MessageHeaders messageHeaders = property.Value as MessageHeaders;
-                if (messageHeaders != null &&
-                    messageHeaders.MessageVersion == MessageVersion.None &&
-                    string.Equals(property.Key, MessageHeadersPropertyKey, StringComparison.Ordinal))
+                if (
+                    messageHeaders != null
+                    && messageHeaders.MessageVersion == MessageVersion.None
+                    && string.Equals(
+                        property.Key,
+                        MessageHeadersPropertyKey,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     foreach (MessageHeader header in messageHeaders)
                     {
@@ -135,18 +179,30 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        private static HttpRequestMessage CreateRequestMessage(Message message, HttpRequestMessageProperty requestMessageProperty)
+        private static HttpRequestMessage CreateRequestMessage(
+            Message message,
+            HttpRequestMessageProperty requestMessageProperty
+        )
         {
             Fx.Assert(message != null, "The 'message' parameter should not be null.");
-            Fx.Assert(requestMessageProperty != null, "The 'requestMessageProperty' parameter should not be null.");
-            
+            Fx.Assert(
+                requestMessageProperty != null,
+                "The 'requestMessageProperty' parameter should not be null."
+            );
+
             HttpRequestMessage request = new HttpRequestMessage();
             request.RequestUri = message.Properties.Via;
 
-            Fx.Assert(requestMessageProperty.Method != null, "The HttpRequestMessageProperty class ensures the 'Method' property will never be null.");
+            Fx.Assert(
+                requestMessageProperty.Method != null,
+                "The HttpRequestMessageProperty class ensures the 'Method' property will never be null."
+            );
             request.Method = new HttpMethod(requestMessageProperty.Method);
 
-            request.Content = CreateMessageContent(message, requestMessageProperty.SuppressEntityBody);
+            request.Content = CreateMessageContent(
+                message,
+                requestMessageProperty.SuppressEntityBody
+            );
 
             WebHeaderCollection headers = requestMessageProperty.Headers;
             foreach (string headerKey in headers.AllKeys)
@@ -159,15 +215,22 @@ namespace System.ServiceModel.Channels
             return request;
         }
 
-        private static HttpResponseMessage CreateResponseMessage(Message message, HttpResponseMessageProperty responseMessageProperty)
+        private static HttpResponseMessage CreateResponseMessage(
+            Message message,
+            HttpResponseMessageProperty responseMessageProperty
+        )
         {
             Fx.Assert(message != null, "The 'message' parameter should not be null.");
-            Fx.Assert(responseMessageProperty != null, "The 'responseMessageProperty' parameter should not be null.");
-            
+            Fx.Assert(
+                responseMessageProperty != null,
+                "The 'responseMessageProperty' parameter should not be null."
+            );
+
             HttpResponseMessage response = new HttpResponseMessage();
-            response.StatusCode = responseMessageProperty.HasStatusCodeBeenSet ?
-                responseMessageProperty.StatusCode :
-                message.IsFault ? HttpStatusCode.InternalServerError : HttpStatusCode.OK;
+            response.StatusCode =
+                responseMessageProperty.HasStatusCodeBeenSet ? responseMessageProperty.StatusCode
+                : message.IsFault ? HttpStatusCode.InternalServerError
+                : HttpStatusCode.OK;
 
             string reasonPhrase = responseMessageProperty.StatusDescription;
             if (!string.IsNullOrEmpty(reasonPhrase))
@@ -175,7 +238,10 @@ namespace System.ServiceModel.Channels
                 response.ReasonPhrase = reasonPhrase;
             }
 
-            response.Content = CreateMessageContent(message, responseMessageProperty.SuppressEntityBody);
+            response.Content = CreateMessageContent(
+                message,
+                responseMessageProperty.SuppressEntityBody
+            );
 
             WebHeaderCollection headers = responseMessageProperty.Headers;
             foreach (string headerKey in headers.AllKeys)

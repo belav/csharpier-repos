@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexCapture.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // Capture is just a location/length pair that indicates the
@@ -9,22 +9,24 @@
 // search may return multiple Capture within each capturing
 // RegexGroup.
 
-namespace System.Text.RegularExpressions {
-
+namespace System.Text.RegularExpressions
+{
     /// <devdoc>
-    ///    <para> 
+    ///    <para>
     ///       Represents the results from a single subexpression capture. The object represents
     ///       one substring for a single successful capture.</para>
     /// </devdoc>
 #if !SILVERLIGHT
-    [ Serializable() ] 
+    [Serializable()]
 #endif
-    public class Capture {
+    public class Capture
+    {
         internal String _text;
         internal int _index;
         internal int _length;
 
-        internal Capture(String text, int i, int l) {
+        internal Capture(String text, int i, int l)
+        {
             _text = text;
             _index = i;
             _length = l;
@@ -37,10 +39,9 @@ namespace System.Text.RegularExpressions {
         ///    <para>Returns the position in the original string where the first character of
         ///       captured substring was found.</para>
         /// </devdoc>
-        public int Index {
-            get {
-                return _index;
-            }
+        public int Index
+        {
+            get { return _index; }
         }
 
         /*
@@ -51,19 +52,17 @@ namespace System.Text.RegularExpressions {
         ///       Returns the length of the captured substring.
         ///    </para>
         /// </devdoc>
-        public int Length {
-            get {
-                return _length;
-            }
+        public int Length
+        {
+            get { return _length; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Value {
-            get {
-                return _text.Substring(_index, _length);
-            }
+        public string Value
+        {
+            get { return _text.Substring(_index, _length); }
         }
 
         /*
@@ -71,37 +70,42 @@ namespace System.Text.RegularExpressions {
          */
         /// <devdoc>
         ///    <para>
-        ///       Returns 
+        ///       Returns
         ///          the substring that was matched.
         ///       </para>
         ///    </devdoc>
-        override public String ToString() {
+        override public String ToString()
+        {
             return Value;
         }
 
         /*
          * The original string
          */
-        internal String GetOriginalString() {
+        internal String GetOriginalString()
+        {
             return _text;
         }
 
         /*
          * The substring to the left of the capture
          */
-        internal String GetLeftSubstring() {
+        internal String GetLeftSubstring()
+        {
             return _text.Substring(0, _index);
         }
 
         /*
          * The substring to the right of the capture
          */
-        internal String GetRightSubstring() {
+        internal String GetRightSubstring()
+        {
             return _text.Substring(_index + _length, _text.Length - _index - _length);
         }
 
 #if DBG
-        internal virtual String Description() {
+        internal virtual String Description()
+        {
             StringBuilder Sb = new StringBuilder();
 
             Sb.Append("(I = ");
@@ -115,7 +119,4 @@ namespace System.Text.RegularExpressions {
         }
 #endif
     }
-
-
-
 }

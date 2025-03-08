@@ -190,12 +190,15 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldSkipped("key"));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            source.MarkFieldSkipped("key")
+        );
 
         // Assert
         Assert.Equal(
             "A field previously marked invalid should not be marked skipped.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -249,12 +252,14 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some-error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldValid("key"));
+        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldValid("key")
+        );
 
         // Assert
         Assert.Equal(
             "A field previously marked invalid should not be marked valid.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -418,7 +423,9 @@ public class ModelStateDictionaryTest
     [Theory]
     [InlineData("[0].foo.bar")]
     [InlineData("[0].foo.bar[0]")]
-    public void GetFieldValidationState_IndexedPrefix_ReturnsInvalidIfKeyChildContainsErrors(string key)
+    public void GetFieldValidationState_IndexedPrefix_ReturnsInvalidIfKeyChildContainsErrors(
+        string key
+    )
     {
         // Arrange
         var dictionary = new ModelStateDictionary();
@@ -434,7 +441,9 @@ public class ModelStateDictionaryTest
     [Theory]
     [InlineData("[0].foo.bar")]
     [InlineData("[0].foo.bar[0]")]
-    public void GetFieldValidationState_IndexedPrefix_ReturnsValidIfModelStateDoesNotContainErrors(string key)
+    public void GetFieldValidationState_IndexedPrefix_ReturnsValidIfModelStateDoesNotContainErrors(
+        string key
+    )
     {
         // Arrange
         var dictionary = new ModelStateDictionary();
@@ -570,8 +579,7 @@ public class ModelStateDictionaryTest
         item = dictionary1["bar"];
         Assert.Equal("AttemptedValue2", item.AttemptedValue);
         Assert.Equal("RawValue2", item.RawValue);
-        Assert.Collection(item.Errors,
-            error => Assert.Equal("value2-Error1", error.ErrorMessage));
+        Assert.Collection(item.Errors, error => Assert.Equal("value2-Error1", error.ErrorMessage));
     }
 
     [Theory]
@@ -603,8 +611,7 @@ public class ModelStateDictionaryTest
         item = dictionary1[key];
         Assert.Equal("AttemptedValue2", item.AttemptedValue);
         Assert.Equal("RawValue2", item.RawValue);
-        Assert.Collection(item.Errors,
-            error => Assert.Equal("value2-Error1", error.ErrorMessage));
+        Assert.Collection(item.Errors, error => Assert.Equal("value2-Error1", error.ErrorMessage));
     }
 
     [Fact]
@@ -695,7 +702,9 @@ public class ModelStateDictionaryTest
     [InlineData("")]
     [InlineData("user")]
     [InlineData("user.Age")]
-    public void GetFieldValidity_ReturnsInvalid_IfAllKeysAreValidatedAndAnyEntryIsInvalid(string key)
+    public void GetFieldValidity_ReturnsInvalid_IfAllKeysAreValidatedAndAnyEntryIsInvalid(
+        string key
+    )
     {
         // Arrange
         var dictionary = new ModelStateDictionary();
@@ -714,7 +723,9 @@ public class ModelStateDictionaryTest
     [InlineData("")]
     [InlineData("[0]")]
     [InlineData("[0].product")]
-    public void GetFieldValidity_ReturnsInvalid_IfAllKeysAreValidatedAndAnyEntryIsInvalid_Collection(string key)
+    public void GetFieldValidity_ReturnsInvalid_IfAllKeysAreValidatedAndAnyEntryIsInvalid_Collection(
+        string key
+    )
     {
         // Arrange
         var dictionary = new ModelStateDictionary();
@@ -749,10 +760,7 @@ public class ModelStateDictionaryTest
     {
         // Arrange
         var expected = "The maximum number of allowed model errors has been reached.";
-        var dictionary = new ModelStateDictionary
-        {
-            MaxAllowedErrors = 5
-        };
+        var dictionary = new ModelStateDictionary { MaxAllowedErrors = 5 };
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
 
@@ -779,10 +787,7 @@ public class ModelStateDictionaryTest
     {
         // Arrange
         var expected = "The maximum number of allowed model errors has been reached.";
-        var dictionary = new ModelStateDictionary
-        {
-            MaxAllowedErrors = 3
-        };
+        var dictionary = new ModelStateDictionary { MaxAllowedErrors = 3 };
 
         // Act and Assert
         var result = dictionary.TryAddModelError("key1", "error1");
@@ -808,10 +813,7 @@ public class ModelStateDictionaryTest
     {
         // Arrange
         var expected = "The maximum number of allowed model errors has been reached.";
-        var dictionary = new ModelStateDictionary
-        {
-            MaxAllowedErrors = 3
-        };
+        var dictionary = new ModelStateDictionary { MaxAllowedErrors = 3 };
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
 
@@ -852,10 +854,7 @@ public class ModelStateDictionaryTest
     {
         // Arrange
         var expected = "The maximum number of allowed model errors has been reached.";
-        var dictionary = new ModelStateDictionary
-        {
-            MaxAllowedErrors = 4
-        };
+        var dictionary = new ModelStateDictionary { MaxAllowedErrors = 4 };
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
         dictionary.AddModelError("key1", new Exception(), metadata);
@@ -882,10 +881,7 @@ public class ModelStateDictionaryTest
     {
         // Arrange
         var expected = "The maximum number of allowed model errors has been reached.";
-        var dictionary = new ModelStateDictionary
-        {
-            MaxAllowedErrors = 3
-        };
+        var dictionary = new ModelStateDictionary { MaxAllowedErrors = 3 };
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
 
@@ -910,10 +906,7 @@ public class ModelStateDictionaryTest
     {
         // Arrange
         var expected = "The maximum number of allowed model errors has been reached.";
-        var dictionary = new ModelStateDictionary
-        {
-            MaxAllowedErrors = 3
-        };
+        var dictionary = new ModelStateDictionary { MaxAllowedErrors = 3 };
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
 
@@ -938,10 +931,7 @@ public class ModelStateDictionaryTest
     public void ModelStateDictionary_HasReachedMaxErrors(int errorCount, bool expected)
     {
         // Arrange
-        var dictionary = new ModelStateDictionary()
-        {
-            MaxAllowedErrors = 3
-        };
+        var dictionary = new ModelStateDictionary() { MaxAllowedErrors = 3 };
 
         for (var i = 0; i < errorCount; i++)
         {
@@ -995,10 +985,13 @@ public class ModelStateDictionaryTest
         var dictionary = new ModelStateDictionary();
 
         var bindingMetadataProvider = CreateBindingMetadataProvider();
-        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(new[] { bindingMetadataProvider });
+        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(
+            new[] { bindingMetadataProvider }
+        );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor.Value.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor(
-            name => $"Hmm, the supplied value is not valid for { name }.");
+        optionsAccessor.Value.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor(name =>
+            $"Hmm, the supplied value is not valid for {name}."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
@@ -1021,10 +1014,13 @@ public class ModelStateDictionaryTest
         var dictionary = new ModelStateDictionary();
 
         var bindingMetadataProvider = CreateBindingMetadataProvider();
-        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(new[] { bindingMetadataProvider });
+        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(
+            new[] { bindingMetadataProvider }
+        );
         var optionsAccessor = new OptionsAccessor();
         optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(
-            () => "Hmm, the supplied value is not valid.");
+            () => "Hmm, the supplied value is not valid."
+        );
 
         var method = typeof(string).GetMethod(nameof(string.Copy));
         var parameter = method.GetParameters()[0]; // Copy(string str)
@@ -1049,10 +1045,13 @@ public class ModelStateDictionaryTest
         var dictionary = new ModelStateDictionary();
 
         var bindingMetadataProvider = CreateBindingMetadataProvider();
-        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(new[] { bindingMetadataProvider });
+        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(
+            new[] { bindingMetadataProvider }
+        );
         var optionsAccessor = new OptionsAccessor();
         optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(
-            () => "Hmm, the supplied value is not valid.");
+            () => "Hmm, the supplied value is not valid."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForType(typeof(int));
@@ -1110,10 +1109,13 @@ public class ModelStateDictionaryTest
         dictionary.SetModelValue("key", new string[] { "some value" }, "some value");
 
         var bindingMetadataProvider = CreateBindingMetadataProvider();
-        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(new[] { bindingMetadataProvider });
+        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(
+            new[] { bindingMetadataProvider }
+        );
         var optionsAccessor = new OptionsAccessor();
         optionsAccessor.Value.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor(
-            (value, name) => $"Hmm, the value '{ value }' is not valid for { name }.");
+            (value, name) => $"Hmm, the value '{value}' is not valid for {name}."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
@@ -1137,10 +1139,13 @@ public class ModelStateDictionaryTest
         dictionary.SetModelValue("key", new string[] { "some value" }, "some value");
 
         var bindingMetadataProvider = CreateBindingMetadataProvider();
-        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(new[] { bindingMetadataProvider });
+        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(
+            new[] { bindingMetadataProvider }
+        );
         var optionsAccessor = new OptionsAccessor();
         optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
-            value => $"Hmm, the value '{ value }' is not valid.");
+            value => $"Hmm, the value '{value}' is not valid."
+        );
 
         var method = typeof(string).GetMethod(nameof(string.Copy));
         var parameter = method.GetParameters()[0]; // Copy(string str)
@@ -1166,10 +1171,13 @@ public class ModelStateDictionaryTest
         dictionary.SetModelValue("key", new string[] { "some value" }, "some value");
 
         var bindingMetadataProvider = CreateBindingMetadataProvider();
-        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(new[] { bindingMetadataProvider });
+        var compositeProvider = new DefaultCompositeMetadataDetailsProvider(
+            new[] { bindingMetadataProvider }
+        );
         var optionsAccessor = new OptionsAccessor();
         optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
-            (value) => $"Hmm, the value '{ value }' is not valid.");
+            (value) => $"Hmm, the value '{value}' is not valid."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForType(typeof(int));
@@ -1323,15 +1331,30 @@ public class ModelStateDictionaryTest
         Assert.Empty(dictionary["Product"].Errors);
         Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product"].ValidationState);
         Assert.Empty(dictionary["Product.Detail1"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail1"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail1"].ValidationState
+        );
         Assert.Empty(dictionary["Product.Detail2[0]"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail2[0]"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail2[0]"].ValidationState
+        );
         Assert.Empty(dictionary["Product.Detail2[1]"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail2[1]"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail2[1]"].ValidationState
+        );
         Assert.Empty(dictionary["Product.Detail2[2]"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail2[2]"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail2[2]"].ValidationState
+        );
         Assert.Empty(dictionary["Product.Detail3"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail3"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail3"].ValidationState
+        );
         Assert.Single(dictionary["ProductName"].Errors);
         Assert.Equal(ModelValidationState.Invalid, dictionary["ProductName"].ValidationState);
     }
@@ -1352,10 +1375,19 @@ public class ModelStateDictionaryTest
         // Assert
         Assert.Equal(ModelValidationState.Valid, dictionary["Product"].ValidationState);
         Assert.Empty(dictionary["Product.Detail1"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail1"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail1"].ValidationState
+        );
         Assert.Empty(dictionary["Product.Detail1.Name"].Errors);
-        Assert.Equal(ModelValidationState.Unvalidated, dictionary["Product.Detail1.Name"].ValidationState);
-        Assert.Equal(ModelValidationState.Skipped, dictionary["Product.Detail1Name"].ValidationState);
+        Assert.Equal(
+            ModelValidationState.Unvalidated,
+            dictionary["Product.Detail1.Name"].ValidationState
+        );
+        Assert.Equal(
+            ModelValidationState.Skipped,
+            dictionary["Product.Detail1Name"].ValidationState
+        );
     }
 
     [Theory]
@@ -1439,9 +1471,12 @@ public class ModelStateDictionaryTest
                 Assert.Equal(ModelValidationState.Invalid, entry.Value.ValidationState);
                 Assert.Null(entry.Value.RawValue);
                 Assert.Null(entry.Value.AttemptedValue);
-                Assert.Collection(entry.Value.Errors,
-                    error => Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage));
-            });
+                Assert.Collection(
+                    entry.Value.Errors,
+                    error => Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage)
+                );
+            }
+        );
     }
 
     [Fact]
@@ -1454,7 +1489,8 @@ public class ModelStateDictionaryTest
         modelStateDictionary.SetModelValue("property", "value2", "value2");
 
         // Act & Assert
-        Assert.Collection(modelStateDictionary,
+        Assert.Collection(
+            modelStateDictionary,
             entry =>
             {
                 Assert.Equal("prop", entry.Key);
@@ -1469,7 +1505,8 @@ public class ModelStateDictionaryTest
             {
                 Assert.Equal("property_name", entry.Key);
                 Assert.Equal("value3", entry.Value.RawValue);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1489,7 +1526,13 @@ public class ModelStateDictionaryTest
     public void KeysEnumerable_ReturnsAllKeys()
     {
         // Arrange
-        var expected = new[] { "Property1", "Property4", "Property1.Property2", "Property2[Property3]" };
+        var expected = new[]
+        {
+            "Property1",
+            "Property4",
+            "Property1.Property2",
+            "Property2[Property3]",
+        };
         var dictionary = new ModelStateDictionary();
         dictionary.MarkFieldValid("Property1");
         dictionary.AddModelError("Property1.Property2", "Property2 invalid.");
@@ -1531,7 +1574,8 @@ public class ModelStateDictionaryTest
         dictionary.Remove("Property2");
 
         // Act & Assert
-        Assert.Collection(dictionary.Values,
+        Assert.Collection(
+            dictionary.Values,
             value =>
             {
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
@@ -1560,8 +1604,10 @@ public class ModelStateDictionaryTest
                 Assert.Null(value.AttemptedValue);
                 Assert.Collection(
                     value.Errors,
-                    error => Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage));
-            });
+                    error => Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage)
+                );
+            }
+        );
     }
 
     [Fact]
@@ -1649,12 +1695,15 @@ public class ModelStateDictionaryTest
         dictionary.MaxStateDepth = stateDepth;
 
         // Act
-        var invalidException = Assert.Throws<InvalidOperationException>(() => dictionary.TryAddModelException(key, exception));
+        var invalidException = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.TryAddModelException(key, exception)
+        );
 
         // Assert
         Assert.Equal(
             $"The specified key exceeded the maximum ModelState depth: {dictionary.MaxStateDepth}",
-            invalidException.Message);
+            invalidException.Message
+        );
     }
 
     [Fact]
@@ -1667,12 +1716,15 @@ public class ModelStateDictionaryTest
         dictionary.MaxStateDepth = stateDepth;
 
         // Act
-        var invalidException = Assert.Throws<InvalidOperationException>(() => dictionary.TryAddModelError(key, "errorMessage"));
+        var invalidException = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.TryAddModelError(key, "errorMessage")
+        );
 
         // Assert
         Assert.Equal(
             $"The specified key exceeded the maximum ModelState depth: {dictionary.MaxStateDepth}",
-            invalidException.Message);
+            invalidException.Message
+        );
     }
 
     [Fact]
@@ -1684,12 +1736,15 @@ public class ModelStateDictionaryTest
         dictionary.MaxStateDepth = stateDepth;
 
         // Act
-        var invalidException = Assert.Throws<InvalidOperationException>(() => dictionary.SetModelValue(key, string.Empty, string.Empty));
+        var invalidException = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.SetModelValue(key, string.Empty, string.Empty)
+        );
 
         // Assert
         Assert.Equal(
             $"The specified key exceeded the maximum ModelState depth: {dictionary.MaxStateDepth}",
-            invalidException.Message);
+            invalidException.Message
+        );
     }
 
     [Fact]
@@ -1707,7 +1762,8 @@ public class ModelStateDictionaryTest
         // Assert
         Assert.Equal(
             $"The specified key exceeded the maximum ModelState depth: {source.MaxStateDepth}",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -1720,12 +1776,14 @@ public class ModelStateDictionaryTest
         source.MaxStateDepth = stateDepth;
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldSkipped(key));
+        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldSkipped(key)
+        );
 
         // Assert
         Assert.Equal(
             $"The specified key exceeded the maximum ModelState depth: {source.MaxStateDepth}",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -1755,8 +1813,8 @@ public class ModelStateDictionaryTest
         Assert.Equal(dictionary.MaxStateDepth, newDictionary.MaxStateDepth);
     }
 
-    private DefaultBindingMetadataProvider CreateBindingMetadataProvider()
-        => new DefaultBindingMetadataProvider();
+    private DefaultBindingMetadataProvider CreateBindingMetadataProvider() =>
+        new DefaultBindingMetadataProvider();
 
     private class OptionsAccessor : IOptions<MvcOptions>
     {

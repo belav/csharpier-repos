@@ -8,7 +8,8 @@ namespace System.Linq.Parallel.Tests
 {
     public static class FirstFirstOrDefaultTests
     {
-        private static readonly Func<int, IEnumerable<int>> Positions = x => new[] { 0, x / 2, Math.Max(0, x - 1) }.Distinct();
+        private static readonly Func<int, IEnumerable<int>> Positions = x =>
+            new[] { 0, x / 2, Math.Max(0, x - 1) }.Distinct();
 
         public static IEnumerable<object[]> FirstUnorderedData(int[] counts)
         {
@@ -16,14 +17,25 @@ namespace System.Linq.Parallel.Tests
             {
                 foreach (int position in Positions(count))
                 {
-                    yield return new object[] { Labeled.Label("UnorderedDefault", UnorderedSources.Default(count)), count, position };
+                    yield return new object[]
+                    {
+                        Labeled.Label("UnorderedDefault", UnorderedSources.Default(count)),
+                        count,
+                        position,
+                    };
                 }
             }
         }
 
         public static IEnumerable<object[]> FirstData(int[] counts)
         {
-            foreach (object[] results in Sources.Ranges(counts.DefaultIfEmpty(Sources.OuterLoopCount), Positions)) yield return results;
+            foreach (
+                object[] results in Sources.Ranges(
+                    counts.DefaultIfEmpty(Sources.OuterLoopCount),
+                    Positions
+                )
+            )
+                yield return results;
         }
 
         //
@@ -44,9 +56,23 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(FirstUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        [MemberData(nameof(FirstData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void First_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        [MemberData(
+            nameof(FirstUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        [MemberData(
+            nameof(FirstData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void First_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             First(labeled, count, position);
         }
@@ -54,7 +80,11 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [MemberData(nameof(FirstUnorderedData), new[] { 1, 2, 16 })]
         [MemberData(nameof(FirstData), new[] { 1, 2, 16 })]
-        public static void FirstOrDefault(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        public static void FirstOrDefault(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be split, and possibly mentioned in release notes.
@@ -66,9 +96,23 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(FirstUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        [MemberData(nameof(FirstData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void FirstOrDefault_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        [MemberData(
+            nameof(FirstUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        [MemberData(
+            nameof(FirstData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void FirstOrDefault_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             FirstOrDefault(labeled, count, position);
         }
@@ -87,7 +131,11 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [MemberData(nameof(FirstUnorderedData), new[] { 0 })]
         [MemberData(nameof(FirstData), new[] { 0 })]
-        public static void FirstOrDefault_Empty(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        public static void FirstOrDefault_Empty(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             _ = count;
             _ = position;
@@ -98,7 +146,11 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [MemberData(nameof(FirstUnorderedData), new[] { 1, 2, 16 })]
         [MemberData(nameof(FirstData), new[] { 0, 1, 2, 16 })]
-        public static void First_NoMatch(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        public static void First_NoMatch(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             _ = position;
             ParallelQuery<int> query = labeled.Item;
@@ -109,9 +161,23 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(FirstUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        [MemberData(nameof(FirstData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void First_NoMatch_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        [MemberData(
+            nameof(FirstUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        [MemberData(
+            nameof(FirstData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void First_NoMatch_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             First_NoMatch(labeled, count, position);
         }
@@ -119,7 +185,11 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [MemberData(nameof(FirstUnorderedData), new[] { 1, 2, 16 })]
         [MemberData(nameof(FirstData), new[] { 0, 1, 2, 16 })]
-        public static void FirstOrDefault_NoMatch(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        public static void FirstOrDefault_NoMatch(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             _ = position;
             ParallelQuery<int> query = labeled.Item;
@@ -130,9 +200,23 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(FirstUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        [MemberData(nameof(FirstData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void FirstOrDefault_NoMatch_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int position)
+        [MemberData(
+            nameof(FirstUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        [MemberData(
+            nameof(FirstData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void FirstOrDefault_NoMatch_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int position
+        )
         {
             FirstOrDefault_NoMatch(labeled, count, position);
         }
@@ -140,17 +224,59 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void First_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.First(x => { canceler(); return false; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.FirstOrDefault(x => { canceler(); return false; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.First(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.FirstOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
         public static void First_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.First(x => { canceler(); return false; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.FirstOrDefault(x => { canceler(); return false; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.First(x => { canceler(); return false; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.FirstOrDefault(x => { canceler(); return false; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.First(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.FirstOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.First(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.FirstOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
@@ -166,18 +292,44 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void First_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).First(x => { throw new DeliberateTestException(); }));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).FirstOrDefault(x => { throw new DeliberateTestException(); }));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .First(x =>
+                    {
+                        throw new DeliberateTestException();
+                    })
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .FirstOrDefault(x =>
+                    {
+                        throw new DeliberateTestException();
+                    })
+            );
         }
 
         [Fact]
         public static void First_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).First());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).FirstOrDefault());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).First()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).FirstOrDefault()
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<int>().First(null));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<int>().FirstOrDefault(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<int>().First(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<int>().FirstOrDefault(null)
+            );
         }
     }
 }

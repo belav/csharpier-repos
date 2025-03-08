@@ -1,57 +1,61 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
-using NUnit.Framework;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Principal;
+using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks
 {
     [TestFixture]
     public class ThreadPrincipalTests
     {
-
 #if !MONOTOUCH // Uses LogicalCallContext
         [Test]
-		[Category ("MultiThreaded")]
-        public void PrincipalFlowsToAsyncTask ()
+        [Category("MultiThreaded")]
+        public void PrincipalFlowsToAsyncTask()
         {
             /* run in different thread to work around problems on platforms
             * where SynchronizationContext is set (e.g. Xamarin.iOS) */
-            Assert.IsTrue (Task.Run (async () => await _PrincipalFlowsToAsyncTask ()).Wait (5000));
+            Assert.IsTrue(Task.Run(async () => await _PrincipalFlowsToAsyncTask()).Wait(5000));
         }
 #endif
 
-        public async Task _PrincipalFlowsToAsyncTask ()
-        {    
-            var mockIdentity = new MockIdentity {
+        public async Task _PrincipalFlowsToAsyncTask()
+        {
+            var mockIdentity = new MockIdentity
+            {
                 AuthenticationType = "authtype",
                 IsAuthenticated = true,
-                Name = "name"
+                Name = "name",
             };
-            var mockPrincipal = new MockPrincipal {
-                Identity = mockIdentity
-            };          
+            var mockPrincipal = new MockPrincipal { Identity = mockIdentity };
             var oldPrincipal = Thread.CurrentPrincipal;
-            Thread.CurrentPrincipal = mockPrincipal;          
+            Thread.CurrentPrincipal = mockPrincipal;
 
-            try {
-                await Task.Factory.StartNew(async () =>
-                {
-                    var newThreadId = Thread.CurrentThread.ManagedThreadId; // on different thread.
-                    Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
-                    Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
-                   
-                    await Task.Factory.StartNew(() =>
+            try
+            {
+                await Task.Factory.StartNew(
+                    async () =>
                     {
-                        // still works even when nesting..
-                        newThreadId = Thread.CurrentThread.ManagedThreadId;
+                        var newThreadId = Thread.CurrentThread.ManagedThreadId; // on different thread.
                         Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
                         Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
 
-                    }, TaskCreationOptions.LongRunning);
-                }, TaskCreationOptions.LongRunning);
+                        await Task.Factory.StartNew(
+                            () =>
+                            {
+                                // still works even when nesting..
+                                newThreadId = Thread.CurrentThread.ManagedThreadId;
+                                Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
+                                Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
+                            },
+                            TaskCreationOptions.LongRunning
+                        );
+                    },
+                    TaskCreationOptions.LongRunning
+                );
 
                 await Task.Run(() =>
                 {
@@ -60,20 +64,26 @@ namespace MonoTests.System.Threading.Tasks
                     Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
                     Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
                 });
-            } finally {
+            }
+            finally
+            {
                 Thread.CurrentPrincipal = oldPrincipal;
             }
         }
     }
 
-    public class MockPrincipal : IPrincipal {
+    public class MockPrincipal : IPrincipal
+    {
         public IIdentity Identity { get; set; }
-        public bool IsInRole (string role) {
+
+        public bool IsInRole(string role)
+        {
             return true;
         }
     }
 
-    public class MockIdentity : IIdentity {
+    public class MockIdentity : IIdentity
+    {
         public string AuthenticationType { get; set; }
         public bool IsAuthenticated { get; set; }
         public string Name { get; set; }

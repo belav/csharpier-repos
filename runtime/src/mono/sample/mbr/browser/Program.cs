@@ -11,11 +11,11 @@ namespace Sample
 {
     public partial class Test
     {
-        static DeltaHelper replacer = DeltaHelper.Make ();
+        static DeltaHelper replacer = DeltaHelper.Make();
 
         public static void Main(string[] args)
         {
-            Console.WriteLine ("Hello, World!");
+            Console.WriteLine("Hello, World!");
         }
 
         [JSExport]
@@ -27,8 +27,8 @@ namespace Sample
         [JSExport]
         public static void Update()
         {
-            Assembly assm = typeof (Test).Assembly;
-            replacer.Update (assm);
+            Assembly assm = typeof(Test).Assembly;
+            replacer.Update(assm);
         }
     }
 }

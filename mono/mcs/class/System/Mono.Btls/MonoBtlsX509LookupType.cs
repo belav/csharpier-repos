@@ -28,12 +28,12 @@ using System;
 
 namespace Mono.Btls
 {
-	enum MonoBtlsX509LookupType
-	{
-		UNKNOWN = 0,
-		FILE,
-		HASH_DIR,
-		MONO
-	}
+    enum MonoBtlsX509LookupType
+    {
+        UNKNOWN = 0,
+        FILE,
+        HASH_DIR,
+        MONO,
+    }
 }
 #endif

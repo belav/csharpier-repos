@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal partial class DocumentationCommentCompiler : CSharpSymbolVisitor
     {
         /// <summary>
-        /// Walks a DocumentationCommentTriviaSyntax, binding the semantically meaningful parts 
+        /// Walks a DocumentationCommentTriviaSyntax, binding the semantically meaningful parts
         /// to produce diagnostics and to replace source crefs with documentation comment IDs.
         /// </summary>
         [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 StringWriter writer,
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
                 HashSet<ParameterSymbol> documentedParameters,
-                HashSet<TypeParameterSymbol> documentedTypeParameters)
+                HashSet<TypeParameterSymbol> documentedTypeParameters
+            )
                 : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 _compilation = compilation;
@@ -68,10 +69,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SynthesizedRecordPropertySymbol symbol,
                 ArrayBuilder<XmlElementSyntax> paramElements,
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
-                StringBuilder builder)
+                StringBuilder builder
+            )
             {
                 StringWriter writer = new StringWriter(builder, CultureInfo.InvariantCulture);
-                DocumentationCommentWalker walker = new DocumentationCommentWalker(compilation, BindingDiagnosticBag.Discarded, symbol, writer, includeElementNodes, documentedParameters: null, documentedTypeParameters: null);
+                DocumentationCommentWalker walker = new DocumentationCommentWalker(
+                    compilation,
+                    BindingDiagnosticBag.Discarded,
+                    symbol,
+                    writer,
+                    includeElementNodes,
+                    documentedParameters: null,
+                    documentedTypeParameters: null
+                );
 
                 // Before: <param name="NAME">CONTENT</param>
                 // After: <summary>CONTENT</summary>
@@ -80,7 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // '///<param': '<' owns the '///' trivia
                     // '/// <param': ' ' token preceding '<' owns '///' trivia
                     var startLessThanToken = paramElement.StartTag.LessThanToken;
-                    if (!startLessThanToken.LeadingTrivia.Any(SyntaxKind.DocumentationCommentExteriorTrivia))
+                    if (
+                        !startLessThanToken.LeadingTrivia.Any(
+                            SyntaxKind.DocumentationCommentExteriorTrivia
+                        )
+                    )
                     {
                         walker.VisitToken(startLessThanToken.GetPreviousToken());
                     }
@@ -100,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     walker.VisitToken(endGreaterThanToken);
 
                     // The '>' token doesn't own the following new line. Instead, it is directly followed by an 'XmlTextLiteralNewLineToken'.
-                    if (endGreaterThanToken.GetNextToken() is SyntaxToken newLineToken && newLineToken.IsKind(SyntaxKind.XmlTextLiteralNewLineToken))
+                    if (
+                        endGreaterThanToken.GetNextToken() is SyntaxToken newLineToken
+                        && newLineToken.IsKind(SyntaxKind.XmlTextLiteralNewLineToken)
+                    )
                     {
                         walker.VisitToken(newLineToken);
                     }
@@ -121,12 +138,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DocumentationCommentTriviaSyntax trivia,
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
                 ref HashSet<ParameterSymbol> documentedParameters,
-                ref HashSet<TypeParameterSymbol> documentedTypeParameters)
+                ref HashSet<TypeParameterSymbol> documentedTypeParameters
+            )
             {
                 PooledStringBuilder pooled = PooledStringBuilder.GetInstance();
-                using (StringWriter writer = new StringWriter(pooled.Builder, CultureInfo.InvariantCulture))
+                using (
+                    StringWriter writer = new StringWriter(
+                        pooled.Builder,
+                        CultureInfo.InvariantCulture
+                    )
+                )
                 {
-                    DocumentationCommentWalker walker = new DocumentationCommentWalker(compilation, diagnostics, symbol, writer, includeElementNodes, documentedParameters, documentedTypeParameters);
+                    DocumentationCommentWalker walker = new DocumentationCommentWalker(
+                        compilation,
+                        diagnostics,
+                        symbol,
+                        writer,
+                        includeElementNodes,
+                        documentedParameters,
+                        documentedTypeParameters
+                    );
                     walker.Visit(trivia);
 
                     // Copy back out in case they have been initialized.
@@ -150,7 +181,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder binder = factory.GetBinder(cref);
 
                     // Do this for the diagnostics, even if it won't be written.
-                    BindingDiagnosticBag diagnostics = diagnose ? _diagnostics : BindingDiagnosticBag.GetInstance(withDiagnostics: false, withDependencies: _diagnostics.AccumulatesDependencies);
+                    BindingDiagnosticBag diagnostics = diagnose
+                        ? _diagnostics
+                        : BindingDiagnosticBag.GetInstance(
+                            withDiagnostics: false,
+                            withDependencies: _diagnostics.AccumulatesDependencies
+                        );
                     string docCommentId = GetDocumentationCommentId(cref, binder, diagnostics);
 
                     if (!diagnose)
@@ -187,7 +223,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder binder = factory.GetBinder(nameAttr, nameAttr.Identifier.SpanStart);
 
                     // Do this for diagnostics, even if we aren't writing.
-                    BindName(nameAttr, binder, _memberSymbol, ref _documentedParameters, ref _documentedTypeParameters, _diagnostics);
+                    BindName(
+                        nameAttr,
+                        binder,
+                        _memberSymbol,
+                        ref _documentedParameters,
+                        ref _documentedTypeParameters,
+                        _diagnostics
+                    );
 
                     // Do descend - we still need to write out the tokens of the attribute.
                 }
@@ -206,8 +249,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         nameSyntax = ((XmlElementStartTagSyntax)node).Name;
                     }
 
-                    if (nameSyntax != null && nameSyntax.Prefix == null &&
-                        DocumentationCommentXmlNames.ElementEquals(nameSyntax.LocalName.ValueText, DocumentationCommentXmlNames.IncludeElementName))
+                    if (
+                        nameSyntax != null
+                        && nameSyntax.Prefix == null
+                        && DocumentationCommentXmlNames.ElementEquals(
+                            nameSyntax.LocalName.ValueText,
+                            DocumentationCommentXmlNames.IncludeElementName
+                        )
+                    )
                     {
                         _includeElementNodes.Add((CSharpSyntaxNode)node);
                     }

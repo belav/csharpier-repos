@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public enum ExtractLocation
         {
             SameFile,
-            NewFile
+            NewFile,
         }
 
         public static readonly ExtractInterfaceOptionsResult Cancelled = new(isCancelled: true);
@@ -27,7 +27,14 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public ExtractLocation Location { get; }
         public CleanCodeGenerationOptionsProvider FallbackOptions { get; }
 
-        public ExtractInterfaceOptionsResult(bool isCancelled, ImmutableArray<ISymbol> includedMembers, string interfaceName, string fileName, ExtractLocation location, CleanCodeGenerationOptionsProvider fallbackOptions)
+        public ExtractInterfaceOptionsResult(
+            bool isCancelled,
+            ImmutableArray<ISymbol> includedMembers,
+            string interfaceName,
+            string fileName,
+            ExtractLocation location,
+            CleanCodeGenerationOptionsProvider fallbackOptions
+        )
         {
             IsCancelled = isCancelled;
             IncludedMembers = includedMembers;
@@ -37,7 +44,6 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             FileName = fileName;
         }
 
-        private ExtractInterfaceOptionsResult(bool isCancelled)
-            => IsCancelled = isCancelled;
+        private ExtractInterfaceOptionsResult(bool isCancelled) => IsCancelled = isCancelled;
     }
 }

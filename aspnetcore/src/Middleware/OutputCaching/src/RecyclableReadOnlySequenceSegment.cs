@@ -19,12 +19,18 @@ namespace Microsoft.AspNetCore.OutputCaching;
 internal sealed class RecyclableReadOnlySequenceSegment : ReadOnlySequenceSegment<byte>
 {
     public int Length => Memory.Length;
+
     private RecyclableReadOnlySequenceSegment() { }
 
-    public static RecyclableReadOnlySequenceSegment Create(int minimumLength, RecyclableReadOnlySequenceSegment? previous)
-        => Create(GetBuffer(minimumLength), previous);
+    public static RecyclableReadOnlySequenceSegment Create(
+        int minimumLength,
+        RecyclableReadOnlySequenceSegment? previous
+    ) => Create(GetBuffer(minimumLength), previous);
 
-    public static RecyclableReadOnlySequenceSegment Create(ReadOnlyMemory<byte> memory, RecyclableReadOnlySequenceSegment? previous)
+    public static RecyclableReadOnlySequenceSegment Create(
+        ReadOnlyMemory<byte> memory,
+        RecyclableReadOnlySequenceSegment? previous
+    )
     {
         var obj = s_Spares.TryDequeue(out var value) ? value : new();
         obj.Memory = memory;
@@ -39,7 +45,10 @@ internal sealed class RecyclableReadOnlySequenceSegment : ReadOnlySequenceSegmen
     private const int TARGET_MAX = 128;
     static readonly ConcurrentQueue<RecyclableReadOnlySequenceSegment> s_Spares = new();
 
-    public static void RecycleChain(RecyclableReadOnlySequenceSegment? obj, bool recycleBuffers = false)
+    public static void RecycleChain(
+        RecyclableReadOnlySequenceSegment? obj,
+        bool recycleBuffers = false
+    )
     {
         while (obj is not null)
         {
@@ -59,6 +68,7 @@ internal sealed class RecyclableReadOnlySequenceSegment : ReadOnlySequenceSegmen
             obj = next;
         }
     }
+
     public static void RecycleChain(in ReadOnlySequence<byte> value, bool recycleBuffers = false)
     {
         var obj = value.Start.GetObject() as RecyclableReadOnlySequenceSegment;
@@ -90,7 +100,8 @@ internal sealed class RecyclableReadOnlySequenceSegment : ReadOnlySequenceSegmen
             case 1:
                 return new(segments[0]);
             default:
-                RecyclableReadOnlySequenceSegment first = Create(segments[0], null), last = first;
+                RecyclableReadOnlySequenceSegment first = Create(segments[0], null),
+                    last = first;
                 for (int i = 1; i < count; i++)
                 {
                     last = Create(segments[i], last);
@@ -99,7 +110,11 @@ internal sealed class RecyclableReadOnlySequenceSegment : ReadOnlySequenceSegmen
         }
     }
 
-    public static async ValueTask CopyToAsync(ReadOnlySequence<byte> source, PipeWriter destination, CancellationToken cancellationToken)
+    public static async ValueTask CopyToAsync(
+        ReadOnlySequence<byte> source,
+        PipeWriter destination,
+        CancellationToken cancellationToken
+    )
     {
         if (!source.IsEmpty)
         {
@@ -121,8 +136,7 @@ internal sealed class RecyclableReadOnlySequenceSegment : ReadOnlySequenceSegmen
     }
 
     // TODO: reinstate ArrayPool<byte>.Shared usage.Rent(minimumLength);
-    private static byte[] GetBuffer(int minimumLength)
-        => new byte[minimumLength];
+    private static byte[] GetBuffer(int minimumLength) => new byte[minimumLength];
 
     private static void Recycle(ReadOnlyMemory<byte> _)
     {

@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System.ComponentModel;
-
 using Moq.Language;
 using Moq.Language.Flow;
 
@@ -29,7 +28,6 @@ namespace Moq
         /// Allow sequence to be repeated
         /// </summary>
         public bool Cyclic { get; set; }
-
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
@@ -63,9 +61,13 @@ namespace Moq
         {
             var expectationPosition = sequenceLength++;
 
-            return new WhenPhrase<TMock>(mock, new Condition(
-                condition: () => expectationPosition == sequenceStep,
-                success: NextStep));
+            return new WhenPhrase<TMock>(
+                mock,
+                new Condition(
+                    condition: () => expectationPosition == sequenceStep,
+                    success: NextStep
+                )
+            );
         }
     }
 
@@ -80,7 +82,8 @@ namespace Moq
         /// </summary>
         public static ISetupConditionResult<TMock> InSequence<TMock>(
             this Mock<TMock> mock,
-            MockSequence sequence)
+            MockSequence sequence
+        )
             where TMock : class
         {
             Guard.NotNull(sequence, nameof(sequence));

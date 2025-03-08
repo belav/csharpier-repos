@@ -18,7 +18,13 @@ namespace R2RDump
         /// <summary>
         /// Probing extensions to use when looking up assemblies under reference paths.
         /// </summary>
-        private readonly static string[] ProbeExtensions = new[] { ".ni.exe", ".ni.dll", ".exe", ".dll" };
+        private readonly static string[] ProbeExtensions = new[]
+        {
+            ".ni.exe",
+            ".ni.dll",
+            ".exe",
+            ".dll",
+        };
 
         public bool DiffHideSameDisasm { get; init; }
         public bool Disasm { get; init; }
@@ -45,9 +51,15 @@ namespace R2RDump
         /// <param name="assemblyReferenceHandle">Handle representing the assembly reference</param>
         /// <param name="parentFile">Name of assembly from which we're performing the lookup</param>
         /// <returns></returns>
-        public IAssemblyMetadata FindAssembly(MetadataReader metadataReader, AssemblyReferenceHandle assemblyReferenceHandle, string parentFile)
+        public IAssemblyMetadata FindAssembly(
+            MetadataReader metadataReader,
+            AssemblyReferenceHandle assemblyReferenceHandle,
+            string parentFile
+        )
         {
-            string simpleName = metadataReader.GetString(metadataReader.GetAssemblyReference(assemblyReferenceHandle).Name);
+            string simpleName = metadataReader.GetString(
+                metadataReader.GetAssemblyReference(assemblyReferenceHandle).Name
+            );
             return FindAssembly(simpleName, parentFile);
         }
 
@@ -62,14 +74,21 @@ namespace R2RDump
         {
             foreach (string refAsm in Reference)
             {
-                if (Path.GetFileNameWithoutExtension(refAsm).Equals(simpleName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    Path.GetFileNameWithoutExtension(refAsm)
+                        .Equals(simpleName, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return Open(refAsm);
                 }
             }
 
-            IEnumerable<string> allRefPaths = new string[] { Path.GetDirectoryName(parentFile) }
-                .Concat((ReferencePath ?? Enumerable.Empty<DirectoryInfo>()).Select(path => path.FullName));
+            IEnumerable<string> allRefPaths = new string[]
+            {
+                Path.GetDirectoryName(parentFile),
+            }.Concat(
+                (ReferencePath ?? Enumerable.Empty<DirectoryInfo>()).Select(path => path.FullName)
+            );
 
             foreach (string refPath in allRefPaths)
             {
@@ -83,9 +102,7 @@ namespace R2RDump
                             return Open(probeFile);
                         }
                     }
-                    catch (BadImageFormatException)
-                    {
-                    }
+                    catch (BadImageFormatException) { }
                 }
             }
 
@@ -95,11 +112,15 @@ namespace R2RDump
             {
                 byte[] image = File.ReadAllBytes(filename);
 
-                PEReader peReader = new PEReader(Unsafe.As<byte[], ImmutableArray<byte>>(ref image));
+                PEReader peReader = new PEReader(
+                    Unsafe.As<byte[], ImmutableArray<byte>>(ref image)
+                );
 
                 if (!peReader.HasMetadata)
                 {
-                    throw new BadImageFormatException($"ECMA metadata not found in file '{filename}'");
+                    throw new BadImageFormatException(
+                        $"ECMA metadata not found in file '{filename}'"
+                    );
                 }
 
                 return new StandaloneAssemblyMetadata(peReader);

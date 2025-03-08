@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,60 +32,59 @@ using System.Collections;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    public class DataListItemCollectionTest
+    {
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Constructor_Null()
+        {
+            DataListItemCollection dlic = new DataListItemCollection(null);
+            Assert.IsNotNull(dlic, "ctor");
+            Assert.IsFalse(dlic.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse(dlic.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue(Object.ReferenceEquals(dlic, dlic.SyncRoot), "SyncRoot");
+            // unusable
+            Assert.AreEqual(0, dlic.Count, "NRE");
+        }
 
-	[TestFixture]
-	public class DataListItemCollectionTest {
+        [Test]
+        public void Constructor_Empty()
+        {
+            ArrayList al = new ArrayList();
+            DataListItemCollection dlic = new DataListItemCollection(al);
+            Assert.AreEqual(0, dlic.Count, "Count0");
+            Assert.IsFalse(dlic.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse(dlic.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue(Object.ReferenceEquals(dlic, dlic.SyncRoot), "SyncRoot");
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void Constructor_Null ()
-		{
-			DataListItemCollection dlic = new DataListItemCollection (null);
-			Assert.IsNotNull (dlic, "ctor");
-			Assert.IsFalse (dlic.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dlic.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (dlic, dlic.SyncRoot), "SyncRoot");
-			// unusable
-			Assert.AreEqual (0, dlic.Count, "NRE");
-		}
+            al.Add(new DataListItem(0, ListItemType.Item));
+            Assert.AreEqual(1, dlic.Count, "Count++");
+            // note: no add/insert/remove/...
+            Assert.IsNotNull(dlic[0], "[0]");
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			ArrayList al = new ArrayList ();
-			DataListItemCollection dlic = new DataListItemCollection (al);
-			Assert.AreEqual (0, dlic.Count, "Count0");
-			Assert.IsFalse (dlic.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dlic.IsSynchronized, "IsSynchronized");
-			Assert.IsTrue (Object.ReferenceEquals (dlic, dlic.SyncRoot), "SyncRoot");
+            al.Clear();
+            Assert.AreEqual(0, dlic.Count, "Count--");
+            // we can add/remove from the original ArrayList
+        }
 
-			al.Add (new DataListItem (0, ListItemType.Item));
-			Assert.AreEqual (1, dlic.Count, "Count++");
-			// note: no add/insert/remove/...
-			Assert.IsNotNull (dlic[0], "[0]");
+        [Test]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void Constructor_WrongType()
+        {
+            ArrayList al = new ArrayList();
+            al.Add(String.Empty);
+            // DataListItemCollection only deals with DataListItem so...
 
-			al.Clear ();
-			Assert.AreEqual (0, dlic.Count, "Count--");
-			// we can add/remove from the original ArrayList
-		}
+            DataListItemCollection dlic = new DataListItemCollection(al);
+            Assert.AreEqual(1, dlic.Count, "Count0");
 
-		[Test]
-		[ExpectedException (typeof (InvalidCastException))]
-		public void Constructor_WrongType ()
-		{
-			ArrayList al = new ArrayList ();
-			al.Add (String.Empty);
-			// DataListItemCollection only deals with DataListItem so...
-
-			DataListItemCollection dlic = new DataListItemCollection (al);
-			Assert.AreEqual (1, dlic.Count, "Count0");
-
-			// ... it chokes when accessing the string
-			Assert.AreEqual (String.Empty, dlic[0], "[0]");
-		}
-	}
+            // ... it chokes when accessing the string
+            Assert.AreEqual(String.Empty, dlic[0], "[0]");
+        }
+    }
 }

@@ -24,38 +24,41 @@ public class EnumerableWrapperProvider : IWrapperProvider
     /// Can be null.</param>
     public EnumerableWrapperProvider(
         Type sourceEnumerableOfT,
-        IWrapperProvider? elementWrapperProvider)
+        IWrapperProvider? elementWrapperProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(sourceEnumerableOfT);
 
         var enumerableOfT = ClosedGenericMatcher.ExtractGenericInterface(
             sourceEnumerableOfT,
-            typeof(IEnumerable<>));
+            typeof(IEnumerable<>)
+        );
         if (!sourceEnumerableOfT.IsInterface || enumerableOfT == null)
         {
             throw new ArgumentException(
-                Resources.FormatEnumerableWrapperProvider_InvalidSourceEnumerableOfT(typeof(IEnumerable<>).Name),
-                nameof(sourceEnumerableOfT));
+                Resources.FormatEnumerableWrapperProvider_InvalidSourceEnumerableOfT(
+                    typeof(IEnumerable<>).Name
+                ),
+                nameof(sourceEnumerableOfT)
+            );
         }
 
         _wrapperProvider = elementWrapperProvider;
 
         var declaredElementType = enumerableOfT.GenericTypeArguments[0];
         var wrappedElementType = elementWrapperProvider?.WrappingType ?? declaredElementType;
-        WrappingType = typeof(DelegatingEnumerable<,>).MakeGenericType(wrappedElementType, declaredElementType);
+        WrappingType = typeof(DelegatingEnumerable<,>).MakeGenericType(
+            wrappedElementType,
+            declaredElementType
+        );
 
-        _wrappingTypeConstructor = WrappingType.GetConstructor(new[]
-        {
-                sourceEnumerableOfT,
-                typeof(IWrapperProvider)
-            })!;
+        _wrappingTypeConstructor = WrappingType.GetConstructor(
+            new[] { sourceEnumerableOfT, typeof(IWrapperProvider) }
+        )!;
     }
 
     /// <inheritdoc />
-    public Type WrappingType
-    {
-        get;
-    }
+    public Type WrappingType { get; }
 
     /// <inheritdoc />
     public object? Wrap(object? original)

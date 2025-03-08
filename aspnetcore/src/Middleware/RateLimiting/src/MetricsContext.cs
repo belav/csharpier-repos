@@ -9,7 +9,11 @@ internal readonly struct MetricsContext
     public readonly bool CurrentLeasedRequestsCounterEnabled;
     public readonly bool CurrentQueuedRequestsCounterEnabled;
 
-    public MetricsContext(string? policyName, bool currentLeasedRequestsCounterEnabled, bool currentQueuedRequestsCounterEnabled)
+    public MetricsContext(
+        string? policyName,
+        bool currentLeasedRequestsCounterEnabled,
+        bool currentQueuedRequestsCounterEnabled
+    )
     {
         PolicyName = policyName;
         CurrentLeasedRequestsCounterEnabled = currentLeasedRequestsCounterEnabled;

@@ -23,20 +23,22 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    });
+            })
+            .Build();
 
         var ex = Assert.Throws<InvalidOperationException>(() => host.Start());
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddHealthChecks' inside the call to 'ConfigureServices(...)' " +
-            "in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddHealthChecks' inside the call to 'ConfigureServices(...)' "
+                + "in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact] // Matches based on '.Map'
@@ -46,16 +48,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -73,16 +76,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -100,16 +104,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -130,16 +135,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -160,19 +166,21 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
-                        .AddCheck("Bar", () => HealthCheckResult.Healthy("A-ok!"))
-                        .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
+                            .AddCheck("Bar", () => HealthCheckResult.Healthy("A-ok!"))
+                            .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -193,19 +201,21 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
-                        .AddCheck("Bar", () => HealthCheckResult.Degraded("Not so great."))
-                        .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
+                            .AddCheck("Bar", () => HealthCheckResult.Degraded("Not so great."))
+                            .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -226,19 +236,30 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddAsyncCheck("Foo", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")))
-                        .AddAsyncCheck("Bar", () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad.")))
-                        .AddAsyncCheck("Baz", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddAsyncCheck(
+                                "Foo",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            )
+                            .AddAsyncCheck(
+                                "Bar",
+                                () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                            )
+                            .AddAsyncCheck(
+                                "Baz",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -259,19 +280,27 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddAsyncCheck("Foo", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")))
-                        .AddAsyncCheck("Bar", () => throw null)
-                        .AddAsyncCheck("Baz", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddAsyncCheck(
+                                "Foo",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            )
+                            .AddAsyncCheck("Bar", () => throw null)
+                            .AddAsyncCheck(
+                                "Baz",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -288,36 +317,49 @@ public class HealthCheckMiddlewareTests
     [Fact]
     public async Task CanUseCustomWriter()
     {
-        var expectedJson = JsonConvert.SerializeObject(new
-        {
-            status = "Unhealthy",
-        });
+        var expectedJson = JsonConvert.SerializeObject(new { status = "Unhealthy" });
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        ResponseWriter = (c, r) =>
-                        {
-                            var json = JsonConvert.SerializeObject(new { status = r.Status.ToString(), });
-                            c.Response.ContentType = "application/json";
-                            return c.Response.WriteAsync(json);
-                        },
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions()
+                            {
+                                ResponseWriter = (c, r) =>
+                                {
+                                    var json = JsonConvert.SerializeObject(
+                                        new { status = r.Status.ToString() }
+                                    );
+                                    c.Response.ContentType = "application/json";
+                                    return c.Response.WriteAsync(json);
+                                },
+                            }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddAsyncCheck(
+                                "Foo",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            )
+                            .AddAsyncCheck(
+                                "Bar",
+                                () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                            )
+                            .AddAsyncCheck(
+                                "Baz",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            );
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddAsyncCheck("Foo", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")))
-                        .AddAsyncCheck("Bar", () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad.")))
-                        .AddAsyncCheck("Baz", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")));
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -339,22 +381,33 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        ResponseWriter = null,
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions() { ResponseWriter = null }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddAsyncCheck(
+                                "Foo",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            )
+                            .AddAsyncCheck(
+                                "Bar",
+                                () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                            )
+                            .AddAsyncCheck(
+                                "Baz",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            );
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddAsyncCheck("Foo", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")))
-                        .AddAsyncCheck("Bar", () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad.")))
-                        .AddAsyncCheck("Baz", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")));
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -374,22 +427,23 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        ResultStatusCodes =
-                        {
-                                [HealthStatus.Healthy] = 201,
-                        }
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions()
+                            {
+                                ResultStatusCodes = { [HealthStatus.Healthy] = 201 },
+                            }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -409,16 +463,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -431,7 +486,10 @@ public class HealthCheckMiddlewareTests
         Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
         Assert.Equal("no-store, no-cache", response.Headers.CacheControl.ToString());
         Assert.Equal("no-cache", response.Headers.Pragma.ToString());
-        Assert.Equal(new string[] { "Thu, 01 Jan 1970 00:00:00 GMT" }, response.Content.Headers.GetValues(HeaderNames.Expires));
+        Assert.Equal(
+            new string[] { "Thu, 01 Jan 1970 00:00:00 GMT" },
+            response.Content.Headers.GetValues(HeaderNames.Expires)
+        );
     }
 
     [Fact]
@@ -441,19 +499,20 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        AllowCachingResponses = true,
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions() { AllowCachingResponses = true }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -476,23 +535,37 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        Predicate = (check) => check.Name == "Foo" || check.Name == "Baz",
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions()
+                            {
+                                Predicate = (check) => check.Name == "Foo" || check.Name == "Baz",
+                            }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services
+                            .AddHealthChecks()
+                            .AddAsyncCheck(
+                                "Foo",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            )
+                            // Will get filtered out
+                            .AddAsyncCheck(
+                                "Bar",
+                                () => Task.FromResult(HealthCheckResult.Unhealthy("A-ok!"))
+                            )
+                            .AddAsyncCheck(
+                                "Baz",
+                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            );
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks()
-                        .AddAsyncCheck("Foo", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")))
-                        // Will get filtered out
-                        .AddAsyncCheck("Bar", () => Task.FromResult(HealthCheckResult.Unhealthy("A-ok!")))
-                        .AddAsyncCheck("Baz", () => Task.FromResult(HealthCheckResult.Healthy("A-ok!")));
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -513,16 +586,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks(default);
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks(default);
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -543,16 +617,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -571,16 +646,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -601,16 +677,17 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHealthChecks("/health");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -630,22 +707,23 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    // Throws if used
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        ResponseWriter = (c, r) => throw null,
-                    });
+                        // Throws if used
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
+                        );
 
-                    app.UseHealthChecks("/health/detailed");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                        app.UseHealthChecks("/health/detailed");
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -667,22 +745,23 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHealthChecks("/health/detailed");
-
-                    // Throws if used
-                    app.UseHealthChecks("/health", new HealthCheckOptions()
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        ResponseWriter = (c, r) => throw null,
+                        app.UseHealthChecks("/health/detailed");
+
+                        // Throws if used
+                        app.UseHealthChecks(
+                            "/health",
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
+                        );
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -703,24 +782,27 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.Use(next => async (context) =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        // Need to fake setting the connection info. TestServer doesn't
-                        // do that, because it doesn't have a connection.
-                        context.Connection.LocalPort = context.Request.Host.Port.Value;
-                        await next(context);
-                    });
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
+                        );
 
-                    app.UseHealthChecks("/health", port: 5001);
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                        app.UseHealthChecks("/health", port: 5001);
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -741,24 +823,27 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.Use(next => async (context) =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        // Need to fake setting the connection info. TestServer doesn't
-                        // do that, because it doesn't have a connection.
-                        context.Connection.LocalPort = context.Request.Host.Port.Value;
-                        await next(context);
-                    });
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
+                        );
 
-                    app.UseHealthChecks(default, port: 5001);
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                        app.UseHealthChecks(default, port: 5001);
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -779,24 +864,27 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.Use(next => async (context) =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        // Need to fake setting the connection info. TestServer doesn't
-                        // do that, because it doesn't have a connection.
-                        context.Connection.LocalPort = context.Request.Host.Port.Value;
-                        await next(context);
-                    });
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
+                        );
 
-                    app.UseHealthChecks("/health", port: 5001);
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+                        app.UseHealthChecks("/health", port: 5001);
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHealthChecks();
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -815,30 +903,34 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.Use(next => async (context) =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        // Need to fake setting the connection info. TestServer doesn't
-                        // do that, because it doesn't have a connection.
-                        context.Connection.LocalPort = context.Request.Host.Port.Value;
-                        await next(context);
-                    });
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
+                        );
 
-                    // Throws if used
-                    app.UseHealthChecks("/health", port: 5001, new HealthCheckOptions()
+                        // Throws if used
+                        app.UseHealthChecks(
+                            "/health",
+                            port: 5001,
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
+                        );
+
+                        app.UseHealthChecks("/health/detailed", port: 5001);
+                    })
+                    .ConfigureServices(services =>
                     {
-                        ResponseWriter = (c, r) => throw null,
+                        services.AddHealthChecks();
                     });
-
-                    app.UseHealthChecks("/health/detailed", port: 5001);
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -859,30 +951,34 @@ public class HealthCheckMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.Use(next => async (context) =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        // Need to fake setting the connection info. TestServer doesn't
-                        // do that, because it doesn't have a connection.
-                        context.Connection.LocalPort = context.Request.Host.Port.Value;
-                        await next(context);
-                    });
+                        app.Use(next =>
+                            async (context) =>
+                            {
+                                // Need to fake setting the connection info. TestServer doesn't
+                                // do that, because it doesn't have a connection.
+                                context.Connection.LocalPort = context.Request.Host.Port.Value;
+                                await next(context);
+                            }
+                        );
 
-                    // Throws if used
-                    app.UseHealthChecks("/health", port: 5002, new HealthCheckOptions()
+                        // Throws if used
+                        app.UseHealthChecks(
+                            "/health",
+                            port: 5002,
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
+                        );
+
+                        app.UseHealthChecks("/health", port: 5001);
+                    })
+                    .ConfigureServices(services =>
                     {
-                        ResponseWriter = (c, r) => throw null,
+                        services.AddHealthChecks();
                     });
-
-                    app.UseHealthChecks("/health", port: 5001);
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -903,7 +999,10 @@ public class HealthCheckMiddlewareTests
         Assert.NotNull(options.ResultStatusCodes);
         Assert.Equal(StatusCodes.Status200OK, options.ResultStatusCodes[HealthStatus.Healthy]);
         Assert.Equal(StatusCodes.Status200OK, options.ResultStatusCodes[HealthStatus.Degraded]);
-        Assert.Equal(StatusCodes.Status503ServiceUnavailable, options.ResultStatusCodes[HealthStatus.Unhealthy]);
+        Assert.Equal(
+            StatusCodes.Status503ServiceUnavailable,
+            options.ResultStatusCodes[HealthStatus.Unhealthy]
+        );
     }
 
     [Fact]
@@ -913,7 +1012,10 @@ public class HealthCheckMiddlewareTests
         Assert.NotNull(options.ResultStatusCodes);
         Assert.Equal(StatusCodes.Status200OK, options.ResultStatusCodes[HealthStatus.Healthy]);
         Assert.Equal(StatusCodes.Status200OK, options.ResultStatusCodes[HealthStatus.Degraded]);
-        Assert.Equal(StatusCodes.Status503ServiceUnavailable, options.ResultStatusCodes[HealthStatus.Unhealthy]);
+        Assert.Equal(
+            StatusCodes.Status503ServiceUnavailable,
+            options.ResultStatusCodes[HealthStatus.Unhealthy]
+        );
     }
 
     [Fact]
@@ -925,8 +1027,8 @@ public class HealthCheckMiddlewareTests
             {
                 [HealthStatus.Healthy] = 200,
                 [HealthStatus.Degraded] = 200,
-                [HealthStatus.Unhealthy] = 503
-            }
+                [HealthStatus.Unhealthy] = 503,
+            },
         };
     }
 
@@ -936,9 +1038,18 @@ public class HealthCheckMiddlewareTests
         var exception = Assert.Throws<InvalidOperationException>(() =>
             new HealthCheckOptions { ResultStatusCodes = new Dictionary<HealthStatus, int>() }
         );
-        Assert.Contains($"{nameof(HealthStatus)}.{nameof(HealthStatus.Healthy)}", exception.Message);
-        Assert.Contains($"{nameof(HealthStatus)}.{nameof(HealthStatus.Degraded)}", exception.Message);
-        Assert.Contains($"{nameof(HealthStatus)}.{nameof(HealthStatus.Unhealthy)}", exception.Message);
+        Assert.Contains(
+            $"{nameof(HealthStatus)}.{nameof(HealthStatus.Healthy)}",
+            exception.Message
+        );
+        Assert.Contains(
+            $"{nameof(HealthStatus)}.{nameof(HealthStatus.Degraded)}",
+            exception.Message
+        );
+        Assert.Contains(
+            $"{nameof(HealthStatus)}.{nameof(HealthStatus.Unhealthy)}",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -949,12 +1060,21 @@ public class HealthCheckMiddlewareTests
             {
                 ResultStatusCodes = new Dictionary<HealthStatus, int>
                 {
-                    [HealthStatus.Healthy] = 200
-                }
+                    [HealthStatus.Healthy] = 200,
+                },
             }
         );
-        Assert.DoesNotContain($"{nameof(HealthStatus)}.{nameof(HealthStatus.Healthy)}", exception.Message);
-        Assert.Contains($"{nameof(HealthStatus)}.{nameof(HealthStatus.Degraded)}", exception.Message);
-        Assert.Contains($"{nameof(HealthStatus)}.{nameof(HealthStatus.Unhealthy)}", exception.Message);
+        Assert.DoesNotContain(
+            $"{nameof(HealthStatus)}.{nameof(HealthStatus.Healthy)}",
+            exception.Message
+        );
+        Assert.Contains(
+            $"{nameof(HealthStatus)}.{nameof(HealthStatus.Degraded)}",
+            exception.Message
+        );
+        Assert.Contains(
+            $"{nameof(HealthStatus)}.{nameof(HealthStatus.Unhealthy)}",
+            exception.Message
+        );
     }
 }

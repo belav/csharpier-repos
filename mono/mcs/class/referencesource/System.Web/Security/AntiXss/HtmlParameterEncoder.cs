@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.AntiXss {
+namespace System.Web.Security.AntiXss
+{
     using System;
     using System.Collections;
     using System.Text;
@@ -13,7 +14,8 @@ namespace System.Web.Security.AntiXss {
     /// <summary>
     /// The type of space encoding to use.
     /// </summary>
-    internal enum EncodingType {
+    internal enum EncodingType
+    {
         /// <summary>
         /// Encode spaces for use in query strings
         /// </summary>
@@ -22,14 +24,14 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// Encode spaces for use in form data
         /// </summary>
-        HtmlForm = 2
+        HtmlForm = 2,
     }
 
     /// <summary>
     /// Provides Html Parameter Encoding methods.
     /// </summary>
-    internal static class HtmlParameterEncoder {
-
+    internal static class HtmlParameterEncoder
+    {
         /// <summary>
         /// The value to use when encoding a space for query strings.
         /// </summary>
@@ -51,12 +53,13 @@ namespace System.Web.Security.AntiXss {
         /// <param name="s">The text to URL-encode.</param>
         /// <param name="encoding">The encoding for the text parameter.</param>
         /// <returns>The URL-encoded text.</returns>
-        /// <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings. 
-        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers. 
-        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser 
+        /// <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings.
+        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers.
+        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser
         /// in a request string.</remarks>
         /// <exception cref="ArgumentNullException">Thrown if the encoding is null.</exception>
-        internal static string QueryStringParameterEncode(string s, Encoding encoding) {
+        internal static string QueryStringParameterEncode(string s, Encoding encoding)
+        {
             return FormQueryEncode(s, encoding, EncodingType.QueryString);
         }
 
@@ -66,12 +69,13 @@ namespace System.Web.Security.AntiXss {
         /// <param name="s">The text to URL-encode.</param>
         /// <param name="encoding">The encoding for the text parameter.</param>
         /// <returns>The URL-encoded text.</returns>
-        /// <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings. 
-        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers. 
-        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser 
+        /// <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings.
+        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers.
+        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser
         /// in a request string.</remarks>
         /// <exception cref="ArgumentNullException">Thrown if the encoding is null.</exception>
-        internal static string FormStringParameterEncode(string s, Encoding encoding) {
+        internal static string FormStringParameterEncode(string s, Encoding encoding)
+        {
             return FormQueryEncode(s, encoding, EncodingType.HtmlForm);
         }
 
@@ -82,16 +86,29 @@ namespace System.Web.Security.AntiXss {
         /// <param name="encoding">The encoding for the text parameter.</param>
         /// <param name="encodingType">The encoding type to use.</param>
         /// <returns>The encoded text.</returns>
-        private static string FormQueryEncode(string s, Encoding encoding, EncodingType encodingType) {
+        private static string FormQueryEncode(
+            string s,
+            Encoding encoding,
+            EncodingType encodingType
+        )
+        {
             return FormQueryEncode(s, encoding, encodingType, characterValuesLazy);
         }
 
-        private static string FormQueryEncode(string s, Encoding encoding, EncodingType encodingType, Lazy<char[][]> characterValuesLazy) {
-            if (string.IsNullOrEmpty(s)) {
+        private static string FormQueryEncode(
+            string s,
+            Encoding encoding,
+            EncodingType encodingType,
+            Lazy<char[][]> characterValuesLazy
+        )
+        {
+            if (string.IsNullOrEmpty(s))
+            {
                 return s;
             }
 
-            if (encoding == null) {
+            if (encoding == null)
+            {
                 throw new ArgumentNullException("encoding");
             }
 
@@ -104,15 +121,28 @@ namespace System.Web.Security.AntiXss {
             char[] encodedInput = new char[utf8Bytes.Length * 3]; // Each byte can potentially be encoded as %xx
             int outputLength = 0;
 
-            for (int characterPosition = 0; characterPosition < utf8Bytes.Length; characterPosition++) {
+            for (
+                int characterPosition = 0;
+                characterPosition < utf8Bytes.Length;
+                characterPosition++
+            )
+            {
                 byte currentCharacter = utf8Bytes[characterPosition];
 
-                if (currentCharacter == 0x00 || currentCharacter == 0x20 || currentCharacter > characterValues.Length || characterValues[currentCharacter] != null) {
+                if (
+                    currentCharacter == 0x00
+                    || currentCharacter == 0x20
+                    || currentCharacter > characterValues.Length
+                    || characterValues[currentCharacter] != null
+                )
+                {
                     // character needs to be encoded
                     char[] encodedCharacter;
 
-                    if (currentCharacter == 0x20) {
-                        switch (encodingType) {
+                    if (currentCharacter == 0x20)
+                    {
+                        switch (encodingType)
+                        {
                             case EncodingType.QueryString:
                                 encodedCharacter = QueryStringSpace;
                                 break;
@@ -126,15 +156,18 @@ namespace System.Web.Security.AntiXss {
                                 throw new ArgumentOutOfRangeException("encodingType");
                         }
                     }
-                    else {
+                    else
+                    {
                         encodedCharacter = characterValues[currentCharacter];
                     }
 
-                    for (int j = 0; j < encodedCharacter.Length; j++) {
+                    for (int j = 0; j < encodedCharacter.Length; j++)
+                    {
                         encodedInput[outputLength++] = encodedCharacter[j];
                     }
                 }
-                else {
+                else
+                {
                     // character does not need encoding
                     encodedInput[outputLength++] = (char)currentCharacter;
                 }
@@ -146,7 +179,8 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// Initializes the HTML safe list.
         /// </summary>
-        private static char[][] InitialiseSafeList() {
+        private static char[][] InitialiseSafeList()
+        {
             char[][] result = SafeList.Generate(255, SafeList.PercentThenHexValueGenerator);
             SafeList.PunchSafeList(ref result, UrlParameterSafeList());
             return result;
@@ -156,7 +190,8 @@ namespace System.Web.Security.AntiXss {
         /// Provides the safe characters for URL parameter encoding.
         /// </summary>
         /// <returns>The safe characters for URL parameter encoding.</returns>
-        private static IEnumerable UrlParameterSafeList() {
+        private static IEnumerable UrlParameterSafeList()
+        {
             // Hyphen
             yield return 0x2D;
 
@@ -164,12 +199,14 @@ namespace System.Web.Security.AntiXss {
             yield return 0x2E;
 
             // Digits
-            for (int i = 0x30; i <= 0x39; i++) {
+            for (int i = 0x30; i <= 0x39; i++)
+            {
                 yield return i;
             }
 
             // Upper case alphabet
-            for (int i = 0x41; i <= 0x5A; i++) {
+            for (int i = 0x41; i <= 0x5A; i++)
+            {
                 yield return i;
             }
 
@@ -177,7 +214,8 @@ namespace System.Web.Security.AntiXss {
             yield return 0x5F;
 
             // Lower case alphabet
-            for (int i = 0x61; i <= 0x7A; i++) {
+            for (int i = 0x61; i <= 0x7A; i++)
+            {
                 yield return i;
             }
 
@@ -190,16 +228,20 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The values to output for each character.
         /// </summary>
-        private static Lazy<char[][]> pathCharacterValuesLazy = new Lazy<char[][]>(InitialisePathSafeList);
+        private static Lazy<char[][]> pathCharacterValuesLazy = new Lazy<char[][]>(
+            InitialisePathSafeList
+        );
 
-        internal static string UrlPathEncode(string s, Encoding encoding) {
+        internal static string UrlPathEncode(string s, Encoding encoding)
+        {
             return FormQueryEncode(s, encoding, EncodingType.QueryString, pathCharacterValuesLazy);
         }
 
         /// <summary>
         /// Initializes the HTML safe list.
         /// </summary>
-        private static char[][] InitialisePathSafeList() {
+        private static char[][] InitialisePathSafeList()
+        {
             char[][] result = SafeList.Generate(255, SafeList.PercentThenHexValueGenerator);
             SafeList.PunchSafeList(ref result, UrlPathSafeList());
             return result;
@@ -209,9 +251,10 @@ namespace System.Web.Security.AntiXss {
         /// Provides the safe characters for URL path encoding.
         /// </summary>
         /// <returns>The safe characters for URL path encoding.</returns>
-        private static IEnumerable UrlPathSafeList() {
-
-            foreach (var c in UrlParameterSafeList()) {
+        private static IEnumerable UrlPathSafeList()
+        {
+            foreach (var c in UrlParameterSafeList())
+            {
                 yield return c;
             }
 

@@ -19,19 +19,20 @@ public record AssertWasmSdkBundleOptions(
     bool ExpectFingerprintOnDotnetJs = false,
     bool ExpectSymbolsFile = true,
     bool AssertIcuAssets = true,
-    bool AssertSymbolsFile = true)
-        : AssertBundleOptionsBase(
-               Config: Config,
-               IsPublish: IsPublish,
-               TargetFramework: TargetFramework,
-               BinFrameworkDir: BinFrameworkDir,
-               PredefinedIcudt: PredefinedIcudt,
-               GlobalizationMode: GlobalizationMode,
-               ExpectedFileType: ExpectedFileType,
-               RuntimeType: RuntimeType,
-               BootJsonFileName: BootJsonFileName,
-               ExpectFingerprintOnDotnetJs: ExpectFingerprintOnDotnetJs,
-               ExpectSymbolsFile: ExpectSymbolsFile,
-               AssertIcuAssets: AssertIcuAssets,
-               AssertSymbolsFile: AssertSymbolsFile)
-{}
+    bool AssertSymbolsFile = true
+)
+    : AssertBundleOptionsBase(
+        Config: Config,
+        IsPublish: IsPublish,
+        TargetFramework: TargetFramework,
+        BinFrameworkDir: BinFrameworkDir,
+        PredefinedIcudt: PredefinedIcudt,
+        GlobalizationMode: GlobalizationMode,
+        ExpectedFileType: ExpectedFileType,
+        RuntimeType: RuntimeType,
+        BootJsonFileName: BootJsonFileName,
+        ExpectFingerprintOnDotnetJs: ExpectFingerprintOnDotnetJs,
+        ExpectSymbolsFile: ExpectSymbolsFile,
+        AssertIcuAssets: AssertIcuAssets,
+        AssertSymbolsFile: AssertSymbolsFile
+    ) { }

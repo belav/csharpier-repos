@@ -13,12 +13,11 @@ internal sealed record class VisualBasicCodeGenerationOptions : CodeGenerationOp
 {
     public static readonly VisualBasicCodeGenerationOptions Default = new();
 
-    public VisualBasicCodeGenerationOptions()
-    {
-    }
+    public VisualBasicCodeGenerationOptions() { }
 
-    internal VisualBasicCodeGenerationOptions(IOptionsReader options, VisualBasicCodeGenerationOptions? fallbackOptions)
-        : base(options, fallbackOptions ?? Default, LanguageNames.VisualBasic)
-    {
-    }
+    internal VisualBasicCodeGenerationOptions(
+        IOptionsReader options,
+        VisualBasicCodeGenerationOptions? fallbackOptions
+    )
+        : base(options, fallbackOptions ?? Default, LanguageNames.VisualBasic) { }
 }

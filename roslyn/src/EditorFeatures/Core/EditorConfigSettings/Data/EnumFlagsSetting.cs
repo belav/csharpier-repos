@@ -16,7 +16,8 @@ internal sealed class EnumFlagsSetting<TOptionValue>(
     SettingLocation location,
     int flag,
     StrongBox<TOptionValue> valueStorage,
-    Conversions<TOptionValue, int> conversions) : Setting(optionKey, description, updater, location)
+    Conversions<TOptionValue, int> conversions
+) : Setting(optionKey, description, updater, location)
     where TOptionValue : struct, Enum
 {
     private readonly int _flag = flag;
@@ -28,8 +29,7 @@ internal sealed class EnumFlagsSetting<TOptionValue>(
     /// </summary>
     private readonly StrongBox<TOptionValue> _valueStorage = valueStorage;
 
-    public override Type Type
-        => typeof(bool);
+    public override Type Type => typeof(bool);
 
     protected override object UpdateValue(object settingValue)
     {
@@ -46,6 +46,5 @@ internal sealed class EnumFlagsSetting<TOptionValue>(
         return _valueStorage.Value = _conversions.From(flags);
     }
 
-    public override object? GetValue()
-        => (_conversions.To(_valueStorage.Value) & _flag) == _flag;
+    public override object? GetValue() => (_conversions.To(_valueStorage.Value) & _flag) == _flag;
 }

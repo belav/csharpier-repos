@@ -16,14 +16,21 @@ public static class SupplyParameterFromFormServiceCollectionExtensions
     /// </summary>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddSupplyValueFromFormProvider(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddSupplyValueFromFormProvider(
+        this IServiceCollection serviceCollection
+    )
     {
-        serviceCollection.TryAddEnumerable(ServiceDescriptor.Scoped<ICascadingValueSupplier, SupplyParameterFromFormValueProvider>(services =>
-        {
-            return new SupplyParameterFromFormValueProvider(
-                services.GetRequiredService<IFormValueMapper>(),
-                mappingScopeName: "");
-        }));
+        serviceCollection.TryAddEnumerable(
+            ServiceDescriptor.Scoped<ICascadingValueSupplier, SupplyParameterFromFormValueProvider>(
+                services =>
+                {
+                    return new SupplyParameterFromFormValueProvider(
+                        services.GetRequiredService<IFormValueMapper>(),
+                        mappingScopeName: ""
+                    );
+                }
+            )
+        );
 
         return serviceCollection;
     }

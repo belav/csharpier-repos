@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,52 +29,52 @@
 using System.CodeDom;
 using System.Runtime.Serialization;
 
-namespace System.ComponentModel.Design.Serialization {
-
-[Serializable]
-public class CodeDomSerializerException : SystemException
+namespace System.ComponentModel.Design.Serialization
 {
-	private CodeLinePragma linePragma;
+    [Serializable]
+    public class CodeDomSerializerException : SystemException
+    {
+        private CodeLinePragma linePragma;
 
-	public CodeDomSerializerException (Exception ex, CodeLinePragma linePragma)
-		: base (String.Empty, ex) {
+        public CodeDomSerializerException(Exception ex, CodeLinePragma linePragma)
+            : base(String.Empty, ex)
+        {
+            this.linePragma = linePragma;
+        }
 
-		this.linePragma = linePragma;
-	}
+        public CodeDomSerializerException(String message, CodeLinePragma linePragma)
+            : base(message)
+        {
+            this.linePragma = linePragma;
+        }
 
-	public CodeDomSerializerException (String message, CodeLinePragma linePragma)
-		: base (message) {
+        [MonoTODO]
+        protected CodeDomSerializerException(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
 
-		this.linePragma = linePragma;
-	}
+        [MonoTODO]
+        public CodeDomSerializerException(string message, IDesignerSerializationManager manager)
+        {
+            throw new NotImplementedException();
+        }
 
-	[MonoTODO]
-	protected CodeDomSerializerException (SerializationInfo info, StreamingContext context) {
-		throw new NotImplementedException ();
-	}
+        [MonoTODO]
+        public CodeDomSerializerException(Exception ex, IDesignerSerializationManager manager)
+        {
+            throw new NotImplementedException();
+        }
 
-	[MonoTODO]
-	public CodeDomSerializerException (string message, IDesignerSerializationManager manager)
-	{
-		throw new NotImplementedException ();
-	}
+        [MonoTODO]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
 
-	[MonoTODO]
-	public CodeDomSerializerException (Exception ex, IDesignerSerializationManager manager)
-	{
-		throw new NotImplementedException ();
-	}
-
-	[MonoTODO]
-	public override void GetObjectData (SerializationInfo info, StreamingContext context)
-	{
-		throw new NotImplementedException();
-	}
-
-	public CodeLinePragma LinePragma {
-		get {
-			return linePragma;
-		}
-	}
-}
+        public CodeLinePragma LinePragma
+        {
+            get { return linePragma; }
+        }
+    }
 }

@@ -17,20 +17,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
 {
     using VerifyCodeFix = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpGenerateDefaultConstructorsCodeFixProvider>;
-
-    using VerifyRefactoring = CSharpCodeRefactoringVerifier<
-        GenerateDefaultConstructorsCodeRefactoringProvider>;
+        CSharpGenerateDefaultConstructorsCodeFixProvider
+    >;
+    using VerifyRefactoring = CSharpCodeRefactoringVerifier<GenerateDefaultConstructorsCodeRefactoringProvider>;
 
     public class GenerateDefaultConstructorsTests
     {
-        private static async Task TestRefactoringAsync(string source, string fixedSource, int index = 0)
+        private static async Task TestRefactoringAsync(
+            string source,
+            string fixedSource,
+            int index = 0
+        )
         {
             await TestRefactoringOnlyAsync(source, fixedSource, index);
             await TestCodeFixMissingAsync(source);
         }
 
-        private static async Task TestRefactoringOnlyAsync(string source, string fixedSource, int index = 0)
+        private static async Task TestRefactoringOnlyAsync(
+            string source,
+            string fixedSource,
+            int index = 0
+        )
         {
             await new VerifyRefactoring.Test
             {
@@ -105,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -138,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -171,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -189,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -224,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                         s = null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -273,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -323,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -373,7 +387,8 @@ index: 1);
                     }
                 }
                 """,
-index: 2);
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -431,7 +446,8 @@ index: 2);
                     }
                 }
                 """,
-index: 3);
+                index: 3
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -492,7 +508,8 @@ index: 3);
                     }
                 }
                 """,
-index: 2);
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -553,7 +570,8 @@ index: 2);
                     }
                 }
                 """,
-index: 2);
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -574,7 +592,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -615,7 +634,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -656,7 +676,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -692,7 +713,8 @@ index: 2);
                     }
                 }
                 """,
-index: 4);
+                index: 4
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -744,7 +766,8 @@ index: 4);
                     }
                 }
                 """,
-index: 3);
+                index: 3
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -802,7 +825,8 @@ index: 3);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -857,10 +881,15 @@ index: 3);
                     }
                 }
                 """,
-index: 2);
+                index: 2
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task Tuple()
         {
             await TestCodeFixAsync(
@@ -890,10 +919,15 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TupleWithNames()
         {
             await TestCodeFixAsync(
@@ -923,7 +957,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateConstructor)]
@@ -957,7 +992,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateConstructor)]
@@ -991,7 +1027,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1003,7 +1040,8 @@ index: 2);
                 enum [||]E
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1037,7 +1075,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1071,7 +1110,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1108,7 +1148,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1149,7 +1190,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1184,7 +1226,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1218,7 +1261,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1252,7 +1296,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1286,7 +1331,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1320,7 +1366,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1354,7 +1401,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1388,7 +1436,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1422,7 +1471,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1456,7 +1506,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1490,7 +1541,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1524,7 +1576,8 @@ index: 2);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateDefaultConstructors)]
@@ -1557,7 +1610,9 @@ index: 2);
                     {
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateConstructor)]

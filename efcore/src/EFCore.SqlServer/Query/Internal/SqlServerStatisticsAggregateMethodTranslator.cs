@@ -24,7 +24,8 @@ public class SqlServerStatisticsAggregateMethodTranslator : IAggregateMethodCall
     /// </summary>
     public SqlServerStatisticsAggregateMethodTranslator(
         ISqlExpressionFactory sqlExpressionFactory,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _doubleTypeMapping = typeMappingSource.FindMapping(typeof(double))!;
@@ -40,12 +41,15 @@ public class SqlServerStatisticsAggregateMethodTranslator : IAggregateMethodCall
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         // Docs: https://docs.microsoft.com/sql/t-sql/functions/aggregate-functions-transact-sql
 
-        if (method.DeclaringType != typeof(SqlServerDbFunctionsExtensions)
-            || source.Selector is not SqlExpression sqlExpression)
+        if (
+            method.DeclaringType != typeof(SqlServerDbFunctionsExtensions)
+            || source.Selector is not SqlExpression sqlExpression
+        )
         {
             return null;
         }
@@ -56,7 +60,7 @@ public class SqlServerStatisticsAggregateMethodTranslator : IAggregateMethodCall
             nameof(SqlServerDbFunctionsExtensions.StandardDeviationPopulation) => "STDEVP",
             nameof(SqlServerDbFunctionsExtensions.VarianceSample) => "VAR",
             nameof(SqlServerDbFunctionsExtensions.VariancePopulation) => "VARP",
-            _ => null
+            _ => null,
         };
 
         if (functionName is null)
@@ -73,6 +77,7 @@ public class SqlServerStatisticsAggregateMethodTranslator : IAggregateMethodCall
             nullable: true,
             argumentsPropagateNullability: new[] { false },
             typeof(double),
-            _doubleTypeMapping);
+            _doubleTypeMapping
+        );
     }
 }

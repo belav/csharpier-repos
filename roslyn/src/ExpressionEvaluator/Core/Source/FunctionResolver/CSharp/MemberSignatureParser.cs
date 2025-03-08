@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.ExpressionEvaluator;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
@@ -158,7 +158,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (CurrentToken.Kind == TokenKind.LessThan)
                 {
                     var typeArguments = ParseTypeArguments();
-                    signature = new GenericTypeSignature((QualifiedTypeSignature)signature, typeArguments);
+                    signature = new GenericTypeSignature(
+                        (QualifiedTypeSignature)signature,
+                        typeArguments
+                    );
                 }
                 if (CurrentToken.Kind != TokenKind.Dot)
                 {
@@ -221,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         EatToken();
                         type = new GenericTypeSignature(
                             SpecialType.System_Nullable_T.GetTypeSignature(),
-                            ImmutableArray.Create(type));
+                            ImmutableArray.Create(type)
+                        );
                         break;
                     default:
                         return type;
@@ -326,8 +330,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return new InvalidSignatureException();
         }
 
-        private sealed class InvalidSignatureException : Exception
-        {
-        }
+        private sealed class InvalidSignatureException : Exception { }
     }
 }

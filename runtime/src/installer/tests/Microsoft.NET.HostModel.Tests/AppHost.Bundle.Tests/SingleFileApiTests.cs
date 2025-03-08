@@ -20,11 +20,16 @@ namespace AppHost.Bundle.Tests
         public void SelfContained()
         {
             string singleFile = sharedTestState.BundledAppPath;
-            Command.Create(singleFile, "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory")
+            Command
+                .Create(
+                    singleFile,
+                    "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
+                )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("FullyQualifiedName: <Unknown>")
                 .And.HaveStdOutContaining("Name: <Unknown>")
                 .And.HaveStdOutContaining("CodeBase NotSupported")
@@ -33,7 +38,9 @@ namespace AppHost.Bundle.Tests
                 // For single-file, Environment.GetCommandLineArgs[0] should return the file path of the host.
                 .And.HaveStdOutContaining($"Command line args: {singleFile}")
                 .And.HaveStdOutContaining($"ExecutingAssembly.Location: {Environment.NewLine}")
-                .And.HaveStdOutContaining($"AppContext.BaseDirectory: {Path.GetDirectoryName(singleFile)}");
+                .And.HaveStdOutContaining(
+                    $"AppContext.BaseDirectory: {Path.GetDirectoryName(singleFile)}"
+                );
         }
 
         [Fact]
@@ -44,13 +51,23 @@ namespace AppHost.Bundle.Tests
             string extractionRoot = app.GetNewExtractionRootPath();
             string extractionDir = app.GetExtractionDir(extractionRoot, manifest).FullName;
 
-            Command.Create(singleFile, "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory trusted_platform_assemblies assembly_location System.Console")
+            Command
+                .Create(
+                    singleFile,
+                    "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory trusted_platform_assemblies assembly_location System.Console"
+                )
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(Constants.BundleExtractBase.EnvironmentVariable, extractionRoot)
+                .EnvironmentVariable(
+                    Constants.BundleExtractBase.EnvironmentVariable,
+                    extractionRoot
+                )
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdOutContaining($"FullyQualifiedName: {Path.Combine(extractionDir, "System.Private.CoreLib.dll")}")
+                .Should()
+                .Pass()
+                .And.HaveStdOutContaining(
+                    $"FullyQualifiedName: {Path.Combine(extractionDir, "System.Private.CoreLib.dll")}"
+                )
                 .And.HaveStdOutContaining("Name: System.Private.CoreLib.dll")
                 .And.NotHaveStdOutContaining("CodeBase NotSupported") // CodeBase should point to extraction directory
                 .And.HaveStdOutContaining("SingleFileApiTests.dll")
@@ -73,12 +90,17 @@ namespace AppHost.Bundle.Tests
 
             // If we don't extract anything to disk, the extraction dir shouldn't
             // appear in the native search dirs.
-            Command.Create(singleFile, "native_search_dirs")
+            Command
+                .Create(singleFile, "native_search_dirs")
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(Constants.BundleExtractBase.EnvironmentVariable, extractionRoot)
+                .EnvironmentVariable(
+                    Constants.BundleExtractBase.EnvironmentVariable,
+                    extractionRoot
+                )
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining(bundleDir)
                 .And.NotHaveStdOutContaining(extractionRoot);
         }
@@ -87,18 +109,26 @@ namespace AppHost.Bundle.Tests
         public void NativeSearchDirectories_WithExtraction()
         {
             SingleFileTestApp app = sharedTestState.App;
-            string singleFile = app.Bundle(BundleOptions.BundleNativeBinaries, out Manifest manifest);
+            string singleFile = app.Bundle(
+                BundleOptions.BundleNativeBinaries,
+                out Manifest manifest
+            );
 
             string extractionRoot = app.GetNewExtractionRootPath();
             string extractionDir = app.GetExtractionDir(extractionRoot, manifest).FullName;
             string bundleDir = Directory.GetParent(singleFile).FullName;
 
-            Command.Create(singleFile, "native_search_dirs")
+            Command
+                .Create(singleFile, "native_search_dirs")
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(Constants.BundleExtractBase.EnvironmentVariable, extractionRoot)
+                .EnvironmentVariable(
+                    Constants.BundleExtractBase.EnvironmentVariable,
+                    extractionRoot
+                )
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining(extractionDir)
                 .And.HaveStdOutContaining(bundleDir);
         }
@@ -113,7 +143,10 @@ namespace AppHost.Bundle.Tests
                 App = SingleFileTestApp.CreateSelfContained("SingleFileApiTests");
 
                 // Copy over mockcoreclr so that the app will have a native binary
-                File.Copy(Binaries.CoreClr.MockPath, Path.Combine(App.NonBundledLocation, Binaries.CoreClr.MockName));
+                File.Copy(
+                    Binaries.CoreClr.MockPath,
+                    Path.Combine(App.NonBundledLocation, Binaries.CoreClr.MockName)
+                );
 
                 // Create a bundled app that can be used by multiple tests
                 BundledAppPath = App.Bundle(BundleOptions.None);

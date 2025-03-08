@@ -16,31 +16,51 @@ namespace Microsoft.AspNetCore.HttpSys.Internal;
 internal sealed class HeaderCollection : IHeaderDictionary
 {
     // https://tools.ietf.org/html/rfc7230#section-4.1.2
-    internal static readonly HashSet<string> DisallowedTrailers = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            // Message framing headers.
-            HeaderNames.TransferEncoding, HeaderNames.ContentLength,
-
-            // Routing headers.
-            HeaderNames.Host,
-
-            // Request modifiers: controls and conditionals.
-            // rfc7231#section-5.1: Controls.
-            HeaderNames.CacheControl, HeaderNames.Expect, HeaderNames.MaxForwards, HeaderNames.Pragma, HeaderNames.Range, HeaderNames.TE,
-
-            // rfc7231#section-5.2: Conditionals.
-            HeaderNames.IfMatch, HeaderNames.IfNoneMatch, HeaderNames.IfModifiedSince, HeaderNames.IfUnmodifiedSince, HeaderNames.IfRange,
-
-            // Authentication headers.
-            HeaderNames.WWWAuthenticate, HeaderNames.Authorization, HeaderNames.ProxyAuthenticate, HeaderNames.ProxyAuthorization, HeaderNames.SetCookie, HeaderNames.Cookie,
-
-            // Response control data.
-            // rfc7231#section-7.1: Control Data.
-            HeaderNames.Age, HeaderNames.Expires, HeaderNames.Date, HeaderNames.Location, HeaderNames.RetryAfter, HeaderNames.Vary, HeaderNames.Warning,
-
-            // Content-Encoding, Content-Type, Content-Range, and Trailer itself.
-            HeaderNames.ContentEncoding, HeaderNames.ContentType, HeaderNames.ContentRange, HeaderNames.Trailer
-        };
+    internal static readonly HashSet<string> DisallowedTrailers = new HashSet<string>(
+        StringComparer.OrdinalIgnoreCase
+    )
+    {
+        // Message framing headers.
+        HeaderNames.TransferEncoding,
+        HeaderNames.ContentLength,
+        // Routing headers.
+        HeaderNames.Host,
+        // Request modifiers: controls and conditionals.
+        // rfc7231#section-5.1: Controls.
+        HeaderNames.CacheControl,
+        HeaderNames.Expect,
+        HeaderNames.MaxForwards,
+        HeaderNames.Pragma,
+        HeaderNames.Range,
+        HeaderNames.TE,
+        // rfc7231#section-5.2: Conditionals.
+        HeaderNames.IfMatch,
+        HeaderNames.IfNoneMatch,
+        HeaderNames.IfModifiedSince,
+        HeaderNames.IfUnmodifiedSince,
+        HeaderNames.IfRange,
+        // Authentication headers.
+        HeaderNames.WWWAuthenticate,
+        HeaderNames.Authorization,
+        HeaderNames.ProxyAuthenticate,
+        HeaderNames.ProxyAuthorization,
+        HeaderNames.SetCookie,
+        HeaderNames.Cookie,
+        // Response control data.
+        // rfc7231#section-7.1: Control Data.
+        HeaderNames.Age,
+        HeaderNames.Expires,
+        HeaderNames.Date,
+        HeaderNames.Location,
+        HeaderNames.RetryAfter,
+        HeaderNames.Vary,
+        HeaderNames.Warning,
+        // Content-Encoding, Content-Type, Content-Range, and Trailer itself.
+        HeaderNames.ContentEncoding,
+        HeaderNames.ContentType,
+        HeaderNames.ContentRange,
+        HeaderNames.Trailer,
+    };
 
     // Should this instance check for prohibited trailers?
     private readonly bool _checkTrailers;
@@ -127,9 +147,14 @@ internal sealed class HeaderCollection : IHeaderDictionary
                 return _contentLength;
             }
 
-            if (rawValue.Count == 1 &&
-                !string.IsNullOrWhiteSpace(rawValue[0]) &&
-                HeaderUtilities.TryParseNonNegativeInt64(new StringSegment(rawValue[0]).Trim(), out value))
+            if (
+                rawValue.Count == 1
+                && !string.IsNullOrWhiteSpace(rawValue[0])
+                && HeaderUtilities.TryParseNonNegativeInt64(
+                    new StringSegment(rawValue[0]).Trim(),
+                    out value
+                )
+            )
             {
                 _contentLengthText = rawValue;
                 _contentLength = value;
@@ -147,7 +172,11 @@ internal sealed class HeaderCollection : IHeaderDictionary
             {
                 if (value.Value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value.Value, "Cannot be negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value.Value,
+                        "Cannot be negative."
+                    );
                 }
                 _contentLengthText = HeaderUtilities.FormatNonNegativeInt64(value.Value);
                 this[HeaderNames.ContentLength] = _contentLengthText;
@@ -255,10 +284,14 @@ internal sealed class HeaderCollection : IHeaderDictionary
         {
             if (_checkTrailers)
             {
-                throw new InvalidOperationException("The response trailers cannot be modified because the response has already completed. "
-                    + "If this is a Content-Length response then you need to call HttpResponse.DeclareTrailer before starting the body.");
+                throw new InvalidOperationException(
+                    "The response trailers cannot be modified because the response has already completed. "
+                        + "If this is a Content-Length response then you need to call HttpResponse.DeclareTrailer before starting the body."
+                );
             }
-            throw new InvalidOperationException("The response headers cannot be modified because the response has already started.");
+            throw new InvalidOperationException(
+                "The response headers cannot be modified because the response has already started."
+            );
         }
     }
 
@@ -274,12 +307,20 @@ internal sealed class HeaderCollection : IHeaderDictionary
     {
         if (headerCharacters != null)
         {
-            var invalidIndex = HttpCharacters.IndexOfInvalidFieldValueCharExtended(headerCharacters);
+            var invalidIndex = HttpCharacters.IndexOfInvalidFieldValueCharExtended(
+                headerCharacters
+            );
             if (invalidIndex >= 0)
             {
                 Throw(headerCharacters, invalidIndex);
-                static void Throw(string headerCharacters, int invalidIndex)
-                    => throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Invalid control character in header: 0x{0:X2}", headerCharacters[invalidIndex]));
+                static void Throw(string headerCharacters, int invalidIndex) =>
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Invalid control character in header: 0x{0:X2}",
+                            headerCharacters[invalidIndex]
+                        )
+                    );
             }
         }
     }
@@ -288,7 +329,9 @@ internal sealed class HeaderCollection : IHeaderDictionary
     {
         if (_checkTrailers && DisallowedTrailers.Contains(key))
         {
-            throw new InvalidOperationException($"The '{key}' header is not allowed in HTTP trailers.");
+            throw new InvalidOperationException(
+                $"The '{key}' header is not allowed in HTTP trailers."
+            );
         }
     }
 
@@ -297,6 +340,9 @@ internal sealed class HeaderCollection : IHeaderDictionary
         private readonly HeaderCollection _collection = collection;
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public KeyValuePair<string, string>[] Items => _collection.Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString())).ToArray();
+        public KeyValuePair<string, string>[] Items =>
+            _collection
+                .Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString()))
+                .ToArray();
     }
 }

@@ -18,22 +18,25 @@ namespace System.Data.EntityModel.SchemaObjectModel
     /// <summary>
     /// Summary description for SchemaElementLookUpTableEnumerator.
     /// </summary>
-    internal sealed class SchemaElementLookUpTableEnumerator<T,S>: IEnumerator<T>
-    where T : S
-    where S : SchemaElement
+    internal sealed class SchemaElementLookUpTableEnumerator<T, S> : IEnumerator<T>
+        where T : S
+        where S : SchemaElement
     {
         #region Instance Fields
-        private Dictionary<string,S> _data = null;
+        private Dictionary<string, S> _data = null;
         private List<string>.Enumerator _enumerator;
         #endregion
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="data"></param>
         /// <param name="keysInOrder"></param>
-        public SchemaElementLookUpTableEnumerator(Dictionary<string,S> data,List<string> keysInOrder)
+        public SchemaElementLookUpTableEnumerator(
+            Dictionary<string, S> data,
+            List<string> keysInOrder
+        )
         {
             Debug.Assert(data != null, "data parameter is null");
             Debug.Assert(keysInOrder != null, "keysInOrder parameter is null");
@@ -45,7 +48,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region IEnumerator Members
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Reset()
         {
@@ -54,7 +57,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public T Current
         {
@@ -75,14 +78,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public bool MoveNext()
         {
-            while ( _enumerator.MoveNext() )
+            while (_enumerator.MoveNext())
             {
-                if ( Current != null )
+                if (Current != null)
                     return true;
             }
             return false;
@@ -91,11 +94,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region IDisposable Members
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
         #endregion
     }
 }

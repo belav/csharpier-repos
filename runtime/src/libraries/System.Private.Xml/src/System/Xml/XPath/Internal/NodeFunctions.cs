@@ -75,7 +75,10 @@ namespace MS.Internal.Xml.XPath
                         XPathNavigator? nav;
                         while ((nav = _arg.Advance()) != null)
                         {
-                            if (nav.NodeType != XPathNodeType.Whitespace || _xsltContext.PreserveWhitespace(nav))
+                            if (
+                                nav.NodeType != XPathNodeType.Whitespace
+                                || _xsltContext.PreserveWhitespace(nav)
+                            )
                             {
                                 count++;
                             }
@@ -93,7 +96,10 @@ namespace MS.Internal.Xml.XPath
             return string.Empty;
         }
 
-        public override XPathResultType StaticType { get { return Function.ReturnTypes[(int)_funcType]; } }
+        public override XPathResultType StaticType
+        {
+            get { return Function.ReturnTypes[(int)_funcType]; }
+        }
 
         public override XPathNodeIterator Clone()
         {

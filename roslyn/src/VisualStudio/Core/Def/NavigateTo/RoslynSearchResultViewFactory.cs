@@ -40,17 +40,29 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                 searchResult,
                 new HighlightedText(
                     searchResult.NavigableItem.DisplayTaggedParts.JoinText(),
-                    searchResult.NameMatchSpans.NullToEmpty().Select(m => m.ToSpan()).ToArray()),
+                    searchResult.NameMatchSpans.NullToEmpty().Select(m => m.ToSpan()).ToArray()
+                ),
                 new HighlightedText(
                     searchResult.AdditionalInformation,
-                    Array.Empty<VisualStudio.Text.Span>()),
-                primaryIcon: searchResult.NavigableItem.Glyph.GetImageId());
+                    Array.Empty<VisualStudio.Text.Span>()
+                ),
+                primaryIcon: searchResult.NavigableItem.Glyph.GetImageId()
+            );
         }
 
-        public Task<IReadOnlyList<SearchResultPreviewPanelBase>> GetPreviewPanelsAsync(SearchResult result, SearchResultViewBase searchResultView)
-            => Task.FromResult(GetPreviewPanels(result, searchResultView) ?? Array.Empty<SearchResultPreviewPanelBase>());
+        public Task<IReadOnlyList<SearchResultPreviewPanelBase>> GetPreviewPanelsAsync(
+            SearchResult result,
+            SearchResultViewBase searchResultView
+        ) =>
+            Task.FromResult(
+                GetPreviewPanels(result, searchResultView)
+                    ?? Array.Empty<SearchResultPreviewPanelBase>()
+            );
 
-        private IReadOnlyList<SearchResultPreviewPanelBase>? GetPreviewPanels(SearchResult result, SearchResultViewBase searchResultView)
+        private IReadOnlyList<SearchResultPreviewPanelBase>? GetPreviewPanels(
+            SearchResult result,
+            SearchResultViewBase searchResultView
+        )
         {
             if (result is not RoslynCodeSearchResult roslynResult)
                 return null;
@@ -78,7 +90,8 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                     projectGuid,
                     roslynResult.SearchResult.NavigableItem.SourceSpan.ToSpan(),
                     searchResultView.Title.Text,
-                    searchResultView.PrimaryIcon)
+                    searchResultView.PrimaryIcon
+                ),
             };
         }
     }

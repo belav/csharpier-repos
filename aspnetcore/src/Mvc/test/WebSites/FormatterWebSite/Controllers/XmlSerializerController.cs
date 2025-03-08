@@ -29,20 +29,13 @@ public class XmlSerializerController : Controller
     [HttpPost]
     public DummyClass GetDerivedDummyClass(int sampleInput)
     {
-        return new DerivedDummyClass
-        {
-            SampleInt = sampleInput,
-            SampleIntInDerived = 50
-        };
+        return new DerivedDummyClass { SampleInt = sampleInput, SampleIntInDerived = 50 };
     }
 
     [HttpPost]
     public Dictionary<string, string> GetDictionary()
     {
-        return new Dictionary<string, string>
-            {
-                { "Hello", "World" }
-            };
+        return new Dictionary<string, string> { { "Hello", "World" } };
     }
 
     [HttpPost]

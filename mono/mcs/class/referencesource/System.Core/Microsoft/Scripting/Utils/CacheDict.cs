@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -15,18 +15,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
 
-namespace System.Dynamic.Utils {
+namespace System.Dynamic.Utils
+{
     /// <summary>
     /// Provides a dictionary-like object used for caches which holds onto a maximum
     /// number of elements specified at construction time.
     /// </summary>
-    internal class CacheDict<TKey, TValue> {
-
-        // cache size is always ^2. 
+    internal class CacheDict<TKey, TValue>
+    {
+        // cache size is always ^2.
         // items are placed at [hash ^ mask]
         // new item will displace previous one at the same location.
         protected readonly int mask;
@@ -51,7 +52,8 @@ namespace System.Dynamic.Utils {
         /// Creates a dictionary-like object used for caches.
         /// </summary>
         /// <param name="maxSize">The maximum number of elements to store will be this number aligned to next ^2.</param>
-        internal CacheDict(int size) {
+        internal CacheDict(int size)
+        {
             var alignedSize = AlignSize(size);
             this.mask = alignedSize - 1;
             this.entries = new Entry[alignedSize];
@@ -74,7 +76,8 @@ namespace System.Dynamic.Utils {
         /// Tries to get the value associated with 'key', returning true if it's found and
         /// false if it's not present.
         /// </summary>
-        internal bool TryGetValue(TKey key, out TValue value) {
+        internal bool TryGetValue(TKey key, out TValue value)
+        {
             int hash = key.GetHashCode();
             int idx = hash & mask;
 
@@ -93,7 +96,8 @@ namespace System.Dynamic.Utils {
         /// Adds a new element to the cache, possibly replacing some
         /// element that is already present.
         /// </summary>
-        internal void Add(TKey key, TValue value) {
+        internal void Add(TKey key, TValue value)
+        {
             var hash = key.GetHashCode();
             var idx = hash & mask;
 
@@ -108,17 +112,18 @@ namespace System.Dynamic.Utils {
         /// Returns the value associated with the given key, or throws KeyNotFoundException
         /// if the key is not present.
         /// </summary>
-        internal TValue this[TKey key] {
-            get {
+        internal TValue this[TKey key]
+        {
+            get
+            {
                 TValue res;
-                if (TryGetValue(key, out res)) {
+                if (TryGetValue(key, out res))
+                {
                     return res;
                 }
                 throw new KeyNotFoundException();
             }
-            set {
-                Add(key, value);
-            }
+            set { Add(key, value); }
         }
     }
 }

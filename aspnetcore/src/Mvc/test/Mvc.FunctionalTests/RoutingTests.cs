@@ -11,9 +11,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class RoutingTests : RoutingTestsBase<RoutingWebSite.StartupWithoutEndpointRouting>
 {
     public RoutingTests(MvcTestFixture<RoutingWebSite.StartupWithoutEndpointRouting> fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [Fact]
     public override async Task HasEndpointMatch()
@@ -59,11 +57,12 @@ public class RoutingTests : RoutingTestsBase<RoutingWebSite.StartupWithoutEndpoi
         Assert.Equal(
             new string[]
             {
-                    typeof(RouteCollection).FullName,
-                    typeof(Route).FullName,
-                    "Microsoft.AspNetCore.Mvc.Routing.MvcRouteHandler",
+                typeof(RouteCollection).FullName,
+                typeof(Route).FullName,
+                "Microsoft.AspNetCore.Mvc.Routing.MvcRouteHandler",
             },
-            result.Routers);
+            result.Routers
+        );
     }
 
     [Fact]
@@ -78,12 +77,14 @@ public class RoutingTests : RoutingTestsBase<RoutingWebSite.StartupWithoutEndpoi
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<ResultData>(body);
 
-        Assert.Equal(new string[]
+        Assert.Equal(
+            new string[]
             {
-                    typeof(RouteCollection).FullName,
-                    "Microsoft.AspNetCore.Mvc.Routing.AttributeRoute",
-                    "Microsoft.AspNetCore.Mvc.Routing.MvcAttributeRouteHandler",
+                typeof(RouteCollection).FullName,
+                "Microsoft.AspNetCore.Mvc.Routing.AttributeRoute",
+                "Microsoft.AspNetCore.Mvc.Routing.MvcAttributeRouteHandler",
             },
-            result.Routers);
+            result.Routers
+        );
     }
 }

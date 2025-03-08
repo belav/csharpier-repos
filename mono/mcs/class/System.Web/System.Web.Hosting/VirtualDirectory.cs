@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,28 +28,27 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Collections;
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
+    public abstract class VirtualDirectory : VirtualFileBase
+    {
+        protected VirtualDirectory(string virtualPath)
+        {
+            SetVirtualPath(virtualPath);
+        }
 
-	public abstract class VirtualDirectory : VirtualFileBase
-	{
-		protected VirtualDirectory (string virtualPath)
-		{
-			SetVirtualPath (virtualPath);
-		}
+        public abstract IEnumerable Children { get; }
 
-		public abstract IEnumerable Children { get; }
+        public abstract IEnumerable Directories { get; }
 
-		public abstract IEnumerable Directories { get; }
-		
-		public abstract IEnumerable Files { get; }
+        public abstract IEnumerable Files { get; }
 
-		public override bool IsDirectory {
-			get { return true; }
-		}
-	}
+        public override bool IsDirectory
+        {
+            get { return true; }
+        }
+    }
 }
-

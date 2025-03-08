@@ -32,8 +32,7 @@ internal static class BinaryMessageFormatter
                 current |= 0x80;
             }
             lenNumBytes++;
-        }
-        while (length > 0);
+        } while (length > 0);
 
         return lenNumBytes;
     }
@@ -45,8 +44,7 @@ internal static class BinaryMessageFormatter
         {
             length >>= 7;
             lenNumBytes++;
-        }
-        while (length > 0);
+        } while (length > 0);
 
         return lenNumBytes;
     }

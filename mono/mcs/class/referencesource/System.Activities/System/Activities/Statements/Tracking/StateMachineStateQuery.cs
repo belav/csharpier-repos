@@ -19,12 +19,12 @@ namespace System.Activities.Statements.Tracking
         public StateMachineStateQuery()
         {
             base.Name = StateMachineStateRecord.StateMachineStateRecordName;
-        }   
-        
+        }
+
         /// <summary>
         /// Gets the name that distinguishes this tracking record.
         /// </summary>
-        public new string Name 
+        public new string Name
         {
             get
             {
@@ -34,4 +34,4 @@ namespace System.Activities.Statements.Tracking
             }
         }
     }
-}   
+}

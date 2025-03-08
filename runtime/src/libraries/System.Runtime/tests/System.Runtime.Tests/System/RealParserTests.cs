@@ -21,12 +21,22 @@ namespace System.Tests
 
         protected override bool InvariantTryParseDouble(string s, out double result)
         {
-            return double.TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result);
+            return double.TryParse(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                CultureInfo.InvariantCulture,
+                out result
+            );
         }
 
         protected override bool InvariantTryParseSingle(string s, out float result)
         {
-            return float.TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result);
+            return float.TryParse(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                CultureInfo.InvariantCulture,
+                out result
+            );
         }
     }
 }

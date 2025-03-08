@@ -14,11 +14,19 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
     private readonly CancellationToken _timeoutToken;
     private readonly HttpConnectionContext? _connection;
 
-    public LongPollingServerTransport(CancellationToken timeoutToken, PipeReader application, ILoggerFactory loggerFactory)
-        : this(timeoutToken, application, loggerFactory, connection: null)
-    { }
+    public LongPollingServerTransport(
+        CancellationToken timeoutToken,
+        PipeReader application,
+        ILoggerFactory loggerFactory
+    )
+        : this(timeoutToken, application, loggerFactory, connection: null) { }
 
-    public LongPollingServerTransport(CancellationToken timeoutToken, PipeReader application, ILoggerFactory loggerFactory, HttpConnectionContext? connection)
+    public LongPollingServerTransport(
+        CancellationToken timeoutToken,
+        PipeReader application,
+        ILoggerFactory loggerFactory,
+        HttpConnectionContext? connection
+    )
     {
         _timeoutToken = timeoutToken;
         _application = application;
@@ -26,7 +34,9 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
         _connection = connection;
 
         // We create the logger with a string to preserve the logging namespace after the server side transport renames.
-        _logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport");
+        _logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport"
+        );
     }
 
     public async Task<bool> ProcessRequestAsync(HttpContext context, CancellationToken token)
@@ -55,7 +65,10 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
                 context.Response.ContentType = "application/octet-stream";
 
                 _connection?.StartSendCancellation();
-                await context.Response.Body.WriteAsync(buffer, _connection?.SendingToken ?? default);
+                await context.Response.Body.WriteAsync(
+                    buffer,
+                    _connection?.SendingToken ?? default
+                );
             }
             finally
             {
@@ -114,19 +127,44 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Terminating Long Polling connection by sending 204 response.", EventName = "LongPolling204")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Terminating Long Polling connection by sending 204 response.",
+            EventName = "LongPolling204"
+        )]
         public static partial void LongPolling204(ILogger logger);
 
-        [LoggerMessage(2, LogLevel.Debug, "Poll request timed out. Sending 200 response to connection.", EventName = "PollTimedOut")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Poll request timed out. Sending 200 response to connection.",
+            EventName = "PollTimedOut"
+        )]
         public static partial void PollTimedOut(ILogger logger);
 
-        [LoggerMessage(3, LogLevel.Trace, "Writing a {Count} byte message to connection.", EventName = "LongPollingWritingMessage")]
+        [LoggerMessage(
+            3,
+            LogLevel.Trace,
+            "Writing a {Count} byte message to connection.",
+            EventName = "LongPollingWritingMessage"
+        )]
         public static partial void LongPollingWritingMessage(ILogger logger, long count);
 
-        [LoggerMessage(4, LogLevel.Debug, "Client disconnected from Long Polling endpoint for connection.", EventName = "LongPollingDisconnected")]
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "Client disconnected from Long Polling endpoint for connection.",
+            EventName = "LongPollingDisconnected"
+        )]
         public static partial void LongPollingDisconnected(ILogger logger);
 
-        [LoggerMessage(5, LogLevel.Error, "Long Polling transport was terminated due to an error on connection.", EventName = "LongPollingTerminated")]
+        [LoggerMessage(
+            5,
+            LogLevel.Error,
+            "Long Polling transport was terminated due to an error on connection.",
+            EventName = "LongPollingTerminated"
+        )]
         public static partial void LongPollingTerminated(ILogger logger, Exception ex);
     }
 }

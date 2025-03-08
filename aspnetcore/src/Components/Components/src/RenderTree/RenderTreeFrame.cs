@@ -43,8 +43,11 @@ public struct RenderTreeFrame
     // Common
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(0)] internal int SequenceField;
-    [FieldOffset(4)] internal RenderTreeFrameType FrameTypeField;
+    [FieldOffset(0)]
+    internal int SequenceField;
+
+    [FieldOffset(4)]
+    internal RenderTreeFrameType FrameTypeField;
 
     /// <summary>
     /// Gets the sequence number of the frame. Sequence numbers indicate the relative source
@@ -62,9 +65,14 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.Element
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(8)] internal int ElementSubtreeLengthField;
-    [FieldOffset(16)] internal string ElementNameField;
-    [FieldOffset(24)] internal object ElementKeyField;
+    [FieldOffset(8)]
+    internal int ElementSubtreeLengthField;
+
+    [FieldOffset(16)]
+    internal string ElementNameField;
+
+    [FieldOffset(24)]
+    internal object ElementKeyField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.Element"/>
@@ -89,7 +97,8 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.Text
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(16)] internal string TextContentField;
+    [FieldOffset(16)]
+    internal string TextContentField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.Text"/>,
@@ -101,10 +110,17 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.Attribute
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(8)] internal ulong AttributeEventHandlerIdField;
-    [FieldOffset(16)] internal string AttributeNameField;
-    [FieldOffset(24)] internal object AttributeValueField;
-    [FieldOffset(32)] internal string AttributeEventUpdatesAttributeNameField;
+    [FieldOffset(8)]
+    internal ulong AttributeEventHandlerIdField;
+
+    [FieldOffset(16)]
+    internal string AttributeNameField;
+
+    [FieldOffset(24)]
+    internal object AttributeValueField;
+
+    [FieldOffset(32)]
+    internal string AttributeEventUpdatesAttributeNameField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.Attribute"/>
@@ -136,14 +152,24 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.Component
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(6)] internal ComponentFrameFlags ComponentFrameFlagsField;
-    [FieldOffset(8)] internal int ComponentSubtreeLengthField;
-    [FieldOffset(12)] internal int ComponentIdField;
+    [FieldOffset(6)]
+    internal ComponentFrameFlags ComponentFrameFlagsField;
+
+    [FieldOffset(8)]
+    internal int ComponentSubtreeLengthField;
+
+    [FieldOffset(12)]
+    internal int ComponentIdField;
+
     [FieldOffset(16)]
     [DynamicallyAccessedMembers(Internal.LinkerFlags.Component)]
     internal Type ComponentTypeField;
-    [FieldOffset(24)] internal ComponentState ComponentStateField;
-    [FieldOffset(32)] internal object ComponentKeyField;
+
+    [FieldOffset(24)]
+    internal ComponentState ComponentStateField;
+
+    [FieldOffset(32)]
+    internal object ComponentKeyField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.Component"/>
@@ -192,7 +218,8 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.Region
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(8)] internal int RegionSubtreeLengthField;
+    [FieldOffset(8)]
+    internal int RegionSubtreeLengthField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.Region"/>
@@ -205,8 +232,11 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.ElementReferenceCapture
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(16)] internal string ElementReferenceCaptureIdField;
-    [FieldOffset(24)] internal Action<ElementReference> ElementReferenceCaptureActionField;
+    [FieldOffset(16)]
+    internal string ElementReferenceCaptureIdField;
+
+    [FieldOffset(24)]
+    internal Action<ElementReference> ElementReferenceCaptureActionField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.ElementReferenceCapture"/>,
@@ -218,14 +248,18 @@ public struct RenderTreeFrame
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.ElementReferenceCapture"/>,
     /// gets the action that writes the reference to its target. Otherwise, the value is undefined.
     /// </summary>
-    public Action<ElementReference> ElementReferenceCaptureAction => ElementReferenceCaptureActionField;
+    public Action<ElementReference> ElementReferenceCaptureAction =>
+        ElementReferenceCaptureActionField;
 
     // --------------------------------------------------------------------------------
     // RenderTreeFrameType.ComponentReferenceCapture
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(8)] internal int ComponentReferenceCaptureParentFrameIndexField;
-    [FieldOffset(16)] internal Action<object> ComponentReferenceCaptureActionField;
+    [FieldOffset(8)]
+    internal int ComponentReferenceCaptureParentFrameIndexField;
+
+    [FieldOffset(16)]
+    internal Action<object> ComponentReferenceCaptureActionField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.ComponentReferenceCapture"/>,
@@ -237,7 +271,8 @@ public struct RenderTreeFrame
     ///          initialization logic in RenderTreeDiffBuilder to walk the frames hierarchically, then it would know
     ///          the parent index at the point where it wants to initialize the ComponentReferenceCapture frame.
     /// </summary>
-    public int ComponentReferenceCaptureParentFrameIndex => ComponentReferenceCaptureParentFrameIndexField;
+    public int ComponentReferenceCaptureParentFrameIndex =>
+        ComponentReferenceCaptureParentFrameIndexField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.ComponentReferenceCapture"/>,
@@ -249,7 +284,8 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.Markup
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(16)] internal string MarkupContentField;
+    [FieldOffset(16)]
+    internal string MarkupContentField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.Markup"/>,
@@ -261,7 +297,8 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.ComponentRenderMode
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(16)] internal IComponentRenderMode ComponentRenderModeField;
+    [FieldOffset(16)]
+    internal IComponentRenderMode ComponentRenderModeField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.ComponentRenderMode"/>,
@@ -275,7 +312,9 @@ public struct RenderTreeFrame
             // However the name "ComponentRenderMode" sounds so much like it would be a field on Component frames that we'll explicitly check to avoid mistakes.
             if (FrameType != RenderTreeFrameType.ComponentRenderMode)
             {
-                throw new InvalidOperationException($"The {nameof(ComponentRenderMode)} field only exists on frames of type {nameof(RenderTreeFrameType.ComponentRenderMode)}.");
+                throw new InvalidOperationException(
+                    $"The {nameof(ComponentRenderMode)} field only exists on frames of type {nameof(RenderTreeFrameType.ComponentRenderMode)}."
+                );
             }
 
             return ComponentRenderModeField;
@@ -286,8 +325,11 @@ public struct RenderTreeFrame
     // RenderTreeFrameType.NamedEvent
     // --------------------------------------------------------------------------------
 
-    [FieldOffset(16)] internal string NamedEventTypeField;
-    [FieldOffset(24)] internal string NamedEventAssignedNameField;
+    [FieldOffset(16)]
+    internal string NamedEventTypeField;
+
+    [FieldOffset(24)]
+    internal string NamedEventAssignedNameField;
 
     /// <summary>
     /// If the <see cref="FrameType"/> property equals <see cref="RenderTreeFrameType.NamedEvent"/>,
@@ -302,7 +344,12 @@ public struct RenderTreeFrame
     public string NamedEventAssignedName => NamedEventAssignedNameField;
 
     // Element constructor
-    private RenderTreeFrame(int sequence, int elementSubtreeLength, string elementName, object elementKey)
+    private RenderTreeFrame(
+        int sequence,
+        int elementSubtreeLength,
+        string elementName,
+        object elementKey
+    )
         : this()
     {
         SequenceField = sequence;
@@ -313,7 +360,13 @@ public struct RenderTreeFrame
     }
 
     // Component constructor
-    private RenderTreeFrame(int sequence, int componentSubtreeLength, [DynamicallyAccessedMembers(LinkerFlags.Component)] Type componentType, ComponentState componentState, object componentKey)
+    private RenderTreeFrame(
+        int sequence,
+        int componentSubtreeLength,
+        [DynamicallyAccessedMembers(LinkerFlags.Component)] Type componentType,
+        ComponentState componentState,
+        object componentKey
+    )
         : this()
     {
         SequenceField = sequence;
@@ -356,7 +409,13 @@ public struct RenderTreeFrame
     }
 
     // Attribute constructor
-    private RenderTreeFrame(int sequence, string attributeName, object attributeValue, ulong attributeEventHandlerId, string attributeEventUpdatesAttributeName)
+    private RenderTreeFrame(
+        int sequence,
+        string attributeName,
+        object attributeValue,
+        ulong attributeEventHandlerId,
+        string attributeEventUpdatesAttributeName
+    )
         : this()
     {
         FrameTypeField = RenderTreeFrameType.Attribute;
@@ -368,7 +427,11 @@ public struct RenderTreeFrame
     }
 
     // Element reference capture constructor
-    private RenderTreeFrame(int sequence, Action<ElementReference> elementReferenceCaptureAction, string elementReferenceCaptureId)
+    private RenderTreeFrame(
+        int sequence,
+        Action<ElementReference> elementReferenceCaptureAction,
+        string elementReferenceCaptureId
+    )
         : this()
     {
         FrameTypeField = RenderTreeFrameType.ElementReferenceCapture;
@@ -378,7 +441,11 @@ public struct RenderTreeFrame
     }
 
     // Component reference capture constructor
-    private RenderTreeFrame(int sequence, Action<object> componentReferenceCaptureAction, int parentFrameIndex)
+    private RenderTreeFrame(
+        int sequence,
+        Action<object> componentReferenceCaptureAction,
+        int parentFrameIndex
+    )
         : this()
     {
         FrameTypeField = RenderTreeFrameType.ComponentReferenceCapture;
@@ -387,71 +454,176 @@ public struct RenderTreeFrame
         ComponentReferenceCaptureParentFrameIndexField = parentFrameIndex;
     }
 
-    internal static RenderTreeFrame Element(int sequence, string elementName)
-        => new RenderTreeFrame(sequence, elementSubtreeLength: 0, elementName, null);
+    internal static RenderTreeFrame Element(int sequence, string elementName) =>
+        new RenderTreeFrame(sequence, elementSubtreeLength: 0, elementName, null);
 
-    internal static RenderTreeFrame Text(int sequence, string textContent)
-        => new RenderTreeFrame(sequence, isMarkup: false, textOrMarkup: textContent);
+    internal static RenderTreeFrame Text(int sequence, string textContent) =>
+        new RenderTreeFrame(sequence, isMarkup: false, textOrMarkup: textContent);
 
-    internal static RenderTreeFrame Markup(int sequence, string markupContent)
-        => new RenderTreeFrame(sequence, isMarkup: true, textOrMarkup: markupContent);
+    internal static RenderTreeFrame Markup(int sequence, string markupContent) =>
+        new RenderTreeFrame(sequence, isMarkup: true, textOrMarkup: markupContent);
 
-    internal static RenderTreeFrame Attribute(int sequence, string name, object value)
-        => new RenderTreeFrame(sequence, attributeName: name, attributeValue: value, attributeEventHandlerId: 0, attributeEventUpdatesAttributeName: null);
+    internal static RenderTreeFrame Attribute(int sequence, string name, object value) =>
+        new RenderTreeFrame(
+            sequence,
+            attributeName: name,
+            attributeValue: value,
+            attributeEventHandlerId: 0,
+            attributeEventUpdatesAttributeName: null
+        );
 
-    internal static RenderTreeFrame ChildComponent(int sequence, [DynamicallyAccessedMembers(LinkerFlags.Component)] Type componentType)
-        => new RenderTreeFrame(sequence, componentSubtreeLength: 0, componentType, null, null);
+    internal static RenderTreeFrame ChildComponent(
+        int sequence,
+        [DynamicallyAccessedMembers(LinkerFlags.Component)] Type componentType
+    ) => new RenderTreeFrame(sequence, componentSubtreeLength: 0, componentType, null, null);
 
-    internal static RenderTreeFrame PlaceholderChildComponentWithSubtreeLength(int subtreeLength)
-        => new RenderTreeFrame(0, componentSubtreeLength: subtreeLength, typeof(IComponent), null, null);
+    internal static RenderTreeFrame PlaceholderChildComponentWithSubtreeLength(int subtreeLength) =>
+        new RenderTreeFrame(
+            0,
+            componentSubtreeLength: subtreeLength,
+            typeof(IComponent),
+            null,
+            null
+        );
 
-    internal static RenderTreeFrame Region(int sequence)
-        => new RenderTreeFrame(sequence, regionSubtreeLength: 0);
+    internal static RenderTreeFrame Region(int sequence) =>
+        new RenderTreeFrame(sequence, regionSubtreeLength: 0);
 
-    internal static RenderTreeFrame ElementReferenceCapture(int sequence, Action<ElementReference> elementReferenceCaptureAction)
-        => new RenderTreeFrame(sequence, elementReferenceCaptureAction: elementReferenceCaptureAction, elementReferenceCaptureId: null);
+    internal static RenderTreeFrame ElementReferenceCapture(
+        int sequence,
+        Action<ElementReference> elementReferenceCaptureAction
+    ) =>
+        new RenderTreeFrame(
+            sequence,
+            elementReferenceCaptureAction: elementReferenceCaptureAction,
+            elementReferenceCaptureId: null
+        );
 
-    internal static RenderTreeFrame ComponentReferenceCapture(int sequence, Action<object> componentReferenceCaptureAction, int parentFrameIndex)
-        => new RenderTreeFrame(sequence, componentReferenceCaptureAction: componentReferenceCaptureAction, parentFrameIndex: parentFrameIndex);
+    internal static RenderTreeFrame ComponentReferenceCapture(
+        int sequence,
+        Action<object> componentReferenceCaptureAction,
+        int parentFrameIndex
+    ) =>
+        new RenderTreeFrame(
+            sequence,
+            componentReferenceCaptureAction: componentReferenceCaptureAction,
+            parentFrameIndex: parentFrameIndex
+        );
 
-    internal static RenderTreeFrame NamedEvent(int sequence, string eventType, string assignedName)
-        => new RenderTreeFrame { SequenceField = sequence, FrameTypeField = RenderTreeFrameType.NamedEvent, NamedEventTypeField = eventType, NamedEventAssignedNameField = assignedName };
+    internal static RenderTreeFrame NamedEvent(
+        int sequence,
+        string eventType,
+        string assignedName
+    ) =>
+        new RenderTreeFrame
+        {
+            SequenceField = sequence,
+            FrameTypeField = RenderTreeFrameType.NamedEvent,
+            NamedEventTypeField = eventType,
+            NamedEventAssignedNameField = assignedName,
+        };
 
-    internal static RenderTreeFrame ComponentRenderModeFrame(int sequence, IComponentRenderMode renderMode)
-        => new RenderTreeFrame { SequenceField = sequence, FrameTypeField = RenderTreeFrameType.ComponentRenderMode, ComponentRenderModeField = renderMode };
+    internal static RenderTreeFrame ComponentRenderModeFrame(
+        int sequence,
+        IComponentRenderMode renderMode
+    ) =>
+        new RenderTreeFrame
+        {
+            SequenceField = sequence,
+            FrameTypeField = RenderTreeFrameType.ComponentRenderMode,
+            ComponentRenderModeField = renderMode,
+        };
 
-    internal RenderTreeFrame WithElementSubtreeLength(int elementSubtreeLength)
-        => new RenderTreeFrame(SequenceField, elementSubtreeLength: elementSubtreeLength, ElementNameField, ElementKeyField);
+    internal RenderTreeFrame WithElementSubtreeLength(int elementSubtreeLength) =>
+        new RenderTreeFrame(
+            SequenceField,
+            elementSubtreeLength: elementSubtreeLength,
+            ElementNameField,
+            ElementKeyField
+        );
 
-    internal RenderTreeFrame WithComponentSubtreeLength(int componentSubtreeLength)
-        => new RenderTreeFrame(SequenceField, componentSubtreeLength: componentSubtreeLength, ComponentTypeField, ComponentStateField, ComponentKeyField);
+    internal RenderTreeFrame WithComponentSubtreeLength(int componentSubtreeLength) =>
+        new RenderTreeFrame(
+            SequenceField,
+            componentSubtreeLength: componentSubtreeLength,
+            ComponentTypeField,
+            ComponentStateField,
+            ComponentKeyField
+        );
 
-    internal RenderTreeFrame WithAttributeSequence(int sequence)
-        => new RenderTreeFrame(sequence, attributeName: AttributeNameField, AttributeValueField, AttributeEventHandlerIdField, AttributeEventUpdatesAttributeNameField);
+    internal RenderTreeFrame WithAttributeSequence(int sequence) =>
+        new RenderTreeFrame(
+            sequence,
+            attributeName: AttributeNameField,
+            AttributeValueField,
+            AttributeEventHandlerIdField,
+            AttributeEventUpdatesAttributeNameField
+        );
 
-    internal RenderTreeFrame WithComponent(ComponentState componentState)
-        => new RenderTreeFrame(SequenceField, componentSubtreeLength: ComponentSubtreeLengthField, ComponentTypeField, componentState, ComponentKeyField);
+    internal RenderTreeFrame WithComponent(ComponentState componentState) =>
+        new RenderTreeFrame(
+            SequenceField,
+            componentSubtreeLength: ComponentSubtreeLengthField,
+            ComponentTypeField,
+            componentState,
+            ComponentKeyField
+        );
 
-    internal RenderTreeFrame WithAttributeEventHandlerId(ulong eventHandlerId)
-        => new RenderTreeFrame(SequenceField, attributeName: AttributeNameField, AttributeValueField, eventHandlerId, AttributeEventUpdatesAttributeNameField);
+    internal RenderTreeFrame WithAttributeEventHandlerId(ulong eventHandlerId) =>
+        new RenderTreeFrame(
+            SequenceField,
+            attributeName: AttributeNameField,
+            AttributeValueField,
+            eventHandlerId,
+            AttributeEventUpdatesAttributeNameField
+        );
 
-    internal RenderTreeFrame WithAttributeValue(object attributeValue)
-        => new RenderTreeFrame(SequenceField, attributeName: AttributeNameField, attributeValue, AttributeEventHandlerIdField, AttributeEventUpdatesAttributeNameField);
+    internal RenderTreeFrame WithAttributeValue(object attributeValue) =>
+        new RenderTreeFrame(
+            SequenceField,
+            attributeName: AttributeNameField,
+            attributeValue,
+            AttributeEventHandlerIdField,
+            AttributeEventUpdatesAttributeNameField
+        );
 
-    internal RenderTreeFrame WithAttributeEventUpdatesAttributeName(string attributeUpdatesAttributeName)
-        => new RenderTreeFrame(SequenceField, attributeName: AttributeNameField, AttributeValueField, AttributeEventHandlerIdField, attributeUpdatesAttributeName);
+    internal RenderTreeFrame WithAttributeEventUpdatesAttributeName(
+        string attributeUpdatesAttributeName
+    ) =>
+        new RenderTreeFrame(
+            SequenceField,
+            attributeName: AttributeNameField,
+            AttributeValueField,
+            AttributeEventHandlerIdField,
+            attributeUpdatesAttributeName
+        );
 
-    internal RenderTreeFrame WithRegionSubtreeLength(int regionSubtreeLength)
-        => new RenderTreeFrame(SequenceField, regionSubtreeLength: regionSubtreeLength);
+    internal RenderTreeFrame WithRegionSubtreeLength(int regionSubtreeLength) =>
+        new RenderTreeFrame(SequenceField, regionSubtreeLength: regionSubtreeLength);
 
-    internal RenderTreeFrame WithElementReferenceCaptureId(string elementReferenceCaptureId)
-        => new RenderTreeFrame(SequenceField, elementReferenceCaptureAction: ElementReferenceCaptureActionField, elementReferenceCaptureId);
+    internal RenderTreeFrame WithElementReferenceCaptureId(string elementReferenceCaptureId) =>
+        new RenderTreeFrame(
+            SequenceField,
+            elementReferenceCaptureAction: ElementReferenceCaptureActionField,
+            elementReferenceCaptureId
+        );
 
-    internal RenderTreeFrame WithElementKey(object elementKey)
-        => new RenderTreeFrame(SequenceField, elementSubtreeLength: ElementSubtreeLengthField, ElementNameField, elementKey);
+    internal RenderTreeFrame WithElementKey(object elementKey) =>
+        new RenderTreeFrame(
+            SequenceField,
+            elementSubtreeLength: ElementSubtreeLengthField,
+            ElementNameField,
+            elementKey
+        );
 
-    internal RenderTreeFrame WithComponentKey(object componentKey)
-        => new RenderTreeFrame(SequenceField, componentSubtreeLength: ComponentSubtreeLengthField, ComponentTypeField, ComponentStateField, componentKey);
+    internal RenderTreeFrame WithComponentKey(object componentKey) =>
+        new RenderTreeFrame(
+            SequenceField,
+            componentSubtreeLength: ComponentSubtreeLengthField,
+            ComponentTypeField,
+            ComponentStateField,
+            componentKey
+        );
 
     /// <inheritdoc />
     // Just to be nice for debugging and unit tests.

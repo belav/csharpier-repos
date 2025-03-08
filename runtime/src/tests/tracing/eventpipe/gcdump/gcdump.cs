@@ -2,24 +2,24 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Diagnostics.Tools.RuntimeClient;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Parsers;
-using Tracing.Tests.Common;
 using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using Tracing.Tests.Common;
 using Xunit;
 
 namespace Tracing.Tests.EventSourceError
 {
-    // Regression test for https://github.com/dotnet/runtime/issues/38639 
+    // Regression test for https://github.com/dotnet/runtime/issues/38639
     public class GCDumpTest
     {
         private static bool _seenGCStart = false;
@@ -41,14 +41,28 @@ namespace Tracing.Tests.EventSourceError
 
             List<EventPipeProvider> providers = new List<EventPipeProvider>
             {
-                new EventPipeProvider("Microsoft-Windows-DotNETRuntime", eventLevel: EventLevel.Verbose, keywords: (long)ClrTraceEventParser.Keywords.GCHeapSnapshot)
+                new EventPipeProvider(
+                    "Microsoft-Windows-DotNETRuntime",
+                    eventLevel: EventLevel.Verbose,
+                    keywords: (long)ClrTraceEventParser.Keywords.GCHeapSnapshot
+                ),
             };
 
-            bool enableRundown = TestLibrary.Utilities.IsNativeAot? false: true;
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _DoesRundownContainMethodEvents, enableRundownProvider: enableRundown);
+            bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _DoesRundownContainMethodEvents,
+                enableRundownProvider: enableRundown
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             // This space intentionally left blank
         };
@@ -59,7 +73,9 @@ namespace Tracing.Tests.EventSourceError
             _gcStopReceived.WaitOne(10000);
         };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (
+            source
+        ) =>
         {
             source.Clr.GCStart += (GCStartTraceData data) =>
             {
@@ -71,7 +87,7 @@ namespace Tracing.Tests.EventSourceError
                 _bulkTypeCount += data.Count;
             };
 
-            source.Clr.GCBulkNode += delegate (GCBulkNodeTraceData data)
+            source.Clr.GCBulkNode += delegate(GCBulkNodeTraceData data)
             {
                 _bulkNodeCount += data.Count;
             };
@@ -97,21 +113,26 @@ namespace Tracing.Tests.EventSourceError
                 _gcStopReceived.Set();
             };
 
-            return () => 
+            return () =>
             {
                 // Hopefully it is low enough to be resilient to changes in the runtime
                 // and high enough to catch issues. There should be between hundreds and thousands
                 // for each, but the number is variable and the point of the test is to verify
                 // that we get any events at all.
-                
-                if (_seenGCStart
-                     && _seenGCStop
-                     && _bulkTypeCount > 50
-                     && _bulkNodeCount > 50
-                     && _bulkEdgeCount > 50)
+
+                if (
+                    _seenGCStart
+                    && _seenGCStop
+                    && _bulkTypeCount > 50
+                    && _bulkNodeCount > 50
+                    && _bulkEdgeCount > 50
+                )
                 {
                     // Native AOT hasn't yet implemented statics. Hence _bulkRootStaticVarCount is zero and _bulkRootEdgeCount can be low
-                    if ((TestLibrary.Utilities.IsNativeAot && _bulkRootEdgeCount > 20) || (_bulkRootStaticVarCount > 50 && _bulkRootEdgeCount > 50))
+                    if (
+                        (TestLibrary.Utilities.IsNativeAot && _bulkRootEdgeCount > 20)
+                        || (_bulkRootStaticVarCount > 50 && _bulkRootEdgeCount > 50)
+                    )
                         return 100;
                 }
 

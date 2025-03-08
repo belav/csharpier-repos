@@ -17,7 +17,11 @@ public class DataSourceDependentMatcherTest
         var lifetime = new DataSourceDependentMatcher.Lifetime();
 
         // Act
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
 
         // Assert
         var inner = Assert.IsType<TestMatcher>(matcher.CurrentMatcher);
@@ -32,23 +36,26 @@ public class DataSourceDependentMatcherTest
         // Arrange
         var dataSource = new DynamicEndpointDataSource();
         var lifetime = new DataSourceDependentMatcher.Lifetime();
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
 
         var endpoint = new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse("a/b/c"),
             0,
             EndpointMetadataCollection.Empty,
-            "test");
+            "test"
+        );
 
         // Act
         dataSource.AddEndpoint(endpoint);
 
         // Assert
         var inner = Assert.IsType<TestMatcher>(matcher.CurrentMatcher);
-        Assert.Collection(
-            inner.Endpoints,
-            e => Assert.Same(endpoint, e));
+        Assert.Collection(inner.Endpoints, e => Assert.Same(endpoint, e));
     }
 
     [Fact]
@@ -57,14 +64,19 @@ public class DataSourceDependentMatcherTest
         // Arrange
         var dataSource = new DynamicEndpointDataSource();
         var lifetime = new DataSourceDependentMatcher.Lifetime();
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
 
         var endpoint = new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse("a/b/c"),
             0,
             EndpointMetadataCollection.Empty,
-            "test");
+            "test"
+        );
 
         lifetime.Dispose();
 
@@ -82,11 +94,19 @@ public class DataSourceDependentMatcherTest
         // Arrange
         var dataSource = new DynamicEndpointDataSource();
         var lifetime = new DataSourceDependentMatcher.Lifetime();
-        var endpoint = new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "test");
+        var endpoint = new Endpoint(
+            TestConstants.EmptyRequestDelegate,
+            EndpointMetadataCollection.Empty,
+            "test"
+        );
         dataSource.AddEndpoint(endpoint);
 
         // Act
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
 
         // Assert
         var inner = Assert.IsType<TestMatcher>(matcher.CurrentMatcher);
@@ -104,11 +124,16 @@ public class DataSourceDependentMatcherTest
             RoutePatternFactory.Parse("/"),
             0,
             new EndpointMetadataCollection(new SuppressMatchingMetadata()),
-            "test");
+            "test"
+        );
         dataSource.AddEndpoint(endpoint);
 
         // Act
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
 
         // Assert
         var inner = Assert.IsType<TestMatcher>(matcher.CurrentMatcher);
@@ -125,12 +150,20 @@ public class DataSourceDependentMatcherTest
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse("/"),
             0,
-            new EndpointMetadataCollection(new SuppressMatchingMetadata(), new EncourageMatchingMetadata()),
-            "test");
+            new EndpointMetadataCollection(
+                new SuppressMatchingMetadata(),
+                new EncourageMatchingMetadata()
+            ),
+            "test"
+        );
         dataSource.AddEndpoint(endpoint);
 
         // Act
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
 
         // Assert
         var inner = Assert.IsType<TestMatcher>(matcher.CurrentMatcher);
@@ -141,27 +174,33 @@ public class DataSourceDependentMatcherTest
     public void Matcher_ThrowsOnDuplicateEndpoints()
     {
         // Arrange
-        var expectedError = "Duplicate endpoint name 'Foo' found on '/bar' and '/foo'. Endpoint names must be globally unique.";
+        var expectedError =
+            "Duplicate endpoint name 'Foo' found on '/bar' and '/foo'. Endpoint names must be globally unique.";
         var dataSource = new DynamicEndpointDataSource();
         var lifetime = new DataSourceDependentMatcher.Lifetime();
-        dataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/foo"),
-            0,
-            new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-            "/foo"
-        ));
-        dataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/bar"),
-            0,
-            new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-            "/bar"
-        ));
+        dataSource.AddEndpoint(
+            new RouteEndpoint(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/foo"),
+                0,
+                new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
+                "/foo"
+            )
+        );
+        dataSource.AddEndpoint(
+            new RouteEndpoint(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/bar"),
+                0,
+                new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
+                "/bar"
+            )
+        );
 
         // Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create)
+        );
         Assert.Equal(expectedError, exception.Message);
     }
 
@@ -169,37 +208,47 @@ public class DataSourceDependentMatcherTest
     public void Matcher_ThrowsOnDuplicateEndpointsFromMultipleSources()
     {
         // Arrange
-        var expectedError = "Duplicate endpoint name 'Foo' found on '/foo2' and '/foo'. Endpoint names must be globally unique.";
+        var expectedError =
+            "Duplicate endpoint name 'Foo' found on '/foo2' and '/foo'. Endpoint names must be globally unique.";
         var dataSource = new DynamicEndpointDataSource();
         var lifetime = new DataSourceDependentMatcher.Lifetime();
-        dataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/foo"),
-            0,
-            new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-            "/foo"
-        ));
-        dataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/bar"),
-            0,
-            new EndpointMetadataCollection(new EndpointNameMetadata("Bar")),
-            "/bar"
-        ));
+        dataSource.AddEndpoint(
+            new RouteEndpoint(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/foo"),
+                0,
+                new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
+                "/foo"
+            )
+        );
+        dataSource.AddEndpoint(
+            new RouteEndpoint(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/bar"),
+                0,
+                new EndpointMetadataCollection(new EndpointNameMetadata("Bar")),
+                "/bar"
+            )
+        );
         var anotherDataSource = new DynamicEndpointDataSource();
-        anotherDataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/foo2"),
-            0,
-            new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-            "/foo2"
-        ));
+        anotherDataSource.AddEndpoint(
+            new RouteEndpoint(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/foo2"),
+                0,
+                new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
+                "/foo2"
+            )
+        );
 
-        var compositeDataSource = new CompositeEndpointDataSource(new[] { dataSource, anotherDataSource });
+        var compositeDataSource = new CompositeEndpointDataSource(
+            new[] { dataSource, anotherDataSource }
+        );
 
         // Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => new DataSourceDependentMatcher(compositeDataSource, lifetime, TestMatcherBuilder.Create));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new DataSourceDependentMatcher(compositeDataSource, lifetime, TestMatcherBuilder.Create)
+        );
         Assert.Equal(expectedError, exception.Message);
     }
 
@@ -207,29 +256,39 @@ public class DataSourceDependentMatcherTest
     public void Matcher_ThrowsOnDuplicateEndpointAddedLater()
     {
         // Arrange
-        var expectedError = "Duplicate endpoint name 'Foo' found on '/bar' and '/foo'. Endpoint names must be globally unique.";
+        var expectedError =
+            "Duplicate endpoint name 'Foo' found on '/bar' and '/foo'. Endpoint names must be globally unique.";
         var dataSource = new DynamicEndpointDataSource();
         var lifetime = new DataSourceDependentMatcher.Lifetime();
-        dataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/foo"),
-            0,
-            new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-            "/foo"
-        ));
-
-        // Act (should be all good since no duplicate has been added yet)
-        var matcher = new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create);
-
-        // Assert that rerunning initializer throws AggregateException
-        var exception = Assert.Throws<AggregateException>(
-            () => dataSource.AddEndpoint(new RouteEndpoint(
+        dataSource.AddEndpoint(
+            new RouteEndpoint(
                 TestConstants.EmptyRequestDelegate,
-                RoutePatternFactory.Parse("/bar"),
+                RoutePatternFactory.Parse("/foo"),
                 0,
                 new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-                "/bar"
-        )));
+                "/foo"
+            )
+        );
+
+        // Act (should be all good since no duplicate has been added yet)
+        var matcher = new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            TestMatcherBuilder.Create
+        );
+
+        // Assert that rerunning initializer throws AggregateException
+        var exception = Assert.Throws<AggregateException>(() =>
+            dataSource.AddEndpoint(
+                new RouteEndpoint(
+                    TestConstants.EmptyRequestDelegate,
+                    RoutePatternFactory.Parse("/bar"),
+                    0,
+                    new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
+                    "/bar"
+                )
+            )
+        );
         Assert.Equal(expectedError, exception.InnerException.Message);
     }
 
@@ -246,7 +305,7 @@ public class DataSourceDependentMatcherTest
 
         public override Matcher Build()
         {
-            return new TestMatcher() { Endpoints = Endpoints, };
+            return new TestMatcher() { Endpoints = Endpoints };
         }
     }
 

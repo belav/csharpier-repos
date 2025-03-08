@@ -14,12 +14,24 @@ namespace System.Net.Sockets.Tests
         public void Ctor_InvalidArguments_Throws()
         {
             AssertExtensions.Throws<ArgumentNullException>("localEP", () => new TcpListener(null));
-            AssertExtensions.Throws<ArgumentNullException>("localaddr", () => new TcpListener(null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => new TcpListener(IPAddress.Loopback, -1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localaddr",
+                () => new TcpListener(null, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => new TcpListener(IPAddress.Loopback, -1)
+            );
 #pragma warning disable 0618 // ctor is obsolete
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => new TcpListener(66000));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => new TcpListener(66000)
+            );
 #pragma warning restore 0618
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => TcpListener.Create(66000));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => TcpListener.Create(66000)
+            );
         }
 
         [Theory]
@@ -29,9 +41,9 @@ namespace System.Net.Sockets.Tests
         public void Active_TrueWhileRunning(int ctor)
         {
             var listener =
-                ctor == 0 ? new DerivedTcpListener(new IPEndPoint(IPAddress.Loopback, 0)) :
-                ctor == 1 ? new DerivedTcpListener(IPAddress.Loopback, 0) :
-                new DerivedTcpListener(0);
+                ctor == 0 ? new DerivedTcpListener(new IPEndPoint(IPAddress.Loopback, 0))
+                : ctor == 1 ? new DerivedTcpListener(IPAddress.Loopback, 0)
+                : new DerivedTcpListener(0);
             Assert.False(listener.Active);
             listener.Start();
             Assert.True(listener.Active);
@@ -111,8 +123,14 @@ namespace System.Net.Sockets.Tests
             Assert.False(listener.Pending());
             using (TcpClient client = new TcpClient(new IPEndPoint(IPAddress.Loopback, 0)))
             {
-                Task connectTask = client.ConnectAsync(IPAddress.Loopback, ((IPEndPoint)listener.LocalEndpoint).Port);
-                Assert.True(SpinWait.SpinUntil(() => listener.Pending(), 30000), "Expected Pending to be true within timeout");
+                Task connectTask = client.ConnectAsync(
+                    IPAddress.Loopback,
+                    ((IPEndPoint)listener.LocalEndpoint).Port
+                );
+                Assert.True(
+                    SpinWait.SpinUntil(() => listener.Pending(), 30000),
+                    "Expected Pending to be true within timeout"
+                );
                 listener.AcceptSocket().Dispose();
                 await connectTask;
             }
@@ -128,15 +146,28 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<InvalidOperationException>(() => listener.AcceptSocket());
             Assert.Throws<InvalidOperationException>(() => listener.AcceptTcpClient());
             Assert.Throws<InvalidOperationException>(() => listener.BeginAcceptSocket(null, null));
-            Assert.Throws<InvalidOperationException>(() => listener.BeginAcceptTcpClient(null, null));
-            Assert.Throws<InvalidOperationException>(() => { listener.AcceptSocketAsync(); });
-            Assert.Throws<InvalidOperationException>(() => { listener.AcceptTcpClientAsync(); });
+            Assert.Throws<InvalidOperationException>(() => listener.BeginAcceptTcpClient(null, null)
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                listener.AcceptSocketAsync();
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                listener.AcceptTcpClientAsync();
+            });
 
             Assert.Throws<ArgumentNullException>(() => listener.EndAcceptSocket(null));
             Assert.Throws<ArgumentNullException>(() => listener.EndAcceptTcpClient(null));
 
-            AssertExtensions.Throws<ArgumentException>("asyncResult", () => listener.EndAcceptSocket(Task.CompletedTask));
-            AssertExtensions.Throws<ArgumentException>("asyncResult", () => listener.EndAcceptTcpClient(Task.CompletedTask));
+            AssertExtensions.Throws<ArgumentException>(
+                "asyncResult",
+                () => listener.EndAcceptSocket(Task.CompletedTask)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "asyncResult",
+                () => listener.EndAcceptTcpClient(Task.CompletedTask)
+            );
         }
 
         [Theory]
@@ -144,7 +175,10 @@ namespace System.Net.Sockets.Tests
         [InlineData(1)] // Async
         [InlineData(2)] // Async with Cancellation
         [InlineData(3)] // APM
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51392", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51392",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public async Task Accept_AcceptsPendingSocketOrClient(int mode)
         {
             var listener = new TcpListener(IPAddress.Loopback, 0);
@@ -152,14 +186,23 @@ namespace System.Net.Sockets.Tests
 
             using (var client = new TcpClient())
             {
-                Task connectTask = client.ConnectAsync(IPAddress.Loopback, ((IPEndPoint)listener.LocalEndpoint).Port);
-                using (Socket s = mode switch
-                {
-                    0 => listener.AcceptSocket(),
-                    1 => await listener.AcceptSocketAsync(),
-                    2 => await listener.AcceptSocketAsync(CancellationToken.None),
-                    _ => await Task.Factory.FromAsync(listener.BeginAcceptSocket, listener.EndAcceptSocket, null),
-                })
+                Task connectTask = client.ConnectAsync(
+                    IPAddress.Loopback,
+                    ((IPEndPoint)listener.LocalEndpoint).Port
+                );
+                using (
+                    Socket s = mode switch
+                    {
+                        0 => listener.AcceptSocket(),
+                        1 => await listener.AcceptSocketAsync(),
+                        2 => await listener.AcceptSocketAsync(CancellationToken.None),
+                        _ => await Task.Factory.FromAsync(
+                            listener.BeginAcceptSocket,
+                            listener.EndAcceptSocket,
+                            null
+                        ),
+                    }
+                )
                 {
                     Assert.False(listener.Pending());
                 }
@@ -168,14 +211,23 @@ namespace System.Net.Sockets.Tests
 
             using (var client = new TcpClient())
             {
-                Task connectTask = client.ConnectAsync(IPAddress.Loopback, ((IPEndPoint)listener.LocalEndpoint).Port);
-                using (TcpClient c = mode switch
-                {
-                    0 => listener.AcceptTcpClient(),
-                    1 => await listener.AcceptTcpClientAsync(),
-                    2 => await listener.AcceptTcpClientAsync(CancellationToken.None),
-                    _ => await Task.Factory.FromAsync(listener.BeginAcceptTcpClient, listener.EndAcceptTcpClient, null),
-                })
+                Task connectTask = client.ConnectAsync(
+                    IPAddress.Loopback,
+                    ((IPEndPoint)listener.LocalEndpoint).Port
+                );
+                using (
+                    TcpClient c = mode switch
+                    {
+                        0 => listener.AcceptTcpClient(),
+                        1 => await listener.AcceptTcpClientAsync(),
+                        2 => await listener.AcceptTcpClientAsync(CancellationToken.None),
+                        _ => await Task.Factory.FromAsync(
+                            listener.BeginAcceptTcpClient,
+                            listener.EndAcceptTcpClient,
+                            null
+                        ),
+                    }
+                )
                 {
                     Assert.False(listener.Pending());
                 }
@@ -196,7 +248,7 @@ namespace System.Net.Sockets.Tests
             }
 
             // This should not throw e.g. default to IPv6.
-            TcpListener  l = TcpListener.Create(0);
+            TcpListener l = TcpListener.Create(0);
             l.Stop();
 
             Socket s = new Socket(SocketType.Stream, ProtocolType.Tcp);
@@ -221,7 +273,10 @@ namespace System.Net.Sockets.Tests
             async Task VerifyAccept(TcpListener listener)
             {
                 using var client = new TcpClient();
-                Task connectTask = client.ConnectAsync(IPAddress.Loopback, ((IPEndPoint)listener.LocalEndpoint).Port);
+                Task connectTask = client.ConnectAsync(
+                    IPAddress.Loopback,
+                    ((IPEndPoint)listener.LocalEndpoint).Port
+                );
                 using Socket s = await listener.AcceptSocketAsync();
                 Assert.False(listener.Pending());
                 await connectTask;
@@ -304,10 +359,15 @@ namespace System.Net.Sockets.Tests
         private sealed class DerivedTcpListener : TcpListener
         {
 #pragma warning disable 0618
-            public DerivedTcpListener(int port) : base(port) { }
+            public DerivedTcpListener(int port)
+                : base(port) { }
 #pragma warning restore 0618
-            public DerivedTcpListener(IPEndPoint endpoint) : base(endpoint) { }
-            public DerivedTcpListener(IPAddress address, int port) : base(address, port) { }
+            public DerivedTcpListener(IPEndPoint endpoint)
+                : base(endpoint) { }
+
+            public DerivedTcpListener(IPAddress address, int port)
+                : base(address, port) { }
+
             public new bool Active => base.Active;
         }
     }

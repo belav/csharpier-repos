@@ -18,19 +18,30 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
 {
-    internal abstract class AbstractRemoveAsyncModifierCodeFixProvider<TReturnStatementSyntax, TExpressionSyntax> : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractRemoveAsyncModifierCodeFixProvider<
+        TReturnStatementSyntax,
+        TExpressionSyntax
+    > : SyntaxEditorBasedCodeFixProvider
         where TReturnStatementSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
     {
         protected abstract bool IsAsyncSupportingFunctionSyntax(SyntaxNode node);
-        protected abstract SyntaxNode RemoveAsyncModifier(SyntaxGenerator generator, SyntaxNode methodLikeNode);
-        protected abstract SyntaxNode? ConvertToBlockBody(SyntaxNode node, TExpressionSyntax expressionBody);
+        protected abstract SyntaxNode RemoveAsyncModifier(
+            SyntaxGenerator generator,
+            SyntaxNode methodLikeNode
+        );
+        protected abstract SyntaxNode? ConvertToBlockBody(
+            SyntaxNode node,
+            TExpressionSyntax expressionBody
+        );
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await document
+                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 
             var diagnostic = context.Diagnostics.First();
@@ -41,7 +52,9 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var methodSymbol = GetMethodSymbol(node, semanticModel, cancellationToken);
 
             if (methodSymbol == null)
@@ -55,24 +68,34 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                     CodeAction.Create(
                         CodeFixesResources.Remove_async_modifier,
                         GetDocumentUpdater(context),
-                        nameof(CodeFixesResources.Remove_async_modifier)),
-                    context.Diagnostics);
+                        nameof(CodeFixesResources.Remove_async_modifier)
+                    ),
+                    context.Diagnostics
+                );
             }
         }
 
         protected sealed override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var solutionServices = document.Project.Solution.Services;
             var generator = editor.Generator;
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var compilation = semanticModel.Compilation;
             var knownTypes = new KnownTypes(compilation);
 
             // For fix all we need to do nested locals or lambdas first, so order the diagnostics by location descending
-            foreach (var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start))
+            foreach (
+                var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
+            )
             {
                 var token = diagnostic.Location.FindToken(cancellationToken);
                 var node = token.GetAncestor(IsAsyncSupportingFunctionSyntax);
@@ -85,7 +108,9 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 var methodSymbol = GetMethodSymbol(node, semanticModel, cancellationToken);
                 if (methodSymbol == null)
                 {
-                    Debug.Fail("We should always be able to find the method symbol for the diagnostic.");
+                    Debug.Fail(
+                        "We should always be able to find the method symbol for the diagnostic."
+                    );
                     continue;
                 }
 
@@ -93,26 +118,41 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 // so do it up front. Nothing in the fixer changes the reachability of the end of the method so this is safe
                 var controlFlow = GetControlFlowAnalysis(generator, semanticModel, node);
                 // If control flow couldn't be computed then its probably an empty block, which means we need to add a return anyway
-                var needsReturnStatementAdded = controlFlow == null || controlFlow.EndPointIsReachable;
+                var needsReturnStatementAdded =
+                    controlFlow == null || controlFlow.EndPointIsReachable;
 
-                editor.ReplaceNode(node,
-                    (updatedNode, generator) => RemoveAsyncModifier(
-                        solutionServices, syntaxFacts, generator, updatedNode, methodSymbol.ReturnType, knownTypes, needsReturnStatementAdded));
+                editor.ReplaceNode(
+                    node,
+                    (updatedNode, generator) =>
+                        RemoveAsyncModifier(
+                            solutionServices,
+                            syntaxFacts,
+                            generator,
+                            updatedNode,
+                            methodSymbol.ReturnType,
+                            knownTypes,
+                            needsReturnStatementAdded
+                        )
+                );
             }
         }
 
-        private static IMethodSymbol? GetMethodSymbol(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken)
-            => semanticModel.GetSymbolInfo(node, cancellationToken).Symbol as IMethodSymbol ??
-               semanticModel.GetDeclaredSymbol(node, cancellationToken) as IMethodSymbol;
+        private static IMethodSymbol? GetMethodSymbol(
+            SyntaxNode node,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) =>
+            semanticModel.GetSymbolInfo(node, cancellationToken).Symbol as IMethodSymbol
+            ?? semanticModel.GetDeclaredSymbol(node, cancellationToken) as IMethodSymbol;
 
-        private static bool ShouldOfferFix(ITypeSymbol returnType, KnownTypes knownTypes)
-            => IsTaskType(returnType, knownTypes)
-                || returnType.OriginalDefinition.Equals(knownTypes.TaskOfTType)
-                || returnType.OriginalDefinition.Equals(knownTypes.ValueTaskOfTTypeOpt);
+        private static bool ShouldOfferFix(ITypeSymbol returnType, KnownTypes knownTypes) =>
+            IsTaskType(returnType, knownTypes)
+            || returnType.OriginalDefinition.Equals(knownTypes.TaskOfTType)
+            || returnType.OriginalDefinition.Equals(knownTypes.ValueTaskOfTTypeOpt);
 
-        private static bool IsTaskType(ITypeSymbol returnType, KnownTypes knownTypes)
-            => returnType.OriginalDefinition.Equals(knownTypes.TaskType)
-                || returnType.OriginalDefinition.Equals(knownTypes.ValueTaskType);
+        private static bool IsTaskType(ITypeSymbol returnType, KnownTypes knownTypes) =>
+            returnType.OriginalDefinition.Equals(knownTypes.TaskType)
+            || returnType.OriginalDefinition.Equals(knownTypes.ValueTaskType);
 
         private SyntaxNode RemoveAsyncModifier(
             SolutionServices solutionServices,
@@ -121,7 +161,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             SyntaxNode node,
             ITypeSymbol returnType,
             KnownTypes knownTypes,
-            bool needsReturnStatementAdded)
+            bool needsReturnStatementAdded
+        )
         {
             node = RemoveAsyncModifier(generator, node);
 
@@ -143,7 +184,12 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 else
                 {
                     // For Task<T> returning expression bodied methods we can just wrap the whole expression
-                    var newExpressionBody = WrapExpressionWithTaskFromResult(generator, expressionBody, returnType, knownTypes);
+                    var newExpressionBody = WrapExpressionWithTaskFromResult(
+                        generator,
+                        expressionBody,
+                        returnType,
+                        knownTypes
+                    );
                     node = generator.WithExpression(node, newExpressionBody);
                 }
             }
@@ -160,22 +206,39 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 }
             }
 
-            return ChangeReturnStatements(solutionServices, syntaxFacts, generator, node, returnType, knownTypes);
+            return ChangeReturnStatements(
+                solutionServices,
+                syntaxFacts,
+                generator,
+                node,
+                returnType,
+                knownTypes
+            );
         }
 
-        private static ControlFlowAnalysis? GetControlFlowAnalysis(SyntaxGenerator generator, SemanticModel semanticModel, SyntaxNode node)
+        private static ControlFlowAnalysis? GetControlFlowAnalysis(
+            SyntaxGenerator generator,
+            SemanticModel semanticModel,
+            SyntaxNode node
+        )
         {
             var statements = generator.GetStatements(node);
             if (statements.Count > 0)
             {
-                return semanticModel.AnalyzeControlFlow(statements[0], statements[statements.Count - 1]);
+                return semanticModel.AnalyzeControlFlow(
+                    statements[0],
+                    statements[statements.Count - 1]
+                );
             }
 
             return null;
         }
 
-        private static SyntaxNode AddReturnStatement(SyntaxGenerator generator, SyntaxNode node)
-            => generator.WithStatements(node, generator.GetStatements(node).Concat(generator.ReturnStatement()));
+        private static SyntaxNode AddReturnStatement(SyntaxGenerator generator, SyntaxNode node) =>
+            generator.WithStatements(
+                node,
+                generator.GetStatements(node).Concat(generator.ReturnStatement())
+            );
 
         private SyntaxNode ChangeReturnStatements(
             SolutionServices solutionServices,
@@ -183,13 +246,17 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             SyntaxGenerator generator,
             SyntaxNode node,
             ITypeSymbol returnType,
-            KnownTypes knownTypes)
+            KnownTypes knownTypes
+        )
         {
             var editor = new SyntaxEditor(node, solutionServices);
 
             // Look for all return statements, but if we find a new node that can have the async modifier we stop
             // because that will have its own diagnostic and fix, if applicable
-            var returns = node.DescendantNodes(n => n == node || !IsAsyncSupportingFunctionSyntax(n)).OfType<TReturnStatementSyntax>();
+            var returns = node.DescendantNodes(n =>
+                    n == node || !IsAsyncSupportingFunctionSyntax(n)
+                )
+                .OfType<TReturnStatementSyntax>();
 
             foreach (var returnSyntax in returns)
             {
@@ -197,13 +264,22 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 if (returnExpression is null)
                 {
                     // Convert return; into return Task.CompletedTask;
-                    var returnTaskCompletedTask = GetReturnTaskCompletedTaskStatement(generator, returnType, knownTypes);
+                    var returnTaskCompletedTask = GetReturnTaskCompletedTaskStatement(
+                        generator,
+                        returnType,
+                        knownTypes
+                    );
                     editor.ReplaceNode(returnSyntax, returnTaskCompletedTask);
                 }
                 else
                 {
                     // Convert return <expr>; into return Task.FromResult(<expr>);
-                    var newExpression = WrapExpressionWithTaskFromResult(generator, returnExpression, returnType, knownTypes);
+                    var newExpression = WrapExpressionWithTaskFromResult(
+                        generator,
+                        returnExpression,
+                        returnType,
+                        knownTypes
+                    );
                     editor.ReplaceNode(returnExpression, newExpression);
                 }
             }
@@ -211,13 +287,23 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             return editor.GetChangedRoot();
         }
 
-        private static SyntaxNode GetReturnTaskCompletedTaskStatement(SyntaxGenerator generator, ITypeSymbol returnType, KnownTypes knownTypes)
+        private static SyntaxNode GetReturnTaskCompletedTaskStatement(
+            SyntaxGenerator generator,
+            ITypeSymbol returnType,
+            KnownTypes knownTypes
+        )
         {
             SyntaxNode invocation;
             if (returnType.OriginalDefinition.Equals(knownTypes.TaskType))
             {
-                var taskTypeExpression = TypeExpressionForStaticMemberAccess(generator, knownTypes.TaskType);
-                invocation = generator.MemberAccessExpression(taskTypeExpression, nameof(Task.CompletedTask));
+                var taskTypeExpression = TypeExpressionForStaticMemberAccess(
+                    generator,
+                    knownTypes.TaskType
+                );
+                invocation = generator.MemberAccessExpression(
+                    taskTypeExpression,
+                    nameof(Task.CompletedTask)
+                );
             }
             else
             {
@@ -228,15 +314,31 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             return statement;
         }
 
-        private static SyntaxNode WrapExpressionWithTaskFromResult(SyntaxGenerator generator, SyntaxNode expression, ITypeSymbol returnType, KnownTypes knownTypes)
+        private static SyntaxNode WrapExpressionWithTaskFromResult(
+            SyntaxGenerator generator,
+            SyntaxNode expression,
+            ITypeSymbol returnType,
+            KnownTypes knownTypes
+        )
         {
             if (returnType.OriginalDefinition.Equals(knownTypes.TaskOfTType))
             {
-                var taskTypeExpression = TypeExpressionForStaticMemberAccess(generator, knownTypes.TaskType!);
+                var taskTypeExpression = TypeExpressionForStaticMemberAccess(
+                    generator,
+                    knownTypes.TaskType!
+                );
                 var unwrappedReturnType = returnType.GetTypeArguments()[0];
-                var memberName = generator.GenericName(nameof(Task.FromResult), unwrappedReturnType);
-                var taskFromResult = generator.MemberAccessExpression(taskTypeExpression, memberName);
-                return generator.InvocationExpression(taskFromResult, expression.WithoutTrivia()).WithTriviaFrom(expression);
+                var memberName = generator.GenericName(
+                    nameof(Task.FromResult),
+                    unwrappedReturnType
+                );
+                var taskFromResult = generator.MemberAccessExpression(
+                    taskTypeExpression,
+                    memberName
+                );
+                return generator
+                    .InvocationExpression(taskFromResult, expression.WithoutTrivia())
+                    .WithTriviaFrom(expression);
             }
             else
             {
@@ -246,20 +348,45 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
 
         // Workaround for https://github.com/dotnet/roslyn/issues/43950
         // Copied from https://github.com/dotnet/roslyn-analyzers/blob/f24a5b42c85be6ee572f3a93bef223767fbefd75/src/Utilities/Workspaces/SyntaxGeneratorExtensions.cs#L68-L74
-        private static SyntaxNode TypeExpressionForStaticMemberAccess(SyntaxGenerator generator, INamedTypeSymbol typeSymbol)
+        private static SyntaxNode TypeExpressionForStaticMemberAccess(
+            SyntaxGenerator generator,
+            INamedTypeSymbol typeSymbol
+        )
         {
-            var qualifiedNameSyntaxKind = generator.QualifiedName(generator.IdentifierName("ignored"), generator.IdentifierName("ignored")).RawKind;
-            var memberAccessExpressionSyntaxKind = generator.MemberAccessExpression(generator.IdentifierName("ignored"), "ignored").RawKind;
+            var qualifiedNameSyntaxKind = generator
+                .QualifiedName(
+                    generator.IdentifierName("ignored"),
+                    generator.IdentifierName("ignored")
+                )
+                .RawKind;
+            var memberAccessExpressionSyntaxKind = generator
+                .MemberAccessExpression(generator.IdentifierName("ignored"), "ignored")
+                .RawKind;
 
             var typeExpression = generator.TypeExpression(typeSymbol);
-            return QualifiedNameToMemberAccess(qualifiedNameSyntaxKind, memberAccessExpressionSyntaxKind, typeExpression, generator);
+            return QualifiedNameToMemberAccess(
+                qualifiedNameSyntaxKind,
+                memberAccessExpressionSyntaxKind,
+                typeExpression,
+                generator
+            );
 
             // Local function
-            static SyntaxNode QualifiedNameToMemberAccess(int qualifiedNameSyntaxKind, int memberAccessExpressionSyntaxKind, SyntaxNode expression, SyntaxGenerator generator)
+            static SyntaxNode QualifiedNameToMemberAccess(
+                int qualifiedNameSyntaxKind,
+                int memberAccessExpressionSyntaxKind,
+                SyntaxNode expression,
+                SyntaxGenerator generator
+            )
             {
                 if (expression.RawKind == qualifiedNameSyntaxKind)
                 {
-                    var left = QualifiedNameToMemberAccess(qualifiedNameSyntaxKind, memberAccessExpressionSyntaxKind, expression.ChildNodes().First(), generator);
+                    var left = QualifiedNameToMemberAccess(
+                        qualifiedNameSyntaxKind,
+                        memberAccessExpressionSyntaxKind,
+                        expression.ChildNodes().First(),
+                        generator
+                    );
                     var right = expression.ChildNodes().Last();
                     return generator.MemberAccessExpression(left, right);
                 }

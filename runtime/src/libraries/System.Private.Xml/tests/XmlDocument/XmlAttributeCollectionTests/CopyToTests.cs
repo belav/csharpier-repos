@@ -19,7 +19,8 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2;
+            XmlAttribute attr1,
+                attr2;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr2"));
             XmlAttribute[] destinationArray = new XmlAttribute[2];
@@ -42,7 +43,8 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2;
+            XmlAttribute attr1,
+                attr2;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr2"));
             XmlAttribute[] destinationArray = new XmlAttribute[4];

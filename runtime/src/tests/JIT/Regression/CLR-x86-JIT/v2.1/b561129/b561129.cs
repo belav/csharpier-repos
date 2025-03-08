@@ -1,14 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class WipOrderRow
-{
-}
+public class WipOrderRow { }
 
 public class WIPOrder
 {
@@ -27,9 +24,7 @@ public class WIPOrder
 
 public class ProductionContext
 {
-    public ProductionContext()
-    {
-    }
+    public ProductionContext() { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public WipOrderRow SelectWipOrderByPK(string wipOrderNo, short wipOrderType)
@@ -40,22 +35,15 @@ public class ProductionContext
     public string ReportedWipOrderNo
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        get
-        {
-            return null;
-        }
+        get { return null; }
     }
 
     public short ReportedWipOrderType
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        get
-        {
-            return 0;
-        }
+        get { return 0; }
     }
 }
-
 
 public class ProgressConsumerBuilder
 {
@@ -69,9 +57,13 @@ public class ProgressConsumerBuilder
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public WIPOrder BuildOrder()
     {
-        WIPOrder order = new WIPOrder(_productionContext,
-                                      _productionContext.SelectWipOrderByPK(_productionContext.ReportedWipOrderNo,
-                                                                           _productionContext.ReportedWipOrderType));
+        WIPOrder order = new WIPOrder(
+            _productionContext,
+            _productionContext.SelectWipOrderByPK(
+                _productionContext.ReportedWipOrderNo,
+                _productionContext.ReportedWipOrderType
+            )
+        );
         return order;
     }
 }
@@ -96,4 +88,3 @@ public class MainApp
         }
     }
 }
-

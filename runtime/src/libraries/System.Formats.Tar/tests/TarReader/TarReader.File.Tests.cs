@@ -37,8 +37,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_File_SymbolicLink(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_File_SymbolicLink_Internal(format, testFormat);
+        public void Read_Archive_File_SymbolicLink(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_File_SymbolicLink_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -55,8 +57,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_Folder_File_Utf8(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Folder_File_Utf8_Internal(format, testFormat);
+        public void Read_Archive_Folder_File_Utf8(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Folder_File_Utf8_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -64,8 +68,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_Folder_Subfolder_File(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Folder_Subfolder_File_Internal(format, testFormat);
+        public void Read_Archive_Folder_Subfolder_File(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Folder_Subfolder_File_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -73,8 +79,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_FolderSymbolicLink_Folder_Subfolder_File(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Internal(format, testFormat);
+        public void Read_Archive_FolderSymbolicLink_Folder_Subfolder_File(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -82,8 +90,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_Many_Small_Files(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Many_Small_Files_Internal(format, testFormat);
+        public void Read_Archive_Many_Small_Files(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Many_Small_Files_Internal(format, testFormat);
 
         [Theory]
         // V7 does not support longer filenames
@@ -91,8 +101,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_LongPath_Splitable_Under255(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_LongPath_Splitable_Under255_Internal(format, testFormat);
+        public void Read_Archive_LongPath_Splitable_Under255(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_LongPath_Splitable_Under255_Internal(format, testFormat);
 
         [Theory]
         // V7 does not support block devices, character devices or fifos
@@ -108,24 +120,30 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_File_LongSymbolicLink(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_File_LongSymbolicLink_Internal(format, testFormat);
+        public void Read_Archive_File_LongSymbolicLink(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_File_LongSymbolicLink_Internal(format, testFormat);
 
         [Theory]
         // Neither V7 not Ustar can handle a path that does not have separators that can be split under 100 bytes
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_LongFileName_Over100_Under255(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_LongFileName_Over100_Under255_Internal(format, testFormat);
+        public void Read_Archive_LongFileName_Over100_Under255(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_LongFileName_Over100_Under255_Internal(format, testFormat);
 
         [Theory]
         // Neither V7 not Ustar can handle path lengths waaaay beyond name+prefix length
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public void Read_Archive_LongPath_Over255(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_LongPath_Over255_Internal(format, testFormat);
+        public void Read_Archive_LongPath_Over255(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_LongPath_Over255_Internal(format, testFormat);
 
         [Theory]
         [MemberData(nameof(GetV7TestCaseNames))]
@@ -220,7 +238,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Throw_FifoContainsNonZeroDataSection()
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "hdr-only");
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "hdr-only"
+            );
             using TarReader reader = new TarReader(archiveStream);
             Assert.NotNull(reader.GetNextEntry());
             Assert.NotNull(reader.GetNextEntry());
@@ -236,7 +258,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Throw_SingleExtendedAttributesEntryWithNoActualEntry()
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "pax-path-hdr");
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "pax-path-hdr"
+            );
             using TarReader reader = new TarReader(archiveStream);
             Assert.Throws<EndOfStreamException>(() => reader.GetNextEntry());
         }
@@ -244,8 +270,15 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void ReadDataStreamOfGoLangTarGzGnu()
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.GZip, "golang_tar", "pax-bad-hdr-large");
-            using GZipStream decompressor = new GZipStream(archiveStream, CompressionMode.Decompress);
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.GZip,
+                "golang_tar",
+                "pax-bad-hdr-large"
+            );
+            using GZipStream decompressor = new GZipStream(
+                archiveStream,
+                CompressionMode.Decompress
+            );
             VerifyDataStreamOfTarInternal(decompressor, copyData: false);
         }
 
@@ -254,7 +287,11 @@ namespace System.Formats.Tar.Tests
         [InlineData("golang_tar", "v7")]
         public void AllowSpacesInOctalFields(string folderName, string testCaseName)
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, folderName, testCaseName);
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                folderName,
+                testCaseName
+            );
             using TarReader reader = new TarReader(archiveStream);
             TarEntry entry;
             while ((entry = reader.GetNextEntry()) != null)
@@ -274,7 +311,11 @@ namespace System.Formats.Tar.Tests
         [InlineData("writer-big")] // The size field contains an euro char
         public void Throw_ArchivesWithRandomChars(string testCaseName)
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", testCaseName);
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                testCaseName
+            );
             using TarReader reader = new TarReader(archiveStream);
             Assert.Throws<InvalidDataException>(() => reader.GetNextEntry());
         }
@@ -282,7 +323,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void GarbageEntryChecksumZeroReturnNull()
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "issue12435");
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "issue12435"
+            );
             using TarReader reader = new TarReader(archiveStream);
             Assert.Null(reader.GetNextEntry());
         }
@@ -302,7 +347,11 @@ namespace System.Formats.Tar.Tests
             // Sparse entries were created for the GNU format, so they are very rare entry types which are excluded from this test method:
             // pax-nil-sparse-data, pax-nil-sparse-hole, pax-sparse-big
 
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, testFolderName, testCaseName);
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                testFolderName,
+                testCaseName
+            );
             using TarReader reader = new TarReader(archiveStream);
             Assert.Throws<NotSupportedException>(() => reader.GetNextEntry());
         }
@@ -310,7 +359,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void DirectoryListRegularFileAndSparse()
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "gnu-incremental");
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "gnu-incremental"
+            );
             using TarReader reader = new TarReader(archiveStream);
             TarEntry directoryList = reader.GetNextEntry();
 
@@ -326,23 +379,46 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void PaxSizeLargerThanMaxAllowedByStream()
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "writer-big-long");
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "writer-big-long"
+            );
             using TarReader reader = new TarReader(archiveStream);
             // The extended attribute 'size' has the value 17179869184
             // Exception message: Stream length must be non-negative and less than 2^31 - 1 - origin
             Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNextEntry());
         }
 
-        private static void VerifyDataStreamOfTarUncompressedInternal(string testFolderName, string testCaseName, bool copyData)
+        private static void VerifyDataStreamOfTarUncompressedInternal(
+            string testFolderName,
+            string testCaseName,
+            bool copyData
+        )
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, testFolderName, testCaseName);
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                testFolderName,
+                testCaseName
+            );
             VerifyDataStreamOfTarInternal(archiveStream, copyData);
         }
 
-        private static void VerifyDataStreamOfTarGzInternal(TestTarFormat testTarFormat, string testCaseName, bool copyData)
+        private static void VerifyDataStreamOfTarGzInternal(
+            TestTarFormat testTarFormat,
+            string testCaseName,
+            bool copyData
+        )
         {
-            using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.GZip, testTarFormat, testCaseName);
-            using GZipStream decompressor = new GZipStream(archiveStream, CompressionMode.Decompress);
+            using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.GZip,
+                testTarFormat,
+                testCaseName
+            );
+            using GZipStream decompressor = new GZipStream(
+                archiveStream,
+                CompressionMode.Decompress
+            );
             VerifyDataStreamOfTarInternal(decompressor, copyData);
         }
 

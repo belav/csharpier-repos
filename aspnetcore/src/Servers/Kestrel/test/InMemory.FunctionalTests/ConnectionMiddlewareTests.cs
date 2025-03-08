@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
@@ -22,11 +22,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
 {
     public static TheoryData<RequestDelegate> EchoAppRequestDelegates =>
-        new TheoryData<RequestDelegate>
-        {
-                { TestApp.EchoApp },
-                { TestApp.EchoAppPipeWriter }
-        };
+        new TheoryData<RequestDelegate> { { TestApp.EchoApp }, { TestApp.EchoAppPipeWriter } };
 
     [Theory]
     [MemberData(nameof(EchoAppRequestDelegates))]
@@ -56,7 +52,8 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {serviceContext.DateHeaderValue}",
                     "",
-                    "Hello World!");
+                    "Hello World!"
+                );
             }
         }
 
@@ -69,26 +66,31 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(requestDelegate, serviceContext, listenOptions =>
-        {
-            listenOptions.UseConnectionLogging();
-            listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
-            listenOptions.UseConnectionLogging();
-        }))
+        await using (
+            var server = new TestServer(
+                requestDelegate,
+                serviceContext,
+                listenOptions =>
+                {
+                    listenOptions.UseConnectionLogging();
+                    listenOptions.Use(next =>
+                        new AsyncConnectionMiddleware(next).OnConnectionAsync
+                    );
+                    listenOptions.UseConnectionLogging();
+                }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.0",
-                    "Content-Length: 12",
-                    "",
-                    "Hello World?");
+                await connection.Send("POST / HTTP/1.0", "Content-Length: 12", "", "Hello World?");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {serviceContext.DateHeaderValue}",
                     "",
-                    "Hello World!");
+                    "Hello World!"
+                );
             }
         }
     }
@@ -99,36 +101,43 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(requestDelegate, serviceContext, listenOptions =>
-        {
-            listenOptions.UseConnectionLogging();
-            listenOptions.Use((context, next) =>
-            {
-                return new AsyncConnectionMiddleware(next).OnConnectionAsync(context);
-            });
-            listenOptions.UseConnectionLogging();
-        }))
+        await using (
+            var server = new TestServer(
+                requestDelegate,
+                serviceContext,
+                listenOptions =>
+                {
+                    listenOptions.UseConnectionLogging();
+                    listenOptions.Use(
+                        (context, next) =>
+                        {
+                            return new AsyncConnectionMiddleware(next).OnConnectionAsync(context);
+                        }
+                    );
+                    listenOptions.UseConnectionLogging();
+                }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.0",
-                    "Content-Length: 12",
-                    "",
-                    "Hello World?");
+                await connection.Send("POST / HTTP/1.0", "Content-Length: 12", "", "Hello World?");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {serviceContext.DateHeaderValue}",
                     "",
-                    "Hello World!");
+                    "Hello World!"
+                );
             }
         }
     }
 
     [Theory]
     [MemberData(nameof(EchoAppRequestDelegates))]
-    public async Task ImmediateFinAfterOnConnectionAsyncClosesGracefully(RequestDelegate requestDelegate)
+    public async Task ImmediateFinAfterOnConnectionAsyncClosesGracefully(
+        RequestDelegate requestDelegate
+    )
     {
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
         listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
@@ -169,7 +178,9 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     [Theory]
     [CollectDump]
     [MemberData(nameof(EchoAppRequestDelegates))]
-    public async Task ImmediateShutdownAfterOnConnectionAsyncDoesNotCrash(RequestDelegate requestDelegate)
+    public async Task ImmediateShutdownAfterOnConnectionAsyncDoesNotCrash(
+        RequestDelegate requestDelegate
+    )
     {
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
         listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
@@ -227,15 +238,19 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
 
     [Theory]
     [MemberData(nameof(EchoAppRequestDelegates))]
-    public async Task ThrowingSynchronousConnectionMiddlewareDoesNotCrashServer(RequestDelegate requestDelegate)
+    public async Task ThrowingSynchronousConnectionMiddlewareDoesNotCrashServer(
+        RequestDelegate requestDelegate
+    )
     {
         var connectionId = "";
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
-        listenOptions.Use(next => context =>
-        {
-            connectionId = context.ConnectionId;
-            throw new InvalidOperationException();
-        });
+        listenOptions.Use(next =>
+            context =>
+            {
+                connectionId = context.ConnectionId;
+                throw new InvalidOperationException();
+            }
+        );
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 
@@ -243,45 +258,50 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                   "POST / HTTP/1.0",
-                   "Content-Length: 1000",
-                   "\r\n");
+                await connection.Send("POST / HTTP/1.0", "Content-Length: 1000", "\r\n");
 
                 await connection.WaitForConnectionClose();
             }
         }
 
-        Assert.Contains(LogMessages, m => m.Message.Contains("Unhandled exception while processing " + connectionId + "."));
+        Assert.Contains(
+            LogMessages,
+            m => m.Message.Contains("Unhandled exception while processing " + connectionId + ".")
+        );
     }
 
     [Fact]
     public async Task CanFlushAsyncWithConnectionMiddleware()
     {
-        var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-            .UsePassThrough();
+        var listenOptions = new ListenOptions(
+            new IPEndPoint(IPAddress.Loopback, 0)
+        ).UsePassThrough();
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async context =>
-        {
-            await context.Response.WriteAsync("Hello ");
-            await context.Response.Body.FlushAsync();
-            await context.Response.WriteAsync("World!");
-        }, serviceContext, listenOptions))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    await context.Response.WriteAsync("Hello ");
+                    await context.Response.Body.FlushAsync();
+                    await context.Response.WriteAsync("World!");
+                },
+                serviceContext,
+                listenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {serviceContext.DateHeaderValue}",
                     "",
-                    "Hello World!");
+                    "Hello World!"
+                );
             }
         }
     }
@@ -289,30 +309,35 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     [Fact]
     public async Task CanFlushAsyncWithConnectionMiddlewarePipeWriter()
     {
-        var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-            .UsePassThrough();
+        var listenOptions = new ListenOptions(
+            new IPEndPoint(IPAddress.Loopback, 0)
+        ).UsePassThrough();
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async context =>
-        {
-            await context.Response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("Hello "));
-            await context.Response.BodyWriter.FlushAsync();
-            await context.Response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("World!"));
-        }, serviceContext, listenOptions))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    await context.Response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("Hello "));
+                    await context.Response.BodyWriter.FlushAsync();
+                    await context.Response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("World!"));
+                },
+                serviceContext,
+                listenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {serviceContext.DateHeaderValue}",
                     "",
-                    "Hello World!");
+                    "Hello World!"
+                );
             }
         }
     }
@@ -330,7 +355,10 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
         public async Task OnConnectionAsync(ConnectionContext context)
         {
             var old = context.Transport;
-            var duplexPipe = new DuplexPipeStreamAdapter<RewritingStream>(context.Transport, s => new RewritingStream(s));
+            var duplexPipe = new DuplexPipeStreamAdapter<RewritingStream>(
+                context.Transport,
+                s => new RewritingStream(s)
+            );
             _rewritingStream = duplexPipe.Stream;
 
             try
@@ -364,7 +392,10 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
             await Task.Yield();
 
             var old = context.Transport;
-            var duplexPipe = new DuplexPipeStreamAdapter<RewritingStream>(context.Transport, s => new RewritingStream(s));
+            var duplexPipe = new DuplexPipeStreamAdapter<RewritingStream>(
+                context.Transport,
+                s => new RewritingStream(s)
+            );
 
             try
             {
@@ -402,14 +433,8 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
 
         public override long Position
         {
-            get
-            {
-                return _innerStream.Position;
-            }
-            set
-            {
-                _innerStream.Position = value;
-            }
+            get { return _innerStream.Position; }
+            set { _innerStream.Position = value; }
         }
 
         public override void Flush()
@@ -431,7 +456,12 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
             return actual;
         }
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             var actual = await _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
 
@@ -463,7 +493,12 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
             _innerStream.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             for (int i = 0; i < buffer.Length; i++)
             {

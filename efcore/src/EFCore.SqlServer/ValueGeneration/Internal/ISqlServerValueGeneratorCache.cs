@@ -24,5 +24,6 @@ public interface ISqlServerValueGeneratorCache : IValueGeneratorCache
     /// </summary>
     SqlServerSequenceValueGeneratorState GetOrAddSequenceState(
         IProperty property,
-        IRelationalConnection connection);
+        IRelationalConnection connection
+    );
 }

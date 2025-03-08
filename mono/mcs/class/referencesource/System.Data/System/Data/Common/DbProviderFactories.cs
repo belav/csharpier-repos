@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Collections;
     using System.Collections.Concurrent;
@@ -16,12 +16,12 @@ namespace System.Data.Common {
     using System.Data;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Xml;
     using System.Linq;
     using System.Reflection;
+    using System.Xml;
 
-    public static class DbProviderFactories {
-
+    public static class DbProviderFactories
+    {
         private const string AssemblyQualifiedName = "AssemblyQualifiedName";
         private const string Instance = "Instance";
         private const string InvariantName = "InvariantName";
@@ -29,30 +29,40 @@ namespace System.Data.Common {
         private const string Description = "Description";
         private const string InstanceFieldName = "Instance";
 
-
-        private static ConcurrentDictionary<string, ProviderRegistration> _registeredFactories = new ConcurrentDictionary<string, ProviderRegistration>();
+        private static ConcurrentDictionary<string, ProviderRegistration> _registeredFactories =
+            new ConcurrentDictionary<string, ProviderRegistration>();
         private static ConnectionState _initState; // closed, connecting, open
         private static DataTable _providerTable;
         private static object _lockobj = new object();
 
-        static public DbProviderFactory GetFactory(string providerInvariantName) => GetFactory(providerInvariantName, true);
+        public static DbProviderFactory GetFactory(string providerInvariantName) =>
+            GetFactory(providerInvariantName, true);
 
-        static public DbProviderFactory GetFactory(string providerInvariantName, bool throwOnError) {
+        public static DbProviderFactory GetFactory(string providerInvariantName, bool throwOnError)
+        {
             if (throwOnError)
                 ADP.CheckArgumentLength(providerInvariantName, "providerInvariantName");
             // NOTES: Include the Framework Providers and any other Providers listed in the config file.
             DataTable providerTable = GetProviderTable();
-            if (null != providerTable) {
+            if (null != providerTable)
+            {
                 // we don't need to copy the DataTable because its used in a controlled fashion
                 // also we don't need to create a blank datatable because we know the information won't exist
 
 #if DEBUG
                 DataColumn[] pkey = providerTable.PrimaryKey;
-                Debug.Assert(null != providerTable.Columns[InvariantName], "missing primary key column");
-                Debug.Assert((null != pkey) && (1 == pkey.Length) && (InvariantName == pkey[0].ColumnName), "bad primary key");
+                Debug.Assert(
+                    null != providerTable.Columns[InvariantName],
+                    "missing primary key column"
+                );
+                Debug.Assert(
+                    (null != pkey) && (1 == pkey.Length) && (InvariantName == pkey[0].ColumnName),
+                    "bad primary key"
+                );
 #endif
                 DataRow providerRow = providerTable.Rows.Find(providerInvariantName);
-                if (null != providerRow) {
+                if (null != providerRow)
+                {
                     return DbProviderFactories.GetFactory(providerRow);
                 }
             }
@@ -62,33 +72,42 @@ namespace System.Data.Common {
             return null;
         }
 
-        static public DbProviderFactory GetFactory(DataRow providerRow) {
+        public static DbProviderFactory GetFactory(DataRow providerRow)
+        {
             ADP.CheckArgumentNull(providerRow, "providerRow");
-            
+
             // fail with ConfigProviderMissing rather than ColumnNotInTheTable exception
             DataColumn column = providerRow.Table.Columns[AssemblyQualifiedName];
-            if (null != column) { 
+            if (null != column)
+            {
                 // column value may not be a string
                 string assemblyQualifiedName = providerRow[column] as string;
-                if (!ADP.IsEmpty(assemblyQualifiedName)) {
-
-    // FXCop is concerned about the following line call to Get Type,
-    // If this code is deemed safe during our security review we should add this warning to our exclusion list.
-    // FXCop Message, pertaining to the call to GetType.
-    //
-    // Secure late-binding methods,System.Data.dll!System.Data.Common.DbProviderFactories.GetFactory(System.Data.DataRow):System.Data.Common.DbProviderFactory,
+                if (!ADP.IsEmpty(assemblyQualifiedName))
+                {
+                    // FXCop is concerned about the following line call to Get Type,
+                    // If this code is deemed safe during our security review we should add this warning to our exclusion list.
+                    // FXCop Message, pertaining to the call to GetType.
+                    //
+                    // Secure late-binding methods,System.Data.dll!System.Data.Common.DbProviderFactories.GetFactory(System.Data.DataRow):System.Data.Common.DbProviderFactory,
                     Type providerType = Type.GetType(assemblyQualifiedName);
-                    if (null != providerType) {
-
-                        System.Reflection.FieldInfo providerInstance = providerType.GetField(Instance, System.Reflection.BindingFlags.DeclaredOnly|System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.Static);
-                        if (null != providerInstance) {
+                    if (null != providerType)
+                    {
+                        System.Reflection.FieldInfo providerInstance = providerType.GetField(
+                            Instance,
+                            System.Reflection.BindingFlags.DeclaredOnly
+                                | System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.Static
+                        );
+                        if (null != providerInstance)
+                        {
                             Debug.Assert(providerInstance.IsPublic, "field not public");
                             Debug.Assert(providerInstance.IsStatic, "field not static");
 
-                             if (providerInstance.FieldType.IsSubclassOf(typeof(DbProviderFactory))) {
-
+                            if (providerInstance.FieldType.IsSubclassOf(typeof(DbProviderFactory)))
+                            {
                                 object factory = providerInstance.GetValue(null);
-                                if (null != factory) {
+                                if (null != factory)
+                                {
                                     return (DbProviderFactory)factory;
                                 }
                                 // else throw ConfigProviderInvalid
@@ -104,19 +123,23 @@ namespace System.Data.Common {
             throw ADP.ConfigProviderMissing();
         }
 
-        static public DbProviderFactory GetFactory(DbConnection connection) {
+        public static DbProviderFactory GetFactory(DbConnection connection)
+        {
             ADP.CheckArgumentNull(connection, "connection");
 
             return connection.ProviderFactory;
         }
-            
-        static public DataTable GetFactoryClasses() { // V1.2.3300
+
+        public static DataTable GetFactoryClasses()
+        { // V1.2.3300
             // NOTES: Include the Framework Providers and any other Providers listed in the config file.
             DataTable dataTable = GetProviderTable();
-            if (null != dataTable) {
+            if (null != dataTable)
+            {
                 dataTable = dataTable.Copy();
             }
-            else {
+            else
+            {
                 dataTable = DbProviderFactoriesConfigurationHandler.CreateProviderDataTable();
             }
             return dataTable;
@@ -133,12 +156,39 @@ namespace System.Data.Common {
             //  <add name="OracleClient Data Provider" invariant="System.Data.OracleClient" description=".Net Framework Data Provider for Oracle" type="System.Data.OracleClient.OracleClientFactory, System.Data.OracleClient, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             //  <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             Type sysDataType = typeof(System.Data.SqlClient.SqlClientFactory);
-            string asmQualName = sysDataType.AssemblyQualifiedName.ToString().Replace(DbProviderFactoriesConfigurationHandler.sqlclientPartialAssemblyQualifiedName, DbProviderFactoriesConfigurationHandler.oracleclientPartialAssemblyQualifiedName);
-            DbProviderFactoryConfigSection[] dbFactoriesConfigSection = new DbProviderFactoryConfigSection[(int)DbProvidersIndex.DbProvidersIndexCount];
-            dbFactoriesConfigSection[(int)DbProvidersIndex.Odbc] = new DbProviderFactoryConfigSection(typeof(System.Data.Odbc.OdbcFactory), DbProviderFactoriesConfigurationHandler.odbcProviderName, DbProviderFactoriesConfigurationHandler.odbcProviderDescription);
-            dbFactoriesConfigSection[(int)DbProvidersIndex.OleDb] = new DbProviderFactoryConfigSection(typeof(System.Data.OleDb.OleDbFactory), DbProviderFactoriesConfigurationHandler.oledbProviderName, DbProviderFactoriesConfigurationHandler.oledbProviderDescription);
-            dbFactoriesConfigSection[(int)DbProvidersIndex.OracleClient] = new DbProviderFactoryConfigSection(DbProviderFactoriesConfigurationHandler.oracleclientProviderName, DbProviderFactoriesConfigurationHandler.oracleclientProviderNamespace, DbProviderFactoriesConfigurationHandler.oracleclientProviderDescription, asmQualName);
-            dbFactoriesConfigSection[(int)DbProvidersIndex.SqlClient] = new DbProviderFactoryConfigSection(typeof(System.Data.SqlClient.SqlClientFactory), DbProviderFactoriesConfigurationHandler.sqlclientProviderName, DbProviderFactoriesConfigurationHandler.sqlclientProviderDescription);
+            string asmQualName = sysDataType
+                .AssemblyQualifiedName.ToString()
+                .Replace(
+                    DbProviderFactoriesConfigurationHandler.sqlclientPartialAssemblyQualifiedName,
+                    DbProviderFactoriesConfigurationHandler.oracleclientPartialAssemblyQualifiedName
+                );
+            DbProviderFactoryConfigSection[] dbFactoriesConfigSection =
+                new DbProviderFactoryConfigSection[(int)DbProvidersIndex.DbProvidersIndexCount];
+            dbFactoriesConfigSection[(int)DbProvidersIndex.Odbc] =
+                new DbProviderFactoryConfigSection(
+                    typeof(System.Data.Odbc.OdbcFactory),
+                    DbProviderFactoriesConfigurationHandler.odbcProviderName,
+                    DbProviderFactoriesConfigurationHandler.odbcProviderDescription
+                );
+            dbFactoriesConfigSection[(int)DbProvidersIndex.OleDb] =
+                new DbProviderFactoryConfigSection(
+                    typeof(System.Data.OleDb.OleDbFactory),
+                    DbProviderFactoriesConfigurationHandler.oledbProviderName,
+                    DbProviderFactoriesConfigurationHandler.oledbProviderDescription
+                );
+            dbFactoriesConfigSection[(int)DbProvidersIndex.OracleClient] =
+                new DbProviderFactoryConfigSection(
+                    DbProviderFactoriesConfigurationHandler.oracleclientProviderName,
+                    DbProviderFactoriesConfigurationHandler.oracleclientProviderNamespace,
+                    DbProviderFactoriesConfigurationHandler.oracleclientProviderDescription,
+                    asmQualName
+                );
+            dbFactoriesConfigSection[(int)DbProvidersIndex.SqlClient] =
+                new DbProviderFactoryConfigSection(
+                    typeof(System.Data.SqlClient.SqlClientFactory),
+                    DbProviderFactoriesConfigurationHandler.sqlclientProviderName,
+                    DbProviderFactoriesConfigurationHandler.sqlclientProviderDescription
+                );
 
             for (int i = 0; i < dbFactoriesConfigSection.Length; i++)
             {
@@ -148,12 +198,26 @@ namespace System.Data.Common {
 
                     if (i == ((int)DbProvidersIndex.OracleClient)) // OracleClient Provider: Include only if it installed
                     {
-                        Type providerType = Type.GetType(dbFactoriesConfigSection[i].AssemblyQualifiedName);
+                        Type providerType = Type.GetType(
+                            dbFactoriesConfigSection[i].AssemblyQualifiedName
+                        );
                         if (providerType != null)
                         {
                             // NOTES: Try and create a instance; If it fails, it will throw a System.NullReferenceException exception;
-                            System.Reflection.FieldInfo providerInstance = providerType.GetField(Instance, System.Reflection.BindingFlags.DeclaredOnly | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                            if ((null != providerInstance) && (providerInstance.FieldType.IsSubclassOf(typeof(DbProviderFactory))))
+                            System.Reflection.FieldInfo providerInstance = providerType.GetField(
+                                Instance,
+                                System.Reflection.BindingFlags.DeclaredOnly
+                                    | System.Reflection.BindingFlags.Public
+                                    | System.Reflection.BindingFlags.Static
+                            );
+                            if (
+                                (null != providerInstance)
+                                && (
+                                    providerInstance.FieldType.IsSubclassOf(
+                                        typeof(DbProviderFactory)
+                                    )
+                                )
+                            )
                             {
                                 Debug.Assert(providerInstance.IsPublic, "field not public");
                                 Debug.Assert(providerInstance.IsStatic, "field not static");
@@ -177,7 +241,9 @@ namespace System.Data.Common {
                         row[Name] = dbFactoriesConfigSection[i].Name;
                         row[InvariantName] = dbFactoriesConfigSection[i].InvariantName;
                         row[Description] = dbFactoriesConfigSection[i].Description;
-                        row[AssemblyQualifiedName] = dbFactoriesConfigSection[i].AssemblyQualifiedName;
+                        row[AssemblyQualifiedName] = dbFactoriesConfigSection[
+                            i
+                        ].AssemblyQualifiedName;
                         dataTable.Rows.Add(row);
                     } // Else Ignore and do not include to table;
                 }
@@ -192,14 +258,38 @@ namespace System.Data.Common {
                     bool flagIncludeToTable = false;
 
                     // OracleClient Provider: Include only if it installed
-                    if (configDataTable.Rows[i][AssemblyQualifiedName].ToString().ToLowerInvariant().Contains(DbProviderFactoriesConfigurationHandler.oracleclientProviderNamespace.ToString().ToLowerInvariant()))
+                    if (
+                        configDataTable
+                            .Rows[i][AssemblyQualifiedName]
+                            .ToString()
+                            .ToLowerInvariant()
+                            .Contains(
+                                DbProviderFactoriesConfigurationHandler
+                                    .oracleclientProviderNamespace.ToString()
+                                    .ToLowerInvariant()
+                            )
+                    )
                     {
-                        Type providerType = Type.GetType(configDataTable.Rows[i][AssemblyQualifiedName].ToString());
+                        Type providerType = Type.GetType(
+                            configDataTable.Rows[i][AssemblyQualifiedName].ToString()
+                        );
                         if (providerType != null)
                         {
                             // NOTES: Try and create a instance; If it fails, it will throw a System.NullReferenceException exception;
-                            System.Reflection.FieldInfo providerInstance = providerType.GetField(Instance, System.Reflection.BindingFlags.DeclaredOnly | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                            if ((null != providerInstance) && (providerInstance.FieldType.IsSubclassOf(typeof(DbProviderFactory))))
+                            System.Reflection.FieldInfo providerInstance = providerType.GetField(
+                                Instance,
+                                System.Reflection.BindingFlags.DeclaredOnly
+                                    | System.Reflection.BindingFlags.Public
+                                    | System.Reflection.BindingFlags.Static
+                            );
+                            if (
+                                (null != providerInstance)
+                                && (
+                                    providerInstance.FieldType.IsSubclassOf(
+                                        typeof(DbProviderFactory)
+                                    )
+                                )
+                            )
                             {
                                 Debug.Assert(providerInstance.IsPublic, "field not public");
                                 Debug.Assert(providerInstance.IsStatic, "field not static");
@@ -217,13 +307,13 @@ namespace System.Data.Common {
                         flagIncludeToTable = true;
                     }
 
-                    if(flagIncludeToTable == true)
+                    if (flagIncludeToTable == true)
                     {
                         // NOTES: If it already exist in the configTable, it raises a ConstraintException;
                         dataTable.Rows.Add(configDataTable.Rows[i].ItemArray);
                     }
                 }
-                catch (System.Data.ConstraintException) 
+                catch (System.Data.ConstraintException)
                 {
                     // NOTES: Ignore item; Already exist in the configTable, hence the ConstraintException; Move to the next item;
                 }
@@ -232,38 +322,58 @@ namespace System.Data.Common {
             return dataTable;
         }
 
-        static private DataTable GetProviderTable() {
+        private static DataTable GetProviderTable()
+        {
             Initialize();
             return _providerTable;
         }
 
-        static private void Initialize() {
-            if (ConnectionState.Open != _initState) {
-                lock (_lockobj) {
-                    switch(_initState) {
-                    case ConnectionState.Closed:
-                        _initState = ConnectionState.Connecting; // used for preventing recursion
-                        try {
-                            DataSet configTable = PrivilegedConfigurationManager.GetSection(DbProviderFactoriesConfigurationHandler.sectionName) as DataSet;
-                            _providerTable = (null != configTable) ? IncludeFrameworkFactoryClasses(configTable.Tables[DbProviderFactoriesConfigurationHandler.providerGroup]) : IncludeFrameworkFactoryClasses(null);
-                        }
-                        finally {
-                            _initState = ConnectionState.Open;
-                        }
-                        break;
-                    case ConnectionState.Connecting:
-                    case ConnectionState.Open:
-                        break;
-                    default:
-                        Debug.Assert(false, "unexpected state");
-                        break;
+        private static void Initialize()
+        {
+            if (ConnectionState.Open != _initState)
+            {
+                lock (_lockobj)
+                {
+                    switch (_initState)
+                    {
+                        case ConnectionState.Closed:
+                            _initState = ConnectionState.Connecting; // used for preventing recursion
+                            try
+                            {
+                                DataSet configTable =
+                                    PrivilegedConfigurationManager.GetSection(
+                                        DbProviderFactoriesConfigurationHandler.sectionName
+                                    ) as DataSet;
+                                _providerTable =
+                                    (null != configTable)
+                                        ? IncludeFrameworkFactoryClasses(
+                                            configTable.Tables[
+                                                DbProviderFactoriesConfigurationHandler.providerGroup
+                                            ]
+                                        )
+                                        : IncludeFrameworkFactoryClasses(null);
+                            }
+                            finally
+                            {
+                                _initState = ConnectionState.Open;
+                            }
+                            break;
+                        case ConnectionState.Connecting:
+                        case ConnectionState.Open:
+                            break;
+                        default:
+                            Debug.Assert(false, "unexpected state");
+                            break;
                     }
                 }
             }
         }
 
 #if MONO
-        public static bool TryGetFactory(string providerInvariantName, out DbProviderFactory factory)
+        public static bool TryGetFactory(
+            string providerInvariantName,
+            out DbProviderFactory factory
+        )
         {
             factory = GetFactory(providerInvariantName, throwOnError: false);
             return factory != null;
@@ -274,13 +384,22 @@ namespace System.Data.Common {
             return _registeredFactories.Keys.ToList();
         }
 
-        public static void RegisterFactory(string providerInvariantName, string factoryTypeAssemblyQualifiedName)
+        public static void RegisterFactory(
+            string providerInvariantName,
+            string factoryTypeAssemblyQualifiedName
+        )
         {
             ADP.CheckArgumentLength(providerInvariantName, nameof(providerInvariantName));
-            ADP.CheckArgumentLength(factoryTypeAssemblyQualifiedName, nameof(factoryTypeAssemblyQualifiedName));
-            
-            // this method performs a deferred registration: the type name specified is checked when the factory is requested for the first time. 
-            _registeredFactories[providerInvariantName] = new ProviderRegistration(factoryTypeAssemblyQualifiedName, null);
+            ADP.CheckArgumentLength(
+                factoryTypeAssemblyQualifiedName,
+                nameof(factoryTypeAssemblyQualifiedName)
+            );
+
+            // this method performs a deferred registration: the type name specified is checked when the factory is requested for the first time.
+            _registeredFactories[providerInvariantName] = new ProviderRegistration(
+                factoryTypeAssemblyQualifiedName,
+                null
+            );
         }
 
         private static DbProviderFactory GetFactoryInstance(Type providerFactoryClass)
@@ -288,10 +407,18 @@ namespace System.Data.Common {
             ADP.CheckArgumentNull(providerFactoryClass, nameof(providerFactoryClass));
             if (!providerFactoryClass.IsSubclassOf(typeof(DbProviderFactory)))
             {
-                throw ADP.Argument(SR.Format(SR.ADP_DbProviderFactories_NotAFactoryType, providerFactoryClass.FullName));
+                throw ADP.Argument(
+                    SR.Format(
+                        SR.ADP_DbProviderFactories_NotAFactoryType,
+                        providerFactoryClass.FullName
+                    )
+                );
             }
 
-            FieldInfo providerInstance = providerFactoryClass.GetField(InstanceFieldName, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static);
+            FieldInfo providerInstance = providerFactoryClass.GetField(
+                InstanceFieldName,
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static
+            );
             if (null == providerInstance)
             {
                 throw ADP.InvalidOperation(SR.ADP_DbProviderFactories_NoInstance);
@@ -318,23 +445,31 @@ namespace System.Data.Common {
             ADP.CheckArgumentLength(providerInvariantName, nameof(providerInvariantName));
             ADP.CheckArgumentNull(factory, nameof(factory));
 
-            _registeredFactories[providerInvariantName] = new ProviderRegistration(factory.GetType().AssemblyQualifiedName, factory);
+            _registeredFactories[providerInvariantName] = new ProviderRegistration(
+                factory.GetType().AssemblyQualifiedName,
+                factory
+            );
         }
-        
+
         public static bool UnregisterFactory(string providerInvariantName)
         {
-            return !string.IsNullOrWhiteSpace(providerInvariantName) && _registeredFactories.TryRemove(providerInvariantName, out _);
+            return !string.IsNullOrWhiteSpace(providerInvariantName)
+                && _registeredFactories.TryRemove(providerInvariantName, out _);
         }
 
         private struct ProviderRegistration
         {
-            internal ProviderRegistration(string factoryTypeAssemblyQualifiedName, DbProviderFactory factoryInstance)
+            internal ProviderRegistration(
+                string factoryTypeAssemblyQualifiedName,
+                DbProviderFactory factoryInstance
+            )
             {
                 this.FactoryTypeAssemblyQualifiedName = factoryTypeAssemblyQualifiedName;
                 this.FactoryInstance = factoryInstance;
             }
 
             internal string FactoryTypeAssemblyQualifiedName { get; }
+
             /// <summary>
             /// The cached instance of the type in <see cref="FactoryTypeAssemblyQualifiedName"/>. If null, this registation is seen as a deferred registration
             /// and <see cref="FactoryTypeAssemblyQualifiedName"/> is checked the first time when this registration is requested through GetFactory().

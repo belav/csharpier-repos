@@ -22,33 +22,27 @@ namespace System.ServiceModel.Activities
         }
 
         [DataMember(EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal object Value
         {
-            get
-            {
-                return this.value;
-            }
-
-            set
-            {
-                this.value = value;
-            }
+            get { return this.value; }
+            set { this.value = value; }
         }
 
         [DataMember(EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal int Options
         {
-            get
-            {
-                return this.options;
-            }
-
-            set
-            {
-                this.options = value;
-            }
+            get { return this.options; }
+            set { this.options = value; }
         }
 
         public InstanceValue ToInstanceValue()

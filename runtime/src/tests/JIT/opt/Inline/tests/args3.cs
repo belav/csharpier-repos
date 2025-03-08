@@ -17,7 +17,7 @@ namespace JitInliningTest
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             int retval = -1056;
             int[] myArray = { 1, 2, 3, 4, 5 };
@@ -31,4 +31,3 @@ namespace JitInliningTest
         }
     }
 }
-

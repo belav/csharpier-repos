@@ -5,7 +5,8 @@ using System.Diagnostics;
 
 namespace System.Collections.Generic
 {
-    internal sealed class IDictionaryDebugView<TKey, TValue> where TKey : notnull
+    internal sealed class IDictionaryDebugView<TKey, TValue>
+        where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> _dict;
 

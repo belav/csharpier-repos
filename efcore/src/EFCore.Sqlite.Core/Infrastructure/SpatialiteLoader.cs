@@ -120,8 +120,10 @@ public static class SpatialiteLoader
         {
             var candidateAssets = new Dictionary<(string, string), int>();
             var rid = RuntimeInformation.RuntimeIdentifier;
-            var rids = DependencyContext.Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)?.Fallbacks.ToList()
-                ?? new List<string?>();
+            var rids =
+                DependencyContext
+                    .Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)
+                    ?.Fallbacks.ToList() ?? new List<string?>();
             rids.Insert(0, rid);
 
             foreach (var library in DependencyContext.Default.RuntimeLibraries)
@@ -130,10 +132,13 @@ public static class SpatialiteLoader
                 {
                     foreach (var file in group.RuntimeFiles)
                     {
-                        if (string.Equals(
+                        if (
+                            string.Equals(
                                 Path.GetFileName(file.Path),
                                 "mod_spatialite" + SharedLibraryExtension,
-                                StringComparison.OrdinalIgnoreCase))
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             var fallbacks = rids.IndexOf(group.Runtime);
                             if (fallbacks != -1 && library.Path is not null)
@@ -145,8 +150,10 @@ public static class SpatialiteLoader
                 }
             }
 
-            var assetPath = candidateAssets.OrderBy(p => p.Value)
-                .Select(p => p.Key).FirstOrDefault();
+            var assetPath = candidateAssets
+                .OrderBy(p => p.Value)
+                .Select(p => p.Key)
+                .FirstOrDefault();
             if (assetPath != default)
             {
                 string? assetDirectory;
@@ -155,18 +162,26 @@ public static class SpatialiteLoader
                     // NB: This enables framework-dependent deployments
                     assetDirectory = Path.Combine(
                         AppContext.BaseDirectory,
-                        Path.GetDirectoryName(assetPath.Item2.Replace('/', Path.DirectorySeparatorChar))!);
+                        Path.GetDirectoryName(
+                            assetPath.Item2.Replace('/', Path.DirectorySeparatorChar)
+                        )!
+                    );
                 }
                 else
                 {
                     string? assetFullPath = null;
-                    var probingDirectories = ((string)AppDomain.CurrentDomain.GetData("PROBING_DIRECTORIES")!)
-                        .Split(Path.PathSeparator);
+                    var probingDirectories = (
+                        (string)AppDomain.CurrentDomain.GetData("PROBING_DIRECTORIES")!
+                    ).Split(Path.PathSeparator);
                     foreach (var directory in probingDirectories)
                     {
                         var candidateFullPath = Path.Combine(
                             directory,
-                            (assetPath.Item1 + "/" + assetPath.Item2).Replace('/', Path.DirectorySeparatorChar));
+                            (assetPath.Item1 + "/" + assetPath.Item2).Replace(
+                                '/',
+                                Path.DirectorySeparatorChar
+                            )
+                        );
                         if (File.Exists(candidateFullPath))
                         {
                             assetFullPath = candidateFullPath;
@@ -192,16 +207,23 @@ public static class SpatialiteLoader
                     currentPath = Environment.GetEnvironmentVariable(PathVariableName!);
                 }
 
-                if (currentPath == null
-                    || !currentPath.Split(Path.PathSeparator).Any(
-                        p => string.Equals(
-                            p.TrimEnd(Path.DirectorySeparatorChar),
-                            assetDirectory,
-                            StringComparison.OrdinalIgnoreCase)))
+                if (
+                    currentPath == null
+                    || !currentPath
+                        .Split(Path.PathSeparator)
+                        .Any(p =>
+                            string.Equals(
+                                p.TrimEnd(Path.DirectorySeparatorChar),
+                                assetDirectory,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                )
                 {
                     Environment.SetEnvironmentVariable(
                         PathVariableName!,
-                        assetDirectory + Path.PathSeparator + currentPath);
+                        assetDirectory + Path.PathSeparator + currentPath
+                    );
                 }
             }
         }

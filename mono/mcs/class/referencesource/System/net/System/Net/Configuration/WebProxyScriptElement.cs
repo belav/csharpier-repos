@@ -27,57 +27,60 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            try {
+            try
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-            } catch (Exception exception) {
-
+            }
+            catch (Exception exception)
+            {
                 throw new ConfigurationErrorsException(
-                              SR.GetString(SR.net_config_element_permission,
-                                           ConfigurationStrings.WebProxyScript),
-                              exception);
+                    SR.GetString(
+                        SR.net_config_element_permission,
+                        ConfigurationStrings.WebProxyScript
+                    ),
+                    exception
+                );
             }
         }
 
         [ConfigurationProperty(ConfigurationStrings.DownloadTimeout, DefaultValue = "00:01:00")]
         public TimeSpan DownloadTimeout
         {
-            get { return (TimeSpan) this[this.downloadTimeout]; }
+            get { return (TimeSpan)this[this.downloadTimeout]; }
             set { this[this.downloadTimeout] = value; }
         }
 
-/* Not used with Managed JScript
-        [ConfigurationProperty(ConfigurationStrings.ExecutionTimeout, DefaultValue = "00:00:05")]
-        public TimeSpan ExecutionTimeout
-        {
-            get { return (TimeSpan) this[this.executionTimeout]; }
-            set { this[this.executionTimeout] = value; }
-        }
-*/
+        /* Not used with Managed JScript
+                [ConfigurationProperty(ConfigurationStrings.ExecutionTimeout, DefaultValue = "00:00:05")]
+                public TimeSpan ExecutionTimeout
+                {
+                    get { return (TimeSpan) this[this.executionTimeout]; }
+                    set { this[this.executionTimeout] = value; }
+                }
+        */
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty downloadTimeout =
-            new ConfigurationProperty(ConfigurationStrings.DownloadTimeout,
-                                      typeof(TimeSpan),
-                                      TimeSpan.FromMinutes(1),
-                                      null,
-                                      new TimeSpanValidator(new TimeSpan(0, 0, 0), TimeSpan.MaxValue, false),
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty downloadTimeout = new ConfigurationProperty(
+            ConfigurationStrings.DownloadTimeout,
+            typeof(TimeSpan),
+            TimeSpan.FromMinutes(1),
+            null,
+            new TimeSpanValidator(new TimeSpan(0, 0, 0), TimeSpan.MaxValue, false),
+            ConfigurationPropertyOptions.None
+        );
 
-/* Not used with Managed JScript
-        readonly ConfigurationProperty executionTimeout =
-            new ConfigurationProperty(ConfigurationStrings.ExecutionTimeout,
-                                      typeof(TimeSpan),
-                                      TimeSpan.FromSeconds(5),
-                                      ConfigurationPropertyOptions.None);
-*/
+        /* Not used with Managed JScript
+                readonly ConfigurationProperty executionTimeout =
+                    new ConfigurationProperty(ConfigurationStrings.ExecutionTimeout,
+                                              typeof(TimeSpan),
+                                              TimeSpan.FromSeconds(5),
+                                              ConfigurationPropertyOptions.None);
+        */
     }
 }

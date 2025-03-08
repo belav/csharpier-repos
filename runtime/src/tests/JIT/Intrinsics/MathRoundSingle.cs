@@ -15,23 +15,13 @@ namespace MathRoundSingleTest
 
         public static float staticValue = 1.1f;
 
-        public static float[] staticValueArray = new float[]
-        {
-            2.2f,
-            3.3f,
-            4.4f
-        };
+        public static float[] staticValueArray = new float[] { 2.2f, 3.3f, 4.4f };
 
         public float instanceValue = 5.5f;
 
-        public float[] instanceValueArray = new float[]
-        {
-            6.6f,
-            7.7f,
-            8.8f
-        };
+        public float[] instanceValueArray = new float[] { 6.6f, 7.7f, 8.8f };
 
-        unsafe static int Main()
+        static unsafe int Main()
         {
             float localValue = 9.9f;
 
@@ -80,19 +70,25 @@ namespace MathRoundSingleTest
             {
                 if (MathF.Round(pStaticValueArray[0]) != 2.0f)
                 {
-                    Console.WriteLine("MathF.Round of a addressed static value array (index 0) failed");
+                    Console.WriteLine(
+                        "MathF.Round of a addressed static value array (index 0) failed"
+                    );
                     return Fail;
                 }
 
                 if (MathF.Round(pStaticValueArray[1]) != 3.0f)
                 {
-                    Console.WriteLine("MathF.Round of a addressed static value array (index 1) failed");
+                    Console.WriteLine(
+                        "MathF.Round of a addressed static value array (index 1) failed"
+                    );
                     return Fail;
                 }
 
                 if (MathF.Round(pStaticValueArray[2]) != 4.0f)
                 {
-                    Console.WriteLine("MathF.Round of a addressed static value array (index 2) failed");
+                    Console.WriteLine(
+                        "MathF.Round of a addressed static value array (index 2) failed"
+                    );
                     return Fail;
                 }
             }
@@ -134,19 +130,25 @@ namespace MathRoundSingleTest
             {
                 if (MathF.Round(pInstanceValueArray[0]) != 7.0f)
                 {
-                    Console.WriteLine("MathF.Round of a addressed instance value array (index 0) failed");
+                    Console.WriteLine(
+                        "MathF.Round of a addressed instance value array (index 0) failed"
+                    );
                     return Fail;
                 }
 
                 if (MathF.Round(pInstanceValueArray[1]) != 8.0f)
                 {
-                    Console.WriteLine("MathF.Round of a addressed instance value array (index 1) failed");
+                    Console.WriteLine(
+                        "MathF.Round of a addressed instance value array (index 1) failed"
+                    );
                     return Fail;
                 }
 
                 if (MathF.Round(pInstanceValueArray[2]) != 9.0f)
                 {
-                    Console.WriteLine("MathF.Round of a addressed instance value array (index 2) failed");
+                    Console.WriteLine(
+                        "MathF.Round of a addressed instance value array (index 2) failed"
+                    );
                     return Fail;
                 }
             }

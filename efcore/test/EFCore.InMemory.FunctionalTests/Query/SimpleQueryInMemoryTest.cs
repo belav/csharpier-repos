@@ -14,14 +14,14 @@ public class SimpleQueryInMemoryTest : SimpleQueryTestBase
 
         Assert.Equal(1, staff.ManagerId);
 
-        var query = context.Appraisals
-            .Include(ap => ap.Staff).ThenInclude(s => s.Manager)
-            .Include(ap => ap.Staff).ThenInclude(s => s.SecondaryManager)
+        var query = context
+            .Appraisals.Include(ap => ap.Staff)
+            .ThenInclude(s => s.Manager)
+            .Include(ap => ap.Staff)
+            .ThenInclude(s => s.SecondaryManager)
             .Where(ap => ap.Id == id);
 
-        var appraisal = async
-            ? await query.SingleOrDefaultAsync()
-            : query.SingleOrDefault();
+        var appraisal = async ? await query.SingleOrDefaultAsync() : query.SingleOrDefault();
 
         Assert.Equal(1, staff.ManagerId); // InMemory has different behavior
 
@@ -31,6 +31,5 @@ public class SimpleQueryInMemoryTest : SimpleQueryTestBase
         Assert.Equal(2, appraisal.Staff.SecondaryManagerId);
     }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => InMemoryTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 }

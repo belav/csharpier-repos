@@ -28,26 +28,38 @@ namespace Test
     public class BaseClass<T>
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(T arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg.ToString()); return; }
+        public BaseClass(T arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg.ToString());
+            return;
+        }
     }
 
-    public class DerivedClass<T> : BaseClass<T> where T : new()
+    public class DerivedClass<T> : BaseClass<T>
+        where T : new()
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass() : this(new T()) { }
+        public DerivedClass()
+            : this(new T()) { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(T arg) : base(arg) { }
+        public DerivedClass(T arg)
+            : base(arg) { }
     }
 
     public class Reftype
     {
-        public override string ToString() { return "Reftype instance"; }
+        public override string ToString()
+        {
+            return "Reftype instance";
+        }
     }
 
     public struct Valuetype
     {
-        public override string ToString() { return "Valuetype instance"; }
+        public override string ToString()
+        {
+            return "Valuetype instance";
+        }
     }
 }
-

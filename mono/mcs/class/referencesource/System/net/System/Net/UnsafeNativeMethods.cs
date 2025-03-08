@@ -4,48 +4,49 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Net.Sockets;
-    using System.Net.Cache;
-    using System.Threading;
-    using System.ComponentModel;
+namespace System.Net
+{
     using System.Collections;
-    using System.Runtime.ConstrainedExecution;
-    using System.Security;
-    using Microsoft.Win32.SafeHandles;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Net.Cache;
+    using System.Net.Sockets;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-    using System.IO;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32.SafeHandles;
 
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-    internal static class UnsafeNclNativeMethods {
-
+    internal static class UnsafeNclNativeMethods
+    {
 #if FEATURE_PAL
- #if !PLATFORM_UNIX
+#if !PLATFORM_UNIX
         internal const String DLLPREFIX = "";
         internal const String DLLSUFFIX = ".dll";
- #else // !PLATFORM_UNIX
-  #if __APPLE__
+#else // !PLATFORM_UNIX
+#if __APPLE__
         internal const String DLLPREFIX = "lib";
         internal const String DLLSUFFIX = ".dylib";
-  #elif _AIX
+#elif _AIX
         internal const String DLLPREFIX = "lib";
         internal const String DLLSUFFIX = ".a";
-  #elif __hppa__ || IA64
+#elif __hppa__ || IA64
         internal const String DLLPREFIX = "lib";
         internal const String DLLSUFFIX = ".sl";
-  #else
+#else
         internal const String DLLPREFIX = "lib";
         internal const String DLLSUFFIX = ".so";
-  #endif
- #endif // !PLATFORM_UNIX
+#endif
+#endif // !PLATFORM_UNIX
 
-        internal const String ROTOR_PAL   = DLLPREFIX + "rotor_pal" + DLLSUFFIX;
+        internal const String ROTOR_PAL = DLLPREFIX + "rotor_pal" + DLLSUFFIX;
         internal const String ROTOR_PALRT = DLLPREFIX + "rotor_palrt" + DLLSUFFIX;
         private const String KERNEL32 = ROTOR_PAL;
 #else
@@ -71,68 +72,109 @@ namespace System.Net {
         private const string TOKENBINDING = "tokenbinding.dll";
 
 #if !FEATURE_PAL
-        private const string OLE32 = "ole32.dll";        
-#endif       
+        private const string OLE32 = "ole32.dll";
+#endif
+
         [DllImport(KERNEL32)]
-        internal static extern IntPtr CreateSemaphore([In] IntPtr lpSemaphoreAttributes, [In] int lInitialCount, [In] int lMaximumCount, [In] IntPtr lpName);
+        internal static extern IntPtr CreateSemaphore(
+            [In] IntPtr lpSemaphoreAttributes,
+            [In] int lInitialCount,
+            [In] int lMaximumCount,
+            [In] IntPtr lpName
+        );
 
 #if DEBUG
         [DllImport(KERNEL32)]
-        internal static extern bool ReleaseSemaphore([In] IntPtr hSemaphore, [In] int lReleaseCount, [Out] out int lpPreviousCount);
-
+        internal static extern bool ReleaseSemaphore(
+            [In] IntPtr hSemaphore,
+            [In] int lReleaseCount,
+            [Out] out int lpPreviousCount
+        );
 #else
         [DllImport(KERNEL32)]
-        internal static extern bool ReleaseSemaphore([In] IntPtr hSemaphore, [In] int lReleaseCount, [In] IntPtr lpPreviousCount);
+        internal static extern bool ReleaseSemaphore(
+            [In] IntPtr hSemaphore,
+            [In] int lReleaseCount,
+            [In] IntPtr lpPreviousCount
+        );
 #endif
 
-        // 
+        //
         internal static class ErrorCodes
         {
-            internal const uint ERROR_SUCCESS               = 0;
-            internal const uint ERROR_HANDLE_EOF            = 38;
-            internal const uint ERROR_NOT_SUPPORTED         = 50;
-            internal const uint ERROR_INVALID_PARAMETER     = 87;
-            internal const uint ERROR_ALREADY_EXISTS        = 183;
-            internal const uint ERROR_MORE_DATA             = 234;
-            internal const uint ERROR_OPERATION_ABORTED     = 995;
-            internal const uint ERROR_IO_PENDING            = 997;
-            internal const uint ERROR_NOT_FOUND             = 1168;
-            internal const uint ERROR_CONNECTION_INVALID    = 1229;
+            internal const uint ERROR_SUCCESS = 0;
+            internal const uint ERROR_HANDLE_EOF = 38;
+            internal const uint ERROR_NOT_SUPPORTED = 50;
+            internal const uint ERROR_INVALID_PARAMETER = 87;
+            internal const uint ERROR_ALREADY_EXISTS = 183;
+            internal const uint ERROR_MORE_DATA = 234;
+            internal const uint ERROR_OPERATION_ABORTED = 995;
+            internal const uint ERROR_IO_PENDING = 997;
+            internal const uint ERROR_NOT_FOUND = 1168;
+            internal const uint ERROR_CONNECTION_INVALID = 1229;
         }
 
         internal static class NTStatus
         {
-            internal const uint STATUS_SUCCESS               = 0x00000000;
+            internal const uint STATUS_SUCCESS = 0x00000000;
             internal const uint STATUS_OBJECT_NAME_NOT_FOUND = 0xC0000034;
         }
 
-        [DllImport(KERNEL32, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
+        [DllImport(
+            KERNEL32,
+            ExactSpelling = true,
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         internal static extern uint GetCurrentThreadId();
 
+        [DllImport(
+            KERNEL32,
+            ExactSpelling = true,
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
+        internal static extern unsafe uint CancelIoEx(
+            CriticalHandle handle,
+            NativeOverlapped* overlapped
+        );
 
-        [DllImport(KERNEL32, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        internal static unsafe extern uint CancelIoEx(CriticalHandle handle, NativeOverlapped* overlapped);
-
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-        [DllImport(KERNEL32, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        internal static unsafe extern bool SetFileCompletionNotificationModes(CriticalHandle handle, FileCompletionNotificationModes modes);
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "Implementation requires unmanaged code usage"
+        )]
+        [DllImport(
+            KERNEL32,
+            ExactSpelling = true,
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
+        internal static extern unsafe bool SetFileCompletionNotificationModes(
+            CriticalHandle handle,
+            FileCompletionNotificationModes modes
+        );
 
         [DllImport(KERNEL32, CallingConvention = CallingConvention.Winapi, SetLastError = true)]
         internal static extern IntPtr GetProcessHeap();
 
         [DllImport(KERNEL32, CallingConvention = CallingConvention.Winapi, SetLastError = true)]
-        internal static extern bool HeapFree([In] IntPtr hHeap, [In] uint dwFlags, [In] IntPtr lpMem);
+        internal static extern bool HeapFree(
+            [In] IntPtr hHeap,
+            [In] uint dwFlags,
+            [In] IntPtr lpMem
+        );
 
         [System.Security.SecurityCritical]
         [DllImport(KERNEL32, CallingConvention = CallingConvention.Winapi, SetLastError = true)]
-        internal extern static IntPtr GetProcAddress(SafeLoadLibrary hModule, string entryPoint);
+        internal static extern IntPtr GetProcAddress(SafeLoadLibrary hModule, string entryPoint);
 
         [Flags]
         internal enum FileCompletionNotificationModes : byte
         {
             None = 0,
             SkipCompletionPortOnSuccess = 1,
-            SkipSetEventOnHandle = 2
+            SkipSetEventOnHandle = 2,
         }
 
 #if STRESS || !DEBUG
@@ -141,42 +183,102 @@ namespace System.Net {
 #endif
 
 #if FEATURE_PAL
-        [DllImport(ROTOR_PALRT, CharSet=CharSet.Unicode, SetLastError=true, EntryPoint="PAL_FetchConfigurationStringW")]
-        internal static extern bool FetchConfigurationString(bool perMachine, String parameterName, StringBuilder parameterValue, int parameterValueLength);
+        [DllImport(
+            ROTOR_PALRT,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            EntryPoint = "PAL_FetchConfigurationStringW"
+        )]
+        internal static extern bool FetchConfigurationString(
+            bool perMachine,
+            String parameterName,
+            StringBuilder parameterValue,
+            int parameterValueLength
+        );
 #endif // FEATURE_PAL
 
 #if !FEATURE_PAL
         [SuppressUnmanagedCodeSecurity]
-        internal unsafe static class RegistryHelper
+        internal static unsafe class RegistryHelper
         {
             internal const uint REG_NOTIFY_CHANGE_LAST_SET = 4;
             internal const uint REG_BINARY = 3;
             internal const uint KEY_READ = 0x00020019;
 
-            internal static readonly IntPtr HKEY_CURRENT_USER = (IntPtr) unchecked((int) 0x80000001L);
-            internal static readonly IntPtr HKEY_LOCAL_MACHINE = (IntPtr) unchecked((int) 0x80000002L);
+            internal static readonly IntPtr HKEY_CURRENT_USER = (IntPtr)unchecked((int)0x80000001L);
+            internal static readonly IntPtr HKEY_LOCAL_MACHINE = (IntPtr)
+                unchecked((int)0x80000002L);
 
             // RELIABILITY:
             // this out parameter in this API, resultSubKey, is an allocated handle to a registry sub-key.
             // it must be a SafeHandle so we can guarantee that it is released correctly and never leaked.
-            [DllImport(ADVAPI32, BestFitMapping=false, ThrowOnUnmappableChar=true, ExactSpelling=false, CharSet=CharSet.Auto, SetLastError=true)]
-            internal static extern uint RegOpenKeyEx(IntPtr key, string subKey, uint ulOptions, uint samDesired, out SafeRegistryHandle resultSubKey);
+            [DllImport(
+                ADVAPI32,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                ExactSpelling = false,
+                CharSet = CharSet.Auto,
+                SetLastError = true
+            )]
+            internal static extern uint RegOpenKeyEx(
+                IntPtr key,
+                string subKey,
+                uint ulOptions,
+                uint samDesired,
+                out SafeRegistryHandle resultSubKey
+            );
 
-            [DllImport(ADVAPI32, BestFitMapping=false, ThrowOnUnmappableChar=true, ExactSpelling=false, CharSet=CharSet.Auto, SetLastError=true)]
-            internal static extern uint RegOpenKeyEx(SafeRegistryHandle key, string subKey, uint ulOptions, uint samDesired, out SafeRegistryHandle resultSubKey);
+            [DllImport(
+                ADVAPI32,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                ExactSpelling = false,
+                CharSet = CharSet.Auto,
+                SetLastError = true
+            )]
+            internal static extern uint RegOpenKeyEx(
+                SafeRegistryHandle key,
+                string subKey,
+                uint ulOptions,
+                uint samDesired,
+                out SafeRegistryHandle resultSubKey
+            );
 
-            [DllImport(ADVAPI32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(ADVAPI32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern uint RegCloseKey(IntPtr key);
 
-            [DllImport(ADVAPI32, ExactSpelling=true, SetLastError=true)]
-            internal static extern uint RegNotifyChangeKeyValue(SafeRegistryHandle key, bool watchSubTree, uint notifyFilter, SafeWaitHandle regEvent, bool async);
+            [DllImport(ADVAPI32, ExactSpelling = true, SetLastError = true)]
+            internal static extern uint RegNotifyChangeKeyValue(
+                SafeRegistryHandle key,
+                bool watchSubTree,
+                uint notifyFilter,
+                SafeWaitHandle regEvent,
+                bool async
+            );
 
-            [DllImport(ADVAPI32, ExactSpelling=true, SetLastError=true)]
-            internal static extern uint RegOpenCurrentUser(uint samDesired, out SafeRegistryHandle resultKey);
+            [DllImport(ADVAPI32, ExactSpelling = true, SetLastError = true)]
+            internal static extern uint RegOpenCurrentUser(
+                uint samDesired,
+                out SafeRegistryHandle resultKey
+            );
 
-            [DllImport(ADVAPI32, BestFitMapping=false, ThrowOnUnmappableChar=true, ExactSpelling=false, CharSet=CharSet.Auto, SetLastError=true)]
-            internal static extern uint RegQueryValueEx(SafeRegistryHandle key, string valueName, IntPtr reserved, out uint type, [Out] byte[] data, [In][Out] ref uint size);
+            [DllImport(
+                ADVAPI32,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                ExactSpelling = false,
+                CharSet = CharSet.Auto,
+                SetLastError = true
+            )]
+            internal static extern uint RegQueryValueEx(
+                SafeRegistryHandle key,
+                string valueName,
+                IntPtr reserved,
+                out uint type,
+                [Out] byte[] data,
+                [In] [Out] ref uint size
+            );
         }
 
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
@@ -204,7 +306,7 @@ namespace System.Net {
             {
                 if (ComNetOS.InstallationType == WindowsInstallationType.ServerCore)
                 {
-                    // if InstallationType == WindowsSku.Unknown we'll support RAS, since older OS (like XP) 
+                    // if InstallationType == WindowsSku.Unknown we'll support RAS, since older OS (like XP)
                     // don't have an "Installation Type" Registry value
                     s_RasSupported = false;
                 }
@@ -214,25 +316,39 @@ namespace System.Net {
                 }
 
                 if (Logging.On)
-                    Logging.PrintInfo(Logging.Web, SR.GetString(SR.net_log_proxy_ras_supported, s_RasSupported));
+                    Logging.PrintInfo(
+                        Logging.Web,
+                        SR.GetString(SR.net_log_proxy_ras_supported, s_RasSupported)
+                    );
             }
 
             internal RasHelper()
             {
-                if (!s_RasSupported) 
+                if (!s_RasSupported)
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.net_log_proxy_ras_notsupported_exception));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_log_proxy_ras_notsupported_exception)
+                    );
                 }
 
                 m_RasEvent = new ManualResetEvent(false);
 
                 // Use -1 as a handle, to receive all RAS notifications for the local machine.
-                uint statusCode = RasConnectionNotification((IntPtr)(-1), m_RasEvent.SafeWaitHandle, RASCN_Connection | RASCN_Disconnection);
+                uint statusCode = RasConnectionNotification(
+                    (IntPtr)(-1),
+                    m_RasEvent.SafeWaitHandle,
+                    RASCN_Connection | RASCN_Disconnection
+                );
 
-                GlobalLog.Print("RasHelper::RasHelper() RasConnectionNotification() statusCode:" + statusCode);
-                if (statusCode != 0) 
+                GlobalLog.Print(
+                    "RasHelper::RasHelper() RasConnectionNotification() statusCode:" + statusCode
+                );
+                if (statusCode != 0)
                 {
-                    GlobalLog.Print("RasHelper::RasHelper() RasConnectionNotification() Marshal.GetLastWin32Error():" + Marshal.GetLastWin32Error());
+                    GlobalLog.Print(
+                        "RasHelper::RasHelper() RasConnectionNotification() Marshal.GetLastWin32Error():"
+                            + Marshal.GetLastWin32Error()
+                    );
                     m_Suppressed = true;
                     m_RasEvent.Close();
                     m_RasEvent = null;
@@ -277,10 +393,12 @@ namespace System.Net {
 
             internal static string GetCurrentConnectoid()
             {
-                uint dwSize = (uint) Marshal.SizeOf(typeof(RASCONN));
-                GlobalLog.Print("RasHelper::GetCurrentConnectoid() using struct size dwSize:" + dwSize);
+                uint dwSize = (uint)Marshal.SizeOf(typeof(RASCONN));
+                GlobalLog.Print(
+                    "RasHelper::GetCurrentConnectoid() using struct size dwSize:" + dwSize
+                );
 
-                if (!s_RasSupported) 
+                if (!s_RasSupported)
                 {
                     // if RAS is not supported, behave as if no dial-up/VPN connection is in use
                     // (which is actually the case, since without RAS dial-up/VPN doesn't work)
@@ -296,7 +414,14 @@ namespace System.Net {
                     connections = new RASCONN[count];
                     connections[0].dwSize = dwSize;
                     statusCode = RasEnumConnections(connections, ref cb, ref count);
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() called RasEnumConnections() count:" + count + " statusCode: " + statusCode + " cb:" + cb);
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() called RasEnumConnections() count:"
+                            + count
+                            + " statusCode: "
+                            + statusCode
+                            + " cb:"
+                            + cb
+                    );
                     if (statusCode != ERROR_BUFFER_TOO_SMALL)
                     {
                         break;
@@ -309,14 +434,39 @@ namespace System.Net {
                     return null;
                 }
 
-                for (uint i=0; i < count; i++)
+                for (uint i = 0; i < count; i++)
                 {
                     GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "]");
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].dwSize: " + connections[i].dwSize);
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].hrasconn: " + connections[i].hrasconn);
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].szEntryName: " + connections[i].szEntryName);
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].szDeviceType: " + connections[i].szDeviceType);
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].szDeviceName: " + connections[i].szDeviceName);
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() RASCONN["
+                            + i
+                            + "].dwSize: "
+                            + connections[i].dwSize
+                    );
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() RASCONN["
+                            + i
+                            + "].hrasconn: "
+                            + connections[i].hrasconn
+                    );
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() RASCONN["
+                            + i
+                            + "].szEntryName: "
+                            + connections[i].szEntryName
+                    );
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() RASCONN["
+                            + i
+                            + "].szDeviceType: "
+                            + connections[i].szDeviceType
+                    );
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() RASCONN["
+                            + i
+                            + "].szDeviceName: "
+                            + connections[i].szDeviceName
+                    );
 
                     RASCONNSTATUS connectionStatus = new RASCONNSTATUS();
                     connectionStatus.dwSize = (uint)Marshal.SizeOf(connectionStatus);
@@ -325,14 +475,46 @@ namespace System.Net {
                     // that said, its use is that of a opaque ID, so we're not
                     // allocating anything that needs to be released for reliability.
                     statusCode = RasGetConnectStatus(connections[i].hrasconn, ref connectionStatus);
-                    GlobalLog.Print("RasHelper::GetCurrentConnectoid() called RasGetConnectStatus() statusCode: " + statusCode + " dwSize: " + connectionStatus.dwSize);
-                    if (statusCode==0) {
-                        GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].RASCONNSTATUS.dwSize: " + connectionStatus.dwSize);
-                        GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].RASCONNSTATUS.rasconnstate: " + connectionStatus.rasconnstate);
-                        GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].RASCONNSTATUS.dwError: " + connectionStatus.dwError);
-                        GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].RASCONNSTATUS.szDeviceType: " + connectionStatus.szDeviceType);
-                        GlobalLog.Print("RasHelper::GetCurrentConnectoid() RASCONN[" + i + "].RASCONNSTATUS.szDeviceName: " + connectionStatus.szDeviceName);
-                        if (connectionStatus.rasconnstate==RASCONNSTATE.RASCS_Connected) {
+                    GlobalLog.Print(
+                        "RasHelper::GetCurrentConnectoid() called RasGetConnectStatus() statusCode: "
+                            + statusCode
+                            + " dwSize: "
+                            + connectionStatus.dwSize
+                    );
+                    if (statusCode == 0)
+                    {
+                        GlobalLog.Print(
+                            "RasHelper::GetCurrentConnectoid() RASCONN["
+                                + i
+                                + "].RASCONNSTATUS.dwSize: "
+                                + connectionStatus.dwSize
+                        );
+                        GlobalLog.Print(
+                            "RasHelper::GetCurrentConnectoid() RASCONN["
+                                + i
+                                + "].RASCONNSTATUS.rasconnstate: "
+                                + connectionStatus.rasconnstate
+                        );
+                        GlobalLog.Print(
+                            "RasHelper::GetCurrentConnectoid() RASCONN["
+                                + i
+                                + "].RASCONNSTATUS.dwError: "
+                                + connectionStatus.dwError
+                        );
+                        GlobalLog.Print(
+                            "RasHelper::GetCurrentConnectoid() RASCONN["
+                                + i
+                                + "].RASCONNSTATUS.szDeviceType: "
+                                + connectionStatus.szDeviceType
+                        );
+                        GlobalLog.Print(
+                            "RasHelper::GetCurrentConnectoid() RASCONN["
+                                + i
+                                + "].RASCONNSTATUS.szDeviceName: "
+                                + connectionStatus.szDeviceName
+                        );
+                        if (connectionStatus.rasconnstate == RASCONNSTATE.RASCS_Connected)
+                        {
                             return connections[i].szEntryName;
                         }
                     }
@@ -341,15 +523,46 @@ namespace System.Net {
                 return null;
             }
 
+            [DllImport(
+                RASAPI32,
+                ExactSpelling = false,
+                CharSet = CharSet.Auto,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = false
+            )]
+            private static extern uint RasEnumConnections(
+                [In, Out] RASCONN[] lprasconn,
+                ref uint lpcb,
+                ref uint lpcConnections
+            );
 
-            [DllImport(RASAPI32, ExactSpelling = false, CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true, SetLastError = false)]
-            private static extern uint RasEnumConnections([In, Out] RASCONN[] lprasconn, ref uint lpcb, ref uint lpcConnections);
+            [DllImport(
+                RASAPI32,
+                ExactSpelling = false,
+                CharSet = CharSet.Auto,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = false
+            )]
+            private static extern uint RasGetConnectStatus(
+                [In] IntPtr hrasconn,
+                [In, Out] ref RASCONNSTATUS lprasconnstatus
+            );
 
-            [DllImport(RASAPI32, ExactSpelling=false, CharSet=CharSet.Auto, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=false)]
-            private static extern uint RasGetConnectStatus([In] IntPtr hrasconn, [In, Out] ref RASCONNSTATUS lprasconnstatus);
-
-            [DllImport(RASAPI32, ExactSpelling=false, CharSet=CharSet.Auto, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=false)]
-            private static extern uint RasConnectionNotification([In] IntPtr hrasconn, [In] SafeWaitHandle hEvent, uint dwFlags);
+            [DllImport(
+                RASAPI32,
+                ExactSpelling = false,
+                CharSet = CharSet.Auto,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = false
+            )]
+            private static extern uint RasConnectionNotification(
+                [In] IntPtr hrasconn,
+                [In] SafeWaitHandle hEvent,
+                uint dwFlags
+            );
 
             const int RAS_MaxEntryName = 256;
             const int RAS_MaxDeviceType = 16;
@@ -367,71 +580,86 @@ namespace System.Net {
             const int MAX_PATH = 260;
 
             const uint RASBASE = 600;
-            const uint ERROR_DIAL_ALREADY_IN_PROGRESS = (RASBASE+156);
-            const uint ERROR_BUFFER_TOO_SMALL = (RASBASE+3);
+            const uint ERROR_DIAL_ALREADY_IN_PROGRESS = (RASBASE + 156);
+            const uint ERROR_BUFFER_TOO_SMALL = (RASBASE + 3);
 
-            [StructLayout(LayoutKind.Sequential, Pack=4, CharSet=CharSet.Auto)]
-            struct RASCONN {
+            [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Auto)]
+            struct RASCONN
+            {
                 internal uint dwSize;
                 internal IntPtr hrasconn;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxEntryName + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxEntryName + 1)]
                 internal string szEntryName;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxDeviceType + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxDeviceType + 1)]
                 internal string szDeviceType;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxDeviceName + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxDeviceName + 1)]
                 internal string szDeviceName;
 
-/* None of these are supported on Windows 98.
-   MSDN lies twice: there is no dwSessionId at all, and szPhonebook and dwSubEntry are not on Win98.
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=MAX_PATH)]
-                internal string szPhonebook;
-                internal uint dwSubEntry;
-                internal Guid guidEntry;
-                internal uint dwFlags;
-                internal ulong luid;
-*/
+                /* None of these are supported on Windows 98.
+                   MSDN lies twice: there is no dwSessionId at all, and szPhonebook and dwSubEntry are not on Win98.
+                                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=MAX_PATH)]
+                                internal string szPhonebook;
+                                internal uint dwSubEntry;
+                                internal Guid guidEntry;
+                                internal uint dwFlags;
+                                internal ulong luid;
+                */
             }
 
-            [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
-            struct RASCONNSTATUS {
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+            struct RASCONNSTATUS
+            {
                 internal uint dwSize;
                 internal RASCONNSTATE rasconnstate;
                 internal uint dwError;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxDeviceType + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxDeviceType + 1)]
                 internal string szDeviceType;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxDeviceName + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxDeviceName + 1)]
                 internal string szDeviceName;
-/* Not supported on Windows 98.
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxPhoneNumber + 1)]
-                internal string szPhoneNumber;
-*/
+                /* Not supported on Windows 98.
+                                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxPhoneNumber + 1)]
+                                internal string szPhoneNumber;
+                */
             }
 
-            [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
-            struct RASDIALPARAMS {
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+            struct RASDIALPARAMS
+            {
                 internal uint dwSize;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxEntryName + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxEntryName + 1)]
                 internal string szEntryName;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxPhoneNumber + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxPhoneNumber + 1)]
                 internal string szPhoneNumber;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxCallbackNumber + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxCallbackNumber + 1)]
                 internal string szCallbackNumber;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=UNLEN + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = UNLEN + 1)]
                 internal string szUserName;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=PWLEN + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = PWLEN + 1)]
                 internal string szPassword;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=DNLEN + 1)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = DNLEN + 1)]
                 internal string szDomain;
-/* Not supported on Windows 98.
-                internal uint dwSubEntry;
-                internal uint dwCallbackId;
-*/
+                /* Not supported on Windows 98.
+                                internal uint dwSubEntry;
+                                internal uint dwCallbackId;
+                */
             }
 
             const int RASCS_PAUSED = 0x1000;
             const int RASCS_DONE = 0x2000;
 
-            enum RASCONNSTATE {
+            enum RASCONNSTATE
+            {
                 RASCS_OpenPort = 0,
                 RASCS_PortOpened,
                 RASCS_ConnectDevice,
@@ -451,9 +679,9 @@ namespace System.Net {
                 RASCS_WaitForModemReset,
                 RASCS_WaitForCallback,
                 RASCS_Projected,
-                RASCS_StartAuthentication,    // Windows 95 only
-                RASCS_CallbackComplete,       // Windows 95 only
-                RASCS_LogonNetwork,           // Windows 95 only
+                RASCS_StartAuthentication, // Windows 95 only
+                RASCS_CallbackComplete, // Windows 95 only
+                RASCS_LogonNetwork, // Windows 95 only
                 RASCS_SubEntryConnected,
                 RASCS_SubEntryDisconnected,
                 RASCS_Interactive = RASCS_PAUSED,
@@ -462,156 +690,173 @@ namespace System.Net {
                 RASCS_PasswordExpired,
                 RASCS_InvokeEapUI,
                 RASCS_Connected = RASCS_DONE,
-                RASCS_Disconnected
+                RASCS_Disconnected,
             }
         }
 
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class SafeNetHandles_SECURITY {
-
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
+        internal static class SafeNetHandles_SECURITY
+        {
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern int FreeContextBuffer(
-                [In] IntPtr contextBuffer);
+            internal static extern int FreeContextBuffer([In] IntPtr contextBuffer);
 
-
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern int FreeCredentialsHandle(
-                  ref  SSPIHandle handlePtr
-                  );
+            internal static extern int FreeCredentialsHandle(ref SSPIHandle handlePtr);
 
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern int DeleteSecurityContext(
-                  ref  SSPIHandle handlePtr
-                  );
-
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int AcceptSecurityContext(
-                      ref  SSPIHandle       credentialHandle,
-                      [In] void*            inContextPtr,
-                      [In] SecurityBufferDescriptor inputBuffer,
-                      [In] ContextFlags     inFlags,
-                      [In] Endianness       endianness,
-                      ref  SSPIHandle       outContextPtr,
-                      [In, Out] SecurityBufferDescriptor outputBuffer,
-                      [In, Out] ref ContextFlags attributes,
-                      out  long timeStamp
-                      );
-
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int QueryContextAttributesW(
-                ref SSPIHandle contextHandle,
-                [In] ContextAttribute attribute,
-                [In] void* buffer);
+            internal static extern int DeleteSecurityContext(ref SSPIHandle handlePtr);
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int SetContextAttributesW(
+            internal static extern unsafe int AcceptSecurityContext(
+                ref SSPIHandle credentialHandle,
+                [In] void* inContextPtr,
+                [In] SecurityBufferDescriptor inputBuffer,
+                [In] ContextFlags inFlags,
+                [In] Endianness endianness,
+                ref SSPIHandle outContextPtr,
+                [In, Out] SecurityBufferDescriptor outputBuffer,
+                [In, Out] ref ContextFlags attributes,
+                out long timeStamp
+            );
+
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+            internal static extern unsafe int QueryContextAttributesW(
+                ref SSPIHandle contextHandle,
+                [In] ContextAttribute attribute,
+                [In] void* buffer
+            );
+
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+            internal static extern unsafe int SetContextAttributesW(
                 ref SSPIHandle contextHandle,
                 [In] ContextAttribute attribute,
                 [In] byte[] buffer,
-                [In] int bufferSize);
+                [In] int bufferSize
+            );
 
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             internal static extern int EnumerateSecurityPackagesW(
                 [Out] out int pkgnum,
-                [Out] out SafeFreeContextBuffer_SECURITY handle);
+                [Out] out SafeFreeContextBuffer_SECURITY handle
+            );
 
-            [DllImport(SECUR32, ExactSpelling=true, CharSet=CharSet.Unicode, SetLastError=true)]
-            internal unsafe static extern int AcquireCredentialsHandleW(
-                      [In] string principal,
-                      [In] string moduleName,
-                      [In] int usage,
-                      [In] void* logonID,
-                      [In] ref AuthIdentity authdata,
-                      [In] void* keyCallback,
-                      [In] void* keyArgument,
-                      ref  SSPIHandle handlePtr,
-                      [Out] out long timeStamp
-                      );
+            [DllImport(
+                SECUR32,
+                ExactSpelling = true,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern unsafe int AcquireCredentialsHandleW(
+                [In] string principal,
+                [In] string moduleName,
+                [In] int usage,
+                [In] void* logonID,
+                [In] ref AuthIdentity authdata,
+                [In] void* keyCallback,
+                [In] void* keyArgument,
+                ref SSPIHandle handlePtr,
+                [Out] out long timeStamp
+            );
 
-            [DllImport(SECUR32, ExactSpelling=true, CharSet=CharSet.Unicode, SetLastError=true)]
-            internal unsafe static extern int AcquireCredentialsHandleW(
-                      [In] string principal,
-                      [In] string moduleName,
-                      [In] int usage,
-                      [In] void* logonID,
-                      [In] IntPtr zero,
-                      [In] void* keyCallback,
-                      [In] void* keyArgument,
-                      ref  SSPIHandle handlePtr,
-                      [Out] out long timeStamp
-                      );
+            [DllImport(
+                SECUR32,
+                ExactSpelling = true,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern unsafe int AcquireCredentialsHandleW(
+                [In] string principal,
+                [In] string moduleName,
+                [In] int usage,
+                [In] void* logonID,
+                [In] IntPtr zero,
+                [In] void* keyCallback,
+                [In] void* keyArgument,
+                ref SSPIHandle handlePtr,
+                [Out] out long timeStamp
+            );
 
             //  Win7+
-            [DllImport(SECUR32, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal unsafe static extern int AcquireCredentialsHandleW(
-                      [In] string principal,
-                      [In] string moduleName,
-                      [In] int usage,
-                      [In] void* logonID,
-                      [In] SafeSspiAuthDataHandle authdata,
-                      [In] void* keyCallback,
-                      [In] void* keyArgument,
-                      ref  SSPIHandle handlePtr,
-                      [Out] out long timeStamp
-                      );
+            [DllImport(
+                SECUR32,
+                ExactSpelling = true,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern unsafe int AcquireCredentialsHandleW(
+                [In] string principal,
+                [In] string moduleName,
+                [In] int usage,
+                [In] void* logonID,
+                [In] SafeSspiAuthDataHandle authdata,
+                [In] void* keyCallback,
+                [In] void* keyArgument,
+                ref SSPIHandle handlePtr,
+                [Out] out long timeStamp
+            );
 
-            [DllImport(SECUR32, ExactSpelling=true, CharSet=CharSet.Unicode, SetLastError=true)]
-            internal unsafe  static extern int AcquireCredentialsHandleW(
-                      [In] string principal,
-                      [In] string moduleName,
-                      [In] int usage,
-                      [In] void* logonID,
-                      [In] ref SecureCredential authData,
-                      [In] void* keyCallback,
-                      [In] void* keyArgument,
-                      ref  SSPIHandle handlePtr,
-                      [Out] out long timeStamp
-                      );
-
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int InitializeSecurityContextW(
-                      ref  SSPIHandle       credentialHandle,
-                      [In] void*            inContextPtr,
-                      [In] byte*            targetName,
-                      [In] ContextFlags     inFlags,
-                      [In] int              reservedI,
-                      [In] Endianness       endianness,
-                      [In] SecurityBufferDescriptor inputBuffer,
-                      [In] int              reservedII,
-                      ref  SSPIHandle       outContextPtr,
-                      [In, Out] SecurityBufferDescriptor outputBuffer,
-                      [In, Out] ref ContextFlags attributes,
-                      out  long timeStamp
-                      );
-
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int CompleteAuthToken(
-                      [In] void*            inContextPtr,
-                      [In, Out] SecurityBufferDescriptor inputBuffers
-                      );
+            [DllImport(
+                SECUR32,
+                ExactSpelling = true,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern unsafe int AcquireCredentialsHandleW(
+                [In] string principal,
+                [In] string moduleName,
+                [In] int usage,
+                [In] void* logonID,
+                [In] ref SecureCredential authData,
+                [In] void* keyCallback,
+                [In] void* keyArgument,
+                ref SSPIHandle handlePtr,
+                [Out] out long timeStamp
+            );
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int ApplyControlToken(
-                      [In] void* inContextPtr,
-                      [In, Out] SecurityBufferDescriptor inputBuffers
-                      );
+            internal static extern unsafe int InitializeSecurityContextW(
+                ref SSPIHandle credentialHandle,
+                [In] void* inContextPtr,
+                [In] byte* targetName,
+                [In] ContextFlags inFlags,
+                [In] int reservedI,
+                [In] Endianness endianness,
+                [In] SecurityBufferDescriptor inputBuffer,
+                [In] int reservedII,
+                ref SSPIHandle outContextPtr,
+                [In, Out] SecurityBufferDescriptor outputBuffer,
+                [In, Out] ref ContextFlags attributes,
+                out long timeStamp
+            );
+
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+            internal static extern unsafe int CompleteAuthToken(
+                [In] void* inContextPtr,
+                [In, Out] SecurityBufferDescriptor inputBuffers
+            );
+
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+            internal static extern unsafe int ApplyControlToken(
+                [In] void* inContextPtr,
+                [In, Out] SecurityBufferDescriptor inputBuffers
+            );
         }
-        
 #endif // !FEATURE_PAL
 
         // Because the regular SafeNetHandles has a LocalAlloc with a different return type.
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class SafeNetHandlesSafeOverlappedFree {
-            [DllImport(ExternDll.Kernel32, ExactSpelling=true, SetLastError=true)]
+        internal static class SafeNetHandlesSafeOverlappedFree
+        {
+            [DllImport(ExternDll.Kernel32, ExactSpelling = true, SetLastError = true)]
             internal static extern SafeOverlappedFree LocalAlloc(int uFlags, UIntPtr sizetdwBytes);
         }
 
@@ -619,60 +864,101 @@ namespace System.Net {
         // Because the regular SafeNetHandles tries to bind this MustRun method on type initialization, failing
         // on legacy platforms.
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class SafeNetHandlesXPOrLater {
-            [DllImport(WS2_32, ExactSpelling = true, CharSet = CharSet.Unicode, BestFitMapping = false, ThrowOnUnmappableChar = true, SetLastError = true)]
+        internal static class SafeNetHandlesXPOrLater
+        {
+            [DllImport(
+                WS2_32,
+                ExactSpelling = true,
+                CharSet = CharSet.Unicode,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = true
+            )]
             internal static extern int GetAddrInfoW(
                 [In] string nodename,
                 [In] string servicename,
                 [In] ref AddressInfo hints,
                 [Out] out SafeFreeAddrInfo handle
-                );
+            );
 
             [DllImport(WS2_32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern void freeaddrinfo([In] IntPtr info );
+            internal static extern void freeaddrinfo([In] IntPtr info);
         }
 #endif
 
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class SafeNetHandles {
+        internal static class SafeNetHandles
+        {
+#if !FEATURE_PAL
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
+            internal static extern int QuerySecurityContextToken(
+                ref SSPIHandle phContext,
+                [Out] out SafeCloseHandle handle
+            );
 
-    #if !FEATURE_PAL
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
-            internal static extern int QuerySecurityContextToken(ref SSPIHandle phContext, [Out] out SafeCloseHandle handle);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern unsafe uint HttpCreateRequestQueue(
+                HttpApi.HTTPAPI_VERSION version,
+                string pName,
+                Microsoft.Win32.NativeMethods.SECURITY_ATTRIBUTES pSecurityAttributes,
+                uint flags,
+                out HttpRequestQueueV2Handle pReqQueueHandle
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal static extern unsafe uint HttpCreateRequestQueue(HttpApi.HTTPAPI_VERSION version, string pName,
-                Microsoft.Win32.NativeMethods.SECURITY_ATTRIBUTES pSecurityAttributes, uint flags, out HttpRequestQueueV2Handle pReqQueueHandle);
-
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
             internal static extern unsafe uint HttpCloseRequestQueue(IntPtr pReqQueueHandle);
+#endif
 
-    #endif
-
-            [DllImport(ExternDll.Kernel32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(ExternDll.Kernel32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern bool CloseHandle(IntPtr handle);
 
-            [DllImport(ExternDll.Kernel32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(ExternDll.Kernel32, ExactSpelling = true, SetLastError = true)]
             internal static extern SafeLocalFree LocalAlloc(int uFlags, UIntPtr sizetdwBytes);
 
             [DllImport(ExternDll.Kernel32, EntryPoint = "LocalAlloc", SetLastError = true)]
-            internal static extern SafeLocalFreeChannelBinding LocalAllocChannelBinding(int uFlags, UIntPtr sizetdwBytes);
+            internal static extern SafeLocalFreeChannelBinding LocalAllocChannelBinding(
+                int uFlags,
+                UIntPtr sizetdwBytes
+            );
 
-            [DllImport(ExternDll.Kernel32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(ExternDll.Kernel32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern IntPtr LocalFree(IntPtr handle);
 
 #if !FEATURE_PAL
 
-            [DllImport(KERNEL32, ExactSpelling=true, CharSet=CharSet.Unicode, SetLastError=true)]
-            internal static extern unsafe SafeLoadLibrary LoadLibraryExW([In] string lpwLibFileName, [In] void* hFile, [In] uint dwFlags);
+            [DllImport(
+                KERNEL32,
+                ExactSpelling = true,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern unsafe SafeLoadLibrary LoadLibraryExW(
+                [In] string lpwLibFileName,
+                [In] void* hFile,
+                [In] uint dwFlags
+            );
 #endif // !FEATURE_PAL
 
-
-            [DllImport(KERNEL32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(KERNEL32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern unsafe bool FreeLibrary([In] IntPtr hModule);
 
@@ -692,21 +978,19 @@ namespace System.Net {
                 [Out] out SafeFreeCertChain  chainContext);
             */
 
-            [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern void CertFreeCertificateChain(
-                [In] IntPtr pChainContext);
+            internal static extern void CertFreeCertificateChain([In] IntPtr pChainContext);
 
             [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern void CertFreeCertificateChainList(
-                [In] IntPtr ppChainContext);
+            internal static extern void CertFreeCertificateChainList([In] IntPtr ppChainContext);
 
-            [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern bool CertFreeCertificateContext(      // Suppressing returned status check, it's always==TRUE,
-                [In] IntPtr certContext);
-
+            internal static extern bool CertFreeCertificateContext( // Suppressing returned status check, it's always==TRUE,
+                [In] IntPtr certContext
+            );
             /*
             // Consider removing.
             [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
@@ -718,49 +1002,47 @@ namespace System.Net {
 
 #endif // !FEATURE_PAL
 
-            [DllImport(ExternDll.Kernel32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(ExternDll.Kernel32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern IntPtr GlobalFree(IntPtr handle);
 
             // Blocking call - requires IntPtr instead of SafeCloseSocket.
-            [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(WS2_32, ExactSpelling = true, SetLastError = true)]
             internal static extern SafeCloseSocket.InnerSafeCloseSocket accept(
-                                                  [In] IntPtr socketHandle,
-                                                  [Out] byte[] socketAddress,
-                                                  [In, Out] ref int socketAddressSize
-                                                  );
+                [In] IntPtr socketHandle,
+                [Out] byte[] socketAddress,
+                [In, Out] ref int socketAddressSize
+            );
 
-            [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(WS2_32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern SocketError closesocket(
-                                                  [In] IntPtr socketHandle
-                                                  );
+            internal static extern SocketError closesocket([In] IntPtr socketHandle);
 
-            [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(WS2_32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern SocketError ioctlsocket(
-                                                [In] IntPtr handle,
-                                                [In] int cmd,
-                                                [In, Out] ref int argp
-                                                );
+                [In] IntPtr handle,
+                [In] int cmd,
+                [In, Out] ref int argp
+            );
 
-            [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(WS2_32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern SocketError WSAEventSelect(
-                                                     [In] IntPtr handle,
-                                                     [In] IntPtr Event,
-                                                     [In] AsyncEventBits NetworkEvents
-                                                     );
+                [In] IntPtr handle,
+                [In] IntPtr Event,
+                [In] AsyncEventBits NetworkEvents
+            );
 
-            [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(WS2_32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             internal static extern SocketError setsockopt(
-                                               [In] IntPtr handle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref Linger linger,
-                                               [In] int optionLength
-                                               );
+                [In] IntPtr handle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] ref Linger linger,
+                [In] int optionLength
+            );
 
             /* Consider removing
             [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
@@ -775,21 +1057,21 @@ namespace System.Net {
             */
 
 #if !FEATURE_PAL
-            [DllImport(WININET, ExactSpelling=true, SetLastError = true)]
+            [DllImport(WININET, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            unsafe internal static extern bool RetrieveUrlCacheEntryFileW(
-                                            [In]      char*     urlName,
-                                            [In]      byte*     entryPtr,               //was [Out]
-                                            [In, Out] ref int   entryBufSize,
-                                            [In]      int       dwReserved              //must be 0
-                                            );
+            internal static extern unsafe bool RetrieveUrlCacheEntryFileW(
+                [In] char* urlName,
+                [In] byte* entryPtr, //was [Out]
+                [In, Out] ref int entryBufSize,
+                [In] int dwReserved //must be 0
+            );
 
-            [DllImport(WININET, ExactSpelling=true, SetLastError = true)]
+            [DllImport(WININET, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            unsafe internal static extern bool UnlockUrlCacheEntryFileW(
-                                            [In]    char*       urlName,
-                                            [In]    int         dwReserved                  //must be 0
-                                            );
+            internal static extern unsafe bool UnlockUrlCacheEntryFileW(
+                [In] char* urlName,
+                [In] int dwReserved //must be 0
+            );
 #endif // !FEATURE_PAL
         }
 
@@ -853,8 +1135,8 @@ namespace System.Net {
         //      [Out] byte[]
         //
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class OSSOCK {
-
+        internal static class OSSOCK
+        {
 #if FEATURE_PAL
             private const string WS2_32 = ROTOR_PAL;
 #else
@@ -868,15 +1150,18 @@ namespace System.Net {
             //               result in both being set to false !
             //
 
-            [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
-            internal struct WSAPROTOCOLCHAIN {
-                internal int ChainLen;                                 /* the length of the chain,     */
-                [MarshalAs(UnmanagedType.ByValArray, SizeConst=7)]
-                internal uint[] ChainEntries;       /* a list of dwCatalogEntryIds */
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+            internal struct WSAPROTOCOLCHAIN
+            {
+                internal int ChainLen; /* the length of the chain,     */
+
+                [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
+                internal uint[] ChainEntries; /* a list of dwCatalogEntryIds */
             }
 
-            [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
-            internal struct WSAPROTOCOL_INFO {
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+            internal struct WSAPROTOCOL_INFO
+            {
                 internal uint dwServiceFlags1;
                 internal uint dwServiceFlags2;
                 internal uint dwServiceFlags3;
@@ -896,12 +1181,14 @@ namespace System.Net {
                 internal int iSecurityScheme;
                 internal uint dwMessageSize;
                 internal uint dwProviderReserved;
-                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=256)]
+
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
                 internal string szProtocol;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct ControlData {
+            internal struct ControlData
+            {
                 internal UIntPtr length;
                 internal uint level;
                 internal uint type;
@@ -910,17 +1197,20 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct ControlDataIPv6 {
+            internal struct ControlDataIPv6
+            {
                 internal UIntPtr length;
                 internal uint level;
                 internal uint type;
-                [MarshalAs(UnmanagedType.ByValArray,SizeConst=16)]
+
+                [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
                 internal byte[] address;
                 internal uint index;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct WSAMsg {
+            internal struct WSAMsg
+            {
                 internal IntPtr socketAddress;
                 internal uint addressLength;
                 internal IntPtr buffers;
@@ -928,7 +1218,7 @@ namespace System.Net {
                 internal WSABuffer controlBuffer;
                 internal SocketFlags flags;
             }
-            
+
             //
             // Flags equivalent to winsock TRANSMIT_PACKETS_ELEMENT flags
             //    #define TP_ELEMENT_MEMORY   1
@@ -936,50 +1226,57 @@ namespace System.Net {
             //    #define TP_ELEMENT_EOP      4
             //
             [Flags]
-            internal enum TransmitPacketsElementFlags : uint {
+            internal enum TransmitPacketsElementFlags : uint
+            {
                 None = 0x00,
                 Memory = 0x01,
                 File = 0x02,
-                EndOfPacket = 0x04
+                EndOfPacket = 0x04,
             }
 
             // Structure equivalent to TRANSMIT_PACKETS_ELEMENT
             //
             // typedef struct _TRANSMIT_PACKETS_ELEMENT {
-            //     ULONG dwElFlags;  
-            //     ULONG cLength;  
-            //     union {    
-            //         struct {      
-            //             LARGE_INTEGER nFileOffset;      
+            //     ULONG dwElFlags;
+            //     ULONG cLength;
+            //     union {
+            //         struct {
+            //             LARGE_INTEGER nFileOffset;
             //             HANDLE hFile;
-            //         };    
-            //         PVOID pBuffer;  
+            //         };
+            //         PVOID pBuffer;
             //     }
             //  };
             // } TRANSMIT_PACKETS_ELEMENT;
             //
             [StructLayout(LayoutKind.Explicit)]
-            internal struct TransmitPacketsElement {
+            internal struct TransmitPacketsElement
+            {
                 [System.Runtime.InteropServices.FieldOffset(0)]
                 internal TransmitPacketsElementFlags flags;
+
                 [System.Runtime.InteropServices.FieldOffset(4)]
                 internal uint length;
+
                 [System.Runtime.InteropServices.FieldOffset(8)]
                 internal Int64 fileOffset;
+
                 [System.Runtime.InteropServices.FieldOffset(8)]
                 internal IntPtr buffer;
+
                 [System.Runtime.InteropServices.FieldOffset(16)]
                 internal IntPtr fileHandle;
             }
-             
+
             /*
-               typedef struct _SOCKET_ADDRESS {  
-                   PSOCKADDR lpSockaddr;  
+               typedef struct _SOCKET_ADDRESS {
+                   PSOCKADDR lpSockaddr;
                    INT iSockaddrLength;
-               } SOCKET_ADDRESS, *PSOCKET_ADDRESS;			
+               } SOCKET_ADDRESS, *PSOCKET_ADDRESS;
             */
             [StructLayout(LayoutKind.Sequential)]
-            internal struct SOCKET_ADDRESS {
+            internal struct SOCKET_ADDRESS
+            {
                 internal IntPtr lpSockAddr;
                 internal int iSockaddrLength;
             }
@@ -991,566 +1288,600 @@ namespace System.Net {
                } SOCKET_ADDRESS_LIST, *PSOCKET_ADDRESS_LIST, FAR *LPSOCKET_ADDRESS_LIST;
             */
             [StructLayout(LayoutKind.Sequential)]
-            internal struct SOCKET_ADDRESS_LIST {
-                internal int iAddressCount;            
+            internal struct SOCKET_ADDRESS_LIST
+            {
+                internal int iAddressCount;
                 internal SOCKET_ADDRESS Addresses;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct TransmitFileBuffersStruct {
-                internal IntPtr preBuffer;// Pointer to Buffer
+            internal struct TransmitFileBuffersStruct
+            {
+                internal IntPtr preBuffer; // Pointer to Buffer
                 internal int preBufferLength; // Length of Buffer
-                internal IntPtr postBuffer;// Pointer to Buffer
+                internal IntPtr postBuffer; // Pointer to Buffer
                 internal int postBufferLength; // Length of Buffer
             }
 
             // CharSet=Auto here since WSASocket has A and W versions. We can use Auto cause the method is not used under constrained execution region
-            [DllImport(WS2_32, CharSet=CharSet.Auto, SetLastError=true)]
+            [DllImport(WS2_32, CharSet = CharSet.Auto, SetLastError = true)]
             internal static extern SafeCloseSocket.InnerSafeCloseSocket WSASocket(
-                                                    [In] AddressFamily addressFamily,
-                                                    [In] SocketType socketType,
-                                                    [In] ProtocolType protocolType,
-                                                    [In] IntPtr protocolInfo, // will be WSAProtcolInfo protocolInfo once we include QOS APIs
-                                                    [In] uint group,
-                                                    [In] SocketConstructorFlags flags
-                                                    );
+                [In] AddressFamily addressFamily,
+                [In] SocketType socketType,
+                [In] ProtocolType protocolType,
+                [In] IntPtr protocolInfo, // will be WSAProtcolInfo protocolInfo once we include QOS APIs
+                [In] uint group,
+                [In] SocketConstructorFlags flags
+            );
 
-            [DllImport(WS2_32, CharSet=CharSet.Auto, SetLastError=true)]
-            internal unsafe static extern SafeCloseSocket.InnerSafeCloseSocket WSASocket(
-                                        [In] AddressFamily addressFamily,
-                                        [In] SocketType socketType,
-                                        [In] ProtocolType protocolType,
-                                        [In] byte* pinnedBuffer, // will be WSAProtcolInfo protocolInfo once we include QOS APIs
-                                        [In] uint group,
-                                        [In] SocketConstructorFlags flags
-                                        );
+            [DllImport(WS2_32, CharSet = CharSet.Auto, SetLastError = true)]
+            internal static extern unsafe SafeCloseSocket.InnerSafeCloseSocket WSASocket(
+                [In] AddressFamily addressFamily,
+                [In] SocketType socketType,
+                [In] ProtocolType protocolType,
+                [In] byte* pinnedBuffer, // will be WSAProtcolInfo protocolInfo once we include QOS APIs
+                [In] uint group,
+                [In] SocketConstructorFlags flags
+            );
 
-
-            [DllImport(WS2_32, CharSet=CharSet.Ansi, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=true)]
+            [DllImport(
+                WS2_32,
+                CharSet = CharSet.Ansi,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = true
+            )]
             internal static extern SocketError WSAStartup(
-                                               [In] short wVersionRequested,
-                                               [Out] out WSAData lpWSAData
-                                               );
+                [In] short wVersionRequested,
+                [Out] out WSAData lpWSAData
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
             internal static extern SocketError ioctlsocket(
-                                                [In] SafeCloseSocket socketHandle,
-                                                [In] int cmd,
-                                                [In, Out] ref int argp
-                                                );
+                [In] SafeCloseSocket socketHandle,
+                [In] int cmd,
+                [In, Out] ref int argp
+            );
 
-            [DllImport(WS2_32, CharSet=CharSet.Ansi, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=true)]
-            internal static extern IntPtr gethostbyname(
-                                                  [In] string host
-                                                  );
+            [DllImport(
+                WS2_32,
+                CharSet = CharSet.Ansi,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = true
+            )]
+            internal static extern IntPtr gethostbyname([In] string host);
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern IntPtr gethostbyaddr(
-                                                  [In] ref int addr,
-                                                  [In] int len,
-                                                  [In] ProtocolFamily type
-                                                  );
+                [In] ref int addr,
+                [In] int len,
+                [In] ProtocolFamily type
+            );
 
-            [DllImport(WS2_32, CharSet=CharSet.Ansi, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=true)]
+            [DllImport(
+                WS2_32,
+                CharSet = CharSet.Ansi,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = true
+            )]
             internal static extern SocketError gethostname(
-                                                [Out] StringBuilder hostName,
-                                                [In] int bufferLength
-                                                );
+                [Out] StringBuilder hostName,
+                [In] int bufferLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getpeername(
-                                                [In] SafeCloseSocket socketHandle,
-                                                [Out] byte[] socketAddress,
-                                                [In, Out] ref int socketAddressSize
-                                                );
+                [In] SafeCloseSocket socketHandle,
+                [Out] byte[] socketAddress,
+                [In, Out] ref int socketAddressSize
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [Out] out int optionValue,
-                                               [In, Out] ref int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [Out] out int optionValue,
+                [In, Out] ref int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [Out] byte[] optionValue,
-                                               [In, Out] ref int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [Out] byte[] optionValue,
+                [In, Out] ref int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [Out] out Linger optionValue,
-                                               [In, Out] ref int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [Out] out Linger optionValue,
+                [In, Out] ref int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [Out] out IPMulticastRequest optionValue,
-                                               [In, Out] ref int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [Out] out IPMulticastRequest optionValue,
+                [In, Out] ref int optionLength
+            );
 
             //
             // IPv6 Changes: need to receive and IPv6MulticastRequest from getsockopt
             //
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [Out] out IPv6MulticastRequest optionValue,
-                                               [In, Out] ref int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [Out] out IPv6MulticastRequest optionValue,
+                [In, Out] ref int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError setsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref int optionValue,
-                                               [In] int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] ref int optionValue,
+                [In] int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError setsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] byte[] optionValue,
-                                               [In] int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] byte[] optionValue,
+                [In] int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError setsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref IntPtr pointer,
-                                               [In] int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] ref IntPtr pointer,
+                [In] int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
             internal static extern SocketError setsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref Linger linger,
-                                               [In] int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] ref Linger linger,
+                [In] int optionLength
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError setsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref IPMulticastRequest mreq,
-                                               [In] int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] ref IPMulticastRequest mreq,
+                [In] int optionLength
+            );
 
             //
             // IPv6 Changes: need to pass an IPv6MulticastRequest to setsockopt
             //
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError setsockopt(
-                                               [In] SafeCloseSocket socketHandle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref IPv6MulticastRequest mreq,
-                                               [In] int optionLength
-                                               );
+                [In] SafeCloseSocket socketHandle,
+                [In] SocketOptionLevel optionLevel,
+                [In] SocketOptionName optionName,
+                [In] ref IPv6MulticastRequest mreq,
+                [In] int optionLength
+            );
 
 #if !FEATURE_PAL
 
-            [DllImport(mswsock, SetLastError=true)]
+            [DllImport(mswsock, SetLastError = true)]
             internal static extern bool TransmitFile(
-                                      [In] SafeCloseSocket socket,
-                                      [In] SafeHandle fileHandle,
-                                      [In] int numberOfBytesToWrite,
-                                      [In] int numberOfBytesPerSend,
-                                      [In] SafeHandle overlapped,
-                                      [In] TransmitFileBuffers buffers,
-                                      [In] TransmitFileOptions flags
-                                      );
-        
-            [DllImport(mswsock, SetLastError=true, EntryPoint = "TransmitFile")]
-            internal static extern bool TransmitFile2(
-                                      [In] SafeCloseSocket socket,
-                                      [In] IntPtr fileHandle,
-                                      [In] int numberOfBytesToWrite,
-                                      [In] int numberOfBytesPerSend,
-                                      [In] SafeHandle overlapped,
-                                      [In] TransmitFileBuffers buffers,
-                                      [In] TransmitFileOptions flags
-                                      );
+                [In] SafeCloseSocket socket,
+                [In] SafeHandle fileHandle,
+                [In] int numberOfBytesToWrite,
+                [In] int numberOfBytesPerSend,
+                [In] SafeHandle overlapped,
+                [In] TransmitFileBuffers buffers,
+                [In] TransmitFileOptions flags
+            );
 
+            [DllImport(mswsock, SetLastError = true, EntryPoint = "TransmitFile")]
+            internal static extern bool TransmitFile2(
+                [In] SafeCloseSocket socket,
+                [In] IntPtr fileHandle,
+                [In] int numberOfBytesToWrite,
+                [In] int numberOfBytesPerSend,
+                [In] SafeHandle overlapped,
+                [In] TransmitFileBuffers buffers,
+                [In] TransmitFileOptions flags
+            );
 
             [DllImport(mswsock, SetLastError = true, EntryPoint = "TransmitFile")]
             internal static extern bool TransmitFile_Blocking(
-                                      [In] IntPtr socket,
-                                      [In] SafeHandle fileHandle,
-                                      [In] int numberOfBytesToWrite,
-                                      [In] int numberOfBytesPerSend,
-                                      [In] SafeHandle overlapped,
-                                      [In] TransmitFileBuffers buffers,
-                                      [In] TransmitFileOptions flags
-                                      );
+                [In] IntPtr socket,
+                [In] SafeHandle fileHandle,
+                [In] int numberOfBytesToWrite,
+                [In] int numberOfBytesPerSend,
+                [In] SafeHandle overlapped,
+                [In] TransmitFileBuffers buffers,
+                [In] TransmitFileOptions flags
+            );
 
             [DllImport(mswsock, SetLastError = true, EntryPoint = "TransmitFile")]
             internal static extern bool TransmitFile_Blocking2(
-                                      [In] IntPtr socket,
-                                      [In] IntPtr fileHandle,
-                                      [In] int numberOfBytesToWrite,
-                                      [In] int numberOfBytesPerSend,
-                                      [In] SafeHandle overlapped,
-                                      [In] TransmitFileBuffers buffers,
-                                      [In] TransmitFileOptions flags
-                                      );
-
+                [In] IntPtr socket,
+                [In] IntPtr fileHandle,
+                [In] int numberOfBytesToWrite,
+                [In] int numberOfBytesPerSend,
+                [In] SafeHandle overlapped,
+                [In] TransmitFileBuffers buffers,
+                [In] TransmitFileOptions flags
+            );
 #endif // !FEATURE_PAL
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int send(
-                                         [In] IntPtr      socketHandle,
-                                         [In] byte*       pinnedBuffer,
-                                         [In] int         len,
-                                         [In] SocketFlags socketFlags
-                                         );
+            internal static extern unsafe int send(
+                [In] IntPtr socketHandle,
+                [In] byte* pinnedBuffer,
+                [In] int len,
+                [In] SocketFlags socketFlags
+            );
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int recv(
-                                         [In] IntPtr      socketHandle,
-                                         [In] byte*       pinnedBuffer,
-                                         [In] int         len,
-                                         [In] SocketFlags socketFlags
-                                         );
+            internal static extern unsafe int recv(
+                [In] IntPtr socketHandle,
+                [In] byte* pinnedBuffer,
+                [In] int len,
+                [In] SocketFlags socketFlags
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError listen(
-                                           [In] SafeCloseSocket socketHandle,
-                                           [In] int backlog
-                                           );
+                [In] SafeCloseSocket socketHandle,
+                [In] int backlog
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError bind(
-                                         [In] SafeCloseSocket socketHandle,
-                                         [In] byte[] socketAddress,
-                                         [In] int socketAddressSize
-                                         );
+                [In] SafeCloseSocket socketHandle,
+                [In] byte[] socketAddress,
+                [In] int socketAddressSize
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError shutdown(
-                                             [In] SafeCloseSocket socketHandle,
-                                             [In] int how
-                                             );
+                [In] SafeCloseSocket socketHandle,
+                [In] int how
+            );
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int sendto(
-                                           [In] IntPtr      socketHandle,
-                                           [In] byte*       pinnedBuffer,
-                                           [In] int         len,
-                                           [In] SocketFlags socketFlags,
-                                           [In] byte[]      socketAddress,
-                                           [In] int         socketAddressSize
-                                           );
+            internal static extern unsafe int sendto(
+                [In] IntPtr socketHandle,
+                [In] byte* pinnedBuffer,
+                [In] int len,
+                [In] SocketFlags socketFlags,
+                [In] byte[] socketAddress,
+                [In] int socketAddressSize
+            );
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int recvfrom(
-                                             [In] IntPtr        socketHandle,
-                                             [In] byte*         pinnedBuffer,
-                                             [In] int           len,
-                                             [In] SocketFlags   socketFlags,
-                                             [Out] byte[]       socketAddress,
-                                             [In, Out] ref int  socketAddressSize
-                                             );
+            internal static extern unsafe int recvfrom(
+                [In] IntPtr socketHandle,
+                [In] byte* pinnedBuffer,
+                [In] int len,
+                [In] SocketFlags socketFlags,
+                [Out] byte[] socketAddress,
+                [In, Out] ref int socketAddressSize
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError getsockname(
-                                                [In] SafeCloseSocket socketHandle,
-                                                [Out] byte[] socketAddress,
-                                                [In, Out] ref int socketAddressSize
-                                                );
+                [In] SafeCloseSocket socketHandle,
+                [Out] byte[] socketAddress,
+                [In, Out] ref int socketAddressSize
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern int select(
-                                           [In] int ignoredParameter,
-                                           [In, Out] IntPtr[] readfds,
-                                           [In, Out] IntPtr[] writefds,
-                                           [In, Out] IntPtr[] exceptfds,
-                                           [In] ref TimeValue timeout
-                                           );
+                [In] int ignoredParameter,
+                [In, Out] IntPtr[] readfds,
+                [In, Out] IntPtr[] writefds,
+                [In, Out] IntPtr[] exceptfds,
+                [In] ref TimeValue timeout
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern int select(
-                                           [In] int ignoredParameter,
-                                           [In, Out] IntPtr[] readfds,
-                                           [In, Out] IntPtr[] writefds,
-                                           [In, Out] IntPtr[] exceptfds,
-                                           [In] IntPtr nullTimeout
-                                           );
+                [In] int ignoredParameter,
+                [In, Out] IntPtr[] readfds,
+                [In, Out] IntPtr[] writefds,
+                [In, Out] IntPtr[] exceptfds,
+                [In] IntPtr nullTimeout
+            );
 
             // This function is always potentially blocking so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSAConnect(
-                                              [In] IntPtr socketHandle,
-                                              [In] byte[] socketAddress,
-                                              [In] int    socketAddressSize,
-                                              [In] IntPtr inBuffer,
-                                              [In] IntPtr outBuffer,
-                                              [In] IntPtr sQOS,
-                                              [In] IntPtr gQOS
-                                              );
+                [In] IntPtr socketHandle,
+                [In] byte[] socketAddress,
+                [In] int socketAddressSize,
+                [In] IntPtr inBuffer,
+                [In] IntPtr outBuffer,
+                [In] IntPtr sQOS,
+                [In] IntPtr gQOS
+            );
 
-
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSASend(
-                                              [In] SafeCloseSocket socketHandle,
-                                              [In] ref WSABuffer buffer,
-                                              [In] int bufferCount,
-                                              [Out] out int bytesTransferred,
-                                              [In] SocketFlags socketFlags,
-                                              [In] SafeHandle overlapped,
-                                              [In] IntPtr completionRoutine
-                                              );
+                [In] SafeCloseSocket socketHandle,
+                [In] ref WSABuffer buffer,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In] SocketFlags socketFlags,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSASend(
-                                              [In] SafeCloseSocket socketHandle,
-                                              [In] WSABuffer[] buffersArray,
-                                              [In] int bufferCount,
-                                              [Out] out int bytesTransferred,
-                                              [In] SocketFlags socketFlags,
-                                              [In] SafeHandle overlapped,
-                                              [In] IntPtr completionRoutine
-                                              );
+                [In] SafeCloseSocket socketHandle,
+                [In] WSABuffer[] buffersArray,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In] SocketFlags socketFlags,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
             [DllImport(WS2_32, SetLastError = true, EntryPoint = "WSASend")]
             internal static extern SocketError WSASend_Blocking(
-                                              [In] IntPtr socketHandle,
-                                              [In] WSABuffer[] buffersArray,
-                                              [In] int bufferCount,
-                                              [Out] out int bytesTransferred,
-                                              [In] SocketFlags socketFlags,
-                                              [In] SafeHandle overlapped,
-                                              [In] IntPtr completionRoutine
-                                              );
+                [In] IntPtr socketHandle,
+                [In] WSABuffer[] buffersArray,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In] SocketFlags socketFlags,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
             [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSASendTo(
-                                                [In] SafeCloseSocket socketHandle,
-                                                [In] ref WSABuffer buffer,
-                                                [In] int bufferCount,
-                                                [Out] out int bytesTransferred,
-                                                [In] SocketFlags socketFlags,
-                                                [In] IntPtr socketAddress,
-                                                [In] int socketAddressSize,
-                                                [In] SafeHandle overlapped,
-                                                [In] IntPtr completionRoutine
-                                                );
-            
+                [In] SafeCloseSocket socketHandle,
+                [In] ref WSABuffer buffer,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In] SocketFlags socketFlags,
+                [In] IntPtr socketAddress,
+                [In] int socketAddressSize,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
+
             [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSASendTo(
-                                                [In] SafeCloseSocket socketHandle,
-                                                [In] WSABuffer[] buffersArray,
-                                                [In] int bufferCount,
-                                                [Out] out int bytesTransferred,
-                                                [In] SocketFlags socketFlags,
-                                                [In] IntPtr socketAddress,
-                                                [In] int socketAddressSize,
-                                                [In] SafeNativeOverlapped overlapped,
-                                                [In] IntPtr completionRoutine
-                                                );
-
-            [DllImport(WS2_32, SetLastError=true)]
-            internal static extern SocketError WSARecv(
-                                              [In] SafeCloseSocket socketHandle,
-                                              [In] ref WSABuffer buffer,
-                                              [In] int bufferCount,
-                                              [Out] out int bytesTransferred,
-                                              [In, Out] ref SocketFlags socketFlags,
-                                              [In] SafeHandle overlapped,
-                                              [In] IntPtr completionRoutine
-                                              );
+                [In] SafeCloseSocket socketHandle,
+                [In] WSABuffer[] buffersArray,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In] SocketFlags socketFlags,
+                [In] IntPtr socketAddress,
+                [In] int socketAddressSize,
+                [In] SafeNativeOverlapped overlapped,
+                [In] IntPtr completionRoutine
+            );
 
             [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSARecv(
-                                              [In] SafeCloseSocket socketHandle,
-                                              [In, Out] WSABuffer[] buffers,
-                                              [In] int bufferCount,
-                                              [Out] out int bytesTransferred,
-                                              [In, Out] ref SocketFlags socketFlags,
-                                              [In] SafeHandle overlapped,
-                                              [In] IntPtr completionRoutine
-                                              );
+                [In] SafeCloseSocket socketHandle,
+                [In] ref WSABuffer buffer,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In, Out] ref SocketFlags socketFlags,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
+
+            [DllImport(WS2_32, SetLastError = true)]
+            internal static extern SocketError WSARecv(
+                [In] SafeCloseSocket socketHandle,
+                [In, Out] WSABuffer[] buffers,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In, Out] ref SocketFlags socketFlags,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
             [DllImport(WS2_32, SetLastError = true, EntryPoint = "WSARecv")]
             internal static extern SocketError WSARecv_Blocking(
-                                              [In] IntPtr socketHandle,
-                                              [In, Out] WSABuffer[] buffers,
-                                              [In] int bufferCount,
-                                              [Out] out int bytesTransferred,
-                                              [In, Out] ref SocketFlags socketFlags,
-                                              [In] SafeHandle overlapped,
-                                              [In] IntPtr completionRoutine
-                                              );
-
-            [DllImport(WS2_32, SetLastError=true)]
-            internal static extern SocketError WSARecvFrom(
-                                                  [In] SafeCloseSocket socketHandle,
-                                                  [In] ref WSABuffer buffer,
-                                                  [In] int bufferCount,
-                                                  [Out] out int bytesTransferred,
-                                                  [In, Out] ref SocketFlags socketFlags,
-                                                  [In] IntPtr socketAddressPointer,
-                                                  [In] IntPtr socketAddressSizePointer,
-                                                  [In] SafeHandle overlapped,
-                                                  [In] IntPtr completionRoutine
-                                                  );
+                [In] IntPtr socketHandle,
+                [In, Out] WSABuffer[] buffers,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In, Out] ref SocketFlags socketFlags,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
             [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSARecvFrom(
-                                                  [In] SafeCloseSocket socketHandle,
-                                                  [In, Out] WSABuffer[] buffers,
-                                                  [In] int bufferCount,
-                                                  [Out] out int bytesTransferred,
-                                                  [In, Out] ref SocketFlags socketFlags,
-                                                  [In] IntPtr socketAddressPointer,
-                                                  [In] IntPtr socketAddressSizePointer,
-                                                  [In] SafeNativeOverlapped overlapped,
-                                                  [In] IntPtr completionRoutine
-                                                  );
-            
-            [DllImport(WS2_32, SetLastError=true)]
-            internal static extern SocketError WSAEventSelect(
-                                                     [In] SafeCloseSocket socketHandle,
-                                                     [In] SafeHandle Event,
-                                                     [In] AsyncEventBits NetworkEvents
-                                                     );
+                [In] SafeCloseSocket socketHandle,
+                [In] ref WSABuffer buffer,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In, Out] ref SocketFlags socketFlags,
+                [In] IntPtr socketAddressPointer,
+                [In] IntPtr socketAddressSizePointer,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
-            [DllImport(WS2_32, SetLastError=true)]
-            internal static extern SocketError WSAEventSelect(
-                                         [In] SafeCloseSocket socketHandle,
-                                         [In] IntPtr Event,
-                                         [In] AsyncEventBits NetworkEvents
-                                         );
+            [DllImport(WS2_32, SetLastError = true)]
+            internal static extern SocketError WSARecvFrom(
+                [In] SafeCloseSocket socketHandle,
+                [In, Out] WSABuffer[] buffers,
+                [In] int bufferCount,
+                [Out] out int bytesTransferred,
+                [In, Out] ref SocketFlags socketFlags,
+                [In] IntPtr socketAddressPointer,
+                [In] IntPtr socketAddressSizePointer,
+                [In] SafeNativeOverlapped overlapped,
+                [In] IntPtr completionRoutine
+            );
 
+            [DllImport(WS2_32, SetLastError = true)]
+            internal static extern SocketError WSAEventSelect(
+                [In] SafeCloseSocket socketHandle,
+                [In] SafeHandle Event,
+                [In] AsyncEventBits NetworkEvents
+            );
+
+            [DllImport(WS2_32, SetLastError = true)]
+            internal static extern SocketError WSAEventSelect(
+                [In] SafeCloseSocket socketHandle,
+                [In] IntPtr Event,
+                [In] AsyncEventBits NetworkEvents
+            );
 
             // Used with SIOGETEXTENSIONFUNCTIONPOINTER - we're assuming that will never block.
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSAIoctl(
-                                                [In] SafeCloseSocket socketHandle,
-                                                [In] int ioControlCode,
-                                                [In,Out] ref Guid guid,
-                                                [In] int guidSize,
-                                                [Out] out IntPtr funcPtr,
-                                                [In]  int funcPtrSize,
-                                                [Out] out int bytesTransferred,
-                                                [In] IntPtr shouldBeNull,
-                                                [In] IntPtr shouldBeNull2
-                                                );
+                [In] SafeCloseSocket socketHandle,
+                [In] int ioControlCode,
+                [In, Out] ref Guid guid,
+                [In] int guidSize,
+                [Out] out IntPtr funcPtr,
+                [In] int funcPtrSize,
+                [Out] out int bytesTransferred,
+                [In] IntPtr shouldBeNull,
+                [In] IntPtr shouldBeNull2
+            );
 
             [DllImport(WS2_32, SetLastError = true, EntryPoint = "WSAIoctl")]
             internal static extern SocketError WSAIoctl_Blocking(
-                                                [In] IntPtr socketHandle,
-                                                [In] int ioControlCode,
-                                                [In] byte[] inBuffer,
-                                                [In] int inBufferSize,
-                                                [Out] byte[] outBuffer,
-                                                [In] int outBufferSize,
-                                                [Out] out int bytesTransferred,
-                                                [In] SafeHandle overlapped,
-                                                [In] IntPtr completionRoutine
-                                                );
+                [In] IntPtr socketHandle,
+                [In] int ioControlCode,
+                [In] byte[] inBuffer,
+                [In] int inBufferSize,
+                [Out] byte[] outBuffer,
+                [In] int outBufferSize,
+                [Out] out int bytesTransferred,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
             [DllImport(WS2_32, SetLastError = true, EntryPoint = "WSAIoctl")]
             internal static extern SocketError WSAIoctl_Blocking_Internal(
-                                                [In]  IntPtr socketHandle,
-                                                [In]  uint ioControlCode,
-                                                [In]  IntPtr inBuffer,
-                                                [In]  int inBufferSize,
-                                                [Out] IntPtr outBuffer,
-                                                [In]  int outBufferSize,
-                                                [Out] out int bytesTransferred,
-                                                [In]  SafeHandle overlapped,
-                                                [In]  IntPtr completionRoutine
-                                                );		    
+                [In] IntPtr socketHandle,
+                [In] uint ioControlCode,
+                [In] IntPtr inBuffer,
+                [In] int inBufferSize,
+                [Out] IntPtr outBuffer,
+                [In] int outBufferSize,
+                [Out] out int bytesTransferred,
+                [In] SafeHandle overlapped,
+                [In] IntPtr completionRoutine
+            );
 
-            [DllImport(WS2_32,SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern SocketError WSAEnumNetworkEvents(
-                                                     [In] SafeCloseSocket socketHandle,
-                                                     [In] SafeWaitHandle Event,
-                                                     [In, Out] ref NetworkEvents networkEvents
-                                                     );
+                [In] SafeCloseSocket socketHandle,
+                [In] SafeWaitHandle Event,
+                [In, Out] ref NetworkEvents networkEvents
+            );
 
 #if !FEATURE_PAL
-            [DllImport(WS2_32, SetLastError=true)]
-            internal unsafe static extern int WSADuplicateSocket(
+            [DllImport(WS2_32, SetLastError = true)]
+            internal static extern unsafe int WSADuplicateSocket(
                 [In] SafeCloseSocket socketHandle,
                 [In] uint targetProcessID,
                 [In] byte* pinnedBuffer
             );
 #endif // !FEATURE_PAL
 
-            [DllImport(WS2_32, SetLastError=true)]
+            [DllImport(WS2_32, SetLastError = true)]
             internal static extern bool WSAGetOverlappedResult(
-                                                     [In] SafeCloseSocket socketHandle,
-                                                     [In] SafeHandle overlapped,
-                                                     [Out] out uint bytesTransferred,
-                                                     [In] bool wait,
-                                                     [Out] out SocketFlags socketFlags
-                                                     );
+                [In] SafeCloseSocket socketHandle,
+                [In] SafeHandle overlapped,
+                [Out] out uint bytesTransferred,
+                [In] bool wait,
+                [Out] out SocketFlags socketFlags
+            );
 #if !FEATURE_PAL
             // Don't throw, it would crash IPAddress.TryParse
-            [DllImport(WS2_32, CharSet=CharSet.Unicode, BestFitMapping=false, ThrowOnUnmappableChar=false, SetLastError=true)]
+            [DllImport(
+                WS2_32,
+                CharSet = CharSet.Unicode,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = false,
+                SetLastError = true
+            )]
             internal static extern SocketError WSAStringToAddress(
                 [In] string addressString,
                 [In] AddressFamily addressFamily,
                 [In] IntPtr lpProtocolInfo, // always passing in a 0
                 [Out] byte[] socketAddress,
-                [In, Out] ref int socketAddressSize );
+                [In, Out] ref int socketAddressSize
+            );
 
-            [DllImport(WS2_32, CharSet=CharSet.Ansi, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=true)]
+            [DllImport(
+                WS2_32,
+                CharSet = CharSet.Ansi,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = true
+            )]
             internal static extern SocketError WSAAddressToString(
                 [In] byte[] socketAddress,
                 [In] int socketAddressSize,
-                [In] IntPtr lpProtocolInfo,// always passing in a 0
-                [Out]StringBuilder addressString,
-                [In, Out] ref int addressStringLength);
+                [In] IntPtr lpProtocolInfo, // always passing in a 0
+                [Out] StringBuilder addressString,
+                [In, Out] ref int addressStringLength
+            );
 
-            [DllImport(WS2_32, CharSet=CharSet.Unicode, BestFitMapping=false, ThrowOnUnmappableChar=true, SetLastError=true)]
+            [DllImport(
+                WS2_32,
+                CharSet = CharSet.Unicode,
+                BestFitMapping = false,
+                ThrowOnUnmappableChar = true,
+                SetLastError = true
+            )]
             internal static extern SocketError GetNameInfoW(
-                [In]         byte[]        sa,
-                [In]         int           salen,
-                [In,Out]     StringBuilder host,
-                [In]         int           hostlen,
-                [In,Out]     StringBuilder serv,
-                [In]         int           servlen,
-                [In]         int           flags);
+                [In] byte[] sa,
+                [In] int salen,
+                [In, Out] StringBuilder host,
+                [In] int hostlen,
+                [In, Out] StringBuilder serv,
+                [In] int servlen,
+                [In] int flags
+            );
 
             //if we change this back to auto, we also have to change
             //WSAPROTOCOL_INFO and WSAPROTOCOLCHAIN
-            [DllImport(WS2_32, SetLastError=true, CharSet=CharSet.Auto, ExactSpelling=false)]
+            [DllImport(WS2_32, SetLastError = true, CharSet = CharSet.Auto, ExactSpelling = false)]
             internal static extern int WSAEnumProtocols(
-                                                        [MarshalAs(UnmanagedType.LPArray)]
-                                                        [In] int[]     lpiProtocols,
-                                                        [In] SafeLocalFree lpProtocolBuffer,
-                                                        [In][Out] ref uint lpdwBufferLength
-                                                       );
+                [MarshalAs(UnmanagedType.LPArray)] [In] int[] lpiProtocols,
+                [In] SafeLocalFree lpProtocolBuffer,
+                [In] [Out] ref uint lpdwBufferLength
+            );
+
 #if SOCKETTHREADPOOL
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern bool BindIoCompletionCallback(
@@ -1558,7 +1889,7 @@ namespace System.Net {
                 IOCompletionCallback function,
                 Int32 flags
             );
-    
+
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern IntPtr CreateIoCompletionPort(
                 SafeCloseSocket socketHandle,
@@ -1566,7 +1897,7 @@ namespace System.Net {
                 Int32 CompletionKey,
                 Int32 NumberOfConcurrentThreads
             );
-    
+
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern IntPtr CreateIoCompletionPort(
                 SafeHandle Handle,
@@ -1574,6 +1905,7 @@ namespace System.Net {
                 Int32 CompletionKey,
                 Int32 NumberOfConcurrentThreads
             );
+
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern IntPtr CreateIoCompletionPort(
                 IntPtr Handle,
@@ -1581,16 +1913,16 @@ namespace System.Net {
                 Int32 CompletionKey,
                 Int32 NumberOfConcurrentThreads
             );
-    
+
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern unsafe bool GetQueuedCompletionStatus(
-              IntPtr CompletionPort,
-              out UInt32 lpNumberOfBytes,
-              out Int32 lpCompletionKey,
-              out NativeOverlapped* lpOverlapped,
-              Int32 dwMilliseconds
+                IntPtr CompletionPort,
+                out UInt32 lpNumberOfBytes,
+                out Int32 lpCompletionKey,
+                out NativeOverlapped* lpOverlapped,
+                Int32 dwMilliseconds
             );
-    
+
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern bool PostQueuedCompletionStatus(
                 IntPtr CompletionPort,
@@ -1600,9 +1932,7 @@ namespace System.Net {
             );
 #endif // SOCKETTHREADPOOL
 #endif // !FEATURE_PAL
-
         }; // class UnsafeNclNativeMethods.OSSOCK
-
 #if !FEATURE_PAL
         //
         // UnsafeNclNativeMethods.NativePKI class contains methods
@@ -1610,8 +1940,8 @@ namespace System.Net {
         // They deal mainly with certificates handling when doing https://
         //
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class NativePKI {
-
+        internal static class NativePKI
+        {
             [StructLayout(LayoutKind.Sequential)]
             internal struct CRYPT_OBJID_BLOB
             {
@@ -1619,7 +1949,7 @@ namespace System.Net {
                 public IntPtr pbData;
             }
 
-            [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Ansi)]
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
             internal struct CERT_EXTENSION
             {
                 public IntPtr pszObjId;
@@ -1635,25 +1965,28 @@ namespace System.Net {
                 public IntPtr ppPara;
             }
 
-            [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
-            internal static extern  int CertVerifyCertificateChainPolicy(
-                [In] IntPtr                     policy,
-                [In] SafeFreeCertChain          chainContext,
-                [In] ref ChainPolicyParameter   cpp,
-                [In, Out] ref ChainPolicyStatus ps);
+            [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
+            internal static extern int CertVerifyCertificateChainPolicy(
+                [In] IntPtr policy,
+                [In] SafeFreeCertChain chainContext,
+                [In] ref ChainPolicyParameter cpp,
+                [In, Out] ref ChainPolicyStatus ps
+            );
 
             // Win7+
-            [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
             private static extern bool CertSelectCertificateChains(
                 [In] IntPtr pSelectionContext, // LPCGUID
                 [In] CertificateSelect flags, // DWORD
-                [In] IntPtr pChainParameters, // PCCERT_SELECT_CHAIN_PARA 
+                [In] IntPtr pChainParameters, // PCCERT_SELECT_CHAIN_PARA
                 [In] int cCriteria, // DWORD
                 [In] SafeCertSelectCritera rgpCriteria, // PCCERT_SELECT_CRITERIA
                 [In] IntPtr hStore, // HCERTSTORE
                 [Out] out int pcSelection, // PDWORD
                 // **PCCERT_CHAIN_CONTEXT, Array of ptrs to contexts
-                [Out] out SafeFreeCertChainList pprgpSelection);
+                [Out]
+                    out SafeFreeCertChainList pprgpSelection
+            );
 
             // See WinCrypt.h
             [Flags]
@@ -1674,8 +2007,11 @@ namespace System.Net {
             // SecureChannel will handle filtering by Issuer durring the request (AcquireClientCredentials).
             // See WinINet's implementation: //depot/winmain/inetcore/wininet/dll/CliauthCertselect.cxx
             [FriendAccessAllowed]
-            [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods",
-                Justification = "Marshalling requires DangerousGetHandle")]
+            [SuppressMessage(
+                "Microsoft.Reliability",
+                "CA2001:AvoidCallingProblematicMethods",
+                Justification = "Marshalling requires DangerousGetHandle"
+            )]
             internal static X509CertificateCollection FindClientCertificates()
             {
                 if (!ComNetOS.IsWin7orLater)
@@ -1695,13 +2031,14 @@ namespace System.Net {
                 {
                     bool success = CertSelectCertificateChains(
                         IntPtr.Zero,
-                        CertificateSelect.HasPrivateKey, 
+                        CertificateSelect.HasPrivateKey,
                         IntPtr.Zero,
-                        criteria.Count,  // DWORD
+                        criteria.Count, // DWORD
                         criteria, // PCCERT_SELECT_CRITERIA
-                        store.StoreHandle, 
-                        out chainCount, 
-                        out chainList);
+                        store.StoreHandle,
+                        out chainCount,
+                        out chainList
+                    );
 
                     if (!success)
                     {
@@ -1713,15 +2050,21 @@ namespace System.Net {
                     for (int i = 0; i < chainCount; i++)
                     {
                         // Resolve IntPtr in array.
-                        using (SafeFreeCertChain chainRef = new SafeFreeCertChain(
-                            Marshal.ReadIntPtr(chainList.DangerousGetHandle() 
-                            + i * Marshal.SizeOf(typeof(IntPtr))), true))
+                        using (
+                            SafeFreeCertChain chainRef = new SafeFreeCertChain(
+                                Marshal.ReadIntPtr(
+                                    chainList.DangerousGetHandle()
+                                        + i * Marshal.SizeOf(typeof(IntPtr))
+                                ),
+                                true
+                            )
+                        )
                         {
                             Debug.Assert(!chainRef.IsInvalid);
 
                             // X509Chain will duplicate the chain by increasing its ref-count.
                             X509Chain chain = new X509Chain(chainRef.DangerousGetHandle());
-                            
+
                             // Copy base cert from chain.
                             if (chain.ChainElements.Count > 0)
                             {
@@ -1747,53 +2090,77 @@ namespace System.Net {
         }; // class UnsafeNclNativeMethods.NativePKI
 
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class NativeNTSSPI {
-
+        internal static class NativeNTSSPI
+        {
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            [DllImport(SECUR32, ExactSpelling=true, SetLastError=true)]
+            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             internal static extern int EncryptMessage(
-                  ref SSPIHandle contextHandle,
-                  [In] uint qualityOfProtection,
-                  [In, Out] SecurityBufferDescriptor inputOutput,
-                  [In] uint sequenceNumber
-                  );
+                ref SSPIHandle contextHandle,
+                [In] uint qualityOfProtection,
+                [In, Out] SecurityBufferDescriptor inputOutput,
+                [In] uint sequenceNumber
+            );
 
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
-            internal static unsafe extern int DecryptMessage(
-                  [In] ref SSPIHandle contextHandle,
-                  [In, Out] SecurityBufferDescriptor inputOutput,
-                  [In] uint sequenceNumber,
-                       uint *qualityOfProtection
-                  );
-
+            internal static extern unsafe int DecryptMessage(
+                [In] ref SSPIHandle contextHandle,
+                [In, Out] SecurityBufferDescriptor inputOutput,
+                [In] uint sequenceNumber,
+                uint* qualityOfProtection
+            );
         }; // class UnsafeNclNativeMethods.NativeNTSSPI
-        
+
         // The replacement for WinInet, WinHttp is preferred where it's available.  We require version 5.1.
         [SuppressUnmanagedCodeSecurity]
         internal static class WinHttp
         {
-            [DllImport(WINHTTP, ExactSpelling=true, SetLastError=true)]
-            internal static extern bool WinHttpDetectAutoProxyConfigUrl(AutoDetectType autoDetectFlags, 
-                out SafeGlobalFree autoConfigUrl);
+            [DllImport(WINHTTP, ExactSpelling = true, SetLastError = true)]
+            internal static extern bool WinHttpDetectAutoProxyConfigUrl(
+                AutoDetectType autoDetectFlags,
+                out SafeGlobalFree autoConfigUrl
+            );
 
             [DllImport(WINHTTP, SetLastError = true)]
             internal static extern bool WinHttpGetIEProxyConfigForCurrentUser(
-                ref WINHTTP_CURRENT_USER_IE_PROXY_CONFIG proxyConfig);
+                ref WINHTTP_CURRENT_USER_IE_PROXY_CONFIG proxyConfig
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
             [DllImport(WINHTTP, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal static extern SafeInternetHandle WinHttpOpen(string userAgent, AccessType accessType,
-                string proxyName, string proxyBypass, int dwFlags);
+            internal static extern SafeInternetHandle WinHttpOpen(
+                string userAgent,
+                AccessType accessType,
+                string proxyName,
+                string proxyBypass,
+                int dwFlags
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
             [DllImport(WINHTTP, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal static extern bool WinHttpSetTimeouts(SafeInternetHandle session, int resolveTimeout,
-                int connectTimeout, int sendTimeout, int receiveTimeout);
+            internal static extern bool WinHttpSetTimeouts(
+                SafeInternetHandle session,
+                int resolveTimeout,
+                int connectTimeout,
+                int sendTimeout,
+                int receiveTimeout
+            );
 
             [DllImport(WINHTTP, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal static extern bool WinHttpGetProxyForUrl(SafeInternetHandle session, string url,
-                [In] ref WINHTTP_AUTOPROXY_OPTIONS autoProxyOptions, out WINHTTP_PROXY_INFO proxyInfo);
+            internal static extern bool WinHttpGetProxyForUrl(
+                SafeInternetHandle session,
+                string url,
+                [In] ref WINHTTP_AUTOPROXY_OPTIONS autoProxyOptions,
+                out WINHTTP_PROXY_INFO proxyInfo
+            );
 
             [DllImport(WINHTTP, CharSet = CharSet.Unicode, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -1814,14 +2181,14 @@ namespace System.Net {
                 AutoDetect = 0x00000001, // WINHTTP_AUTOPROXY_AUTO_DETECT
                 AutoProxyConfigUrl = 0x00000002, // WINHTTP_AUTOPROXY_CONFIG_URL
                 RunInProcess = 0x00010000, // WINHTTP_AUTOPROXY_RUN_INPROCESS
-                RunOutProcessOnly = 0x00020000 // WINHTTP_AUTOPROXY_RUN_OUTPROCESS_ONLY
+                RunOutProcessOnly = 0x00020000, // WINHTTP_AUTOPROXY_RUN_OUTPROCESS_ONLY
             }
 
             internal enum AccessType
-            { 
+            {
                 DefaultProxy = 0,
                 NoProxy = 1,
-                NamedProxy = 3
+                NamedProxy = 3,
             }
 
             [Flags]
@@ -1863,240 +2230,270 @@ namespace System.Net {
             {
                 Success = 0,
 
-                OutOfHandles = 12001,                       // ERROR_WINHTTP_OUT_OF_HANDLES
-                Timeout = 12002,                            // ERROR_WINHTTP_TIMEOUT
-                InternalError = 12004,                      // ERROR_WINHTTP_INTERNAL_ERROR
-                InvalidUrl = 12005,                         // ERROR_WINHTTP_INVALID_URL
-                UnrecognizedScheme = 12006,                 // ERROR_WINHTTP_UNRECOGNIZED_SCHEME
-                NameNotResolved = 12007,                    // ERROR_WINHTTP_NAME_NOT_RESOLVED
-                InvalidOption = 12009,                      // ERROR_WINHTTP_INVALID_OPTION
-                OptionNotSettable = 12011,                  // ERROR_WINHTTP_OPTION_NOT_SETTABLE
-                Shutdown = 12012,                           // ERROR_WINHTTP_SHUTDOWN
+                OutOfHandles = 12001, // ERROR_WINHTTP_OUT_OF_HANDLES
+                Timeout = 12002, // ERROR_WINHTTP_TIMEOUT
+                InternalError = 12004, // ERROR_WINHTTP_INTERNAL_ERROR
+                InvalidUrl = 12005, // ERROR_WINHTTP_INVALID_URL
+                UnrecognizedScheme = 12006, // ERROR_WINHTTP_UNRECOGNIZED_SCHEME
+                NameNotResolved = 12007, // ERROR_WINHTTP_NAME_NOT_RESOLVED
+                InvalidOption = 12009, // ERROR_WINHTTP_INVALID_OPTION
+                OptionNotSettable = 12011, // ERROR_WINHTTP_OPTION_NOT_SETTABLE
+                Shutdown = 12012, // ERROR_WINHTTP_SHUTDOWN
 
-                LoginFailure = 12015,                       // ERROR_WINHTTP_LOGIN_FAILURE
-                OperationCancelled = 12017,                 // ERROR_WINHTTP_OPERATION_CANCELLED
-                IncorrectHandleType = 12018,                // ERROR_WINHTTP_INCORRECT_HANDLE_TYPE
-                IncorrectHandleState = 12019,               // ERROR_WINHTTP_INCORRECT_HANDLE_STATE
-                CannotConnect = 12029,                      // ERROR_WINHTTP_CANNOT_CONNECT
-                ConnectionError = 12030,                    // ERROR_WINHTTP_CONNECTION_ERROR
-                ResendRequest = 12032,                      // ERROR_WINHTTP_RESEND_REQUEST
+                LoginFailure = 12015, // ERROR_WINHTTP_LOGIN_FAILURE
+                OperationCancelled = 12017, // ERROR_WINHTTP_OPERATION_CANCELLED
+                IncorrectHandleType = 12018, // ERROR_WINHTTP_INCORRECT_HANDLE_TYPE
+                IncorrectHandleState = 12019, // ERROR_WINHTTP_INCORRECT_HANDLE_STATE
+                CannotConnect = 12029, // ERROR_WINHTTP_CANNOT_CONNECT
+                ConnectionError = 12030, // ERROR_WINHTTP_CONNECTION_ERROR
+                ResendRequest = 12032, // ERROR_WINHTTP_RESEND_REQUEST
 
-                AuthCertNeeded = 12044,                     // ERROR_WINHTTP_CLIENT_AUTH_CERT_NEEDED
+                AuthCertNeeded = 12044, // ERROR_WINHTTP_CLIENT_AUTH_CERT_NEEDED
 
-                CannotCallBeforeOpen = 12100,               // ERROR_WINHTTP_CANNOT_CALL_BEFORE_OPEN
-                CannotCallBeforeSend = 12101,               // ERROR_WINHTTP_CANNOT_CALL_BEFORE_SEND
-                CannotCallAfterSend = 12102,                // ERROR_WINHTTP_CANNOT_CALL_AFTER_SEND
-                CannotCallAfterOpen = 12103,                // ERROR_WINHTTP_CANNOT_CALL_AFTER_OPEN
+                CannotCallBeforeOpen = 12100, // ERROR_WINHTTP_CANNOT_CALL_BEFORE_OPEN
+                CannotCallBeforeSend = 12101, // ERROR_WINHTTP_CANNOT_CALL_BEFORE_SEND
+                CannotCallAfterSend = 12102, // ERROR_WINHTTP_CANNOT_CALL_AFTER_SEND
+                CannotCallAfterOpen = 12103, // ERROR_WINHTTP_CANNOT_CALL_AFTER_OPEN
 
-                HeaderNotFound = 12150,                     // ERROR_WINHTTP_HEADER_NOT_FOUND
-                InvalidServerResponse = 12152,              // ERROR_WINHTTP_INVALID_SERVER_RESPONSE
-                InvalidHeader = 12153,                      // ERROR_WINHTTP_INVALID_HEADER
-                InvalidQueryRequest = 12154,                // ERROR_WINHTTP_INVALID_QUERY_REQUEST
-                HeaderAlreadyExists = 12155,                // ERROR_WINHTTP_HEADER_ALREADY_EXISTS
-                RedirectFailed = 12156,                     // ERROR_WINHTTP_REDIRECT_FAILED
+                HeaderNotFound = 12150, // ERROR_WINHTTP_HEADER_NOT_FOUND
+                InvalidServerResponse = 12152, // ERROR_WINHTTP_INVALID_SERVER_RESPONSE
+                InvalidHeader = 12153, // ERROR_WINHTTP_INVALID_HEADER
+                InvalidQueryRequest = 12154, // ERROR_WINHTTP_INVALID_QUERY_REQUEST
+                HeaderAlreadyExists = 12155, // ERROR_WINHTTP_HEADER_ALREADY_EXISTS
+                RedirectFailed = 12156, // ERROR_WINHTTP_REDIRECT_FAILED
 
-                AutoProxyServiceError = 12178,              // ERROR_WINHTTP_AUTO_PROXY_SERVICE_ERROR
-                BadAutoProxyScript = 12166,                 // ERROR_WINHTTP_BAD_AUTO_PROXY_SCRIPT
-                UnableToDownloadScript = 12167,             // ERROR_WINHTTP_UNABLE_TO_DOWNLOAD_SCRIPT
+                AutoProxyServiceError = 12178, // ERROR_WINHTTP_AUTO_PROXY_SERVICE_ERROR
+                BadAutoProxyScript = 12166, // ERROR_WINHTTP_BAD_AUTO_PROXY_SCRIPT
+                UnableToDownloadScript = 12167, // ERROR_WINHTTP_UNABLE_TO_DOWNLOAD_SCRIPT
 
-                NotInitialized = 12172,                     // ERROR_WINHTTP_NOT_INITIALIZED
-                SecureFailure = 12175,                      // ERROR_WINHTTP_SECURE_FAILURE
+                NotInitialized = 12172, // ERROR_WINHTTP_NOT_INITIALIZED
+                SecureFailure = 12175, // ERROR_WINHTTP_SECURE_FAILURE
 
-                SecureCertDateInvalid = 12037,              // ERROR_WINHTTP_SECURE_CERT_DATE_INVALID
-                SecureCertCNInvalid = 12038,                // ERROR_WINHTTP_SECURE_CERT_CN_INVALID
-                SecureInvalidCA = 12045,                    // ERROR_WINHTTP_SECURE_INVALID_CA
-                SecureCertRevFailed = 12057,                // ERROR_WINHTTP_SECURE_CERT_REV_FAILED
-                SecureChannelError = 12157,                 // ERROR_WINHTTP_SECURE_CHANNEL_ERROR
-                SecureInvalidCert = 12169,                  // ERROR_WINHTTP_SECURE_INVALID_CERT
-                SecureCertRevoked = 12170,                  // ERROR_WINHTTP_SECURE_CERT_REVOKED
-                SecureCertWrongUsage = 12179,               // ERROR_WINHTTP_SECURE_CERT_WRONG_USAGE
+                SecureCertDateInvalid = 12037, // ERROR_WINHTTP_SECURE_CERT_DATE_INVALID
+                SecureCertCNInvalid = 12038, // ERROR_WINHTTP_SECURE_CERT_CN_INVALID
+                SecureInvalidCA = 12045, // ERROR_WINHTTP_SECURE_INVALID_CA
+                SecureCertRevFailed = 12057, // ERROR_WINHTTP_SECURE_CERT_REV_FAILED
+                SecureChannelError = 12157, // ERROR_WINHTTP_SECURE_CHANNEL_ERROR
+                SecureInvalidCert = 12169, // ERROR_WINHTTP_SECURE_INVALID_CERT
+                SecureCertRevoked = 12170, // ERROR_WINHTTP_SECURE_CERT_REVOKED
+                SecureCertWrongUsage = 12179, // ERROR_WINHTTP_SECURE_CERT_WRONG_USAGE
 
-                AudodetectionFailed = 12180,                // ERROR_WINHTTP_AUTODETECTION_FAILED
-                HeaderCountExceeded = 12181,                // ERROR_WINHTTP_HEADER_COUNT_EXCEEDED
-                HeaderSizeOverflow = 12182,                 // ERROR_WINHTTP_HEADER_SIZE_OVERFLOW
-                ChunkedEncodingHeaderSizeOverflow = 12183,  // ERROR_WINHTTP_CHUNKED_ENCODING_HEADER_SIZE_OVERFLOW
-                ResponseDrainOverflow = 12184,              // ERROR_WINHTTP_RESPONSE_DRAIN_OVERFLOW
-                ClientCertNoPrivateKey = 12185,             // ERROR_WINHTTP_CLIENT_CERT_NO_PRIVATE_KEY
-                ClientCertNoAccessPrivateKey = 12186,       // ERROR_WINHTTP_CLIENT_CERT_NO_ACCESS_PRIVATE_KEY
+                AudodetectionFailed = 12180, // ERROR_WINHTTP_AUTODETECTION_FAILED
+                HeaderCountExceeded = 12181, // ERROR_WINHTTP_HEADER_COUNT_EXCEEDED
+                HeaderSizeOverflow = 12182, // ERROR_WINHTTP_HEADER_SIZE_OVERFLOW
+                ChunkedEncodingHeaderSizeOverflow = 12183, // ERROR_WINHTTP_CHUNKED_ENCODING_HEADER_SIZE_OVERFLOW
+                ResponseDrainOverflow = 12184, // ERROR_WINHTTP_RESPONSE_DRAIN_OVERFLOW
+                ClientCertNoPrivateKey = 12185, // ERROR_WINHTTP_CLIENT_CERT_NO_PRIVATE_KEY
+                ClientCertNoAccessPrivateKey = 12186, // ERROR_WINHTTP_CLIENT_CERT_NO_ACCESS_PRIVATE_KEY
             }
         }
-
 
         //
         // Caching (must use WinInet to cache).
         //
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static class UnsafeWinInetCache {
-            public  const int    MAX_PATH = 260;
+        internal static class UnsafeWinInetCache
+        {
+            public const int MAX_PATH = 260;
 
-            [DllImport(WININET, CharSet = CharSet.Unicode, ExactSpelling=true, SetLastError = true)]
+            [DllImport(
+                WININET,
+                CharSet = CharSet.Unicode,
+                ExactSpelling = true,
+                SetLastError = true
+            )]
             internal static extern bool CreateUrlCacheEntryW(
-                                            [In]  string        urlName,
-                                            [In]  int           expectedFileSize,
-                                            [In]  string        fileExtension,
-                                            [Out] System.Text.StringBuilder fileName,
-                                            [In]  int           dwReserved
-        );
+                [In] string urlName,
+                [In] int expectedFileSize,
+                [In] string fileExtension,
+                [Out] System.Text.StringBuilder fileName,
+                [In] int dwReserved
+            );
 
-            [DllImport(WININET, CharSet = CharSet.Unicode, ExactSpelling=true, SetLastError = true)]
-            unsafe internal static extern bool CommitUrlCacheEntryW(
-                                            [In] string                 urlName,
-                                            [In] string                 localFileName,
-                                            [In] _WinInetCache.FILETIME  expireTime,
-                                            [In] _WinInetCache.FILETIME  lastModifiedTime,
-                                            [In] _WinInetCache.EntryType EntryType,
-                                            [In] byte*                  headerInfo,
-                                            [In] int                    headerSizeTChars,
-                                            [In] string                 fileExtension,
-                                            [In] string                 originalUrl
-        );
+            [DllImport(
+                WININET,
+                CharSet = CharSet.Unicode,
+                ExactSpelling = true,
+                SetLastError = true
+            )]
+            internal static extern unsafe bool CommitUrlCacheEntryW(
+                [In] string urlName,
+                [In] string localFileName,
+                [In] _WinInetCache.FILETIME expireTime,
+                [In] _WinInetCache.FILETIME lastModifiedTime,
+                [In] _WinInetCache.EntryType EntryType,
+                [In] byte* headerInfo,
+                [In] int headerSizeTChars,
+                [In] string fileExtension,
+                [In] string originalUrl
+            );
 
-            [DllImport(WININET, CharSet = CharSet.Unicode, ExactSpelling=true, SetLastError = true)]
-            unsafe internal static extern bool GetUrlCacheEntryInfoW(
-                                            [In]      string    urlName,
-                                            [In]      byte*     entryPtr,                       //was [Out]
-                                            [In, Out] ref int   bufferSz
-                                            );
+            [DllImport(
+                WININET,
+                CharSet = CharSet.Unicode,
+                ExactSpelling = true,
+                SetLastError = true
+            )]
+            internal static extern unsafe bool GetUrlCacheEntryInfoW(
+                [In] string urlName,
+                [In] byte* entryPtr, //was [Out]
+                [In, Out] ref int bufferSz
+            );
 
-            [DllImport(WININET, CharSet = CharSet.Unicode, ExactSpelling=true, SetLastError = true)]
-            unsafe internal static extern bool SetUrlCacheEntryInfoW(
-                                            [In] string                 lpszUrlName,
-                                            [In] byte*                  EntryPtr,
-                                            [In] _WinInetCache.Entry_FC  fieldControl
-                                            );
+            [DllImport(
+                WININET,
+                CharSet = CharSet.Unicode,
+                ExactSpelling = true,
+                SetLastError = true
+            )]
+            internal static extern unsafe bool SetUrlCacheEntryInfoW(
+                [In] string lpszUrlName,
+                [In] byte* EntryPtr,
+                [In] _WinInetCache.Entry_FC fieldControl
+            );
 
-            [DllImport(WININET, CharSet = CharSet.Unicode, ExactSpelling=true, SetLastError = true)]
-            internal static extern bool DeleteUrlCacheEntryW( [In] string urlName);
+            [DllImport(
+                WININET,
+                CharSet = CharSet.Unicode,
+                ExactSpelling = true,
+                SetLastError = true
+            )]
+            internal static extern bool DeleteUrlCacheEntryW([In] string urlName);
 
-            [DllImport(WININET, CharSet = CharSet.Unicode, ExactSpelling=true, SetLastError = true)]
+            [DllImport(
+                WININET,
+                CharSet = CharSet.Unicode,
+                ExactSpelling = true,
+                SetLastError = true
+            )]
             internal static extern bool UnlockUrlCacheEntryFileW(
-                                            [In] string     urlName,
-                                            [In] int        dwReserved                  //must be 0
-                                            );
+                [In] string urlName,
+                [In] int dwReserved //must be 0
+            );
 
-    /*********
-    NOT USED SO FAR
-            unsafe private extern static SafeUnlockUrlCacheEntryStream RetrieveUrlCacheEntryStream(
-                                            [In]      string    urlName,
-                                            [In]      byte*     entryPtr,               //was [Out]
+            /*********
+            NOT USED SO FAR
+                    unsafe private extern static SafeUnlockUrlCacheEntryStream RetrieveUrlCacheEntryStream(
+                                                    [In]      string    urlName,
+                                                    [In]      byte*     entryPtr,               //was [Out]
+                                                    [In, Out] ref int   entryBufSize,
+                                                    [In]      bool      randomRead,
+                                                    [In]      int       dwReserved
+                                                    );
+        
+                    unsafe internal static extern bool ReadUrlCacheEntryStream(
+                                                    [In]      SafeUnlockUrlCacheEntryStream  urlCacheStream,
+                                                    [In]      int       offset,
+                                                    [In]      byte*     bufferPtr,
+                                                    [In, Out] ref int   bufferSz,
+                                                    [In]      int       dwReserved                      //must be 0
+                                                    );
+        
+                    internal static extern bool UnlockUrlCacheEntryStream(
+                                            [In] IntPtr         urlCacheStream,
+                                            [In] int            dwReserved                      //mustbe 0
+                                            );
+        
+                    unsafe internal static extern bool GetUrlCacheEntryInfoEx(
+                                            [In]      string    url,
+                                            [In]      byte*     entryPtr,                       //was [Out]
                                             [In, Out] ref int   entryBufSize,
-                                            [In]      bool      randomRead,
-                                            [In]      int       dwReserved
+                                            [In]      IntPtr    lpszReserved,                   //was[Out] must pass null
+                                            [In]      IntPtr    lpdwReserved,                   //was[In, Out] must pass null
+                                            [In]      IntPtr    lpReserved,                     //must pass null
+                                            [In]      int       dwFlags                         //reserved must be 0
                                             );
-
-            unsafe internal static extern bool ReadUrlCacheEntryStream(
-                                            [In]      SafeUnlockUrlCacheEntryStream  urlCacheStream,
-                                            [In]      int       offset,
-                                            [In]      byte*     bufferPtr,
-                                            [In, Out] ref int   bufferSz,
-                                            [In]      int       dwReserved                      //must be 0
+        
+                    internal static extern IntPtr  FindFirstUrlCacheGroup(
+                                            [In]  _WinInetCache.GroupFlag     flags,
+                                            [In]  _WinInetCache.GroupSrchType searchFilter,
+                                            [In]  IntPtr                     searchConditionPtr, //must be null
+                                            [In]  int                        searchConditionSz,  //must be 0
+                                            [Out] out WinInet.GroupId        groupId,
+                                            [In]  IntPtr                     lpReserved          //was [In,Out] must be IntPtr.Zero
                                             );
-
-            internal static extern bool UnlockUrlCacheEntryStream(
-                                    [In] IntPtr         urlCacheStream,
-                                    [In] int            dwReserved                      //mustbe 0
-                                    );
-
-            unsafe internal static extern bool GetUrlCacheEntryInfoEx(
-                                    [In]      string    url,
-                                    [In]      byte*     entryPtr,                       //was [Out]
-                                    [In, Out] ref int   entryBufSize,
-                                    [In]      IntPtr    lpszReserved,                   //was[Out] must pass null
-                                    [In]      IntPtr    lpdwReserved,                   //was[In, Out] must pass null
-                                    [In]      IntPtr    lpReserved,                     //must pass null
-                                    [In]      int       dwFlags                         //reserved must be 0
-                                    );
-
-            internal static extern IntPtr  FindFirstUrlCacheGroup(
-                                    [In]  _WinInetCache.GroupFlag     flags,
-                                    [In]  _WinInetCache.GroupSrchType searchFilter,
-                                    [In]  IntPtr                     searchConditionPtr, //must be null
-                                    [In]  int                        searchConditionSz,  //must be 0
-                                    [Out] out WinInet.GroupId        groupId,
-                                    [In]  IntPtr                     lpReserved          //was [In,Out] must be IntPtr.Zero
-                                    );
-
-            internal static extern bool FindNextUrlCacheGroup(
-                                    [In]  IntPtr                    hFind,
-                                    [Out] out _WinInetCache.GroupId  groupId,
-                                    [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
-                                    );
-
-            internal static extern bool GetUrlCacheGroupAttribute(
-                                    [In]   _WinInetCache.GroupId     groupId,
-                                    [In]   int                      flags,              //must 0
-                                    [In]   _WinInetCache.GroupAttr   attr,
-                                    [Out] out _WinInetCache.GroupInfo groupInfo,
-                                    [In, Out] ref int               groupInfoSize,
-                                    [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
-                                    );
-
-            internal static extern bool SetUrlCacheGroupAttribute(
-                                    [In]  _WinInetCache.GroupId      groupId,
-                                    [In]  int                       flags,              //must be 0
-                                    [In]  _WinInetCache.GroupAttr    attr,
-                                    [In]  _WinInetCache.GroupInfo    groupInfo,
-                                    [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
-                                    );
-
-            internal static extern WinInet.GroupId CreateUrlCacheGroup(
-                                    [In]  _WinInetCache.GroupFlag    flags,
-                                    [In]  IntPtr                    lpReserved          //must be IntPtr.Zero
-                                    );
-
-            internal static extern bool DeleteUrlCacheGroup(
-                                    [In]  _WinInetCache.GroupId      groupId,
-                                    [In]  _WinInetCache.GroupFlag    flags,
-                                    [In]  IntPtr                    lpReserved          //must be IntPtr.Zero
-                                    );
-
-
-            internal static extern bool SetUrlCacheEntryGroup(
-                                    [In] string                     urlName,
-                                    [In] _WinInetCache.GroupSetFlag  flags,
-                                    [In] _WinInetCache.GroupId       groupId,
-                                    [In] IntPtr                     groupAttributes,    // must pass NULL
-                                    [In] int                        groupAttrCount,     // must pass 0
-                                    [In] IntPtr                     lpReserved          // must pass NULL
-                                    );
-
-            unsafe internal static extern IntPtr FindFirstUrlCacheEntryEx(
-                                    [In]      byte*             searchPattern,      //must be null
-                                    [In]      int               dwFlags,            //must be 0
-                                    [In]      CacheEntry.EntryType srchFilter,
-                                    [In]      WinInet.GroupId   groupId,
-                                    [In]      byte*             entryPtr,           //was [out]
-                                    [In, Out] ref int           entryBufSize,
-                                    [Out]     void*             lpReserved,         // must pass NULL
-                                    [In]      void*             lpReserved2,        //was [In,Out] must be IntPtr.Zero
-                                    [In]      void*             lpReserved3         // must pass NULL
-                                    );
-
-            unsafe internal static extern bool FindNextUrlCacheEntryEx(
-                                    [In]     IntPtr             enumHandle,
-                                    [In]     byte*              entryPtr,           //was [Out]
-                                    [In, Out]ref int            entryBufSize,
-                                    [In]     void*              lpReserved,         // [Out] must pass NULL
-                                    [In]     void*              lpReserved2,        // [In] [Out] must pass NULL
-                                    [In]     void*              lpReserved3         // must pass NULL
-                                    );
-
-            unsafe internal static extern IntPtr FindFirstUrlCacheEntry(
-                                    [In]     string             searchPattern,
-                                    [In]     byte*              entryPtr,           //was [Out]
-                                    [In, Out]ref int            entryBufSize
-                                    );
-
-
-            unsafe internal static extern bool FindNextUrlCacheEntry(
-                                    [In]     IntPtr             enumHandle,
-                                    [In]     byte*              entryPtr,           //was [Out]
-                                    [In, Out]ref int            entryBufSize
-                                    );
-
-            internal static extern bool FindCloseUrlCache( [In] IntPtr enumHandle);
-
-    /**********/
+        
+                    internal static extern bool FindNextUrlCacheGroup(
+                                            [In]  IntPtr                    hFind,
+                                            [Out] out _WinInetCache.GroupId  groupId,
+                                            [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
+                                            );
+        
+                    internal static extern bool GetUrlCacheGroupAttribute(
+                                            [In]   _WinInetCache.GroupId     groupId,
+                                            [In]   int                      flags,              //must 0
+                                            [In]   _WinInetCache.GroupAttr   attr,
+                                            [Out] out _WinInetCache.GroupInfo groupInfo,
+                                            [In, Out] ref int               groupInfoSize,
+                                            [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
+                                            );
+        
+                    internal static extern bool SetUrlCacheGroupAttribute(
+                                            [In]  _WinInetCache.GroupId      groupId,
+                                            [In]  int                       flags,              //must be 0
+                                            [In]  _WinInetCache.GroupAttr    attr,
+                                            [In]  _WinInetCache.GroupInfo    groupInfo,
+                                            [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
+                                            );
+        
+                    internal static extern WinInet.GroupId CreateUrlCacheGroup(
+                                            [In]  _WinInetCache.GroupFlag    flags,
+                                            [In]  IntPtr                    lpReserved          //must be IntPtr.Zero
+                                            );
+        
+                    internal static extern bool DeleteUrlCacheGroup(
+                                            [In]  _WinInetCache.GroupId      groupId,
+                                            [In]  _WinInetCache.GroupFlag    flags,
+                                            [In]  IntPtr                    lpReserved          //must be IntPtr.Zero
+                                            );
+        
+        
+                    internal static extern bool SetUrlCacheEntryGroup(
+                                            [In] string                     urlName,
+                                            [In] _WinInetCache.GroupSetFlag  flags,
+                                            [In] _WinInetCache.GroupId       groupId,
+                                            [In] IntPtr                     groupAttributes,    // must pass NULL
+                                            [In] int                        groupAttrCount,     // must pass 0
+                                            [In] IntPtr                     lpReserved          // must pass NULL
+                                            );
+        
+                    unsafe internal static extern IntPtr FindFirstUrlCacheEntryEx(
+                                            [In]      byte*             searchPattern,      //must be null
+                                            [In]      int               dwFlags,            //must be 0
+                                            [In]      CacheEntry.EntryType srchFilter,
+                                            [In]      WinInet.GroupId   groupId,
+                                            [In]      byte*             entryPtr,           //was [out]
+                                            [In, Out] ref int           entryBufSize,
+                                            [Out]     void*             lpReserved,         // must pass NULL
+                                            [In]      void*             lpReserved2,        //was [In,Out] must be IntPtr.Zero
+                                            [In]      void*             lpReserved3         // must pass NULL
+                                            );
+        
+                    unsafe internal static extern bool FindNextUrlCacheEntryEx(
+                                            [In]     IntPtr             enumHandle,
+                                            [In]     byte*              entryPtr,           //was [Out]
+                                            [In, Out]ref int            entryBufSize,
+                                            [In]     void*              lpReserved,         // [Out] must pass NULL
+                                            [In]     void*              lpReserved2,        // [In] [Out] must pass NULL
+                                            [In]     void*              lpReserved3         // must pass NULL
+                                            );
+        
+                    unsafe internal static extern IntPtr FindFirstUrlCacheEntry(
+                                            [In]     string             searchPattern,
+                                            [In]     byte*              entryPtr,           //was [Out]
+                                            [In, Out]ref int            entryBufSize
+                                            );
+        
+        
+                    unsafe internal static extern bool FindNextUrlCacheEntry(
+                                            [In]     IntPtr             enumHandle,
+                                            [In]     byte*              entryPtr,           //was [Out]
+                                            [In, Out]ref int            entryBufSize
+                                            );
+        
+                    internal static extern bool FindCloseUrlCache( [In] IntPtr enumHandle);
+        
+            /**********/
         }
 
         [SuppressUnmanagedCodeSecurityAttribute]
@@ -2104,110 +2501,397 @@ namespace System.Net {
         {
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern SecurityStatus SspiFreeAuthIdentity(
-                [In] IntPtr authData);
+            internal static extern unsafe SecurityStatus SspiFreeAuthIdentity([In] IntPtr authData);
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(SECUR32, ExactSpelling = true, SetLastError = true, CharSet = CharSet.Unicode)]
-            internal unsafe static extern SecurityStatus SspiEncodeStringsAsAuthIdentity(
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                SECUR32,
+                ExactSpelling = true,
+                SetLastError = true,
+                CharSet = CharSet.Unicode
+            )]
+            internal static extern unsafe SecurityStatus SspiEncodeStringsAsAuthIdentity(
                 [In] string userName,
                 [In] string domainName,
                 [In] string password,
-                [Out] out SafeSspiAuthDataHandle authData);
+                [Out] out SafeSspiAuthDataHandle authData
+            );
         }
 
 #endif // !FEATURE_PAL
 
 #if !FEATURE_PAL
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-        internal static unsafe class HttpApi {
-            
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpInitialize(HTTPAPI_VERSION version, uint flags, void* pReserved);
+        internal static unsafe class HttpApi
+        {
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpInitialize(
+                HTTPAPI_VERSION version,
+                uint flags,
+                void* pReserved
+            );
 
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpReceiveRequestEntityBody(CriticalHandle requestQueueHandle, ulong requestId, uint flags, void* pEntityBuffer, uint entityBufferLength, out uint bytesReturned, NativeOverlapped* pOverlapped);
-            [DllImport(HTTPAPI, EntryPoint = "HttpReceiveRequestEntityBody", ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-            internal static extern uint HttpReceiveRequestEntityBody2(CriticalHandle requestQueueHandle, ulong requestId, uint flags, void* pEntityBuffer, uint entityBufferLength, out uint bytesReturned, [In] SafeHandle pOverlapped);
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpReceiveRequestEntityBody(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                uint flags,
+                void* pEntityBuffer,
+                uint entityBufferLength,
+                out uint bytesReturned,
+                NativeOverlapped* pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpReceiveClientCertificate(CriticalHandle requestQueueHandle, ulong connectionId, uint flags, HTTP_SSL_CLIENT_CERT_INFO* pSslClientCertInfo, uint sslClientCertInfoSize, uint* pBytesReceived, NativeOverlapped* pOverlapped);
+            [DllImport(
+                HTTPAPI,
+                EntryPoint = "HttpReceiveRequestEntityBody",
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpReceiveRequestEntityBody2(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                uint flags,
+                void* pEntityBuffer,
+                uint entityBufferLength,
+                out uint bytesReturned,
+                [In] SafeHandle pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpReceiveClientCertificate(CriticalHandle requestQueueHandle, ulong connectionId, uint flags, byte* pSslClientCertInfo, uint sslClientCertInfoSize, uint* pBytesReceived, NativeOverlapped* pOverlapped);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpReceiveClientCertificate(
+                CriticalHandle requestQueueHandle,
+                ulong connectionId,
+                uint flags,
+                HTTP_SSL_CLIENT_CERT_INFO* pSslClientCertInfo,
+                uint sslClientCertInfoSize,
+                uint* pBytesReceived,
+                NativeOverlapped* pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpReceiveHttpRequest(CriticalHandle requestQueueHandle, ulong requestId, uint flags, HTTP_REQUEST* pRequestBuffer, uint requestBufferLength, uint* pBytesReturned, NativeOverlapped* pOverlapped);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpReceiveClientCertificate(
+                CriticalHandle requestQueueHandle,
+                ulong connectionId,
+                uint flags,
+                byte* pSslClientCertInfo,
+                uint sslClientCertInfoSize,
+                uint* pBytesReceived,
+                NativeOverlapped* pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpSendHttpResponse(CriticalHandle requestQueueHandle, ulong requestId, uint flags, HTTP_RESPONSE* pHttpResponse, void* pCachePolicy, uint* pBytesSent, SafeLocalFree pRequestBuffer, uint requestBufferLength, NativeOverlapped* pOverlapped, void* pLogData);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpReceiveHttpRequest(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                uint flags,
+                HTTP_REQUEST* pRequestBuffer,
+                uint requestBufferLength,
+                uint* pBytesReturned,
+                NativeOverlapped* pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpSendResponseEntityBody(CriticalHandle requestQueueHandle, ulong requestId, uint flags, ushort entityChunkCount, HTTP_DATA_CHUNK* pEntityChunks, uint* pBytesSent, SafeLocalFree pRequestBuffer, uint requestBufferLength, NativeOverlapped* pOverlapped, void* pLogData);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpSendHttpResponse(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                uint flags,
+                HTTP_RESPONSE* pHttpResponse,
+                void* pCachePolicy,
+                uint* pBytesSent,
+                SafeLocalFree pRequestBuffer,
+                uint requestBufferLength,
+                NativeOverlapped* pOverlapped,
+                void* pLogData
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-            internal static extern uint HttpCancelHttpRequest(CriticalHandle requestQueueHandle, ulong requestId, IntPtr pOverlapped);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpSendResponseEntityBody(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                uint flags,
+                ushort entityChunkCount,
+                HTTP_DATA_CHUNK* pEntityChunks,
+                uint* pBytesSent,
+                SafeLocalFree pRequestBuffer,
+                uint requestBufferLength,
+                NativeOverlapped* pOverlapped,
+                void* pLogData
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, EntryPoint = "HttpSendResponseEntityBody", ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-            internal static extern uint HttpSendResponseEntityBody2(CriticalHandle requestQueueHandle, ulong requestId, uint flags, ushort entityChunkCount, IntPtr pEntityChunks, out uint pBytesSent, SafeLocalFree pRequestBuffer, uint requestBufferLength, SafeHandle pOverlapped, IntPtr pLogData);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpCancelHttpRequest(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                IntPtr pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling=true, CallingConvention=CallingConvention.StdCall, SetLastError=true)]
-            internal static extern uint HttpWaitForDisconnect(CriticalHandle requestQueueHandle, ulong connectionId, NativeOverlapped* pOverlapped);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                EntryPoint = "HttpSendResponseEntityBody",
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpSendResponseEntityBody2(
+                CriticalHandle requestQueueHandle,
+                ulong requestId,
+                uint flags,
+                ushort entityChunkCount,
+                IntPtr pEntityChunks,
+                out uint pBytesSent,
+                SafeLocalFree pRequestBuffer,
+                uint requestBufferLength,
+                SafeHandle pOverlapped,
+                IntPtr pLogData
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-            internal static extern uint HttpCreateServerSession(HTTPAPI_VERSION version, ulong* serverSessionId, uint reserved);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpWaitForDisconnect(
+                CriticalHandle requestQueueHandle,
+                ulong connectionId,
+                NativeOverlapped* pOverlapped
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-            internal static extern uint HttpCreateUrlGroup(ulong serverSessionId, ulong* urlGroupId, uint reserved);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpCreateServerSession(
+                HTTPAPI_VERSION version,
+                ulong* serverSessionId,
+                uint reserved
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal static extern uint HttpAddUrlToUrlGroup(ulong urlGroupId, string pFullyQualifiedUrl, ulong context, uint pReserved);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpCreateUrlGroup(
+                ulong serverSessionId,
+                ulong* urlGroupId,
+                uint reserved
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-            internal static extern uint HttpSetUrlGroupProperty(ulong urlGroupId, HTTP_SERVER_PROPERTY serverProperty, IntPtr pPropertyInfo, uint propertyInfoLength);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern uint HttpAddUrlToUrlGroup(
+                ulong urlGroupId,
+                string pFullyQualifiedUrl,
+                ulong context,
+                uint pReserved
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-            internal static extern uint HttpRemoveUrlFromUrlGroup(ulong urlGroupId, string pFullyQualifiedUrl, uint flags);
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
+            internal static extern uint HttpSetUrlGroupProperty(
+                ulong urlGroupId,
+                HTTP_SERVER_PROPERTY serverProperty,
+                IntPtr pPropertyInfo,
+                uint propertyInfoLength
+            );
 
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
+            internal static extern uint HttpRemoveUrlFromUrlGroup(
+                ulong urlGroupId,
+                string pFullyQualifiedUrl,
+                uint flags
+            );
+
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
             internal static extern uint HttpCloseServerSession(ulong serverSessionId);
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                HTTPAPI,
+                ExactSpelling = true,
+                CallingConvention = CallingConvention.StdCall,
+                SetLastError = true
+            )]
             internal static extern uint HttpCloseUrlGroup(ulong urlGroupId);
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(TOKENBINDING, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall, EntryPoint="TokenBindingVerifyMessage")]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                TOKENBINDING,
+                CharSet = CharSet.Unicode,
+                CallingConvention = CallingConvention.StdCall,
+                EntryPoint = "TokenBindingVerifyMessage"
+            )]
             public static extern int TokenBindingVerifyMessage(
                 [In] byte* tokenBindingMessage,
                 [In] uint tokenBindingMessageSize,
                 [In] TOKENBINDING_KEY_PARAMETERS_TYPE keyType,
                 [In] byte* tlsUnique,
                 [In] uint tlsUniqueSize,
-                [Out] out HeapAllocHandle resultList);
+                [Out] out HeapAllocHandle resultList
+            );
 
-            [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Implementation requires unmanaged code usage")]
-            [DllImport(TOKENBINDING, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall, EntryPoint="TokenBindingVerifyMessage")]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+                Justification = "Implementation requires unmanaged code usage"
+            )]
+            [DllImport(
+                TOKENBINDING,
+                CharSet = CharSet.Unicode,
+                CallingConvention = CallingConvention.StdCall,
+                EntryPoint = "TokenBindingVerifyMessage"
+            )]
             public static extern int TokenBindingVerifyMessage_V1(
                 [In] byte* tokenBindingMessage,
                 [In] uint tokenBindingMessageSize,
                 [In] IntPtr keyType,
                 [In] byte* tlsUnique,
                 [In] uint tlsUniqueSize,
-                [Out] out HeapAllocHandle resultList);
+                [Out] out HeapAllocHandle resultList
+            );
 
             internal sealed class HeapAllocHandle : SafeHandleZeroOrMinusOneIsInvalid
             {
@@ -2215,9 +2899,7 @@ namespace System.Net {
 
                 // Called by P/Invoke when returning SafeHandles.
                 private HeapAllocHandle()
-                    : base(ownsHandle: true)
-                {
-                }
+                    : base(ownsHandle: true) { }
 
                 // Do not provide a finalizer - SafeHandle's critical finalizer will call ReleaseHandle for you.
                 protected override bool ReleaseHandle()
@@ -2226,14 +2908,16 @@ namespace System.Net {
                 }
             }
 
-            internal enum HTTP_API_VERSION {
+            internal enum HTTP_API_VERSION
+            {
                 Invalid,
                 Version10,
                 Version20,
             }
 
             // see http.w for definitions
-            internal enum HTTP_SERVER_PROPERTY {
+            internal enum HTTP_SERVER_PROPERTY
+            {
                 HttpServerAuthenticationProperty,
                 HttpServerLoggingProperty,
                 HttpServerQosProperty,
@@ -2247,22 +2931,25 @@ namespace System.Net {
                 HttpServerChannelBindProperty,
                 HttpServerProtectionLevelProperty,
             }
-                       
-            internal enum HTTP_REQUEST_INFO_TYPE {
+
+            internal enum HTTP_REQUEST_INFO_TYPE
+            {
                 HttpRequestInfoTypeAuth,
                 HttpRequestInfoTypeChannelBind,
                 HttpRequestInfoTypeSslProtocol,
                 HttpRequestInfoTypeSslTokenBindingDraft,
-                HttpRequestInfoTypeSslTokenBinding
+                HttpRequestInfoTypeSslTokenBinding,
             }
 
-            internal enum HTTP_RESPONSE_INFO_TYPE {
+            internal enum HTTP_RESPONSE_INFO_TYPE
+            {
                 HttpResponseInfoTypeMultipleKnownHeaders,
                 HttpResponseInfoTypeAuthenticationProperty,
-                HttpResponseInfoTypeQosProperty ,
+                HttpResponseInfoTypeQosProperty,
             }
 
-            internal enum HTTP_TIMEOUT_TYPE {
+            internal enum HTTP_TIMEOUT_TYPE
+            {
                 EntityBody,
                 DrainEntityBody,
                 RequestQueue,
@@ -2274,19 +2961,22 @@ namespace System.Net {
             internal const int MaxTimeout = 6;
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_VERSION {
+            internal struct HTTP_VERSION
+            {
                 internal ushort MajorVersion;
                 internal ushort MinorVersion;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_KNOWN_HEADER {
+            internal struct HTTP_KNOWN_HEADER
+            {
                 internal ushort RawValueLength;
                 internal sbyte* pRawValue;
             }
 
-            [StructLayout(LayoutKind.Sequential, Size=32)]
-            internal struct HTTP_DATA_CHUNK {
+            [StructLayout(LayoutKind.Sequential, Size = 32)]
+            internal struct HTTP_DATA_CHUNK
+            {
                 internal HTTP_DATA_CHUNK_TYPE DataChunkType;
                 internal uint p0;
                 internal byte* pBuffer;
@@ -2294,13 +2984,15 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTPAPI_VERSION {
+            internal struct HTTPAPI_VERSION
+            {
                 internal ushort HttpApiMajorVersion;
                 internal ushort HttpApiMinorVersion;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_COOKED_URL {
+            internal struct HTTP_COOKED_URL
+            {
                 internal ushort FullUrlLength;
                 internal ushort HostLength;
                 internal ushort AbsPathLength;
@@ -2312,7 +3004,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct SOCKADDR {
+            internal struct SOCKADDR
+            {
                 internal ushort sa_family;
                 internal byte sa_data;
                 internal byte sa_data_02;
@@ -2331,13 +3024,15 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_TRANSPORT_ADDRESS {
+            internal struct HTTP_TRANSPORT_ADDRESS
+            {
                 internal SOCKADDR* pRemoteAddress;
                 internal SOCKADDR* pLocalAddress;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_SSL_CLIENT_CERT_INFO {
+            internal struct HTTP_SSL_CLIENT_CERT_INFO
+            {
                 internal uint CertFlags;
                 internal uint CertEncodedSize;
                 internal byte* pCertEncoded;
@@ -2345,10 +3040,11 @@ namespace System.Net {
                 internal byte CertDeniedByMapper;
             }
 
-            internal enum HTTP_SERVICE_BINDING_TYPE : uint { 
+            internal enum HTTP_SERVICE_BINDING_TYPE : uint
+            {
                 HttpServiceBindingTypeNone = 0,
                 HttpServiceBindingTypeW,
-                HttpServiceBindingTypeA
+                HttpServiceBindingTypeA,
             }
 
             [StructLayout(LayoutKind.Sequential)]
@@ -2367,7 +3063,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_UNKNOWN_HEADER {
+            internal struct HTTP_UNKNOWN_HEADER
+            {
                 internal ushort NameLength;
                 internal ushort RawValueLength;
                 internal sbyte* pName;
@@ -2375,7 +3072,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_SSL_INFO {
+            internal struct HTTP_SSL_INFO
+            {
                 internal ushort ServerCertKeySize;
                 internal ushort ConnectionKeySize;
                 internal uint ServerCertIssuerSize;
@@ -2387,7 +3085,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_RESPONSE_HEADERS {
+            internal struct HTTP_RESPONSE_HEADERS
+            {
                 internal ushort UnknownHeaderCount;
                 internal HTTP_UNKNOWN_HEADER* pUnknownHeaders;
                 internal ushort TrailerCount;
@@ -2425,7 +3124,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_REQUEST_HEADERS {
+            internal struct HTTP_REQUEST_HEADERS
+            {
                 internal ushort UnknownHeaderCount;
                 internal HTTP_UNKNOWN_HEADER* pUnknownHeaders;
                 internal ushort TrailerCount;
@@ -2473,7 +3173,8 @@ namespace System.Net {
                 internal HTTP_KNOWN_HEADER KnownHeaders_41;
             }
 
-            internal enum HTTP_VERB : int {
+            internal enum HTTP_VERB : int
+            {
                 HttpVerbUnparsed = 0,
                 HttpVerbUnknown = 1,
                 HttpVerbInvalid = 2,
@@ -2497,7 +3198,8 @@ namespace System.Net {
                 HttpVerbMaximum = 20,
             }
 
-            internal static readonly string[] HttpVerbs = new string[] {
+            internal static readonly string[] HttpVerbs = new string[]
+            {
                 null,
                 "Unknown",
                 "Invalid",
@@ -2520,7 +3222,8 @@ namespace System.Net {
                 "SEARCH",
             };
 
-            internal enum HTTP_DATA_CHUNK_TYPE : int {
+            internal enum HTTP_DATA_CHUNK_TYPE : int
+            {
                 HttpDataChunkFromMemory = 0,
                 HttpDataChunkFromFileHandle = 1,
                 HttpDataChunkFromFragmentCache = 2,
@@ -2528,14 +3231,16 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_RESPONSE_INFO {
+            internal struct HTTP_RESPONSE_INFO
+            {
                 internal HTTP_RESPONSE_INFO_TYPE Type;
                 internal uint Length;
                 internal void* pInfo;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_RESPONSE {
+            internal struct HTTP_RESPONSE
+            {
                 internal uint Flags;
                 internal HTTP_VERSION Version;
                 internal ushort StatusCode;
@@ -2549,14 +3254,16 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_REQUEST_INFO {
+            internal struct HTTP_REQUEST_INFO
+            {
                 internal HTTP_REQUEST_INFO_TYPE InfoType;
                 internal uint InfoLength;
                 internal void* pInfo;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_REQUEST {
+            internal struct HTTP_REQUEST
+            {
                 internal uint Flags;
                 internal ulong ConnectionId;
                 internal ulong RequestId;
@@ -2586,7 +3293,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_TIMEOUT_LIMIT_INFO {
+            internal struct HTTP_TIMEOUT_LIMIT_INFO
+            {
                 internal HTTP_FLAGS Flags;
                 internal ushort EntityBody;
                 internal ushort DrainEntityBody;
@@ -2597,7 +3305,8 @@ namespace System.Net {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct HTTP_BINDING_INFO {
+            internal struct HTTP_BINDING_INFO
+            {
                 internal HTTP_FLAGS Flags;
                 internal IntPtr RequestQueueHandle;
             }
@@ -2644,7 +3353,7 @@ namespace System.Net {
                 TOKENBINDING_EXTENSION_FORMAT_UNDEFINED = 0,
             }
 
-            internal enum TOKENBINDING_KEY_PARAMETERS_TYPE : byte 
+            internal enum TOKENBINDING_KEY_PARAMETERS_TYPE : byte
             {
                 TOKENBINDING_KEY_PARAMETERS_TYPE_RSA_PKCS_SHA256 = 0,
                 TOKENBINDING_KEY_PARAMETERS_TYPE_RSA_PSS_SHA256 = 1,
@@ -2664,7 +3373,7 @@ namespace System.Net {
                 public TOKENBINDING_HASH_ALGORITHM_V1 hashAlgorithm;
                 public TOKENBINDING_SIGNATURE_ALGORITHM_V1 signatureAlgorithm;
             }
-            
+
             [StructLayout(LayoutKind.Sequential)]
             internal unsafe struct TOKENBINDING_RESULT_DATA
             {
@@ -2699,33 +3408,37 @@ namespace System.Net {
                 public uint resultCount;
                 public TOKENBINDING_RESULT_DATA_V1* resultData;
             }
-            
+
             // see http.w for definitions
             [Flags]
-            internal enum HTTP_FLAGS : uint {
-                NONE                                = 0x00000000,
+            internal enum HTTP_FLAGS : uint
+            {
+                NONE = 0x00000000,
                 HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY = 0x00000001,
-                HTTP_RECEIVE_SECURE_CHANNEL_TOKEN   = 0x00000001,
-                HTTP_SEND_RESPONSE_FLAG_DISCONNECT  = 0x00000001,
-                HTTP_SEND_RESPONSE_FLAG_MORE_DATA   = 0x00000002,
+                HTTP_RECEIVE_SECURE_CHANNEL_TOKEN = 0x00000001,
+                HTTP_SEND_RESPONSE_FLAG_DISCONNECT = 0x00000001,
+                HTTP_SEND_RESPONSE_FLAG_MORE_DATA = 0x00000002,
                 HTTP_SEND_RESPONSE_FLAG_BUFFER_DATA = 0x00000004,
-                HTTP_SEND_RESPONSE_FLAG_RAW_HEADER  = 0x00000004,
-                HTTP_SEND_REQUEST_FLAG_MORE_DATA    = 0x00000001,
-                HTTP_PROPERTY_FLAG_PRESENT          = 0x00000001,
-                HTTP_INITIALIZE_SERVER              = 0x00000001,
-                HTTP_INITIALIZE_CBT                 = 0x00000004,
-                HTTP_SEND_RESPONSE_FLAG_OPAQUE      = 0x00000040,
+                HTTP_SEND_RESPONSE_FLAG_RAW_HEADER = 0x00000004,
+                HTTP_SEND_REQUEST_FLAG_MORE_DATA = 0x00000001,
+                HTTP_PROPERTY_FLAG_PRESENT = 0x00000001,
+                HTTP_INITIALIZE_SERVER = 0x00000001,
+                HTTP_INITIALIZE_CBT = 0x00000004,
+                HTTP_SEND_RESPONSE_FLAG_OPAQUE = 0x00000040,
             }
 
-            const int HttpHeaderRequestMaximum  = (int)HttpRequestHeader.UserAgent + 1;
+            const int HttpHeaderRequestMaximum = (int)HttpRequestHeader.UserAgent + 1;
             const int HttpHeaderResponseMaximum = (int)HttpResponseHeader.WwwAuthenticate + 1;
 
-            internal static class HTTP_REQUEST_HEADER_ID {
-                internal static string ToString(int position) {
+            internal static class HTTP_REQUEST_HEADER_ID
+            {
+                internal static string ToString(int position)
+                {
                     return m_Strings[position];
                 }
 
-                private static string[] m_Strings = {
+                private static string[] m_Strings =
+                {
                     "Cache-Control",
                     "Connection",
                     "Date",
@@ -2736,7 +3449,6 @@ namespace System.Net {
                     "Upgrade",
                     "Via",
                     "Warning",
-
                     "Allow",
                     "Content-Length",
                     "Content-Type",
@@ -2747,7 +3459,6 @@ namespace System.Net {
                     "Content-Range",
                     "Expires",
                     "Last-Modified",
-
                     "Accept",
                     "Accept-Charset",
                     "Accept-Encoding",
@@ -2758,7 +3469,6 @@ namespace System.Net {
                     "From",
                     "Host",
                     "If-Match",
-
                     "If-Modified-Since",
                     "If-None-Match",
                     "If-Range",
@@ -2773,69 +3483,74 @@ namespace System.Net {
                 };
             }
 
-            internal static class HTTP_RESPONSE_HEADER_ID {
+            internal static class HTTP_RESPONSE_HEADER_ID
+            {
                 private static Hashtable m_Hashtable;
 
-                static HTTP_RESPONSE_HEADER_ID() {
+                static HTTP_RESPONSE_HEADER_ID()
+                {
                     m_Hashtable = new Hashtable((int)Enum.HttpHeaderResponseMaximum);
-                    for (int i = 0; i < (int)Enum.HttpHeaderResponseMaximum; i++) {
+                    for (int i = 0; i < (int)Enum.HttpHeaderResponseMaximum; i++)
+                    {
                         m_Hashtable.Add(m_Strings[i], i);
                     }
                 }
 
-                internal static int IndexOfKnownHeader(string HeaderName) {
+                internal static int IndexOfKnownHeader(string HeaderName)
+                {
                     object index = m_Hashtable[HeaderName];
-                    return index==null ? -1 : (int)index;
-    }
+                    return index == null ? -1 : (int)index;
+                }
 
-                internal static string ToString(int position) {
+                internal static string ToString(int position)
+                {
                     return m_Strings[position];
-}
+                }
 
-                internal enum Enum {
-                    HttpHeaderCacheControl          = 0,    // general-header [section 4.5]
-                    HttpHeaderConnection            = 1,    // general-header [section 4.5]
-                    HttpHeaderDate                  = 2,    // general-header [section 4.5]
-                    HttpHeaderKeepAlive             = 3,    // general-header [not in rfc]
-                    HttpHeaderPragma                = 4,    // general-header [section 4.5]
-                    HttpHeaderTrailer               = 5,    // general-header [section 4.5]
-                    HttpHeaderTransferEncoding      = 6,    // general-header [section 4.5]
-                    HttpHeaderUpgrade               = 7,    // general-header [section 4.5]
-                    HttpHeaderVia                   = 8,    // general-header [section 4.5]
-                    HttpHeaderWarning               = 9,    // general-header [section 4.5]
+                internal enum Enum
+                {
+                    HttpHeaderCacheControl = 0, // general-header [section 4.5]
+                    HttpHeaderConnection = 1, // general-header [section 4.5]
+                    HttpHeaderDate = 2, // general-header [section 4.5]
+                    HttpHeaderKeepAlive = 3, // general-header [not in rfc]
+                    HttpHeaderPragma = 4, // general-header [section 4.5]
+                    HttpHeaderTrailer = 5, // general-header [section 4.5]
+                    HttpHeaderTransferEncoding = 6, // general-header [section 4.5]
+                    HttpHeaderUpgrade = 7, // general-header [section 4.5]
+                    HttpHeaderVia = 8, // general-header [section 4.5]
+                    HttpHeaderWarning = 9, // general-header [section 4.5]
 
-                    HttpHeaderAllow                 = 10,   // entity-header  [section 7.1]
-                    HttpHeaderContentLength         = 11,   // entity-header  [section 7.1]
-                    HttpHeaderContentType           = 12,   // entity-header  [section 7.1]
-                    HttpHeaderContentEncoding       = 13,   // entity-header  [section 7.1]
-                    HttpHeaderContentLanguage       = 14,   // entity-header  [section 7.1]
-                    HttpHeaderContentLocation       = 15,   // entity-header  [section 7.1]
-                    HttpHeaderContentMd5            = 16,   // entity-header  [section 7.1]
-                    HttpHeaderContentRange          = 17,   // entity-header  [section 7.1]
-                    HttpHeaderExpires               = 18,   // entity-header  [section 7.1]
-                    HttpHeaderLastModified          = 19,   // entity-header  [section 7.1]
-
+                    HttpHeaderAllow = 10, // entity-header  [section 7.1]
+                    HttpHeaderContentLength = 11, // entity-header  [section 7.1]
+                    HttpHeaderContentType = 12, // entity-header  [section 7.1]
+                    HttpHeaderContentEncoding = 13, // entity-header  [section 7.1]
+                    HttpHeaderContentLanguage = 14, // entity-header  [section 7.1]
+                    HttpHeaderContentLocation = 15, // entity-header  [section 7.1]
+                    HttpHeaderContentMd5 = 16, // entity-header  [section 7.1]
+                    HttpHeaderContentRange = 17, // entity-header  [section 7.1]
+                    HttpHeaderExpires = 18, // entity-header  [section 7.1]
+                    HttpHeaderLastModified = 19, // entity-header  [section 7.1]
 
                     // Response Headers
 
-                    HttpHeaderAcceptRanges          = 20,   // response-header [section 6.2]
-                    HttpHeaderAge                   = 21,   // response-header [section 6.2]
-                    HttpHeaderEtag                  = 22,   // response-header [section 6.2]
-                    HttpHeaderLocation              = 23,   // response-header [section 6.2]
-                    HttpHeaderProxyAuthenticate     = 24,   // response-header [section 6.2]
-                    HttpHeaderRetryAfter            = 25,   // response-header [section 6.2]
-                    HttpHeaderServer                = 26,   // response-header [section 6.2]
-                    HttpHeaderSetCookie             = 27,   // response-header [not in rfc]
-                    HttpHeaderVary                  = 28,   // response-header [section 6.2]
-                    HttpHeaderWwwAuthenticate       = 29,   // response-header [section 6.2]
+                    HttpHeaderAcceptRanges = 20, // response-header [section 6.2]
+                    HttpHeaderAge = 21, // response-header [section 6.2]
+                    HttpHeaderEtag = 22, // response-header [section 6.2]
+                    HttpHeaderLocation = 23, // response-header [section 6.2]
+                    HttpHeaderProxyAuthenticate = 24, // response-header [section 6.2]
+                    HttpHeaderRetryAfter = 25, // response-header [section 6.2]
+                    HttpHeaderServer = 26, // response-header [section 6.2]
+                    HttpHeaderSetCookie = 27, // response-header [not in rfc]
+                    HttpHeaderVary = 28, // response-header [section 6.2]
+                    HttpHeaderWwwAuthenticate = 29, // response-header [section 6.2]
 
-                    HttpHeaderResponseMaximum       = 30,
+                    HttpHeaderResponseMaximum = 30,
 
-
-                    HttpHeaderMaximum               = 41
+                    HttpHeaderMaximum = 41,
                 }
 
-                private static string[] m_Strings = {
+                private static string[] m_Strings =
+                {
                     "Cache-Control",
                     "Connection",
                     "Date",
@@ -2846,7 +3561,6 @@ namespace System.Net {
                     "Upgrade",
                     "Via",
                     "Warning",
-
                     "Allow",
                     "Content-Length",
                     "Content-Type",
@@ -2857,7 +3571,6 @@ namespace System.Net {
                     "Content-Range",
                     "Expires",
                     "Last-Modified",
-
                     "Accept-Ranges",
                     "Age",
                     "ETag",
@@ -2876,27 +3589,31 @@ namespace System.Net {
 
             //
             // This property is used by HttpListener to pass the version structure to the native layer in API
-            // calls. 
+            // calls.
             //
-            internal static HTTPAPI_VERSION Version {
-                get {
-                    return version;
-                }
+            internal static HTTPAPI_VERSION Version
+            {
+                get { return version; }
             }
 
             //
-            // This property is used by HttpListener to get the Api version in use so that it uses appropriate 
+            // This property is used by HttpListener to get the Api version in use so that it uses appropriate
             // Http APIs.
             //
-            internal static HTTP_API_VERSION ApiVersion {
-                get {
-                    if (version.HttpApiMajorVersion == 2 && version.HttpApiMinorVersion == 0) {
+            internal static HTTP_API_VERSION ApiVersion
+            {
+                get
+                {
+                    if (version.HttpApiMajorVersion == 2 && version.HttpApiMinorVersion == 0)
+                    {
                         return HTTP_API_VERSION.Version20;
-                    } 
-                    else if (version.HttpApiMajorVersion == 1 && version.HttpApiMinorVersion == 0) {
+                    }
+                    else if (version.HttpApiMajorVersion == 1 && version.HttpApiMinorVersion == 0)
+                    {
                         return HTTP_API_VERSION.Version10;
-                    } 
-                    else {
+                    }
+                    else
+                    {
                         return HTTP_API_VERSION.Invalid;
                     }
                 }
@@ -2905,90 +3622,138 @@ namespace System.Net {
             //
             // returns 'true' if http.sys supports CBT: either the system is Win7+, or http.sys was patched.
             //
-            internal static bool ExtendedProtectionSupported {
-                get {
-                    return extendedProtectionSupported;
-                }
+            internal static bool ExtendedProtectionSupported
+            {
+                get { return extendedProtectionSupported; }
             }
 
-            static HttpApi() {
+            static HttpApi()
+            {
                 InitHttpApi(2, 0);
             }
 
-            private static void InitHttpApi(ushort majorVersion, ushort minorVersion) {
+            private static void InitHttpApi(ushort majorVersion, ushort minorVersion)
+            {
                 version.HttpApiMajorVersion = majorVersion;
                 version.HttpApiMinorVersion = minorVersion;
 
-                GlobalLog.Print("HttpApi::.ctor() calling HttpApi.HttpInitialize() for Version " + majorVersion + "." + minorVersion);
+                GlobalLog.Print(
+                    "HttpApi::.ctor() calling HttpApi.HttpInitialize() for Version "
+                        + majorVersion
+                        + "."
+                        + minorVersion
+                );
 
                 // For pre-Win7 OS versions, we need to check whether http.sys contains the CBT patch.
-                // We do so by passing HTTP_INITIALIZE_CBT flag to HttpInitialize. If the flag is not 
+                // We do so by passing HTTP_INITIALIZE_CBT flag to HttpInitialize. If the flag is not
                 // supported, http.sys is not patched. Note that http.sys will return invalid parameter
                 // also on Win7, even though it shipped with CBT support. Therefore we must not pass
                 // the flag on Win7 and later.
                 uint statusCode = ErrorCodes.ERROR_SUCCESS;
                 extendedProtectionSupported = true;
 
-                if (ComNetOS.IsWin7orLater) {
+                if (ComNetOS.IsWin7orLater)
+                {
                     // on Win7 and later, we don't pass the CBT flag. CBT is always supported.
-                    statusCode = HttpApi.HttpInitialize(version, (uint)HTTP_FLAGS.HTTP_INITIALIZE_SERVER, null);
+                    statusCode = HttpApi.HttpInitialize(
+                        version,
+                        (uint)HTTP_FLAGS.HTTP_INITIALIZE_SERVER,
+                        null
+                    );
                 }
-                else {
-                    statusCode = HttpApi.HttpInitialize(version,
-                        (uint)(HTTP_FLAGS.HTTP_INITIALIZE_SERVER | HTTP_FLAGS.HTTP_INITIALIZE_CBT), null);
+                else
+                {
+                    statusCode = HttpApi.HttpInitialize(
+                        version,
+                        (uint)(HTTP_FLAGS.HTTP_INITIALIZE_SERVER | HTTP_FLAGS.HTTP_INITIALIZE_CBT),
+                        null
+                    );
 
                     // if the status code is INVALID_PARAMETER, http.sys does not support CBT.
-                    if (statusCode == ErrorCodes.ERROR_INVALID_PARAMETER) {
-                        if (Logging.On) Logging.PrintWarning(Logging.HttpListener, SR.GetString(SR.net_listener_cbt_not_supported));
-                       
+                    if (statusCode == ErrorCodes.ERROR_INVALID_PARAMETER)
+                    {
+                        if (Logging.On)
+                            Logging.PrintWarning(
+                                Logging.HttpListener,
+                                SR.GetString(SR.net_listener_cbt_not_supported)
+                            );
+
                         // try again without CBT flag: HttpListener can still be used, but doesn't support EP
                         extendedProtectionSupported = false;
-                        statusCode = HttpApi.HttpInitialize(version, (uint)HTTP_FLAGS.HTTP_INITIALIZE_SERVER, null);
+                        statusCode = HttpApi.HttpInitialize(
+                            version,
+                            (uint)HTTP_FLAGS.HTTP_INITIALIZE_SERVER,
+                            null
+                        );
                     }
                 }
 
                 supported = statusCode == ErrorCodes.ERROR_SUCCESS;
 
-                GlobalLog.Print("HttpApi::.ctor() call to HttpApi.HttpInitialize() returned:" + statusCode + " supported:" + supported);
+                GlobalLog.Print(
+                    "HttpApi::.ctor() call to HttpApi.HttpInitialize() returned:"
+                        + statusCode
+                        + " supported:"
+                        + supported
+                );
             }
 
             static volatile bool supported;
-            internal static bool Supported {
-                get {
-                    return supported;
-                }
+            internal static bool Supported
+            {
+                get { return supported; }
             }
 
             // Server API
 
-            internal static WebHeaderCollection GetHeaders(byte[] memoryBlob, IntPtr originalAddress)
+            internal static WebHeaderCollection GetHeaders(
+                byte[] memoryBlob,
+                IntPtr originalAddress
+            )
             {
                 GlobalLog.Enter("HttpApi::GetHeaders()");
 
                 // Return value.
-                WebHeaderCollection headerCollection = new WebHeaderCollection(WebHeaderCollectionType.HttpListenerRequest);
+                WebHeaderCollection headerCollection = new WebHeaderCollection(
+                    WebHeaderCollectionType.HttpListenerRequest
+                );
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    HTTP_REQUEST* request = (HTTP_REQUEST*) pMemoryBlob;
-                    long fixup = pMemoryBlob - (byte*) originalAddress;
+                    HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
+                    long fixup = pMemoryBlob - (byte*)originalAddress;
                     int index;
 
                     // unknown headers
                     if (request->Headers.UnknownHeaderCount != 0)
                     {
-                        HTTP_UNKNOWN_HEADER* pUnknownHeader = (HTTP_UNKNOWN_HEADER*) (fixup + (byte*) request->Headers.pUnknownHeaders);
+                        HTTP_UNKNOWN_HEADER* pUnknownHeader = (HTTP_UNKNOWN_HEADER*)(
+                            fixup + (byte*)request->Headers.pUnknownHeaders
+                        );
                         for (index = 0; index < request->Headers.UnknownHeaderCount; index++)
                         {
-                            // For unknown headers, when header value is empty, RawValueLength will be 0 and 
+                            // For unknown headers, when header value is empty, RawValueLength will be 0 and
                             // pRawValue will be null.
                             if (pUnknownHeader->pName != null && pUnknownHeader->NameLength > 0)
                             {
-                                string headerName = new string(pUnknownHeader->pName + fixup, 0, pUnknownHeader->NameLength);
+                                string headerName = new string(
+                                    pUnknownHeader->pName + fixup,
+                                    0,
+                                    pUnknownHeader->NameLength
+                                );
                                 string headerValue;
-                                if (pUnknownHeader->pRawValue != null && pUnknownHeader->RawValueLength > 0) {
-                                    headerValue = new string(pUnknownHeader->pRawValue + fixup, 0, pUnknownHeader->RawValueLength);
+                                if (
+                                    pUnknownHeader->pRawValue != null
+                                    && pUnknownHeader->RawValueLength > 0
+                                )
+                                {
+                                    headerValue = new string(
+                                        pUnknownHeader->pRawValue + fixup,
+                                        0,
+                                        pUnknownHeader->RawValueLength
+                                    );
                                 }
-                                else {
+                                else
+                                {
                                     headerValue = string.Empty;
                                 }
                                 headerCollection.AddInternal(headerName, headerValue);
@@ -3001,12 +3766,19 @@ namespace System.Net {
                     HTTP_KNOWN_HEADER* pKnownHeader = &request->Headers.KnownHeaders;
                     for (index = 0; index < HttpHeaderRequestMaximum; index++)
                     {
-                        // For known headers, when header value is empty, RawValueLength will be 0 and 
+                        // For known headers, when header value is empty, RawValueLength will be 0 and
                         // pRawValue will point to empty string ("\0")
                         if (pKnownHeader->pRawValue != null)
                         {
-                            string headerValue = new string(pKnownHeader->pRawValue + fixup, 0, pKnownHeader->RawValueLength);
-                            headerCollection.AddInternal(HTTP_REQUEST_HEADER_ID.ToString(index), headerValue);
+                            string headerValue = new string(
+                                pKnownHeader->pRawValue + fixup,
+                                0,
+                                pKnownHeader->RawValueLength
+                            );
+                            headerCollection.AddInternal(
+                                HTTP_REQUEST_HEADER_ID.ToString(index),
+                                headerValue
+                            );
                         }
                         pKnownHeader++;
                     }
@@ -3022,16 +3794,30 @@ namespace System.Net {
                 string header = null;
 
                 HTTP_KNOWN_HEADER* pKnownHeader = (&request->Headers.KnownHeaders) + headerIndex;
-                GlobalLog.Print("HttpApi::GetKnownHeader() pKnownHeader:0x" + ((IntPtr) pKnownHeader).ToString("x"));
-                GlobalLog.Print("HttpApi::GetKnownHeader() pRawValue:0x" + ((IntPtr) pKnownHeader->pRawValue).ToString("x") + " RawValueLength:" + pKnownHeader->RawValueLength.ToString());
-                // For known headers, when header value is empty, RawValueLength will be 0 and 
+                GlobalLog.Print(
+                    "HttpApi::GetKnownHeader() pKnownHeader:0x"
+                        + ((IntPtr)pKnownHeader).ToString("x")
+                );
+                GlobalLog.Print(
+                    "HttpApi::GetKnownHeader() pRawValue:0x"
+                        + ((IntPtr)pKnownHeader->pRawValue).ToString("x")
+                        + " RawValueLength:"
+                        + pKnownHeader->RawValueLength.ToString()
+                );
+                // For known headers, when header value is empty, RawValueLength will be 0 and
                 // pRawValue will point to empty string ("\0")
                 if (pKnownHeader->pRawValue != null)
                 {
-                    header = new string(pKnownHeader->pRawValue + fixup, 0, pKnownHeader->RawValueLength);
+                    header = new string(
+                        pKnownHeader->pRawValue + fixup,
+                        0,
+                        pKnownHeader->RawValueLength
+                    );
                 }
 
-                GlobalLog.Leave("HttpApi::GetKnownHeader() return:" + ValidationHelper.ToString(header));
+                GlobalLog.Leave(
+                    "HttpApi::GetKnownHeader() return:" + ValidationHelper.ToString(header)
+                );
                 return header;
             }
 
@@ -3040,24 +3826,38 @@ namespace System.Net {
                 return GetKnownHeader(request, 0, headerIndex);
             }
 
-            internal static string GetKnownHeader(byte[] memoryBlob, IntPtr originalAddress, int headerIndex)
+            internal static string GetKnownHeader(
+                byte[] memoryBlob,
+                IntPtr originalAddress,
+                int headerIndex
+            )
             {
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    return GetKnownHeader((HTTP_REQUEST*) pMemoryBlob, pMemoryBlob - (byte*) originalAddress, headerIndex);
+                    return GetKnownHeader(
+                        (HTTP_REQUEST*)pMemoryBlob,
+                        pMemoryBlob - (byte*)originalAddress,
+                        headerIndex
+                    );
                 }
             }
 
-            private unsafe static string GetVerb(HTTP_REQUEST* request, long fixup)
+            private static unsafe string GetVerb(HTTP_REQUEST* request, long fixup)
             {
                 GlobalLog.Enter("HttpApi::GetVerb()");
                 string verb = null;
 
-                if ((int) request->Verb > (int) HTTP_VERB.HttpVerbUnknown && (int) request->Verb < (int) HTTP_VERB.HttpVerbMaximum)
+                if (
+                    (int)request->Verb > (int)HTTP_VERB.HttpVerbUnknown
+                    && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum
+                )
                 {
-                    verb = HttpVerbs[(int) request->Verb];
+                    verb = HttpVerbs[(int)request->Verb];
                 }
-                else if (request->Verb == HTTP_VERB.HttpVerbUnknown && request->pUnknownVerb != null)
+                else if (
+                    request->Verb == HTTP_VERB.HttpVerbUnknown
+                    && request->pUnknownVerb != null
+                )
                 {
                     verb = new string(request->pUnknownVerb + fixup, 0, request->UnknownVerbLength);
                 }
@@ -3066,16 +3866,19 @@ namespace System.Net {
                 return verb;
             }
 
-            internal unsafe static string GetVerb(HTTP_REQUEST* request)
+            internal static unsafe string GetVerb(HTTP_REQUEST* request)
             {
                 return GetVerb(request, 0);
             }
 
-            internal unsafe static string GetVerb(byte[] memoryBlob, IntPtr originalAddress)
+            internal static unsafe string GetVerb(byte[] memoryBlob, IntPtr originalAddress)
             {
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    return GetVerb((HTTP_REQUEST*) pMemoryBlob, pMemoryBlob - (byte*) originalAddress);
+                    return GetVerb(
+                        (HTTP_REQUEST*)pMemoryBlob,
+                        pMemoryBlob - (byte*)originalAddress
+                    );
                 }
             }
 
@@ -3087,8 +3890,11 @@ namespace System.Net {
                 HTTP_VERB verb = HTTP_VERB.HttpVerbUnknown;
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    HTTP_REQUEST* request = (HTTP_REQUEST*) pMemoryBlob;
-                    if ((int)request->Verb > (int)HTTP_VERB.HttpVerbUnparsed && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum)
+                    HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
+                    if (
+                        (int)request->Verb > (int)HTTP_VERB.HttpVerbUnparsed
+                        && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum
+                    )
                     {
                         verb = request->Verb;
                     }
@@ -3098,50 +3904,72 @@ namespace System.Net {
                 return verb;
             }
 
-            internal static uint GetChunks(byte[] memoryBlob, IntPtr originalAddress, ref int dataChunkIndex, ref uint dataChunkOffset, byte[] buffer, int offset, int size)
+            internal static uint GetChunks(
+                byte[] memoryBlob,
+                IntPtr originalAddress,
+                ref int dataChunkIndex,
+                ref uint dataChunkOffset,
+                byte[] buffer,
+                int offset,
+                int size
+            )
             {
-                GlobalLog.Enter("HttpApi::GetChunks() memoryBlob:" + ValidationHelper.ToString(memoryBlob));
+                GlobalLog.Enter(
+                    "HttpApi::GetChunks() memoryBlob:" + ValidationHelper.ToString(memoryBlob)
+                );
 
                 // Return value.
                 uint dataRead = 0;
-                fixed(byte* pMemoryBlob = memoryBlob)
+                fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    HTTP_REQUEST* request = (HTTP_REQUEST*) pMemoryBlob;
-                    long fixup = pMemoryBlob - (byte*) originalAddress;
+                    HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
+                    long fixup = pMemoryBlob - (byte*)originalAddress;
 
-                    if (request->EntityChunkCount > 0 && dataChunkIndex < request->EntityChunkCount && dataChunkIndex != -1)
+                    if (
+                        request->EntityChunkCount > 0
+                        && dataChunkIndex < request->EntityChunkCount
+                        && dataChunkIndex != -1
+                    )
                     {
-                        HTTP_DATA_CHUNK* pDataChunk = (HTTP_DATA_CHUNK*) (fixup + (byte*) &request->pEntityChunks[dataChunkIndex]);
+                        HTTP_DATA_CHUNK* pDataChunk = (HTTP_DATA_CHUNK*)(
+                            fixup + (byte*)&request->pEntityChunks[dataChunkIndex]
+                        );
 
-                        fixed(byte* pReadBuffer = buffer)
+                        fixed (byte* pReadBuffer = buffer)
                         {
                             byte* pTo = &pReadBuffer[offset];
 
-                            while (dataChunkIndex < request->EntityChunkCount && dataRead < size){
-                                if(dataChunkOffset >= pDataChunk->BufferLength){
+                            while (dataChunkIndex < request->EntityChunkCount && dataRead < size)
+                            {
+                                if (dataChunkOffset >= pDataChunk->BufferLength)
+                                {
                                     dataChunkOffset = 0;
-                                    dataChunkIndex ++;
+                                    dataChunkIndex++;
                                     pDataChunk++;
                                 }
-                                else{
+                                else
+                                {
                                     byte* pFrom = pDataChunk->pBuffer + dataChunkOffset + fixup;
 
-                                    uint bytesToRead =  pDataChunk->BufferLength - (uint)dataChunkOffset;
-                                    if (bytesToRead  > (uint)size){
+                                    uint bytesToRead =
+                                        pDataChunk->BufferLength - (uint)dataChunkOffset;
+                                    if (bytesToRead > (uint)size)
+                                    {
                                         bytesToRead = (uint)size;
                                     }
-                                    for (uint i=0;i<bytesToRead;i++)
+                                    for (uint i = 0; i < bytesToRead; i++)
                                     {
                                         *(pTo++) = *(pFrom++);
                                     }
-                                    dataRead+=bytesToRead;
+                                    dataRead += bytesToRead;
                                     dataChunkOffset += bytesToRead;
                                 }
                             }
                         }
                     }
                     //we're finished.
-                    if(dataChunkIndex ==  request->EntityChunkCount){
+                    if (dataChunkIndex == request->EntityChunkCount)
+                    {
                         dataChunkIndex = -1;
                     }
                 }
@@ -3154,13 +3982,26 @@ namespace System.Net {
             {
                 GlobalLog.Enter("HttpApi::GetRemoteEndPoint()");
 
-                SocketAddress v4address = new SocketAddress(AddressFamily.InterNetwork, SocketAddress.IPv4AddressSize);
-                SocketAddress v6address = new SocketAddress(AddressFamily.InterNetworkV6, SocketAddress.IPv6AddressSize);
+                SocketAddress v4address = new SocketAddress(
+                    AddressFamily.InterNetwork,
+                    SocketAddress.IPv4AddressSize
+                );
+                SocketAddress v6address = new SocketAddress(
+                    AddressFamily.InterNetworkV6,
+                    SocketAddress.IPv6AddressSize
+                );
 
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    HTTP_REQUEST* request = (HTTP_REQUEST*) pMemoryBlob;
-                    IntPtr address = request->Address.pRemoteAddress != null ? (IntPtr) (pMemoryBlob - (byte*) originalAddress + (byte*) request->Address.pRemoteAddress) : IntPtr.Zero;
+                    HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
+                    IntPtr address =
+                        request->Address.pRemoteAddress != null
+                            ? (IntPtr)(
+                                pMemoryBlob
+                                - (byte*)originalAddress
+                                + (byte*)request->Address.pRemoteAddress
+                            )
+                            : IntPtr.Zero;
                     CopyOutAddress(address, ref v4address, ref v6address);
                 }
 
@@ -3182,13 +4023,26 @@ namespace System.Net {
             {
                 GlobalLog.Enter("HttpApi::GetLocalEndPoint()");
 
-                SocketAddress v4address = new SocketAddress(AddressFamily.InterNetwork, SocketAddress.IPv4AddressSize);
-                SocketAddress v6address = new SocketAddress(AddressFamily.InterNetworkV6, SocketAddress.IPv6AddressSize);
+                SocketAddress v4address = new SocketAddress(
+                    AddressFamily.InterNetwork,
+                    SocketAddress.IPv4AddressSize
+                );
+                SocketAddress v6address = new SocketAddress(
+                    AddressFamily.InterNetworkV6,
+                    SocketAddress.IPv6AddressSize
+                );
 
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
-                    HTTP_REQUEST* request = (HTTP_REQUEST*) pMemoryBlob;
-                    IntPtr address = request->Address.pLocalAddress != null ? (IntPtr) (pMemoryBlob - (byte*) originalAddress + (byte*) request->Address.pLocalAddress) : IntPtr.Zero;
+                    HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
+                    IntPtr address =
+                        request->Address.pLocalAddress != null
+                            ? (IntPtr)(
+                                pMemoryBlob
+                                - (byte*)originalAddress
+                                + (byte*)request->Address.pLocalAddress
+                            )
+                            : IntPtr.Zero;
                     CopyOutAddress(address, ref v4address, ref v6address);
                 }
 
@@ -3205,28 +4059,39 @@ namespace System.Net {
                 GlobalLog.Leave("HttpApi::GetLocalEndPoint()");
                 return endpoint;
             }
-            
+
             /// <summary>
-            /// Method to acquire the V2 token binding 
+            /// Method to acquire the V2 token binding
             /// We tell the difference between a V1 binding and a V2 binding by looking at the HTTP_REQUEST_INFO_TYPE returned from the HTTP request blob
-            /// If we negotiated the new binding type, the value 'HttpRequestInfoTypeSslTokenBinding' will be returned. 
+            /// If we negotiated the new binding type, the value 'HttpRequestInfoTypeSslTokenBinding' will be returned.
             /// </summary>
             /// <param name="memoryBlob"></param>
             /// <param name="originalAddress"></param>
             /// <returns></returns>
-            internal static HTTP_REQUEST_TOKEN_BINDING_INFO* GetTlsTokenBindingRequestInfo(byte[] memoryBlob, IntPtr originalAddress)
+            internal static HTTP_REQUEST_TOKEN_BINDING_INFO* GetTlsTokenBindingRequestInfo(
+                byte[] memoryBlob,
+                IntPtr originalAddress
+            )
             {
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
                     HTTP_REQUEST_V2* request = (HTTP_REQUEST_V2*)pMemoryBlob;
-                    long fixup = pMemoryBlob - (byte*) originalAddress;
+                    long fixup = pMemoryBlob - (byte*)originalAddress;
 
                     for (int i = 0; i < request->RequestInfoCount; i++)
                     {
-                        HTTP_REQUEST_INFO* pThisInfo = (HTTP_REQUEST_INFO*)(fixup + (byte*)&request->pRequestInfo[i]);
-                        if (pThisInfo != null && pThisInfo->InfoType == HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBinding)
+                        HTTP_REQUEST_INFO* pThisInfo = (HTTP_REQUEST_INFO*)(
+                            fixup + (byte*)&request->pRequestInfo[i]
+                        );
+                        if (
+                            pThisInfo != null
+                            && pThisInfo->InfoType
+                                == HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBinding
+                        )
                         {
-                            return (HTTP_REQUEST_TOKEN_BINDING_INFO*)((byte*)(pThisInfo->pInfo) + fixup);
+                            return (HTTP_REQUEST_TOKEN_BINDING_INFO*)(
+                                (byte*)(pThisInfo->pInfo) + fixup
+                            );
                         }
                     }
                 }
@@ -3236,12 +4101,15 @@ namespace System.Net {
             /// <summary>
             /// Compat method to acquire the old V1 token binding
             /// We tell the difference between a V1 binding and a V2 binding by looking at the HTTP_REQUEST_INFO_TYPE returned from the HTTP request blob
-            /// If we negotiated the old binding type, the value 'HttpRequestInfoTypeSslTokenBindingDraft' will be returned.  
+            /// If we negotiated the old binding type, the value 'HttpRequestInfoTypeSslTokenBindingDraft' will be returned.
             /// </summary>
             /// <param name="memoryBlob"></param>
             /// <param name="originalAddress"></param>
             /// <returns></returns>
-            internal static HTTP_REQUEST_TOKEN_BINDING_INFO_V1* GetTlsTokenBindingRequestInfo_V1(byte[] memoryBlob, IntPtr originalAddress)
+            internal static HTTP_REQUEST_TOKEN_BINDING_INFO_V1* GetTlsTokenBindingRequestInfo_V1(
+                byte[] memoryBlob,
+                IntPtr originalAddress
+            )
             {
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
@@ -3250,11 +4118,19 @@ namespace System.Net {
 
                     for (int i = 0; i < request->RequestInfoCount; i++)
                     {
-                        HTTP_REQUEST_INFO* pThisInfo = (HTTP_REQUEST_INFO*)(fixup + (byte*)&request->pRequestInfo[i]);
-                        if (pThisInfo != null && pThisInfo->InfoType == HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBindingDraft)
+                        HTTP_REQUEST_INFO* pThisInfo = (HTTP_REQUEST_INFO*)(
+                            fixup + (byte*)&request->pRequestInfo[i]
+                        );
+                        if (
+                            pThisInfo != null
+                            && pThisInfo->InfoType
+                                == HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBindingDraft
+                        )
                         {
                             // Old V1 token binding protocol is being used, so we need to handle this data blob using the old behavior
-                            return (HTTP_REQUEST_TOKEN_BINDING_INFO_V1*)((byte*)(pThisInfo->pInfo) + fixup);
+                            return (HTTP_REQUEST_TOKEN_BINDING_INFO_V1*)(
+                                (byte*)(pThisInfo->pInfo) + fixup
+                            );
                         }
                     }
                 }
@@ -3262,31 +4138,35 @@ namespace System.Net {
             }
 
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            private static void CopyOutAddress(IntPtr address, ref SocketAddress v4address, ref SocketAddress v6address)
+            private static void CopyOutAddress(
+                IntPtr address,
+                ref SocketAddress v4address,
+                ref SocketAddress v6address
+            )
             {
                 if (address != IntPtr.Zero)
                 {
-                    ushort addressFamily = *((ushort*) address);
-                    if (addressFamily == (ushort) AddressFamily.InterNetwork)
+                    ushort addressFamily = *((ushort*)address);
+                    if (addressFamily == (ushort)AddressFamily.InterNetwork)
                     {
                         v6address = null;
                         fixed (byte* pBuffer = v4address.m_Buffer)
                         {
                             for (int index = 2; index < SocketAddress.IPv4AddressSize; index++)
                             {
-                                pBuffer[index] = ((byte*) address)[index];
+                                pBuffer[index] = ((byte*)address)[index];
                             }
                         }
                         return;
                     }
-                    if (addressFamily == (ushort) AddressFamily.InterNetworkV6)
+                    if (addressFamily == (ushort)AddressFamily.InterNetworkV6)
                     {
                         v4address = null;
                         fixed (byte* pBuffer = v6address.m_Buffer)
                         {
                             for (int index = 2; index < SocketAddress.IPv6AddressSize; index++)
                             {
-                                pBuffer[index] = ((byte*) address)[index];
+                                pBuffer[index] = ((byte*)address)[index];
                             }
                         }
                         return;
@@ -3299,11 +4179,14 @@ namespace System.Net {
         }
 
         [SuppressUnmanagedCodeSecurity]
-        internal unsafe static class SecureStringHelper
+        internal static unsafe class SecureStringHelper
         {
 #if DEBUG
             // this method is only called as part of an assert
-            internal static bool AreEqualValues(SecureString secureString1, SecureString secureString2)
+            internal static bool AreEqualValues(
+                SecureString secureString1,
+                SecureString secureString2
+            )
             {
                 IntPtr bstr1 = IntPtr.Zero;
                 IntPtr bstr2 = IntPtr.Zero;
@@ -3324,7 +4207,7 @@ namespace System.Net {
                 // strings are non-null at this point
 
                 if ((object)secureString1 == (object)secureString2)
-                    return true;  // same objects
+                    return true; // same objects
 
                 if (secureString1.Length != secureString2.Length)
                     return false;
@@ -3396,27 +4279,34 @@ namespace System.Net {
 
 #if !FEATURE_PAL
         internal const int CLSCTX_SERVER = 0x15;
-        [DllImport(OLE32, PreserveSig=false)] 
+
+        [DllImport(OLE32, PreserveSig = false)]
         public static extern void CoCreateInstance(
             [In] ref Guid clsid,
             IntPtr pUnkOuter,
             int context,
             [In] ref Guid iid,
-            [MarshalAs(UnmanagedType.IUnknown)] out Object o );
+            [MarshalAs(UnmanagedType.IUnknown)] out Object o
+        );
 #endif // !FEATURE_PAL
-    
-        // Used to support Windows Store apps.  
+
+        // Used to support Windows Store apps.
         // This code was provided by Immo Landwerth from the CLR team.
         [FriendAccessAllowed]
         internal class AppXHelper
         {
             [SecuritySafeCritical]
-            internal static Lazy<IntPtr> PrimaryWindowHandle = new Lazy<IntPtr>(() => GetPrimaryWindowHandle());
+            internal static Lazy<IntPtr> PrimaryWindowHandle = new Lazy<IntPtr>(() =>
+                GetPrimaryWindowHandle()
+            );
 
             [SecuritySafeCritical]
-            [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", 
+            [SuppressMessage(
+                "Microsoft.Usage",
+                "CA1806:DoNotIgnoreMethodResults",
                 MessageId = "System.Net.UnsafeNclNativeMethods+AppXHelper.GetWindowThreadProcessId(System.IntPtr,System.Int32@)",
-                Justification = "The return value of is the thread ID that created the window, not an error code.")]
+                Justification = "The return value of is the thread ID that created the window, not an error code."
+            )]
             private static IntPtr GetPrimaryWindowHandle()
             {
                 IntPtr primaryWindow = IntPtr.Zero;
@@ -3436,11 +4326,11 @@ namespace System.Net {
                 }
                 return primaryWindow;
             }
-            
-            [DllImport(USER32, SetLastError=true, ExactSpelling=true)]
+
+            [DllImport(USER32, SetLastError = true, ExactSpelling = true)]
             private static extern uint GetGUIThreadInfo(int threadId, ref GuiThreadInfo info);
 
-            [DllImport(USER32, ExactSpelling=true)]
+            [DllImport(USER32, ExactSpelling = true)]
             private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out int processId);
 
             private struct GuiThreadInfo
@@ -3453,6 +4343,7 @@ namespace System.Net {
                 public IntPtr hwndMenuOwner;
                 public IntPtr hwndMoveSize;
                 public IntPtr hwndCaret;
+
                 // RECT
                 public int left;
                 public int top;
@@ -3494,18 +4385,25 @@ namespace System.Net {
                     try
                     {
                         // if tokenbinding.dll is not available, TOKENBINDING is not supported
-                        string dllFileName = Path.Combine(Environment.SystemDirectory, TOKENBINDING);
-                        SafeLoadLibrary s_TokenBindingLibrary = SafeLoadLibrary.LoadLibraryEx(dllFileName);
+                        string dllFileName = Path.Combine(
+                            Environment.SystemDirectory,
+                            TOKENBINDING
+                        );
+                        SafeLoadLibrary s_TokenBindingLibrary = SafeLoadLibrary.LoadLibraryEx(
+                            dllFileName
+                        );
                         if (!s_TokenBindingLibrary.IsInvalid)
                         {
-                            s_supportsTokenBinding = s_TokenBindingLibrary.HasFunction("TokenBindingVerifyMessage");
+                            s_supportsTokenBinding = s_TokenBindingLibrary.HasFunction(
+                                "TokenBindingVerifyMessage"
+                            );
                         }
                         s_Initialized = true;
                     }
                     catch (Exception e)
                     {
                         if (NclUtilities.IsFatal(e))
-                        { 
+                        {
                             throw;
                         }
                     }

@@ -172,7 +172,10 @@ namespace System.Threading.Tests
 
             if (Environment.Is64BitProcess)
             {
-                Assert.Equal(12345, (nint)Interlocked.Exchange(ref value, unchecked((nint)1 + int.MaxValue)));
+                Assert.Equal(
+                    12345,
+                    (nint)Interlocked.Exchange(ref value, unchecked((nint)1 + int.MaxValue))
+                );
                 Assert.Equal(unchecked((nint)1 + int.MaxValue), value);
             }
         }
@@ -194,7 +197,10 @@ namespace System.Threading.Tests
 
             if (Environment.Is64BitProcess)
             {
-                Assert.Equal(12345u, (nuint)Interlocked.Exchange(ref value, unchecked((nuint)1 + uint.MaxValue)));
+                Assert.Equal(
+                    12345u,
+                    (nuint)Interlocked.Exchange(ref value, unchecked((nuint)1 + uint.MaxValue))
+                );
                 Assert.Equal(unchecked((nuint)1 + uint.MaxValue), value);
             }
         }
@@ -289,7 +295,15 @@ namespace System.Threading.Tests
 
             if (Environment.Is64BitProcess)
             {
-                Assert.Equal(12345, (nint)Interlocked.CompareExchange(ref value, unchecked((nint)1 + int.MaxValue), (nint)12345u));
+                Assert.Equal(
+                    12345,
+                    (nint)
+                        Interlocked.CompareExchange(
+                            ref value,
+                            unchecked((nint)1 + int.MaxValue),
+                            (nint)12345u
+                        )
+                );
                 Assert.Equal(unchecked((nint)1 + int.MaxValue), value);
             }
         }
@@ -311,15 +325,29 @@ namespace System.Threading.Tests
         {
             nuint value = 42;
 
-            Assert.Equal(42u, (nuint)Interlocked.CompareExchange(ref value, (nuint)12345u, (nuint)41u));
+            Assert.Equal(
+                42u,
+                (nuint)Interlocked.CompareExchange(ref value, (nuint)12345u, (nuint)41u)
+            );
             Assert.Equal(42u, value);
 
-            Assert.Equal(42u, (nuint)Interlocked.CompareExchange(ref value, (nuint)12345u, (nuint)42u));
+            Assert.Equal(
+                42u,
+                (nuint)Interlocked.CompareExchange(ref value, (nuint)12345u, (nuint)42u)
+            );
             Assert.Equal(12345u, value);
 
             if (Environment.Is64BitProcess)
             {
-                Assert.Equal(12345u, (nuint)Interlocked.CompareExchange(ref value, unchecked((nuint)1 + uint.MaxValue), (nuint)12345u));
+                Assert.Equal(
+                    12345u,
+                    (nuint)
+                        Interlocked.CompareExchange(
+                            ref value,
+                            unchecked((nuint)1 + uint.MaxValue),
+                            (nuint)12345u
+                        )
+                );
                 Assert.Equal(unchecked((nuint)1 + uint.MaxValue), value);
             }
         }
@@ -482,7 +510,10 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[ThreadCount];
             for (int i = 0; i < ThreadCount; ++i)
             {
-                Thread t = ThreadTestHelpers.CreateGuardedThread(out waitsForThread[i], threadStart);
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitsForThread[i],
+                    threadStart
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadStarted.CheckedWait();
@@ -494,7 +525,10 @@ namespace System.Threading.Tests
                 waitForThread();
             }
 
-            Assert.Equal(ThreadCount * IterationCount, Interlocked.CompareExchange(ref value, 0, 0));
+            Assert.Equal(
+                ThreadCount * IterationCount,
+                Interlocked.CompareExchange(ref value, 0, 0)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -516,7 +550,11 @@ namespace System.Threading.Tests
                     double oldValue = value;
                     while (true)
                     {
-                        double valueBeforeUpdate = Interlocked.CompareExchange(ref value, oldValue + Increment, oldValue);
+                        double valueBeforeUpdate = Interlocked.CompareExchange(
+                            ref value,
+                            oldValue + Increment,
+                            oldValue
+                        );
                         if (valueBeforeUpdate == oldValue)
                         {
                             break;
@@ -530,7 +568,10 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[ThreadCount];
             for (int i = 0; i < ThreadCount; ++i)
             {
-                Thread t = ThreadTestHelpers.CreateGuardedThread(out waitsForThread[i], threadStart);
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitsForThread[i],
+                    threadStart
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadStarted.CheckedWait();
@@ -542,7 +583,10 @@ namespace System.Threading.Tests
                 waitForThread();
             }
 
-            Assert.Equal(ThreadCount * IterationCount * Increment, Interlocked.CompareExchange(ref value, 0, 0));
+            Assert.Equal(
+                ThreadCount * IterationCount * Increment,
+                Interlocked.CompareExchange(ref value, 0, 0)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -572,8 +616,11 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[ThreadCount];
             for (int i = 0; i < ThreadCount; ++i)
             {
-                Thread t =
-                    ThreadTestHelpers.CreateGuardedThread(out checksForThreadErrors[i], out waitsForThread[i], threadStart);
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out checksForThreadErrors[i],
+                    out waitsForThread[i],
+                    threadStart
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadStarted.CheckedWait();
@@ -593,7 +640,8 @@ namespace System.Threading.Tests
                     }
 
                     Thread.Sleep(1);
-                });
+                }
+            );
             foreach (var waitForThread in waitsForThread)
             {
                 waitForThread();
@@ -630,18 +678,20 @@ namespace System.Threading.Tests
             int count = 0;
             for (int i = 0; i < 1000; i++)
             {
-                threads.Add(Task.Run(() =>
-                {
-                    for (int j = 0; j < 1000; j++)
+                threads.Add(
+                    Task.Run(() =>
                     {
-                        var cookie = asymmetricLock.Enter();
-                        count++;
-                        cookie.Exit();
-                    }
-                }));
+                        for (int j = 0; j < 1000; j++)
+                        {
+                            var cookie = asymmetricLock.Enter();
+                            count++;
+                            cookie.Exit();
+                        }
+                    })
+                );
             }
             Task.WaitAll(threads.ToArray());
-            Assert.Equal(1000*1000, count);
+            Assert.Equal(1000 * 1000, count);
         }
 
         // Taking this lock on the same thread repeatedly is very fast because it has no interlocked operations.

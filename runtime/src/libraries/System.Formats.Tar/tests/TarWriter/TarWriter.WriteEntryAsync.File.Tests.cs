@@ -17,7 +17,9 @@ namespace System.Formats.Tar.Tests
             TarWriter writer = new TarWriter(archiveStream);
             await writer.DisposeAsync();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => writer.WriteEntryAsync("fileName", "entryName"));
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                writer.WriteEntryAsync("fileName", "entryName")
+            );
         }
 
         [Fact]
@@ -26,8 +28,12 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             await using (TarWriter writer = new TarWriter(archiveStream))
             {
-                await Assert.ThrowsAsync<ArgumentNullException>(() => writer.WriteEntryAsync(null, "entryName"));
-                await Assert.ThrowsAsync<ArgumentException>(() => writer.WriteEntryAsync(string.Empty, "entryName"));
+                await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                    writer.WriteEntryAsync(null, "entryName")
+                );
+                await Assert.ThrowsAsync<ArgumentException>(() =>
+                    writer.WriteEntryAsync(string.Empty, "entryName")
+                );
             }
         }
 
@@ -47,7 +53,13 @@ namespace System.Formats.Tar.Tests
 
                 await using (MemoryStream archiveStream = new MemoryStream())
                 {
-                    await using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.Pax, leaveOpen: true))
+                    await using (
+                        TarWriter writer = new TarWriter(
+                            archiveStream,
+                            TarEntryFormat.Pax,
+                            leaveOpen: true
+                        )
+                    )
                     {
                         await writer.WriteEntryAsync(file1Path, null);
                         await writer.WriteEntryAsync(file2Path, string.Empty);
@@ -102,7 +114,10 @@ namespace System.Formats.Tar.Tests
                         Assert.NotNull(entry);
                         Assert.Equal(format, entry.Format);
                         Assert.Equal(fileName, entry.Name);
-                        TarEntryType expectedEntryType = format is TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+                        TarEntryType expectedEntryType =
+                            format is TarEntryFormat.V7
+                                ? TarEntryType.V7RegularFile
+                                : TarEntryType.RegularFile;
                         Assert.Equal(expectedEntryType, entry.EntryType);
                         Assert.True(entry.Length > 0);
                         Assert.NotNull(entry.DataStream);

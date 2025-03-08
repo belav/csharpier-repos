@@ -19,13 +19,20 @@ namespace System.Data.Objects
 {
     internal sealed class ObjectStateEntryDbUpdatableDataRecord : CurrentValueRecord
     {
-        internal ObjectStateEntryDbUpdatableDataRecord(EntityEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject)
+        internal ObjectStateEntryDbUpdatableDataRecord(
+            EntityEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject
+        )
             : base(cacheEntry, metadata, userObject)
         {
             EntityUtil.CheckArgumentNull(cacheEntry, "cacheEntry");
             EntityUtil.CheckArgumentNull(userObject, "userObject");
             EntityUtil.CheckArgumentNull(metadata, "metadata");
-            Debug.Assert(!cacheEntry.IsKeyEntry, "Cannot create an ObjectStateEntryDbUpdatableDataRecord for a key entry");
+            Debug.Assert(
+                !cacheEntry.IsKeyEntry,
+                "Cannot create an ObjectStateEntryDbUpdatableDataRecord for a key entry"
+            );
             switch (cacheEntry.State)
             {
                 case EntityState.Unchanged:
@@ -33,10 +40,14 @@ namespace System.Data.Objects
                 case EntityState.Added:
                     break;
                 default:
-                    Debug.Assert(false, "A CurrentValueRecord cannot be created for an entity object that is in a deleted or detached state.");
+                    Debug.Assert(
+                        false,
+                        "A CurrentValueRecord cannot be created for an entity object that is in a deleted or detached state."
+                    );
                     break;
             }
         }
+
         internal ObjectStateEntryDbUpdatableDataRecord(RelationshipEntry cacheEntry)
             : base(cacheEntry)
         {
@@ -48,10 +59,14 @@ namespace System.Data.Objects
                 case EntityState.Added:
                     break;
                 default:
-                    Debug.Assert(false, "A CurrentValueRecord cannot be created for an entity object that is in a deleted or detached state.");
+                    Debug.Assert(
+                        false,
+                        "A CurrentValueRecord cannot be created for an entity object that is in a deleted or detached state."
+                    );
                     break;
             }
         }
+
         protected override object GetRecordValue(int ordinal)
         {
             if (_cacheEntry.IsRelationship)
@@ -60,9 +75,15 @@ namespace System.Data.Objects
             }
             else
             {
-                return (_cacheEntry as EntityEntry).GetCurrentEntityValue(_metadata, ordinal, _userObject, ObjectStateValueRecord.CurrentUpdatable);
+                return (_cacheEntry as EntityEntry).GetCurrentEntityValue(
+                    _metadata,
+                    ordinal,
+                    _userObject,
+                    ObjectStateValueRecord.CurrentUpdatable
+                );
             }
         }
+
         protected override void SetRecordValue(int ordinal, object value)
         {
             if (_cacheEntry.IsRelationship)
@@ -72,7 +93,12 @@ namespace System.Data.Objects
             }
             else
             {
-                (_cacheEntry as EntityEntry).SetCurrentEntityValue(_metadata, ordinal, _userObject, value);
+                (_cacheEntry as EntityEntry).SetCurrentEntityValue(
+                    _metadata,
+                    ordinal,
+                    _userObject,
+                    value
+                );
             }
         }
     }

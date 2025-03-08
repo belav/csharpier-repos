@@ -14,20 +14,30 @@ public class DefaultEndpointDataSourceTests
         var dataSource = new DefaultEndpointDataSource(
             new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "1"),
             new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "2")
-            );
+        );
 
         // Assert
-        Assert.Collection(dataSource.Endpoints,
+        Assert.Collection(
+            dataSource.Endpoints,
             endpoint => Assert.Equal("1", endpoint.DisplayName),
-            endpoint => Assert.Equal("2", endpoint.DisplayName));
+            endpoint => Assert.Equal("2", endpoint.DisplayName)
+        );
     }
 
     [Fact]
     public void Constructor_Params_ShouldMakeCopyOfEndpoints()
     {
         // Arrange
-        var endpoint1 = new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "1");
-        var endpoint2 = new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "2");
+        var endpoint1 = new Endpoint(
+            TestConstants.EmptyRequestDelegate,
+            EndpointMetadataCollection.Empty,
+            "1"
+        );
+        var endpoint2 = new Endpoint(
+            TestConstants.EmptyRequestDelegate,
+            EndpointMetadataCollection.Empty,
+            "2"
+        );
         var endpoints = new[] { endpoint1, endpoint2 };
 
         // Act
@@ -46,7 +56,9 @@ public class DefaultEndpointDataSourceTests
     {
         Endpoint[] endpoints = null;
 
-        var actual = Assert.Throws<ArgumentNullException>(() => new DefaultEndpointDataSource(endpoints));
+        var actual = Assert.Throws<ArgumentNullException>(() =>
+            new DefaultEndpointDataSource(endpoints)
+        );
         Assert.Equal("endpoints", actual.ParamName);
     }
 
@@ -54,24 +66,44 @@ public class DefaultEndpointDataSourceTests
     public void Constructor_Enumerable_EndpointsInitialized()
     {
         // Arrange & Act
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+        var dataSource = new DefaultEndpointDataSource(
+            new List<Endpoint>
             {
-                new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "1"),
-                new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "2")
-            });
+                new Endpoint(
+                    TestConstants.EmptyRequestDelegate,
+                    EndpointMetadataCollection.Empty,
+                    "1"
+                ),
+                new Endpoint(
+                    TestConstants.EmptyRequestDelegate,
+                    EndpointMetadataCollection.Empty,
+                    "2"
+                ),
+            }
+        );
 
         // Assert
-        Assert.Collection(dataSource.Endpoints,
+        Assert.Collection(
+            dataSource.Endpoints,
             endpoint => Assert.Equal("1", endpoint.DisplayName),
-            endpoint => Assert.Equal("2", endpoint.DisplayName));
+            endpoint => Assert.Equal("2", endpoint.DisplayName)
+        );
     }
 
     [Fact]
     public void Constructor_Enumerable_ShouldMakeCopyOfEndpoints()
     {
         // Arrange
-        var endpoint1 = new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "1");
-        var endpoint2 = new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "2");
+        var endpoint1 = new Endpoint(
+            TestConstants.EmptyRequestDelegate,
+            EndpointMetadataCollection.Empty,
+            "1"
+        );
+        var endpoint2 = new Endpoint(
+            TestConstants.EmptyRequestDelegate,
+            EndpointMetadataCollection.Empty,
+            "2"
+        );
         var endpoints = new List<Endpoint> { endpoint1, endpoint2 };
 
         // Act
@@ -90,7 +122,9 @@ public class DefaultEndpointDataSourceTests
     {
         IEnumerable<Endpoint> endpoints = null;
 
-        var actual = Assert.Throws<ArgumentNullException>(() => new DefaultEndpointDataSource(endpoints));
+        var actual = Assert.Throws<ArgumentNullException>(() =>
+            new DefaultEndpointDataSource(endpoints)
+        );
         Assert.Equal("endpoints", actual.ParamName);
     }
 }

@@ -13,7 +13,9 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.NamingPreferences
 {
-    internal class ManageSymbolSpecificationsDialogViewModel : AbstractNotifyPropertyChanged, IManageNamingStylesInfoDialogViewModel
+    internal class ManageSymbolSpecificationsDialogViewModel
+        : AbstractNotifyPropertyChanged,
+            IManageNamingStylesInfoDialogViewModel
     {
         private readonly INotificationService _notificationService;
 
@@ -26,29 +28,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             ObservableCollection<SymbolSpecification> specifications,
             List<NamingStyleOptionPageViewModel.NamingRuleViewModel> namingRules,
             string languageName,
-            INotificationService notificationService)
+            INotificationService notificationService
+        )
         {
             LanguageName = languageName;
             _notificationService = notificationService;
 
-            Items = new ObservableCollection<INamingStylesInfoDialogViewModel>(specifications.Select(specification => new SymbolSpecificationViewModel(
-                languageName,
-                specification,
-                !namingRules.Any(rule => rule.SelectedSpecification?.ID == specification.ID),
-                notificationService)));
+            Items = new ObservableCollection<INamingStylesInfoDialogViewModel>(
+                specifications.Select(specification => new SymbolSpecificationViewModel(
+                    languageName,
+                    specification,
+                    !namingRules.Any(rule => rule.SelectedSpecification?.ID == specification.ID),
+                    notificationService
+                ))
+            );
         }
 
-        internal void AddSymbolSpecification(INamingStylesInfoDialogViewModel _)
-        {
+        internal void AddSymbolSpecification(INamingStylesInfoDialogViewModel _) { }
 
-        }
-
-        internal void RemoveSymbolSpecification(INamingStylesInfoDialogViewModel symbolSpecification)
-            => Items.Remove(symbolSpecification);
+        internal void RemoveSymbolSpecification(
+            INamingStylesInfoDialogViewModel symbolSpecification
+        ) => Items.Remove(symbolSpecification);
 
         public void AddItem()
         {
-            var viewModel = new SymbolSpecificationViewModel(LanguageName, canBeDeleted: true, notificationService: _notificationService);
+            var viewModel = new SymbolSpecificationViewModel(
+                LanguageName,
+                canBeDeleted: true,
+                notificationService: _notificationService
+            );
             var dialog = new SymbolSpecificationDialog(viewModel);
             if (dialog.ShowModal().Value == true)
             {
@@ -56,15 +64,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             }
         }
 
-        public void RemoveItem(INamingStylesInfoDialogViewModel item)
-            => Items.Remove(item);
+        public void RemoveItem(INamingStylesInfoDialogViewModel item) => Items.Remove(item);
 
         public void EditItem(INamingStylesInfoDialogViewModel item)
         {
             var symbolSpecificationViewModel = (SymbolSpecificationViewModel)item;
 
             var symbolSpecification = ((SymbolSpecificationViewModel)item).GetSymbolSpecification();
-            var viewModel = new SymbolSpecificationViewModel(LanguageName, symbolSpecification, symbolSpecificationViewModel.CanBeDeleted, _notificationService);
+            var viewModel = new SymbolSpecificationViewModel(
+                LanguageName,
+                symbolSpecification,
+                symbolSpecificationViewModel.CanBeDeleted,
+                _notificationService
+            );
             var dialog = new SymbolSpecificationDialog(viewModel);
             if (dialog.ShowModal().Value == true)
             {

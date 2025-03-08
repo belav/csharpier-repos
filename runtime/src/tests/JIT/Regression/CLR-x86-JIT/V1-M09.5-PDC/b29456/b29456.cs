@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using Xunit;
-
 
 namespace Tests
 {
@@ -481,7 +479,6 @@ namespace Tests
             string string9 = s_string1 + s_string_null;
             string string10 = s_string1 + s_string_null + s_string3;
             string string11 = s_string_null + s_string2;
-
 
             Console.WriteLine("Booleans:");
             Console.WriteLine(s_t);

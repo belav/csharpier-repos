@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -112,17 +111,23 @@ namespace Moq.Tests
             var ex = Record.Exception(() => repository.VerifyNoOtherCalls());
 
             Assert.NotNull(ex);
-            Assert.True(ex.Message.ContainsConsecutiveLines(
-                $"   {fooMock}:",
-                $"   This mock failed verification due to the following unverified invocations:",
-                $"   ",
-                $"      MockRepositoryFixture.IFoo.Do()"));
+            Assert.True(
+                ex.Message.ContainsConsecutiveLines(
+                    $"   {fooMock}:",
+                    $"   This mock failed verification due to the following unverified invocations:",
+                    $"   ",
+                    $"      MockRepositoryFixture.IFoo.Do()"
+                )
+            );
 
-            Assert.True(ex.Message.ContainsConsecutiveLines(
-                $"   {barMock}:",
-                $"   This mock failed verification due to the following unverified invocations:",
-                $"   ",
-                $"      MockRepositoryFixture.IBar.Redo()"));
+            Assert.True(
+                ex.Message.ContainsConsecutiveLines(
+                    $"   {barMock}:",
+                    $"   This mock failed verification due to the following unverified invocations:",
+                    $"   ",
+                    $"      MockRepositoryFixture.IBar.Redo()"
+                )
+            );
         }
 
         [Fact]
@@ -159,17 +164,23 @@ namespace Moq.Tests
             var ex = Record.Exception(() => repository.VerifyAll());
 
             Assert.NotNull(ex);
-            Assert.True(ex.Message.ContainsConsecutiveLines(
-                $"   {foo}:",
-                $"   This mock failed verification due to the following:",
-                $"   ",
-                $"      MockRepositoryFixture.IFoo f => f.Do():"));
+            Assert.True(
+                ex.Message.ContainsConsecutiveLines(
+                    $"   {foo}:",
+                    $"   This mock failed verification due to the following:",
+                    $"   ",
+                    $"      MockRepositoryFixture.IFoo f => f.Do():"
+                )
+            );
 
-            Assert.True(ex.Message.ContainsConsecutiveLines(
-                $"   {bar}:",
-                $"   This mock failed verification due to the following:",
-                $"   ",
-                $"      MockRepositoryFixture.IBar b => b.Redo()"));
+            Assert.True(
+                ex.Message.ContainsConsecutiveLines(
+                    $"   {bar}:",
+                    $"   This mock failed verification due to the following:",
+                    $"   ",
+                    $"      MockRepositoryFixture.IBar b => b.Redo()"
+                )
+            );
         }
 
         [Fact]
@@ -194,7 +205,10 @@ namespace Moq.Tests
         [Fact]
         public void ShouldCreateMocksWithFactoryDefaultValue()
         {
-            var repository = new MockRepository(MockBehavior.Loose) { DefaultValue = DefaultValue.Mock };
+            var repository = new MockRepository(MockBehavior.Loose)
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
 
             var mock = repository.Create<IFoo>();
 
@@ -244,7 +258,9 @@ namespace Moq.Tests
         [Theory]
         [InlineData(DefaultValue.Custom)]
         [InlineData((DefaultValue)(-1))]
-        public void DefaultValue_cannot_be_set_to_anything_other_than_Empty_or_Mock(DefaultValue defaultValue)
+        public void DefaultValue_cannot_be_set_to_anything_other_than_Empty_or_Mock(
+            DefaultValue defaultValue
+        )
         {
             var mockRepository = new MockRepository(MockBehavior.Default);
 
@@ -278,7 +294,10 @@ namespace Moq.Tests
         {
             const Switches expectedSwitches = Switches.CollectDiagnosticFileInfoForSetups;
 
-            var repository = new MockRepository(MockBehavior.Default) { Switches = expectedSwitches };
+            var repository = new MockRepository(MockBehavior.Default)
+            {
+                Switches = expectedSwitches,
+            };
             var mock = repository.Create<IFoo>();
 
             Assert.Equal(expectedSwitches, actual: mock.Switches);
@@ -291,15 +310,16 @@ namespace Moq.Tests
             IBar Bar();
         }
 
-        public interface IBar { void Redo(); }
+        public interface IBar
+        {
+            void Redo();
+        }
 
         public abstract class BaseClass
         {
             public bool BaseCalled;
 
-            public BaseClass()
-            {
-            }
+            public BaseClass() { }
 
             public BaseClass(string value)
             {
@@ -316,9 +336,8 @@ namespace Moq.Tests
 
         public class ClassWithoutParameterlessConstructor : BaseClass
         {
-            public ClassWithoutParameterlessConstructor(string value) : base(value)
-            {
-            }
+            public ClassWithoutParameterlessConstructor(string value)
+                : base(value) { }
         }
     }
 }

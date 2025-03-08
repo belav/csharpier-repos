@@ -54,12 +54,16 @@ public static class HealthCheckApplicationBuilderExtensions
     /// of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/') character.
     /// </para>
     /// </remarks>
-    public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, PathString path, HealthCheckOptions options)
+    public static IApplicationBuilder UseHealthChecks(
+        this IApplicationBuilder app,
+        PathString path,
+        HealthCheckOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
 
-        UseHealthChecksCore(app, path, port: null, new[] { Options.Create(options), });
+        UseHealthChecksCore(app, path, port: null, new[] { Options.Create(options) });
         return app;
     }
 
@@ -82,7 +86,11 @@ public static class HealthCheckApplicationBuilderExtensions
     /// The health check middleware will use default settings from <see cref="IOptions{HealthCheckOptions}"/>.
     /// </para>
     /// </remarks>
-    public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, PathString path, int port)
+    public static IApplicationBuilder UseHealthChecks(
+        this IApplicationBuilder app,
+        PathString path,
+        int port
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
@@ -109,7 +117,11 @@ public static class HealthCheckApplicationBuilderExtensions
     /// The health check middleware will use default settings from <see cref="IOptions{HealthCheckOptions}"/>.
     /// </para>
     /// </remarks>
-    public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, PathString path, string port)
+    public static IApplicationBuilder UseHealthChecks(
+        this IApplicationBuilder app,
+        PathString path,
+        string port
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(port);
@@ -140,12 +152,17 @@ public static class HealthCheckApplicationBuilderExtensions
     /// character.
     /// </para>
     /// </remarks>
-    public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, PathString path, int port, HealthCheckOptions options)
+    public static IApplicationBuilder UseHealthChecks(
+        this IApplicationBuilder app,
+        PathString path,
+        int port,
+        HealthCheckOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
 
-        UseHealthChecksCore(app, path, port, new[] { Options.Create(options), });
+        UseHealthChecksCore(app, path, port, new[] { Options.Create(options) });
         return app;
     }
 
@@ -166,7 +183,12 @@ public static class HealthCheckApplicationBuilderExtensions
     /// character.
     /// </para>
     /// </remarks>
-    public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, PathString path, string port, HealthCheckOptions options)
+    public static IApplicationBuilder UseHealthChecks(
+        this IApplicationBuilder app,
+        PathString path,
+        string port,
+        HealthCheckOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
@@ -184,18 +206,26 @@ public static class HealthCheckApplicationBuilderExtensions
 
         ArgumentNullException.ThrowIfNull(options);
 
-        UseHealthChecksCore(app, path, portAsInt, new[] { Options.Create(options), });
+        UseHealthChecksCore(app, path, portAsInt, new[] { Options.Create(options) });
         return app;
     }
 
-    private static void UseHealthChecksCore(IApplicationBuilder app, PathString path, int? port, object[] args)
+    private static void UseHealthChecksCore(
+        IApplicationBuilder app,
+        PathString path,
+        int? port,
+        object[] args
+    )
     {
         if (app.ApplicationServices.GetService(typeof(HealthCheckService)) == null)
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(HealthCheckServiceCollectionExtensions.AddHealthChecks),
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(HealthCheckServiceCollectionExtensions.AddHealthChecks),
+                    "ConfigureServices(...)"
+                )
+            );
         }
 
         // NOTE: we explicitly don't use Map here because it's really common for multiple health
@@ -210,20 +240,23 @@ public static class HealthCheckApplicationBuilderExtensions
         Func<HttpContext, bool> predicate = c =>
         {
             return
-
                 // Process the port if we have one
-                (port == null || c.Connection.LocalPort == port) &&
-
+                (port == null || c.Connection.LocalPort == port)
+                &&
                 // We allow you to listen on all URLs by providing the empty PathString.
-                (!path.HasValue ||
-
+                (
+                    !path.HasValue
+                    ||
                     // If you do provide a PathString, want to handle all of the special cases that
                     // StartsWithSegments handles, but we also want it to have exact match semantics.
                     //
                     // Ex: /Foo/ == /Foo (true)
                     // Ex: /Foo/Bar == /Foo (false)
-                    (c.Request.Path.StartsWithSegments(path, out var remaining) &&
-                    string.IsNullOrEmpty(remaining)));
+                    (
+                        c.Request.Path.StartsWithSegments(path, out var remaining)
+                        && string.IsNullOrEmpty(remaining)
+                    )
+                );
         };
 
         app.MapWhen(predicate, b => b.UseMiddleware<HealthCheckMiddleware>(args));

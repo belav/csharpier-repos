@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,64 +27,73 @@
 //
 using System;
 using System.Configuration;
-
 using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
-	{
-		public static ServiceModelSectionGroup GetSectionGroup (
-			ConfigurationType config)
-		{
-			ServiceModelSectionGroup ret = (ServiceModelSectionGroup) config.GetSectionGroup ("system.serviceModel");
-			if (ret == null)
-				throw new SystemException ("Internal configuration error: section 'system.serviceModel' was not found.");
-			return ret;
-		}
+    public sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
+    {
+        public static ServiceModelSectionGroup GetSectionGroup(ConfigurationType config)
+        {
+            ServiceModelSectionGroup ret = (ServiceModelSectionGroup)
+                config.GetSectionGroup("system.serviceModel");
+            if (ret == null)
+                throw new SystemException(
+                    "Internal configuration error: section 'system.serviceModel' was not found."
+                );
+            return ret;
+        }
 
-		public ServiceModelSectionGroup ()
-		{
-		}
+        public ServiceModelSectionGroup() { }
 
-		public BehaviorsSection Behaviors {
-			get { return (BehaviorsSection) Sections ["behaviors"]; }
-		}
+        public BehaviorsSection Behaviors
+        {
+            get { return (BehaviorsSection)Sections["behaviors"]; }
+        }
 
-		public BindingsSection Bindings {
-			get { return (BindingsSection) Sections ["bindings"]; }
-		}
+        public BindingsSection Bindings
+        {
+            get { return (BindingsSection)Sections["bindings"]; }
+        }
 
-		public ClientSection Client {
-			get { return (ClientSection) Sections ["client"]; }
-		}
+        public ClientSection Client
+        {
+            get { return (ClientSection)Sections["client"]; }
+        }
 
-		public CommonBehaviorsSection CommonBehaviors {
-			get { return (CommonBehaviorsSection) Sections ["commonBehaviors"]; }
-		}
+        public CommonBehaviorsSection CommonBehaviors
+        {
+            get { return (CommonBehaviorsSection)Sections["commonBehaviors"]; }
+        }
 
-		public DiagnosticSection Diagnostic {
-			get { return (DiagnosticSection) Sections ["diagnostics"]; }
-		}
+        public DiagnosticSection Diagnostic
+        {
+            get { return (DiagnosticSection)Sections["diagnostics"]; }
+        }
 
-		public ExtensionsSection Extensions {
-			get { return (ExtensionsSection) Sections ["extensions"]; }
-		}
+        public ExtensionsSection Extensions
+        {
+            get { return (ExtensionsSection)Sections["extensions"]; }
+        }
 
-		public ServiceHostingEnvironmentSection ServiceHostingEnvironment {
-			get { return (ServiceHostingEnvironmentSection) Sections ["serviceHostingEnvironment"]; }
-		}
+        public ServiceHostingEnvironmentSection ServiceHostingEnvironment
+        {
+            get { return (ServiceHostingEnvironmentSection)Sections["serviceHostingEnvironment"]; }
+        }
 
-		public ServicesSection Services {
-			get { return (ServicesSection) Sections ["services"]; }
-		}
+        public ServicesSection Services
+        {
+            get { return (ServicesSection)Sections["services"]; }
+        }
 
-		public ProtocolMappingSection ProtocolMapping {
-			get { return (ProtocolMappingSection) Sections ["protocolMapping"]; }
-		}
+        public ProtocolMappingSection ProtocolMapping
+        {
+            get { return (ProtocolMappingSection)Sections["protocolMapping"]; }
+        }
 
-		public StandardEndpointsSection StandardEndpoints {
-			get { return (StandardEndpointsSection) Sections ["standardEndpoints"]; }
-		}
-	}
+        public StandardEndpointsSection StandardEndpoints
+        {
+            get { return (StandardEndpointsSection)Sections["standardEndpoints"]; }
+        }
+    }
 }

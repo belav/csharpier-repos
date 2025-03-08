@@ -42,9 +42,7 @@ namespace ContainsGCPointers
         public ClassHasPointers classHasPointers1;
     }
 
-    public class BaseClassHasPointers : ClassHasPointers
-    {
-    }
+    public class BaseClassHasPointers : ClassHasPointers { }
 
     public class ClassHasIntArray
     {
@@ -63,8 +61,10 @@ namespace Explicit
     class Class1
     {
         public static int Stat;
+
         [FieldOffset(4)]
         public bool Bar;
+
         [FieldOffset(10)]
         public char Baz;
     }
@@ -74,6 +74,7 @@ namespace Explicit
     {
         [FieldOffset(0)]
         public int Lol;
+
         [FieldOffset(20)]
         public byte Omg;
     }
@@ -83,24 +84,19 @@ namespace Explicit
     {
         [FieldOffset(0)]
         public int Lol;
+
         [FieldOffset(20)]
         public byte Omg;
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public class ExplicitEmptyClass
-    {
-    }
+    public class ExplicitEmptyClass { }
 
     [StructLayout(LayoutKind.Explicit, Size = 0)]
-    public class ExplicitEmptyClassSize0
-    {
-    }
+    public class ExplicitEmptyClassSize0 { }
 
     [StructLayout(LayoutKind.Explicit)]
-    public struct ExplicitEmptyStruct
-    {
-    }
+    public struct ExplicitEmptyStruct { }
 
     [StructLayout(LayoutKind.Explicit)]
     ref struct MisalignedPointer
@@ -116,9 +112,7 @@ namespace Explicit
         public ByRefStruct O;
     }
 
-    ref struct ByRefStruct
-    {
-    }
+    ref struct ByRefStruct { }
 }
 
 namespace Sequential
@@ -182,31 +176,37 @@ namespace Sequential
         public StructByte fld1;
         public Auto.StructByte fld2;
     }
+
     public struct StructStructByte_Struct2BytesAuto
     {
         public StructByte fld1;
         public Auto.Struct2Bytes fld2;
     }
+
     public struct StructStructByte_Struct3BytesAuto
     {
         public StructByte fld1;
         public Auto.Struct3Bytes fld2;
     }
+
     public struct StructStructByte_Struct4BytesAuto
     {
         public StructByte fld1;
         public Auto.Struct4Bytes fld2;
     }
+
     public struct StructStructByte_Struct5BytesAuto
     {
         public StructByte fld1;
         public Auto.Struct5Bytes fld2;
     }
+
     public struct StructStructByte_Struct8BytesAuto
     {
         public StructByte fld1;
         public Auto.Struct8Bytes fld2;
     }
+
     public struct StructStructByte_Struct9BytesAuto
     {
         public StructByte fld1;
@@ -530,10 +530,25 @@ namespace IsByRefLike
 
 namespace EnumAlignment
 {
-    public enum ByteEnum : byte { Val }
-    public enum ShortEnum : short { Val }
-    public enum IntEnum : int { Val }
-    public enum LongEnum : long { Val }
+    public enum ByteEnum : byte
+    {
+        Val,
+    }
+
+    public enum ShortEnum : short
+    {
+        Val,
+    }
+
+    public enum IntEnum : int
+    {
+        Val,
+    }
+
+    public enum LongEnum : long
+    {
+        Val,
+    }
 
     public struct LongIntEnumStruct
     {

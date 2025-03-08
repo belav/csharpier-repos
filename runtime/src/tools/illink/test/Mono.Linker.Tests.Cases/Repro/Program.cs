@@ -6,14 +6,13 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Repro
 {
-	[SkipKeptItemsValidation]
-	[ExpectedNoWarnings]
-	public class Program
-	{
-
-		public static void Main ()
-		{
-			Console.WriteLine ("HelloWorld");
-		}
-	}
+    [SkipKeptItemsValidation]
+    [ExpectedNoWarnings]
+    public class Program
+    {
+        public static void Main()
+        {
+            Console.WriteLine("HelloWorld");
+        }
+    }
 }

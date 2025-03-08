@@ -27,14 +27,23 @@ internal struct FormDataReader : IDisposable
 
     private PrefixResolver _prefixResolver;
 
-    public FormDataReader(IReadOnlyDictionary<FormKey, StringValues> formCollection, CultureInfo culture, Memory<char> buffer)
+    public FormDataReader(
+        IReadOnlyDictionary<FormKey, StringValues> formCollection,
+        CultureInfo culture,
+        Memory<char> buffer
+    )
     {
         _readOnlyMemoryKeys = formCollection;
         Culture = culture;
         _prefixBuffer = buffer;
     }
 
-    public FormDataReader(IReadOnlyDictionary<FormKey, StringValues> formCollection, CultureInfo culture, Memory<char> buffer, IFormFileCollection formFileCollection)
+    public FormDataReader(
+        IReadOnlyDictionary<FormKey, StringValues> formCollection,
+        CultureInfo culture,
+        Memory<char> buffer,
+        IFormFileCollection formFileCollection
+    )
         : this(formCollection, culture, buffer)
     {
         FormFileCollection = formFileCollection;
@@ -60,7 +69,13 @@ internal struct FormDataReader : IDisposable
 
         if (ErrorHandler == null)
         {
-            throw new FormDataMappingException(new FormDataMappingError(_currentPrefixBuffer.ToString(), errorMessage, attemptedValue));
+            throw new FormDataMappingException(
+                new FormDataMappingError(
+                    _currentPrefixBuffer.ToString(),
+                    errorMessage,
+                    attemptedValue
+                )
+            );
         }
 
         _errorCount++;
@@ -68,8 +83,11 @@ internal struct FormDataReader : IDisposable
         {
             ErrorHandler.Invoke(
                 _currentPrefixBuffer.ToString(),
-                FormattableStringFactory.Create($"Maximum number of errors ({MaxErrorCount}) reached. Further errors will be suppressed."),
-                null);
+                FormattableStringFactory.Create(
+                    $"Maximum number of errors ({MaxErrorCount}) reached. Further errors will be suppressed."
+                ),
+                null
+            );
         }
 
         if (_errorCount >= MaxErrorCount)
@@ -112,7 +130,12 @@ internal struct FormDataReader : IDisposable
             _formDictionaryKeysByPrefix = ProcessFormKeys();
         }
 
-        if (_formDictionaryKeysByPrefix.TryGetValue(new FormKey(_currentPrefixBuffer), out var foundKeys))
+        if (
+            _formDictionaryKeysByPrefix.TryGetValue(
+                new FormKey(_currentPrefixBuffer),
+                out var foundKeys
+            )
+        )
         {
             return new FormKeyCollection(foundKeys);
         }
@@ -180,7 +203,10 @@ internal struct FormDataReader : IDisposable
 
         if (!_prefixResolver.HasValues)
         {
-            _prefixResolver = new PrefixResolver(_readOnlyMemoryKeys.Keys, _readOnlyMemoryKeys.Count);
+            _prefixResolver = new PrefixResolver(
+                _readOnlyMemoryKeys.Keys,
+                _readOnlyMemoryKeys.Count
+            );
         }
 
         return _prefixResolver.HasPrefix(_currentPrefixBuffer);
@@ -204,7 +230,10 @@ internal struct FormDataReader : IDisposable
         // If keyLength is bigger than the current scope keyLength typically means there is a
         // bug where some part of the code has not popped the scope appropriately.
         Debug.Assert(_currentPrefixBuffer.Length >= keyLength);
-        if (_currentPrefixBuffer.Length == keyLength || _currentPrefixBuffer.Span[^(keyLength + 1)] != '.')
+        if (
+            _currentPrefixBuffer.Length == keyLength
+            || _currentPrefixBuffer.Span[^(keyLength + 1)] != '.'
+        )
         {
             _currentPrefixBuffer = _currentPrefixBuffer[..^keyLength];
         }
@@ -224,12 +253,13 @@ internal struct FormDataReader : IDisposable
         _currentDepth++;
         // We automatically append a "." before adding the suffix, except when its the first element pushed to the
         // scope, or when we are accessing a property after a collection or an indexer like items[1].
-        var separator = _currentPrefixBuffer.Length > 0 && key[0] != '['
-            ? ".".AsSpan()
-            : "".AsSpan();
+        var separator =
+            _currentPrefixBuffer.Length > 0 && key[0] != '[' ? ".".AsSpan() : "".AsSpan();
         if (_currentDepth > MaxRecursionDepth)
         {
-            throw new InvalidOperationException($"The maximum recursion depth of '{MaxRecursionDepth}' was exceeded for '{_currentPrefixBuffer}{separator}{key}'.");
+            throw new InvalidOperationException(
+                $"The maximum recursion depth of '{MaxRecursionDepth}' was exceeded for '{_currentPrefixBuffer}{separator}{key}'."
+            );
         }
 
         Debug.Assert(_prefixBuffer.Length >= (_currentPrefixBuffer.Length + separator.Length));
@@ -243,7 +273,9 @@ internal struct FormDataReader : IDisposable
 
     internal readonly bool TryGetValue([NotNullWhen(true)] out string? value)
     {
-        var foundSingleValue = _readOnlyMemoryKeys.TryGetValue(new FormKey(_currentPrefixBuffer), out var result) || result.Count == 1;
+        var foundSingleValue =
+            _readOnlyMemoryKeys.TryGetValue(new FormKey(_currentPrefixBuffer), out var result)
+            || result.Count == 1;
         if (foundSingleValue)
         {
             value = result[0];
@@ -295,7 +327,8 @@ internal struct FormDataReader : IDisposable
 
         public Enumerator GetEnumerator() => new Enumerator(_values.GetEnumerator());
 
-        IEnumerator<ReadOnlyMemory<char>> IEnumerable<ReadOnlyMemory<char>>.GetEnumerator() => GetEnumerator();
+        IEnumerator<ReadOnlyMemory<char>> IEnumerable<ReadOnlyMemory<char>>.GetEnumerator() =>
+            GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

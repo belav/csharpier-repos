@@ -22,18 +22,23 @@ public class ShortCircuitTests
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        app.Use((context, next) =>
-                        {
-                            context.Response.Headers["NotSet"] = "No!";
-                            return next(context);
-                        });
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Response.Headers["NotSet"] = "No!";
+                                return next(context);
+                            }
+                        );
                         app.UseEndpoints(b =>
                         {
-                            b.Map("/shortcircuit", context =>
-                            {
-                                context.Response.Headers["Set"] = "Yes!";
-                                return Task.CompletedTask;
-                            })
+                            b.Map(
+                                    "/shortcircuit",
+                                    context =>
+                                    {
+                                        context.Response.Headers["Set"] = "Yes!";
+                                        return Task.CompletedTask;
+                                    }
+                                )
                                 .ShortCircuit();
                         });
                     })
@@ -65,11 +70,13 @@ public class ShortCircuitTests
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        app.Use((context, next) =>
-                        {
-                            context.Response.Headers["NotSet"] = "No!";
-                            return next(context);
-                        });
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Response.Headers["NotSet"] = "No!";
+                                return next(context);
+                            }
+                        );
                         app.UseEndpoints(b =>
                         {
                             b.MapShortCircuit((int)HttpStatusCode.NotFound, "/shortcircuit");

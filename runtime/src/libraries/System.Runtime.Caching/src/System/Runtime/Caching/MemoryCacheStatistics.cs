@@ -37,6 +37,7 @@ namespace System.Runtime.Caching
         private CacheMemoryMonitor _cacheMemoryMonitor;
         private readonly MemoryCache _memoryCache;
         private readonly PhysicalMemoryMonitor _physicalMemoryMonitor;
+
 #if NETCOREAPP
         [UnsupportedOSPlatformGuard("browser")]
         private static bool _configSupported => !OperatingSystem.IsBrowser();
@@ -63,7 +64,10 @@ namespace System.Runtime.Caching
                 // the order of these if statements is important
 
                 // When above the high pressure mark, interval should be 5 seconds or less
-                if (_physicalMemoryMonitor.IsAboveHighPressure() || _cacheMemoryMonitor.IsAboveHighPressure())
+                if (
+                    _physicalMemoryMonitor.IsAboveHighPressure()
+                    || _cacheMemoryMonitor.IsAboveHighPressure()
+                )
                 {
                     if (_pollingInterval > MEMORYSTATUS_INTERVAL_5_SECONDS)
                     {
@@ -74,11 +78,18 @@ namespace System.Runtime.Caching
                 }
 
                 // When above half the low pressure mark, interval should be 30 seconds or less
-                if ((_cacheMemoryMonitor.PressureLast > _cacheMemoryMonitor.PressureLow / 2)
-                    || (_physicalMemoryMonitor.PressureLast > _physicalMemoryMonitor.PressureLow / 2))
+                if (
+                    (_cacheMemoryMonitor.PressureLast > _cacheMemoryMonitor.PressureLow / 2)
+                    || (
+                        _physicalMemoryMonitor.PressureLast > _physicalMemoryMonitor.PressureLow / 2
+                    )
+                )
                 {
                     // allow interval to fall back down when memory pressure goes away
-                    int newPollingInterval = Math.Min(_configPollingInterval, MEMORYSTATUS_INTERVAL_30_SECONDS);
+                    int newPollingInterval = Math.Min(
+                        _configPollingInterval,
+                        MEMORYSTATUS_INTERVAL_30_SECONDS
+                    );
                     if (_pollingInterval != newPollingInterval)
                     {
                         _pollingInterval = newPollingInterval;
@@ -113,7 +124,10 @@ namespace System.Runtime.Caching
             // has there been a Gen 2 Collection since the last trim?
             if (gen2Count != _lastTrimGen2Count)
             {
-                return Math.Max(_physicalMemoryMonitor.GetPercentToTrim(_lastTrimTime, _lastTrimPercent), _cacheMemoryMonitor.GetPercentToTrim(_lastTrimTime, _lastTrimPercent));
+                return Math.Max(
+                    _physicalMemoryMonitor.GetPercentToTrim(_lastTrimTime, _lastTrimPercent),
+                    _cacheMemoryMonitor.GetPercentToTrim(_lastTrimTime, _lastTrimPercent)
+                );
             }
             else
             {
@@ -126,7 +140,9 @@ namespace System.Runtime.Caching
             MemoryCacheElement element = null;
             if (!_memoryCache.ConfigLess && _configSupported)
             {
-                MemoryCacheSection section = ConfigurationManager.GetSection("system.runtime.caching/memoryCache") as MemoryCacheSection;
+                MemoryCacheSection section =
+                    ConfigurationManager.GetSection("system.runtime.caching/memoryCache")
+                    as MemoryCacheSection;
                 if (section != null)
                 {
                     element = section.NamedCaches[_memoryCache.Name];
@@ -138,7 +154,8 @@ namespace System.Runtime.Caching
                 _configCacheMemoryLimitMegabytes = element.CacheMemoryLimitMegabytes;
                 _configPhysicalMemoryLimitPercentage = element.PhysicalMemoryLimitPercentage;
                 double milliseconds = element.PollingInterval.TotalMilliseconds;
-                _configPollingInterval = (milliseconds < (double)int.MaxValue) ? (int)milliseconds : int.MaxValue;
+                _configPollingInterval =
+                    (milliseconds < (double)int.MaxValue) ? (int)milliseconds : int.MaxValue;
             }
             else
             {
@@ -149,14 +166,35 @@ namespace System.Runtime.Caching
 
             if (config != null)
             {
-                _configPollingInterval = ConfigUtil.GetIntValueFromTimeSpan(config, ConfigUtil.PollingInterval, _configPollingInterval);
-                _configCacheMemoryLimitMegabytes = ConfigUtil.GetIntValue(config, ConfigUtil.CacheMemoryLimitMegabytes, _configCacheMemoryLimitMegabytes, true, int.MaxValue);
-                _configPhysicalMemoryLimitPercentage = ConfigUtil.GetIntValue(config, ConfigUtil.PhysicalMemoryLimitPercentage, _configPhysicalMemoryLimitPercentage, true, 100);
+                _configPollingInterval = ConfigUtil.GetIntValueFromTimeSpan(
+                    config,
+                    ConfigUtil.PollingInterval,
+                    _configPollingInterval
+                );
+                _configCacheMemoryLimitMegabytes = ConfigUtil.GetIntValue(
+                    config,
+                    ConfigUtil.CacheMemoryLimitMegabytes,
+                    _configCacheMemoryLimitMegabytes,
+                    true,
+                    int.MaxValue
+                );
+                _configPhysicalMemoryLimitPercentage = ConfigUtil.GetIntValue(
+                    config,
+                    ConfigUtil.PhysicalMemoryLimitPercentage,
+                    _configPhysicalMemoryLimitPercentage,
+                    true,
+                    100
+                );
             }
 #if !NETCOREAPP
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && _configPhysicalMemoryLimitPercentage > 0)
+            if (
+                !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && _configPhysicalMemoryLimitPercentage > 0
+            )
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_PhysicalMemoryLimitPercentage);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_PhysicalMemoryLimitPercentage
+                );
             }
 #endif
         }
@@ -166,7 +204,10 @@ namespace System.Runtime.Caching
             bool dispose = true;
             try
             {
-                _cacheMemoryMonitor = new CacheMemoryMonitor(_memoryCache, _configCacheMemoryLimitMegabytes);
+                _cacheMemoryMonitor = new CacheMemoryMonitor(
+                    _memoryCache,
+                    _configCacheMemoryLimitMegabytes
+                );
                 Timer timer;
                 // Don't capture the current ExecutionContext and its AsyncLocals onto the timer causing them to live forever
                 bool restoreFlow = false;
@@ -178,7 +219,12 @@ namespace System.Runtime.Caching
                         restoreFlow = true;
                     }
 
-                    timer = new Timer(new TimerCallback(CacheManagerTimerCallback), null, _configPollingInterval, _configPollingInterval);
+                    timer = new Timer(
+                        new TimerCallback(CacheManagerTimerCallback),
+                        null,
+                        _configPollingInterval,
+                        _configPollingInterval
+                    );
                 }
                 finally
                 {
@@ -231,26 +277,17 @@ namespace System.Runtime.Caching
 
         internal long CacheMemoryLimit
         {
-            get
-            {
-                return _cacheMemoryMonitor.MemoryLimit;
-            }
+            get { return _cacheMemoryMonitor.MemoryLimit; }
         }
 
         internal long PhysicalMemoryLimit
         {
-            get
-            {
-                return _physicalMemoryMonitor.MemoryLimit;
-            }
+            get { return _physicalMemoryMonitor.MemoryLimit; }
         }
 
         internal TimeSpan PollingInterval
         {
-            get
-            {
-                return TimeSpan.FromMilliseconds(_configPollingInterval);
-            }
+            get { return TimeSpan.FromMilliseconds(_configPollingInterval); }
         }
 
         internal MemoryCacheStatistics(MemoryCache memoryCache, NameValueCollection config)
@@ -261,7 +298,9 @@ namespace System.Runtime.Caching
             _timerLock = new object();
             InitializeConfiguration(config);
             _pollingInterval = _configPollingInterval;
-            _physicalMemoryMonitor = new PhysicalMemoryMonitor(_configPhysicalMemoryLimitPercentage);
+            _physicalMemoryMonitor = new PhysicalMemoryMonitor(
+                _configPhysicalMemoryLimitPercentage
+            );
             InitDisposableMembers();
         }
 
@@ -275,7 +314,11 @@ namespace System.Runtime.Caching
                 {
                     return 0;
                 }
-                Dbg.Trace("MemoryCacheStats", "**BEG** CacheManagerThread " + DateTime.Now.ToString("T", CultureInfo.InvariantCulture));
+                Dbg.Trace(
+                    "MemoryCacheStats",
+                    "**BEG** CacheManagerThread "
+                        + DateTime.Now.ToString("T", CultureInfo.InvariantCulture)
+                );
 
                 // The timer thread must always call Update so that the CacheManager
                 // knows the size of the cache.
@@ -303,19 +346,34 @@ namespace System.Runtime.Caching
                     }
                 }
 
-                Dbg.Trace("MemoryCacheStats", "**END** CacheManagerThread: "
-                            + ", percent=" + percent
-                            + ", beginTotalCount=" + beginTotalCount
-                            + ", trimmed=" + trimmedOrExpired
-                            + ", Milliseconds=" + sw.ElapsedMilliseconds);
+                Dbg.Trace(
+                    "MemoryCacheStats",
+                    "**END** CacheManagerThread: "
+                        + ", percent="
+                        + percent
+                        + ", beginTotalCount="
+                        + beginTotalCount
+                        + ", trimmed="
+                        + trimmedOrExpired
+                        + ", Milliseconds="
+                        + sw.ElapsedMilliseconds
+                );
 
 #if PERF
-                Debug.WriteLine("CacheCommon.CacheManagerThread:"
-                                                    + " minPercent= " + minPercent
-                                                    + ", percent= " + percent
-                                                    + ", beginTotalCount=" + beginTotalCount
-                                                    + ", trimmed=" + trimmedOrExpired
-                                                    + ", Milliseconds=" + sw.ElapsedMilliseconds + Environment.NewLine);
+                Debug.WriteLine(
+                    "CacheCommon.CacheManagerThread:"
+                        + " minPercent= "
+                        + minPercent
+                        + ", percent= "
+                        + percent
+                        + ", beginTotalCount="
+                        + beginTotalCount
+                        + ", trimmed="
+                        + trimmedOrExpired
+                        + ", Milliseconds="
+                        + sw.ElapsedMilliseconds
+                        + Environment.NewLine
+                );
 #endif
                 return trimmedOrExpired;
             }
@@ -338,7 +396,11 @@ namespace System.Runtime.Caching
                 lock (_timerLock)
                 {
                     GCHandleRef<Timer> timerHandleRef = _timerHandleRef;
-                    if (timerHandleRef != null && Interlocked.CompareExchange(ref _timerHandleRef, null, timerHandleRef) == timerHandleRef)
+                    if (
+                        timerHandleRef != null
+                        && Interlocked.CompareExchange(ref _timerHandleRef, null, timerHandleRef)
+                            == timerHandleRef
+                    )
                     {
                         timerHandleRef.Dispose();
                         Dbg.Trace("MemoryCacheStats", "Stopped CacheMemoryTimers");
@@ -355,9 +417,25 @@ namespace System.Runtime.Caching
 
         internal void UpdateConfig(NameValueCollection config)
         {
-            int pollingInterval = ConfigUtil.GetIntValueFromTimeSpan(config, ConfigUtil.PollingInterval, _configPollingInterval);
-            int cacheMemoryLimitMegabytes = ConfigUtil.GetIntValue(config, ConfigUtil.CacheMemoryLimitMegabytes, _configCacheMemoryLimitMegabytes, true, int.MaxValue);
-            int physicalMemoryLimitPercentage = ConfigUtil.GetIntValue(config, ConfigUtil.PhysicalMemoryLimitPercentage, _configPhysicalMemoryLimitPercentage, true, 100);
+            int pollingInterval = ConfigUtil.GetIntValueFromTimeSpan(
+                config,
+                ConfigUtil.PollingInterval,
+                _configPollingInterval
+            );
+            int cacheMemoryLimitMegabytes = ConfigUtil.GetIntValue(
+                config,
+                ConfigUtil.CacheMemoryLimitMegabytes,
+                _configCacheMemoryLimitMegabytes,
+                true,
+                int.MaxValue
+            );
+            int physicalMemoryLimitPercentage = ConfigUtil.GetIntValue(
+                config,
+                ConfigUtil.PhysicalMemoryLimitPercentage,
+                _configPhysicalMemoryLimitPercentage,
+                true,
+                100
+            );
 
             if (pollingInterval != _configPollingInterval)
             {
@@ -367,17 +445,17 @@ namespace System.Runtime.Caching
                 }
             }
 
-            if (cacheMemoryLimitMegabytes == _configCacheMemoryLimitMegabytes
-                && physicalMemoryLimitPercentage == _configPhysicalMemoryLimitPercentage)
+            if (
+                cacheMemoryLimitMegabytes == _configCacheMemoryLimitMegabytes
+                && physicalMemoryLimitPercentage == _configPhysicalMemoryLimitPercentage
+            )
             {
                 return;
             }
 
             try
             {
-                try
-                {
-                }
+                try { }
                 finally
                 {
                     // prevent ThreadAbortEx from interrupting

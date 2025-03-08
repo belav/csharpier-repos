@@ -34,17 +34,40 @@ namespace Tests.System.Net.Http
             yield return new object[] { "Sun Nov  6 8:49:37 1994", zeroOffset };
 
             // RFC5322 date/time
-            DateTimeOffset offset = new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(-6, 0, 0));
-            yield return new object[] { "Sat, 08 Nov 1997 09:55:06 -0600", new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(-6, 0, 0)) };
-            yield return new object[] { "8 Nov 1997 9:55:6", new DateTimeOffset(1997, 11, 8, 9, 55, 6, TimeSpan.Zero) };
-            yield return new object[] { "Sat, 8 Nov 1997 9:55:6 +0200", new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(2, 0, 0)) };
+            DateTimeOffset offset = new DateTimeOffset(
+                1997,
+                11,
+                8,
+                9,
+                55,
+                6,
+                new TimeSpan(-6, 0, 0)
+            );
+            yield return new object[]
+            {
+                "Sat, 08 Nov 1997 09:55:06 -0600",
+                new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(-6, 0, 0)),
+            };
+            yield return new object[]
+            {
+                "8 Nov 1997 9:55:6",
+                new DateTimeOffset(1997, 11, 8, 9, 55, 6, TimeSpan.Zero),
+            };
+            yield return new object[]
+            {
+                "Sat, 8 Nov 1997 9:55:6 +0200",
+                new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(2, 0, 0)),
+            };
         }
 
         [Theory]
         [MemberData(nameof(TryParse_Data))]
         // We don't need extensive tests, since we let DateTimeOffset do the parsing. This test is just
         // to validate that we use the correct parameters when calling into DateTimeOffset.ToString().
-        public static void TryParse_UseOfValidDateTimeStringsInDifferentFormats_ParsedCorrectly(string input, DateTimeOffset expected)
+        public static void TryParse_UseOfValidDateTimeStringsInDifferentFormats_ParsedCorrectly(
+            string input,
+            DateTimeOffset expected
+        )
         {
             Assert.True(HttpDateParser.TryParse(input, out var result));
             Assert.Equal(expected, result);

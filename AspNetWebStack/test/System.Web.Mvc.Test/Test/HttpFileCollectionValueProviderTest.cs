@@ -11,14 +11,27 @@ namespace System.Web.Mvc.Test
 {
     public class HttpFileCollectionValueProviderTest
     {
-        private static readonly KeyValuePair<string, HttpPostedFileBase>[] _allFiles = new KeyValuePair<string, HttpPostedFileBase>[]
-        {
-            new KeyValuePair<string, HttpPostedFileBase>("foo", new MockHttpPostedFile(42, "fooFile1")),
-            new KeyValuePair<string, HttpPostedFileBase>("foo", null),
-            new KeyValuePair<string, HttpPostedFileBase>("foo", new MockHttpPostedFile(0, "") /* empty */),
-            new KeyValuePair<string, HttpPostedFileBase>("foo", new MockHttpPostedFile(100, "fooFile2")),
-            new KeyValuePair<string, HttpPostedFileBase>("bar.baz", new MockHttpPostedFile(200, "barBazFile"))
-        };
+        private static readonly KeyValuePair<string, HttpPostedFileBase>[] _allFiles =
+            new KeyValuePair<string, HttpPostedFileBase>[]
+            {
+                new KeyValuePair<string, HttpPostedFileBase>(
+                    "foo",
+                    new MockHttpPostedFile(42, "fooFile1")
+                ),
+                new KeyValuePair<string, HttpPostedFileBase>("foo", null),
+                new KeyValuePair<string, HttpPostedFileBase>(
+                    "foo",
+                    new MockHttpPostedFile(0, "") /* empty */
+                ),
+                new KeyValuePair<string, HttpPostedFileBase>(
+                    "foo",
+                    new MockHttpPostedFile(100, "fooFile2")
+                ),
+                new KeyValuePair<string, HttpPostedFileBase>(
+                    "bar.baz",
+                    new MockHttpPostedFile(200, "barBazFile")
+                ),
+            };
 
         [Fact]
         public void ContainsPrefix()
@@ -54,7 +67,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { valueProvider.ContainsPrefix(null); }, "prefix");
+                delegate
+                {
+                    valueProvider.ContainsPrefix(null);
+                },
+                "prefix"
+            );
         }
 
         [Fact]
@@ -69,11 +87,15 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.NotNull(vpResult);
 
-            HttpPostedFileBase[] expectedRawValues = (from el in _allFiles
-                                                      where el.Key == "foo"
-                                                      let file = el.Value
-                                                      let hasContent = (file != null && file.ContentLength > 0 && !String.IsNullOrEmpty(file.FileName))
-                                                      select (hasContent) ? file : null).ToArray();
+            HttpPostedFileBase[] expectedRawValues = (
+                from el in _allFiles
+                where el.Key == "foo"
+                let file = el.Value
+                let hasContent = (
+                    file != null && file.ContentLength > 0 && !String.IsNullOrEmpty(file.FileName)
+                )
+                select (hasContent) ? file : null
+            ).ToArray();
             Assert.Equal(expectedRawValues, (HttpPostedFileBase[])vpResult.RawValue);
             Assert.Equal("System.Web.HttpPostedFileBase[]", vpResult.AttemptedValue);
             Assert.Equal(CultureInfo.InvariantCulture, vpResult.Culture);
@@ -100,7 +122,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { valueProvider.GetValue(null); }, "key");
+                delegate
+                {
+                    valueProvider.GetValue(null);
+                },
+                "key"
+            );
         }
 
         private static HttpFileCollectionValueProvider GetEmptyValueProvider()
@@ -114,7 +141,9 @@ namespace System.Web.Mvc.Test
         {
             Mock<HttpFileCollectionBase> mockFileCollection = new Mock<HttpFileCollectionBase>();
             mockFileCollection.SetupGet(c => c.Count).Returns(_allFiles.Length);
-            mockFileCollection.SetupGet(c => c.AllKeys).Returns(_allFiles.Select(f => f.Key).ToArray());
+            mockFileCollection
+                .SetupGet(c => c.AllKeys)
+                .Returns(_allFiles.Select(f => f.Key).ToArray());
             for (int i = 0; i < _allFiles.Length; i++)
             {
                 int j = i;
@@ -122,7 +151,9 @@ namespace System.Web.Mvc.Test
             }
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(o => o.HttpContext.Request.Files).Returns(mockFileCollection.Object);
+            mockControllerContext
+                .SetupGet(o => o.HttpContext.Request.Files)
+                .Returns(mockFileCollection.Object);
 
             return new HttpFileCollectionValueProvider(mockControllerContext.Object);
         }

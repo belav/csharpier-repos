@@ -4,18 +4,26 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-
 using Debug = global::System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
     internal static partial class ConstraintValidator
     {
-        private static bool SatisfiesConstraints(this Type genericVariable, SigTypeContext typeContextOfConstraintDeclarer, Type typeArg)
+        private static bool SatisfiesConstraints(
+            this Type genericVariable,
+            SigTypeContext typeContextOfConstraintDeclarer,
+            Type typeArg
+        )
         {
-            GenericParameterAttributes specialConstraints = genericVariable.GenericParameterAttributes & GenericParameterAttributes.SpecialConstraintMask;
+            GenericParameterAttributes specialConstraints =
+                genericVariable.GenericParameterAttributes
+                & GenericParameterAttributes.SpecialConstraintMask;
 
-            if ((specialConstraints & GenericParameterAttributes.NotNullableValueTypeConstraint) != 0)
+            if (
+                (specialConstraints & GenericParameterAttributes.NotNullableValueTypeConstraint)
+                != 0
+            )
             {
                 if (!typeArg.IsValueType)
                 {
@@ -42,13 +50,20 @@ namespace Internal.Reflection.Execution
                     return false;
             }
 
-            if (typeArg.IsByRefLike && (specialConstraints & (GenericParameterAttributes)0x20 /* GenericParameterAttributes.AcceptByRefLike */) == 0)
+            if (
+                typeArg.IsByRefLike
+                && (
+                    specialConstraints & (GenericParameterAttributes)0x20 /* GenericParameterAttributes.AcceptByRefLike */
+                ) == 0
+            )
                 return false;
 
             // Now check general subtype constraints
             foreach (var constraint in genericVariable.GetGenericParameterConstraints())
             {
-                Type instantiatedTypeConstraint = constraint.Instantiate(typeContextOfConstraintDeclarer);
+                Type instantiatedTypeConstraint = constraint.Instantiate(
+                    typeContextOfConstraintDeclarer
+                );
 
                 // System.Object constraint will be always satisfied - even if argList is empty
                 if (instantiatedTypeConstraint.IsSystemObject())
@@ -62,7 +77,12 @@ namespace Internal.Reflection.Execution
             return true;
         }
 
-        private static void EnsureSatisfiesClassConstraints(Type[] typeParameters, Type[] typeArguments, object definition, SigTypeContext typeContext)
+        private static void EnsureSatisfiesClassConstraints(
+            Type[] typeParameters,
+            Type[] typeArguments,
+            object definition,
+            SigTypeContext typeContext
+        )
         {
             if (typeParameters.Length != typeArguments.Length)
             {
@@ -75,9 +95,15 @@ namespace Internal.Reflection.Execution
             {
                 Type actualArg = typeArguments[i];
 
-                if (actualArg.IsSystemVoid() || (actualArg.HasElementType && !actualArg.IsArray) || actualArg.IsFunctionPointer)
+                if (
+                    actualArg.IsSystemVoid()
+                    || (actualArg.HasElementType && !actualArg.IsArray)
+                    || actualArg.IsFunctionPointer
+                )
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_NeverValidGenericArgument, actualArg));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_NeverValidGenericArgument, actualArg)
+                    );
                 }
             }
 
@@ -88,16 +114,31 @@ namespace Internal.Reflection.Execution
 
                 if (!formalArg.SatisfiesConstraints(typeContext, actualArg))
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_ConstraintFailed, actualArg, definition.ToString(), formalArg));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Argument_ConstraintFailed,
+                            actualArg,
+                            definition.ToString(),
+                            formalArg
+                        )
+                    );
                 }
             }
         }
 
-        public static void EnsureSatisfiesClassConstraints(Type typeDefinition, Type[] typeArguments)
+        public static void EnsureSatisfiesClassConstraints(
+            Type typeDefinition,
+            Type[] typeArguments
+        )
         {
             Type[] typeParameters = typeDefinition.GetGenericArguments();
             SigTypeContext typeContext = new SigTypeContext(typeArguments, null);
-            EnsureSatisfiesClassConstraints(typeParameters, typeArguments, typeDefinition, typeContext);
+            EnsureSatisfiesClassConstraints(
+                typeParameters,
+                typeArguments,
+                typeDefinition,
+                typeContext
+            );
         }
 
         public static void EnsureSatisfiesClassConstraints(MethodInfo reflectionMethodInfo)
@@ -107,7 +148,12 @@ namespace Internal.Reflection.Execution
             Type[] methodParameters = genericMethodDefinition.GetGenericArguments();
             Type[] typeArguments = reflectionMethodInfo.DeclaringType.GetGenericArguments();
             SigTypeContext typeContext = new SigTypeContext(typeArguments, methodArguments);
-            EnsureSatisfiesClassConstraints(methodParameters, methodArguments, genericMethodDefinition, typeContext);
+            EnsureSatisfiesClassConstraints(
+                methodParameters,
+                methodArguments,
+                genericMethodDefinition,
+                typeContext
+            );
         }
     }
 }

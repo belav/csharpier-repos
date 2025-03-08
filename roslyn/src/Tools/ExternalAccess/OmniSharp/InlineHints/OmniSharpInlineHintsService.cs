@@ -14,31 +14,50 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.InlineHints;
 
 internal static class OmniSharpInlineHintsService
 {
-    public static async Task<ImmutableArray<OmniSharpInlineHint>> GetInlineHintsAsync(Document document, TextSpan textSpan, OmniSharpInlineHintsOptions options, CancellationToken cancellationToken)
+    public static async Task<ImmutableArray<OmniSharpInlineHint>> GetInlineHintsAsync(
+        Document document,
+        TextSpan textSpan,
+        OmniSharpInlineHintsOptions options,
+        CancellationToken cancellationToken
+    )
     {
         var service = document.GetRequiredLanguageService<IInlineHintsService>();
         var roslynOptions = options.ToInlineHintsOptions();
 
-        var hints = await service.GetInlineHintsAsync(document, textSpan, roslynOptions, displayAllOverride: false, cancellationToken).ConfigureAwait(false);
+        var hints = await service
+            .GetInlineHintsAsync(
+                document,
+                textSpan,
+                roslynOptions,
+                displayAllOverride: false,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
         return hints.SelectAsArray(static h => new OmniSharpInlineHint(
             h.Span,
             h.Ranking,
             h.DisplayParts,
             h.ReplacementTextChange,
-            h.GetDescriptionAsync));
+            h.GetDescriptionAsync
+        ));
     }
 }
 
 internal readonly struct OmniSharpInlineHint
 {
-    private readonly Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>> _getDescriptionAsync;
+    private readonly Func<
+        Document,
+        CancellationToken,
+        Task<ImmutableArray<TaggedText>>
+    > _getDescriptionAsync;
 
     public OmniSharpInlineHint(
         TextSpan span,
         double ranking,
         ImmutableArray<TaggedText> displayParts,
         TextChange? replacementTextChange,
-        Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>> getDescriptionAsync)
+        Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>> getDescriptionAsync
+    )
     {
         Span = span;
         Ranking = ranking;
@@ -52,6 +71,8 @@ internal readonly struct OmniSharpInlineHint
     public readonly ImmutableArray<TaggedText> DisplayParts { get; }
     public readonly TextChange? ReplacementTextChange { get; }
 
-    public Task<ImmutableArray<TaggedText>> GetDescriptionAsync(Document document, CancellationToken cancellationToken)
-        => _getDescriptionAsync.Invoke(document, cancellationToken);
+    public Task<ImmutableArray<TaggedText>> GetDescriptionAsync(
+        Document document,
+        CancellationToken cancellationToken
+    ) => _getDescriptionAsync.Invoke(document, cancellationToken);
 }

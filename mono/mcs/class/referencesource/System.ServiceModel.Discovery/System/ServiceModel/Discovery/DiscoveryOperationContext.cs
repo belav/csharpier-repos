@@ -6,10 +6,10 @@ namespace System.ServiceModel.Discovery
 {
     using System;
     using System.Runtime;
-    using System.ServiceModel.Channels;
-    using System.Xml;
     using System.Runtime.Diagnostics;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.Xml;
 
     class DiscoveryOperationContext
     {
@@ -28,38 +28,36 @@ namespace System.ServiceModel.Discovery
 
             if (Fx.Trace.IsEtwProviderEnabled)
             {
-                this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(operationContext.IncomingMessage);
+                this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    operationContext.IncomingMessage
+                );
             }
 
             this.operationContext = operationContext;
-            this.operationContextExtension = DiscoveryOperationContext.GetDiscoveryOperationContextExtension(this.operationContext);
-            this.messageProperty = DiscoveryOperationContext.GetDiscoveryMessageProperty(this.operationContext);
+            this.operationContextExtension =
+                DiscoveryOperationContext.GetDiscoveryOperationContextExtension(
+                    this.operationContext
+                );
+            this.messageProperty = DiscoveryOperationContext.GetDiscoveryMessageProperty(
+                this.operationContext
+            );
 
             this.thisLock = new object();
         }
 
         public ServiceDiscoveryMode DiscoveryMode
         {
-            get
-            {
-                return this.operationContextExtension.DiscoveryMode;
-            }
+            get { return this.operationContextExtension.DiscoveryMode; }
         }
 
         public EventTraceActivity EventTraceActivity
         {
-            get
-            {
-                return this.eventTraceActivity;
-            }
+            get { return this.eventTraceActivity; }
         }
 
         public TimeSpan MaxResponseDelay
         {
-            get
-            {
-                return this.operationContextExtension.MaxResponseDelay;
-            }
+            get { return this.operationContextExtension.MaxResponseDelay; }
         }
 
         public TResponseChannel GetCallbackChannel<TResponseChannel>()
@@ -70,7 +68,9 @@ namespace System.ServiceModel.Discovery
         public void AddressDuplexResponseMessage(OperationContext responseOperationContext)
         {
             EnsureOutgoingMessageHeaders();
-            responseOperationContext.OutgoingMessageHeaders.CopyHeadersFrom(this.outgoingMessageHeaders);
+            responseOperationContext.OutgoingMessageHeaders.CopyHeadersFrom(
+                this.outgoingMessageHeaders
+            );
             responseOperationContext.OutgoingMessageHeaders.MessageId = new UniqueId();
             this.AddDiscoveryMessageProperty(responseOperationContext);
         }
@@ -81,7 +81,9 @@ namespace System.ServiceModel.Discovery
             this.AddDiscoveryMessageProperty(responseOperationContext);
         }
 
-        static DiscoveryOperationContextExtension GetDiscoveryOperationContextExtension(OperationContext operationContext)
+        static DiscoveryOperationContextExtension GetDiscoveryOperationContextExtension(
+            OperationContext operationContext
+        )
         {
             DiscoveryOperationContextExtension operationContextExtension =
                 operationContext.Extensions.Find<DiscoveryOperationContextExtension>();
@@ -94,10 +96,17 @@ namespace System.ServiceModel.Discovery
             return operationContextExtension;
         }
 
-        static DiscoveryMessageProperty GetDiscoveryMessageProperty(OperationContext operationContext)
+        static DiscoveryMessageProperty GetDiscoveryMessageProperty(
+            OperationContext operationContext
+        )
         {
             object messageProperty;
-            if (operationContext.IncomingMessageProperties.TryGetValue(DiscoveryMessageProperty.Name, out messageProperty))
+            if (
+                operationContext.IncomingMessageProperties.TryGetValue(
+                    DiscoveryMessageProperty.Name,
+                    out messageProperty
+                )
+            )
             {
                 return messageProperty as DiscoveryMessageProperty;
             }
@@ -109,7 +118,9 @@ namespace System.ServiceModel.Discovery
 
         static MessageHeaders GetOutgoingMessageHeaders(OperationContext operationContext)
         {
-            MessageHeaders outgoingMessageHeaders = new MessageHeaders(operationContext.IncomingMessageVersion);
+            MessageHeaders outgoingMessageHeaders = new MessageHeaders(
+                operationContext.IncomingMessageVersion
+            );
 
             EndpointAddress replyTo = operationContext.IncomingMessageHeaders.ReplyTo;
             if (replyTo != null)
@@ -132,7 +143,8 @@ namespace System.ServiceModel.Discovery
             {
                 responseOperationContext.OutgoingMessageProperties.Add(
                     DiscoveryMessageProperty.Name,
-                    this.messageProperty);
+                    this.messageProperty
+                );
             }
         }
 
@@ -144,7 +156,10 @@ namespace System.ServiceModel.Discovery
                 {
                     if (this.outgoingMessageHeaders == null)
                     {
-                        this.outgoingMessageHeaders = DiscoveryOperationContext.GetOutgoingMessageHeaders(this.operationContext);
+                        this.outgoingMessageHeaders =
+                            DiscoveryOperationContext.GetOutgoingMessageHeaders(
+                                this.operationContext
+                            );
                     }
                 }
             }

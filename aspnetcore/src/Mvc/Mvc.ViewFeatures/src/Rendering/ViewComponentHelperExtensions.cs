@@ -33,7 +33,10 @@ public static class ViewComponentHelperExtensions
     /// <param name="componentType">The view component <see cref="Type"/>.</param>
     /// <returns>A <see cref="Task"/> that on completion returns the rendered <see cref="IHtmlContent" />.
     /// </returns>
-    public static Task<IHtmlContent> InvokeAsync(this IViewComponentHelper helper, Type componentType)
+    public static Task<IHtmlContent> InvokeAsync(
+        this IViewComponentHelper helper,
+        Type componentType
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
 
@@ -48,7 +51,10 @@ public static class ViewComponentHelperExtensions
     /// <typeparam name="TComponent">The <see cref="Type"/> of the view component.</typeparam>
     /// <returns>A <see cref="Task"/> that on completion returns the rendered <see cref="IHtmlContent" />.
     /// </returns>
-    public static Task<IHtmlContent> InvokeAsync<TComponent>(this IViewComponentHelper helper, object? arguments)
+    public static Task<IHtmlContent> InvokeAsync<TComponent>(
+        this IViewComponentHelper helper,
+        object? arguments
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
 

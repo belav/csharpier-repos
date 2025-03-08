@@ -38,7 +38,9 @@ public class ComplexObjectModelBinderProvider : IModelBinderProvider
         return null;
     }
 
-    private static IReadOnlyList<IModelBinder> GetParameterBinders(ModelBinderProviderContext context)
+    private static IReadOnlyList<IModelBinder> GetParameterBinders(
+        ModelBinderProviderContext context
+    )
     {
         var boundConstructor = context.Metadata.BoundConstructor;
         if (boundConstructor is null)
@@ -46,13 +48,16 @@ public class ComplexObjectModelBinderProvider : IModelBinderProvider
             return Array.Empty<IModelBinder>();
         }
 
-        var parameterBinders = boundConstructor.BoundConstructorParameters!.Count == 0 ?
-            Array.Empty<IModelBinder>() :
-            new IModelBinder[boundConstructor.BoundConstructorParameters.Count];
+        var parameterBinders =
+            boundConstructor.BoundConstructorParameters!.Count == 0
+                ? Array.Empty<IModelBinder>()
+                : new IModelBinder[boundConstructor.BoundConstructorParameters.Count];
 
         for (var i = 0; i < parameterBinders.Length; i++)
         {
-            parameterBinders[i] = context.CreateBinder(boundConstructor.BoundConstructorParameters[i]);
+            parameterBinders[i] = context.CreateBinder(
+                boundConstructor.BoundConstructorParameters[i]
+            );
         }
 
         return parameterBinders;

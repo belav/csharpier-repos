@@ -26,7 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Threading.Tasks;
 using System.Web;
@@ -34,83 +33,87 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web
 {
-	[TestFixture]
-	public sealed class EventHandlerTaskAsyncHelperTest : TaskAsyncResultTest
-	{
-		EventHandlerTaskAsyncHelper helper;
-		object expectedSender;
-		EventArgs expectedEventArgs;
+    [TestFixture]
+    public sealed class EventHandlerTaskAsyncHelperTest : TaskAsyncResultTest
+    {
+        EventHandlerTaskAsyncHelper helper;
+        object expectedSender;
+        EventArgs expectedEventArgs;
 
-		static Task DummyTaskEventHandler (object sender, EventArgs e)
-		{
-			throw new AssertionException ("Should not be called.");
-		}
+        static Task DummyTaskEventHandler(object sender, EventArgs e)
+        {
+            throw new AssertionException("Should not be called.");
+        }
 
-		protected override void SetNullArguments ()
-		{
-			expectedSender = null;
-			expectedEventArgs = null;
-		}
+        protected override void SetNullArguments()
+        {
+            expectedSender = null;
+            expectedEventArgs = null;
+        }
 
-		protected override IAsyncResult GetAsyncResult (Func<Task> taskFactory, AsyncCallback callback, object state)
-		{
-			Assert.IsNull (helper, "GetAsyncResult#A01");
+        protected override IAsyncResult GetAsyncResult(
+            Func<Task> taskFactory,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            Assert.IsNull(helper, "GetAsyncResult#A01");
 
-			TaskEventHandler handler = (sender, e) => {
-				Assert.AreSame (expectedSender, sender, "GetAsyncResult#A02");
-				Assert.AreSame (expectedEventArgs, e, "GetAsyncResult#A03");
+            TaskEventHandler handler = (sender, e) =>
+            {
+                Assert.AreSame(expectedSender, sender, "GetAsyncResult#A02");
+                Assert.AreSame(expectedEventArgs, e, "GetAsyncResult#A03");
 
-				return taskFactory ();
-			};
+                return taskFactory();
+            };
 
-			helper = new EventHandlerTaskAsyncHelper (handler);
-			return helper.BeginEventHandler (expectedSender, expectedEventArgs, callback, state);
-		}
+            helper = new EventHandlerTaskAsyncHelper(handler);
+            return helper.BeginEventHandler(expectedSender, expectedEventArgs, callback, state);
+        }
 
-		protected override void Wait (IAsyncResult result)
-		{
-			Assert.IsNotNull (helper, "Wait#A01");
+        protected override void Wait(IAsyncResult result)
+        {
+            Assert.IsNotNull(helper, "Wait#A01");
 
-			helper.EndEventHandler (result);
-		}
+            helper.EndEventHandler(result);
+        }
 
-		protected override void TestSetUp ()
-		{
-			base.TestSetUp ();
+        protected override void TestSetUp()
+        {
+            base.TestSetUp();
 
-			helper = null;
-			expectedSender = new object ();
-			expectedEventArgs = new EventArgs ();
-		}
+            helper = null;
+            expectedSender = new object();
+            expectedEventArgs = new EventArgs();
+        }
 
-		[Test]
-		public void Constructor ()
-		{
-			var helper = new EventHandlerTaskAsyncHelper (DummyTaskEventHandler);
-		}
+        [Test]
+        public void Constructor()
+        {
+            var helper = new EventHandlerTaskAsyncHelper(DummyTaskEventHandler);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor_NullHandler ()
-		{
-			var helper = new EventHandlerTaskAsyncHelper (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_NullHandler()
+        {
+            var helper = new EventHandlerTaskAsyncHelper(null);
+        }
 
-		[Test]
-		public void BeginEventHandler ()
-		{
-			var helper = new EventHandlerTaskAsyncHelper (DummyTaskEventHandler);
+        [Test]
+        public void BeginEventHandler()
+        {
+            var helper = new EventHandlerTaskAsyncHelper(DummyTaskEventHandler);
 
-			Assert.IsNotNull (helper.BeginEventHandler, "#A01");
-		}
+            Assert.IsNotNull(helper.BeginEventHandler, "#A01");
+        }
 
-		[Test]
-		public void EndEventHandler ()
-		{
-			var helper = new EventHandlerTaskAsyncHelper (DummyTaskEventHandler);
+        [Test]
+        public void EndEventHandler()
+        {
+            var helper = new EventHandlerTaskAsyncHelper(DummyTaskEventHandler);
 
-			Assert.IsNotNull (helper.EndEventHandler, "#A01");
-		}
-	}
+            Assert.IsNotNull(helper.EndEventHandler, "#A01");
+        }
+    }
 }
-

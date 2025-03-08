@@ -4,10 +4,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
@@ -15,9 +15,8 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class AuthenticationTests : IISFunctionalTestBase
 {
-    public AuthenticationTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public AuthenticationTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     [RequiresIIS(IISCapability.WindowsAuthentication)]

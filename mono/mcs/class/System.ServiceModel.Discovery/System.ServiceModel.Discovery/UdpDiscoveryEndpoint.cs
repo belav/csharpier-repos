@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,69 +29,81 @@ using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery.Udp;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class UdpDiscoveryEndpoint : DiscoveryEndpoint
-	{
-		public static readonly Uri DefaultIPv4MulticastAddress = new Uri ("soap.udp://239.255.255.250:3702/");
-		public static readonly Uri DefaultIPv6MulticastAddress = new Uri ("soap.udp://[FF02:0000:0000:0000:0000:0000:0000:000C]:3702/");
+    public class UdpDiscoveryEndpoint : DiscoveryEndpoint
+    {
+        public static readonly Uri DefaultIPv4MulticastAddress = new Uri(
+            "soap.udp://239.255.255.250:3702/"
+        );
+        public static readonly Uri DefaultIPv6MulticastAddress = new Uri(
+            "soap.udp://[FF02:0000:0000:0000:0000:0000:0000:000C]:3702/"
+        );
 
-		internal static Uri DefaultMulticastAddress {
-			get { return Socket.SupportsIPv4 ? DefaultIPv4MulticastAddress : DefaultIPv6MulticastAddress; }
-		}
-		
-		// (1)->(2)
-		public UdpDiscoveryEndpoint ()
-			: this (DiscoveryVersion.WSDiscovery11)
-		{
-		}
+        internal static Uri DefaultMulticastAddress
+        {
+            get
+            {
+                return Socket.SupportsIPv4
+                    ? DefaultIPv4MulticastAddress
+                    : DefaultIPv6MulticastAddress;
+            }
+        }
 
-		// (2)->(6)
-		public UdpDiscoveryEndpoint (DiscoveryVersion discoveryVersion)
-			: this (discoveryVersion, DefaultMulticastAddress)
-		{
-		}
+        // (1)->(2)
+        public UdpDiscoveryEndpoint()
+            : this(DiscoveryVersion.WSDiscovery11) { }
 
-		// (3)->(4)
-		public UdpDiscoveryEndpoint (string multicastAddress)
-			: this (new Uri (multicastAddress))
-		{
-		}
+        // (2)->(6)
+        public UdpDiscoveryEndpoint(DiscoveryVersion discoveryVersion)
+            : this(discoveryVersion, DefaultMulticastAddress) { }
 
-		// (4)->(5)
-		public UdpDiscoveryEndpoint (Uri multicastAddress)
-			: this (DiscoveryVersion.WSDiscovery11, multicastAddress)
-		{
-		}
+        // (3)->(4)
+        public UdpDiscoveryEndpoint(string multicastAddress)
+            : this(new Uri(multicastAddress)) { }
 
-		// (5)->(6)
-		public UdpDiscoveryEndpoint (DiscoveryVersion discoveryVersion, string multicastAddress)
-			: this (discoveryVersion, new Uri (multicastAddress))
-		{
-		}
+        // (4)->(5)
+        public UdpDiscoveryEndpoint(Uri multicastAddress)
+            : this(DiscoveryVersion.WSDiscovery11, multicastAddress) { }
 
-		// (6), everything falls to here.
-		public UdpDiscoveryEndpoint (DiscoveryVersion discoveryVersion, Uri multicastAddress)
-			: base (discoveryVersion, ServiceDiscoveryMode.Adhoc, CreateBinding (discoveryVersion), new EndpointAddress (discoveryVersion.AdhocAddress))
-		{
-			ListenUri = multicastAddress;
-			TransportSettings = new UdpTransportSettings ();
-			MulticastAddress = multicastAddress;
-			MaxResponseDelay = TimeSpan.FromMilliseconds (500);
-			Behaviors.Add (new DiscoveryViaUriBehavior (discoveryVersion, multicastAddress));
-		}
+        // (5)->(6)
+        public UdpDiscoveryEndpoint(DiscoveryVersion discoveryVersion, string multicastAddress)
+            : this(discoveryVersion, new Uri(multicastAddress)) { }
 
-		static Binding CreateBinding (DiscoveryVersion discoveryVersion)
-		{
-			var mbe = new TextMessageEncodingBindingElement () {MessageVersion = discoveryVersion.MessageVersion};
-			var tbe = new UdpTransportBindingElement ();
-			return new CustomBinding (mbe, tbe) {SendTimeout = TimeSpan.FromMinutes (1), ReceiveTimeout = TimeSpan.FromMinutes (10)};
-		}
+        // (6), everything falls to here.
+        public UdpDiscoveryEndpoint(DiscoveryVersion discoveryVersion, Uri multicastAddress)
+            : base(
+                discoveryVersion,
+                ServiceDiscoveryMode.Adhoc,
+                CreateBinding(discoveryVersion),
+                new EndpointAddress(discoveryVersion.AdhocAddress)
+            )
+        {
+            ListenUri = multicastAddress;
+            TransportSettings = new UdpTransportSettings();
+            MulticastAddress = multicastAddress;
+            MaxResponseDelay = TimeSpan.FromMilliseconds(500);
+            Behaviors.Add(new DiscoveryViaUriBehavior(discoveryVersion, multicastAddress));
+        }
 
-		public Uri MulticastAddress { get; set; }
-		public UdpTransportSettings TransportSettings { get; private set; }
-	}
+        static Binding CreateBinding(DiscoveryVersion discoveryVersion)
+        {
+            var mbe = new TextMessageEncodingBindingElement()
+            {
+                MessageVersion = discoveryVersion.MessageVersion,
+            };
+            var tbe = new UdpTransportBindingElement();
+            return new CustomBinding(mbe, tbe)
+            {
+                SendTimeout = TimeSpan.FromMinutes(1),
+                ReceiveTimeout = TimeSpan.FromMinutes(10),
+            };
+        }
+
+        public Uri MulticastAddress { get; set; }
+        public UdpTransportSettings TransportSettings { get; private set; }
+    }
 }

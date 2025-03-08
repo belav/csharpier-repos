@@ -24,9 +24,21 @@ namespace System.Speech.Recognition.SrgsGrammar
             Helpers.ThrowIfEmptyOrNull(inputPath, nameof(inputPath));
             Helpers.ThrowIfNull(outputStream, nameof(outputStream));
 
-            using (XmlTextReader reader = new(new Uri(inputPath, UriKind.RelativeOrAbsolute).ToString()))
+            using (
+                XmlTextReader reader = new(
+                    new Uri(inputPath, UriKind.RelativeOrAbsolute).ToString()
+                )
+            )
             {
-                SrgsCompiler.CompileStream(new XmlReader[] { reader }, null, outputStream, true, null, null, null);
+                SrgsCompiler.CompileStream(
+                    new XmlReader[] { reader },
+                    null,
+                    outputStream,
+                    true,
+                    null,
+                    null,
+                    null
+                );
             }
         }
 
@@ -49,13 +61,26 @@ namespace System.Speech.Recognition.SrgsGrammar
             Helpers.ThrowIfNull(reader, nameof(reader));
             Helpers.ThrowIfNull(outputStream, nameof(outputStream));
 
-            SrgsCompiler.CompileStream(new XmlReader[] { reader }, null, outputStream, true, null, null, null);
+            SrgsCompiler.CompileStream(
+                new XmlReader[] { reader },
+                null,
+                outputStream,
+                true,
+                null,
+                null,
+                null
+            );
         }
 
         /// <summary>
         /// Compiles a grammar to a file
         /// </summary>
-        public static void CompileClassLibrary(string[] inputPaths, string outputPath, string[] referencedAssemblies, string keyFile)
+        public static void CompileClassLibrary(
+            string[] inputPaths,
+            string outputPath,
+            string[] referencedAssemblies,
+            string keyFile
+        )
         {
             Helpers.ThrowIfNull(inputPaths, nameof(inputPaths));
             Helpers.ThrowIfEmptyOrNull(outputPath, nameof(outputPath));
@@ -67,11 +92,24 @@ namespace System.Speech.Recognition.SrgsGrammar
                 {
                     if (inputPaths[iFile] == null)
                     {
-                        throw new ArgumentException(SR.Get(SRID.ArrayOfNullIllegal), nameof(inputPaths));
+                        throw new ArgumentException(
+                            SR.Get(SRID.ArrayOfNullIllegal),
+                            nameof(inputPaths)
+                        );
                     }
-                    readers[iFile] = new XmlTextReader(new Uri(inputPaths[iFile], UriKind.RelativeOrAbsolute).ToString());
+                    readers[iFile] = new XmlTextReader(
+                        new Uri(inputPaths[iFile], UriKind.RelativeOrAbsolute).ToString()
+                    );
                 }
-                SrgsCompiler.CompileStream(readers, outputPath, null, false, null, referencedAssemblies, keyFile);
+                SrgsCompiler.CompileStream(
+                    readers,
+                    outputPath,
+                    null,
+                    false,
+                    null,
+                    referencedAssemblies,
+                    keyFile
+                );
             }
             finally
             {
@@ -89,23 +127,48 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// <summary>
         /// Compiles an Srgs document to a file
         /// </summary>
-        public static void CompileClassLibrary(SrgsDocument srgsGrammar, string outputPath, string[] referencedAssemblies, string keyFile)
+        public static void CompileClassLibrary(
+            SrgsDocument srgsGrammar,
+            string outputPath,
+            string[] referencedAssemblies,
+            string keyFile
+        )
         {
             Helpers.ThrowIfNull(srgsGrammar, nameof(srgsGrammar));
             Helpers.ThrowIfEmptyOrNull(outputPath, nameof(outputPath));
 
-            SrgsCompiler.CompileStream(srgsGrammar, outputPath, null, false, referencedAssemblies, keyFile);
+            SrgsCompiler.CompileStream(
+                srgsGrammar,
+                outputPath,
+                null,
+                false,
+                referencedAssemblies,
+                keyFile
+            );
         }
 
         /// <summary>
         /// Compiles a grammar to a file
         /// </summary>
-        public static void CompileClassLibrary(XmlReader reader, string outputPath, string[] referencedAssemblies, string keyFile)
+        public static void CompileClassLibrary(
+            XmlReader reader,
+            string outputPath,
+            string[] referencedAssemblies,
+            string keyFile
+        )
         {
             Helpers.ThrowIfNull(reader, nameof(reader));
             Helpers.ThrowIfEmptyOrNull(outputPath, nameof(outputPath));
 
-            SrgsCompiler.CompileStream(new XmlReader[] { reader }, outputPath, null, false, null, referencedAssemblies, keyFile);
+            SrgsCompiler.CompileStream(
+                new XmlReader[] { reader },
+                outputPath,
+                null,
+                false,
+                null,
+                referencedAssemblies,
+                keyFile
+            );
         }
 
         #endregion
@@ -129,7 +192,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         internal static void CompileXmlOrCopyCfg(
             Stream inputStream,
             Stream outputStream,
-            Uri originalUri)
+            Uri originalUri
+        )
         {
             // Wrap stream in case Seek is not supported:
             SeekableReadStream seekableInputStream = new(inputStream);
@@ -149,7 +213,15 @@ namespace System.Speech.Recognition.SrgsGrammar
             else
             {
                 // Else compile the Xml:
-                SrgsCompiler.CompileStream(new XmlReader[] { new XmlTextReader(seekableInputStream) }, null, outputStream, true, originalUri, null, null);
+                SrgsCompiler.CompileStream(
+                    new XmlReader[] { new XmlTextReader(seekableInputStream) },
+                    null,
+                    outputStream,
+                    true,
+                    originalUri,
+                    null,
+                    null
+                );
             }
         }
 

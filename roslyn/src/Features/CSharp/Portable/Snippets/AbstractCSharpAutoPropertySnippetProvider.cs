@@ -22,30 +22,62 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Snippets
 {
-    internal abstract class AbstractCSharpAutoPropertySnippetProvider : AbstractPropertySnippetProvider
+    internal abstract class AbstractCSharpAutoPropertySnippetProvider
+        : AbstractPropertySnippetProvider
     {
-        protected virtual AccessorDeclarationSyntax? GenerateGetAccessorDeclaration(CSharpSyntaxContext syntaxContext, SyntaxGenerator generator)
-            => (AccessorDeclarationSyntax)generator.GetAccessorDeclaration();
+        protected virtual AccessorDeclarationSyntax? GenerateGetAccessorDeclaration(
+            CSharpSyntaxContext syntaxContext,
+            SyntaxGenerator generator
+        ) => (AccessorDeclarationSyntax)generator.GetAccessorDeclaration();
 
-        protected virtual AccessorDeclarationSyntax? GenerateSetAccessorDeclaration(CSharpSyntaxContext syntaxContext, SyntaxGenerator generator)
-            => (AccessorDeclarationSyntax)generator.SetAccessorDeclaration();
+        protected virtual AccessorDeclarationSyntax? GenerateSetAccessorDeclaration(
+            CSharpSyntaxContext syntaxContext,
+            SyntaxGenerator generator
+        ) => (AccessorDeclarationSyntax)generator.SetAccessorDeclaration();
 
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            return syntaxTree.IsMemberDeclarationContext(position, context: null,
-                SyntaxKindSet.AllMemberModifiers, SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations, canBePartial: true, cancellationToken);
+            return syntaxTree.IsMemberDeclarationContext(
+                position,
+                context: null,
+                SyntaxKindSet.AllMemberModifiers,
+                SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                canBePartial: true,
+                cancellationToken
+            );
         }
 
-        protected override async Task<SyntaxNode> GenerateSnippetSyntaxAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> GenerateSnippetSyntaxAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await document
+                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
-            var identifierName = NameGenerator.GenerateUniqueName("MyProperty",
-                n => semanticModel.LookupSymbols(position, name: n).IsEmpty);
-            var syntaxContext = CSharpSyntaxContext.CreateContext(document, semanticModel, position, cancellationToken);
+            var identifierName = NameGenerator.GenerateUniqueName(
+                "MyProperty",
+                n => semanticModel.LookupSymbols(position, name: n).IsEmpty
+            );
+            var syntaxContext = CSharpSyntaxContext.CreateContext(
+                document,
+                semanticModel,
+                position,
+                cancellationToken
+            );
             var accessors = new AccessorDeclarationSyntax?[]
             {
                 GenerateGetAccessorDeclaration(syntaxContext, generator),
@@ -63,19 +95,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return SyntaxFactory.PropertyDeclaration(
                 attributeLists: default,
                 modifiers: modifiers,
-                type: compilation.GetSpecialType(SpecialType.System_Int32).GenerateTypeSyntax(allowVar: false),
+                type: compilation
+                    .GetSpecialType(SpecialType.System_Int32)
+                    .GenerateTypeSyntax(allowVar: false),
                 explicitInterfaceSpecifier: null,
                 identifier: identifierName.ToIdentifierToken(),
-                accessorList: SyntaxFactory.AccessorList(new SyntaxList<AccessorDeclarationSyntax>(accessors.Where(a => a is not null)!)));
+                accessorList: SyntaxFactory.AccessorList(
+                    new SyntaxList<AccessorDeclarationSyntax>(accessors.Where(a => a is not null)!)
+                )
+            );
         }
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)caretTarget;
             return propertyDeclaration.AccessorList!.CloseBraceToken.Span.End;
         }
 
-        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(SyntaxNode node, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
+        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(
+            SyntaxNode node,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SnippetPlaceholder>.GetInstance(out var arrayBuilder);
             var propertyDeclaration = (PropertyDeclarationSyntax)node;
@@ -87,7 +132,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return arrayBuilder.ToImmutableArray();
         }
 
-        protected override SyntaxNode? FindAddedSnippetSyntaxNode(SyntaxNode root, int position, Func<SyntaxNode?, bool> isCorrectContainer)
+        protected override SyntaxNode? FindAddedSnippetSyntaxNode(
+            SyntaxNode root,
+            int position,
+            Func<SyntaxNode?, bool> isCorrectContainer
+        )
         {
             var node = root.FindNode(TextSpan.FromBounds(position, position));
             return node.GetAncestorOrThis<PropertyDeclarationSyntax>();

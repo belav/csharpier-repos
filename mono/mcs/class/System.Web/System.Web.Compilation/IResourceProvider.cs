@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,15 +26,14 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 
-using System.Resources;
 using System.Globalization;
+using System.Resources;
 
 namespace System.Web.Compilation
 {
-        public interface IResourceProvider
-        {
-		object GetObject (string resourceKey, CultureInfo culture);
-                IResourceReader ResourceReader { get; }
-        }
+    public interface IResourceProvider
+    {
+        object GetObject(string resourceKey, CultureInfo culture);
+        IResourceReader ResourceReader { get; }
+    }
 }
-

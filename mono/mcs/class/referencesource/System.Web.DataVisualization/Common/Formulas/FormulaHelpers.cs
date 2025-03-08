@@ -6,9 +6,9 @@
 // @owner=victark, alexgor, deliant
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting.Formulas
@@ -16,7 +16,6 @@ namespace System.Windows.Forms.DataVisualization.Charting.Formulas
 namespace System.Web.UI.DataVisualization.Charting.Formulas
 #endif
 {
-
     #region class FormulaHelper
     /// <summary>
     /// Formula helper is a static utility class implementing common formula related routines.
@@ -29,7 +28,16 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// </summary>
         /// <param name="formula">The formula.</param>
         /// <returns>FomulaInfo instance</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        [
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1506:AvoidExcessiveClassCoupling"
+            )
+        ]
         internal static FormulaInfo GetFormulaInfo(FinancialFormula formula)
         {
             switch (formula)
@@ -109,7 +117,13 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                     return new AccumulationDistributionFormulaInfo();
 
                 default:
-                    Debug.Fail(String.Format(CultureInfo.InvariantCulture, "{0} case is not defined", formula));
+                    Debug.Fail(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0} case is not defined",
+                            formula
+                        )
+                    );
                     return null;
             }
         }
@@ -124,28 +138,38 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             switch (chartType)
             {
                 case SeriesChartType.BoxPlot:
-                    return new DataField[] { 
-                        DataField.LowerWisker, DataField.UpperWisker, 
-                        DataField.LowerBox, DataField.UpperBox, 
-                        DataField.Average, DataField.Median };
+                    return new DataField[]
+                    {
+                        DataField.LowerWisker,
+                        DataField.UpperWisker,
+                        DataField.LowerBox,
+                        DataField.UpperBox,
+                        DataField.Average,
+                        DataField.Median,
+                    };
                 case SeriesChartType.Bubble:
-                    return new DataField[] { 
-                        DataField.Bubble, DataField.BubbleSize };
+                    return new DataField[] { DataField.Bubble, DataField.BubbleSize };
                 case SeriesChartType.Candlestick:
                 case SeriesChartType.Stock:
-                    return new DataField[] { 
-                        DataField.High, DataField.Low,
-                        DataField.Open, DataField.Close };
+                    return new DataField[]
+                    {
+                        DataField.High,
+                        DataField.Low,
+                        DataField.Open,
+                        DataField.Close,
+                    };
                 case SeriesChartType.ErrorBar:
-                    return new DataField[] { 
-                        DataField.Center, 
-                        DataField.LowerError, DataField.UpperError};
+                    return new DataField[]
+                    {
+                        DataField.Center,
+                        DataField.LowerError,
+                        DataField.UpperError,
+                    };
                 case SeriesChartType.RangeBar:
                 case SeriesChartType.Range:
                 case SeriesChartType.RangeColumn:
                 case SeriesChartType.SplineRange:
-                    return new DataField[] { 
-                        DataField.Top, DataField.Bottom };
+                    return new DataField[] { DataField.Top, DataField.Bottom };
                 default:
                     return new DataField[] { DataField.Y };
             }
@@ -189,13 +213,19 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         }
 
         /// <summary>
-        /// Maps formula data field to a chart type specific data field. 
+        /// Maps formula data field to a chart type specific data field.
         /// </summary>
         /// <param name="chartType">Type of the chart.</param>
         /// <param name="formulaField">The formula field to be mapped.</param>
         /// <returns>The series field</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal static DataField? MapFormulaDataField(SeriesChartType chartType, DataField formulaField)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
+        internal static DataField? MapFormulaDataField(
+            SeriesChartType chartType,
+            DataField formulaField
+        )
         {
             switch (formulaField)
             {
@@ -203,60 +233,81 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 case DataField.High:
                     switch (chartType)
                     {
-                        default: return null;
-                        case SeriesChartType.BoxPlot: return DataField.UpperBox;
+                        default:
+                            return null;
+                        case SeriesChartType.BoxPlot:
+                            return DataField.UpperBox;
                         case SeriesChartType.Candlestick:
-                        case SeriesChartType.Stock: return DataField.High;
-                        case SeriesChartType.ErrorBar: return DataField.UpperError;
+                        case SeriesChartType.Stock:
+                            return DataField.High;
+                        case SeriesChartType.ErrorBar:
+                            return DataField.UpperError;
                         case SeriesChartType.RangeBar:
                         case SeriesChartType.Range:
                         case SeriesChartType.RangeColumn:
-                        case SeriesChartType.SplineRange: return DataField.Top;
+                        case SeriesChartType.SplineRange:
+                            return DataField.Top;
                     }
 
                 case DataField.Bottom:
                 case DataField.Low:
                     switch (chartType)
                     {
-                        default: return null;
-                        case SeriesChartType.BoxPlot: return DataField.LowerBox;
+                        default:
+                            return null;
+                        case SeriesChartType.BoxPlot:
+                            return DataField.LowerBox;
                         case SeriesChartType.Candlestick:
-                        case SeriesChartType.Stock: return DataField.Low;
-                        case SeriesChartType.ErrorBar: return DataField.LowerError;
+                        case SeriesChartType.Stock:
+                            return DataField.Low;
+                        case SeriesChartType.ErrorBar:
+                            return DataField.LowerError;
                         case SeriesChartType.RangeBar:
                         case SeriesChartType.Range:
                         case SeriesChartType.RangeColumn:
-                        case SeriesChartType.SplineRange: return DataField.Bottom;
+                        case SeriesChartType.SplineRange:
+                            return DataField.Bottom;
                     }
 
                 case DataField.Open:
                     switch (chartType)
                     {
-                        default: return null;
-                        case SeriesChartType.BoxPlot: return DataField.Average;
+                        default:
+                            return null;
+                        case SeriesChartType.BoxPlot:
+                            return DataField.Average;
                         case SeriesChartType.Candlestick:
-                        case SeriesChartType.Stock: return DataField.Open;
-                        case SeriesChartType.ErrorBar: return DataField.Center;
+                        case SeriesChartType.Stock:
+                            return DataField.Open;
+                        case SeriesChartType.ErrorBar:
+                            return DataField.Center;
                         case SeriesChartType.RangeBar:
                         case SeriesChartType.Range:
                         case SeriesChartType.RangeColumn:
-                        case SeriesChartType.SplineRange: return DataField.Bottom;
+                        case SeriesChartType.SplineRange:
+                            return DataField.Bottom;
                     }
 
                 case DataField.Close:
                 case DataField.Y:
                     switch (chartType)
                     {
-                        default: return DataField.Y;
-                        case SeriesChartType.BoxPlot: return DataField.Average;
-                        case SeriesChartType.Bubble: return DataField.Bubble;
+                        default:
+                            return DataField.Y;
+                        case SeriesChartType.BoxPlot:
+                            return DataField.Average;
+                        case SeriesChartType.Bubble:
+                            return DataField.Bubble;
                         case SeriesChartType.Candlestick:
-                        case SeriesChartType.Stock: return DataField.Close;
-                        case SeriesChartType.ErrorBar: return DataField.Center;
+                        case SeriesChartType.Stock:
+                            return DataField.Close;
+                        case SeriesChartType.ErrorBar:
+                            return DataField.Center;
                         case SeriesChartType.RangeBar:
                         case SeriesChartType.Range:
                         case SeriesChartType.RangeColumn:
-                        case SeriesChartType.SplineRange: return DataField.Top;
+                        case SeriesChartType.SplineRange:
+                            return DataField.Top;
                     }
                 default:
                     return null;
@@ -285,26 +336,26 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Gets the input data fields of the formula.
         /// </summary>
         /// <value>The input fields.</value>
-        public DataField[] InputFields 
-        { 
-            get { return _inputFields; } 
+        public DataField[] InputFields
+        {
+            get { return _inputFields; }
         }
 
         /// <summary>
         /// Gets the output data fields of the formula.
         /// </summary>
         /// <value>The output fields.</value>
-        public DataField[] OutputFields 
-        { 
-            get { return _outputFields; } 
+        public DataField[] OutputFields
+        {
+            get { return _outputFields; }
         }
 
         /// <summary>
         /// Gets the parameters of the formula.
         /// </summary>
         /// <value>The parameters.</value>
-        public object[] Parameters 
-        { 
+        public object[] Parameters
+        {
             get { return _parameters; }
         }
         #endregion
@@ -316,7 +367,11 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="inputFields">The input data fields.</param>
         /// <param name="outputFields">The output data fields.</param>
         /// <param name="defaultParams">The default formula params.</param>
-        public FormulaInfo(DataField[] inputFields, DataField[] outputFields, params object[] defaultParams)
+        public FormulaInfo(
+            DataField[] inputFields,
+            DataField[] outputFields,
+            params object[] defaultParams
+        )
         {
             _inputFields = inputFields;
             _outputFields = outputFields;
@@ -334,7 +389,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < _parameters.Length; i++)
             {
-                if (i > 0) sb.Append(',');
+                if (i > 0)
+                    sb.Append(',');
                 sb.AppendFormat(CultureInfo.InvariantCulture, "{0}", _parameters[i]);
             }
             return sb.ToString();
@@ -351,7 +407,11 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
 
             string[] paramStringList = parameters.Split(',');
             int paramStringIndex = 0;
-            for (int i = 0; i < _parameters.Length && paramStringIndex < paramStringList.Length; i++)
+            for (
+                int i = 0;
+                i < _parameters.Length && paramStringIndex < paramStringList.Length;
+                i++
+            )
             {
                 string newParamValue = paramStringList[paramStringIndex++];
                 if (!String.IsNullOrEmpty(newParamValue))
@@ -396,7 +456,11 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
 
             string[] paramStringList = parameters.Split(',');
             int paramStringIndex = 0;
-            for (int i = 0; i < _parameters.Length && paramStringIndex < paramStringList.Length; i++)
+            for (
+                int i = 0;
+                i < _parameters.Length && paramStringIndex < paramStringList.Length;
+                i++
+            )
             {
                 string newParamValue = paramStringList[paramStringIndex++];
                 if (!String.IsNullOrEmpty(newParamValue))
@@ -407,7 +471,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                     }
                     catch (FormatException)
                     {
-                        throw new ArgumentException(SR.ExceptionFormulaDataFormatInvalid(parameters));
+                        throw new ArgumentException(
+                            SR.ExceptionFormulaDataFormatInvalid(parameters)
+                        );
                     }
                 }
             }
@@ -425,9 +491,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="MovingAverageFormulaInfo"/> class.
         /// </summary>
         public MovingAverageFormulaInfo()
-            : this(2, false)                      //Defaults
-        {
-        }
+            : this(2, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MovingAverageFormulaInfo"/> class.
         /// </summary>
@@ -437,9 +503,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, startFromFirst)
-        {
-        }
+                period,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -452,9 +518,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="ExponentialMovingAverageFormulaInfo"/> class.
         /// </summary>
         public ExponentialMovingAverageFormulaInfo()
-            : this(2, false)                      //Defaults
-        {
-        }
+            : this(2, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExponentialMovingAverageFormulaInfo"/> class.
         /// </summary>
@@ -464,9 +530,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, startFromFirst)
-        {
-        }
+                period,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -479,21 +545,21 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="WeightedMovingAverageFormulaInfo"/> class.
         /// </summary>
         public WeightedMovingAverageFormulaInfo()
-            : this(2, false)                      //Defaults
-        {
-        }
+            : this(2, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WeightedMovingAverageFormulaInfo"/> class.
         /// </summary>
         /// <param name="period">The period.</param>
         /// <param name="startFromFirst">if set to <c>true</c> [start from first].</param>
         public WeightedMovingAverageFormulaInfo(int period, bool startFromFirst)
-           : base(
+            : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, startFromFirst)
-        {
-        }
+                period,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -506,9 +572,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="TriangularMovingAverageFormulaInfo"/> class.
         /// </summary>
         public TriangularMovingAverageFormulaInfo()
-            : this(2, false)                      //Defaults
-        {
-        }
+            : this(2, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TriangularMovingAverageFormulaInfo"/> class.
         /// </summary>
@@ -518,9 +584,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, startFromFirst)
-        {
-        }
+                period,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -533,9 +599,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="TripleExponentialMovingAverageFormulaInfo"/> class.
         /// </summary>
         public TripleExponentialMovingAverageFormulaInfo()
-            : this(12)                           //Defaults
-        {
-        }
+            : this(12) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TripleExponentialMovingAverageFormulaInfo"/> class.
         /// </summary>
@@ -544,9 +610,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -559,9 +624,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="BollingerBandsFormulaInfo"/> class.
         /// </summary>
         public BollingerBandsFormulaInfo()
-            : this(3, 2, true)                                          //Defaults
-        {
-        }
+            : this(3, 2, true) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BollingerBandsFormulaInfo"/> class.
         /// </summary>
@@ -570,11 +635,12 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="startFromFirst">if set to <c>true</c> [start from first].</param>
         public BollingerBandsFormulaInfo(int period, double deviation, bool startFromFirst)
             : base(
-                new DataField[] { DataField.Y },                        //Input fields
-                new DataField[] { DataField.Top, DataField.Bottom },    //Output fields
-                period, deviation, startFromFirst)
-        {
-        }
+                new DataField[] { DataField.Y }, //Input fields
+                new DataField[] { DataField.Top, DataField.Bottom }, //Output fields
+                period,
+                deviation,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -589,9 +655,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public TypicalPriceFormulaInfo()
             : base(
                 new DataField[] { DataField.Close, DataField.High, DataField.Low }, //Input fields
-                new DataField[] { DataField.Y })                                    //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -606,9 +672,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public WeightedCloseFormulaInfo()
             : base(
                 new DataField[] { DataField.Close, DataField.High, DataField.Low }, //Input fields
-                new DataField[] { DataField.Y })                                    //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -623,11 +689,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public MedianPriceFormulaInfo()
             : base(
                 new DataField[] { DataField.High, DataField.Low }, //Input fields
-                new DataField[] { DataField.Y })                    //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
-
 
     /// <summary>
     /// Envelopes FormulaInfo
@@ -639,9 +704,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="EnvelopesFormulaInfo"/> class.
         /// </summary>
         public EnvelopesFormulaInfo()
-            : this(2, 10, true)                                          //Defaults
-        {
-        }
+            : this(2, 10, true) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EnvelopesFormulaInfo"/> class.
         /// </summary>
@@ -650,13 +715,13 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="startFromFirst">if set to <c>true</c> [start from first].</param>
         public EnvelopesFormulaInfo(int period, double shiftPercentage, bool startFromFirst)
             : base(
-                new DataField[] { DataField.Y },                        //Input fields
-                new DataField[] { DataField.Top, DataField.Bottom },    //Output fields
-                period, shiftPercentage, startFromFirst)
-        {
-        }
+                new DataField[] { DataField.Y }, //Input fields
+                new DataField[] { DataField.Top, DataField.Bottom }, //Output fields
+                period,
+                shiftPercentage,
+                startFromFirst
+            ) { }
     }
-
 
     /// <summary>
     /// StandardDeviation FormulaInfo
@@ -668,9 +733,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="StandardDeviationFormulaInfo"/> class.
         /// </summary>
         public StandardDeviationFormulaInfo()
-            : this(2, false)                      //Defaults
-        {
-        }
+            : this(2, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StandardDeviationFormulaInfo"/> class.
         /// </summary>
@@ -680,9 +745,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, startFromFirst)
-        {
-        }
+                period,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -695,9 +760,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="ChaikinOscillatorFormulaInfo"/> class.
         /// </summary>
         public ChaikinOscillatorFormulaInfo()
-            : this(3, 10, false)                      //Defaults
-        {
-        }
+            : this(3, 10, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ChaikinOscillatorFormulaInfo"/> class.
         /// </summary>
@@ -708,9 +773,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close, DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                shortPeriod, longPeriod, startFromFirst)
-        {
-        }
+                shortPeriod,
+                longPeriod,
+                startFromFirst
+            ) { }
     }
 
     /// <summary>
@@ -723,9 +789,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="DetrendedPriceOscillatorFormulaInfo"/> class.
         /// </summary>
         public DetrendedPriceOscillatorFormulaInfo()
-            : this(2, false)                      //Defaults
-        {
-        }
+            : this(2, false) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DetrendedPriceOscillatorFormulaInfo"/> class.
         /// </summary>
@@ -735,11 +801,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, startFromFirst)
-        {
-        }
+                period,
+                startFromFirst
+            ) { }
     }
-
 
     /// <summary>
     /// VolatilityChaikins FormulaInfo
@@ -751,9 +816,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="VolatilityChaikinsFormulaInfo"/> class.
         /// </summary>
         public VolatilityChaikinsFormulaInfo()
-            : this(10, 10)                      //Defaults
-        {
-        }
+            : this(10, 10) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VolatilityChaikinsFormulaInfo"/> class.
         /// </summary>
@@ -763,9 +828,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, signalPeriod)
-        {
-        }
+                period,
+                signalPeriod
+            ) { }
     }
 
     /// <summary>
@@ -778,9 +843,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="VolumeOscillatorFormulaInfo"/> class.
         /// </summary>
         public VolumeOscillatorFormulaInfo()
-            : this(5, 10, true)                      //Defaults
-        {
-        }
+            : this(5, 10, true) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeOscillatorFormulaInfo"/> class.
         /// </summary>
@@ -791,9 +856,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Y }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                shortPeriod, longPeriod, percentage)
-        {
-        }
+                shortPeriod,
+                longPeriod,
+                percentage
+            ) { }
     }
 
     /// <summary>
@@ -806,9 +872,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="StochasticIndicatorFormulaInfo"/> class.
         /// </summary>
         public StochasticIndicatorFormulaInfo()
-            : this(10, 10)                      //Defaults
-        {
-        }
+            : this(10, 10) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StochasticIndicatorFormulaInfo"/> class.
         /// </summary>
@@ -818,9 +884,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close }, //Input fields
                 new DataField[] { DataField.Y, DataField.Y }, //Output fields
-                periodD, periodK)
-        {
-        }
+                periodD,
+                periodK
+            ) { }
     }
 
     /// <summary>
@@ -833,9 +899,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="WilliamsRFormulaInfo"/> class.
         /// </summary>
         public WilliamsRFormulaInfo()
-            : this(14)                      //Defaults
-        {
-        }
+            : this(14) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WilliamsRFormulaInfo"/> class.
         /// </summary>
@@ -844,9 +910,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -859,9 +924,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="AverageTrueRangeFormulaInfo"/> class.
         /// </summary>
         public AverageTrueRangeFormulaInfo()
-            : this(14)                      //Defaults
-        {
-        }
+            : this(14) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AverageTrueRangeFormulaInfo"/> class.
         /// </summary>
@@ -870,9 +935,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -887,9 +951,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public EaseOfMovementFormulaInfo()
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close }, //Input fields
-                new DataField[] { DataField.Y }) //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -902,9 +966,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="MassIndexFormulaInfo"/> class.
         /// </summary>
         public MassIndexFormulaInfo()
-            : this(25, 9)                      //Defaults
-        {
-        }
+            : this(25, 9) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MassIndexFormulaInfo"/> class.
         /// </summary>
@@ -914,9 +978,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period, averagePeriod)
-        {
-        }
+                period,
+                averagePeriod
+            ) { }
     }
 
     /// <summary>
@@ -931,9 +995,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public PerformanceFormulaInfo()
             : base(
                 new DataField[] { DataField.Close }, //Input fields
-                new DataField[] { DataField.Y }) //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -946,9 +1010,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="RateOfChangeFormulaInfo"/> class.
         /// </summary>
         public RateOfChangeFormulaInfo()
-            : this(10)                      //Defaults
-        {
-        }
+            : this(10) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RateOfChangeFormulaInfo"/> class.
         /// </summary>
@@ -957,9 +1021,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Close }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -972,9 +1035,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="RelativeStrengthIndexFormulaInfo"/> class.
         /// </summary>
         public RelativeStrengthIndexFormulaInfo()
-            : this(10)                      //Defaults
-        {
-        }
+            : this(10) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RelativeStrengthIndexFormulaInfo"/> class.
         /// </summary>
@@ -983,9 +1046,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Close }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -998,9 +1060,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="MovingAverageConvergenceDivergenceFormulaInfo"/> class.
         /// </summary>
         public MovingAverageConvergenceDivergenceFormulaInfo()
-            : this(12, 26)                      //Defaults
-        {
-        }
+            : this(12, 26) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MovingAverageConvergenceDivergenceFormulaInfo"/> class.
         /// </summary>
@@ -1010,9 +1072,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Close }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                shortPeriod, longPeriod)
-        {
-        }
+                shortPeriod,
+                longPeriod
+            ) { }
     }
 
     /// <summary>
@@ -1025,9 +1087,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="CommodityChannelIndexFormulaInfo"/> class.
         /// </summary>
         public CommodityChannelIndexFormulaInfo()
-            : this(10)                      //Defaults
-        {
-        }
+            : this(10) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CommodityChannelIndexFormulaInfo"/> class.
         /// </summary>
@@ -1036,9 +1098,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close }, //Input fields
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -1054,9 +1115,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="ForecastingFormulaInfo"/> class.
         /// </summary>
         public ForecastingFormulaInfo()
-            : this(TimeSeriesAndForecasting.RegressionType.Polynomial, 2, 0, true, true)                      //Defaults
-        {
-        }
+            : this(TimeSeriesAndForecasting.RegressionType.Polynomial, 2, 0, true, true) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ForecastingFormulaInfo"/> class.
         /// </summary>
@@ -1065,13 +1126,22 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="forecastingPeriod">The forecasting period.</param>
         /// <param name="returnApproximationError">if set to <c>true</c> [return approximation error].</param>
         /// <param name="returnForecastingError">if set to <c>true</c> [return forecasting error].</param>
-        public ForecastingFormulaInfo(TimeSeriesAndForecasting.RegressionType regressionType, int polynomialDegree, int forecastingPeriod, bool returnApproximationError, bool returnForecastingError)
+        public ForecastingFormulaInfo(
+            TimeSeriesAndForecasting.RegressionType regressionType,
+            int polynomialDegree,
+            int forecastingPeriod,
+            bool returnApproximationError,
+            bool returnForecastingError
+        )
             : base(
                 new DataField[] { DataField.Close }, //Input fields
                 new DataField[] { DataField.Close, DataField.High, DataField.Low }, //Output fields
-                regressionType, polynomialDegree, forecastingPeriod, returnApproximationError, returnForecastingError)
-        {
-        }
+                regressionType,
+                polynomialDegree,
+                forecastingPeriod,
+                returnApproximationError,
+                returnForecastingError
+            ) { }
 
         //Methods
         /// <summary>
@@ -1106,7 +1176,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                     }
                     catch (FormatException)
                     {
-                        throw new ArgumentException(SR.ExceptionFormulaDataFormatInvalid(parameters));
+                        throw new ArgumentException(
+                            SR.ExceptionFormulaDataFormatInvalid(parameters)
+                        );
                     }
                 }
             }
@@ -1135,9 +1207,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="MoneyFlowFormulaInfo"/> class.
         /// </summary>
         public MoneyFlowFormulaInfo()
-            : this(2)                      //Defaults
-        {
-        }
+            : this(2) //Defaults
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MoneyFlowFormulaInfo"/> class.
         /// </summary>
@@ -1146,9 +1218,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close, DataField.Y }, //Input fields: High,Low,Close,Volume
                 new DataField[] { DataField.Y }, //Output fields
-                period)
-        {
-        }
+                period
+            ) { }
     }
 
     /// <summary>
@@ -1163,9 +1234,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public PriceVolumeTrendFormulaInfo()
             : base(
                 new DataField[] { DataField.Close, DataField.Y }, //Input=Close,Volume
-                new DataField[] { DataField.Y }) //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -1180,9 +1251,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public OnBalanceVolumeFormulaInfo()
             : base(
                 new DataField[] { DataField.Close, DataField.Y }, //Input=Close,Volume
-                new DataField[] { DataField.Y }) //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -1195,9 +1266,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="NegativeVolumeIndexFormulaInfo"/> class.
         /// </summary>
         public NegativeVolumeIndexFormulaInfo() //Note about parameters: Start value is mandatory so we don't provide the default
-            : this(double.NaN)
-        {
-        }
+            : this(double.NaN) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NegativeVolumeIndexFormulaInfo"/> class.
         /// </summary>
@@ -1206,9 +1276,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Close, DataField.Y }, //Input=Close,Volume
                 new DataField[] { DataField.Y },
-                startValue) //Output fields
-        {
-        }
+                startValue
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -1221,9 +1291,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Initializes a new instance of the <see cref="PositiveVolumeIndexFormulaInfo"/> class.
         /// </summary>
         public PositiveVolumeIndexFormulaInfo() //Note about parameters: Start value is mandatory so we don't provide the default
-            : this(double.NaN)
-        {
-        }
+            : this(double.NaN) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PositiveVolumeIndexFormulaInfo"/> class.
         /// </summary>
@@ -1232,9 +1301,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             : base(
                 new DataField[] { DataField.Close, DataField.Y }, //Input=Close,Volume
                 new DataField[] { DataField.Y },
-                startValue) //Output fields
-        {
-        }
+                startValue
+            ) //Output fields
+        { }
     }
 
     /// <summary>
@@ -1249,9 +1318,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         public AccumulationDistributionFormulaInfo() //Note about parameters: Start value is mandatory so we don't provide the default
             : base(
                 new DataField[] { DataField.High, DataField.Low, DataField.Close, DataField.Y }, //Input=High, Low, Close, Volume
-                new DataField[] { DataField.Y }) //Output fields
-        {
-        }
+                new DataField[] { DataField.Y }
+            ) //Output fields
+        { }
     }
 
     #endregion
@@ -1280,7 +1349,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         LowerError,
         UpperError,
         Top,
-        Bottom
+        Bottom,
     }
     #endregion
 
@@ -1301,10 +1370,11 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Gets the series.
         /// </summary>
         /// <value>The series.</value>
-        public Series Series 
-        { 
+        public Series Series
+        {
             get { return _series; }
         }
+
         /// <summary>
         /// Gets the name of the series.
         /// </summary>
@@ -1313,12 +1383,13 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         {
             get { return _series != null ? _series.Name : _seriesName; }
         }
+
         /// <summary>
         /// Gets the data field.
         /// </summary>
         /// <value>The data field.</value>
-        public DataField DataField 
-        { 
+        public DataField DataField
+        {
             get { return _dataField; }
         }
         #endregion
@@ -1334,6 +1405,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             _series = series;
             _dataField = dataField;
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SeriesFieldInfo"/> class.
         /// </summary>
@@ -1370,9 +1442,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 if (i > 0)
                     sb.Append(',');
 
-                SeriesChartType seriesChartType = info.Series != null ?
-                                                        info.Series.ChartType :
-                                                        FormulaHelper.GetDefaultChartType(info.DataField);
+                SeriesChartType seriesChartType =
+                    info.Series != null
+                        ? info.Series.ChartType
+                        : FormulaHelper.GetDefaultChartType(info.DataField);
 
                 IList<DataField> dataFields = FormulaHelper.GetDataFields(seriesChartType);
 
@@ -1380,7 +1453,12 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 if (dataFieldIndex == 0)
                     sb.AppendFormat(CultureInfo.InvariantCulture, "{0}:Y", info.SeriesName); //The string field descriptor is 1 based ;-(
                 else
-                    sb.AppendFormat(CultureInfo.InvariantCulture, "{0}:Y{1}", info.SeriesName, dataFieldIndex + 1); //The string field descriptor is 1 based ;-(
+                    sb.AppendFormat(
+                        CultureInfo.InvariantCulture,
+                        "{0}:Y{1}",
+                        info.SeriesName,
+                        dataFieldIndex + 1
+                    ); //The string field descriptor is 1 based ;-(
             }
             return sb.ToString();
         }
@@ -1393,7 +1471,11 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="seriesFields">The series fields list. The series name can be followed by the field names. For example: "Series1:Y,Series1:Y3,Series2:Close"</param>
         /// <param name="formulaFields">The formula fields list.</param>
         /// <returns></returns>
-        public static SeriesFieldList FromString(Chart chart, string seriesFields, IList<DataField> formulaFields)
+        public static SeriesFieldList FromString(
+            Chart chart,
+            string seriesFields,
+            IList<DataField> formulaFields
+        )
         {
             SeriesFieldList result = new SeriesFieldList();
             if (String.IsNullOrEmpty(seriesFields))
@@ -1428,7 +1510,12 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                             AddSeriesFieldInfo(result, series, unmappedFormulaFields);
                             break;
                         case 2: //Series and field names are provided: "Series1:Y3"
-                            AddSeriesFieldInfo(result, series, unmappedFormulaFields, seriesFieldParts[1]);
+                            AddSeriesFieldInfo(
+                                result,
+                                series,
+                                unmappedFormulaFields,
+                                seriesFieldParts[1]
+                            );
                             break;
                     }
                 }
@@ -1440,7 +1527,12 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                             AddSeriesFieldInfo(result, seriesName, unmappedFormulaFields);
                             break;
                         case 2: //Series and field names are provided: "Series1:Y3"
-                            AddSeriesFieldInfo(result, seriesName, unmappedFormulaFields, seriesFieldParts[1]);
+                            AddSeriesFieldInfo(
+                                result,
+                                seriesName,
+                                unmappedFormulaFields,
+                                seriesFieldParts[1]
+                            );
                             break;
                     }
                 }
@@ -1454,9 +1546,15 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="result">The result.</param>
         /// <param name="series">The series.</param>
         /// <param name="unmappedFormulaFields">The unmapped formula fields.</param>
-        private static void AddSeriesFieldInfo(SeriesFieldList result, Series series, IList<DataField> unmappedFormulaFields)
+        private static void AddSeriesFieldInfo(
+            SeriesFieldList result,
+            Series series,
+            IList<DataField> unmappedFormulaFields
+        )
         {
-            List<DataField> seriesFields = new List<DataField>(FormulaHelper.GetDataFields(series.ChartType));
+            List<DataField> seriesFields = new List<DataField>(
+                FormulaHelper.GetDataFields(series.ChartType)
+            );
 
             for (int i = 0; i < unmappedFormulaFields.Count && seriesFields.Count > 0; )
             {
@@ -1487,6 +1585,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 }
             }
         }
+
         /// <summary>
         /// Adds the series field info.
         /// </summary>
@@ -1494,7 +1593,12 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="series">The series.</param>
         /// <param name="unmappedFormulaFields">The unmapped formula fields.</param>
         /// <param name="seriesFieldId">The series field id.</param>
-        private static void AddSeriesFieldInfo(SeriesFieldList result, Series series, IList<DataField> unmappedFormulaFields, string seriesFieldId)
+        private static void AddSeriesFieldInfo(
+            SeriesFieldList result,
+            Series series,
+            IList<DataField> unmappedFormulaFields,
+            string seriesFieldId
+        )
         {
             IList<DataField> seriesFields = FormulaHelper.GetDataFields(series.ChartType);
 
@@ -1515,7 +1619,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                     }
                     else
                     {
-                        throw (new ArgumentException(SR.ExceptionFormulaYIndexInvalid, seriesFieldId));
+                        throw (
+                            new ArgumentException(SR.ExceptionFormulaYIndexInvalid, seriesFieldId)
+                        );
                     }
             }
             else
@@ -1536,7 +1642,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             {
                 throw new ArgumentException(SR.ExceptionDataPointValueNameInvalid, seriesFieldId);
             }
-
         }
 
         /// <summary>
@@ -1545,10 +1650,16 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="result">The result.</param>
         /// <param name="seriesName">Name of the series.</param>
         /// <param name="unmappedFormulaFields">The unmapped formula fields.</param>
-        private static void AddSeriesFieldInfo(SeriesFieldList result, string seriesName, IList<DataField> unmappedFormulaFields)
+        private static void AddSeriesFieldInfo(
+            SeriesFieldList result,
+            string seriesName,
+            IList<DataField> unmappedFormulaFields
+        )
         {
             SeriesChartType chartType = FormulaHelper.GetDefaultChartType(unmappedFormulaFields[0]);
-            List<DataField> seriesFields = new List<DataField>(FormulaHelper.GetDataFields(chartType));
+            List<DataField> seriesFields = new List<DataField>(
+                FormulaHelper.GetDataFields(chartType)
+            );
 
             for (int i = 0; i < unmappedFormulaFields.Count && seriesFields.Count > 0; )
             {
@@ -1574,6 +1685,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 }
             }
         }
+
         /// <summary>
         /// Adds the series field info.
         /// </summary>
@@ -1581,7 +1693,12 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="seriesName">Name of the series.</param>
         /// <param name="unmappedFormulaFields">The unmapped formula fields.</param>
         /// <param name="seriesFieldId">The series field id.</param>
-        private static void AddSeriesFieldInfo(SeriesFieldList result, string seriesName, IList<DataField> unmappedFormulaFields, string seriesFieldId)
+        private static void AddSeriesFieldInfo(
+            SeriesFieldList result,
+            string seriesName,
+            IList<DataField> unmappedFormulaFields,
+            string seriesFieldId
+        )
         {
             SeriesChartType chartType = FormulaHelper.GetDefaultChartType(unmappedFormulaFields[0]);
             IList<DataField> seriesFields = FormulaHelper.GetDataFields(chartType);
@@ -1605,7 +1722,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                     }
                     else
                     {
-                        throw (new ArgumentException(SR.ExceptionFormulaYIndexInvalid, seriesFieldId));
+                        throw (
+                            new ArgumentException(SR.ExceptionFormulaYIndexInvalid, seriesFieldId)
+                        );
                     }
             }
             else
@@ -1615,8 +1734,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 {
                     seriesField = (DataField)Enum.Parse(typeof(DataField), seriesFieldId, true);
                 }
-                catch (ArgumentException)
-                { }
+                catch (ArgumentException) { }
             }
 
             if (seriesField != null)
@@ -1631,6 +1749,4 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         }
     }
     #endregion
-
 }
-

@@ -42,7 +42,11 @@ namespace System.Globalization.Tests
         [Fact]
         public void Ctor_NullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", "String", () => new StringInfo(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "String",
+                () => new StringInfo(null)
+            );
         }
 
         [Theory]
@@ -60,7 +64,11 @@ namespace System.Globalization.Tests
         public void String_SetNull_ThrowsArgumentNullException()
         {
             var stringInfo = new StringInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "String", () => stringInfo.String = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "String",
+                () => stringInfo.String = null
+            );
         }
 
         public static IEnumerable<object[]> StringInfo_TestData()
@@ -68,13 +76,33 @@ namespace System.Globalization.Tests
             yield return new object[] { "Simple Text", 7, "Text", 4, "Text" };
             yield return new object[] { "Simple Text", 0, "Simple Text", 6, "Simple" };
             yield return new object[] { "\uD800\uDC00\uD801\uDC01Left", 2, "Left", 2, "Le" };
-            yield return new object[] { "\uD800\uDC00\uD801\uDC01Left", 1, "\uD801\uDC01Left", 2, "\uD801\uDC01L" };
-            yield return new object[] { "Start\uD800\uDC00\uD801\uDC01Left", 5, "\uD800\uDC00\uD801\uDC01Left", 1, "\uD800\uDC00" };
+            yield return new object[]
+            {
+                "\uD800\uDC00\uD801\uDC01Left",
+                1,
+                "\uD801\uDC01Left",
+                2,
+                "\uD801\uDC01L",
+            };
+            yield return new object[]
+            {
+                "Start\uD800\uDC00\uD801\uDC01Left",
+                5,
+                "\uD800\uDC00\uD801\uDC01Left",
+                1,
+                "\uD800\uDC00",
+            };
         }
 
         [Theory]
         [MemberData(nameof(StringInfo_TestData))]
-        public void SubstringTest(string source, int index, string expected, int length, string expectedWithLength)
+        public void SubstringTest(
+            string source,
+            int index,
+            string expected,
+            int length,
+            string expectedWithLength
+        )
         {
             StringInfo si = new StringInfo(source);
             Assert.Equal(expected, si.SubstringByTextElements(index));
@@ -89,20 +117,36 @@ namespace System.Globalization.Tests
             StringInfo siEmpty = new StringInfo("");
 
             Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(s.Length + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                si.SubstringByTextElements(s.Length + 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => siEmpty.SubstringByTextElements(0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(-1, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(s.Length + 1, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                si.SubstringByTextElements(s.Length + 1, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => siEmpty.SubstringByTextElements(0, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(0, s.Length + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                si.SubstringByTextElements(0, s.Length + 1)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
         {
             yield return new object[] { new StringInfo(), new StringInfo(), true };
-            yield return new object[] { new StringInfo("stringinfo1"), new StringInfo("stringinfo1"), true };
-            yield return new object[] { new StringInfo("stringinfo1"), new StringInfo("stringinfo2"), false };
+            yield return new object[]
+            {
+                new StringInfo("stringinfo1"),
+                new StringInfo("stringinfo1"),
+                true,
+            };
+            yield return new object[]
+            {
+                new StringInfo("stringinfo1"),
+                new StringInfo("stringinfo2"),
+                false,
+            };
             yield return new object[] { new StringInfo("stringinfo1"), "stringinfo1", false };
             yield return new object[] { new StringInfo("stringinfo1"), 123, false };
             yield return new object[] { new StringInfo("stringinfo1"), null, false };
@@ -159,11 +203,23 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetNextTextElement_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.GetNextTextElement(null)); // Str is null
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.GetNextTextElement(null, 0)); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.GetNextTextElement(null)
+            ); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.GetNextTextElement(null, 0)
+            ); // Str is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => StringInfo.GetNextTextElement("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => StringInfo.GetNextTextElement("abc", 4)); // Index > str.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => StringInfo.GetNextTextElement("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => StringInfo.GetNextTextElement("abc", 4)
+            ); // Index > str.Length
         }
 
         [Theory]
@@ -181,11 +237,23 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetNextTextElementLength_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.GetNextTextElementLength(null)); // Str is null
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.GetNextTextElementLength(null, 0)); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.GetNextTextElementLength(null)
+            ); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.GetNextTextElementLength(null, 0)
+            ); // Str is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => StringInfo.GetNextTextElementLength("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => StringInfo.GetNextTextElementLength("abc", 4)); // Index > str.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => StringInfo.GetNextTextElementLength("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => StringInfo.GetNextTextElementLength("abc", 4)
+            ); // Index > str.Length
         }
 
         public static IEnumerable<object[]> GetTextElementEnumerator_TestData()
@@ -194,12 +262,22 @@ namespace System.Globalization.Tests
             yield return new object[] { "Hello", 5, new string[0] }; // Index = string.Length
 
             // Surrogate pair
-            yield return new object[] { "s\uDBFF\uDFFF$", 0, new string[] { "s", "\uDBFF\uDFFF", "$" } };
+            yield return new object[]
+            {
+                "s\uDBFF\uDFFF$",
+                0,
+                new string[] { "s", "\uDBFF\uDFFF", "$" },
+            };
             yield return new object[] { "s\uDBFF\uDFFF$", 1, new string[] { "\uDBFF\uDFFF", "$" } };
 
             // Combining characters
             yield return new object[] { "13229^a\u20D1a", 6, new string[] { "a\u20D1", "a" } };
-            yield return new object[] { "13229^a\u20D1a", 0, new string[] { "1", "3", "2", "2", "9", "^", "a\u20D1", "a" } };
+            yield return new object[]
+            {
+                "13229^a\u20D1a",
+                0,
+                new string[] { "1", "3", "2", "2", "9", "^", "a\u20D1", "a" },
+            };
 
             // Single base and combining character
             yield return new object[] { "a\u0300", 0, new string[] { "a\u0300" } };
@@ -224,7 +302,10 @@ namespace System.Globalization.Tests
                 }
                 Assert.Equal(expected.Length, basicCounter);
             }
-            TextElementEnumerator indexedEnumerator = StringInfo.GetTextElementEnumerator(str, index);
+            TextElementEnumerator indexedEnumerator = StringInfo.GetTextElementEnumerator(
+                str,
+                index
+            );
             int indexedCounter = 0;
             while (indexedEnumerator.MoveNext())
             {
@@ -237,11 +318,23 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetTextElementEnumerator_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.GetTextElementEnumerator(null)); // Str is null
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.GetTextElementEnumerator(null, 0)); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.GetTextElementEnumerator(null)
+            ); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.GetTextElementEnumerator(null, 0)
+            ); // Str is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => StringInfo.GetTextElementEnumerator("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => StringInfo.GetTextElementEnumerator("abc", 4)); // Index > str.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => StringInfo.GetTextElementEnumerator("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => StringInfo.GetTextElementEnumerator("abc", 4)
+            ); // Index > str.Length
         }
 
         public static IEnumerable<object[]> ParseCombiningCharacters_TestData()
@@ -265,7 +358,11 @@ namespace System.Globalization.Tests
             yield return new object[] { "!\u20D1bo\uFE22\u20D1\u20EB|", new int[] { 0, 2, 3, 7 } };
 
             //                            ,-- Other (U+10FFFF <Unassigned>)
-            yield return new object[] { "1\uDBFF\uDFFF@\uFE22\u20D1\u20EB9", new int[] { 0, 1, 3, 7 } };
+            yield return new object[]
+            {
+                "1\uDBFF\uDFFF@\uFE22\u20D1\u20EB9",
+                new int[] { 0, 1, 3, 7 },
+            };
 
             //                            ,-- Extend (U+0300 COMBINING GRAVE ACCENT)
             yield return new object[] { "a\u0300", new int[] { 0 } };
@@ -335,7 +432,13 @@ namespace System.Globalization.Tests
         [Fact]
         public void ParseCombiningChars_LargeStrings()
         {
-            string s = "\u0600x" /* prepend + 'x' */ + new string('\u0300' /* extend */, 9_999_998);
+            string s =
+                "\u0600x" /* prepend + 'x' */
+                + new string(
+                    '\u0300' /* extend */
+                    ,
+                    9_999_998
+                );
             s = string.Concat(s, s, s, s); // 40 million characters
 
             ParseCombiningCharacters(s, new int[] { 0, 10_000_000, 20_000_000, 30_000_000 });
@@ -344,7 +447,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void ParseCombiningCharacters_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("str", () => StringInfo.ParseCombiningCharacters(null)); // Str is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => StringInfo.ParseCombiningCharacters(null)
+            ); // Str is null
         }
     }
 }

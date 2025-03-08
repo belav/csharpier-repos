@@ -14,18 +14,20 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public static class MetadataReferenceExtensions
     {
-        public static Guid GetModuleVersionId(this MetadataReference metadataReference)
-            => GetManifestModuleMetadata(metadataReference).GetModuleVersionId();
+        public static Guid GetModuleVersionId(this MetadataReference metadataReference) =>
+            GetManifestModuleMetadata(metadataReference).GetModuleVersionId();
 
-        public static AssemblyIdentity GetAssemblyIdentity(this MetadataReference reference)
-            => reference.GetManifestModuleMetadata().MetadataReader.ReadAssemblyIdentityOrThrow();
+        public static AssemblyIdentity GetAssemblyIdentity(this MetadataReference reference) =>
+            reference.GetManifestModuleMetadata().MetadataReader.ReadAssemblyIdentityOrThrow();
 
-        public static ModuleMetadata GetManifestModuleMetadata(this MetadataReference reference)
-            => reference is PortableExecutableReference peReference
+        public static ModuleMetadata GetManifestModuleMetadata(this MetadataReference reference) =>
+            reference is PortableExecutableReference peReference
                 ? peReference.GetManifestModuleMetadata()
-            : throw new InvalidOperationException();
+                : throw new InvalidOperationException();
 
-        public static ModuleMetadata GetManifestModuleMetadata(this PortableExecutableReference peReference)
+        public static ModuleMetadata GetManifestModuleMetadata(
+            this PortableExecutableReference peReference
+        )
         {
             switch (peReference.GetMetadata())
             {

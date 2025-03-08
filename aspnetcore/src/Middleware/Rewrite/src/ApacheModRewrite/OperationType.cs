@@ -18,5 +18,5 @@ internal enum OperationType
     SymbolicLink,
     Size,
     ExistingUrl,
-    Executable
+    Executable,
 }

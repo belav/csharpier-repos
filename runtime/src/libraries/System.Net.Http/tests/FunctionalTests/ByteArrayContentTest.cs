@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Http.Functional.Tests
@@ -27,37 +26,46 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_EmptySourceArrayWithRange_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[0], 0, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[0], 0, 1)
+            );
         }
 
         [Fact]
         public void Ctor_StartIndexTooBig_ThrowsArgumentOufOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 5, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 5, 1)
+            );
         }
 
         [Fact]
         public void Ctor_StartIndexNegative_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], -1, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ByteArrayContent(new byte[5], -1, 1)
+            );
         }
 
         [Fact]
         public void Ctor_LengthTooBig_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 1, 5));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 1, 5)
+            );
         }
 
         [Fact]
         public void Ctor_LengthPlusOffsetCauseIntOverflow_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 1, int.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ByteArrayContent(new byte[5], 1, int.MaxValue)
+            );
         }
 
         [Fact]
         public void Ctor_LengthNegative_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ByteArrayContent(new byte[5], 0, -1)
+            );
         }
 
         [Fact]
@@ -91,7 +99,9 @@ namespace System.Net.Http.Functional.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task ReadAsStreamAsync_Call_MemoryStreamWrappingByteArrayReturned(bool readStreamAsync)
+        public async Task ReadAsStreamAsync_Call_MemoryStreamWrappingByteArrayReturned(
+            bool readStreamAsync
+        )
         {
             var contentData = new byte[10];
             var content = new MockByteArrayContent(contentData, 5, 3);
@@ -108,7 +118,10 @@ namespace System.Net.Http.Functional.Tests
             byte[] contentData = CreateSourceArray();
             var content = new ByteArrayContent(contentData);
 
-            Assert.Throws<ArgumentNullException>(() => { Task t = content.CopyToAsync(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task t = content.CopyToAsync(null);
+            });
         }
 
         [Fact]
@@ -172,8 +185,10 @@ namespace System.Net.Http.Functional.Tests
 
             for (int i = 1; i < read; i++)
             {
-                Assert.True((destinationData[i] == (destinationData[i - 1] + 1)) ||
-                    ((destinationData[i] == 0) && (destinationData[i - 1] != 0)));
+                Assert.True(
+                    (destinationData[i] == (destinationData[i - 1] + 1))
+                        || ((destinationData[i] == 0) && (destinationData[i - 1] != 0))
+                );
             }
         }
 
@@ -182,9 +197,7 @@ namespace System.Net.Http.Functional.Tests
             public int CopyToCount { get; private set; }
 
             public MockByteArrayContent(byte[] content, int offset, int count)
-                : base(content, offset, count)
-            {
-            }
+                : base(content, offset, count) { }
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {

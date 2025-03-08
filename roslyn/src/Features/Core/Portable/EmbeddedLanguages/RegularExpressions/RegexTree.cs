@@ -16,9 +16,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         RegexCompilationUnit root,
         ImmutableArray<EmbeddedDiagnostic> diagnostics,
         ImmutableDictionary<string, TextSpan> captureNamesToSpan,
-        ImmutableDictionary<int, TextSpan> captureNumbersToSpan) : EmbeddedSyntaxTree<RegexKind, RegexNode, RegexCompilationUnit>(text, root, diagnostics)
+        ImmutableDictionary<int, TextSpan> captureNumbersToSpan
+    ) : EmbeddedSyntaxTree<RegexKind, RegexNode, RegexCompilationUnit>(text, root, diagnostics)
     {
-        public readonly ImmutableDictionary<string, TextSpan> CaptureNamesToSpan = captureNamesToSpan;
-        public readonly ImmutableDictionary<int, TextSpan> CaptureNumbersToSpan = captureNumbersToSpan;
+        public readonly ImmutableDictionary<string, TextSpan> CaptureNamesToSpan =
+            captureNamesToSpan;
+        public readonly ImmutableDictionary<int, TextSpan> CaptureNumbersToSpan =
+            captureNumbersToSpan;
     }
 }

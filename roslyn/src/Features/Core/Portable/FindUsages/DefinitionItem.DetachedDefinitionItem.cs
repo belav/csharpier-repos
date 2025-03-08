@@ -23,49 +23,57 @@ namespace Microsoft.CodeAnalysis.FindUsages
         ImmutableArray<DocumentIdSpan> sourceSpans,
         ImmutableDictionary<string, string> properties,
         ImmutableDictionary<string, string> displayableProperties,
-        bool displayIfNoReferences) : IEquatable<DetachedDefinitionItem>
+        bool displayIfNoReferences
+    ) : IEquatable<DetachedDefinitionItem>
     {
         [DataMember(Order = 0)]
         public readonly ImmutableArray<string> Tags = tags;
+
         [DataMember(Order = 1)]
         public readonly ImmutableArray<TaggedText> DisplayParts = displayParts;
+
         [DataMember(Order = 2)]
         public readonly ImmutableArray<TaggedText> NameDisplayParts = nameDisplayParts;
+
         [DataMember(Order = 3)]
         public readonly ImmutableArray<TaggedText> OriginationParts = originationParts;
+
         [DataMember(Order = 4)]
         public readonly ImmutableArray<DocumentIdSpan> SourceSpans = sourceSpans;
+
         [DataMember(Order = 5)]
         public readonly ImmutableDictionary<string, string> Properties = properties;
+
         [DataMember(Order = 6)]
-        public readonly ImmutableDictionary<string, string> DisplayableProperties = displayableProperties;
+        public readonly ImmutableDictionary<string, string> DisplayableProperties =
+            displayableProperties;
+
         [DataMember(Order = 7)]
         public readonly bool DisplayIfNoReferences = displayIfNoReferences;
 
         private int _hashCode;
 
-        public override bool Equals(object? obj)
-            => Equals(obj as DetachedDefinitionItem);
+        public override bool Equals(object? obj) => Equals(obj as DetachedDefinitionItem);
 
-        public bool Equals(DetachedDefinitionItem? other)
-            => other != null &&
-               this.DisplayIfNoReferences == other.DisplayIfNoReferences &&
-               this.Tags.SequenceEqual(other.Tags) &&
-               this.DisplayParts.SequenceEqual(other.DisplayParts) &&
-               this.OriginationParts.SequenceEqual(other.OriginationParts) &&
-               this.SourceSpans.SequenceEqual(other.SourceSpans) &&
-               this.Properties.SetEquals(other.Properties) &&
-               this.DisplayableProperties.SetEquals(other.DisplayableProperties);
+        public bool Equals(DetachedDefinitionItem? other) =>
+            other != null
+            && this.DisplayIfNoReferences == other.DisplayIfNoReferences
+            && this.Tags.SequenceEqual(other.Tags)
+            && this.DisplayParts.SequenceEqual(other.DisplayParts)
+            && this.OriginationParts.SequenceEqual(other.OriginationParts)
+            && this.SourceSpans.SequenceEqual(other.SourceSpans)
+            && this.Properties.SetEquals(other.Properties)
+            && this.DisplayableProperties.SetEquals(other.DisplayableProperties);
 
         public override int GetHashCode()
         {
             if (_hashCode == 0)
             {
                 // Combine enough to have a low chance of collision.
-                var hash =
-                    Hash.Combine(this.DisplayIfNoReferences,
-                    Hash.CombineValues(this.Tags,
-                    Hash.CombineValues(this.DisplayParts)));
+                var hash = Hash.Combine(
+                    this.DisplayIfNoReferences,
+                    Hash.CombineValues(this.Tags, Hash.CombineValues(this.DisplayParts))
+                );
 
                 _hashCode = hash == 0 ? 1 : hash;
             }
@@ -73,12 +81,16 @@ namespace Microsoft.CodeAnalysis.FindUsages
             return _hashCode;
         }
 
-        public async Task<DefaultDefinitionItem?> TryRehydrateAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<DefaultDefinitionItem?> TryRehydrateAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             using var converted = TemporaryArray<DocumentSpan>.Empty;
             foreach (var ss in SourceSpans)
             {
-                var documentSpan = await ss.TryRehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+                var documentSpan = await ss.TryRehydrateAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 if (documentSpan == null)
                     return null;
 
@@ -86,9 +98,15 @@ namespace Microsoft.CodeAnalysis.FindUsages
             }
 
             return new DefaultDefinitionItem(
-                Tags, DisplayParts, NameDisplayParts, OriginationParts,
+                Tags,
+                DisplayParts,
+                NameDisplayParts,
+                OriginationParts,
                 converted.ToImmutableAndClear(),
-                Properties, DisplayableProperties, DisplayIfNoReferences);
+                Properties,
+                DisplayableProperties,
+                DisplayIfNoReferences
+            );
         }
     }
 }
