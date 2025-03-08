@@ -46,7 +46,6 @@ namespace System.Web.SessionState
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         void ProcessRequest(

@@ -22,7 +22,6 @@ namespace System.Xml.Schema
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         public XmlSchemaSimpleType()
         {
             Debug.Assert(SchemaContentType == XmlSchemaContentType.TextOnly);

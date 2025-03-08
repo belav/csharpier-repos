@@ -10,7 +10,6 @@
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
 /// </license>
-
 namespace SciMark2
 {
     public class Constants

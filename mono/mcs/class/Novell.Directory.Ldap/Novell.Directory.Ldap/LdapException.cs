@@ -148,7 +148,6 @@ namespace Novell.Directory.Ldap
     /// <tr><td>112</td><td>{@link #TLS_NOT_SUPPORTED}</td></tr>
     /// </table>
     /// </summary>
-
     public class LdapException : System.Exception
     {
         /// <summary> Returns the error message from the Ldap server, if this message is

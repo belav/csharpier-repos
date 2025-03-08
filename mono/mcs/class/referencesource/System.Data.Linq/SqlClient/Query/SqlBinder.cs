@@ -18,7 +18,6 @@ namespace System.Data.Linq.SqlClient
     ///     NON-NULL EQ NULL ==> FALSE
     ///     NON-NULL NEQ NULL ==> TRUE
     /// </summary>
-
     internal class SqlBinder
     {
         SqlColumnizer columnizer;

@@ -190,7 +190,6 @@ namespace System.Globalization
         /// For Taiwan calendar, four digit year is not used.
         /// Therefore, for any two digit number, we just return the original number.
         /// </summary>
-
         public override int ToFourDigitYear(int year)
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(year);

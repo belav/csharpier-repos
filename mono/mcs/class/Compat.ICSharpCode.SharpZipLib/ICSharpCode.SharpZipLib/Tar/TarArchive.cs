@@ -164,7 +164,6 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary> Set the debugging flag. </summary>
         ///
         /// <param name=debugF> The new debug setting. </param>
-
         public void SetDebug(bool debugF)
         {
             this.debug = debugF;

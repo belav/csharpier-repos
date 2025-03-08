@@ -234,7 +234,6 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <item>remainder - unused</item>
         /// </list>
         /// </remarks>
-
         public int HostSystem
         {
             get { return (versionMadeBy >> 8) & 0xff; }

@@ -18,7 +18,6 @@ namespace System.Reflection.TypeLoading
         /// Note that it is possible that two threads racing to query the same TypeInfo may allocate and query two different
         /// cache objects. Thus, this object must not be relied upon to preserve object identity.
         /// </summary>
-
         private sealed class TypeComponentsCache
         {
             public TypeComponentsCache(RuntimeTypeInfo type)

@@ -3429,7 +3429,6 @@ namespace System.Data.Objects
         ///
         /// See <see cref="EntityProxyFactory"/> class for more information about proxy type generation.
         /// </remarks>
-
         // Use one of the following methods to retrieve an enumeration of all CLR types mapped to O-Space EntityType objects:
         //
 

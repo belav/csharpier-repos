@@ -19,7 +19,6 @@ namespace Microsoft.NET.HostModel.Bundle
     ///   - the default options for this target
     ///   - the assembly alignment for this target
     /// </summary>
-
     public class TargetInfo
     {
         public readonly OSPlatform OS;

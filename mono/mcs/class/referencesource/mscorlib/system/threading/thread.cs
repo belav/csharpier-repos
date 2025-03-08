@@ -491,7 +491,6 @@ namespace System.Threading
 #endif
 #if (FEATURE_COMPRESSEDSTACK || MONO) && !NETCORE
         /// <internalonly/>
-
 #if !MONO
         [System.Security.SecurityCritical] // auto-generated_required
         [DynamicSecurityMethodAttribute()]

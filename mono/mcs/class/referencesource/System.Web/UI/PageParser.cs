@@ -134,7 +134,6 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         private static object s_lock = new object();
 
         // Only allowed in full trust (ASURT 123086)

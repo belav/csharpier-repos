@@ -475,7 +475,6 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="set">EntityContainerEntitySet that we will go over to get the existing entitysets.</param>
         /// <returns> Method definition </returns>
-
         private CodeMemberMethod CreateEntitySetAddObjectProperty(EntitySet set)
         {
             Debug.Assert(set != null, "Property is Null");

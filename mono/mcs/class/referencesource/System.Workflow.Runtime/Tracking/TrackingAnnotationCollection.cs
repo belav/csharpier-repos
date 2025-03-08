@@ -22,7 +22,6 @@ namespace System.Workflow.Runtime.Tracking
     /// <summary>
     /// Used by Location to hold Conditions.
     /// </summary>
-
     /// <summary>
     /// Used by TrackingExtract and TrackPoint to hold annotations.
     /// </summary>

@@ -275,7 +275,6 @@ namespace ILLink.Tasks
         }
 
         /// ToolTask implementation
-
         protected override MessageImportance StandardErrorLoggingImportance =>
             MessageImportance.High;
 

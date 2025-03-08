@@ -2883,7 +2883,6 @@ namespace System.Diagnostics.Tracing
         /// descriptor as well as some stuff we added specifically for EventSource. see the
         /// code:m_eventData for where we use this.
         /// </summary>
-
         internal partial struct EventMetadata
         {
             public EventDescriptor Descriptor;

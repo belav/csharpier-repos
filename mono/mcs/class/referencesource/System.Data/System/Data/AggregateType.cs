@@ -12,7 +12,6 @@ namespace System.Data
     /// <devdoc>
     ///    <para>Specifies the aggregate function type.</para>
     /// </devdoc>
-
     internal enum AggregateType
     {
         /// <devdoc>

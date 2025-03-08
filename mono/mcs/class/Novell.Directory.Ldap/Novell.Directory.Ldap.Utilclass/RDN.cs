@@ -48,7 +48,6 @@ namespace Novell.Directory.Ldap.Utilclass
     /// </summary>
     /// <seealso cref="DN">
     /// </seealso>
-
     public class RDN : System.Object
     {
         /// <summary> Returns the actually Raw String before Normalization

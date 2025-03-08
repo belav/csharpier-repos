@@ -17,7 +17,6 @@ namespace System.Web.Security
     ///    Defines the signature for the
     ///    WindowsAuthentication_OnAuthenticate event handler.
     /// </devdoc>
-
     public delegate void WindowsAuthenticationEventHandler(
         Object sender,
         WindowsAuthenticationEventArgs e

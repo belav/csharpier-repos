@@ -345,7 +345,6 @@ namespace XmlCoreTest.Common
         /// </summary>
         /// <param name="pattern">String containing the pattern which you want to use to create
         /// the XML string. Refer to table above for supported chars.</param>
-
         public void PutPattern(string pattern)
         {
             char[] patternArr = pattern.ToCharArray();

@@ -18,7 +18,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    <para>The choices for an ordered list.</para>
         /// </devdoc>
-
         Numbered = 1,
 
         LowerAlpha = 2,
@@ -32,7 +31,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    <para>The choices for an unordered list.</para>
         /// </devdoc>
-
         Disc = 6,
 
         Circle = 7,
@@ -42,7 +40,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    <para>The style that matches the Image type.</para>
         /// </devdoc>
-
         CustomImage = 9,
     }
 

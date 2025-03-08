@@ -13,7 +13,6 @@ namespace System.Net.Sockets
     ///       Specifies the protocols that the <see cref='System.Net.Sockets.Socket'/> class supports.
     ///    </para>
     /// </devdoc>
-
     public enum ProtocolType
     {
         /// <devdoc>

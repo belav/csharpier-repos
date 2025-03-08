@@ -41,7 +41,6 @@ namespace System.Web.UI.Design.MobileControls
         /// <summary>
         ///   Initializes the UI of the form.
         /// </summary>
-
         private EditableTreeList _filterList = null;
         private DefaultDialogButtons _dialogButtons = null;
         private WebConfigManager _webConfig = null;

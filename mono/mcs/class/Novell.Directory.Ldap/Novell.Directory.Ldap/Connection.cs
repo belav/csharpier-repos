@@ -1361,7 +1361,6 @@ namespace Novell.Directory.Ldap
         }
 
         ///TLS not supported in first release
-
         internal Stream InputStream
         {
             get { return in_Renamed; }

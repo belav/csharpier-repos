@@ -21,7 +21,6 @@ namespace System.Web.UI.WebControls
     /// DataGrid, DataBoundTable, ListBox etc. It encapsulates the logic
     /// of how a data-bound control binds to collections or DataControl instances.
     /// </summary>
-
     [Designer(
         "System.Web.UI.Design.WebControls.DataBoundControlDesigner, " + AssemblyRef.SystemDesign
     ),]

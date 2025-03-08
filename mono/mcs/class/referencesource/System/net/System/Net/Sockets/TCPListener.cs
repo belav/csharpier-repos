@@ -84,7 +84,6 @@ namespace System.Net.Sockets
         ///    </para>
         /// </devdoc>
         ///
-
         [Obsolete(
             "This method has been deprecated. Please use TcpListener(IPAddress localaddr, int port) instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]

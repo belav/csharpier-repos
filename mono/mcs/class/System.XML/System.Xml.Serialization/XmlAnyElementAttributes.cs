@@ -36,7 +36,6 @@ namespace System.Xml.Serialization
     /// <summary>
     /// Summary description for XmlAnyElementAttributes.
     /// </summary>
-
     public class XmlAnyElementAttributes : CollectionBase
     {
         public XmlAnyElementAttribute this[int index]

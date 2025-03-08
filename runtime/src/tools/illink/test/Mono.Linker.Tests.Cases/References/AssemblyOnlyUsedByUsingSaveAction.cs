@@ -9,7 +9,6 @@ namespace Mono.Linker.Tests.Cases.References
     /// With the assembly action of `save`, we remove unused assembly references from the assembly and rewrite it.
     /// When cecil writes the assembly, the unused typeref is not written out.
     /// </summary>
-
     // Add a custom step which sets the assembly action of the test to "save"
     [SetupCompileBefore(
         "SetSaveAction.dll",

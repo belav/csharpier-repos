@@ -10,7 +10,6 @@
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
 /// </license>
-
 using System;
 
 namespace SciMark2
@@ -26,7 +25,6 @@ namespace SciMark2
     /// Derived from GSL (Gnu Scientific Library),
     /// GSL's FFT Code by Brian Gough bjg@vvv.lanl.gov
     /// </author>
-
     public class FFT
     {
         public const int DefaultSeed = 20010415;

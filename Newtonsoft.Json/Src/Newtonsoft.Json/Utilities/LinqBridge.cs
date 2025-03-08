@@ -47,7 +47,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the input typed as <see cref="IEnumerable{T}"/>.
         /// </summary>
-
         public static IEnumerable<TSource> AsEnumerable<TSource>(IEnumerable<TSource> source)
         {
             return source;
@@ -57,7 +56,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns an empty <see cref="IEnumerable{T}"/> that has the
         /// specified type argument.
         /// </summary>
-
         public static IEnumerable<TResult> Empty<TResult>()
         {
             return Sequence<TResult>.Empty;
@@ -67,7 +65,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Converts the elements of an <see cref="IEnumerable"/> to the
         /// specified type.
         /// </summary>
-
         public static IEnumerable<TResult> Cast<TResult>(this IEnumerable source)
         {
             CheckNotNull(source, "source");
@@ -96,7 +93,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Filters the elements of an <see cref="IEnumerable"/> based on a specified type.
         /// </summary>
-
         public static IEnumerable<TResult> OfType<TResult>(this IEnumerable source)
         {
             CheckNotNull(source, "source");
@@ -116,7 +112,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// </summary>
         /// <param name="start">The value of the first integer in the sequence.</param>
         /// <param name="count">The number of sequential integers to generate.</param>
-
         public static IEnumerable<int> Range(int start, int count)
         {
             if (count < 0)
@@ -138,7 +133,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Generates a sequence that contains one repeated value.
         /// </summary>
-
         public static IEnumerable<TResult> Repeat<TResult>(TResult element, int count)
         {
             if (count < 0)
@@ -156,7 +150,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Filters a sequence of values based on a predicate.
         /// </summary>
-
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -182,7 +175,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Filters a sequence of values based on a predicate.
         /// Each element's index is used in the logic of the predicate function.
         /// </summary>
-
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
@@ -208,7 +200,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Projects each element of a sequence into a new form.
         /// </summary>
-
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
@@ -233,7 +224,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Projects each element of a sequence into a new form by
         /// incorporating the element's index.
         /// </summary>
-
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, TResult> selector
@@ -259,7 +249,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Projects each element of a sequence to an <see cref="IEnumerable{T}" />
         /// and flattens the resulting sequences into one sequence.
         /// </summary>
-
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TResult>> selector
@@ -276,7 +265,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// index of each source element is used in the projected form of
         /// that element.
         /// </summary>
-
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector
@@ -292,7 +280,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// flattens the resulting sequences into one sequence, and invokes
         /// a result selector function on each element therein.
         /// </summary>
-
         public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
@@ -311,7 +298,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// each source element is used in the intermediate projected form
         /// of that element.
         /// </summary>
-
         public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
@@ -340,7 +326,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns elements from a sequence as long as a specified condition is true.
         /// </summary>
-
         public static IEnumerable<TSource> TakeWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -355,7 +340,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns elements from a sequence as long as a specified condition is true.
         /// The element's index is used in the logic of the predicate function.
         /// </summary>
-
         public static IEnumerable<TSource> TakeWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
@@ -392,7 +376,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Base implementation of First operator.
         /// </summary>
-
         private static TSource FirstImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource> empty
@@ -412,7 +395,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the first element of a sequence.
         /// </summary>
-
         public static TSource First<TSource>(this IEnumerable<TSource> source)
         {
             return source.FirstImpl(Futures<TSource>.Undefined);
@@ -421,7 +403,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the first element in a sequence that satisfies a specified condition.
         /// </summary>
-
         public static TSource First<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -434,7 +415,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the first element of a sequence, or a default value if
         /// the sequence contains no elements.
         /// </summary>
-
         public static TSource FirstOrDefault<TSource>(this IEnumerable<TSource> source)
         {
             return source.FirstImpl(Futures<TSource>.Default);
@@ -444,7 +424,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the first element of the sequence that satisfies a
         /// condition or a default value if no such element is found.
         /// </summary>
-
         public static TSource FirstOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -456,7 +435,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Base implementation of Last operator.
         /// </summary>
-
         private static TSource LastImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource> empty
@@ -493,7 +471,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the last element of a sequence that satisfies a
         /// specified condition.
         /// </summary>
-
         public static TSource Last<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -506,7 +483,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the last element of a sequence, or a default value if
         /// the sequence contains no elements.
         /// </summary>
-
         public static TSource LastOrDefault<TSource>(this IEnumerable<TSource> source)
         {
             return source.LastImpl(Futures<TSource>.Default);
@@ -516,7 +492,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the last element of a sequence that satisfies a
         /// condition or a default value if no such element is found.
         /// </summary>
-
         public static TSource LastOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -528,7 +503,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Base implementation of Single operator.
         /// </summary>
-
         private static TSource SingleImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource> empty
@@ -555,7 +529,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the only element of a sequence, and throws an exception
         /// if there is not exactly one element in the sequence.
         /// </summary>
-
         public static TSource Single<TSource>(this IEnumerable<TSource> source)
         {
             return source.SingleImpl(Futures<TSource>.Undefined);
@@ -566,7 +539,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// specified condition, and throws an exception if more than one
         /// such element exists.
         /// </summary>
-
         public static TSource Single<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -580,7 +552,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// the sequence is empty; this method throws an exception if there
         /// is more than one element in the sequence.
         /// </summary>
-
         public static TSource SingleOrDefault<TSource>(this IEnumerable<TSource> source)
         {
             return source.SingleImpl(Futures<TSource>.Default);
@@ -592,7 +563,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// exists; this method throws an exception if more than one element
         /// satisfies the condition.
         /// </summary>
-
         public static TSource SingleOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -604,7 +574,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the element at a specified index in a sequence.
         /// </summary>
-
         public static TSource ElementAt<TSource>(this IEnumerable<TSource> source, int index)
         {
             CheckNotNull(source, "source");
@@ -630,7 +599,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the element at a specified index in a sequence or a
         /// default value if the index is out of range.
         /// </summary>
-
         public static TSource ElementAtOrDefault<TSource>(
             this IEnumerable<TSource> source,
             int index
@@ -651,7 +619,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Inverts the order of the elements in a sequence.
         /// </summary>
-
         public static IEnumerable<TSource> Reverse<TSource>(this IEnumerable<TSource> source)
         {
             CheckNotNull(source, "source");
@@ -671,7 +638,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns a specified number of contiguous elements from the start
         /// of a sequence.
         /// </summary>
-
         public static IEnumerable<TSource> Take<TSource>(
             this IEnumerable<TSource> source,
             int count
@@ -684,7 +650,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Bypasses a specified number of elements in a sequence and then
         /// returns the remaining elements.
         /// </summary>
-
         public static IEnumerable<TSource> Skip<TSource>(
             this IEnumerable<TSource> source,
             int count
@@ -697,7 +662,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Bypasses elements in a sequence as long as a specified condition
         /// is true and then returns the remaining elements.
         /// </summary>
-
         public static IEnumerable<TSource> SkipWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -713,7 +677,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// is true and then returns the remaining elements. The element's
         /// index is used in the logic of the predicate function.
         /// </summary>
-
         public static IEnumerable<TSource> SkipWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
@@ -751,7 +714,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the number of elements in a sequence.
         /// </summary>
-
         public static int Count<TSource>(this IEnumerable<TSource> source)
         {
             CheckNotNull(source, "source");
@@ -778,7 +740,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns a number that represents how many elements in the
         /// specified sequence satisfy a condition.
         /// </summary>
-
         public static int Count<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -791,7 +752,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns a <see cref="Int64"/> that represents the total number
         /// of elements in a sequence.
         /// </summary>
-
         public static long LongCount<TSource>(this IEnumerable<TSource> source)
         {
             CheckNotNull(source, "source");
@@ -806,7 +766,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns a <see cref="Int64"/> that represents how many elements
         /// in a sequence satisfy a condition.
         /// </summary>
-
         public static long LongCount<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -818,7 +777,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Concatenates two sequences.
         /// </summary>
-
         public static IEnumerable<TSource> Concat<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
@@ -845,7 +803,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Creates a <see cref="List{T}"/> from an <see cref="IEnumerable{T}"/>.
         /// </summary>
-
         public static List<TSource> ToList<TSource>(this IEnumerable<TSource> source)
         {
             CheckNotNull(source, "source");
@@ -856,7 +813,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Creates an array from an <see cref="IEnumerable{T}"/>.
         /// </summary>
-
         public static TSource[] ToArray<TSource>(this IEnumerable<TSource> source)
         {
             IList<TSource> ilist = source as IList<TSource>;
@@ -874,7 +830,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns distinct elements from a sequence by using the default
         /// equality comparer to compare values.
         /// </summary>
-
         public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source)
         {
             return Distinct(
@@ -887,7 +842,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns distinct elements from a sequence by using a specified
         /// <see cref="IEqualityComparer{T}"/> to compare values.
         /// </summary>
-
         public static IEnumerable<TSource> Distinct<TSource>(
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer
@@ -930,7 +884,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to a specified key
         /// selector function.
         /// </summary>
-
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -949,7 +902,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to a specified key
         /// selector function and a key comparer.
         /// </summary>
-
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -964,7 +916,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to specified key
         /// and element selector functions.
         /// </summary>
-
         public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -984,7 +935,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to a specified key
         /// selector function, a comparer and an element selector function.
         /// </summary>
-
         public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1019,7 +969,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Groups the elements of a sequence according to a specified key
         /// selector function.
         /// </summary>
-
         public static IEnumerable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1037,7 +986,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// selector function and compares the keys by using a specified
         /// comparer.
         /// </summary>
-
         public static IEnumerable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1052,7 +1000,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// selector function and projects the elements for each group by
         /// using a specified function.
         /// </summary>
-
         public static IEnumerable<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1072,7 +1019,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// selector function and creates a result value from each group and
         /// its key.
         /// </summary>
-
         public static IEnumerable<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1092,7 +1038,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// function. The keys are compared by using a comparer and each
         /// group's elements are projected by using a specified function.
         /// </summary>
-
         public static IEnumerable<TResult> GroupBy<TSource, TKey, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1113,7 +1058,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// its key. The elements of each group are projected by using a
         /// specified function.
         /// </summary>
-
         public static IEnumerable<TResult> GroupBy<TSource, TKey, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1133,7 +1077,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// selector function and creates a result value from each group and
         /// its key. The keys are compared by using a specified comparer.
         /// </summary>
-
         public static IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1157,7 +1100,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// and the elements of each group are projected by using a
         /// specified function.
         /// </summary>
-
         public static IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1178,7 +1120,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Applies an accumulator function over a sequence.
         /// </summary>
-
         public static TSource Aggregate<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, TSource> func
@@ -1200,7 +1141,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Applies an accumulator function over a sequence. The specified
         /// seed value is used as the initial accumulator value.
         /// </summary>
-
         public static TAccumulate Aggregate<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
@@ -1215,7 +1155,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// seed value is used as the initial accumulator value, and the
         /// specified function is used to select the result value.
         /// </summary>
-
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
@@ -1239,7 +1178,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Produces the set union of two sequences by using the default
         /// equality comparer.
         /// </summary>
-
         public static IEnumerable<TSource> Union<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
@@ -1256,7 +1194,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Produces the set union of two sequences by using a specified
         /// <see cref="IEqualityComparer{T}" />.
         /// </summary>
-
         public static IEnumerable<TSource> Union<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
@@ -1271,7 +1208,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// parameter's default value in a singleton collection if the
         /// sequence is empty.
         /// </summary>
-
         public static IEnumerable<TSource> DefaultIfEmpty<TSource>(this IEnumerable<TSource> source)
         {
             return source.DefaultIfEmpty(default(TSource));
@@ -1281,7 +1217,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the elements of the specified sequence or the specified
         /// value in a singleton collection if the sequence is empty.
         /// </summary>
-
         public static IEnumerable<TSource> DefaultIfEmpty<TSource>(
             this IEnumerable<TSource> source,
             TSource defaultValue
@@ -1312,7 +1247,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Determines whether all elements of a sequence satisfy a condition.
         /// </summary>
-
         public static bool All<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -1331,7 +1265,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Determines whether a sequence contains any elements.
         /// </summary>
-
         public static bool Any<TSource>(this IEnumerable<TSource> source)
         {
             CheckNotNull(source, "source");
@@ -1344,7 +1277,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Determines whether any element of a sequence satisfies a
         /// condition.
         /// </summary>
-
         public static bool Any<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
@@ -1365,7 +1297,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Determines whether a sequence contains a specified element by
         /// using the default equality comparer.
         /// </summary>
-
         public static bool Contains<TSource>(this IEnumerable<TSource> source, TSource value)
         {
             return source.Contains(
@@ -1378,7 +1309,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Determines whether a sequence contains a specified element by
         /// using a specified <see cref="IEqualityComparer{T}" />.
         /// </summary>
-
         public static bool Contains<TSource>(
             this IEnumerable<TSource> source,
             TSource value,
@@ -1402,7 +1332,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Determines whether two sequences are equal by comparing the
         /// elements by using the default equality comparer for their type.
         /// </summary>
-
         public static bool SequenceEqual<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
@@ -1418,7 +1347,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Determines whether two sequences are equal by comparing their
         /// elements by using a specified <see cref="IEqualityComparer{T}" />.
         /// </summary>
-
         public static bool SequenceEqual<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
@@ -1451,7 +1379,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Base implementation for Min/Max operator.
         /// </summary>
-
         private static TSource MinMaxImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, bool> lesser
@@ -1466,7 +1393,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Base implementation for Min/Max operator for nullable types.
         /// </summary>
-
         private static TSource? MinMaxImpl<TSource>(
             this IEnumerable<TSource?> source,
             TSource? seed,
@@ -1484,7 +1410,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the minimum value in a generic sequence.
         /// </summary>
-
         public static TSource Min<TSource>(this IEnumerable<TSource> source)
         {
             var comparer = Comparer<TSource>.Default;
@@ -1495,7 +1420,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a generic
         /// sequence and returns the minimum resulting value.
         /// </summary>
-
         public static TResult Min<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
@@ -1507,7 +1431,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns the maximum value in a generic sequence.
         /// </summary>
-
         public static TSource Max<TSource>(this IEnumerable<TSource> source)
         {
             var comparer = Comparer<TSource>.Default;
@@ -1518,7 +1441,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a generic
         /// sequence and returns the maximum resulting value.
         /// </summary>
-
         public static TResult Max<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
@@ -1536,7 +1458,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// DO NOT use this method if the caller must be a generator. It is
         /// mostly safe among aggregate operations.
         /// </remarks>
-
         private static IEnumerable<T> Renumerable<T>(this IEnumerator<T> e)
         {
             MiscellaneousUtils.Assert(e != null);
@@ -1550,7 +1471,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Sorts the elements of a sequence in ascending order according to a key.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1566,7 +1486,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Sorts the elements of a sequence in ascending order by using a
         /// specified comparer.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1587,7 +1506,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Sorts the elements of a sequence in descending order according to a key.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1603,7 +1521,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         ///  Sorts the elements of a sequence in descending order by using a
         /// specified comparer.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1625,7 +1542,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Performs a subsequent ordering of the elements in a sequence in
         /// ascending order according to a key.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1641,7 +1557,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Performs a subsequent ordering of the elements in a sequence in
         /// ascending order by using a specified comparer.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1661,7 +1576,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Performs a subsequent ordering of the elements in a sequence in
         /// descending order, according to a key.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1677,7 +1591,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Performs a subsequent ordering of the elements in a sequence in
         /// descending order by using a specified comparer.
         /// </summary>
-
         public static IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1696,7 +1609,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Base implementation for Intersect and Except operators.
         /// </summary>
-
         private static IEnumerable<TSource> IntersectExceptImpl<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
@@ -1731,7 +1643,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Produces the set intersection of two sequences by using the
         /// default equality comparer to compare values.
         /// </summary>
-
         public static IEnumerable<TSource> Intersect<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
@@ -1747,7 +1658,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Produces the set intersection of two sequences by using the
         /// specified <see cref="IEqualityComparer{T}" /> to compare values.
         /// </summary>
-
         public static IEnumerable<TSource> Intersect<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
@@ -1766,7 +1676,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Produces the set difference of two sequences by using the
         /// default equality comparer to compare values.
         /// </summary>
-
         public static IEnumerable<TSource> Except<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
@@ -1782,7 +1691,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Produces the set difference of two sequences by using the
         /// specified <see cref="IEqualityComparer{T}" /> to compare values.
         /// </summary>
-
         public static IEnumerable<TSource> Except<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
@@ -1802,7 +1710,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to a specified key
         /// selector function.
         /// </summary>
-
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1819,7 +1726,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to a specified key
         /// selector function and key comparer.
         /// </summary>
-
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1834,7 +1740,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to specified key
         /// selector and element selector functions.
         /// </summary>
-
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1853,7 +1758,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <see cref="IEnumerable{T}" /> according to a specified key
         /// selector function, a comparer, and an element selector function.
         /// </summary>
-
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1891,7 +1795,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Correlates the elements of two sequences based on matching keys.
         /// The default equality comparer is used to compare keys.
         /// </summary>
-
         public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
@@ -1914,7 +1817,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// The default equality comparer is used to compare keys. A
         /// specified <see cref="IEqualityComparer{T}" /> is used to compare keys.
         /// </summary>
-
         public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
@@ -1942,7 +1844,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// keys and groups the results. The default equality comparer is
         /// used to compare keys.
         /// </summary>
-
         public static IEnumerable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
@@ -1966,7 +1867,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// used to compare keys. A specified <see cref="IEqualityComparer{T}" />
         /// is used to compare keys.
         /// </summary>
-
         public static IEnumerable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
@@ -2015,7 +1915,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of <see cref="System.Int32" /> values.
         /// </summary>
-
         public static int Sum(this IEnumerable<int> source)
         {
             CheckNotNull(source, "source");
@@ -2032,7 +1931,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static int Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int> selector
@@ -2044,7 +1942,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of <see cref="System.Int32" /> values.
         /// </summary>
-
         public static double Average(this IEnumerable<int> source)
         {
             CheckNotNull(source, "source");
@@ -2070,7 +1967,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static double Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int> selector
@@ -2082,7 +1978,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of nullable <see cref="System.Int32" /> values.
         /// </summary>
-
         public static int? Sum(this IEnumerable<int?> source)
         {
             CheckNotNull(source, "source");
@@ -2099,7 +1994,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static int? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
@@ -2111,7 +2005,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of nullable <see cref="System.Int32" /> values.
         /// </summary>
-
         public static double? Average(this IEnumerable<int?> source)
         {
             CheckNotNull(source, "source");
@@ -2137,7 +2030,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static double? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
@@ -2150,7 +2042,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the minimum value in a sequence of nullable
         /// <see cref="System.Int32" /> values.
         /// </summary>
-
         public static int? Min(this IEnumerable<int?> source)
         {
             CheckNotNull(source, "source");
@@ -2162,7 +2053,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the minimum nullable <see cref="System.Int32" /> value.
         /// </summary>
-
         public static int? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
@@ -2175,7 +2065,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the maximum value in a sequence of nullable
         /// <see cref="System.Int32" /> values.
         /// </summary>
-
         public static int? Max(this IEnumerable<int?> source)
         {
             CheckNotNull(source, "source");
@@ -2191,7 +2080,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the maximum nullable <see cref="System.Int32" /> value.
         /// </summary>
-
         public static int? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
@@ -2203,7 +2091,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of <see cref="System.Int64" /> values.
         /// </summary>
-
         public static long Sum(this IEnumerable<long> source)
         {
             CheckNotNull(source, "source");
@@ -2220,7 +2107,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static long Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long> selector
@@ -2232,7 +2118,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of <see cref="System.Int64" /> values.
         /// </summary>
-
         public static double Average(this IEnumerable<long> source)
         {
             CheckNotNull(source, "source");
@@ -2258,7 +2143,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static double Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long> selector
@@ -2270,7 +2154,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of nullable <see cref="System.Int64" /> values.
         /// </summary>
-
         public static long? Sum(this IEnumerable<long?> source)
         {
             CheckNotNull(source, "source");
@@ -2287,7 +2170,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static long? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
@@ -2299,7 +2181,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of nullable <see cref="System.Int64" /> values.
         /// </summary>
-
         public static double? Average(this IEnumerable<long?> source)
         {
             CheckNotNull(source, "source");
@@ -2325,7 +2206,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static double? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
@@ -2338,7 +2218,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the minimum value in a sequence of nullable
         /// <see cref="System.Int64" /> values.
         /// </summary>
-
         public static long? Min(this IEnumerable<long?> source)
         {
             CheckNotNull(source, "source");
@@ -2350,7 +2229,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the minimum nullable <see cref="System.Int64" /> value.
         /// </summary>
-
         public static long? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
@@ -2363,7 +2241,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the maximum value in a sequence of nullable
         /// <see cref="System.Int64" /> values.
         /// </summary>
-
         public static long? Max(this IEnumerable<long?> source)
         {
             CheckNotNull(source, "source");
@@ -2379,7 +2256,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the maximum nullable <see cref="System.Int64" /> value.
         /// </summary>
-
         public static long? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
@@ -2391,7 +2267,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of nullable <see cref="System.Single" /> values.
         /// </summary>
-
         public static float Sum(this IEnumerable<float> source)
         {
             CheckNotNull(source, "source");
@@ -2408,7 +2283,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static float Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float> selector
@@ -2420,7 +2294,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of <see cref="System.Single" /> values.
         /// </summary>
-
         public static float Average(this IEnumerable<float> source)
         {
             CheckNotNull(source, "source");
@@ -2446,7 +2319,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static float Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float> selector
@@ -2458,7 +2330,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of nullable <see cref="System.Single" /> values.
         /// </summary>
-
         public static float? Sum(this IEnumerable<float?> source)
         {
             CheckNotNull(source, "source");
@@ -2475,7 +2346,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static float? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
@@ -2487,7 +2357,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of nullable <see cref="System.Single" /> values.
         /// </summary>
-
         public static float? Average(this IEnumerable<float?> source)
         {
             CheckNotNull(source, "source");
@@ -2513,7 +2382,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static float? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
@@ -2526,7 +2394,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the minimum value in a sequence of nullable
         /// <see cref="System.Single" /> values.
         /// </summary>
-
         public static float? Min(this IEnumerable<float?> source)
         {
             CheckNotNull(source, "source");
@@ -2538,7 +2405,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the minimum nullable <see cref="System.Single" /> value.
         /// </summary>
-
         public static float? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
@@ -2551,7 +2417,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the maximum value in a sequence of nullable
         /// <see cref="System.Single" /> values.
         /// </summary>
-
         public static float? Max(this IEnumerable<float?> source)
         {
             CheckNotNull(source, "source");
@@ -2567,7 +2432,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the maximum nullable <see cref="System.Single" /> value.
         /// </summary>
-
         public static float? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
@@ -2579,7 +2443,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of <see cref="System.Double" /> values.
         /// </summary>
-
         public static double Sum(this IEnumerable<double> source)
         {
             CheckNotNull(source, "source");
@@ -2596,7 +2459,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static double Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double> selector
@@ -2608,7 +2470,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of <see cref="System.Double" /> values.
         /// </summary>
-
         public static double Average(this IEnumerable<double> source)
         {
             CheckNotNull(source, "source");
@@ -2634,7 +2495,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static double Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double> selector
@@ -2646,7 +2506,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of nullable <see cref="System.Double" /> values.
         /// </summary>
-
         public static double? Sum(this IEnumerable<double?> source)
         {
             CheckNotNull(source, "source");
@@ -2663,7 +2522,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static double? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
@@ -2675,7 +2533,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of nullable <see cref="System.Double" /> values.
         /// </summary>
-
         public static double? Average(this IEnumerable<double?> source)
         {
             CheckNotNull(source, "source");
@@ -2701,7 +2558,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static double? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
@@ -2714,7 +2570,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the minimum value in a sequence of nullable
         /// <see cref="System.Double" /> values.
         /// </summary>
-
         public static double? Min(this IEnumerable<double?> source)
         {
             CheckNotNull(source, "source");
@@ -2726,7 +2581,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the minimum nullable <see cref="System.Double" /> value.
         /// </summary>
-
         public static double? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
@@ -2739,7 +2593,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the maximum value in a sequence of nullable
         /// <see cref="System.Double" /> values.
         /// </summary>
-
         public static double? Max(this IEnumerable<double?> source)
         {
             CheckNotNull(source, "source");
@@ -2755,7 +2608,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the maximum nullable <see cref="System.Double" /> value.
         /// </summary>
-
         public static double? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
@@ -2767,7 +2619,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of <see cref="System.Decimal" /> values.
         /// </summary>
-
         public static decimal Sum(this IEnumerable<decimal> source)
         {
             CheckNotNull(source, "source");
@@ -2784,7 +2635,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static decimal Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal> selector
@@ -2805,7 +2655,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of <see cref="System.Decimal" /> values.
         /// </summary>
-
         public static decimal Average(this IEnumerable<decimal> source)
         {
             CheckNotNull(source, "source");
@@ -2831,7 +2680,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static decimal Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal> selector
@@ -2843,7 +2691,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the sum of a sequence of nullable <see cref="System.Decimal" /> values.
         /// </summary>
-
         public static decimal? Sum(this IEnumerable<decimal?> source)
         {
             CheckNotNull(source, "source");
@@ -2860,7 +2707,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// values that are obtained by invoking a transform function on
         /// each element of the input sequence.
         /// </summary>
-
         public static decimal? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
@@ -2872,7 +2718,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Computes the average of a sequence of nullable <see cref="System.Decimal" /> values.
         /// </summary>
-
         public static decimal? Average(this IEnumerable<decimal?> source)
         {
             CheckNotNull(source, "source");
@@ -2898,7 +2743,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// that are obtained by invoking a transform function on each
         /// element of the input sequence.
         /// </summary>
-
         public static decimal? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
@@ -2911,7 +2755,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the minimum value in a sequence of nullable
         /// <see cref="System.Decimal" /> values.
         /// </summary>
-
         public static decimal? Min(this IEnumerable<decimal?> source)
         {
             CheckNotNull(source, "source");
@@ -2923,7 +2766,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the minimum nullable <see cref="System.Decimal" /> value.
         /// </summary>
-
         public static decimal? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
@@ -2936,7 +2778,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Returns the maximum value in a sequence of nullable
         /// <see cref="System.Decimal" /> values.
         /// </summary>
-
         public static decimal? Max(this IEnumerable<decimal?> source)
         {
             CheckNotNull(source, "source");
@@ -2952,7 +2793,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Invokes a transform function on each element of a sequence and
         /// returns the maximum nullable <see cref="System.Decimal" /> value.
         /// </summary>
-
         public static decimal? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
@@ -2970,7 +2810,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Gets the key of the <see cref="IGrouping{TKey,TElement}" />.
         /// </summary>
-
         TKey Key { get; }
     }
 
@@ -2995,7 +2834,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Performs a subsequent ordering on the elements of an
         /// <see cref="IOrderedEnumerable{T}"/> according to a key.
         /// </summary>
-
         IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey>(
             Func<TElement, TKey> keySelector,
             IComparer<TKey> comparer,
@@ -3029,13 +2867,11 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Gets the number of key/value collection pairs in the <see cref="Lookup{TKey,TElement}" />.
         /// </summary>
-
         public int Count => _map.Count;
 
         /// <summary>
         /// Gets the collection of values indexed by the specified key.
         /// </summary>
-
         public IEnumerable<TElement> this[TKey key]
         {
             get
@@ -3048,7 +2884,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Determines whether a specified key is in the <see cref="Lookup{TKey,TElement}" />.
         /// </summary>
-
         public bool Contains(TKey key)
         {
             return _map.ContainsKey(key);
@@ -3058,7 +2893,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// Applies a transform function to each key and its associated
         /// values and returns the results.
         /// </summary>
-
         public IEnumerable<TResult> ApplyResultSelector<TResult>(
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
         )
@@ -3073,7 +2907,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// <summary>
         /// Returns a generic enumerator that iterates through the <see cref="Lookup{TKey,TElement}" />.
         /// </summary>
-
         public IEnumerator<IGrouping<TKey, TElement>> GetEnumerator()
         {
             return _map.Values.GetEnumerator();
@@ -3188,7 +3021,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// for why this method is needed and cannot be expressed as a
         /// lambda at the call site.
         /// </remarks>
-
         private static Tuple<T, int> TagPosition(T e, int i)
         {
             return new Tuple<T, int>(e, i);
@@ -3199,7 +3031,6 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         /// for why this method is needed and cannot be expressed as a
         /// lambda at the call site.
         /// </remarks>
-
         private static T GetFirst(Tuple<T, int> pv)
         {
             return pv.First;
@@ -3289,7 +3120,6 @@ namespace System.Runtime.CompilerServices
     /// column in <a href="http://msdn.microsoft.com/msdnmag/">MSDN Magazine</a>,
     /// issue <a href="http://msdn.microsoft.com/en-us/magazine/cc135410.aspx">Nov 2007</a>.
     /// </remarks>
-
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
     internal sealed class ExtensionAttribute : Attribute { }
 }

@@ -85,7 +85,6 @@ namespace System.Runtime.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         // We support the reflection format for generice type name.
         // The format is like:
         //

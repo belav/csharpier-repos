@@ -10,7 +10,6 @@ namespace Test.Sys.Drawing
     /// <summary>
     /// Summary description for Enums.
     /// </summary>
-
     [TestFixture]
     public class Enums
     {

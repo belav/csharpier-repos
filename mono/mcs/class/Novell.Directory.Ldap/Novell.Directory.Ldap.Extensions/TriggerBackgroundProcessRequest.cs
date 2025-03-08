@@ -54,7 +54,6 @@ namespace Novell.Directory.Ldap.Extensions
     ///    NULL
     ///
     /// </summary>
-
     public class TriggerBackgroundProcessRequest : LdapExtendedOperation
     {
         /// <summary> Constants used to refer to different Novell eDirectory

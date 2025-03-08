@@ -47,7 +47,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <paramref name="elementName"/> should be set to true if performing a recursive search.
         /// </summary>
         /// <returns>The task referrign to the element finding.</returns>
-
         public static async Task<IUIAutomationElement> FindAutomationElementAsync(
             string elementName,
             bool recursive = false

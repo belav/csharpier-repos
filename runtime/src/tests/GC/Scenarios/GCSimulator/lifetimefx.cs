@@ -41,7 +41,6 @@ namespace LifeTimeFX
     /// </summary>
     /// <param name="o"></param>
     /// <param name="index"></param>
-
     public interface ObjectContainer<T>
         where T : LifeTime
     {

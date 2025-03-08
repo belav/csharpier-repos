@@ -6,7 +6,6 @@
 /// Copyright (C) 2003, Duncan Mak,
 ///                     Ximian, Inc.
 ///
-
 using System;
 using System.Collections;
 using System.Globalization;

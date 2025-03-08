@@ -35,7 +35,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle ElementType
         {
             get { return _elementType; }
@@ -160,7 +159,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle Type
         {
             get { return _type; }
@@ -468,7 +466,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: ConstantByteValue, ConstantSByteValue, ConstantInt16Value, ConstantUInt16Value, ConstantInt32Value, ConstantUInt32Value, ConstantInt64Value, ConstantUInt64Value
-
         public Handle Value
         {
             get { return _value; }
@@ -477,7 +474,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _value;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle Type
         {
             get { return _type; }
@@ -2519,7 +2515,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: ConstantStringValue, ConstantReferenceValue
-
         public HandleCollection Value
         {
             get { return _value; }
@@ -3337,7 +3332,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: QualifiedMethod, MemberReference
-
         public Handle Constructor
         {
             get { return _constructor; }
@@ -3346,7 +3340,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _constructor;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
-
         public HandleCollection FixedArguments
         {
             get { return _fixedArguments; }
@@ -3471,7 +3464,6 @@ namespace Internal.Metadata.NativeFormat
         internal ConstantStringValueHandle _name;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle Type
         {
             get { return _type; }
@@ -3608,7 +3600,6 @@ namespace Internal.Metadata.NativeFormat
         internal FieldSignatureHandle _signature;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
-
         public Handle DefaultValue
         {
             get { return _defaultValue; }
@@ -3724,7 +3715,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle Type
         {
             get { return _type; }
@@ -3960,7 +3950,6 @@ namespace Internal.Metadata.NativeFormat
         internal ConstantStringValueHandle _name;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public HandleCollection Constraints
         {
             get { return _constraints; }
@@ -4071,7 +4060,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle Parent
         {
             get { return _parent; }
@@ -4087,7 +4075,6 @@ namespace Internal.Metadata.NativeFormat
         internal ConstantStringValueHandle _name;
 
         /// One of: MethodSignature, FieldSignature
-
         public Handle Signature
         {
             get { return _signature; }
@@ -4333,7 +4320,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: QualifiedMethod, MemberReference
-
         public Handle Method
         {
             get { return _method; }
@@ -4342,7 +4328,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _method;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public HandleCollection GenericTypeArguments
         {
             get { return _genericTypeArguments; }
@@ -4569,7 +4554,6 @@ namespace Internal.Metadata.NativeFormat
         internal int _genericParameterCount;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle ReturnType
         {
             get { return _returnType; }
@@ -4578,7 +4562,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _returnType;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public HandleCollection Parameters
         {
             get { return _parameters; }
@@ -4587,7 +4570,6 @@ namespace Internal.Metadata.NativeFormat
         internal HandleCollection _parameters;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public HandleCollection VarArgParameters
         {
             get { return _varArgParameters; }
@@ -4802,7 +4784,6 @@ namespace Internal.Metadata.NativeFormat
         internal bool _isOptional;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle ModifierType
         {
             get { return _modifierType; }
@@ -4811,7 +4792,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _modifierType;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle Type
         {
             get { return _type; }
@@ -4929,7 +4909,6 @@ namespace Internal.Metadata.NativeFormat
         internal ConstantStringValueHandle _name;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle Type
         {
             get { return _type; }
@@ -4938,7 +4917,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _type;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
-
         public Handle Value
         {
             get { return _value; }
@@ -5042,7 +5020,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: NamespaceDefinition, ScopeDefinition
-
         public Handle ParentScopeOrNamespace
         {
             get { return _parentScopeOrNamespace; }
@@ -5174,7 +5151,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: NamespaceReference, ScopeReference
-
         public Handle ParentScopeOrNamespace
         {
             get { return _parentScopeOrNamespace; }
@@ -5306,7 +5282,6 @@ namespace Internal.Metadata.NativeFormat
         internal ConstantStringValueHandle _name;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
-
         public Handle DefaultValue
         {
             get { return _defaultValue; }
@@ -5415,7 +5390,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle Type
         {
             get { return _type; }
@@ -5547,7 +5521,6 @@ namespace Internal.Metadata.NativeFormat
         internal MethodSemanticsHandleCollection _methodSemantics;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
-
         public Handle DefaultValue
         {
             get { return _defaultValue; }
@@ -5663,7 +5636,6 @@ namespace Internal.Metadata.NativeFormat
         internal CallingConventions _callingConvention;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle Type
         {
             get { return _type; }
@@ -5672,7 +5644,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _type;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public HandleCollection Parameters
         {
             get { return _parameters; }
@@ -5994,7 +5965,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public Handle ElementType
         {
             get { return _elementType; }
@@ -6463,7 +6433,6 @@ namespace Internal.Metadata.NativeFormat
         internal TypeAttributes _flags;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle BaseType
         {
             get { return _baseType; }
@@ -6549,7 +6518,6 @@ namespace Internal.Metadata.NativeFormat
         internal GenericParameterHandleCollection _genericParameters;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public HandleCollection Interfaces
         {
             get { return _interfaces; }
@@ -6776,7 +6744,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification
-
         public Handle GenericType
         {
             get { return _genericType; }
@@ -6785,7 +6752,6 @@ namespace Internal.Metadata.NativeFormat
         internal Handle _genericType;
 
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
-
         public HandleCollection GenericTypeArguments
         {
             get { return _genericTypeArguments; }
@@ -6891,7 +6857,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: NamespaceReference, TypeReference
-
         public Handle ParentNamespaceOrType
         {
             get { return _parentNamespaceOrType; }
@@ -7002,7 +6967,6 @@ namespace Internal.Metadata.NativeFormat
         } // Handle
 
         /// One of: TypeDefinition, TypeReference, TypeInstantiationSignature, SZArraySignature, ArraySignature, PointerSignature, FunctionPointerSignature, ByReferenceSignature, TypeVariableSignature, MethodTypeVariableSignature
-
         public Handle Signature
         {
             get { return _signature; }

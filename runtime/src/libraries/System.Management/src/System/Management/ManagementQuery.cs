@@ -2173,7 +2173,6 @@ namespace System.Management
     /// End Class
     ///    </code>
     /// </example>
-
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//
     public class RelationshipQuery : WqlObjectQuery
     {

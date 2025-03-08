@@ -37,7 +37,6 @@ namespace System.Collections.Generic
     /// to the position within the array of ints.
     ///
     ///
-
     unsafe internal class BitHelper
     { // should not be serialized
         private const byte MarkedBitFlag = 1;

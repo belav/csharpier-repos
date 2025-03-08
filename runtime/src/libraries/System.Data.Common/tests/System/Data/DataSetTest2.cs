@@ -3511,7 +3511,6 @@ namespace System.Data.Tests
         ///        </xs:complexType>
         ///    </xs:element>
         ///</xs:schema>
-
         [Fact]
         public void ParentDataTableSchema()
         {

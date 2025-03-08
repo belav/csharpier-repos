@@ -4992,7 +4992,6 @@ namespace System.Diagnostics.Tracing
         /// Sends an error message to the debugger (outputDebugString), as well as the EventListeners
         /// It will do this even if the EventSource is not enabled.
         ///
-
         [SuppressMessage(
             "Microsoft.Concurrency",
             "CA8001",

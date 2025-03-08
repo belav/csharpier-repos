@@ -1988,7 +1988,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>Takes a byte array or an open file stream and writes it to a server</para>
         /// </devdoc>
-
         private void UploadBits(
             WebRequest request,
             Stream readStream,

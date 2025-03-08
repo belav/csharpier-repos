@@ -1404,7 +1404,6 @@ namespace MonoTests.System.Web.UI.WebControls
         /// <summary>
         /// EVENTS
         /// </summary>
-
         [Test]
         public void Wizard_ActiveStepChanged()
         {
@@ -1574,7 +1573,6 @@ namespace MonoTests.System.Web.UI.WebControls
         /// <summary>
         /// Rendering
         /// </summary>
-
         [Test]
         [Category("NunitWeb")]
         public void Wizard_RenderTest()
@@ -2282,7 +2280,6 @@ namespace MonoTests.System.Web.UI.WebControls
         /// <summary>
         /// Exceptions
         /// </summary>
-
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
         public void Wizard_ViewStateException()

@@ -9,7 +9,6 @@ namespace System.Net.Mime
     /// Summary description for EmbeddedMessagePart.
     /// </summary>
     ///
-
     /*
     // Consider removing.
     internal class MimeEmbeddedMessagePart:MimePart

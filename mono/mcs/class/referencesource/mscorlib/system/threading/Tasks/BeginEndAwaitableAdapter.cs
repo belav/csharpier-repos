@@ -6,7 +6,6 @@
 /// <owner>Microsoft</owner>
 /// <owner>gpaperin</owner>
 ///----------- ----------- ----------- ----------- ----------- -----------
-
 using System;
 using System.Diagnostics.Contracts;
 using System.IO;

@@ -26,7 +26,6 @@ namespace System.Runtime.InteropServices
         }
 
         /// External functions that implement the NativeLibrary interface
-
         [LibraryImport(
             RuntimeHelpers.QCall,
             EntryPoint = "NativeLibrary_LoadFromPath",

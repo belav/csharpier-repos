@@ -10,7 +10,6 @@
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
 /// </license>
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -23,7 +22,6 @@ namespace SciMark2
     /// sparse matrix computations, Jacobi SOR, and dense LU matrix
     /// factorizations.
     /// </summary>
-
     public class CommandLine
     {
         [Fact]

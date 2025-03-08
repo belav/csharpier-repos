@@ -32,7 +32,6 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         bool AllowEdit { get; }
 
         /// <devdoc>
@@ -43,25 +42,21 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         bool SupportsChangeNotification { get; }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         bool SupportsSearching { get; }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         bool SupportsSorting { get; }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         bool IsSorted { get; }
 
         /// <devdoc>
@@ -77,13 +72,11 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         event ListChangedEventHandler ListChanged;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         void AddIndex(PropertyDescriptor property);
 
         /// <devdoc>

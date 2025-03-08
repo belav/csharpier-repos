@@ -8,7 +8,6 @@
 /// Copyright (C) 2003, Duncan Mak,
 ///                     Ximian, Inc.
 ///
-
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;

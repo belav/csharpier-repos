@@ -639,7 +639,6 @@ namespace System.Net
         ///       class.
         ///    </para>
         /// </devdoc>
-
         protected WebRequest()
         {
 #if !FEATURE_PAL

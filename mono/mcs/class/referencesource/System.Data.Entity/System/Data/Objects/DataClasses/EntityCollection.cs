@@ -25,7 +25,6 @@ namespace System.Data.Objects.DataClasses
     /// which can either be all entities of a particular type or
     /// entities participating in a particular relationship.
     /// </summary>
-
     [Serializable]
     public sealed class EntityCollection<TEntity> : RelatedEnd, ICollection<TEntity>, IListSource
         where TEntity : class

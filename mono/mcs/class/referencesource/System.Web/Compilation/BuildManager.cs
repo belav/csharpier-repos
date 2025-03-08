@@ -38,7 +38,6 @@ namespace System.Web.Compilation
     public sealed class BuildManager
     {
         /// Contants relating to generated assembly names
-
         // All generated assemblies start with this prefix
         internal const string AssemblyNamePrefix = "App_";
 

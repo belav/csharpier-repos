@@ -7,7 +7,6 @@
 ///is needed.  This is for headers such as subject and should NOT be
 ///used for email body
 /// </summary>
-
 //-----------------------------------------------------------------------------
 // <copyright file="HeaderQuotedPrintableStream.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.

@@ -251,7 +251,6 @@ namespace MonoTests.System.Web.UI.WebControls
         /// <summary>
         /// All this methods are delegates for running tests in host assembly.
         /// </summary>
-
         public static void DoTestDefaultRender(Page p)
         {
             LiteralControl lcb = new LiteralControl(HtmlDiff.BEGIN_TAG);

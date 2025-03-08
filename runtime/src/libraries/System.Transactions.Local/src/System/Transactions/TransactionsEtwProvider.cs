@@ -85,7 +85,6 @@ namespace System.Transactions
         /// The Transactions provider GUID is {8ac2d80a-1f1a-431b-ace4-bff8824aef0b}.
         /// </summary>
         ///
-
         internal static readonly TransactionsEtwProvider Log = new TransactionsEtwProvider();
 
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>

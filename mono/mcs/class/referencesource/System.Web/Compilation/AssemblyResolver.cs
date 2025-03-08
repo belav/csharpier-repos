@@ -715,7 +715,6 @@ namespace System.Web.Compilation
     }
 
     /// Adapted the following code from \\ddindex2\sources2\OrcasSP\vsproject\xmake\Shared\UnitTests
-
     internal class MockEngine : IBuildEngine
     {
         private List<BuildMessageEventArgs> messages = new List<BuildMessageEventArgs>();

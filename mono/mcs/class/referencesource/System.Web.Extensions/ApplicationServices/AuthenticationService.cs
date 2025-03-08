@@ -20,7 +20,6 @@ namespace System.Web.ApplicationServices
     ///     or custom authentication login in the Authenticating event. Also uses Forms.SetAuthCookie() or
     ///     custom cookie generation via the CreatingCookie event.
     /// </devdoc>
-
     [
         AspNetCompatibilityRequirements(
             RequirementsMode = AspNetCompatibilityRequirementsMode.Required

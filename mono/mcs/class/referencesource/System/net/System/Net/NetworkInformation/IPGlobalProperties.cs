@@ -37,11 +37,9 @@ namespace System.Net.NetworkInformation
         public abstract string DhcpScopeName { get; }
 
         /// Gets the domain in which the local computer is registered.
-
         public abstract string DomainName { get; }
 
         /// Gets the host name for the local computer.
-
         public abstract string HostName { get; }
 
         /// Gets a bool value that specifies whether the local computer is acting as a Windows Internet Name Service (WINS) proxy.
@@ -56,16 +54,13 @@ namespace System.Net.NetworkInformation
 
         /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local computer.
         /// Provides User Datagram Protocol (UDP) statistical data for the local computer.
-
         public abstract UdpStatistics GetUdpIPv4Statistics();
         public abstract UdpStatistics GetUdpIPv6Statistics();
 
         /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local computer.
-
         public abstract IcmpV4Statistics GetIcmpV4Statistics();
 
         /// Provides Internet Control Message Protocol (ICMP) version 6 statistical data for the local computer.
-
         public abstract IcmpV6Statistics GetIcmpV6Statistics();
 
         /// Provides Internet Protocol (IP) statistical data for the local computer.

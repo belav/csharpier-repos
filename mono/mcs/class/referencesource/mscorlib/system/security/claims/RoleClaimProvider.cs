@@ -18,7 +18,6 @@ namespace System.Security.Claims
     /// ClaimsIdentity has a property the holds this type.  Since it is internal, few checks are
     /// made on parameters.
     /// </summary>
-
     [System.Runtime.InteropServices.ComVisible(false)]
     internal class RoleClaimProvider
     {

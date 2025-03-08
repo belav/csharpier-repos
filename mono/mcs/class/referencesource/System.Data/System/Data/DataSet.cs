@@ -3773,7 +3773,6 @@ namespace System.Data
         ///    Resets the dataSet back to it's original state.  Subclasses should override
         ///    to restore back to it's original state.
         ///
-
         public virtual void Reset()
         {
             IntPtr hscp;

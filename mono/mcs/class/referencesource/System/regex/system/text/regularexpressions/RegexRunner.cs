@@ -27,7 +27,6 @@ namespace System.Text.RegularExpressions
     using System.Globalization;
 
     /// <internalonly/>
-
     //
 
 #if !SILVERLIGHT

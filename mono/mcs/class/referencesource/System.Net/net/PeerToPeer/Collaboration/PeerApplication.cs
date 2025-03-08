@@ -683,7 +683,6 @@ namespace System.Net.PeerToPeer.Collaboration
         /// <summary>
         /// This is made virtual so that derived types can be implemented correctly
         /// </summary>
-
         [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
         protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {

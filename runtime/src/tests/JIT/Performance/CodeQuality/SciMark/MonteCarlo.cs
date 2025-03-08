@@ -10,7 +10,6 @@
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
 /// </license>
-
 using System;
 
 namespace SciMark2
@@ -35,7 +34,6 @@ namespace SciMark2
     /// total # points
     /// </pre>
     /// </summary>
-
     public class MonteCarlo
     {
         internal const int SEED = 113;

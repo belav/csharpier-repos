@@ -27,7 +27,6 @@ namespace System.Workflow.ComponentModel.Design
     /// What did I change in this file
     /// 1. Eliminated the layout manager and introduced classes for WorkflowLayout and PrintPreviewLayout
     /// 2. Eliminated the event syncing of PageSetupData change. We call performlayout on the current designer service whenever the pagesetupdata changes
-
     /// Designer Features:
     /// Selection on click and thru drag rectangle
     /// Reconfigurable background
@@ -58,7 +57,6 @@ namespace System.Workflow.ComponentModel.Design
     /// starts at 0,0
     ///
     ///
-
     [ToolboxItem(false)]
     [ActivityDesignerTheme(typeof(AmbientTheme), Xml = WorkflowView.ThemeXml)]
     [Obsolete(

@@ -1689,7 +1689,6 @@ namespace MonoTests.System.Web.UI.WebControls
         /// <summary>
         /// Helper methods
         /// </summary>
-
         private static bool event_checker;
 
         private static void Eventassert(string message)

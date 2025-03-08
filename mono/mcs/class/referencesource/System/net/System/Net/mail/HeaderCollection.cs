@@ -8,7 +8,6 @@ namespace System.Net.Mime
     /// <summary>
     /// Summary description for HeaderCollection.
     /// </summary>
-
     internal class HeaderCollection : NameValueCollection
     {
         MimeBasePart part = null;

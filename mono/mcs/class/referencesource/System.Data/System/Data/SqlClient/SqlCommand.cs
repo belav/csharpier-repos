@@ -7823,7 +7823,6 @@ namespace System.Data.SqlClient
         /// This function constructs a string parameter containing the exec statement in the following format
         /// N'EXEC sp_name @param1=@param1, @param1=@param2, ..., @paramN=@paramN'
         ///
-
         private SqlParameter BuildStoredProcedureStatementForColumnEncryption(
             string storedProcedureName,
             SqlParameter[] parameters

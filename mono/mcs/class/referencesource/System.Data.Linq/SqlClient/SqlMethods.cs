@@ -122,7 +122,6 @@ namespace System.Data.Linq.SqlClient
         /// <param name="startDate">Starting date for the calculation.</param>
         /// <param name="endDate">Ending date for the calculation.</param>
         /// <returns>Number of month boundaries crossed between the dates.</returns>
-
         public static int? DateDiffMonth(DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
             if (startDate.HasValue && endDate.HasValue)
@@ -316,7 +315,6 @@ namespace System.Data.Linq.SqlClient
         /// <param name="startDate">Starting date for the calculation.</param>
         /// <param name="endDate">Ending date for the calculation.</param>
         /// <returns>Number of minute boundaries crossed between the dates.</returns>
-
         public static int? DateDiffMinute(DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
             if (startDate.HasValue && endDate.HasValue)
@@ -382,7 +380,6 @@ namespace System.Data.Linq.SqlClient
         /// <param name="startDate">Starting date for the calculation.</param>
         /// <param name="endDate">Ending date for the calculation.</param>
         /// <returns>Number of second boundaries crossed between the dates.</returns>
-
         public static int? DateDiffSecond(DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
             if (startDate.HasValue && endDate.HasValue)
@@ -450,7 +447,6 @@ namespace System.Data.Linq.SqlClient
         /// <param name="startDate">Starting date for the calculation.</param>
         /// <param name="endDate">Ending date for the calculation.</param>
         /// <returns>Number of millisecond boundaries crossed between the dates.</returns>
-
         public static int? DateDiffMillisecond(DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
             if (startDate.HasValue && endDate.HasValue)
@@ -516,7 +512,6 @@ namespace System.Data.Linq.SqlClient
         /// <param name="startDate">Starting date for the calculation.</param>
         /// <param name="endDate">Ending date for the calculation.</param>
         /// <returns>Number of microsecond boundaries crossed between the dates.</returns>
-
         public static int? DateDiffMicrosecond(DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
             if (startDate.HasValue && endDate.HasValue)

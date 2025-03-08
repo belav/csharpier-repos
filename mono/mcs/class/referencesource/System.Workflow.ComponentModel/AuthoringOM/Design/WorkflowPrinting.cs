@@ -23,7 +23,6 @@ namespace System.Workflow.ComponentModel.Design
     /// 4. Eliminated the PageSetupDataChanged event.
     /// 5. Initialized all the member variables appropriately.
     /// 6. Eliminated unused functions and properties
-
     [ToolboxItem(false)]
     internal sealed class WorkflowPrintDocument : PrintDocument
     {

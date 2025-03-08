@@ -53,7 +53,6 @@ namespace System.ComponentModel.Design
         /// <devdoc>
         ///    <para>Gets a value indicating whether the component is currently selected.</para>
         /// </devdoc>
-
         bool GetComponentSelected(object component);
 
         /// <devdoc>

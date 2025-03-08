@@ -62,7 +62,6 @@ namespace ILCompiler.DependencyAnalysisFramework
         /// This event is triggered when the algorithm requires that dependencies of some set of
         /// nodes be computed.
         /// </summary>
-
         public abstract event Action<
             List<DependencyNodeCore<DependencyContextType>>
         > ComputeDependencyRoutine;

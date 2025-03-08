@@ -660,7 +660,6 @@ function ValidatorOnSubmit() {
         ///    <para>Checks the client brower and configures the
         ///       validator for compatibility prior to rendering. </para>
         /// </devdoc>
-
         protected internal override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);

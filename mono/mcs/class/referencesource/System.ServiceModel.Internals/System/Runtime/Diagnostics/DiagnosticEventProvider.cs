@@ -267,7 +267,6 @@ namespace System.Runtime.Diagnostics
         /// <param name="dataDescriptor">pointer to the descriptor to be filled</param>
         /// <param name="dataBuffer">storage buffer for storing user data, needed because cant get the address of the object</param>
         /// <returns>null if the object is a basic type other than string. String otherwise</returns>
-
         [SecurityCritical]
         static unsafe string EncodeObject(
             ref object data,

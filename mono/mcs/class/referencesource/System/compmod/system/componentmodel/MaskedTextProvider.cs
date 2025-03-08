@@ -39,7 +39,6 @@ namespace System.ComponentModel
         ///                       other info.
         ///  'string descriptor': An array of char descriptor objects describing the chars in the 'test string',
         ///                       the indexes of this array represent the position of the chars in the string.
-
         /// <devdoc>
         ///     Char case conversion type used when '>' (subsequent chars to upper case) or '<' (subsequent chars to lower case)
         ///     are specified in the mask.

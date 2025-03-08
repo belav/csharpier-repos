@@ -17,7 +17,6 @@ namespace System.Data.Common
     /// This class defines the data strucutre for ActvitiyId used for correlated tracing between client (bid trace event) and server (XEvent).
     /// It also includes all the APIs used to access the ActivityId. Note: ActivityId is thread based which is stored in TLS.
     /// </summary>
-
     internal static class ActivityCorrelator
     {
         internal const Bid.ApiGroup CorrelationTracePoints = Bid.ApiGroup.Correlation;

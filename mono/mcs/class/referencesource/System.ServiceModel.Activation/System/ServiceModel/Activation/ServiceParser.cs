@@ -164,7 +164,6 @@ namespace System.ServiceModel.Activation
 
         /// <summary>
         /// </summary>
-
         // various getters for private objects that the build
         // provider will need
         //

@@ -4125,7 +4125,6 @@ namespace MonoTests.System.Data
         ///		</xs:complexType>
         ///	</xs:element>
         ///</xs:schema>
-
         [Test]
         public void ParentDataTableSchema()
         {

@@ -133,7 +133,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// <summary>
         /// Validates this element and its children
         /// </summary>
-
         internal virtual void Validate() { }
 
         /// <summary>

@@ -334,7 +334,6 @@ namespace System.Xml.RwFactoryWriterTests
     /// <summary>
     /// CustomReader which wraps Factory created reader.
     /// </summary>
-
     public class CustomReader : XmlReader
     {
         private XmlReader _tr = null;

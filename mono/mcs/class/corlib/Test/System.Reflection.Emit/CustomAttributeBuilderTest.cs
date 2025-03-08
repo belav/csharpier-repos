@@ -29,7 +29,6 @@ namespace MonoTests.System.Reflection.Emit
     /// For testing constructors we have use 4 different test functions,
     /// Various exceptions have been checked for 4th type of consturctor.
     /// </summary>
-
     [TestFixture]
     public class CustomAttributeBuilderTest
     {

@@ -10,7 +10,6 @@ namespace Test.Sys.Drawing
     /// <summary>
     /// Summary description for Pens.
     /// </summary>
-
     [TestFixture]
     public class BrushesFixture
     {

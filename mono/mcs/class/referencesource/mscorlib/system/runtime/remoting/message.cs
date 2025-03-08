@@ -5014,7 +5014,6 @@ namespace System.Runtime.Remoting.Messaging
         }
 
         /// <internalonly/>
-
         [System.Security.SecurityCritical]
         void IInternalMessage.SetCallContext(LogicalCallContext newCallContext)
         {

@@ -150,7 +150,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// processor. We encode the special characters in these strings
         /// before writing them here.
         /// </remarks>
-
         private static void EncodeString(StringBuilder builder, string value)
         {
             foreach (var c in value)

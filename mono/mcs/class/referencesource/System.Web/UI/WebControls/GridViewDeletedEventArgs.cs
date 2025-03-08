@@ -16,7 +16,6 @@ namespace System.Web.UI.WebControls
     /// <devdoc>
     /// <para>Provides data for some <see cref='System.Web.UI.WebControls.GridView'/> events.</para>
     /// </devdoc>
-
     public class GridViewDeletedEventArgs : EventArgs
     {
         private int _affectedRows;

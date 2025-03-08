@@ -652,7 +652,6 @@ namespace System.Net.NetworkInformation
     /// <summary>
     ///   Wrapper for API's in iphlpapi.dll
     /// </summary>
-
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal static class UnsafeNetInfoNativeMethods
     {

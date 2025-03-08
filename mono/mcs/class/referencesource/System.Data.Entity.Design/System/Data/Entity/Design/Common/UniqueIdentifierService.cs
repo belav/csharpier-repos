@@ -18,7 +18,6 @@ namespace System.Data.Entity.Design.Common
     /// for every scope.
     ///
     ///
-
     internal sealed class UniqueIdentifierService
     {
         internal UniqueIdentifierService(bool caseSensitive)

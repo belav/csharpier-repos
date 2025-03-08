@@ -171,7 +171,6 @@ namespace System.Web.Caching
     ///       application domain remains active. Information about an instance of this class
     ///       is available through the <see langword='Cache'/> property of the System.Web.HttpContext.</para>
     /// </devdoc>
-
     //
     // Extra notes:
     // - The Cache object contains a ICacheStore object and wraps it for public consumption.

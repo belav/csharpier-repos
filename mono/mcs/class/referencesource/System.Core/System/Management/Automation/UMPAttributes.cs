@@ -20,7 +20,6 @@ namespace System.Management.Instrumentation
     ///
     /// </summary>
     ///
-
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public sealed class ManagementEntityAttribute : Attribute
@@ -74,7 +73,6 @@ namespace System.Management.Instrumentation
     /// <remarks>
     /// WMI is able to deal with Decoupled and Hosted providers.
     /// UserHosted for component loaded inproc to the client is not allowed for .NET extension providers.
-
     public enum ManagementHostingModel
     {
         Decoupled,
@@ -416,7 +414,6 @@ namespace System.Management.Instrumentation
         /// type System.Object.
         /// </summary>
         ///
-
         public ManagementConfigurationAttribute()
         {
             updateMode = ManagementConfigurationType.Apply;

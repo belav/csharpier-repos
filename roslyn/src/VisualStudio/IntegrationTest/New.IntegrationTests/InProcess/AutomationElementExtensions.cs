@@ -297,7 +297,6 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         /// Given an <see cref="IUIAutomationElement"/>, returns a descendent following the <paramref name="path"/>.
         /// Throws an <see cref="InvalidOperationException"/> if no such descendant is found.
         /// </summary>
-
         public static IUIAutomationElement FindDescendantByPath(
             this IUIAutomationElement element,
             string path

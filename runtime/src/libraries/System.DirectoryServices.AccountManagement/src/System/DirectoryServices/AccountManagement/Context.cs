@@ -639,7 +639,6 @@ namespace System.DirectoryServices.AccountManagement
         /// Validate the passed credentials against the directory supplied.
         /// This function will use the best determined method to do the evaluation.
         /// </summary>
-
         public bool ValidateCredentials(string userName, string password)
         {
             CheckDisposed();

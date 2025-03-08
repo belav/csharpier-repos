@@ -1105,7 +1105,6 @@ namespace Mono.CSharp
     ///   by checking whether the returned value is of type
     ///   NoValueSet.
     /// </remarks>
-
     public delegate void CompiledMethod(ref object retvalue);
 
     /// <summary>

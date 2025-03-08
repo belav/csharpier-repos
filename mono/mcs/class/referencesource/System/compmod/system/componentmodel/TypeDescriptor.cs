@@ -4064,7 +4064,6 @@ namespace System.ComponentModel
             ///     Implements GetTypeDescriptor.  This creates a custom type
             ///     descriptor that walks the linked list for each of its calls.
             /// </devdoc>
-
             [SuppressMessage(
                 "Microsoft.Globalization",
                 "CA1303:DoNotPassLiteralsAsLocalizedParameters"
@@ -4656,7 +4655,6 @@ namespace System.ComponentModel
             ///     Implements GetTypeDescriptor.  This creates a custom type
             ///     descriptor that walks the linked list for each of its calls.
             /// </devdoc>
-
             [SuppressMessage(
                 "Microsoft.Globalization",
                 "CA1303:DoNotPassLiteralsAsLocalizedParameters"

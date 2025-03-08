@@ -5,7 +5,6 @@
 ///
 /// <owner>gpaperin</owner>
 ///----------- ----------- ----------- ----------- ----------- -----------
-
 #if !SILVERLIGHT
 
 using System;

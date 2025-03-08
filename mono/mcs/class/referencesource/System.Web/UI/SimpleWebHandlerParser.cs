@@ -89,7 +89,6 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         // Only allowed in full trust (ASURT 124397)
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         protected SimpleWebHandlerParser(
@@ -632,7 +631,6 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         // Only allowed in full trust (ASURT 123890)
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         public static Type GetCompiledType(string inputFile, HttpContext context)

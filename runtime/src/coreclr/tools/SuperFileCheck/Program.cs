@@ -464,7 +464,6 @@ namespace SuperFileCheck
         /// <summary>
         /// Runs SuperFileCheck logic.
         /// </summary>
-
         static async Task<FileCheckResult> RunSuperFileCheckAsync(
             MethodDeclarationInfo methodDeclInfo,
             string[] args,

@@ -13,7 +13,6 @@ namespace System.Configuration.Provider
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-
     public class ProviderCollection : IEnumerable, ICollection //, ICloneable
     {
         private Hashtable _Hashtable = null;

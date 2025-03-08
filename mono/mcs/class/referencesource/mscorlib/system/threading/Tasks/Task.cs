@@ -970,7 +970,6 @@ namespace System.Threading.Tasks
         /// Captures the ExecutionContext so long as flow isn't suppressed.
         /// </summary>
         /// <param name="stackMark">A stack crawl mark pointing to the frame of the caller.</param>
-
         [SecuritySafeCritical]
         internal void PossiblyCaptureContext(ref StackCrawlMark stackMark)
         {

@@ -45,7 +45,6 @@ namespace MonoTests.SystemWeb.Framework
         ///	WebTest.CurrentTest.UserData = "Was here";
         /// }
         /// </example>
-
         public object UserData
         {
             get { return _userData; }

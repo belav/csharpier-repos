@@ -7,7 +7,6 @@ using System.Reflection.Emit;
 ///<summary>
 ///System.Reflection.Emit.OpCodes.Tailcall [v-zuolan]
 ///</summary>
-
 public class OpCodesTailcall
 {
     public static int Main()

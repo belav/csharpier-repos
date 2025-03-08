@@ -1332,7 +1332,6 @@ namespace System.Linq
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1368,7 +1367,6 @@ namespace System.Linq
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         ///
-
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -1408,7 +1406,6 @@ namespace System.Linq
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         ///
-
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
@@ -1444,7 +1441,6 @@ namespace System.Linq
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         ///
-
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this OrderedParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,

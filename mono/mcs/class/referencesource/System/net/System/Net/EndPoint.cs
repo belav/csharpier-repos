@@ -25,7 +25,6 @@ namespace System.Net
         ///       Returns the Address Family to which the EndPoint belongs.
         ///    </para>
         /// </devdoc>
-
         public virtual AddressFamily AddressFamily
         {
             get { throw ExceptionHelper.PropertyNotImplementedException; }

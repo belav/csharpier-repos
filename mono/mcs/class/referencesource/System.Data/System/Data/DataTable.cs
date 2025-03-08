@@ -3478,7 +3478,6 @@ namespace System.Data
         ///    <para>
         ///       Clears the table of all data.</para>
         /// </devdoc>
-
         public void Clear()
         {
             Clear(true);

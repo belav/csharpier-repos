@@ -179,7 +179,6 @@ namespace System.Runtime.Remoting.Channels
         Object Pop(IServerChannelSink sink);
 
         /// <internalonly/>
-
         // IMPORTANT: If a sink did a Push(), it must do a Pop()
         //   before calling GetResponseStream inside of ProcessMessage.
 
@@ -189,14 +188,12 @@ namespace System.Runtime.Remoting.Channels
         void Store(IServerChannelSink sink, Object state);
 
         /// <internalonly/>
-
         // Called by the server transport sink to complete the dispatch, if async
         //   processing is being used.
         [System.Security.SecurityCritical] // auto-generated_required
         void StoreAndDispatch(IServerChannelSink sink, Object state);
 
         /// <internalonly/>
-
         // handles callback after message has been dispatched asynchronously
         [System.Security.SecurityCritical] // auto-generated_required
         void ServerCallback(IAsyncResult ar);

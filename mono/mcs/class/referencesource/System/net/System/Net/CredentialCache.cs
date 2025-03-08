@@ -413,7 +413,6 @@ namespace System.Net
         /// <devdoc>
         ///    [To be supplied]
         /// </devdoc>
-
         //
         // IEnumerable interface
         //

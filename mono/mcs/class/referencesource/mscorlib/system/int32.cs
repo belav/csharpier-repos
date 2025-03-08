@@ -449,7 +449,6 @@ namespace System
         ///            }
         ///        }
         ///#endif // #if GENERICS_WORK
-
 #if MONO
         public bool TryFormat(
             Span<char> destination,
