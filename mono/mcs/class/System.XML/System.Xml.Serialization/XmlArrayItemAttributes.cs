@@ -36,7 +36,6 @@ namespace System.Xml.Serialization
     /// <summary>
     /// Summary description for XmlArrayItemAttributes.
     /// </summary>
-
     public class XmlArrayItemAttributes : CollectionBase
     {
         public XmlArrayItemAttribute this[int index]

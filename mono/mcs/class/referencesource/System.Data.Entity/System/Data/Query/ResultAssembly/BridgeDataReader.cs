@@ -664,7 +664,6 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-
         override public int GetOrdinal(string name)
         {
             AssertReaderIsOpen("GetOrdinal");

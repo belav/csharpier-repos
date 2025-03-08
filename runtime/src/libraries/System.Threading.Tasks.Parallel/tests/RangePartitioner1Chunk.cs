@@ -157,7 +157,6 @@ namespace System.Threading.Tasks.Tests
         /// <summary>
         /// Verify that the enumerators used while executing the ParalleForEach over the partitioner are disposed
         /// </summary>
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void PFEDisposeEnum()
         {

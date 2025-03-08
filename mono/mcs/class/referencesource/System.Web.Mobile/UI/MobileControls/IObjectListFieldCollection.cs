@@ -41,11 +41,9 @@ namespace System.Web.UI.MobileControls
         ObjectListField[] GetAll();
 
         /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.this"]/*' />
-
         ObjectListField this[int index] { get; }
 
         /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.IndexOf"]/*' />
-
         int IndexOf(ObjectListField field);
 
         /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.IndexOf1"]/*' />

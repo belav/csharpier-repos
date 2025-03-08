@@ -1270,7 +1270,6 @@ namespace System.Web
 
     /// <devdoc>
     /// </devdoc>
-
     // VSWhidbey 473228 - removed link demand from HttpUtility for ClickOnce scenario
     public sealed class HttpUtility
     {

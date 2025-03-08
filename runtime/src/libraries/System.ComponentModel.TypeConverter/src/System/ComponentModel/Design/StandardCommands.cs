@@ -231,7 +231,6 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Gets the GUID/integer value pair for the HorizSpaceMakeEqual command. Read only.
         /// </summary>
-
         public static readonly CommandID HorizSpaceMakeEqual = new CommandID(
             s_standardCommandSet,
             VSStandardCommands.cmdidHorizSpaceMakeEqual

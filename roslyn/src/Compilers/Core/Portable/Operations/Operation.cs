@@ -87,7 +87,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The source language of the IOperation. Possible values are <see cref="LanguageNames.CSharp"/> and <see cref="LanguageNames.VisualBasic"/>.
         /// </summary>
-
         public string Language
         {
             // It is an eventual goal to support analyzing IL. At that point, we'll need to detect a null

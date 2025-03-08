@@ -9649,7 +9649,6 @@ namespace System.Runtime.Intrinsics.Arm
             ///  uint8x16_t vqtbx2q_u8(uint8x16x2_t t, uint8x16_t idx)
             ///   A64: TBX Vd.16B, {Vn.16B, Vn+1.16B}, Vm.16B
             /// </summary>
-
             public static Vector128<byte> VectorTableLookupExtension(
                 Vector128<byte> defaultValues,
                 (Vector128<byte>, Vector128<byte>) table,

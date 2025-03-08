@@ -487,7 +487,6 @@ namespace System.Net
         ///       Defines the s_Policy for how to deal with server certificates.
         ///    </para>
         /// </devdoc>
-
         [Obsolete(
             "CertificatePolicy is obsoleted for this type, please use ServerCertificateValidationCallback instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]

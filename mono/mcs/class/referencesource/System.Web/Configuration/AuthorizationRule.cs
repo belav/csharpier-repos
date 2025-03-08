@@ -255,7 +255,6 @@ namespace System.Web.Configuration
         ///     <para>  Defines the action that needs to be taken if the rule is satisfied.
         ///     </para>
         /// </devdoc>
-
         //
         // No Configuration properties are set on this property because its supposed to be hidden to tools.
         //
@@ -275,7 +274,6 @@ namespace System.Web.Configuration
         ///     <para> Defines a list of verbs needed to satisfy the rule
         ///     </para>
         /// </devdoc>
-
         [ConfigurationProperty("verbs")]
         [TypeConverter(typeof(CommaDelimitedStringCollectionConverter))]
         public StringCollection Verbs
@@ -308,7 +306,6 @@ namespace System.Web.Configuration
         ///     <para> Defines a list of users authorized for this rule.
         ///     </para>
         /// </devdoc>
-
         [ConfigurationProperty("users")]
         [TypeConverter(typeof(CommaDelimitedStringCollectionConverter))]
         public StringCollection Users

@@ -53,7 +53,6 @@ namespace Novell.Directory.Ldap.Utilclass
     /// </summary>
     /// <seealso cref="RDN">
     /// </seealso>
-
     public class DN : System.Object
     {
         private void InitBlock()
@@ -561,7 +560,6 @@ namespace Novell.Directory.Ldap.Utilclass
         /// </param>
         /// <returns>  <code>true</code> if the character is a valid hex digit
         /// </returns>
-
         private static bool isHexDigit(char ch)
         {
             if (((ch < 58) && (ch > 47)) || ((ch < 71) && (ch > 64)) || ((ch < 103) && (ch > 96)))
@@ -608,7 +606,6 @@ namespace Novell.Directory.Ldap.Utilclass
         /// </param>
         /// <returns>  the character whose value is represented by the parameters.
         /// </returns>
-
         private static char hexToChar(char hex1, char hex0)
         {
             int result;
@@ -669,7 +666,6 @@ namespace Novell.Directory.Ldap.Utilclass
         /// <returns>  <code>true</code> if the DNs are equal; otherwise
         /// <code>false</code>
         /// </returns>
-
         public System.Collections.ArrayList getrdnList()
         {
             return this.rdnList;

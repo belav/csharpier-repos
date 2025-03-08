@@ -118,7 +118,6 @@ namespace System.Data
 
         /// <devdoc>
         ///
-
         private const int MaxPredicates = 100;
         internal ExpressionNode[] NodeStack = new ExpressionNode[MaxPredicates];
 
@@ -730,7 +729,6 @@ namespace System.Data
         ///     Builds expression tree for higher-precedence operator to be used as left
         ///     operand of current operator. May cause errors - always do ErrorCheck() upin return.
         /// </devdoc>
-
         private void BuildExpression(int pri)
         {
             ExpressionNode expr = null;
@@ -1301,7 +1299,6 @@ namespace System.Data
         ///     is the character a white space character?
         ///     Consider using CharacterInfo().IsWhiteSpace(ch) (System.Globalization)
         /// </devdoc>
-
         private bool IsWhiteSpace(char ch)
         {
             return ch <= 32 && ch != '\0';

@@ -48,7 +48,6 @@ namespace System.Diagnostics.Tracing
         /// If null, the name of the corresponding property will be used
         /// as the event field's name.
         ///
-
         internal string Name { get; set; }
 
         /// <summary>

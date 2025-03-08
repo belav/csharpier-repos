@@ -35,7 +35,6 @@ namespace System.Globalization
     ///     Gregorian   0622/07/18   9999/12/31
     ///     Hijri       0001/01/01   9666/04/03
     /// </remarks>
-
     public partial class HijriCalendar : Calendar
     {
         public static readonly int HijriEra = 1;

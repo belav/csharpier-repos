@@ -372,7 +372,6 @@ namespace System.Web.Services.Protocols
         ///       Allows to intercept XmlReader creation.
         ///    </para>
         /// </devdoc>
-
         [PermissionSet(
             SecurityAction.LinkDemand | SecurityAction.InheritanceDemand,
             Name = "FullTrust"

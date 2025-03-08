@@ -26,7 +26,6 @@ namespace System.Xml.Serialization
     /// <summary>
     /// TypeMember is immutable class which is used as a key in a Hashtable.
     /// </summary>
-
     internal sealed class TypeMember
     {
         Type type;

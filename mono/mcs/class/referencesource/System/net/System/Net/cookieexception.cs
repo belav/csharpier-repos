@@ -35,7 +35,6 @@ namespace System.Net
             : base(serializationInfo, streamingContext) { }
 
         /// <internalonly/>
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",

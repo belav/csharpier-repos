@@ -130,7 +130,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Fields used to fill area with gradient
         /// </summary>
-
         protected bool gradientFill = false;
 
         /// <summary>

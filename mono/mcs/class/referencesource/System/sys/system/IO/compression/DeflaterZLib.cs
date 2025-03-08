@@ -5,7 +5,6 @@
 ///
 /// <owner>gpaperin</owner>
 ///----------- ----------- ----------- ----------- ----------- ----------- -----------
-
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;

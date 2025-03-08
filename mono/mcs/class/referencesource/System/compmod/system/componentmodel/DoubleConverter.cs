@@ -21,7 +21,6 @@ namespace System.ComponentModel
     ///       converter to convert double-precision, floating point number objects to and from various
     ///       other representations.</para>
     /// </devdoc>
-
     [HostProtection(SharedState = true)]
     public class DoubleConverter : BaseNumberConverter
     {

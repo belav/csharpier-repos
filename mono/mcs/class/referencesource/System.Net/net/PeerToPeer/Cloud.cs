@@ -25,7 +25,6 @@ namespace System.Net.PeerToPeer
     /// This class is not sealed because there is no reason for it to be sealed.
     /// </remarks>
     /// <
-
     [Serializable]
     public class Cloud : ISerializable, IEquatable<Cloud>
     {

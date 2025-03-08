@@ -1005,7 +1005,6 @@ namespace System.Web
         ///       object for the previous handler;
         ///    </para>
         /// </devdoc>
-
         public IHttpHandler PreviousHandler
         {
             get

@@ -20,7 +20,6 @@ namespace System.Net
     ///    <para>Provides simple
     ///       domain name resolution functionality.</para>
     /// </devdoc>
-
     public static class Dns
     {
         //
@@ -196,7 +195,6 @@ namespace System.Net
         /// corresponding to the DNS name provided in the host
         /// parameter.</para>
         /// </devdoc>
-
         [Obsolete(
             "GetHostByName is obsoleted for this type, please use GetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -322,7 +320,6 @@ namespace System.Net
         /// <para>Creates an <see cref='System.Net.IPHostEntry'/>
         /// instance from an IP dotted address.</para>
         /// </devdoc>
-
         [Obsolete(
             "GetHostByAddress is obsoleted for this type, please use GetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -362,7 +359,6 @@ namespace System.Net
         /// <para>Creates an <see cref='System.Net.IPHostEntry'/> instance from an <see cref='System.Net.IPAddress'/>
         /// instance.</para>
         /// </devdoc>
-
         [Obsolete(
             "GetHostByAddress is obsoleted for this type, please use GetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -998,7 +994,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         [Obsolete(
             "EndGetHostByName is obsoleted for this type, please use EndGetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]

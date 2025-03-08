@@ -488,7 +488,6 @@ namespace Novell.Directory.Ldap.Controls
         /// <param name="afterCount">The number of entries after "listIndex" to be
         /// returned.
         /// </param>
-
         public virtual void setRange(System.String jumpTo, int beforeCount, int afterCount)
         {
             /* Save off the fields in local variables

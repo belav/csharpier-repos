@@ -196,7 +196,6 @@ namespace System.Net.NetworkInformation
         }
 
         /// Basic Properties
-
         public override string Id
         {
             get { return id; }

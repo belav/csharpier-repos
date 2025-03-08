@@ -35,7 +35,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
     /// <summary>
     ///   ApplicationCrmEnable Attribute for classes.
     /// </summary>
-
     [AttributeUsage(AttributeTargets.Assembly)]
     [ComVisible(false)]
     [ProgId("System.EnterpriseServices.Crm.ApplicationCrmEnabledAttribute")]

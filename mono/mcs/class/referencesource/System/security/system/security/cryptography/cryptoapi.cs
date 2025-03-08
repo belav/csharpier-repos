@@ -2145,7 +2145,6 @@ namespace System.Security.Cryptography
     /// </summary>
     ///
     ///-------------------------------------------------------------------------
-
     internal abstract class CAPINative : CAPIBase { }
 
     ///+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2174,7 +2173,6 @@ namespace System.Security.Cryptography
     /// </summary>
     ///
     ///-------------------------------------------------------------------------
-
     [SuppressUnmanagedCodeSecurityAttribute()]
     internal abstract class CAPISafe : CAPINative
     {
@@ -2704,7 +2702,6 @@ namespace System.Security.Cryptography
     /// </summary>
     ///
     ///-------------------------------------------------------------------------
-
     [SuppressUnmanagedCodeSecurityAttribute()]
     internal abstract class CAPIUnsafe : CAPISafe
     {
@@ -2999,7 +2996,6 @@ namespace System.Security.Cryptography
     /// </summary>
     ///
     ///-------------------------------------------------------------------------
-
     internal abstract class CAPIMethods : CAPIUnsafe { }
 
     ///+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -3013,7 +3009,6 @@ namespace System.Security.Cryptography
     /// </summary>
     ///
     ///-------------------------------------------------------------------------
-
     [SuppressMessage(
         "Microsoft.Performance",
         "CA1812:AvoidUninstantiatedInternalClasses",

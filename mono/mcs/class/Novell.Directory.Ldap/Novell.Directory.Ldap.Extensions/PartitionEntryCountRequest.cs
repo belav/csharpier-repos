@@ -91,7 +91,6 @@ namespace Novell.Directory.Ldap.Extensions
         /// <exception> LdapException A general exception which includes an
         /// error message and an Ldap error code.
         /// </exception>
-
         public PartitionEntryCountRequest(System.String dn)
             : base(ReplicationConstants.NAMING_CONTEXT_COUNT_REQ, null)
         {

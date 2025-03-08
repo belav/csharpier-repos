@@ -808,7 +808,6 @@ namespace System.Net
         /// <devdoc>
         ///     Removes the specified Connection group from the ServicePoint, destroys safe and unsafe groups, but not internal.
         /// </devdoc>
-
         public bool CloseConnectionGroup(string connectionGroupName)
         {
             GlobalLog.Enter(

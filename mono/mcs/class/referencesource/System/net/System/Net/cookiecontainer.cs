@@ -250,7 +250,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         //This method will construct faked URI, Domain property is required for param.
         public void Add(Cookie cookie)
         {
@@ -617,7 +616,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         // <
         public void Add(CookieCollection cookies)
         {
@@ -738,7 +736,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         public void Add(Uri uri, CookieCollection cookies)
         {
             if (uri == null)
@@ -1154,7 +1151,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         //<
 
         public void SetCookies(Uri uri, string cookieHeader)

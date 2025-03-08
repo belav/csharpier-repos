@@ -70,7 +70,6 @@ public struct TestGenericStruct<T>
 /// <summary>
 /// SizeOf(System.Object)
 /// </summary>
-
 [SecuritySafeCritical]
 public class MarshalSizeOf1
 {

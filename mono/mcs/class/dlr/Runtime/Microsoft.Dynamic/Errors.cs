@@ -40,7 +40,6 @@ namespace Microsoft.Scripting
     /// <summary>
     ///    Strongly-typed and parameterized string factory.
     /// </summary>
-
     internal static partial class Strings
     {
         /// <summary>
@@ -215,7 +214,6 @@ namespace Microsoft.Scripting
     /// <summary>
     ///    Strongly-typed and parameterized exception factory.
     /// </summary>
-
     internal static partial class Error
     {
         /// <summary>

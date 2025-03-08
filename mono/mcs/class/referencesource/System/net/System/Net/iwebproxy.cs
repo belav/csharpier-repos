@@ -19,7 +19,6 @@ namespace System.Net
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-
         Uri GetProxy(Uri destination);
 
         /// <devdoc>

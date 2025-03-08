@@ -224,7 +224,6 @@ namespace System.Text.RegularExpressions
         ///       between multiple threads.
         ///    </para>
         /// </devdoc>
-
 #if !SILVERLIGHT
 #if MONO_FEATURE_CAS
         [HostProtection(Synchronization = true)]

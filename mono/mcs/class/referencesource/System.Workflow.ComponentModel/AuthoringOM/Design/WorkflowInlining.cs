@@ -24,7 +24,6 @@
     /// <summary>
     /// Base class used to display inlined workflows. This class is for internal use.
     ///
-
     internal abstract class ActivityHostDesigner : SequentialActivityDesigner
     {
         #region Fields

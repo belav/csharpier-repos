@@ -101,7 +101,6 @@ namespace System.Net.Mail
         //
 
         /// <internalonly/>
-
         [SuppressMessage(
             "Microsoft.Security",
             "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",

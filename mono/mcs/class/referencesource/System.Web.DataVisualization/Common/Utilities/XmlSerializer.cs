@@ -1520,7 +1520,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// </summary>
         /// <param name="objectToSerialize">Object to be serialized.</param>
         /// <param name="stream">The stream used to write the XML document.</param>
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Performance",
             "CA1811:AvoidUncalledPrivateCode"
@@ -1584,7 +1583,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// </summary>
         /// <param name="objectToSerialize">Object to be serialized.</param>
         /// <param name="writer">Defines the serialization destination. Can be Stream, TextWriter, XmlWriter or String (file name).</param>
-
         internal override void Serialize(object objectToSerialize, object writer)
         {
             // the possible writer types

@@ -261,7 +261,6 @@ namespace System.Reflection.Emit
         ///    </para>
         /// </summary>
         /// <seealso topic='IL Instruction Set       Specification'/>
-
         private OpCodes() { }
 
         public static readonly OpCode Nop = new OpCode(

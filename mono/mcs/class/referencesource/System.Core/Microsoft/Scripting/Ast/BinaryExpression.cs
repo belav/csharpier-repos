@@ -1567,7 +1567,6 @@ namespace System.Linq.Expressions
         /// <param name="right">An <see cref="Expression"/> to set the <see cref="P:BinaryExpression.Right"/> property equal to.</param>
         /// <returns>A <see cref="BinaryExpression"/> that has the <see cref="P:Expression.NodeType"/> property equal to <see cref="F:ExpressionType.LessThan"/>
         /// and the <see cref="P:BinaryExpression.Left"/> and <see cref="P:BinaryExpression.Right"/> properties set to the specified values.</returns>
-
         public static BinaryExpression LessThan(Expression left, Expression right)
         {
             return LessThan(left, right, false, null);
@@ -2139,7 +2138,6 @@ namespace System.Linq.Expressions
         /// and the <see cref="P:BinaryExpression.Left"/>, <see cref="P:BinaryExpression.Right"/>, <see cref="P:BinaryExpression.Method"/>,
         /// and <see cref="P:BinaryExpression.Conversion"/> properties set to the specified values.
         /// </returns>
-
         public static BinaryExpression AddAssign(
             Expression left,
             Expression right,

@@ -6,7 +6,6 @@
 ///
 /// Copyright (C) 2003, Erik LeBel,
 ///
-
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
