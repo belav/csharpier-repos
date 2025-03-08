@@ -25,9 +25,11 @@ public class NorthwindKeylessEntitiesQueryInMemoryTest
 
     public override async Task KeylessEntity_with_included_nav(bool async) =>
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.KeylessEntity_with_included_nav(async));
+            base.KeylessEntity_with_included_nav(async)
+        );
 
     public override async Task KeylessEntity_with_included_navs_multi_level(bool async) =>
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.KeylessEntity_with_included_navs_multi_level(async));
+            base.KeylessEntity_with_included_navs_multi_level(async)
+        );
 }

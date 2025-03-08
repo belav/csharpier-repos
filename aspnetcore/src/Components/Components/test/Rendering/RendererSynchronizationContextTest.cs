@@ -246,7 +246,8 @@ public class RendererSynchronizationContextTest
                     Assert.True(e2.Wait(Timeout), "timeout");
                 },
                 null
-            ));
+            )
+        );
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
@@ -365,7 +366,8 @@ public class RendererSynchronizationContextTest
                     throw new InvalidTimeZoneException();
                 },
                 null
-            ));
+            )
+        );
     }
 
     [Fact]

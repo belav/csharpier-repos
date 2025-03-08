@@ -82,7 +82,8 @@ public class HeaderDictionaryTypeExtensionsTest
         context.Request.Headers["custom"] = "valid";
 
         Assert.Throws<NotSupportedException>(() =>
-            context.Request.GetTypedHeaders().Get<object>("custom"));
+            context.Request.GetTypedHeaders().Get<object>("custom")
+        );
     }
 
     [Fact]
@@ -166,7 +167,8 @@ public class HeaderDictionaryTypeExtensionsTest
         context.Request.Headers["custom"] = "valid";
 
         Assert.Throws<NotSupportedException>(() =>
-            context.Request.GetTypedHeaders().GetList<object>("custom"));
+            context.Request.GetTypedHeaders().GetList<object>("custom")
+        );
     }
 
     public class TestHeaderValue

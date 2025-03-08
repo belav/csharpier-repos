@@ -120,7 +120,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    alice.DeriveRawSecretAgreement(bobPublic));
+                    alice.DeriveRawSecretAgreement(bobPublic)
+                );
             }
         }
     }

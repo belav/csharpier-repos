@@ -109,17 +109,21 @@ public abstract class JsonSerializerApiValidation
     public async Task DeserializeNullException()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await Serializer.DeserializeWrapper<MyPoco>(json: "{}", jsonTypeInfo: null));
+            await Serializer.DeserializeWrapper<MyPoco>(json: "{}", jsonTypeInfo: null)
+        );
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await Serializer.DeserializeWrapper(json: "{}", type: null));
+            await Serializer.DeserializeWrapper(json: "{}", type: null)
+        );
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await Serializer.DeserializeWrapper(json: "{}", type: typeof(MyPoco), context: null));
+            await Serializer.DeserializeWrapper(json: "{}", type: typeof(MyPoco), context: null)
+        );
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             await Serializer.DeserializeWrapper(
                 json: "{}",
                 type: null,
                 context: new MyDummyContext()
-            ));
+            )
+        );
 
         if (!Serializer.SupportsNullValueOnDeserialize)
         {
@@ -128,16 +132,20 @@ public abstract class JsonSerializerApiValidation
                     json: null,
                     type: typeof(MyPoco),
                     context: new MyDummyContext()
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await Serializer.DeserializeWrapper(json: null, type: typeof(MyPoco)));
+                await Serializer.DeserializeWrapper(json: null, type: typeof(MyPoco))
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await Serializer.DeserializeWrapper<MyPoco>(json: null));
+                await Serializer.DeserializeWrapper<MyPoco>(json: null)
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                 await Serializer.DeserializeWrapper<MyPoco>(
                     json: null,
                     jsonTypeInfo: myDummyTypeInfo
-                ));
+                )
+            );
         }
     }
 
@@ -145,20 +153,24 @@ public abstract class JsonSerializerApiValidation
     public async Task SerializeNullException()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await Serializer.SerializeWrapper<MyPoco>(value: new MyPoco(), jsonTypeInfo: null));
+            await Serializer.SerializeWrapper<MyPoco>(value: new MyPoco(), jsonTypeInfo: null)
+        );
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await Serializer.SerializeWrapper(value: new MyPoco(), inputType: null));
+            await Serializer.SerializeWrapper(value: new MyPoco(), inputType: null)
+        );
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             await Serializer.SerializeWrapper(
                 value: new MyPoco(),
                 inputType: typeof(MyPoco),
                 context: null
-            ));
+            )
+        );
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             await Serializer.SerializeWrapper(
                 value: new MyPoco(),
                 inputType: null,
                 context: new MyDummyContext()
-            ));
+            )
+        );
     }
 }

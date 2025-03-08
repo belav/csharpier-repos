@@ -85,7 +85,8 @@ namespace System.IO.Tests
                         FileMode.Open,
                         FileAccess.Write,
                         FileShare.ReadWrite | FileShare.Delete
-                    ));
+                    )
+                );
             }
 
             // Then try the other way around
@@ -99,7 +100,8 @@ namespace System.IO.Tests
             )
             {
                 FSAssert.ThrowsSharingViolation(() =>
-                    CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.None));
+                    CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.None)
+                );
             }
         }
     }

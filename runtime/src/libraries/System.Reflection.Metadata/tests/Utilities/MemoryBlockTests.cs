@@ -890,15 +890,19 @@ namespace System.Reflection.Metadata.Tests
 
                 Assert.Equal(0x00ffffff, block.PeekReference(0, smallRefSize: false));
                 Assert.Throws<BadImageFormatException>(() =>
-                    block.PeekReference(4, smallRefSize: false));
+                    block.PeekReference(4, smallRefSize: false)
+                );
                 Assert.Throws<BadImageFormatException>(() =>
-                    block.PeekReference(16, smallRefSize: false));
+                    block.PeekReference(16, smallRefSize: false)
+                );
 
                 Assert.Equal(0x1fffffff, block.PeekHeapReference(8, smallRefSize: false));
                 Assert.Throws<BadImageFormatException>(() =>
-                    block.PeekHeapReference(12, smallRefSize: false));
+                    block.PeekHeapReference(12, smallRefSize: false)
+                );
                 Assert.Throws<BadImageFormatException>(() =>
-                    block.PeekHeapReference(16, smallRefSize: false));
+                    block.PeekHeapReference(16, smallRefSize: false)
+                );
 
                 Assert.Equal(0x01ffffffu, block.PeekReferenceUnchecked(4, smallRefSize: false));
                 Assert.Equal(0x1fffffffu, block.PeekReferenceUnchecked(8, smallRefSize: false));

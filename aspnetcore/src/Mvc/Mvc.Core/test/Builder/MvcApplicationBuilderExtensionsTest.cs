@@ -22,7 +22,8 @@ public class MvcApplicationBuilderExtensionsTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            applicationBuilderMock.Object.UseMvc(rb => { }));
+            applicationBuilderMock.Object.UseMvc(rb => { })
+        );
 
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling "

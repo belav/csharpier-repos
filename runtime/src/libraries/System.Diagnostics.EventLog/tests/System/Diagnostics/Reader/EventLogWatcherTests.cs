@@ -40,7 +40,8 @@ namespace System.Diagnostics.Tests
                     },
                     bookmark,
                     true
-                ));
+                )
+            );
 
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]");
             using (var eventLogWatcher = new EventLogWatcher(query, bookmark))
@@ -92,8 +93,8 @@ namespace System.Diagnostics.Tests
                         signal.Set();
                     };
                     Helpers.Retry(() => eventLogWatcher.Enabled = waitOnEvent);
-                    Helpers.Retry(() =>
-                        eventLog.WriteEntry(message, EventLogEntryType.Information));
+                    Helpers.Retry(() => eventLog.WriteEntry(message, EventLogEntryType.Information)
+                    );
                     if (waitOnEvent)
                     {
                         Assert.True(signal.WaitOne(6000));

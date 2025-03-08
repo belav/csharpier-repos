@@ -24,7 +24,8 @@ namespace System.Reflection.Tests
         {
             FieldInfo fieldInfo = GetField(typeof(FieldInfoTests), field);
             Assert.Throws<FieldAccessException>(() =>
-                fieldInfo.SetValue(new FieldInfoTests(), value));
+                fieldInfo.SetValue(new FieldInfoTests(), value)
+            );
         }
 
         [Fact]

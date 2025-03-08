@@ -41,10 +41,12 @@ namespace System.Net.NetworkInformation.Tests
                         Assert.NotNull(ipProperties);
 
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.AnycastAddresses);
+                            ipProperties.AnycastAddresses
+                        );
 
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.DhcpServerAddresses);
+                            ipProperties.DhcpServerAddresses
+                        );
 
                         try
                         {
@@ -71,11 +73,12 @@ namespace System.Net.NetworkInformation.Tests
                             _log.WriteLine("-- " + gateway.Address.ToString());
                         }
 
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.IsDnsEnabled);
+                        Assert.Throws<PlatformNotSupportedException>(() => ipProperties.IsDnsEnabled
+                        );
 
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.IsDynamicDnsEnabled);
+                            ipProperties.IsDynamicDnsEnabled
+                        );
 
                         Assert.NotNull(ipProperties.MulticastAddresses);
                         _log.WriteLine(
@@ -96,13 +99,16 @@ namespace System.Net.NetworkInformation.Tests
                         {
                             _log.WriteLine("-- " + uni.Address.ToString());
                             Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.AddressPreferredLifetime);
+                                uni.AddressPreferredLifetime
+                            );
                             Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.AddressValidLifetime);
+                                uni.AddressValidLifetime
+                            );
+                            Assert.Throws<PlatformNotSupportedException>(() => uni.DhcpLeaseLifetime
+                            );
                             Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.DhcpLeaseLifetime);
-                            Assert.Throws<PlatformNotSupportedException>(() =>
-                                uni.DuplicateAddressDetectionState);
+                                uni.DuplicateAddressDetectionState
+                            );
 
                             Assert.NotNull(uni.IPv4Mask);
                             _log.WriteLine("--- IPv4 Mask: " + uni.IPv4Mask);
@@ -121,7 +127,8 @@ namespace System.Net.NetworkInformation.Tests
                         }
 
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipProperties.WinsServersAddresses);
+                            ipProperties.WinsServersAddresses
+                        );
                     }
                 })
                 .WaitAsync(TestHelper.PassingTestTimeout);
@@ -144,13 +151,17 @@ namespace System.Net.NetworkInformation.Tests
 
                         _log.WriteLine("Index: " + ipv4Properties.Index);
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsAutomaticPrivateAddressingActive);
+                            ipv4Properties.IsAutomaticPrivateAddressingActive
+                        );
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsAutomaticPrivateAddressingEnabled);
+                            ipv4Properties.IsAutomaticPrivateAddressingEnabled
+                        );
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsDhcpEnabled);
+                            ipv4Properties.IsDhcpEnabled
+                        );
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv4Properties.IsForwardingEnabled);
+                            ipv4Properties.IsForwardingEnabled
+                        );
                         _log.WriteLine("Mtu: " + ipv4Properties.Mtu);
                         Assert.Throws<PlatformNotSupportedException>(() => ipv4Properties.UsesWins);
                     }
@@ -182,7 +193,8 @@ namespace System.Net.NetworkInformation.Tests
                         _log.WriteLine("Index: " + ipv6Properties.Index);
                         _log.WriteLine("Mtu: " + ipv6Properties.Mtu);
                         Assert.Throws<PlatformNotSupportedException>(() =>
-                            ipv6Properties.GetScopeId(ScopeLevel.Link));
+                            ipv6Properties.GetScopeId(ScopeLevel.Link)
+                        );
                     }
                 })
                 .WaitAsync(TestHelper.PassingTestTimeout);
@@ -213,7 +225,8 @@ namespace System.Net.NetworkInformation.Tests
                         foreach (ScopeLevel level in values)
                         {
                             Assert.Throws<PlatformNotSupportedException>(() =>
-                                ipv6Properties.GetScopeId(level));
+                                ipv6Properties.GetScopeId(level)
+                            );
                         }
                     }
                 })

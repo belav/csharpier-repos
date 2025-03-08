@@ -384,7 +384,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void MidStmtStr_ArgumentException(string str, int start, int length, string insert)
         {
             Assert.Throws<ArgumentException>(() =>
-                StringType.MidStmtStr(ref str, start, length, insert));
+                StringType.MidStmtStr(ref str, start, length, insert)
+            );
         }
 
         [Theory]
@@ -461,9 +462,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void StrLike_NullReferenceException(string source, string pattern)
         {
             Assert.Throws<NullReferenceException>(() =>
-                StringType.StrLike(source, pattern, CompareMethod.Binary));
+                StringType.StrLike(source, pattern, CompareMethod.Binary)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                StringType.StrLike(source, pattern, CompareMethod.Text));
+                StringType.StrLike(source, pattern, CompareMethod.Text)
+            );
             Assert.Throws<NullReferenceException>(() => StringType.StrLikeBinary(source, pattern));
             Assert.Throws<NullReferenceException>(() => StringType.StrLikeText(source, pattern));
         }

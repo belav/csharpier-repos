@@ -159,7 +159,8 @@ namespace System.Diagnostics.Tests
                     //
 
                     Assert.Throws<ArgumentNullException>(() =>
-                        DistributedContextPropagator.Current = null);
+                        DistributedContextPropagator.Current = null
+                    );
                 })
                 .Dispose();
         }

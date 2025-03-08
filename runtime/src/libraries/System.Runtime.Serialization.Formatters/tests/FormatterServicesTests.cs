@@ -53,9 +53,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void GetUninitializedObject_NonRuntimeType_ThrowsSerializationException()
         {
             Assert.Throws<SerializationException>(() =>
-                FormatterServices.GetUninitializedObject(new NonRuntimeType()));
+                FormatterServices.GetUninitializedObject(new NonRuntimeType())
+            );
             Assert.Throws<SerializationException>(() =>
-                FormatterServices.GetSafeUninitializedObject(new NonRuntimeType()));
+                FormatterServices.GetSafeUninitializedObject(new NonRuntimeType())
+            );
         }
 
         public static IEnumerable<object[]> GetUninitializedObject_NotSupportedType_TestData()
@@ -93,9 +95,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void GetUninitializedObject_AbstractClass_ThrowsMemberAccessException(Type type)
         {
             Assert.Throws<MemberAccessException>(() =>
-                FormatterServices.GetUninitializedObject(type));
+                FormatterServices.GetUninitializedObject(type)
+            );
             Assert.Throws<MemberAccessException>(() =>
-                FormatterServices.GetSafeUninitializedObject(type));
+                FormatterServices.GetSafeUninitializedObject(type)
+            );
         }
 
         public abstract class AbstractClass { }
@@ -119,9 +123,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void GetUninitializedObject_OpenGenericClass_ThrowsMemberAccessException(Type type)
         {
             Assert.Throws<MemberAccessException>(() =>
-                FormatterServices.GetUninitializedObject(type));
+                FormatterServices.GetUninitializedObject(type)
+            );
             Assert.Throws<MemberAccessException>(() =>
-                FormatterServices.GetSafeUninitializedObject(type));
+                FormatterServices.GetSafeUninitializedObject(type)
+            );
         }
 
         public interface IGenericClass
@@ -174,9 +180,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         )
         {
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetUninitializedObject(type));
+                FormatterServices.GetUninitializedObject(type)
+            );
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetSafeUninitializedObject(type));
+                FormatterServices.GetSafeUninitializedObject(type)
+            );
         }
 
         [Theory]
@@ -190,9 +198,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         )
         {
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetUninitializedObject(type));
+                FormatterServices.GetUninitializedObject(type)
+            );
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetSafeUninitializedObject(type));
+                FormatterServices.GetSafeUninitializedObject(type)
+            );
         }
 
         [Fact]
@@ -207,9 +217,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.NotNull(canonType);
             Type sharedGenericInstance = typeof(GenericClass<>).MakeGenericType(canonType);
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetUninitializedObject(sharedGenericInstance));
+                FormatterServices.GetUninitializedObject(sharedGenericInstance)
+            );
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetSafeUninitializedObject(sharedGenericInstance));
+                FormatterServices.GetSafeUninitializedObject(sharedGenericInstance)
+            );
         }
 
         [Fact]
@@ -336,7 +348,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void GetUninitializedObject_StaticConstructorThrows_ThrowsTypeInitializationException()
         {
             TypeInitializationException ex = Assert.Throws<TypeInitializationException>(() =>
-                FormatterServices.GetUninitializedObject(typeof(StaticConstructorThrows)));
+                FormatterServices.GetUninitializedObject(typeof(StaticConstructorThrows))
+            );
             Assert.IsType<DivideByZeroException>(ex.InnerException);
         }
 
@@ -443,7 +456,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     new object(),
                     new MemberInfo[] { typeof(object).GetMethod("GetHashCode") },
                     new object[] { new object() }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -465,7 +479,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 FormatterServices.GetObjectData(
                     new object(),
                     new MethodInfo[] { typeof(object).GetMethod("GetHashCode") }
-                ));
+                )
+            );
         }
 
         [Fact]

@@ -44,10 +44,8 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
             Assert.Throws<EntryPointNotFoundException>(() =>
-                PInvokesCS.DefaultDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(
-                    a,
-                    null
-                ));
+                PInvokesCS.DefaultDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(a, null)
+            );
         }
     }
 
@@ -83,7 +81,8 @@ public unsafe class Program
                 PInvokesCS.DefaultDllImport.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
                     a,
                     null
-                ));
+                )
+            );
         }
     }
 
@@ -116,10 +115,8 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
             Assert.Throws<EntryPointNotFoundException>(() =>
-                PInvokesCS.WinapiDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(
-                    a,
-                    null
-                ));
+                PInvokesCS.WinapiDllImport.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(a, null)
+            );
         }
     }
 
@@ -155,7 +152,8 @@ public unsafe class Program
                 PInvokesCS.WinapiDllImport.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
                     a,
                     null
-                ));
+                )
+            );
         }
     }
 
@@ -188,10 +186,8 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
             Assert.Throws<EntryPointNotFoundException>(() =>
-                PInvokesIL.UnsetPInvokeImpl.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(
-                    a,
-                    null
-                ));
+                PInvokesIL.UnsetPInvokeImpl.Stdcall.Blittable_Double_CdeclUnmanagedCallConv(a, null)
+            );
         }
     }
 
@@ -227,7 +223,8 @@ public unsafe class Program
                 PInvokesIL.UnsetPInvokeImpl.Stdcall.NotBlittable_Double_CdeclUnmanagedCallConv(
                     a,
                     null
-                ));
+                )
+            );
         }
     }
 

@@ -163,7 +163,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                         MetadataReference.CreateFromFile(
                             dllPath,
                             documentation: documentationProvider.GetDocumentationProvider(dllPath)
-                        ));
+                        )
+                    );
                     if (dllReference is null)
                     {
                         _logger?.Log(

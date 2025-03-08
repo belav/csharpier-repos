@@ -133,7 +133,8 @@ public class BodyModelBinderTests
             {
                 d.BindingSource = BindingSource.Body;
                 d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(() =>
-                    "Customized error message");
+                    "Customized error message"
+                );
             });
 
         var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
@@ -503,7 +504,8 @@ public class BodyModelBinderTests
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<IOException>(() =>
-            binder.BindModelAsync(bindingContext));
+            binder.BindModelAsync(bindingContext)
+        );
         Assert.Equal("Unable to read input stream!!", exception.Message);
     }
 
@@ -593,7 +595,8 @@ public class BodyModelBinderTests
 
         // Act
         var exception = await Assert.ThrowsAsync<IOException>(() =>
-            binder.BindModelAsync(bindingContext));
+            binder.BindModelAsync(bindingContext)
+        );
         Assert.Equal("Unable to read input stream!!", exception.Message);
     }
 

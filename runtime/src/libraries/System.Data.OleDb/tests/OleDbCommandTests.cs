@@ -253,7 +253,8 @@ namespace System.Data.OleDb.Tests
                     )
                     {
                         Assert.Throws<ArgumentOutOfRangeException>(() =>
-                            innerCommand.CommandType = (CommandType)0);
+                            innerCommand.CommandType = (CommandType)0
+                        );
                     }
                 }
             );

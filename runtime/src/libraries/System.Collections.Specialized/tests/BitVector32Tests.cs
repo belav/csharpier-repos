@@ -592,7 +592,8 @@ namespace System.Collections.Specialized.Tests
             Assert.InRange(CountBitsRequired(overflow.Mask), 2, 15);
 
             Assert.Throws<InvalidOperationException>(() =>
-                BitVector32.CreateSection(invalid, overflow));
+                BitVector32.CreateSection(invalid, overflow)
+            );
         }
 
         [Theory]

@@ -43,7 +43,8 @@ public class CompositeViewEngineTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            compositeViewEngine.FindView(actionContext, viewName, isMainPage: true));
+            compositeViewEngine.FindView(actionContext, viewName, isMainPage: true)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -220,7 +221,8 @@ public class CompositeViewEngineTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            compositeViewEngine.GetView("~/Index.html", viewName, isMainPage));
+            compositeViewEngine.GetView("~/Index.html", viewName, isMainPage)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -363,7 +365,8 @@ public class CompositeViewEngineTest
 
         // Act & AssertS
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            compositeViewEngine.FindView(GetActionContext(), viewName, isMainPage: false));
+            compositeViewEngine.FindView(GetActionContext(), viewName, isMainPage: false)
+        );
         Assert.Equal(expected, exception.Message);
     }
 

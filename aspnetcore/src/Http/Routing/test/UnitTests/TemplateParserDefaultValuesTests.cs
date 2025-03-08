@@ -63,7 +63,8 @@ public class TemplateParserDefaultValuesTests
                 "{controller}/{action}/{id:int=12}",
                 defaults: new { id = 13 },
                 constraints: null
-            ));
+            )
+        );
 
         var message =
             "An error occurred while creating the route with name 'mockName' and template"
@@ -92,7 +93,8 @@ public class TemplateParserDefaultValuesTests
                 "{controller}/{action}/{id:int=?}",
                 defaults: new { id = 13 },
                 constraints: null
-            ));
+            )
+        );
 
         var message =
             "An error occurred while creating the route with name 'mockName' and template"

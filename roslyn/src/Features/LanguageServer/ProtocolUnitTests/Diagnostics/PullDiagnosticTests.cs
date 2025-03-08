@@ -403,7 +403,8 @@ class A {
                     testLspServer,
                     document.GetURI(),
                     useVSDiagnostics
-                ));
+                )
+            );
         }
 
         [Theory, CombinatorialData]
@@ -440,7 +441,8 @@ class A {
                     testLspServer,
                     document.GetURI(),
                     useVSDiagnostics
-                ));
+                )
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2057,7 +2059,8 @@ class A {
             );
 
             await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(async () =>
-                await RunGetWorkspacePullDiagnosticsAsync(testLspServer, useVSDiagnostics));
+                await RunGetWorkspacePullDiagnosticsAsync(testLspServer, useVSDiagnostics)
+            );
         }
 
         [Theory, CombinatorialData]

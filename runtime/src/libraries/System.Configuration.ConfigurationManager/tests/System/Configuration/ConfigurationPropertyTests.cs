@@ -13,14 +13,16 @@ namespace System.ConfigurationTests
         public void ConfigurationSectionThrows()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new ConfigurationProperty("foo", typeof(ConfigurationSection)));
+                new ConfigurationProperty("foo", typeof(ConfigurationSection))
+            );
         }
 
         [Fact]
         public void AppSettingsSectionThrows()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new ConfigurationProperty("foo", typeof(AppSettingsSection)));
+                new ConfigurationProperty("foo", typeof(AppSettingsSection))
+            );
         }
 
         [Fact]
@@ -91,7 +93,8 @@ namespace System.ConfigurationTests
                     null,
                     validator,
                     ConfigurationPropertyOptions.None
-                ));
+                )
+            );
         }
 
         public class FooFailsValidator : ConfigurationValidatorBase

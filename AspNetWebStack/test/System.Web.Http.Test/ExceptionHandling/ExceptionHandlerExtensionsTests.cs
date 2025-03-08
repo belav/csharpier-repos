@@ -163,7 +163,8 @@ namespace System.Web.Http.ExceptionHandling
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                ExceptionHandlerExtensions.HandleAsync(handler, context, cancellationToken));
+                ExceptionHandlerExtensions.HandleAsync(handler, context, cancellationToken)
+            );
             Assert.Equal("IHttpActionResult.ExecuteAsync must not return null.", exception.Message);
         }
 

@@ -630,7 +630,8 @@ namespace Microsoft.CodeAnalysis
             private readonly Func<string, AnalyzerConfigData> _computeFunction =
                 path => new AnalyzerConfigData(configSet.GetOptionsForSourcePath(path));
             private readonly Lazy<AnalyzerConfigData> _global = new Lazy<AnalyzerConfigData>(() =>
-                new AnalyzerConfigData(configSet.GlobalConfigOptions));
+                new AnalyzerConfigData(configSet.GlobalConfigOptions)
+            );
 
             public AnalyzerConfigData GlobalConfigOptions => _global.Value;
 

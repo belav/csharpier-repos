@@ -209,7 +209,8 @@ namespace System.Data.Tests.Common
                 new DataColumnMappingCollection();
 
             Assert.Throws<IndexOutOfRangeException>(() =>
-                dataColumnMappingCollection.GetByDataSetColumn((string)null));
+                dataColumnMappingCollection.GetByDataSetColumn((string)null)
+            );
         }
 
         [Fact]
@@ -337,7 +338,8 @@ namespace System.Data.Tests.Common
                 new DataColumnMappingCollection();
 
             Assert.Throws<ArgumentNullException>(() =>
-                dataColumnMappingCollection.Remove((DataColumnMapping)null));
+                dataColumnMappingCollection.Remove((DataColumnMapping)null)
+            );
         }
 
         [Fact]
@@ -430,7 +432,8 @@ namespace System.Data.Tests.Common
                 new DataColumnMappingCollection();
 
             Assert.Throws<ArgumentNullException>(() =>
-                dataColumnMappingCollection.Insert(123, (DataColumnMapping)null));
+                dataColumnMappingCollection.Insert(123, (DataColumnMapping)null)
+            );
         }
 
         [Fact]
@@ -476,7 +479,8 @@ namespace System.Data.Tests.Common
                     new DataTable(),
                     MissingMappingAction.Error,
                     new MissingSchemaAction()
-                ));
+                )
+            );
         }
 
         [Fact]

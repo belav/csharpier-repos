@@ -104,7 +104,8 @@ namespace System.Reflection.Emit.Tests
             module.CreateGlobalFunctions();
 
             Assert.Throws<InvalidOperationException>(() =>
-                module.DefineUninitializedData("TestField", 1, attributes));
+                module.DefineUninitializedData("TestField", 1, attributes)
+            );
         }
     }
 }

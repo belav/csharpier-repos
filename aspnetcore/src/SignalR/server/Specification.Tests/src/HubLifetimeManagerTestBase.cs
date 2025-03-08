@@ -308,7 +308,8 @@ public abstract class HubLifetimeManagerTestsBase<THub>
                     manager.SetConnectionResultAsync(
                         connection2.ConnectionId,
                         CompletionMessage.WithError(invocation.InvocationId, "Error from client")
-                    ))
+                    )
+                )
                 .DefaultTimeout();
 
             Assert.Equal(
@@ -352,7 +353,8 @@ public abstract class HubLifetimeManagerTestsBase<THub>
                         "Result",
                         new object[] { "test" },
                         cancellationToken: default
-                    ))
+                    )
+                )
                 .DefaultTimeout();
         }
     }

@@ -88,8 +88,8 @@ public class StackTraceHelperTest
     public void StackTraceHelper_PrettyPrintsStackTraceForMethodsWithGenericOutParameters()
     {
         // Arrange
-        var exception = Record.Exception(() =>
-            MethodWithGenericOutParameter("Test", out int value));
+        var exception = Record.Exception(() => MethodWithGenericOutParameter("Test", out int value)
+        );
 
         // Act
         var stackFrames = StackTraceHelper.GetFrames(exception, out _);
@@ -231,7 +231,8 @@ public class StackTraceHelperTest
     {
         // Arrange
         var exception = Record.Exception(() =>
-            InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute());
+            InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute()
+        );
 
         // Act
         var stackFrames = StackTraceHelper.GetFrames(exception, out _);
@@ -250,7 +251,8 @@ public class StackTraceHelperTest
     {
         // Arrange
         var exception = Record.Exception(() =>
-            new TypeWithMethodWithStackTraceHiddenAttribute().Throw());
+            new TypeWithMethodWithStackTraceHiddenAttribute().Throw()
+        );
 
         // Act
         var stackFrames = StackTraceHelper.GetFrames(exception, out _);

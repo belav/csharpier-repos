@@ -26,7 +26,8 @@ namespace System.Formats.Tar.Tests
                         "directory",
                         overwriteFiles: true,
                         cs.Token
-                    ));
+                    )
+                );
             }
         }
 
@@ -37,7 +38,8 @@ namespace System.Formats.Tar.Tests
                     source: null,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
 
         [Fact]
         public async Task InvalidPath_Throws_Async()
@@ -49,13 +51,15 @@ namespace System.Formats.Tar.Tests
                         archive,
                         destinationDirectoryName: null,
                         overwriteFiles: false
-                    ));
+                    )
+                );
                 await Assert.ThrowsAsync<ArgumentException>(() =>
                     TarFile.ExtractToDirectoryAsync(
                         archive,
                         destinationDirectoryName: string.Empty,
                         overwriteFiles: false
-                    ));
+                    )
+                );
             }
         }
 
@@ -78,7 +82,8 @@ namespace System.Formats.Tar.Tests
                             unreadable,
                             destinationDirectoryName: "path",
                             overwriteFiles: false
-                        ));
+                        )
+                    );
                 }
             }
         }
@@ -97,7 +102,8 @@ namespace System.Formats.Tar.Tests
                             archive,
                             destinationDirectoryName: dirPath,
                             overwriteFiles: false
-                        ));
+                        )
+                    );
                 }
             }
         }
@@ -239,7 +245,8 @@ namespace System.Formats.Tar.Tests
                 using (TempDirectory root = new TempDirectory())
                 {
                     await Assert.ThrowsAnyAsync<IOException>(() =>
-                        TarFile.ExtractToDirectoryAsync(archive, root.Path, overwriteFiles: false));
+                        TarFile.ExtractToDirectoryAsync(archive, root.Path, overwriteFiles: false)
+                    );
                     Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
                 }
             }
@@ -788,7 +795,8 @@ namespace System.Formats.Tar.Tests
                     archive,
                     destinationFolderPath,
                     overwriteFiles: false
-                ));
+                )
+            );
             Assert.False(File.Exists(entryFilePath), $"File should not exist: {entryFilePath}");
         }
     }

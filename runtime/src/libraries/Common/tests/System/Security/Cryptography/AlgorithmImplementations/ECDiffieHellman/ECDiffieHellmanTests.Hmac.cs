@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    ecdh.DeriveKeyFromHmac(null, HashAlgorithmName.SHA512, null));
+                    ecdh.DeriveKeyFromHmac(null, HashAlgorithmName.SHA512, null)
+                );
             }
         }
 
@@ -32,7 +33,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 Assert.ThrowsAny<ArgumentException>(() =>
-                    alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null));
+                    alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null)
+                );
             }
         }
 

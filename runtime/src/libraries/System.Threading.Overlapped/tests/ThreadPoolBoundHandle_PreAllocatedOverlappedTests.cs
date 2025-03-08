@@ -60,13 +60,15 @@ public partial class ThreadPoolBoundHandleTests
                 (_, __, ___) => { },
                 new object(),
                 new NonBlittableType() { s = "foo" }
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             PreAllocatedOverlapped.UnsafeCreate(
                 (_, __, ___) => { },
                 new object(),
                 new NonBlittableType() { s = "foo" }
-            ));
+            )
+        );
 
         // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
         GC.Collect();
@@ -116,9 +118,11 @@ public partial class ThreadPoolBoundHandleTests
         };
 
         Assert.Throws<ArgumentException>(() =>
-            new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array));
+            new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array)
+        );
         Assert.Throws<ArgumentException>(() =>
-            PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array));
+            PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)
+        );
 
         // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
         GC.Collect();

@@ -35,16 +35,17 @@ namespace System.SpanTests
         public static void AsRefFail()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.AsRef<uint>(new Span<byte>(new byte[] { 1 })));
+                MemoryMarshal.AsRef<uint>(new Span<byte>(new byte[] { 1 }))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(
                     new Span<byte>(new byte[] { 1 })
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentException>(() =>
-                MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(
-                    new Span<byte>(new byte[100])
-                ));
+                MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(new Span<byte>(new byte[100]))
+            );
         }
     }
 }

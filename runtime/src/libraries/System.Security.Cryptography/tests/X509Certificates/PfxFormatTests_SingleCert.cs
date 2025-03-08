@@ -61,7 +61,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         protected override void ReadEmptyPfx(byte[] pfxBytes, string correctPassword)
         {
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                new X509Certificate2(pfxBytes, correctPassword, s_importFlags));
+                new X509Certificate2(pfxBytes, correctPassword, s_importFlags)
+            );
 
             AssertMessageContains("no certificates", ex);
         }
@@ -69,7 +70,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         protected override void ReadWrongPassword(byte[] pfxBytes, string wrongPassword)
         {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
-                new X509Certificate2(pfxBytes, wrongPassword, s_importFlags));
+                new X509Certificate2(pfxBytes, wrongPassword, s_importFlags)
+            );
 
             AssertMessageContains("password", ex);
             Assert.Equal(ErrorInvalidPasswordHResult, ex.HResult);
@@ -84,7 +86,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         )
         {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
-                new X509Certificate2(pfxBytes, bestPassword, importFlags));
+                new X509Certificate2(pfxBytes, bestPassword, importFlags)
+            );
 
             if (OperatingSystem.IsWindows())
             {
@@ -102,7 +105,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static void CheckBadKeyset(X509Certificate2 cert)
         {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
-                cert.GetRSAPrivateKey());
+                cert.GetRSAPrivateKey()
+            );
 
             // NTE_BAD_KEYSET
             Assert.Equal(-2146893802, ex.HResult);

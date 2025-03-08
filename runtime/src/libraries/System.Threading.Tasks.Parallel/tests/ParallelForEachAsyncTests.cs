@@ -997,7 +997,8 @@ namespace System.Threading.Tasks.Tests
                         {
                             await Task.Yield();
                         }
-                    ));
+                    )
+                );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1024,7 +1025,8 @@ namespace System.Threading.Tasks.Tests
                         {
                             await Task.Yield();
                         }
-                    ));
+                    )
+                );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1051,7 +1053,8 @@ namespace System.Threading.Tasks.Tests
                         {
                             await Task.Yield();
                         }
-                    ));
+                    )
+                );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1658,7 +1661,8 @@ namespace System.Threading.Tasks.Tests
                             throw new Exception();
                         }
                     }
-                ));
+                )
+            );
 
             await Assert.ThrowsAsync<FormatException>(() =>
                 Parallel.ForAsync(
@@ -1679,7 +1683,8 @@ namespace System.Threading.Tasks.Tests
                             await tcs.Task;
                         }
                     }
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1705,7 +1710,8 @@ namespace System.Threading.Tasks.Tests
                             throw new Exception();
                         }
                     }
-                ));
+                )
+            );
 
             await Assert.ThrowsAsync<FormatException>(() =>
                 Parallel.ForEachAsync(
@@ -1725,7 +1731,8 @@ namespace System.Threading.Tasks.Tests
                             await tcs.Task;
                         }
                     }
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1752,7 +1759,8 @@ namespace System.Threading.Tasks.Tests
                             throw new Exception();
                         }
                     }
-                ));
+                )
+            );
 
             await Assert.ThrowsAsync<FormatException>(() =>
                 Parallel.ForEachAsync(
@@ -1772,7 +1780,8 @@ namespace System.Threading.Tasks.Tests
                             await tcs.Task;
                         }
                     }
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1808,7 +1817,8 @@ namespace System.Threading.Tasks.Tests
                             await Task.CompletedTask;
                         }
                     )
-                    .Wait());
+                    .Wait()
+            );
 
             Assert.Equal(1, ae.InnerExceptions.Count);
             Assert.IsType<FormatException>(ae.InnerException);

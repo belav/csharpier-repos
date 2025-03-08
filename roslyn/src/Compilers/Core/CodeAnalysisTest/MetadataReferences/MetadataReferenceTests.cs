@@ -36,12 +36,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 System.Reflection.Emit.AssemblyBuilderAccess.Run
             );
             Assert.Throws<NotSupportedException>(() =>
-                MetadataReference.CreateFromAssemblyInternal(dynamicAssembly));
+                MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
+            );
 
             var inMemoryAssembly = Assembly.Load(TestResources.General.C1);
             Assert.Equal("", inMemoryAssembly.Location);
             Assert.Throws<NotSupportedException>(() =>
-                MetadataReference.CreateFromAssemblyInternal(inMemoryAssembly));
+                MetadataReference.CreateFromAssemblyInternal(inMemoryAssembly)
+            );
         }
 
         [Fact]
@@ -51,23 +53,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentNullException>(() => MetadataReference.CreateFromImage(default));
             Assert.Throws<ArgumentNullException>(() => MetadataReference.CreateFromFile(null));
             Assert.Throws<ArgumentNullException>(() =>
-                MetadataReference.CreateFromFile(null, default(MetadataReferenceProperties)));
+                MetadataReference.CreateFromFile(null, default(MetadataReferenceProperties))
+            );
             Assert.Throws<ArgumentNullException>(() => MetadataReference.CreateFromStream(null));
 
             Assert.Throws<ArgumentNullException>(() =>
-                MetadataReference.CreateFromAssemblyInternal(null));
+                MetadataReference.CreateFromAssemblyInternal(null)
+            );
             Assert.Throws<ArgumentException>(() =>
                 MetadataReference.CreateFromAssemblyInternal(
                     typeof(object).Assembly,
                     new MetadataReferenceProperties(MetadataImageKind.Module)
-                ));
+                )
+            );
 
             var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName { Name = "Goo" },
                 System.Reflection.Emit.AssemblyBuilderAccess.Run
             );
             Assert.Throws<NotSupportedException>(() =>
-                MetadataReference.CreateFromAssemblyInternal(dynamicAssembly));
+                MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
+            );
         }
 #endif
 
@@ -456,7 +462,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(MetadataImageKind.Assembly, r3.Properties.Kind);
 
             Assert.Throws<ArgumentException>(() =>
-                r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module)));
+                r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module))
+            );
         }
 
         [Fact]
@@ -494,7 +501,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(MetadataImageKind.Assembly, r3.Properties.Kind);
 
             Assert.Throws<ArgumentException>(() =>
-                r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module)));
+                r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module))
+            );
         }
 
         [Fact]

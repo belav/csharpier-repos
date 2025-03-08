@@ -260,7 +260,8 @@ public class SqlServerValueGeneratorCacheTest
                 .Throws<ArgumentOutOfRangeException>(() =>
                     cache
                         .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                        .Sequence.IncrementBy)
+                        .Sequence.IncrementBy
+                )
                 .Message
         );
     }

@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             this.RootBinder = rootBinder.WithAdditionalFlags(GetSemanticModelBinderFlags());
             _operationFactory = new Lazy<CSharpOperationFactory>(() =>
-                new CSharpOperationFactory(this));
+                new CSharpOperationFactory(this)
+            );
         }
 
         public override CSharpCompilation Compilation

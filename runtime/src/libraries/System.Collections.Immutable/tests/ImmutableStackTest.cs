@@ -233,14 +233,16 @@ namespace System.Collections.Immutable.Tests
         public void EmptyPeekThrows()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ImmutableStack<GenericParameterHelper>.Empty.Peek());
+                ImmutableStack<GenericParameterHelper>.Empty.Peek()
+            );
         }
 
         [Fact]
         public void EmptyPopThrows()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ImmutableStack<GenericParameterHelper>.Empty.Pop());
+                ImmutableStack<GenericParameterHelper>.Empty.Pop()
+            );
         }
 
         [Fact]
@@ -304,7 +306,8 @@ namespace System.Collections.Immutable.Tests
                 ImmutableStack.Create<string>("1", "2", "3")
             );
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

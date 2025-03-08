@@ -129,7 +129,8 @@ namespace System.Net.Tests
         public void CreateHttp_InvalidScheme_ThrowsNotSupportedException()
         {
             Assert.Throws<NotSupportedException>(() =>
-                WebRequest.CreateHttp(new Uri("ftp://microsoft.com")));
+                WebRequest.CreateHttp(new Uri("ftp://microsoft.com"))
+            );
         }
 
         [Fact]
@@ -177,7 +178,8 @@ namespace System.Net.Tests
         public void RegisterPrefix_PrefixOrCreatorNull_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                WebRequest.RegisterPrefix(null, new FakeRequestFactory()));
+                WebRequest.RegisterPrefix(null, new FakeRequestFactory())
+            );
             Assert.Throws<ArgumentNullException>(() => WebRequest.RegisterPrefix("http://", null));
         }
 

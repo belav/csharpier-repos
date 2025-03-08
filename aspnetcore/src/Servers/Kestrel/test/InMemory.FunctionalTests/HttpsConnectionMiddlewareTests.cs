@@ -311,7 +311,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         )
         {
             await Assert.ThrowsAnyAsync<Exception>(() =>
-                server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/"));
+                server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/")
+            );
         }
     }
 
@@ -405,7 +406,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             CreateMiddleware(
                 new HttpsConnectionAdapterOptions(),
                 ListenOptions.DefaultHttpProtocols
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -603,7 +605,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         new X509CertificateCollection(),
                         SslProtocols.Tls12 | SslProtocols.Tls11,
                         false
-                    ));
+                    )
+                );
 #pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
             }
@@ -686,7 +689,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         new X509CertificateCollection(),
                         SslProtocols.Tls12 | SslProtocols.Tls11,
                         false
-                    ));
+                    )
+                );
 #pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
             }
@@ -859,7 +863,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(context.Connection.ClientCertificate);
 
                 await Assert.ThrowsAsync<PlatformNotSupportedException>(() =>
-                    context.Connection.GetClientCertificateAsync());
+                    context.Connection.GetClientCertificateAsync()
+                );
 
                 var lifetimeNotificationFeature =
                     context.Features.Get<IConnectionLifetimeNotificationFeature>();
@@ -1181,7 +1186,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(context.Connection.ClientCertificate);
 
                 var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.Connection.GetClientCertificateAsync());
+                    context.Connection.GetClientCertificateAsync()
+                );
                 Assert.Equal("Client stream needs to be drained before renegotiation.", ex.Message);
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
@@ -1420,7 +1426,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
                 // Request the client cert while there's still body data in the buffers
                 var ioe = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.Connection.GetClientCertificateAsync());
+                    context.Connection.GetClientCertificateAsync()
+                );
                 Assert.Equal(
                     "Client stream needs to be drained before renegotiation.",
                     ioe.Message
@@ -1518,7 +1525,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         new X509CertificateCollection(),
                         SslProtocols.Tls,
                         false
-                    ));
+                    )
+                );
 #pragma warning restore SYSLIB0039
             }
         }
@@ -1753,7 +1761,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             CreateMiddleware(
                 new HttpsConnectionAdapterOptions { ServerCertificate = cert },
                 ListenOptions.DefaultHttpProtocols
-            ));
+            )
+        );
 
         Assert.Equal(CoreStrings.FormatInvalidServerCertificateEku(cert.Thumbprint), ex.Message);
     }
@@ -1874,7 +1883,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         };
 
         Assert.Throws<NotSupportedException>(() =>
-            CreateMiddleware(httpConnectionAdapterOptions, HttpProtocols.Http2));
+            CreateMiddleware(httpConnectionAdapterOptions, HttpProtocols.Http2)
+        );
     }
 
     [ConditionalFact]

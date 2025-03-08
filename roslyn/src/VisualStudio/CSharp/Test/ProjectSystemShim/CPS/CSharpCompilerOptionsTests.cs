@@ -122,13 +122,15 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         {
             using var environment = new TestEnvironment();
             await Assert.ThrowsAsync<InvalidProjectDataException>(() =>
-                CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test2", binOutputPath: ""));
+                CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test2", binOutputPath: "")
+            );
             await Assert.ThrowsAsync<InvalidProjectDataException>(() =>
                 CSharpHelpers.CreateCSharpCPSProjectAsync(
                     environment,
                     "Test3",
                     binOutputPath: "Test.dll"
-                ));
+                )
+            );
         }
 
         [WpfFact]

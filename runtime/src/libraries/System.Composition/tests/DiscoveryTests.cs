@@ -60,7 +60,8 @@ namespace System.Composition.UnitTests
         public void InstanceExportsOfIncompatibleContractsAreDetected()
         {
             var x = Assert.Throws<CompositionFailedException>(() =>
-                CreateContainer(typeof(IncompatibleRule)));
+                CreateContainer(typeof(IncompatibleRule))
+            );
             Assert.Equal(
                 "Exported contract type 'IRule' is not assignable from part 'IncompatibleRule'.",
                 x.Message
@@ -71,7 +72,8 @@ namespace System.Composition.UnitTests
         public void PropertyExportsOfIncompatibleContractsAreDetected()
         {
             var x = Assert.Throws<CompositionFailedException>(() =>
-                CreateContainer(typeof(IncompatibleRuleProperty)));
+                CreateContainer(typeof(IncompatibleRuleProperty))
+            );
             Assert.Equal(
                 "Exported contract type 'IRule' is not assignable from property 'Rule' of part 'IncompatibleRuleProperty'.",
                 x.Message
@@ -136,7 +138,8 @@ namespace System.Composition.UnitTests
                 .CreateContainer();
 
             var x = Assert.Throws<CompositionFailedException>(() =>
-                c.GetExport<MultipleImportsOnProperty>());
+                c.GetExport<MultipleImportsOnProperty>()
+            );
             Assert.Equal(
                 "Multiple imports have been configured for 'MultiImport'. At most one import can be applied to a single site.",
                 x.Message

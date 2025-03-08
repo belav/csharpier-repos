@@ -17,9 +17,11 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<NotImplementedException>(() => rsa.Decrypt(null, null));
             Assert.Throws<NotImplementedException>(() => rsa.Encrypt(null, null));
             Assert.Throws<NotImplementedException>(() =>
-                rsa.SignHash(null, HashAlgorithmName.SHA256, null));
+                rsa.SignHash(null, HashAlgorithmName.SHA256, null)
+            );
             Assert.Throws<NotImplementedException>(() =>
-                rsa.VerifyHash(null, null, HashAlgorithmName.SHA256, null));
+                rsa.VerifyHash(null, null, HashAlgorithmName.SHA256, null)
+            );
         }
 
         [Fact]
@@ -677,7 +679,8 @@ namespace System.Security.Cryptography.Tests
                         (ReadOnlySpan<byte>)new byte[] { 1, 2, 3 },
                         HashAlgorithmName.SHA256,
                         RSASignaturePadding.Pss
-                    ));
+                    )
+                );
             }
         }
 
@@ -1037,7 +1040,8 @@ namespace System.Security.Cryptography.Tests
                         (ReadOnlySpan<byte>)new byte[20],
                         HashAlgorithmName.SHA1,
                         RSASignaturePadding.Pkcs1
-                    ));
+                    )
+                );
             }
         }
 
@@ -1392,7 +1396,8 @@ namespace System.Security.Cryptography.Tests
                     rsa.Encrypt(
                         (ReadOnlySpan<byte>)new byte[] { 1, 2, 3 },
                         RSAEncryptionPadding.Pkcs1
-                    ));
+                    )
+                );
             }
         }
 
@@ -1498,7 +1503,8 @@ namespace System.Security.Cryptography.Tests
                     rsa.Decrypt(
                         new ReadOnlySpan<byte>(new byte[KeySizeInBits / 8]),
                         RSAEncryptionPadding.Pkcs1
-                    ));
+                    )
+                );
             }
         }
 

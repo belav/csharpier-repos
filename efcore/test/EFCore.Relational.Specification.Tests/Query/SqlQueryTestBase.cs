@@ -1768,7 +1768,8 @@ SELECT * FROM [Customers2]
                 .Throws<InvalidOperationException>(() =>
                     context.Database.SqlQueryRaw<Post>(
                         NormalizeDelimitersInRawString(@"SELECT * FROM [Posts]")
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1784,7 +1785,8 @@ SELECT * FROM [Customers2]
                 .Throws<InvalidOperationException>(() =>
                     context.Database.SqlQueryRaw<Blog>(
                         NormalizeDelimitersInRawString(@"SELECT * FROM [Blogs]")
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1800,7 +1802,8 @@ SELECT * FROM [Customers2]
                 .Throws<InvalidOperationException>(() =>
                     context.Database.SqlQueryRaw<Person>(
                         NormalizeDelimitersInRawString(@"SELECT * FROM [People]")
-                    ))
+                    )
+                )
                 .Message
         );
     }

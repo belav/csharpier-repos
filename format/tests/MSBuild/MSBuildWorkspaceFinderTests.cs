@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 )
                 .Replace('/', Path.DirectorySeparatorChar);
             var exception = Assert.Throws<FileNotFoundException>(() =>
-                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath));
+                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath)
+            );
             Assert.StartsWith(exceptionMessageStart, exception.Message);
         }
 
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 )
                 .Replace('/', Path.DirectorySeparatorChar);
             var exception = Assert.Throws<FileNotFoundException>(() =>
-                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath));
+                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath)
+            );
             Assert.Equal(exceptionMessageStart, exception.Message);
         }
 
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 )
                 .Replace('/', Path.DirectorySeparatorChar);
             var exception = Assert.Throws<FileNotFoundException>(() =>
-                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath));
+                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath)
+            );
             Assert.Equal(exceptionMessageStart, exception.Message);
         }
 
@@ -63,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 )
                 .Replace('/', Path.DirectorySeparatorChar);
             var exception = Assert.Throws<FileNotFoundException>(() =>
-                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath));
+                MSBuildWorkspaceFinder.FindWorkspace(ProjectsPath, workspacePath)
+            );
             Assert.Equal(exceptionMessageStart, exception.Message);
         }
 

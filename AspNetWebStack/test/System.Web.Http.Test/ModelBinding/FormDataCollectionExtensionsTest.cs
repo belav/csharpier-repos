@@ -150,7 +150,8 @@ namespace System.Web.Http.ModelBinding
             sb.Append("=1");
 
             return Assert.ThrowsAsync<InsufficientExecutionStackException>(() =>
-                ParseJQueryAsync<Nest>(sb.ToString()));
+                ParseJQueryAsync<Nest>(sb.ToString())
+            );
         }
 
         [Fact]
@@ -164,7 +165,8 @@ namespace System.Web.Http.ModelBinding
             sb.Append("=1");
 
             return Assert.ThrowsAsync<InsufficientExecutionStackException>(() =>
-                ParseJQueryAsync<Nest>(sb.ToString()));
+                ParseJQueryAsync<Nest>(sb.ToString())
+            );
         }
 
         public class ClassWithPointArray
@@ -300,8 +302,8 @@ namespace System.Web.Http.ModelBinding
             FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>();
 
             // Act/Assert
-            Assert.Throws<ArgumentNullException>(() =>
-                formData.ReadAs<int>((HttpActionContext)null));
+            Assert.Throws<ArgumentNullException>(() => formData.ReadAs<int>((HttpActionContext)null)
+            );
         }
 
         [Fact]

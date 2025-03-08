@@ -1507,14 +1507,14 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                         context.SignInAsync(
                                             JwtBearerDefaults.AuthenticationScheme,
                                             new ClaimsPrincipal()
-                                        ));
+                                        )
+                                    );
                                 }
                                 else if (context.Request.Path == new PathString("/signOut"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.SignOutAsync(
-                                            JwtBearerDefaults.AuthenticationScheme
-                                        ));
+                                        context.SignOutAsync(JwtBearerDefaults.AuthenticationScheme)
+                                    );
                                 }
                                 else if (context.Request.Path == new PathString("/expiration"))
                                 {

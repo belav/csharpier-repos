@@ -346,7 +346,8 @@ namespace System.Net.Http.Functional.Tests
                     content,
                     credential,
                     preAuthenticate: false
-                ));
+                )
+            );
         }
 
         [OuterLoop("Uses external servers")]

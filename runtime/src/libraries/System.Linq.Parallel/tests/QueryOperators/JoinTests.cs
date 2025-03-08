@@ -761,11 +761,13 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<NotSupportedException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
-                    .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i));
+                    .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i)
+            );
             Assert.Throws<NotSupportedException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
-                    .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i, null));
+                    .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i, null)
+            );
 #pragma warning restore 618
         }
 
@@ -783,7 +785,8 @@ namespace System.Linq.Parallel.Tests
                         x => x,
                         y => y,
                         (l, r) => l
-                    ));
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -793,7 +796,8 @@ namespace System.Linq.Parallel.Tests
                         x => x,
                         y => y,
                         (l, r) => l
-                    ));
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -805,7 +809,8 @@ namespace System.Linq.Parallel.Tests
                         x => x,
                         y => y,
                         (l, r) => l
-                    ));
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -817,7 +822,8 @@ namespace System.Linq.Parallel.Tests
                         x => x,
                         y => y,
                         (l, r) => l
-                    ));
+                    )
+            );
         }
 
         [Fact]

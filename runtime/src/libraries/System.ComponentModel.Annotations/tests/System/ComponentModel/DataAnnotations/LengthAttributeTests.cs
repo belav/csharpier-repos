@@ -130,7 +130,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void Validate_ICollection_Invalid(LengthAttribute attribute, object value)
         {
             Assert.Throws<ValidationException>(() =>
-                attribute.Validate(value, new ValidationContext(new object())));
+                attribute.Validate(value, new ValidationContext(new object()))
+            );
             Assert.False(attribute.IsValid(value));
         }
 
@@ -145,7 +146,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new LengthAttribute(minimumLength, maximumLength);
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.GetValidationResult("Rincewind", new ValidationContext(new object())));
+                attribute.GetValidationResult("Rincewind", new ValidationContext(new object()))
+            );
         }
 
         [Fact]
@@ -155,7 +157,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 new LengthAttribute(0, 0).GetValidationResult(
                     new Random(),
                     new ValidationContext(new object())
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -165,7 +168,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 new LengthAttribute(0, 0).GetValidationResult(
                     new GenericIEnumerableClass(),
                     new ValidationContext(new object())
-                ));
+                )
+            );
         }
     }
 }

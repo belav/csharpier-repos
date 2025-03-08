@@ -218,7 +218,8 @@ namespace Microsoft.Extensions.Http.Logging
             else
             {
                 _ = Assert.Throws<HttpRequestException>(() =>
-                    client.Send(new HttpRequestMessage(HttpMethod.Get, Url)));
+                    client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
+                );
             }
 
             AssertCounters(testLogger, requestCount: 1, requestSuccessful, async: false);
@@ -232,7 +233,8 @@ namespace Microsoft.Extensions.Http.Logging
                 else
                 {
                     _ = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                        client.SendAsync(new HttpRequestMessage(HttpMethod.Get, Url)));
+                        client.SendAsync(new HttpRequestMessage(HttpMethod.Get, Url))
+                    );
                 }
 
                 Assert.Equal(1, testLogger.AsyncRequestStartLogCount);
@@ -252,7 +254,8 @@ namespace Microsoft.Extensions.Http.Logging
                 else
                 {
                     _ = Assert.Throws<HttpRequestException>(() =>
-                        client.Send(new HttpRequestMessage(HttpMethod.Get, Url)));
+                        client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
+                    );
                 }
 
                 AssertCounters(testLogger, requestCount: 2, requestSuccessful, async: false);

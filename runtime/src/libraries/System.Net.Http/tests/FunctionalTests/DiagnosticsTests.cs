@@ -325,7 +325,8 @@ namespace System.Net.Http.Functional.Tests
                             diagnosticListenerObserver.Enable();
 
                             Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                GetAsync(useVersion, testAsync, InvalidUri));
+                                GetAsync(useVersion, testAsync, InvalidUri)
+                            );
 
                             await responseLoggedTcs.Task;
 
@@ -390,7 +391,8 @@ namespace System.Net.Http.Functional.Tests
                                     async uri =>
                                     {
                                         await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                                            GetAsync(useVersion, testAsync, uri, cts.Token));
+                                            GetAsync(useVersion, testAsync, uri, cts.Token)
+                                        );
                                     },
                                     async server =>
                                     {
@@ -903,7 +905,8 @@ namespace System.Net.Http.Functional.Tests
                             diagnosticListenerObserver.Enable();
 
                             Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                GetAsync(useVersion, testAsync, InvalidUri));
+                                GetAsync(useVersion, testAsync, InvalidUri)
+                            );
 
                             await activityStopTcs.Task;
 
@@ -1109,7 +1112,8 @@ namespace System.Net.Http.Functional.Tests
                             );
 
                             Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                GetAsync(useVersion, testAsync, InvalidUri));
+                                GetAsync(useVersion, testAsync, InvalidUri)
+                            );
 
                             await exceptionLoggedTcs.Task;
 

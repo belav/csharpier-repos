@@ -152,7 +152,8 @@ namespace System.Net.Security.Tests
                     Assert.Contains("protocol", e.InnerException.InnerException.Message);
 
                     e = await Assert.ThrowsAsync<AuthenticationException>(() =>
-                        clientAuthenticationTask);
+                        clientAuthenticationTask
+                    );
 
                     Assert.NotNull(e.InnerException);
                     Assert.Contains("SSL_ERROR_SSL", e.InnerException.Message);
@@ -566,7 +567,8 @@ namespace System.Net.Security.Tests
 
                 // Fail as there are still some undrained data (incomplete incoming TLS frame)
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.NegotiateClientCertificateAsync(cts.Token));
+                    server.NegotiateClientCertificateAsync(cts.Token)
+                );
 
                 // no more delaying needed, drain client data.
                 clientChunkingStream.SetWriteChunking(false);
@@ -637,7 +639,8 @@ namespace System.Net.Security.Tests
                 int read = await server.ReadAsync(readBuffer, cts.Token);
 
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.NegotiateClientCertificateAsync(cts.Token));
+                    server.NegotiateClientCertificateAsync(cts.Token)
+                );
 
                 while (read < 200)
                 {
@@ -840,7 +843,8 @@ namespace System.Net.Security.Tests
                 await t;
 
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.NegotiateClientCertificateAsync());
+                    server.NegotiateClientCertificateAsync()
+                );
 
                 server.RemoteCertificate?.Dispose();
             }
@@ -905,12 +909,14 @@ namespace System.Net.Security.Tests
                 {
                     byte[] buffer = new byte[TestHelper.s_ping.Length];
                     await Assert.ThrowsAsync<NotSupportedException>(() =>
-                        server.ReadAsync(buffer).AsTask());
+                        server.ReadAsync(buffer).AsTask()
+                    );
                 }
                 else
                 {
                     await Assert.ThrowsAsync<NotSupportedException>(() =>
-                        server.WriteAsync(TestHelper.s_ping).AsTask());
+                        server.WriteAsync(TestHelper.s_ping).AsTask()
+                    );
                 }
             }
         }
@@ -931,7 +937,8 @@ namespace System.Net.Security.Tests
                 );
                 // Do it again without waiting for previous one to finish.
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    ssl.AuthenticateAsClientAsync("foo.com", null, SslProtocols.Tls12, false));
+                    ssl.AuthenticateAsClientAsync("foo.com", null, SslProtocols.Tls12, false)
+                );
             }
         }
 

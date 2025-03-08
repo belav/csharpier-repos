@@ -488,9 +488,8 @@ namespace System.ComponentModel.Composition.Hosting
                 );
 
                 atomicComposition.AddCompleteAction(() =>
-                    OnExportsChanged(
-                        new ExportsChangeEventArgs(addedExports, removedExports, null)
-                    ));
+                    OnExportsChanged(new ExportsChangeEventArgs(addedExports, removedExports, null))
+                );
 
                 atomicComposition.Complete();
             }
@@ -961,7 +960,8 @@ namespace System.ComponentModel.Composition.Hosting
                                 Array.Empty<ExportDefinition>(),
                                 null
                             )
-                        ));
+                        )
+                    );
                 }
 
                 localAtomicComposition.Complete();

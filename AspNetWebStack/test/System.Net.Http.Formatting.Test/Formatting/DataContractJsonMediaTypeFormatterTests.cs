@@ -384,7 +384,8 @@ namespace System.Net.Http.Formatting
                     memoryStream,
                     content,
                     transportContext: null
-                ));
+                )
+            );
         }
 
 #if Testing_NetStandard1_3 // Cannot read or write w/ DCS in netstandard1.3.

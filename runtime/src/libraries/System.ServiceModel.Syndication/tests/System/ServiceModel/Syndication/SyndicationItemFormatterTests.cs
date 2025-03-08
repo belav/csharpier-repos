@@ -62,8 +62,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateCategory_ItemReturnsNull_ThrowsInvalidOperationException()
         {
             var item = new NullSyndicationItem();
-            Assert.Throws<InvalidOperationException>(() =>
-                Formatter.CreateCategoryEntryPoint(item));
+            Assert.Throws<InvalidOperationException>(() => Formatter.CreateCategoryEntryPoint(item)
+            );
         }
 
         [Fact]
@@ -607,7 +607,8 @@ namespace System.ServiceModel.Syndication.Tests
                     "contentType",
                     "version",
                     out SyndicationContent content
-                ));
+                )
+            );
         }
 
         public static IEnumerable<object[]> TryParseElement_TestData()

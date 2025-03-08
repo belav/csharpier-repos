@@ -405,7 +405,8 @@ namespace System.Security.Cryptography.Cng.Tests
                             destination,
                             PaddingMode.None,
                             notSupportedFeedbackSizeInBits
-                        ));
+                        )
+                    );
 
                     Assert.Contains(feedbackSizeString, ce.Message);
 
@@ -415,7 +416,8 @@ namespace System.Security.Cryptography.Cng.Tests
                             destination,
                             PaddingMode.None,
                             notSupportedFeedbackSizeInBits
-                        ));
+                        )
+                    );
 
                     Assert.Contains(feedbackSizeString, ce.Message);
 
@@ -446,7 +448,8 @@ namespace System.Security.Cryptography.Cng.Tests
             try
             {
                 CryptographicException ce = Assert.Throws<CryptographicException>(() =>
-                    createFromKey(keyName));
+                    createFromKey(keyName)
+                );
                 Assert.Contains($"'{algorithm.Algorithm}'", ce.Message);
             }
             finally

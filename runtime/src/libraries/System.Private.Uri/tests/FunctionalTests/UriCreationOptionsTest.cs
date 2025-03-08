@@ -326,7 +326,8 @@ namespace System.PrivateUri.Tests
 
                 _ = referenceUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped);
                 Assert.Throws<InvalidOperationException>(() =>
-                    uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped));
+                    uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped)
+                );
             }
         }
 
@@ -347,13 +348,17 @@ namespace System.PrivateUri.Tests
             Assert.Empty(uri.GetComponents(UriComponents.Fragment, format));
 
             Assert.Throws<InvalidOperationException>(() =>
-                uri.GetComponents(UriComponents.Path, format));
+                uri.GetComponents(UriComponents.Path, format)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                uri.GetComponents(UriComponents.Query, format));
+                uri.GetComponents(UriComponents.Query, format)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                uri.GetComponents(UriComponents.PathAndQuery, format));
+                uri.GetComponents(UriComponents.PathAndQuery, format)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                uri.GetComponents(UriComponents.AbsoluteUri, format));
+                uri.GetComponents(UriComponents.AbsoluteUri, format)
+            );
         }
 
         private sealed class CustomUriParser : UriParser { }

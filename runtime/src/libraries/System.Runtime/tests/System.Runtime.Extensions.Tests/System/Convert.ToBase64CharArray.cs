@@ -57,7 +57,8 @@ namespace System.Tests
         public static void InvalidInputBuffer()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                Convert.ToBase64CharArray(null, 0, 1, new char[1], 0));
+                Convert.ToBase64CharArray(null, 0, 1, new char[1], 0)
+            );
         }
 
         [Fact]
@@ -66,7 +67,8 @@ namespace System.Tests
             char[] inputChars = "test".ToCharArray();
             byte[] inputBytes = Convert.FromBase64CharArray(inputChars, 0, inputChars.Length);
             Assert.Throws<ArgumentNullException>(() =>
-                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, null, 0));
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, null, 0)
+            );
         }
 
         [Fact]
@@ -77,7 +79,8 @@ namespace System.Tests
             char[] outputBuffer = new char[4];
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64CharArray(inputBytes, -1, inputBytes.Length, outputBuffer, 0));
+                Convert.ToBase64CharArray(inputBytes, -1, inputBytes.Length, outputBuffer, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Convert.ToBase64CharArray(
                     inputBytes,
@@ -85,7 +88,8 @@ namespace System.Tests
                     inputBytes.Length,
                     outputBuffer,
                     0
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -96,9 +100,11 @@ namespace System.Tests
             char[] outputBuffer = new char[4];
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, -1));
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, 1));
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length, outputBuffer, 1)
+            );
         }
 
         [Fact]
@@ -109,11 +115,14 @@ namespace System.Tests
             char[] outputBuffer = new char[4];
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64CharArray(inputBytes, 0, -1, outputBuffer, 0));
+                Convert.ToBase64CharArray(inputBytes, 0, -1, outputBuffer, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length + 1, outputBuffer, 0));
+                Convert.ToBase64CharArray(inputBytes, 0, inputBytes.Length + 1, outputBuffer, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64CharArray(inputBytes, 1, inputBytes.Length, outputBuffer, 0));
+                Convert.ToBase64CharArray(inputBytes, 1, inputBytes.Length, outputBuffer, 0)
+            );
         }
     }
 }

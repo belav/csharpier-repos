@@ -196,7 +196,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                         HashAlgorithmName.SHA1,
                         RSASignaturePadding.Pkcs1,
                         out _
-                    ));
+                    )
+                );
 
                 Assert.ThrowsAny<CryptographicException>(() =>
                     rsa.TrySignHash(
@@ -205,7 +206,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                         HashAlgorithmName.SHA1,
                         RSASignaturePadding.Pss,
                         out _
-                    ));
+                    )
+                );
             }
         }
 

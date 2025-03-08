@@ -50,11 +50,14 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] hash = new byte[32];
 
             Assert.Throws<ObjectDisposedException>(() =>
-                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan()));
+                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan())
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                ecdsa.SignData(hash.AsSpan(), Span<byte>.Empty, HashAlgorithmName.SHA256));
+                ecdsa.SignData(hash.AsSpan(), Span<byte>.Empty, HashAlgorithmName.SHA256)
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                ecdsa.SignHash(hash.AsSpan(), Span<byte>.Empty));
+                ecdsa.SignHash(hash.AsSpan(), Span<byte>.Empty)
+            );
         }
 
         [Theory]
@@ -97,7 +100,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     ReadOnlySpan<byte>.Empty,
                     Span<byte>.Empty,
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
 
         private static byte[] WithOutputArray(Func<byte[], int> func)
@@ -159,9 +163,11 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] hash = new byte[32];
 
             Assert.Throws<ObjectDisposedException>(() =>
-                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan()));
+                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan())
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                ecdsa.SignData(hash.AsSpan(), HashAlgorithmName.SHA256));
+                ecdsa.SignData(hash.AsSpan(), HashAlgorithmName.SHA256)
+            );
             Assert.Throws<ObjectDisposedException>(() => ecdsa.SignHash(hash.AsSpan()));
         }
 
@@ -190,7 +196,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 ecdsa.SignData(
                     ReadOnlySpan<byte>.Empty,
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
     }
 
@@ -251,7 +258,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] hash = new byte[32];
 
             Assert.Throws<ObjectDisposedException>(() =>
-                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan()));
+                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan())
+            );
             Assert.Throws<ObjectDisposedException>(() => ecdsa.TrySignHash(hash, sig, out _));
         }
 
@@ -284,7 +292,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     Span<byte>.Empty,
                     new HashAlgorithmName(Guid.NewGuid().ToString("N")),
                     out int bytesWritten
-                ));
+                )
+            );
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -313,7 +322,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     ReadOnlySpan<byte>.Empty,
                     Span<byte>.Empty,
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
 
         private static byte[] TryWithOutputArray(Func<byte[], (bool, int)> func)
@@ -573,7 +583,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 ecdsa.ImportParameters(keyParameters);
 
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    SignData(ecdsa, new byte[] { 1, 2, 3, 4, 5 }, HashAlgorithmName.SHA256));
+                    SignData(ecdsa, new byte[] { 1, 2, 3, 4, 5 }, HashAlgorithmName.SHA256)
+                );
             }
         }
 

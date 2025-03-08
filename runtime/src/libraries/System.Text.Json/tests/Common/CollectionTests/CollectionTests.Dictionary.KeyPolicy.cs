@@ -334,7 +334,8 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(dict, options));
+                Serializer.SerializeWrapper(dict, options)
+            );
 
             Assert.Contains(typeof(CustomJsonNamingPolicy).ToString(), ex.Message);
         }
@@ -352,7 +353,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.SerializeWrapper(
                     new Dictionary<string, int> { { "onlyKey", 1 } },
                     options
-                ));
+                )
+            );
 
             // We don't use policy on deserialize, so we populate dictionary.
             Dictionary<string, int> obj = await Serializer.DeserializeWrapper<
@@ -402,7 +404,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.SerializeWrapper(
                     new Dictionary<string, int?> { { "onlyKey", 1 } },
                     options
-                ));
+                )
+            );
 
             // We don't use policy on deserialize, so we populate dictionary.
             Dictionary<string, int?> obj = await Serializer.DeserializeWrapper<

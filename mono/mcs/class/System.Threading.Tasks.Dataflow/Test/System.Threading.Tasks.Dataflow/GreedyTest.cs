@@ -271,7 +271,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new BatchedJoinBlock<int, int>(
                     2,
                     new GroupingDataflowBlockOptions { Greedy = false }
-                ));
+                )
+            );
         }
 
         [Test]
@@ -281,7 +282,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new BatchedJoinBlock<int, int, int>(
                     2,
                     new GroupingDataflowBlockOptions { Greedy = false }
-                ));
+                )
+            );
         }
 
         [Test]

@@ -261,7 +261,8 @@ namespace Microsoft.NET.HostModel.AppHost
                     bundleHeaderPlaceholder,
                     BitConverter.GetBytes(bundleHeaderOffset),
                     pad0s: false
-                ));
+                )
+            );
 
             RetryUtil.RetryOnIOError(() => MachOUtils.AdjustHeadersForBundle(appHostPath));
 

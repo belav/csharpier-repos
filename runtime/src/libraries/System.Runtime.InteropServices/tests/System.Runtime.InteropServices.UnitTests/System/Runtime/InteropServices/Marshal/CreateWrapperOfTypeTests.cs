@@ -12,7 +12,8 @@ namespace System.Runtime.InteropServices.Tests
         public void CreateWrapperOfType_Unix_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.CreateWrapperOfType("object", null));
+                Marshal.CreateWrapperOfType("object", null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

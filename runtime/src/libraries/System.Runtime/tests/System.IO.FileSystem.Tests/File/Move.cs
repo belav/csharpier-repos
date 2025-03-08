@@ -61,12 +61,14 @@ namespace System.IO.Tests
                 Move(
                     testFile.FullName,
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
-                ));
+                )
+            );
             Assert.Throws<FileNotFoundException>(() =>
                 Move(
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
                     testFile.FullName
-                ));
+                )
+            );
         }
 
         [Theory, MemberData(nameof(PathsWithInvalidCharacters))]
@@ -84,7 +86,8 @@ namespace System.IO.Tests
                 if (PlatformDetection.IsInAppContainer)
                 {
                     AssertExtensions.ThrowsAny<IOException, UnauthorizedAccessException>(() =>
-                        Move(testFile.FullName, invalidPath));
+                        Move(testFile.FullName, invalidPath)
+                    );
                 }
                 else
                 {
@@ -290,7 +293,8 @@ namespace System.IO.Tests
                 Move(
                     testFile.FullName,
                     testFile.DirectoryName + Path.DirectorySeparatorChar + invalidPath
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -298,13 +302,17 @@ namespace System.IO.Tests
         public void WindowsWildCharacterPath_Core()
         {
             Assert.Throws<FileNotFoundException>(() =>
-                Move(Path.Combine(TestDirectory, "*"), GetTestFilePath()));
+                Move(Path.Combine(TestDirectory, "*"), GetTestFilePath())
+            );
             Assert.Throws<FileNotFoundException>(() =>
-                Move(GetTestFilePath(), Path.Combine(TestDirectory, "*")));
+                Move(GetTestFilePath(), Path.Combine(TestDirectory, "*"))
+            );
             Assert.Throws<FileNotFoundException>(() =>
-                Move(GetTestFilePath(), Path.Combine(TestDirectory, "Test*t")));
+                Move(GetTestFilePath(), Path.Combine(TestDirectory, "Test*t"))
+            );
             Assert.Throws<FileNotFoundException>(() =>
-                Move(GetTestFilePath(), Path.Combine(TestDirectory, "*Test")));
+                Move(GetTestFilePath(), Path.Combine(TestDirectory, "*Test"))
+            );
         }
 
         [Fact]
@@ -337,7 +345,8 @@ namespace System.IO.Tests
         {
             FileInfo testFile = new FileInfo(GetTestFilePath());
             Assert.ThrowsAny<IOException>(() =>
-                Move(testFile.FullName, Path.Combine(TestDirectory, whitespace)));
+                Move(testFile.FullName, Path.Combine(TestDirectory, whitespace))
+            );
         }
 
         [Theory, MemberData(nameof(SimpleWhiteSpace))]

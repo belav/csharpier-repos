@@ -646,7 +646,8 @@ namespace System.Threading.ThreadPools.Tests
                             // Blocking can affect thread pool thread injection heuristics, so don't block, pretend like a
                             // long-running CPU-bound work item
                             ThreadTestHelpers.WaitForConditionWithoutRelinquishingTimeSlice(() =>
-                                Interlocked.CompareExchange(ref completeWork, 0, 0) != 0);
+                                Interlocked.CompareExchange(ref completeWork, 0, 0) != 0
+                            );
                         }
                         catch (Exception ex)
                         {
@@ -741,7 +742,8 @@ namespace System.Threading.ThreadPools.Tests
                             queuedWorkCount - runningWorkItemCount * 8
                         );
                         ThreadTestHelpers.WaitForCondition(() =>
-                            ThreadPool.PendingWorkItemCount >= minExpectedPendingWorkCount);
+                            ThreadPool.PendingWorkItemCount >= minExpectedPendingWorkCount
+                        );
                     }
                     finally
                     {

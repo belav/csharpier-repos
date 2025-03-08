@@ -3172,7 +3172,8 @@ namespace System.ComponentModel.Composition
                 Assert.Equal(expectation.Item2, actualValue);
 
                 ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
-                    container.GetExportedValue<string>());
+                    container.GetExportedValue<string>()
+                );
             }
         }
 

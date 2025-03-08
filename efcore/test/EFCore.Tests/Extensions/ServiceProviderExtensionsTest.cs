@@ -13,7 +13,8 @@ public class ServiceProviderExtensionsTest
         var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
         Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetRequiredService<IPilkington>());
+            serviceProvider.GetRequiredService<IPilkington>()
+        );
     }
 
     [ConditionalFact]
@@ -22,7 +23,8 @@ public class ServiceProviderExtensionsTest
         var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
         Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetRequiredService(typeof(IPilkington)));
+            serviceProvider.GetRequiredService(typeof(IPilkington))
+        );
     }
 
     [ConditionalFact]
@@ -39,7 +41,8 @@ public class ServiceProviderExtensionsTest
             KarlQuote,
             Assert
                 .Throws<NotSupportedException>(() =>
-                    serviceProvider.GetRequiredService<IPilkington>())
+                    serviceProvider.GetRequiredService<IPilkington>()
+                )
                 .Message
         );
     }
@@ -59,7 +62,8 @@ public class ServiceProviderExtensionsTest
             KarlQuote,
             Assert
                 .Throws<NotSupportedException>(() =>
-                    serviceProvider.GetRequiredService(typeof(IPilkington)))
+                    serviceProvider.GetRequiredService(typeof(IPilkington))
+                )
                 .Message
         );
     }
@@ -112,8 +116,8 @@ public class ServiceProviderExtensionsTest
         Assert.Equal(
             KarlQuote,
             Assert
-                .Throws<NotSupportedException>(() =>
-                    serviceProvider.GetService(typeof(IPilkington)))
+                .Throws<NotSupportedException>(() => serviceProvider.GetService(typeof(IPilkington))
+                )
                 .Message
         );
     }

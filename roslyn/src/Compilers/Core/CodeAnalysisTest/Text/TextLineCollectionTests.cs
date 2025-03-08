@@ -19,9 +19,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<NotSupportedException>(() =>
                 default(TextLineCollection.Enumerator).Equals(
                     default(TextLineCollection.Enumerator)
-                ));
+                )
+            );
             Assert.Throws<NotSupportedException>(() =>
-                default(TextLineCollection.Enumerator).GetHashCode());
+                default(TextLineCollection.Enumerator).GetHashCode()
+            );
         }
     }
 }

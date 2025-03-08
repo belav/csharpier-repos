@@ -91,7 +91,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
             await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper(jsonInput.json, typeInfo));
+                Serializer.DeserializeWrapper(jsonInput.json, typeInfo)
+            );
         }
 
         public static IEnumerable<object[]> DisallowHandling_JsonWithUnmappedMembers_MemberData() =>
@@ -259,7 +260,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task ClassWithExtensionDataAndDisallowHandling_ThrowsInvalidOperationException()
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.DeserializeWrapper<ClassWithExtensionDataAndDisallowHandling>("{}"));
+                Serializer.DeserializeWrapper<ClassWithExtensionDataAndDisallowHandling>("{}")
+            );
         }
 
         [Fact]

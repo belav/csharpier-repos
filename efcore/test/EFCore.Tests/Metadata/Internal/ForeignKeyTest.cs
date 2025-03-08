@@ -21,7 +21,8 @@ public class ForeignKeyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    entityType.AddForeignKey(new[] { principalProp }, key, entityType))
+                    entityType.AddForeignKey(new[] { principalProp }, key, entityType)
+                )
                 .Message
         );
 
@@ -58,7 +59,8 @@ public class ForeignKeyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    foreignKey.SetDependentToPrincipal((string)null))
+                    foreignKey.SetDependentToPrincipal((string)null)
+                )
                 .Message
         );
 
@@ -66,7 +68,8 @@ public class ForeignKeyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    foreignKey.SetPrincipalToDependent((string)null))
+                    foreignKey.SetPrincipalToDependent((string)null)
+                )
                 .Message
         );
 
@@ -74,7 +77,8 @@ public class ForeignKeyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    foreignKey.SetProperties(new[] { principalProp }, key))
+                    foreignKey.SetProperties(new[] { principalProp }, key)
+                )
                 .Message
         );
     }
@@ -128,7 +132,8 @@ public class ForeignKeyTest
                         new[] { fk },
                         principalKey,
                         principalEntityType
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -159,7 +164,8 @@ public class ForeignKeyTest
                         new[] { dependentProperty1, dependentProperty2 },
                         principalEntityType.FindPrimaryKey(),
                         principalEntityType
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -190,7 +196,8 @@ public class ForeignKeyTest
                         new[] { dependentProperty1, dependentProperty2 },
                         principalEntityType.FindPrimaryKey(),
                         principalEntityType
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -450,7 +457,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty))
+                    foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)
+                )
                 .Message
         );
     }
@@ -477,7 +485,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty))
+                    foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)
+                )
                 .Message
         );
     }
@@ -696,7 +705,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    foreignKey.SetPrincipalToDependent((string)null))
+                    foreignKey.SetPrincipalToDependent((string)null)
+                )
                 .Message
         );
     }
@@ -1059,7 +1069,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    fk.FindNavigationsFromInHierarchy(unrelatedType))
+                    fk.FindNavigationsFromInHierarchy(unrelatedType)
+                )
                 .Message
         );
         Assert.Equal(
@@ -1070,7 +1081,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    fk.FindNavigationsFromInHierarchy(unrelatedType))
+                    fk.FindNavigationsFromInHierarchy(unrelatedType)
+                )
                 .Message
         );
 
@@ -1082,7 +1094,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    fk.FindNavigationsToInHierarchy(unrelatedType))
+                    fk.FindNavigationsToInHierarchy(unrelatedType)
+                )
                 .Message
         );
         Assert.Equal(
@@ -1093,7 +1106,8 @@ public class ForeignKeyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    fk.FindNavigationsToInHierarchy(unrelatedType))
+                    fk.FindNavigationsToInHierarchy(unrelatedType)
+                )
                 .Message
         );
     }

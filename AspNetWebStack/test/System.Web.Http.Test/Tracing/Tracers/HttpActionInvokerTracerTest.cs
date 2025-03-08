@@ -192,7 +192,8 @@ namespace System.Web.Http.Tracing.Tracers
                 ((IHttpActionInvoker)tracer).InvokeActionAsync(
                     _actionContext,
                     CancellationToken.None
-                ));
+                )
+            );
 
             Assert.Equal(expectedException.Message, exception.Message);
         }
@@ -357,7 +358,8 @@ namespace System.Web.Http.Tracing.Tracers
                 ((IHttpActionInvoker)tracer).InvokeActionAsync(
                     _actionContext,
                     CancellationToken.None
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

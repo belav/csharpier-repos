@@ -86,7 +86,8 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
         );
         using var server = host.GetTestServer();
         var error = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("https://example.com/challenge"));
+            server.SendAsync("https://example.com/challenge")
+        );
         Assert.Contains("cannot be set to itself", error.Message);
     }
 
@@ -100,7 +101,8 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
         );
         using var server = host.GetTestServer();
         var error = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("https://example.com/challenge"));
+            server.SendAsync("https://example.com/challenge")
+        );
         Assert.Contains("cannot be set to itself", error.Message);
     }
 
@@ -119,7 +121,8 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
         );
         using var server = host.GetTestServer();
         var error = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("https://example.com/challenge"));
+            server.SendAsync("https://example.com/challenge")
+        );
         Assert.Contains("cannot be set to itself", error.Message);
     }
 }

@@ -729,7 +729,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                         + "to Parse and pass the settings into XmlReader.Create method.";
 
                 var exception = Assert.Throws<System.Xml.XmlException>(() =>
-                    xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+                    xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+                );
 
                 Assert.Equal(expectedMsg, exception.Message);
             }
@@ -758,7 +759,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             );
 
             var exception = Assert.Throws<FormatException>(() =>
-                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -769,7 +771,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
             var exception = Assert.Throws<ArgumentException>(() =>
-                new ConfigurationBuilder().AddXmlFile(path: null));
+                new ConfigurationBuilder().AddXmlFile(path: null)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -780,7 +783,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
             var exception = Assert.Throws<ArgumentException>(() =>
-                new ConfigurationBuilder().AddXmlFile(string.Empty));
+                new ConfigurationBuilder().AddXmlFile(string.Empty)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -808,7 +812,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             );
 
             var exception = Assert.Throws<FormatException>(() =>
-                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -836,7 +841,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             );
 
             var exception = Assert.Throws<FormatException>(() =>
-                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -865,7 +871,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             );
 
             var exception = Assert.Throws<FormatException>(() =>
-                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+                xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -876,7 +883,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var ex = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddXmlFile("NotExistingConfig.xml", optional: false)
-                    .Build());
+                    .Build()
+            );
             Assert.StartsWith(
                 $"The configuration file 'NotExistingConfig.xml' was not found and is not optional. The expected physical path was '",
                 ex.Message

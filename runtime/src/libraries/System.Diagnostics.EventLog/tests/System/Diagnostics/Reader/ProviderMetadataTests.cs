@@ -17,7 +17,8 @@ namespace System.Diagnostics.Tests
         public void SourceDoesNotExist_Throws()
         {
             Assert.Throws<EventLogNotFoundException>(() =>
-                new ProviderMetadata("Source_Does_Not_Exist"));
+                new ProviderMetadata("Source_Does_Not_Exist")
+            );
         }
 
         [ConditionalTheory(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]

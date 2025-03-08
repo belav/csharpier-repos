@@ -129,7 +129,8 @@ namespace System.ConfigurationTests
                     {
                         AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFilePath);
                         Assert.Throws<ConfigurationErrorsException>(() =>
-                            ConfigurationManager.AppSettings[SettingName]);
+                            ConfigurationManager.AppSettings[SettingName]
+                        );
                     },
                     configFilePath
                 )

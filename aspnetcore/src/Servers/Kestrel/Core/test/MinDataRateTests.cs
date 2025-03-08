@@ -27,7 +27,8 @@ public class MinDataRateTests
     public void BytesPerSecondInvalid(double value)
     {
         var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new MinDataRate(bytesPerSecond: value, gracePeriod: TimeSpan.MaxValue));
+            new MinDataRate(bytesPerSecond: value, gracePeriod: TimeSpan.MaxValue)
+        );
 
         Assert.Equal("bytesPerSecond", exception.ParamName);
         Assert.StartsWith(CoreStrings.PositiveNumberOrNullMinDataRateRequired, exception.Message);
@@ -45,7 +46,8 @@ public class MinDataRateTests
     public void GracePeriodInvalid(TimeSpan value)
     {
         var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new MinDataRate(bytesPerSecond: 1, gracePeriod: value));
+            new MinDataRate(bytesPerSecond: 1, gracePeriod: value)
+        );
 
         Assert.Equal("gracePeriod", exception.ParamName);
         Assert.StartsWith(

@@ -361,7 +361,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
             .BuildServiceProvider()
             .GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>();
         Assert.Throws<OptionsValidationException>(() =>
-            options.Get(CookieAuthenticationDefaults.AuthenticationScheme));
+            options.Get(CookieAuthenticationDefaults.AuthenticationScheme)
+        );
     }
 
     [Fact]
@@ -378,7 +379,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         using var server = host.GetTestServer();
 
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await SendAsync(server, "http://example.com/testpath"));
+            await SendAsync(server, "http://example.com/testpath")
+        );
     }
 
     [Fact]
@@ -395,7 +397,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await SendAsync(server, "http://example.com/testpath"));
+            await SendAsync(server, "http://example.com/testpath")
+        );
     }
 
     [Theory]
@@ -1696,7 +1699,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                             await Assert.ThrowsAsync<InvalidOperationException>(() =>
                                 context.ChallengeAsync(
                                     CookieAuthenticationDefaults.AuthenticationScheme
-                                ));
+                                )
+                            );
                         });
                     })
                     .ConfigureServices(services => services.AddAuthentication().AddCookie())

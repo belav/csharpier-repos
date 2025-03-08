@@ -559,57 +559,75 @@ namespace System.Tests
         [Fact]
         public static void NegTest()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Assembly)null));
+            Assert.Throws<ArgumentNullException>(() => Attribute.GetCustomAttributes((Assembly)null)
+            );
             Assert.Throws<ArgumentNullException>(() => Attribute.GetCustomAttributes((Module)null));
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((MemberInfo)null));
+                Attribute.GetCustomAttributes((MemberInfo)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((ParameterInfo)null));
+                Attribute.GetCustomAttributes((ParameterInfo)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Assembly)null, false));
+                Attribute.GetCustomAttributes((Assembly)null, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Module)null, false));
+                Attribute.GetCustomAttributes((Module)null, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((MemberInfo)null, false));
+                Attribute.GetCustomAttributes((MemberInfo)null, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((ParameterInfo)null, false));
+                Attribute.GetCustomAttributes((ParameterInfo)null, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Assembly)null, typeof(TestAttribute)));
+                Attribute.GetCustomAttributes((Assembly)null, typeof(TestAttribute))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Module)null, typeof(TestAttribute)));
+                Attribute.GetCustomAttributes((Module)null, typeof(TestAttribute))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((MemberInfo)null, typeof(TestAttribute)));
+                Attribute.GetCustomAttributes((MemberInfo)null, typeof(TestAttribute))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((ParameterInfo)null, typeof(TestAttribute)));
+                Attribute.GetCustomAttributes((ParameterInfo)null, typeof(TestAttribute))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Assembly)null, typeof(TestAttribute), false));
+                Attribute.GetCustomAttributes((Assembly)null, typeof(TestAttribute), false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((Module)null, typeof(TestAttribute), false));
+                Attribute.GetCustomAttributes((Module)null, typeof(TestAttribute), false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((MemberInfo)null, typeof(TestAttribute), false));
+                Attribute.GetCustomAttributes((MemberInfo)null, typeof(TestAttribute), false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes((ParameterInfo)null, typeof(TestAttribute), false));
+                Attribute.GetCustomAttributes((ParameterInfo)null, typeof(TestAttribute), false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttributes(Assembly.GetExecutingAssembly(), null, false));
+                Attribute.GetCustomAttributes(Assembly.GetExecutingAssembly(), null, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 Attribute.GetCustomAttributes(
                     typeof(TestClass2).GetEvent("TestEvent2"),
                     null,
                     false
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 Attribute.GetCustomAttributes(
                     typeof(TestClass2).GetMethod("TestMethod2"),
                     null,
                     false
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 Attribute.GetCustomAttributes(
                     typeof(TestClass2).GetMethod("TestMethod2").GetParameters()[0],
                     null,
                     false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -833,11 +851,13 @@ namespace System.Tests
             Type clsType = typeof(DerivedClass);
 
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttribute(element, attributeType));
+                Attribute.GetCustomAttribute(element, attributeType)
+            );
             attributeType = null;
             element = typeof(AttributeGetCustomAttributes).Assembly;
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttribute(element, attributeType));
+                Attribute.GetCustomAttribute(element, attributeType)
+            );
             attributeType = typeof(myClass);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -845,7 +865,8 @@ namespace System.Tests
             );
             attributeType = typeof(Attribute);
             Assert.Throws<AmbiguousMatchException>(() =>
-                Attribute.GetCustomAttribute(element, attributeType));
+                Attribute.GetCustomAttribute(element, attributeType)
+            );
         }
 
         [Fact]
@@ -884,11 +905,13 @@ namespace System.Tests
             Type clsType = typeof(DerivedClass);
 
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttribute(element, attributeType, true));
+                Attribute.GetCustomAttribute(element, attributeType, true)
+            );
             attributeType = null;
             element = typeof(AttributeGetCustomAttributes).Assembly;
             Assert.Throws<ArgumentNullException>(() =>
-                Attribute.GetCustomAttribute(element, attributeType, false));
+                Attribute.GetCustomAttribute(element, attributeType, false)
+            );
             attributeType = typeof(myClass);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -896,7 +919,8 @@ namespace System.Tests
             );
             attributeType = typeof(Attribute);
             Assert.Throws<AmbiguousMatchException>(() =>
-                Attribute.GetCustomAttribute(element, attributeType, true));
+                Attribute.GetCustomAttribute(element, attributeType, true)
+            );
         }
 
         [Fact]
@@ -928,11 +952,13 @@ namespace System.Tests
             Type clsType = typeof(DerivedClass);
 
             Assert.Throws<ArgumentNullException>(() =>
-                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType));
+                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType)
+            );
             attributeType = null;
             element = typeof(TestClass).GetMethod("method1");
             Assert.Throws<ArgumentNullException>(() =>
-                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType));
+                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType)
+            );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -943,7 +969,8 @@ namespace System.Tests
                 Attribute.GetCustomAttribute(
                     typeof(Attribute).GetMethod("GetCustomAttribute"),
                     typeof(Attribute)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -975,11 +1002,13 @@ namespace System.Tests
             Type clsType = typeof(DerivedClass);
 
             Assert.Throws<ArgumentNullException>(() =>
-                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType, false));
+                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType, false)
+            );
             attributeType = null;
             element = typeof(TestClass).GetMethod("method1");
             Assert.Throws<ArgumentNullException>(() =>
-                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType, false));
+                (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType, false)
+            );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -991,7 +1020,8 @@ namespace System.Tests
                     typeof(Attribute).GetMethod("GetCustomAttribute"),
                     typeof(Attribute),
                     false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1023,10 +1053,12 @@ namespace System.Tests
             Type clsType = typeof(DerivedClass);
 
             Assert.Throws<ArgumentNullException>(() =>
-                (DebuggableAttribute)Attribute.GetCustomAttribute(element, attributeType));
+                (DebuggableAttribute)Attribute.GetCustomAttribute(element, attributeType)
+            );
             attributeType = null;
             Assert.Throws<ArgumentNullException>(() =>
-                (DebuggableAttribute)Attribute.GetCustomAttribute(clsType.Module, attributeType));
+                (DebuggableAttribute)Attribute.GetCustomAttribute(clsType.Module, attributeType)
+            );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -1064,11 +1096,13 @@ namespace System.Tests
             Type clsType = typeof(DerivedClass);
 
             Assert.Throws<ArgumentNullException>(() =>
-                (DebuggableAttribute)Attribute.GetCustomAttribute(element, attributeType, false));
+                (DebuggableAttribute)Attribute.GetCustomAttribute(element, attributeType, false)
+            );
             attributeType = null;
             Assert.Throws<ArgumentNullException>(() =>
                 (DebuggableAttribute)
-                    Attribute.GetCustomAttribute(clsType.Module, attributeType, false));
+                    Attribute.GetCustomAttribute(clsType.Module, attributeType, false)
+            );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -1110,10 +1144,12 @@ namespace System.Tests
             ParameterInfo[] paramInfos = minfo.GetParameters();
 
             Assert.Throws<ArgumentNullException>(() =>
-                (ArgumentUsageAttribute)Attribute.GetCustomAttribute(element, attributeType));
+                (ArgumentUsageAttribute)Attribute.GetCustomAttribute(element, attributeType)
+            );
             attributeType = null;
             Assert.Throws<ArgumentNullException>(() =>
-                (ArgumentUsageAttribute)Attribute.GetCustomAttribute(paramInfos[0], attributeType));
+                (ArgumentUsageAttribute)Attribute.GetCustomAttribute(paramInfos[0], attributeType)
+            );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -1165,12 +1201,13 @@ namespace System.Tests
             ParameterInfo[] paramInfos = minfo.GetParameters();
 
             Assert.Throws<ArgumentNullException>(() =>
-                (ArgumentUsageAttribute)
-                    Attribute.GetCustomAttribute(element, attributeType, false));
+                (ArgumentUsageAttribute)Attribute.GetCustomAttribute(element, attributeType, false)
+            );
             attributeType = null;
             Assert.Throws<ArgumentNullException>(() =>
                 (ArgumentUsageAttribute)
-                    Attribute.GetCustomAttribute(paramInfos[0], attributeType, false));
+                    Attribute.GetCustomAttribute(paramInfos[0], attributeType, false)
+            );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,

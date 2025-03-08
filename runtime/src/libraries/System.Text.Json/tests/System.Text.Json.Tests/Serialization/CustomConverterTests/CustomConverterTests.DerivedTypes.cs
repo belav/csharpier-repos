@@ -83,7 +83,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Without converter, we throw.
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_Dictionary>(json));
+                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_Dictionary>(json)
+            );
             Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(wrapper));
 
             // With converter, we expect no values in the wrapper per converter's implementation.
@@ -118,7 +119,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Without converter, we throw on deserialize.
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_IEnumerable>(json));
+                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_IEnumerable>(json)
+            );
             // Without converter, we serialize as is.
             Assert.Equal(
                 @"{""IEnumerableWrapper"":[""1"",""2"",""3""]}",

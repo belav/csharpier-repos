@@ -67,7 +67,8 @@ public class RegistryPolicyResolverTests
 
         // Act
         var ex = ExceptionAssert.Throws<InvalidOperationException>(() =>
-            RunTestWithRegValues(registryEntries));
+            RunTestWithRegValues(registryEntries)
+        );
 
         // Assert
         Assert.Equal(

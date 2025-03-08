@@ -261,27 +261,38 @@ namespace System.Text.RegularExpressions.Tests
             {
                 // Unsupported pattern constructs with specific options
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?=a)", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and positive lookaheads
+                    new Regex("(?=a)", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and positive lookaheads
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?!a)", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and negative lookaheads
+                    new Regex("(?!a)", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and negative lookaheads
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?<=a)", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and positive lookbehinds
+                    new Regex("(?<=a)", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and positive lookbehinds
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?<!a)", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and negative lookbehinds
+                    new Regex("(?<!a)", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and negative lookbehinds
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"(\w)\1", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and backreferences
+                    new Regex(@"(\w)\1", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and backreferences
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"(?(0)ab)", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and backreference conditionals
+                    new Regex(@"(?(0)ab)", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and backreference conditionals
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"([ab])\1", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and expression conditionals
+                    new Regex(@"([ab])\1", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and expression conditionals
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"(?>a*)a", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and atomics
+                    new Regex(@"(?>a*)a", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and atomics
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"\Ga", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and start anchors
+                    new Regex(@"\Ga", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and start anchors
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"(?<C>A)(?<-C>B)$", RegexHelpers.RegexOptionNonBacktracking)); // NonBacktracking and balancing groups
+                    new Regex(@"(?<C>A)(?<-C>B)$", RegexHelpers.RegexOptionNonBacktracking)
+                ); // NonBacktracking and balancing groups
                 Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"\w{1,1001}", RegexHelpers.RegexOptionNonBacktracking)); // Potentially large automata expansion
+                    new Regex(@"\w{1,1001}", RegexHelpers.RegexOptionNonBacktracking)
+                ); // Potentially large automata expansion
             }
         }
 
@@ -390,9 +401,11 @@ namespace System.Text.RegularExpressions.Tests
         {
             var r = new SerializableDerivedRegex();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new SerializableDerivedRegex(default, default));
+                new SerializableDerivedRegex(default, default)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                ((ISerializable)r).GetObjectData(default, default));
+                ((ISerializable)r).GetObjectData(default, default)
+            );
         }
 
         [Serializable]

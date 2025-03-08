@@ -42,7 +42,8 @@ public class ReverseEngineeringConfigurationTests
                             ModelNamespace = "FakeNamespace",
                             ContextName = contextName,
                         }
-                    ))
+                    )
+                )
                 .Message
         );
     }

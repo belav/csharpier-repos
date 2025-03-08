@@ -142,7 +142,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             State.ThreadingContext.JoinableTaskFactory.Run(() =>
                 GetDocument()
                     .GetLineFormattingOptionsAsync(GlobalOptions, CancellationToken.None)
-                    .AsTask());
+                    .AsTask()
+            );
 
         public EnvDTE.TextPoint StartPoint
         {

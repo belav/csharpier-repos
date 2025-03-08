@@ -79,7 +79,8 @@ namespace System.IO.Tests
         public void DeleteRoot()
         {
             Assert.Throws<IOException>(() =>
-                Delete(Path.GetPathRoot(Directory.GetCurrentDirectory())));
+                Delete(Path.GetPathRoot(Directory.GetCurrentDirectory()))
+            );
         }
 
         [Fact]
@@ -254,7 +255,8 @@ namespace System.IO.Tests
             ReadOnly_FileSystemHelper(readOnlyDirectory =>
             {
                 Assert.Throws<DirectoryNotFoundException>(() =>
-                    Delete(Path.Combine(readOnlyDirectory, "DoesNotExist")));
+                    Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"))
+                );
             });
         }
         #endregion

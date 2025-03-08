@@ -249,14 +249,16 @@ namespace System.Text.Json.Serialization.Tests
 
             // Invalid JSON.
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(@"{x}", options));
+                JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(@"{x}", options)
+            );
 
             // Invalid enum value.
             Assert.Throws<JsonException>(() =>
                 JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(
                     @"[{""Key"":""BAD"",""Value"":100}]",
                     options
-                ));
+                )
+            );
         }
     }
 }

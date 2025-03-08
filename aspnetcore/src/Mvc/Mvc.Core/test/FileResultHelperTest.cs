@@ -133,7 +133,8 @@ public class FileResultTest
 
         // Act & Assert
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteResultAsync(actionContext));
+            result.ExecuteResultAsync(actionContext)
+        );
     }
 
     public static TheoryData<string, string> ContentDispositionData

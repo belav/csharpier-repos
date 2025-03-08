@@ -486,7 +486,8 @@ public class TryParseTypeModelBinderTest
     {
         // Act & assert
         Assert.Throws<InvalidOperationException>(() =>
-            new TryParseModelBinder(typeof(TestClass), NullLoggerFactory.Instance));
+            new TryParseModelBinder(typeof(TestClass), NullLoggerFactory.Instance)
+        );
     }
 
     private static DefaultModelBindingContext GetBindingContext(Type modelType)

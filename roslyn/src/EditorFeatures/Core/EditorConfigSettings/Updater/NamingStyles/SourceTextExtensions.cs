@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         private class NamingRuleComparerIgnoreGUIDs : IEqualityComparer<NamingRule>
         {
             private static readonly Lazy<NamingRuleComparerIgnoreGUIDs> s_lazyInstance = new(() =>
-                new NamingRuleComparerIgnoreGUIDs());
+                new NamingRuleComparerIgnoreGUIDs()
+            );
 
             public static NamingRuleComparerIgnoreGUIDs Instance => s_lazyInstance.Value;
 

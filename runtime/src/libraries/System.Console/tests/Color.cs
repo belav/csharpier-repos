@@ -53,7 +53,8 @@ public class Color
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.ForegroundColor);
         Assert.Throws<PlatformNotSupportedException>(() =>
-            Console.ForegroundColor = ConsoleColor.Red);
+            Console.ForegroundColor = ConsoleColor.Red
+        );
     }
 
     [Fact]
@@ -62,7 +63,8 @@ public class Color
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.BackgroundColor);
         Assert.Throws<PlatformNotSupportedException>(() =>
-            Console.BackgroundColor = ConsoleColor.Red);
+            Console.BackgroundColor = ConsoleColor.Red
+        );
     }
 
     [Fact]

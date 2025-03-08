@@ -72,7 +72,8 @@ namespace System.ComponentModel.Composition.Factories
                     atomicComposition.AddCompleteAction(() =>
                         this.OnExportsChanged(
                             new ExportsChangeEventArgs(addedExports, removedExports, null)
-                        ));
+                        )
+                    );
 
                     atomicComposition.Complete();
                 }

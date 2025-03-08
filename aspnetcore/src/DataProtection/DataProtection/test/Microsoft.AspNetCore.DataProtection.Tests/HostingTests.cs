@@ -37,7 +37,8 @@ public class HostingTests
                                 new InvalidOperationException(
                                     "Server was started before key ring was initialized"
                                 )
-                            ))
+                            )
+                        )
                     )
             );
 
@@ -70,7 +71,8 @@ public class HostingTests
                                 new InvalidOperationException(
                                     "Server was started before key ring was initialized"
                                 )
-                            ))
+                            )
+                        )
                     )
             )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());

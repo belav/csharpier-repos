@@ -53,7 +53,8 @@ public class WarningsTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Database.EnlistTransaction(new CommittableTransaction()))
+                    context.Database.EnlistTransaction(new CommittableTransaction())
+                )
                 .Message
         );
     }

@@ -239,7 +239,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                         Span<byte>.Empty,
                         out _,
                         feedbackSizeInBits: 120
-                    ));
+                    )
+                );
             }
         }
 
@@ -255,7 +256,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                         Span<byte>.Empty,
                         out _,
                         feedbackSizeInBits: 120
-                    ));
+                    )
+                );
             }
         }
 

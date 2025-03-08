@@ -28,7 +28,8 @@ public class RequestLifetimeTests
 
         var client = host.GetTestServer().CreateClient();
         var ex = await Assert.ThrowsAsync<OperationCanceledException>(() =>
-            client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead));
+            client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead)
+        );
         Assert.Equal("The application aborted the request.", ex.Message);
         await requestAborted.Task.DefaultTimeout();
     }
@@ -47,7 +48,8 @@ public class RequestLifetimeTests
 
         var client = host.GetTestServer().CreateClient();
         var ex = await Assert.ThrowsAsync<OperationCanceledException>(() =>
-            client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead));
+            client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead)
+        );
         Assert.Equal("The application aborted the request.", ex.Message);
         abortReceived.SetResult();
     }
@@ -74,7 +76,8 @@ public class RequestLifetimeTests
         responseReceived.SetResult();
         response.EnsureSuccessStatusCode();
         var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsByteArrayAsync());
+            response.Content.ReadAsByteArrayAsync()
+        );
         var rex = ex.GetBaseException();
         Assert.Equal("The application aborted the request.", rex.Message);
         abortReceived.SetResult();
@@ -102,7 +105,8 @@ public class RequestLifetimeTests
         responseReceived.SetResult();
         response.EnsureSuccessStatusCode();
         var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsByteArrayAsync());
+            response.Content.ReadAsByteArrayAsync()
+        );
         var rex = ex.GetBaseException();
         Assert.Equal("The application aborted the request.", rex.Message);
         abortReceived.SetResult();

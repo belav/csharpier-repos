@@ -105,22 +105,28 @@ namespace System.SpanTests
         public static void BinarySearch_NullComparableThrows()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new Span<int>(new int[] { }).BinarySearch<int>(null));
+                new Span<int>(new int[] { }).BinarySearch<int>(null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySpan<int>(new int[] { }).BinarySearch<int>(null));
+                new ReadOnlySpan<int>(new int[] { }).BinarySearch<int>(null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new Span<int>(new int[] { }).BinarySearch<int, IComparable<int>>(null));
+                new Span<int>(new int[] { }).BinarySearch<int, IComparable<int>>(null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySpan<int>(new int[] { }).BinarySearch<int, IComparable<int>>(null));
+                new ReadOnlySpan<int>(new int[] { }).BinarySearch<int, IComparable<int>>(null)
+            );
         }
 
         [Fact]
         public static void BinarySearch_NullComparerThrows()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new Span<int>(new int[] { }).BinarySearch<int, IComparer<int>>(0, null));
+                new Span<int>(new int[] { }).BinarySearch<int, IComparer<int>>(0, null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySpan<int>(new int[] { }).BinarySearch<int, IComparer<int>>(0, null));
+                new ReadOnlySpan<int>(new int[] { }).BinarySearch<int, IComparer<int>>(0, null)
+            );
         }
 
         // NOTE: BinarySearch_MaxLength_NoOverflow test is constrained to run on Windows and MacOSX because it causes

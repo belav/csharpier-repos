@@ -613,7 +613,8 @@ class C
                     gmdbpf,
                     missingAssemblyIdentities,
                     ref references
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -631,7 +632,8 @@ class C
                     gmdbpf,
                     missingAssemblyIdentities,
                     ref references
-                ));
+                )
+            );
         }
 
         private static void ShouldTryAgain_False(DkmUtilities.GetMetadataBytesPtrFunction gmdbpf)

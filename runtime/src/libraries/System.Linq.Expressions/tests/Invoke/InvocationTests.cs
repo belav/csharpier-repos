@@ -182,14 +182,16 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Invoke(adder, Expression.Constant(1)));
+                Expression.Invoke(adder, Expression.Constant(1))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.Invoke(
                     adder,
                     Expression.Constant(1),
                     Expression.Constant(1),
                     Expression.Constant(1)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -211,14 +213,16 @@ namespace System.Linq.Expressions.Tests
         {
             Func<int, int, int> adder = (x, y) => x + y;
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Invoke(Expression.Constant(adder), Expression.Constant(1)));
+                Expression.Invoke(Expression.Constant(adder), Expression.Constant(1))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.Invoke(
                     Expression.Constant(adder),
                     Expression.Constant(1),
                     Expression.Constant(1),
                     Expression.Constant(1)
-                ));
+                )
+            );
         }
 
         [Fact]

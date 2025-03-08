@@ -57,7 +57,8 @@ public class WebAssemblyPrerenderedTest : ServerTestBase<AspNetSiteServerFixture
             jsExecutor.ExecuteScript(
                 "return window['__aspnetcore__testing__blazor_wasm__started__'];"
             )
-                is not null);
+                is not null
+        );
     }
 
     private static string GetPublishedContentRoot(Assembly assembly)

@@ -201,7 +201,8 @@ namespace System.Collections.Tests
                 invalidSet =>
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer()));
+                        list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
+                    );
                 }
             );
         }

@@ -907,13 +907,15 @@ namespace System.Reflection.Emit.Tests
                     AssemblyBuilderAccess access = AssemblyBuilderAccess.Run;
 
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        AssemblyBuilder.DefineDynamicAssembly(assemblyName, access));
+                        AssemblyBuilder.DefineDynamicAssembly(assemblyName, access)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
                         AssemblyBuilder.DefineDynamicAssembly(
                             assemblyName,
                             access,
                             assemblyAttributes: null
-                        ));
+                        )
+                    );
                 },
                 options
             );

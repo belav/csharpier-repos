@@ -47,7 +47,8 @@ namespace Microsoft.NET.HostModel.Tests
         {
             // compression must be off when targeting pre-6.0
             Assert.Throws<ArgumentException>(() =>
-                CreateBundlerInstance(BundleOptions.EnableCompression, new Version(5, 0)));
+                CreateBundlerInstance(BundleOptions.EnableCompression, new Version(5, 0))
+            );
         }
 
         [Theory]
@@ -64,9 +65,11 @@ namespace Microsoft.NET.HostModel.Tests
 
             Bundler bundler = CreateBundlerInstance();
             Assert.Throws<ArgumentException>(() =>
-                bundler.GenerateBundle(new[] { invalidSourcePath }));
+                bundler.GenerateBundle(new[] { invalidSourcePath })
+            );
             Assert.Throws<ArgumentException>(() =>
-                bundler.GenerateBundle(new[] { invalidBundlePath }));
+                bundler.GenerateBundle(new[] { invalidBundlePath })
+            );
         }
 
         [Fact]

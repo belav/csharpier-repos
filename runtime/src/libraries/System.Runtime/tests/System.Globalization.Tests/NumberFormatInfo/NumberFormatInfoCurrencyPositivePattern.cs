@@ -53,7 +53,8 @@ namespace System.Globalization.Tests
         public void CurrencyPositivePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.CurrencyPositivePattern = 1);
+                NumberFormatInfo.InvariantInfo.CurrencyPositivePattern = 1
+            );
         }
     }
 }

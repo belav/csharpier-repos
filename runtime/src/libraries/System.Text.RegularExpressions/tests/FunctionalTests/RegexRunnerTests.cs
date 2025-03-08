@@ -38,14 +38,16 @@ namespace System.Text.RegularExpressions.Tests
             // FindFirstChar and Go methods should not be implemented since built-in engines should be overriding and using Scan instead.
             TargetInvocationException goInvocationException =
                 Assert.Throws<TargetInvocationException>(() =>
-                    goMethod.Invoke(runner, new object[] { }));
+                    goMethod.Invoke(runner, new object[] { })
+                );
             Assert.Equal(
                 typeof(NotImplementedException),
                 goInvocationException.InnerException.GetType()
             );
             TargetInvocationException ffcInvocationException =
                 Assert.Throws<TargetInvocationException>(() =>
-                    ffcMethod.Invoke(runner, new object[] { }));
+                    ffcMethod.Invoke(runner, new object[] { })
+                );
             Assert.Equal(
                 typeof(NotImplementedException),
                 ffcInvocationException.InnerException.GetType()

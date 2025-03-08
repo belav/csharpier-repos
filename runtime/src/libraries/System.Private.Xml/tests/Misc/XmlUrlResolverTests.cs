@@ -20,7 +20,8 @@ namespace System.Xml.Tests
                         UriKind.Relative
                     ),
                     "test.xml"
-                ));
+                )
+            );
         }
 
         [Theory]

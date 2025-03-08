@@ -314,7 +314,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Range(0, 1).WithExecutionMode(first).WithExecutionMode(second));
+                ParallelEnumerable.Range(0, 1).WithExecutionMode(first).WithExecutionMode(second)
+            );
         }
 
         [Fact]

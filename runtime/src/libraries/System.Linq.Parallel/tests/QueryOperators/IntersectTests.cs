@@ -504,9 +504,11 @@ namespace System.Linq.Parallel.Tests
         {
 #pragma warning disable 618
             Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1)));
+                ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1))
+            );
             Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1), null));
+                ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1), null)
+            );
 #pragma warning restore 618
         }
 
@@ -519,12 +521,14 @@ namespace System.Linq.Parallel.Tests
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithCancellation(t)
-                    .Intersect(ParallelEnumerable.Range(0, 1).WithCancellation(t)));
+                    .Intersect(ParallelEnumerable.Range(0, 1).WithCancellation(t))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithDegreeOfParallelism(1)
-                    .Intersect(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1)));
+                    .Intersect(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -533,7 +537,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(0, 1)
                             .WithExecutionMode(ParallelExecutionMode.Default)
-                    ));
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -542,7 +547,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(0, 1)
                             .WithMergeOptions(ParallelMergeOptions.Default)
-                    ));
+                    )
+            );
         }
 
         [Fact]

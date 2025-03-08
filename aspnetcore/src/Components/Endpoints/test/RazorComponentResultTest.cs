@@ -26,9 +26,11 @@ public class RazorComponentResultTest
     public void RejectsNullParameters()
     {
         Assert.Throws<ArgumentNullException>(() =>
-            new RazorComponentResult(typeof(SimpleComponent), (object)null));
+            new RazorComponentResult(typeof(SimpleComponent), (object)null)
+        );
         Assert.Throws<ArgumentNullException>(() =>
-            new RazorComponentResult(typeof(SimpleComponent), null));
+            new RazorComponentResult(typeof(SimpleComponent), null)
+        );
     }
 
     [Fact]
@@ -272,7 +274,8 @@ public class RazorComponentResultTest
             PreventStreamingRendering = true,
         };
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(httpContext));
+            result.ExecuteAsync(httpContext)
+        );
 
         // Assert
         Assert.Contains(
@@ -313,7 +316,8 @@ public class RazorComponentResultTest
         var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
             new RazorComponentResult(typeof(ComponentThatThrowsSynchronously)).ExecuteAsync(
                 httpContext
-            ));
+            )
+        );
 
         // Assert
         Assert.Contains("Test message", ex.Message);
@@ -330,7 +334,8 @@ public class RazorComponentResultTest
             new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously))
             {
                 PreventStreamingRendering = true,
-            }.ExecuteAsync(httpContext));
+            }.ExecuteAsync(httpContext)
+        );
 
         // Assert
         Assert.Contains("Test message", ex.Message);
@@ -358,7 +363,8 @@ public class RazorComponentResultTest
         var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
             new RazorComponentResult(
                 typeof(StreamingComponentThatThrowsAsynchronously)
-            ).ExecuteAsync(httpContext));
+            ).ExecuteAsync(httpContext)
+        );
 
         // Assert
         Assert.Contains("Test message with <b>markup</b>", ex.Message);

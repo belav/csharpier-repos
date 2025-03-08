@@ -61,7 +61,8 @@ public class DefaultHealthCheckServiceTest
 
         // Act
         var exception = Assert.Throws<ArgumentException>(() =>
-            new DefaultHealthCheckService(scopeFactory, options, logger));
+            new DefaultHealthCheckService(scopeFactory, options, logger)
+        );
 
         // Assert
         Assert.StartsWith(

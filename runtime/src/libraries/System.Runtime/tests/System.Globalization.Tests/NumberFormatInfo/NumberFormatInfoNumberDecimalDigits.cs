@@ -54,7 +54,8 @@ namespace System.Globalization.Tests
         public void NumberDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.NumberDecimalDigits = 1);
+                NumberFormatInfo.InvariantInfo.NumberDecimalDigits = 1
+            );
         }
     }
 }

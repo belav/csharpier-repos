@@ -27,7 +27,8 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.AppendAllTextAsync(path, "", token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await File.AppendAllTextAsync(path, "", token));
+                await File.AppendAllTextAsync(path, "", token)
+            );
         }
     }
 
@@ -52,7 +53,8 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.AppendAllTextAsync(path, "", Encoding.UTF8, token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await File.AppendAllTextAsync(path, "", Encoding.UTF8, token));
+                await File.AppendAllTextAsync(path, "", Encoding.UTF8, token)
+            );
         }
     }
 
@@ -72,7 +74,8 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.AppendAllLinesAsync(path, new[] { "" }, token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await File.AppendAllLinesAsync(path, new[] { "" }, token));
+                await File.AppendAllLinesAsync(path, new[] { "" }, token)
+            );
         }
     }
 
@@ -100,7 +103,8 @@ namespace System.IO.Tests
                 File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token).IsCanceled
             );
             return Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token));
+                await File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token)
+            );
         }
     }
 }

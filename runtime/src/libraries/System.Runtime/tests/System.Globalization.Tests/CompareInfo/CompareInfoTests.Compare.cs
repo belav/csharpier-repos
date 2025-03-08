@@ -2845,7 +2845,8 @@ namespace System.Globalization.Tests
                         new string(hiraganaChar1, 1),
                         new string(katakanaChar1, 1),
                         option
-                    ));
+                    )
+                );
             }
         }
     }

@@ -129,16 +129,20 @@ D9fVWpuVzYpEDfZm"
             }
 
             Assert.ThrowsAny<ArgumentNullException>(() =>
-                privateKeyInfo.Encrypt(ReadOnlySpan<char>.Empty, null));
+                privateKeyInfo.Encrypt(ReadOnlySpan<char>.Empty, null)
+            );
 
             Assert.ThrowsAny<ArgumentNullException>(() =>
-                privateKeyInfo.Encrypt(ReadOnlySpan<byte>.Empty, null));
+                privateKeyInfo.Encrypt(ReadOnlySpan<byte>.Empty, null)
+            );
 
             Assert.ThrowsAny<ArgumentNullException>(() =>
-                privateKeyInfo.TryEncrypt(ReadOnlySpan<char>.Empty, null, Span<byte>.Empty, out _));
+                privateKeyInfo.TryEncrypt(ReadOnlySpan<char>.Empty, null, Span<byte>.Empty, out _)
+            );
 
             Assert.ThrowsAny<ArgumentNullException>(() =>
-                privateKeyInfo.TryEncrypt(ReadOnlySpan<byte>.Empty, null, Span<byte>.Empty, out _));
+                privateKeyInfo.TryEncrypt(ReadOnlySpan<byte>.Empty, null, Span<byte>.Empty, out _)
+            );
 
             // PKCS12 requires SHA-1
             Assert.ThrowsAny<CryptographicException>(() =>
@@ -149,7 +153,8 @@ D9fVWpuVzYpEDfZm"
                         HashAlgorithmName.SHA256,
                         72
                     )
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -161,7 +166,8 @@ D9fVWpuVzYpEDfZm"
                     ),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
 
             // PKCS12 requires SHA-1
             Assert.ThrowsAny<CryptographicException>(() =>
@@ -172,7 +178,8 @@ D9fVWpuVzYpEDfZm"
                         HashAlgorithmName.MD5,
                         72
                     )
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -184,7 +191,8 @@ D9fVWpuVzYpEDfZm"
                     ),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
 
             // PKCS12 requires a char-based password
             Assert.ThrowsAny<CryptographicException>(() =>
@@ -195,7 +203,8 @@ D9fVWpuVzYpEDfZm"
                         HashAlgorithmName.SHA1,
                         72
                     )
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -207,14 +216,16 @@ D9fVWpuVzYpEDfZm"
                     ),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
 
             // Unknown encryption algorithm
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.Encrypt(
                     new byte[3],
                     new PbeParameters(0, HashAlgorithmName.SHA1, 72)
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -222,14 +233,16 @@ D9fVWpuVzYpEDfZm"
                     new PbeParameters(0, HashAlgorithmName.SHA1, 72),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
 
             // Unknown encryption algorithm (negative enum value)
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.Encrypt(
                     new byte[3],
                     new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72)
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -237,14 +250,16 @@ D9fVWpuVzYpEDfZm"
                     new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
 
             // Unknown encryption algorithm (overly-large enum value)
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.Encrypt(
                     new byte[3],
                     new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72)
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -252,7 +267,8 @@ D9fVWpuVzYpEDfZm"
                     new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
 
             // Unknown hash algorithm
             Assert.ThrowsAny<CryptographicException>(() =>
@@ -263,7 +279,8 @@ D9fVWpuVzYpEDfZm"
                         new HashAlgorithmName("Potato"),
                         72
                     )
-                ));
+                )
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
                 privateKeyInfo.TryEncrypt(
@@ -275,7 +292,8 @@ D9fVWpuVzYpEDfZm"
                     ),
                     Span<byte>.Empty,
                     out _
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -298,11 +316,13 @@ D9fVWpuVzYpEDfZm"
                         (ReadOnlySpan<char>)"wrong",
                         encryptedKey,
                         out _
-                    ));
+                    )
+                );
 
                 // Wrong password
                 Assert.Throws<CryptographicException>(() =>
-                    Pkcs8PrivateKeyInfo.DecryptAndDecode(new byte[3], encryptedKey, out _));
+                    Pkcs8PrivateKeyInfo.DecryptAndDecode(new byte[3], encryptedKey, out _)
+                );
 
                 // Corrupted data
                 Assert.Throws<CryptographicException>(() =>
@@ -310,14 +330,16 @@ D9fVWpuVzYpEDfZm"
                         (ReadOnlySpan<char>)"initial",
                         encryptedKey.AsMemory(1),
                         out _
-                    ));
+                    )
+                );
 
                 Assert.Throws<CryptographicException>(() =>
                     Pkcs8PrivateKeyInfo.DecryptAndDecode(
                         (ReadOnlySpan<char>)"initial",
                         encryptedKey.AsMemory(0, encryptedKey.Length - 1),
                         out _
-                    ));
+                    )
+                );
 
                 Pkcs8PrivateKeyInfo privateKey = Pkcs8PrivateKeyInfo.DecryptAndDecode(
                     (ReadOnlySpan<char>)nameof(DecryptionFailures),
@@ -435,20 +457,18 @@ D9fVWpuVzYpEDfZm"
             );
 
             Assert.ThrowsAny<CryptographicException>(() =>
-                info.Encrypt((ReadOnlySpan<char>)"hi", pbeParameters));
-            Assert.ThrowsAny<CryptographicException>(() =>
-                info.Encrypt(new byte[3], pbeParameters));
+                info.Encrypt((ReadOnlySpan<char>)"hi", pbeParameters)
+            );
+            Assert.ThrowsAny<CryptographicException>(() => info.Encrypt(new byte[3], pbeParameters)
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
-                info.TryEncrypt(
-                    (ReadOnlySpan<char>)"hello",
-                    pbeParameters,
-                    Span<byte>.Empty,
-                    out _
-                ));
+                info.TryEncrypt((ReadOnlySpan<char>)"hello", pbeParameters, Span<byte>.Empty, out _)
+            );
 
             Assert.ThrowsAny<CryptographicException>(() =>
-                info.TryEncrypt(new byte[3], pbeParameters, Span<byte>.Empty, out _));
+                info.TryEncrypt(new byte[3], pbeParameters, Span<byte>.Empty, out _)
+            );
         }
 
         [Fact]
@@ -515,7 +535,8 @@ D9fVWpuVzYpEDfZm"
                     parameterBytes,
                     keyBytes,
                     skipCopies: true
-                ));
+                )
+            );
         }
 
         [Fact]

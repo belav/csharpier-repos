@@ -36,14 +36,16 @@ namespace System.Xml.XmlResolverTests
         {
             var xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
             Assert.Throws<XmlException>(() =>
-                xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string)));
+                xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string))
+            );
 
             xmlResolver = new XmlPreloadedResolver(
                 new XmlPreloadedResolver(),
                 XmlKnownDtds.Xhtml10
             );
             Assert.Throws<XmlException>(() =>
-                xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string)));
+                xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string))
+            );
 
             xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
             Assert.Throws<XmlException>(() =>
@@ -51,7 +53,8 @@ namespace System.Xml.XmlResolverTests
                     new Uri("-//W3C//DTD XHTML 1.0 Transitional//EN", UriKind.RelativeOrAbsolute),
                     null,
                     typeof(string)
-                ));
+                )
+            );
 
             xmlResolver = new XmlPreloadedResolver(
                 new XmlPreloadedResolver(),
@@ -62,7 +65,8 @@ namespace System.Xml.XmlResolverTests
                     new Uri("-//W3C//Invalid URI ", UriKind.RelativeOrAbsolute),
                     null,
                     typeof(string)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -121,15 +125,18 @@ namespace System.Xml.XmlResolverTests
         {
             var xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
             Assert.ThrowsAsync<ArgumentNullException>(() =>
-                xmlResolver.GetEntityAsync(null, null, null));
+                xmlResolver.GetEntityAsync(null, null, null)
+            );
             Assert.ThrowsAsync<XmlException>(() =>
-                xmlResolver.GetEntityAsync(new Uri("https://DummyUri"), null, null));
+                xmlResolver.GetEntityAsync(new Uri("https://DummyUri"), null, null)
+            );
             Assert.ThrowsAsync<XmlException>(() =>
                 xmlResolver.GetEntityAsync(
                     new Uri("-//W3C//ENTITIES Latin 1 for XHTML//EN", UriKind.RelativeOrAbsolute),
                     null,
                     typeof(string)
-                ));
+                )
+            );
 
             xmlResolver = new XmlPreloadedResolver(
                 new XmlPreloadedResolver(),
@@ -140,14 +147,16 @@ namespace System.Xml.XmlResolverTests
                     new Uri("https://DummyUri", UriKind.RelativeOrAbsolute),
                     null,
                     typeof(string)
-                ));
+                )
+            );
 
             Assert.ThrowsAsync<XmlException>(() =>
                 xmlResolver.GetEntityAsync(
                     new Uri("-//W3C//ENTITIES Latin 1 for XHTML//EN", UriKind.RelativeOrAbsolute),
                     null,
                     typeof(TextReader)
-                ));
+                )
+            );
         }
 
         [Fact]

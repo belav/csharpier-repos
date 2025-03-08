@@ -21,7 +21,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
         {
             using var environment = new TestEnvironment();
             var project = ObjectReference.CreateFromFactory(() =>
-                CSharpHelpers.CreateCSharpProject(environment, "Test"));
+                CSharpHelpers.CreateCSharpProject(environment, "Test")
+            );
 
             Assert.Single(environment.Workspace.CurrentSolution.Projects);
 

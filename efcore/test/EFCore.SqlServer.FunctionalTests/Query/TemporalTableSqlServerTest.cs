@@ -284,11 +284,13 @@ ORDER BY [t0].[Id] DESC
             var message = async
                 ? (
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        context.MainEntitiesDifferentTable.TemporalAll().ToListAsync())
+                        context.MainEntitiesDifferentTable.TemporalAll().ToListAsync()
+                    )
                 ).Message
                 : Assert
                     .Throws<InvalidOperationException>(() =>
-                        context.MainEntitiesDifferentTable.TemporalAll().ToList())
+                        context.MainEntitiesDifferentTable.TemporalAll().ToList()
+                    )
                     .Message;
 
             Assert.Equal(

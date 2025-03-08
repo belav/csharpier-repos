@@ -40,7 +40,8 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
                         features: null,
                         cancellationToken: CancellationToken.None
                     )
-                    .AsTask())
+                    .AsTask()
+            )
             .DefaultTimeout();
 
         // Assert
@@ -69,7 +70,8 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
                         features: features,
                         cancellationToken: CancellationToken.None
                     )
-                    .AsTask())
+                    .AsTask()
+            )
             .DefaultTimeout();
 
         // Assert

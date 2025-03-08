@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis
                             var model =
                                 state != EntryState.Removed
                                     ? new Lazy<SemanticModel>(() =>
-                                        _compilation.GetSemanticModel(tree))
+                                        _compilation.GetSemanticModel(tree)
+                                    )
                                     : null;
                             for (int i = 0; i < syntaxInputBuilders.Count; i++)
                             {

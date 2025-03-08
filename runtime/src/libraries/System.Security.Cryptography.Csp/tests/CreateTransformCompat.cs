@@ -42,9 +42,11 @@ namespace System.Security.Cryptography.Csp.Tests
                     // So badSize is 8 times as big as it should be.
                     int badSize = alg.BlockSize;
                     Assert.Throws<ArgumentException>(() =>
-                        alg.CreateEncryptor(key, new byte[badSize]));
+                        alg.CreateEncryptor(key, new byte[badSize])
+                    );
                     Assert.Throws<ArgumentException>(() =>
-                        alg.CreateDecryptor(key, new byte[badSize]));
+                        alg.CreateDecryptor(key, new byte[badSize])
+                    );
 
                     return;
                 }

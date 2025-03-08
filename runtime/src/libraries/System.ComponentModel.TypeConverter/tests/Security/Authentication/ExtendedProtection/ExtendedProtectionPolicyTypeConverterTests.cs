@@ -42,7 +42,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
                     CultureInfo.InvariantCulture,
                     new ExtendedProtectionPolicy(PolicyEnforcement.Never),
                     null
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -96,7 +97,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
             ExtendedProtectionPolicy policy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
 
             Assert.Throws<NotSupportedException>(() =>
-                converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, destinationType));
+                converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, destinationType)
+            );
         }
 
         private ExtendedProtectionPolicyTypeConverter converter =

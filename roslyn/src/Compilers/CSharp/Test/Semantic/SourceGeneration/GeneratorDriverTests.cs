@@ -1248,7 +1248,8 @@ class C
                     out var outputCompilation,
                     out var outputDiagnostics,
                     cts.Token
-                ));
+                )
+            );
             Assert.Same(oldDriver, driver);
         }
 
@@ -2627,15 +2628,19 @@ class C { }
 
             // cancellation is not wrapped, and is bubbled up
             Assert.Throws<OperationCanceledException>(() =>
-                timeoutFunc(30, new CancellationToken(true)));
+                timeoutFunc(30, new CancellationToken(true))
+            );
             Assert.Throws<OperationCanceledException>(() =>
-                userTimeoutFunc(30, new CancellationToken(true)));
+                userTimeoutFunc(30, new CancellationToken(true))
+            );
 
             // unless it wasn't *our* cancellation token, in which case it still gets wrapped
             Assert.Throws<OperationCanceledException>(() =>
-                otherTimeoutFunc(30, CancellationToken.None));
+                otherTimeoutFunc(30, CancellationToken.None)
+            );
             Assert.Throws<UserFunctionException>(() =>
-                userOtherTimeoutFunc(30, CancellationToken.None));
+                userOtherTimeoutFunc(30, CancellationToken.None)
+            );
         }
 
         [Fact]
@@ -3920,7 +3925,8 @@ class C { }
                 parseOptions: parseOptions
             );
             Assert.Throws<OperationCanceledException>(() =>
-                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token));
+                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token)
+            );
             Assert.True(generatorCancelled);
         }
 
@@ -4222,7 +4228,8 @@ class C { }
 
             // replace it with null, and check that it throws
             Assert.Throws<ArgumentNullException>(() =>
-                driver.WithUpdatedAnalyzerConfigOptions(null!));
+                driver.WithUpdatedAnalyzerConfigOptions(null!)
+            );
         }
 
         [Fact]
@@ -4501,7 +4508,8 @@ class C { }
 
             // replace it with null, and check that it throws
             Assert.Throws<ArgumentNullException>(() =>
-                driver.ReplaceAdditionalText(additionalText1, null!));
+                driver.ReplaceAdditionalText(additionalText1, null!)
+            );
         }
 
         [Fact]

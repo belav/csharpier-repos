@@ -250,7 +250,8 @@ namespace System.Collections.Concurrent.Tests
             );
             c.CopyTo(new Exception[Size], 0);
             Assert.Throws<InvalidCastException>(() =>
-                c.CopyTo(new InvalidOperationException[Size], 0));
+                c.CopyTo(new InvalidOperationException[Size], 0)
+            );
         }
 
         [Fact]
@@ -264,7 +265,8 @@ namespace System.Collections.Concurrent.Tests
             );
             c.CopyTo(new Exception[Size], 0);
             Assert.Throws<InvalidCastException>(() =>
-                c.CopyTo(new InvalidOperationException[Size], 0));
+                c.CopyTo(new InvalidOperationException[Size], 0)
+            );
 
             c = new ConcurrentBag<ArgumentException>(
                 Enumerable.Range(0, Size).Select(_ => new ArgumentException())

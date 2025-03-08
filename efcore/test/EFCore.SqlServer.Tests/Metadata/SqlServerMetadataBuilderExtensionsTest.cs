@@ -397,7 +397,8 @@ public class SqlServerMetadataBuilderExtensionsTest
                 .Throws<ArgumentException>(() =>
                     propertyBuilder.HasValueGenerationStrategy(
                         SqlServerValueGenerationStrategy.SequenceHiLo
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -405,7 +406,8 @@ public class SqlServerMetadataBuilderExtensionsTest
             SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseHiLo())
+                    new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseHiLo()
+                )
                 .Message
         );
     }
@@ -423,7 +425,8 @@ public class SqlServerMetadataBuilderExtensionsTest
                 .Throws<ArgumentException>(() =>
                     propertyBuilder.HasValueGenerationStrategy(
                         SqlServerValueGenerationStrategy.Sequence
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -431,7 +434,8 @@ public class SqlServerMetadataBuilderExtensionsTest
             SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseSequence())
+                    new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseSequence()
+                )
                 .Message
         );
     }
@@ -449,7 +453,8 @@ public class SqlServerMetadataBuilderExtensionsTest
                 .Throws<ArgumentException>(() =>
                     propertyBuilder.HasValueGenerationStrategy(
                         SqlServerValueGenerationStrategy.IdentityColumn
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -459,7 +464,8 @@ public class SqlServerMetadataBuilderExtensionsTest
                 .Throws<ArgumentException>(() =>
                     new PropertyBuilder(
                         (IMutableProperty)propertyBuilder.Metadata
-                    ).UseIdentityColumn())
+                    ).UseIdentityColumn()
+                )
                 .Message
         );
     }

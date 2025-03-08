@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void CreateFromPem_CryptographicException_NoCertificate()
         {
             Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(default, default));
+                X509Certificate2.CreateFromPem(default, default)
+            );
         }
 
         [Fact]
@@ -27,14 +28,16 @@ MII
 -----END CERTIFICATE-----
 ";
             Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(CertContents, default));
+                X509Certificate2.CreateFromPem(CertContents, default)
+            );
         }
 
         [Fact]
         public static void CreateFromPem_CryptographicException_InvalidKeyAlgorithm()
         {
             CryptographicException ce = Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(TestData.Ed25519Certificate, default));
+                X509Certificate2.CreateFromPem(TestData.Ed25519Certificate, default)
+            );
 
             Assert.Contains("'1.3.101.112'", ce.Message);
         }
@@ -43,7 +46,8 @@ MII
         public static void CreateFromPem_CryptographicException_NoKey()
         {
             Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(TestData.RsaCertificate, default));
+                X509Certificate2.CreateFromPem(TestData.RsaCertificate, default)
+            );
         }
 
         [Fact]
@@ -56,7 +60,8 @@ MII
 -----END RSA PRIVATE KEY-----
 ";
             Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(TestData.RsaCertificate, CertContents));
+                X509Certificate2.CreateFromPem(TestData.RsaCertificate, CertContents)
+            );
         }
 
         [Fact]
@@ -77,7 +82,8 @@ MII
 -----END CERTIFICATE-----
 ";
                 Assert.Throws<CryptographicException>(() =>
-                    X509Certificate2.CreateFromPem(certContents, TestData.RsaPkcs1Key));
+                    X509Certificate2.CreateFromPem(certContents, TestData.RsaPkcs1Key)
+                );
             }
         }
 
@@ -92,7 +98,8 @@ MII
 -----END CERTIFICATE-----
 ";
             Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(certContents, TestData.RsaPkcs1Key));
+                X509Certificate2.CreateFromPem(certContents, TestData.RsaPkcs1Key)
+            );
         }
 
         [Fact]
@@ -219,7 +226,8 @@ MII
         public static void CreateFromPem_Rsa_KeyMismatch_Fail()
         {
             CryptographicException ce = AssertExtensions.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(TestData.RsaCertificate, TestData.OtherRsaPkcs1Key));
+                X509Certificate2.CreateFromPem(TestData.RsaCertificate, TestData.OtherRsaPkcs1Key)
+            );
 
             Assert.IsType<ArgumentException>(ce.InnerException);
         }
@@ -248,7 +256,8 @@ MII
                     TestData.RsaCertificate,
                     TestData.OtherRsaPkcs8EncryptedKey,
                     "test"
-                ));
+                )
+            );
 
             Assert.IsType<ArgumentException>(ce.InnerException);
         }
@@ -261,7 +270,8 @@ MII
                     TestData.RsaCertificate,
                     TestData.RsaEncryptedPkcs8Key,
                     "florp"
-                ));
+                )
+            );
 
             Assert.Contains("password may be incorrect", ce.Message);
         }
@@ -274,7 +284,8 @@ MII
                     TestData.RsaCertificate,
                     TestData.RsaPkcs8Key,
                     "test"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -572,8 +583,8 @@ MII
 MII
 -----END CERTIFICATE-----
 ";
-            Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(CertContents));
+            Assert.Throws<CryptographicException>(() => X509Certificate2.CreateFromPem(CertContents)
+            );
         }
 
         [Fact]
@@ -586,8 +597,8 @@ MII
 {content}
 -----END CERTIFICATE-----
 ";
-            Assert.Throws<CryptographicException>(() =>
-                X509Certificate2.CreateFromPem(certContents));
+            Assert.Throws<CryptographicException>(() => X509Certificate2.CreateFromPem(certContents)
+            );
         }
 
         private static void AssertKeysMatch<T>(

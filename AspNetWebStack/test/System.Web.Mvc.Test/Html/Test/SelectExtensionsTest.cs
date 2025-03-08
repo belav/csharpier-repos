@@ -4710,7 +4710,8 @@ namespace System.Web.Mvc.Html.Test
                         + Environment.NewLine
                         + "</select>",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.DropDownList("foo", selectList, (string)null)),
+                        helper.DropDownList("foo", selectList, (string)null)
+                    ),
                 },
                 // DropDownList(name, selectList, optionLabel) (With default value selected from ViewData)
                 new
@@ -4723,7 +4724,8 @@ namespace System.Web.Mvc.Html.Test
                         + Environment.NewLine
                         + "</select>",
                     Action = new Func<MvcHtmlString>(() =>
-                        defaultValueHelper.DropDownList("bar", selectList, (string)null)),
+                        defaultValueHelper.DropDownList("bar", selectList, (string)null)
+                    ),
                 },
                 // ListBox(name, selectList)
                 new
@@ -4748,7 +4750,8 @@ namespace System.Web.Mvc.Html.Test
                         + Environment.NewLine
                         + "</select>",
                     Action = new Func<MvcHtmlString>(() =>
-                        defaultValueHelper.ListBox("foo", selectList)),
+                        defaultValueHelper.ListBox("foo", selectList)
+                    ),
                 },
             };
 

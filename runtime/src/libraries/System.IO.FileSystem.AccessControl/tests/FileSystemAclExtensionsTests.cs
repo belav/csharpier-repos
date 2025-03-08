@@ -21,7 +21,8 @@ namespace System.IO
         public void GetAccessControl_DirectoryInfo_InvalidArguments()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                FileSystemAclExtensions.GetAccessControl((DirectoryInfo)null));
+                FileSystemAclExtensions.GetAccessControl((DirectoryInfo)null)
+            );
         }
 
         [Fact]
@@ -41,7 +42,8 @@ namespace System.IO
                 FileSystemAclExtensions.GetAccessControl(
                     (DirectoryInfo)null,
                     new AccessControlSections()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -61,7 +63,8 @@ namespace System.IO
         public void GetAccessControl_FileInfo_InvalidArguments()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                FileSystemAclExtensions.GetAccessControl((FileInfo)null));
+                FileSystemAclExtensions.GetAccessControl((FileInfo)null)
+            );
         }
 
         [Fact]
@@ -82,7 +85,8 @@ namespace System.IO
                 FileSystemAclExtensions.GetAccessControl(
                     (FileInfo)null,
                     new AccessControlSections()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -267,7 +271,8 @@ namespace System.IO
             var security = new DirectorySecurity();
             // Fails because the DirectorySecurity lacks any rights to create parent folder
             Assert.Throws<UnauthorizedAccessException>(() =>
-                CreateDirectoryWithSecurity(dirInfo, security));
+                CreateDirectoryWithSecurity(dirInfo, security)
+            );
         }
 
         [Fact]
@@ -396,7 +401,8 @@ namespace System.IO
                     DefaultBufferSize,
                     FileOptions.None,
                     security
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -529,7 +535,8 @@ namespace System.IO
                     DefaultBufferSize,
                     FileOptions.None,
                     security
-                ));
+                )
+            );
         }
 
         public static IEnumerable<object[]> WriteRights_AllArguments_Data() =>
@@ -886,7 +893,8 @@ namespace System.IO
                     DefaultBufferSize,
                     FileOptions.None,
                     security
-                ));
+                )
+            );
         }
 
         private void FileInfo_Create_FileSecurity_Successful(FileMode mode, FileSystemRights rights)

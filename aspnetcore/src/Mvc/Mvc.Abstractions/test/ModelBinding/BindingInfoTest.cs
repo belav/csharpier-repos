@@ -330,6 +330,7 @@ public class BindingInfoTest
 
         // Act and Assert
         Assert.Throws<NotSupportedException>(() =>
-            BindingInfo.GetBindingInfo(attributes, modelMetadata));
+            BindingInfo.GetBindingInfo(attributes, modelMetadata)
+        );
     }
 }

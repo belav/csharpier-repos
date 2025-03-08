@@ -40,7 +40,8 @@ namespace System.Net.Http.Formatting
 #if !NETCOREAPP2_1 // DBNull not serializable on .NET Core 2.1.
                     DBNull.Value,
 #endif
-                });
+                }
+            );
 
         public static readonly TheoryDataSet<Type> AFewValidTypes = new()
         {
@@ -132,7 +133,8 @@ namespace System.Net.Http.Formatting
             );
             stream.Position = 0;
             await Assert.ThrowsAsync<SerializationException>(() =>
-                formatter.ReadFromStreamAsync(typeof(SampleType), stream, null, null));
+                formatter.ReadFromStreamAsync(typeof(SampleType), stream, null, null)
+            );
         }
 #endif
 

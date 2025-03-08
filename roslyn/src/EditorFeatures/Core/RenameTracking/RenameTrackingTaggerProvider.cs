@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     _diagnosticAnalyzerService,
                     _globalOptions,
                     _asyncListener
-                ));
+                )
+            );
             return new Tagger(stateMachine) as ITagger<T>;
         }
 

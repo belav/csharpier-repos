@@ -252,7 +252,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     nameof(ObjectWithThrowingMethod.ThrowException),
                     [],
                     CancellationToken.None
-                ));
+                )
+            );
 
             Assert.Contains("Exception thrown by test method!", exception.Message);
         }

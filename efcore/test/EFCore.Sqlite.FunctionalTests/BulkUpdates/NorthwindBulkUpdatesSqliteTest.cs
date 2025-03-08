@@ -608,7 +608,8 @@ WHERE EXISTS (
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Delete_with_cross_apply(async))
+                    base.Delete_with_cross_apply(async)
+                )
             ).Message
         );
 
@@ -617,7 +618,8 @@ WHERE EXISTS (
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Delete_with_outer_apply(async))
+                    base.Delete_with_outer_apply(async)
+                )
             ).Message
         );
 
@@ -1327,7 +1329,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Update_with_cross_apply_set_constant(async))
+                    base.Update_with_cross_apply_set_constant(async)
+                )
             ).Message
         );
 
@@ -1336,7 +1339,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Update_with_outer_apply_set_constant(async))
+                    base.Update_with_outer_apply_set_constant(async)
+                )
             ).Message
         );
 
@@ -1369,7 +1373,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Update_with_cross_join_cross_apply_set_constant(async))
+                    base.Update_with_cross_join_cross_apply_set_constant(async)
+                )
             ).Message
         );
 
@@ -1378,7 +1383,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Update_with_cross_join_outer_apply_set_constant(async))
+                    base.Update_with_cross_join_outer_apply_set_constant(async)
+                )
             ).Message
         );
 

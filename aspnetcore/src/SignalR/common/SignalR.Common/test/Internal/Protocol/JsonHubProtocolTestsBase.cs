@@ -654,7 +654,8 @@ public abstract class JsonHubProtocolTestsBase
         var binder = new TestBinder(Array.Empty<Type>(), typeof(object));
         var data = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(input));
         var ex = Assert.Throws<InvalidDataException>(() =>
-            JsonHubProtocol.TryParseMessage(ref data, binder, out var _));
+            JsonHubProtocol.TryParseMessage(ref data, binder, out var _)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -765,7 +766,8 @@ public abstract class JsonHubProtocolTestsBase
         var binder = new TestBinder(paramTypes: new[] { typeof(int[]) }, returnType: null);
         var data = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(input));
         var ex = Assert.Throws<InvalidDataException>(() =>
-            JsonHubProtocol.TryParseMessage(ref data, binder, out var message));
+            JsonHubProtocol.TryParseMessage(ref data, binder, out var message)
+        );
         Assert.Equal("Error reading JSON.", ex.Message);
     }
 

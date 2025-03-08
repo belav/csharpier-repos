@@ -294,7 +294,8 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
                 .Options;
             var dbContext = new IdentityDbContext<InvalidUser>(dbOptions);
             var e = Assert.Throws<InvalidOperationException>(() =>
-                dbContext.Database.EnsureCreated());
+                dbContext.Database.EnsureCreated()
+            );
             Assert.Equal("[ProtectedPersonalData] only works strings by default.", e.Message);
         }
     }

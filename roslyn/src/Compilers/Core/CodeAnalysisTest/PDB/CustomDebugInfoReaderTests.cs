@@ -31,6 +31,7 @@ public class CustomDebugInfoReaderTests
     public void DecodeForwardIteratorRecord_Invalid(byte[] bytes)
     {
         Assert.Throws<InvalidOperationException>(() =>
-            CustomDebugInfoReader.DecodeForwardIteratorRecord(bytes.ToImmutableArray()));
+            CustomDebugInfoReader.DecodeForwardIteratorRecord(bytes.ToImmutableArray())
+        );
     }
 }

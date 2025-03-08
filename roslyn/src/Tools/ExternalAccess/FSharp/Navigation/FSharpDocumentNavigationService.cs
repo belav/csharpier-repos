@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return _threadingContext.JoinableTaskFactory.Run(() =>
-                service.CanNavigateToSpanAsync(workspace, documentId, textSpan, cancellationToken));
+                service.CanNavigateToSpanAsync(workspace, documentId, textSpan, cancellationToken)
+            );
         }
 
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                     lineNumber,
                     offset,
                     cancellationToken
-                ));
+                )
+            );
         }
 
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                     position,
                     virtualSpace,
                     cancellationToken
-                ));
+                )
+            );
         }
 
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                         PreferProvisionalTab = true,
                     },
                     cancellationToken
-                ));
+                )
+            );
         }
 
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                         PreferProvisionalTab = true,
                     },
                     cancellationToken
-                ));
+                )
+            );
         }
 
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
@@ -221,7 +226,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                         PreferProvisionalTab = true,
                     },
                     cancellationToken
-                ));
+                )
+            );
         }
     }
 }

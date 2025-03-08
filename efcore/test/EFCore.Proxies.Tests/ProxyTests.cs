@@ -117,8 +117,8 @@ public class ProxyTests
         Assert.Equal(
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    context.CreateProxy<SharedTypeEntityType>())
+                .Throws<InvalidOperationException>(() => context.CreateProxy<SharedTypeEntityType>()
+                )
                 .Message
         );
 
@@ -126,7 +126,8 @@ public class ProxyTests
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.CreateProxy<SharedTypeEntityType>(_ => { }))
+                    context.CreateProxy<SharedTypeEntityType>(_ => { })
+                )
                 .Message
         );
 
@@ -134,7 +135,8 @@ public class ProxyTests
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.CreateProxy(typeof(SharedTypeEntityType)))
+                    context.CreateProxy(typeof(SharedTypeEntityType))
+                )
                 .Message
         );
     }
@@ -360,7 +362,8 @@ public class ProxyTests
                         model,
                         owned: false,
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }

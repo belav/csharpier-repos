@@ -486,7 +486,8 @@ namespace System.Collections.Immutable.Tests
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableHashSet.Create<string>());
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

@@ -918,11 +918,13 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             Assert.False(serviceDescriptor.IsKeyedService);
             Assert.Throws<InvalidOperationException>(() =>
-                serviceDescriptor.KeyedImplementationInstance);
+                serviceDescriptor.KeyedImplementationInstance
+            );
+            Assert.Throws<InvalidOperationException>(() => serviceDescriptor.KeyedImplementationType
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                serviceDescriptor.KeyedImplementationType);
-            Assert.Throws<InvalidOperationException>(() =>
-                serviceDescriptor.KeyedImplementationFactory);
+                serviceDescriptor.KeyedImplementationFactory
+            );
         }
 
         public static TheoryData NotNullServiceKeyData
@@ -961,8 +963,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void NotNullServiceKey_IsKeyedServiceTrue(ServiceDescriptor serviceDescriptor)
         {
             Assert.True(serviceDescriptor.IsKeyedService);
-            Assert.Throws<InvalidOperationException>(() =>
-                serviceDescriptor.ImplementationInstance);
+            Assert.Throws<InvalidOperationException>(() => serviceDescriptor.ImplementationInstance
+            );
             Assert.Throws<InvalidOperationException>(() => serviceDescriptor.ImplementationType);
             Assert.Throws<InvalidOperationException>(() => serviceDescriptor.ImplementationFactory);
         }

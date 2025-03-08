@@ -161,7 +161,8 @@ namespace System.Security.Cryptography.Xml.Tests
                             xml,
                             false,
                             checkSignatureThrows: !SignatureSupport.SupportsRsaSha1Signatures
-                        ));
+                        )
+                    );
                 else
                 {
                     bool validSignature = includeID == "" && includeURI != "" && includeType == "";

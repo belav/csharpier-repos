@@ -122,7 +122,8 @@ public class DbContextOperationsTest
             Assert
                 .Throws<OperationException>(() =>
                     CreateOperations(typeof(ThrowingTestProgram))
-                        .CreateContext(typeof(TestContext).FullName))
+                        .CreateContext(typeof(TestContext).FullName)
+                )
                 .Message
         );
 

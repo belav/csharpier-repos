@@ -128,7 +128,8 @@ WHERE [c0].[ShippingAddress_ZipCode] <> 7728
     public override async Task Project_complex_type_via_optional_navigation(bool async)
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Project_complex_type_via_optional_navigation(async));
+            base.Project_complex_type_via_optional_navigation(async)
+        );
 
         Assert.Equal(
             RelationalStrings.CannotProjectNullableComplexType("Customer.ShippingAddress#Address"),
@@ -534,7 +535,8 @@ WHERE [v0].[ShippingAddress_ZipCode] <> 7728
     public override async Task Project_struct_complex_type_via_optional_navigation(bool async)
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Project_struct_complex_type_via_optional_navigation(async));
+            base.Project_struct_complex_type_via_optional_navigation(async)
+        );
 
         Assert.Equal(
             RelationalStrings.CannotProjectNullableComplexType(

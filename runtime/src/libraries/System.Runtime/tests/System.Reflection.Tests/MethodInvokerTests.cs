@@ -123,7 +123,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_2))
             );
             Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, "1", "2", 42));
+                invoker.Invoke(obj: null, "1", "2", 42)
+            );
         }
 
         [Fact]
@@ -133,7 +134,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_3))
             );
             Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, "1", "2", "3", 42));
+                invoker.Invoke(obj: null, "1", "2", "3", 42)
+            );
         }
 
         [Fact]
@@ -143,7 +145,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_1))
             );
             Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>(new object[] { "1", "2" })));
+                invoker.Invoke(obj: null, new Span<object?>(new object[] { "1", "2" }))
+            );
         }
 
         [Fact]
@@ -183,7 +186,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetMethod(nameof(TestClass.Args_1))
             );
             Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>()));
+                invoker.Invoke(obj: null, new Span<object?>())
+            );
         }
 
         [Fact]
@@ -265,13 +269,15 @@ namespace System.Reflection.Tests
                 if (parameters.GetType().GetElementType() == typeof(object))
                 {
                     Assert.Throws<ArgumentException>(() =>
-                        invoker.Invoke(obj, new Span<object?>(parameters)));
+                        invoker.Invoke(obj, new Span<object?>(parameters))
+                    );
                 }
                 else
                 {
                     // Using 'string[]', for example, is not supported with Span<object>.
                     Assert.Throws<ArrayTypeMismatchException>(() =>
-                        invoker.Invoke(obj, new Span<object?>(parameters)));
+                        invoker.Invoke(obj, new Span<object?>(parameters))
+                    );
                 }
             }
             else
@@ -315,7 +321,8 @@ namespace System.Reflection.Tests
                 else
                 {
                     Assert.Throws<ArrayTypeMismatchException>(() =>
-                        invoker.Invoke(obj, new Span<object?>(parameters)));
+                        invoker.Invoke(obj, new Span<object?>(parameters))
+                    );
                 }
             }
 
@@ -344,7 +351,8 @@ namespace System.Reflection.Tests
             );
             Assert.Throws<InvalidOperationException>(() => invoker.Invoke(obj: null));
             Assert.Throws<InvalidOperationException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>()));
+                invoker.Invoke(obj: null, new Span<object?>())
+            );
         }
 
         [Fact]
@@ -355,7 +363,8 @@ namespace System.Reflection.Tests
             );
             Assert.Throws<InvalidOperationException>(() => invoker.Invoke(obj: null, "1"));
             Assert.Throws<InvalidOperationException>(() =>
-                invoker.Invoke(obj: null, new Span<object?>(new object[] { "1" })));
+                invoker.Invoke(obj: null, new Span<object?>(new object[] { "1" }))
+            );
         }
 
         [Fact]
@@ -368,7 +377,8 @@ namespace System.Reflection.Tests
                 invoker.Invoke(
                     obj: null,
                     new Span<object?>(new object[] { "1", "2", "3", "4", "5" })
-                ));
+                )
+            );
         }
 
         [Fact]

@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                             context,
                             triggerPoint.Value,
                             document
-                        ));
+                        )
+                    );
                 }
             );
         }

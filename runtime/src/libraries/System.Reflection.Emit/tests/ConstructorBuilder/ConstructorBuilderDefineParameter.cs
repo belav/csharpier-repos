@@ -169,9 +169,11 @@ namespace System.Reflection.Emit.Tests
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                constructor.DefineParameter(-1, ParameterAttributes.None, "p"));
+                constructor.DefineParameter(-1, ParameterAttributes.None, "p")
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                constructor.DefineParameter(1, ParameterAttributes.None, "p"));
+                constructor.DefineParameter(1, ParameterAttributes.None, "p")
+            );
         }
 
         [Fact]
@@ -185,7 +187,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                constructor.DefineParameter(2, ParameterAttributes.None, "p"));
+                constructor.DefineParameter(2, ParameterAttributes.None, "p")
+            );
         }
 
         [Fact]
@@ -202,7 +205,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                constructor.DefineParameter(1, ParameterAttributes.None, "p"));
+                constructor.DefineParameter(1, ParameterAttributes.None, "p")
+            );
         }
     }
 }

@@ -309,7 +309,8 @@ namespace System.Web.Http.WebHost
 
             // Assert
             return Assert.ThrowsAsync<InvalidOperationException>(() =>
-                actualRequest.Content.ReadAsStringAsync());
+                actualRequest.Content.ReadAsStringAsync()
+            );
         }
 
         [Fact]
@@ -691,7 +692,8 @@ namespace System.Web.Http.WebHost
 
                 // Act & Assert
                 await Assert.ThrowsAsync<EncoderFallbackException>(() =>
-                    product.ProcessRequestAsyncCore(context));
+                    product.ProcessRequestAsyncCore(context)
+                );
 
                 Assert.True(spy.Disposed);
                 Assert.ThrowsObjectDisposed(
@@ -1665,7 +1667,8 @@ namespace System.Web.Http.WebHost
                         expectedResponse,
                         logger,
                         expectedCancellationToken
-                    ));
+                    )
+                );
             }
         }
 
@@ -1700,7 +1703,8 @@ namespace System.Web.Http.WebHost
                         logger,
                         handler,
                         expectedCancellationToken
-                    ));
+                    )
+                );
 
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
                     c != null
@@ -1764,7 +1768,8 @@ namespace System.Web.Http.WebHost
                         logger,
                         handler,
                         expectedCancellationToken
-                    ));
+                    )
+                );
             }
         }
 
@@ -1854,7 +1859,8 @@ namespace System.Web.Http.WebHost
                         logger,
                         handler,
                         expectedCancellationToken
-                    ));
+                    )
+                );
 
                 Assert.Same(expectedException, exception);
                 Assert.NotNull(exception.StackTrace);
@@ -1997,7 +2003,8 @@ namespace System.Web.Http.WebHost
                         logger,
                         handler,
                         expectedCancellationToken
-                    ));
+                    )
+                );
 
                 loggerMock.Verify(
                     l =>

@@ -286,7 +286,8 @@ namespace System.IO.Ports.Tests
                 //Wait for both write methods to timeout
                 TCSupport.WaitForTaskCompletion(t1);
                 var aggregatedException = Assert.Throws<AggregateException>(() =>
-                    TCSupport.WaitForTaskCompletion(t2));
+                    TCSupport.WaitForTaskCompletion(t2)
+                );
                 Assert.IsType<IOException>(aggregatedException.InnerException);
             }
         }

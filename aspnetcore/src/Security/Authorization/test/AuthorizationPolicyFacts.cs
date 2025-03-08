@@ -12,7 +12,8 @@ public class AuthorizationPolicyFacts
     public void RequireRoleThrowsIfEmpty()
     {
         Assert.Throws<InvalidOperationException>(() =>
-            new AuthorizationPolicyBuilder().RequireRole());
+            new AuthorizationPolicyBuilder().RequireRole()
+        );
     }
 
     [Fact]

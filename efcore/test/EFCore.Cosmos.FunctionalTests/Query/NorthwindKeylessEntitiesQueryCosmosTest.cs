@@ -64,8 +64,8 @@ WHERE (c["Discriminator"] = "ProductView")
 
     public override async Task Entity_mapped_to_view_on_right_side_of_join(bool async)
     {
-        await AssertTranslationFailed(() =>
-            base.Entity_mapped_to_view_on_right_side_of_join(async));
+        await AssertTranslationFailed(() => base.Entity_mapped_to_view_on_right_side_of_join(async)
+        );
 
         AssertSql();
     }
@@ -74,7 +74,8 @@ WHERE (c["Discriminator"] = "ProductView")
     {
         // Defining queries are not supported.
         await Assert.ThrowsAsync<EqualException>(() =>
-            base.KeylessEntity_with_nav_defining_query(async));
+            base.KeylessEntity_with_nav_defining_query(async)
+        );
 
         AssertSql(
             """
@@ -120,7 +121,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.KeylessEntity_with_defining_query_and_correlated_collection(async));
+            base.KeylessEntity_with_defining_query_and_correlated_collection(async)
+        );
 
         AssertSql();
     }
@@ -137,7 +139,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
     {
         // Left join translation. Issue #17314.
         await AssertTranslationFailed(() =>
-            base.KeylessEntity_select_where_navigation_multi_level(async));
+            base.KeylessEntity_select_where_navigation_multi_level(async)
+        );
 
         AssertSql();
     }
@@ -145,8 +148,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
     public override async Task KeylessEntity_with_included_navs_multi_level(bool async)
     {
         // Left join translation. Issue #17314.
-        await AssertTranslationFailed(() =>
-            base.KeylessEntity_with_included_navs_multi_level(async));
+        await AssertTranslationFailed(() => base.KeylessEntity_with_included_navs_multi_level(async)
+        );
 
         AssertSql();
     }
@@ -165,7 +168,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.Collection_correlated_with_keyless_entity_in_predicate_works(async));
+            base.Collection_correlated_with_keyless_entity_in_predicate_works(async)
+        );
 
         AssertSql();
     }
@@ -205,7 +209,8 @@ WHERE (c["Discriminator"] = "Customer")
         // Cosmos client evaluation. Issue #17246.
         =>
         await AssertTranslationFailed(() =>
-            base.Count_over_keyless_entity_with_pushdown_empty_projection(async));
+            base.Count_over_keyless_entity_with_pushdown_empty_projection(async)
+        );
 
     private void AssertSql(params string[] expected) =>
         Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

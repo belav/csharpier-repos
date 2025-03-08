@@ -202,7 +202,8 @@ namespace System.Net.Http.Formatting
 
             // Act
             Assert.Throws<InvalidOperationException>(() =>
-                formatter.SelectCharacterEncoding(content.Headers));
+                formatter.SelectCharacterEncoding(content.Headers)
+            );
         }
 
         [Theory]

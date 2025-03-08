@@ -2859,7 +2859,8 @@ public class Source
             md.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                compilation.GetTypeByMetadataName("System.Int64").GetMembers());
+                compilation.GetTypeByMetadataName("System.Int64").GetMembers()
+            );
         }
 
         [WorkItem(43, "https://roslyn.codeplex.com/workitem/43")]

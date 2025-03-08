@@ -33,14 +33,16 @@ public class IdentityBuilderTest
     public void IdentityBuilder_ValueTypeUser_Error()
     {
         Assert.Throws<ArgumentException>(() =>
-            new IdentityBuilder(typeof(int), new ServiceCollection()));
+            new IdentityBuilder(typeof(int), new ServiceCollection())
+        );
     }
 
     [Fact]
     public void IdentityBuilder_ValueTypeRole_Error()
     {
         Assert.Throws<ArgumentException>(() =>
-            new IdentityBuilder(typeof(PocoUser), typeof(int), new ServiceCollection()));
+            new IdentityBuilder(typeof(PocoUser), typeof(int), new ServiceCollection())
+        );
     }
 
     [Fact]
@@ -276,7 +278,8 @@ public class IdentityBuilderTest
         var builder = services.AddIdentity<PocoUser, PocoRole>();
         Assert.Throws<InvalidOperationException>(() => builder.AddTokenProvider<object>("whatevs"));
         Assert.Throws<InvalidOperationException>(() =>
-            builder.AddTokenProvider("whatevs", typeof(object)));
+            builder.AddTokenProvider("whatevs", typeof(object))
+        );
     }
 
     private class MyUberThingy

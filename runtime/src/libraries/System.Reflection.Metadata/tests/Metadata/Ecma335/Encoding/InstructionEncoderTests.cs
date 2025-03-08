@@ -830,9 +830,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             Assert.Throws<InvalidOperationException>(() => il.DefineLabel());
             Assert.Throws<InvalidOperationException>(() => il.MarkLabel(l));
             Assert.Throws<InvalidOperationException>(() =>
-                controlFlowBuilder.AddFinallyRegion(l, l, l, l));
+                controlFlowBuilder.AddFinallyRegion(l, l, l, l)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                new MethodBodyStreamEncoder(new BlobBuilder()).AddMethodBody(il));
+                new MethodBodyStreamEncoder(new BlobBuilder()).AddMethodBody(il)
+            );
             switchEncoder.Branch(l);
             switchEncoder.Branch(l);
             switchEncoder.Branch(l);
@@ -882,11 +884,13 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<InvalidOperationException>(() => il.DefineLabel());
             Assert.Throws<InvalidOperationException>(() =>
-                il.Branch(ILOpCode.Br, default(LabelHandle)));
+                il.Branch(ILOpCode.Br, default(LabelHandle))
+            );
             Assert.Throws<InvalidOperationException>(() => il.MarkLabel(default(LabelHandle)));
 
             Assert.Throws<ArgumentNullException>(() =>
-                ilcf1.Branch(ILOpCode.Br, default(LabelHandle)));
+                ilcf1.Branch(ILOpCode.Br, default(LabelHandle))
+            );
             Assert.Throws<ArgumentNullException>(() => ilcf1.MarkLabel(default(LabelHandle)));
             AssertExtensions.Throws<ArgumentException>(
                 "label",

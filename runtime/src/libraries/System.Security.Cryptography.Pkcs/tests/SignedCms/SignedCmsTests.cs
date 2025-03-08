@@ -176,11 +176,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<ArgumentNullException>(() => new SignedCms(null, true));
 
             Assert.Throws<ArgumentNullException>(() =>
-                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null));
+                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, false));
+                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, true));
+                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, true)
+            );
         }
 
         [ConditionalFact(
@@ -444,7 +447,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             Assert.Throws<InvalidOperationException>(() =>
-                cms.ComputeSignature(new CmsSigner(identifierType), silent: true));
+                cms.ComputeSignature(new CmsSigner(identifierType), silent: true)
+            );
         }
 
         [Theory]
@@ -463,7 +467,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             Assert.Throws<PlatformNotSupportedException>(() =>
-                cms.ComputeSignature(new CmsSigner(identifierType), silent: false));
+                cms.ComputeSignature(new CmsSigner(identifierType), silent: false)
+            );
         }
 
         [Theory]
@@ -835,7 +840,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         {
                             IncludeOption = X509IncludeOption.None,
                         }
-                    ));
+                    )
+                );
             }
 
             Assert.Equal(1, cms.SignerInfos.Count);
@@ -866,7 +872,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         {
                             IncludeOption = X509IncludeOption.None,
                         }
-                    ));
+                    )
+                );
 
                 cms.RemoveSignature(0);
 
@@ -879,7 +886,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         {
                             IncludeOption = X509IncludeOption.None,
                         }
-                    ));
+                    )
+                );
             }
 
             Assert.Equal(0, cms.SignerInfos.Count);
@@ -908,7 +916,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         {
                             IncludeOption = X509IncludeOption.None,
                         }
-                    ));
+                    )
+                );
 
                 cms.RemoveSignature(0);
 
@@ -935,7 +944,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         {
                             IncludeOption = X509IncludeOption.None,
                         }
-                    ));
+                    )
+                );
             }
 
             Assert.Equal(0, cms.SignerInfos.Count);

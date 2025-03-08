@@ -19,7 +19,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<HttpMethod>(() =>
-                    StandardHttpMethods.Concat(CustomHttpMethods).ToList());
+                    StandardHttpMethods.Concat(CustomHttpMethods).ToList()
+                );
             }
         }
 
@@ -37,7 +38,8 @@ namespace System.Net.Http.Formatting.DataSets
                         HttpMethod.Delete,
                         HttpMethod.Options,
                         HttpMethod.Trace,
-                    });
+                    }
+                );
             }
         }
 
@@ -46,7 +48,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<HttpMethod>(() =>
-                    new List<HttpMethod>() { new HttpMethod("Custom") });
+                    new List<HttpMethod>() { new HttpMethod("Custom") }
+                );
             }
         }
 
@@ -192,7 +195,8 @@ namespace System.Net.Http.Formatting.DataSets
                     new List<MediaTypeHeaderValue>()
                     {
                         new MediaTypeHeaderValue("application/bson"),
-                    });
+                    }
+                );
             }
         }
 
@@ -205,7 +209,8 @@ namespace System.Net.Http.Formatting.DataSets
                     {
                         new MediaTypeHeaderValue("application/json"),
                         new MediaTypeHeaderValue("text/json"),
-                    });
+                    }
+                );
             }
         }
 
@@ -218,7 +223,8 @@ namespace System.Net.Http.Formatting.DataSets
                     {
                         new MediaTypeHeaderValue("application/xml"),
                         new MediaTypeHeaderValue("text/xml"),
-                    });
+                    }
+                );
             }
         }
 
@@ -231,7 +237,8 @@ namespace System.Net.Http.Formatting.DataSets
                     {
                         new MediaTypeHeaderValue("application/atom+xml"),
                         new MediaTypeHeaderValue("application/json"),
-                    });
+                    }
+                );
             }
         }
 
@@ -243,7 +250,8 @@ namespace System.Net.Http.Formatting.DataSets
                     new List<MediaTypeHeaderValue>()
                     {
                         new MediaTypeHeaderValue("application/x-www-form-urlencoded"),
-                    });
+                    }
+                );
             }
         }
 
@@ -252,7 +260,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "application/json", "text/json" });
+                    new List<string>() { "application/json", "text/json" }
+                );
             }
         }
 
@@ -261,7 +270,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "application/xml", "text/xml" });
+                    new List<string>() { "application/xml", "text/xml" }
+                );
             }
         }
 
@@ -270,7 +280,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    StandardXmlMediaTypeStrings.Concat(StandardJsonMediaTypeStrings).ToList());
+                    StandardXmlMediaTypeStrings.Concat(StandardJsonMediaTypeStrings).ToList()
+                );
             }
         }
 
@@ -296,7 +307,8 @@ namespace System.Net.Http.Formatting.DataSets
                             byteOrderMark: true,
                             throwOnInvalidBytes: true
                         ),
-                    });
+                    }
+                );
             }
         }
 
@@ -349,7 +361,8 @@ namespace System.Net.Http.Formatting.DataSets
                 return new RefTypeTestData<MediaTypeHeaderValue>(() =>
                     LegalMediaTypeStrings
                         .Select(mediaType => new MediaTypeHeaderValue(mediaType))
-                        .ToList());
+                        .ToList()
+                );
             }
         }
 
@@ -374,7 +387,8 @@ namespace System.Net.Http.Formatting.DataSets
                         {
                             CharSet = "utf-8",
                         },
-                    });
+                    }
+                );
             }
         }
 
@@ -390,7 +404,8 @@ namespace System.Net.Http.Formatting.DataSets
                         new MultipartContent(),
                         new StringContent(""),
                         new StreamContent(new MemoryStream()),
-                    });
+                    }
+                );
             }
         }
 
@@ -401,7 +416,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<MediaTypeMapping>(() =>
-                    QueryStringMappings.Cast<MediaTypeMapping>().ToList());
+                    QueryStringMappings.Cast<MediaTypeMapping>().ToList()
+                );
             }
         }
 
@@ -417,7 +433,8 @@ namespace System.Net.Http.Formatting.DataSets
                             "json",
                             new MediaTypeHeaderValue("application/json")
                         ),
-                    });
+                    }
+                );
             }
         }
 
@@ -439,7 +456,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "x-requested-with", "some-random-name" });
+                    new List<string>() { "x-requested-with", "some-random-name" }
+                );
             }
         }
 
@@ -448,7 +466,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "1", "XMLHttpRequest", "\"quoted-string\"" });
+                    new List<string>() { "1", "XMLHttpRequest", "\"quoted-string\"" }
+                );
             }
         }
 
@@ -462,7 +481,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "application/*", "text/*" });
+                    new List<string>() { "application/*", "text/*" }
+                );
             }
         }
 
@@ -471,7 +491,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<MediaTypeHeaderValue>(() =>
-                    LegalMediaRangeStrings.Select(s => new MediaTypeHeaderValue(s)).ToList());
+                    LegalMediaRangeStrings.Select(s => new MediaTypeHeaderValue(s)).ToList()
+                );
             }
         }
 
@@ -484,7 +505,8 @@ namespace System.Net.Http.Formatting.DataSets
                     {
                         new MediaTypeWithQualityHeaderValue("application/*", .1),
                         new MediaTypeWithQualityHeaderValue("text/*", .2),
-                    });
+                    }
+                );
             }
         }
 
@@ -493,7 +515,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "application/xml", "text/xml" });
+                    new List<string>() { "application/xml", "text/xml" }
+                );
             }
         }
 
@@ -502,7 +525,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<MediaTypeHeaderValue>(() =>
-                    IllegalMediaRangeStrings.Select(s => new MediaTypeHeaderValue(s)).ToList());
+                    IllegalMediaRangeStrings.Select(s => new MediaTypeHeaderValue(s)).ToList()
+                );
             }
         }
 
@@ -516,7 +540,8 @@ namespace System.Net.Http.Formatting.DataSets
                         new XmlMediaTypeFormatter(),
                         new JsonMediaTypeFormatter(),
                         new FormUrlEncodedMediaTypeFormatter(),
-                    });
+                    }
+                );
             }
         }
 
@@ -538,7 +563,8 @@ namespace System.Net.Http.Formatting.DataSets
                         new DerivedXmlMediaTypeFormatter(),
                         new DerivedJsonMediaTypeFormatter(),
                         new DerivedFormUrlEncodedMediaTypeFormatter(),
-                    });
+                    }
+                );
             }
         }
 
@@ -552,7 +578,8 @@ namespace System.Net.Http.Formatting.DataSets
                         new MediaTypeFormatter[0],
                         StandardFormatters,
                         DerivedFormatters,
-                    });
+                    }
+                );
             }
         }
 
@@ -561,7 +588,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>() { "http://somehost", "https://somehost" });
+                    new List<string>() { "http://somehost", "https://somehost" }
+                );
             }
         }
 
@@ -580,7 +608,8 @@ namespace System.Net.Http.Formatting.DataSets
                         "news://somehost",
                         "ws://somehost",
                         "abc://somehost",
-                    });
+                    }
+                );
             }
         }
 
@@ -614,7 +643,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<HttpRequestMessage>(() =>
-                    new List<HttpRequestMessage>() { new HttpRequestMessage() { Content = null } });
+                    new List<HttpRequestMessage>() { new HttpRequestMessage() { Content = null } }
+                );
             }
         }
 
@@ -623,19 +653,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(() =>
-                    new List<string>()
-                    {
-                        "文",
-                        "A",
-                        "a",
-                        "b",
-                        " a",
-                        "arg1",
-                        "arg2",
-                        "1",
-                        "@",
-                        "!",
-                    });
+                    new List<string>() { "文", "A", "a", "b", " a", "arg1", "arg2", "1", "@", "!" }
+                );
             }
         }
 
@@ -683,7 +702,8 @@ namespace System.Net.Http.Formatting.DataSets
                         typeof(System.Threading.Tasks.Task<object>),
                         typeof(System.Threading.Tasks.Task),
                         typeof(List<dynamic>),
-                    });
+                    }
+                );
             }
         }
 
@@ -718,7 +738,8 @@ namespace System.Net.Http.Formatting.DataSets
                         "http://somehost/somepath",
                         "http://somehost/somepath/",
                         "http://somehost/somepath?somequery=somevalue",
-                    });
+                    }
+                );
             }
         }
 
@@ -730,7 +751,8 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<Uri>(() =>
-                    UriTestDataStrings.Select(s => new Uri(s)).ToList());
+                    UriTestDataStrings.Select(s => new Uri(s)).ToList()
+                );
             }
         }
 

@@ -1934,10 +1934,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableBoolArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableBoolArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableBoolArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableBoolArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableByteArrayIndex(
@@ -1948,10 +1950,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableByteArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableByteArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableByteArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableByteArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableCharArrayIndex(
@@ -1962,10 +1966,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableCharArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableCharArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableCharArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableCharArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableDecimalArrayIndex(
@@ -1976,10 +1982,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableDecimalArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableDecimalArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableDecimalArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableDecimalArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableDoubleArrayIndex(
@@ -1990,10 +1998,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableDoubleArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableDoubleArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableDoubleArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableDoubleArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableEnumArrayIndex(
@@ -2004,10 +2014,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableEnumArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableEnumArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableEnumArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableEnumArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableLongEnumArrayIndex(
@@ -2018,10 +2030,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableLongEnumArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableLongEnumArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableLongEnumArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableLongEnumArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableFloatArrayIndex(
@@ -2032,10 +2046,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableFloatArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableFloatArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableFloatArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableFloatArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableIntArrayIndex(
@@ -2046,10 +2062,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableIntArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableIntArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableIntArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableIntArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableLongArrayIndex(
@@ -2060,10 +2078,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableLongArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableLongArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableLongArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableLongArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableSByteArrayIndex(
@@ -2074,10 +2094,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableSByteArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableSByteArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableSByteArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableSByteArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableShortArrayIndex(
@@ -2088,10 +2110,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableShortArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableShortArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableShortArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableShortArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableStructArrayIndex(
@@ -2102,10 +2126,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableStructArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableStructArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableStructArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableStructArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableStructWithStringArrayIndex(
@@ -2116,18 +2142,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableStructWithStringArrayIndexExpression(
-                        array,
-                        index,
-                        useInterpreter
-                    ));
+                    CheckNullableStructWithStringArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableStructWithStringArrayIndexExpression(
-                        array,
-                        index,
-                        useInterpreter
-                    ));
+                    CheckNullableStructWithStringArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableStructWithStringAndValueArrayIndex(
@@ -2142,14 +2162,16 @@ namespace System.Linq.Expressions.Tests
                         array,
                         index,
                         useInterpreter
-                    ));
+                    )
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
                     CheckNullableStructWithStringAndValueArrayIndexExpression(
                         array,
                         index,
                         useInterpreter
-                    ));
+                    )
+                );
         }
 
         private static void CheckExceptionNullableStructWithTwoValuesArrayIndex(
@@ -2164,14 +2186,16 @@ namespace System.Linq.Expressions.Tests
                         array,
                         index,
                         useInterpreter
-                    ));
+                    )
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
                     CheckNullableStructWithTwoValuesArrayIndexExpression(
                         array,
                         index,
                         useInterpreter
-                    ));
+                    )
+                );
         }
 
         private static void CheckExceptionNullableStructWithStructArrayIndex(
@@ -2182,18 +2206,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableStructWithStructArrayIndexExpression(
-                        array,
-                        index,
-                        useInterpreter
-                    ));
+                    CheckNullableStructWithStructArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableStructWithStructArrayIndexExpression(
-                        array,
-                        index,
-                        useInterpreter
-                    ));
+                    CheckNullableStructWithStructArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableUIntArrayIndex(
@@ -2204,10 +2222,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableUIntArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableUIntArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableUIntArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableUIntArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableULongArrayIndex(
@@ -2218,10 +2238,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableULongArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableULongArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableULongArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableULongArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableUShortArrayIndex(
@@ -2232,10 +2254,12 @@ namespace System.Linq.Expressions.Tests
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() =>
-                    CheckNullableUShortArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableUShortArrayIndexExpression(array, index, useInterpreter)
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
-                    CheckNullableUShortArrayIndexExpression(array, index, useInterpreter));
+                    CheckNullableUShortArrayIndexExpression(array, index, useInterpreter)
+                );
         }
 
         private static void CheckExceptionNullableGenericWithStructRestrictionArrayIndex<Ts>(
@@ -2251,14 +2275,16 @@ namespace System.Linq.Expressions.Tests
                         array,
                         index,
                         useInterpreter
-                    ));
+                    )
+                );
             else
                 Assert.Throws<IndexOutOfRangeException>(() =>
                     CheckNullableGenericWithStructRestrictionArrayIndexExpression(
                         array,
                         index,
                         useInterpreter
-                    ));
+                    )
+                );
         }
 
         #endregion

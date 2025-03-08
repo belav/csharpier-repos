@@ -31,9 +31,11 @@ namespace System.Formats.Tar.Tests
                         "dir"
                     );
                     await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                        writer.WriteEntryAsync(entry, cs.Token));
+                        writer.WriteEntryAsync(entry, cs.Token)
+                    );
                     await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                        writer.WriteEntryAsync("file.txt", "file.txt", cs.Token));
+                        writer.WriteEntryAsync("file.txt", "file.txt", cs.Token)
+                    );
                 }
             }
         }

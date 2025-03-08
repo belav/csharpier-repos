@@ -26,7 +26,8 @@ namespace System.Formats.Tar.Tests
                 )
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                        writer.WriteEntryAsync(null));
+                        writer.WriteEntryAsync(null)
+                    );
                 }
             }
         }

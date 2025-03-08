@@ -277,7 +277,8 @@ namespace System.Globalization.Tests
         public void FirstDayOfWeek_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.FirstDayOfWeek = DayOfWeek.Wednesday);
+                DateTimeFormatInfo.InvariantInfo.FirstDayOfWeek = DayOfWeek.Wednesday
+            );
         }
     }
 }

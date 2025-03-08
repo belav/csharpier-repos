@@ -21,7 +21,8 @@ public class ExampleJsInterop : IAsyncDisposable
                     "import",
                     "./_content/Company.RazorClassLibrary1/exampleJsInterop.js"
                 )
-                .AsTask());
+                .AsTask()
+        );
     }
 
     public async ValueTask<string> Prompt(string message)

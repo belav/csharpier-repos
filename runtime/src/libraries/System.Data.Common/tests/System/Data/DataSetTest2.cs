@@ -3486,7 +3486,8 @@ namespace System.Data.Tests
             Assert.Equal(SchemaSerializationMode.IncludeSchema, ds.SchemaSerializationMode);
 
             Assert.Throws<InvalidOperationException>(() =>
-                ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema);
+                ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema
+            );
         }
 
         ///<?xml version="1.0" encoding="utf-16"?>

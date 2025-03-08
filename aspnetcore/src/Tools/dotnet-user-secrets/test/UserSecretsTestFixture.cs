@@ -17,9 +17,8 @@ public class UserSecretsTestFixture : IDisposable
     public UserSecretsTestFixture()
     {
         _disposables.Push(() =>
-            TryDelete(
-                Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
-            ));
+            TryDelete(Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId)))
+        );
     }
 
     public void Dispose()

@@ -2210,7 +2210,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                     prePopulatedEventQueue,
                                     cancellationToken
                                 )
-                                .ConfigureAwait(false));
+                                .ConfigureAwait(false)
+                        );
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();

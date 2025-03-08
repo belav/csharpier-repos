@@ -132,7 +132,8 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath() + streamSpecifier;
             FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(() =>
-                CreateFileStream(fileName, FileMode.Open));
+                CreateFileStream(fileName, FileMode.Open)
+            );
             Assert.Equal(fileName, fnfe.FileName);
         }
 
@@ -189,7 +190,8 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath() + streamSpecifier;
             FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(() =>
-                CreateFileStream(fileName, FileMode.Truncate));
+                CreateFileStream(fileName, FileMode.Truncate)
+            );
             Assert.Equal(fileName, fnfe.FileName);
         }
 

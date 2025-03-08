@@ -59,7 +59,8 @@ namespace System.Collections.Tests
         public void SortedDictionary_Generic_Constructor_NullIDictionary_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SortedDictionary<TKey, TValue>((IDictionary<TKey, TValue>)null));
+                new SortedDictionary<TKey, TValue>((IDictionary<TKey, TValue>)null)
+            );
         }
 
         [Theory]

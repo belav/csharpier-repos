@@ -707,7 +707,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     document,
                     caretPosition: triggerSpan.End,
                     cancellationToken
-                ));
+                )
+            );
 
             var methodSymbols = symbols.OfType<IMethodSymbol>().ToImmutableArray();
             if (methodSymbols.Any())
@@ -957,7 +958,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // completion session is active, which is behind an experimental feature flag.
             // https://github.com/dotnet/roslyn/issues/50634
             var compilation = ThreadingContext.JoinableTaskFactory.Run(() =>
-                document.Project.GetRequiredCompilationAsync(CancellationToken.None));
+                document.Project.GetRequiredCompilationAsync(CancellationToken.None)
+            );
             var newSymbolKey =
                 (
                     e.NewModel.SelectedItem
@@ -1170,7 +1172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         cancellationToken
                     );
                     ThreadingContext.JoinableTaskFactory.Run(() =>
-                        provider.ProvideArgumentAsync(context));
+                        provider.ProvideArgumentAsync(context)
+                    );
 
                     if (context.DefaultValue is not null)
                     {

@@ -316,7 +316,8 @@ namespace System.Linq.Parallel.Tests
         public static void Aggregate_InvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Aggregate((i, j) => i));
+                ParallelEnumerable.Empty<int>().Aggregate((i, j) => i)
+            );
             // All other invocations return the seed value.
             Assert.Equal(-1, ParallelEnumerable.Empty<int>().Aggregate(-1, (i, j) => i + j));
             Assert.Equal(
@@ -549,7 +550,8 @@ namespace System.Linq.Parallel.Tests
                         {
                             throw new DeliberateTestException();
                         }
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -559,7 +561,8 @@ namespace System.Linq.Parallel.Tests
                         {
                             throw new DeliberateTestException();
                         }
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -570,7 +573,8 @@ namespace System.Linq.Parallel.Tests
                             throw new DeliberateTestException();
                         },
                         i => i
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -581,7 +585,8 @@ namespace System.Linq.Parallel.Tests
                         {
                             throw new DeliberateTestException();
                         }
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -593,7 +598,8 @@ namespace System.Linq.Parallel.Tests
                         },
                         (i, j) => i,
                         i => i
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -605,7 +611,8 @@ namespace System.Linq.Parallel.Tests
                         {
                             throw new DeliberateTestException();
                         }
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -617,7 +624,8 @@ namespace System.Linq.Parallel.Tests
                         (i, j) => i,
                         (i, j) => i,
                         i => i
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -629,7 +637,8 @@ namespace System.Linq.Parallel.Tests
                         },
                         (i, j) => i,
                         (int i) => i
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
@@ -641,7 +650,8 @@ namespace System.Linq.Parallel.Tests
                         {
                             throw new DeliberateTestException();
                         }
-                    ));
+                    )
+            );
             if (Environment.ProcessorCount >= 2)
             {
                 AssertThrows.Wrapped<DeliberateTestException>(() =>
@@ -655,7 +665,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             },
                             i => i
-                        ));
+                        )
+                );
                 AssertThrows.Wrapped<DeliberateTestException>(() =>
                     UnorderedSources
                         .Default(2)
@@ -667,7 +678,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             },
                             (int i) => i
-                        ));
+                        )
+                );
             }
         }
 

@@ -3604,9 +3604,10 @@ class G
             Assert.Null(debuggingSession.GetTestAccessor().GetPendingSolutionUpdate());
 
             Assert.Throws<InvalidOperationException>(() =>
-                debuggingSession.CommitSolutionUpdate(out var _));
-            Assert.Throws<InvalidOperationException>(() =>
-                debuggingSession.DiscardSolutionUpdate());
+                debuggingSession.CommitSolutionUpdate(out var _)
+            );
+            Assert.Throws<InvalidOperationException>(() => debuggingSession.DiscardSolutionUpdate()
+            );
 
             // no change in non-remappable regions since we didn't have any active statements:
             Assert.Empty(debuggingSession.EditSession.NonRemappableRegions);
@@ -6431,12 +6432,15 @@ class C
                     solution,
                     s_noActiveSpans,
                     CancellationToken.None
-                ));
+                )
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                debuggingSession.BreakStateOrCapabilitiesChanged(inBreakState: true, out _));
+                debuggingSession.BreakStateOrCapabilitiesChanged(inBreakState: true, out _)
+            );
             Assert.Throws<ObjectDisposedException>(() => debuggingSession.DiscardSolutionUpdate());
             Assert.Throws<ObjectDisposedException>(() =>
-                debuggingSession.CommitSolutionUpdate(out _));
+                debuggingSession.CommitSolutionUpdate(out _)
+            );
             Assert.Throws<ObjectDisposedException>(() => debuggingSession.EndSession(out _, out _));
 
             // The following methods can be called at any point in time, so we must handle race with dispose gracefully.

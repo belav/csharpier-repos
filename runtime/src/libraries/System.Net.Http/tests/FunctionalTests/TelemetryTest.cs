@@ -139,7 +139,8 @@ namespace System.Net.Http.Functional.Tests
                                                                 client.Send(
                                                                     request,
                                                                     HttpCompletionOption.ResponseHeadersRead
-                                                                ));
+                                                                )
+                                                            );
                                                         response.Content.CopyTo(
                                                             Stream.Null,
                                                             null,
@@ -202,7 +203,8 @@ namespace System.Net.Http.Functional.Tests
                                                                 invoker.Send(
                                                                     request,
                                                                     cancellationToken: default
-                                                                ));
+                                                                )
+                                                            );
                                                         await response.Content.CopyToAsync(
                                                             Stream.Null
                                                         );
@@ -333,7 +335,8 @@ namespace System.Net.Http.Functional.Tests
                                                     await Assert.ThrowsAsync<TaskCanceledException>(
                                                         async () =>
                                                             await Task.Run(() =>
-                                                                client.Send(request, cts.Token))
+                                                                client.Send(request, cts.Token)
+                                                            )
                                                     );
                                                     break;
 
@@ -345,7 +348,8 @@ namespace System.Net.Http.Functional.Tests
                                                                     request,
                                                                     HttpCompletionOption.ResponseHeadersRead,
                                                                     cts.Token
-                                                                ))
+                                                                )
+                                                            )
                                                     );
                                                     break;
 
@@ -404,7 +408,8 @@ namespace System.Net.Http.Functional.Tests
                                                     await Assert.ThrowsAsync<TaskCanceledException>(
                                                         async () =>
                                                             await Task.Run(() =>
-                                                                invoker.Send(request, cts.Token))
+                                                                invoker.Send(request, cts.Token)
+                                                            )
                                                     );
                                                     break;
 
@@ -550,7 +555,8 @@ namespace System.Net.Http.Functional.Tests
                                                             invoker.Send(
                                                                 request,
                                                                 cancellationToken: default
-                                                            ));
+                                                            )
+                                                        );
                                                     await syncResponse.Content.CopyToAsync(
                                                         Stream.Null
                                                     );

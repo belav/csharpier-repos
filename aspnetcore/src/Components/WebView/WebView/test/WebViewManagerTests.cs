@@ -138,7 +138,8 @@ public class WebViewManagerTests
                 typeof(MyComponent),
                 arbitraryComponentSelector,
                 ParameterView.Empty
-            ));
+            )
+        );
 
         Assert.Equal(
             $"There is already a root component with selector '{arbitraryComponentSelector}'.",

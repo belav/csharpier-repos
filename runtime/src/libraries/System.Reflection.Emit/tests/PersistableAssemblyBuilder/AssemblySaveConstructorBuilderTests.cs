@@ -114,7 +114,8 @@ namespace System.Reflection.Emit.Tests
                     TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
                 );
             Assert.Throws<InvalidOperationException>(() =>
-                type.DefineDefaultConstructor(MethodAttributes.Public));
+                type.DefineDefaultConstructor(MethodAttributes.Public)
+            );
         }
 
         [Fact]
@@ -128,7 +129,8 @@ namespace System.Reflection.Emit.Tests
                 .DefineType("MyType", TypeAttributes.Public);
             child.SetParent(type);
             Assert.Throws<NotSupportedException>(() =>
-                child.DefineDefaultConstructor(MethodAttributes.Public));
+                child.DefineDefaultConstructor(MethodAttributes.Public)
+            );
         }
 
         [Fact]
@@ -177,7 +179,8 @@ namespace System.Reflection.Emit.Tests
             derivedType.SetParent(type);
 
             Assert.Throws<NotSupportedException>(() =>
-                derivedType.DefineDefaultConstructor(MethodAttributes.Public));
+                derivedType.DefineDefaultConstructor(MethodAttributes.Public)
+            );
         }
 
         [Theory]
@@ -204,7 +207,8 @@ namespace System.Reflection.Emit.Tests
             );
             type.SetParent(baseType);
             Assert.Throws<NotSupportedException>(() =>
-                type.DefineDefaultConstructor(MethodAttributes.Public));
+                type.DefineDefaultConstructor(MethodAttributes.Public)
+            );
         }
 
         [Fact]

@@ -201,7 +201,8 @@ namespace System.Net.Mime.Tests
         public void SmtpDate_ValidateTimeZoneShortHandValue_WithInvalidShortHand_ShouldReturnFalse()
         {
             Assert.Throws<FormatException>(() =>
-                SmtpDateTime.ValidateTimeZoneShortHandValue("7M-GTE"));
+                SmtpDateTime.ValidateTimeZoneShortHandValue("7M-GTE")
+            );
         }
 
         [Fact]
@@ -242,28 +243,32 @@ namespace System.Net.Mime.Tests
                     out positive,
                     out hours,
                     out minutes
-                ));
+                )
+            );
             Assert.Throws<FormatException>(() =>
                 SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
                     "+-0045",
                     out positive,
                     out hours,
                     out minutes
-                ));
+                )
+            );
             Assert.Throws<FormatException>(() =>
                 SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
                     "+10000",
                     out positive,
                     out hours,
                     out minutes
-                ));
+                )
+            );
             Assert.Throws<FormatException>(() =>
                 SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
                     "-A000",
                     out positive,
                     out hours,
                     out minutes
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -292,7 +297,8 @@ namespace System.Net.Mime.Tests
         {
             TimeSpan span;
             Assert.Throws<FormatException>(() =>
-                SmtpDateTime.TryParseTimeZoneString("7mGTE", out span));
+                SmtpDateTime.TryParseTimeZoneString("7mGTE", out span)
+            );
         }
     }
 }

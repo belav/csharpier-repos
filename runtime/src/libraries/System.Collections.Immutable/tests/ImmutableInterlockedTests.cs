@@ -117,7 +117,8 @@ namespace System.Collections.Immutable.Tests
                         {
                             throw new InvalidOperationException();
                         }
-                    ));
+                    )
+                );
             });
         }
 
@@ -128,7 +129,8 @@ namespace System.Collections.Immutable.Tests
             {
                 ImmutableArray<int> array = ImmutableArray.Create(42);
                 Assert.Throws<InvalidOperationException>(() =>
-                    func(ref array, l => throw new InvalidOperationException()));
+                    func(ref array, l => throw new InvalidOperationException())
+                );
             });
         }
 

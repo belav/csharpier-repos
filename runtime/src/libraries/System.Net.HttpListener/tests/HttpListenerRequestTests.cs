@@ -530,7 +530,8 @@ namespace System.Net.Tests
             request.EndGetClientCertificate(beginGetClientCertificateResult);
 
             Assert.Throws<InvalidOperationException>(() =>
-                request.EndGetClientCertificate(beginGetClientCertificateResult));
+                request.EndGetClientCertificate(beginGetClientCertificateResult)
+            );
         }
 
         [Fact]
@@ -551,7 +552,8 @@ namespace System.Net.Tests
         {
             HttpListenerRequest request = await GetRequest("POST", null, null);
             Assert.Throws<NotSupportedException>(() =>
-                request.TransportContext.GetChannelBinding(kind));
+                request.TransportContext.GetChannelBinding(kind)
+            );
         }
 
         public static IEnumerable<object[]> QueryString_TestData()

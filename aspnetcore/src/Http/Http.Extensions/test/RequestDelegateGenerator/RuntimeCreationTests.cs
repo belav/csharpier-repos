@@ -25,7 +25,8 @@ app.MapGet("/", ({{bindAsyncType}} myNotBindAsyncParam) => { });
         var (result, compilation) = await RunGeneratorAsync(source);
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            GetEndpointFromCompilation(compilation));
+            GetEndpointFromCompilation(compilation)
+        );
         Assert.StartsWith(
             $"BindAsync method found on {bindAsyncType} with incorrect format.",
             ex.Message

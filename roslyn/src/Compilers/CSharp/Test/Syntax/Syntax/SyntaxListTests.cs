@@ -46,11 +46,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EnumeratorEquality()
         {
             Assert.Throws<NotSupportedException>(() =>
-                default(SyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode());
+                default(SyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode()
+            );
             Assert.Throws<NotSupportedException>(() =>
                 default(SyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
                     default(SyntaxList<CSharpSyntaxNode>.Enumerator)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -183,17 +185,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                list.InsertRange(list.Count + 1, new[] { nodeD }));
+                list.InsertRange(list.Count + 1, new[] { nodeD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count));
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                list.AddRange((IEnumerable<SyntaxNode>)null));
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null));
+                list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact]
@@ -238,11 +243,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(() =>
-                list.AddRange((IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
             Assert.Throws<ArgumentNullException>(() =>
-                list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact, WorkItem(127, "https://github.com/dotnet/roslyn/issues/127")]

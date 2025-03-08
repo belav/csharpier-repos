@@ -41,29 +41,34 @@ namespace System.Text.Json.Serialization.Tests
             // Add method for this collection only accepts strings, even though it only implements IList which usually
             // indicates that the element type is typeof(object).
             await Assert.ThrowsAsync<InvalidCastException>(async () =>
-                await Serializer.DeserializeWrapper<StringCollection>(@"[""1"", ""2""]"));
+                await Serializer.DeserializeWrapper<StringCollection>(@"[""1"", ""2""]")
+            );
 
             // Not supported. Not IList, and we don't detect the add method for this collection.
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<StringDictionary>(
                     @"[{""Key"": ""key"",""Value"":""value""}]"
-                ));
+                )
+            );
 
             // Int key is not allowed.
             await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<HybridDictionary>(@"{1:""value""}"));
+                await Serializer.DeserializeWrapper<HybridDictionary>(@"{1:""value""}")
+            );
 
             // Runtime type in this case is IOrderedDictionary (we don't replace with concrete type), which we can't instantiate.
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<IOrderedDictionary>(
                     @"{""first"":""John"",""second"":""Jane"",""third"":""Jet""}"
-                ));
+                )
+            );
 
             // Not supported. Not IList, and we don't detect the add method for this collection.
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<NameValueCollection>(
                     @"[""NameValueCollection""]"
-                ));
+                )
+            );
         }
     }
 }

@@ -55,7 +55,8 @@ public partial class ThreadPoolBoundHandleTests
     public void BindHandle_ValidHandle_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() =>
-            ThreadPoolBoundHandle.BindHandle(new Win32Handle(new IntPtr(1))));
+            ThreadPoolBoundHandle.BindHandle(new Win32Handle(new IntPtr(1)))
+        );
     }
 
     [Fact]

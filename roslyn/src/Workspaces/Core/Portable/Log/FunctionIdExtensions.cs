@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         > s_functionIdsToString = new(() =>
             Enum.GetValues(typeof(FunctionId))
                 .Cast<FunctionId>()
-                .ToImmutableDictionary(f => f, f => f.ToString()));
+                .ToImmutableDictionary(f => f, f => f.ToString())
+        );
 
         public static string Convert(this FunctionId functionId) =>
             s_functionIdsToString.Value[functionId];

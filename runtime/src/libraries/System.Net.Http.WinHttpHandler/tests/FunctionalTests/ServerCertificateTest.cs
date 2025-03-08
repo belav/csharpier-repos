@@ -114,7 +114,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
                     client.GetAsync(
                         System.Net.Test.Common.Configuration.Http.SecureRemoteEchoServer
-                    ));
+                    )
+                );
                 var innerEx = (Win32Exception)ex.InnerException;
                 Assert.Equal(ERROR_WINHTTP_SECURE_FAILURE, innerEx.NativeErrorCode);
             }
@@ -132,7 +133,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
                     client.GetAsync(
                         System.Net.Test.Common.Configuration.Http.SecureRemoteEchoServer
-                    ));
+                    )
+                );
                 Assert.True(ex.GetBaseException() is CustomException);
             }
         }

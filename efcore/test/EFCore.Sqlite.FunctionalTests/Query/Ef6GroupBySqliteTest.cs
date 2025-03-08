@@ -19,7 +19,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             SqliteStrings.AggregateOperationNotSupported("Average", "decimal"),
             (
                 await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    base.Average_Grouped_from_LINQ_101(async))
+                    base.Average_Grouped_from_LINQ_101(async)
+                )
             ).Message
         );
 
@@ -28,7 +29,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             SqliteStrings.AggregateOperationNotSupported("Max", "decimal"),
             (
                 await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    base.Max_Grouped_from_LINQ_101(async))
+                    base.Max_Grouped_from_LINQ_101(async)
+                )
             ).Message
         );
 
@@ -37,7 +39,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             SqliteStrings.AggregateOperationNotSupported("Min", "decimal"),
             (
                 await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    base.Min_Grouped_from_LINQ_101(async))
+                    base.Min_Grouped_from_LINQ_101(async)
+                )
             ).Message
         );
 
@@ -49,7 +52,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             "Missing alias in the list",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Whats_new_2021_sample_3(async))
+                    base.Whats_new_2021_sample_3(async)
+                )
             ).Message
         );
 #else
@@ -65,7 +69,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             "Missing alias in the list",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Whats_new_2021_sample_5(async))
+                    base.Whats_new_2021_sample_5(async)
+                )
             ).Message
         );
 #else
@@ -81,7 +86,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             "Missing alias in the list",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Whats_new_2021_sample_6(async))
+                    base.Whats_new_2021_sample_6(async)
+                )
             ).Message
         );
 #else
@@ -94,7 +100,8 @@ public class Ef6GroupBySqliteTest : Ef6GroupByTestBase<Ef6GroupBySqliteTest.Ef6G
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Group_Join_from_LINQ_101(async))
+                    base.Group_Join_from_LINQ_101(async)
+                )
             ).Message
         );
 

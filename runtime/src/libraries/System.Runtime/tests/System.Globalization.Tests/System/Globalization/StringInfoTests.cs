@@ -118,15 +118,18 @@ namespace System.Globalization.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                si.SubstringByTextElements(s.Length + 1));
+                si.SubstringByTextElements(s.Length + 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => siEmpty.SubstringByTextElements(0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => si.SubstringByTextElements(-1, 1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                si.SubstringByTextElements(s.Length + 1, 1));
+                si.SubstringByTextElements(s.Length + 1, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => siEmpty.SubstringByTextElements(0, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                si.SubstringByTextElements(0, s.Length + 1));
+                si.SubstringByTextElements(0, s.Length + 1)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()

@@ -424,7 +424,8 @@ namespace System.Text.Json.Serialization.Tests
             );
             string json = "{}";
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper(json, type, options));
+                await Serializer.DeserializeWrapper(json, type, options)
+            );
 
             Assert.Throws<InvalidOperationException>(() => options.GetTypeInfo(type));
         }
@@ -463,7 +464,8 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = "{}";
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper(json, type, options));
+                await Serializer.DeserializeWrapper(json, type, options)
+            );
 
             Assert.Throws<InvalidOperationException>(() => options.GetTypeInfo(type));
         }
@@ -512,7 +514,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 string json = """{"Property":null}""";
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>(json));
+                    await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>(json)
+                );
             }
         }
 
@@ -544,7 +547,8 @@ namespace System.Text.Json.Serialization.Tests
                 if (typeof(T).IsValueType)
                 {
                     await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>("{}"));
+                        await serializer.DeserializeWrapper<ClassWithReadOnlyProperty<T>>("{}")
+                    );
                 }
                 else
                 {

@@ -559,7 +559,8 @@ In order to use this site, specify a version in the site’s web.config file. Fo
                     loadWebPages,
                     registerForChange,
                     null
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal(

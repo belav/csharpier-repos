@@ -27,7 +27,8 @@ public class NegotiateHandlerTests
         var server = host.GetTestServer();
 
         var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-            SendAsync(server, "/Anonymous1", connection: null));
+            SendAsync(server, "/Anonymous1", connection: null)
+        );
         Assert.Equal(
             "Negotiate authentication requires a server that supports IConnectionItemsFeature like Kestrel.",
             ex.Message
@@ -101,7 +102,8 @@ public class NegotiateHandlerTests
         await NtlmStage1Auth(server, testConnection);
 
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            SendAsync(server, "/404", testConnection));
+            SendAsync(server, "/404", testConnection)
+        );
         Assert.Equal(
             "An anonymous request was received in between authentication handshake requests.",
             ex.Message
@@ -115,7 +117,8 @@ public class NegotiateHandlerTests
         var server = host.GetTestServer();
 
         var ex = await Assert.ThrowsAsync<TrueException>(() =>
-            SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob2"));
+            SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob2")
+        );
         Assert.Equal("Stage1Complete", ex.UserMessage);
     }
 
@@ -356,7 +359,8 @@ public class NegotiateHandlerTests
         var testConnection = new TestConnection();
 
         var ex = await Assert.ThrowsAsync<Exception>(() =>
-            SendAsync(server, "/404", testConnection, "Negotiate OtherError"));
+            SendAsync(server, "/404", testConnection, "Negotiate OtherError")
+        );
         Assert.Equal("A test other error occurred", ex.Message);
     }
 
@@ -564,7 +568,8 @@ public class NegotiateHandlerTests
             context =>
             {
                 return Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.SignInAsync(new ClaimsPrincipal()));
+                    context.SignInAsync(new ClaimsPrincipal())
+                );
             }
         );
 

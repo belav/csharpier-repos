@@ -333,7 +333,8 @@ public class OpenIdConnectTests
         var server = setting.CreateTestServer();
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync(DefaultHost + TestServerBuilder.Signout));
+            server.SendAsync(DefaultHost + TestServerBuilder.Signout)
+        );
         Assert.Equal(
             "Cannot redirect to the end session endpoint, the configuration may be missing or invalid.",
             exception.Message
@@ -680,7 +681,8 @@ public class OpenIdConnectTests
 
         Assert.Throws<FormatException>(() =>
             sp.GetRequiredService<IOptionsMonitor<OpenIdConnectOptions>>()
-                .Get(OpenIdConnectDefaults.AuthenticationScheme));
+                .Get(OpenIdConnectDefaults.AuthenticationScheme)
+        );
     }
 
     [Fact]

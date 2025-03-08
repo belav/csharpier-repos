@@ -183,7 +183,8 @@ namespace Moq.Tests
             var mock = new Mock<IComparable>();
 
             Assert.Throws<ArgumentNullException>(() =>
-                mock.Setup((Expression<Action<IComparable>>)null));
+                mock.Setup((Expression<Action<IComparable>>)null)
+            );
         }
 
         [Fact]
@@ -192,7 +193,8 @@ namespace Moq.Tests
             var mock = new Mock<IComparable>();
 
             Assert.Throws<ArgumentNullException>(() =>
-                mock.Setup((Expression<Func<IComparable, string>>)null));
+                mock.Setup((Expression<Func<IComparable, string>>)null)
+            );
         }
 
         [Fact]

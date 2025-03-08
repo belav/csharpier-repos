@@ -101,7 +101,8 @@ namespace System.Reflection.Emit.Tests
                     types,
                     customModifiers,
                     customModifiers
-                ));
+                )
+            );
         }
 
         [Fact]

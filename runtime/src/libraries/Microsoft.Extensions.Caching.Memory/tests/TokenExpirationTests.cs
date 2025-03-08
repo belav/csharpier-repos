@@ -268,7 +268,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     key,
                     value,
                     new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
-                ));
+                )
+            );
             callbackInvoked.WaitOne(TimeSpan.FromSeconds(30));
             var result = task.Result;
 

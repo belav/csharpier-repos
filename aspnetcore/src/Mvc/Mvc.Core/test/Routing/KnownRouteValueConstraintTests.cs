@@ -200,7 +200,8 @@ public class KnownRouteValueConstraintTests
                 "area",
                 new RouteValueDictionary { { "area", "area" } },
                 direction
-            ));
+            )
+        );
         var providerName = actionDescriptorCollectionProvider.GetType().FullName;
         Assert.Equal(
             $"The 'ActionDescriptors' property of '{providerName}' must not be null.",

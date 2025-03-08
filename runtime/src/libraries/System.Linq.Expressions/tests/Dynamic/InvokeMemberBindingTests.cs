@@ -299,7 +299,8 @@ namespace System.Dynamic.Tests
         {
             dynamic d = GetObjectWithNonIndexerParameterProperty(true, true);
             RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() =>
-                d.ItemProp[2] = 3);
+                d.ItemProp[2] = 3
+            );
             // Similar message to CS1545 advises about getter and setter methods.
             Assert.Contains("get_ItemProp", ex.Message);
             Assert.Contains("set_ItemProp", ex.Message);
@@ -314,7 +315,8 @@ namespace System.Dynamic.Tests
             dynamic d = GetObjectWithNonIndexerParameterProperty(true, false);
             int dump;
             RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() =>
-                dump = d.ItemProp[2]);
+                dump = d.ItemProp[2]
+            );
             // Similar message to CS1546 advises about getter method.
             Assert.Contains("get_ItemProp", ex.Message);
         }
@@ -327,7 +329,8 @@ namespace System.Dynamic.Tests
         {
             dynamic d = GetObjectWithNonIndexerParameterProperty(false, true);
             RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() =>
-                d.ItemProp[2] = 9);
+                d.ItemProp[2] = 9
+            );
             // Similar message to CS1546 advises about setter method.
             Assert.Contains("set_ItemProp", ex.Message);
         }

@@ -21,10 +21,11 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounterCategory_CreatePerformanceCounterCategory_NullTests()
         {
             Assert.Throws<ArgumentNullException>(() => new PerformanceCounterCategory(null, "."));
+            Assert.Throws<ArgumentException>(() => new PerformanceCounterCategory(string.Empty, ".")
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PerformanceCounterCategory(string.Empty, "."));
-            Assert.Throws<ArgumentException>(() =>
-                new PerformanceCounterCategory("category", string.Empty));
+                new PerformanceCounterCategory("category", string.Empty)
+            );
         }
 
         [Fact]
@@ -171,7 +172,8 @@ namespace System.Diagnostics.Tests
                     PerformanceCounterCategoryType.SingleInstance,
                     "counter name",
                     "counter help"
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 PerformanceCounterCategory.Create(
                     "category name",
@@ -179,14 +181,16 @@ namespace System.Diagnostics.Tests
                     PerformanceCounterCategoryType.SingleInstance,
                     null,
                     "counter help"
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 PerformanceCounterCategory.Create(
                     "category name",
                     "Category help",
                     PerformanceCounterCategoryType.SingleInstance,
                     null
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 PerformanceCounterCategory.Create(
                     "Processor",
@@ -194,7 +198,8 @@ namespace System.Diagnostics.Tests
                     PerformanceCounterCategoryType.MultiInstance,
                     "Interrupts/sec",
                     "counter help"
-                ));
+                )
+            );
 
             string maxCounter = new string('a', 32769);
 
@@ -205,7 +210,8 @@ namespace System.Diagnostics.Tests
                     PerformanceCounterCategoryType.SingleInstance,
                     maxCounter,
                     "counter help"
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 PerformanceCounterCategory.Create(
                     maxCounter,
@@ -213,7 +219,8 @@ namespace System.Diagnostics.Tests
                     PerformanceCounterCategoryType.SingleInstance,
                     "Counter name",
                     "counter help"
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 PerformanceCounterCategory.Create(
                     "Category name",
@@ -221,7 +228,8 @@ namespace System.Diagnostics.Tests
                     PerformanceCounterCategoryType.SingleInstance,
                     "Counter name",
                     "counter help"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -236,7 +244,8 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounterCategory_GetCategories_StaticInvalid()
         {
             Assert.Throws<ArgumentException>(() =>
-                PerformanceCounterCategory.GetCategories(string.Empty));
+                PerformanceCounterCategory.GetCategories(string.Empty)
+            );
         }
 
         [Fact]
@@ -266,24 +275,29 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounterCategory_CounterExists_StaticInvalid()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                PerformanceCounterCategory.CounterExists(null, "Processor"));
+                PerformanceCounterCategory.CounterExists(null, "Processor")
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                PerformanceCounterCategory.CounterExists("Interrupts/sec", null));
+                PerformanceCounterCategory.CounterExists("Interrupts/sec", null)
+            );
             Assert.Throws<ArgumentException>(() =>
-                PerformanceCounterCategory.CounterExists("Interrupts/sec", string.Empty));
+                PerformanceCounterCategory.CounterExists("Interrupts/sec", string.Empty)
+            );
             Assert.Throws<ArgumentException>(() =>
                 PerformanceCounterCategory.CounterExists(
                     "Interrupts/sec",
                     "Processor",
                     string.Empty
-                ));
+                )
+            );
         }
 
         [Fact]
         public static void PerformanceCounterCategory_DeleteCategory_Invalid()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                PerformanceCounterCategory.Delete("Processor"));
+                PerformanceCounterCategory.Delete("Processor")
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteToPerfCounters))]
@@ -300,12 +314,14 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void PerformanceCounterCategory_Exists_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                PerformanceCounterCategory.Exists(null, "."));
+            Assert.Throws<ArgumentNullException>(() => PerformanceCounterCategory.Exists(null, ".")
+            );
             Assert.Throws<ArgumentException>(() =>
-                PerformanceCounterCategory.Exists(string.Empty, "."));
+                PerformanceCounterCategory.Exists(string.Empty, ".")
+            );
             Assert.Throws<ArgumentException>(() =>
-                PerformanceCounterCategory.Exists("Processor", string.Empty));
+                PerformanceCounterCategory.Exists("Processor", string.Empty)
+            );
         }
 
         [ConditionalFact(
@@ -360,7 +376,8 @@ namespace System.Diagnostics.Tests
             PerformanceCounterCategory pcc = new PerformanceCounterCategory("Processor");
 
             string[] instances = Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                pcc.GetInstanceNames());
+                pcc.GetInstanceNames()
+            );
             AssertExtensions.GreaterThan(
                 instances.Length,
                 0,
@@ -377,13 +394,17 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounterCategory_InstanceExists_StaticInvalid()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                PerformanceCounterCategory.InstanceExists(null, "Processor", "."));
+                PerformanceCounterCategory.InstanceExists(null, "Processor", ".")
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                PerformanceCounterCategory.InstanceExists("", null, "."));
+                PerformanceCounterCategory.InstanceExists("", null, ".")
+            );
             Assert.Throws<ArgumentException>(() =>
-                PerformanceCounterCategory.InstanceExists("", string.Empty, "."));
+                PerformanceCounterCategory.InstanceExists("", string.Empty, ".")
+            );
             Assert.Throws<ArgumentException>(() =>
-                PerformanceCounterCategory.InstanceExists("", "Processor", string.Empty));
+                PerformanceCounterCategory.InstanceExists("", "Processor", string.Empty)
+            );
         }
 
         [Fact]

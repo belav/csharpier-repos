@@ -74,7 +74,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
 
             // update loggers in remote process
             var client = threadingContext.JoinableTaskFactory.Run(() =>
-                RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None));
+                RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None)
+            );
             if (client != null)
             {
                 var functionIds = Enum.GetValues(typeof(FunctionId))
@@ -93,7 +94,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                                 ),
                             CancellationToken.None
                         )
-                        .ConfigureAwait(false));
+                        .ConfigureAwait(false)
+                );
             }
         }
 

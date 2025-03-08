@@ -52,7 +52,8 @@ namespace System.Net.NameResolution.Tests
                     "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
                         + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
                         + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -63,7 +64,8 @@ namespace System.Net.NameResolution.Tests
                     "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
                         + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
                         + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are."
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -74,7 +76,8 @@ namespace System.Net.NameResolution.Tests
                     "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
                         + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
                         + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret"
-                ));
+                )
+            );
         }
 
         [Fact]

@@ -524,7 +524,8 @@ namespace System.IO.Pipes.Tests
 
                     SafePipeHandle fakePipeHandle = new SafePipeHandle(handle, ownsHandle: false);
                     Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(direction, false, true, fakePipeHandle));
+                        new NamedPipeServerStream(direction, false, true, fakePipeHandle)
+                    );
                 }
                 finally
                 {
@@ -554,7 +555,8 @@ namespace System.IO.Pipes.Tests
             SafePipeHandle handle = pipe.SafePipeHandle;
             pipe.Dispose();
             Assert.Throws<ObjectDisposedException>(() =>
-                new NamedPipeServerStream(direction, true, true, pipe.SafePipeHandle).Dispose());
+                new NamedPipeServerStream(direction, true, true, pipe.SafePipeHandle).Dispose()
+            );
         }
 
         [Fact]
@@ -644,7 +646,8 @@ namespace System.IO.Pipes.Tests
             )
             {
                 Assert.Throws<UnauthorizedAccessException>(() =>
-                    new NamedPipeServerStream(uniqueServerName, PipeDirection.Out));
+                    new NamedPipeServerStream(uniqueServerName, PipeDirection.Out)
+                );
             }
         }
 
@@ -677,7 +680,8 @@ namespace System.IO.Pipes.Tests
                         2,
                         PipeTransmissionMode.Byte,
                         PipeOptions.FirstPipeInstance
-                    ));
+                    )
+                );
             }
         }
     }

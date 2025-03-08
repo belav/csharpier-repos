@@ -140,7 +140,8 @@ public class RoutePatternParserTests
     public void InvalidTemplate_WithRepeatedParameter()
     {
         var ex = Assert.Throws<RoutePatternException>(() =>
-            RoutePatternParser.Parse("{p1}/literal/{p1}"));
+            RoutePatternParser.Parse("{p1}/literal/{p1}")
+        );
 
         var expectedMessage =
             "The route parameter name 'p1' appears more than one time in the route template.";
@@ -249,7 +250,8 @@ public class RoutePatternParserTests
     public void InvalidTemplate_LiteralAfterOptionalParam()
     {
         var ex = Assert.Throws<RoutePatternException>(() =>
-            RoutePatternParser.Parse("/test/{a?}/test"));
+            RoutePatternParser.Parse("/test/{a?}/test")
+        );
 
         var expectedMessage =
             "Invalid template 'test/{a?}/test'. Non-optional parameters or literal routes cannot appear after optional parameters.";
@@ -261,7 +263,8 @@ public class RoutePatternParserTests
     public void InvalidTemplate_NonOptionalParamAfterOptionalParam()
     {
         var ex = Assert.Throws<RoutePatternException>(() =>
-            RoutePatternParser.Parse("/test/{a?}/{b}"));
+            RoutePatternParser.Parse("/test/{a?}/{b}")
+        );
 
         var expectedMessage =
             "Invalid template 'test/{a?}/{b}'. Non-optional parameters or literal routes cannot appear after optional parameters.";
@@ -290,7 +293,8 @@ public class RoutePatternParserTests
     public void InvalidTemplate_CatchAllParamNotLast()
     {
         var ex = Assert.Throws<RoutePatternException>(() =>
-            RoutePatternParser.Parse("/test/{*a}/{b}"));
+            RoutePatternParser.Parse("/test/{*a}/{b}")
+        );
 
         var expectedMessage =
             "A catch-all parameter can only appear as the last segment of the route template.";
@@ -302,7 +306,8 @@ public class RoutePatternParserTests
     public void InvalidTemplate_BadOptionalCharacterPosition()
     {
         var ex = Assert.Throws<RoutePatternException>(() =>
-            RoutePatternParser.Parse("/test/{a?bc}/{b}"));
+            RoutePatternParser.Parse("/test/{a?bc}/{b}")
+        );
 
         var expectedMessage =
             "The route parameter name 'a?bc' is invalid. Route parameter names must be non-empty and cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, and can occur only at the start of the parameter.";

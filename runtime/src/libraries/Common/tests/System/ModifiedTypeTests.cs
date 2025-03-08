@@ -53,9 +53,10 @@ namespace System.Tests.Types
                 Assert.Throws<InvalidOperationException>(() => t.GenericParameterAttributes);
                 Assert.Throws<InvalidOperationException>(() => t.GenericParameterPosition);
                 Assert.Throws<InvalidOperationException>(() =>
-                    t.GetFunctionPointerCallingConventions());
-                Assert.Throws<InvalidOperationException>(() =>
-                    t.GetFunctionPointerParameterTypes());
+                    t.GetFunctionPointerCallingConventions()
+                );
+                Assert.Throws<InvalidOperationException>(() => t.GetFunctionPointerParameterTypes()
+                );
                 Assert.Throws<InvalidOperationException>(() => t.GetFunctionPointerReturnType());
                 Assert.False(t.HasElementType);
                 Assert.False(t.IsAbstract);

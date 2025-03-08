@@ -51,7 +51,8 @@ unsafe partial class GenericsTest
         Assert.Equal(value2.GetElement(1), 2.0f);
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetVector64FOut(1.0f, 2.0f, out Vector64<float> value3));
+            GenericsNative.GetVector64FOut(1.0f, 2.0f, out Vector64<float> value3)
+        );
 
         Vector64<float>* value4 = GenericsNative.GetVector64FPtr(1.0f, 2.0f);
         Assert.Equal(value4->GetElement(0), 1.0f);
@@ -59,8 +60,8 @@ unsafe partial class GenericsTest
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector64FRef(1.0f, 2.0f));
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector64F(default, default));
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64F(default, default)
+        );
 
         Vector64<float>[] values = new Vector64<float>[]
         {
@@ -80,9 +81,11 @@ unsafe partial class GenericsTest
         });
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector64Fs(values, values.Length));
+            GenericsNative.AddVector64Fs(values, values.Length)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector64Fs(in values[0], values.Length));
+            GenericsNative.AddVector64Fs(in values[0], values.Length)
+        );
     }
 }

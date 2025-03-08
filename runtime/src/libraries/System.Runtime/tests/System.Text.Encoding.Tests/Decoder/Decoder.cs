@@ -260,7 +260,8 @@ namespace System.Text.Encodings.Tests
                         out bytesUsed,
                         out charsUsed,
                         out completed
-                    ));
+                    )
+                );
             }
         }
 
@@ -388,9 +389,10 @@ namespace System.Text.Encodings.Tests
                 char* pChars = charsPtr;
 
                 Assert.Throws<DecoderFallbackException>(() =>
-                    decoder.GetChars(pBytes, 2, pChars, 2, true));
-                Assert.Throws<DecoderFallbackException>(() =>
-                    decoder.GetCharCount(pBytes, 2, true));
+                    decoder.GetChars(pBytes, 2, pChars, 2, true)
+                );
+                Assert.Throws<DecoderFallbackException>(() => decoder.GetCharCount(pBytes, 2, true)
+                );
             }
         }
 
@@ -417,7 +419,8 @@ namespace System.Text.Encodings.Tests
             );
             Assert.Throws<DecoderFallbackException>(() => fallbackBuffer.Fallback(bytes, 0));
             Assert.Throws<DecoderFallbackException>(() =>
-                fallbackBuffer.Fallback(new byte[] { 0x40, 0x60 }, 0));
+                fallbackBuffer.Fallback(new byte[] { 0x40, 0x60 }, 0)
+            );
 
             Assert.Equal(0, fallbackBuffer.Remaining);
             Assert.Equal('\u0000', fallbackBuffer.GetNextChar());
@@ -468,7 +471,8 @@ namespace System.Text.Encodings.Tests
                     new char[8],
                     0,
                     flush: true
-                ));
+                )
+            );
             Assert.Equal(expectedIndex, ex.Index);
 
             // Then test GetChars / GetCharCount
@@ -480,7 +484,8 @@ namespace System.Text.Encodings.Tests
             );
 
             ex = Assert.Throws<DecoderFallbackException>(() =>
-                decoder.GetCharCount(secondPayload, 0, secondPayload.Length, flush: true));
+                decoder.GetCharCount(secondPayload, 0, secondPayload.Length, flush: true)
+            );
             Assert.Equal(expectedIndex, ex.Index);
         }
 

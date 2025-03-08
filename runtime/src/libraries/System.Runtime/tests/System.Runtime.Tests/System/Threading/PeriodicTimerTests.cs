@@ -46,7 +46,8 @@ namespace System.Threading.Tests
 
             timer.Dispose();
             Assert.Throws<ObjectDisposedException>(() =>
-                timer.Period = TimeSpan.FromMilliseconds(100));
+                timer.Period = TimeSpan.FromMilliseconds(100)
+            );
         }
 
         [Fact]

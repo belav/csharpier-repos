@@ -856,7 +856,8 @@ public abstract class OutputCacheMiddlewareTests
 
         // Should throw
         Assert.ThrowsAny<InvalidOperationException>(() =>
-            OutputCacheMiddleware.AddOutputCacheFeature(context));
+            OutputCacheMiddleware.AddOutputCacheFeature(context)
+        );
     }
 
     private class FakeResponseFeature : HttpResponseFeature

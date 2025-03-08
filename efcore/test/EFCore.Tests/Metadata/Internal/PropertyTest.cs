@@ -28,7 +28,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    entityType.AddProperty("Kuke", typeof(string)))
+                    entityType.AddProperty("Kuke", typeof(string))
+                )
                 .Message
         );
 
@@ -55,7 +56,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.ValueGenerated = ValueGenerated.OnAddOrUpdate)
+                    property.ValueGenerated = ValueGenerated.OnAddOrUpdate
+                )
                 .Message
         );
 
@@ -63,7 +65,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetAfterSaveBehavior(PropertySaveBehavior.Throw))
+                    property.SetAfterSaveBehavior(PropertySaveBehavior.Throw)
+                )
                 .Message
         );
 
@@ -71,7 +74,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw))
+                    property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw)
+                )
                 .Message
         );
 
@@ -118,7 +122,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueComparer((ValueComparer)null))
+                    property.SetValueComparer((ValueComparer)null)
+                )
                 .Message
         );
 
@@ -133,7 +138,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueConverter((ValueConverter)null))
+                    property.SetValueConverter((ValueConverter)null)
+                )
                 .Message
         );
 
@@ -148,7 +154,8 @@ public class PropertyTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueGeneratorFactory((Type)null))
+                    property.SetValueGeneratorFactory((Type)null)
+                )
                 .Message
         );
     }
@@ -311,7 +318,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueGeneratorFactory(typeof(NonDerivedValueGeneratorFactory)))
+                    property.SetValueGeneratorFactory(typeof(NonDerivedValueGeneratorFactory))
+                )
                 .Message
         );
 
@@ -322,7 +330,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueGeneratorFactory(typeof(AbstractValueGeneratorFactory)))
+                    property.SetValueGeneratorFactory(typeof(AbstractValueGeneratorFactory))
+                )
                 .Message
         );
 
@@ -333,7 +342,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueGeneratorFactory(typeof(StaticValueGeneratorFactory)))
+                    property.SetValueGeneratorFactory(typeof(StaticValueGeneratorFactory))
+                )
                 .Message
         );
 
@@ -344,7 +354,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueGeneratorFactory(typeof(PrivateValueGeneratorFactory)))
+                    property.SetValueGeneratorFactory(typeof(PrivateValueGeneratorFactory))
+                )
                 .Message
         );
 
@@ -355,9 +366,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueGeneratorFactory(
-                        typeof(NonParameterlessValueGeneratorFactory)
-                    ))
+                    property.SetValueGeneratorFactory(typeof(NonParameterlessValueGeneratorFactory))
+                )
                 .Message
         );
     }
@@ -408,7 +418,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueConverter(typeof(NonDerivedValueConverter)))
+                    property.SetValueConverter(typeof(NonDerivedValueConverter))
+                )
                 .Message
         );
 
@@ -416,7 +427,8 @@ public class PropertyTest
             CoreStrings.CannotCreateValueConverter(nameof(AbstractValueConverter), "HasConversion"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueConverter(typeof(AbstractValueConverter)))
+                    property.SetValueConverter(typeof(AbstractValueConverter))
+                )
                 .Message
         );
 
@@ -424,7 +436,8 @@ public class PropertyTest
             CoreStrings.CannotCreateValueConverter(nameof(StaticValueConverter), "HasConversion"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueConverter(typeof(StaticValueConverter)))
+                    property.SetValueConverter(typeof(StaticValueConverter))
+                )
                 .Message
         );
 
@@ -432,7 +445,8 @@ public class PropertyTest
             CoreStrings.CannotCreateValueConverter(nameof(PrivateValueConverter), "HasConversion"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueConverter(typeof(PrivateValueConverter)))
+                    property.SetValueConverter(typeof(PrivateValueConverter))
+                )
                 .Message
         );
 
@@ -443,7 +457,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueConverter(typeof(NonParameterlessValueConverter)))
+                    property.SetValueConverter(typeof(NonParameterlessValueConverter))
+                )
                 .Message
         );
     }
@@ -483,7 +498,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueComparer(typeof(NonDerivedValueComparer)))
+                    property.SetValueComparer(typeof(NonDerivedValueComparer))
+                )
                 .Message
         );
 
@@ -491,7 +507,8 @@ public class PropertyTest
             CoreStrings.CannotCreateValueComparer(nameof(AbstractValueComparer), "HasConversion"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueComparer(typeof(AbstractValueComparer)))
+                    property.SetValueComparer(typeof(AbstractValueComparer))
+                )
                 .Message
         );
 
@@ -499,7 +516,8 @@ public class PropertyTest
             CoreStrings.CannotCreateValueComparer(nameof(StaticValueComparer), "HasConversion"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueComparer(typeof(StaticValueComparer)))
+                    property.SetValueComparer(typeof(StaticValueComparer))
+                )
                 .Message
         );
 
@@ -507,7 +525,8 @@ public class PropertyTest
             CoreStrings.CannotCreateValueComparer(nameof(PrivateValueComparer), "HasConversion"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueComparer(typeof(PrivateValueComparer)))
+                    property.SetValueComparer(typeof(PrivateValueComparer))
+                )
                 .Message
         );
 
@@ -518,7 +537,8 @@ public class PropertyTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    property.SetValueComparer(typeof(NonParameterlessValueComparer)))
+                    property.SetValueComparer(typeof(NonParameterlessValueComparer))
+                )
                 .Message
         );
     }
@@ -594,8 +614,8 @@ public class PropertyTest
         Assert.Equal(
             CoreStrings.BadJsonValueReaderWriterType(type.ShortDisplayName()),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    property.SetJsonValueReaderWriterType(type))
+                .Throws<InvalidOperationException>(() => property.SetJsonValueReaderWriterType(type)
+                )
                 .Message
         );
     }

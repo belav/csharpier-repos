@@ -147,7 +147,8 @@ namespace System.Net.Tests
         {
             HttpListenerContext context = await GetWebSocketContext(new string[] { "MyProtocol" });
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context.AcceptWebSocketAsync("MyOtherProtocol"));
+                context.AcceptWebSocketAsync("MyOtherProtocol")
+            );
         }
 
         [ConditionalFact(nameof(IsNotWindows7))]
@@ -155,7 +156,8 @@ namespace System.Net.Tests
         {
             HttpListenerContext context = await GetWebSocketContext();
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context.AcceptWebSocketAsync("SubProtocol"));
+                context.AcceptWebSocketAsync("SubProtocol")
+            );
         }
 
         [ConditionalTheory(nameof(IsNotWindows7))]
@@ -183,7 +185,8 @@ namespace System.Net.Tests
                 async context =>
                 {
                     await Assert.ThrowsAsync<WebSocketException>(() =>
-                        context.AcceptWebSocketAsync(null));
+                        context.AcceptWebSocketAsync(null)
+                    );
                 }
             );
         }
@@ -231,7 +234,8 @@ namespace System.Net.Tests
         {
             HttpListenerContext context = await GetWebSocketContext();
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context.AcceptWebSocketAsync(subProtocol));
+                context.AcceptWebSocketAsync(subProtocol)
+            );
         }
 
         [ConditionalFact(nameof(IsNotWindows7))]

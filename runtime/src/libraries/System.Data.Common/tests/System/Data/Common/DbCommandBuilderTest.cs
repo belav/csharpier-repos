@@ -46,7 +46,8 @@ namespace System.Data.Tests.Common
             cb.CatalogLocation = CatalogLocation.End;
 
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                cb.CatalogLocation = (CatalogLocation)666);
+                cb.CatalogLocation = (CatalogLocation)666
+            );
             // The CatalogLocation enumeration value, 666, is invalid
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -89,7 +90,8 @@ namespace System.Data.Tests.Common
             MyCommandBuilder cb = new MyCommandBuilder();
             cb.ConflictOption = ConflictOption.CompareRowVersion;
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                cb.ConflictOption = (ConflictOption)666);
+                cb.ConflictOption = (ConflictOption)666
+            );
             // The ConflictOption enumeration value, 666, is invalid
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -106,12 +108,14 @@ namespace System.Data.Tests.Common
             MyCommandBuilder cb = new MyCommandBuilder();
 
             NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                cb.QuoteIdentifier(null));
+                cb.QuoteIdentifier(null)
+            );
             Assert.Null(ex.InnerException);
             Assert.Equal((new NotSupportedException()).Message, ex.Message);
 
             NotSupportedException ex2 = Assert.Throws<NotSupportedException>(() =>
-                cb.QuoteIdentifier("mono"));
+                cb.QuoteIdentifier("mono")
+            );
             Assert.Null(ex.InnerException);
             Assert.Equal((new NotSupportedException()).Message, ex.Message);
         }

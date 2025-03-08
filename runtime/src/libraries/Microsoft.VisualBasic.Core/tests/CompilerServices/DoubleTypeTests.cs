@@ -65,7 +65,8 @@ namespace Microsoft.VisualBasic.Tests
         {
             Assert.Throws<ArgumentNullException>(() => DoubleType.Parse(null, null));
             Assert.Throws<FormatException>(() =>
-                DoubleType.Parse("abc", CultureInfo.InvariantCulture.NumberFormat));
+                DoubleType.Parse("abc", CultureInfo.InvariantCulture.NumberFormat)
+            );
         }
     }
 }

@@ -363,10 +363,12 @@ namespace System.IO.Tests
             {
                 // [] ArgumentOutOfRange for negative offset
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, iArrInvalidValues[iLoop], 0));
+                    dw2.Write(bArr, iArrInvalidValues[iLoop], 0)
+                );
                 // [] ArgumentOutOfRangeException for negative count
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, 0, iArrInvalidValues[iLoop]));
+                    dw2.Write(bArr, 0, iArrInvalidValues[iLoop])
+                );
             }
             dw2.Dispose();
             mstr.Dispose();
@@ -377,10 +379,12 @@ namespace System.IO.Tests
             {
                 // [] Offset out of range
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, iArrLargeValues[iLoop], 0));
+                    dw2.Write(bArr, iArrLargeValues[iLoop], 0)
+                );
                 // [] Invalid count value
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(bArr, 0, iArrLargeValues[iLoop]));
+                    dw2.Write(bArr, 0, iArrLargeValues[iLoop])
+                );
             }
             dw2.Dispose();
             mstr.Dispose();
@@ -527,10 +531,12 @@ namespace System.IO.Tests
             {
                 // [] ArgumentOutOfRange for negative offset
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, iArrInvalidValues[iLoop], 0));
+                    dw2.Write(chArr, iArrInvalidValues[iLoop], 0)
+                );
                 // [] negative count.
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, 0, iArrInvalidValues[iLoop]));
+                    dw2.Write(chArr, 0, iArrInvalidValues[iLoop])
+                );
             }
             mstr.Dispose();
             dw2.Dispose();
@@ -541,10 +547,12 @@ namespace System.IO.Tests
             {
                 // [] Offset out of range
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, iArrLargeValues[iLoop], 0));
+                    dw2.Write(chArr, iArrLargeValues[iLoop], 0)
+                );
                 // [] Invalid count value
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dw2.Write(chArr, 0, iArrLargeValues[iLoop]));
+                    dw2.Write(chArr, 0, iArrLargeValues[iLoop])
+                );
             }
             mstr.Dispose();
             dw2.Dispose();

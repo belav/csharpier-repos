@@ -139,11 +139,14 @@ namespace System.Diagnostics.Tests
                 using (var record = (EventLogRecord)eventLog.ReadEvent())
                 {
                     ThrowsMaxOnce<EventLogNotFoundException>(() =>
-                        levelDisplayName = record.LevelDisplayName);
+                        levelDisplayName = record.LevelDisplayName
+                    );
                     ThrowsMaxOnce<EventLogNotFoundException>(() =>
-                        opcodeDisplayName = record.OpcodeDisplayName);
+                        opcodeDisplayName = record.OpcodeDisplayName
+                    );
                     ThrowsMaxOnce<EventLogNotFoundException>(() =>
-                        taskDisplayName = record.TaskDisplayName);
+                        taskDisplayName = record.TaskDisplayName
+                    );
                     Assert.Equal(levelDisplayName, record.LevelDisplayName);
                     Assert.Equal(opcodeDisplayName, record.OpcodeDisplayName);
                     Assert.Equal(taskDisplayName, record.TaskDisplayName);

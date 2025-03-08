@@ -553,7 +553,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(new SubClass(0)),
                     Expression.Constant(new SubClass(1))
-                ));
+                )
+            );
         }
 
         public class BaseClass

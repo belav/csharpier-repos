@@ -493,7 +493,8 @@ public abstract class VirtualFileResultTestBase
 
         // Act
         var ex = await Assert.ThrowsAsync<FileNotFoundException>(() =>
-            ExecuteAsync(httpContext, path, "text/plain"));
+            ExecuteAsync(httpContext, path, "text/plain")
+        );
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);

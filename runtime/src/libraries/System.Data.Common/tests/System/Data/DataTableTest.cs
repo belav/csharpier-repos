@@ -382,7 +382,8 @@ namespace System.Data.Tests
             DataTable dt = new DataTable("MyTable");
 #pragma warning disable SYSLIB0038
             Assert.Throws<InvalidEnumArgumentException>(() =>
-                dt.RemotingFormat = SerializationFormat.Binary);
+                dt.RemotingFormat = SerializationFormat.Binary
+            );
 #pragma warning restore SYSLIB0038
         }
 
@@ -791,7 +792,8 @@ Assert.Fail();
 
             // PrimaryKey columns do not belong to this table.
             Assert.Throws<ArgumentException>(() =>
-                dt.PrimaryKey = new DataColumn[] { dt2.Columns[0] });
+                dt.PrimaryKey = new DataColumn[] { dt2.Columns[0] }
+            );
 
             Assert.Equal(0, dt.Constraints.Count);
 
@@ -1165,7 +1167,8 @@ Assert.Fail();
 
             // import 3rd row again
             ConstraintException ex = Assert.Throws<ConstraintException>(() =>
-                target.ImportRow(src.Rows[2]));
+                target.ImportRow(src.Rows[2])
+            );
             // Column 'id' is constrained to be unique.
             // Value '3' is already present
             Assert.Null(ex.InnerException);
@@ -1291,8 +1294,8 @@ Assert.Fail();
             Assert.Equal(2, table.Rows.Count);
             Assert.Equal(DataRowState.Deleted, table.Rows[1].RowState);
 
-            ConstraintException ex = Assert.Throws<ConstraintException>(() =>
-                table.RejectChanges());
+            ConstraintException ex = Assert.Throws<ConstraintException>(() => table.RejectChanges()
+            );
             // Column 'col' is constrained to be unique.
             // Value '1' is already present
             Assert.Null(ex.InnerException);
@@ -1734,7 +1737,8 @@ Assert.Fail();
             dt.Rows.Add(new object[] { 1, 3 });
 
             Assert.Throws<NoNullAllowedException>(() =>
-                dt.Rows.Add(new object[] { DBNull.Value, 3 }));
+                dt.Rows.Add(new object[] { DBNull.Value, 3 })
+            );
         }
 
         [Fact]
@@ -2106,7 +2110,8 @@ Assert.Fail();
             dtLoad.Columns.Add("name", typeof(double));
             DataTableReader dtr = _dt.CreateDataReader();
             Assert.Throws<ArgumentException>(() =>
-                dtLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler));
+                dtLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler)
+            );
         }
 
         [Fact]
@@ -2370,8 +2375,8 @@ Assert.Fail();
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr);
 
-            Assert.Throws<VersionNotFoundException>(() =>
-                dtLoad.Rows[2][1, DataRowVersion.Current]);
+            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[2][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -2431,8 +2436,8 @@ Assert.Fail();
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.PreserveChanges);
 
-            Assert.Throws<VersionNotFoundException>(() =>
-                dtLoad.Rows[2][1, DataRowVersion.Current]);
+            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[2][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -2596,8 +2601,8 @@ Assert.Fail();
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() =>
-                dtLoad.Rows[2][1, DataRowVersion.Current]);
+            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[2][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -2616,8 +2621,8 @@ Assert.Fail();
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() =>
-                dtLoad.Rows[3][1, DataRowVersion.Original]);
+            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[3][1, DataRowVersion.Original]
+            );
         }
 
         [Fact]
@@ -2640,8 +2645,8 @@ Assert.Fail();
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() =>
-                dtLoad.Rows[3][1, DataRowVersion.Original]);
+            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[3][1, DataRowVersion.Original]
+            );
         }
 
         [Fact]
@@ -2660,8 +2665,8 @@ Assert.Fail();
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() =>
-                dtLoad.Rows[3][1, DataRowVersion.Original]);
+            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[3][1, DataRowVersion.Original]
+            );
         }
 
         [Fact]

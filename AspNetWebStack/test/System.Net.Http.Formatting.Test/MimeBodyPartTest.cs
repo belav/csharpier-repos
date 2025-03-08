@@ -38,7 +38,8 @@ namespace System.Net.Http
 
             // Act and Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                bodypart.WriteSegment(bodypart.Segments[0], CancellationToken.None));
+                bodypart.WriteSegment(bodypart.Segments[0], CancellationToken.None)
+            );
         }
 
         [Fact]

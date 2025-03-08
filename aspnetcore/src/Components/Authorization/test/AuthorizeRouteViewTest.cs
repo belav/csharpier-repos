@@ -474,7 +474,8 @@ public class AuthorizeRouteViewTest
                         { nameof(AuthorizeRouteView.RouteData), routeData2 },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert: we retain the layout instance, and mutate its contents
         Assert.True(render2Task.IsCompletedSuccessfully);

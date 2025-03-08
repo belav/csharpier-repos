@@ -408,7 +408,8 @@ public class HttpRequestHeadersTests
                 Encoding.Latin1.GetBytes(key),
                 Encoding.ASCII.GetBytes("value"),
                 checkForNewlineChars: false
-            ));
+            )
+        );
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
     }
 
@@ -728,7 +729,8 @@ public class HttpRequestHeadersTests
         });
 
         Assert.Throws<InvalidOperationException>(() =>
-            headers.Append(acceptNameBytes, headerValueBytes, checkForNewlineChars: false));
+            headers.Append(acceptNameBytes, headerValueBytes, checkForNewlineChars: false)
+        );
         headers.Append(cookieNameBytes, headerValueBytes, checkForNewlineChars: false);
         headers.OnHeadersComplete();
 
@@ -761,7 +763,8 @@ public class HttpRequestHeadersTests
                 contentLengthNameBytes,
                 contentLengthValueBytes,
                 checkForNewlineChars: false
-            ));
+            )
+        );
     }
 
     [Fact]

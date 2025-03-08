@@ -118,7 +118,8 @@ public class HttpsTests : LoggedTest
                         clientCertificates: null,
                         enabledSslProtocols: SslProtocols.None,
                         checkCertificateRevocation: false
-                    ));
+                    )
+                );
 
                 Logger.LogTrace(ex, "AuthenticateAsClientAsync Exception");
             }
@@ -890,7 +891,8 @@ public class HttpsTests : LoggedTest
                         clientCertificates: null,
                         enabledSslProtocols: SslProtocols.Tls,
                         checkCertificateRevocation: false
-                    ));
+                    )
+                );
             }
         }
 #pragma warning restore SYSLIB0039

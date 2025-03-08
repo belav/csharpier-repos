@@ -462,7 +462,8 @@ public class CommandBatchPreparerTest
                     entry.SetTemporaryValue(
                         entry.EntityType.FindProperty(nameof(FakeEntity.Value)),
                         "Test"
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -502,7 +503,8 @@ ForeignKeyConstraint { 'RelatedId' } FakeEntity [Added]" + CoreStrings.Sensitive
                         new[] { fakeEntry, relatedFakeEntry },
                         modelData,
                         sensitiveLogging
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -562,7 +564,8 @@ Index { 'UniqueValue' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabled;
                         new[] { fakeEntry, relatedFakeEntry, fakeEntry2 },
                         modelData,
                         sensitiveLogging
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -845,7 +848,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                             new[] { firstEntry, secondEntry },
                             modelData,
                             sensitiveLogging: true
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -864,7 +868,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                             new[] { firstEntry, secondEntry },
                             modelData,
                             sensitiveLogging: false
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -925,7 +930,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                                 new[] { firstEntry, secondEntry },
                                 modelData,
                                 sensitiveLogging: true
-                            ))
+                            )
+                        )
                         .Message
                 );
             }
@@ -945,7 +951,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                                 new[] { firstEntry, secondEntry },
                                 modelData,
                                 sensitiveLogging: false
-                            ))
+                            )
+                        )
                         .Message
                 );
             }
@@ -969,7 +976,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                                 new[] { firstEntry, secondEntry },
                                 modelData,
                                 sensitiveLogging: true
-                            ))
+                            )
+                        )
                         .Message
                 );
             }
@@ -989,7 +997,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                                 new[] { firstEntry, secondEntry },
                                 modelData,
                                 sensitiveLogging: false
-                            ))
+                            )
+                        )
                         .Message
                 );
             }

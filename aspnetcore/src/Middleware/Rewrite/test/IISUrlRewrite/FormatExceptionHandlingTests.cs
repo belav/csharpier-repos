@@ -65,7 +65,8 @@ public class FormatExceptionHandlingTests
     {
         // Arrange, Act, Assert
         var ex = Assert.Throws<FormatException>(() =>
-            new UrlRewriteFileParser().Parse(new StringReader(input), false));
+            new UrlRewriteFileParser().Parse(new StringReader(input), false)
+        );
         Assert.Equal(expected, ex.Message);
     }
 }

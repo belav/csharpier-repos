@@ -2580,7 +2580,8 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(2, 1),
             Assert
                 .Throws<ArgumentException>(() =>
-                    context.Set<IntKey>().Local.FindEntryUntyped(new object[] { 77, 88 }))
+                    context.Set<IntKey>().Local.FindEntryUntyped(new object[] { 77, 88 })
+                )
                 .Message
         );
     }
@@ -2606,7 +2607,8 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(1, 2),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1.Name, property2.Name }, oneValue))
+                    set.Local.FindEntry(new[] { property1.Name, property2.Name }, oneValue)
+                )
                 .Message
         );
 
@@ -2614,7 +2616,8 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(2, 1),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1.Name }, twoValues))
+                    set.Local.FindEntry(new[] { property1.Name }, twoValues)
+                )
                 .Message
         );
 
@@ -2624,7 +2627,8 @@ public class FindEntryTest
                 .Throws<ArgumentException>(() =>
                     set
                         .Local.GetEntries(new[] { property1.Name, property2.Name }, oneValue)
-                        .ToList())
+                        .ToList()
+                )
                 .Message
         );
 
@@ -2632,7 +2636,8 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(2, 1),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.GetEntries(new[] { property1.Name }, twoValues).ToList())
+                    set.Local.GetEntries(new[] { property1.Name }, twoValues).ToList()
+                )
                 .Message
         );
 
@@ -2640,15 +2645,16 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(1, 2),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1, property2 }, oneValue))
+                    set.Local.FindEntry(new[] { property1, property2 }, oneValue)
+                )
                 .Message
         );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
             Assert
-                .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1 }, twoValues))
+                .Throws<ArgumentException>(() => set.Local.FindEntry(new[] { property1 }, twoValues)
+                )
                 .Message
         );
 
@@ -2656,7 +2662,8 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(1, 2),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.GetEntries(new[] { property1, property2 }, oneValue).ToList())
+                    set.Local.GetEntries(new[] { property1, property2 }, oneValue).ToList()
+                )
                 .Message
         );
 
@@ -2664,7 +2671,8 @@ public class FindEntryTest
             CoreStrings.FindWrongCount(2, 1),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.GetEntries(new[] { property1 }, twoValues).ToList())
+                    set.Local.GetEntries(new[] { property1 }, twoValues).ToList()
+                )
                 .Message
         );
     }
@@ -2705,7 +2713,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("string", "Id1", "int"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1.Name }, new object?[] { "1" }))
+                    set.Local.FindEntry(new[] { property1.Name }, new object?[] { "1" })
+                )
                 .Message
         );
 
@@ -2713,7 +2722,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("string", "Id1", "int"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.GetEntries(new[] { property1.Name }, new object?[] { "1" }).ToList())
+                    set.Local.GetEntries(new[] { property1.Name }, new object?[] { "1" }).ToList()
+                )
                 .Message
         );
 
@@ -2726,7 +2736,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("string", "Id1", "int"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1 }, new object?[] { "1" }))
+                    set.Local.FindEntry(new[] { property1 }, new object?[] { "1" })
+                )
                 .Message
         );
 
@@ -2734,7 +2745,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("string", "Id1", "int"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.GetEntries(new[] { property1 }, new object?[] { "1" }).ToList())
+                    set.Local.GetEntries(new[] { property1 }, new object?[] { "1" }).ToList()
+                )
                 .Message
         );
     }
@@ -2751,7 +2763,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("int", "Id2", "string"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntryUntyped(new object[] { 77, 88, "X" }))
+                    set.Local.FindEntryUntyped(new object[] { 77, 88, "X" })
+                )
                 .Message
         );
 
@@ -2762,7 +2775,8 @@ public class FindEntryTest
                     set.Local.FindEntry(
                         new[] { property1.Name, property2.Name },
                         new object?[] { 1, 2 }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -2775,7 +2789,8 @@ public class FindEntryTest
                             new[] { property1.Name, property2.Name },
                             new object?[] { 1, 2 }
                         )
-                        .ToList())
+                        .ToList()
+                )
                 .Message
         );
 
@@ -2783,7 +2798,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("int", "Foo", "string"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(new[] { property1, property2 }, new object?[] { 1, 2 }))
+                    set.Local.FindEntry(new[] { property1, property2 }, new object?[] { 1, 2 })
+                )
                 .Message
         );
 
@@ -2793,7 +2809,8 @@ public class FindEntryTest
                 .Throws<ArgumentException>(() =>
                     set
                         .Local.GetEntries(new[] { property1, property2 }, new object?[] { 1, 2 })
-                        .ToList())
+                        .ToList()
+                )
                 .Message
         );
     }

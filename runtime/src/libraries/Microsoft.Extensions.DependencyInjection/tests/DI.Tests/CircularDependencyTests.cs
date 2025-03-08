@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<SelfCircularDependency>());
+                serviceProvider.GetRequiredService<SelfCircularDependency>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -46,7 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<IEnumerable<SelfCircularDependency>>());
+                serviceProvider.GetRequiredService<IEnumerable<SelfCircularDependency>>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -66,7 +68,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<SelfCircularDependencyGeneric<string>>());
+                serviceProvider.GetRequiredService<SelfCircularDependencyGeneric<string>>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -88,7 +91,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<SelfCircularDependencyGeneric<int>>());
+                serviceProvider.GetRequiredService<SelfCircularDependencyGeneric<int>>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -130,7 +134,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<SelfCircularDependencyWithInterface>());
+                serviceProvider.GetRequiredService<SelfCircularDependencyWithInterface>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -152,7 +157,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<DirectCircularDependencyA>());
+                serviceProvider.GetRequiredService<DirectCircularDependencyA>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -176,7 +182,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<IndirectCircularDependencyA>());
+                serviceProvider.GetRequiredService<IndirectCircularDependencyA>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -214,7 +221,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<DependencyOnCircularDependency>());
+                serviceProvider.GetRequiredService<DependencyOnCircularDependency>()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }

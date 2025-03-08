@@ -823,7 +823,8 @@ namespace SuperFileCheck
                                         argsToCopy.ToArray(),
                                         checkPrefixes,
                                         tmpFilePath
-                                    ));
+                                    )
+                                );
                             }
 
                             await Task.WhenAll(tasks);

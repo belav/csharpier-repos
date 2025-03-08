@@ -74,7 +74,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                field.SetCustomAttribute(attributeConstructor, bytes));
+                field.SetCustomAttribute(attributeConstructor, bytes)
+            );
         }
 
         [Fact]

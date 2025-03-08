@@ -105,7 +105,8 @@ namespace System.ComponentModel.Composition.Hosting
                     // Add a revert action to revert the stored exports
                     // in the case that this atomicComposition gets rolled back.
                     atomicComposition.AddRevertAction(() =>
-                        SetSavedImport(import, savedExports, null));
+                        SetSavedImport(import, savedExports, null)
+                    );
                 }
 
                 _importCache ??= new Dictionary<ImportDefinition, Export[]?>();

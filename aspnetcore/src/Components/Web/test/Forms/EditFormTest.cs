@@ -42,7 +42,8 @@ public class EditFormTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            testRenderer.RenderRootComponentAsync(componentId));
+            testRenderer.RenderRootComponentAsync(componentId)
+        );
         Assert.StartsWith(
             $"{nameof(EditForm)} requires a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, but not both.",
             ex.Message
@@ -59,7 +60,8 @@ public class EditFormTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            testRenderer.RenderRootComponentAsync(componentId));
+            testRenderer.RenderRootComponentAsync(componentId)
+        );
         Assert.StartsWith(
             $"{nameof(EditForm)} requires either a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.",
             ex.Message

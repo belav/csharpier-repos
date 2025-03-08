@@ -128,7 +128,8 @@ public class RequestDecompressionMiddlewareTests
 
         // Act/Assert
         await Assert.ThrowsAsync<InvalidDataException>(async () =>
-            await InvokeMiddleware(compressedBytes, new[] { contentEncoding }));
+            await InvokeMiddleware(compressedBytes, new[] { contentEncoding })
+        );
     }
 
     [Fact]

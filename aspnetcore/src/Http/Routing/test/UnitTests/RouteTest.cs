@@ -37,7 +37,8 @@ public class RouteTest
                 constraints: null,
                 dataTokens: null,
                 inlineConstraintResolver: _inlineConstraintResolver
-            ));
+            )
+        );
 
         var expected =
             "An error occurred while creating the route with name '' and template"

@@ -18,14 +18,14 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             // Null options builder.
             OptionsBuilder<FakeOptions>? optionsBuilder = null;
             Assert.Throws<ArgumentNullException>(() => optionsBuilder!.Bind(s_emptyConfig));
-            Assert.Throws<ArgumentNullException>(() =>
-                optionsBuilder!.Bind(s_emptyConfig, _ => { }));
+            Assert.Throws<ArgumentNullException>(() => optionsBuilder!.Bind(s_emptyConfig, _ => { })
+            );
 
             // Null configuration.
             optionsBuilder = CreateOptionsBuilder();
             Assert.Throws<ArgumentNullException>(() => optionsBuilder.Bind(config: null!));
-            Assert.Throws<ArgumentNullException>(() =>
-                optionsBuilder.Bind(config: null!, _ => { }));
+            Assert.Throws<ArgumentNullException>(() => optionsBuilder.Bind(config: null!, _ => { })
+            );
 
             // Null configureBinder.
             optionsBuilder.Bind(s_emptyConfig, configureBinder: null);
@@ -38,12 +38,14 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             string configSectionPath = "FakeSectionPath";
             OptionsBuilder<FakeOptions>? optionsBuilder = null;
             Assert.Throws<ArgumentNullException>(() =>
-                optionsBuilder!.BindConfiguration(configSectionPath));
+                optionsBuilder!.BindConfiguration(configSectionPath)
+            );
 
             // Null config section path.
             optionsBuilder = CreateOptionsBuilder();
             Assert.Throws<ArgumentNullException>(() =>
-                optionsBuilder.BindConfiguration(configSectionPath: null!));
+                optionsBuilder.BindConfiguration(configSectionPath: null!)
+            );
 
             // Null configureBinder.
             optionsBuilder.BindConfiguration(configSectionPath, configureBinder: null);
@@ -56,16 +58,20 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             IServiceCollection? services = null;
             string name = "Name";
             Assert.Throws<ArgumentNullException>(() =>
-                services!.Configure<FakeOptions>(s_emptyConfig));
+                services!.Configure<FakeOptions>(s_emptyConfig)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                services!.Configure<FakeOptions>(name, s_emptyConfig));
+                services!.Configure<FakeOptions>(name, s_emptyConfig)
+            );
 
             // Null config.
             services = new ServiceCollection();
             Assert.Throws<ArgumentNullException>(() =>
-                services.Configure<FakeOptions>(config: null!));
+                services.Configure<FakeOptions>(config: null!)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                services.Configure<FakeOptions>(name, config: null!));
+                services.Configure<FakeOptions>(name, config: null!)
+            );
 
             // Null name.
             services.Configure<FakeOptions>(name: null!, s_emptyConfig);

@@ -95,6 +95,7 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
                 .Logs.GetLog(LogType.Browser)
                 .Any(l =>
                     l.Level == LogLevel.Info && l.Message.Contains("Connection disconnected.")
-                ));
+                )
+        );
     }
 }

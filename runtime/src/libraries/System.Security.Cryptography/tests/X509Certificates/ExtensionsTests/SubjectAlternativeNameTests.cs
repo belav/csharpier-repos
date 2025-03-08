@@ -402,13 +402,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 case LoadMode.Array:
                     // The ctors don't need to be so forgiving, through.
                     Assert.Throws<CryptographicException>(() =>
-                        new X509SubjectAlternativeNameExtension(invalidEncoding));
+                        new X509SubjectAlternativeNameExtension(invalidEncoding)
+                    );
                     break;
                 case LoadMode.Span:
                     Assert.Throws<CryptographicException>(() =>
                         new X509SubjectAlternativeNameExtension(
                             new ReadOnlySpan<byte>(invalidEncoding)
-                        ));
+                        )
+                    );
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(

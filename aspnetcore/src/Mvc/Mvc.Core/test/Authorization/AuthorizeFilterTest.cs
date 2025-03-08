@@ -66,7 +66,8 @@ public class AuthorizeFilterTest
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            authorizeFilter.OnAuthorizationAsync(authorizationContext));
+            authorizeFilter.OnAuthorizationAsync(authorizationContext)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -83,7 +84,8 @@ public class AuthorizeFilterTest
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            authorizeFilter.OnAuthorizationAsync(authorizationContext));
+            authorizeFilter.OnAuthorizationAsync(authorizationContext)
+        );
         Assert.Equal(expected, ex.Message);
     }
 

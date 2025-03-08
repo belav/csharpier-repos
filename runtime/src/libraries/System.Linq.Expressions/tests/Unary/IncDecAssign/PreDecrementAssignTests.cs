@@ -212,7 +212,8 @@ namespace System.Linq.Expressions.Tests
                 .GetTypeInfo()
                 .GetDeclaredMethod("SillyMethod");
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.PreDecrementAssign(variable, method));
+                Expression.PreDecrementAssign(variable, method)
+            );
         }
 
         [Fact]

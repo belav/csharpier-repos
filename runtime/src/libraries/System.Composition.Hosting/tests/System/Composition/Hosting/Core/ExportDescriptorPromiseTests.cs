@@ -175,22 +175,27 @@ namespace System.Composition.Hosting.Core.Tests
                     Assert.Throws<NotImplementedException>(() => metadata.Add("key", "value"));
                     Assert.Throws<NotImplementedException>(() => metadata.Clear());
                     Assert.Throws<NotImplementedException>(() =>
-                        metadata.Add(default(KeyValuePair<string, object>)));
+                        metadata.Add(default(KeyValuePair<string, object>))
+                    );
                     Assert.Throws<NotImplementedException>(() => metadata.CopyTo(null, 0));
                     Assert.Throws<NotImplementedException>(() =>
-                        metadata.Contains(default(KeyValuePair<string, object>)));
+                        metadata.Contains(default(KeyValuePair<string, object>))
+                    );
                     Assert.Throws<NotImplementedException>(() => metadata.ContainsKey("key"));
                     Assert.Throws<NotImplementedException>(() => metadata.Count);
                     Assert.Throws<NotImplementedException>(() => metadata.IsReadOnly);
                     Assert.Throws<NotImplementedException>(() => metadata.GetEnumerator());
                     Assert.Throws<NotImplementedException>(() =>
-                        ((IEnumerable)metadata).GetEnumerator());
+                        ((IEnumerable)metadata).GetEnumerator()
+                    );
                     Assert.Throws<NotImplementedException>(() => metadata.Keys);
                     Assert.Throws<NotImplementedException>(() => metadata.Remove("key"));
                     Assert.Throws<NotImplementedException>(() =>
-                        metadata.Remove(default(KeyValuePair<string, object>)));
+                        metadata.Remove(default(KeyValuePair<string, object>))
+                    );
                     Assert.Throws<NotImplementedException>(() =>
-                        metadata.TryGetValue("key", out object _));
+                        metadata.TryGetValue("key", out object _)
+                    );
                     Assert.Throws<NotImplementedException>(() => metadata.Values);
 
                     Assert.Throws<NotImplementedException>(() => metadata["key"]);

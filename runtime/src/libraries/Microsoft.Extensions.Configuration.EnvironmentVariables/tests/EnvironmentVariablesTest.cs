@@ -256,7 +256,8 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
 
             Assert.Equal("connection", envConfigSrc.Get("test:ConnectionString"));
             Assert.Throws<InvalidOperationException>(() =>
-                envConfigSrc.Get("ConnectionStrings:db1_ProviderName"));
+                envConfigSrc.Get("ConnectionStrings:db1_ProviderName")
+            );
         }
 
         public const string EnvironmentVariable =

@@ -481,7 +481,8 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
                 async,
                 ss => ss.Set<Animal>().OfType<Eagle>().OfType<Kiwi>(),
                 elementSorter: e => e.Name
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

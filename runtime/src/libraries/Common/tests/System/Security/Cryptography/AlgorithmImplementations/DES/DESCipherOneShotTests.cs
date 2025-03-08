@@ -203,7 +203,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         Span<byte>.Empty,
                         out _,
                         feedbackSizeInBits: 56
-                    ));
+                    )
+                );
             }
         }
 
@@ -219,7 +220,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         Span<byte>.Empty,
                         out _,
                         feedbackSizeInBits: 56
-                    ));
+                    )
+                );
             }
         }
 

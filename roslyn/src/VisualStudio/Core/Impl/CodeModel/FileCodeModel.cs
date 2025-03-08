@@ -475,7 +475,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             GetDocumentId(),
                             CancellationToken.None
                         )
-                        .AsTask());
+                        .AsTask()
+                );
             }
             else
             {

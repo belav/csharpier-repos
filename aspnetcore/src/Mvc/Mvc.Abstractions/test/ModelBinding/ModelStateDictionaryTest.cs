@@ -191,7 +191,8 @@ public class ModelStateDictionaryTest
 
         // Act
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldSkipped("key"));
+            source.MarkFieldSkipped("key")
+        );
 
         // Assert
         Assert.Equal(
@@ -251,8 +252,8 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some-error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldValid("key"));
+        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldValid("key")
+        );
 
         // Assert
         Assert.Equal(
@@ -1695,7 +1696,8 @@ public class ModelStateDictionaryTest
 
         // Act
         var invalidException = Assert.Throws<InvalidOperationException>(() =>
-            dictionary.TryAddModelException(key, exception));
+            dictionary.TryAddModelException(key, exception)
+        );
 
         // Assert
         Assert.Equal(
@@ -1715,7 +1717,8 @@ public class ModelStateDictionaryTest
 
         // Act
         var invalidException = Assert.Throws<InvalidOperationException>(() =>
-            dictionary.TryAddModelError(key, "errorMessage"));
+            dictionary.TryAddModelError(key, "errorMessage")
+        );
 
         // Assert
         Assert.Equal(
@@ -1734,7 +1737,8 @@ public class ModelStateDictionaryTest
 
         // Act
         var invalidException = Assert.Throws<InvalidOperationException>(() =>
-            dictionary.SetModelValue(key, string.Empty, string.Empty));
+            dictionary.SetModelValue(key, string.Empty, string.Empty)
+        );
 
         // Assert
         Assert.Equal(
@@ -1772,8 +1776,8 @@ public class ModelStateDictionaryTest
         source.MaxStateDepth = stateDepth;
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldSkipped(key));
+        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldSkipped(key)
+        );
 
         // Assert
         Assert.Equal(

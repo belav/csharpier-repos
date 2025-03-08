@@ -225,7 +225,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
             Assert.Throws<InvalidCastException>(() =>
-                Marshal.GetDelegateForFunctionPointer<OtherNonGenericDelegate>(ptr));
+                Marshal.GetDelegateForFunctionPointer<OtherNonGenericDelegate>(ptr)
+            );
             GC.KeepAlive(d);
         }
 

@@ -63,7 +63,8 @@ namespace System.ComponentModel.Tests
                                     convertTest.Culture,
                                     convertTest.Source,
                                     convertTest.DestinationType
-                                ));
+                                )
+                            );
                         }
                     }
                     else
@@ -96,7 +97,8 @@ namespace System.ComponentModel.Tests
                                         convertTest.Culture,
                                         convertTest.Source,
                                         convertTest.DestinationType
-                                    ));
+                                    )
+                                );
                             }
                         }
                     }

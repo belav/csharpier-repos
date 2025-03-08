@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Throws<ArgumentNullException>(() => SolutionInfo.Create(null, version));
             Assert.Throws<ArgumentNullException>(() =>
-                SolutionInfo.Create(solutionId, version, projects: new[] { projectInfo, null }));
+                SolutionInfo.Create(solutionId, version, projects: new[] { projectInfo, null })
+            );
         }
 
         [Fact]

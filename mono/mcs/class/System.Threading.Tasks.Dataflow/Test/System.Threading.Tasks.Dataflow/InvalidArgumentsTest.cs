@@ -54,7 +54,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             AssertEx.Throws<ArgumentOutOfRangeException>(() => new BatchBlock<int>(-1));
 
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                new BatchBlock<int>(2, new GroupingDataflowBlockOptions { BoundedCapacity = 1 }));
+                new BatchBlock<int>(2, new GroupingDataflowBlockOptions { BoundedCapacity = 1 })
+            );
 
             AssertEx.Throws<ArgumentNullException>(() => new BatchBlock<int>(2, null));
         }
@@ -69,12 +70,14 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new BatchedJoinBlock<int, int>(
                     1,
                     new GroupingDataflowBlockOptions { BoundedCapacity = 1 }
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentException>(() =>
                 new BatchedJoinBlock<int, int>(
                     1,
                     new GroupingDataflowBlockOptions { Greedy = false }
-                ));
+                )
+            );
 
             AssertEx.Throws<ArgumentNullException>(() => new BatchedJoinBlock<int, int>(2, null));
         }
@@ -83,23 +86,28 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
         public void BatchedJoinBlock3Test()
         {
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                new BatchedJoinBlock<int, int, int>(0));
+                new BatchedJoinBlock<int, int, int>(0)
+            );
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                new BatchedJoinBlock<int, int, int>(-1));
+                new BatchedJoinBlock<int, int, int>(-1)
+            );
 
             AssertEx.Throws<ArgumentException>(() =>
                 new BatchedJoinBlock<int, int, int>(
                     1,
                     new GroupingDataflowBlockOptions { BoundedCapacity = 1 }
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentException>(() =>
                 new BatchedJoinBlock<int, int, int>(
                     1,
                     new GroupingDataflowBlockOptions { Greedy = false }
-                ));
+                )
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                new BatchedJoinBlock<int, int, int>(2, null));
+                new BatchedJoinBlock<int, int, int>(2, null)
+            );
         }
 
         [Test]
@@ -132,28 +140,33 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
         public void TransformBlockTest()
         {
             AssertEx.Throws<ArgumentNullException>(() =>
-                new TransformBlock<int, int>((Func<int, int>)null));
+                new TransformBlock<int, int>((Func<int, int>)null)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 new TransformBlock<int, int>(
                     (Func<int, int>)null,
                     new ExecutionDataflowBlockOptions()
-                ));
-            AssertEx.Throws<ArgumentNullException>(() =>
-                new TransformBlock<int, int>(i => i, null));
+                )
+            );
+            AssertEx.Throws<ArgumentNullException>(() => new TransformBlock<int, int>(i => i, null)
+            );
         }
 
         [Test]
         public void TransformManyBlockTest()
         {
             AssertEx.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>((Func<int, IEnumerable<int>>)null));
+                new TransformManyBlock<int, int>((Func<int, IEnumerable<int>>)null)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 new TransformManyBlock<int, int>(
                     (Func<int, IEnumerable<int>>)null,
                     new ExecutionDataflowBlockOptions()
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>(i => new int[0], null));
+                new TransformManyBlock<int, int>(i => new int[0], null)
+            );
         }
 
         [Test]
@@ -183,28 +196,34 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             bool consumed;
             // invalid header
             AssertEx.Throws<ArgumentException>(() =>
-                block.ConsumeMessage(new DataflowMessageHeader(), target, out consumed));
+                block.ConsumeMessage(new DataflowMessageHeader(), target, out consumed)
+            );
 
             // header that wasn't sent by the block doesn't throw
             block.ConsumeMessage(new DataflowMessageHeader(1), target, out consumed);
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                block.ConsumeMessage(new DataflowMessageHeader(1), null, out consumed));
+                block.ConsumeMessage(new DataflowMessageHeader(1), null, out consumed)
+            );
 
             AssertEx.Throws<ArgumentException>(() =>
-                block.ReserveMessage(new DataflowMessageHeader(), target));
+                block.ReserveMessage(new DataflowMessageHeader(), target)
+            );
 
             // header that wasn't sent by the block doesn't throw
             block.ReserveMessage(new DataflowMessageHeader(1), target);
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                block.ReserveMessage(new DataflowMessageHeader(1), null));
+                block.ReserveMessage(new DataflowMessageHeader(1), null)
+            );
 
             AssertEx.Throws<ArgumentException>(() =>
-                block.ReleaseReservation(new DataflowMessageHeader(), target));
+                block.ReleaseReservation(new DataflowMessageHeader(), target)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                block.LinkTo(null, new DataflowLinkOptions()));
+                block.LinkTo(null, new DataflowLinkOptions())
+            );
 
             AssertEx.Throws<ArgumentNullException>(() => block.LinkTo(target, null));
         }
@@ -216,11 +235,13 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             {
                 // invalid header
                 AssertEx.Throws<ArgumentException>(() =>
-                    block.OfferMessage(new DataflowMessageHeader(), 42, null, false));
+                    block.OfferMessage(new DataflowMessageHeader(), 42, null, false)
+                );
 
                 // consumeToAccept with null source
                 AssertEx.Throws<ArgumentException>(() =>
-                    block.OfferMessage(new DataflowMessageHeader(1), 42, null, true));
+                    block.OfferMessage(new DataflowMessageHeader(1), 42, null, true)
+                );
             }
         }
 
@@ -241,24 +262,33 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             var options = new DataflowBlockOptions();
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(nullSource, i => { }, realSource, i => { }));
+                DataflowBlock.Choose(nullSource, i => { }, realSource, i => { })
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, null, realSource, i => { }));
+                DataflowBlock.Choose(realSource, null, realSource, i => { })
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, i => { }, nullSource, i => { }));
+                DataflowBlock.Choose(realSource, i => { }, nullSource, i => { })
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, i => { }, realSource, null));
+                DataflowBlock.Choose(realSource, i => { }, realSource, null)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(nullSource, i => { }, realSource, i => { }, options));
+                DataflowBlock.Choose(nullSource, i => { }, realSource, i => { }, options)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, null, realSource, i => { }, options));
+                DataflowBlock.Choose(realSource, null, realSource, i => { }, options)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, i => { }, nullSource, i => { }, options));
+                DataflowBlock.Choose(realSource, i => { }, nullSource, i => { }, options)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, i => { }, realSource, null, options));
+                DataflowBlock.Choose(realSource, i => { }, realSource, null, options)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, i => { }, realSource, i => { }, null));
+                DataflowBlock.Choose(realSource, i => { }, realSource, i => { }, null)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
@@ -268,9 +298,11 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     i => { },
                     realSource,
                     i => { }
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, null, realSource, i => { }, realSource, i => { }));
+                DataflowBlock.Choose(realSource, null, realSource, i => { }, realSource, i => { })
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -279,9 +311,11 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     i => { },
                     realSource,
                     i => { }
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(realSource, i => { }, realSource, null, realSource, i => { }));
+                DataflowBlock.Choose(realSource, i => { }, realSource, null, realSource, i => { })
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     nullSource,
@@ -290,9 +324,11 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     i => { },
                     nullSource,
                     i => { }
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Choose(nullSource, i => { }, realSource, i => { }, realSource, null));
+                DataflowBlock.Choose(nullSource, i => { }, realSource, i => { }, realSource, null)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
@@ -303,7 +339,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     realSource,
                     i => { },
                     options
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -313,7 +350,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     realSource,
                     i => { },
                     options
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -323,7 +361,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     realSource,
                     i => { },
                     options
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -333,7 +372,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     realSource,
                     i => { },
                     options
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -343,7 +383,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     nullSource,
                     i => { },
                     options
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -353,7 +394,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     realSource,
                     null,
                     options
-                ));
+                )
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Choose(
                     realSource,
@@ -363,16 +405,19 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     realSource,
                     i => { },
                     null
-                ));
+                )
+            );
         }
 
         [Test]
         public void EncapsulateTest()
         {
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Encapsulate((ITargetBlock<int>)null, new BufferBlock<int>()));
+                DataflowBlock.Encapsulate((ITargetBlock<int>)null, new BufferBlock<int>())
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Encapsulate(new BufferBlock<int>(), (ISourceBlock<int>)null));
+                DataflowBlock.Encapsulate(new BufferBlock<int>(), (ISourceBlock<int>)null)
+            );
         }
 
         [Test]
@@ -381,26 +426,33 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             IPropagatorBlock<int, int> nullBlock = null;
             var realBlock = new BufferBlock<int>();
 
-            AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(nullBlock, realBlock));
-            AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(realBlock, nullBlock));
+            AssertEx.Throws<ArgumentNullException>(() => DataflowBlock.LinkTo(nullBlock, realBlock)
+            );
+            AssertEx.Throws<ArgumentNullException>(() => DataflowBlock.LinkTo(realBlock, nullBlock)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(nullBlock, realBlock, i => true));
+                DataflowBlock.LinkTo(nullBlock, realBlock, i => true)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(realBlock, nullBlock, i => true));
+                DataflowBlock.LinkTo(realBlock, nullBlock, i => true)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(realBlock, realBlock, null));
+                DataflowBlock.LinkTo(realBlock, realBlock, null)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(nullBlock, realBlock, new DataflowLinkOptions(), i => true));
+                DataflowBlock.LinkTo(nullBlock, realBlock, new DataflowLinkOptions(), i => true)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(realBlock, nullBlock, new DataflowLinkOptions(), i => true));
+                DataflowBlock.LinkTo(realBlock, nullBlock, new DataflowLinkOptions(), i => true)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(realBlock, realBlock, null, i => true));
+                DataflowBlock.LinkTo(realBlock, realBlock, null, i => true)
+            );
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.LinkTo(realBlock, realBlock, new DataflowLinkOptions(), null));
+                DataflowBlock.LinkTo(realBlock, realBlock, new DataflowLinkOptions(), null)
+            );
         }
 
         [Test]
@@ -419,36 +471,40 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             source.Post(4);
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Receive((ISourceBlock<int>)null));
+                DataflowBlock.Receive((ISourceBlock<int>)null)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Receive((ISourceBlock<int>)null, new CancellationToken(false)));
+                DataflowBlock.Receive((ISourceBlock<int>)null, new CancellationToken(false))
+            );
             AssertEx.Throws<OperationCanceledException>(() =>
-                DataflowBlock.Receive(source, new CancellationToken(true)));
+                DataflowBlock.Receive(source, new CancellationToken(true))
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.Receive((ISourceBlock<int>)null, TimeSpan.FromMinutes(1)));
+                DataflowBlock.Receive((ISourceBlock<int>)null, TimeSpan.FromMinutes(1))
+            );
             // shouldn't throw
             DataflowBlock.Receive(source, TimeSpan.FromMilliseconds(-1));
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                DataflowBlock.Receive(source, TimeSpan.FromMilliseconds(-2)));
+                DataflowBlock.Receive(source, TimeSpan.FromMilliseconds(-2))
+            );
             // shouldn't throw
             DataflowBlock.Receive(source, TimeSpan.FromMilliseconds(int.MaxValue));
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                DataflowBlock.Receive(source, TimeSpan.FromMilliseconds(int.MaxValue + 1L)));
+                DataflowBlock.Receive(source, TimeSpan.FromMilliseconds(int.MaxValue + 1L))
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.Receive(
                     (ISourceBlock<int>)null,
                     TimeSpan.FromMinutes(1),
                     new CancellationToken(false)
-                ));
+                )
+            );
             AssertEx.Throws<OperationCanceledException>(() =>
-                DataflowBlock.Receive(
-                    source,
-                    TimeSpan.FromMinutes(1),
-                    new CancellationToken(true)
-                ));
+                DataflowBlock.Receive(source, TimeSpan.FromMinutes(1), new CancellationToken(true))
+            );
             // shouldn't throw
             DataflowBlock.Receive(
                 source,
@@ -460,7 +516,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     source,
                     TimeSpan.FromMilliseconds(-2),
                     new CancellationToken(false)
-                ));
+                )
+            );
             // shouldn't throw
             DataflowBlock.Receive(
                 source,
@@ -472,7 +529,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     source,
                     TimeSpan.FromMilliseconds(int.MaxValue + 1L),
                     new CancellationToken(false)
-                ));
+                )
+            );
         }
 
         [Test]
@@ -481,28 +539,34 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             var source = new BufferBlock<int>();
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.ReceiveAsync((ISourceBlock<int>)null));
+                DataflowBlock.ReceiveAsync((ISourceBlock<int>)null)
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.ReceiveAsync((ISourceBlock<int>)null, new CancellationToken(false)));
+                DataflowBlock.ReceiveAsync((ISourceBlock<int>)null, new CancellationToken(false))
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
-                DataflowBlock.ReceiveAsync((ISourceBlock<int>)null, TimeSpan.FromMinutes(1)));
+                DataflowBlock.ReceiveAsync((ISourceBlock<int>)null, TimeSpan.FromMinutes(1))
+            );
             // shouldn't throw
             DataflowBlock.ReceiveAsync(source, TimeSpan.FromMilliseconds(-1));
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                DataflowBlock.ReceiveAsync(source, TimeSpan.FromMilliseconds(-2)));
+                DataflowBlock.ReceiveAsync(source, TimeSpan.FromMilliseconds(-2))
+            );
             // shouldn't throw
             DataflowBlock.ReceiveAsync(source, TimeSpan.FromMilliseconds(int.MaxValue));
             AssertEx.Throws<ArgumentOutOfRangeException>(() =>
-                DataflowBlock.ReceiveAsync(source, TimeSpan.FromMilliseconds(int.MaxValue + 1L)));
+                DataflowBlock.ReceiveAsync(source, TimeSpan.FromMilliseconds(int.MaxValue + 1L))
+            );
 
             AssertEx.Throws<ArgumentNullException>(() =>
                 DataflowBlock.ReceiveAsync(
                     (ISourceBlock<int>)null,
                     TimeSpan.FromMinutes(1),
                     new CancellationToken(false)
-                ));
+                )
+            );
             // shouldn't throw
             DataflowBlock.ReceiveAsync(
                 source,
@@ -514,7 +578,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     source,
                     TimeSpan.FromMilliseconds(-2),
                     new CancellationToken(false)
-                ));
+                )
+            );
             // shouldn't throw
             DataflowBlock.ReceiveAsync(
                 source,
@@ -526,7 +591,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     source,
                     TimeSpan.FromMilliseconds(int.MaxValue + 1L),
                     new CancellationToken(false)
-                ));
+                )
+            );
         }
 
         [Test]

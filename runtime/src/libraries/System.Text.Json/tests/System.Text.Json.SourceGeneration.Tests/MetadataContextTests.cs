@@ -282,12 +282,14 @@ namespace System.Text.Json.SourceGeneration.Tests
                 MetadataWithPerTypeAttributeContext
                     .Default
                     .ClassWithBadCustomConverter
-                    .SerializeHandler);
+                    .SerializeHandler
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 MetadataWithPerTypeAttributeContext
                     .Default
                     .StructWithBadCustomConverter
-                    .SerializeHandler);
+                    .SerializeHandler
+            );
             Assert.Null(
                 MetadataWithPerTypeAttributeContext.Default.NullablePersonStruct.SerializeHandler
             );
@@ -434,9 +436,11 @@ namespace System.Text.Json.SourceGeneration.Tests
                 MetadataContext.Default.StructWithCustomConverterFactoryProperty.SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(() =>
-                MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler);
+                MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler);
+                MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler
+            );
             Assert.Null(MetadataContext.Default.NullablePersonStruct.SerializeHandler);
             Assert.Null(MetadataContext.Default.PersonStruct.SerializeHandler);
             Assert.Null(MetadataContext.Default.TypeWithValidationAttributes.SerializeHandler);

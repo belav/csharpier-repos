@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
 
             Assert.NotNull(
                 await Record.ExceptionAsync(() =>
-                    AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.None))
+                    AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.None)
+                )
             );
         }
 

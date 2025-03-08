@@ -768,7 +768,8 @@ public class JsonConverterReadTests
         );
 
         var ex = Assert.ThrowsAny<Exception>(() =>
-            JsonSerializer.Deserialize<TValue>(value, jsonSerializerOptions));
+            JsonSerializer.Deserialize<TValue>(value, jsonSerializerOptions)
+        );
         assertException(ex);
 
         if (deserializeOld)

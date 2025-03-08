@@ -28,7 +28,8 @@ namespace System.Net.NetworkInformation
             ipv4: false
         );
         private static readonly Lazy<bool> s_isBusybox = new Lazy<bool>(() =>
-            IsBusyboxPing(s_discoveredPing4UtilityPath));
+            IsBusyboxPing(s_discoveredPing4UtilityPath)
+        );
 
         // We don't want to pick up an arbitrary or malicious ping
         // command, so that's why we do the path probing ourselves.

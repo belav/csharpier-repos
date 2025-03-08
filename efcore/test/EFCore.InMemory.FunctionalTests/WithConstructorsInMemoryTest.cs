@@ -32,7 +32,8 @@ public class WithConstructorsInMemoryTest
                 .Entity<BlogQuery>()
                 .HasNoKey()
                 .ToInMemoryQuery(() =>
-                    context.Set<Blog>().Select(b => new BlogQuery(b.Title, b.MonthlyRevenue)));
+                    context.Set<Blog>().Select(b => new BlogQuery(b.Title, b.MonthlyRevenue))
+                );
         }
     }
 }

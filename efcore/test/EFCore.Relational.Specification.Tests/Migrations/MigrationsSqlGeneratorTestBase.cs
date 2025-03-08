@@ -371,7 +371,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -393,7 +394,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { null },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -414,7 +416,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -435,7 +438,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -457,7 +461,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -478,7 +483,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -566,7 +572,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -587,7 +594,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -608,7 +616,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "John" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -821,7 +830,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "Targaryen" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -849,7 +859,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "Targaryen" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -875,7 +886,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "Targaryen" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -901,7 +913,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "Targaryen" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -927,7 +940,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "Targaryen" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -953,7 +967,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 { "Targaryen" },
                             },
                         }
-                    ))
+                    )
+                )
                 .Message
         );
 

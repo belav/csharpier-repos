@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis
         {
             private static readonly ObjectPool<ChildSyntaxList.Enumerator[]> s_stackPool =
                 new ObjectPool<ChildSyntaxList.Enumerator[]>(() =>
-                    new ChildSyntaxList.Enumerator[16]);
+                    new ChildSyntaxList.Enumerator[16]
+                );
 
             private ChildSyntaxList.Enumerator[]? _stack;
             private int _stackPtr;
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis
         {
             private static readonly ObjectPool<SyntaxTriviaList.Enumerator[]> s_stackPool =
                 new ObjectPool<SyntaxTriviaList.Enumerator[]>(() =>
-                    new SyntaxTriviaList.Enumerator[16]);
+                    new SyntaxTriviaList.Enumerator[16]
+                );
 
             private SyntaxTriviaList.Enumerator[] _stack;
             private int _stackPtr;

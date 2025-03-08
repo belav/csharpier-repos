@@ -14,7 +14,8 @@ namespace System.Threading.Channels.Tests
         {
             Assert.Equal(TaskStatus.Canceled, task.Status);
             OperationCanceledException oce = Assert.ThrowsAny<OperationCanceledException>(() =>
-                task.GetAwaiter().GetResult());
+                task.GetAwaiter().GetResult()
+            );
             if (PlatformDetection.IsNetCore)
             {
                 // Earlier netstandard versions didn't have the APIs to always make this possible.

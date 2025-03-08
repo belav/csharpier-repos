@@ -314,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        Finder.Find<DifferentNamespace.ShadowKey>(context, 77))
+                        Finder.Find<DifferentNamespace.ShadowKey>(context, 77)
+                    )
                     .Message
             );
         }
@@ -807,7 +808,8 @@ namespace Microsoft.EntityFrameworkCore
                     await Assert.ThrowsAsync<ArgumentException>(() =>
                         Finder
                             .FindAsync<IntKey>(cancellationType, context, new object[] { 77, 88 })
-                            .AsTask())
+                            .AsTask()
+                    )
                 ).Message
             );
         }
@@ -834,7 +836,8 @@ namespace Microsoft.EntityFrameworkCore
                     await Assert.ThrowsAsync<ArgumentException>(() =>
                         Finder
                             .FindAsync<CompositeKey>(cancellationType, context, new object[] { 77 })
-                            .AsTask())
+                            .AsTask()
+                    )
                 ).Message
             );
         }
@@ -854,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore
                     await Assert.ThrowsAsync<ArgumentException>(() =>
                         Finder
                             .FindAsync<IntKey>(cancellationType, context, new object[] { "77" })
-                            .AsTask())
+                            .AsTask()
+                    )
                 ).Message
             );
         }
@@ -878,7 +882,8 @@ namespace Microsoft.EntityFrameworkCore
                                 context,
                                 new object[] { 77, 78 }
                             )
-                            .AsTask())
+                            .AsTask()
+                    )
                 ).Message
             );
         }
@@ -898,7 +903,8 @@ namespace Microsoft.EntityFrameworkCore
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
                         Finder
                             .FindAsync<Random>(cancellationType, context, new object[] { 77 })
-                            .AsTask())
+                            .AsTask()
+                    )
                 ).Message
             );
         }
@@ -926,7 +932,8 @@ namespace Microsoft.EntityFrameworkCore
                                 context,
                                 new object[] { 77 }
                             )
-                            .AsTask())
+                            .AsTask()
+                    )
                 ).Message
             );
         }

@@ -80,7 +80,8 @@ public class FormPipeReaderTests
         var bodyPipe = await MakePipeReader("%00");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormPipeReader(bodyPipe)));
+            ReadFormAsync(new FormPipeReader(bodyPipe))
+        );
 
         Assert.Equal("The form value contains invalid characters.", exception.Message);
         Assert.IsType<InvalidOperationException>(exception.InnerException);
@@ -108,7 +109,8 @@ public class FormPipeReaderTests
         var bodyPipe = await MakePipeReader(content);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormPipeReader(bodyPipe) { ValueCountLimit = 3 }));
+            ReadFormAsync(new FormPipeReader(bodyPipe) { ValueCountLimit = 3 })
+        );
         Assert.Equal("Form value count limit 3 exceeded.", exception.Message);
 
         // The body pipe is still readable and has not advanced.
@@ -123,7 +125,8 @@ public class FormPipeReaderTests
         var bodyPipe = await MakePipeReader(content);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormPipeReader(bodyPipe) { ValueCountLimit = 3 }));
+            ReadFormAsync(new FormPipeReader(bodyPipe) { ValueCountLimit = 3 })
+        );
         Assert.Equal("Form value count limit 3 exceeded.", exception.Message);
 
         // The body pipe is still readable and has not advanced.
@@ -153,7 +156,8 @@ public class FormPipeReaderTests
         var bodyPipe = await MakePipeReader(content);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormPipeReader(bodyPipe) { KeyLengthLimit = 10 }));
+            ReadFormAsync(new FormPipeReader(bodyPipe) { KeyLengthLimit = 10 })
+        );
         Assert.Equal("Form key length limit 10 exceeded.", exception.Message);
 
         // The body pipe is still readable and has not advanced.
@@ -183,7 +187,8 @@ public class FormPipeReaderTests
         var bodyPipe = await MakePipeReader(content);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormPipeReader(bodyPipe) { ValueLengthLimit = 10 }));
+            ReadFormAsync(new FormPipeReader(bodyPipe) { ValueLengthLimit = 10 })
+        );
         Assert.Equal("Form value length limit 10 exceeded.", exception.Message);
 
         // The body pipe is still readable and has not advanced.
@@ -203,7 +208,8 @@ public class FormPipeReaderTests
         await bodyPipe.Writer.FlushAsync();
 
         var readTask = Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormPipeReader(bodyPipe.Reader) { ValueLengthLimit = 10 }));
+            ReadFormAsync(new FormPipeReader(bodyPipe.Reader) { ValueLengthLimit = 10 })
+        );
 
         await bodyPipe.Writer.WriteAsync(Encoding.UTF8.GetBytes(content2));
         bodyPipe.Writer.Complete();
@@ -232,7 +238,8 @@ public class FormPipeReaderTests
             KeyLengthLimit = keyLengthLimit,
         };
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: false));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: false)
+        );
         // Make sure that FormPipeReader throws an exception after hitting KeyLengthLimit + ValueLengthLimit,
         // Rather than after reading the entire request.
         Assert.Equal(
@@ -490,7 +497,8 @@ public class FormPipeReaderTests
         formReader.KeyLengthLimit = 2;
 
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true)
+        );
         Assert.Equal("Form key length limit 2 exceeded.", exception.Message);
     }
 
@@ -508,7 +516,8 @@ public class FormPipeReaderTests
         formReader.KeyLengthLimit = 2;
 
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true)
+        );
         Assert.Equal("Form key length limit 2 exceeded.", exception.Message);
     }
 
@@ -525,7 +534,8 @@ public class FormPipeReaderTests
         formReader.ValueLengthLimit = 2;
 
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true)
+        );
         Assert.Equal("Form value length limit 2 exceeded.", exception.Message);
     }
 
@@ -543,7 +553,8 @@ public class FormPipeReaderTests
         formReader.ValueLengthLimit = 2;
 
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true)
+        );
         Assert.Equal("Form value length limit 2 exceeded.", exception.Message);
     }
 
@@ -561,7 +572,8 @@ public class FormPipeReaderTests
         formReader.KeyLengthLimit = 10;
 
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true)
+        );
         Assert.Equal("Form key length limit 10 exceeded.", exception.Message);
     }
 
@@ -579,7 +591,8 @@ public class FormPipeReaderTests
         formReader.ValueLengthLimit = 10;
 
         var exception = Assert.Throws<InvalidDataException>(() =>
-            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true));
+            formReader.ParseFormValues(ref readOnlySequence, ref accumulator, isFinalBlock: true)
+        );
         Assert.Equal("Form value length limit 10 exceeded.", exception.Message);
     }
 

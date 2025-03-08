@@ -492,7 +492,8 @@ namespace Microsoft.Extensions
                 var exception = Assert.Throws<InvalidOperationException>(() =>
                     configSection.Get<MyModelContainingArray>(o =>
                         o.ErrorOnUnknownConfiguration = true
-                    ));
+                    )
+                );
 
                 Assert.Equal(
                     SR.Format(
@@ -521,7 +522,8 @@ namespace Microsoft.Extensions
                 var exception = Assert.Throws<InvalidOperationException>(() =>
                     configSection.Get<MyModelContainingADictionary>(o =>
                         o.ErrorOnUnknownConfiguration = true
-                    ));
+                    )
+                );
 
                 Assert.Equal(
                     SR.Format(

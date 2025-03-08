@@ -94,11 +94,8 @@ namespace System.Management.Tests
             try
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    managementClass.GetStronglyTypedClassCode(
-                        lang,
-                        tempFilePath,
-                        "Wmi.Test.CoreFx"
-                    ));
+                    managementClass.GetStronglyTypedClassCode(lang, tempFilePath, "Wmi.Test.CoreFx")
+                );
             }
             finally
             {
@@ -190,7 +187,8 @@ namespace System.Management.Tests
                 // be deleted via a tool like wbemtest.
                 targetNamespace.Delete();
                 ManagementException managementException = Assert.Throws<ManagementException>(() =>
-                    targetNamespace.Get());
+                    targetNamespace.Get()
+                );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
             }
         }

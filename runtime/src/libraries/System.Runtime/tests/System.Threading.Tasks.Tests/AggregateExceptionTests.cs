@@ -38,10 +38,12 @@ namespace System.Threading.Tasks.Tests
         {
             AggregateException ex = new AggregateException();
             Assert.Throws<ArgumentNullException>(() =>
-                new AggregateException("message", (Exception)null));
+                new AggregateException("message", (Exception)null)
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
-                new AggregateException("message", (IEnumerable<Exception>)null));
+                new AggregateException("message", (IEnumerable<Exception>)null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -115,7 +117,8 @@ namespace System.Threading.Tasks.Tests
                         }
                         return false;
                     }
-                ));
+                )
+            );
         }
 
         // Validates that flattening (including recursive) works.

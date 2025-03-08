@@ -175,7 +175,8 @@ namespace System.Linq.Parallel.Tests
                     .Any(x =>
                     {
                         throw new DeliberateTestException();
-                    }));
+                    })
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(1)
@@ -187,7 +188,8 @@ namespace System.Linq.Parallel.Tests
                             }
                         )
                     )
-                    .Any());
+                    .Any()
+            );
         }
 
         [Fact]

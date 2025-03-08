@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             // Act + Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetService(typeof(IFoo)));
+                serviceProvider.GetService(typeof(IFoo))
+            );
             Assert.Equal(
                 $"Cannot consume scoped service '{typeof(IBar)}' from singleton '{typeof(IFoo)}'.",
                 exception.Message
@@ -42,7 +43,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             // Act + Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetService(typeof(IFoo)));
+                serviceProvider.GetService(typeof(IFoo))
+            );
             Assert.Equal(
                 $"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IFoo)}'.",
                 exception.Message
@@ -61,7 +63,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             // Act + Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetService(typeof(IFoo)));
+                serviceProvider.GetService(typeof(IFoo))
+            );
             Assert.Equal(
                 $"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IBar)}'.",
                 exception.Message
@@ -82,7 +85,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             // Act + Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                scope.ServiceProvider.GetService(typeof(IFoo)));
+                scope.ServiceProvider.GetService(typeof(IFoo))
+            );
             Assert.Equal(
                 $"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IBar)}'.",
                 exception.Message
@@ -99,7 +103,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             // Act + Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetService(typeof(IBar)));
+                serviceProvider.GetService(typeof(IBar))
+            );
             Assert.Equal(
                 $"Cannot resolve scoped service '{typeof(IBar)}' from root provider.",
                 exception.Message
@@ -146,7 +151,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             // Act + Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetService(typeof(IFoo)));
+                serviceProvider.GetService(typeof(IFoo))
+            );
             Assert.Equal(
                 $"Cannot resolve '{typeof(IFoo)}' from root provider because it requires scoped service '{typeof(IBar)}'.",
                 exception.Message
@@ -195,7 +201,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 validateScopes: true
             );
             Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetService<IEnumerable<IBar>>());
+                serviceProvider.GetService<IEnumerable<IBar>>()
+            );
             var actual = serviceProvider.GetService<IEnumerable<IBaz>>();
 
             // Assert
@@ -228,7 +235,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var aggregateException = Assert.Throws<AggregateException>(() =>
                 serviceCollection.BuildServiceProvider(
                     new ServiceProviderOptions() { ValidateOnBuild = true }
-                ));
+                )
+            );
             Assert.StartsWith(
                 "Some services are not able to be constructed",
                 aggregateException.Message
@@ -279,7 +287,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var aggregateException = Assert.Throws<AggregateException>(() =>
                 serviceCollection.BuildServiceProvider(
                     new ServiceProviderOptions() { ValidateOnBuild = true }
-                ));
+                )
+            );
             Assert.StartsWith(
                 "Some services are not able to be constructed",
                 aggregateException.Message
@@ -308,7 +317,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var aggregateException = Assert.Throws<AggregateException>(() =>
                 serviceCollection.BuildServiceProvider(
                     new ServiceProviderOptions() { ValidateOnBuild = true }
-                ));
+                )
+            );
             Assert.StartsWith(
                 "Some services are not able to be constructed",
                 aggregateException.Message

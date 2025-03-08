@@ -116,9 +116,11 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    handler.ServerCertificateCustomValidationCallback = null);
+                    handler.ServerCertificateCustomValidationCallback = null
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    handler.CheckCertificateRevocationList = false);
+                    handler.CheckCertificateRevocationList = false
+                );
             }
         }
 
@@ -254,7 +256,8 @@ namespace System.Net.Http.Functional.Tests
                     return false;
                 };
                 await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.GetAsync(Configuration.Http.SecureRemoteEchoServer));
+                    client.GetAsync(Configuration.Http.SecureRemoteEchoServer)
+                );
             }
         }
 
@@ -272,7 +275,8 @@ namespace System.Net.Http.Functional.Tests
                 };
 
                 HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.GetAsync(Configuration.Http.SecureRemoteEchoServer));
+                    client.GetAsync(Configuration.Http.SecureRemoteEchoServer)
+                );
                 Assert.Same(e, ex.GetBaseException());
             }
         }
@@ -320,7 +324,8 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient(handler))
             {
                 await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.GetAsync(Configuration.Http.RevokedCertRemoteServer));
+                    client.GetAsync(Configuration.Http.RevokedCertRemoteServer)
+                );
             }
         }
 

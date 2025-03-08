@@ -1504,7 +1504,8 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     new HashSet<char>() { 'b' },
                     null
-                ));
+                )
+            );
             await Assert.ThrowsAsync<XunitException>(() =>
                 ValidateSetAsync(
                     engine,
@@ -1513,7 +1514,8 @@ namespace System.Text.RegularExpressions.Tests
                     new HashSet<char>() { 'b' },
                     null,
                     validateEveryChar: true
-                ));
+                )
+            );
 
             await Assert.ThrowsAsync<XunitException>(() =>
                 ValidateSetAsync(
@@ -1522,7 +1524,8 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     null,
                     new HashSet<char>() { 'b' }
-                ));
+                )
+            );
             await Assert.ThrowsAsync<XunitException>(() =>
                 ValidateSetAsync(
                     engine,
@@ -1531,7 +1534,8 @@ namespace System.Text.RegularExpressions.Tests
                     null,
                     new HashSet<char>() { 'b' },
                     validateEveryChar: true
-                ));
+                )
+            );
         }
 
         [Fact]

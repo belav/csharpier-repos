@@ -2777,7 +2777,8 @@ ORDER BY [t].[CustomerID]
         await Assert.ThrowsAsync<TrueException>(() =>
             base.Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(
                 async
-            ));
+            )
+        );
 
         AssertSql(
             """
@@ -6464,7 +6465,8 @@ ORDER BY [c].[CustomerID]
     [ConditionalFact]
     public async Task Single_Predicate_Cancellation() =>
         await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-            await Single_Predicate_Cancellation_test(Fixture.TestSqlLoggerFactory.CancelQuery()));
+            await Single_Predicate_Cancellation_test(Fixture.TestSqlLoggerFactory.CancelQuery())
+        );
 
     [ConditionalFact]
     public Task Query_compiler_concurrency()
@@ -6513,7 +6515,8 @@ ORDER BY [c].[CustomerID]
         }
 
         return Assert.ThrowsAsync<ObjectDisposedException>(() =>
-            task.SingleAsync(c => c.CustomerID == "ALFKI"));
+            task.SingleAsync(c => c.CustomerID == "ALFKI")
+        );
     }
 
     [ConditionalFact]
@@ -6863,7 +6866,8 @@ WHERE EXISTS (
     public override async Task Max_on_empty_sequence_throws(bool async)
     {
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Max_on_empty_sequence_throws(async));
+            base.Max_on_empty_sequence_throws(async)
+        );
 
         AssertSql(
             """
@@ -7471,7 +7475,8 @@ FROM [Orders] AS [o]
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_code_using_instance_method_throws(async))
+                    base.Client_code_using_instance_method_throws(async)
+                )
             ).Message
         );
 
@@ -7487,7 +7492,8 @@ FROM [Orders] AS [o]
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_code_using_instance_in_static_method(async))
+                    base.Client_code_using_instance_in_static_method(async)
+                )
             ).Message
         );
 
@@ -7502,7 +7508,8 @@ FROM [Orders] AS [o]
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_code_using_instance_in_anonymous_type(async))
+                    base.Client_code_using_instance_in_anonymous_type(async)
+                )
             ).Message
         );
 
@@ -7668,7 +7675,8 @@ FROM [Orders] AS [o]
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Entity_equality_through_subquery_composite_key(async))
+                base.Entity_equality_through_subquery_composite_key(async)
+            )
         ).Message;
 
         Assert.Equal(

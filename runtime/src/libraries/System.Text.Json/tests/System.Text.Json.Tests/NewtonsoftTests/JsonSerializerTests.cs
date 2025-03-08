@@ -47,7 +47,8 @@ namespace System.Text.Json.Tests
         public void DeserializeBoolean_DateTime()
         {
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<IList<bool>>(@"['2000-12-20T10:55:55Z']"));
+                JsonSerializer.Deserialize<IList<bool>>(@"['2000-12-20T10:55:55Z']")
+            );
         }
 
         [Fact]
@@ -66,7 +67,8 @@ namespace System.Text.Json.Tests
         public void IncompleteContainers()
         {
             JsonException e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<IList<object>>("[1,"));
+                JsonSerializer.Deserialize<IList<object>>("[1,")
+            );
             Assert.Contains("Path: $[1] | LineNumber: 0 | BytePositionInLine: 2.", e.Message);
 
             e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<int>>("[1,"));
@@ -76,15 +78,18 @@ namespace System.Text.Json.Tests
             Assert.Contains("Path: $[0] | LineNumber: 0 | BytePositionInLine: 2.", e.Message);
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1,"));
+                JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1,")
+            );
             Assert.Contains("Path: $.key | LineNumber: 0 | BytePositionInLine: 8.", e.Message);
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1"));
+                JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1")
+            );
             Assert.Contains("Path: $.key | LineNumber: 0 | BytePositionInLine: 8.", e.Message);
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<IncompleteTestClass>("{\"key\":1,"));
+                JsonSerializer.Deserialize<IncompleteTestClass>("{\"key\":1,")
+            );
             Assert.Contains("$ | LineNumber: 0 | BytePositionInLine: 8.", e.Message);
         }
 

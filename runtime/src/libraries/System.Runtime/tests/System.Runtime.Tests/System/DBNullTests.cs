@@ -95,8 +95,8 @@ namespace System.Tests
         [Fact]
         public void ToDateTime_Invoke_ThrowsInvalidCastException()
         {
-            Assert.Throws<InvalidCastException>(() =>
-                ((IConvertible)DBNull.Value).ToDateTime(null));
+            Assert.Throws<InvalidCastException>(() => ((IConvertible)DBNull.Value).ToDateTime(null)
+            );
         }
 
         [Fact]
@@ -129,7 +129,8 @@ namespace System.Tests
         public void ToType_InvalidType_ThrowsInvalidCastException()
         {
             Assert.Throws<InvalidCastException>(() =>
-                ((IConvertible)DBNull.Value).ToType(typeof(int), null));
+                ((IConvertible)DBNull.Value).ToType(typeof(int), null)
+            );
         }
 
         public static IEnumerable<object[]> IsDBNull_TestData()

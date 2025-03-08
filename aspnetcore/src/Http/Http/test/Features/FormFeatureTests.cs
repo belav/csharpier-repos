@@ -36,7 +36,8 @@ public class FormFeatureTests
         context.Request.Body = new NonSeekableReadStream(formContent);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+            context.Request.ReadFormAsync()
+        );
 
         Assert.Equal("Form value count limit 1 exceeded.", exception.Message);
     }
@@ -519,7 +520,8 @@ public class FormFeatureTests
         context.Features.Set<IFormFeature>(formFeature);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+            context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -547,7 +549,8 @@ public class FormFeatureTests
         context.Features.Set<IFormFeature>(formFeature);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+            context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -575,7 +578,8 @@ public class FormFeatureTests
         context.Features.Set<IFormFeature>(formFeature);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+            context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -607,7 +611,8 @@ public class FormFeatureTests
         context.Features.Set<IFormFeature>(formFeature);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+            context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -685,7 +690,8 @@ public class FormFeatureTests
         context.Features.Set<IFormFeature>(formFeature);
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+            context.Request.ReadFormAsync()
+        );
 
         Assert.Equal(
             "Form section has invalid Content-Disposition value: " + InvalidContentDispositionValue,

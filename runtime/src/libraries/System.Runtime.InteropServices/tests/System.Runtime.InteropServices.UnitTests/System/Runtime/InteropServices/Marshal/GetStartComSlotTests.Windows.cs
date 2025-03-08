@@ -57,7 +57,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetStartComSlot_ManagedIInspectableObject_Fail()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetStartComSlot(typeof(IInspectableInterface)));
+                Marshal.GetStartComSlot(typeof(IInspectableInterface))
+            );
         }
     }
 }

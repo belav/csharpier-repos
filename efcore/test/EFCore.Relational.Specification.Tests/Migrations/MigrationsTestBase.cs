@@ -3688,7 +3688,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 buildTargetAction,
                 asserter: null,
                 withConventions
-            ));
+            )
+        );
 
     protected virtual void AssertSql(params string[] expected) =>
         Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

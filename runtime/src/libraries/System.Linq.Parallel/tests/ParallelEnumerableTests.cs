@@ -187,7 +187,8 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Range(0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Range(-8, -8));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ParallelEnumerable.Range(int.MaxValue, 2));
+                ParallelEnumerable.Range(int.MaxValue, 2)
+            );
         }
 
         //
@@ -251,13 +252,16 @@ namespace System.Linq.Parallel.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat(1, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ParallelEnumerable.Repeat((long)1024, -1024));
+                ParallelEnumerable.Repeat((long)1024, -1024)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat(2.0, -2));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ParallelEnumerable.Repeat((decimal)8, -8));
+                ParallelEnumerable.Repeat((decimal)8, -8)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat("fail", -1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ParallelEnumerable.Repeat((string)null, -1));
+                ParallelEnumerable.Repeat((string)null, -1)
+            );
         }
 
         [Fact]

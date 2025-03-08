@@ -270,7 +270,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes));
+                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -278,7 +279,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<COMException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter));
+                testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -297,7 +299,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -316,7 +319,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
@@ -324,7 +328,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartName));
+                testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -354,7 +359,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartWhole));
+                testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]
@@ -373,7 +379,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes));
+                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -381,7 +388,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<COMException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter));
+                testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -400,7 +408,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+                testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -408,7 +417,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeader));
+                testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
+            );
         }
 
         [WpfFact]
@@ -416,7 +426,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+                testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
@@ -424,7 +435,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartName));
+                testObject.GetEndPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -443,7 +455,8 @@ public class Ref<T> where T : Entity
         {
             var testObject = GetCodeFunction("A", "MethodA");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartWhole));
+                testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]
@@ -528,7 +541,8 @@ public class Ref<T> where T : Entity
             var textPoint = new MockTextPoint(virtualTreePoint);
 
             Assert.Throws<COMException>(() =>
-                (GetCodeModel()).CodeElementFromPoint(textPoint, vsCMElement.vsCMElementFunction));
+                (GetCodeModel()).CodeElementFromPoint(textPoint, vsCMElement.vsCMElementFunction)
+            );
 
             var element = (GetCodeModel()).CodeElementFromPoint(
                 textPoint,

@@ -48,7 +48,8 @@ namespace System.Reflection.Emit.Tests
 
             Type createdType = type.CreateType();
             Assert.Throws<InvalidOperationException>(() =>
-                constructor.SetImplementationFlags(MethodImplAttributes.Runtime));
+                constructor.SetImplementationFlags(MethodImplAttributes.Runtime)
+            );
         }
     }
 }

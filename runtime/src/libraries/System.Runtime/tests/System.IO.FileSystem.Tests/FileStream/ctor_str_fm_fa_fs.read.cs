@@ -86,7 +86,8 @@ namespace System.IO.Tests
                         FileMode.Open,
                         FileAccess.Read,
                         FileShare.ReadWrite | FileShare.Delete
-                    ));
+                    )
+                );
             }
         }
     }

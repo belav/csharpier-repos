@@ -28,7 +28,8 @@ public class RateLimitingMiddlewareTests
                 options,
                 Mock.Of<IServiceProvider>(),
                 new RateLimitingMetrics(new TestMeterFactory())
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new RateLimitingMiddleware(
@@ -40,7 +41,8 @@ public class RateLimitingMiddlewareTests
                 options,
                 Mock.Of<IServiceProvider>(),
                 new RateLimitingMetrics(new TestMeterFactory())
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new RateLimitingMiddleware(
@@ -52,7 +54,8 @@ public class RateLimitingMiddlewareTests
                 options,
                 null,
                 new RateLimitingMetrics(new TestMeterFactory())
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new RateLimitingMiddleware(
@@ -64,7 +67,8 @@ public class RateLimitingMiddlewareTests
                 options,
                 Mock.Of<IServiceProvider>(),
                 null
-            ));
+            )
+        );
     }
 
     [Fact]

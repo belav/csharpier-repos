@@ -28,7 +28,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multi_level_reference_and_collection_predicate(async))
+                    base.Include_multi_level_reference_and_collection_predicate(async)
+                )
             ).Message
         );
 
@@ -39,7 +40,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multi_level_reference_then_include_collection_predicate(async))
+                    base.Include_multi_level_reference_then_include_collection_predicate(async)
+                )
             ).Message
         );
 
@@ -48,7 +50,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multiple_references_and_collection_multi_level(async))
+                    base.Include_multiple_references_and_collection_multi_level(async)
+                )
             ).Message
         );
 
@@ -59,7 +62,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multiple_references_and_collection_multi_level_reverse(async))
+                    base.Include_multiple_references_and_collection_multi_level_reverse(async)
+                )
             ).Message
         );
 
@@ -70,7 +74,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multiple_references_then_include_collection_multi_level(async))
+                    base.Include_multiple_references_then_include_collection_multi_level(async)
+                )
             ).Message
         );
 
@@ -83,7 +88,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Include_multiple_references_then_include_collection_multi_level_reverse(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -92,7 +98,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_reference_and_collection_order_by(async))
+                    base.Include_reference_and_collection_order_by(async)
+                )
             ).Message
         );
 
@@ -101,7 +108,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_references_and_collection_multi_level(async))
+                    base.Include_references_and_collection_multi_level(async)
+                )
             ).Message
         );
 
@@ -112,7 +120,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_references_and_collection_multi_level_predicate(async))
+                    base.Include_references_and_collection_multi_level_predicate(async)
+                )
             ).Message
         );
 
@@ -121,7 +130,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_references_then_include_collection(async))
+                    base.Include_references_then_include_collection(async)
+                )
             ).Message
         );
 
@@ -130,7 +140,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_references_then_include_collection_multi_level(async))
+                    base.Include_references_then_include_collection_multi_level(async)
+                )
             ).Message
         );
 
@@ -141,7 +152,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_references_then_include_collection_multi_level_predicate(async))
+                    base.Include_references_then_include_collection_multi_level_predicate(async)
+                )
             ).Message
         );
 
@@ -254,7 +266,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multi_level_reference_then_include_collection_predicate(async))
+                    base.Include_multi_level_reference_then_include_collection_predicate(async)
+                )
             ).Message
         );
 
@@ -265,7 +278,8 @@ public abstract class NorthwindIncludeNoTrackingQueryTestBase<TFixture>
             CoreStrings.IncludeWithCycle("Customer", "Orders"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_multi_level_reference_then_include_collection_predicate(async))
+                    base.Include_multi_level_reference_then_include_collection_predicate(async)
+                )
             ).Message
         );
 

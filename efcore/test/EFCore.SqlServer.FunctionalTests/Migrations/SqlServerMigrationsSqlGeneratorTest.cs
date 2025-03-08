@@ -466,7 +466,8 @@ ALTER TABLE [Person] ALTER COLUMN [Id] bigint NOT NULL;
                         SqlServerValueGenerationStrategy.IdentityColumn,
                     OldColumn = new AddColumnOperation { ClrType = typeof(int) },
                 }
-            ));
+            )
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, ex.Message);
     }
@@ -490,7 +491,8 @@ ALTER TABLE [Person] ALTER COLUMN [Id] bigint NOT NULL;
                             SqlServerValueGenerationStrategy.IdentityColumn,
                     },
                 }
-            ));
+            )
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, ex.Message);
     }
@@ -694,7 +696,8 @@ DROP DATABASE [Northwind];
         migrationBuilder.DropIndex(name: "IX_Name");
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            Generate(migrationBuilder.Operations.ToArray()));
+            Generate(migrationBuilder.Operations.ToArray())
+        );
 
         Assert.Equal(SqlServerStrings.IndexTableRequired, ex.Message);
     }
@@ -745,7 +748,8 @@ ALTER SCHEMA [hr] TRANSFER [dbo].[People];
         migrationBuilder.RenameIndex(name: "IX_OldIndex", newName: "IX_NewIndex");
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            Generate(migrationBuilder.Operations.ToArray()));
+            Generate(migrationBuilder.Operations.ToArray())
+        );
 
         Assert.Equal(SqlServerStrings.IndexTableRequired, ex.Message);
     }

@@ -507,7 +507,8 @@ public class XmlDataContractSerializerOutputFormatterTest
 
         // Act & Assert
         await Assert.ThrowsAsync<SerializationException>(async () =>
-            await formatter.WriteAsync(outputFormatterContext));
+            await formatter.WriteAsync(outputFormatterContext)
+        );
     }
 
     [ConditionalFact]
@@ -529,7 +530,8 @@ public class XmlDataContractSerializerOutputFormatterTest
 
         // Act & Assert
         await Assert.ThrowsAsync<SerializationException>(async () =>
-            await formatter.WriteAsync(outputFormatterContext));
+            await formatter.WriteAsync(outputFormatterContext)
+        );
     }
 
     [ConditionalFact]

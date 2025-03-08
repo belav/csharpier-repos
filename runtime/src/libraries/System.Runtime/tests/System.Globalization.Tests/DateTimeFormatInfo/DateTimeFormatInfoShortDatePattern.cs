@@ -270,7 +270,8 @@ namespace System.Globalization.Tests
         public void ShortDatePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.ShortDatePattern = "MM/dd/yyyy");
+                DateTimeFormatInfo.InvariantInfo.ShortDatePattern = "MM/dd/yyyy"
+            );
         }
     }
 }

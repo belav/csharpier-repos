@@ -141,7 +141,8 @@ namespace System.Net.Security.Tests
                 Task t2 = server.AuthenticateAsServerAsync(certificate);
 
                 await Assert.ThrowsAsync<AuthenticationException>(() =>
-                    t1.WaitAsync(TestConfiguration.PassingTestTimeout));
+                    t1.WaitAsync(TestConfiguration.PassingTestTimeout)
+                );
                 try
                 {
                     await t2.WaitAsync(TestConfiguration.PassingTestTimeout);
@@ -180,7 +181,8 @@ namespace System.Net.Security.Tests
                             certificate.GetNameInfo(X509NameType.SimpleName, false)
                         ),
                         server.AuthenticateAsServerAsync(certificate)
-                    ));
+                    )
+                );
             }
         }
 
@@ -203,7 +205,8 @@ namespace System.Net.Security.Tests
                 // Throw an exception from the wrapped stream's read operation
                 clientStream.ExceptionToThrow = new FormatException();
                 IOException thrown = await Assert.ThrowsAsync<IOException>(() =>
-                    ReadAsync(clientSslStream, new byte[1], 0, 1));
+                    ReadAsync(clientSslStream, new byte[1], 0, 1)
+                );
                 Assert.Same(clientStream.ExceptionToThrow, thrown.InnerException);
                 clientStream.ExceptionToThrow = null;
 
@@ -237,7 +240,8 @@ namespace System.Net.Security.Tests
                 // Throw an exception from the wrapped stream's write operation
                 clientStream.ExceptionToThrow = new FormatException();
                 IOException thrown = await Assert.ThrowsAsync<IOException>(() =>
-                    WriteAsync(clientSslStream, new byte[1], 0, 1));
+                    WriteAsync(clientSslStream, new byte[1], 0, 1)
+                );
                 Assert.Same(clientStream.ExceptionToThrow, thrown.InnerException);
                 clientStream.ExceptionToThrow = null;
 
@@ -359,17 +363,20 @@ namespace System.Net.Security.Tests
                 else
                 {
                     IOException serverException = await Assert.ThrowsAsync<IOException>(() =>
-                        serverReadTask);
+                        serverReadTask
+                    );
                     Assert.IsType<ObjectDisposedException>(serverException.InnerException);
                 }
 
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    ReadAsync(serverSslStream, serverBuffer, 0, serverBuffer.Length));
+                    ReadAsync(serverSslStream, serverBuffer, 0, serverBuffer.Length)
+                );
 
                 // Now, there is no pending read, so the internal buffer will be returned to ArrayPool.
                 serverSslStream.Dispose();
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    ReadAsync(serverSslStream, serverBuffer, 0, serverBuffer.Length));
+                    ReadAsync(serverSslStream, serverBuffer, 0, serverBuffer.Length)
+                );
             }
         }
 
@@ -440,7 +447,8 @@ namespace System.Net.Security.Tests
                     await WriteAsync(clientSslStream, new byte[20], 0, 20);
                     readMode = 1;
                     await Assert.ThrowsAsync<IOException>(() =>
-                        ReadAsync(serverSslStream, new byte[1], 0, 1));
+                        ReadAsync(serverSslStream, new byte[1], 0, 1)
+                    );
                 }
             }
         }
@@ -785,7 +793,8 @@ namespace System.Net.Security.Tests
                 stream1.Dispose();
 
                 await Assert.ThrowsAsync<AggregateException>(() =>
-                    DoHandshake(clientSslStream, serverSslStream));
+                    DoHandshake(clientSslStream, serverSslStream)
+                );
             }
         }
 
@@ -799,7 +808,8 @@ namespace System.Net.Security.Tests
                 stream2.Dispose();
 
                 await Assert.ThrowsAsync<AggregateException>(() =>
-                    DoHandshake(clientSslStream, serverSslStream));
+                    DoHandshake(clientSslStream, serverSslStream)
+                );
             }
         }
 
@@ -819,7 +829,8 @@ namespace System.Net.Security.Tests
                 clientSslStream.Dispose();
 
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    DoHandshake(clientSslStream, serverSslStream));
+                    DoHandshake(clientSslStream, serverSslStream)
+                );
             }
         }
 
@@ -839,7 +850,8 @@ namespace System.Net.Security.Tests
                 serverSslStream.Dispose();
 
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    DoHandshake(clientSslStream, serverSslStream));
+                    DoHandshake(clientSslStream, serverSslStream)
+                );
             }
         }
     }
@@ -868,13 +880,15 @@ namespace System.Net.Security.Tests
                             clientCerts,
                             SslProtocols.None,
                             checkCertificateRevocation: false
-                        ));
+                        )
+                    );
                     Task t2 = Task.Run(() =>
                         serverSslStream.AuthenticateAsServer(
                             certificate,
                             clientCertificateRequired: clientCertificate != null,
                             checkCertificateRevocation: false
-                        ));
+                        )
+                    );
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
                 }
             );
@@ -992,12 +1006,14 @@ namespace System.Net.Security.Tests
                             TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false),
                         },
                         new CancellationToken(true)
-                    ));
+                    )
+                );
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
                     serverSslStream.AuthenticateAsServerAsync(
                         new SslServerAuthenticationOptions() { ServerCertificate = certificate },
                         new CancellationToken(true)
-                    ));
+                    )
+                );
             }
         }
 

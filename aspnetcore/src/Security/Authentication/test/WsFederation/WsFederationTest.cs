@@ -69,7 +69,8 @@ public class WsFederationTest
 
         // Verify if the request is redirected to STS with right parameters
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            httpClient.GetAsync("/"));
+            httpClient.GetAsync("/")
+        );
         Assert.Equal(
             "Provide MetadataAddress, Configuration, or ConfigurationManager to WsFederationOptions",
             exception.Message
@@ -178,7 +179,8 @@ public class WsFederationTest
         var httpClient = await CreateClient();
         var form = CreateSignInContent("WsFederation/ValidToken.xml", suppressWctx: true);
         var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(() =>
-            httpClient.PostAsync(httpClient.BaseAddress + "signin-wsfed", form));
+            httpClient.PostAsync(httpClient.BaseAddress + "signin-wsfed", form)
+        );
         Assert.Contains("Unsolicited logins are not allowed.", exception.InnerException.Message);
     }
 

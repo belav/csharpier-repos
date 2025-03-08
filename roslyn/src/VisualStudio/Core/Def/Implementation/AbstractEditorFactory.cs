@@ -342,7 +342,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     itemid,
                     filePath,
                     cancellationToken
-                ));
+                )
+            );
         }
 
         // NOTE: This function has been created to hide IWinFormsEditorFactory type in non-WinForms scenarios (e.g. editing .cs or .vb file)

@@ -35,7 +35,8 @@ namespace System.Text.Tests
                     codePage,
                     EncoderFallback.ReplacementFallback,
                     DecoderFallback.ReplacementFallback
-                ));
+                )
+            );
         }
 
         [ConditionalTheory(
@@ -75,7 +76,8 @@ namespace System.Text.Tests
                             codePage,
                             EncoderFallback.ReplacementFallback,
                             DecoderFallback.ReplacementFallback
-                        ));
+                        )
+                    );
                 }
             );
         }
@@ -95,7 +97,8 @@ namespace System.Text.Tests
                     encodingName,
                     EncoderFallback.ReplacementFallback,
                     DecoderFallback.ReplacementFallback
-                ));
+                )
+            );
         }
 
         [ConditionalTheory(
@@ -133,7 +136,8 @@ namespace System.Text.Tests
                             encodingName,
                             EncoderFallback.ReplacementFallback,
                             DecoderFallback.ReplacementFallback
-                        ));
+                        )
+                    );
                 }
             );
         }

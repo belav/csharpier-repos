@@ -30,7 +30,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         public static void AllUsersApplicationDataFolderTest()
         {
             Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
-                SpecialDirectories.AllUsersApplicationData);
+                SpecialDirectories.AllUsersApplicationData
+            );
         }
 
         [Fact]
@@ -38,7 +39,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         public static void CurrentUserApplicationDataFolderTest()
         {
             Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
-                SpecialDirectories.CurrentUserApplicationData);
+                SpecialDirectories.CurrentUserApplicationData
+            );
         }
 
         [Fact]
@@ -53,7 +55,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             if (PlatformDetection.IsWindowsNanoServer)
             {
                 Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
-                    SpecialDirectories.MyDocuments);
+                    SpecialDirectories.MyDocuments
+                );
             }
             else
             {

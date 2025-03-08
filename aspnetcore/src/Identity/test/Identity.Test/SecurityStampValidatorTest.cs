@@ -77,7 +77,8 @@ public class SecurityStampTest
             ticket
         );
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            SecurityStampValidator.ValidatePrincipalAsync(context));
+            SecurityStampValidator.ValidatePrincipalAsync(context)
+        );
     }
 
     [Theory]

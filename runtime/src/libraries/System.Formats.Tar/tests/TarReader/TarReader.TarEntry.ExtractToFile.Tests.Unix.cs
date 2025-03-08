@@ -32,14 +32,16 @@ namespace System.Formats.Tar.Tests
                 PosixTarEntry blockDevice = reader.GetNextEntry() as PosixTarEntry;
                 Assert.NotNull(blockDevice);
                 Assert.Throws<UnauthorizedAccessException>(() =>
-                    blockDevice.ExtractToFile(path, overwrite: false));
+                    blockDevice.ExtractToFile(path, overwrite: false)
+                );
                 Assert.False(File.Exists(path));
 
                 // Character device requires elevation for writing
                 PosixTarEntry characterDevice = reader.GetNextEntry() as PosixTarEntry;
                 Assert.NotNull(characterDevice);
                 Assert.Throws<UnauthorizedAccessException>(() =>
-                    characterDevice.ExtractToFile(path, overwrite: false));
+                    characterDevice.ExtractToFile(path, overwrite: false)
+                );
                 Assert.False(File.Exists(path));
 
                 // Fifo does not require elevation, should succeed

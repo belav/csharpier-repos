@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("bcdea", order);
         }
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("edcba", order);
         }
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("bac", order);
         }
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("abc", order);
         }
@@ -160,7 +164,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("abdecfg", order);
         }
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("bcdeafg", order);
         }
@@ -199,7 +205,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("bcaefd", order);
         }
@@ -218,7 +225,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(() =>
-                ExtensionOrderer.TestAccessor.CheckForCycles(extensions));
+                ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
+            );
             var order = ExtensionOrderer.Order(extensions);
             VerifyOrder("bcdefa", order);
         }

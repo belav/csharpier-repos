@@ -78,7 +78,8 @@ namespace System.Xml.XmlDocumentTests
             var cDataSection = xmlDocument.CreateCDataSection("data");
 
             Assert.Throws<InvalidOperationException>(() =>
-                xmlDocument.InsertBefore(cDataSection, null));
+                xmlDocument.InsertBefore(cDataSection, null)
+            );
         }
 
         [Fact]
@@ -104,7 +105,8 @@ namespace System.Xml.XmlDocumentTests
 
             Assert.Equal(1, attribute.ChildNodes.Count);
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.InsertBefore(cDataSection, null));
+                attribute.InsertBefore(cDataSection, null)
+            );
             Assert.Equal(1, attribute.ChildNodes.Count);
         }
 
@@ -194,8 +196,8 @@ namespace System.Xml.XmlDocumentTests
             var textNode = xmlDocument.CreateTextNode("text node");
 
             Assert.Equal(XmlNodeType.Comment, commentNode.NodeType);
-            Assert.Throws<InvalidOperationException>(() =>
-                commentNode.InsertBefore(textNode, null));
+            Assert.Throws<InvalidOperationException>(() => commentNode.InsertBefore(textNode, null)
+            );
         }
 
         [Fact]
@@ -209,7 +211,8 @@ namespace System.Xml.XmlDocumentTests
 
             Assert.Equal(XmlNodeType.ProcessingInstruction, processingNode.NodeType);
             Assert.Throws<InvalidOperationException>(() =>
-                processingNode.InsertBefore(textNode, null));
+                processingNode.InsertBefore(textNode, null)
+            );
         }
 
         [Fact]
@@ -222,8 +225,8 @@ namespace System.Xml.XmlDocumentTests
             var newTextNode = xmlDocument.CreateTextNode("text node");
 
             Assert.Equal(XmlNodeType.Text, textNode.NodeType);
-            Assert.Throws<InvalidOperationException>(() =>
-                textNode.InsertBefore(newTextNode, null));
+            Assert.Throws<InvalidOperationException>(() => textNode.InsertBefore(newTextNode, null)
+            );
         }
 
         [Fact]
@@ -263,8 +266,8 @@ namespace System.Xml.XmlDocumentTests
 
             var attribute = xmlDocument.CreateAttribute("attr");
 
-            Assert.Throws<InvalidOperationException>(() =>
-                xmlDocument.InsertBefore(attribute, null));
+            Assert.Throws<InvalidOperationException>(() => xmlDocument.InsertBefore(attribute, null)
+            );
         }
 
         [Fact]
@@ -275,8 +278,8 @@ namespace System.Xml.XmlDocumentTests
 
             var attribute = xmlDocument.CreateAttribute("attr");
 
-            Assert.Throws<InvalidOperationException>(() =>
-                xmlDocument.InsertBefore(attribute, null));
+            Assert.Throws<InvalidOperationException>(() => xmlDocument.InsertBefore(attribute, null)
+            );
         }
     }
 }

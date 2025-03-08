@@ -80,7 +80,8 @@ namespace System.Data.OleDb.Tests
                     command.CommandText = @"SELECT * FROM " + tableName;
                     connection.Close();
                     var exception = Record.Exception(() =>
-                        OleDbCommandBuilder.DeriveParameters(command));
+                        OleDbCommandBuilder.DeriveParameters(command)
+                    );
                     Assert.NotNull(exception);
                     Assert.IsType<InvalidOperationException>(exception);
                     Assert.Contains(

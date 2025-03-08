@@ -28,11 +28,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         var message = async
             ? (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    (from c in context1.Customers from o in context2.Orders select c).FirstAsync())
+                    (from c in context1.Customers from o in context2.Orders select c).FirstAsync()
+                )
             ).Message
             : Assert
                 .Throws<InvalidOperationException>(() =>
-                    (from c in context1.Customers from o in context2.Orders select c).First())
+                    (from c in context1.Customers from o in context2.Orders select c).First()
+                )
                 .Message;
 
         Assert.Equal(CoreStrings.ErrorInvalidQueryable, message);
@@ -52,11 +54,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         from c in context1.Customers
                         from o in context2.Set<Order>()
                         select c
-                    ).FirstAsync())
+                    ).FirstAsync()
+                )
             ).Message
             : Assert
                 .Throws<InvalidOperationException>(() =>
-                    (from c in context1.Customers from o in context2.Set<Order>() select c).First())
+                    (from c in context1.Customers from o in context2.Set<Order>() select c).First()
+                )
                 .Message;
 
         Assert.Equal(CoreStrings.ErrorInvalidQueryable, message);
@@ -73,11 +77,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         var message = async
             ? (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    (from c in context1.Customers from o in set select c).FirstAsync())
+                    (from c in context1.Customers from o in set select c).FirstAsync()
+                )
             ).Message
             : Assert
                 .Throws<InvalidOperationException>(() =>
-                    (from c in context1.Customers from o in set select c).First())
+                    (from c in context1.Customers from o in set select c).First()
+                )
                 .Message;
 
         Assert.Equal(CoreStrings.ErrorInvalidQueryable, message);
@@ -1107,7 +1113,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task All_client(bool async) =>
         AssertTranslationFailed(() =>
-            AssertAll(async, ss => ss.Set<Customer>(), predicate: c => c.IsLondon));
+            AssertAll(async, ss => ss.Set<Customer>(), predicate: c => c.IsLondon)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1117,7 +1124,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 async,
                 ss => ss.Set<Customer>(),
                 predicate: c => c.CustomerID != "Foo" && c.IsLondon
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1127,7 +1135,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 async,
                 ss => ss.Set<Customer>(),
                 predicate: c => c.CustomerID != "Foo" || c.IsLondon
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2125,7 +2134,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         c1.City
                         == ss.Set<Customer>().OrderBy(c => c.CustomerID).First(c => c.IsLondon).City
                     select c1
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2147,7 +2157,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             .First()
                             .c3.City
                     select c1
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2231,7 +2242,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         c,
                     },
                 e => (e.e1.EmployeeID, e.c.CustomerID)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2466,7 +2478,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             c.CustomerID == "ALFKI"
                             && c.Orders.Exists(o => o.OrderDate == new DateTime(2008, 10, 24))
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2482,7 +2495,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             c.CustomerID == "ALFKI"
                             && c.Orders.Exists(o => o.OrderDate != new DateTime(2008, 10, 24))
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2495,7 +2509,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 ss =>
                     ss.Set<Customer>()
                         .Where(c => c.CustomerID == "ALFKI" && c.Orders.Exists(o => false))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2508,7 +2523,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 ss =>
                     ss.Set<Customer>()
                         .Where(c => c.CustomerID == "ALFKI" && !c.Orders.Exists(o => false))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2688,7 +2704,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         .Where(c => c.EmployeeID == NonExistentID)
                         .DefaultIfEmpty(new Employee())
                     select e
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2703,7 +2720,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         .Where(c => c.EmployeeID == NonExistentID)
                         .DefaultIfEmpty(new Employee())
                     select 42
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2848,7 +2866,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         on new Foo { Bar = c.CustomerID } equals new Foo { Bar = o.CustomerID }
                     orderby c.IsLondon, o.OrderDate
                     select new { c, o }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3556,7 +3575,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            context.Customers.ToListAsync())
+                            context.Customers.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => context.Customers.ToList())
                 ).Message
             );
@@ -3600,7 +3620,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            context.Customers.FirstAsync())
+                            context.Customers.FirstAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => context.Customers.First())
                 ).Message
             );
@@ -4071,7 +4092,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 async,
                 ss =>
                     ss.Set<Customer>().Where(c => Equals(c.Orders.First(), customer.Orders.First()))
-            ));
+            )
+        );
     }
 
     [ConditionalTheory]
@@ -4091,7 +4113,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             && o.OrderDate.Value.Month == dateFilter.Value.Month
                             && o.OrderDate.Value.Year == dateFilter.Value.Year
                         )
-            ));
+            )
+        );
     }
 
     [ConditionalTheory]
@@ -4643,7 +4666,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     select new { Id1 = o.CustomerID, Id2 = c != null ? c.CustomerID : null },
 #pragma warning restore IDE0031 // Use null propagation
                 e => (e.Id1, e.Id2)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -4669,7 +4693,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     select new { Id1 = o.CustomerID, Id2 = c != null ? c.CustomerID : null },
 #pragma warning restore IDE0031 // Use null propagation
                 e => (e.Id1, e.Id2)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -4695,7 +4720,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     select new { Id1 = o.CustomerID, Id2 = c != null ? c.CustomerID : null },
 #pragma warning restore IDE0031 // Use null propagation
                 e => (e.Id1, e.Id2)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -4715,7 +4741,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     select new { City1 = e1.City, City2 = e2 != null ? e2.City : null },
 #pragma warning restore IDE0031 // Use null propagation
                 e => (e.City1, e.City2)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -5653,7 +5680,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         .SelectMany(c => c.Orders)
                         .Distinct()
                         .Select(o => o.OrderDate)
-            ));
+            )
+        );
 
     private static string ClientOrderBy(Customer c) => c.CustomerID;
 
@@ -5671,7 +5699,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     select g.OrderByDescending(x => x.OrderID).ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a, ordered: true)
-            ));
+            )
+        );
 
     protected static bool ClientEvalPredicate(Order order) => order.OrderID > 10000;
 
@@ -5731,7 +5760,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                     .FirstOrDefault()
                                     .OrderDetails
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -6238,7 +6268,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_include_on_incorrect_property_throws(bool async) =>
         Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await AssertQuery(async, ss => ss.Set<Customer>().Include("OrderDetails")));
+            await AssertQuery(async, ss => ss.Set<Customer>().Include("OrderDetails"))
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -6247,7 +6278,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             await AssertQuery(
                 async,
                 ss => ss.Set<Customer>().Include(c => EF.Property<Customer>(c, "OrderDetails"))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [InlineData(false, false)]
@@ -6421,7 +6453,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     AssertQuery(
                         async,
                         ss => ss.Set<Customer>().Select(e => new { e.Region.Length })
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -6606,7 +6639,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         .OrderBy(c => c.CustomerID)
                         .SkipWhile(c => c.CustomerID != "Foo")
                         .Skip(1)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -6681,7 +6715,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         using var context = CreateContext();
 
         await Assert.ThrowsAsync<OperationCanceledException>(() =>
-            context.Employees.ToListAsync(new CancellationToken(true)));
+            context.Employees.ToListAsync(new CancellationToken(true))
+        );
 
         Assert.Contains(CoreEventId.QueryCanceled, Fixture.ListLoggerFactory.Log.Select(l => l.Id));
     }

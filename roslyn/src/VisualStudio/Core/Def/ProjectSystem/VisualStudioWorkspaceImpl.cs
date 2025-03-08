@@ -389,9 +389,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             var document = _threadingContext.JoinableTaskFactory.Run(() =>
-                CurrentSolution
-                    .GetDocumentAsync(documentId, includeSourceGenerated: true)
-                    .AsTask());
+                CurrentSolution.GetDocumentAsync(documentId, includeSourceGenerated: true).AsTask()
+            );
             if (document == null)
             {
                 throw new ArgumentException(
@@ -799,7 +798,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // tries to switch back to the main thread in the LSP client.
             // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
             var mappedChanges = _threadingContext.JoinableTaskFactory.Run(() =>
-                GetMappedTextChangesAsync(solutionChanges));
+                GetMappedTextChangesAsync(solutionChanges)
+            );
 
             // Group the mapped text changes by file, then apply all mapped text changes for the file.
             foreach (var changesForFile in mappedChanges)

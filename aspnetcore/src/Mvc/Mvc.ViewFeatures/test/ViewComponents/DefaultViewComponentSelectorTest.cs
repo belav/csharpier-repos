@@ -113,7 +113,8 @@ public class DefaultViewComponentSelectorTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            selector.SelectComponent("Ambiguous"));
+            selector.SelectComponent("Ambiguous")
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);

@@ -246,15 +246,19 @@ namespace System.Threading.Tests
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterReadLock(-2));
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterUpgradeableReadLock(-3));
+                    rwls.TryEnterUpgradeableReadLock(-3)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterWriteLock(-4));
 
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterReadLock(TimeSpan.MaxValue));
+                    rwls.TryEnterReadLock(TimeSpan.MaxValue)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue));
+                    rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2)));
+                    rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2))
+                );
             }
         }
 

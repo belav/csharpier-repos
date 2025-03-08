@@ -41,7 +41,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task Read_ConcurrentCollection_Throws(Type type, string json)
         {
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper(json, type));
+                await Serializer.DeserializeWrapper(json, type)
+            );
             Assert.Contains(type.ToString(), ex.Message);
         }
 
@@ -56,7 +57,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper(json, type));
+                await Serializer.DeserializeWrapper(json, type)
+            );
             Assert.Contains(type.ToString(), ex.Message);
         }
 

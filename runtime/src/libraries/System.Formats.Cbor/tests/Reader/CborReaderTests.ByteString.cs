@@ -337,7 +337,8 @@ namespace System.Formats.Cbor.Tests
             var reader = new CborReader(encoding);
 
             Assert.Throws<InvalidOperationException>(() =>
-                reader.TryReadByteString(buffer, out int _));
+                reader.TryReadByteString(buffer, out int _)
+            );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
 

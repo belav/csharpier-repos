@@ -83,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             project,
                             document,
                             CancellationToken.None
-                        ));
+                        )
+                    );
                 }
             }
         }

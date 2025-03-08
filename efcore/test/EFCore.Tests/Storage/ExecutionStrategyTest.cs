@@ -322,7 +322,8 @@ public class ExecutionStrategyTest : IDisposable
 
                     throw new ArgumentNullException();
                 }
-            ));
+            )
+        );
 
         Assert.Equal(4, executionCount);
     }
@@ -363,7 +364,8 @@ public class ExecutionStrategyTest : IDisposable
                             Assert.True(false);
                             return 0;
                         }
-                    ))
+                    )
+                )
                 .InnerException
         );
 
@@ -396,7 +398,8 @@ public class ExecutionStrategyTest : IDisposable
                 ),
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        executeAsync(mockExecutionStrategy))
+                        executeAsync(mockExecutionStrategy)
+                    )
                 ).Message
             );
         }
@@ -428,7 +431,8 @@ public class ExecutionStrategyTest : IDisposable
                 ),
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        executeAsync(mockExecutionStrategy))
+                        executeAsync(mockExecutionStrategy)
+                    )
                 ).Message
             );
         }
@@ -461,7 +465,8 @@ public class ExecutionStrategyTest : IDisposable
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    executeAsync(mockExecutionStrategy))
+                    executeAsync(mockExecutionStrategy)
+                )
             ).Message
         );
     }
@@ -659,7 +664,8 @@ public class ExecutionStrategyTest : IDisposable
 
                     throw new ArgumentNullException();
                 }
-            ));
+            )
+        );
 
         Assert.Equal(4, executionCount);
     }
@@ -704,7 +710,8 @@ public class ExecutionStrategyTest : IDisposable
                             Assert.True(false);
                             return Task.FromResult(0);
                         }
-                    ))
+                    )
+                )
             ).InnerException.InnerException);
 
         Assert.Equal(3, executionCount);

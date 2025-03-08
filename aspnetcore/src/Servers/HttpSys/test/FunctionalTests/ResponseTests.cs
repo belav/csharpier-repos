@@ -285,7 +285,8 @@ public class ResponseTests : LoggedTest
                         httpContext
                     );
                     Assert.Throws<InvalidTimeZoneException>(() =>
-                        httpContext.Response.Body.Write(new byte[10], 0, 10));
+                        httpContext.Response.Body.Write(new byte[10], 0, 10)
+                    );
                     return Task.CompletedTask;
                 },
                 LoggerFactory

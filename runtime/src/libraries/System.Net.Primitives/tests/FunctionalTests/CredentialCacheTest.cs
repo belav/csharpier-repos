@@ -287,7 +287,8 @@ namespace System.Net.Primitives.Functional.Tests
             ); //Null authenticationType
 
             var exception = Record.Exception(() =>
-                cc.Add("", 500, "authenticationType", new NetworkCredential()));
+                cc.Add("", 500, "authenticationType", new NetworkCredential())
+            );
             // On .NET Framework we get exception.ParamName as null while it is "host" on netcore
             Assert.NotNull(exception);
             Assert.True(exception is ArgumentException);

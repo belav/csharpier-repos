@@ -397,7 +397,8 @@ public class ArrayModelBinderIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            parameterBinder.BindModelAsync(parameter, testContext));
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 }

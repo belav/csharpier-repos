@@ -39,7 +39,8 @@ public class RelatedAssemblyPartTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true));
+            RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -52,7 +53,8 @@ public class RelatedAssemblyPartTest
 
         // Act & Assert
         Assert.Throws<FileNotFoundException>(() =>
-            RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true));
+            RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true)
+        );
     }
 
     [Fact]

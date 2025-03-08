@@ -23,7 +23,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_with_client_eval(async))
+                    base.SelectMany_with_client_eval(async)
+                )
             ).Message
         );
 
@@ -32,7 +33,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_with_client_eval_with_collection_shaper(async))
+                    base.SelectMany_with_client_eval_with_collection_shaper(async)
+                )
             ).Message
         );
 
@@ -43,7 +45,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_with_client_eval_with_collection_shaper_ignored(async))
+                    base.SelectMany_with_client_eval_with_collection_shaper_ignored(async)
+                )
             ).Message
         );
 
@@ -52,7 +55,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_with_selecting_outer_entity(async))
+                    base.SelectMany_with_selecting_outer_entity(async)
+                )
             ).Message
         );
 
@@ -61,7 +65,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_with_selecting_outer_element(async))
+                    base.SelectMany_with_selecting_outer_element(async)
+                )
             ).Message
         );
 
@@ -72,7 +77,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async))
+                    base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async)
+                )
             ).Message
         );
 
@@ -83,7 +89,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(async))
+                    base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(async)
+                )
             ).Message
         );
 
@@ -92,7 +99,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.GroupJoin_as_final_operator(async))
+                    base.GroupJoin_as_final_operator(async)
+                )
             ).Message
         );
 
@@ -101,7 +109,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Unflattened_GroupJoin_composed(async))
+                    base.Unflattened_GroupJoin_composed(async)
+                )
             ).Message
         );
 
@@ -110,7 +119,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Unflattened_GroupJoin_composed_2(async))
+                    base.Unflattened_GroupJoin_composed_2(async)
+                )
             ).Message
         );
 
@@ -119,7 +129,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.GroupJoin_SelectMany_subquery_with_filter_orderby(async))
+                    base.GroupJoin_SelectMany_subquery_with_filter_orderby(async)
+                )
             ).Message
         );
 
@@ -130,9 +141,8 @@ public class NorthwindJoinQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.GroupJoin_SelectMany_subquery_with_filter_orderby_and_DefaultIfEmpty(
-                        async
-                    ))
+                    base.GroupJoin_SelectMany_subquery_with_filter_orderby_and_DefaultIfEmpty(async)
+                )
             ).Message
         );
 }

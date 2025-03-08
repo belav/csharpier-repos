@@ -148,17 +148,23 @@ namespace System.IO.Pipes.Tests
             Assert.True(InteropTest.TryGetHostName(out hostName));
 
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeClientStream("foobar" + hostName, "foobar"));
+                new NamedPipeClientStream("foobar" + hostName, "foobar")
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeClientStream(hostName, "foobar" + Path.GetInvalidFileNameChars()[0]));
+                new NamedPipeClientStream(hostName, "foobar" + Path.GetInvalidFileNameChars()[0])
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeClientStream(hostName, "/tmp/foo\0bar"));
+                new NamedPipeClientStream(hostName, "/tmp/foo\0bar")
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeClientStream(hostName, "/tmp/foobar/"));
+                new NamedPipeClientStream(hostName, "/tmp/foobar/")
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeClientStream(hostName, "/"));
+                new NamedPipeClientStream(hostName, "/")
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeClientStream(hostName, "\0"));
+                new NamedPipeClientStream(hostName, "\0")
+            );
         }
 
         [Theory]
@@ -289,7 +295,8 @@ namespace System.IO.Pipes.Tests
 
                     SafePipeHandle fakePipeHandle = new SafePipeHandle(handle, ownsHandle: false);
                     Assert.Throws<IOException>(() =>
-                        new NamedPipeClientStream(direction, false, true, fakePipeHandle));
+                        new NamedPipeClientStream(direction, false, true, fakePipeHandle)
+                    );
                 }
                 finally
                 {

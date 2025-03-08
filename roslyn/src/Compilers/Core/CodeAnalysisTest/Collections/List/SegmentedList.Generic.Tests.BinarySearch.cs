@@ -77,9 +77,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 () => list.BinarySearch(0, count + 1, element, GetIComparer())
             ); //"Finding items longer than array should throw ArgumentException"
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                list.BinarySearch(-1, count, element, GetIComparer())); //"ArgumentOutOfRangeException should be thrown on negative index."
+                list.BinarySearch(-1, count, element, GetIComparer())
+            ); //"ArgumentOutOfRangeException should be thrown on negative index."
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                list.BinarySearch(0, -1, element, GetIComparer())); //"ArgumentOutOfRangeException should be thrown on negative count."
+                list.BinarySearch(0, -1, element, GetIComparer())
+            ); //"ArgumentOutOfRangeException should be thrown on negative count."
             Assert.Throws<ArgumentException>(
                 null,
                 () => list.BinarySearch(count + 1, count, element, GetIComparer())

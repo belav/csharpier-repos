@@ -271,7 +271,8 @@ namespace System.Globalization.Tests
         public void LongTimePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.LongTimePattern = "HH:mm:ss");
+                DateTimeFormatInfo.InvariantInfo.LongTimePattern = "HH:mm:ss"
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsIcuGlobalization))]

@@ -22,7 +22,8 @@ namespace System.Formats.Tar.Tests
                     "directory",
                     overwriteFiles: true,
                     cs.Token
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -33,25 +34,29 @@ namespace System.Formats.Tar.Tests
                     sourceFileName: null,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentException>(() =>
                 TarFile.ExtractToDirectoryAsync(
                     sourceFileName: string.Empty,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(() =>
                 TarFile.ExtractToDirectoryAsync(
                     sourceFileName: "path",
                     destinationDirectoryName: null,
                     overwriteFiles: false
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentException>(() =>
                 TarFile.ExtractToDirectoryAsync(
                     sourceFileName: "path",
                     destinationDirectoryName: string.Empty,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -69,7 +74,8 @@ namespace System.Formats.Tar.Tests
                         sourceFileName: filePath,
                         destinationDirectoryName: dirPath,
                         overwriteFiles: false
-                    ));
+                    )
+                );
             }
         }
 
@@ -88,7 +94,8 @@ namespace System.Formats.Tar.Tests
                         sourceFileName: filePath,
                         destinationDirectoryName: dirPath,
                         overwriteFiles: false
-                    ));
+                    )
+                );
             }
         }
 
@@ -288,7 +295,8 @@ namespace System.Formats.Tar.Tests
                         sourceArchiveFileName,
                         destination.Path,
                         overwriteFiles: false
-                    ));
+                    )
+                );
             }
         }
 

@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
         public static void Protect_PlatformNotSupported(DataProtectionScope scope)
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                ProtectedData.Protect(null, null, scope));
+                ProtectedData.Protect(null, null, scope)
+            );
         }
 
         [Theory]
@@ -24,7 +25,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
         public static void Unprotect_PlatformNotSupported(DataProtectionScope scope)
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                ProtectedData.Unprotect(null, null, scope));
+                ProtectedData.Unprotect(null, null, scope)
+            );
         }
     }
 }

@@ -156,7 +156,8 @@ namespace System.Net.Security.Tests
                         client.AuthenticateAsClientAsync(
                             CredentialCache.DefaultNetworkCredentials,
                             string.Empty
-                        )),
+                        )
+                    ),
                     // We suppress the Delegation flag in NTLM case.
                     Assert.ThrowsAsync<AuthenticationException>(() =>
                         server.AuthenticateAsServerAsync(
@@ -164,7 +165,8 @@ namespace System.Net.Security.Tests
                             null,
                             ProtectionLevel.EncryptAndSign,
                             TokenImpersonationLevel.Delegation
-                        ))
+                        )
+                    )
                 );
             }
         }
@@ -189,9 +191,11 @@ namespace System.Net.Security.Tests
                         client.AuthenticateAsClientAsync(
                             CredentialCache.DefaultNetworkCredentials,
                             string.Empty
-                        )),
+                        )
+                    ),
                     Assert.ThrowsAsync<AuthenticationException>(() =>
-                        server.AuthenticateAsServerAsync(policy))
+                        server.AuthenticateAsServerAsync(policy)
+                    )
                 );
             }
         }
@@ -222,9 +226,11 @@ namespace System.Net.Security.Tests
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
                     Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        client.AuthenticateAsClientAsync()),
+                        client.AuthenticateAsClientAsync()
+                    ),
                     Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        server.AuthenticateAsServerAsync())
+                        server.AuthenticateAsServerAsync()
+                    )
                 );
             }
         }
@@ -273,17 +279,20 @@ namespace System.Net.Security.Tests
                             TargetName,
                             ProtectionLevel.None,
                             TokenImpersonationLevel.Identification
-                        )),
+                        )
+                    ),
                     Assert.ThrowsAsync<AuthenticationException>(() =>
                         server.AuthenticateAsServerAsync(
                             (NetworkCredential)CredentialCache.DefaultCredentials,
                             ProtectionLevel.Sign,
                             TokenImpersonationLevel.Identification
-                        ))
+                        )
+                    )
                 );
 
                 Assert.Throws<AuthenticationException>(() =>
-                    client.Write(s_sampleMsg, 0, s_sampleMsg.Length));
+                    client.Write(s_sampleMsg, 0, s_sampleMsg.Length)
+                );
             }
         }
 

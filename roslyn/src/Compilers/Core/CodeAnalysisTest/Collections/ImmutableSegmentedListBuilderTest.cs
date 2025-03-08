@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(-1, new int[0]));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                mutable.InsertRange(mutable.Count + 1, new int[0]));
+                mutable.InsertRange(mutable.Count + 1, new int[0])
+            );
         }
 
         [Fact]
@@ -386,7 +387,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 ImmutableSegmentedList.CreateBuilder<string>()
             );
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null!));
+                Activator.CreateInstance(proxyType, (object)null!)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

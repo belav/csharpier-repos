@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _displayFullPaths = displayFullPaths;
             _displayEndLocations = displayEndLocations;
             _lazyNormalizedBaseDirectory = new Lazy<string>(() =>
-                FileUtilities.TryNormalizeAbsolutePath(baseDirectory));
+                FileUtilities.TryNormalizeAbsolutePath(baseDirectory)
+            );
         }
 
         internal override string FormatSourceSpan(LinePositionSpan span, IFormatProvider formatter)

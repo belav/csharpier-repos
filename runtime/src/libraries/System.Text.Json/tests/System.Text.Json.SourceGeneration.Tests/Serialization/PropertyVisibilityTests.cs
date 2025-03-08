@@ -34,7 +34,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             ValidateInvalidOperationException();
 
             ioe = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(Activator.CreateInstance(type), type));
+                await Serializer.SerializeWrapper(Activator.CreateInstance(type), type)
+            );
             ValidateInvalidOperationException();
 
             void ValidateInvalidOperationException()
@@ -61,11 +62,13 @@ namespace System.Text.Json.SourceGeneration.Tests
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                 await Serializer.DeserializeWrapper<MyClass_WithNonPublicAccessors_WithPropertyAttributes>(
                     json
-                ));
+                )
+            );
 
             var obj = new MyClass_WithNonPublicAccessors_WithPropertyAttributes();
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(obj));
+                await Serializer.SerializeWrapper(obj)
+            );
         }
 
         [Theory]
@@ -93,7 +96,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             else
             {
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await Serializer.DeserializeWrapper(@"{""MyInt"":1}", type));
+                    await Serializer.DeserializeWrapper(@"{""MyInt"":1}", type)
+                );
             }
         }
 
@@ -107,19 +111,22 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             // Deserialization baseline, without enum converter, we get JsonException. NB order of members in deserialized type is significant for this assertion to succeed.
             await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithPropertiesWithConverter>(json));
+                await Serializer.DeserializeWrapper<StructWithPropertiesWithConverter>(json)
+            );
 
             // JsonInclude not supported in source gen.
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                 await Serializer.DeserializeWrapper<StructWithPropertiesWithConverter>(
                     json,
                     options
-                ));
+                )
+            );
 
             // JsonInclude on private getters not supported.
             var obj = new StructWithPropertiesWithConverter();
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(obj, options));
+                await Serializer.SerializeWrapper(obj, options)
+            );
         }
 
         [Fact]
@@ -137,7 +144,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Equal(4, obj.GetZ);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(obj));
+                await Serializer.SerializeWrapper(obj)
+            );
         }
 
         [Fact]
@@ -153,7 +161,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             // JsonInclude for private members not supported in source gen
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(obj));
+                await Serializer.SerializeWrapper(obj)
+            );
         }
 
         [Fact]
@@ -165,7 +174,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                 await Serializer.DeserializeWrapper<StructWithPropertiesWithJsonPropertyName_PrivateSetter>(
                     json
-                ));
+                )
+            );
 
             var obj = new StructWithPropertiesWithJsonPropertyName_PrivateSetter();
             obj.SetProxy(2);
@@ -188,9 +198,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
 
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(collection));
+                Serializer.SerializeWrapper(collection)
+            );
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.DeserializeWrapper<CollectionWithPrivateElementType>(json));
+                Serializer.DeserializeWrapper<CollectionWithPrivateElementType>(json)
+            );
         }
 
         [Fact]
@@ -209,9 +221,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
 
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(dictionary));
+                Serializer.SerializeWrapper(dictionary)
+            );
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.DeserializeWrapper<DictionaryWithPrivateKeyAndValueType>(json));
+                Serializer.DeserializeWrapper<DictionaryWithPrivateKeyAndValueType>(json)
+            );
         }
 
         [Fact]
@@ -421,9 +435,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         public override async Task JsonIgnoreCondition_WhenWritingNull_OnValueType_Fail(Type type)
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper("{}", type));
+                await Serializer.DeserializeWrapper("{}", type)
+            );
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(Activator.CreateInstance(type), type));
+                await Serializer.SerializeWrapper(Activator.CreateInstance(type), type)
+            );
         }
 
         [Theory]
@@ -435,9 +451,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             // Since this code goes down fast-path, there's no warm up and we hit the reader exception about having no tokens.
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper("", type));
+                await Serializer.DeserializeWrapper("", type)
+            );
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(Activator.CreateInstance(type), type));
+                await Serializer.SerializeWrapper(Activator.CreateInstance(type), type)
+            );
         }
 
         [Fact]
@@ -480,9 +498,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             JsonConverter obj = JsonMetadataServices.BooleanConverter;
 
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Serialize(obj, PublicContext.Default.Options));
+                JsonSerializer.Serialize(obj, PublicContext.Default.Options)
+            );
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<JsonConverter>("{}", PublicContext.Default.Options));
+                JsonSerializer.Deserialize<JsonConverter>("{}", PublicContext.Default.Options)
+            );
         }
 
         [Fact]

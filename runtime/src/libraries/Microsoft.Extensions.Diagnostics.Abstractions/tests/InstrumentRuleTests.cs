@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
         public void ScopeRequired()
         {
             var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new InstrumentRule(null, null, null, MeterScope.None, true));
+                new InstrumentRule(null, null, null, MeterScope.None, true)
+            );
             Assert.Equal("scopes", ex.ParamName);
         }
     }

@@ -267,7 +267,8 @@ namespace Castle.DynamicProxy.Tests
                         new Func<object, bool>(_ => true),
                         new Predicate<object>(_ => false),
                     }
-                ));
+                )
+            );
         }
 
         [Test]
@@ -281,7 +282,8 @@ namespace Castle.DynamicProxy.Tests
                         new NotADelegate(),
                         typeof(Predicate<object>),
                     }
-                ));
+                )
+            );
         }
 
         public class NotADelegate : INotADelegate { }

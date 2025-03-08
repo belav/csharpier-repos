@@ -74,11 +74,14 @@ namespace System.ComponentModel.Tests
         public void Ctor_NullDesignerTypeName_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
-                new DesignerAttribute((string)null));
+                new DesignerAttribute((string)null)
+            );
             AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
-                new DesignerAttribute(null, "designerBaseTypeName"));
+                new DesignerAttribute(null, "designerBaseTypeName")
+            );
             AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
-                new DesignerAttribute((string)null, typeof(int)));
+                new DesignerAttribute((string)null, typeof(int))
+            );
         }
 
         [Fact]

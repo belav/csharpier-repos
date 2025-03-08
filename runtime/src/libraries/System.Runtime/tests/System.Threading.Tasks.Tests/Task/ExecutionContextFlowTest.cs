@@ -85,14 +85,16 @@ namespace System.Threading.Tasks.Tests
             yield return new object[]
             {
                 new Func<TaskCompletionSource<int>>(() =>
-                    new TaskCompletionSource<int>(new object())),
+                    new TaskCompletionSource<int>(new object())
+                ),
             };
             yield return new object[]
             {
                 new Func<TaskCompletionSource<int>>(() =>
                     new TaskCompletionSource<int>(
                         TaskCreationOptions.RunContinuationsAsynchronously
-                    )),
+                    )
+                ),
             };
             yield return new object[]
             {
@@ -100,7 +102,8 @@ namespace System.Threading.Tasks.Tests
                     new TaskCompletionSource<int>(
                         new object(),
                         TaskCreationOptions.RunContinuationsAsynchronously
-                    )),
+                    )
+                ),
             };
         }
 

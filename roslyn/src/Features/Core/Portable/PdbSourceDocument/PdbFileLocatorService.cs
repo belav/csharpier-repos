@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                             if (pdbResult is not null)
                             {
                                 pdbStream = IOUtilities.PerformIO(() =>
-                                    File.OpenRead(pdbResult.PdbFilePath));
+                                    File.OpenRead(pdbResult.PdbFilePath)
+                                );
                                 if (pdbStream is not null)
                                 {
                                     var readerProvider =

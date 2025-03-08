@@ -77,7 +77,8 @@ namespace System.IO.Tests
                     bufferSize: 4096,
                     FileOptions.None,
                     tooMuch
-                ));
+                )
+            );
             Assert.Contains(filePath, ex.Message);
             Assert.Contains(tooMuch.ToString(), ex.Message);
 

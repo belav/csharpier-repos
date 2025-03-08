@@ -82,7 +82,8 @@ interface Interface
             Assert.Null(@base.FindImplementationForInterfaceMember(baseNestedDelegate)); //not a method/property/event
 
             Assert.Throws<ArgumentNullException>(() =>
-                @base.FindImplementationForInterfaceMember(null)); //not a method/property/event
+                @base.FindImplementationForInterfaceMember(null)
+            ); //not a method/property/event
 
             var @interface = (NamedTypeSymbol)global.GetMembers("Interface").Single();
 

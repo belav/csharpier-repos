@@ -242,9 +242,11 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 Assert.Throws<ArgumentException>(() =>
-                    Marshal.StructureToPtr(structure, memory, false));
+                    Marshal.StructureToPtr(structure, memory, false)
+                );
                 Assert.Throws<ArgumentException>(() =>
-                    Marshal.StructureToPtr(structure, memory, true));
+                    Marshal.StructureToPtr(structure, memory, true)
+                );
             }
             finally
             {

@@ -467,7 +467,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 // And verify that the public key isn't accidentally a private key.
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    pubKey.SignData(data, HashAlgorithmName.SHA1));
+                    pubKey.SignData(data, HashAlgorithmName.SHA1)
+                );
             }
         }
 

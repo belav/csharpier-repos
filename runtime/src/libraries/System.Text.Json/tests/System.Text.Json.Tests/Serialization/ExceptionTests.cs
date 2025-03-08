@@ -58,7 +58,8 @@ namespace System.Text.Json.Serialization.Tests
             options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
             JsonException e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<string, int>>("{\"Key\u0467\":1", options));
+                JsonSerializer.Deserialize<Dictionary<string, int>>("{\"Key\u0467\":1", options)
+            );
             Assert.Equal(0, e.LineNumber);
             Assert.Equal(10, e.BytePositionInLine);
             Assert.Contains("LineNumber: 0 | BytePositionInLine: 10.", e.Message);
@@ -146,11 +147,13 @@ namespace System.Text.Json.Serialization.Tests
 
             // Without custom escaper.
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<string, int>>(Json));
+                JsonSerializer.Deserialize<Dictionary<string, int>>(Json)
+            );
             Assert.Equal(Expected, e.Path);
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped));
+                JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped)
+            );
             Assert.Equal(Expected, e.Path);
 
             // Custom escaper should not change Path.
@@ -158,11 +161,13 @@ namespace System.Text.Json.Serialization.Tests
             options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<string, int>>(Json, options));
+                JsonSerializer.Deserialize<Dictionary<string, int>>(Json, options)
+            );
             Assert.Equal(Expected, e.Path);
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped, options));
+                JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped, options)
+            );
             Assert.Equal(Expected, e.Path);
         }
 
@@ -193,11 +198,13 @@ namespace System.Text.Json.Serialization.Tests
 
             // Exception.
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJson));
+                JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJson)
+            );
             Assert.Equal(Expected, e.Path);
 
             e = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJsonEscaped));
+                JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJsonEscaped)
+            );
             Assert.Equal(Expected, e.Path);
         }
 
@@ -457,7 +464,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ClassWithUnsupportedArray()
         {
             Exception ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithInvalidArray>(@"{""UnsupportedArray"":[[]]}"));
+                JsonSerializer.Deserialize<ClassWithInvalidArray>(@"{""UnsupportedArray"":[[]]}")
+            );
 
             // The exception contains the type.
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
@@ -465,7 +473,8 @@ namespace System.Text.Json.Serialization.Tests
             ex = Assert.Throws<NotSupportedException>(() =>
                 JsonSerializer.Serialize(
                     new ClassWithInvalidArray { UnsupportedArray = new int[,] { } }
-                ));
+                )
+            );
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
         }
 
@@ -475,7 +484,8 @@ namespace System.Text.Json.Serialization.Tests
             Exception ex = Assert.Throws<NotSupportedException>(() =>
                 JsonSerializer.Deserialize<ClassWithPropertyToClassWithInvalidArray>(
                     @"{""Inner"":{""UnsupportedArray"":[[]]}}"
-                ));
+                )
+            );
 
             // The exception contains the type and Path.
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
@@ -490,7 +500,8 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Inner = new() { UnsupportedArray = new int[,] { } },
                     }
-                ));
+                )
+            );
 
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains("Path: $.Inner.UnsupportedArray", ex.Message);
@@ -506,7 +517,8 @@ namespace System.Text.Json.Serialization.Tests
             Exception ex = Assert.Throws<NotSupportedException>(() =>
                 JsonSerializer.Deserialize<ClassWithInvalidDictionary>(
                     @"{""UnsupportedDictionary"":{""key"":{}}}"
-                ));
+                )
+            );
 
             Assert.Contains("System.Int32[,]", ex.Message);
 
@@ -538,7 +550,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void UnsupportedTypeFromRoot()
         {
             Exception ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<int[,]>(@"[]"));
+                JsonSerializer.Deserialize<int[,]>(@"[]")
+            );
 
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains("Path: $", ex.Message);
@@ -565,7 +578,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Each constructor parameter must bind to an object property or field.
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize("{}", type));
+                JsonSerializer.Deserialize("{}", type)
+            );
             Assert.Contains(type.FullName, ex.ToString());
         }
 
@@ -591,13 +605,15 @@ namespace System.Text.Json.Serialization.Tests
             // (De)serialization of SerializationInfo type is not supported.
 
             NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Serialize(instance, type));
+                JsonSerializer.Serialize(instance, type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(serializationInfoName, exAsStr);
             Assert.Contains("$.Info", exAsStr);
 
             ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize(@"{""Info"":{}}", type));
+                JsonSerializer.Deserialize(@"{""Info"":{}}", type)
+            );
             exAsStr = ex.ToString();
             Assert.Contains(serializationInfoName, exAsStr);
             Assert.Contains("$.Info", exAsStr);
@@ -608,9 +624,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialization of other non-null tokens is not okay.
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize(@"{""Info"":1}", type));
+                JsonSerializer.Deserialize(@"{""Info"":1}", type)
+            );
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize(@"{""Info"":""""}", type));
+                JsonSerializer.Deserialize(@"{""Info"":""""}", type)
+            );
         }
 
         public class ClassWithBadCtor
@@ -651,7 +669,8 @@ namespace System.Text.Json.Serialization.Tests
             JsonException ex = Assert.Throws<JsonException>(() =>
                 JsonSerializer.Serialize(
                     new { Value = new PocoUsingCustomConverterThrowingJsonException() }
-                ));
+                )
+            );
             Assert.Equal(PocoConverterThrowingCustomJsonException.ExceptionMessage, ex.Message);
             Assert.Equal(PocoConverterThrowingCustomJsonException.ExceptionPath, ex.Path);
         }
@@ -660,9 +679,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void CustomConverterThrowingJsonException_Deserialization_ShouldNotOverwriteMetadata()
         {
             JsonException ex = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<PocoUsingCustomConverterThrowingJsonException[]>(
-                    @"[{}]"
-                ));
+                JsonSerializer.Deserialize<PocoUsingCustomConverterThrowingJsonException[]>(@"[{}]")
+            );
             Assert.Equal(PocoConverterThrowingCustomJsonException.ExceptionMessage, ex.Message);
             Assert.Equal(PocoConverterThrowingCustomJsonException.ExceptionPath, ex.Path);
         }

@@ -99,7 +99,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             signedCms.CheckSignature(
                                 new X509Certificate2Collection(signerCert),
                                 true
-                            ));
+                            )
+                        );
                         return;
                     }
                     else

@@ -40,7 +40,8 @@ public class HttpRequestJsonExtensionsTests
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await context.Request.ReadFromJsonAsync<int>());
+            await context.Request.ReadFromJsonAsync<int>()
+        );
 
         // Assert
         var expectedMessage =
@@ -57,7 +58,8 @@ public class HttpRequestJsonExtensionsTests
 
         // Act
         var ex = await Assert.ThrowsAsync<JsonException>(async () =>
-            await context.Request.ReadFromJsonAsync<int>());
+            await context.Request.ReadFromJsonAsync<int>()
+        );
 
         // Assert
         var expectedMessage =
@@ -161,7 +163,8 @@ public class HttpRequestJsonExtensionsTests
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await context.Request.ReadFromJsonAsync<object>());
+            await context.Request.ReadFromJsonAsync<object>()
+        );
 
         // Assert
         Assert.Equal(
@@ -212,7 +215,8 @@ public class HttpRequestJsonExtensionsTests
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await context.Request.ReadFromJsonAsync(typeof(object)));
+            await context.Request.ReadFromJsonAsync(typeof(object))
+        );
 
         // Assert
         Assert.Equal(

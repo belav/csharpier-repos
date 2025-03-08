@@ -9,11 +9,13 @@ public class HttpLoggingAttributeTests
     public void ThrowsForInvalidOptions()
     {
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new HttpLoggingAttribute(HttpLoggingFields.None) { RequestBodyLogLimit = -1 });
+            new HttpLoggingAttribute(HttpLoggingFields.None) { RequestBodyLogLimit = -1 }
+        );
         Assert.Equal(nameof(HttpLoggingAttribute.RequestBodyLogLimit), ex.ParamName);
 
         ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new HttpLoggingAttribute(HttpLoggingFields.None) { ResponseBodyLogLimit = -1 });
+            new HttpLoggingAttribute(HttpLoggingFields.None) { ResponseBodyLogLimit = -1 }
+        );
         Assert.Equal(nameof(HttpLoggingAttribute.ResponseBodyLogLimit), ex.ParamName);
     }
 

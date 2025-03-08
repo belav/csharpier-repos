@@ -1252,7 +1252,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 else
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        context.ChangeTracker.DetectChanges());
+                        context.ChangeTracker.DetectChanges()
+                    );
                 }
             },
             context =>
@@ -1397,7 +1398,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 else
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        context.ChangeTracker.DetectChanges());
+                        context.ChangeTracker.DetectChanges()
+                    );
                 }
             },
             context =>

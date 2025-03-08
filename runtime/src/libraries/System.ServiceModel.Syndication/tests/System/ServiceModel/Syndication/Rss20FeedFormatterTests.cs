@@ -646,7 +646,8 @@ namespace System.ServiceModel.Syndication.Tests
                         null,
                         new SyndicationItem(),
                         new Uri("http://microsoft.com")
-                    ));
+                    )
+                );
             }
         }
 
@@ -658,7 +659,8 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var formatter = new Formatter();
                 Assert.Throws<NullReferenceException>(() =>
-                    formatter.WriteItemEntryPoint(writer, null, new Uri("http://microsoft.com")));
+                    formatter.WriteItemEntryPoint(writer, null, new Uri("http://microsoft.com"))
+                );
             }
         }
 
@@ -736,7 +738,8 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Formatter();
                 var items = new SyndicationItem[] { new SyndicationItem() };
                 Assert.Throws<NullReferenceException>(() =>
-                    formatter.WriteItemsEntryPoint(null, items, new Uri("http://microsoft.com")));
+                    formatter.WriteItemsEntryPoint(null, items, new Uri("http://microsoft.com"))
+                );
             }
         }
 
@@ -749,7 +752,8 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Formatter();
                 var items = new SyndicationItem[] { null };
                 Assert.Throws<NullReferenceException>(() =>
-                    formatter.WriteItemsEntryPoint(writer, items, new Uri("http://microsoft.com")));
+                    formatter.WriteItemsEntryPoint(writer, items, new Uri("http://microsoft.com"))
+                );
             }
         }
 

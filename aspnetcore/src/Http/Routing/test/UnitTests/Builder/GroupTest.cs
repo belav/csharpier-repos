@@ -167,7 +167,8 @@ public class GroupTest
         builder = null;
 
         ex = Assert.Throws<ArgumentNullException>(() =>
-            builder!.MapGroup(RoutePatternFactory.Parse("/")));
+            builder!.MapGroup(RoutePatternFactory.Parse("/"))
+        );
         Assert.Equal("endpoints", ex.ParamName);
         ex = Assert.Throws<ArgumentNullException>(() => builder!.MapGroup("/"));
         Assert.Equal("endpoints", ex.ParamName);

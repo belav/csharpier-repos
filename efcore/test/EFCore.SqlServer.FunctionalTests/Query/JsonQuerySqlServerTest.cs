@@ -849,7 +849,8 @@ FROM [JsonEntitiesBasic] AS [j]
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Json_collection_index_in_projection_using_untranslatable_client_method(async))
+                base.Json_collection_index_in_projection_using_untranslatable_client_method(async)
+            )
         ).Message;
 
         Assert.Contains(
@@ -867,7 +868,8 @@ FROM [JsonEntitiesBasic] AS [j]
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Json_collection_index_in_projection_using_untranslatable_client_method2(async))
+                base.Json_collection_index_in_projection_using_untranslatable_client_method2(async)
+            )
         ).Message;
 
         Assert.Contains(

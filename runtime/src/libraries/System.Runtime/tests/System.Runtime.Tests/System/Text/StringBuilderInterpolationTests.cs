@@ -525,7 +525,8 @@ namespace System.Text.Tests
             StringBuilder.AppendInterpolatedStringHandler iab =
                 new StringBuilder.AppendInterpolatedStringHandler(0, 0, new StringBuilder());
             Assert.Throws<FormatException>(() =>
-                iab.AppendFormatted(new InvalidCharsWritten(tooBig)));
+                iab.AppendFormatted(new InvalidCharsWritten(tooBig))
+            );
         }
 
         private static void AssertModeMatchesType<T>(T tss)

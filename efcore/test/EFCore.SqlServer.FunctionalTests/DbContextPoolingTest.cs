@@ -245,16 +245,20 @@ public class DbContextPoolingTest
     public void Invalid_pool_size()
     {
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            BuildServiceProvider<PooledContext>(poolSize: 0));
+            BuildServiceProvider<PooledContext>(poolSize: 0)
+        );
 
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            BuildServiceProvider<PooledContext>(poolSize: -1));
+            BuildServiceProvider<PooledContext>(poolSize: -1)
+        );
 
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            BuildServiceProvider<IPooledContext, PooledContext>(poolSize: 0));
+            BuildServiceProvider<IPooledContext, PooledContext>(poolSize: 0)
+        );
 
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            BuildServiceProvider<IPooledContext, PooledContext>(poolSize: -1));
+            BuildServiceProvider<IPooledContext, PooledContext>(poolSize: -1)
+        );
     }
 
     [ConditionalTheory]
@@ -263,10 +267,12 @@ public class DbContextPoolingTest
     public void Invalid_pool_size_with_factory(bool withDependencyInjection)
     {
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            BuildFactory<PooledContext>(withDependencyInjection, poolSize: 0));
+            BuildFactory<PooledContext>(withDependencyInjection, poolSize: 0)
+        );
 
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            BuildFactory<PooledContext>(withDependencyInjection, poolSize: -1));
+            BuildFactory<PooledContext>(withDependencyInjection, poolSize: -1)
+        );
     }
 
     [ConditionalFact]
@@ -419,7 +425,8 @@ public class DbContextPoolingTest
             Assert.Throws<InvalidOperationException>(() =>
                 useInterface
                     ? scopedProvider.GetService<IPooledContext>()
-                    : scopedProvider.GetService<PooledContext>());
+                    : scopedProvider.GetService<PooledContext>()
+            );
         }
         finally
         {
@@ -457,7 +464,8 @@ public class DbContextPoolingTest
             CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
             Assert
                 .Throws<ArgumentException>(() =>
-                    serviceCollection.AddDbContextPool<BadCtorContext>(_ => { }))
+                    serviceCollection.AddDbContextPool<BadCtorContext>(_ => { })
+                )
                 .Message
         );
 
@@ -465,7 +473,8 @@ public class DbContextPoolingTest
             CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
             Assert
                 .Throws<ArgumentException>(() =>
-                    serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { }))
+                    serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { })
+                )
                 .Message
         );
 
@@ -473,7 +482,8 @@ public class DbContextPoolingTest
             CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
             Assert
                 .Throws<ArgumentException>(() =>
-                    serviceCollection.AddPooledDbContextFactory<BadCtorContext>((_, __) => { }))
+                    serviceCollection.AddPooledDbContextFactory<BadCtorContext>((_, __) => { })
+                )
                 .Message
         );
     }
@@ -488,7 +498,8 @@ public class DbContextPoolingTest
         using var scope = serviceProvider.CreateScope();
 
         Assert.Throws<InvalidOperationException>(() =>
-            scope.ServiceProvider.GetService<TwoParameterConstructorContext>());
+            scope.ServiceProvider.GetService<TwoParameterConstructorContext>()
+        );
     }
 
     private class TwoParameterConstructorContext : DbContext
@@ -512,7 +523,8 @@ public class DbContextPoolingTest
         using var scope = serviceProvider.CreateScope();
 
         Assert.Throws<InvalidOperationException>(() =>
-            scope.ServiceProvider.GetService<WrongParameterConstructorContext>());
+            scope.ServiceProvider.GetService<WrongParameterConstructorContext>()
+        );
     }
 
     private class WrongParameterConstructorContext : DbContext
@@ -532,7 +544,8 @@ public class DbContextPoolingTest
         using var scope = serviceProvider.CreateScope();
 
         Assert.Throws<InvalidOperationException>(() =>
-            scope.ServiceProvider.GetService<TwoParameterConstructorContext>());
+            scope.ServiceProvider.GetService<TwoParameterConstructorContext>()
+        );
     }
 
     [ConditionalFact]

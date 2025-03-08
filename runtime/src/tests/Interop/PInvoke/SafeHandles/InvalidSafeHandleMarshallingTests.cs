@@ -29,11 +29,13 @@ namespace SafeHandleTests
             }
 
             Assert.Throws<MarshalDirectiveException>(() =>
-                SafeHandleNative.SafeHandle_Invalid(new TestSafeHandle[1]));
+                SafeHandleNative.SafeHandle_Invalid(new TestSafeHandle[1])
+            );
             Assert.Throws<TypeLoadException>(() =>
                 SafeHandleNative.SafeHandle_Invalid(
                     new SafeHandleNative.StructWithSafeHandleArray()
-                ));
+                )
+            );
         }
 
         static void MarshalSafeHandleAsInterface()

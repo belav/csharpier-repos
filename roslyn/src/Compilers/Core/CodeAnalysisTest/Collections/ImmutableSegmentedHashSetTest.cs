@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 ImmutableSegmentedHashSet.Create<string>()
             );
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object?)null));
+                Activator.CreateInstance(proxyType, (object?)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

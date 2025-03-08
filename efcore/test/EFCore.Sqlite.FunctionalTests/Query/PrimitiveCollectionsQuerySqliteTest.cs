@@ -1214,7 +1214,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_ints_ordered(async))
+                    base.Project_collection_of_ints_ordered(async)
+                )
             ).Message
         );
 
@@ -1223,7 +1224,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_datetimes_filtered(async))
+                    base.Project_collection_of_datetimes_filtered(async)
+                )
             ).Message
         );
 
@@ -1232,7 +1234,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_nullable_ints_with_paging(async))
+                    base.Project_collection_of_nullable_ints_with_paging(async)
+                )
             ).Message
         );
 
@@ -1241,7 +1244,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_nullable_ints_with_paging2(async))
+                    base.Project_collection_of_nullable_ints_with_paging2(async)
+                )
             ).Message
         );
 
@@ -1250,7 +1254,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_nullable_ints_with_paging3(async))
+                    base.Project_collection_of_nullable_ints_with_paging3(async)
+                )
             ).Message
         );
 
@@ -1259,7 +1264,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_ints_with_distinct(async))
+                    base.Project_collection_of_ints_with_distinct(async)
+                )
             ).Message
         );
 
@@ -1268,7 +1274,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_nullable_ints_with_distinct(async))
+                    base.Project_collection_of_nullable_ints_with_distinct(async)
+                )
             ).Message
         );
 
@@ -1279,7 +1286,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_collection_of_ints_with_ToList_and_FirstOrDefault(async))
+                    base.Project_collection_of_ints_with_ToList_and_FirstOrDefault(async)
+                )
             ).Message
         );
 
@@ -1288,7 +1296,8 @@ ORDER BY "p"."Id"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_multiple_collections(async))
+                    base.Project_multiple_collections(async)
+                )
             ).Message
         );
 
@@ -1315,7 +1324,8 @@ ORDER BY "p"."Id"
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Project_empty_collection_of_nullables_and_collection_only_containing_nulls(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 

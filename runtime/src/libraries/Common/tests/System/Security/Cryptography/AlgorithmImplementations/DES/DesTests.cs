@@ -92,9 +92,11 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     () => des.CreateDecryptor(null, des.IV)
                 );
                 Assert.Throws<CryptographicException>(() =>
-                    des.CreateDecryptor(KnownWeakKey, des.IV));
+                    des.CreateDecryptor(KnownWeakKey, des.IV)
+                );
                 Assert.Throws<CryptographicException>(() =>
-                    des.CreateDecryptor(KnownSemiWeakKey, des.IV));
+                    des.CreateDecryptor(KnownSemiWeakKey, des.IV)
+                );
 
                 AssertExtensions.Throws<ArgumentException>(
                     "rgbKey",
@@ -105,9 +107,11 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     () => des.CreateEncryptor(null, des.IV)
                 );
                 Assert.Throws<CryptographicException>(() =>
-                    des.CreateEncryptor(KnownWeakKey, des.IV));
+                    des.CreateEncryptor(KnownWeakKey, des.IV)
+                );
                 Assert.Throws<CryptographicException>(() =>
-                    des.CreateEncryptor(KnownSemiWeakKey, des.IV));
+                    des.CreateEncryptor(KnownSemiWeakKey, des.IV)
+                );
             }
         }
     }

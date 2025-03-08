@@ -902,7 +902,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Nothing is preserved, hence MaxDepth will be reached.
             await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.SerializeWrapper(angela, options));
+                Serializer.SerializeWrapper(angela, options)
+            );
         }
 
         class BadReferenceResolver : ReferenceResolver
@@ -993,7 +994,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
                     testJson,
                     s_serializerOptionsPreserve
-                ));
+                )
+            );
             Assert.Equal("$.Sibling", ex.Path);
 
             testJson = baseJson + @"{""$ref"":""1"",""bar"":""value""}}";
@@ -1001,7 +1003,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
                     testJson,
                     s_serializerOptionsPreserve
-                ));
+                )
+            );
             Assert.Equal("$.Sibling", ex.Path);
 
             // The '$id' and '$ref' metadata properties must be JSON strings.
@@ -1010,7 +1013,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.DeserializeWrapper<ClassWithObjectProperty>(
                     testJson,
                     s_serializerOptionsPreserve
-                ));
+                )
+            );
             Assert.Equal("$.Sibling", ex.Path);
         }
 

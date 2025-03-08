@@ -108,7 +108,8 @@ public class DefaultAntiforgeryTokenSerializerTest
 
         // Act & assert
         var ex = Assert.Throws<AntiforgeryValidationException>(() =>
-            testSerializer.Deserialize(serializedToken));
+            testSerializer.Deserialize(serializedToken)
+        );
         Assert.Equal(@"The antiforgery token could not be decrypted.", ex.Message);
     }
 

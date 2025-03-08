@@ -476,7 +476,8 @@ namespace System.Net.Http
 
             HttpContent content = CreateContent(true, request, null);
             return Assert.ThrowsAsync<InvalidOperationException>(() =>
-                content.ReadAsHttpRequestMessageAsync());
+                content.ReadAsHttpRequestMessageAsync()
+            );
         }
 
         [Fact]
@@ -491,7 +492,8 @@ namespace System.Net.Http
 
             HttpContent content = CreateContent(true, request, null);
             return Assert.ThrowsAsync<InvalidOperationException>(() =>
-                content.ReadAsHttpRequestMessageAsync());
+                content.ReadAsHttpRequestMessageAsync()
+            );
         }
 
         [Fact]
@@ -736,7 +738,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(() =>
-                content.ReadAsHttpRequestMessageAsync(cts.Token));
+                content.ReadAsHttpRequestMessageAsync(cts.Token)
+            );
         }
 
         [Fact]
@@ -747,7 +750,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(() =>
-                content.ReadAsHttpRequestMessageAsync("http", cts.Token));
+                content.ReadAsHttpRequestMessageAsync("http", cts.Token)
+            );
         }
 
         [Fact]
@@ -758,7 +762,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(() =>
-                content.ReadAsHttpRequestMessageAsync("http", 1024, cts.Token));
+                content.ReadAsHttpRequestMessageAsync("http", 1024, cts.Token)
+            );
         }
 
         [Fact]
@@ -769,7 +774,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(() =>
-                content.ReadAsHttpRequestMessageAsync("http", 1024, 1024, cts.Token));
+                content.ReadAsHttpRequestMessageAsync("http", 1024, 1024, cts.Token)
+            );
         }
     }
 }

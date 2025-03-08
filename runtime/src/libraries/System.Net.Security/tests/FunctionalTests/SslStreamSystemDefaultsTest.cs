@@ -206,7 +206,8 @@ namespace System.Net.Security.Tests
                             checkCertificateRevocation: false,
                             protocols: serverProtocols
                         )
-                    ));
+                    )
+                );
             }
         }
 

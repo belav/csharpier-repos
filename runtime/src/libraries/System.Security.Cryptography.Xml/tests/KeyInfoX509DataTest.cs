@@ -4186,7 +4186,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void Constructor_X509CertificateNull_X509IncludeOption()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new KeyInfoX509Data(null, X509IncludeOption.EndCertOnly));
+                new KeyInfoX509Data(null, X509IncludeOption.EndCertOnly)
+            );
         }
 
         [Fact]

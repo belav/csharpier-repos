@@ -15,7 +15,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
             CoreStrings.InvalidIncludeExpression("e.OneToOne_Optional_Self1"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Multiple_complex_includes_self_ref(async))
+                    base.Multiple_complex_includes_self_ref(async)
+                )
             ).Message
         );
 
@@ -24,7 +25,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
             CoreStrings.InvalidIncludeExpression("Property(e, \"OneToOne_Optional_Self1\")"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Multiple_complex_includes_self_ref_EF_Property(async))
+                    base.Multiple_complex_includes_self_ref_EF_Property(async)
+                )
             ).Message
         );
 
@@ -34,48 +36,56 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
         AssertTranslationFailed(() =>
             base.Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(
                 async
-            ));
+            )
+        );
 
     public override Task Include_collection_with_multiple_orderbys_complex(bool async) =>
-        AssertIncludeOnNonEntity(() =>
-            base.Include_collection_with_multiple_orderbys_complex(async));
+        AssertIncludeOnNonEntity(() => base.Include_collection_with_multiple_orderbys_complex(async)
+        );
 
     public override Task Include_collection_with_multiple_orderbys_complex_repeated(bool async) =>
         AssertIncludeOnNonEntity(() =>
-            base.Include_collection_with_multiple_orderbys_complex_repeated(async));
+            base.Include_collection_with_multiple_orderbys_complex_repeated(async)
+        );
 
     public override Task Include_collection_with_multiple_orderbys_complex_repeated_checked(
         bool async
     ) =>
         AssertIncludeOnNonEntity(() =>
-            base.Include_collection_with_multiple_orderbys_complex_repeated_checked(async));
+            base.Include_collection_with_multiple_orderbys_complex_repeated_checked(async)
+        );
 
     public override Task Include_collection_with_multiple_orderbys_member(bool async) =>
-        AssertIncludeOnNonEntity(() =>
-            base.Include_collection_with_multiple_orderbys_member(async));
+        AssertIncludeOnNonEntity(() => base.Include_collection_with_multiple_orderbys_member(async)
+        );
 
     public override Task Include_collection_with_multiple_orderbys_methodcall(bool async) =>
         AssertIncludeOnNonEntity(() =>
-            base.Include_collection_with_multiple_orderbys_methodcall(async));
+            base.Include_collection_with_multiple_orderbys_methodcall(async)
+        );
 
     public override Task Include_collection_with_multiple_orderbys_property(bool async) =>
         AssertIncludeOnNonEntity(() =>
-            base.Include_collection_with_multiple_orderbys_property(async));
+            base.Include_collection_with_multiple_orderbys_property(async)
+        );
 
     public override Task Include_inside_subquery(bool async) =>
         AssertIncludeOnNonEntity(() => base.Include_inside_subquery(async));
 
     public override Task Filtered_include_outer_parameter_used_inside_filter(bool async) =>
         AssertIncludeOnNonEntity(() =>
-            base.Filtered_include_outer_parameter_used_inside_filter(async));
+            base.Filtered_include_outer_parameter_used_inside_filter(async)
+        );
 
     public override Task Include_after_multiple_SelectMany_and_reference_navigation(bool async) =>
         AssertInvalidIncludeExpression(() =>
-            base.Include_after_multiple_SelectMany_and_reference_navigation(async));
+            base.Include_after_multiple_SelectMany_and_reference_navigation(async)
+        );
 
     public override Task Include_after_SelectMany_and_multiple_reference_navigations(bool async) =>
         AssertInvalidIncludeExpression(() =>
-            base.Include_after_SelectMany_and_multiple_reference_navigations(async));
+            base.Include_after_SelectMany_and_multiple_reference_navigations(async)
+        );
 
     public override Task Required_navigation_with_Include(bool async) =>
         AssertIncludeOnNonEntity(() => base.Required_navigation_with_Include(async));
@@ -87,9 +97,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
         bool async
     ) =>
         AssertTranslationFailed(() =>
-            base.SelectMany_DefaultIfEmpty_multiple_times_with_joins_projecting_a_collection(
-                async
-            ));
+            base.SelectMany_DefaultIfEmpty_multiple_times_with_joins_projecting_a_collection(async)
+        );
 
     public override Task Complex_query_issue_21665(bool async) =>
         AssertTranslationFailed(() => base.Complex_query_issue_21665(async));

@@ -63,7 +63,8 @@ namespace System.Numerics.Tests
             {
                 Assert.Throws<OverflowException>(() => bi.GetByteCount(isUnsigned));
                 Assert.Throws<OverflowException>(() =>
-                    bi.TryWriteBytes(Span<byte>.Empty, out _, isUnsigned, isBigEndian));
+                    bi.TryWriteBytes(Span<byte>.Empty, out _, isUnsigned, isBigEndian)
+                );
                 return;
             }
 

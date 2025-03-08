@@ -72,7 +72,8 @@ namespace System.IO.Tests
             var token = cts.Token;
 
             var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-                await tr.ReadToEndAsync(token));
+                await tr.ReadToEndAsync(token)
+            );
             Assert.Equal(token, ex.CancellationToken);
         }
 

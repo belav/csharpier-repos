@@ -63,11 +63,13 @@ namespace Microsoft.CodeAnalysis
             new ObjectPool<TreeOptions.Builder>(() =>
                 ImmutableDictionary.CreateBuilder<string, ReportDiagnostic>(
                     Section.PropertiesKeyComparer
-                ));
+                )
+            );
 
         private readonly ObjectPool<AnalyzerOptions.Builder> _analyzerOptionsPool =
             new ObjectPool<AnalyzerOptions.Builder>(() =>
-                ImmutableDictionary.CreateBuilder<string, string>(Section.PropertiesKeyComparer));
+                ImmutableDictionary.CreateBuilder<string, string>(Section.PropertiesKeyComparer)
+            );
 
         private readonly ObjectPool<List<Section>> _sectionKeyPool = new ObjectPool<List<Section>>(
             () => new List<Section>()

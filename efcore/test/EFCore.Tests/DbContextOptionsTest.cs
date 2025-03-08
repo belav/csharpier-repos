@@ -59,7 +59,8 @@ public class DbContextOptionsTest
             CoreStrings.OptionsExtensionNotFound(nameof(FakeDbContextOptionsExtension1)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    optionsBuilder.Options.GetExtension<FakeDbContextOptionsExtension1>())
+                    optionsBuilder.Options.GetExtension<FakeDbContextOptionsExtension1>()
+                )
                 .Message
         );
 

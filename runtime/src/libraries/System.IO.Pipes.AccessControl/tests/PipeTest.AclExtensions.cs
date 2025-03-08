@@ -42,7 +42,8 @@ namespace System.IO.Pipes.Tests
         public void SetAccessControl_NullPipeStream()
         {
             Assert.Throws<NullReferenceException>(() =>
-                PipesAclExtensions.SetAccessControl(null, new PipeSecurity()));
+                PipesAclExtensions.SetAccessControl(null, new PipeSecurity())
+            );
         }
 
         [Fact]
@@ -52,12 +53,14 @@ namespace System.IO.Pipes.Tests
             {
                 var stream = pair.readablePipe;
                 Assert.Throws<ArgumentNullException>(() =>
-                    PipesAclExtensions.SetAccessControl(stream, null));
+                    PipesAclExtensions.SetAccessControl(stream, null)
+                );
                 Assert.Throws<ArgumentNullException>(() => stream.SetAccessControl(null));
 
                 stream = pair.writeablePipe;
                 Assert.Throws<ArgumentNullException>(() =>
-                    PipesAclExtensions.SetAccessControl(stream, null));
+                    PipesAclExtensions.SetAccessControl(stream, null)
+                );
                 Assert.Throws<ArgumentNullException>(() => stream.SetAccessControl(null));
             }
         }
@@ -69,11 +72,13 @@ namespace System.IO.Pipes.Tests
             {
                 pair.readablePipe.Dispose();
                 Assert.Throws<ObjectDisposedException>(() =>
-                    pair.readablePipe.SetAccessControl(new PipeSecurity()));
+                    pair.readablePipe.SetAccessControl(new PipeSecurity())
+                );
 
                 pair.writeablePipe.Dispose();
                 Assert.Throws<ObjectDisposedException>(() =>
-                    pair.writeablePipe.SetAccessControl(new PipeSecurity()));
+                    pair.writeablePipe.SetAccessControl(new PipeSecurity())
+                );
             }
         }
 

@@ -102,7 +102,8 @@ namespace System.Reflection.Tests
                     null,
                     new[] { "param1", "param2" },
                     out var _
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -165,7 +166,8 @@ namespace System.Reflection.Tests
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { true, "value", 3.14, 1 };
             Assert.Throws<MissingMethodException>(() =>
-                binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _));
+                binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _)
+            );
         }
 
         [Fact]

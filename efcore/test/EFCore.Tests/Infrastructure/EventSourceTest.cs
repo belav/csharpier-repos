@@ -126,7 +126,8 @@ public class EventSourceTest
             if (async)
             {
                 await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
-                    await context.SaveChangesAsync());
+                    await context.SaveChangesAsync()
+                );
             }
             else
             {
@@ -170,7 +171,8 @@ public class EventSourceTest
 
                                 Assert.True(false);
                                 return Task.FromResult(1);
-                            }))
+                            })
+                        )
                     ).InnerException
                 );
             }
@@ -188,7 +190,8 @@ public class EventSourceTest
 
                                 Assert.True(false);
                                 return 0;
-                            }))
+                            })
+                        )
                         .InnerException
                 );
             }

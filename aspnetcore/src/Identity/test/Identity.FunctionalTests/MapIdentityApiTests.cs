@@ -273,7 +273,8 @@ public class MapIdentityApiTests : LoggedTest
         await RegisterAsync(client);
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            client.PostAsJsonAsync("/identity/login?useCookies=true", new { Email, Password }));
+            client.PostAsJsonAsync("/identity/login?useCookies=true", new { Email, Password })
+        );
     }
 
     [Fact]

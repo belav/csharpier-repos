@@ -698,7 +698,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         UDFSqlContext.AddFiveStatic(c.Id - 5)
                     ),
                 }
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -936,7 +937,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 where 2 == UDFSqlContext.AddOneStatic(c.Id)
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -949,7 +951,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 orderby UDFSqlContext.AddOneStatic(c.Id)
                 select c.Id
-            ).ToList());
+            ).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -981,7 +984,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         Math.Abs(UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -998,7 +1002,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         UDFSqlContext.CustomerOrderCountWithClientStatic(Math.Abs(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1017,7 +1022,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         )
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1036,7 +1042,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         )
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1053,7 +1060,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         Math.Abs(UDFSqlContext.AddOneStatic(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1070,7 +1078,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         UDFSqlContext.AddOneStatic(Math.Abs(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1083,7 +1092,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 where 3 == UDFSqlContext.AddOneStatic(Math.Abs(c.Id))
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1100,7 +1110,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         UDFSqlContext.CustomerOrderCountWithClientStatic(c.Id)
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1113,7 +1124,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 where 3 == Math.Abs(UDFSqlContext.AddOneStatic(c.Id))
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1144,7 +1156,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         UDFSqlContext.AddOneStatic(c.Id)
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1268,7 +1281,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            context.Customers.Where(c => c.Id == UDFSqlContext.NullableValueReturnType()).ToList());
+            context.Customers.Where(c => c.Id == UDFSqlContext.NullableValueReturnType()).ToList()
+        );
 
         Assert.Equal(
             RelationalStrings.DbFunctionNullableValueReturnType(
@@ -1348,7 +1362,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         context.AddFiveInstance(c.Id - 5)
                     ),
                 }
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1582,7 +1597,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 where 2 == context.AddOneInstance(c.Id)
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1591,11 +1607,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         AssertTranslationFailed(() =>
-            (
-                from c in context.Customers
-                orderby context.AddOneInstance(c.Id)
-                select c.Id
-            ).ToList());
+            (from c in context.Customers orderby context.AddOneInstance(c.Id) select c.Id).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -1627,7 +1640,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         Math.Abs(context.CustomerOrderCountWithClientInstance(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1644,7 +1658,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         context.CustomerOrderCountWithClientInstance(Math.Abs(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1661,7 +1676,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         context.AddOneInstance(context.CustomerOrderCountWithClientInstance(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1678,7 +1694,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         context.CustomerOrderCountWithClientInstance(context.AddOneInstance(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1695,7 +1712,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         Math.Abs(context.AddOneInstance(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1712,7 +1730,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         context.AddOneInstance(Math.Abs(c.Id))
                     )
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1725,7 +1744,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 where 3 == context.AddOneInstance(Math.Abs(c.Id))
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1739,7 +1759,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 where
                     2 == context.AddOneInstance(context.CustomerOrderCountWithClientInstance(c.Id))
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1752,7 +1773,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 where 3 == Math.Abs(context.AddOneInstance(c.Id))
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     public static Exception AssertThrows<T>(Func<object> testCode)
@@ -1787,7 +1809,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 where
                     2 == context.CustomerOrderCountWithClientInstance(context.AddOneInstance(c.Id))
                 select c.Id
-            ).Single());
+            ).Single()
+        );
     }
 
     [ConditionalFact]
@@ -1953,7 +1976,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     (
                         from c in context.Customers
                         select new { c.Id, Prods = context.GetTopTwoSellingProducts().ToList() }
-                    ).ToList())
+                    ).ToList()
+                )
                 .Message;
 
             Assert.Equal(
@@ -2087,7 +2111,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                                 })
                                 .ToList(),
                         }
-                    ).ToList())
+                    ).ToList()
+                )
                 .Message;
 
             Assert.Equal(
@@ -2116,7 +2141,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                                 .Select(p => p.ProductId)
                                 .ToList(),
                         }
-                    ).ToList())
+                    ).ToList()
+                )
                 .Message;
 
             Assert.Equal(
@@ -2143,7 +2169,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                                 .Select(p => p.ProductId)
                                 .ToList(),
                         }
-                    ).ToList())
+                    ).ToList()
+                )
                 .Message;
 
             Assert.Equal(
@@ -2172,7 +2199,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                                 .Select(p => p.ProductId)
                                 .ToList(),
                         }
-                    ).ToList())
+                    ).ToList()
+                )
                 .Message;
 
             Assert.Equal(

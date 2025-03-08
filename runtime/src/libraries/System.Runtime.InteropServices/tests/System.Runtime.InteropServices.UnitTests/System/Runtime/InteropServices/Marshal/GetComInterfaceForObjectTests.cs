@@ -142,11 +142,14 @@ namespace System.Runtime.InteropServices.Tests
         public void GetComInterfaceForObject_Unix_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetComInterfaceForObject(null, null));
+                Marshal.GetComInterfaceForObject(null, null)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetComInterfaceForObject(null, null, CustomQueryInterfaceMode.Allow));
+                Marshal.GetComInterfaceForObject(null, null, CustomQueryInterfaceMode.Allow)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetComInterfaceForObject<int, int>(1));
+                Marshal.GetComInterfaceForObject<int, int>(1)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -297,15 +300,18 @@ namespace System.Runtime.InteropServices.Tests
         public void GetTypedObjectForIUnknown_UncastableType_ThrowsInvalidCastException()
         {
             Assert.Throws<InvalidCastException>(() =>
-                Marshal.GetComInterfaceForObject(new object(), typeof(INonGenericInterface)));
+                Marshal.GetComInterfaceForObject(new object(), typeof(INonGenericInterface))
+            );
             Assert.Throws<InvalidCastException>(() =>
                 Marshal.GetComInterfaceForObject(
                     new object(),
                     typeof(INonGenericInterface),
                     CustomQueryInterfaceMode.Allow
-                ));
+                )
+            );
             Assert.Throws<InvalidCastException>(() =>
-                Marshal.GetComInterfaceForObject<object, INonGenericInterface>(new object()));
+                Marshal.GetComInterfaceForObject<object, INonGenericInterface>(new object())
+            );
         }
     }
 }

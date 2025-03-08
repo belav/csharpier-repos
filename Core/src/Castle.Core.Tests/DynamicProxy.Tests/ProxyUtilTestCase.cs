@@ -41,7 +41,8 @@ namespace Castle.DynamicProxy.Tests
         {
             var _ = new object();
             Assert.Throws<ArgumentException>(() =>
-                ProxyUtil.CreateDelegateToMixin(_, typeof(Exception)));
+                ProxyUtil.CreateDelegateToMixin(_, typeof(Exception))
+            );
         }
 
         [Test]
@@ -56,7 +57,8 @@ namespace Castle.DynamicProxy.Tests
         {
             var proxy = new FakeProxyWithInvokeMethods();
             Assert.Throws<MissingMethodException>(() =>
-                ProxyUtil.CreateDelegateToMixin<Action<bool>>(proxy));
+                ProxyUtil.CreateDelegateToMixin<Action<bool>>(proxy)
+            );
         }
 
         [Test]

@@ -59,7 +59,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
                                 modelBuilder.Entity<Dr>().OwnsOne(e => e.Dre)
                         )
                             .GetInfrastructure()
-                            .HasOne("Snoop"))
+                            .HasOne("Snoop")
+                    )
                     .Message
             );
         }
@@ -86,7 +87,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
                     .Throws<InvalidOperationException>(() =>
                         ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
                             .GetInfrastructure()
-                            .HasOne("Snoop"))
+                            .HasOne("Snoop")
+                    )
                     .Message
             );
         }
@@ -102,7 +104,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
                     .Throws<InvalidOperationException>(() =>
                         ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
                             .GetInfrastructure()
-                            .HasMany("Snoop"))
+                            .HasMany("Snoop")
+                    )
                     .Message
             );
         }
@@ -118,7 +121,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
                     .Throws<InvalidOperationException>(() =>
                         ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
                             .GetInfrastructure()
-                            .HasMany("Dre"))
+                            .HasMany("Dre")
+                    )
                     .Message
             );
         }

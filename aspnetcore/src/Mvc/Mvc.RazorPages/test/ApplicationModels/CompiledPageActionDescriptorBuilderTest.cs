@@ -156,7 +156,8 @@ public class CompiledPageActionDescriptorBuilderTest
 
         // Act & Assert
         var actual = Assert.Throws<InvalidOperationException>(() =>
-            CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters));
+            CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters)
+        );
     }
 
     [Fact]

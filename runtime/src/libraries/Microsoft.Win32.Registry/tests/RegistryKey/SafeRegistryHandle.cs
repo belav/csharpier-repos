@@ -15,7 +15,8 @@ namespace Microsoft.Win32.RegistryTests
         {
             // null handle
             Assert.Throws<ArgumentNullException>(() =>
-                RegistryKey.FromHandle(handle: null, view: RegistryView.Default));
+                RegistryKey.FromHandle(handle: null, view: RegistryView.Default)
+            );
 
             // invalid view
             AssertExtensions.Throws<ArgumentException>(

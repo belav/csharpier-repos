@@ -14,7 +14,8 @@ namespace System.Diagnostics.Contracts.Tests
             Assert.Throws<ArgumentNullException>(() => Contract.ForAll(0, 1, null));
             Assert.Throws<ArgumentNullException>(() => Contract.ForAll<int>(null, i => true));
             Assert.Throws<ArgumentNullException>(() =>
-                Contract.ForAll<int>(Enumerable.Empty<int>(), null));
+                Contract.ForAll<int>(Enumerable.Empty<int>(), null)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Contract.ForAll(1, 0, i => true)
@@ -111,7 +112,8 @@ namespace System.Diagnostics.Contracts.Tests
                             throw new FormatException();
                         return true;
                     }
-                ));
+                )
+            );
             Assert.Equal(4, count);
 
             count = 0;
@@ -126,7 +128,8 @@ namespace System.Diagnostics.Contracts.Tests
                             throw new FormatException();
                         return true;
                     }
-                ));
+                )
+            );
             Assert.Equal(6, count);
         }
     }

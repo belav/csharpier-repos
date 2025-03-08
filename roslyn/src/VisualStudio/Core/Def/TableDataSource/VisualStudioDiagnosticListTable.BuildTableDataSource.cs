@@ -324,9 +324,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             // We couldn't find a document matching a known ID when the item was created, so it may be a
                             // source generator output.
                             var documents = threadingContext.JoinableTaskFactory.Run(() =>
-                                project
-                                    .GetSourceGeneratedDocumentsAsync(cancellationToken)
-                                    .AsTask());
+                                project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask()
+                            );
                             if (documentId is not null)
                             {
                                 if (documents.Any(document => document.Id == documentId))

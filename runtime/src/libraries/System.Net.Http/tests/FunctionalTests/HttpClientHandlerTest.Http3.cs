@@ -526,7 +526,8 @@ namespace System.Net.Http.Functional.Tests
                 await stream.ReadAsync(new byte[1024]);
                 semaphore.Release();
                 var ex = await Assert.ThrowsAsync<HttpProtocolException>(async () =>
-                    await stream.ReadAsync(new byte[1024]));
+                    await stream.ReadAsync(new byte[1024])
+                );
                 Assert.Equal(GeneralProtocolError, ex.ErrorCode);
             });
 
@@ -1085,7 +1086,8 @@ namespace System.Net.Http.Functional.Tests
                     type == CancellationType.CancellationToken ? cts.Token : default;
 
                 Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
-                    stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask());
+                    stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask()
+                );
 
                 if (type == CancellationType.CancellationToken)
                 {
@@ -1183,7 +1185,8 @@ namespace System.Net.Http.Functional.Tests
                 cts.Token.Register(() => response.Dispose());
 
                 Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
-                    stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask());
+                    stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask()
+                );
 
                 // exact exception depends on who won the race
                 if (ex is not OperationCanceledException)
@@ -1297,7 +1300,8 @@ namespace System.Net.Http.Functional.Tests
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-                    await client.SendAsync(request, cts.Token));
+                    await client.SendAsync(request, cts.Token)
+                );
 
                 // Next call must succeed
                 using HttpRequestMessage request2 = new()
@@ -1376,7 +1380,8 @@ namespace System.Net.Http.Functional.Tests
                 };
 
                 HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10)));
+                    client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+                );
 
                 Assert.IsType<AuthenticationException>(ex.InnerException);
 
@@ -1408,11 +1413,13 @@ namespace System.Net.Http.Functional.Tests
                 VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10)));
+                client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+            );
 
             // second request should throw the same exception as inner as the first one
             HttpRequestException ex2 = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                client.SendAsync(request2).WaitAsync(TimeSpan.FromSeconds(10)));
+                client.SendAsync(request2).WaitAsync(TimeSpan.FromSeconds(10))
+            );
 
             Assert.Equal(ex, ex2.InnerException);
         }
@@ -1635,7 +1642,8 @@ namespace System.Net.Http.Functional.Tests
 
                 // Http3WriteStream is disposed after cancellation fired
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    requestStream.WriteAsync(message).AsTask());
+                    requestStream.WriteAsync(message).AsTask()
+                );
                 // client is properly canceled on timeout
                 var tce = await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
                 Assert.IsType<TimeoutException>(tce.InnerException);
@@ -1712,7 +1720,8 @@ namespace System.Net.Http.Functional.Tests
 
                 // Http3WriteStream is disposed after cancellation fired
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    requestStream.WriteAsync(message).AsTask());
+                    requestStream.WriteAsync(message).AsTask()
+                );
                 // client is properly canceled
                 await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
             });

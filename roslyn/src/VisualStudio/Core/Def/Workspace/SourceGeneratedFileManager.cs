@@ -219,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     _openFiles.Add(moniker, openFile);
 
                     _threadingContext.JoinableTaskFactory.Run(() =>
-                        openFile.RefreshFileAsync(CancellationToken.None).AsTask());
+                        openFile.RefreshFileAsync(CancellationToken.None).AsTask()
+                    );
 
                     // Update the RDT flags to ensure the file can't be saved or appears in any MRUs as it's a temporary generated file name.
                     var runningDocumentTable = _serviceProvider.GetService<

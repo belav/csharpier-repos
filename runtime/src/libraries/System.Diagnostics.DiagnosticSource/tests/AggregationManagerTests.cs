@@ -11,8 +11,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetDefaultAggregator()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             LastValue val = store.GetAggregator();
 
             Assert.NotNull(val);
@@ -22,8 +22,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetNoLabels()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             var span = new ReadOnlySpan<KeyValuePair<string, object?>>();
             LastValue val = store.GetAggregator(span);
 
@@ -35,8 +35,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetOneLabel()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -90,8 +90,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetTwoLabel()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -149,8 +149,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetTwoLabelUnordered()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -176,8 +176,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetThreeLabel()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("alpha", 15),
@@ -239,8 +239,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetThreeLabelUnordered()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("alpha", 15),
@@ -301,8 +301,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetFourLabel()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("alpha", 15),
@@ -368,8 +368,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetFourLabelUnordered()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("alpha", 15),
@@ -436,8 +436,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetMultiRank0Start()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -504,8 +504,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetMultiRank1Start()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -576,8 +576,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetMultiRank2Start()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -645,8 +645,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetMultiRank3Start()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),
@@ -715,8 +715,8 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void GetMultiRank4Start()
         {
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
-                new LastValue());
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() => new LastValue()
+            );
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red"),

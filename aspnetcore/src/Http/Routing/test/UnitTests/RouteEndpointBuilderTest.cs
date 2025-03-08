@@ -25,7 +25,8 @@ public class RouteEndpointBuilderTest
     public void Constructor_DoesNotAllowNullRoutePattern()
     {
         var ex = Assert.Throws<ArgumentNullException>(() =>
-            new RouteEndpointBuilder(context => Task.CompletedTask, routePattern: null, order: 0));
+            new RouteEndpointBuilder(context => Task.CompletedTask, routePattern: null, order: 0)
+        );
         Assert.Equal("routePattern", ex.ParamName);
     }
 

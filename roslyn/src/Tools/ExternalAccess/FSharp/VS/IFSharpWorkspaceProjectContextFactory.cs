@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp
                         data: new FSharpEvaluationData(projectFilePath, binOutputPath),
                         hostObject: hierarchy,
                         CancellationToken.None
-                    ))
+                    )
+                )
             );
 
         private sealed class FSharpEvaluationData : EvaluationData

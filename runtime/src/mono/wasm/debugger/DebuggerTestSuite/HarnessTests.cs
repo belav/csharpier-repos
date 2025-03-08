@@ -28,7 +28,8 @@ namespace DebuggerTests
                     -1,
                     -1,
                     null
-                ));
+                )
+            );
             Assert.Contains("timed out", tce.Message);
         }
 
@@ -42,7 +43,8 @@ namespace DebuggerTests
                     -1,
                     -1,
                     null
-                ));
+                )
+            );
             Assert.Contains("non_existent_fn is not defined", ae.Message);
         }
 
@@ -93,7 +95,8 @@ namespace DebuggerTests
         public async Task InspectorWaitForMessageThatNeverArrives()
         {
             var tce = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await insp.WaitFor("Message.that.never.arrives"));
+                await insp.WaitFor("Message.that.never.arrives")
+            );
             Assert.Contains("timed out", tce.Message);
         }
     }

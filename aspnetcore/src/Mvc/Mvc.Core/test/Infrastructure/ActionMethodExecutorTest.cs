@@ -480,7 +480,8 @@ public class ActionMethodExecutorTest
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            Execute(actionMethodExecutor, filterContext, withFilter).AsTask());
+            Execute(actionMethodExecutor, filterContext, withFilter).AsTask()
+        );
 
         Assert.Equal(
             $"Cannot return null from an action method with a return type of '{typeof(CustomConvertibleFromAction)}'.",

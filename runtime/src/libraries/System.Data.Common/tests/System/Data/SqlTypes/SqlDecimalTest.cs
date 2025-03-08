@@ -84,7 +84,8 @@ namespace System.Data.Tests.SqlTypes
                     100,
                     false,
                     new int[4] { int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue }
-                ));
+                )
+            );
 
             // SqlDecimal (byte, byte, bool, int, int, int, int)
             test = new SqlDecimal(12, 2, true, 100, 100, 0, 0);
@@ -99,7 +100,8 @@ namespace System.Data.Tests.SqlTypes
                     int.MaxValue,
                     int.MaxValue,
                     int.MaxValue
-                ));
+                )
+            );
         }
 
         // Test public fields
@@ -160,7 +162,8 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(8000.00m, SqlDecimal.Add(test2, _test3));
 
             Assert.Throws<OverflowException>(() =>
-                SqlDecimal.Add(SqlDecimal.MaxValue, SqlDecimal.MaxValue));
+                SqlDecimal.Add(SqlDecimal.MaxValue, SqlDecimal.MaxValue)
+            );
 
             Assert.Equal(6465m, SqlDecimal.Ceiling(_test1));
             Assert.Equal(SqlDecimal.Null, SqlDecimal.Ceiling(SqlDecimal.Null));
@@ -169,8 +172,8 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(-1077.441066m, SqlDecimal.Divide(_test1, _test4));
             Assert.Equal(1.54687501546m, SqlDecimal.Divide(_test2, _test1).Value, 9);
 
-            Assert.Throws<DivideByZeroException>(() =>
-                SqlDecimal.Divide(_test1, new SqlDecimal(0)));
+            Assert.Throws<DivideByZeroException>(() => SqlDecimal.Divide(_test1, new SqlDecimal(0))
+            );
 
             Assert.Equal(6464m, SqlDecimal.Floor(_test1));
 
@@ -182,8 +185,8 @@ namespace System.Data.Tests.SqlTypes
             Test = SqlDecimal.Multiply(_test5, test1);
             Assert.Equal("158456325028528675187087900670", Test.ToString());
 
-            Assert.Throws<OverflowException>(() =>
-                SqlDecimal.Multiply(SqlDecimal.MaxValue, _test1));
+            Assert.Throws<OverflowException>(() => SqlDecimal.Multiply(SqlDecimal.MaxValue, _test1)
+            );
 
             // Power
             Assert.Equal(41791653.0770m, SqlDecimal.Power(_test1, 2));
@@ -200,7 +203,8 @@ namespace System.Data.Tests.SqlTypes
             );
 
             Assert.Throws<OverflowException>(() =>
-                SqlDecimal.Subtract(SqlDecimal.MinValue, SqlDecimal.MaxValue));
+                SqlDecimal.Subtract(SqlDecimal.MinValue, SqlDecimal.MaxValue)
+            );
 
             Assert.Equal(1, SqlDecimal.Sign(_test1));
             Assert.Equal(new SqlInt32(-1), SqlDecimal.Sign(_test4));
@@ -624,7 +628,8 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml2, test2, "BA02");
 
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                ReadWriteXmlTestInternal(xml3, test3, "BA03"));
+                ReadWriteXmlTestInternal(xml3, test3, "BA03")
+            );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }
 

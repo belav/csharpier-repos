@@ -182,7 +182,8 @@ public class OwnedFixupTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(principal).Reference(p => p.Child2).TargetEntry)
+                    context.Entry(principal).Reference(p => p.Child2).TargetEntry
+                )
                 .Message
         );
     }

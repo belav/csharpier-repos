@@ -116,7 +116,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 var actionDelegate = App.call_test_method (""CreateActionDelegate"", [  ]);
                 actionDelegate(3.14,40);
             "
-                ));
+                )
+            );
 
             Assert.Contains("Value is not an integer: 3.14 (number)", ex.Message);
             Assert.Equal(0, HelperMarshal._actionResultValue);

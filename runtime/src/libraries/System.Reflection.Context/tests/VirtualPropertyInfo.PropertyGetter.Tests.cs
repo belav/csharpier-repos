@@ -82,7 +82,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     new object[] { 1 },
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -95,7 +96,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     null,
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -108,7 +110,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     null,
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]

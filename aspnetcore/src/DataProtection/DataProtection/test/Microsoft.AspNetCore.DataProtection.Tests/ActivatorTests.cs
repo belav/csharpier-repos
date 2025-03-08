@@ -76,7 +76,8 @@ public class ActivatorTests
         var ex = Assert.Throws<InvalidCastException>(() =>
             activator.CreateInstance<IDisposable>(
                 typeof(ClassWithParameterlessCtor).AssemblyQualifiedName
-            ));
+            )
+        );
         Assert.Equal(
             Resources.FormatTypeExtensions_BadCast(
                 typeof(IDisposable).AssemblyQualifiedName,

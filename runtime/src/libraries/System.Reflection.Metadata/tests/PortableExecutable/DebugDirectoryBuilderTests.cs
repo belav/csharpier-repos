@@ -18,11 +18,14 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var builder = new DebugDirectoryBuilder();
             Assert.Throws<ArgumentNullException>(() =>
-                builder.AddEmbeddedPortablePdbEntry(null, 0x0100));
+                builder.AddEmbeddedPortablePdbEntry(null, 0x0100)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddEmbeddedPortablePdbEntry(bb, 0x0000));
+                builder.AddEmbeddedPortablePdbEntry(bb, 0x0000)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddEmbeddedPortablePdbEntry(bb, 0x00ff));
+                builder.AddEmbeddedPortablePdbEntry(bb, 0x00ff)
+            );
             builder.AddEmbeddedPortablePdbEntry(bb, 0x0100);
             builder.AddEmbeddedPortablePdbEntry(bb, 0xffff);
         }
@@ -44,20 +47,26 @@ namespace System.Reflection.PortableExecutable.Tests
                 () => builder.AddCodeViewEntry("\0xx", default(BlobContentId), 0x0100)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, int.MinValue));
+                builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, int.MinValue)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, -1));
+                builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, 0));
+                builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, 0)
+            );
             builder.AddCodeViewEntry("foo\0", default(BlobContentId), 0x0100);
             builder.AddCodeViewEntry("baz\0", default(BlobContentId), 0x0100, int.MaxValue);
             Assert.Throws<ArgumentNullException>(() =>
-                builder.AddCodeViewEntry(null, default(BlobContentId), 0x0100));
+                builder.AddCodeViewEntry(null, default(BlobContentId), 0x0100)
+            );
             builder.AddCodeViewEntry("foo", default(BlobContentId), 0);
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddCodeViewEntry("foo", default(BlobContentId), 0x0001));
+                builder.AddCodeViewEntry("foo", default(BlobContentId), 0x0001)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddCodeViewEntry("foo", default(BlobContentId), 0x00ff));
+                builder.AddCodeViewEntry("foo", default(BlobContentId), 0x00ff)
+            );
             builder.AddCodeViewEntry("foo", default(BlobContentId), 0x0100);
             builder.AddCodeViewEntry("foo", default(BlobContentId), 0xffff);
         }

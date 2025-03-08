@@ -126,11 +126,14 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Ctor_NullIdentifier_ThrowsNullReferenceException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                new LdapConnection((LdapDirectoryIdentifier)null));
+                new LdapConnection((LdapDirectoryIdentifier)null)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new LdapConnection(null, new NetworkCredential()));
+                new LdapConnection(null, new NetworkCredential())
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new LdapConnection(null, new NetworkCredential(), AuthType.Dpa));
+                new LdapConnection(null, new NetworkCredential(), AuthType.Dpa)
+            );
         }
 
         [Theory]
@@ -246,7 +249,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var connection = new LdapConnection("server") { AuthType = AuthType.Anonymous };
             Assert.Throws<InvalidOperationException>(() =>
-                connection.Bind(new NetworkCredential("name", "password")));
+                connection.Bind(new NetworkCredential("name", "password"))
+            );
 
             connection.Credential = new NetworkCredential("name", "password");
             Assert.Throws<InvalidOperationException>(() => connection.Bind());
@@ -265,7 +269,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     PartialResultProcessing.NoPartialResultSupport,
                     null,
                     null
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -292,8 +297,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void SendRequest_DsmlAuthRequest_ThrowsNotSupportedException()
         {
             var connection = new LdapConnection("server");
-            Assert.Throws<NotSupportedException>(() =>
-                connection.SendRequest(new DsmlAuthRequest()));
+            Assert.Throws<NotSupportedException>(() => connection.SendRequest(new DsmlAuthRequest())
+            );
         }
 
         [Theory]
@@ -319,7 +324,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var connection = new LdapConnection("server");
             Assert.Throws<NotSupportedException>(() =>
-                connection.BeginSendRequest(new AddRequest(), partialMode, null, null));
+                connection.BeginSendRequest(new AddRequest(), partialMode, null, null)
+            );
         }
 
         [Fact]

@@ -26,7 +26,8 @@ namespace System.IO.Tests
                 File.AppendAllBytes(
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
                     new byte[0]
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -98,7 +99,8 @@ namespace System.IO.Tests
                 else
                 {
                     Assert.Throws<UnauthorizedAccessException>(() =>
-                        File.AppendAllBytes(path, dataToAppend));
+                        File.AppendAllBytes(path, dataToAppend)
+                    );
                 }
             }
             finally

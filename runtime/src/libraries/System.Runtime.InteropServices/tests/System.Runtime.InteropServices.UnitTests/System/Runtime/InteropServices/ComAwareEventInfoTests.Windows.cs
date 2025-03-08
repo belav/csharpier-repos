@@ -30,9 +30,11 @@ namespace System.Runtime.InteropServices.Tests
             Delegate handler = new EventHandler(EventHandler);
 
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.AddEventHandler(target, handler));
+                attribute.AddEventHandler(target, handler)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.RemoveEventHandler(target, handler));
+                attribute.RemoveEventHandler(target, handler)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -80,10 +82,11 @@ namespace System.Runtime.InteropServices.Tests
             var attribute = new ComAwareEventInfo(typeBuilder.CreateType(), "Event");
             var target = new ComImportObject();
             Delegate handler = new EventHandler(EventHandler);
+            Assert.Throws<AmbiguousMatchException>(() => attribute.AddEventHandler(target, handler)
+            );
             Assert.Throws<AmbiguousMatchException>(() =>
-                attribute.AddEventHandler(target, handler));
-            Assert.Throws<AmbiguousMatchException>(() =>
-                attribute.RemoveEventHandler(target, handler));
+                attribute.RemoveEventHandler(target, handler)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -98,7 +101,8 @@ namespace System.Runtime.InteropServices.Tests
 
             Assert.Throws<NullReferenceException>(() => attribute.AddEventHandler(target, handler));
             Assert.Throws<NullReferenceException>(() =>
-                attribute.RemoveEventHandler(target, handler));
+                attribute.RemoveEventHandler(target, handler)
+            );
         }
 
         [ComEventInterface(null, typeof(int))]
@@ -144,9 +148,11 @@ namespace System.Runtime.InteropServices.Tests
             Delegate handler = new EventHandler(EventHandler);
 
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.AddEventHandler(target, handler));
+                attribute.AddEventHandler(target, handler)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.RemoveEventHandler(target, handler));
+                attribute.RemoveEventHandler(target, handler)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

@@ -625,7 +625,8 @@ namespace MonoTests.System.Drawing
         public void ExtractAssociatedIcon_DoesNotExists()
         {
             Assert.Throws<FileNotFoundException>(() =>
-                Icon.ExtractAssociatedIcon("does-not-exists.png"));
+                Icon.ExtractAssociatedIcon("does-not-exists.png")
+            );
         }
 
         private static bool RunningOnUnix

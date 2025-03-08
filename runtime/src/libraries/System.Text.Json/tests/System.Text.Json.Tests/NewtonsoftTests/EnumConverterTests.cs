@@ -236,7 +236,8 @@ namespace System.Text.Json.Tests
         public static void DuplicateNameEnumTest()
         {
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<DuplicateNameEnum>("\"foo_bar\""));
+                JsonSerializer.Deserialize<DuplicateNameEnum>("\"foo_bar\"")
+            );
         }
 
         [Fact]

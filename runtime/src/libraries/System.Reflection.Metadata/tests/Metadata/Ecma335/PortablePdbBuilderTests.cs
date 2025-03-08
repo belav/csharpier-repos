@@ -19,13 +19,15 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     null,
                     MetadataRootBuilder.EmptyRowCounts,
                     default(MethodDefinitionHandle)
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new PortablePdbBuilder(
                     mdBuilder,
                     default(ImmutableArray<int>),
                     default(MethodDefinitionHandle)
-                ));
+                )
+            );
 
             var rowCounts = new int[128];
             rowCounts[64] = 1;
@@ -82,7 +84,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     mdBuilder,
                     ImmutableArray.Create(rowCounts),
                     default(MethodDefinitionHandle)
-                ));
+                )
+            );
 
             rowCounts = new int[64];
             rowCounts[(int)TableIndex.GenericParamConstraint] = 0x01000000;
@@ -91,7 +94,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     mdBuilder,
                     ImmutableArray.Create(rowCounts),
                     default(MethodDefinitionHandle)
-                ));
+                )
+            );
         }
 
         [Fact]

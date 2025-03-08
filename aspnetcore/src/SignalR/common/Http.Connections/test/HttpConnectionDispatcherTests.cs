@@ -3385,7 +3385,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             await connection.DisposeAsync().DefaultTimeout();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                connection.ServiceScope.Value.ServiceProvider.GetService<MessageWrapper>());
+                connection.ServiceScope.Value.ServiceProvider.GetService<MessageWrapper>()
+            );
         }
     }
 

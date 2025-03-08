@@ -27,7 +27,8 @@ namespace System
             Environment
                 .GetEnvironmentVariables()
                 .Keys.Cast<string>()
-                .Any(key => key.StartsWith("HELIX")));
+                .Any(key => key.StartsWith("HELIX"))
+        );
         public static bool IsInHelix => s_IsInHelix.Value;
 
         public static bool IsNetCore =>
@@ -118,11 +119,14 @@ namespace System
         public static bool IsMarshalGetExceptionPointersSupported => !IsMonoRuntime && !IsNativeAot;
 
         private static readonly Lazy<bool> s_isCheckedRuntime = new Lazy<bool>(() =>
-            AssemblyConfigurationEquals("Checked"));
+            AssemblyConfigurationEquals("Checked")
+        );
         private static readonly Lazy<bool> s_isReleaseRuntime = new Lazy<bool>(() =>
-            AssemblyConfigurationEquals("Release"));
+            AssemblyConfigurationEquals("Release")
+        );
         private static readonly Lazy<bool> s_isDebugRuntime = new Lazy<bool>(() =>
-            AssemblyConfigurationEquals("Debug"));
+            AssemblyConfigurationEquals("Debug")
+        );
 
         public static bool IsCheckedRuntime => s_isCheckedRuntime.Value;
         public static bool IsReleaseRuntime => s_isReleaseRuntime.Value;
@@ -427,13 +431,15 @@ namespace System
             (bool?)
                 Type.GetType("System.Globalization.GlobalizationMode")
                     ?.GetProperty("Invariant", BindingFlags.NonPublic | BindingFlags.Static)
-                    ?.GetValue(null) == true);
+                    ?.GetValue(null) == true
+        );
 
         private static readonly Lazy<bool> m_isHybrid = new Lazy<bool>(() =>
             (bool?)
                 Type.GetType("System.Globalization.GlobalizationMode")
                     ?.GetProperty("Hybrid", BindingFlags.NonPublic | BindingFlags.Static)
-                    ?.GetValue(null) == true);
+                    ?.GetValue(null) == true
+        );
 
         private static readonly Lazy<Version> m_icuVersion = new Lazy<Version>(GetICUVersion);
         public static Version ICUVersion => m_icuVersion.Value;
@@ -513,7 +519,8 @@ namespace System
                         "DisableFileLocking",
                         BindingFlags.NonPublic | BindingFlags.Static
                     )
-                    ?.GetValue(null) == true);
+                    ?.GetValue(null) == true
+        );
 
         public static bool IsFileLockingEnabled => IsWindows || !s_fileLockingDisabled.Value;
 

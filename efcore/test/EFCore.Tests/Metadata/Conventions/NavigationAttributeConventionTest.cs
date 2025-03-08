@@ -569,8 +569,8 @@ public class NavigationAttributeConventionTest
                 nameof(SelfReferencingEntity.AnotherEntity)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    RunEntityTypeConventions(entityTypeBuilder))
+                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                )
                 .Message
         );
     }
@@ -588,8 +588,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    RunEntityTypeConventions(entityTypeBuilder))
+                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                )
                 .Message
         );
     }
@@ -607,8 +607,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    RunEntityTypeConventions(entityTypeBuilder))
+                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                )
                 .Message
         );
     }
@@ -626,8 +626,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    RunEntityTypeConventions(entityTypeBuilder))
+                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                )
                 .Message
         );
     }
@@ -1024,7 +1024,8 @@ public class NavigationAttributeConventionTest
                 .Throws<InvalidOperationException>(() =>
                     useNavigation
                         ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder))
+                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                )
                 .Message
         );
     }
@@ -1056,7 +1057,8 @@ public class NavigationAttributeConventionTest
                 .Throws<InvalidOperationException>(() =>
                     useNavigation
                         ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder))
+                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                )
                 .Message
         );
     }
@@ -1093,7 +1095,8 @@ public class NavigationAttributeConventionTest
                 .Throws<InvalidOperationException>(() =>
                     useNavigation
                         ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder))
+                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                )
                 .Message
         );
     }
@@ -1130,7 +1133,8 @@ public class NavigationAttributeConventionTest
                 .Throws<InvalidOperationException>(() =>
                     useNavigation
                         ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                        : RunForeignKeyAttributeConvention(relationshipBuilder))
+                        : RunForeignKeyAttributeConvention(relationshipBuilder)
+                )
                 .Message
         );
     }

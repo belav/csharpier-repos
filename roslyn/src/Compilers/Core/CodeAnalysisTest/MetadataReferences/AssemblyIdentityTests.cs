@@ -412,7 +412,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     hasPublicKey: true,
                     isRetargetable: false,
                     contentType: AssemblyContentType.Default
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentException>(() =>
                 new AssemblyIdentity(
@@ -423,7 +424,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     hasPublicKey: false,
                     isRetargetable: false,
                     contentType: AssemblyContentType.Default
-                ));
+                )
+            );
 
             foreach (
                 var v in new Version[]
@@ -442,9 +444,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new AssemblyIdentity("Goo", contentType: (AssemblyContentType)(-1)));
+                new AssemblyIdentity("Goo", contentType: (AssemblyContentType)(-1))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new AssemblyIdentity("Goo", contentType: (AssemblyContentType)int.MaxValue));
+                new AssemblyIdentity("Goo", contentType: (AssemblyContentType)int.MaxValue)
+            );
 
             Assert.Throws<ArgumentException>(() =>
                 new AssemblyIdentity(
@@ -453,7 +457,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     hasPublicKey: true,
                     isRetargetable: true,
                     contentType: AssemblyContentType.WindowsRuntime
-                ));
+                )
+            );
         }
 
         [Fact]

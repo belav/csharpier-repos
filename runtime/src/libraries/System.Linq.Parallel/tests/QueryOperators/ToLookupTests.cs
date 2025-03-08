@@ -405,7 +405,8 @@ namespace System.Linq.Parallel.Tests
                             throw new DeliberateTestException();
                         }
                     )
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToLookup(
                     (Func<int, int>)(
@@ -415,7 +416,8 @@ namespace System.Linq.Parallel.Tests
                         }
                     ),
                     y => y
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToLookup(
                     x => x,
@@ -425,7 +427,8 @@ namespace System.Linq.Parallel.Tests
                             throw new DeliberateTestException();
                         }
                     )
-                ));
+                )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToLookup(
@@ -436,7 +439,8 @@ namespace System.Linq.Parallel.Tests
                         }
                     ),
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToLookup(
                     (Func<int, int>)(
@@ -447,7 +451,8 @@ namespace System.Linq.Parallel.Tests
                     ),
                     y => y,
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToLookup(
                     x => x,
@@ -458,12 +463,15 @@ namespace System.Linq.Parallel.Tests
                         }
                     ),
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToLookup(x => x, new FailingEqualityComparer<int>()));
+                labeled.Item.ToLookup(x => x, new FailingEqualityComparer<int>())
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToLookup(x => x, y => y, new FailingEqualityComparer<int>()));
+                labeled.Item.ToLookup(x => x, y => y, new FailingEqualityComparer<int>())
+            );
         }
 
         [Fact]

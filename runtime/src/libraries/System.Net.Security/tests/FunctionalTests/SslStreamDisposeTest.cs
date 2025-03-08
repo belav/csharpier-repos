@@ -141,7 +141,8 @@ namespace System.Net.Security.Tests
                 }
 
                 await Assert.ThrowsAnyAsync<ObjectDisposedException>(() =>
-                    client.ReadAsync(readBuffer, cts.Token).AsTask());
+                    client.ReadAsync(readBuffer, cts.Token).AsTask()
+                );
             }
         }
     }

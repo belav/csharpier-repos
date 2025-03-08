@@ -63,7 +63,8 @@ public class AsciiDecodingTests
                 byteRange[position] = b;
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    new Span<byte>(byteRange).GetAsciiStringNonNullCharacters());
+                    new Span<byte>(byteRange).GetAsciiStringNonNullCharacters()
+                );
             }
         }
     }

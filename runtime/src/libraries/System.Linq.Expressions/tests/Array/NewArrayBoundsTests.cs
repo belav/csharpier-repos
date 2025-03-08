@@ -182,7 +182,8 @@ namespace System.Linq.Expressions.Tests
             // an edge case could cause more obscure damage. A class derived from ReadOnlyCollection is used to catch
             // assumptions that such a type is safe.
             Assert.ThrowsAny<Exception>(() =>
-                Expression.NewArrayBounds(typeof(int), new BogusReadOnlyCollection<Expression>()));
+                Expression.NewArrayBounds(typeof(int), new BogusReadOnlyCollection<Expression>())
+            );
         }
 
         private static void VerifyArrayGenerator(

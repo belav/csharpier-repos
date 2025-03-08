@@ -320,7 +320,8 @@ public class InternalNavigationBuilderTest
             CoreStrings.NonUniqueRequiredDependentNavigation(nameof(Order), nameof(Order.Details)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    builder.IsRequired(true, ConfigurationSource.Explicit))
+                    builder.IsRequired(true, ConfigurationSource.Explicit)
+                )
                 .Message
         );
     }

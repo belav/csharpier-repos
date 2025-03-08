@@ -25,7 +25,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                     AssertQuery(
                         async,
                         ss => ss.Set<Order>().Include(o => EF.Property<Order>(o, "ArcticMonkeys"))
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -34,7 +35,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
             CoreStrings.InvalidIncludeExpression("Property(o, \"OrderDate\")"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate)))
+                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
+                )
             ).Message
         );
 
@@ -141,7 +143,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                             ss.Set<Customer>()
                                 .Select(c => new Tuple<Customer, int>(c, 5))
                                 .Include(t => t.Item1.Orders)
-                    ))
+                    )
+                )
             ).Message
         );
 

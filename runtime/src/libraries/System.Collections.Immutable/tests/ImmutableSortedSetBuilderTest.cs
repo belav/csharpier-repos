@@ -469,7 +469,8 @@ namespace System.Collections.Immutable.Tests
                 ImmutableSortedSet.CreateBuilder<int>()
             );
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

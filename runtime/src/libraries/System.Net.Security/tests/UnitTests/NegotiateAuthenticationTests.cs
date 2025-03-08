@@ -88,7 +88,8 @@ namespace System.Net.Security.Tests
             {
                 negotiateAuthentication.Dispose();
                 Assert.Throws<InvalidOperationException>(() =>
-                    negotiateAuthentication.RemoteIdentity);
+                    negotiateAuthentication.RemoteIdentity
+                );
             }
         }
 

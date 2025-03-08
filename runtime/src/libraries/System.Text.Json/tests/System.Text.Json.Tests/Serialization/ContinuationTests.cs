@@ -233,7 +233,8 @@ namespace System.Text.Json.Serialization.Tests
                 };
 
                 JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                    await JsonSerializer.DeserializeAsync(stream, type, readOptions));
+                    await JsonSerializer.DeserializeAsync(stream, type, readOptions)
+                );
                 Assert.Equal(expectedFailure.Line, ex.LineNumber);
                 Assert.Equal(expectedFailure.Column, ex.BytePositionInLine);
             }

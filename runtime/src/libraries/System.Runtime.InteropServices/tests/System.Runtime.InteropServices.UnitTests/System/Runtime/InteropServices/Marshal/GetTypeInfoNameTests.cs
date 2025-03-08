@@ -21,7 +21,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetTypeInfoName_Unix_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetTypeInfoName((ITypeInfo)null));
+                Marshal.GetTypeInfoName((ITypeInfo)null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

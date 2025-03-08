@@ -54,10 +54,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         )
         {
             this.context = new Lazy<IValueContextProvider<SymbolicValue>>(() =>
-                new ValueContextProvider<TContext>(
-                    this.parent,
-                    this.stack_decoder.ContextProvider
-                ));
+                new ValueContextProvider<TContext>(this.parent, this.stack_decoder.ContextProvider)
+            );
             this.parent = parent;
             this.stack_decoder = stackDecoder;
         }

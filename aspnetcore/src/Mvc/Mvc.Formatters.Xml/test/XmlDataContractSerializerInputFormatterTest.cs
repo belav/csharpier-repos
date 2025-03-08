@@ -487,7 +487,8 @@ public class XmlDataContractSerializerInputFormatterTest
 
         // Act & Assert
         await Assert.ThrowsAsync<InputFormatterException>(async () =>
-            await formatter.ReadAsync(context));
+            await formatter.ReadAsync(context)
+        );
     }
 
     [Fact]
@@ -505,7 +506,8 @@ public class XmlDataContractSerializerInputFormatterTest
 
         // Act & Assert
         await Assert.ThrowsAsync<InputFormatterException>(async () =>
-            await formatter.ReadAsync(context));
+            await formatter.ReadAsync(context)
+        );
     }
 
     [Fact]
@@ -707,7 +709,8 @@ public class XmlDataContractSerializerInputFormatterTest
 
         // Act & Assert
         await Assert.ThrowsAsync<InputFormatterException>(async () =>
-            await formatter.ReadAsync(context));
+            await formatter.ReadAsync(context)
+        );
     }
 
     [Fact]
@@ -769,7 +772,8 @@ public class XmlDataContractSerializerInputFormatterTest
 
         // Act & Assert
         await Assert.ThrowsAsync<InputFormatterException>(async () =>
-            await formatter.ReadAsync(context));
+            await formatter.ReadAsync(context)
+        );
     }
 
     [Fact]

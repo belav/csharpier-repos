@@ -268,7 +268,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             {
                 // The machine is not connected to a domain. we expect PrincipalContext(ContextType.Domain) to throw
                 Assert.Throws<PrincipalServerDownException>(() =>
-                    new PrincipalContext(ContextType.Domain));
+                    new PrincipalContext(ContextType.Domain)
+                );
             }
         }
 
@@ -624,7 +625,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
             Assert.Throws<ObjectDisposedException>(() => context.ValidateCredentials(null, null));
             Assert.Throws<ObjectDisposedException>(() =>
-                context.ValidateCredentials(null, null, ContextOptions.Negotiate));
+                context.ValidateCredentials(null, null, ContextOptions.Negotiate)
+            );
         }
     }
 }

@@ -270,7 +270,8 @@ public class HttpResponseHeadersTests
         headers.SetReadOnly();
 
         Assert.Throws<InvalidOperationException>(() =>
-            ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" }));
+            ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" })
+        );
     }
 
     [Fact]
@@ -323,7 +324,8 @@ public class HttpResponseHeadersTests
         var dictionary = (IDictionary<string, StringValues>)headers;
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            dictionary.Add("Content-Length", new[] { contentLength }));
+            dictionary.Add("Content-Length", new[] { contentLength })
+        );
         Assert.Equal(
             CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
             exception.Message
@@ -338,7 +340,8 @@ public class HttpResponseHeadersTests
         var dictionary = (IDictionary<string, StringValues>)headers;
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            ((IHeaderDictionary)headers)["Content-Length"] = contentLength);
+            ((IHeaderDictionary)headers)["Content-Length"] = contentLength
+        );
         Assert.Equal(
             CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
             exception.Message
@@ -352,7 +355,8 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            headers.HeaderContentLength = contentLength);
+            headers.HeaderContentLength = contentLength
+        );
         Assert.Equal(
             CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
             exception.Message

@@ -362,7 +362,8 @@ Delta: Gamma: Beta: Test B
                     loader.AddDependencyLocation(testFixture.Gamma);
                     loader.AddDependencyLocation(testFixture.Delta1);
                     Assert.Throws<InvalidOperationException>(() =>
-                        loader.LoadFromPath(testFixture.Beta));
+                        loader.LoadFromPath(testFixture.Beta)
+                    );
                 }
             );
         }
@@ -392,7 +393,8 @@ Delta: Gamma: Beta: Test B
                         // We don't pass Alpha's path to AddDependencyLocation here, and therefore expect
                         // calling Beta.B.Write to fail because loader will prevent the load of Alpha
                         var exception = Assert.Throws<TargetInvocationException>(() =>
-                            writeMethod.Invoke(b, new object[] { sb, "Test B" }));
+                            writeMethod.Invoke(b, new object[] { sb, "Test B" })
+                        );
                         Assert.IsAssignableFrom<FileNotFoundException>(exception.InnerException);
 
                         var actual = sb.ToString();
@@ -983,7 +985,8 @@ Delta: Epsilon: Test E
                         // See limitation 1
                         // The Epsilon.dll has Delta.dll (v2) next to it in the directory.
                         Assert.Throws<InvalidOperationException>(() =>
-                            loader.GetRealAnalyzerLoadPath(testFixture.Delta2));
+                            loader.GetRealAnalyzerLoadPath(testFixture.Delta2)
+                        );
 
                         // Fake the dependency so we can verify the rest of the load
                         loader.AddDependencyLocation(testFixture.Delta2);
@@ -1146,7 +1149,8 @@ Delta: Epsilon: Test E
                     {
                         // See limitation 2
                         Assert.Throws<InvalidOperationException>(() =>
-                            loader.GetRealAnalyzerLoadPath(testFixture.Delta2));
+                            loader.GetRealAnalyzerLoadPath(testFixture.Delta2)
+                        );
 
                         // Fake the dependency so we can verify the rest of the load
                         loader.AddDependencyLocation(testFixture.Delta2);
@@ -1443,7 +1447,8 @@ Delta.2: Test D2
                             analyzer
                                 .GetType()
                                 .GetMethod("Method")!
-                                .Invoke(analyzer, new object[] { sb }));
+                                .Invoke(analyzer, new object[] { sb })
+                        );
                         Assert.True(
                             ex is MissingMethodException or TargetInvocationException,
                             $@"Unexpected exception type: ""{ex.GetType()}"""
@@ -1574,7 +1579,8 @@ Delta.2: Test D2
                     else
                     {
                         Assert.Throws<UnauthorizedAccessException>(() =>
-                            File.Delete(testFixture.Delta1));
+                            File.Delete(testFixture.Delta1)
+                        );
                     }
                 }
             );

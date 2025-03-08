@@ -1186,7 +1186,8 @@ internal class InFriendCompilation
                 .Single();
             // the below should not throw a null reference exception.
             Assert.Throws<ArgumentException>(() =>
-                compilation.IsSymbolAccessibleWithin(classC, classQ));
+                compilation.IsSymbolAccessibleWithin(classC, classQ)
+            );
         }
 
         [Fact]
@@ -1877,9 +1878,11 @@ unsafe class A
             var b = comp2.GetMember("B").GetPublicSymbol();
 
             Assert.Throws<ArgumentException>(() =>
-                ((Compilation)comp2).IsSymbolAccessibleWithin(ptr1, b));
+                ((Compilation)comp2).IsSymbolAccessibleWithin(ptr1, b)
+            );
             Assert.Throws<ArgumentException>(() =>
-                ((Compilation)comp2).IsSymbolAccessibleWithin(ptr2, b));
+                ((Compilation)comp2).IsSymbolAccessibleWithin(ptr2, b)
+            );
         }
     }
 }

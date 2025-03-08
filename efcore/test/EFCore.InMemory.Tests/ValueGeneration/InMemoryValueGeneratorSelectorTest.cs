@@ -130,7 +130,8 @@ public class InMemoryValueGeneratorSelectorTest
             CoreStrings.NoValueGenerator("Float", "AnEntity", "float"),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    selector.Select(entityType.FindProperty("Float"), entityType))
+                    selector.Select(entityType.FindProperty("Float"), entityType)
+                )
                 .Message
         );
     }

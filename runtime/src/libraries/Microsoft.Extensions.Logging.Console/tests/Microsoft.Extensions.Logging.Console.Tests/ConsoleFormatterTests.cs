@@ -141,7 +141,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
             // Act/Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                logger.Log((LogLevel)8, 0, _state, null, _defaultFormatter));
+                logger.Log((LogLevel)8, 0, _state, null, _defaultFormatter)
+            );
         }
 
         [ConditionalTheory(

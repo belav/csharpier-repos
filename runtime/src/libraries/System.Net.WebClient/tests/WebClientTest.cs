@@ -1133,7 +1133,8 @@ namespace System.Net.Tests
             var wc = new WebClient();
             wc.Headers[headerName] = headerValue;
             await Assert.ThrowsAsync<WebException>(() =>
-                wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer));
+                wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
+            );
         }
 
         public static IEnumerable<object[]> RequestHeaders_AddHostHeaderAndSendRequest_ExpectedResult_MemberData()
@@ -1155,7 +1156,8 @@ namespace System.Net.Tests
             if (throwsWebException)
             {
                 await Assert.ThrowsAsync<WebException>(() =>
-                    wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer));
+                    wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
+                );
             }
             else
             {

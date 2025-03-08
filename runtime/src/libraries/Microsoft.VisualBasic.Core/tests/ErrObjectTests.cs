@@ -72,7 +72,8 @@ namespace Microsoft.VisualBasic.Tests
 
             ProjectData.SetProjectError(new Exception() { Source = null });
             _ = Assert.Throws<OutOfMemoryException>(() =>
-                Information.Err().Raise(7, Source: "MySource2"));
+                Information.Err().Raise(7, Source: "MySource2")
+            );
             Assert.Equal("MySource2", Information.Err().Source);
         }
 
@@ -118,7 +119,8 @@ namespace Microsoft.VisualBasic.Tests
                 "MyFile1#3",
                 Assert
                     .Throws<OutOfMemoryException>(() =>
-                        Information.Err().Raise(7, HelpFile: "MyFile1"))
+                        Information.Err().Raise(7, HelpFile: "MyFile1")
+                    )
                     .HelpLink
             );
 
@@ -128,7 +130,8 @@ namespace Microsoft.VisualBasic.Tests
                 "MyFile2#0",
                 Assert
                     .Throws<OutOfMemoryException>(() =>
-                        Information.Err().Raise(7, HelpFile: "MyFile2"))
+                        Information.Err().Raise(7, HelpFile: "MyFile2")
+                    )
                     .HelpLink
             );
 
@@ -137,7 +140,8 @@ namespace Microsoft.VisualBasic.Tests
                 "MyFile3#3",
                 Assert
                     .Throws<OutOfMemoryException>(() =>
-                        Information.Err().Raise(7, HelpContext: 3, HelpFile: "MyFile3"))
+                        Information.Err().Raise(7, HelpContext: 3, HelpFile: "MyFile3")
+                    )
                     .HelpLink
             );
         }

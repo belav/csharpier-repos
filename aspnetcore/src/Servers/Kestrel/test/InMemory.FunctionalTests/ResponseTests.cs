@@ -48,7 +48,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         Task.Run(() =>
                         {
                             onCompletedTcs.SetResult();
-                        }));
+                        })
+                    );
 
                     // Prevent OnStarting call (see HttpProtocol.ProcessRequestsAsync()).
                     throw new Exception();
@@ -87,7 +88,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     await context.Response.WriteAsync("hello, world");
                     await context.Response.BodyWriter.FlushAsync();
                     ex = Assert.Throws<InvalidOperationException>(() =>
-                        context.Response.OnStarting(_ => Task.CompletedTask, null));
+                        context.Response.OnStarting(_ => Task.CompletedTask, null)
+                    );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -125,7 +127,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     await context.Response.StartAsync();
                     ex = Assert.Throws<InvalidOperationException>(() =>
-                        context.Response.OnStarting(_ => Task.CompletedTask, null));
+                        context.Response.OnStarting(_ => Task.CompletedTask, null)
+                    );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -477,7 +480,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         Task.Run(() =>
                         {
                             onCompletedTcs.SetResult();
-                        }));
+                        })
+                    );
                     return Task.CompletedTask;
                 },
                 new TestServiceContext(LoggerFactory)
@@ -522,7 +526,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 #pragma warning disable CS0618 // Type or member is obsolete
                     readException = await Assert.ThrowsAsync<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                        async () => await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1));
+                        async () => await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
+                    );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -1314,7 +1319,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     await httpContext.Response.WriteAsync("hello, world");
 
                     completeEx = Assert.Throws<InvalidOperationException>(() =>
-                        httpContext.Response.BodyWriter.Complete());
+                        httpContext.Response.BodyWriter.Complete()
+                    );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -3827,7 +3833,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     // Synchronous writes now throw.
                     var ioEx = Assert.Throws<InvalidOperationException>(() =>
-                        context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6));
+                        context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
+                    );
                     Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
                     await context.Response.Body.WriteAsync(Encoding.ASCII.GetBytes("Hello1"), 0, 6);
                 },
@@ -3937,7 +3944,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     // Synchronous writes now throw.
                     var ioEx = Assert.Throws<InvalidOperationException>(() =>
-                        context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6));
+                        context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
+                    );
                     Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
 
                     return context
@@ -4008,8 +4016,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     await response.StartAsync();
 
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        response.BodyWriter.Advance(-1));
+                    Assert.Throws<ArgumentOutOfRangeException>(() => response.BodyWriter.Advance(-1)
+                    );
                 },
                 testContext
             )
@@ -4042,8 +4050,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var response = httpContext.Response;
 
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        response.BodyWriter.Advance(-1));
+                    Assert.Throws<ArgumentOutOfRangeException>(() => response.BodyWriter.Advance(-1)
+                    );
                     return Task.CompletedTask;
                 },
                 testContext
@@ -4293,7 +4301,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     httpContext.Response.BodyWriter.Complete();
                     writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        httpContext.Response.WriteAsync("test"));
+                        httpContext.Response.WriteAsync("test")
+                    );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -4519,7 +4528,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     if (secondRequest)
                     {
                         Assert.Throws<InvalidOperationException>(() =>
-                            httpContext.Response.BodyWriter.Advance(1));
+                            httpContext.Response.BodyWriter.Advance(1)
+                        );
                         return Task.CompletedTask;
                     }
 
@@ -4703,7 +4713,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     await httpContext.Response.StartAsync();
 
                     Assert.Throws<InvalidOperationException>(() =>
-                        httpContext.Response.BodyWriter.Advance(1));
+                        httpContext.Response.BodyWriter.Advance(1)
+                    );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -4737,7 +4748,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     httpContext.Response.BodyWriter.Complete();
 
                     writeEx = Assert.Throws<InvalidOperationException>(() =>
-                        httpContext.Response.BodyWriter.GetMemory());
+                        httpContext.Response.BodyWriter.GetMemory()
+                    );
 
                     return Task.CompletedTask;
                 },

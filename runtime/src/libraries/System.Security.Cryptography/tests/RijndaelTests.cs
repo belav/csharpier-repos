@@ -374,7 +374,8 @@ namespace System.Security.Cryptography.Tests
                 byte[] input = new byte[3 * (alg.BlockSize / 8)];
 
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    xform.TransformBlock(input, 0, input.Length, output, 0));
+                    xform.TransformBlock(input, 0, input.Length, output, 0)
+                );
 
                 Assert.Equal(new byte[output.Length], output);
             }

@@ -347,7 +347,8 @@ namespace System.Security.Cryptography.Tests
             kdf.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                kdf.DeriveKey(s_labelBytes, s_contextBytes, 42));
+                kdf.DeriveKey(s_labelBytes, s_contextBytes, 42)
+            );
             kdf.Dispose();
         }
 

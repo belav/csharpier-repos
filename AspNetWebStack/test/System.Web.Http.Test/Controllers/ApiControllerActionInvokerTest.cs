@@ -156,7 +156,8 @@ namespace System.Web.Http
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                _actionInvoker.InvokeActionAsync(_actionContext, CancellationToken.None));
+                _actionInvoker.InvokeActionAsync(_actionContext, CancellationToken.None)
+            );
             Assert.Same(expectedException, exception);
         }
 
@@ -439,7 +440,8 @@ namespace System.Web.Http
 
                 // Act & Assert
                 await Assert.ThrowsAsync<InvalidCastException>(() =>
-                    _actionInvoker.InvokeActionAsync(_actionContext, CancellationToken.None));
+                    _actionInvoker.InvokeActionAsync(_actionContext, CancellationToken.None)
+                );
             }
         }
 

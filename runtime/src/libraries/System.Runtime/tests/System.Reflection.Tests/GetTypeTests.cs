@@ -37,9 +37,11 @@ namespace System.Reflection.Tests
             Assert.Null(Type.GetType(aqn, throwOnError: false, ignoreCase: true));
 
             Assert.Throws<TypeLoadException>(() =>
-                Type.GetType(typeName, throwOnError: true, ignoreCase: false));
+                Type.GetType(typeName, throwOnError: true, ignoreCase: false)
+            );
             Assert.Throws<TypeLoadException>(() =>
-                Type.GetType(typeName, throwOnError: true, ignoreCase: true));
+                Type.GetType(typeName, throwOnError: true, ignoreCase: true)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "typeName@0",
                 () => Type.GetType(aqn, throwOnError: true, ignoreCase: false)
@@ -54,16 +56,20 @@ namespace System.Reflection.Tests
             Assert.Null(a.GetType(aqn));
 
             Assert.Throws<ArgumentException>(() =>
-                a.GetType(typeName, throwOnError: false, ignoreCase: false));
+                a.GetType(typeName, throwOnError: false, ignoreCase: false)
+            );
             Assert.Throws<ArgumentException>(() =>
-                a.GetType(typeName, throwOnError: false, ignoreCase: true));
+                a.GetType(typeName, throwOnError: false, ignoreCase: true)
+            );
             Assert.Null(a.GetType(aqn, throwOnError: false, ignoreCase: false));
             Assert.Null(a.GetType(aqn, throwOnError: false, ignoreCase: true));
 
             Assert.Throws<ArgumentException>(() =>
-                a.GetType(typeName, throwOnError: true, ignoreCase: false));
+                a.GetType(typeName, throwOnError: true, ignoreCase: false)
+            );
             Assert.Throws<ArgumentException>(() =>
-                a.GetType(typeName, throwOnError: true, ignoreCase: true));
+                a.GetType(typeName, throwOnError: true, ignoreCase: true)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "typeName@0",
                 () => a.GetType(aqn, throwOnError: true, ignoreCase: false)
@@ -75,16 +81,20 @@ namespace System.Reflection.Tests
 
             // Module.GetType
             Assert.Throws<ArgumentException>(() =>
-                m.GetType(typeName, throwOnError: false, ignoreCase: false));
+                m.GetType(typeName, throwOnError: false, ignoreCase: false)
+            );
             Assert.Throws<ArgumentException>(() =>
-                m.GetType(typeName, throwOnError: false, ignoreCase: true));
+                m.GetType(typeName, throwOnError: false, ignoreCase: true)
+            );
             Assert.Null(m.GetType(aqn, throwOnError: false, ignoreCase: false));
             Assert.Null(m.GetType(aqn, throwOnError: false, ignoreCase: true));
 
             Assert.Throws<ArgumentException>(() =>
-                m.GetType(typeName, throwOnError: true, ignoreCase: false));
+                m.GetType(typeName, throwOnError: true, ignoreCase: false)
+            );
             Assert.Throws<ArgumentException>(() =>
-                m.GetType(typeName, throwOnError: true, ignoreCase: true));
+                m.GetType(typeName, throwOnError: true, ignoreCase: true)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "typeName@0",
                 () => m.GetType(aqn, throwOnError: true, ignoreCase: false)
@@ -178,13 +188,17 @@ namespace System.Reflection.Tests
                 Assert.Null(Type.GetType(aqn, throwOnError: false, ignoreCase: true));
 
                 Assert.Throws<TypeLoadException>(() =>
-                    Type.GetType(typeName, throwOnError: true, ignoreCase: false));
+                    Type.GetType(typeName, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Throws<TypeLoadException>(() =>
-                    Type.GetType(typeName, throwOnError: true, ignoreCase: true));
+                    Type.GetType(typeName, throwOnError: true, ignoreCase: true)
+                );
                 Assert.Throws<TypeLoadException>(() =>
-                    Type.GetType(aqn, throwOnError: true, ignoreCase: false));
+                    Type.GetType(aqn, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Throws<TypeLoadException>(() =>
-                    Type.GetType(aqn, throwOnError: true, ignoreCase: true));
+                    Type.GetType(aqn, throwOnError: true, ignoreCase: true)
+                );
 
                 // Assembly.GetType
                 Assert.Null(a.GetType(typeName));
@@ -196,9 +210,11 @@ namespace System.Reflection.Tests
                 Assert.Null(a.GetType(aqn, throwOnError: false, ignoreCase: true));
 
                 Assert.Throws<TypeLoadException>(() =>
-                    a.GetType(typeName, throwOnError: true, ignoreCase: false));
+                    a.GetType(typeName, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Throws<TypeLoadException>(() =>
-                    a.GetType(typeName, throwOnError: true, ignoreCase: true));
+                    a.GetType(typeName, throwOnError: true, ignoreCase: true)
+                );
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => a.GetType(aqn, throwOnError: true, ignoreCase: false)
@@ -215,9 +231,11 @@ namespace System.Reflection.Tests
                 Assert.Null(m.GetType(aqn, throwOnError: false, ignoreCase: true));
 
                 Assert.Throws<TypeLoadException>(() =>
-                    m.GetType(typeName, throwOnError: true, ignoreCase: false));
+                    m.GetType(typeName, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Throws<TypeLoadException>(() =>
-                    m.GetType(typeName, throwOnError: true, ignoreCase: true));
+                    m.GetType(typeName, throwOnError: true, ignoreCase: true)
+                );
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () => m.GetType(aqn, throwOnError: true, ignoreCase: false)
@@ -402,7 +420,8 @@ namespace System.Reflection.Tests
                 );
 
                 Assert.Throws<TypeLoadException>(() =>
-                    Type.GetType(typeName, throwOnError: true, ignoreCase: false));
+                    Type.GetType(typeName, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Equal(
                     expectedName,
                     Type.GetType(
@@ -413,7 +432,8 @@ namespace System.Reflection.Tests
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Throws<TypeLoadException>(() =>
-                    Type.GetType(aqn, throwOnError: true, ignoreCase: false));
+                    Type.GetType(aqn, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Equal(
                     expectedName,
                     Type.GetType(aqn, throwOnError: true, ignoreCase: true).AssemblyQualifiedName,
@@ -438,7 +458,8 @@ namespace System.Reflection.Tests
                 Assert.Null(a.GetType(aqn, throwOnError: false, ignoreCase: true));
 
                 Assert.Throws<TypeLoadException>(() =>
-                    a.GetType(typeName, throwOnError: true, ignoreCase: false));
+                    a.GetType(typeName, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Equal(
                     expectedName,
                     a.GetType(typeName, throwOnError: true, ignoreCase: true).AssemblyQualifiedName,
@@ -468,7 +489,8 @@ namespace System.Reflection.Tests
                 Assert.Null(m.GetType(aqn, throwOnError: false, ignoreCase: true));
 
                 Assert.Throws<TypeLoadException>(() =>
-                    m.GetType(typeName, throwOnError: true, ignoreCase: false));
+                    m.GetType(typeName, throwOnError: true, ignoreCase: false)
+                );
                 Assert.Equal(
                     expectedName,
                     m.GetType(typeName, throwOnError: true, ignoreCase: true).AssemblyQualifiedName,
@@ -517,7 +539,8 @@ namespace System.Reflection.Tests
                 Type.GetType(
                     "System.Reflection.Tests.GenericClass`1[[Bogus, BogusAssembly]]",
                     throwOnError: true
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -528,7 +551,8 @@ namespace System.Reflection.Tests
             Assert.Null(Type.GetType("ExtraComma, ,"));
             Assert.Null(Type.GetType("ExtraComma, , System.Runtime"));
             Assert.Throws<FileLoadException>(() =>
-                Type.GetType("System.Object, System.Runtime, Version=x.y"));
+                Type.GetType("System.Object, System.Runtime, Version=x.y")
+            );
         }
 
         [ConditionalFact(

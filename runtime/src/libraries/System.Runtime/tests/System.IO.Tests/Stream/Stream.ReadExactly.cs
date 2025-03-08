@@ -231,7 +231,8 @@ namespace System.IO.Tests
             if (async)
             {
                 await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-                    await s.ReadExactlyAsync(buffer));
+                    await s.ReadExactlyAsync(buffer)
+                );
             }
             else
             {
@@ -243,7 +244,8 @@ namespace System.IO.Tests
             if (async)
             {
                 await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-                    await s.ReadExactlyAsync(buffer, 0, buffer.Length));
+                    await s.ReadExactlyAsync(buffer, 0, buffer.Length)
+                );
             }
             else
             {
@@ -276,30 +278,40 @@ namespace System.IO.Tests
             if (async)
             {
                 await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                    await s.ReadExactlyAsync(null, 0, 1));
+                    await s.ReadExactlyAsync(null, 0, 1)
+                );
                 await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                    await s.ReadExactlyAsync(buffer, 0, -1));
+                    await s.ReadExactlyAsync(buffer, 0, -1)
+                );
                 await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                    await s.ReadExactlyAsync(buffer, -1, buffer.Length));
+                    await s.ReadExactlyAsync(buffer, -1, buffer.Length)
+                );
                 await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                    await s.ReadExactlyAsync(buffer, buffer.Length, 1));
+                    await s.ReadExactlyAsync(buffer, buffer.Length, 1)
+                );
                 await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                    await s.ReadExactlyAsync(buffer, 0, buffer.Length + 1));
+                    await s.ReadExactlyAsync(buffer, 0, buffer.Length + 1)
+                );
                 await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                    await s.ReadExactlyAsync(buffer, buffer.Length - 1, 2));
+                    await s.ReadExactlyAsync(buffer, buffer.Length - 1, 2)
+                );
             }
             else
             {
                 Assert.Throws<ArgumentNullException>(() => s.ReadExactly(null, 0, 1));
                 Assert.Throws<ArgumentOutOfRangeException>(() => s.ReadExactly(buffer, 0, -1));
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    s.ReadExactly(buffer, -1, buffer.Length));
+                    s.ReadExactly(buffer, -1, buffer.Length)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    s.ReadExactly(buffer, buffer.Length, 1));
+                    s.ReadExactly(buffer, buffer.Length, 1)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    s.ReadExactly(buffer, 0, buffer.Length + 1));
+                    s.ReadExactly(buffer, 0, buffer.Length + 1)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    s.ReadExactly(buffer, buffer.Length - 1, 2));
+                    s.ReadExactly(buffer, buffer.Length - 1, 2)
+                );
             }
 
             Assert.Equal(0, readInvokedCount);
@@ -330,9 +342,11 @@ namespace System.IO.Tests
             cts.Cancel();
 
             await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-                await s.ReadExactlyAsync(buffer, cancellationToken: token));
+                await s.ReadExactlyAsync(buffer, cancellationToken: token)
+            );
             await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-                await s.ReadExactlyAsync(buffer, 0, buffer.Length, cancellationToken: token));
+                await s.ReadExactlyAsync(buffer, 0, buffer.Length, cancellationToken: token)
+            );
             Assert.Equal(2, readInvokedCount);
         }
     }

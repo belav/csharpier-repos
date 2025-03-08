@@ -627,7 +627,8 @@ namespace System.Web.Http.Tracing
                         invoked = true;
                     },
                     errorTrace: (tr) => { }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -688,7 +689,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -721,7 +723,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -754,7 +757,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -891,7 +895,8 @@ namespace System.Web.Http.Tracing
                     {
                         tr.Message = "errorMessage";
                     }
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -953,7 +958,8 @@ namespace System.Web.Http.Tracing
                     {
                         tr.Message = "errorMessage";
                     }
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1013,7 +1019,8 @@ namespace System.Web.Http.Tracing
                         tr.Message = "won't Happen";
                     },
                     errorTrace: null
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1050,7 +1057,8 @@ namespace System.Web.Http.Tracing
                     },
                     endTrace: (tr) => { },
                     errorTrace: (tr) => { }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Empty(traceWriter.Traces);
             Assert.Same(thrown, exception);
@@ -1237,7 +1245,8 @@ namespace System.Web.Http.Tracing
                     {
                         tr.Message = "errorMessage";
                     }
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1271,7 +1280,8 @@ namespace System.Web.Http.Tracing
                     execute: () => TaskHelpers.FromError(exception),
                     endTrace: (tr) => { },
                     errorTrace: (tr) => { }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Empty(traceWriter.Traces);
             Assert.Same(thrown, exception);
@@ -1360,7 +1370,8 @@ namespace System.Web.Http.Tracing
                         invoked = true;
                     },
                     errorTrace: (tr) => { }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1420,7 +1431,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1452,7 +1464,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1484,7 +1497,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1618,7 +1632,8 @@ namespace System.Web.Http.Tracing
                     {
                         tr.Message = "errorMessage";
                     }
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1690,7 +1705,8 @@ namespace System.Web.Http.Tracing
                         tr.Message = "won't Happen";
                     },
                     errorTrace: null
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1912,7 +1928,8 @@ namespace System.Web.Http.Tracing
                     {
                         tr.Message = "errorMessage";
                     }
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1985,7 +2002,8 @@ namespace System.Web.Http.Tracing
                         tr.Message = "won't Happen";
                     },
                     errorTrace: null
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -2021,7 +2039,8 @@ namespace System.Web.Http.Tracing
                         ),
                     endTrace: (tr) => { },
                     errorTrace: (tr) => { }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Empty(traceWriter.Traces);
         }
@@ -2142,7 +2161,8 @@ namespace System.Web.Http.Tracing
                         invoked = true;
                     },
                     errorTrace: (tr) => { }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2202,7 +2222,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2234,7 +2255,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2266,7 +2288,8 @@ namespace System.Web.Http.Tracing
                     {
                         invoked = true;
                     }
-                ));
+                )
+            );
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2400,7 +2423,8 @@ namespace System.Web.Http.Tracing
                     {
                         tr.Message = "errorMessage";
                     }
-                ));
+                )
+            );
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,

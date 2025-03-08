@@ -94,7 +94,8 @@ namespace System.Net.WebSockets.Tests
                     TimeSpan.FromSeconds(30),
                     false,
                     WebSocket.CreateClientBuffer(16480, 9856)
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentException>(() =>
                 WebSocket.CreateClientWebSocket(
@@ -105,7 +106,8 @@ namespace System.Net.WebSockets.Tests
                     TimeSpan.FromSeconds(30),
                     false,
                     WebSocket.CreateClientBuffer(16480, 9856)
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 WebSocket.CreateClientWebSocket(
                     new MemoryStream(),
@@ -115,7 +117,8 @@ namespace System.Net.WebSockets.Tests
                     TimeSpan.FromSeconds(30),
                     false,
                     WebSocket.CreateClientBuffer(16480, 9856)
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 WebSocket.CreateClientWebSocket(
@@ -126,7 +129,8 @@ namespace System.Net.WebSockets.Tests
                     TimeSpan.FromSeconds(30),
                     false,
                     WebSocket.CreateClientBuffer(16480, 9856)
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 WebSocket.CreateClientWebSocket(
                     new MemoryStream(),
@@ -136,7 +140,8 @@ namespace System.Net.WebSockets.Tests
                     TimeSpan.FromSeconds(30),
                     false,
                     WebSocket.CreateClientBuffer(16480, 9856)
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 WebSocket.CreateClientWebSocket(
                     new MemoryStream(),
@@ -146,7 +151,8 @@ namespace System.Net.WebSockets.Tests
                     TimeSpan.FromSeconds(-2),
                     false,
                     WebSocket.CreateClientBuffer(16480, 9856)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -199,7 +205,8 @@ namespace System.Net.WebSockets.Tests
         )
         {
             WebSocketException wse = Assert.Throws<WebSocketException>(() =>
-                ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates));
+                ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates)
+            );
             if (PlatformDetection.IsNetCore) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
             {
                 Assert.Equal(WebSocketError.InvalidState, wse.WebSocketErrorCode);

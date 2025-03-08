@@ -208,7 +208,8 @@ namespace System.IO.Ports.Tests
                         new byte[s_DEFAULT_WRITE_BYTE_ARRAY_SIZE],
                         0,
                         s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
-                    ));
+                    )
+                );
 
                 VerifyTimeout(Write_byte_int_int, stream);
             }

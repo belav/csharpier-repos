@@ -21,7 +21,8 @@ public static class CosmosDbContextOptionsBuilderExtensions
                         ServerCertificateCustomValidationCallback =
                             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                     }
-                ))
+                )
+            )
             .ConnectionMode(ConnectionMode.Gateway);
 
         return optionsBuilder;

@@ -304,9 +304,11 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             var cspParameters = new CspParameters();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new RSACryptoServiceProvider(cspParameters));
+                new RSACryptoServiceProvider(cspParameters)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new RSACryptoServiceProvider(0, cspParameters));
+                new RSACryptoServiceProvider(0, cspParameters)
+            );
         }
 
         [Fact]
@@ -326,7 +328,8 @@ namespace System.Security.Cryptography.Csp.Tests
             {
                 // Verify that Unix shims and Windows Csp both throws the same exception when large Exponent imported
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.ImportParameters(TestData.RsaBigExponentParams));
+                    rsa.ImportParameters(TestData.RsaBigExponentParams)
+                );
             }
         }
 
@@ -360,7 +363,8 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 Assert.Throws<CryptographicException>(() =>
-                    rsa.Encrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256));
+                    rsa.Encrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256)
+                );
             }
         }
 
@@ -370,7 +374,8 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 Assert.Throws<CryptographicException>(() =>
-                    rsa.Decrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256));
+                    rsa.Decrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256)
+                );
             }
         }
 
@@ -384,7 +389,8 @@ namespace System.Security.Cryptography.Csp.Tests
                         TestData.HelloBytes,
                         HashAlgorithmName.SHA256,
                         RSASignaturePadding.Pss
-                    ));
+                    )
+                );
             }
         }
 
@@ -400,7 +406,8 @@ namespace System.Security.Cryptography.Csp.Tests
                         sig,
                         HashAlgorithmName.SHA256,
                         RSASignaturePadding.Pss
-                    ));
+                    )
+                );
             }
         }
 

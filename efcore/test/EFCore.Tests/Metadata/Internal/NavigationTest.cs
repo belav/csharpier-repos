@@ -32,7 +32,8 @@ public class NavigationTest
             CoreStrings.NavigationToKeylessType(nameof(B.ManyAs), nameof(A)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    fk.SetPrincipalToDependent(nameof(B.ManyAs)))
+                    fk.SetPrincipalToDependent(nameof(B.ManyAs))
+                )
                 .Message
         );
     }

@@ -46,7 +46,8 @@ FROM "JsonEntitiesBasic" AS "j"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_json_entity_FirstOrDefault_subquery(async))
+                    base.Project_json_entity_FirstOrDefault_subquery(async)
+                )
             ).Message
         );
 
@@ -57,7 +58,8 @@ FROM "JsonEntitiesBasic" AS "j"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Project_json_entity_FirstOrDefault_subquery_deduplication(async))
+                    base.Project_json_entity_FirstOrDefault_subquery_deduplication(async)
+                )
             ).Message
         );
 
@@ -70,7 +72,8 @@ FROM "JsonEntitiesBasic" AS "j"
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Project_json_entity_FirstOrDefault_subquery_deduplication_and_outer_reference(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -83,7 +86,8 @@ FROM "JsonEntitiesBasic" AS "j"
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Project_json_entity_FirstOrDefault_subquery_deduplication_outer_reference_and_pruning(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -208,7 +212,8 @@ WHERE EXISTS (
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_Select_entity_with_initializer_ElementAt(async))
+                    base.Json_collection_Select_entity_with_initializer_ElementAt(async)
+                )
             ).Message
         );
 
@@ -301,7 +306,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_in_projection_with_anonymous_projection_of_scalars(async))
+                    base.Json_collection_in_projection_with_anonymous_projection_of_scalars(async)
+                )
             ).Message
         );
 
@@ -314,7 +320,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Json_collection_in_projection_with_composition_where_and_anonymous_projection_of_scalars(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -327,7 +334,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Json_collection_in_projection_with_composition_where_and_anonymous_projection_of_primitive_arrays(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -338,7 +346,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_Select_entity_in_anonymous_object_ElementAt(async))
+                    base.Json_collection_Select_entity_in_anonymous_object_ElementAt(async)
+                )
             ).Message
         );
 
@@ -349,7 +358,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_skip_take_in_projection_project_into_anonymous_type(async))
+                    base.Json_collection_skip_take_in_projection_project_into_anonymous_type(async)
+                )
             ).Message
         );
 
@@ -362,7 +372,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Json_collection_skip_take_in_projection_with_json_reference_access_as_final_operation(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -371,7 +382,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_distinct_in_projection(async))
+                    base.Json_collection_distinct_in_projection(async)
+                )
             ).Message
         );
 
@@ -380,7 +392,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_filter_in_projection(async))
+                    base.Json_collection_filter_in_projection(async)
+                )
             ).Message
         );
 
@@ -389,7 +402,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_leaf_filter_in_projection(async))
+                    base.Json_collection_leaf_filter_in_projection(async)
+                )
             ).Message
         );
 
@@ -398,7 +412,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_branch_collection_distinct_and_other_collection(async))
+                    base.Json_branch_collection_distinct_and_other_collection(async)
+                )
             ).Message
         );
 
@@ -407,7 +422,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_leaf_collection_distinct_and_other_collection(async))
+                    base.Json_leaf_collection_distinct_and_other_collection(async)
+                )
             ).Message
         );
 
@@ -416,7 +432,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_multiple_collection_projections(async))
+                    base.Json_multiple_collection_projections(async)
+                )
             ).Message
         );
 
@@ -425,7 +442,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_SelectMany(async))
+                    base.Json_collection_SelectMany(async)
+                )
             ).Message
         );
 
@@ -434,7 +452,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_collection_skip_take_in_projection(async))
+                    base.Json_collection_skip_take_in_projection(async)
+                )
             ).Message
         );
 
@@ -445,7 +464,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_nested_collection_anonymous_projection_in_projection(async))
+                    base.Json_nested_collection_anonymous_projection_in_projection(async)
+                )
             ).Message
         );
 
@@ -454,7 +474,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_nested_collection_filter_in_projection(async))
+                    base.Json_nested_collection_filter_in_projection(async)
+                )
             ).Message
         );
 
@@ -463,7 +484,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Json_nested_collection_SelectMany(async))
+                    base.Json_nested_collection_SelectMany(async)
+                )
             ).Message
         );
 
@@ -473,7 +495,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Json_collection_index_in_projection_using_untranslatable_client_method(async))
+                base.Json_collection_index_in_projection_using_untranslatable_client_method(async)
+            )
         ).Message;
 
         Assert.Contains(
@@ -491,7 +514,8 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Json_collection_index_in_projection_using_untranslatable_client_method2(async))
+                base.Json_collection_index_in_projection_using_untranslatable_client_method2(async)
+            )
         ).Message;
 
         Assert.Contains(

@@ -200,7 +200,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                         JsonSerializer.Deserialize(
                             json,
                             DefaultContext.ValueTupleStringInt32Boolean
-                        ));
+                        )
+                    );
                 }
                 else
                 {
@@ -282,7 +283,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             if (DefaultContext.JsonSourceGenerationMode == JsonSourceGenerationMode.Serialization)
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(obj, DefaultContext.ClassWithCustomConverterProperty));
+                    JsonSerializer.Serialize(obj, DefaultContext.ClassWithCustomConverterProperty)
+                );
             }
             else
             {
@@ -321,7 +323,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         obj,
                         DefaultContext.ClassWithCustomConverterNullableProperty
-                    ));
+                    )
+                );
             }
             else
             {
@@ -361,7 +364,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         obj,
                         DefaultContext.ClassWithCustomConverterFactoryNullableProperty
-                    ));
+                    )
+                );
             }
             else
             {
@@ -395,10 +399,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             if (DefaultContext.JsonSourceGenerationMode == JsonSourceGenerationMode.Serialization)
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(
-                        obj,
-                        DefaultContext.StructWithCustomConverterProperty
-                    ));
+                    JsonSerializer.Serialize(obj, DefaultContext.StructWithCustomConverterProperty)
+                );
             }
             else
             {
@@ -432,7 +434,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         obj,
                         DefaultContext.ClassWithCustomConverterFactoryProperty
-                    ));
+                    )
+                );
             }
             else
             {
@@ -449,7 +452,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         obj,
                         DefaultContext.ClassWithCustomConverterFactoryProperty
-                    ));
+                    )
+                );
             }
             else
             {
@@ -477,7 +481,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         obj,
                         DefaultContext.StructWithCustomConverterFactoryProperty
-                    ));
+                    )
+                );
             }
             else
             {
@@ -494,7 +499,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         obj,
                         DefaultContext.StructWithCustomConverterFactoryProperty
-                    ));
+                    )
+                );
             }
             else
             {
@@ -515,10 +521,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                 JsonSerializer.Serialize(
                     new ClassWithBadCustomConverter(),
                     DefaultContext.ClassWithBadCustomConverter
-                ));
+                )
+            );
 
             Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize(Json, DefaultContext.ClassWithBadCustomConverter));
+                JsonSerializer.Deserialize(Json, DefaultContext.ClassWithBadCustomConverter)
+            );
         }
 
         [Fact]
@@ -530,10 +538,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                 JsonSerializer.Serialize(
                     new StructWithBadCustomConverter(),
                     DefaultContext.StructWithBadCustomConverter
-                ));
+                )
+            );
 
             Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize(Json, DefaultContext.StructWithBadCustomConverter));
+                JsonSerializer.Deserialize(Json, DefaultContext.StructWithBadCustomConverter)
+            );
         }
 
         protected static Location CreateLocation()
@@ -988,14 +998,16 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             JsonSerializerContext context = (JsonSerializerContext)DefaultContext;
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Options.PropertyNameCaseInsensitive = true);
+                context.Options.PropertyNameCaseInsensitive = true
+            );
             string exAsStr = ex.ToString();
             Assert.Contains("JsonSerializerOptions", exAsStr);
             Assert.Contains("JsonSerializerContext", exAsStr);
 
             context = (JsonSerializerContext)_contextCreator(new JsonSerializerOptions());
             ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Options.PropertyNameCaseInsensitive = true);
+                context.Options.PropertyNameCaseInsensitive = true
+            );
             exAsStr = ex.ToString();
             Assert.Contains("JsonSerializerOptions", exAsStr);
             Assert.Contains("JsonSerializerContext", exAsStr);
@@ -1203,11 +1215,13 @@ namespace System.Text.Json.SourceGeneration.Tests
             object[] objArr = new object[] { new MyStruct() };
 
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(objArr, context.ObjectArray));
+                JsonSerializer.Serialize(objArr, context.ObjectArray)
+            );
             Assert.Contains(ExceptionMessageFromCustomContext, ex.ToString());
 
             ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(objArr, typeof(object[]), context));
+                JsonSerializer.Serialize(objArr, typeof(object[]), context)
+            );
             Assert.Contains(ExceptionMessageFromCustomContext, ex.ToString());
         }
 
@@ -1299,7 +1313,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             {
                 // Deserialization not supported in fast path serialization only mode
                 Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Deserialize(json, DefaultContext.TypeWithValidationAttributes));
+                    JsonSerializer.Deserialize(json, DefaultContext.TypeWithValidationAttributes)
+                );
             }
             else
             {
@@ -1341,7 +1356,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             if (DefaultContext.JsonSourceGenerationMode == JsonSourceGenerationMode.Serialization)
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(value, DefaultContext.PolymorphicClass));
+                    JsonSerializer.Serialize(value, DefaultContext.PolymorphicClass)
+                );
             }
             else
             {
@@ -1366,7 +1382,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Deserialize<PolymorphicClass>(
                         json,
                         DefaultContext.PolymorphicClass
-                    ));
+                    )
+                );
             }
             else
             {
@@ -1390,7 +1407,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     JsonSerializer.Serialize(
                         new PocoWithNumberHandlingAttr(),
                         DefaultContext.PocoWithNumberHandlingAttr
-                    ));
+                    )
+                );
             }
             else
             {

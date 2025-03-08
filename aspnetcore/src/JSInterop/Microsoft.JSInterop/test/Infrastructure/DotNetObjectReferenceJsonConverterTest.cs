@@ -24,7 +24,8 @@ public class DotNetObjectReferenceJsonConverterTest
             JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
                 json,
                 JsonSerializerOptions
-            ));
+            )
+        );
         Assert.Equal("Required property __dotNetObject not found.", ex.Message);
     }
 
@@ -42,7 +43,8 @@ public class DotNetObjectReferenceJsonConverterTest
             JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
                 json,
                 JsonSerializerOptions
-            ));
+            )
+        );
         Assert.Equal("Unexpected JSON property foo.", ex.Message);
     }
 
@@ -61,7 +63,8 @@ public class DotNetObjectReferenceJsonConverterTest
             JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
                 json,
                 JsonSerializerOptions
-            ));
+            )
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -80,7 +83,8 @@ public class DotNetObjectReferenceJsonConverterTest
             JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
                 json,
                 JsonSerializerOptions
-            ));
+            )
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 

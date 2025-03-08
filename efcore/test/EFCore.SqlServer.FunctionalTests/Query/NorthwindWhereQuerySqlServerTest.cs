@@ -1867,8 +1867,8 @@ WHERE 0 = 1
     public override async Task Where_compare_constructed_multi_value_equal(bool async)
     {
         //  Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(() =>
-            base.Where_compare_constructed_multi_value_equal(async));
+        await AssertTranslationFailed(() => base.Where_compare_constructed_multi_value_equal(async)
+        );
 
         AssertSql();
     }
@@ -1877,7 +1877,8 @@ WHERE 0 = 1
     {
         //  Anonymous type to constant comparison. Issue #14672.
         await AssertTranslationFailed(() =>
-            base.Where_compare_constructed_multi_value_not_equal(async));
+            base.Where_compare_constructed_multi_value_not_equal(async)
+        );
 
         AssertSql();
     }
@@ -1894,7 +1895,8 @@ WHERE 0 = 1
     {
         //  Anonymous type to constant comparison. Issue #14672.
         await AssertTranslationFailed(() =>
-            base.Where_compare_tuple_constructed_multi_value_equal(async));
+            base.Where_compare_tuple_constructed_multi_value_equal(async)
+        );
 
         AssertSql();
     }
@@ -1903,7 +1905,8 @@ WHERE 0 = 1
     {
         //  Anonymous type to constant comparison. Issue #14672.
         await AssertTranslationFailed(() =>
-            base.Where_compare_tuple_constructed_multi_value_not_equal(async));
+            base.Where_compare_tuple_constructed_multi_value_not_equal(async)
+        );
 
         AssertSql();
     }
@@ -1911,8 +1914,8 @@ WHERE 0 = 1
     public override async Task Where_compare_tuple_create_constructed_equal(bool async)
     {
         //  Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(() =>
-            base.Where_compare_tuple_create_constructed_equal(async));
+        await AssertTranslationFailed(() => base.Where_compare_tuple_create_constructed_equal(async)
+        );
 
         AssertSql();
     }
@@ -1921,7 +1924,8 @@ WHERE 0 = 1
     {
         //  Anonymous type to constant comparison. Issue #14672.
         await AssertTranslationFailed(() =>
-            base.Where_compare_tuple_create_constructed_multi_value_equal(async));
+            base.Where_compare_tuple_create_constructed_multi_value_equal(async)
+        );
 
         AssertSql();
     }
@@ -1932,7 +1936,8 @@ WHERE 0 = 1
     {
         //  Anonymous type to constant comparison. Issue #14672.
         await AssertTranslationFailed(() =>
-            base.Where_compare_tuple_create_constructed_multi_value_not_equal(async));
+            base.Where_compare_tuple_create_constructed_multi_value_not_equal(async)
+        );
 
         AssertSql();
     }

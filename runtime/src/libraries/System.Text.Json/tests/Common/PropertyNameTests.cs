@@ -113,9 +113,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // A policy that returns null is not allowed.
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.DeserializeWrapper<SimpleTestClass>(@"{}", options));
+                await Serializer.DeserializeWrapper<SimpleTestClass>(@"{}", options)
+            );
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(new SimpleTestClass(), options));
+                await Serializer.SerializeWrapper(new SimpleTestClass(), options)
+            );
         }
 
         [Fact]
@@ -194,7 +196,8 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.DeserializeWrapper<DuplicatePropertyNameDesignTime_TestClass>(
                         "{}",
                         options
-                    ));
+                    )
+                );
             }
 
             {
@@ -203,7 +206,8 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.SerializeWrapper(
                         new DuplicatePropertyNameDesignTime_TestClass(),
                         options
-                    ));
+                    )
+                );
             }
         }
 
@@ -227,12 +231,14 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.DeserializeWrapper<IntPropertyNamesDifferentByCaseOnly_TestClass>(
                         "{}",
                         options
-                    ));
+                    )
+                );
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     await Serializer.SerializeWrapper(
                         new IntPropertyNamesDifferentByCaseOnly_TestClass(),
                         options
-                    ));
+                    )
+                );
             }
 
             {
@@ -252,12 +258,14 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.DeserializeWrapper<ObjectPropertyNamesDifferentByCaseOnly_TestClass>(
                         "{}",
                         options
-                    ));
+                    )
+                );
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     await Serializer.SerializeWrapper(
                         new ObjectPropertyNamesDifferentByCaseOnly_TestClass(),
                         options
-                    ));
+                    )
+                );
             }
         }
 
@@ -480,7 +488,8 @@ namespace System.Text.Json.Serialization.Tests
             var inputPrimitive = new Dictionary<string, int> { { "validKey", 1 } };
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(inputPrimitive, options));
+                await Serializer.SerializeWrapper(inputPrimitive, options)
+            );
 
             var inputClass = new Dictionary<string, OverridePropertyNameDesignTime_TestClass>
             {
@@ -488,7 +497,8 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(inputClass, options));
+                await Serializer.SerializeWrapper(inputClass, options)
+            );
         }
 
         public class OverridePropertyNameDesignTime_TestClass

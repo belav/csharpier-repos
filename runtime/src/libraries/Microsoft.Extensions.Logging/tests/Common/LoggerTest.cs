@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Act
             var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.LogInformation("Hello!"));
+                logger.LogInformation("Hello!")
+            );
 
             // Assert
             Assert.Equal(new[] { "provider1.Test-Hello!", "provider3.Test-Hello!" }, store);
@@ -67,7 +68,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Act
             var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.BeginScope("Scope1"));
+                logger.BeginScope("Scope1")
+            );
 
             // Assert
             Assert.Equal(new[] { "provider1.Test-Scope1", "provider3.Test-Scope1" }, store);
@@ -103,7 +105,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Act
             var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.LogInformation("Hello!"));
+                logger.LogInformation("Hello!")
+            );
 
             // Assert
             Assert.Equal(new[] { "provider1.Test-Hello!", "provider3.Test-Hello!" }, store);
@@ -135,7 +138,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Act
             var aggregateException = Assert.Throws<AggregateException>(() =>
-                logger.LogInformation("Hello!"));
+                logger.LogInformation("Hello!")
+            );
 
             // Assert
             Assert.Empty(store);

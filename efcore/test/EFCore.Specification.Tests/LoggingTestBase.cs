@@ -57,7 +57,8 @@ public abstract class LoggingTestBase
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Set<Animal>().Include("Wheels").Load())
+                    context.Set<Animal>().Include("Wheels").Load()
+                )
                 .Message
         );
     }

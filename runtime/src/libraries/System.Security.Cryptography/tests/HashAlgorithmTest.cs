@@ -72,7 +72,8 @@ namespace System.Security.Cryptography.Tests
                 // and the second call then fails with an OperationCanceledException, canceling the
                 // whole operation.
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    hash.ComputeHashAsync(stream, cancellationSource.Token));
+                    hash.ComputeHashAsync(stream, cancellationSource.Token)
+                );
 
                 Assert.True(cancellationSource.IsCancellationRequested);
             }

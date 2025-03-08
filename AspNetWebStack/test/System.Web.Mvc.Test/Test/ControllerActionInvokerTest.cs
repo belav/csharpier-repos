@@ -3252,7 +3252,8 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<AmbiguousMatchException>(() =>
-                invoker.PublicFindAction(context, controllerDescriptor, actionName: null));
+                invoker.PublicFindAction(context, controllerDescriptor, actionName: null)
+            );
         }
 
         [Fact]

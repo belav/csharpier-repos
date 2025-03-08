@@ -44,7 +44,8 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
         public void PublicComVisibleTypeWithoutGuidThrows()
         {
             var exception = Assert.Throws<MissingGuidException>(() =>
-                CreateClsidMap(sharedTestState.ComLibraryMissingGuidFixture));
+                CreateClsidMap(sharedTestState.ComLibraryMissingGuidFixture)
+            );
             Assert.Equal(SharedTestState.MissingGuidTypeName, exception.TypeName);
         }
 
@@ -83,7 +84,8 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
         public void PublicComVisibleTypeWithDuplicateGuidThrows()
         {
             var exception = Assert.Throws<ConflictingGuidException>(() =>
-                CreateClsidMap(sharedTestState.ComLibraryConflictingGuidFixture));
+                CreateClsidMap(sharedTestState.ComLibraryConflictingGuidFixture)
+            );
             Assert.Equal(Guid.Parse(SharedTestState.ConflictingGuid), exception.Guid);
             Assert.Equal(SharedTestState.ConflictingGuidTypeName1, exception.TypeName1);
             Assert.Equal(SharedTestState.ConflictingGuidTypeName2, exception.TypeName2);

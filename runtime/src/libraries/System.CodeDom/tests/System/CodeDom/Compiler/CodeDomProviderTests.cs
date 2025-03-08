@@ -192,11 +192,13 @@ namespace System.CodeDom.Compiler.Tests
         )
         {
             Exception ex1 = Assert.ThrowsAny<Exception>(() =>
-                CodeDomProvider.CreateProvider(language));
+                CodeDomProvider.CreateProvider(language)
+            );
             AssertIsConfigurationErrorsException(ex1);
 
             Exception ex2 = Assert.ThrowsAny<Exception>(() =>
-                CodeDomProvider.CreateProvider(language, new Dictionary<string, string>()));
+                CodeDomProvider.CreateProvider(language, new Dictionary<string, string>())
+            );
             AssertIsConfigurationErrorsException(ex2);
         }
 
@@ -204,7 +206,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CreateProvider_SerializeConfigurationErrorsException_ThrowsPlatformNotSupportedException()
         {
             Exception ex = Assert.ThrowsAny<Exception>(() =>
-                CodeDomProvider.CreateProvider(string.Empty));
+                CodeDomProvider.CreateProvider(string.Empty)
+            );
             AssertIsConfigurationErrorsException(ex);
 
             BinaryFormatterHelpers.AssertExceptionDeserializationFails(ex.GetType());
@@ -269,7 +272,8 @@ namespace System.CodeDom.Compiler.Tests
         )
         {
             Exception ex = Assert.ThrowsAny<Exception>(() =>
-                CodeDomProvider.GetLanguageFromExtension(extension));
+                CodeDomProvider.GetLanguageFromExtension(extension)
+            );
             AssertIsConfigurationErrorsException(ex);
         }
 
@@ -332,7 +336,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GetCompilerInfo_NoSuchExtension_ThrowsKeyNotFoundException(string language)
         {
             Exception ex = Assert.ThrowsAny<Exception>(() =>
-                CodeDomProvider.GetCompilerInfo(language));
+                CodeDomProvider.GetCompilerInfo(language)
+            );
             AssertIsConfigurationErrorsException(ex);
         }
 
@@ -349,7 +354,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromDom_NullCompiler_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().CompileAssemblyFromDom(new CompilerParameters()));
+                new NullProvider().CompileAssemblyFromDom(new CompilerParameters())
+            );
         }
 
         [Fact]
@@ -365,7 +371,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFile_NullCompiler_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().CompileAssemblyFromFile(new CompilerParameters()));
+                new NullProvider().CompileAssemblyFromFile(new CompilerParameters())
+            );
         }
 
         [Fact]
@@ -381,7 +388,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromSource_NullCompiler_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().CompileAssemblyFromSource(new CompilerParameters()));
+                new NullProvider().CompileAssemblyFromSource(new CompilerParameters())
+            );
         }
 
         [Fact]
@@ -397,7 +405,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CreateEscapedIdentifier_NullGenerator_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().CreateEscapedIdentifier("value"));
+                new NullProvider().CreateEscapedIdentifier("value")
+            );
         }
 
         [Fact]
@@ -413,7 +422,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CreateValidIdentifier_NullGenerator_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().CreateValidIdentifier("value"));
+                new NullProvider().CreateValidIdentifier("value")
+            );
         }
 
         [Fact]
@@ -438,7 +448,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeCompileUnit(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -449,7 +460,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -460,7 +472,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -471,7 +484,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeNamespace(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -482,7 +496,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeNamespace(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -493,7 +508,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -504,7 +520,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -515,7 +532,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeDeclaration(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -526,49 +544,56 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeDeclaration(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
         public void GetTypeOutput_CallsGeneratorMethod()
         {
             Assert.Throws<DataMisalignedException>(() =>
-                new CustomProvider().GetTypeOutput(new CodeTypeReference()));
+                new CustomProvider().GetTypeOutput(new CodeTypeReference())
+            );
         }
 
         [Fact]
         public void GetTypeOutput_NullGenerator_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().GetTypeOutput(new CodeTypeReference()));
+                new NullProvider().GetTypeOutput(new CodeTypeReference())
+            );
         }
 
         [Fact]
         public void IsValidIdentifier_CallsGeneratorMethod()
         {
             Assert.Throws<DirectoryNotFoundException>(() =>
-                new CustomProvider().IsValidIdentifier("value"));
+                new CustomProvider().IsValidIdentifier("value")
+            );
         }
 
         [Fact]
         public void IsValidIdentifier_NullGenerator_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().IsValidIdentifier("value"));
+                new NullProvider().IsValidIdentifier("value")
+            );
         }
 
         [Fact]
         public void Supports_CallsGeneratorMethod()
         {
             Assert.Throws<DivideByZeroException>(() =>
-                new CustomProvider().Supports(GeneratorSupport.ArraysOfArrays));
+                new CustomProvider().Supports(GeneratorSupport.ArraysOfArrays)
+            );
         }
 
         [Fact]
         public void Supports_NullGenerator_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().Supports(GeneratorSupport.ArraysOfArrays));
+                new NullProvider().Supports(GeneratorSupport.ArraysOfArrays)
+            );
         }
 
         [Fact]
@@ -579,7 +604,8 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeMember(),
                     new StringWriter(),
                     new CodeGeneratorOptions()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -595,7 +621,8 @@ namespace System.CodeDom.Compiler.Tests
         public void Parse_NullParser_ThrowsNotImplementedException()
         {
             Assert.Throws<NotImplementedException>(() =>
-                new NullProvider().Parse(new StringReader("abc")));
+                new NullProvider().Parse(new StringReader("abc"))
+            );
         }
 
         private static void AssertIsConfigurationErrorsException(Exception ex)

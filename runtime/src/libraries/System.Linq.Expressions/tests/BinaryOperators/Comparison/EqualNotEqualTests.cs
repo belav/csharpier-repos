@@ -484,7 +484,8 @@ namespace System.Linq.Expressions.Tests
         {
             var typedNullConst = Expression.Constant(null, typeof(UselessValue?));
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Equal(typedNullConst, typedNullConst));
+                Expression.Equal(typedNullConst, typedNullConst)
+            );
         }
 
         // DBNull having a different type code to other objects could result in bugs surrounding it if

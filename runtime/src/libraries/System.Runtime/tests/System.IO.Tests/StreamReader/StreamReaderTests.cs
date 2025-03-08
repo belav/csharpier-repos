@@ -131,7 +131,8 @@ namespace System.IO.Tests
             var token = cts.Token;
 
             var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-                await sw.ReadToEndAsync(token));
+                await sw.ReadToEndAsync(token)
+            );
             Assert.Equal(token, ex.CancellationToken);
         }
 
@@ -694,9 +695,11 @@ namespace System.IO.Tests
             Assert.Throws<ObjectDisposedException>(() => sr.Read(Span<char>.Empty));
             Assert.Throws<ObjectDisposedException>(() => sr.ReadBlock(Span<char>.Empty));
             await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                sr.ReadAsync(Memory<char>.Empty).AsTask());
+                sr.ReadAsync(Memory<char>.Empty).AsTask()
+            );
             await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                sr.ReadBlockAsync(Memory<char>.Empty).AsTask());
+                sr.ReadBlockAsync(Memory<char>.Empty).AsTask()
+            );
         }
 
         [Fact]

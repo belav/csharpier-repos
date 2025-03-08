@@ -240,7 +240,8 @@ namespace System.Data.Tests
             constraints[2] = foreignKeyConstraint;
 
             Exception ex2 = Assert.ThrowsAny<Exception>(() =>
-                table2.Constraints.AddRange(constraints));
+                table2.Constraints.AddRange(constraints)
+            );
             Assert.True(ex2 is ArgumentException || ex2 is InvalidConstraintException);
         }
 

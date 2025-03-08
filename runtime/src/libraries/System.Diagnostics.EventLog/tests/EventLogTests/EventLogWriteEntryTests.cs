@@ -38,7 +38,8 @@ namespace System.Diagnostics.Tests
                                 (int)eventInstance.InstanceId,
                                 (short)eventInstance.CategoryId,
                                 rawData
-                            ));
+                            )
+                        );
                         return eventLog.Entries.LastOrDefault();
                     }
                     else if (category)
@@ -49,7 +50,8 @@ namespace System.Diagnostics.Tests
                                 EventLogEntryType.Warning,
                                 (int)eventInstance.InstanceId,
                                 (short)eventInstance.CategoryId
-                            ));
+                            )
+                        );
                         return eventLog.Entries.LastOrDefault();
                     }
                     else
@@ -59,7 +61,8 @@ namespace System.Diagnostics.Tests
                                 message,
                                 EventLogEntryType.Warning,
                                 (int)eventInstance.InstanceId
-                            ));
+                            )
+                        );
                         return eventLog.Entries.LastOrDefault();
                     }
                 }
@@ -100,7 +103,8 @@ namespace System.Diagnostics.Tests
                                 (int)eventInstance.InstanceId,
                                 (short)eventInstance.CategoryId,
                                 rawData
-                            ));
+                            )
+                        );
                         return eventLog.Entries.LastOrDefault();
                     }
                     else if (category)
@@ -112,7 +116,8 @@ namespace System.Diagnostics.Tests
                                 EventLogEntryType.Warning,
                                 (int)eventInstance.InstanceId,
                                 (short)eventInstance.CategoryId
-                            ));
+                            )
+                        );
                         return eventLog.Entries.LastOrDefault();
                     }
                     else
@@ -123,14 +128,16 @@ namespace System.Diagnostics.Tests
                                 message,
                                 EventLogEntryType.Warning,
                                 (int)eventInstance.InstanceId
-                            ));
+                            )
+                        );
                         return eventLog.Entries.LastOrDefault();
                     }
                 }
                 else if (type)
                 {
                     Helpers.Retry(() =>
-                        EventLog.WriteEntry(source, message, EventLogEntryType.Warning));
+                        EventLog.WriteEntry(source, message, EventLogEntryType.Warning)
+                    );
                 }
                 else
                 {
@@ -146,7 +153,8 @@ namespace System.Diagnostics.Tests
             if (data)
             {
                 Helpers.Retry(() =>
-                    EventLog.WriteEvent(source, eventInstance, rawData, insertStrings));
+                    EventLog.WriteEvent(source, eventInstance, rawData, insertStrings)
+                );
             }
             else
             {
@@ -167,7 +175,8 @@ namespace System.Diagnostics.Tests
                 eventLog.Source = source;
                 if (data)
                     Helpers.Retry(() =>
-                        eventLog.WriteEvent(eventInstance, rawData, insertStringsSingleton));
+                        eventLog.WriteEvent(eventInstance, rawData, insertStringsSingleton)
+                    );
                 else
                     Helpers.Retry(() => eventLog.WriteEvent(eventInstance, insertStringsSingleton));
 
@@ -376,7 +385,8 @@ namespace System.Diagnostics.Tests
                 string source = "Source_" + nameof(WriteEntryWithInvalidType);
                 eventLog.Source = source;
                 Assert.Throws<InvalidEnumArgumentException>(() =>
-                    eventLog.WriteEntry(message, (EventLogEntryType)7)); // 7 is a random number which is not associated with any type in EventLogEntryType
+                    eventLog.WriteEntry(message, (EventLogEntryType)7)
+                ); // 7 is a random number which is not associated with any type in EventLogEntryType
             }
         }
 
@@ -448,7 +458,9 @@ namespace System.Diagnostics.Tests
             string source = "Source_" + nameof(WriteEventInstanceNull);
             Helpers.Retry(() =>
                 Assert.Throws<ArgumentNullException>(() =>
-                    EventLog.WriteEvent(source, null, insertStrings)));
+                    EventLog.WriteEvent(source, null, insertStrings)
+                )
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
@@ -459,7 +471,9 @@ namespace System.Diagnostics.Tests
             message[0] = new string('c', 32767);
             Helpers.Retry(() =>
                 Assert.Throws<ArgumentException>(() =>
-                    EventLog.WriteEvent(source, eventInstance, message)));
+                    EventLog.WriteEvent(source, eventInstance, message)
+                )
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]

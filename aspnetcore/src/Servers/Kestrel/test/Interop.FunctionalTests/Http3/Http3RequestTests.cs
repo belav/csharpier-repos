@@ -796,7 +796,8 @@ public class Http3RequestTests : LoggedTest
             // Act
             var ex = await Assert
                 .ThrowsAnyAsync<HttpRequestException>(() =>
-                    client.SendAsync(request, CancellationToken.None))
+                    client.SendAsync(request, CancellationToken.None)
+                )
                 .DefaultTimeout();
 
             // Assert
@@ -1815,7 +1816,8 @@ public class Http3RequestTests : LoggedTest
                             {
                                 connectionStartedTcs.SetResult();
                                 context.ConnectionClosed.Register(() =>
-                                    connectionClosedTcs.SetResult());
+                                    connectionClosedTcs.SetResult()
+                                );
                                 return next(context);
                             };
                         });

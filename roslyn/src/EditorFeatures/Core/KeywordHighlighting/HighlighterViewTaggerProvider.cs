@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
     {
         private readonly IHighlightingService _highlightingService = highlightingService;
         private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool = new(() =>
-            new List<TextSpan>());
+            new List<TextSpan>()
+        );
 
         // Whenever an edit happens, clear all highlights.  When moving the caret, preserve
         // highlights if the caret stays within an existing tag.

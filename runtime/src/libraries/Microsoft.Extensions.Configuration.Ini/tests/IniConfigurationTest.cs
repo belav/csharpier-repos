@@ -233,7 +233,8 @@ ConnectionString
             var expectedMsg = SR.Format(SR.Error_UnrecognizedLineFormat, "ConnectionString");
 
             var exception = Assert.Throws<FormatException>(() =>
-                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
+                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -250,7 +251,8 @@ DefaultConnection=TestConnectionString
             var expectedMsg = SR.Format(SR.Error_UnrecognizedLineFormat, "[ConnectionString");
 
             var exception = Assert.Throws<FormatException>(() =>
-                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
+                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -261,7 +263,8 @@ DefaultConnection=TestConnectionString
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
             var exception = Assert.Throws<ArgumentException>(() =>
-                new ConfigurationBuilder().AddIniFile(path: null));
+                new ConfigurationBuilder().AddIniFile(path: null)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -272,7 +275,8 @@ DefaultConnection=TestConnectionString
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
             var exception = Assert.Throws<ArgumentException>(() =>
-                new ConfigurationBuilder().AddIniFile(string.Empty));
+                new ConfigurationBuilder().AddIniFile(string.Empty)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -296,7 +300,8 @@ DefaultConnection=TestConnectionString
             );
 
             var exception = Assert.Throws<FormatException>(() =>
-                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
+                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -306,7 +311,8 @@ DefaultConnection=TestConnectionString
         public void IniConfiguration_Throws_On_Missing_Configuration_File()
         {
             var exception = Assert.Throws<FileNotFoundException>(() =>
-                new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build());
+                new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build()
+            );
 
             // Assert
             Assert.StartsWith(

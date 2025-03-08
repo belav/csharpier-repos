@@ -24,7 +24,8 @@ namespace System.Globalization.Tests
             //
             // On mobile, this does not throw, but instead produces a DateTime w/ 95/01/01
             Assert.ThrowsAny<FormatException>(() =>
-                DateTime.Parse(eraName + " 70/1/1 0:00:00", ciJapanese));
+                DateTime.Parse(eraName + " 70/1/1 0:00:00", ciJapanese)
+            );
         }
     }
 }

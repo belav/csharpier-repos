@@ -116,7 +116,8 @@ namespace System.ComponentModel.Composition.Hosting
                     // Add a revert action to revert the stored exports
                     // in the case that this atomicComposition gets rolled back.
                     atomicComposition.AddRevertAction(() =>
-                        this.SetSavedImport(import, savedExports, null));
+                        this.SetSavedImport(import, savedExports, null)
+                    );
                 }
 
                 if (this._importCache == null)

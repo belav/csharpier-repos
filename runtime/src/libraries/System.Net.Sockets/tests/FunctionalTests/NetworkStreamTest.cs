@@ -75,7 +75,8 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<IOException>(() =>
                 new NetworkStream(
                     new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -614,7 +615,8 @@ namespace System.Net.Sockets.Tests
                     Assert.False(serverStream.Readable);
                     Assert.False(serverStream.CanRead);
                     Assert.Throws<InvalidOperationException>(() =>
-                        serverStream.Read(new byte[1], 0, 1));
+                        serverStream.Read(new byte[1], 0, 1)
+                    );
 
                     serverStream.Readable = true;
                     Assert.True(serverStream.Readable);
@@ -629,7 +631,8 @@ namespace System.Net.Sockets.Tests
                     Assert.False(serverStream.Writeable);
                     Assert.False(serverStream.CanWrite);
                     Assert.Throws<InvalidOperationException>(() =>
-                        serverStream.Write(new byte[1], 0, 1));
+                        serverStream.Write(new byte[1], 0, 1)
+                    );
 
                     serverStream.Writeable = true;
                     Assert.True(serverStream.Writeable);

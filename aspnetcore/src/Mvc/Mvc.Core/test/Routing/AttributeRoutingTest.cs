@@ -43,7 +43,8 @@ public class AttributeRoutingTest
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<RouteCreationException>(() =>
-            route.RouteAsync(routeContext));
+            route.RouteAsync(routeContext)
+        );
 
         Assert.Equal(expectedMessage, ex.Message);
     }

@@ -53,7 +53,8 @@ namespace System.Web.Http.Routing
                 BuildWithResolver(
                     @"hello/{param:constraint}",
                     constraintResolver: constraintResolver.Object
-                ));
+                )
+            );
             Assert.Matches(
                 "The inline constraint resolver of type 'IInlineConstraintResolverProxy' was unable to resolve the following inline constraint: 'constraint'.",
                 ex.Message

@@ -668,7 +668,8 @@ c1 = c2;
                 script.Compile();
 
                 Assert.Throws<TypeLoadException>(() =>
-                    script.EvaluateAsync().GetAwaiter().GetResult());
+                    script.EvaluateAsync().GetAwaiter().GetResult()
+                );
             }
             finally
             {

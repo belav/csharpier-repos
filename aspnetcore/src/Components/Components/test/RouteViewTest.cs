@@ -61,7 +61,8 @@ public class RouteViewTest
                 ParameterView.FromDictionary(
                     new Dictionary<string, object> { { nameof(RouteView.RouteData), routeData } }
                 )
-            ));
+            )
+        );
 
         // Assert: RouteView renders LayoutView
         var batch = _renderer.Batches.Single();
@@ -147,7 +148,8 @@ public class RouteViewTest
                         { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert: uses default layout
         // Not asserting about what else gets rendered as that's covered by other tests
@@ -182,7 +184,8 @@ public class RouteViewTest
                 ParameterView.FromDictionary(
                     new Dictionary<string, object> { { nameof(RouteView.RouteData), routeData } }
                 )
-            ));
+            )
+        );
 
         // Assert: uses no layout
         // Not asserting about what else gets rendered as that's covered by other tests
@@ -216,7 +219,8 @@ public class RouteViewTest
                         { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert: uses layout specified by page
         // Not asserting about what else gets rendered as that's covered by other tests

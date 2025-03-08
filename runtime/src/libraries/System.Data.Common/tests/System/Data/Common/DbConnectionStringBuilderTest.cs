@@ -88,7 +88,8 @@ namespace System.Data.Tests.Common
                 string keyword = invalid_keywords[i];
 
                 ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                    _builder.Add(keyword, "abc"));
+                    _builder.Add(keyword, "abc")
+                );
                 // Invalid keyword, contain one or more of 'no characters',
                 // 'control characters', 'leading or trailing whitespace'
                 // or 'leading semicolons'
@@ -103,7 +104,8 @@ namespace System.Data.Tests.Common
         public void Add_Keyword_Null()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                _builder.Add(null, "abc"));
+                _builder.Add(null, "abc")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -298,7 +300,8 @@ namespace System.Data.Tests.Common
             {
                 string keyword = invalid_keywords[i];
                 ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                    _builder[keyword] = "abc");
+                    _builder[keyword] = "abc"
+                );
                 // Invalid keyword, contain one or more of 'no characters',
                 // 'control characters', 'leading or trailing whitespace'
                 // or 'leading semicolons'
@@ -343,13 +346,15 @@ namespace System.Data.Tests.Common
         public void Indexer_Keyword_Null()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                _builder[null] = "abc");
+                _builder[null] = "abc"
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
 
             ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
-                _builder[null] = null);
+                _builder[null] = null
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("keyword", ex2.ParamName);
@@ -468,7 +473,8 @@ namespace System.Data.Tests.Common
         public void Remove_Keyword_Null()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                _builder.Remove(null));
+                _builder.Remove(null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -530,7 +536,8 @@ namespace System.Data.Tests.Common
         {
             _builder["SourceType"] = "DBC";
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                _builder.ContainsKey(null));
+                _builder.ContainsKey(null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -671,7 +678,8 @@ namespace System.Data.Tests.Common
         public void AppendKeyValuePair1_Builder_Null()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost"));
+                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("builder", ex.ParamName);
@@ -682,7 +690,8 @@ namespace System.Data.Tests.Common
         {
             StringBuilder sb = new StringBuilder();
             ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost"));
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost")
+            );
             // Expecting non-empty string for 'keyName' parameter
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -694,7 +703,8 @@ namespace System.Data.Tests.Common
         {
             StringBuilder sb = new StringBuilder();
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost"));
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyName", ex.ParamName);
@@ -1734,13 +1744,15 @@ namespace System.Data.Tests.Common
         public void AppendKeyValuePair2_Builder_Null()
         {
             ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", true));
+                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", true)
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("builder", ex1.ParamName);
 
             ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", false));
+                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", false)
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("builder", ex2.ParamName);
@@ -1752,14 +1764,16 @@ namespace System.Data.Tests.Common
             StringBuilder sb = new StringBuilder();
 
             ArgumentException ex1 = Assert.Throws<ArgumentException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", true));
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", true)
+            );
             // Expecting non-empty string for 'keyName' parameter
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Null(ex1.ParamName);
 
             ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", false));
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", false)
+            );
             // Expecting non-empty string for 'keyName' parameter
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1771,13 +1785,15 @@ namespace System.Data.Tests.Common
         {
             StringBuilder sb = new StringBuilder();
             ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", true));
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", true)
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("keyName", ex1.ParamName);
 
             ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
-                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", false));
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", false)
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("keyName", ex2.ParamName);
@@ -1907,7 +1923,8 @@ namespace System.Data.Tests.Common
         public void TryGetValue_Keyword_Null()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                _builder.TryGetValue(null, out object value));
+                _builder.TryGetValue(null, out object value)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -2545,7 +2562,8 @@ namespace System.Data.Tests.Common
                     continue;
 
                 ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                    sb.ConnectionString = test1[0]);
+                    sb.ConnectionString = test1[0]
+                );
                 // Format of the initialization string does
                 // not conform to specification starting
                 // at index 0

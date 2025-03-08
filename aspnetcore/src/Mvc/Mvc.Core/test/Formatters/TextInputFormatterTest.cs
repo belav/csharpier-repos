@@ -57,7 +57,8 @@ public class TextInputFormatterTest
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() =>
-            formatter.TestSelectCharacterEncoding(context));
+            formatter.TestSelectCharacterEncoding(context)
+        );
     }
 
     [Theory]

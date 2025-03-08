@@ -203,11 +203,13 @@ public class ViewDataDictionaryOfTModelTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            new ViewDataDictionary<string>(source));
+            new ViewDataDictionary<string>(source)
+        );
         Assert.Equal(expectedMessage, exception.Message);
 
         exception = Assert.Throws<InvalidOperationException>(() =>
-            new ViewDataDictionary<string>(source, model: 24));
+            new ViewDataDictionary<string>(source, model: 24)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 

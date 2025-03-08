@@ -17,7 +17,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
             RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Last_when_no_order_by(async))
+                    base.Last_when_no_order_by(async)
+                )
             ).Message
         );
 
@@ -26,7 +27,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
             RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.LastOrDefault)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.LastOrDefault_when_no_order_by(async))
+                    base.LastOrDefault_when_no_order_by(async)
+                )
             ).Message
         );
 
@@ -35,7 +37,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
             CoreStrings.EntityEqualityOnKeylessEntityNotSupported("Equals", nameof(CustomerQuery)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Contains_over_keyless_entity_throws(async))
+                    base.Contains_over_keyless_entity_throws(async)
+                )
             ).Message
         );
 
@@ -44,7 +47,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
             "Nullable object must have a value.",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Min_no_data_subquery(async))
+                    base.Min_no_data_subquery(async)
+                )
             ).Message
         );
 
@@ -53,7 +57,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
             "Nullable object must have a value.",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Max_no_data_subquery(async))
+                    base.Max_no_data_subquery(async)
+                )
             ).Message
         );
 
@@ -62,7 +67,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
             "Nullable object must have a value.",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Average_no_data_subquery(async))
+                    base.Average_no_data_subquery(async)
+                )
             ).Message
         );
 

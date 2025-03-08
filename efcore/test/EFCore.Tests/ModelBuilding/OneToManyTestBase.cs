@@ -1039,7 +1039,8 @@ public abstract partial class ModelBuilderTest
                             .Entity<Customer>()
                             .HasNoKey()
                             .HasMany(c => c.Orders)
-                            .WithOne(o => o.Customer))
+                            .WithOne(o => o.Customer)
+                    )
                     .Message
             );
         }
@@ -2168,7 +2169,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<Category>().HasMany(o => o.Products).WithOne())
+                        modelBuilder.Entity<Category>().HasMany(o => o.Products).WithOne()
+                    )
                     .Message
             );
         }
@@ -2201,7 +2203,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<Nob>().HasMany(e => e.Hobs).WithOne(e => e.Nob))
+                        modelBuilder.Entity<Nob>().HasMany(e => e.Hobs).WithOne(e => e.Nob)
+                    )
                     .Message
             );
         }
@@ -2220,7 +2223,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<Dr>().HasMany<Dre>(d => d.Jrs))
+                        modelBuilder.Entity<Dr>().HasMany<Dre>(d => d.Jrs)
+                    )
                     .Message
             );
         }
@@ -3056,7 +3060,8 @@ public abstract partial class ModelBuilderTest
                         modelBuilder
                             .Entity<NavDependent>()
                             .Navigation(e => e.Name)
-                            .UsePropertyAccessMode(PropertyAccessMode.Property))
+                            .UsePropertyAccessMode(PropertyAccessMode.Property)
+                    )
                     .Message
             );
         }
@@ -3095,7 +3100,8 @@ public abstract partial class ModelBuilderTest
                         modelBuilder
                             .Entity<KeylessCollectionNavigation>()
                             .HasNoKey()
-                            .HasMany(e => e.Stores))
+                            .HasMany(e => e.Stores)
+                    )
                     .Message
             );
         }
@@ -3116,7 +3122,8 @@ public abstract partial class ModelBuilderTest
                             .Entity<KeylessCollectionNavigation>()
                             .HasNoKey()
                             .HasOne(e => e.Reference)
-                            .WithMany(e => e.Collection))
+                            .WithMany(e => e.Collection)
+                    )
                     .Message
             );
         }
@@ -3136,7 +3143,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<KeylessCollectionNavigation>().HasNoKey())
+                        modelBuilder.Entity<KeylessCollectionNavigation>().HasNoKey()
+                    )
                     .Message
             );
         }
@@ -3158,7 +3166,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<KeylessCollectionNavigation>().HasNoKey())
+                        modelBuilder.Entity<KeylessCollectionNavigation>().HasNoKey()
+                    )
                     .Message
             );
         }

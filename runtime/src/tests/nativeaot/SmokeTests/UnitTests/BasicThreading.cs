@@ -355,7 +355,8 @@ class ThreadTest
     {
         Thread t = null;
         t = new Thread(() =>
-            Expect(Thread.CurrentThread == t, "Expected CurrentThread == t on thread t"));
+            Expect(Thread.CurrentThread == t, "Expected CurrentThread == t on thread t")
+        );
         t.Start();
         s_startedThreads.Add(t);
 
@@ -434,7 +435,8 @@ class ThreadTest
 
         // Thread pool thread
         Task.Factory.StartNew(() =>
-                Expect(Thread.CurrentThread.IsBackground, "Expected IsBackground == true"))
+                Expect(Thread.CurrentThread.IsBackground, "Expected IsBackground == true")
+            )
             .Wait();
 
         // Resurrected threads

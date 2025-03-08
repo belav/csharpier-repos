@@ -1197,7 +1197,8 @@ namespace MonoTests.System.Drawing
         public void Equals_NullGraphics()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new Region().Equals(null, Graphics.FromImage(new Bitmap(10, 10))));
+                new Region().Equals(null, Graphics.FromImage(new Bitmap(10, 10)))
+            );
         }
 
         [Test]

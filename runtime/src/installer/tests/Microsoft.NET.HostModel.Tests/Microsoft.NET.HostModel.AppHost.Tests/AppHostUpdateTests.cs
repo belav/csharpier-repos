@@ -76,7 +76,8 @@ namespace Microsoft.NET.HostModel.Tests
                         sourceAppHostMock,
                         destinationFilePath,
                         appBinaryFilePath
-                    ));
+                    )
+                );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
             }
@@ -99,7 +100,8 @@ namespace Microsoft.NET.HostModel.Tests
                         sourceAppHostMock,
                         destinationFilePath,
                         appBinaryFilePath
-                    ));
+                    )
+                );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
             }
@@ -162,7 +164,8 @@ namespace Microsoft.NET.HostModel.Tests
                         destinationFilePath,
                         appBinaryFilePath,
                         windowsGraphicalUserInterface: true
-                    ));
+                    )
+                );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
             }
@@ -194,7 +197,8 @@ namespace Microsoft.NET.HostModel.Tests
                         destinationFilePath,
                         appBinaryFilePath,
                         windowsGraphicalUserInterface: true
-                    ));
+                    )
+                );
 
                 File.Exists(destinationFilePath).Should().BeFalse();
             }
@@ -381,7 +385,8 @@ namespace Microsoft.NET.HostModel.Tests
                         appBinaryFilePath,
                         windowsGraphicalUserInterface: false,
                         enableMacOSCodeSign: true
-                    ));
+                    )
+                );
                 Assert.Contains($"{destinationFilePath}: is already signed", exception.Message);
                 Assert.True(
                     exception.ExitCode == 1,

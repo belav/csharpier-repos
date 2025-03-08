@@ -53,7 +53,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new StringLengthAttribute(-1);
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("Any", new ValidationContext(new object())));
+                attribute.Validate("Any", new ValidationContext(new object()))
+            );
         }
 
         [Fact]
@@ -61,7 +62,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new StringLengthAttribute(42) { MinimumLength = 43 };
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("Any", new ValidationContext(new object())));
+                attribute.Validate("Any", new ValidationContext(new object()))
+            );
         }
 
         [Fact]
@@ -69,7 +71,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new StringLengthAttribute(42);
             Assert.Throws<InvalidCastException>(() =>
-                attribute.Validate(new object(), new ValidationContext(new object())));
+                attribute.Validate(new object(), new ValidationContext(new object()))
+            );
         }
     }
 }

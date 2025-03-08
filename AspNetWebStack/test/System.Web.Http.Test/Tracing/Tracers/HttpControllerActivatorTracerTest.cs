@@ -113,7 +113,8 @@ namespace System.Web.Http.Tracing.Tracers
                     request,
                     controllerDescriptor: null,
                     controllerType: mockController.Object.GetType()
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

@@ -175,7 +175,8 @@ namespace System.Composition.UnitTests
                 typeof(SharedBoundedByDC)
             );
             var x = Assert.Throws<CompositionFailedException>(() =>
-                container.GetExport<SharedBoundedByDC>());
+                container.GetExport<SharedBoundedByDC>()
+            );
         }
 
         [Fact]

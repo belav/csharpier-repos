@@ -343,7 +343,8 @@ namespace System.Collections.Tests
                 if (!DefaultValueAllowed)
                 {
                     Assert.Throws<ArgumentNullException>(() =>
-                        dictionary[default(TKey)] = CreateTValue(3));
+                        dictionary[default(TKey)] = CreateTValue(3)
+                    );
                 }
                 else
                 {
@@ -365,7 +366,8 @@ namespace System.Collections.Tests
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
                 TKey missingKey = GetNewKey(dictionary);
                 Assert.Throws<NotSupportedException>(() =>
-                    dictionary[missingKey] = CreateTValue(5312));
+                    dictionary[missingKey] = CreateTValue(5312)
+                );
             }
         }
 
@@ -618,7 +620,8 @@ namespace System.Collections.Tests
             {
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
                 Assert.Throws<NotSupportedException>(() =>
-                    dictionary.Add(CreateTKey(0), CreateTValue(0)));
+                    dictionary.Add(CreateTKey(0), CreateTValue(0))
+                );
             }
         }
 
@@ -716,8 +719,8 @@ namespace System.Collections.Tests
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
                 TKey missingKey = GetNewKey(dictionary);
                 dictionary.Add(missingKey, CreateTValue(34251));
-                Assert.Throws<ArgumentException>(() =>
-                    dictionary.Add(missingKey, CreateTValue(134)));
+                Assert.Throws<ArgumentException>(() => dictionary.Add(missingKey, CreateTValue(134))
+                );
             }
         }
 
@@ -1010,7 +1013,8 @@ namespace System.Collections.Tests
             else
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    dictionary.TryGetValue(default(TKey), out outValue));
+                    dictionary.TryGetValue(default(TKey), out outValue)
+                );
             }
         }
 
@@ -1113,7 +1117,8 @@ namespace System.Collections.Tests
             {
                 if (DefaultValueWhenNotAllowed_Throws)
                     Assert.Throws<ArgumentNullException>(() =>
-                        collection.Contains(default(KeyValuePair<TKey, TValue>)));
+                        collection.Contains(default(KeyValuePair<TKey, TValue>))
+                    );
                 else
                     Assert.False(collection.Remove(default(KeyValuePair<TKey, TValue>)));
             }

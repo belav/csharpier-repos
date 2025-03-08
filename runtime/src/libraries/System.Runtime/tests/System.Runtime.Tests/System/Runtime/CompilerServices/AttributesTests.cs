@@ -114,15 +114,11 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal(221360928940349194254m, attrUnsigned.Value);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new DecimalConstantAttribute(scale: 50, sign: 55, hi: 60, mid: 65, low: 70));
+                new DecimalConstantAttribute(scale: 50, sign: 55, hi: 60, mid: 65, low: 70)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new DecimalConstantAttribute(
-                    scale: 100,
-                    sign: 101,
-                    hi: 102u,
-                    mid: 103u,
-                    low: 104u
-                ));
+                new DecimalConstantAttribute(scale: 100, sign: 101, hi: 102u, mid: 103u, low: 104u)
+            );
         }
 
         [Fact]

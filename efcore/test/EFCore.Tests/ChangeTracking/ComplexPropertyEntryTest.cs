@@ -254,21 +254,24 @@ public class ComplexPropertyEntryTest
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.Property("Chimp").Metadata.Name)
+                    complexEntry.Property("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.Property("Chimp").Metadata.Name)
+                    complexEntry.Property("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.Property<int>("Chimp").Metadata.Name)
+                    complexEntry.Property<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -345,7 +348,8 @@ public class ComplexPropertyEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.ComplexProperty("Chimp").Metadata.Name)
+                    complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -355,7 +359,8 @@ public class ComplexPropertyEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.ComplexProperty("Chimp").Metadata.Name)
+                    complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -365,7 +370,8 @@ public class ComplexPropertyEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.ComplexProperty<int>("Chimp").Metadata.Name)
+                    complexEntry.ComplexProperty<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -640,21 +646,24 @@ public class ComplexPropertyEntryTest
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.Property("Chimp").Metadata.Name)
+                    complexEntry.Property("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.Property("Chimp").Metadata.Name)
+                    complexEntry.Property("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.Property<int>("Chimp").Metadata.Name)
+                    complexEntry.Property<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -736,7 +745,8 @@ public class ComplexPropertyEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.ComplexProperty("Chimp").Metadata.Name)
+                    complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -746,7 +756,8 @@ public class ComplexPropertyEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.ComplexProperty("Chimp").Metadata.Name)
+                    complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -756,7 +767,8 @@ public class ComplexPropertyEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    complexEntry.ComplexProperty<int>("Chimp").Metadata.Name)
+                    complexEntry.ComplexProperty<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }

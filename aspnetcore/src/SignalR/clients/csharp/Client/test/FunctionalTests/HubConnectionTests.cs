@@ -1356,7 +1356,8 @@ public class HubConnectionTests : FunctionalTestBase
                 cts.Cancel();
 
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    connection.StreamAsChannelAsync<int>("Stream", 5, cts.Token).DefaultTimeout());
+                    connection.StreamAsChannelAsync<int>("Stream", 5, cts.Token).DefaultTimeout()
+                );
             }
             catch (Exception ex)
             {
@@ -1404,7 +1405,8 @@ public class HubConnectionTests : FunctionalTestBase
                     .DefaultTimeout();
 
                 var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout());
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                );
                 Assert.Equal(
                     "An unexpected error occurred invoking 'StreamException' on the server. InvalidOperationException: Error occurred while streaming.",
                     ex.Message
@@ -1622,7 +1624,8 @@ public class HubConnectionTests : FunctionalTestBase
 
                 var channel = await connection.StreamAsChannelAsync<int>("!@#$%");
                 var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout());
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                );
                 Assert.Equal(
                     "Failed to invoke '!@#$%' due to an error on the server. HubException: Method does not exist.",
                     ex.Message
@@ -1666,7 +1669,8 @@ public class HubConnectionTests : FunctionalTestBase
 
                 var channel = await connection.StreamAsChannelAsync<int>("Stream", 42, 42);
                 var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout());
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                );
                 Assert.Equal(
                     "Failed to invoke 'Stream' due to an error on the server. InvalidDataException: Invocation provides 2 argument(s) but target expects 1.",
                     ex.Message
@@ -1710,7 +1714,8 @@ public class HubConnectionTests : FunctionalTestBase
 
                 var channel = await connection.StreamAsChannelAsync<int>("Stream", "xyz");
                 var ex = await Assert.ThrowsAsync<HubException>(() =>
-                    channel.ReadAndCollectAllAsync().DefaultTimeout());
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
+                );
                 Assert.Equal(
                     "Failed to invoke 'Stream' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
                     ex.Message
@@ -2048,7 +2053,8 @@ public class HubConnectionTests : FunctionalTestBase
             var hubException = await Assert.ThrowsAsync<HubException>(() =>
                 connection
                     .InvokeAsync<int>("StreamEcho", new List<string> { "1", "2" })
-                    .DefaultTimeout());
+                    .DefaultTimeout()
+            );
             Assert.Equal(
                 "Failed to invoke 'StreamEcho' due to an error on the server. InvalidDataException: Invocation provides 1 argument(s) but target expects 0.",
                 hubException.Message
@@ -2127,7 +2133,8 @@ public class HubConnectionTests : FunctionalTestBase
             try
             {
                 var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
-                    hubConnection.StartAsync().DefaultTimeout());
+                    hubConnection.StartAsync().DefaultTimeout()
+                );
                 Assert.Equal(
                     "Response status code does not indicate success: 401 (Unauthorized).",
                     ex.Message
@@ -2613,7 +2620,8 @@ public class HubConnectionTests : FunctionalTestBase
                 .Build();
 
             var ex = await Assert.ThrowsAsync<AggregateException>(() =>
-                hubConnection.StartAsync().DefaultTimeout());
+                hubConnection.StartAsync().DefaultTimeout()
+            );
             Assert.Contains(
                 "Negotiate Authentication doesn't work with HTTP/2 or higher.",
                 ex.Message

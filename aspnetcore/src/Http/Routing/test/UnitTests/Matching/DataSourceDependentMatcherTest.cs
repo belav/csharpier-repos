@@ -199,7 +199,8 @@ public class DataSourceDependentMatcherTest
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create));
+            new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create)
+        );
         Assert.Equal(expectedError, exception.Message);
     }
 
@@ -246,11 +247,8 @@ public class DataSourceDependentMatcherTest
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            new DataSourceDependentMatcher(
-                compositeDataSource,
-                lifetime,
-                TestMatcherBuilder.Create
-            ));
+            new DataSourceDependentMatcher(compositeDataSource, lifetime, TestMatcherBuilder.Create)
+        );
         Assert.Equal(expectedError, exception.Message);
     }
 
@@ -289,7 +287,8 @@ public class DataSourceDependentMatcherTest
                     new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
                     "/bar"
                 )
-            ));
+            )
+        );
         Assert.Equal(expectedError, exception.InnerException.Message);
     }
 

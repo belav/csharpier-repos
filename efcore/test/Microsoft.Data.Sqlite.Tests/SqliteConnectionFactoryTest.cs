@@ -208,7 +208,8 @@ public class SqliteConnectionFactoryTest : IDisposable
             }
 
             ex = Assert.Throws<SqliteException>(() =>
-                connection1.ExecuteNonQuery("SELECT load_extension('unknown');"));
+                connection1.ExecuteNonQuery("SELECT load_extension('unknown');")
+            );
             disabledMessage = ex.Message;
 
             connection1.EnableExtensions();
@@ -219,7 +220,8 @@ public class SqliteConnectionFactoryTest : IDisposable
         Assert.Same(db, connection2.Handle);
 
         ex = Assert.Throws<SqliteException>(() =>
-            connection2.ExecuteNonQuery("SELECT load_extension('unknown');"));
+            connection2.ExecuteNonQuery("SELECT load_extension('unknown');")
+        );
         Assert.Equal(disabledMessage, ex.Message);
     }
 

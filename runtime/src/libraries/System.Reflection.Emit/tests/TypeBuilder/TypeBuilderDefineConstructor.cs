@@ -262,7 +262,8 @@ namespace System.Reflection.Emit.Tests
                     MethodAttributes.Public,
                     CallingConventions.Standard,
                     new Type[0]
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -276,7 +277,8 @@ namespace System.Reflection.Emit.Tests
                     MethodAttributes.Public,
                     CallingConventions.Standard,
                     new Type[0]
-                ));
+                )
+            );
         }
 
         [Fact]

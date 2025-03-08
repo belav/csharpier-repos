@@ -124,11 +124,14 @@ public class MethodConstraintsTests
     public static unsafe void TestInvalidInstantiations()
     {
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithNoConstraint, typeof(Object), typeof(Object)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithNoConstraint, typeof(Object), typeof(Object))
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithNoConstraint, typeof(void)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithNoConstraint, typeof(void))
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithNoConstraint, typeof(int*)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithNoConstraint, typeof(int*))
+        );
     }
 
     [TestMethod]
@@ -141,13 +144,17 @@ public class MethodConstraintsTests
 
         // These should throw
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithClassConstraint, typeof(int)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithClassConstraint, typeof(int))
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithNewConstraint, typeof(TypeWithPrivateCtor)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithNewConstraint, typeof(TypeWithPrivateCtor))
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithStructConstraint, typeof(Base)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithStructConstraint, typeof(Base))
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithStructConstraint, typeof(int?)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithStructConstraint, typeof(int?))
+        );
     }
 
     [TestMethod]
@@ -210,48 +217,57 @@ public class MethodConstraintsTests
                 TypeOf.MCT_TypeWithSelfReferenceConstraint,
                 typeof(Base),
                 typeof(Derived)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithVariance, typeof(IBar<Derived>), typeof(Base)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithVariance, typeof(IBar<Derived>), typeof(Base))
+        );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
                 TypeOf.MCT_TypeWithVariance,
                 typeof(TypeImplementingIBar<Derived>),
                 typeof(Base)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
                 TypeOf.MCT_TypeWithVariance,
                 typeof(TypeImplementingIBarDerived),
                 typeof(Base)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
                 TypeOf.MCT_TypeWithRecursiveConstraints,
                 typeof(TypeWithNoConstraint<Derived>),
                 typeof(Base)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
                 TypeOf.MCT_TypeWithRecursiveConstraints,
                 typeof(TypeWithNoConstraint<Base>),
                 typeof(Derived)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithRecursiveConstraints, typeof(Base), typeof(Base)));
+            MakeGenericMethod(TypeOf.MCT_TypeWithRecursiveConstraints, typeof(Base), typeof(Base))
+        );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
                 TypeOf.MCT_TypeWithSelfReferenceIEnumerableConstraint,
                 typeof(UInt32[]),
                 typeof(Int16)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
                 TypeOf.MCT_GenericType.MakeGenericType(
                     new Type[] { typeof(string), typeof(string) }
                 ),
                 typeof(object)
-            ));
+            )
+        );
     }
 
     [TestMethod]
@@ -265,6 +281,7 @@ public class MethodConstraintsTests
 
         // not as derived type check
         Assert.Throws<ArgumentException>(() =>
-            MakeGenericMethod(TypeOf.MCT_TypeWithMDArrayConstraints, typeof(Base[][,,])));
+            MakeGenericMethod(TypeOf.MCT_TypeWithMDArrayConstraints, typeof(Base[][,,]))
+        );
     }
 }

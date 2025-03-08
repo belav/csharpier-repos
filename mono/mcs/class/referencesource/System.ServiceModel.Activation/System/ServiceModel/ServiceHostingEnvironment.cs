@@ -613,9 +613,8 @@ namespace System.ServiceModel
             }
 
             FxTrace.Trace.SetAnnotation(() =>
-                System.ServiceModel.Diagnostics.TraceUtility.GetAnnotation(
-                    OperationContext.Current
-                ));
+                System.ServiceModel.Diagnostics.TraceUtility.GetAnnotation(OperationContext.Current)
+            );
 
             lock (ThisLock)
             {

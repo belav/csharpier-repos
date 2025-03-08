@@ -706,7 +706,8 @@ public class CascadingParameterTest
 
         // Act/Assert: Throws because this is where it tries to attach to the CascadingValueSource
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            renderer.AssignRootComponentId(component));
+            renderer.AssignRootComponentId(component)
+        );
         Assert.Contains("The current thread is not associated with the Dispatcher", ex.Message);
     }
 
@@ -729,7 +730,8 @@ public class CascadingParameterTest
 
         // Act/Assert 1: Initial render
         var componentId = await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.AssignRootComponentId(component));
+            renderer.AssignRootComponentId(component)
+        );
         renderer.RenderRootComponent(componentId);
         var firstBatch = renderer.Batches.Single();
         var diff = firstBatch.DiffsByComponentId[componentId].Single();
@@ -824,7 +826,8 @@ public class CascadingParameterTest
 
         // Assert: We see the supplied value, and the factory isn't used (it would have thrown)
         var componentId = await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.AssignRootComponentId(component));
+            renderer.AssignRootComponentId(component)
+        );
         renderer.RenderRootComponent(componentId);
         Assert.Same(updatedValue, component.GetCascadingParameterValue());
     }

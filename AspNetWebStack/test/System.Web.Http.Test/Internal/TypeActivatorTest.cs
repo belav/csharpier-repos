@@ -126,7 +126,8 @@ namespace System.Web.Http.Internal
 
             // HttpActionDescriptor is abstract
             Assert.Throws<InvalidOperationException>(() =>
-                TypeActivator.Create<HttpActionDescriptor>());
+                TypeActivator.Create<HttpActionDescriptor>()
+            );
         }
 
         [Theory]

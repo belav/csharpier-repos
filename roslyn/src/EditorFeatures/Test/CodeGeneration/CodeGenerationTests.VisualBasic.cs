@@ -1788,7 +1788,8 @@ End Class";
                         expected,
                         typeof(SerializableAttribute),
                         VB.SyntaxFactory.Token(VB.SyntaxKind.ReturnKeyword)
-                    ));
+                    )
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeGeneration)]

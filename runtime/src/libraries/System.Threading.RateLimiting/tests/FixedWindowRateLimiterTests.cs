@@ -413,7 +413,8 @@ namespace System.Threading.RateLimiting.Test
                 }
             );
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                await limiter.AcquireAsync(2));
+                await limiter.AcquireAsync(2)
+            );
         }
 
         [Fact]
@@ -446,7 +447,8 @@ namespace System.Threading.RateLimiting.Test
                 }
             );
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                await limiter.AcquireAsync(-1));
+                await limiter.AcquireAsync(-1)
+            );
         }
 
         [Fact]
@@ -647,7 +649,8 @@ namespace System.Threading.RateLimiting.Test
             cts.Cancel();
 
             var ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                limiter.AcquireAsync(1, cts.Token).AsTask());
+                limiter.AcquireAsync(1, cts.Token).AsTask()
+            );
             Assert.Equal(cts.Token, ex.CancellationToken);
 
             lease.Dispose();
@@ -756,8 +759,8 @@ namespace System.Threading.RateLimiting.Test
 
             // Throws after disposal
             Assert.Throws<ObjectDisposedException>(() => limiter.AttemptAcquire(1));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                limiter.AcquireAsync(1).AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => limiter.AcquireAsync(1).AsTask()
+            );
         }
 
         [Fact]
@@ -792,8 +795,8 @@ namespace System.Threading.RateLimiting.Test
 
             // Throws after disposal
             Assert.Throws<ObjectDisposedException>(() => limiter.AttemptAcquire(1));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                limiter.AcquireAsync(1).AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => limiter.AcquireAsync(1).AsTask()
+            );
         }
 
         [Fact]

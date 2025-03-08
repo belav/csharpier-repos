@@ -488,7 +488,8 @@ namespace System.Threading.Tests
         private static void EnsurePostPhaseThrew(Barrier barrier)
         {
             BarrierPostPhaseException be = Assert.Throws<BarrierPostPhaseException>(() =>
-                barrier.SignalAndWait());
+                barrier.SignalAndWait()
+            );
             Assert.IsType<InvalidOperationException>(be.InnerException);
         }
 

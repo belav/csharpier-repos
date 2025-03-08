@@ -100,7 +100,8 @@ namespace System.IO.Tests
                 }
                 else
                     Assert.Throws<UnauthorizedAccessException>(() =>
-                        File.WriteAllBytes(path, "text"u8.ToArray()));
+                        File.WriteAllBytes(path, "text"u8.ToArray())
+                    );
             }
             finally
             {

@@ -103,7 +103,8 @@ public class RoutePatternFactoryTest
                 defaults,
                 constraints,
                 original.PathSegments
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(
@@ -160,7 +161,8 @@ public class RoutePatternFactoryTest
                 defaults,
                 constraints,
                 original.PathSegments
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal("An optional parameter cannot have default value.", ex.Message);
@@ -511,7 +513,8 @@ public class RoutePatternFactoryTest
                 defaults,
                 constraints,
                 original.PathSegments
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(
@@ -950,8 +953,8 @@ public class RoutePatternFactoryTest
         var left = RoutePatternFactory.Parse("/{id}");
         var right = RoutePatternFactory.Parse("/{ID}");
 
-        var ex = Assert.Throws<RoutePatternException>(() =>
-            RoutePatternFactory.Combine(left, right));
+        var ex = Assert.Throws<RoutePatternException>(() => RoutePatternFactory.Combine(left, right)
+        );
 
         Assert.Equal("/{id}/{ID}", ex.Pattern);
         Assert.Equal(
@@ -1017,7 +1020,8 @@ public class RoutePatternFactoryTest
         var right = RoutePatternFactory.Parse("/b", defaults: null, parameterPolicies: policies);
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Combine(left, right));
+            RoutePatternFactory.Combine(left, right)
+        );
         Assert.Equal(
             "MapGroup cannot build a pattern for '/a/b' because the 'RoutePattern.ParameterPolicies' dictionary key 'X' has multiple values.",
             ex.Message
@@ -1037,7 +1041,8 @@ public class RoutePatternFactoryTest
         );
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Combine(left, right));
+            RoutePatternFactory.Combine(left, right)
+        );
         Assert.Equal(
             "MapGroup cannot build a pattern for '/a/{x=foo}/b' because the 'RoutePattern.Defaults' dictionary key 'X' has multiple values.",
             ex.Message
@@ -1064,7 +1069,8 @@ public class RoutePatternFactoryTest
         );
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Combine(left, right));
+            RoutePatternFactory.Combine(left, right)
+        );
         Assert.Equal(
             "MapGroup cannot build a pattern for '/a/b' because the 'RoutePattern.RequiredValues' dictionary key 'X' has multiple values.",
             ex.Message
@@ -1084,7 +1090,8 @@ public class RoutePatternFactoryTest
         );
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Combine(left, right));
+            RoutePatternFactory.Combine(left, right)
+        );
         Assert.Equal(
             "MapGroup cannot build a pattern for '/a/{x:string}/b' because the 'RoutePattern.ParameterPolicies' dictionary key 'X' has multiple values.",
             ex.Message

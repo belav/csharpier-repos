@@ -223,9 +223,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var serviceProvider = new EmptyServiceProvider();
 
         var exNullAction = Assert.Throws<ArgumentNullException>(() =>
-            RequestDelegateFactory.Create(handler: null!));
+            RequestDelegateFactory.Create(handler: null!)
+        );
         var exNullMethodInfo1 = Assert.Throws<ArgumentNullException>(() =>
-            RequestDelegateFactory.Create(methodInfo: null!));
+            RequestDelegateFactory.Create(methodInfo: null!)
+        );
 
         Assert.Equal("handler", exNullAction.ParamName);
         Assert.Equal("methodInfo", exNullMethodInfo1.ParamName);
@@ -306,7 +308,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             RequestDelegateFactory.Create(
                 ([FromRoute] int id) => { },
                 new() { RouteParameterNames = Array.Empty<string>() }
-            ));
+            )
+        );
 
         Assert.Equal("'id' is not a route parameter.", ex.Message);
     }
@@ -1032,7 +1035,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     )
     {
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(action));
+            RequestDelegateFactory.Create(action)
+        );
         Assert.Equal(
             "notTryParsable must have a valid TryParse method to support converting from a string. No public static bool object.TryParse(string, out object) method found for notTryParsable.",
             ex.Message
@@ -1045,7 +1049,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var unnamedParameter = Expression.Parameter(typeof(int));
         var lambda = Expression.Lambda(Expression.Block(), unnamedParameter);
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(lambda.Compile()));
+            RequestDelegateFactory.Create(lambda.Compile())
+        );
         Assert.Equal(
             "Encountered a parameter of type 'System.Runtime.CompilerServices.Closure' without a name. Parameters must have a name.",
             ex.Message
@@ -1074,7 +1079,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var requestDelegate = factoryResult.RequestDelegate;
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+            requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1237,12 +1243,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Span<byte> Method2() => "hello world"u8.ToArray();
         RefStruct Method3() => new("hello world"u8);
 
-        var ex1 = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(Method1));
-        var ex2 = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(Method2));
-        var ex3 = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(Method3));
+        var ex1 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method1)
+        );
+        var ex2 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method2)
+        );
+        var ex3 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method3)
+        );
 
         Assert.Equal("Unsupported return type: System.ReadOnlySpan<byte>", ex1.Message);
         Assert.Equal("Unsupported return type: System.Span<byte>", ex2.Message);
@@ -1267,11 +1273,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestBothInvalidAction(Todo value1, [FromBody] int value2) { }
 
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestAttributedInvalidAction));
+            RequestDelegateFactory.Create(TestAttributedInvalidAction)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestInferredInvalidAction));
+            RequestDelegateFactory.Create(TestInferredInvalidAction)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestBothInvalidAction));
+            RequestDelegateFactory.Create(TestBothInvalidAction)
+        );
     }
 
     [Fact]
@@ -1281,9 +1290,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestTryParseClass(BadTryParseClass value1) { }
 
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestTryParseStruct));
+            RequestDelegateFactory.Create(TestTryParseStruct)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestTryParseClass));
+            RequestDelegateFactory.Create(TestTryParseClass)
+        );
     }
 
     private struct BadTryParseStruct
@@ -1306,9 +1317,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestBindAsyncClass(BadBindAsyncClass value1) { }
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestBindAsyncStruct));
+            RequestDelegateFactory.Create(TestBindAsyncStruct)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestBindAsyncClass));
+            RequestDelegateFactory.Create(TestBindAsyncClass)
+        );
     }
 
     private struct BadBindAsyncStruct
@@ -1394,7 +1407,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     )
     {
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(@delegate));
+            RequestDelegateFactory.Create(@delegate)
+        );
         Assert.Equal(errorMessage, exception.Message);
     }
 
@@ -1407,9 +1421,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         ) { }
 
         Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(TestNestedParameterListRecordOnType));
+            RequestDelegateFactory.Create(TestNestedParameterListRecordOnType)
+        );
         Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(TestNestedParameterListRecordOnArgument));
+            RequestDelegateFactory.Create(TestNestedParameterListRecordOnArgument)
+        );
     }
 
     private record ParametersListWithImplictFromService(
@@ -1541,11 +1557,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void RefMethod(ref string foo) { }
 
         var outParamException = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(OutMethod));
+            RequestDelegateFactory.Create(OutMethod)
+        );
         var inParamException = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(InMethod));
+            RequestDelegateFactory.Create(InMethod)
+        );
         var refParamException = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(RefMethod));
+            RequestDelegateFactory.Create(RefMethod)
+        );
 
         var typeName = typeof(string).MakeByRefType().Name;
 
@@ -1603,7 +1622,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         var requestDelegateResult = RequestDelegateFactory.Create(action);
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            requestDelegateResult.RequestDelegate(httpContext));
+            requestDelegateResult.RequestDelegate(httpContext)
+        );
         Assert.Equal(
             "No service for type 'Microsoft.AspNetCore.Routing.Internal.RequestDelegateFactoryTests+MyService' has been registered.",
             ex.Message
@@ -1871,7 +1891,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             RequestDelegateFactory.Create(
                 TestAction,
                 new() { ServiceProvider = httpContext.RequestServices }
-            ));
+            )
+        );
     }
 
     public static IEnumerable<object[]> CustomResults
@@ -2030,7 +2051,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var requestDelegate = factoryResult.RequestDelegate;
 
         var exception = await Assert.ThrowsAnyAsync<InvalidOperationException>(async () =>
-            await requestDelegate(httpContext));
+            await requestDelegate(httpContext)
+        );
         Assert.Contains(message, exception.Message);
     }
 
@@ -2783,29 +2805,41 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestJsonAndFormWithAttribute(Todo value1, [FromForm] string value2) { }
 
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestFormFileAndJson));
+            RequestDelegateFactory.Create(TestFormFileAndJson)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestFormFilesAndJson));
+            RequestDelegateFactory.Create(TestFormFilesAndJson)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestFormFileAndJsonWithAttribute));
+            RequestDelegateFactory.Create(TestFormFileAndJsonWithAttribute)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestFormFileCollectionAndJson));
+            RequestDelegateFactory.Create(TestFormFileCollectionAndJson)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestFormCollectionAndJson));
+            RequestDelegateFactory.Create(TestFormCollectionAndJson)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestFormWithAttributeAndJson));
+            RequestDelegateFactory.Create(TestFormWithAttributeAndJson)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestJsonAndFormFile));
+            RequestDelegateFactory.Create(TestJsonAndFormFile)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestJsonAndFormFiles));
+            RequestDelegateFactory.Create(TestJsonAndFormFiles)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestJsonAndFormFileCollection));
+            RequestDelegateFactory.Create(TestJsonAndFormFileCollection)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestJsonAndFormFileWithAttribute));
+            RequestDelegateFactory.Create(TestJsonAndFormFileWithAttribute)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestJsonAndFormCollection));
+            RequestDelegateFactory.Create(TestJsonAndFormCollection)
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestJsonAndFormWithAttribute));
+            RequestDelegateFactory.Create(TestJsonAndFormWithAttribute)
+        );
     }
 
     [Fact]
@@ -2819,7 +2853,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var nse = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(TestAction));
+            RequestDelegateFactory.Create(TestAction)
+        );
         Assert.Equal(
             "Assigning a value to the IFromFormMetadata.Name property is not supported for parameters of type IFormFileCollection.",
             nse.Message
@@ -2874,7 +2909,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var nse = Assert.Throws<NotSupportedException>(() =>
-            RequestDelegateFactory.Create(TestAction));
+            RequestDelegateFactory.Create(TestAction)
+        );
         Assert.Equal(
             "Assigning a value to the IFromFormMetadata.Name property is not supported for parameters of type IFormCollection.",
             nse.Message
@@ -2911,7 +2947,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(action));
+            RequestDelegateFactory.Create(action)
+        );
         Assert.Contains(
             $"The nullable type '{TypeNameHelper.GetTypeDisplayName(parameter.ParameterType, fullName: false)}' is not supported, mark the parameter as non-nullable.",
             exception.Message
@@ -2932,7 +2969,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
 
         var exception = Assert.Throws<ArgumentException>(() =>
-            RequestDelegateFactory.Create(TestAction));
+            RequestDelegateFactory.Create(TestAction)
+        );
         Assert.Contains(
             "An item with the same key has already been added. Key: Foo",
             exception.Message
@@ -4271,7 +4309,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 // IsReflectionEnabledByDefault defaults to `false` when `PublishTrimmed=true`. For these scenarios, we
                 // expect users to configure JSON source generation as instructed in the `NotSupportedException` message.
                 var exception = Assert.Throws<NotSupportedException>(() =>
-                    RequestDelegateFactory.Create(@delegate));
+                    RequestDelegateFactory.Create(@delegate)
+                );
                 Assert.Contains(
                     "Microsoft.AspNetCore.Routing.Internal.RequestDelegateFactoryTests+Todo",
                     exception.Message

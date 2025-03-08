@@ -103,7 +103,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonException exception = await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper<PolymorphicClass>(json));
+                Serializer.DeserializeWrapper<PolymorphicClass>(json)
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
@@ -223,7 +224,8 @@ namespace System.Text.Json.Serialization.Tests
                 Serializer.DeserializeWrapper<PolymorphicClass>(
                     json,
                     PolymorphicClass.CustomConfigWithBaseTypeFallback
-                ));
+                )
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
@@ -347,7 +349,8 @@ namespace System.Text.Json.Serialization.Tests
                 Serializer.DeserializeWrapper<PolymorphicClass>(
                     json,
                     PolymorphicClass.CustomConfigWithBaseTypeFallback
-                ));
+                )
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
@@ -367,8 +370,8 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             PolymorphicClass value = new PolymorphicClass.DerivedAbstractClass.DerivedClass();
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value)
+            );
         }
 
         [Fact]
@@ -1910,7 +1913,8 @@ namespace System.Text.Json.Serialization.Tests
                 Serializer.DeserializeWrapper<PolymorphicInterface>(
                     json,
                     PolymorphicClass.CustomConfigWithBaseTypeFallback
-                ));
+                )
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
@@ -2006,7 +2010,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions { TypeInfoResolver = configuration };
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(value, options));
+                Serializer.SerializeWrapper(value, options)
+            );
         }
 
         public static IEnumerable<object[]> Get_PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException() =>
@@ -2330,7 +2335,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonException exception = await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper<PolymorphicList>(json));
+                Serializer.DeserializeWrapper<PolymorphicList>(json)
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
@@ -2684,7 +2690,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonException exception = await Assert.ThrowsAsync<JsonException>(() =>
-                Serializer.DeserializeWrapper<PolymorphicDictionary>(json));
+                Serializer.DeserializeWrapper<PolymorphicDictionary>(json)
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
@@ -3329,7 +3336,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClassWithoutDerivedTypeAttribute();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonPolymorphic]
@@ -3340,7 +3348,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClassWithNullDerivedTypeAttribute();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(derivedType: null)]
@@ -3351,7 +3360,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClassWithStructDerivedTypeAttribute();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(Guid))]
@@ -3362,7 +3372,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClassWithObjectDerivedTypeAttribute();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(object), "object")]
@@ -3373,7 +3384,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClassWithNonAssignableDerivedTypeAttribute();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(object))]
@@ -3385,7 +3397,8 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicInterfaceWithInterfaceDerivedType value =
                 new PolymorphicInterfaceWithInterfaceDerivedType.DerivedClass();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [Fact]
@@ -3393,7 +3406,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""$type"":""derivedInterface""}";
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(json));
+                Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(json)
+            );
         }
 
         [Fact]
@@ -3417,7 +3431,8 @@ namespace System.Text.Json.Serialization.Tests
                 Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(
                     json,
                     PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor
-                ));
+                )
+            );
         }
 
         [JsonDerivedType(typeof(DerivedInterface), "derivedInterface")]
@@ -3455,7 +3470,8 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicAbstractClassWithAbstractClassDerivedType value =
                 new PolymorphicAbstractClassWithAbstractClassDerivedType.DerivedClass();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedAbstractClass))]
@@ -3474,7 +3490,8 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicClassWithDuplicateDerivedTypeRegistrations value =
                 new PolymorphicClassWithDuplicateDerivedTypeRegistrations.DerivedClass();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedClass))]
@@ -3489,7 +3506,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClasWithDuplicateTypeDiscriminators();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(A), "duplicateId")]
@@ -3506,7 +3524,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             PolymorphicGenericClass<int> value = new PolymorphicGenericClass<int>.DerivedClass();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(PolymorphicGenericClass<>.DerivedClass))]
@@ -3521,7 +3540,8 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicDerivedGenericClass value =
                 new PolymorphicDerivedGenericClass.DerivedClass<int>();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedClass<>))]
@@ -3535,8 +3555,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             PolymorphicClass_CustomConverter_TypeDiscriminator value =
                 new PolymorphicClass_CustomConverter_TypeDiscriminator.DerivedClass();
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value)
+            );
         }
 
         [Fact]
@@ -3546,7 +3566,8 @@ namespace System.Text.Json.Serialization.Tests
             await Assert.ThrowsAsync<NotSupportedException>(() =>
                 Serializer.DeserializeWrapper<PolymorphicClass_CustomConverter_TypeDiscriminator>(
                     json
-                ));
+                )
+            );
         }
 
         [JsonConverter(typeof(CustomConverter))]
@@ -3644,7 +3665,8 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value =
                 new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass();
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(value, options));
+                Serializer.SerializeWrapper(value, options)
+            );
         }
 
         [Fact]

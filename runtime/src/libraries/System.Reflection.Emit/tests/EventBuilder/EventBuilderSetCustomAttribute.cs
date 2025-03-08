@@ -77,7 +77,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                eventBuilder.SetCustomAttribute(attributeConstructor, bytes));
+                eventBuilder.SetCustomAttribute(attributeConstructor, bytes)
+            );
         }
 
         [Fact]
@@ -134,7 +135,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                eventBuilder.SetCustomAttribute(attribute));
+                eventBuilder.SetCustomAttribute(attribute)
+            );
         }
     }
 }

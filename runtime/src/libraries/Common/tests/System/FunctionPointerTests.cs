@@ -127,11 +127,14 @@ namespace System.Tests.Types
         public static unsafe void NonFunctionPointerThrows()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                typeof(int).GetFunctionPointerCallingConventions());
+                typeof(int).GetFunctionPointerCallingConventions()
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                typeof(int).GetFunctionPointerParameterTypes());
+                typeof(int).GetFunctionPointerParameterTypes()
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                typeof(int).GetFunctionPointerReturnType());
+                typeof(int).GetFunctionPointerReturnType()
+            );
         }
 
         [Fact]

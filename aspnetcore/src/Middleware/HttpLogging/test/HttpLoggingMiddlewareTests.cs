@@ -46,7 +46,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Array.Empty<IHttpLoggingInterceptor>(),
                 ObjectPool.Create<HttpLoggingInterceptorContext>(),
                 TimeProvider.System
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new HttpLoggingMiddleware(
@@ -59,7 +60,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Array.Empty<IHttpLoggingInterceptor>(),
                 ObjectPool.Create<HttpLoggingInterceptorContext>(),
                 TimeProvider.System
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new HttpLoggingMiddleware(
@@ -72,7 +74,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Array.Empty<IHttpLoggingInterceptor>(),
                 ObjectPool.Create<HttpLoggingInterceptorContext>(),
                 TimeProvider.System
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new HttpLoggingMiddleware(
@@ -85,7 +88,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 null,
                 ObjectPool.Create<HttpLoggingInterceptorContext>(),
                 TimeProvider.System
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new HttpLoggingMiddleware(
@@ -98,7 +102,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Array.Empty<IHttpLoggingInterceptor>(),
                 null,
                 TimeProvider.System
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new HttpLoggingMiddleware(
@@ -111,7 +116,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Array.Empty<IHttpLoggingInterceptor>(),
                 ObjectPool.Create<HttpLoggingInterceptorContext>(),
                 null
-            ));
+            )
+        );
     }
 
     [Fact]

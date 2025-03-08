@@ -28,7 +28,8 @@ public class Program
                 {
                     bool check = foo.IsValid;
                 }
-            }));
+            })
+        );
     }
 
     public static void CatchRethrow(Action action)

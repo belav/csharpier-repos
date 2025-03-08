@@ -165,7 +165,8 @@ public class ServicesModelBinderIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            parameterBinder.BindModelAsync(parameter, testContext));
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Contains(typeof(IActionResult).FullName, exception.Message);
     }
 

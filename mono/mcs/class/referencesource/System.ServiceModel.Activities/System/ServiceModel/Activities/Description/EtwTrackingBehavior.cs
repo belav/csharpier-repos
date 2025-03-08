@@ -73,7 +73,8 @@ namespace System.ServiceModel.Activities.Description
                     {
                         ApplicationReference = hostReference,
                         TrackingProfile = trackingProfile,
-                    });
+                    }
+                );
             }
         }
 

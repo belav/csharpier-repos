@@ -87,7 +87,8 @@ namespace System.IO.IsolatedStorage
                     isf.MoveDirectory(
                         "MoveDirectory_DoesNotExist",
                         "MoveDirectory_DoesNotExist_Copy"
-                    ));
+                    )
+                );
             }
         }
 

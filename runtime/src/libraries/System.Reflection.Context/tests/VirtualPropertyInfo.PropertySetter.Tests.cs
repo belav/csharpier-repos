@@ -93,7 +93,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     null,
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -106,7 +107,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     new object[] { },
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
             Assert.Throws<TargetParameterCountException>(() =>
                 _virtualPropertySetter.Invoke(
                     _testObject,
@@ -114,7 +116,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     new object[] { "a", 1 },
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -127,7 +130,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     new object[] { 2 },
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -140,7 +144,8 @@ namespace System.Reflection.Context.Tests
                     null,
                     new object[] { 2 },
                     CultureInfo.InvariantCulture
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -239,7 +244,8 @@ namespace System.Reflection.Context.Tests
         public void GetGenericMethodDefinitionTest()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                _virtualPropertySetter.GetGenericMethodDefinition());
+                _virtualPropertySetter.GetGenericMethodDefinition()
+            );
         }
 
         [Fact]
@@ -255,7 +261,8 @@ namespace System.Reflection.Context.Tests
         public void MakeGenericMethodTest()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                _virtualPropertySetter.MakeGenericMethod());
+                _virtualPropertySetter.MakeGenericMethod()
+            );
         }
 
         [Fact]

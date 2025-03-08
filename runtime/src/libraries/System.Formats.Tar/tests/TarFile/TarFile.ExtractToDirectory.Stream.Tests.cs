@@ -19,7 +19,8 @@ namespace System.Formats.Tar.Tests
                     source: null,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -31,13 +32,15 @@ namespace System.Formats.Tar.Tests
                     archive,
                     destinationDirectoryName: null,
                     overwriteFiles: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 TarFile.ExtractToDirectory(
                     archive,
                     destinationDirectoryName: string.Empty,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -55,7 +58,8 @@ namespace System.Formats.Tar.Tests
                     unreadable,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -70,7 +74,8 @@ namespace System.Formats.Tar.Tests
                     archive,
                     destinationDirectoryName: dirPath,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -126,7 +131,8 @@ namespace System.Formats.Tar.Tests
             using TempDirectory root = new TempDirectory();
 
             Assert.ThrowsAny<IOException>(() =>
-                TarFile.ExtractToDirectory(archive, root.Path, overwriteFiles: false));
+                TarFile.ExtractToDirectory(archive, root.Path, overwriteFiles: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }
@@ -647,7 +653,8 @@ namespace System.Formats.Tar.Tests
             archive.Position = 0;
 
             Assert.Throws<IOException>(() =>
-                TarFile.ExtractToDirectory(archive, destinationFolderPath, overwriteFiles: false));
+                TarFile.ExtractToDirectory(archive, destinationFolderPath, overwriteFiles: false)
+            );
             Assert.False(File.Exists(entryFilePath), $"File should not exist: {entryFilePath}");
         }
     }

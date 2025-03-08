@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Emit.UnitTests
             );
 
             Assert.Throws<InvalidOperationException>(() =>
-                outputs.OpenAssemblyMetadata(prefetch: false));
+                outputs.OpenAssemblyMetadata(prefetch: false)
+            );
             Assert.Throws<InvalidOperationException>(() => outputs.OpenPdb());
         }
 

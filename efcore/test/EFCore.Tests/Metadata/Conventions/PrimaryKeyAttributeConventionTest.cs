@@ -66,7 +66,8 @@ public class PrimaryKeyAttributeConventionTest
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         Assert.Throws<ArgumentNullException>(() =>
-            modelBuilder.Entity<EntityWithInvalidNullAdditionalProperties>());
+            modelBuilder.Entity<EntityWithInvalidNullAdditionalProperties>()
+        );
     }
 
     [InlineData(typeof(EntityWithInvalidNullAdditionalProperty))]
@@ -83,7 +84,8 @@ public class PrimaryKeyAttributeConventionTest
             AbstractionsStrings.CollectionArgumentHasEmptyElements("additionalPropertyNames"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    modelBuilder.Entity(entityTypeWithInvalidPrimaryKey))
+                    modelBuilder.Entity(entityTypeWithInvalidPrimaryKey)
+                )
                 .Message
         );
     }
@@ -158,7 +160,8 @@ public class PrimaryKeyAttributeConventionTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    modelBuilder.Entity<EntityPrimaryKeyAndKeyless>())
+                    modelBuilder.Entity<EntityPrimaryKeyAndKeyless>()
+                )
                 .Message
         );
     }

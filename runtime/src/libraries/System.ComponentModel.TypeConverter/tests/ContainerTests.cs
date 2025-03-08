@@ -702,7 +702,8 @@ namespace System.ComponentModel.Tests
         public void ValidateName_Component_Null()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                _container.InvokeValidateName((IComponent)null, "A"));
+                _container.InvokeValidateName((IComponent)null, "A")
+            );
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

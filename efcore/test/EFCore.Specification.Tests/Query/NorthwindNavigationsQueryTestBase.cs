@@ -30,7 +30,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     join od in ss.Set<OrderDetail>().Select(od => ClientProjection(od, od.Product))
                         on o.OrderID equals od.OrderID
                     select c
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -45,7 +46,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     join od in ss.Set<OrderDetail>().Where(od => ClientPredicate(od, od.Product))
                         on o.OrderID equals od.OrderID
                     select c
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -60,7 +62,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     join od in ss.Set<OrderDetail>().OrderBy(od => ClientOrderBy(od, od.Product))
                         on o.OrderID equals od.OrderID
                     select c
-            ));
+            )
+        );
 
     private static readonly Random _randomGenerator = new();
 
@@ -920,7 +923,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                                         .FirstOrDefault(orderDetail => orderDetail.Quantity == 1)
                                 )
                             select p
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -948,7 +952,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                                         .FirstOrDefault()
                                 )
                             select p
-                    ))
+                    )
+                )
             ).Message
         );
 

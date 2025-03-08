@@ -22,7 +22,8 @@ public class NorthwindStringIncludeQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_with_cross_apply_with_filter(async))
+                    base.Include_collection_with_cross_apply_with_filter(async)
+                )
             ).Message
         );
 
@@ -31,7 +32,8 @@ public class NorthwindStringIncludeQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_with_outer_apply_with_filter(async))
+                    base.Include_collection_with_outer_apply_with_filter(async)
+                )
             ).Message
         );
 
@@ -42,7 +44,8 @@ public class NorthwindStringIncludeQuerySqliteTest
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_with_outer_apply_with_filter_non_equality(async))
+                    base.Include_collection_with_outer_apply_with_filter_non_equality(async)
+                )
             ).Message
         );
 
@@ -51,7 +54,8 @@ public class NorthwindStringIncludeQuerySqliteTest
             RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_with_last_no_orderby(async))
+                    base.Include_collection_with_last_no_orderby(async)
+                )
             ).Message
         );
 }

@@ -56,7 +56,8 @@ public class BodyControlTests
         bodyControl.Abort(ex);
 
         var writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            response.WriteAsync(new byte[1], 0, 1));
+            response.WriteAsync(new byte[1], 0, 1)
+        );
         Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, writeEx.Message);
 
         Assert.Same(
@@ -94,7 +95,8 @@ public class BodyControlTests
         var upgrade = bodyControl.Upgrade();
 
         var writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            response.WriteAsync(new byte[1], 0, 1));
+            response.WriteAsync(new byte[1], 0, 1)
+        );
         Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, writeEx.Message);
 
         Assert.Same(
@@ -136,7 +138,8 @@ public class BodyControlTests
         Assert.Same(
             ex,
             Assert.Throws<Exception>(() =>
-                requestPipe.AdvanceTo(new SequencePosition(), new SequencePosition()))
+                requestPipe.AdvanceTo(new SequencePosition(), new SequencePosition())
+            )
         );
         Assert.Same(ex, Assert.Throws<Exception>(() => requestPipe.CancelPendingRead()));
         Assert.Same(ex, Assert.Throws<Exception>(() => requestPipe.TryRead(out var res)));
@@ -157,12 +160,13 @@ public class BodyControlTests
 
         Assert.Throws<ObjectDisposedException>(() => requestPipe.AdvanceTo(new SequencePosition()));
         Assert.Throws<ObjectDisposedException>(() =>
-            requestPipe.AdvanceTo(new SequencePosition(), new SequencePosition()));
+            requestPipe.AdvanceTo(new SequencePosition(), new SequencePosition())
+        );
         Assert.Throws<ObjectDisposedException>(() => requestPipe.CancelPendingRead());
         Assert.Throws<ObjectDisposedException>(() => requestPipe.TryRead(out var res));
         Assert.Throws<ObjectDisposedException>(() => requestPipe.Complete());
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-            await requestPipe.ReadAsync());
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await requestPipe.ReadAsync()
+        );
     }
 
     [Fact]
@@ -183,9 +187,11 @@ public class BodyControlTests
         Assert.Throws<ObjectDisposedException>(() => responsePipe.GetSpan());
         Assert.Throws<ObjectDisposedException>(() => responsePipe.Complete());
         await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-            await responsePipe.WriteAsync(new Memory<byte>()));
+            await responsePipe.WriteAsync(new Memory<byte>())
+        );
         await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-            await responsePipe.FlushAsync());
+            await responsePipe.FlushAsync()
+        );
     }
 
     private class MockMessageBody : MessageBody

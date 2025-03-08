@@ -86,7 +86,8 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(1.5E+19f, SqlSingle.Add(test1, test2).Value);
 
             Assert.Throws<OverflowException>(() =>
-                SqlSingle.Add(SqlSingle.MaxValue, SqlSingle.MaxValue));
+                SqlSingle.Add(SqlSingle.MaxValue, SqlSingle.MaxValue)
+            );
 
             // Divide()
             Assert.Equal(3, SqlSingle.Divide(test1, test4));
@@ -104,7 +105,8 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal((float)(-5E+30), SqlSingle.Subtract(test1, test3).Value);
 
             Assert.Throws<OverflowException>(() =>
-                SqlSingle.Subtract(SqlSingle.MinValue, SqlSingle.MaxValue));
+                SqlSingle.Subtract(SqlSingle.MinValue, SqlSingle.MaxValue)
+            );
         }
 
         [Fact]

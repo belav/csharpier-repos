@@ -22362,11 +22362,14 @@ namespace System.Linq.Expressions.Tests
         public static void CannotConvertNonVoidToVoid()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(Expression.Constant(1), typeof(void)));
+                Expression.ConvertChecked(Expression.Constant(1), typeof(void))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(Expression.Constant("a"), typeof(void)));
+                Expression.ConvertChecked(Expression.Constant("a"), typeof(void))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.ConvertChecked(Expression.Constant(DateTime.MinValue), typeof(void)));
+                Expression.ConvertChecked(Expression.Constant(DateTime.MinValue), typeof(void))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -22531,7 +22534,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ConvertChecked(
                     Expression.Default(typeof(IList<NonSealed>[])),
                     typeof(NonSealed[,][])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -22541,7 +22545,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ConvertChecked(
                     Expression.Default(typeof(NonSealed[,][])),
                     typeof(IList<NonSealed>[])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -22551,12 +22556,14 @@ namespace System.Linq.Expressions.Tests
                 Expression.ConvertChecked(
                     Expression.Default(typeof(NonSealed[][])),
                     typeof(IEquatable<NonSealed>[])
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.ConvertChecked(
                     Expression.Default(typeof(NonSealed[][])),
                     typeof(IDictionary<NonSealed, NonSealed>[])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -22566,12 +22573,14 @@ namespace System.Linq.Expressions.Tests
                 Expression.ConvertChecked(
                     Expression.Default(typeof(IEquatable<NonSealed>[])),
                     typeof(NonSealed[][])
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.ConvertChecked(
                     Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])),
                     typeof(NonSealed[][])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -22581,7 +22590,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ConvertChecked(
                     Expression.Default(typeof(NonSealed[][][])),
                     typeof(string[][])
-                ));
+                )
+            );
         }
     }
 }

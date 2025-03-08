@@ -312,7 +312,8 @@ namespace System.Net.Tests
             response.Close();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                response.RedirectLocation = "http://microsoft.com");
+                response.RedirectLocation = "http://microsoft.com"
+            );
             Assert.Null(response.RedirectLocation);
         }
 
@@ -1011,15 +1012,20 @@ namespace System.Net.Tests
         {
             HttpListenerResponse response = await GetResponse();
             Assert.Throws<InvalidOperationException>(() =>
-                response.Headers[HttpRequestHeader.Accept]);
+                response.Headers[HttpRequestHeader.Accept]
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                response.Headers[HttpRequestHeader.Accept] = "value");
+                response.Headers[HttpRequestHeader.Accept] = "value"
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                response.Headers.Set(HttpRequestHeader.Accept, "value"));
+                response.Headers.Set(HttpRequestHeader.Accept, "value")
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                response.Headers.Add(HttpRequestHeader.Accept, "value"));
+                response.Headers.Add(HttpRequestHeader.Accept, "value")
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                response.Headers.Remove(HttpRequestHeader.Accept));
+                response.Headers.Remove(HttpRequestHeader.Accept)
+            );
         }
     }
 }

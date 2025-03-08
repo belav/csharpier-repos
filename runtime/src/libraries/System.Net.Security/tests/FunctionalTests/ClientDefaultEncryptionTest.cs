@@ -148,7 +148,8 @@ namespace System.Net.Security.Tests
                             null,
                             SslProtocolSupport.DefaultSslProtocols,
                             false
-                        ));
+                        )
+                    );
                     try
                     {
                         await serverTask.WaitAsync(TestConfiguration.PassingTestTimeout);

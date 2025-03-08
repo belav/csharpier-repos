@@ -66,7 +66,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             var block = new BufferBlock<int>();
             block.Complete();
             AssertEx.Throws<InvalidOperationException>(() =>
-                block.Receive(TimeSpan.FromMilliseconds(1000)));
+                block.Receive(TimeSpan.FromMilliseconds(1000))
+            );
         }
 
         [Test]

@@ -273,7 +273,8 @@ public class OperationExecutor : MarshalByRefObject
             var contextType = (string?)args["contextType"];
 
             Execute(() =>
-                executor.UpdateDatabaseImpl(targetMigration, connectionString, contextType));
+                executor.UpdateDatabaseImpl(targetMigration, connectionString, contextType)
+            );
         }
     }
 
@@ -325,7 +326,8 @@ public class OperationExecutor : MarshalByRefObject
                     idempotent,
                     noTransactions,
                     contextType
-                ));
+                )
+            );
         }
     }
 
@@ -615,7 +617,8 @@ public class OperationExecutor : MarshalByRefObject
                     useDatabaseNames,
                     suppressOnConfiguring,
                     noPluralize
-                ));
+                )
+            );
         }
     }
 

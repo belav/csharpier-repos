@@ -120,7 +120,8 @@ public class HeaderUtilitiesTest
     public void FormatNonNegativeInt64_Throws_ForNegativeValues(long value)
     {
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            HeaderUtilities.FormatNonNegativeInt64(value));
+            HeaderUtilities.FormatNonNegativeInt64(value)
+        );
     }
 
     [Theory]

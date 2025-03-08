@@ -33,7 +33,8 @@ namespace System.Text.Json.Serialization.Tests
             // Options can be bound only once.
             CauseInvalidOperationException(() => options.AddContext<MyJsonContext>());
             CauseInvalidOperationException(() =>
-                options.AddContext<MyJsonContextThatSetsOptionsInParameterlessCtor>());
+                options.AddContext<MyJsonContextThatSetsOptionsInParameterlessCtor>()
+            );
         }
 
         private static void CauseInvalidOperationException(Action action)
@@ -86,14 +87,16 @@ namespace System.Text.Json.Serialization.Tests
             options.PropertyNameCaseInsensitive = true;
             options.AddContext<MyJsonContext>();
             CauseInvalidOperationException(() =>
-                options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+                options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            );
 
             // Bind via context ctor
             options = new JsonSerializerOptions();
             MyJsonContext context = new MyJsonContext(options);
             Assert.Same(options, context.Options);
             CauseInvalidOperationException(() =>
-                options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+                options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            );
         }
 
         [Fact]
@@ -115,7 +118,8 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.IsAssignableFrom<JsonTypeInfo<int>>(context.GetTypeInfo(typeof(int), null));
             Assert.Throws<InvalidOperationException>(() =>
-                context.GetTypeInfo(typeof(int), defaultOptions));
+                context.GetTypeInfo(typeof(int), defaultOptions)
+            );
         }
 
         private class MyJsonContext : JsonSerializerContext

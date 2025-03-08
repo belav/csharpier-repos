@@ -207,7 +207,8 @@ public class HttpResponseJsonExtensionsTests
 
         // Act & Assert
         await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await context.Response.WriteAsJsonAsync(value: null, type: null!));
+            await context.Response.WriteAsJsonAsync(value: null, type: null!)
+        );
     }
 
     [Fact]
@@ -224,7 +225,8 @@ public class HttpResponseJsonExtensionsTests
                 response: null!,
                 value: null,
                 typeof(int?)
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -400,7 +402,8 @@ public class HttpResponseJsonExtensionsTests
                 AsyncEnumerable(),
                 typeof(IAsyncEnumerable<int>),
                 cts.Token
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(JsonConstants.JsonContentTypeWithCharset, context.Response.ContentType);
@@ -437,7 +440,8 @@ public class HttpResponseJsonExtensionsTests
 
         // Act
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            context.Response.WriteAsJsonAsync(AsyncEnumerable(), cts.Token));
+            context.Response.WriteAsJsonAsync(AsyncEnumerable(), cts.Token)
+        );
 
         // Assert
         Assert.Equal(JsonConstants.JsonContentTypeWithCharset, context.Response.ContentType);

@@ -102,16 +102,20 @@ namespace System.Diagnostics.Tests
                                             new PerformanceCounter(
                                                 "Typing",
                                                 "Words Typed In Interval"
-                                            )),
+                                            )
+                                        ),
                                         aKeyPressed = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter("Typing", "Letter A Pressed")),
+                                            new PerformanceCounter("Typing", "Letter A Pressed")
+                                        ),
                                         wordsContainingA = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter("Typing", "Words Containing A")),
+                                            new PerformanceCounter("Typing", "Words Containing A")
+                                        ),
                                         percentofWordsContaingA = Helpers.RetryOnAllPlatforms(() =>
                                             new PerformanceCounter(
                                                 "Typing",
                                                 "Percent of Words Containing A"
-                                            ))
+                                            )
+                                        )
                                 )
                                 {
                                     typingCsInstance.Counters[1].Increment();
@@ -191,7 +195,8 @@ namespace System.Diagnostics.Tests
             )
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    typingCounterSet.CreateCounterSetInstance("Typing Instance"));
+                    typingCounterSet.CreateCounterSetInstance("Typing Instance")
+                );
             }
         }
 
@@ -370,7 +375,8 @@ namespace System.Diagnostics.Tests
             {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 Assert.Throws<ArgumentException>(() =>
-                    typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base"));
+                    typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base")
+                );
             }
         }
     }

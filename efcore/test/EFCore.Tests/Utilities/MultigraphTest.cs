@@ -515,7 +515,8 @@ public class MultigraphTest
             CoreStrings.CircularDependency(message),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    graph.BatchingTopologicalSort(null, formatter))
+                    graph.BatchingTopologicalSort(null, formatter)
+                )
                 .Message
         );
 
@@ -570,7 +571,8 @@ public class MultigraphTest
             CoreStrings.CircularDependency(message),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    graph.BatchingTopologicalSort(null, formatter))
+                    graph.BatchingTopologicalSort(null, formatter)
+                )
                 .Message
         );
 

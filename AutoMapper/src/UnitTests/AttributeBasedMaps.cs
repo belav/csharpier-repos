@@ -36,7 +36,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -72,9 +73,11 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Dest, Source>());
+                    AssertConfigurationIsValid<Dest, Source>()
+                );
             }
         }
 
@@ -110,9 +113,11 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Destination>());
+                    AssertConfigurationIsValid<Source, Destination>()
+                );
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Destination, Source>());
+                    AssertConfigurationIsValid<Destination, Source>()
+                );
             }
         }
 
@@ -161,9 +166,11 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid(typeof(Source<>), typeof(Destination<>)));
+                    AssertConfigurationIsValid(typeof(Source<>), typeof(Destination<>))
+                );
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid(typeof(Destination<>), typeof(Source<>)));
+                    AssertConfigurationIsValid(typeof(Destination<>), typeof(Source<>))
+                );
             }
         }
 
@@ -231,7 +238,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -270,7 +278,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -309,7 +318,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -360,7 +370,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -413,7 +424,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -459,7 +471,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -507,7 +520,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -549,7 +563,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Dest>());
+                    AssertConfigurationIsValid<Source, Dest>()
+                );
             }
         }
 
@@ -631,7 +646,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Destination>());
+                    AssertConfigurationIsValid<Source, Destination>()
+                );
             }
         }
 
@@ -693,7 +709,8 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<Source, Destination>());
+                    AssertConfigurationIsValid<Source, Destination>()
+                );
             }
         }
 
@@ -984,9 +1001,11 @@ namespace AutoMapper.UnitTests
             public void Should_validate_successfully()
             {
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<FirstSource, Dest>());
+                    AssertConfigurationIsValid<FirstSource, Dest>()
+                );
                 typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
-                    AssertConfigurationIsValid<SecondSource, Dest>());
+                    AssertConfigurationIsValid<SecondSource, Dest>()
+                );
             }
         }
 

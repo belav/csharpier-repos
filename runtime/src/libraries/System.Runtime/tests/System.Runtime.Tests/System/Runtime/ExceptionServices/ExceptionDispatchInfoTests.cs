@@ -58,9 +58,11 @@ namespace System.Runtime.ExceptionServices.Tests
             e = new Exception();
             ExceptionDispatchInfo.SetCurrentStackTrace(e);
             Assert.Throws<InvalidOperationException>(() =>
-                ExceptionDispatchInfo.SetCurrentStackTrace(e));
+                ExceptionDispatchInfo.SetCurrentStackTrace(e)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello"));
+                ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
+            );
 
             // Previously thrown
             e = new Exception();
@@ -70,9 +72,11 @@ namespace System.Runtime.ExceptionServices.Tests
             }
             catch { }
             Assert.Throws<InvalidOperationException>(() =>
-                ExceptionDispatchInfo.SetCurrentStackTrace(e));
+                ExceptionDispatchInfo.SetCurrentStackTrace(e)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello"));
+                ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
+            );
         }
 
         [Fact]

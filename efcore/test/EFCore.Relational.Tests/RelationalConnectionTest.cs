@@ -39,7 +39,8 @@ public class RelationalConnectionTest
             CoreStrings.NoEfServices,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>())
+                    serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
+                )
                 .Message
         );
     }
@@ -989,7 +990,8 @@ public class RelationalConnectionTest
             RelationalStrings.NoProviderConfigured,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    new FakeRelationalConnection(CreateOptions()))
+                    new FakeRelationalConnection(CreateOptions())
+                )
                 .Message
         );
 
@@ -1004,7 +1006,8 @@ public class RelationalConnectionTest
                             new FakeRelationalOptionsExtension(),
                             new AnotherFakeRelationalOptionsExtension()
                         )
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -1109,7 +1112,8 @@ public class RelationalConnectionTest
             RelationalStrings.CannotChangeWhenOpen,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    connection.DbConnection = new FakeDbConnection("Fake"))
+                    connection.DbConnection = new FakeDbConnection("Fake")
+                )
                 .Message
         );
     }

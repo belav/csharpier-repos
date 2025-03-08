@@ -75,13 +75,15 @@ namespace System.Reflection.Tests
                 if (IsExceptionWrapped)
                 {
                     Exception ex = Assert.Throws<TargetInvocationException>(() =>
-                        Invoke(constructors[0], new object[] { length }));
+                        Invoke(constructors[0], new object[] { length })
+                    );
                     Assert.IsType<OverflowException>(ex.InnerException);
                 }
                 else
                 {
                     Assert.Throws<OverflowException>(() =>
-                        Invoke(constructors[0], new object[] { length }));
+                        Invoke(constructors[0], new object[] { length })
+                    );
                 }
             }
         }
@@ -114,7 +116,8 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
             Assert.Throws<TargetParameterCountException>(() =>
-                Invoke(constructors[2], new object[0]));
+                Invoke(constructors[2], new object[0])
+            );
         }
 
         [Fact]
@@ -122,7 +125,8 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
             Assert.Throws<TargetParameterCountException>(() =>
-                (ClassWith3Constructors)Invoke(constructors[2], new object[] { 121 }));
+                (ClassWith3Constructors)Invoke(constructors[2], new object[] { 121 })
+            );
         }
 
         [Fact]
@@ -156,7 +160,8 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
             Assert.Throws<TargetException>(() =>
-                Invoke(constructors[2], obj: null, new object[] { 999, "initialized" }));
+                Invoke(constructors[2], obj: null, new object[] { 999, "initialized" })
+            );
         }
 
         [Fact]
@@ -165,7 +170,8 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ConstructorInfoAbstractBase));
             Assert.Throws<MemberAccessException>(() =>
-                (ConstructorInfoAbstractBase)Invoke(constructors[0], new object[0]));
+                (ConstructorInfoAbstractBase)Invoke(constructors[0], new object[0])
+            );
         }
 
         [Fact]

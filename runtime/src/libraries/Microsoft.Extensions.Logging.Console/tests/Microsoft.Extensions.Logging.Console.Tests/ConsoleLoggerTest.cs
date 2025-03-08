@@ -446,7 +446,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() =>
-                logger.Log<object>(LogLevel.Trace, 1, "empty", new Exception(), null));
+                logger.Log<object>(LogLevel.Trace, 1, "empty", new Exception(), null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1681,7 +1682,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void ConsoleLoggerOptions_InvalidFormat_Throws()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ConsoleLoggerOptions() { Format = (ConsoleLoggerFormat)10 });
+                new ConsoleLoggerOptions() { Format = (ConsoleLoggerFormat)10 }
+            );
         }
 
         [ConditionalTheory(
@@ -1693,14 +1695,16 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void ConsoleLoggerOptions_SetInvalidMaxQueueLength_Throws(int invalidMaxQueueLength)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ConsoleLoggerOptions() { MaxQueueLength = invalidMaxQueueLength });
+                new ConsoleLoggerOptions() { MaxQueueLength = invalidMaxQueueLength }
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void ConsoleLoggerOptions_SetInvalidBufferMode_Throws()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ConsoleLoggerOptions() { QueueFullMode = (ConsoleLoggerQueueFullMode)10 });
+                new ConsoleLoggerOptions() { QueueFullMode = (ConsoleLoggerQueueFullMode)10 }
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

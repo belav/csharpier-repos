@@ -32,9 +32,11 @@ namespace System.Threading.Tasks.Tests
                 () => token.Register((Action<object>)null, null, false)
             );
             AssertExtensions.Throws<ArgumentNullException>(() =>
-                token.Register((Action<object>)null, null, true));
+                token.Register((Action<object>)null, null, true)
+            );
             AssertExtensions.Throws<ArgumentNullException>(() =>
-                token.Register((Action<object, CancellationToken>)null, null));
+                token.Register((Action<object, CancellationToken>)null, null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "callback",
@@ -1345,10 +1347,12 @@ namespace System.Threading.Tasks.Tests
 
             var cts = new CancellationTokenSource();
             CancellationTokenRegistration ctr1 = cts.Token.Register(() =>
-                registration1Invoked = true);
+                registration1Invoked = true
+            );
             Assert.True(cts.TryReset());
             CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
-                registration2Invoked = true);
+                registration2Invoked = true
+            );
 
             cts.Cancel();
 
@@ -1776,7 +1780,8 @@ namespace System.Threading.Tasks.Tests
                             {
                                 barrier.SignalAndWait();
                                 CancellationTokenRegistration ctr = cts.Token.Register(() =>
-                                    callbackInvoked = true);
+                                    callbackInvoked = true
+                                );
                                 barrier.SignalAndWait();
                                 unregisterResult = ctr.Unregister();
                                 barrier.SignalAndWait();

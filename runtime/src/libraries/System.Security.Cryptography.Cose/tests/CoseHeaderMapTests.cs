@@ -335,7 +335,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 foreach (SetValueMethod setMethod in Enum.GetValues(typeof(SetValueMethod)))
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        SetValue(map, label, 42, setMethod));
+                        SetValue(map, label, 42, setMethod)
+                    );
                 }
                 Assert.Throws<InvalidOperationException>(() => map.Remove(label));
                 Assert.Throws<InvalidOperationException>(() => map.Clear());
@@ -415,8 +416,8 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 CoseHeaderMap map = new();
                 CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(writer.Encode());
-                Assert.Throws<ArgumentException>(() =>
-                    map[CoseHeaderLabel.CriticalHeaders] = value);
+                Assert.Throws<ArgumentException>(() => map[CoseHeaderLabel.CriticalHeaders] = value
+                );
             }
         }
 

@@ -1079,7 +1079,8 @@ zM=
   <Exponent>AQAB</Exponent>
 </RSAKeyValue>
 "
-                    ));
+                    )
+                );
             }
         }
 
@@ -1118,7 +1119,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                    )
+                );
             }
         }
 
@@ -1155,7 +1157,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                    )
+                );
             }
         }
 
@@ -1192,7 +1195,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                    )
+                );
             }
         }
 
@@ -1229,7 +1233,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                    )
+                );
             }
         }
 
@@ -1266,7 +1271,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                    )
+                );
             }
         }
 
@@ -1306,7 +1312,8 @@ zM=
     UERRHhvKNiUn4Xz0KzgGFQ==
   </Modulus>
 </RSAKeyValue>"
-                    ));
+                    )
+                );
             }
         }
 
@@ -1373,7 +1380,8 @@ zM=
     UERRHhvKNiUn4Xz0KzgGFQ==
   </Modulus>
 </RSA"
-                    ));
+                    )
+                );
 
                 if (PlatformDetection.IsNetFramework)
                 {
@@ -1428,7 +1436,8 @@ zM=
     UERRHhvKNiUn4Xz0KzgGFQ==
   </Modulus>
 </RSAKeyValue>"
-                    ));
+                    )
+                );
             }
         }
 

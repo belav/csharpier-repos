@@ -13,7 +13,8 @@ namespace System.Linq.Tests
         public void EmptyInt32Source()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().AsQueryable().Min());
+                Enumerable.Empty<int>().AsQueryable().Min()
+            );
         }
 
         [Fact]
@@ -36,7 +37,8 @@ namespace System.Linq.Tests
         public void EmptyInt64Source()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<long>().AsQueryable().Min());
+                Enumerable.Empty<long>().AsQueryable().Min()
+            );
         }
 
         [Fact]
@@ -68,7 +70,8 @@ namespace System.Linq.Tests
         public void EmptySingle()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<float>().AsQueryable().Min());
+                Enumerable.Empty<float>().AsQueryable().Min()
+            );
         }
 
         [Fact]
@@ -82,7 +85,8 @@ namespace System.Linq.Tests
         public void EmptyDoubleSource()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<double>().AsQueryable().Min());
+                Enumerable.Empty<double>().AsQueryable().Min()
+            );
         }
 
         [Fact]
@@ -105,7 +109,8 @@ namespace System.Linq.Tests
         public void EmptyDecimalSource()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<decimal>().AsQueryable().Min());
+                Enumerable.Empty<decimal>().AsQueryable().Min()
+            );
         }
 
         [Fact]
@@ -244,7 +249,8 @@ namespace System.Linq.Tests
         public void EmptyDateTimeSource()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<DateTime>().AsQueryable().Min());
+                Enumerable.Empty<DateTime>().AsQueryable().Min()
+            );
         }
 
         [Fact]
@@ -294,7 +300,8 @@ namespace System.Linq.Tests
         public void EmptyInt32WithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().AsQueryable().Min(x => x));
+                Enumerable.Empty<int>().AsQueryable().Min(x => x)
+            );
         }
 
         [Fact]
@@ -333,7 +340,8 @@ namespace System.Linq.Tests
         public void EmptyInt64WithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<long>().AsQueryable().Min(x => x));
+                Enumerable.Empty<long>().AsQueryable().Min(x => x)
+            );
         }
 
         [Fact]
@@ -359,7 +367,8 @@ namespace System.Linq.Tests
         public void EmptySingleWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<float>().AsQueryable().Min(x => x));
+                Enumerable.Empty<float>().AsQueryable().Min(x => x)
+            );
         }
 
         [Fact]
@@ -399,7 +408,8 @@ namespace System.Linq.Tests
         public void EmptyDoubleWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<double>().AsQueryable().Min(x => x));
+                Enumerable.Empty<double>().AsQueryable().Min(x => x)
+            );
         }
 
         [Fact]
@@ -437,7 +447,8 @@ namespace System.Linq.Tests
         public void EmptyDecimalWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<decimal>().AsQueryable().Min(x => x));
+                Enumerable.Empty<decimal>().AsQueryable().Min(x => x)
+            );
         }
 
         [Fact]
@@ -619,7 +630,8 @@ namespace System.Linq.Tests
         public void EmptyDateTimeWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<DateTime>().AsQueryable().Min(x => x));
+                Enumerable.Empty<DateTime>().AsQueryable().Min(x => x)
+            );
         }
 
         [Fact]
@@ -676,7 +688,8 @@ namespace System.Linq.Tests
         public void EmptyBooleanSource()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<bool>().AsQueryable().Min());
+                Enumerable.Empty<bool>().AsQueryable().Min()
+            );
         }
 
         [Fact]

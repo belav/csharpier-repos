@@ -12,41 +12,55 @@ namespace System.Formats.Tar.Tests
         public void Constructor_InvalidEntryName()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PaxTarEntry(TarEntryType.RegularFile, entryName: null));
+                new PaxTarEntry(TarEntryType.RegularFile, entryName: null)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.RegularFile, entryName: string.Empty));
+                new PaxTarEntry(TarEntryType.RegularFile, entryName: string.Empty)
+            );
         }
 
         [Fact]
         public void Constructor_UnsupportedEntryTypes()
         {
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry((TarEntryType)byte.MaxValue, InitialEntryName));
+                new PaxTarEntry((TarEntryType)byte.MaxValue, InitialEntryName)
+            );
 
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.ContiguousFile, InitialEntryName));
+                new PaxTarEntry(TarEntryType.ContiguousFile, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.DirectoryList, InitialEntryName));
+                new PaxTarEntry(TarEntryType.DirectoryList, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.LongLink, InitialEntryName));
+                new PaxTarEntry(TarEntryType.LongLink, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.LongPath, InitialEntryName));
+                new PaxTarEntry(TarEntryType.LongPath, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.MultiVolume, InitialEntryName));
+                new PaxTarEntry(TarEntryType.MultiVolume, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.V7RegularFile, InitialEntryName));
+                new PaxTarEntry(TarEntryType.V7RegularFile, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName));
+                new PaxTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.SparseFile, InitialEntryName));
+                new PaxTarEntry(TarEntryType.SparseFile, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.TapeVolume, InitialEntryName));
+                new PaxTarEntry(TarEntryType.TapeVolume, InitialEntryName)
+            );
 
             // The user should not be creating these entries manually in pax
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName));
+                new PaxTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName));
+                new PaxTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName)
+            );
         }
 
         [Theory]
@@ -72,9 +86,11 @@ namespace System.Formats.Tar.Tests
             };
 
             Assert.Throws<ArgumentException>(() =>
-                new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName, extendedAttribute));
+                new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName, extendedAttribute)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new PaxGlobalExtendedAttributesTarEntry(extendedAttribute));
+                new PaxGlobalExtendedAttributesTarEntry(extendedAttribute)
+            );
         }
 
         [Fact]

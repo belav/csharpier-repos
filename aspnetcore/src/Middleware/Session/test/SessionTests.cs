@@ -760,7 +760,8 @@ public class SessionTests
                         app.Run(async context =>
                         {
                             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                context.Session.LoadAsync());
+                                context.Session.LoadAsync()
+                            );
                             Assert.False(context.Session.IsAvailable);
                             Assert.Equal(string.Empty, context.Session.Id);
                             Assert.False(context.Session.Keys.Any());
@@ -816,7 +817,8 @@ public class SessionTests
                         app.Run(async context =>
                         {
                             await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                                context.Session.LoadAsync());
+                                context.Session.LoadAsync()
+                            );
                         });
                     })
                     .ConfigureServices(services =>
@@ -869,7 +871,8 @@ public class SessionTests
                             var token = cts.Token;
                             cts.Cancel();
                             await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                                context.Session.LoadAsync(token));
+                                context.Session.LoadAsync(token)
+                            );
                         });
                     })
                     .ConfigureServices(services =>
@@ -1096,7 +1099,8 @@ public class SessionTests
                             var token = cts.Token;
                             cts.Cancel();
                             await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                                context.Session.CommitAsync(token));
+                                context.Session.CommitAsync(token)
+                            );
                         });
                     })
                     .ConfigureServices(services =>

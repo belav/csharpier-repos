@@ -17,13 +17,15 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: null,
                     destination: archive,
                     includeBaseDirectory: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 TarFile.CreateFromDirectory(
                     sourceDirectoryName: string.Empty,
                     destination: archive,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -35,7 +37,8 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: "path",
                     destination: null,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -53,7 +56,8 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: "path",
                     destination: unwritable,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -68,7 +72,8 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: dirPath,
                     destination: archive,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
     }
 }

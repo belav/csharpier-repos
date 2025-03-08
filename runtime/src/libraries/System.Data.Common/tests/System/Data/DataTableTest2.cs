@@ -1394,7 +1394,8 @@ namespace System.Data.Tests
             al.Clear();
             // Select_S - Relation not exists, Exception
             IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
-                dt.Select("Parent.ParentId = ChildId"));
+                dt.Select("Parent.ParentId = ChildId")
+            );
             // Cannot find relation 0
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1600,7 +1601,8 @@ namespace System.Data.Tests
 
             //if BeginLoadData has not been called, an exception will be thrown
             NoNullAllowedException ex = Assert.Throws<NoNullAllowedException>(() =>
-                dt.LoadDataRow(new object[] { null, "A", "B" }, false));
+                dt.LoadDataRow(new object[] { null, "A", "B" }, false)
+            );
             // Column 'ParentId' does not allow nulls
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1632,7 +1634,8 @@ namespace System.Data.Tests
             ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
 
             ConstraintException ex3 = Assert.Throws<ConstraintException>(() =>
-                ds.Tables[0].EndLoadData());
+                ds.Tables[0].EndLoadData()
+            );
             // Failed to enable constraints. One or more
             // rows contain values violating non-null,
             // unique, or foreign-key constraints
@@ -1815,7 +1818,8 @@ namespace System.Data.Tests
             table.PrimaryKey = new DataColumn[] { col1 };
 
             ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                table.PrimaryKey = new DataColumn[] { new DataColumn("col2", typeof(int)) });
+                table.PrimaryKey = new DataColumn[] { new DataColumn("col2", typeof(int)) }
+            );
             //  Column must belong to a table
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1997,7 +2001,8 @@ namespace System.Data.Tests
             DataTable dt = DataProvider.CreateParentDataTable();
             //Select - parse sort string checking 1");
             IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
-                dt.Select(dt.Columns[0].ColumnName, dt.Columns[0].ColumnName + "1"));
+                dt.Select(dt.Columns[0].ColumnName, dt.Columns[0].ColumnName + "1")
+            );
             // Cannot find column ParentId1
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

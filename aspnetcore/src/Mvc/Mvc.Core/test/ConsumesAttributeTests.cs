@@ -43,7 +43,8 @@ public class ConsumesAttributeTests
 
         // Assert
         var ex = Assert.Throws<FormatException>(() =>
-            new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+            new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+        );
         Assert.Equal(
             "The header contains invalid values at index 0: '"
                 + (invalidContentType ?? "<null>")
@@ -66,7 +67,8 @@ public class ConsumesAttributeTests
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+            new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+        );
 
         Assert.Equal(
             string.Format(

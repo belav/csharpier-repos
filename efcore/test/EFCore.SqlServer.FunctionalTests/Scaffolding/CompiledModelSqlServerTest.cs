@@ -170,14 +170,15 @@ public class CompiledModelSqlServerTest : CompiledModelRelationalTestBase
             CoreStrings.RuntimeModelMissingData,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    principalId.GetIdentityIncrement(principalTable))
+                    principalId.GetIdentityIncrement(principalTable)
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    principalId.GetIdentitySeed(principalTable))
+                .Throws<InvalidOperationException>(() => principalId.GetIdentitySeed(principalTable)
+                )
                 .Message
         );
 

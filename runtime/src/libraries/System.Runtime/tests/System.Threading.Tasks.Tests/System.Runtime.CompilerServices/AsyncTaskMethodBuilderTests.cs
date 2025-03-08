@@ -608,27 +608,31 @@ namespace System.Threading.Tasks.Tests
                         Task.Factory.StartNew(() =>
                         {
                             throw new Exception("uh oh");
-                        }))
+                        })
+                    )
                     .Unwrap(),
                 Task
                     .Factory.StartNew<Task<int>>(() =>
                         Task.Factory.StartNew<int>(() =>
                         {
                             throw new Exception("uh oh");
-                        }))
+                        })
+                    )
                     .Unwrap(),
                 Task.Run(() =>
                     Task.Run(() =>
                     {
                         throw new Exception("uh oh");
-                    })),
+                    })
+                ),
                 Task.Run(() =>
                     Task.Run(
                         new Func<int>(() =>
                         {
                             throw new Exception("uh oh");
                         })
-                    )),
+                    )
+                ),
                 Task.Run(
                     new Func<Task>(() =>
                     {

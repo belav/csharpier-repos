@@ -16,7 +16,8 @@ public class W3CLoggingMiddlewareTests
     {
         var options = CreateOptionsAccessor();
         Assert.Throws<ArgumentNullException>(() =>
-            new W3CLoggingMiddleware(null, options, Helpers.CreateTestW3CLogger(options)));
+            new W3CLoggingMiddleware(null, options, Helpers.CreateTestW3CLogger(options))
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new W3CLoggingMiddleware(
@@ -26,7 +27,8 @@ public class W3CLoggingMiddlewareTests
                 },
                 null,
                 Helpers.CreateTestW3CLogger(options)
-            ));
+            )
+        );
 
         Assert.Throws<ArgumentNullException>(() =>
             new W3CLoggingMiddleware(
@@ -36,7 +38,8 @@ public class W3CLoggingMiddlewareTests
                 },
                 options,
                 null
-            ));
+            )
+        );
     }
 
     [Fact]

@@ -61,7 +61,8 @@ namespace System.ComponentModel
         public void Ctor_NullToolboxItemTypeName_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
-                new ToolboxItemAttribute((string)null));
+                new ToolboxItemAttribute((string)null)
+            );
         }
 
         [Theory]

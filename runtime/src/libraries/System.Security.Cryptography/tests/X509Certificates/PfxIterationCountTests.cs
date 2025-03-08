@@ -124,16 +124,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // Specifying password or importing from file will still give us error because cert is beyond Windows limit.
                     // But we will get the CryptoThrowHelper+WindowsCryptographicException.
                     VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
-                        Import(blob, password));
+                        Import(blob, password)
+                    );
                     VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
-                        Import(blob, PfxTests.GetSecureString(password)));
+                        Import(blob, PfxTests.GetSecureString(password))
+                    );
 
                     // Using a file will do as above as well.
                     VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() => Import(fileName));
                     VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
-                        Import(fileName, password));
+                        Import(fileName, password)
+                    );
                     VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
-                        Import(fileName, PfxTests.GetSecureString(password)));
+                        Import(fileName, PfxTests.GetSecureString(password))
+                    );
                 }
                 else
                 {
@@ -178,8 +182,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
             }
 
-            CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() =>
-                Import(blob));
+            CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() => Import(blob)
+            );
 
             if (PfxTests.IsPkcs12IterationCountAllowed(iterationCount, PfxTests.DefaultIterations))
             {

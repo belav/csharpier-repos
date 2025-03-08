@@ -56,7 +56,8 @@ namespace DebuggerTests
                         .AddFilter(null, LogLevel.Debug);
                     // .AddFile(logFilePath, minimumLevel: LogLevel.Debug)
                 }
-            }));
+            })
+        );
 
         protected ILogger _logger;
         public int Id { get; init; }
@@ -435,7 +436,8 @@ namespace DebuggerTests
                 var init_cmds = getInitCmds(Client, _cancellationTokenSource.Token);
 
                 Task<Result> readyTask = Task.Run(async () =>
-                    Result.FromJson(await WaitFor(APP_READY)));
+                    Result.FromJson(await WaitFor(APP_READY))
+                );
                 init_cmds.Add((APP_READY, readyTask));
 
                 _logger.LogInformation("waiting for the runtime to be ready");

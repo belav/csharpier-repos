@@ -313,7 +313,8 @@ namespace Microsoft.Web.Mvc.Test
                 htmlHelper.RadioButtonList(
                     "WrongFooList",
                     new RouteValueDictionary(new { attr1 = "value1" })
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -329,7 +330,8 @@ namespace Microsoft.Web.Mvc.Test
                 htmlHelper.RadioButtonList(
                     "FooList",
                     new RouteValueDictionary(new { attr1 = "value1" })
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -345,7 +347,8 @@ namespace Microsoft.Web.Mvc.Test
                     "",
                     selectList,
                     new RouteValueDictionary(new { attr1 = "value1" })
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -360,7 +363,8 @@ namespace Microsoft.Web.Mvc.Test
                     "FooBar",
                     null,
                     new RouteValueDictionary(new { attr1 = "value1" })
-                ));
+                )
+            );
         }
 
         private static SelectList GetRadioButtonListData(bool selectBaz)

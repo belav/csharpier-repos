@@ -157,7 +157,8 @@ public class AntiforgeryApplicationModelProviderTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(
             $"Cannot apply [{nameof(ValidateAntiForgeryTokenAttribute)}] and [{nameof(RequireAntiforgeryTokenAttribute)}] at the same time.",
             exception.Message

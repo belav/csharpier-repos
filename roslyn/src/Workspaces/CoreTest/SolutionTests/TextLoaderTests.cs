@@ -151,13 +151,15 @@ public class TextLoaderTests
             loader.LoadTextAndVersionAsync(
                 new LoadTextOptions(SourceHashAlgorithms.Default),
                 CancellationToken.None
-            ));
+            )
+        );
         await Assert.ThrowsAsync<NotImplementedException>(() =>
             loader.LoadTextAndVersionAsync(
                 workspace: null,
                 documentId: null,
                 CancellationToken.None
-            ));
+            )
+        );
     }
 
     [Fact, Obsolete]

@@ -148,7 +148,8 @@ public class AnnotatableTest
             CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    annotatable.AddRuntimeAnnotation("Foo", "Bar"))
+                    annotatable.AddRuntimeAnnotation("Foo", "Bar")
+                )
                 .Message
         );
     }

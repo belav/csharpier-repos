@@ -126,7 +126,8 @@ namespace System.IO.Ports.Tests
                 com.Open();
 
                 Assert.Throws<TimeoutException>(() =>
-                    com.BaseStream.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize));
+                    com.BaseStream.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+                );
 
                 VerifyTimeout(com);
             }

@@ -184,7 +184,8 @@ namespace System.IO.Pipes.Tests
                     2,
                     PipeTransmissionMode.Byte,
                     PipeOptions.FirstPipeInstance
-                ));
+                )
+            );
         }
 
         private static void PingPong_OtherProcess(string inName, string outName)

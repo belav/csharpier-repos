@@ -31,7 +31,8 @@ namespace System.Net.Http.Functional.Tests
             Assert.Throws<ArgumentNullException>(() => new StreamContent(null));
             Assert.Throws<ArgumentNullException>(() => new StreamContent(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new StreamContent(new MemoryStream(), 0));
+                new StreamContent(new MemoryStream(), 0)
+            );
         }
 
         [Fact]

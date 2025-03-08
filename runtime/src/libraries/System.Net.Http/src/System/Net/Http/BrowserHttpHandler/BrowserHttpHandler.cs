@@ -463,7 +463,8 @@ namespace System.Net.Http
             cancellationToken.ThrowIfCancellationRequested();
 #if FEATURE_WASM_THREADS
             return _transformStream.SynchronizationContext.Send(() =>
-                Impl(this, buffer, cancellationToken));
+                Impl(this, buffer, cancellationToken)
+            );
 #else
             return Impl(this, buffer, cancellationToken);
 #endif
@@ -720,7 +721,8 @@ namespace System.Net.Http
             _fetchResponse.ThrowIfDisposed();
 #if FEATURE_WASM_THREADS
             return _fetchResponse.FetchResponse!.SynchronizationContext.Send(() =>
-                Impl(this, stream, cancellationToken));
+                Impl(this, stream, cancellationToken)
+            );
 #else
             return Impl(this, stream, cancellationToken);
 #endif
@@ -774,7 +776,8 @@ namespace System.Net.Http
 #if FEATURE_WASM_THREADS
             return await _fetchResponse
                 .FetchResponse!.SynchronizationContext.Send(() =>
-                    Impl(this, buffer, cancellationToken))
+                    Impl(this, buffer, cancellationToken)
+                )
                 .ConfigureAwait(true);
 #else
             return await Impl(this, buffer, cancellationToken).ConfigureAwait(true);

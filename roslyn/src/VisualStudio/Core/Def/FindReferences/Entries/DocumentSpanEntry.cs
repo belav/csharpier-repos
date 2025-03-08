@@ -264,7 +264,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                             ExcerptMode.Tooltip,
                             classificationOptions,
                             CancellationToken.None
-                        ));
+                        )
+                    );
                     if (excerpt != null)
                     {
                         // get tooltip from excerpt service

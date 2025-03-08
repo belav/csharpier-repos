@@ -23,7 +23,8 @@ namespace System.Formats.Tar.Tests
                     "file.tar",
                     includeBaseDirectory: false,
                     cs.Token
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -34,25 +35,29 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: null,
                     destinationFileName: "path",
                     includeBaseDirectory: false
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentException>(() =>
                 TarFile.CreateFromDirectoryAsync(
                     sourceDirectoryName: string.Empty,
                     destinationFileName: "path",
                     includeBaseDirectory: false
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(() =>
                 TarFile.CreateFromDirectoryAsync(
                     sourceDirectoryName: "path",
                     destinationFileName: null,
                     includeBaseDirectory: false
-                ));
+                )
+            );
             await Assert.ThrowsAsync<ArgumentException>(() =>
                 TarFile.CreateFromDirectoryAsync(
                     sourceDirectoryName: "path",
                     destinationFileName: string.Empty,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -68,7 +73,8 @@ namespace System.Formats.Tar.Tests
                         sourceDirectoryName: "IDontExist",
                         destinationFileName: filePath,
                         includeBaseDirectory: false
-                    ));
+                    )
+                );
             }
         }
 
@@ -88,7 +94,8 @@ namespace System.Formats.Tar.Tests
                         sourceDirectoryName: dirPath,
                         destinationFileName: filePath,
                         includeBaseDirectory: false
-                    ));
+                    )
+                );
             }
         }
 

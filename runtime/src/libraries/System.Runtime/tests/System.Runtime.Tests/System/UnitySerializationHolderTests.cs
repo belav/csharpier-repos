@@ -20,7 +20,8 @@ namespace System.Tests
             SerializationException se = AssertExtensions.Throws<SerializationException>(() =>
                 BinaryFormatterHelpers.FromBase64String(
                     UnitySerializationHolderAssemblyBase64String
-                ));
+                )
+            );
             Assert.IsAssignableFrom<ArgumentException>(se.InnerException);
         }
     }

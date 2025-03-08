@@ -60,14 +60,17 @@ namespace System.Web.Http.WebHost
 
         private static readonly Lazy<IHostBufferPolicySelector> _bufferPolicySelector =
             new Lazy<IHostBufferPolicySelector>(() =>
-                GlobalConfiguration.Configuration.Services.GetHostBufferPolicySelector());
+                GlobalConfiguration.Configuration.Services.GetHostBufferPolicySelector()
+            );
 
         private static readonly Lazy<IExceptionHandler> _exceptionHandler =
             new Lazy<IExceptionHandler>(() =>
-                ExceptionServices.GetHandler(GlobalConfiguration.Configuration));
+                ExceptionServices.GetHandler(GlobalConfiguration.Configuration)
+            );
         private static readonly Lazy<IExceptionLogger> _exceptionLogger =
             new Lazy<IExceptionLogger>(() =>
-                ExceptionServices.GetLogger(GlobalConfiguration.Configuration));
+                ExceptionServices.GetLogger(GlobalConfiguration.Configuration)
+            );
 
         private static readonly Func<
             HttpRequestMessage,

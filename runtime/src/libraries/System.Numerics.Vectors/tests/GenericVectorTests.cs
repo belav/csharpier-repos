@@ -480,52 +480,62 @@ namespace System.Numerics.Tests
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_Byte() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<byte>());
+                TestReadOnlySpanBasedConstructorWithLessElements<byte>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_SByte() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<sbyte>());
+                TestReadOnlySpanBasedConstructorWithLessElements<sbyte>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_UInt16() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<ushort>());
+                TestReadOnlySpanBasedConstructorWithLessElements<ushort>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_Int16() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<short>());
+                TestReadOnlySpanBasedConstructorWithLessElements<short>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_UInt32() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<uint>());
+                TestReadOnlySpanBasedConstructorWithLessElements<uint>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_Int32() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<int>());
+                TestReadOnlySpanBasedConstructorWithLessElements<int>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_UInt64() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<ulong>());
+                TestReadOnlySpanBasedConstructorWithLessElements<ulong>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_Int64() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<long>());
+                TestReadOnlySpanBasedConstructorWithLessElements<long>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_Single() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<float>());
+                TestReadOnlySpanBasedConstructorWithLessElements<float>()
+            );
 
         [Fact]
         public void ReadOnlySpanBasedConstructorWithLessElements_Double() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanBasedConstructorWithLessElements<double>());
+                TestReadOnlySpanBasedConstructorWithLessElements<double>()
+            );
 
         private void TestReadOnlySpanBasedConstructorWithLessElements<T>()
             where T : struct
@@ -537,52 +547,62 @@ namespace System.Numerics.Tests
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_Byte() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<byte>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<byte>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_SByte() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<sbyte>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<sbyte>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_UInt16() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<ushort>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<ushort>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_Int16() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<short>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<short>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_UInt32() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<uint>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<uint>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_Int32() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<int>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<int>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_UInt64() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<ulong>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<ulong>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_Int64() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<long>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<long>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_Single() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<float>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<float>()
+            );
 
         [Fact]
         public void ReadOnlySpanByteBasedConstructorWithLessElements_Double() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestReadOnlySpanByteBasedConstructorWithLessElements<double>());
+                TestReadOnlySpanByteBasedConstructorWithLessElements<double>()
+            );
 
         private void TestReadOnlySpanByteBasedConstructorWithLessElements<T>()
             where T : struct
@@ -594,52 +614,62 @@ namespace System.Numerics.Tests
         [Fact]
         public void SpanBasedConstructorWithLessElements_Byte() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<byte>());
+                TestSpanBasedConstructorWithLessElements<byte>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_SByte() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<sbyte>());
+                TestSpanBasedConstructorWithLessElements<sbyte>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_UInt16() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<ushort>());
+                TestSpanBasedConstructorWithLessElements<ushort>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_Int16() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<short>());
+                TestSpanBasedConstructorWithLessElements<short>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_UInt32() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<uint>());
+                TestSpanBasedConstructorWithLessElements<uint>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_Int32() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<int>());
+                TestSpanBasedConstructorWithLessElements<int>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_UInt64() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<ulong>());
+                TestSpanBasedConstructorWithLessElements<ulong>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_Int64() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<long>());
+                TestSpanBasedConstructorWithLessElements<long>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_Single() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<float>());
+                TestSpanBasedConstructorWithLessElements<float>()
+            );
 
         [Fact]
         public void SpanBasedConstructorWithLessElements_Double() =>
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TestSpanBasedConstructorWithLessElements<double>());
+                TestSpanBasedConstructorWithLessElements<double>()
+            );
 
         private void TestSpanBasedConstructorWithLessElements<T>()
             where T : struct
@@ -833,7 +863,8 @@ namespace System.Numerics.Tests
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count * 2).ToArray();
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Vector<T>(values, Vector<T>.Count + 1));
+                new Vector<T>(values, Vector<T>.Count + 1)
+            );
         }
 
         #endregion Tests for Array based constructor
@@ -856,9 +887,10 @@ namespace System.Numerics.Tests
             where T : struct
         {
             Assert.Throws<NotSupportedException>(() =>
-                new Vector<T>(new ReadOnlySpan<byte>(new byte[4])));
-            Assert.Throws<NotSupportedException>(() =>
-                new Vector<T>(new ReadOnlySpan<T>(new T[4])));
+                new Vector<T>(new ReadOnlySpan<byte>(new byte[4]))
+            );
+            Assert.Throws<NotSupportedException>(() => new Vector<T>(new ReadOnlySpan<T>(new T[4]))
+            );
             Assert.Throws<NotSupportedException>(() => new Vector<T>(new Span<T>(new T[4])));
         }
 
@@ -1385,7 +1417,8 @@ namespace System.Numerics.Tests
             Span<T> destination = new T[Vector<T>.Count];
 
             Assert.Throws<ArgumentException>(() =>
-                vector.CopyTo(new Span<T>(new T[Vector<T>.Count - 1])));
+                vector.CopyTo(new Span<T>(new T[Vector<T>.Count - 1]))
+            );
 
             // CopyTo(Span<T>) method
             vector.CopyTo(destination);
@@ -1398,7 +1431,8 @@ namespace System.Numerics.Tests
             destination.Clear();
 
             Assert.Throws<ArgumentException>(() =>
-                vector.CopyTo(new Span<byte>(new byte[Vector<byte>.Count - 1])));
+                vector.CopyTo(new Span<byte>(new byte[Vector<byte>.Count - 1]))
+            );
 
             // CopyTo(Span<byte>) method
             vector.CopyTo(MemoryMarshal.AsBytes(destination));

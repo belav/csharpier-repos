@@ -51,8 +51,8 @@ namespace System.Collections.Tests
         public static void Capacity_Excessive()
         {
             Assert.Throws<OutOfMemoryException>(() => new MyCollection(int.MaxValue)); // Capacity is too large
-            Assert.Throws<OutOfMemoryException>(() =>
-                CreateCollection(100).Capacity = int.MaxValue); // Capacity is very large
+            Assert.Throws<OutOfMemoryException>(() => CreateCollection(100).Capacity = int.MaxValue
+            ); // Capacity is very large
         }
 
         private static Foo CreateValue(int i) => new Foo(i, i.ToString());

@@ -67,7 +67,8 @@ public class InferParameterBindingInfoConventionTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            convention.InferParameterBindingSources(action));
+            convention.InferParameterBindingSources(action)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -89,7 +90,8 @@ public class InferParameterBindingInfoConventionTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            convention.InferParameterBindingSources(action));
+            convention.InferParameterBindingSources(action)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -111,7 +113,8 @@ public class InferParameterBindingInfoConventionTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            convention.InferParameterBindingSources(action));
+            convention.InferParameterBindingSources(action)
+        );
         Assert.Equal(expected, ex.Message);
     }
 

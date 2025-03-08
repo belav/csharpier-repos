@@ -217,7 +217,8 @@ namespace System.Drawing.Tests
             )
             {
                 Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(() =>
-                    ColorTranslator.FromHtml(htmlColor));
+                    ColorTranslator.FromHtml(htmlColor)
+                );
                 if (exception is ArgumentException argumentException)
                     Assert.Equal("htmlColor", argumentException.ParamName);
             }

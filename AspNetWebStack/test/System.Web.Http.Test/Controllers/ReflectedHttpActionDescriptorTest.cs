@@ -218,7 +218,8 @@ namespace System.Web.Http
             };
 
             return Assert.ThrowsAsync<TaskCanceledException>(() =>
-                actionDescriptor.ExecuteAsync(_context, _arguments, cts.Token));
+                actionDescriptor.ExecuteAsync(_context, _arguments, cts.Token)
+            );
         }
 
         [Fact]
@@ -343,7 +344,8 @@ namespace System.Web.Http
             _arguments["id"] = null;
 
             var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
-                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None));
+                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
+            );
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
@@ -366,7 +368,8 @@ namespace System.Web.Http
             _arguments["otherId"] = 6;
 
             var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
-                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None));
+                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
+            );
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
@@ -389,7 +392,8 @@ namespace System.Web.Http
             _arguments["id"] = new DateTime();
 
             var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
-                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None));
+                actionDescriptor.ExecuteAsync(_context, _arguments, CancellationToken.None)
+            );
 
             Assert.Equal(HttpStatusCode.BadRequest, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);

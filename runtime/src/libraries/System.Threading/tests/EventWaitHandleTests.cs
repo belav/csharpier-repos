@@ -49,10 +49,12 @@ namespace System.Threading.Tests
         public void Ctor_NamesArentSupported_Unix()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new EventWaitHandle(false, EventResetMode.AutoReset, "anything"));
+                new EventWaitHandle(false, EventResetMode.AutoReset, "anything")
+            );
             bool createdNew;
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new EventWaitHandle(false, EventResetMode.AutoReset, "anything", out createdNew));
+                new EventWaitHandle(false, EventResetMode.AutoReset, "anything", out createdNew)
+            );
         }
 
         [PlatformSpecific(TestPlatforms.Windows)] // names aren't supported on Unix
@@ -84,7 +86,8 @@ namespace System.Threading.Tests
             string name = Guid.NewGuid().ToString("N");
             using (Mutex m = new Mutex(false, name))
                 Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                    new EventWaitHandle(false, mode, name));
+                    new EventWaitHandle(false, mode, name)
+                );
         }
 
         [Fact]
@@ -156,10 +159,12 @@ namespace System.Threading.Tests
         public void OpenExisting_NotSupported_Unix()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                EventWaitHandle.OpenExisting("anything"));
+                EventWaitHandle.OpenExisting("anything")
+            );
             EventWaitHandle ewh;
             Assert.Throws<PlatformNotSupportedException>(() =>
-                EventWaitHandle.TryOpenExisting("anything", out ewh));
+                EventWaitHandle.TryOpenExisting("anything", out ewh)
+            );
         }
 
         [PlatformSpecific(TestPlatforms.Windows)] // OpenExisting not supported on Unix
@@ -183,14 +188,16 @@ namespace System.Threading.Tests
         {
             string name = Guid.NewGuid().ToString("N");
             Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                EventWaitHandle.OpenExisting(name));
+                EventWaitHandle.OpenExisting(name)
+            );
             EventWaitHandle e;
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
 
             using (e = new EventWaitHandle(false, EventResetMode.AutoReset, name)) { }
             Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                EventWaitHandle.OpenExisting(name));
+                EventWaitHandle.OpenExisting(name)
+            );
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
         }
@@ -203,7 +210,8 @@ namespace System.Threading.Tests
             using (Mutex mtx = new Mutex(true, name))
             {
                 Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
-                    EventWaitHandle.OpenExisting(name));
+                    EventWaitHandle.OpenExisting(name)
+                );
                 EventWaitHandle ignored;
                 Assert.False(EventWaitHandle.TryOpenExisting(name, out ignored));
             }

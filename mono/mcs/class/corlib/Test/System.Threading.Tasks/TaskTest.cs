@@ -931,7 +931,8 @@ namespace MonoTests.System.Threading.Tasks
                     bool result = false;
 
                     var t = Task.Factory.StartNew(() =>
-                        Task.Factory.StartNew(() => { }, TaskCreationOptions.AttachedToParent));
+                        Task.Factory.StartNew(() => { }, TaskCreationOptions.AttachedToParent)
+                    );
 
                     var mre = new ManualResetEvent(false);
                     t.ContinueWith(l =>

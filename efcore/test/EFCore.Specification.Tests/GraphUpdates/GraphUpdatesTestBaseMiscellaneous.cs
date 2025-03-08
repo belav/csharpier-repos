@@ -152,7 +152,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                         ),
                         Assert
                             .Throws<InvalidOperationException>(() =>
-                                context.Entry(college).State = EntityState.Modified)
+                                context.Entry(college).State = EntityState.Modified
+                            )
                             .Message
                     );
                 }
@@ -267,7 +268,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync())
+                            await context.SaveChangesAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                 ).Message
             );
@@ -308,7 +310,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 if (async)
                 {
                     await Assert.ThrowsAsync<DbUpdateException>(async () =>
-                        await context.SaveChangesAsync());
+                        await context.SaveChangesAsync()
+                    );
                 }
                 else
                 {
@@ -322,7 +325,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     (
                         async
                             ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                                await context.SaveChangesAsync())
+                                await context.SaveChangesAsync()
+                            )
                             : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                     ).Message
                 );
@@ -380,7 +384,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync())
+                            await context.SaveChangesAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                 ).Message
             );
@@ -413,7 +418,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 if (Fixture.ForceClientNoAction)
                 {
                     await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges());
+                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    );
                 }
                 else
                 {
@@ -535,7 +541,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     if (async)
                     {
                         await Assert.ThrowsAsync<DbUpdateException>(async () =>
-                            await context.SaveChangesAsync());
+                            await context.SaveChangesAsync()
+                        );
                     }
                     else
                     {
@@ -720,7 +727,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync())
+                            await context.SaveChangesAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
                 ).Message
             );

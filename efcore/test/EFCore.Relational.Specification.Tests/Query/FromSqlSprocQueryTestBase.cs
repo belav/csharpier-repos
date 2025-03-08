@@ -137,8 +137,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -163,8 +163,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -227,8 +227,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -273,8 +273,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -318,8 +318,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -360,9 +360,10 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             (
                 async
                     ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.MinAsync(mep => mep.UnitPrice))
-                    : Assert.Throws<InvalidOperationException>(() =>
-                        query.Min(mep => mep.UnitPrice))
+                        query.MinAsync(mep => mep.UnitPrice)
+                    )
+                    : Assert.Throws<InvalidOperationException>(() => query.Min(mep => mep.UnitPrice)
+                    )
             ).Message
         );
     }
@@ -398,8 +399,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -425,8 +426,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -481,8 +482,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );
@@ -534,8 +535,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             RelationalStrings.FromSqlNonComposable,
             (
                 async
-                    ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        query.ToArrayAsync())
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToArrayAsync()
+                    )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
             ).Message
         );

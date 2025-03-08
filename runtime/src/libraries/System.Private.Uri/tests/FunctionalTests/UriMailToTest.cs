@@ -77,7 +77,8 @@ namespace System.PrivateUri.Tests
         public void UriMailTo_SchemeUserAtQuery_Throws()
         {
             Assert.ThrowsAny<FormatException>(() =>
-                new Uri("mailto:User@?to=User2@Host2.com;cc=User3@Host3com"));
+                new Uri("mailto:User@?to=User2@Host2.com;cc=User3@Host3com")
+            );
         }
 
         [Fact]

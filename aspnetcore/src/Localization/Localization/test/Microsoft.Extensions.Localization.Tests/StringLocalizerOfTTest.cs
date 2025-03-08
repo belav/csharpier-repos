@@ -14,7 +14,8 @@ public class StringLocalizerOfTTest
     {
         // Arrange, act and assert
         var exception = Assert.Throws<ArgumentNullException>(() =>
-            new StringLocalizer<object>(factory: null!));
+            new StringLocalizer<object>(factory: null!)
+        );
 
         Assert.Equal("factory", exception.ParamName);
     }

@@ -518,7 +518,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.Equal("2.5.4.99", rdn.GetSingleElementType().Value);
 
                         CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                            rdn.GetSingleElementValue());
+                            rdn.GetSingleElementValue()
+                        );
 
                         Assert.IsType<AsnContentException>(ex.InnerException);
                         Assert.IsType<DecoderFallbackException>(ex.InnerException.InnerException);

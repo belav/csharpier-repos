@@ -53,7 +53,8 @@ namespace System.Web.Helpers.Test
                         throw new DirectoryNotFoundException();
                     },
                     @"x:\this\does\not\exist.jpg"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1001,7 +1002,8 @@ namespace System.Web.Helpers.Test
                     verticalAlign: "Bottom",
                     opacity: 100,
                     padding: 5
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1023,7 +1025,8 @@ namespace System.Web.Helpers.Test
                     verticalAlign: "Bottom",
                     opacity: 100,
                     padding: 5
-                ));
+                )
+            );
         }
 
         [Fact]

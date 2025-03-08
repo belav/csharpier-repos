@@ -176,7 +176,8 @@ namespace System.Memory.Tests
             Assert.Equal(0, slicedSequence.Length);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sequence.Slice(1, default(SequencePosition)));
+                sequence.Slice(1, default(SequencePosition))
+            );
 
             // Slice(default, x) returns sequence from the beginning to x
             slicedSequence = sequence.Slice(default(SequencePosition), 1);

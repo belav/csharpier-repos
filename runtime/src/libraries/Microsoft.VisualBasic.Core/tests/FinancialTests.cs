@@ -69,7 +69,8 @@ namespace Microsoft.VisualBasic.Tests
         )
         {
             Assert.Throws<ArgumentException>(() =>
-                Financial.DDB(Cost, Salvage, Life, Period, Factor));
+                Financial.DDB(Cost, Salvage, Life, Period, Factor)
+            );
         }
 
         [Theory]
@@ -252,7 +253,8 @@ namespace Microsoft.VisualBasic.Tests
         public void MIRR_Invalid(double[] ValueArray, double FinanceRate, double ReinvestRate)
         {
             Assert.Throws<DivideByZeroException>(() =>
-                Financial.MIRR(ref ValueArray, FinanceRate, ReinvestRate));
+                Financial.MIRR(ref ValueArray, FinanceRate, ReinvestRate)
+            );
         }
 
         [Theory]

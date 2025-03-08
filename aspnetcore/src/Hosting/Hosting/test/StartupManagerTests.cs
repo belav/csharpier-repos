@@ -97,7 +97,8 @@ public class StartupManagerTests
 #pragma warning restore CS0612 // Type or member is obsolete
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            startup.ConfigureServicesDelegate(serviceCollection));
+            startup.ConfigureServicesDelegate(serviceCollection)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -435,7 +436,8 @@ public class StartupManagerTests
         var services = serviceCollection.BuildServiceProvider();
         var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "Boom");
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            StartupLoader.LoadMethods(services, type, "Boom"));
+            StartupLoader.LoadMethods(services, type, "Boom")
+        );
         Assert.Equal(
             "A public method named 'ConfigureBoom' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupBoom' type.",
             ex.Message
@@ -499,7 +501,8 @@ public class StartupManagerTests
         );
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            StartupLoader.LoadMethods(services, type, "TwoConfigures"));
+            StartupLoader.LoadMethods(services, type, "TwoConfigures")
+        );
         Assert.Equal(
             "Having multiple overloads of method 'Configure' is not supported.",
             ex.Message
@@ -524,7 +527,8 @@ public class StartupManagerTests
         );
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            StartupLoader.LoadMethods(services, type, "PrivateConfigure"));
+            StartupLoader.LoadMethods(services, type, "PrivateConfigure")
+        );
         Assert.Equal(
             "A public method named 'ConfigurePrivateConfigure' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupPrivateConfigure' type.",
             ex.Message
@@ -548,7 +552,8 @@ public class StartupManagerTests
         );
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            StartupLoader.LoadMethods(services, type, "TwoConfigureServices"));
+            StartupLoader.LoadMethods(services, type, "TwoConfigureServices")
+        );
         Assert.Equal(
             "Having multiple overloads of method 'ConfigureServices' is not supported.",
             ex.Message
@@ -761,7 +766,8 @@ public class StartupManagerTests
         );
 
         Assert.Throws<InvalidOperationException>(() =>
-            startup.ConfigureServicesDelegate(serviceCollection));
+            startup.ConfigureServicesDelegate(serviceCollection)
+        );
     }
 
     [Fact]
@@ -775,7 +781,8 @@ public class StartupManagerTests
                 services,
                 typeof(MyContainerStartupBaseClass),
                 Environments.Development
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -790,7 +797,8 @@ public class StartupManagerTests
                 services,
                 typeof(MyContainerStartupWithOverloads),
                 Environments.Development
-            ));
+            )
+        );
     }
 
     [Fact]

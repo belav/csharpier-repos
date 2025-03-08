@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                     Methods.TextDocumentDidOpenName,
                     didOpenParams,
                     CancellationToken.None
-                ));
+                )
+            );
             Assert.Equal("'initialized' has not been called.", ex.Message);
         }
 

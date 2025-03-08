@@ -20,7 +20,8 @@ namespace System.SpanTests
             );
 
             Assert.Throws<IndexOutOfRangeException>(() =>
-                "Hello".AsSpan()[new Index(0, fromEnd: true)]);
+                "Hello".AsSpan()[new Index(0, fromEnd: true)]
+            );
 
             Span<char> span1 = new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' });
             Assert.Equal('e', span1[new Index(1, fromEnd: false)]);
@@ -31,9 +32,8 @@ namespace System.SpanTests
             );
 
             Assert.Throws<IndexOutOfRangeException>(() =>
-                new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' })[
-                    new Index(0, fromEnd: true)
-                ]);
+                new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' })[new Index(0, fromEnd: true)]
+            );
         }
 
         [Fact]

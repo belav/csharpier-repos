@@ -392,6 +392,7 @@ app.MapGet("/{myBindAsyncRecord}", TestAction);
         );
 
         await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await endpoint.RequestDelegate(httpContext));
+            await endpoint.RequestDelegate(httpContext)
+        );
     }
 }

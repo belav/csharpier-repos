@@ -142,7 +142,8 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            app.Map("/Test", b => b.UseEndpoints(endpoints => { })));
+            app.Map("/Test", b => b.UseEndpoints(endpoints => { }))
+        );
 
         // Assert
         Assert.Equal(

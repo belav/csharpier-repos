@@ -137,9 +137,11 @@ namespace Moq.Tests.Regressions
             public void TestMethod(IIssue78Interface intOne)
             {
                 Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>.Factory.StartNew(() =>
-                    intOne.GetTypeOne());
+                    intOne.GetTypeOne()
+                );
                 Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>.Factory.StartNew(() =>
-                    intOne.GetTypeTwo());
+                    intOne.GetTypeTwo()
+                );
 
                 Issue78TypeOne objOne = getTypeOneTask.Result;
                 Issue78TypeTwo objTwo = getTypeTwoTask.Result;
@@ -446,7 +448,8 @@ namespace Moq.Tests.Regressions
                 // cannot handle:
                 var proxyGenerator = new ProxyGenerator();
                 Assert.Throws<ArgumentException>(() =>
-                    proxyGenerator.CreateClassProxy<NoDeserializationCtor>());
+                    proxyGenerator.CreateClassProxy<NoDeserializationCtor>()
+                );
 
                 // With such a type, Moq should fall back to the empty default value provider:
                 var foo = Mock.Of<Foo>();
@@ -513,7 +516,8 @@ namespace Moq.Tests.Regressions
                 {
                     var proxyGenerator = new ProxyGenerator();
                     Assert.Throws<ArgumentException>(() =>
-                        proxyGenerator.CreateClassProxy(classToProxy));
+                        proxyGenerator.CreateClassProxy(classToProxy)
+                    );
                 }
 
                 [Theory]
@@ -522,7 +526,8 @@ namespace Moq.Tests.Regressions
                 {
                     var proxyGenerator = new ProxyGenerator();
                     Assert.Throws<ArgumentException>(() =>
-                        proxyGenerator.CreateClassProxy(classToProxy));
+                        proxyGenerator.CreateClassProxy(classToProxy)
+                    );
                 }
 
                 public abstract class NoSerializableAttribute : ISerializable
@@ -5251,7 +5256,8 @@ namespace Moq.Tests.Regressions
             {
                 var mock = new Mock<IList<string>>();
                 Assert.Throws<NotSupportedException>(() =>
-                    mock.Setup(l => l.FirstOrDefault()).Returns("Hello world"));
+                    mock.Setup(l => l.FirstOrDefault()).Returns("Hello world")
+                );
             }
         }
 
@@ -5939,7 +5945,8 @@ namespace Moq.Tests.Regressions
                     mock.VerifySet(
                         c => c.HttpContext.Response.ShouldEncode = It.IsAny<bool>(),
                         Times.Never()
-                    ));
+                    )
+                );
             }
 
             public class ControllerContext

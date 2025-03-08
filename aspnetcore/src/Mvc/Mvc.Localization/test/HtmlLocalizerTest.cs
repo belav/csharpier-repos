@@ -170,7 +170,8 @@ public class HtmlLocalizerTest
 
         // Act
         var exception = Assert.Throws<FormatException>(() =>
-            content.WriteTo(TextWriter.Null, new HtmlTestEncoder()));
+            content.WriteTo(TextWriter.Null, new HtmlTestEncoder())
+        );
 
         // Assert
         Assert.NotNull(exception);

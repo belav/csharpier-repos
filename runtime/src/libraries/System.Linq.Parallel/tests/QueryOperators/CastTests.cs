@@ -129,9 +129,11 @@ namespace System.Linq.Parallel.Tests
                     .ForAll(x =>
                     {
                         ;
-                    }));
+                    })
+            );
             AssertThrows.Wrapped<InvalidCastException>(() =>
-                UnorderedSources.Default(count).Cast<double>().ToList());
+                UnorderedSources.Default(count).Cast<double>().ToList()
+            );
         }
 
         [Theory]
@@ -145,7 +147,8 @@ namespace System.Linq.Parallel.Tests
                     .ForAll(x =>
                     {
                         ;
-                    }));
+                    })
+            );
             AssertThrows.Wrapped<InvalidCastException>(() => labeled.Item.Cast<double>().ToList());
         }
 
@@ -163,9 +166,11 @@ namespace System.Linq.Parallel.Tests
                     .ForAll(x =>
                     {
                         ;
-                    }));
+                    })
+            );
             AssertThrows.Wrapped<InvalidCastException>(() =>
-                UnorderedSources.Default(count).Select(x => (Int32)x).Cast<Castable>().ToList());
+                UnorderedSources.Default(count).Select(x => (Int32)x).Cast<Castable>().ToList()
+            );
         }
 
         [Theory]
@@ -183,9 +188,11 @@ namespace System.Linq.Parallel.Tests
                     .ForAll(x =>
                     {
                         ;
-                    }));
+                    })
+            );
             AssertThrows.Wrapped<InvalidCastException>(() =>
-                labeled.Item.Select(x => (Int32)x).Cast<Castable>().ToList());
+                labeled.Item.Select(x => (Int32)x).Cast<Castable>().ToList()
+            );
         }
 
         [Fact]

@@ -141,7 +141,8 @@ namespace System.PrivateUri.Tests
             else
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    new UriBuilder(new Uri(uriString, UriKind.RelativeOrAbsolute)));
+                    new UriBuilder(new Uri(uriString, UriKind.RelativeOrAbsolute))
+                );
             }
         }
 
@@ -472,11 +473,14 @@ namespace System.PrivateUri.Tests
         public void InvalidPort_ThrowsArgumentOutOfRangeException(int portNumber)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new UriBuilder("scheme", "host", portNumber));
+                new UriBuilder("scheme", "host", portNumber)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new UriBuilder("scheme", "host", portNumber, "path"));
+                new UriBuilder("scheme", "host", portNumber, "path")
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new UriBuilder("scheme", "host", portNumber, "path", "?query#fragment"));
+                new UriBuilder("scheme", "host", portNumber, "path", "?query#fragment")
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new UriBuilder().Port = portNumber);
         }

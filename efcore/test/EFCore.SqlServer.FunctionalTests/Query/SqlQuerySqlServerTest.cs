@@ -851,7 +851,8 @@ FROM (
     public override async Task SqlQueryRaw_composed_with_common_table_expression(bool async)
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.SqlQueryRaw_composed_with_common_table_expression(async));
+            base.SqlQueryRaw_composed_with_common_table_expression(async)
+        );
 
         Assert.Equal(RelationalStrings.FromSqlNonComposable, exception.Message);
     }

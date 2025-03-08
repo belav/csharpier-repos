@@ -994,14 +994,16 @@ End Enum";
                 RenameTrackingTaggerProvider.WaitForIsRenamableIdentifier(
                     source.Task,
                     new CancellationToken(canceled: true)
-                ));
+                )
+            );
             var thrownException = new Exception();
             source.TrySetException(thrownException);
             var caughtException = Assert.Throws<Exception>(() =>
                 RenameTrackingTaggerProvider.WaitForIsRenamableIdentifier(
                     source.Task,
                     CancellationToken.None
-                ));
+                )
+            );
             Assert.Same(thrownException, caughtException);
         }
 

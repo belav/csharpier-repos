@@ -58,7 +58,8 @@ namespace System.Diagnostics.Tests
                     new EventLogReader(
                         query,
                         bookmark: Helpers.GetBookmark("Application", PathType.LogName)
-                    ));
+                    )
+                );
             }
             else
             {
@@ -84,7 +85,8 @@ namespace System.Diagnostics.Tests
                     new EventLogReader(
                         query,
                         bookmark: Helpers.GetBookmark("Application", PathType.LogName)
-                    ));
+                    )
+                );
             }
             else
             {

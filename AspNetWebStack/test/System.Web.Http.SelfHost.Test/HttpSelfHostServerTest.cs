@@ -158,7 +158,8 @@ namespace System.Web.Http.SelfHost
                 // Arrange & Act & Assert
                 server = await CreateServerAsync(port, transferMode);
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri));
+                    new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri)
+                );
             }
         }
 
@@ -202,7 +203,8 @@ namespace System.Web.Http.SelfHost
                 // Arrange & Act & Assert
                 server = await CreateServerAsync(port, transferMode);
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri));
+                    new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri)
+                );
             }
         }
 

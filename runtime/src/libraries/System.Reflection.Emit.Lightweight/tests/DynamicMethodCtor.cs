@@ -634,17 +634,23 @@ namespace System.Reflection.Emit.Tests
                     Type owner = typeof(TestClass);
 
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new DynamicMethod(name, returnType, parameterTypes));
+                        new DynamicMethod(name, returnType, parameterTypes)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new DynamicMethod(name, returnType, parameterTypes, true));
+                        new DynamicMethod(name, returnType, parameterTypes, true)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new DynamicMethod(name, returnType, parameterTypes, module));
+                        new DynamicMethod(name, returnType, parameterTypes, module)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new DynamicMethod(name, returnType, parameterTypes, owner));
+                        new DynamicMethod(name, returnType, parameterTypes, owner)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new DynamicMethod(name, returnType, parameterTypes, module, true));
+                        new DynamicMethod(name, returnType, parameterTypes, module, true)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new DynamicMethod(name, returnType, parameterTypes, owner, true));
+                        new DynamicMethod(name, returnType, parameterTypes, owner, true)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
                         new DynamicMethod(
                             name,
@@ -654,7 +660,8 @@ namespace System.Reflection.Emit.Tests
                             parameterTypes,
                             module,
                             true
-                        ));
+                        )
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
                         new DynamicMethod(
                             name,
@@ -664,7 +671,8 @@ namespace System.Reflection.Emit.Tests
                             parameterTypes,
                             owner,
                             true
-                        ));
+                        )
+                    );
                 },
                 options
             );

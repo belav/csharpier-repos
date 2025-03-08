@@ -88,7 +88,8 @@ public class HtmlHelperCheckBoxTest
 
         // Act & Assert
         var ex = Assert.Throws<FormatException>(() =>
-            helper.CheckBox("Property2", isChecked: null, htmlAttributes: null));
+            helper.CheckBox("Property2", isChecked: null, htmlAttributes: null)
+        );
         Assert.Contains("Boolean", ex.Message);
     }
 

@@ -61,7 +61,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetEncodedSize_Combined_Overflow()
         {
             Assert.Throws<ArgumentException>(() =>
-                PemEncoding.GetEncodedSize(labelLength: 2, dataLength: 1_585_834_052));
+                PemEncoding.GetEncodedSize(labelLength: 2, dataLength: 1_585_834_052)
+            );
         }
 
         [Fact]

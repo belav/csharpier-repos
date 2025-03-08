@@ -297,7 +297,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == -1),
                 selector: o => o.OrderID
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -335,7 +336,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == -1),
                 selector: o => o.OrderID
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -373,7 +375,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == -1),
                 selector: o => o.OrderID
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -536,7 +539,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     ss.Set<Order>()
                         .Where(o => ClientEvalPredicate(o))
                         .OrderBy(o => ClientEvalSelectorStateless())
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -548,7 +552,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     ss.Set<Order>()
                         .OrderBy(o => ClientEvalSelectorStateless())
                         .Where(o => ClientEvalPredicate(o))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -557,7 +562,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
             AssertCount(
                 async,
                 ss => ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -567,7 +573,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 async,
                 ss => ss.Set<Order>().OrderBy(o => ClientEvalSelectorStateless()),
                 predicate: o => ClientEvalPredicate(o)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -577,7 +584,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 async,
                 ss => ss.Set<Order>().OrderBy(o => o.OrderID),
                 predicate: o => ClientEvalPredicate(o)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -590,7 +598,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                         .OrderBy(o => ClientEvalSelectorStateless())
                         .Where(o => ClientEvalPredicate(o)),
                 predicate: o => ClientEvalPredicate(o)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -600,7 +609,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 async,
                 ss => ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o)),
                 predicate: o => o.CustomerID != "ALFKI"
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -683,7 +693,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Single_Throws(bool async) =>
         Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await AssertSingle(async, ss => ss.Set<Customer>()));
+            await AssertSingle(async, ss => ss.Set<Customer>())
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -699,7 +710,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SingleOrDefault_Throws(bool async) =>
         Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await AssertSingleOrDefault(async, ss => ss.Set<Customer>()));
+            await AssertSingleOrDefault(async, ss => ss.Set<Customer>())
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

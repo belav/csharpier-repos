@@ -15,7 +15,8 @@ namespace System.Reflection.Tests
                 nameof(TestClassThatThrows.Throw)
             )!;
             TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
-                method.Invoke(null, null));
+                method.Invoke(null, null)
+            );
             Exception exInner = ex.InnerException;
 
             Assert.Contains("Here", exInner.ToString());
@@ -28,7 +29,8 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo ctor = typeof(TestClassThatThrows).GetConstructor(Type.EmptyTypes)!;
             TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
-                ctor.Invoke(null));
+                ctor.Invoke(null)
+            );
             Exception exInner = ex.InnerException;
 
             Assert.Contains("Here", exInner.ToString());

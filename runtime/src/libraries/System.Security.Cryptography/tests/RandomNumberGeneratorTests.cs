@@ -406,7 +406,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetInt32_LowerAndUpper_InvalidRange(int fromInclusive, int toExclusive)
         {
             Assert.Throws<ArgumentException>(() =>
-                RandomNumberGenerator.GetInt32(fromInclusive, toExclusive));
+                RandomNumberGenerator.GetInt32(fromInclusive, toExclusive)
+            );
         }
 
         [Theory]
@@ -415,7 +416,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetInt32_Upper_InvalidRange(int toExclusive)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RandomNumberGenerator.GetInt32(toExclusive));
+                RandomNumberGenerator.GetInt32(toExclusive)
+            );
         }
 
         [Theory]

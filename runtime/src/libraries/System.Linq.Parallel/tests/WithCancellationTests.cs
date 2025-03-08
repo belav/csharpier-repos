@@ -29,12 +29,14 @@ namespace System.Linq.Parallel.Tests
         {
             CancellationToken token = new CancellationTokenSource().Token;
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token));
+                ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token)
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithCancellation(token)
-                    .WithCancellation(new CancellationTokenSource().Token));
+                    .WithCancellation(new CancellationTokenSource().Token)
+            );
         }
 
         [Fact]
@@ -148,7 +150,8 @@ namespace System.Linq.Parallel.Tests
                         y => y,
                         (x, e) => x
                     )
-                    .ForAll(x => { }));
+                    .ForAll(x => { })
+            );
             AssertThrows.Wrapped<OperationCanceledException>(() =>
                 left.Join(
                         right,
@@ -159,7 +162,8 @@ namespace System.Linq.Parallel.Tests
                         y => y,
                         (x, e) => x
                     )
-                    .ForAll(x => { }));
+                    .ForAll(x => { })
+            );
             AssertThrows.Wrapped<OperationCanceledException>(() =>
                 left.Zip<int, int, int>(
                         right,
@@ -168,7 +172,8 @@ namespace System.Linq.Parallel.Tests
                             throw new OperationCanceledException();
                         }
                     )
-                    .ForAll(x => { }));
+                    .ForAll(x => { })
+            );
         }
 
         // If a query is canceled and immediately disposed, the dispose should not throw an OCE.

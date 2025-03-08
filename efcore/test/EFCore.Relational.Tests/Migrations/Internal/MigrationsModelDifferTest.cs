@@ -58,8 +58,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                 modelBuilder
                     .Entity<TestKeylessType>()
                     .HasNoKey()
-                    .ToQuery(() =>
-                        context.Set<TestKeylessType>().FromSqlRaw("SELECT * FROM Vista")),
+                    .ToQuery(() => context.Set<TestKeylessType>().FromSqlRaw("SELECT * FROM Vista")
+                    ),
 #pragma warning restore CS0618 // Type or member is obsolete
             result => Assert.Empty(result)
         );
@@ -2038,7 +2038,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         _ => { },
                         upOps => { },
                         downOps => { }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -2065,7 +2066,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         _ => { },
                         upOps => { },
                         downOps => { }
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -2103,7 +2105,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         downOps => { },
                         _ => { },
                         enableSensitiveLogging: enableSensitiveLogging
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -2162,7 +2165,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         downOps => { },
                         _ => { },
                         enableSensitiveLogging: enableSensitiveLogging
-                    ))
+                    )
+                )
                 .Message
         );
 

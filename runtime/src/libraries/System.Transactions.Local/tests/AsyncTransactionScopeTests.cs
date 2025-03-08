@@ -245,7 +245,8 @@ namespace System.Transactions.Tests
                                             case 9:
                                             {
                                                 Task.Factory.StartNew(() =>
-                                                        DoTaskUnderAsyncTS(false, null))
+                                                        DoTaskUnderAsyncTS(false, null)
+                                                    )
                                                     .Wait();
                                                 break;
                                             }
@@ -262,7 +263,8 @@ namespace System.Transactions.Tests
                                             case 12:
                                             {
                                                 Task.Factory.StartNew(() =>
-                                                        SyncTSDoTaskUnderAsyncTS(false, true, null))
+                                                        SyncTSDoTaskUnderAsyncTS(false, true, null)
+                                                    )
                                                     .Wait();
                                                 break;
                                             }
@@ -493,7 +495,8 @@ namespace System.Transactions.Tests
                                                                 true,
                                                                 null
                                                             )
-                                                        ))
+                                                        )
+                                                    )
                                                     .Wait();
                                                 break;
                                             }
@@ -537,7 +540,8 @@ namespace System.Transactions.Tests
                                                             false,
                                                             true,
                                                             null
-                                                        ))
+                                                        )
+                                                    )
                                                     .Wait();
                                                 break;
                                             }
@@ -628,7 +632,8 @@ namespace System.Transactions.Tests
                                                                 true,
                                                                 null
                                                             )
-                                                        ))
+                                                        )
+                                                    )
                                                     .Wait();
                                                 break;
                                             }
@@ -691,7 +696,8 @@ namespace System.Transactions.Tests
                                                                 true,
                                                                 null
                                                             )
-                                                        ))
+                                                        )
+                                                    )
                                                     .Wait();
                                                 break;
                                             }

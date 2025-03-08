@@ -90,7 +90,8 @@ public static partial class OverlappedTests
         {
             Assert.True(nativeOverlapped != null);
             Assert.Throws<InvalidOperationException>(() =>
-                ov.Pack(new IOCompletionCallback(callback), null));
+                ov.Pack(new IOCompletionCallback(callback), null)
+            );
         }
         finally
         {
@@ -113,7 +114,8 @@ public static partial class OverlappedTests
         {
             Assert.True(nativeOverlapped != null);
             Assert.Throws<InvalidOperationException>(() =>
-                ov.Pack(new IOCompletionCallback(callback)));
+                ov.Pack(new IOCompletionCallback(callback))
+            );
         }
         finally
         {

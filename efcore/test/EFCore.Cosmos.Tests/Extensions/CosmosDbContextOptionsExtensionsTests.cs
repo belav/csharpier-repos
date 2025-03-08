@@ -156,5 +156,6 @@ public class CosmosDbContextOptionsExtensionsTests
                 "authKeyOrResourceToken",
                 "databaseName",
                 cosmosOptionsAction
-            ));
+            )
+        );
 }

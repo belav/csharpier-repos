@@ -759,97 +759,124 @@ namespace System.Reflection.Metadata.Tests
         {
             Assert.Throws<InvalidCastException>(() =>
                 (ModuleDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Module), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Module), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (AssemblyDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Assembly), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Assembly), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (InterfaceImplementationHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.InterfaceImpl), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.InterfaceImpl), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MethodDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodDef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodDef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MethodSpecificationHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodSpec), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodSpec), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (TypeDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeDef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeDef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ExportedTypeHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.ExportedType), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ExportedType), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (TypeReferenceHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeRef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeRef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (TypeSpecificationHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeSpec), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeSpec), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MemberReferenceHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (FieldDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (EventDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Event), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Event), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (PropertyDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Property), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Property), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (StandaloneSignatureHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Signature), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Signature), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MemberReferenceHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (FieldDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (EventDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Event), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Event), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (PropertyDefinitionHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.Property), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Property), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
-                (ParameterHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.ParamDef), 1));
+                (ParameterHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.ParamDef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (GenericParameterHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParam), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParam), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (GenericParameterConstraintHandle)
-                    new Handle(
-                        (byte)(HandleType.VirtualBit | HandleType.GenericParamConstraint),
-                        1
-                    ));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParamConstraint), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ModuleReferenceHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.ModuleRef), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ModuleRef), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (CustomAttributeHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.CustomAttribute), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.CustomAttribute), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (DeclarativeSecurityAttributeHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.DeclSecurity), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.DeclSecurity), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ManifestResourceHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
-                (ConstantHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Constant), 1));
+                (ConstantHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Constant), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ManifestResourceHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
-                (AssemblyFileHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.File), 1));
+                (AssemblyFileHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.File), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MethodImplementationHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodImpl), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodImpl), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (UserStringHandle)
-                    new Handle((byte)(HandleType.VirtualBit | HandleType.UserString), 1));
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.UserString), 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
-                (GuidHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Guid), 1));
+                (GuidHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Guid), 1)
+            );
 
             var x1 = (AssemblyReferenceHandle)
                 new Handle((byte)(HandleType.VirtualBit | HandleType.AssemblyRef), 1);
@@ -864,93 +891,122 @@ namespace System.Reflection.Metadata.Tests
         {
             Assert.Throws<InvalidCastException>(() =>
                 (ModuleDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Module | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Module | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (AssemblyDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Assembly | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Assembly | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (InterfaceImplementationHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.InterfaceImpl | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.InterfaceImpl | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MethodDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodDef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodDef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MethodSpecificationHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodSpec | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodSpec | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (TypeDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeDef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeDef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ExportedTypeHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ExportedType | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ExportedType | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (TypeReferenceHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeRef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeRef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (TypeSpecificationHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeSpec | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeSpec | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MemberReferenceHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (FieldDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (EventDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (PropertyDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (StandaloneSignatureHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Signature | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Signature | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MemberReferenceHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (FieldDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (EventDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (PropertyDefinitionHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ParameterHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ParamDef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ParamDef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (GenericParameterHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.GenericParam | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.GenericParam | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (GenericParameterConstraintHandle)
                     new EntityHandle(
                         TokenTypeIds.VirtualBit | TokenTypeIds.GenericParamConstraint | 1
-                    ));
+                    )
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ModuleReferenceHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ModuleRef | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ModuleRef | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (CustomAttributeHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.CustomAttribute | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.CustomAttribute | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (DeclarativeSecurityAttributeHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.DeclSecurity | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.DeclSecurity | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ManifestResourceHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ConstantHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Constant | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Constant | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (ManifestResourceHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (AssemblyFileHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.File | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.File | 1)
+            );
             Assert.Throws<InvalidCastException>(() =>
                 (MethodImplementationHandle)
-                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodImpl | 1));
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodImpl | 1)
+            );
             var x1 = (AssemblyReferenceHandle)
                 new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.AssemblyRef | 1);
         }
@@ -1195,7 +1251,8 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal((int)(uint.MaxValue >> 3), ((Handle)virtual2).Offset);
 
             Assert.Throws<BadImageFormatException>(() =>
-                NamespaceDefinitionHandle.FromVirtualIndex((uint.MaxValue >> 3) + 1));
+                NamespaceDefinitionHandle.FromVirtualIndex((uint.MaxValue >> 3) + 1)
+            );
         }
 
         [Fact]

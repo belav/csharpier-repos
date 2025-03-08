@@ -113,7 +113,8 @@ namespace System.Threading.Tests
             {
                 ExecutionContext ec = ExecutionContext.Capture();
                 Assert.Throws<InvalidOperationException>(() =>
-                    ExecutionContext.Run(ec, _ => { }, null));
+                    ExecutionContext.Run(ec, _ => { }, null)
+                );
             }
         }
 

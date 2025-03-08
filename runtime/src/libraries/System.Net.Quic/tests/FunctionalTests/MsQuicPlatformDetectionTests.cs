@@ -20,10 +20,12 @@ namespace System.Net.Quic.Tests
         {
             PlatformNotSupportedException listenerEx =
                 await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                    await CreateQuicListener());
+                    await CreateQuicListener()
+                );
             PlatformNotSupportedException connectionEx =
                 await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                    await CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0)));
+                    await CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0))
+                );
             Assert.Equal(listenerEx.Message, connectionEx.Message);
             _output.WriteLine(listenerEx.Message);
         }

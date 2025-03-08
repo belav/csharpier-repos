@@ -18,25 +18,29 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: null,
                     destinationFileName: "path",
                     includeBaseDirectory: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 TarFile.CreateFromDirectory(
                     sourceDirectoryName: string.Empty,
                     destinationFileName: "path",
                     includeBaseDirectory: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 TarFile.CreateFromDirectory(
                     sourceDirectoryName: "path",
                     destinationFileName: null,
                     includeBaseDirectory: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 TarFile.CreateFromDirectory(
                     sourceDirectoryName: "path",
                     destinationFileName: string.Empty,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -52,7 +56,8 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: "IDontExist",
                     destinationFileName: filePath,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -71,7 +76,8 @@ namespace System.Formats.Tar.Tests
                     sourceDirectoryName: dirPath,
                     destinationFileName: filePath,
                     includeBaseDirectory: false
-                ));
+                )
+            );
         }
 
         [Theory]

@@ -308,7 +308,8 @@ namespace System.Web.Http.WebHost.Routing
 
                 // Act & Assert
                 var exception = await Assert.ThrowsAsync<Exception>(() =>
-                    product.ProcessRequestAsync(contextBase));
+                    product.ProcessRequestAsync(contextBase)
+                );
 
                 Assert.Same(expectedException, exception);
                 Assert.NotNull(exception.StackTrace);

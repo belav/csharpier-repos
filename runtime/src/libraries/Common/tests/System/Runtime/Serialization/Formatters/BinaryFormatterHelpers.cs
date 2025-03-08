@@ -97,7 +97,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
 
             Exception ex = Assert.Throws<TargetInvocationException>(() =>
-                constructor.Invoke(new object[] { info, new StreamingContext() }));
+                constructor.Invoke(new object[] { info, new StreamingContext() })
+            );
             Assert.IsType<PlatformNotSupportedException>(ex.InnerException);
         }
 

@@ -939,7 +939,8 @@ class C { }";
                     analyzersAndSuppressors,
                     reportSuppressedDiagnostics: true,
                     cancellationToken: cancellationToken
-                ));
+                )
+            );
         }
 
         [

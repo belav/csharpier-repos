@@ -73,7 +73,8 @@ namespace System.Runtime.InteropServices.Tests
         public void SetMessageSendCallback_NullCallback()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                ObjectiveCMarshal.SetMessageSendCallback(MessageSendFunction.MsgSend, IntPtr.Zero));
+                ObjectiveCMarshal.SetMessageSendCallback(MessageSendFunction.MsgSend, IntPtr.Zero)
+            );
         }
 
         [Fact]
@@ -83,7 +84,8 @@ namespace System.Runtime.InteropServices.Tests
                 ObjectiveCMarshal.SetMessageSendCallback(
                     (MessageSendFunction)100,
                     msgSendOverrides[0].Func
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -95,7 +97,8 @@ namespace System.Runtime.InteropServices.Tests
                     var (msgSend, func) = msgSendOverrides[0];
                     ObjectiveCMarshal.SetMessageSendCallback(msgSend, func);
                     Assert.Throws<InvalidOperationException>(() =>
-                        ObjectiveCMarshal.SetMessageSendCallback(msgSend, func));
+                        ObjectiveCMarshal.SetMessageSendCallback(msgSend, func)
+                    );
                 })
                 .Dispose();
         }

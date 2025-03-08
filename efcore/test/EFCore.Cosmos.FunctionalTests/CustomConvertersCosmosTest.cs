@@ -131,7 +131,8 @@ WHERE (c["Discriminator"] IN ("Blog", "RssBlog") AND NOT((c["IndexerVisible"] = 
             CoreStrings.TranslationFailed("")[47..],
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    base.Value_conversion_on_enum_collection_contains())
+                    base.Value_conversion_on_enum_collection_contains()
+                )
                 .Message
         );
 
@@ -143,7 +144,8 @@ WHERE (c["Discriminator"] IN ("Blog", "RssBlog") AND NOT((c["IndexerVisible"] = 
 
     public override void Infer_type_mapping_from_in_subquery_to_item() =>
         Assert.Throws<InvalidOperationException>(() =>
-            base.Infer_type_mapping_from_in_subquery_to_item());
+            base.Infer_type_mapping_from_in_subquery_to_item()
+        );
 
     private void AssertSql(params string[] expected) =>
         Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

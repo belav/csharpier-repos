@@ -129,9 +129,11 @@ namespace System.Collections.Immutable.Tests
         {
             var dictionary = (ICollection<KeyValuePair<string, int>>)Empty<string, int>();
             Assert.Throws<NotSupportedException>(() =>
-                dictionary.Add(new KeyValuePair<string, int>()));
+                dictionary.Add(new KeyValuePair<string, int>())
+            );
             Assert.Throws<NotSupportedException>(() =>
-                dictionary.Remove(new KeyValuePair<string, int>()));
+                dictionary.Remove(new KeyValuePair<string, int>())
+            );
             Assert.Throws<NotSupportedException>(() => dictionary.Clear());
             Assert.True(dictionary.IsReadOnly);
         }

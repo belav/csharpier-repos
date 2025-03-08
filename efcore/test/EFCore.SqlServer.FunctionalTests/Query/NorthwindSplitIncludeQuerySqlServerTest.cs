@@ -130,7 +130,8 @@ ORDER BY [t].[CompanyName] DESC, [t].[CustomerID]
             SqlServerStrings.SplitQueryOffsetWithoutOrderBy,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_skip_no_order_by(async))
+                    base.Include_collection_skip_no_order_by(async)
+                )
             ).Message
         );
 
@@ -166,7 +167,8 @@ ORDER BY [t].[CustomerID]
             SqlServerStrings.SplitQueryOffsetWithoutOrderBy,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_skip_take_no_order_by(async))
+                    base.Include_collection_skip_take_no_order_by(async)
+                )
             ).Message
         );
 

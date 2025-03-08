@@ -98,7 +98,8 @@ namespace EncodingTests
                 new DecoderExceptionFallback()
             );
             Assert.Throws<EncoderFallbackException>(() =>
-                asciiEncoding.GetByteCount(s_asciiInputStringWithFallback));
+                asciiEncoding.GetByteCount(s_asciiInputStringWithFallback)
+            );
         }
 
         [Fact]
@@ -110,7 +111,8 @@ namespace EncodingTests
                 new DecoderExceptionFallback()
             );
             Assert.Throws<DecoderFallbackException>(() =>
-                asciiEncoding.GetString(new byte[] { 0xAA, (byte)'x', 0xAB }));
+                asciiEncoding.GetString(new byte[] { 0xAA, (byte)'x', 0xAB })
+            );
         }
 
         [Fact]

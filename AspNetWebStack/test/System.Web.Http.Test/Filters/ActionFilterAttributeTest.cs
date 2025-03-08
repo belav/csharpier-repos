@@ -136,7 +136,8 @@ namespace System.Web.Http.Filters
                         continuationCalled = true;
                         return null;
                     }
-                ));
+                )
+            );
 
             // Assert
             Assert.Same(expectedException, exception);
@@ -197,7 +198,8 @@ namespace System.Web.Http.Filters
                     context,
                     CancellationToken.None,
                     () => TaskHelpers.Canceled<HttpResponseMessage>()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -250,7 +252,8 @@ namespace System.Web.Http.Filters
 
             // Act & Assert
             await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteActionFilterAsync(context, CancellationToken.None, continuation));
+                filter.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
+            );
 
             // Assert
             filterMock.Verify(f =>
@@ -420,7 +423,8 @@ namespace System.Web.Http.Filters
                     context,
                     CancellationToken.None,
                     () => TaskHelpers.FromError<HttpResponseMessage>(exception)
-                ));
+                )
+            );
 
             // Assert
             Assert.Same(exception, result);
@@ -484,7 +488,8 @@ namespace System.Web.Http.Filters
                     context,
                     CancellationToken.None,
                     () => Task.FromResult(new HttpResponseMessage())
-                ));
+                )
+            );
 
             // Assert
             Assert.Same(exception, actual);
@@ -603,11 +608,8 @@ namespace System.Web.Http.Filters
 
                 // Act
                 Exception exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    product.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        continuation
-                    ));
+                    product.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
+                );
 
                 // Assert
                 Assert.Same(expectedReplacementException, exception);
@@ -630,11 +632,8 @@ namespace System.Web.Http.Filters
 
                 // Act
                 Exception exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    product.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        continuation
-                    ));
+                    product.ExecuteActionFilterAsync(context, CancellationToken.None, continuation)
+                );
 
                 // Assert
                 Assert.NotNull(expectedStackTrace);

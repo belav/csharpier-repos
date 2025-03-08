@@ -46,7 +46,8 @@ public class ResponseCacheAttributeTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            responseCache.CreateInstance(GetServiceProvider(cacheProfiles)));
+            responseCache.CreateInstance(GetServiceProvider(cacheProfiles))
+        );
         Assert.Equal("The 'HelloWorld' cache profile is not defined.", ex.Message);
     }
 

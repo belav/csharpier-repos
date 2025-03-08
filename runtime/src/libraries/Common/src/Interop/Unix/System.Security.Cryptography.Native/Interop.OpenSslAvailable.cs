@@ -12,7 +12,8 @@ internal static partial class Interop
         private static partial int OpenSslAvailable();
 
         private static readonly Lazy<bool> s_openSslAvailable = new Lazy<bool>(() =>
-            OpenSslAvailable() != 0);
+            OpenSslAvailable() != 0
+        );
 
         internal static bool OpenSslIsAvailable => s_openSslAvailable.Value;
     }

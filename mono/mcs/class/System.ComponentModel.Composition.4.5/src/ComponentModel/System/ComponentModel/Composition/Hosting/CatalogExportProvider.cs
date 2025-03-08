@@ -505,7 +505,8 @@ namespace System.ComponentModel.Composition.Hosting
                 atomicComposition.AddCompleteAction(() =>
                     this.OnExportsChanged(
                         new ExportsChangeEventArgs(addedExports, removedExports, null)
-                    ));
+                    )
+                );
 
                 atomicComposition.Complete();
             }
@@ -938,7 +939,8 @@ namespace System.ComponentModel.Composition.Hosting
                                 new ExportDefinition[0],
                                 null
                             )
-                        ));
+                        )
+                    );
                 }
 
                 localAtomicComposition.Complete();

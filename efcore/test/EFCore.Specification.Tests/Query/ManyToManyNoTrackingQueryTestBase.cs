@@ -77,7 +77,8 @@ public abstract class ManyToManyNoTrackingQueryTestBase<TFixture>
                                     "OneSkipPayloadFullShared"
                                 )
                             )
-                    ))
+                    )
+                )
             ).Message
         );
 

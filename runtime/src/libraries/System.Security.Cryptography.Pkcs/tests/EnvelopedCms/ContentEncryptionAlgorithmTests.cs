@@ -166,7 +166,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 );
 
                 CryptographicException e = Assert.Throws<CryptographicException>(() =>
-                    ecms.Encrypt(recipient));
+                    ecms.Encrypt(recipient)
+                );
 
                 Assert.Contains(Oids.Rc4, e.Message);
             }

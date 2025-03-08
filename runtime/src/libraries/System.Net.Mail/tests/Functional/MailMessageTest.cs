@@ -53,9 +53,11 @@ namespace System.Net.Mail.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new MailMessage("from@example.com", null));
             Assert.Throws<ArgumentNullException>(() =>
-                new MailMessage(null, new MailAddress("to@example.com")));
+                new MailMessage(null, new MailAddress("to@example.com"))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new MailMessage(new MailAddress("from@example.com"), null));
+                new MailMessage(new MailAddress("from@example.com"), null)
+            );
             Assert.Throws<ArgumentNullException>(() => new MailMessage(null, "to@example.com"));
         }
 

@@ -101,7 +101,8 @@ namespace System.Diagnostics.Tests
         public void FileVersionInfo_CurrentDirectory_FileNotFound()
         {
             Assert.Throws<FileNotFoundException>(() =>
-                FileVersionInfo.GetVersionInfo(Directory.GetCurrentDirectory()));
+                FileVersionInfo.GetVersionInfo(Directory.GetCurrentDirectory())
+            );
         }
 
         [Fact]
@@ -110,7 +111,8 @@ namespace System.Diagnostics.Tests
             Assert.Throws<FileNotFoundException>(() =>
                 FileVersionInfo.GetVersionInfo(
                     Path.Combine(Directory.GetCurrentDirectory(), TestNotFoundFileName)
-                ));
+                )
+            );
         }
 
         [Fact]

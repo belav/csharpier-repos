@@ -66,7 +66,8 @@ public class ViewResultTest
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            viewResult.ExecuteResultAsync(actionContext));
+            viewResult.ExecuteResultAsync(actionContext)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -118,7 +119,8 @@ public class ViewResultTest
 
         // Act and Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            viewResult.ExecuteResultAsync(actionContext));
+            viewResult.ExecuteResultAsync(actionContext)
+        );
         Assert.Equal(expected, ex.Message);
         viewEngine.Verify();
     }
@@ -171,7 +173,8 @@ public class ViewResultTest
 
         // Act and Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            viewResult.ExecuteResultAsync(actionContext));
+            viewResult.ExecuteResultAsync(actionContext)
+        );
         Assert.Equal(expected, ex.Message);
         viewEngine.Verify();
     }
@@ -224,7 +227,8 @@ public class ViewResultTest
 
         // Act and Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            viewResult.ExecuteResultAsync(actionContext));
+            viewResult.ExecuteResultAsync(actionContext)
+        );
         Assert.Equal(expected, ex.Message);
         viewEngine.Verify();
     }

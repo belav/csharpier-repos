@@ -181,7 +181,8 @@ public class NavigationManagerTest
         var navigationManager = new TestNavigationManager(baseUri);
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            navigationManager.GetUriWithQueryParameter(name, "test"));
+            navigationManager.GetUriWithQueryParameter(name, "test")
+        );
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
@@ -260,7 +261,8 @@ public class NavigationManagerTest
         };
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            navigationManager.GetUriWithQueryParameters(unsupportedParameterValues));
+            navigationManager.GetUriWithQueryParameters(unsupportedParameterValues)
+        );
         Assert.StartsWith("Cannot format query parameters with values of type", exception.Message);
     }
 
@@ -277,7 +279,8 @@ public class NavigationManagerTest
         };
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            navigationManager.GetUriWithQueryParameters(values));
+            navigationManager.GetUriWithQueryParameters(values)
+        );
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
@@ -925,7 +928,8 @@ public class NavigationManagerTest
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false));
+            navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false)
+        );
         Assert.StartsWith("To support navigation locks", ex.Message);
 
         async ValueTask HandleLocationChanging_ThrowException(LocationChangingContext context)
@@ -948,7 +952,8 @@ public class NavigationManagerTest
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false));
+            navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false)
+        );
         Assert.StartsWith("To support navigation locks", ex.Message);
 
         async ValueTask HandleLocationChanging_AllowNavigation(LocationChangingContext context)

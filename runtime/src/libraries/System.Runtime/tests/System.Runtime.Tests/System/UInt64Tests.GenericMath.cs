@@ -89,7 +89,8 @@ namespace System.Tests
                 AdditionOperatorsHelper<ulong, ulong, ulong>.op_CheckedAddition(
                     (ulong)0xFFFFFFFFFFFFFFFF,
                     1
-                ));
+                )
+            );
         }
 
         //
@@ -3651,7 +3652,8 @@ namespace System.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                DecrementOperatorsHelper<ulong>.op_CheckedDecrement((ulong)0x0000000000000000));
+                DecrementOperatorsHelper<ulong>.op_CheckedDecrement((ulong)0x0000000000000000)
+            );
         }
 
         //
@@ -3701,17 +3703,20 @@ namespace System.Tests
                 DivisionOperatorsHelper<ulong, ulong, ulong>.op_Division(
                     (ulong)0x0000000000000000,
                     0
-                ));
+                )
+            );
             Assert.Throws<DivideByZeroException>(() =>
                 DivisionOperatorsHelper<ulong, ulong, ulong>.op_Division(
                     (ulong)0x0000000000000001,
                     0
-                ));
+                )
+            );
             Assert.Throws<DivideByZeroException>(() =>
                 DivisionOperatorsHelper<ulong, ulong, ulong>.op_Division(
                     (ulong)0xFFFFFFFFFFFFFFFF,
                     0
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -3757,17 +3762,20 @@ namespace System.Tests
                 DivisionOperatorsHelper<ulong, ulong, ulong>.op_CheckedDivision(
                     (ulong)0x0000000000000000,
                     0
-                ));
+                )
+            );
             Assert.Throws<DivideByZeroException>(() =>
                 DivisionOperatorsHelper<ulong, ulong, ulong>.op_CheckedDivision(
                     (ulong)0x0000000000000001,
                     0
-                ));
+                )
+            );
             Assert.Throws<DivideByZeroException>(() =>
                 DivisionOperatorsHelper<ulong, ulong, ulong>.op_CheckedDivision(
                     (ulong)0xFFFFFFFFFFFFFFFF,
                     0
-                ));
+                )
+            );
         }
 
         //
@@ -3894,7 +3902,8 @@ namespace System.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                IncrementOperatorsHelper<ulong>.op_CheckedIncrement((ulong)0xFFFFFFFFFFFFFFFF));
+                IncrementOperatorsHelper<ulong>.op_CheckedIncrement((ulong)0xFFFFFFFFFFFFFFFF)
+            );
         }
 
         //
@@ -3942,10 +3951,8 @@ namespace System.Tests
             );
 
             Assert.Throws<DivideByZeroException>(() =>
-                ModulusOperatorsHelper<ulong, ulong, ulong>.op_Modulus(
-                    (ulong)0x0000000000000001,
-                    0
-                ));
+                ModulusOperatorsHelper<ulong, ulong, ulong>.op_Modulus((ulong)0x0000000000000001, 0)
+            );
         }
 
         //
@@ -4034,12 +4041,14 @@ namespace System.Tests
                 MultiplyOperatorsHelper<ulong, ulong, ulong>.op_CheckedMultiply(
                     (ulong)0x8000000000000000,
                     2
-                ));
+                )
+            );
             Assert.Throws<OverflowException>(() =>
                 MultiplyOperatorsHelper<ulong, ulong, ulong>.op_CheckedMultiply(
                     (ulong)0xFFFFFFFFFFFFFFFF,
                     2
-                ));
+                )
+            );
         }
 
         //
@@ -4295,11 +4304,14 @@ namespace System.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<decimal>(decimal.MinValue));
+                NumberBaseHelper<ulong>.CreateChecked<decimal>(decimal.MinValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<decimal>(decimal.MaxValue));
+                NumberBaseHelper<ulong>.CreateChecked<decimal>(decimal.MaxValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<decimal>(decimal.MinusOne));
+                NumberBaseHelper<ulong>.CreateChecked<decimal>(decimal.MinusOne)
+            );
         }
 
         [Fact]
@@ -4333,22 +4345,29 @@ namespace System.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(-1.0));
+                NumberBaseHelper<ulong>.CreateChecked<double>(-1.0)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(+18446744073709551616.0));
+                NumberBaseHelper<ulong>.CreateChecked<double>(+18446744073709551616.0)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(double.PositiveInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<double>(double.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(double.NegativeInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<double>(double.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(double.MaxValue));
+                NumberBaseHelper<ulong>.CreateChecked<double>(double.MaxValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(double.MinValue));
+                NumberBaseHelper<ulong>.CreateChecked<double>(double.MinValue)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<double>(double.NaN));
+                NumberBaseHelper<ulong>.CreateChecked<double>(double.NaN)
+            );
         }
 
         [Fact]
@@ -4382,17 +4401,22 @@ namespace System.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.NegativeOne));
+                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.NegativeOne)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.PositiveInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.NegativeInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.MinValue));
+                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.MinValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.NaN));
+                NumberBaseHelper<ulong>.CreateChecked<Half>(Half.NaN)
+            );
         }
 
         [Fact]
@@ -4411,9 +4435,11 @@ namespace System.Tests
                 NumberBaseHelper<ulong>.CreateChecked<short>(0x7FFF)
             );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<short>(unchecked((short)0x8000)));
+                NumberBaseHelper<ulong>.CreateChecked<short>(unchecked((short)0x8000))
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<short>(unchecked((short)0xFFFF)));
+                NumberBaseHelper<ulong>.CreateChecked<short>(unchecked((short)0xFFFF))
+            );
         }
 
         [Fact]
@@ -4432,9 +4458,11 @@ namespace System.Tests
                 NumberBaseHelper<ulong>.CreateChecked<int>(0x7FFFFFFF)
             );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<int>(unchecked((int)0x80000000)));
+                NumberBaseHelper<ulong>.CreateChecked<int>(unchecked((int)0x80000000))
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<int>(unchecked((int)0xFFFFFFFF)));
+                NumberBaseHelper<ulong>.CreateChecked<int>(unchecked((int)0xFFFFFFFF))
+            );
         }
 
         [Fact]
@@ -4453,9 +4481,11 @@ namespace System.Tests
                 NumberBaseHelper<ulong>.CreateChecked<long>(0x7FFFFFFFFFFFFFFF)
             );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<long>(unchecked((long)0x8000000000000000)));
+                NumberBaseHelper<ulong>.CreateChecked<long>(unchecked((long)0x8000000000000000))
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<long>(unchecked((long)0xFFFFFFFFFFFFFFFF)));
+                NumberBaseHelper<ulong>.CreateChecked<long>(unchecked((long)0xFFFFFFFFFFFFFFFF))
+            );
         }
 
         [Fact]
@@ -4470,11 +4500,14 @@ namespace System.Tests
                 NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.One)
             );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.MaxValue));
+                NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.MaxValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.MinValue));
+                NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.MinValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.NegativeOne));
+                NumberBaseHelper<ulong>.CreateChecked<Int128>(Int128.NegativeOne)
+            );
         }
 
         [Fact]
@@ -4495,13 +4528,11 @@ namespace System.Tests
                     NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0x7FFFFFFFFFFFFFFF))
                 );
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<nint>(
-                        unchecked((nint)0x8000000000000000)
-                    ));
+                    NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0x8000000000000000))
+                );
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<nint>(
-                        unchecked((nint)0xFFFFFFFFFFFFFFFF)
-                    ));
+                    NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0xFFFFFFFFFFFFFFFF))
+                );
             }
             else
             {
@@ -4518,9 +4549,11 @@ namespace System.Tests
                     NumberBaseHelper<ulong>.CreateChecked<nint>((nint)0x7FFFFFFF)
                 );
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0x80000000)));
+                    NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0x80000000))
+                );
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0xFFFFFFFF)));
+                    NumberBaseHelper<ulong>.CreateChecked<nint>(unchecked((nint)0xFFFFFFFF))
+                );
             }
         }
 
@@ -4557,9 +4590,11 @@ namespace System.Tests
                 );
 
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(-1.0f));
+                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(-1.0f)
+                );
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(+18446744073709551616.0f));
+                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(+18446744073709551616.0f)
+                );
             }
             else
             {
@@ -4573,23 +4608,30 @@ namespace System.Tests
                 );
 
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(-1.0f));
+                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(-1.0f)
+                );
                 Assert.Throws<OverflowException>(() =>
-                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(+18446744073709551616.0f));
+                    NumberBaseHelper<ulong>.CreateChecked<NFloat>(+18446744073709551616.0f)
+                );
             }
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.PositiveInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.NegativeInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.MaxValue));
+                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.MaxValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.MinValue));
+                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.MinValue)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.NaN));
+                NumberBaseHelper<ulong>.CreateChecked<NFloat>(NFloat.NaN)
+            );
         }
 
         [Fact]
@@ -4608,9 +4650,11 @@ namespace System.Tests
                 NumberBaseHelper<ulong>.CreateChecked<sbyte>(0x7F)
             );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<sbyte>(unchecked((sbyte)0x80)));
+                NumberBaseHelper<ulong>.CreateChecked<sbyte>(unchecked((sbyte)0x80))
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<sbyte>(unchecked((sbyte)0xFF)));
+                NumberBaseHelper<ulong>.CreateChecked<sbyte>(unchecked((sbyte)0xFF))
+            );
         }
 
         [Fact]
@@ -4644,22 +4688,29 @@ namespace System.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(-1.0f));
+                NumberBaseHelper<ulong>.CreateChecked<float>(-1.0f)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(+18446744073709551616.0f));
+                NumberBaseHelper<ulong>.CreateChecked<float>(+18446744073709551616.0f)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(float.PositiveInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<float>(float.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(float.NegativeInfinity));
+                NumberBaseHelper<ulong>.CreateChecked<float>(float.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(float.MaxValue));
+                NumberBaseHelper<ulong>.CreateChecked<float>(float.MaxValue)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(float.MinValue));
+                NumberBaseHelper<ulong>.CreateChecked<float>(float.MinValue)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<float>(float.NaN));
+                NumberBaseHelper<ulong>.CreateChecked<float>(float.NaN)
+            );
         }
 
         [Fact]
@@ -4751,13 +4802,16 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() =>
                 NumberBaseHelper<ulong>.CreateChecked<UInt128>(
                     UInt128Tests_GenericMath.Int128MaxValue
-                ));
+                )
+            );
             Assert.Throws<OverflowException>(() =>
                 NumberBaseHelper<ulong>.CreateChecked<UInt128>(
                     UInt128Tests_GenericMath.Int128MaxValuePlusOne
-                ));
+                )
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<ulong>.CreateChecked<UInt128>(UInt128.MaxValue));
+                NumberBaseHelper<ulong>.CreateChecked<UInt128>(UInt128.MaxValue)
+            );
         }
 
         [Fact]
@@ -6663,7 +6717,8 @@ namespace System.Tests
                 SubtractionOperatorsHelper<ulong, ulong, ulong>.op_CheckedSubtraction(
                     (ulong)0x0000000000000000,
                     1
-                ));
+                )
+            );
         }
 
         //
@@ -6718,19 +6773,23 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() =>
                 UnaryNegationOperatorsHelper<ulong, ulong>.op_CheckedUnaryNegation(
                     (ulong)0x0000000000000001
-                ));
+                )
+            );
             Assert.Throws<OverflowException>(() =>
                 UnaryNegationOperatorsHelper<ulong, ulong>.op_CheckedUnaryNegation(
                     (ulong)0x7FFFFFFFFFFFFFFF
-                ));
+                )
+            );
             Assert.Throws<OverflowException>(() =>
                 UnaryNegationOperatorsHelper<ulong, ulong>.op_CheckedUnaryNegation(
                     (ulong)0x8000000000000000
-                ));
+                )
+            );
             Assert.Throws<OverflowException>(() =>
                 UnaryNegationOperatorsHelper<ulong, ulong>.op_CheckedUnaryNegation(
                     (ulong)0xFFFFFFFFFFFFFFFF
-                ));
+                )
+            );
         }
 
         //

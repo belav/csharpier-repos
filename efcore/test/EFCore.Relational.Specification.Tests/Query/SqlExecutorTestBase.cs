@@ -83,7 +83,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         var blockingTask = Task.Run(() =>
             context
                 .Customers.Select(c => Process(c, synchronizationEvent, blockingSemaphore))
-                .ToList());
+                .ToList()
+        );
 
         if (async)
         {
@@ -94,7 +95,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
                     CoreStrings.ConcurrentMethodInvocation,
                     (
                         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers"""))
+                            context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers""")
+                        )
                     ).Message
                 );
             });
@@ -110,7 +112,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
                     CoreStrings.ConcurrentMethodInvocation,
                     Assert
                         .Throws<InvalidOperationException>(() =>
-                            context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers"""))
+                            context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers""")
+                        )
                         .Message
                 );
             });

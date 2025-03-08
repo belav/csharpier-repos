@@ -50,7 +50,8 @@ public class WebAssemblyHostTest
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            host.RunAsyncCore(cts.Token));
+            host.RunAsyncCore(cts.Token)
+        );
 
         cts.Cancel();
         await task.TimeoutAfter(TimeSpan.FromSeconds(3));

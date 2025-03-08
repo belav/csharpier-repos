@@ -110,7 +110,8 @@ namespace System.Net.Security.Tests
                 // Initiate Read operation, that results in starting renegotiation as per server response to the above request.
                 // This will throw IOException, since renegotiation is disabled on client side.
                 await Assert.ThrowsAsync<IOException>(() =>
-                    ssl.ReadAsync(message, 0, message.Length));
+                    ssl.ReadAsync(message, 0, message.Length)
+                );
             }
         }
     }

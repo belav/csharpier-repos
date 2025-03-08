@@ -373,7 +373,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property(e => e.Up).IsRequired(false))
+                                    b.Property(e => e.Up).IsRequired(false)
+                                )
                                 .Message
                         );
 
@@ -385,7 +386,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property<int>("Charm").IsRequired(false))
+                                    b.Property<int>("Charm").IsRequired(false)
+                                )
                                 .Message
                         );
 
@@ -397,7 +399,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property<int>("Top").IsRequired(false))
+                                    b.Property<int>("Top").IsRequired(false)
+                                )
                                 .Message
                         );
                     }
@@ -1234,7 +1237,8 @@ public abstract partial class ModelBuilderTest
                             Assert
                                 .Throws<InvalidOperationException>(() =>
                                     b.Property(e => e.Up)
-                                        .HasConversion(new StringToBytesConverter(Encoding.UTF8)))
+                                        .HasConversion(new StringToBytesConverter(Encoding.UTF8))
+                                )
                                 .Message
                         );
                     }
@@ -1299,7 +1303,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property(e => e.Down).HasField("_notFound"))
+                                    b.Property(e => e.Down).HasField("_notFound")
+                                )
                                 .Message
                         );
                     }
@@ -1327,7 +1332,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property(e => e.Down).HasField("_forUp"))
+                                    b.Property(e => e.Down).HasField("_forUp")
+                                )
                                 .Message
                         );
                     }
@@ -1800,7 +1806,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<ArgumentException>(() =>
-                                    b.Property(e => e.Down).HasValueGenerator(typeof(Random)))
+                                    b.Property(e => e.Down).HasValueGenerator(typeof(Random))
+                                )
                                 .Message
                         );
                     }
@@ -1836,7 +1843,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        complexType.FindProperty("Up").GetValueGeneratorFactory()(null, null))
+                        complexType.FindProperty("Up").GetValueGeneratorFactory()(null, null)
+                    )
                     .Message
             );
 
@@ -1847,7 +1855,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        complexType.FindProperty("Down").GetValueGeneratorFactory()(null, null))
+                        complexType.FindProperty("Down").GetValueGeneratorFactory()(null, null)
+                    )
                     .Message
             );
         }
@@ -2501,7 +2510,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property(e => e.Down).HasField("_notFound"))
+                                    b.Property(e => e.Down).HasField("_notFound")
+                                )
                                 .Message
                         );
                     }
@@ -2529,7 +2539,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<InvalidOperationException>(() =>
-                                    b.Property(e => e.Down).HasField("_forUp"))
+                                    b.Property(e => e.Down).HasField("_forUp")
+                                )
                                 .Message
                         );
                     }
@@ -2735,7 +2746,8 @@ public abstract partial class ModelBuilderTest
                             ),
                             Assert
                                 .Throws<ArgumentException>(() =>
-                                    b.Property(e => e.Down).HasValueGenerator(typeof(Random)))
+                                    b.Property(e => e.Down).HasValueGenerator(typeof(Random))
+                                )
                                 .Message
                         );
                     }

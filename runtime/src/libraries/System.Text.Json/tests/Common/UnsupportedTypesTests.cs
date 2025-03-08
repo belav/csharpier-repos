@@ -37,7 +37,8 @@ namespace System.Text.Json.Serialization.Tests
             string fullName = type.FullName;
 
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper<T>(json));
+                await Serializer.DeserializeWrapper<T>(json)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
             Assert.Contains("$", exAsStr);
@@ -45,7 +46,8 @@ namespace System.Text.Json.Serialization.Tests
             json = $@"{{""Prop"":{json}}}";
 
             ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithType<T>>(json));
+                await Serializer.DeserializeWrapper<ClassWithType<T>>(json)
+            );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
             Assert.Contains("$.Prop", exAsStr);
@@ -73,14 +75,16 @@ namespace System.Text.Json.Serialization.Tests
             string fullName = type.FullName;
 
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.SerializeWrapper(value));
+                await Serializer.SerializeWrapper(value)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
             Assert.Contains("$", exAsStr);
 
             ClassWithType<T> obj = new ClassWithType<T> { Prop = value };
             ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.SerializeWrapper(obj));
+                await Serializer.SerializeWrapper(obj)
+            );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
 
@@ -117,14 +121,16 @@ namespace System.Text.Json.Serialization.Tests
 #endif
 
             ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.SerializeWrapper<object>(value));
+                await Serializer.SerializeWrapper<object>(value)
+            );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
             Assert.Contains("$", exAsStr);
 
             ClassWithType<object> polyObj = new ClassWithType<object> { Prop = value };
             ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.SerializeWrapper(polyObj));
+                await Serializer.SerializeWrapper(polyObj)
+            );
             exAsStr = ex.ToString();
             Assert.Contains(fullName, exAsStr);
         }
@@ -223,9 +229,11 @@ namespace System.Text.Json.Serialization.Tests
             object value = ctorInfo.Invoke(new object[] { (byte)0 });
 
             await Assert.ThrowsAnyAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(value));
+                Serializer.SerializeWrapper(value)
+            );
             await Assert.ThrowsAnyAsync<NotSupportedException>(() =>
-                Serializer.DeserializeWrapper("{}", type));
+                Serializer.DeserializeWrapper("{}", type)
+            );
         }
 #endif
 

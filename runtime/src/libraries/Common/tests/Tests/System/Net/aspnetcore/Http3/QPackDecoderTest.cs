@@ -389,7 +389,8 @@ namespace System.Net.Http.Unit.Tests.QPack
         public void DecodesIncompleteHeaderBlock_Error(byte[] encoded)
         {
             QPackDecodingException exception = Assert.Throws<QPackDecodingException>(() =>
-                _decoder.Decode(encoded, endHeaders: true, handler: _handler));
+                _decoder.Decode(encoded, endHeaders: true, handler: _handler)
+            );
             Assert.Equal(SR.net_http_hpack_incomplete_header_block, exception.Message);
             Assert.Empty(_handler.DecodedHeaders);
         }

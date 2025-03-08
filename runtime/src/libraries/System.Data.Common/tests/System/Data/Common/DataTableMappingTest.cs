@@ -47,7 +47,8 @@ namespace System.Data.Common
             dataTable = new DataTable("UnknownDataSet");
             dataSet.Tables.Add(dataTable);
             Assert.Throws<InvalidOperationException>(() =>
-                _dataTableMapping.GetDataTableBySchemaAction(dataSet, MissingSchemaAction.Error));
+                _dataTableMapping.GetDataTableBySchemaAction(dataSet, MissingSchemaAction.Error)
+            );
 
             // Test method with missing dataset table from dataset with MissingSchemaAction add.
             dataSet = new DataSet();
@@ -71,7 +72,8 @@ namespace System.Data.Common
             dataTable = new DataTable("UnknownDataSet");
             dataSet.Tables.Add(dataTable);
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                _dataTableMapping.GetDataTableBySchemaAction(dataSet, 0));
+                _dataTableMapping.GetDataTableBySchemaAction(dataSet, 0)
+            );
         }
 
         [Fact]
@@ -91,7 +93,8 @@ namespace System.Data.Common
 
             // Attempts to change the second data table source table with a repeated value.
             Assert.Throws<ArgumentException>(() =>
-                secondDataTableMapping.SourceTable = "MyCustomSourceTable");
+                secondDataTableMapping.SourceTable = "MyCustomSourceTable"
+            );
         }
 
         [Fact]

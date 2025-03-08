@@ -211,7 +211,8 @@ namespace System.Xml.Linq.Tests
         {
             XElement e = XElement.Parse(xml);
             Assert.Throws<ArgumentNullException>(() =>
-                (e.FirstNode as XElement).GetPrefixOfNamespace(ns));
+                (e.FirstNode as XElement).GetPrefixOfNamespace(ns)
+            );
         }
 
         [Fact]

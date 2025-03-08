@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                         debugInfoProvider,
                         localSigProvider,
                         true
-                    ));
+                    )
+                );
                 Assert.Throws<ArgumentNullException>(() =>
                     EmitBaseline.CreateInitialBaseline(
                         compilation,
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                         debugInfoProvider,
                         localSigProvider,
                         true
-                    ));
+                    )
+                );
                 Assert.Throws<ArgumentNullException>(() =>
                     EmitBaseline.CreateInitialBaseline(
                         compilation,
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                         null,
                         localSigProvider,
                         true
-                    ));
+                    )
+                );
                 Assert.Throws<ArgumentNullException>(() =>
                     EmitBaseline.CreateInitialBaseline(
                         compilation,
@@ -69,7 +72,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                         debugInfoProvider,
                         null,
                         true
-                    ));
+                    )
+                );
                 Assert.NotNull(
                     EmitBaseline.CreateInitialBaseline(
                         compilation,

@@ -46,7 +46,8 @@ namespace System.Collections.Tests
         public void SortedDictionary_Generic_ValueCollection_Constructor_NullDictionary()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SortedDictionary<string, string>.ValueCollection(null));
+                new SortedDictionary<string, string>.ValueCollection(null)
+            );
         }
 
         [Theory]

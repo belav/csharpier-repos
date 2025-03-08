@@ -258,7 +258,8 @@ namespace System.IO.Ports.Tests
                 com1.BreakState = true;
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    com1.BaseStream.Write(new byte[8], 0, 8));
+                    com1.BaseStream.Write(new byte[8], 0, 8)
+                );
             }
         }
 

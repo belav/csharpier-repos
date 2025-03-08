@@ -44,20 +44,16 @@ unsafe partial class GenericsTest
 {
     private static void TestPoint4C()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint4C('1', '2', '3', '4'));
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint4C('1', '2', '3', '4')
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint4COut(
-                '1',
-                '2',
-                '3',
-                '4',
-                out GenericsNative.Point4<char> value3
-            ));
+            GenericsNative.GetPoint4COut('1', '2', '3', '4', out GenericsNative.Point4<char> value3)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint4CRef('1', '2', '3', '4'));
+            GenericsNative.GetPoint4CRef('1', '2', '3', '4')
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint4C(default, default));
 
@@ -71,9 +67,11 @@ unsafe partial class GenericsTest
         };
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddPoint4Cs(values, values.Length));
+            GenericsNative.AddPoint4Cs(values, values.Length)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddPoint4Cs(in values[0], values.Length));
+            GenericsNative.AddPoint4Cs(in values[0], values.Length)
+        );
     }
 }

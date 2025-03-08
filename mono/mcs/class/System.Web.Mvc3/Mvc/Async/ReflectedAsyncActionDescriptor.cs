@@ -148,7 +148,8 @@
                             ,
                             asyncCallback
                         )
-                    ));
+                    )
+                );
 
                 // the inner operation might complete synchronously, so all setup work has to be done before this point
                 ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(AsyncMethodInfo);

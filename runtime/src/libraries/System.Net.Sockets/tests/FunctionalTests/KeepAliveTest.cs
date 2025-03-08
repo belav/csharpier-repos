@@ -106,12 +106,14 @@ namespace System.Net.Sockets.Tests
                         SocketOptionLevel.Tcp,
                         SocketOptionName.TcpKeepAliveRetryCount,
                         RetryCount
-                    ));
+                    )
+                );
                 Assert.Throws<SocketException>(() =>
                     socket.GetSocketOption(
                         SocketOptionLevel.Tcp,
                         SocketOptionName.TcpKeepAliveRetryCount
-                    ));
+                    )
+                );
             }
         }
 
@@ -337,7 +339,8 @@ namespace System.Net.Sockets.Tests
                             SocketOptionLevel.Tcp,
                             SocketOptionName.TcpKeepAliveTime,
                             0
-                        ));
+                        )
+                    );
                 }
                 else
                 {
@@ -374,7 +377,8 @@ namespace System.Net.Sockets.Tests
                             SocketOptionLevel.Tcp,
                             SocketOptionName.TcpKeepAliveTime,
                             buffer
-                        ));
+                        )
+                    );
                 }
                 else
                 {
@@ -405,7 +409,8 @@ namespace System.Net.Sockets.Tests
                         SocketOptionLevel.Tcp,
                         SocketOptionName.TcpKeepAliveTime,
                         bufferNull
-                    ));
+                    )
+                );
             }
         }
 
@@ -426,7 +431,8 @@ namespace System.Net.Sockets.Tests
                         SocketOptionLevel.Tcp,
                         SocketOptionName.TcpKeepAliveTime,
                         bufferLengthZero
-                    ));
+                    )
+                );
             }
         }
 
@@ -447,7 +453,8 @@ namespace System.Net.Sockets.Tests
                         SocketOptionLevel.Tcp,
                         SocketOptionName.TcpKeepAliveTime,
                         bufferShort
-                    ));
+                    )
+                );
             }
         }
 

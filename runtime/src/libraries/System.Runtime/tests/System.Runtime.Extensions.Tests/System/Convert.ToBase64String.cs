@@ -48,9 +48,11 @@ namespace System.Tests
         {
             byte[] inputBytes = Convert.FromBase64String("test");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, -1, inputBytes.Length));
+                Convert.ToBase64String(inputBytes, -1, inputBytes.Length)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, inputBytes.Length, inputBytes.Length));
+                Convert.ToBase64String(inputBytes, inputBytes.Length, inputBytes.Length)
+            );
         }
 
         [Fact]
@@ -58,11 +60,14 @@ namespace System.Tests
         {
             byte[] inputBytes = Convert.FromBase64String("test");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, 0, -1));
+                Convert.ToBase64String(inputBytes, 0, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, 0, inputBytes.Length + 1));
+                Convert.ToBase64String(inputBytes, 0, inputBytes.Length + 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Convert.ToBase64String(inputBytes, 1, inputBytes.Length));
+                Convert.ToBase64String(inputBytes, 1, inputBytes.Length)
+            );
         }
 
         public static IEnumerable<object[]> ConvertToBase64StringTests_TestData()

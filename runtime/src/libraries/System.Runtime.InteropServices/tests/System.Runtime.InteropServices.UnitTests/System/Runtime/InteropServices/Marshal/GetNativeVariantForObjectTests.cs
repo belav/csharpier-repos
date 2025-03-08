@@ -409,9 +409,11 @@ namespace System.Runtime.InteropServices.Tests
         public void GetNativeVariantForObject_Unix_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetNativeVariantForObject(new object(), IntPtr.Zero));
+                Marshal.GetNativeVariantForObject(new object(), IntPtr.Zero)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetNativeVariantForObject(1, IntPtr.Zero));
+                Marshal.GetNativeVariantForObject(1, IntPtr.Zero)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -458,9 +460,11 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 Assert.Throws<SafeArrayTypeMismatchException>(() =>
-                    Marshal.GetNativeVariantForObject(new int[][] { }, pNative));
+                    Marshal.GetNativeVariantForObject(new int[][] { }, pNative)
+                );
                 Assert.Throws<SafeArrayTypeMismatchException>(() =>
-                    Marshal.GetNativeVariantForObject<object>(new int[][] { }, pNative));
+                    Marshal.GetNativeVariantForObject<object>(new int[][] { }, pNative)
+                );
             }
             finally
             {
@@ -546,7 +550,8 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Marshal.GetNativeVariantForObject<char>('a', pNative);
                 Assert.Throws<InvalidCastException>(() =>
-                    Marshal.GetObjectForNativeVariant<char>(pNative));
+                    Marshal.GetObjectForNativeVariant<char>(pNative)
+                );
             }
             finally
             {

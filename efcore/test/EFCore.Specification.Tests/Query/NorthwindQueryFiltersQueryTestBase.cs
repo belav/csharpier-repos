@@ -56,7 +56,8 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
             RemoveNewLines(
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        AssertFilteredQuery(async, ss => ss.Set<Product>()))
+                        AssertFilteredQuery(async, ss => ss.Set<Product>())
+                    )
                 ).Message
             )
         );
@@ -199,7 +200,8 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
                         AssertFilteredQuery(
                             async,
                             ss => ss.Set<Product>().Include(p => p.OrderDetails)
-                        ))
+                        )
+                    )
                 ).Message
             )
         );

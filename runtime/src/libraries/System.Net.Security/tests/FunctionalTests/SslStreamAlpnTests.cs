@@ -127,9 +127,11 @@ namespace System.Net.Security.Tests
                 serverOptions.RemoteCertificateValidationCallback = AllowAnyServerCertificate;
 
                 Task t1 = Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions));
+                    client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions)
+                );
                 Task t2 = Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions));
+                    server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
+                );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
             }
@@ -198,14 +200,13 @@ namespace System.Net.Security.Tests
                 if (BackendSupportsAlpn)
                 {
                     Task t1 = Assert.ThrowsAsync<AuthenticationException>(() =>
-                        clientStream.AuthenticateAsClientAsync(
-                            TestAuthenticateAsync,
-                            clientOptions
-                        ));
+                        clientStream.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions)
+                    );
                     await Assert.ThrowsAsync<AuthenticationException>(() =>
                         serverStream
                             .AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
-                            .WaitAsync(TestConfiguration.PassingTestTimeout));
+                            .WaitAsync(TestConfiguration.PassingTestTimeout)
+                    );
                     serverStream.Dispose();
 
                     await t1.WaitAsync(TestConfiguration.PassingTestTimeout);

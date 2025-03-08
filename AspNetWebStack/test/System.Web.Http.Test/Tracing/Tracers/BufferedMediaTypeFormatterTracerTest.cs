@@ -201,7 +201,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             // Act
             Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                tracer.ReadFromStream(typeof(string), new MemoryStream(), request.Content, null));
+                tracer.ReadFromStream(typeof(string), new MemoryStream(), request.Content, null)
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(
@@ -371,7 +372,8 @@ namespace System.Web.Http.Tracing.Tracers
                     "sampleValue",
                     new MemoryStream(),
                     request.Content
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

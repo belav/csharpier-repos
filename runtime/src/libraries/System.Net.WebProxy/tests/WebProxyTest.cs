@@ -392,7 +392,8 @@ namespace System.Net.Tests
                 // is turned off. Hence dns lookup for it's own hostname fails.
                 Assert.Equal(SocketError.HostNotFound, exception.SocketErrorCode);
                 Assert.Throws<SocketException>(() =>
-                    Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult());
+                    Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult()
+                );
                 Assert.True(OperatingSystem.IsLinux() || OperatingSystem.IsMacOS());
             }
         }

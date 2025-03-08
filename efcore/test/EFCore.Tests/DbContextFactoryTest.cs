@@ -921,7 +921,8 @@ public class DbContextFactoryTest
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                scope.ServiceProvider.GetRequiredService<WoolacombeContext>());
+                scope.ServiceProvider.GetRequiredService<WoolacombeContext>()
+            );
         }
         else
         {
@@ -1177,7 +1178,8 @@ public class DbContextFactoryTest
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<WoolacombeContext>());
+                serviceProvider.GetRequiredService<WoolacombeContext>()
+            );
         }
         else
         {
@@ -1187,7 +1189,8 @@ public class DbContextFactoryTest
         if (validateScopes && factoryLifetime == ServiceLifetime.Scoped)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>());
+                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            );
         }
         else
         {
@@ -1446,7 +1449,8 @@ public class DbContextFactoryTest
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>());
+                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            );
         }
         else
         {
@@ -1704,7 +1708,8 @@ public class DbContextFactoryTest
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<WoolacombeContext>());
+                serviceProvider.GetRequiredService<WoolacombeContext>()
+            );
         }
         else
         {
@@ -1720,7 +1725,8 @@ public class DbContextFactoryTest
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>());
+                serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            );
         }
         else
         {

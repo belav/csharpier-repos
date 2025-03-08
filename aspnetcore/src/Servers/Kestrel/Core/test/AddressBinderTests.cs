@@ -190,7 +190,8 @@ public class AddressBinderTests
                 addressBindContext,
                 _noopUseHttps,
                 CancellationToken.None
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -292,7 +293,8 @@ public class AddressBinderTests
                 addressBindContext,
                 _noopUseHttps,
                 new CancellationToken(true)
-            ));
+            )
+        );
     }
 
     [Theory]

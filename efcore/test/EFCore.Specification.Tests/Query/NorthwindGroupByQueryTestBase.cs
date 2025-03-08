@@ -39,7 +39,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         .Where(o => o.Customer.City != "London")
                         .GroupBy(o => o.CustomerID, (k, es) => new { k, es })
                         .Select(g => g.es.Average(o => o.OrderID))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2785,7 +2786,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         from o in ss.Set<Order>()
                         where o.OrderID == id
                         select o
-                ))
+                )
+            )
         ).Message;
 
         Assert.Contains(
@@ -3358,7 +3360,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
             AssertQuery(
                 async,
                 ss => ss.Set<Customer>().GroupBy(c => c.City).Where(e => e.Key.StartsWith("s"))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3368,13 +3371,15 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                 async,
                 ss => ss.Set<Customer>().GroupBy(c => c.City).OrderBy(e => e.Key),
                 assertOrder: true
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_SelectMany(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(async, ss => ss.Set<Customer>().GroupBy(c => c.City).SelectMany(g => g)));
+            AssertQuery(async, ss => ss.Set<Customer>().GroupBy(c => c.City).SelectMany(g => g))
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3387,7 +3392,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         .OrderBy(o => o.OrderID)
                         .GroupBy(o => o.CustomerID)
                         .SelectMany(g => g)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3401,7 +3407,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         .GroupBy(e => e.EmployeeID)
                         .SelectMany(g => g)
                         .Select(g => EF.Property<string>(g, "Title"))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3420,7 +3427,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         .Distinct()
                         .Select(g => g.Key),
                 assertOrder: true
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3429,7 +3437,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
             AssertQuery(
                 async,
                 ss => ss.Set<Order>().GroupBy(o => o.CustomerID).Distinct().Select(g => g.Key)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3483,7 +3492,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         .GroupBy(p => p.Customer)
                         .SelectMany(g => g),
                 elementSorter: g => g.Order
-            ));
+            )
+        );
 
     #endregion
 

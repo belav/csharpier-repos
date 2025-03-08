@@ -22,7 +22,8 @@ public class QuerySqlGeneratorTest
             RelationalStrings.FromSqlNonComposable,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    CreateDummyQuerySqlGenerator().CheckComposableSql(sql))
+                    CreateDummyQuerySqlGenerator().CheckComposableSql(sql)
+                )
                 .Message
         );
 
@@ -30,8 +31,8 @@ public class QuerySqlGeneratorTest
             RelationalStrings.FromSqlNonComposable,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    CreateDummyQuerySqlGenerator()
-                        .CheckComposableSql(sql.Replace("SELECT", "WITH")))
+                    CreateDummyQuerySqlGenerator().CheckComposableSql(sql.Replace("SELECT", "WITH"))
+                )
                 .Message
         );
     }

@@ -306,7 +306,8 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
                     new DelShortArrByRefAsCdeclCaller(
                         TestMethodForShortArray_AsReversePInvokeByRef_AsCdecl
                     )
-                ));
+                )
+            );
             Console.WriteLine("\t\tMarshalShortArray_AsReversePInvokeByRef_AsCdecl Passed!");
         }
 

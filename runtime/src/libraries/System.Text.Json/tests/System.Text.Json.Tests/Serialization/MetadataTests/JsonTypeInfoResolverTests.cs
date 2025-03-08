@@ -206,7 +206,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.True(list.IsReadOnly);
             Assert.Throws<InvalidOperationException>(() => list.Clear());
             Assert.Throws<InvalidOperationException>(() =>
-                list.Add(new DefaultJsonTypeInfoResolver()));
+                list.Add(new DefaultJsonTypeInfoResolver())
+            );
 
             return list;
         }
@@ -303,7 +304,8 @@ namespace System.Text.Json.Serialization.Tests
             TestResolver resolver = new(JsonTypeInfo.CreateJsonTypeInfo);
 
             Assert.Throws<ArgumentNullException>(() =>
-                ((IJsonTypeInfoResolver)null!).WithAddedModifier(_ => { }));
+                ((IJsonTypeInfoResolver)null!).WithAddedModifier(_ => { })
+            );
             Assert.Throws<ArgumentNullException>(() => resolver.WithAddedModifier(null));
         }
 

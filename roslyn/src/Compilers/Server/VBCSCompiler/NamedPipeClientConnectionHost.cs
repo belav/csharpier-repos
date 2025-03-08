@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             for (int i = 0; i < listenCount; i++)
             {
                 var task = Task.Run(() =>
-                    ListenCoreAsync(PipeName, Logger, _queue, _cancellationTokenSource.Token));
+                    ListenCoreAsync(PipeName, Logger, _queue, _cancellationTokenSource.Token)
+                );
                 _listenTasks[i] = task;
             }
         }

@@ -2415,7 +2415,8 @@ public class ValidationWithRecordIntegrationTests
                 testContext,
                 modelMetadataProvider,
                 modelMetadata
-            ));
+            )
+        );
 
         Assert.Equal(expected, ex.Message);
     }
@@ -2456,7 +2457,8 @@ public class ValidationWithRecordIntegrationTests
                 testContext,
                 modelMetadataProvider,
                 modelMetadata
-            ));
+            )
+        );
 
         Assert.Equal(expected, ex.Message);
     }
@@ -2502,7 +2504,8 @@ public class ValidationWithRecordIntegrationTests
                 testContext,
                 modelMetadataProvider,
                 modelMetadata
-            ));
+            )
+        );
 
         Assert.Equal(expected, ex.Message);
     }

@@ -154,7 +154,8 @@ namespace System.Threading.Tests
                 b.SignalAndWait();
                 t.Dispose(mre);
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await t.DisposeAsync());
+                    await t.DisposeAsync()
+                );
                 b.SignalAndWait();
                 mre.WaitOne();
 

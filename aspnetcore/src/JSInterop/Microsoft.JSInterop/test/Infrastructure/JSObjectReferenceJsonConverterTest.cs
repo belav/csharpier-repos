@@ -25,7 +25,8 @@ public class JSObjectReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Required property __jsObjectId not found.", ex.Message);
     }
 
@@ -37,7 +38,8 @@ public class JSObjectReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Unexpected JSON property foo.", ex.Message);
     }
 
@@ -49,7 +51,8 @@ public class JSObjectReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Record.Exception(() =>
-            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -61,7 +64,8 @@ public class JSObjectReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Record.Exception(() =>
-            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 

@@ -47,7 +47,8 @@ public class UTF8DecodingTests
                         HeaderNames.Accept,
                         KestrelServerOptions.DefaultHeaderEncodingSelector,
                         checkForNewlineChars: false
-                    ));
+                    )
+                );
             }
         }
     }

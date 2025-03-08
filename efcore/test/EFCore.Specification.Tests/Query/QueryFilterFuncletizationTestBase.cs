@@ -103,8 +103,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() =>
-            context.Set<PropertyMethodCallFilter>().ToList());
+        Assert.Throws<NullReferenceException>(() => context.Set<PropertyMethodCallFilter>().ToList()
+        );
 
         context.IndirectionFlag = new Indirection();
         var entity = Assert.Single(context.Set<PropertyMethodCallFilter>().ToList());
@@ -190,7 +190,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
         Assert.Throws<NullReferenceException>(() =>
-            context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
+            context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+        );
 
         context.IndirectionFlag = new Indirection { Enabled = false };
         var entity = Assert.Single(
@@ -234,8 +235,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() =>
-            context.Set<RemoteMethodParamsFilter>().ToList());
+        Assert.Throws<NullReferenceException>(() => context.Set<RemoteMethodParamsFilter>().ToList()
+        );
 
         context.IndirectionFlag = new Indirection();
         var entity = Assert.Single(context.Set<RemoteMethodParamsFilter>().ToList());
@@ -324,7 +325,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Set<LocalVariableErrorFilter>().ToList())
+                    context.Set<LocalVariableErrorFilter>().ToList()
+                )
                 .Message
         );
     }

@@ -735,7 +735,8 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.Hidden("foo", dt, new RouteValueDictionary())),
+                        helper.Hidden("foo", dt, new RouteValueDictionary())
+                    ),
                 },
                 // RadioButton(name, value)
                 new
@@ -760,21 +761,24 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.RadioButton("foo", dt, new RouteValueDictionary())),
+                        helper.RadioButton("foo", dt, new RouteValueDictionary())
+                    ),
                 },
                 // RadioButton(name, value, isChecked, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.RadioButton("foo", dt, false, null)),
+                        helper.RadioButton("foo", dt, false, null)
+                    ),
                 },
                 // RadioButton(name, value, isChecked, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.RadioButton("foo", dt, false, new RouteValueDictionary())),
+                        helper.RadioButton("foo", dt, false, new RouteValueDictionary())
+                    ),
                 },
                 // TextBox(name)
                 new
@@ -799,7 +803,8 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.TextBox("foo", dt, new RouteValueDictionary())),
+                        helper.TextBox("foo", dt, new RouteValueDictionary())
+                    ),
                 },
             };
 
@@ -3691,7 +3696,8 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Html = @"<input id=""viewDataDate"" name=""viewDataDate"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.TextBox("viewDataDate", null, "-{0}-")),
+                        helper.TextBox("viewDataDate", null, "-{0}-")
+                    ),
                 },
                 // TextBox(name, value, format)
                 new
@@ -3704,39 +3710,40 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.TextBox("date", dt, "-{0}-", (object)null)),
+                        helper.TextBox("date", dt, "-{0}-", (object)null)
+                    ),
                 },
                 // TextBox(name, value, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        helper.TextBox("date", dt, "-{0}-", new RouteValueDictionary())),
+                        helper.TextBox("date", dt, "-{0}-", new RouteValueDictionary())
+                    ),
                 },
                 // TextBoxFor(expression, format)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-")),
+                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-")
+                    ),
                 },
                 // TextBoxFor(expression, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-", (object)null)),
+                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-", (object)null)
+                    ),
                 },
                 // TextBoxFor(expression, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(() =>
-                        dateModelhelper.TextBoxFor(
-                            m => m.date,
-                            "-{0}-",
-                            new RouteValueDictionary()
-                        )),
+                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-", new RouteValueDictionary())
+                    ),
                 },
             };
 

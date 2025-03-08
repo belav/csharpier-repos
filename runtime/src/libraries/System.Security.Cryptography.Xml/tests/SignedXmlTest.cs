@@ -3363,7 +3363,8 @@ namespace System.Security.Cryptography.Xml.Tests
 ";
             SignedXml sign = GetSignedXml(xml);
             Assert.Throws<CryptographicException>(() =>
-                sign.CheckSignature(new HMACSHA1("no clue"u8.ToArray())));
+                sign.CheckSignature(new HMACSHA1("no clue"u8.ToArray()))
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/20429")]
@@ -3390,7 +3391,8 @@ namespace System.Security.Cryptography.Xml.Tests
 ";
             SignedXml sign = GetSignedXml(xml);
             Assert.Throws<FormatException>(() =>
-                sign.CheckSignature(new HMACSHA1("no clue"u8.ToArray())));
+                sign.CheckSignature(new HMACSHA1("no clue"u8.ToArray()))
+            );
         }
 
         [Theory]
@@ -3448,7 +3450,8 @@ namespace System.Security.Cryptography.Xml.Tests
                     else
                     {
                         XmlException ex = Assert.Throws<XmlException>(() =>
-                            signedXml.CheckSignature(key));
+                            signedXml.CheckSignature(key)
+                        );
                         Assert.False(listenerContacted, "listenerContacted");
                     }
                 }

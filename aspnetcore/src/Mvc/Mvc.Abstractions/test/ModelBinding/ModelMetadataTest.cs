@@ -394,7 +394,8 @@ public class ModelMetadataTest
 
         // Act & Assert
         var result = Assert.Throws<NotImplementedException>(() =>
-            metadata.GetMetadataForType(typeof(string)));
+            metadata.GetMetadataForType(typeof(string))
+        );
     }
 
     [Fact]
@@ -405,7 +406,8 @@ public class ModelMetadataTest
 
         // Act & Assert
         var result = Assert.Throws<NotImplementedException>(() =>
-            metadata.GetMetadataForProperties(typeof(string)));
+            metadata.GetMetadataForProperties(typeof(string))
+        );
     }
 
     private class TestModelMetadata : ModelMetadata

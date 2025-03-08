@@ -26,14 +26,17 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType1_ThrowsNullReferenceException()
         {
+            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute((Type)null)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute((Type)null));
+                new ComSourceInterfacesAttribute(null, typeof(int))
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(null, typeof(int)));
+                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string))
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string)));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string), typeof(bool)));
+                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string), typeof(bool))
+            );
         }
 
         [Fact]
@@ -47,11 +50,14 @@ namespace System.Runtime.InteropServices.Tests
         public void Ctor_NullSourceInterfaceType2_ThrowsNullReferenceException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), null));
+                new ComSourceInterfacesAttribute(typeof(int), null)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string)));
+                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string))
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string), typeof(bool)));
+                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string), typeof(bool))
+            );
         }
 
         [Fact]
@@ -69,9 +75,11 @@ namespace System.Runtime.InteropServices.Tests
         public void Ctor_NullSourceInterfaceType3_ThrowsNullReferenceException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null));
+                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null, typeof(bool)));
+                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null, typeof(bool))
+            );
         }
 
         [Fact]
@@ -93,7 +101,8 @@ namespace System.Runtime.InteropServices.Tests
         public void Ctor_NullSourceInterfaceType4_ThrowsNullReferenceException()
         {
             Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool), null));
+                new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool), null)
+            );
         }
     }
 }

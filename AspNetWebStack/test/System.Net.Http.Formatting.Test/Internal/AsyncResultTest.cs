@@ -88,7 +88,8 @@ namespace System.Web.Http
 
             // Assert
             Assert.Throws<InvalidOperationException>(() =>
-                mockAsyncResult.Complete(completedSynchronously));
+                mockAsyncResult.Complete(completedSynchronously)
+            );
         }
 
         [Fact]
@@ -133,7 +134,8 @@ namespace System.Web.Http
 
             // Act
             Assert.Throws<InvalidOperationException>(() =>
-                MockAsyncResult.End<MockAsyncResult>(mockAsyncResult));
+                MockAsyncResult.End<MockAsyncResult>(mockAsyncResult)
+            );
         }
 
         [Theory]
@@ -151,7 +153,8 @@ namespace System.Web.Http
 
             // Act/Assert
             Assert.Throws<ApplicationException>(() =>
-                MockAsyncResult.End<MockAsyncResult>(mockAsyncResult));
+                MockAsyncResult.End<MockAsyncResult>(mockAsyncResult)
+            );
         }
 
         internal class MockAsyncResult : AsyncResult

@@ -687,7 +687,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                     .Throws<InvalidOperationException>(() =>
                         modelBuilder
                             .Entity<Child>()
-                            .ToTable(tb => tb.HasCheckConstraint("LargeId", "Id > 1000")))
+                            .ToTable(tb => tb.HasCheckConstraint("LargeId", "Id > 1000"))
+                    )
                     .Message
             );
         }
@@ -712,7 +713,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<Child>().HasBaseType<ChildBase>())
+                        modelBuilder.Entity<Child>().HasBaseType<ChildBase>()
+                    )
                     .Message
             );
         }

@@ -30,7 +30,8 @@ namespace System.Text.Json.Serialization.Tests
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<
                     GenericIEnumerableWrapper<WrapperForIEnumerable>
-                >(@"[[1,2],[3,4]]"));
+                >(@"[[1,2],[3,4]]")
+            );
         }
 
         [Fact]
@@ -180,7 +181,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{ ""List"" : null }";
             await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithStructIListWrapper>(json));
+                await Serializer.DeserializeWrapper<ClassWithStructIListWrapper>(json)
+            );
         }
 
         [Fact]
@@ -212,7 +214,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{ ""Dictionary"" : null }";
             await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithStructIDictionaryWrapper>(json));
+                await Serializer.DeserializeWrapper<ClassWithStructIDictionaryWrapper>(json)
+            );
         }
 
         [Fact]
@@ -267,7 +270,8 @@ namespace System.Text.Json.Serialization.Tests
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<
                     GenericICollectionWrapper<WrapperForICollection>
-                >(@"[[1,2],[3,4]]"));
+                >(@"[[1,2],[3,4]]")
+            );
         }
 
         [Fact]
@@ -597,7 +601,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper(json, type));
+                await Serializer.DeserializeWrapper(json, type)
+            );
             Assert.Contains(exceptionMessageType.ToString(), ex.Message);
         }
 
@@ -632,7 +637,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task Read_NonGeneric_NoPublicConstructor_Throws(Type type, string json)
         {
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper(json, type));
+                await Serializer.DeserializeWrapper(json, type)
+            );
             Assert.Contains(type.ToString(), ex.Message);
         }
     }

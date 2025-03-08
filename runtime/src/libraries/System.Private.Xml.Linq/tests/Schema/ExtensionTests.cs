@@ -141,7 +141,8 @@ namespace CoreXml.Test.XLinq
             xmlDocument.Root.Add(newElement);
 
             Assert.Throws<XmlSchemaValidationException>(() =>
-                ExtensionsClass.Validate(xmlDocument, schemaSet, null));
+                ExtensionsClass.Validate(xmlDocument, schemaSet, null)
+            );
         }
 
         /*
@@ -350,7 +351,8 @@ namespace CoreXml.Test.XLinq
                     date.GetSchemaInfo().SchemaAttribute,
                     schemaSet,
                     null
-                ));
+                )
+            );
         }
 
         // element validation succeeds after change
@@ -441,12 +443,8 @@ namespace CoreXml.Test.XLinq
             root.SetElementValue(childElementName, childElementValue);
 
             Assert.Throws<XmlSchemaValidationException>(() =>
-                ExtensionsClass.Validate(
-                    root,
-                    root.GetSchemaInfo().SchemaElement,
-                    schemaSet,
-                    null
-                ));
+                ExtensionsClass.Validate(root, root.GetSchemaInfo().SchemaElement, schemaSet, null)
+            );
         }
 
         // test attribute schema info

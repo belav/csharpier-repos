@@ -677,7 +677,8 @@ public class InternalPropertyBuilderTest
             CoreStrings.CannotBeNullable(nameof(Customer.Id), typeof(Customer).Name, "int"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    builder.IsRequired(false, ConfigurationSource.Explicit))
+                    builder.IsRequired(false, ConfigurationSource.Explicit)
+                )
                 .Message
         );
     }

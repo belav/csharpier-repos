@@ -544,7 +544,8 @@ namespace System.Collections.Immutable.Tests
                 ImmutableSortedDictionary.Create<int, int>()
             );
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

@@ -366,7 +366,8 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
             string.Format(
@@ -412,7 +413,8 @@ public class ModelBindingHelperTest
     {
         // Arrange Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
             $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
@@ -432,7 +434,8 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
             $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
@@ -449,7 +452,8 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
             $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
@@ -466,7 +470,8 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
             $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
@@ -1260,7 +1265,8 @@ public class ModelBindingHelperTest
                 "this-is-not-a-valid-value",
                 destinationType,
                 culture: null
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -1278,7 +1284,8 @@ public class ModelBindingHelperTest
         // Assert
         Assert.Equal(12.5M, cultureResult);
         Assert.Throws<FormatException>(() =>
-            ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("en-GB")));
+            ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("en-GB"))
+        );
     }
 
     [Theory]
@@ -1339,7 +1346,8 @@ public class ModelBindingHelperTest
                 new MyClassWithoutConverter(),
                 destinationType,
                 culture: null
-            ));
+            )
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -1356,7 +1364,8 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.ConvertTo(value, destinationType, culture: null));
+            ModelBindingHelper.ConvertTo(value, destinationType, culture: null)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 

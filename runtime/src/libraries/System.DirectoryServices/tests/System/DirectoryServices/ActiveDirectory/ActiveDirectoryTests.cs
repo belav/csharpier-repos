@@ -252,7 +252,8 @@ namespace System.DirectoryServices.Tests
 
                     domains = new Domain[forest.Domains.Count];
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        forest.Domains.CopyTo(domains, -1));
+                        forest.Domains.CopyTo(domains, -1)
+                    );
                     forest.Domains.CopyTo(domains, 0);
 
                     Assert.NotNull(domains.FirstOrDefault(d => d.Name.Equals(rootDomain.Name)));
@@ -500,7 +501,8 @@ namespace System.DirectoryServices.Tests
                         Assert.Throws<ArgumentException>(() => ds.Partitions.CopyTo(partitions, 0));
                         Assert.Throws<ArgumentNullException>(() => ds.Partitions.CopyTo(null, 0));
                         Assert.Throws<ArgumentOutOfRangeException>(() =>
-                            ds.Partitions.CopyTo(partitions, -1));
+                            ds.Partitions.CopyTo(partitions, -1)
+                        );
 
                         partitions = new string[ds.Partitions.Count];
                         ds.Partitions.CopyTo(partitions, 0);

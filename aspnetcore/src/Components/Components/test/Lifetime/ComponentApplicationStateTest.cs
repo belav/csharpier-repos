@@ -45,7 +45,8 @@ public class ComponentApplicationStateTest
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() =>
-            applicationState.InitializeExistingState(existingState));
+            applicationState.InitializeExistingState(existingState)
+        );
     }
 
     [Fact]

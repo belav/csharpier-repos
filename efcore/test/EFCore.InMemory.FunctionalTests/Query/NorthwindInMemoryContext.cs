@@ -24,12 +24,13 @@ public class NorthwindInMemoryContext : NorthwindContext
                     CompanyName = c.CompanyName,
                     ContactName = c.ContactName,
                     ContactTitle = c.ContactTitle,
-                }));
+                })
+            );
 
         modelBuilder
             .Entity<OrderQuery>()
-            .ToInMemoryQuery(() =>
-                Orders.Select(o => new OrderQuery { CustomerID = o.CustomerID }));
+            .ToInMemoryQuery(() => Orders.Select(o => new OrderQuery { CustomerID = o.CustomerID })
+            );
 
         modelBuilder
             .Entity<ProductQuery>()
@@ -41,7 +42,8 @@ public class NorthwindInMemoryContext : NorthwindContext
                         ProductID = p.ProductID,
                         ProductName = p.ProductName,
                         CategoryName = "Food",
-                    }));
+                    })
+            );
 
         modelBuilder
             .Entity<CustomerQueryWithQueryFilter>()
@@ -51,6 +53,7 @@ public class NorthwindInMemoryContext : NorthwindContext
                     CompanyName = c.CompanyName,
                     OrderCount = c.Orders.Count(),
                     SearchTerm = SearchTerm,
-                }));
+                })
+            );
     }
 }

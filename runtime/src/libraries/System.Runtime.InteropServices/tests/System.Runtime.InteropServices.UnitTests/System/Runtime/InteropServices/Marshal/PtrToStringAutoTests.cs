@@ -30,7 +30,8 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(() =>
-                    Marshal.PtrToStringAuto(ptr, -1));
+                    Marshal.PtrToStringAuto(ptr, -1)
+                );
             }
             finally
             {

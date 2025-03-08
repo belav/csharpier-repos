@@ -201,7 +201,8 @@ namespace System.Composition.Hosting.Core.Tests
                 )
                 {
                     Assert.Throws<NullReferenceException>(() =>
-                        activatorContext.GetOrCreate(1, activatorOperation, null));
+                        activatorContext.GetOrCreate(1, activatorOperation, null)
+                    );
                     return "Hi";
                 }
 
@@ -226,8 +227,8 @@ namespace System.Composition.Hosting.Core.Tests
                 );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                Assert.Throws<NullReferenceException>(() =>
-                    context.GetOrCreate(1, null, Activator));
+                Assert.Throws<NullReferenceException>(() => context.GetOrCreate(1, null, Activator)
+                );
             }
         }
 
@@ -270,7 +271,8 @@ namespace System.Composition.Hosting.Core.Tests
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
                 Assert.Throws<CompositionFailedException>(() =>
-                    context.FindContextWithin("sharingBoundary"));
+                    context.FindContextWithin("sharingBoundary")
+                );
             }
         }
 

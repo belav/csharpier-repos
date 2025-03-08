@@ -15,7 +15,8 @@ public class EditContextDataAnnotationsExtensionsTest
     {
         var editContext = (EditContext)null;
         var ex = Assert.Throws<ArgumentNullException>(() =>
-            editContext.EnableDataAnnotationsValidation(_serviceProvider));
+            editContext.EnableDataAnnotationsValidation(_serviceProvider)
+        );
         Assert.Equal("editContext", ex.ParamName);
     }
 

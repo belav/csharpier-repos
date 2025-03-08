@@ -103,7 +103,8 @@ namespace System.Net.Http.Functional.Tests
                 var client = new HttpClient(handler);
 
                 await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                    client.GetStringAsync("http://foo", cts.Token));
+                    client.GetStringAsync("http://foo", cts.Token)
+                );
 
                 requestCompleted.SetResult();
             }
@@ -544,7 +545,8 @@ namespace System.Net.Http.Functional.Tests
                 _ = client.GetAsync($"http://{Guid.NewGuid():N}"); // ignoring failure
                 Assert.Equal(TimeSpan.FromSeconds(42), handler.ResponseDrainTimeout);
                 Assert.Throws<InvalidOperationException>(() =>
-                    handler.ResponseDrainTimeout = TimeSpan.FromSeconds(42));
+                    handler.ResponseDrainTimeout = TimeSpan.FromSeconds(42)
+                );
             }
         }
 
@@ -1154,7 +1156,8 @@ namespace System.Net.Http.Functional.Tests
                     {
                         HttpRequestException exception =
                             await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                client.GetAsync(uri));
+                                client.GetAsync(uri)
+                            );
                         Assert.Contains("exceeded", exception.Message);
                     }
                     else
@@ -1629,7 +1632,8 @@ namespace System.Net.Http.Functional.Tests
             using (var handler = new SocketsHttpHandler())
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    handler.ConnectTimeout = TimeSpan.FromMilliseconds(ms));
+                    handler.ConnectTimeout = TimeSpan.FromMilliseconds(ms)
+                );
             }
         }
 
@@ -1657,7 +1661,8 @@ namespace System.Net.Http.Functional.Tests
                 _ = client.GetAsync($"http://{Guid.NewGuid():N}"); // ignoring failure
                 Assert.Equal(TimeSpan.FromMilliseconds(int.MaxValue), handler.ConnectTimeout);
                 Assert.Throws<InvalidOperationException>(() =>
-                    handler.ConnectTimeout = TimeSpan.FromMilliseconds(1));
+                    handler.ConnectTimeout = TimeSpan.FromMilliseconds(1)
+                );
             }
         }
 
@@ -1678,7 +1683,8 @@ namespace System.Net.Http.Functional.Tests
             using (var handler = new SocketsHttpHandler())
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(ms));
+                    handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(ms)
+                );
             }
         }
 
@@ -1709,7 +1715,8 @@ namespace System.Net.Http.Functional.Tests
                     handler.Expect100ContinueTimeout
                 );
                 Assert.Throws<InvalidOperationException>(() =>
-                    handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(1));
+                    handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(1)
+                );
             }
         }
     }
@@ -1794,7 +1801,8 @@ namespace System.Net.Http.Functional.Tests
                             request.Headers.Add("Foo", new string('a', Limit));
 
                             Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                client.SendAsync(request));
+                                client.SendAsync(request)
+                            );
                             Assert.Contains(Limit.ToString(), ex.Message);
 
                             request = CreateRequest(
@@ -1809,7 +1817,8 @@ namespace System.Net.Http.Functional.Tests
                             }
 
                             ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                client.SendAsync(request));
+                                client.SendAsync(request)
+                            );
                             Assert.Contains(Limit.ToString(), ex.Message);
 
                             await waitingForLastRequest.Task.WaitAsync(TimeSpan.FromSeconds(10));
@@ -1878,7 +1887,8 @@ namespace System.Net.Http.Functional.Tests
                                 request.Headers.Add("Foo", new string('a', Limit));
 
                                 Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                    client.SendAsync(request));
+                                    client.SendAsync(request)
+                                );
                                 Assert.Contains(Limit.ToString(), ex.Message);
 
                                 // Ensure that the connection is still usable for requests that don't hit the limit.
@@ -1934,7 +1944,8 @@ namespace System.Net.Http.Functional.Tests
                     else
                     {
                         Exception e = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                            client.GetAsync(uri));
+                            client.GetAsync(uri)
+                        );
                         if (!IsWinHttpHandler)
                         {
                             Assert.Contains(
@@ -2155,23 +2166,28 @@ namespace System.Net.Http.Functional.Tests
 
                                     // Not supported operations
                                     Assert.Throws<NotSupportedException>(() => clientStream.Length);
+                                    Assert.Throws<NotSupportedException>(() => clientStream.Position
+                                    );
                                     Assert.Throws<NotSupportedException>(() =>
-                                        clientStream.Position);
+                                        clientStream.Position = 0
+                                    );
                                     Assert.Throws<NotSupportedException>(() =>
-                                        clientStream.Position = 0);
+                                        clientStream.Seek(0, SeekOrigin.Begin)
+                                    );
                                     Assert.Throws<NotSupportedException>(() =>
-                                        clientStream.Seek(0, SeekOrigin.Begin));
-                                    Assert.Throws<NotSupportedException>(() =>
-                                        clientStream.SetLength(0));
+                                        clientStream.SetLength(0)
+                                    );
 
                                     // Invalid arguments
                                     var nonWritableStream = new MemoryStream(new byte[1], false);
                                     var disposedStream = new MemoryStream();
                                     disposedStream.Dispose();
                                     Assert.Throws<ArgumentNullException>(() =>
-                                        clientStream.CopyTo(null));
+                                        clientStream.CopyTo(null)
+                                    );
                                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                                        clientStream.CopyTo(Stream.Null, 0));
+                                        clientStream.CopyTo(Stream.Null, 0)
+                                    );
                                     Assert.Throws<ArgumentNullException>(() =>
                                     {
                                         clientStream.CopyToAsync(null, 100, default);
@@ -2193,27 +2209,38 @@ namespace System.Net.Http.Functional.Tests
                                         clientStream.CopyToAsync(disposedStream, 100, default);
                                     });
                                     Assert.Throws<ArgumentNullException>(() =>
-                                        clientStream.Read(null, 0, 100));
+                                        clientStream.Read(null, 0, 100)
+                                    );
                                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                                        clientStream.Read(new byte[1], -1, 1));
+                                        clientStream.Read(new byte[1], -1, 1)
+                                    );
                                     Assert.ThrowsAny<ArgumentException>(() =>
-                                        clientStream.Read(new byte[1], 2, 1));
+                                        clientStream.Read(new byte[1], 2, 1)
+                                    );
                                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                                        clientStream.Read(new byte[1], 0, -1));
+                                        clientStream.Read(new byte[1], 0, -1)
+                                    );
                                     Assert.ThrowsAny<ArgumentException>(() =>
-                                        clientStream.Read(new byte[1], 0, 2));
+                                        clientStream.Read(new byte[1], 0, 2)
+                                    );
                                     Assert.Throws<ArgumentNullException>(() =>
-                                        clientStream.BeginRead(null, 0, 100, null, null));
+                                        clientStream.BeginRead(null, 0, 100, null, null)
+                                    );
                                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                                        clientStream.BeginRead(new byte[1], -1, 1, null, null));
+                                        clientStream.BeginRead(new byte[1], -1, 1, null, null)
+                                    );
                                     Assert.ThrowsAny<ArgumentException>(() =>
-                                        clientStream.BeginRead(new byte[1], 2, 1, null, null));
+                                        clientStream.BeginRead(new byte[1], 2, 1, null, null)
+                                    );
                                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                                        clientStream.BeginRead(new byte[1], 0, -1, null, null));
+                                        clientStream.BeginRead(new byte[1], 0, -1, null, null)
+                                    );
                                     Assert.ThrowsAny<ArgumentException>(() =>
-                                        clientStream.BeginRead(new byte[1], 0, 2, null, null));
+                                        clientStream.BeginRead(new byte[1], 0, 2, null, null)
+                                    );
                                     Assert.Throws<ArgumentNullException>(() =>
-                                        clientStream.EndRead(null));
+                                        clientStream.EndRead(null)
+                                    );
                                     Assert.Throws<ArgumentNullException>(() =>
                                     {
                                         clientStream.ReadAsync(null, 0, 100, default);
@@ -2689,7 +2716,8 @@ namespace System.Net.Http.Functional.Tests
             // that when finalized will set our event, so that we can determine the state associated
             // with a handler has gone away.
             IWebProxy p = new PassthroughProxyWithFinalizerCallback(() =>
-                setOnFinalized.TrySetResult());
+                setOnFinalized.TrySetResult()
+            );
 
             // Make a bunch of requests and drop the associated HttpClient instances after making them, without disposal.
             Task.WaitAll(
@@ -2870,9 +2898,11 @@ namespace System.Net.Http.Functional.Tests
             Assert.Equal(HttpKeepAlivePingPolicy.WithActiveRequests, handler.KeepAlivePingPolicy);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                handler.KeepAlivePingTimeout = invalidTimeSpanValue);
+                handler.KeepAlivePingTimeout = invalidTimeSpanValue
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                handler.KeepAlivePingDelay = invalidTimeSpanValue);
+                handler.KeepAlivePingDelay = invalidTimeSpanValue
+            );
         }
 
         [Fact]
@@ -3164,7 +3194,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using var handler = new SocketsHttpHandler();
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                handler.InitialHttp2StreamWindowSize = value);
+                handler.InitialHttp2StreamWindowSize = value
+            );
         }
 
         [Theory]
@@ -3190,7 +3221,8 @@ namespace System.Net.Http.Functional.Tests
                                     new Uri("/shouldquicklyfail", UriKind.Relative)
                                 ),
                                 default
-                            ));
+                            )
+                        );
                     expectedExceptionType = typeof(InvalidOperationException);
                 }
 
@@ -4302,9 +4334,8 @@ namespace System.Net.Http.Functional.Tests
             client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
             HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
-                await client.GetStringAsync(
-                    $"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"
-                ));
+                await client.GetStringAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo")
+            );
 
             Debug.Assert(disposeCalled);
         }
@@ -4329,7 +4360,8 @@ namespace System.Net.Http.Functional.Tests
             client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
             HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
-                await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"));
+                await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo")
+            );
             Assert.Equal(e, hre.InnerException);
         }
 
@@ -4349,7 +4381,8 @@ namespace System.Net.Http.Functional.Tests
             client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
             HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
-                await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"));
+                await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo")
+            );
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
@@ -5509,8 +5542,8 @@ namespace System.Net.Http.Functional.Tests
             }
             else
             {
-                return Assert.Throws<TException>(() =>
-                    invoker.Send(request, CancellationToken.None));
+                return Assert.Throws<TException>(() => invoker.Send(request, CancellationToken.None)
+                );
             }
         }
     }
@@ -5553,7 +5586,8 @@ namespace System.Net.Http.Functional.Tests
                     content.Headers.ContentLength = contentLength;
 
                     Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                        client.PostAsync(uri, content));
+                        client.PostAsync(uri, content)
+                    );
                     Assert.Contains("Content-Length", ex.Message);
 
                     if (UseVersion.Major == 1)
@@ -5708,7 +5742,8 @@ namespace System.Net.Http.Functional.Tests
                     request.Headers.Host = Guid.NewGuid().ToString("N");
 
                     await Assert.ThrowsAsync<HttpRequestException>(() =>
-                        client.SendAsync(request, HttpCompletionOption.ResponseContentRead));
+                        client.SendAsync(request, HttpCompletionOption.ResponseContentRead)
+                    );
                 },
                 async server =>
                 {
@@ -5888,7 +5923,8 @@ namespace System.Net.Http.Functional.Tests
             };
 
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                client.SendAsync(message));
+                client.SendAsync(message)
+            );
             Assert.Equal(HttpRequestError.NameResolutionError, ex.HttpRequestError);
             Assert.IsType<SocketException>(ex.InnerException);
         }
@@ -5917,7 +5953,8 @@ namespace System.Net.Http.Functional.Tests
             };
 
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                client.SendAsync(message));
+                client.SendAsync(message)
+            );
             Assert.Equal(HttpRequestError.ConnectionError, ex.HttpRequestError);
         }
 
@@ -5944,7 +5981,8 @@ namespace System.Net.Http.Functional.Tests
                     };
 
                     HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                        client.SendAsync(message));
+                        client.SendAsync(message)
+                    );
                     Assert.Equal(HttpRequestError.SecureConnectionError, ex.HttpRequestError);
                 },
                 async server =>
@@ -5992,7 +6030,8 @@ namespace System.Net.Http.Functional.Tests
                     };
 
                     HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                        client.SendAsync(message));
+                        client.SendAsync(message)
+                    );
                     Assert.Equal(HttpRequestError.VersionNegotiationError, ex.HttpRequestError);
                 },
                 async server =>

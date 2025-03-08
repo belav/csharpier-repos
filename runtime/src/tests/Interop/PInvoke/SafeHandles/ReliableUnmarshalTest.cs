@@ -18,7 +18,8 @@ namespace SafeHandleTests
             TestSafeHandle h = new TestSafeHandle();
 
             Assert.Throws<InvalidOperationException>(() =>
-                SafeHandleNative.GetHandleAndCookie(out _, value, out h));
+                SafeHandleNative.GetHandleAndCookie(out _, value, out h)
+            );
 
             Assert.Equal(value, h.DangerousGetHandle());
 
@@ -27,7 +28,8 @@ namespace SafeHandleTests
             h = new TestSafeHandle();
 
             Assert.Throws<OverflowException>(() =>
-                SafeHandleNative.GetHandleAndArray(out _, out _, value, out h));
+                SafeHandleNative.GetHandleAndArray(out _, out _, value, out h)
+            );
 
             Assert.Equal(value, h.DangerousGetHandle());
         }

@@ -211,7 +211,8 @@ namespace System.Diagnostics.Tests
                         FileName = "exit",
                         Arguments = "42",
                     }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -225,7 +226,8 @@ namespace System.Diagnostics.Tests
                         UseShellExecute = false,
                         FileName = "https://www.github.com/corefx",
                     }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -235,7 +237,8 @@ namespace System.Diagnostics.Tests
             Assert.Throws<Win32Exception>(() =>
                 Process.Start(
                     new ProcessStartInfo { UseShellExecute = false, FileName = Path.GetTempPath() }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1268,8 +1271,8 @@ namespace System.Diagnostics.Tests
         public void TestInvalidPriorityClass(ProcessPriorityClass priorityClass)
         {
             var process = new Process();
-            Assert.Throws<InvalidEnumArgumentException>(() =>
-                process.PriorityClass = priorityClass);
+            Assert.Throws<InvalidEnumArgumentException>(() => process.PriorityClass = priorityClass
+            );
         }
 
         [Fact]
@@ -1726,7 +1729,8 @@ namespace System.Diagnostics.Tests
             // return information about the current process, not the unrelated process.
             // See https://github.com/dotnet/runtime/issues/14329.
             Assert.Throws<InvalidOperationException>(() =>
-                process.StartInfo = new ProcessStartInfo());
+                process.StartInfo = new ProcessStartInfo()
+            );
 
             process.Kill();
             Assert.True(process.WaitForExit(WaitInMS));
@@ -2567,11 +2571,14 @@ namespace System.Diagnostics.Tests
         public void Process_StartInvalidNamesTest()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Process.Start(null, "userName", new SecureString(), "thisDomain"));
+                Process.Start(null, "userName", new SecureString(), "thisDomain")
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Process.Start(string.Empty, "userName", new SecureString(), "thisDomain"));
+                Process.Start(string.Empty, "userName", new SecureString(), "thisDomain")
+            );
             Assert.Throws<Win32Exception>(() =>
-                Process.Start("exe", string.Empty, new SecureString(), "thisDomain"));
+                Process.Start("exe", string.Empty, new SecureString(), "thisDomain")
+            );
         }
 
         [OuterLoop("May take many seconds the first time it's run")]
@@ -2581,14 +2588,16 @@ namespace System.Diagnostics.Tests
         {
             SecureString password = AsSecureString("Value");
             Assert.Throws<Win32Exception>(() =>
-                Process.Start(GetCurrentProcessName(), "userName", password, "thisDomain"));
+                Process.Start(GetCurrentProcessName(), "userName", password, "thisDomain")
+            );
             Assert.Throws<Win32Exception>(() =>
                 Process.Start(
                     GetCurrentProcessName(),
                     Environment.UserName,
                     password,
                     Environment.UserDomainName
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2880,7 +2889,8 @@ namespace System.Diagnostics.Tests
             Process containingProcess = CreateProcess(() =>
             {
                 Process parentProcess = CreateProcess(() =>
-                    RunProcessAttemptingToKillEntireTreeOnParent());
+                    RunProcessAttemptingToKillEntireTreeOnParent()
+                );
 
                 parentProcess.Start();
                 parentProcess.WaitForExit();

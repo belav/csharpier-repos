@@ -268,7 +268,8 @@ namespace System.Threading.Channels.Tests
                 new Func<Channel<int>>(() =>
                     Channel.CreateUnbounded<int>(
                         new UnboundedChannelOptions() { SingleReader = true, SingleWriter = true }
-                    )),
+                    )
+                ),
             };
             yield return new object[]
             {

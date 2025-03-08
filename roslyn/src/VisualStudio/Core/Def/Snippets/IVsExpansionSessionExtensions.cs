@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             if (
                 !ErrorHandler.Succeeded(
                     ErrorHandler.CallWithCOMConvention(() =>
-                        expansionSession.GetHeaderNode(query, out localNode))
+                        expansionSession.GetHeaderNode(query, out localNode)
+                    )
                 )
             )
             {

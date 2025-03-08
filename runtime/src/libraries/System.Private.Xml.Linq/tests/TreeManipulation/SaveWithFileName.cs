@@ -66,9 +66,11 @@ namespace XLinqTests
         {
             Assert.Throws<ArgumentNullException>(() => new XDocument().Save((string)null));
             Assert.Throws<ArgumentNullException>(() =>
-                new XDocument().Save((string)null, SaveOptions.DisableFormatting));
+                new XDocument().Save((string)null, SaveOptions.DisableFormatting)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new XDocument().Save((string)null, SaveOptions.None));
+                new XDocument().Save((string)null, SaveOptions.None)
+            );
         }
 
         [Fact]
@@ -120,20 +122,24 @@ namespace XLinqTests
         {
             Assert.Throws<ArgumentNullException>(() => new XElement("e").Save((string)null));
             Assert.Throws<ArgumentNullException>(() =>
-                new XElement("e").Save((string)null, SaveOptions.DisableFormatting));
+                new XElement("e").Save((string)null, SaveOptions.DisableFormatting)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new XElement("e").Save((string)null, SaveOptions.None));
+                new XElement("e").Save((string)null, SaveOptions.None)
+            );
         }
 
         [Fact]
         public void XStreamingElementSave_NullParameter()
         {
+            Assert.Throws<ArgumentNullException>(() => new XStreamingElement("e").Save((string)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new XStreamingElement("e").Save((string)null));
+                new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting));
-            Assert.Throws<ArgumentNullException>(() =>
-                new XStreamingElement("e").Save((string)null, SaveOptions.None));
+                new XStreamingElement("e").Save((string)null, SaveOptions.None)
+            );
         }
 
         [Fact]

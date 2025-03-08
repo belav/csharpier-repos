@@ -325,7 +325,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     projectFilePath,
                     referenceUpdates,
                     cancellationToken
-                ));
+                )
+            );
         }
 
         private static bool TryGetPropertyValue(

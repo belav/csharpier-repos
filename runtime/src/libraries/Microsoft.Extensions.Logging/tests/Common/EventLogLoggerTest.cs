@@ -302,7 +302,8 @@ namespace Microsoft.Extensions.Logging
                     null,
                     new EventLogSettings() { },
                     new LoggerExternalScopeProvider()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -310,7 +311,8 @@ namespace Microsoft.Extensions.Logging
         public void NullEventSettingsThrows()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new EventLogLogger("Something", settings: null, new LoggerExternalScopeProvider()));
+                new EventLogLogger("Something", settings: null, new LoggerExternalScopeProvider())
+            );
         }
 
         public static TheoryData<int, string[]> WritesSplitMessagesData

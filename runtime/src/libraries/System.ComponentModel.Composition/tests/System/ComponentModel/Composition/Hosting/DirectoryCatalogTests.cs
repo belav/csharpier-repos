@@ -436,13 +436,15 @@ namespace System.ComponentModel.Composition
                 new DirectoryCatalog(
                     TemporaryFileCopier.GetNewTemporaryDirectory()
                         + @"\NonexistentDirectoryWithoutEndingSlash"
-                ));
+                )
+            );
 
             Assert.Throws<DirectoryNotFoundException>(() =>
                 new DirectoryCatalog(
                     TemporaryFileCopier.GetNewTemporaryDirectory()
                         + @"\NonexistentDirectoryWithEndingSlash\"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -457,7 +459,8 @@ namespace System.ComponentModel.Composition
             Assert.Throws<IOException>(() =>
                 new DirectoryCatalog(
                     Path.Combine(TemporaryFileCopier.GetNewTemporaryDirectory(), "Test.txt")
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -469,7 +472,8 @@ namespace System.ComponentModel.Composition
                         TemporaryFileCopier.GetNewTemporaryDirectory(),
                         "NonExistingFile.txt"
                     )
-                ));
+                )
+            );
         }
 
         [Fact]

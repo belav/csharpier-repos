@@ -513,7 +513,8 @@ public class InternalModelBuilderTest
             CoreStrings.ClashingSharedType(typeof(Details).Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit))
+                    modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
+                )
                 .Message
         );
 
@@ -525,7 +526,8 @@ public class InternalModelBuilderTest
                         nameof(Details),
                         typeof(Details),
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -549,7 +551,8 @@ public class InternalModelBuilderTest
             CoreStrings.ClashingNonOwnedEntityType("Details (Details)"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit))
+                    modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
+                )
                 .Message
         );
     }
@@ -772,7 +775,8 @@ public class InternalModelBuilderTest
                         sharedTypeName,
                         typeof(Details),
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -789,7 +793,8 @@ public class InternalModelBuilderTest
                         typeof(Customer).DisplayName(),
                         typeof(Customer),
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }

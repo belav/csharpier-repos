@@ -27,7 +27,8 @@ namespace Moq.Tests
             var mouse = new Mouse();
             mouse.LeftButtonClicked += new Action<Button>(delegate { });
             Assert.Throws<ArgumentException>(() =>
-                mouse.LeftButtonClicked += new Action<LeftButton>(delegate { }));
+                mouse.LeftButtonClicked += new Action<LeftButton>(delegate { })
+            );
         }
 
         [Fact]
@@ -52,7 +53,8 @@ namespace Moq.Tests
 
             mouse.LeftButtonClicked += new Action<Button>(delegate { });
             Assert.Throws<ArgumentException>(() =>
-                mouse.LeftButtonClicked += new Action<LeftButton>(delegate { }));
+                mouse.LeftButtonClicked += new Action<LeftButton>(delegate { })
+            );
         }
 
         public class Mouse

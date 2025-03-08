@@ -29,8 +29,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             // Context returns a JsonTypeInfo for the declared type
             Assert.NotNull(options.GetTypeInfo(typeof(T)));
             // But fails when resolving one for the runtime type
-            Assert.Throws<NotSupportedException>(() =>
-                options.GetTypeInfo(envelope.Value.GetType()));
+            Assert.Throws<NotSupportedException>(() => options.GetTypeInfo(envelope.Value.GetType())
+            );
 
             // Serializing using the declared type works as expected
             string json = await Serializer.SerializeWrapper(envelope.Value, options);
@@ -42,7 +42,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             // But fails if you pass in its runtime type
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(envelope.Value, envelope.Value.GetType(), options));
+                Serializer.SerializeWrapper(envelope.Value, envelope.Value.GetType(), options)
+            );
 
             if (isBaseTypeDeserializable)
             {
@@ -51,7 +52,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
                 // But will still fail if you attempt to deserialize using the runtime type
                 await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    Serializer.DeserializeWrapper(json, envelope.Value.GetType(), options));
+                    Serializer.DeserializeWrapper(json, envelope.Value.GetType(), options)
+                );
             }
         }
 
@@ -118,7 +120,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             object value = new TypeWithDiamondAmbiguity();
 
             NotSupportedException exn = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.SerializeWrapper(value, UnspeakableTypeContext.Default.Options));
+                Serializer.SerializeWrapper(value, UnspeakableTypeContext.Default.Options)
+            );
             Assert.Contains("TypeWithDiamondAmbiguity", exn.Message);
             Assert.Contains("BasePoco", exn.Message);
             Assert.Contains("IEnumerable", exn.Message);

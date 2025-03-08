@@ -878,7 +878,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     previewChanges,
                     canUseBackgroundWorkIndicator: false,
                     CancellationToken.None
-                ));
+                )
+            );
         }
 
         public Task CommitAsync(bool previewChanges, CancellationToken cancellationToken) =>

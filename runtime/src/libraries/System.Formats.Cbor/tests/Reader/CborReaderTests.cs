@@ -18,7 +18,8 @@ namespace System.Formats.Cbor.Tests
         )
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new CborReader(Array.Empty<byte>(), conformanceMode: mode));
+                new CborReader(Array.Empty<byte>(), conformanceMode: mode)
+            );
         }
 
         [Fact]
@@ -324,7 +325,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() =>
-                reader.ReadEncodedValue(disableConformanceModeChecks: false));
+                reader.ReadEncodedValue(disableConformanceModeChecks: false)
+            );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
 

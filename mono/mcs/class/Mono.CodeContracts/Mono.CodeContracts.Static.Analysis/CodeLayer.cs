@@ -60,7 +60,8 @@ namespace Mono.CodeContracts.Static.Analysis
                     MetaDataProvider,
                     ExpressionToString,
                     VariableToString
-                ));
+                )
+            );
         }
 
         public CodeLayer(

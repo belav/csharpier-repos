@@ -96,7 +96,8 @@ namespace System.CodeDom.Tests
         {
             var collection = new CodeNamespaceImportCollection();
             Assert.Throws<NullReferenceException>(() =>
-                collection.AddRange(new CodeNamespaceImport[] { null }));
+                collection.AddRange(new CodeNamespaceImport[] { null })
+            );
         }
 
         [Theory]

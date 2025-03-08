@@ -3820,7 +3820,8 @@ namespace System.Globalization.Tests
                     "11",
                     "12",
                     "",
-                });
+                }
+            );
         }
 
         [Fact]

@@ -72,7 +72,8 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 httpContext.Response.OnStarting(() =>
                     httpContext
                         .Response.BodyWriter.WriteAsync(Encoding.UTF8.GetBytes(message))
-                        .AsTask());
+                        .AsTask()
+                );
             }
         }
 

@@ -150,7 +150,8 @@ namespace System.Net.Sockets.Tests
             EndPoint endPoint
         ) =>
             Task.Run(() =>
-                s.SendTo(buffer.Array, buffer.Offset, buffer.Count, SocketFlags.None, endPoint));
+                s.SendTo(buffer.Array, buffer.Offset, buffer.Count, SocketFlags.None, endPoint)
+            );
 
         public override Task SendFileAsync(Socket s, string fileName) =>
             Task.Run(() => s.SendFile(fileName));

@@ -31,7 +31,8 @@ namespace System.IO.Tests
         public void NonExistentPath()
         {
             Assert.Throws<DirectoryNotFoundException>(() =>
-                Create(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())));
+                Create(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()))
+            );
         }
 
         [Fact]
@@ -247,8 +248,8 @@ namespace System.IO.Tests
                 Assert.True(File.Exists(testFile + "aAAa"));
                 Assert.Equal(2, Directory.GetFiles(testDir.FullName).Length);
             }
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                File.Create(testFile.ToLowerInvariant()));
+            Assert.Throws<DirectoryNotFoundException>(() => File.Create(testFile.ToLowerInvariant())
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsCaseInsensitiveOS))]
@@ -275,7 +276,8 @@ namespace System.IO.Tests
                         "v443094(*)(+*$#$*",
                         new string(Path.DirectorySeparatorChar, 3)
                     )
-                ));
+                )
+            );
             Assert.ThrowsAny<IOException>(() => Create(Path.Combine(testDir.FullName, "*")));
             Assert.ThrowsAny<IOException>(() => Create(Path.Combine(testDir.FullName, "Test*t")));
             Assert.ThrowsAny<IOException>(() => Create(Path.Combine(testDir.FullName, "*Tes*t")));

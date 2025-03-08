@@ -243,7 +243,8 @@ namespace System.Globalization.Tests
         public void PMDesignator_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.PMDesignator = "PP");
+                DateTimeFormatInfo.InvariantInfo.PMDesignator = "PP"
+            );
         }
     }
 }

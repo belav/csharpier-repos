@@ -1606,7 +1606,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     ss.Set<Level1>()
                         .Select(l1 => l1.OneToOne_Optional_FK1)
                         .Include(l2 => l2.OneToMany_Optional2)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1619,7 +1620,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         .SelectMany(l1 => l1.OneToMany_Required1)
                         .Select(l2 => l2.OneToOne_Optional_FK2)
                         .Include(l3 => l3.OneToMany_Optional3)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2491,7 +2493,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                         .OrderByDescending(x => x.Name)
                                         .Take(3)
                                 )
-                    ))
+                    )
+                )
             )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -2520,7 +2523,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 .ThenInclude(l2 => l2.OneToMany_Optional2)
                                 .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
                                 .ThenInclude(l2 => l2.OneToOne_Required_FK2)
-                    ))
+                    )
+                )
             )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -2958,7 +2962,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     AssertQuery(
                         async,
                         ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -2977,7 +2982,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             ss.Set<Level1>()
                                 .Include(l1 => l1.OneToMany_Optional1)
                                 .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -3349,7 +3355,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 )
                                 : null
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3366,7 +3373,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 )
                                 : Enumerable.Empty<int>()
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

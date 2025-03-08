@@ -96,7 +96,8 @@ public partial class Startup
         {
             var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                upgradeFeature.UpgradeAsync());
+                upgradeFeature.UpgradeAsync()
+            );
             Assert.Equal("Upgrade requires HTTP/1.1.", ex.Message);
         });
     }

@@ -1014,12 +1014,14 @@ namespace System.Collections.Tests
                 arrList2 =>
                 {
                     var arrCopy = new string[10];
-                    Assert.ThrowsAny<ArgumentException>(() =>
-                        arrList2.CopyTo(0, arrCopy, -1, 1000)); // Array index < 0 (should throw ArgumentOutOfRangeException)
+                    Assert.ThrowsAny<ArgumentException>(() => arrList2.CopyTo(0, arrCopy, -1, 1000)
+                    ); // Array index < 0 (should throw ArgumentOutOfRangeException)
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        arrList2.CopyTo(-1, arrCopy, 0, 1)); // Index < 0
+                        arrList2.CopyTo(-1, arrCopy, 0, 1)
+                    ); // Index < 0
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        arrList2.CopyTo(0, arrCopy, 0, -1)); // Count < 0
+                        arrList2.CopyTo(0, arrCopy, 0, -1)
+                    ); // Count < 0
 
                     AssertExtensions.Throws<ArgumentException>(
                         null,
@@ -1054,7 +1056,8 @@ namespace System.Collections.Tests
                     );
 
                     Assert.ThrowsAny<ArgumentException>(() =>
-                        arrList2.CopyTo(0, new object[arrList2.Count, arrList2.Count], 0, -1)); // Should throw ArgumentOutOfRangeException
+                        arrList2.CopyTo(0, new object[arrList2.Count, arrList2.Count], 0, -1)
+                    ); // Should throw ArgumentOutOfRangeException
                 }
             );
         }
@@ -1481,8 +1484,8 @@ namespace System.Collections.Tests
                     // If we change the underlying collection through set this[int index] range will start to throw
                     if (arrList2.IsReadOnly)
                     {
-                        Assert.Throws<NotSupportedException>(() =>
-                            arrList2[arrList2.Count - 1] = -1);
+                        Assert.Throws<NotSupportedException>(() => arrList2[arrList2.Count - 1] = -1
+                        );
                         int iTemp = range.Count;
                     }
                     else
@@ -1496,7 +1499,8 @@ namespace System.Collections.Tests
                     if (arrList2.IsFixedSize)
                     {
                         Assert.Throws<NotSupportedException>(() =>
-                            arrList2.Add(arrList2.Count + 1000));
+                            arrList2.Add(arrList2.Count + 1000)
+                        );
                         int iTemp = range.Count;
                     }
                     else

@@ -260,7 +260,8 @@ namespace System.Linq.Expressions.Tests
             );
 
             Assert.Throws<NotSupportedException>(() =>
-                attemptAssignToConstant.Compile(useInterpreter));
+                attemptAssignToConstant.Compile(useInterpreter)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -354,7 +355,8 @@ namespace System.Linq.Expressions.Tests
                 )
             );
             Assert.Throws<InvalidProgramException>(() =>
-                assignToStaticProperty.Compile(useInterpreter));
+                assignToStaticProperty.Compile(useInterpreter)
+            );
         }
 
         [Fact]

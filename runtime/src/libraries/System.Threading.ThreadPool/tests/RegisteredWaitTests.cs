@@ -166,14 +166,17 @@ namespace System.Threading.ThreadPools.Tests
         {
             Assert.Throws<ArgumentNullException>(() => ThreadPool.QueueUserWorkItem(null));
             Assert.Throws<ArgumentNullException>(() =>
-                ThreadPool.UnsafeQueueUserWorkItem(null, null));
+                ThreadPool.UnsafeQueueUserWorkItem(null, null)
+            );
 
             WaitHandle waitHandle = new ManualResetEvent(true);
             WaitOrTimerCallback callback = (state, timedOut) => { };
             Assert.Throws<ArgumentNullException>(() =>
-                ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true));
+                ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                ThreadPool.RegisterWaitForSingleObject(waitHandle, null, null, 0, true));
+                ThreadPool.RegisterWaitForSingleObject(waitHandle, null, null, 0, true)
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "millisecondsTimeOutInterval",
                 () => ThreadPool.RegisterWaitForSingleObject(waitHandle, callback, null, -2, true)
@@ -227,9 +230,11 @@ namespace System.Threading.ThreadPools.Tests
             );
 
             Assert.Throws<ArgumentNullException>(() =>
-                ThreadPool.UnsafeRegisterWaitForSingleObject(null, callback, null, 0, true));
+                ThreadPool.UnsafeRegisterWaitForSingleObject(null, callback, null, 0, true)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, null, null, 0, true));
+                ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle, null, null, 0, true)
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "millisecondsTimeOutInterval",
                 () =>

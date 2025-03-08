@@ -16,9 +16,11 @@ namespace System.Text.RegularExpressions.Tests
         {
             Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(null, null));
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Regex.CompileToAssembly(null, null, null));
+                Regex.CompileToAssembly(null, null, null)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Regex.CompileToAssembly(null, null, null, null));
+                Regex.CompileToAssembly(null, null, null, null)
+            );
 
             Assert.Throws<PlatformNotSupportedException>(() =>
                 Regex.CompileToAssembly(
@@ -33,7 +35,8 @@ namespace System.Text.RegularExpressions.Tests
                         ),
                     },
                     new AssemblyName("abcd")
-                ));
+                )
+            );
 
             Assert.Throws<PlatformNotSupportedException>(() =>
                 Regex.CompileToAssembly(
@@ -57,7 +60,8 @@ namespace System.Text.RegularExpressions.Tests
                             new[] { "TestCompany" }
                         ),
                     }
-                ));
+                )
+            );
 
             Assert.Throws<PlatformNotSupportedException>(() =>
                 Regex.CompileToAssembly(
@@ -82,7 +86,8 @@ namespace System.Text.RegularExpressions.Tests
                         ),
                     },
                     "resourceFile"
-                ));
+                )
+            );
         }
     }
 }

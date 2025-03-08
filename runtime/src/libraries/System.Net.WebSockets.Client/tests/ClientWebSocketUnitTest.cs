@@ -73,7 +73,8 @@ namespace System.Net.WebSockets.Client.Tests
                             WebSocketCloseStatus.Empty,
                             "",
                             new CancellationToken()
-                        ));
+                        )
+                    );
                 }
 
                 string expectedMessage = ResourceHelper.GetExceptionMessage(
@@ -121,7 +122,8 @@ namespace System.Net.WebSockets.Client.Tests
                 )
                 {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        cws.ReceiveAsync(segment, ct));
+                        cws.ReceiveAsync(segment, ct)
+                    );
                 }
 
                 string expectedMessage = ResourceHelper.GetExceptionMessage(
@@ -168,7 +170,8 @@ namespace System.Net.WebSockets.Client.Tests
                 )
                 {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        cws.SendAsync(segment, WebSocketMessageType.Text, false, ct));
+                        cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
+                    );
                 }
 
                 string expectedMessage = ResourceHelper.GetExceptionMessage(

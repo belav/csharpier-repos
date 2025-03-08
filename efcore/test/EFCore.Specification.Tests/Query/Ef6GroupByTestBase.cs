@@ -301,7 +301,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     from n in ss.Set<NumberForLinq>()
                     group n by n.Value % 5 into g
                     select new { Remainder = g.Key, Numbers = g }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -315,7 +316,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     from w in ss.Set<NumberForLinq>()
                     group w by w.Name.Length into g
                     select new { FirstLetter = g.Key, Words = g }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -329,7 +331,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     from p in ss.Set<ProductForLinq>()
                     group p by p.Category into g
                     select new { Category = g.Key, Products = g }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -354,7 +357,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                             select new { Month = mg.Key, Orders = mg },
                         },
                     }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -369,7 +373,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     group p by p.Category into g
                     where g.Any(p => p.UnitsInStock == 0)
                     select new { Category = g.Key, Products = g }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -384,7 +389,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     group p by p.Category into g
                     where g.All(p => p.UnitsInStock > 0)
                     select new { Category = g.Key, Products = g }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -447,7 +453,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         Category = g.Key,
                         CheapestProducts = g.Where(p => p.UnitPrice == minPrice),
                     }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -477,7 +484,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         Category = g.Key,
                         MostExpensiveProducts = g.Where(p => p.UnitPrice == minPrice),
                     }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -832,7 +840,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     ss.Set<Person>()
                         .GroupBy(bp => bp.Feet)
                         .SelectMany(g => g.OrderByDescending(bp => bp.Id).Take(1).DefaultIfEmpty())
-            ));
+            )
+        );
 
     [ConditionalTheory] // From #12088
     [MemberData(nameof(IsAsyncData))]
@@ -859,7 +868,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         .Select(g => g.OrderBy(c => c.FirstName).First())
                         .GroupBy(c => c.MiddleInitial)
                         .Select(g => g)
-            ));
+            )
+        );
 
     protected ArubaContext CreateContext() => Fixture.CreateContext();
 

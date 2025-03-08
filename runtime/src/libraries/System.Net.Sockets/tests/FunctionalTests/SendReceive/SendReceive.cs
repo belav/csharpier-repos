@@ -2082,13 +2082,15 @@ namespace System.Net.Sockets.Tests
                             (ReadOnlyMemory<byte>)new byte[0],
                             SocketFlags.None,
                             cts.Token
-                        ));
+                        )
+                    );
                     await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
                         await server.ReceiveAsync(
                             (Memory<byte>)new byte[0],
                             SocketFlags.None,
                             cts.Token
-                        ));
+                        )
+                    );
                 }
             }
         }
@@ -2246,13 +2248,15 @@ namespace System.Net.Sockets.Tests
                             (ReadOnlyMemory<byte>)new byte[0],
                             SocketFlags.None,
                             cts.Token
-                        ));
+                        )
+                    );
                     await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
                         await server.ReceiveAsync(
                             (Memory<byte>)new byte[0],
                             SocketFlags.None,
                             cts.Token
-                        ));
+                        )
+                    );
                 }
             }
         }

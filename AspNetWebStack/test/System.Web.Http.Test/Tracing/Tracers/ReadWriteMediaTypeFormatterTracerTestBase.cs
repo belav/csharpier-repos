@@ -114,7 +114,8 @@ namespace System.Web.Http.Tracing.Tracers
                     new MemoryStream(),
                     request.Content,
                     null
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(
@@ -277,7 +278,8 @@ namespace System.Web.Http.Tracing.Tracers
                     new MemoryStream(),
                     request.Content,
                     transportContext: null
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

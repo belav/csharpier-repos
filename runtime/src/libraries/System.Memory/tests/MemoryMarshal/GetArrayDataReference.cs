@@ -14,9 +14,11 @@ namespace System.SpanTests
         public static void GetArrayDataReference_NullInput_ThrowsNullRef()
         {
             Assert.Throws<NullReferenceException>(() =>
-                MemoryMarshal.GetArrayDataReference<object>((object[])null));
+                MemoryMarshal.GetArrayDataReference<object>((object[])null)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                MemoryMarshal.GetArrayDataReference((Array)null));
+                MemoryMarshal.GetArrayDataReference((Array)null)
+            );
         }
 
         [ConditionalFact(

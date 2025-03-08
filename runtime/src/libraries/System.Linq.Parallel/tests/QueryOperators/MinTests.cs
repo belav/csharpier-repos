@@ -520,25 +520,32 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Min());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Min());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Min());
+            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Min()
+            );
+            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Min()
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<double>().Min());
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<decimal>().Min());
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<NotComparable>().Min());
+                ParallelEnumerable.Empty<NotComparable>().Min()
+            );
 
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Min(x => (int)x));
+                ParallelEnumerable.Empty<int>().Min(x => (int)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Min(x => (long)x));
+                ParallelEnumerable.Empty<int>().Min(x => (long)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Min(x => (float)x));
+                ParallelEnumerable.Empty<int>().Min(x => (float)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Min(x => (double)x));
+                ParallelEnumerable.Empty<int>().Min(x => (double)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Min(x => (decimal)x));
+                ParallelEnumerable.Empty<int>().Min(x => (decimal)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Min(x => new NotComparable(x)));
+                ParallelEnumerable.Empty<int>().Min(x => new NotComparable(x))
+            );
         }
 
         [Fact]
@@ -838,7 +845,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -849,7 +857,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -861,7 +870,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -872,7 +882,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -884,7 +895,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -895,7 +907,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -907,7 +920,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -918,7 +932,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -930,7 +945,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -941,7 +957,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -953,18 +970,21 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
         }
 
         [Fact]
         public static void Min_AggregateException_NotComparable()
         {
             ArgumentException e = AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Repeat(new NotComparable(0), 2).Min());
+                ParallelEnumerable.Repeat(new NotComparable(0), 2).Min()
+            );
             Assert.Null(e.ParamName);
 
             e = AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Range(0, 2).Min(x => new NotComparable(x)));
+                ParallelEnumerable.Range(0, 2).Min(x => new NotComparable(x))
+            );
             Assert.Null(e.ParamName);
         }
 

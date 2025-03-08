@@ -21,7 +21,8 @@ public class DefaultViewComponentDescriptorProviderTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.GetViewComponents().ToArray());
+            provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -39,7 +40,8 @@ public class DefaultViewComponentDescriptorProviderTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.GetViewComponents().ToArray());
+            provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -56,7 +58,8 @@ public class DefaultViewComponentDescriptorProviderTest
 
         // Act and Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.GetViewComponents().ToArray());
+            provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -71,7 +74,8 @@ public class DefaultViewComponentDescriptorProviderTest
 
         // Act and Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.GetViewComponents().ToArray());
+            provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -86,7 +90,8 @@ public class DefaultViewComponentDescriptorProviderTest
 
         // Act and Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.GetViewComponents().ToArray());
+            provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 

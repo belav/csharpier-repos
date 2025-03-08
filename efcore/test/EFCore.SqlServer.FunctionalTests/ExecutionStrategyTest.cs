@@ -917,7 +917,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 new TestSqlServerRetryingExecutionStrategy(
                     context,
                     TimeSpan.FromMilliseconds(100)
-                ).ExecuteInTransaction(context, c => c.SaveChanges(false), c => false));
+                ).ExecuteInTransaction(context, c => c.SaveChanges(false), c => false)
+            );
             context.ChangeTracker.AcceptAllChanges();
 
             Assert.Equal(7, connection.OpenCount);

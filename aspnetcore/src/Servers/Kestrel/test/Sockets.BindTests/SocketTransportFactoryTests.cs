@@ -24,6 +24,7 @@ public class SocketTransportFactoryTests
         await Assert.ThrowsAsync<NotImplementedException>(async () =>
             await socketTransportFactory.BindAsync(
                 new UriEndPoint(new Uri("http://127.0.0.1:5554"))
-            ));
+            )
+        );
     }
 }

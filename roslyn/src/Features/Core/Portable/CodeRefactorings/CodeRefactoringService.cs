@@ -45,15 +45,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     >(
                         grp.Key,
                         new Lazy<ImmutableArray<CodeRefactoringProvider>>(() =>
-                            ExtensionOrderer.Order(grp).Select(lz => lz.Value).ToImmutableArray())
+                            ExtensionOrderer.Order(grp).Select(lz => lz.Value).ToImmutableArray()
+                        )
                     ))
-            ));
+            )
+        );
         private readonly Lazy<
             ImmutableDictionary<CodeRefactoringProvider, CodeChangeProviderMetadata>
         > _lazyRefactoringToMetadataMap = new(() =>
             providers
                 .Where(provider => provider.IsValueCreated)
-                .ToImmutableDictionary(provider => provider.Value, provider => provider.Metadata));
+                .ToImmutableDictionary(provider => provider.Value, provider => provider.Metadata)
+        );
 
         private ImmutableDictionary<
             CodeRefactoringProvider,

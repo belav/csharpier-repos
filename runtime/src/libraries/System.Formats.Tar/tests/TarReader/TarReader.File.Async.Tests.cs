@@ -299,7 +299,8 @@ namespace System.Formats.Tar.Tests
             Assert.NotNull(await reader.GetNextEntryAsync());
             Assert.NotNull(await reader.GetNextEntryAsync());
             await Assert.ThrowsAsync<InvalidDataException>(async () =>
-                await reader.GetNextEntryAsync());
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Fact]
@@ -312,7 +313,8 @@ namespace System.Formats.Tar.Tests
             );
             await using TarReader reader = new TarReader(archiveStream);
             await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-                await reader.GetNextEntryAsync());
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Theory]
@@ -351,7 +353,8 @@ namespace System.Formats.Tar.Tests
             );
             await using TarReader reader = new TarReader(archiveStream);
             await Assert.ThrowsAsync<InvalidDataException>(async () =>
-                await reader.GetNextEntryAsync());
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Fact]
@@ -388,7 +391,8 @@ namespace System.Formats.Tar.Tests
             );
             await using TarReader reader = new TarReader(archiveStream);
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await reader.GetNextEntryAsync());
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Fact]
@@ -409,7 +413,8 @@ namespace System.Formats.Tar.Tests
             Assert.NotNull(await reader.GetNextEntryAsync()); // Just a regular file
 
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await reader.GetNextEntryAsync()); // Sparse
+                await reader.GetNextEntryAsync()
+            ); // Sparse
         }
 
         [Fact]
@@ -424,7 +429,8 @@ namespace System.Formats.Tar.Tests
             // The extended attribute 'size' has the value 17179869184
             // Exception message: Stream length must be non-negative and less than 2^31 - 1 - origin
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                await reader.GetNextEntryAsync());
+                await reader.GetNextEntryAsync()
+            );
         }
 
         private static async Task VerifyDataStreamOfTarUncompressedInternalAsync(

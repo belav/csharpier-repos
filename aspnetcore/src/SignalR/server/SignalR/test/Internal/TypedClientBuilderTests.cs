@@ -141,7 +141,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<object>.Build(clientProxy));
+            TypedClientBuilder<object>.Build(clientProxy)
+        );
         Assert.Equal("Type must be an interface.", ex.Message);
     }
 
@@ -150,7 +151,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<ValueTask>.Build(clientProxy));
+            TypedClientBuilder<ValueTask>.Build(clientProxy)
+        );
         Assert.Equal("Type must be an interface.", ex.Message);
     }
 
@@ -159,7 +161,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<EventHandler>.Build(clientProxy));
+            TypedClientBuilder<EventHandler>.Build(clientProxy)
+        );
         Assert.Equal("Type must be an interface.", ex.Message);
     }
 
@@ -168,7 +171,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<IVoidMethodClient>.Build(clientProxy));
+            TypedClientBuilder<IVoidMethodClient>.Build(clientProxy)
+        );
         Assert.Equal(
             $"Cannot generate proxy implementation for '{typeof(IVoidMethodClient).FullName}.{nameof(IVoidMethodClient.Method)}'. All client proxy methods must return '{typeof(Task).FullName}' or '{typeof(Task).FullName}<T>'.",
             ex.Message
@@ -180,7 +184,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<IStringMethodClient>.Build(clientProxy));
+            TypedClientBuilder<IStringMethodClient>.Build(clientProxy)
+        );
         Assert.Equal(
             $"Cannot generate proxy implementation for '{typeof(IStringMethodClient).FullName}.{nameof(IStringMethodClient.Method)}'. All client proxy methods must return '{typeof(Task).FullName}' or '{typeof(Task).FullName}<T>'.",
             ex.Message
@@ -192,7 +197,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<IOutParamMethodClient>.Build(clientProxy));
+            TypedClientBuilder<IOutParamMethodClient>.Build(clientProxy)
+        );
         Assert.Equal(
             $"Cannot generate proxy implementation for '{typeof(IOutParamMethodClient).FullName}.{nameof(IOutParamMethodClient.Method)}'. Client proxy methods must not have 'out' parameters.",
             ex.Message
@@ -204,7 +210,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<IRefParamMethodClient>.Build(clientProxy));
+            TypedClientBuilder<IRefParamMethodClient>.Build(clientProxy)
+        );
         Assert.Equal(
             $"Cannot generate proxy implementation for '{typeof(IRefParamMethodClient).FullName}.{nameof(IRefParamMethodClient.Method)}'. Client proxy methods must not have 'ref' parameters.",
             ex.Message
@@ -216,7 +223,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<IPropertiesClient>.Build(clientProxy));
+            TypedClientBuilder<IPropertiesClient>.Build(clientProxy)
+        );
         Assert.Equal("Type must not contain properties.", ex.Message);
     }
 
@@ -225,7 +233,8 @@ public class TypedClientBuilderTests
     {
         var clientProxy = new MockProxy();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            TypedClientBuilder<IEventsClient>.Build(clientProxy));
+            TypedClientBuilder<IEventsClient>.Build(clientProxy)
+        );
         Assert.Equal("Type must not contain events.", ex.Message);
     }
 

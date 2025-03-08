@@ -1616,7 +1616,8 @@ namespace System.Threading.Tasks.Tests
             // And check that the use of OrderablePartitioner w/o dynamic support is rejected
             var mop = Partitioner.Create(baselist, false);
             Assert.Throws<InvalidOperationException>(() =>
-                Parallel.ForEach(mop, delegate(int item, ParallelLoopState state, long index) { }));
+                Parallel.ForEach(mop, delegate(int item, ParallelLoopState state, long index) { })
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

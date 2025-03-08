@@ -68,12 +68,14 @@ namespace System.Net.Quic.Tests
                 },
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await CreateQuicListener(listenerOptions));
+                await CreateQuicListener(listenerOptions)
+            );
 
             var clientOptions = CreateQuicClientOptions(new IPEndPoint(IPAddress.Loopback, 5000));
             clientOptions.ClientAuthenticationOptions.CipherSuitesPolicy = policy;
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await CreateQuicConnection(clientOptions));
+                await CreateQuicConnection(clientOptions)
+            );
         }
 
         [Fact]
@@ -83,7 +85,8 @@ namespace System.Net.Quic.Tests
                 TestConnection(
                     new CipherSuitesPolicy(new[] { TlsCipherSuite.TLS_AES_128_GCM_SHA256 }),
                     new CipherSuitesPolicy(new[] { TlsCipherSuite.TLS_AES_256_GCM_SHA384 })
-                ));
+                )
+            );
         }
     }
 }

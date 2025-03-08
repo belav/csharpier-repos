@@ -476,7 +476,8 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        membersEntry.OriginalValue = new List<string>())
+                        membersEntry.OriginalValue = new List<string>()
+                    )
                     .Message
             );
         }
@@ -604,7 +605,8 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
             CoreStrings.NullRequiredComplexProperty("Yogurt", "Milk"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges()))
+                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
+                )
             ).Message
         );
     }
@@ -628,7 +630,8 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
             CoreStrings.NullRequiredComplexProperty("Culture", "Manufacturer"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges()))
+                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
+                )
             ).Message
         );
     }
@@ -652,7 +655,8 @@ public abstract class ComplexTypesTrackingTestBase<TFixture>(TFixture fixture)
             CoreStrings.NullRequiredComplexProperty("License", "Tag"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges()))
+                    async ? context.SaveChangesAsync() : Task.FromResult(context.SaveChanges())
+                )
             ).Message
         );
     }

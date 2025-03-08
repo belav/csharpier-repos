@@ -138,13 +138,15 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableByte(byte? value)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.NegateChecked(Expression.Constant(value, typeof(byte?))));
+                Expression.NegateChecked(Expression.Constant(value, typeof(byte?)))
+            );
         }
 
         private static void VerifyArithmeticNegateCheckedNullableChar(char? value)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.NegateChecked(Expression.Constant(value, typeof(char?))));
+                Expression.NegateChecked(Expression.Constant(value, typeof(char?)))
+            );
         }
 
         private static void VerifyArithmeticNegateCheckedNullableDecimal(
@@ -231,7 +233,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateCheckedNullableSByte(sbyte? value)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.NegateChecked(Expression.Constant(value, typeof(sbyte?))));
+                Expression.NegateChecked(Expression.Constant(value, typeof(sbyte?)))
+            );
         }
 
         private static void VerifyArithmeticNegateCheckedNullableShort(

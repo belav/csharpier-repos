@@ -100,7 +100,8 @@ namespace System.Formats.Tar.Tests
                     archiveStream,
                     destinationDirectoryName,
                     overwriteFiles: true
-                ));
+                )
+            );
 
             Assert.Equal(
                 SR.Format(

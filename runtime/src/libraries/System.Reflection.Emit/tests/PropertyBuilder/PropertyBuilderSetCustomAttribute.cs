@@ -98,7 +98,8 @@ namespace System.Reflection.Emit.Tests
 
             type.CreateType();
             Assert.Throws<InvalidOperationException>(() =>
-                property.SetCustomAttribute(customAttrBuilder));
+                property.SetCustomAttribute(customAttrBuilder)
+            );
         }
 
         [Fact]
@@ -190,7 +191,8 @@ namespace System.Reflection.Emit.Tests
 
             type.CreateType();
             Assert.Throws<InvalidOperationException>(() =>
-                property.SetCustomAttribute(con, new byte[6]));
+                property.SetCustomAttribute(con, new byte[6])
+            );
         }
     }
 

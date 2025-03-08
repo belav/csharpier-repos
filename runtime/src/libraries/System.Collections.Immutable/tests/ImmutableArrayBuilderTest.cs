@@ -188,7 +188,8 @@ namespace System.Collections.Immutable.Tests
             );
 
             Assert.Throws<NullReferenceException>(() =>
-                builder1.AddRange(default(ImmutableArray<int>)));
+                builder1.AddRange(default(ImmutableArray<int>))
+            );
             builder1.AddRange(default(ImmutableArray<int>), 42);
 
             var builder2 = new ImmutableArray<object>.Builder();
@@ -1292,7 +1293,8 @@ namespace System.Collections.Immutable.Tests
                 ImmutableArray.CreateBuilder<string>(4)
             );
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

@@ -41,29 +41,35 @@ public class PInvokes
     public static void Strings_NotSupported()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckStringWithAnsiCharSet(""));
+            DisabledRuntimeMarshallingNative.CheckStringWithAnsiCharSet("")
+        );
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckStringWithUnicodeCharSet(""));
+            DisabledRuntimeMarshallingNative.CheckStringWithUnicodeCharSet("")
+        );
         Assert.Throws<MarshalDirectiveException>(() =>
             DisabledRuntimeMarshallingNative.CheckStructWithStructWithString(
                 new StructWithString("")
-            ));
+            )
+        );
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.GetStringWithUnicodeCharSet());
+            DisabledRuntimeMarshallingNative.GetStringWithUnicodeCharSet()
+        );
     }
 
     [Fact]
     public static void LayoutClass_NotSupported()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CheckLayoutClass(new LayoutClass()));
+            DisabledRuntimeMarshallingNative.CheckLayoutClass(new LayoutClass())
+        );
     }
 
     [Fact]
     public static void SetLastError_NotSupported()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithSetLastError());
+            DisabledRuntimeMarshallingNative.CallWithSetLastError()
+        );
     }
 
     [Fact]
@@ -73,7 +79,8 @@ public class PInvokes
     public static void LCID_NotSupported()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithLCID());
+            DisabledRuntimeMarshallingNative.CallWithLCID()
+        );
     }
 
     [Fact]
@@ -83,14 +90,16 @@ public class PInvokes
     public static void PreserveSig_False_NotSupported()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithHResultSwap());
+            DisabledRuntimeMarshallingNative.CallWithHResultSwap()
+        );
     }
 
     [Fact]
     public static void Varargs_NotSupported()
     {
         AssertThrowsCorrectException(() =>
-            DisabledRuntimeMarshallingNative.CallWithVarargs(__arglist(1, 2, 3)));
+            DisabledRuntimeMarshallingNative.CallWithVarargs(__arglist(1, 2, 3))
+        );
 
         static void AssertThrowsCorrectException(Action testCode)
         {
@@ -223,8 +232,10 @@ public class PInvokes
     public static void UInt128_Int128_NotSupported()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithInt128(default(Int128)));
+            DisabledRuntimeMarshallingNative.CallWithInt128(default(Int128))
+        );
         Assert.Throws<MarshalDirectiveException>(() =>
-            DisabledRuntimeMarshallingNative.CallWithUInt128(default(UInt128)));
+            DisabledRuntimeMarshallingNative.CallWithUInt128(default(UInt128))
+        );
     }
 }

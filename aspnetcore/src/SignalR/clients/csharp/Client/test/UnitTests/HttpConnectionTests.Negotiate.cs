@@ -400,7 +400,8 @@ public partial class HttpConnectionTests
                     );
 
                     token.Register(() =>
-                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent)));
+                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    );
 
                     return tcs.Task;
                 }
@@ -461,7 +462,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            connection.StartAsync().DefaultTimeout());
+                            connection.StartAsync().DefaultTimeout()
+                        );
                         Assert.Equal("Negotiate redirection limit exceeded.", exception.Message);
                     }
                 );
@@ -539,7 +541,8 @@ public partial class HttpConnectionTests
                     );
 
                     token.Register(() =>
-                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent)));
+                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    );
 
                     return tcs.Task;
                 }
@@ -635,7 +638,8 @@ public partial class HttpConnectionTests
                     );
 
                     token.Register(() =>
-                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent)));
+                        tcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    );
 
                     return tcs.Task;
                 }
@@ -830,7 +834,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            connection.StartAsync().DefaultTimeout());
+                            connection.StartAsync().DefaultTimeout()
+                        );
                         Assert.Equal("Test error.", exception.Message);
                     }
                 );
@@ -855,7 +860,8 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     var exception = await Assert.ThrowsAsync<TException>(() =>
-                        connection.StartAsync().DefaultTimeout());
+                        connection.StartAsync().DefaultTimeout()
+                    );
 
                     Assert.Equal(expectedExceptionMessage, exception.Message);
                 }

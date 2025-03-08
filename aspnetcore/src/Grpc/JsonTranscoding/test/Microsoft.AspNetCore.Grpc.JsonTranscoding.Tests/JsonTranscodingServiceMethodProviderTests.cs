@@ -134,7 +134,8 @@ public class JsonTranscodingServiceMethodProviderTests
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.NoOption)));
+            FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.NoOption))
+        );
         Assert.Equal("Couldn't find gRPC endpoint for method NoOption.", ex.Message);
     }
 
@@ -224,7 +225,8 @@ public class JsonTranscodingServiceMethodProviderTests
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            MapEndpoints<JsonTranscodingInvalidResponseBodyGreeterService>());
+            MapEndpoints<JsonTranscodingInvalidResponseBodyGreeterService>()
+        );
 
         // Assert
         Assert.Equal(
@@ -246,7 +248,8 @@ public class JsonTranscodingServiceMethodProviderTests
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            MapEndpoints<JsonTranscodingInvalidNestedResponseBodyGreeterService>());
+            MapEndpoints<JsonTranscodingInvalidNestedResponseBodyGreeterService>()
+        );
 
         // Assert
         Assert.Equal(
@@ -268,7 +271,8 @@ public class JsonTranscodingServiceMethodProviderTests
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            MapEndpoints<JsonTranscodingInvalidBodyGreeterService>());
+            MapEndpoints<JsonTranscodingInvalidBodyGreeterService>()
+        );
 
         // Assert
         Assert.Equal(
@@ -290,7 +294,8 @@ public class JsonTranscodingServiceMethodProviderTests
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            MapEndpoints<JsonTranscodingInvalidNestedBodyGreeterService>());
+            MapEndpoints<JsonTranscodingInvalidNestedBodyGreeterService>()
+        );
 
         // Assert
         Assert.Equal(
@@ -312,7 +317,8 @@ public class JsonTranscodingServiceMethodProviderTests
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            MapEndpoints<JsonTranscodingInvalidPatternGreeterService>());
+            MapEndpoints<JsonTranscodingInvalidPatternGreeterService>()
+        );
 
         // Assert
         Assert.Equal(

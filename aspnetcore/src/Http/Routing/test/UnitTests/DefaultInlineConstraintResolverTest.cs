@@ -46,7 +46,8 @@ public class DefaultInlineConstraintResolverTest
     {
         // Arrange, Act & Assert
         var ex = Assert.Throws<RouteCreationException>(() =>
-            _constraintResolver.ResolveConstraint("int(5)"));
+            _constraintResolver.ResolveConstraint("int(5)")
+        );
 
         Assert.Equal(
             "Could not find a constructor for constraint type 'IntRouteConstraint'"
@@ -291,7 +292,8 @@ public class DefaultInlineConstraintResolverTest
         // Arrange
         var routeOptions = new RouteOptions();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            routeOptions.SetParameterPolicy("custom", typeof(string)));
+            routeOptions.SetParameterPolicy("custom", typeof(string))
+        );
 
         Assert.Equal(
             "System.String must implement Microsoft.AspNetCore.Routing.IParameterPolicy",
@@ -341,7 +343,8 @@ public class DefaultInlineConstraintResolverTest
 
         // Act & Assert
         var ex = Assert.Throws<RouteCreationException>(() =>
-            resolver.ResolveConstraint("custom(5,6)"));
+            resolver.ResolveConstraint("custom(5,6)")
+        );
         Assert.Equal(
             "The constructor to use for activating the constraint type 'MultiConstructorRouteConstraint' is ambiguous."
                 + " Multiple constructors were found with the following number of parameters: 2.",
@@ -370,7 +373,8 @@ public class DefaultInlineConstraintResolverTest
         // Arrange
         // Act & Assert
         var ex = Assert.Throws<RouteCreationException>(() =>
-            _constraintResolver.ResolveConstraint("int(5,6)"));
+            _constraintResolver.ResolveConstraint("int(5,6)")
+        );
         Assert.Equal(
             "Could not find a constructor for constraint type 'IntRouteConstraint'"
                 + " with the following number of parameters: 2.",

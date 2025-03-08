@@ -64,7 +64,8 @@ public class ObjectMethodExecutorTest
         var parameter = new TestObject();
         Assert.False(executor.IsMethodAsync);
         Assert.Throws<NotImplementedException>(() =>
-            executor.Execute(_targetObject, new object[] { parameter }));
+            executor.Execute(_targetObject, new object[] { parameter })
+        );
     }
 
     [Fact]
@@ -104,7 +105,8 @@ public class ObjectMethodExecutorTest
         var parameter = new TestObject();
         Assert.True(executor.IsMethodAsync);
         await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await executor.ExecuteAsync(_targetObject, new object[] { parameter }));
+            await executor.ExecuteAsync(_targetObject, new object[] { parameter })
+        );
     }
 
     [Theory]
@@ -119,7 +121,8 @@ public class ObjectMethodExecutorTest
         var parameter = new TestObject();
         Assert.True(executor.IsMethodAsync);
         await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await executor.ExecuteAsync(_targetObject, new object[] { parameter }));
+            await executor.ExecuteAsync(_targetObject, new object[] { parameter })
+        );
     }
 
     [Fact]

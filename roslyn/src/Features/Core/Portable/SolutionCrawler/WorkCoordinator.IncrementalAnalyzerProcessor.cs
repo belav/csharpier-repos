@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             _registration,
                             analyzersGetter,
                             onlyHighPriorityAnalyzer: false
-                        ));
+                        )
+                    );
 
                     if (!initializeLazily)
                     {

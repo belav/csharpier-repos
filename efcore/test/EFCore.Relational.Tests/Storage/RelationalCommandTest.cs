@@ -672,7 +672,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             null,
                             null
-                        ))
+                        )
+                    )
                 ).Message
             );
         }
@@ -687,7 +688,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             null,
                             null
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -746,7 +748,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             parameterValues,
                             null
-                        ))
+                        )
+                    )
                 ).Message
             );
         }
@@ -761,7 +764,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             parameterValues,
                             null
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -1011,7 +1015,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             parameterValues,
                             null
-                        ))
+                        )
+                    )
                 ).Message
             );
         }
@@ -1026,7 +1031,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             parameterValues,
                             null
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -1075,7 +1081,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             parameterValues,
                             null
-                        ))
+                        )
+                    )
                 ).Message
             );
         }
@@ -1090,7 +1097,8 @@ public class RelationalCommandTest
                             relationalCommand,
                             parameterValues,
                             null
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -1133,17 +1141,14 @@ public class RelationalCommandTest
         if (async)
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    null,
-                    null
-                ));
+                await ((CommandFunc)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            );
         }
         else
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null));
+                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            );
         }
 
         Assert.Equal(1, fakeDbConnection.DbCommands[0].DisposeCount);
@@ -1171,14 +1176,16 @@ public class RelationalCommandTest
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                 await relationalCommand.ExecuteReaderAsync(
                     new RelationalCommandParameterObject(fakeConnection, null, null, null, null)
-                ));
+                )
+            );
         }
         else
         {
             Assert.Throws<InvalidOperationException>(() =>
                 relationalCommand.ExecuteReader(
                     new RelationalCommandParameterObject(fakeConnection, null, null, null, null)
-                ));
+                )
+            );
         }
 
         Assert.Equal(1, fakeDbConnection.DbCommands[0].DisposeCount);
@@ -1258,19 +1265,16 @@ public class RelationalCommandTest
         if (async)
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    null,
-                    null
-                ));
+                await ((CommandFunc)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            );
 
             Assert.Equal(1, fakeDbConnection.OpenAsyncCount);
         }
         else
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null));
+                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            );
 
             Assert.Equal(1, fakeDbConnection.OpenCount);
         }
@@ -1315,19 +1319,16 @@ public class RelationalCommandTest
         if (async)
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await ((CommandFunc)commandDelegate)(
-                    fakeConnection,
-                    relationalCommand,
-                    null,
-                    null
-                ));
+                await ((CommandFunc)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            );
 
             Assert.Equal(1, fakeDbConnection.OpenAsyncCount);
         }
         else
         {
             Assert.Throws<InvalidOperationException>(() =>
-                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null));
+                ((CommandAction)commandDelegate)(fakeConnection, relationalCommand, null, null)
+            );
 
             Assert.Equal(1, fakeDbConnection.OpenCount);
         }
@@ -1641,7 +1642,8 @@ public class RelationalCommandTest
                     relationalCommand,
                     parameterValues,
                     logger
-                ));
+                )
+            );
         }
         else
         {
@@ -1651,7 +1653,8 @@ public class RelationalCommandTest
                     relationalCommand,
                     parameterValues,
                     logger
-                ));
+                )
+            );
         }
 
         Assert.Equal(5, diagnostic.Count);
@@ -1739,7 +1742,8 @@ public class RelationalCommandTest
                     relationalCommand,
                     parameterValues,
                     logger
-                ));
+                )
+            );
         }
         else
         {
@@ -1749,7 +1753,8 @@ public class RelationalCommandTest
                     relationalCommand,
                     parameterValues,
                     logger
-                ));
+                )
+            );
         }
 
         Assert.Equal(5, diagnostic.Count);

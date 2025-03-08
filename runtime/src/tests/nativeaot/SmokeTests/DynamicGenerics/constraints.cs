@@ -75,11 +75,14 @@ public class ConstraintsTests
     public static unsafe void TestInvalidInstantiations()
     {
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithNoConstraint.MakeGenericType(typeof(Object), typeof(Object)));
+            TypeOf.CT_TypeWithNoConstraint.MakeGenericType(typeof(Object), typeof(Object))
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithNoConstraint.MakeGenericType(typeof(void)));
+            TypeOf.CT_TypeWithNoConstraint.MakeGenericType(typeof(void))
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithNoConstraint.MakeGenericType(typeof(int*)));
+            TypeOf.CT_TypeWithNoConstraint.MakeGenericType(typeof(int*))
+        );
     }
 
     [TestMethod]
@@ -92,13 +95,17 @@ public class ConstraintsTests
 
         // These should throw
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithClassConstraint.MakeGenericType(typeof(int)));
+            TypeOf.CT_TypeWithClassConstraint.MakeGenericType(typeof(int))
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithNewConstraint.MakeGenericType(typeof(TypeWithPrivateCtor)));
+            TypeOf.CT_TypeWithNewConstraint.MakeGenericType(typeof(TypeWithPrivateCtor))
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithStructConstraint.MakeGenericType(typeof(Base)));
+            TypeOf.CT_TypeWithStructConstraint.MakeGenericType(typeof(Base))
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithStructConstraint.MakeGenericType(typeof(int?)));
+            TypeOf.CT_TypeWithStructConstraint.MakeGenericType(typeof(int?))
+        );
     }
 
     [TestMethod]
@@ -140,38 +147,43 @@ public class ConstraintsTests
 
         // These should throw
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithSelfReferenceConstraint.MakeGenericType(
-                typeof(Base),
-                typeof(Derived)
-            ));
+            TypeOf.CT_TypeWithSelfReferenceConstraint.MakeGenericType(typeof(Base), typeof(Derived))
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithVariance.MakeGenericType(typeof(IBar<Derived>), typeof(Base)));
+            TypeOf.CT_TypeWithVariance.MakeGenericType(typeof(IBar<Derived>), typeof(Base))
+        );
         Assert.Throws<ArgumentException>(() =>
             TypeOf.CT_TypeWithVariance.MakeGenericType(
                 typeof(TypeImplementingIBar<Derived>),
                 typeof(Base)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             TypeOf.CT_TypeWithVariance.MakeGenericType(
                 typeof(TypeImplementingIBarDerived),
                 typeof(Base)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(
                 typeof(TypeWithNoConstraint<Derived>),
                 typeof(Base)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
             TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(
                 typeof(TypeWithNoConstraint<Base>),
                 typeof(Derived)
-            ));
+            )
+        );
         Assert.Throws<ArgumentException>(() =>
-            TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(typeof(Base), typeof(Base)));
+            TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(typeof(Base), typeof(Base))
+        );
         Assert.Throws<ArgumentException>(() =>
             TypeOf.CT_TypeWithSelfReferenceIEnumerableConstraint.MakeGenericType(
                 typeof(UInt32[]),
                 typeof(Int16)
-            ));
+            )
+        );
     }
 }

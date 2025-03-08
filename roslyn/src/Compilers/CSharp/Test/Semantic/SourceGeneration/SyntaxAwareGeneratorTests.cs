@@ -539,7 +539,8 @@ class C
                                 if (a is AssignmentExpressionSyntax)
                                     throw exception;
                             }
-                        )),
+                        )
+                    ),
                 onExecute: (e) =>
                 {
                     e.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));
@@ -670,7 +671,8 @@ class C
                                 if (a is AssignmentExpressionSyntax)
                                     throw exception;
                             }
-                        )),
+                        )
+                    ),
                 onExecute: (e) => { }
             );
 
@@ -1082,7 +1084,8 @@ class D
                                     Assert.Same(dType, typeInfo.Type);
                                 }
                             }
-                        ));
+                        )
+                    );
                     i.RegisterForPostInitialization(
                         (pic) => pic.AddSource("postInit", postInitSource)
                     );
@@ -3031,7 +3034,8 @@ class C
                 parseOptions: parseOptions
             );
             Assert.Throws<OperationCanceledException>(() =>
-                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token));
+                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token)
+            );
             Assert.Equal(19, filterCalled);
         }
 
@@ -3087,7 +3091,8 @@ class C { }
                 parseOptions: parseOptions
             );
             Assert.Throws<OperationCanceledException>(() =>
-                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token));
+                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token)
+            );
             Assert.True(generatorCancelled);
         }
 
@@ -3131,7 +3136,8 @@ class C
                                     );
                                 }
                             }
-                        )),
+                        )
+                    ),
                 onExecute: (e) =>
                 {
                     e.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));

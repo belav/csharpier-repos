@@ -220,7 +220,8 @@ public unsafe class SecretTests
 
         // Act & assert
         Assert.Throws<ObjectDisposedException>(testCode: () =>
-            secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16])));
+            secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16]))
+        );
     }
 
     [Fact]

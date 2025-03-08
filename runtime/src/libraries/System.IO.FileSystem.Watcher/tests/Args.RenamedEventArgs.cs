@@ -164,7 +164,8 @@ namespace System.IO.Tests
         public static void RenamedEventArgs_ctor_Invalid()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new RenamedEventArgs((WatcherChangeTypes)0, null, "foo.txt", "bar.txt"));
+                new RenamedEventArgs((WatcherChangeTypes)0, null, "foo.txt", "bar.txt")
+            );
         }
     }
 }

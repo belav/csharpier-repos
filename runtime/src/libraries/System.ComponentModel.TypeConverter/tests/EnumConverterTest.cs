@@ -75,7 +75,8 @@ namespace System.ComponentModel.Tests
                     TypeConverterTests.s_context,
                     null,
                     "<random string>"
-                ));
+                )
+            );
         }
 
         [Fact]

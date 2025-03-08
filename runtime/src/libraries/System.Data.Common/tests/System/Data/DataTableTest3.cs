@@ -496,7 +496,8 @@ namespace System.Data.Tests
 
             using FileStream stream = new FileStream(_tempFile, FileMode.Create);
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                _parentTable.WriteXmlSchema(stream));
+                _parentTable.WriteXmlSchema(stream)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -632,7 +633,8 @@ namespace System.Data.Tests
             using (FileStream stream = new FileStream(_tempFile, FileMode.Open))
             {
                 ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                    table.ReadXmlSchema(stream));
+                    table.ReadXmlSchema(stream)
+                );
                 // DataTable 'Table1' does not match
                 // to any DataTable in source
                 Assert.Null(ex.InnerException);
@@ -651,7 +653,8 @@ namespace System.Data.Tests
             DataTable table = new DataTable();
 
             ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                table.ReadXmlSchema(string.Empty));
+                table.ReadXmlSchema(string.Empty)
+            );
             // The URL cannot be empty
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

@@ -8,9 +8,11 @@ namespace System.Net
     internal static partial class RawSocketPermissions
     {
         private static readonly Lazy<bool> s_canUseRawIPv4Sockets = new Lazy<bool>(() =>
-            CheckRawSocketPermissions(AddressFamily.InterNetwork));
+            CheckRawSocketPermissions(AddressFamily.InterNetwork)
+        );
         private static readonly Lazy<bool> s_canUseRawIPv6Sockets = new Lazy<bool>(() =>
-            CheckRawSocketPermissions(AddressFamily.InterNetworkV6));
+            CheckRawSocketPermissions(AddressFamily.InterNetworkV6)
+        );
 
         /// <summary>
         /// Returns whether or not the current user has the necessary permission to open raw sockets.

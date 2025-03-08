@@ -158,7 +158,8 @@ The .NET Foundation licenses this file to you under the MIT license.",
     {
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            Client.GetStringAsync("Home/RouteToSuppressLinkGeneration"));
+            Client.GetStringAsync("Home/RouteToSuppressLinkGeneration")
+        );
         Assert.Equal("No route matches the supplied values.", ex.Message);
     }
 

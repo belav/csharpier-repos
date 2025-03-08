@@ -13,11 +13,13 @@ namespace System.Reflection.Tests
         {
             Assert.False(typeof(byte[]).GetTypeInfo().HasMetadataToken());
             Assert.Throws<InvalidOperationException>(() =>
-                typeof(byte[]).GetTypeInfo().GetMetadataToken());
+                typeof(byte[]).GetTypeInfo().GetMetadataToken()
+            );
 
             Assert.False(typeof(byte[]).GetMethods()[0].HasMetadataToken());
             Assert.Throws<InvalidOperationException>(() =>
-                typeof(byte[]).GetTypeInfo().GetMetadataToken());
+                typeof(byte[]).GetTypeInfo().GetMetadataToken()
+            );
         }
 
         private class Test<T> { }

@@ -62,7 +62,8 @@ namespace System.Text.Encodings.Web
         public unsafe void TryEncodeUnicodeScalar_NegativeLengthBuffer()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                HtmlEncoder.Default.TryEncodeUnicodeScalar(2, null, -1, out int _));
+                HtmlEncoder.Default.TryEncodeUnicodeScalar(2, null, -1, out int _)
+            );
         }
 
         [Fact]

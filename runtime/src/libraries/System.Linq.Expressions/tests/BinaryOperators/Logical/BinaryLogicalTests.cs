@@ -450,18 +450,22 @@ namespace System.Linq.Expressions.Tests
         public static void AndAlso_BinaryOperatorNotDefined_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello")));
+                Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"), null));
+                Expression.AndAlso(Expression.Constant(5), Expression.Constant("hello"), null)
+            );
         }
 
         [Fact]
         public static void OrElse_BinaryOperatorNotDefined_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant("hello")));
+                Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"), null));
+                Expression.OrElse(Expression.Constant(5), Expression.Constant("hello"), null)
+            );
         }
 
         public static IEnumerable<object[]> InvalidMethod_TestData()
@@ -518,9 +522,11 @@ namespace System.Linq.Expressions.Tests
                 nameof(NonGenericClass.StaticIntMethod2Valid)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method));
+                Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method));
+                Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
+            );
         }
 
         [Fact]
@@ -530,9 +536,11 @@ namespace System.Linq.Expressions.Tests
                 nameof(NonGenericClass.StaticIntMethod2Valid)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method));
+                Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method));
+                Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
+            );
         }
 
         [Fact]
@@ -602,7 +610,8 @@ namespace System.Linq.Expressions.Tests
             object obj = Activator.CreateInstance(createdType);
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj)));
+                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
+            );
         }
 
         [ConditionalFact(
@@ -624,7 +633,8 @@ namespace System.Linq.Expressions.Tests
             object obj = Activator.CreateInstance(createdType);
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj)));
+                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
+            );
         }
 
         [ConditionalFact(
@@ -699,7 +709,8 @@ namespace System.Linq.Expressions.Tests
             object obj = Activator.CreateInstance(createdType);
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj)));
+                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
+            );
         }
 
         [ConditionalTheory(
@@ -726,7 +737,8 @@ namespace System.Linq.Expressions.Tests
             object obj = Activator.CreateInstance(createdType);
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj)));
+                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
+            );
         }
 
         [ConditionalFact(
@@ -748,7 +760,8 @@ namespace System.Linq.Expressions.Tests
             object obj = Activator.CreateInstance(createdType);
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj)));
+                Expression.AndAlso(Expression.Constant(obj), Expression.Constant(obj))
+            );
         }
 
         [ConditionalFact(
@@ -770,7 +783,8 @@ namespace System.Linq.Expressions.Tests
             object obj = Activator.CreateInstance(createdType);
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj)));
+                Expression.OrElse(Expression.Constant(obj), Expression.Constant(obj))
+            );
         }
 
         [ConditionalFact(
@@ -1223,9 +1237,11 @@ namespace System.Linq.Expressions.Tests
             MethodInfo createdMethod = createdType.GetMethod("Method");
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.AndAlso(Expression.Constant(5), Expression.Constant(5), createdMethod));
+                Expression.AndAlso(Expression.Constant(5), Expression.Constant(5), createdMethod)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant(5), createdMethod));
+                Expression.OrElse(Expression.Constant(5), Expression.Constant(5), createdMethod)
+            );
         }
 
         [ConditionalFact(
@@ -1262,7 +1278,8 @@ namespace System.Linq.Expressions.Tests
 
             TypeInfo createdType = builder.CreateTypeInfo();
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant(5)));
+                Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
+            );
         }
 
         [ConditionalFact(
@@ -1299,7 +1316,8 @@ namespace System.Linq.Expressions.Tests
 
             TypeInfo createdType = builder.CreateTypeInfo();
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.OrElse(Expression.Constant(5), Expression.Constant(5)));
+                Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
+            );
         }
 
         [Fact]

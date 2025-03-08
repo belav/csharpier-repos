@@ -623,7 +623,8 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
                         "Result",
                         new object[] { "test" },
                         cancellationToken: default
-                    ))
+                    )
+                )
                 .DefaultTimeout();
         }
     }
@@ -741,7 +742,8 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
                     "Result",
                     new object[] { "test" },
                     cancellationToken: default
-                ))
+                )
+            )
             .DefaultTimeout();
         Assert.Equal("Connection '1234' does not exist.", ex.Message);
     }

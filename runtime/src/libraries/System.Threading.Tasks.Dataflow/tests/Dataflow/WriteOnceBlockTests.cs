@@ -50,7 +50,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() => new WriteOnceBlock<int>(i => i, null));
             DataflowTestHelpers.TestArgumentsExceptions(new WriteOnceBlock<int>(i => i));
             Assert.Throws<ArgumentNullException>(() =>
-                ((ITargetBlock<int>)new WriteOnceBlock<int>(null)).Fault(null));
+                ((ITargetBlock<int>)new WriteOnceBlock<int>(null)).Fault(null)
+            );
         }
 
         [Fact]

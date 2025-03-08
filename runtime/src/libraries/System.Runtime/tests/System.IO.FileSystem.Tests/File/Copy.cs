@@ -59,12 +59,14 @@ namespace System.IO.Tests
                 Copy(
                     testFile.FullName,
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
-                ));
+                )
+            );
             Assert.Throws<DirectoryNotFoundException>(() =>
                 Copy(
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
                     testFile.FullName
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -256,7 +258,8 @@ namespace System.IO.Tests
             // This always throws as you can't copy an alternate stream out (oddly)
             Assert.Throws<IOException>(() => Copy(testFileAlternateStream, testFile2));
             Assert.Throws<IOException>(() =>
-                Copy(testFileAlternateStream, testFile2 + alternateStream));
+                Copy(testFileAlternateStream, testFile2 + alternateStream)
+            );
         }
 
         [Theory]
@@ -390,9 +393,11 @@ namespace System.IO.Tests
 
             // This always throws as you can't copy an alternate stream out (oddly)
             Assert.Throws<IOException>(() =>
-                Copy(testFileAlternateStream, testFile2, overwrite: true));
+                Copy(testFileAlternateStream, testFile2, overwrite: true)
+            );
             Assert.Throws<IOException>(() =>
-                Copy(testFileAlternateStream, testFile2 + alternateStream, overwrite: true));
+                Copy(testFileAlternateStream, testFile2 + alternateStream, overwrite: true)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsFileLockingEnabled))]
@@ -411,8 +416,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                Assert.Throws<IOException>(() =>
-                    Copy(testFileSource, testFileDest, overwrite: true));
+                Assert.Throws<IOException>(() => Copy(testFileSource, testFileDest, overwrite: true)
+                );
             }
         }
 

@@ -73,7 +73,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 ignore = new CmsRecipientCollection(
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     null
-                ));
+                )
+            );
         }
 
         [Fact]

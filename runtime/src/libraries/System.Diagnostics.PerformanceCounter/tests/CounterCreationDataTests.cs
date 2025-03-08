@@ -34,7 +34,8 @@ namespace System.Diagnostics.Tests
                 PerformanceCounterType.RawBase
             );
             Assert.Throws<InvalidEnumArgumentException>(() =>
-                ccd.CounterType = (PerformanceCounterType)int.MaxValue);
+                ccd.CounterType = (PerformanceCounterType)int.MaxValue
+            );
         }
     }
 }

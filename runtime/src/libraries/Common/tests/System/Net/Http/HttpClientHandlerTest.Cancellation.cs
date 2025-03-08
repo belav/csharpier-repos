@@ -538,9 +538,11 @@ namespace System.Net.Http.Functional.Tests
 
                         var cts = new CancellationTokenSource();
                         Task get2 = ValidateClientCancellationAsync(() =>
-                            client.GetAsync(url, cts.Token));
+                            client.GetAsync(url, cts.Token)
+                        );
                         Task get3 = ValidateClientCancellationAsync(() =>
-                            client.GetAsync(url, cts.Token));
+                            client.GetAsync(url, cts.Token)
+                        );
 
                         Task get4 = client.GetAsync(url);
 

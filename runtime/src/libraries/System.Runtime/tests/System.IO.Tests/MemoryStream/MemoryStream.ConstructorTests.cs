@@ -13,7 +13,8 @@ namespace System.IO.Tests
         public static void MemoryStream_Ctor_NegativeIndices(int arraySize, int index, int count)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new MemoryStream(new byte[arraySize], index, count));
+                new MemoryStream(new byte[arraySize], index, count)
+            );
         }
 
         [Theory]

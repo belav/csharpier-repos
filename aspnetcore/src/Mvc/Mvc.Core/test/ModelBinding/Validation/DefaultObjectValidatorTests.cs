@@ -1364,7 +1364,8 @@ public class DefaultObjectValidatorTests
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            validator.Validate(actionContext, validationState, prefix: string.Empty, model));
+            validator.Validate(actionContext, validationState, prefix: string.Empty, model)
+        );
         Assert.Equal(expected, ex.Message);
         Assert.Equal("https://aka.ms/AA21ue1", ex.HelpLink);
     }

@@ -49,7 +49,8 @@ namespace System.Net.Security.Tests
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                     SslProtocolSupport.DefaultSslProtocols,
                     SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12
-                ));
+                )
+            );
 #pragma warning restore SYSLIB0039
         }
 
@@ -71,7 +72,8 @@ namespace System.Net.Security.Tests
         )
         {
             Exception e = await Record.ExceptionAsync(() =>
-                ClientAsyncSslHelper(clientProtocol, serverProtocol));
+                ClientAsyncSslHelper(clientProtocol, serverProtocol)
+            );
             Assert.NotNull(e);
             Assert.IsAssignableFrom(expectedException, e);
         }

@@ -111,7 +111,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new RegularExpressionAttribute(pattern);
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("Any", new ValidationContext(new object())));
+                attribute.Validate("Any", new ValidationContext(new object()))
+            );
         }
 
         [Theory]
@@ -142,7 +143,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 attribute.Validate(
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaa>",
                     new ValidationContext(new object())
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -150,7 +152,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             RegularExpressionAttribute attribute = new RegularExpressionAttribute("foo(?<1bar)");
             Assert.ThrowsAny<ArgumentException>(() =>
-                attribute.Validate("Any", new ValidationContext(new object())));
+                attribute.Validate("Any", new ValidationContext(new object()))
+            );
         }
 
         public class ClassWithValidToString

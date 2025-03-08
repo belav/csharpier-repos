@@ -100,7 +100,8 @@ public class OptionsValidationTests
 
         var modelValidator = new CustomValidationAttributeModelValidator();
         Assert.Throws<ValidationException>(() =>
-            modelValidator.Validate(nameof(validModel), validModel));
+            modelValidator.Validate(nameof(validModel), validModel)
+        );
     }
 
     [Fact]
@@ -262,7 +263,8 @@ public class OptionsValidationTests
 
         var modelValidator = new CustomTypeCustomValidationAttributeModelValidator();
         Assert.Throws<ValidationException>(() =>
-            modelValidator.Validate(nameof(validModel), validModel));
+            modelValidator.Validate(nameof(validModel), validModel)
+        );
     }
 
     [Fact]

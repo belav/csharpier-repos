@@ -273,7 +273,8 @@ namespace System.Collections.Tests
         {
             Type proxyType = DebuggerAttributes.GetProxyType(obj);
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
     }

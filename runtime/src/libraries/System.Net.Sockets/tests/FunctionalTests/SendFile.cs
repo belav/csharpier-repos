@@ -29,7 +29,8 @@ namespace System.Net.Sockets.Tests
             s.Dispose();
             await Assert.ThrowsAsync<ObjectDisposedException>(() => SendFileAsync(s, null));
             await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread));
+                SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread)
+            );
         }
 
         [Fact]
@@ -43,7 +44,8 @@ namespace System.Net.Sockets.Tests
 
             await Assert.ThrowsAsync<NotSupportedException>(() => SendFileAsync(s, null));
             await Assert.ThrowsAsync<NotSupportedException>(() =>
-                SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread));
+                SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread)
+            );
         }
 
         [Theory]
@@ -60,7 +62,8 @@ namespace System.Net.Sockets.Tests
                 if (!useOverloadWithBuffers)
                 {
                     await Assert.ThrowsAsync<FileNotFoundException>(() =>
-                        SendFileAsync(client, doesNotExist));
+                        SendFileAsync(client, doesNotExist)
+                    );
                 }
                 else
                 {
@@ -71,7 +74,8 @@ namespace System.Net.Sockets.Tests
                             null,
                             null,
                             TransmitFileOptions.UseDefaultWorkerThread
-                        ));
+                        )
+                    );
                 }
             }
         }
@@ -116,12 +120,14 @@ namespace System.Net.Sockets.Tests
                         Array.Empty<byte>(),
                         Array.Empty<byte>(),
                         TransmitFileOptions.UseDefaultWorkerThread
-                    ));
+                    )
+                );
             }
             else
             {
                 await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    SendFileAsync(client, tempFile.Path));
+                    SendFileAsync(client, tempFile.Path)
+                );
             }
         }
 
@@ -549,7 +555,8 @@ namespace System.Net.Sockets.Tests
                             ReadOnlyMemory<byte>.Empty,
                             TransmitFileOptions.UseDefaultWorkerThread,
                             cts.Token
-                        ));
+                        )
+                    );
                 }
             }
         }
@@ -620,7 +627,8 @@ namespace System.Net.Sockets.Tests
                     TransmitFileOptions.UseDefaultWorkerThread,
                     null,
                     null
-                ));
+                )
+            );
         }
 
         [Fact]

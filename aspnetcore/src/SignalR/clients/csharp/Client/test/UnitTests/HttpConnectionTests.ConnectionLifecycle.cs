@@ -76,7 +76,8 @@ public partial class HttpConnectionTests
                         await connection.DisposeAsync().DefaultTimeout();
                         var exception = await Assert
                             .ThrowsAsync<ObjectDisposedException>(async () =>
-                                await connection.StartAsync())
+                                await connection.StartAsync()
+                            )
                             .DefaultTimeout();
 
                         Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
@@ -353,7 +354,8 @@ public partial class HttpConnectionTests
                             .DefaultTimeout();
 
                         await Assert.ThrowsAsync<HttpRequestException>(async () =>
-                            await connection.Transport.Input.ReadAsync());
+                            await connection.Transport.Input.ReadAsync()
+                        );
                     }
                 );
             }
@@ -392,7 +394,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         await Assert.ThrowsAsync<AggregateException>(() =>
-                            connection.StartAsync().DefaultTimeout());
+                            connection.StartAsync().DefaultTimeout()
+                        );
                     }
                 );
             }
@@ -509,7 +512,8 @@ public partial class HttpConnectionTests
                         // be an inner exception.
                         var ex = await Assert
                             .ThrowsAsync<AggregateException>(async () =>
-                                await connection.StartAsync(cts.Token))
+                                await connection.StartAsync(cts.Token)
+                            )
                             .DefaultTimeout();
                         Assert.Equal(3, ex.InnerExceptions.Count);
                         var innerEx = ex.InnerExceptions[2];
@@ -541,7 +545,8 @@ public partial class HttpConnectionTests
                     {
                         await Assert
                             .ThrowsAsync<TaskCanceledException>(async () =>
-                                await connection.StartAsync(new CancellationToken(canceled: true)))
+                                await connection.StartAsync(new CancellationToken(canceled: true))
+                            )
                             .DefaultTimeout();
                     }
                 );
@@ -587,7 +592,8 @@ public partial class HttpConnectionTests
                     {
                         var ex = await Assert
                             .ThrowsAsync<AggregateException>(async () =>
-                                await connection.StartAsync())
+                                await connection.StartAsync()
+                            )
                             .DefaultTimeout();
                     }
                 );
@@ -625,7 +631,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         var ex = await Assert.ThrowsAsync<AggregateException>(async () =>
-                            await connection.StartAsync(cts.Token).DefaultTimeout());
+                            await connection.StartAsync(cts.Token).DefaultTimeout()
+                        );
                     }
                 );
             }
@@ -634,7 +641,8 @@ public partial class HttpConnectionTests
         private static async Task AssertDisposedAsync(HttpConnection connection)
         {
             var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                connection.StartAsync());
+                connection.StartAsync()
+            );
             Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
         }
     }

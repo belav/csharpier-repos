@@ -32,7 +32,8 @@ public class ServerTransportsTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                ));
+                )
+        );
 
         AssertLogContainsMessages(
             "Starting up Blazor server-side application.",
@@ -57,7 +58,8 @@ public class ServerTransportsTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                ));
+                )
+        );
 
         AssertLogContainsMessages(
             "Information: Starting up Blazor server-side application.",
@@ -81,7 +83,8 @@ public class ServerTransportsTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                ));
+                )
+        );
 
         AssertLogContainsMessages(
             "Information: Starting up Blazor server-side application.",
@@ -105,7 +108,8 @@ public class ServerTransportsTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                ));
+                )
+        );
 
         AssertLogContainsMessages(
             "Information: Starting up Blazor server-side application.",
@@ -130,7 +134,8 @@ public class ServerTransportsTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                ));
+                )
+        );
 
         AssertLogContainsMessages(
             "Starting up Blazor server-side application.",
@@ -154,7 +159,8 @@ public class ServerTransportsTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                ));
+                )
+        );
 
         AssertLogContainsMessages(
             "Starting up Blazor server-side application.",

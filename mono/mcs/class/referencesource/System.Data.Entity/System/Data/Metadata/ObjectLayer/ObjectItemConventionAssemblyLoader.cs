@@ -234,7 +234,8 @@ namespace System.Data.Metadata.Edm
                         ospaceType.BaseType = ResolveBaseType(
                             (StructuralType)cspaceType.BaseType,
                             type
-                        ));
+                        )
+                    );
                 }
                 else
                 {
@@ -579,7 +580,8 @@ namespace System.Data.Metadata.Edm
                 var cp = typeToTrack.Key;
                 var clrp = typeToTrack.Value;
                 referenceResolutionListForCurrentType.Add(() =>
-                    CreateAndAddComplexType(type, ot, cp, clrp));
+                    CreateAndAddComplexType(type, ot, cp, clrp)
+                );
             }
 
             return true;
@@ -639,7 +641,8 @@ namespace System.Data.Metadata.Edm
                 var clrp = typeToTrack.Value;
 
                 referenceResolutionListForCurrentType.Add(() =>
-                    CreateAndAddNavigationProperty(ct, ot, cp, clrp));
+                    CreateAndAddNavigationProperty(ct, ot, cp, clrp)
+                );
             }
 
             return true;
@@ -916,7 +919,8 @@ namespace System.Data.Metadata.Edm
                 var cp = typeToTrack.Key;
                 var clrp = typeToTrack.Value;
                 referenceResolutionListForCurrentType.Add(() =>
-                    CreateAndAddEnumProperty(type, ot, cp, clrp));
+                    CreateAndAddEnumProperty(type, ot, cp, clrp)
+                );
             }
 
             return true;

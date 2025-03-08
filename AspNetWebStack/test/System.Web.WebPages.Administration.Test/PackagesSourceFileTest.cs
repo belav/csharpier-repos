@@ -130,7 +130,8 @@ namespace System.Web.WebPages.Administration.Test
 
             // Act
             var result = PackageSourceFile.ReadFeeds(() =>
-                new MemoryStream(Encoding.Default.GetBytes(xml)));
+                new MemoryStream(Encoding.Default.GetBytes(xml))
+            );
 
             // Assert
             Assert.Equal(2, result.Count());

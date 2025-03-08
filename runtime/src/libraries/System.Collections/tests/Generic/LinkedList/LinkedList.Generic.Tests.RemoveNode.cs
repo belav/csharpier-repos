@@ -283,7 +283,8 @@ namespace System.Collections.Tests
             items = new T[] { CreateT(seed++) };
             linkedList.AddLast(items[0]);
             Assert.Throws<InvalidOperationException>(() =>
-                linkedList.Remove(new LinkedListNode<T>(CreateT(seed++)))); //"Err_0568ajods Expected Node that is a new Node throws InvalidOperationException\n"
+                linkedList.Remove(new LinkedListNode<T>(CreateT(seed++)))
+            ); //"Err_0568ajods Expected Node that is a new Node throws InvalidOperationException\n"
 
             InitialItems_Tests(linkedList, items);
 

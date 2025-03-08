@@ -19,7 +19,8 @@ namespace System.IO.Pipelines.Tests
             var pipe = new Pipe();
             MemoryStream stream = null;
             var ex = await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                stream.CopyToAsync(pipe.Writer));
+                stream.CopyToAsync(pipe.Writer)
+            );
             Assert.Equal("source", ex.ParamName);
         }
 
@@ -27,8 +28,8 @@ namespace System.IO.Pipelines.Tests
         public async Task CopyToAsyncThrowsArgumentNullExceptionForNullDestination()
         {
             var stream = new MemoryStream();
-            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                stream.CopyToAsync(null));
+            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => stream.CopyToAsync(null)
+            );
             Assert.Equal("destination", ex.ParamName);
         }
 
@@ -37,7 +38,8 @@ namespace System.IO.Pipelines.Tests
         {
             var pipe = new Pipe();
             await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                new MemoryStream().CopyToAsync(pipe.Writer, new CancellationToken(true)));
+                new MemoryStream().CopyToAsync(pipe.Writer, new CancellationToken(true))
+            );
         }
 
         [Fact]

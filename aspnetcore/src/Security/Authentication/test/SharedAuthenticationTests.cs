@@ -85,7 +85,8 @@ public abstract class SharedAuthenticationTests<TOptions>
         else
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                context.SignInAsync(new ClaimsPrincipal()));
+                context.SignInAsync(new ClaimsPrincipal())
+            );
         }
     }
 
@@ -410,7 +411,8 @@ public abstract class SharedAuthenticationTests<TOptions>
         else
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                context.SignInAsync(new ClaimsPrincipal()));
+                context.SignInAsync(new ClaimsPrincipal())
+            );
         }
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);
@@ -483,7 +485,8 @@ public abstract class SharedAuthenticationTests<TOptions>
         else
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                context.SignInAsync(new ClaimsPrincipal()));
+                context.SignInAsync(new ClaimsPrincipal())
+            );
         }
 
         Assert.Equal(0, selector.AuthenticateCount);
@@ -561,7 +564,8 @@ public abstract class SharedAuthenticationTests<TOptions>
         else
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                context.SignInAsync(new ClaimsPrincipal()));
+                context.SignInAsync(new ClaimsPrincipal())
+            );
         }
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);

@@ -121,7 +121,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                 RelationalStrings.TableNotMappedEntityType(nameof(Order), "Order"),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.Table("Order")))
+                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.Table("Order"))
+                    )
                     .Message
             );
 
@@ -228,7 +229,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                 RelationalStrings.TableNotMappedEntityType(nameof(Order), "Order"),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.View("Order")))
+                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.View("Order"))
+                    )
                     .Message
             );
 
@@ -261,7 +263,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedParameter().HasRowsAffectedReturnValue()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -281,7 +284,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedResultColumn().HasRowsAffectedReturnValue()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -299,7 +303,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedReturnValue().HasRowsAffectedParameter()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -319,7 +324,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedReturnValue().HasRowsAffectedResultColumn()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -339,7 +345,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedParameter().HasRowsAffectedResultColumn()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -377,7 +384,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedResultColumn().HasRowsAffectedParameter()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -472,7 +480,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        param.Direction = ParameterDirection.Input)
+                        param.Direction = ParameterDirection.Input
+                    )
                     .Message
             );
         }
@@ -614,7 +623,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                 RelationalStrings.TableNotMappedEntityType(nameof(Order), "Order"),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.Table("Order")))
+                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.Table("Order"))
+                    )
                     .Message
             );
 
@@ -721,7 +731,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                 RelationalStrings.TableNotMappedEntityType(nameof(Order), "Order"),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.View("Order")))
+                        entity.IsTableExcludedFromMigrations(StoreObjectIdentifier.View("Order"))
+                    )
                     .Message
             );
 
@@ -754,7 +765,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedParameter().HasRowsAffectedReturnValue()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -774,7 +786,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedResultColumn().HasRowsAffectedReturnValue()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -812,7 +825,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                             .Entity<BookLabel>()
                             .UpdateUsingStoredProcedure(s =>
                                 s.HasRowsAffectedResultColumn().HasRowsAffectedParameter()
-                            ))
+                            )
+                    )
                     .Message
             );
         }
@@ -907,7 +921,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        param.Direction = ParameterDirection.Input)
+                        param.Direction = ParameterDirection.Input
+                    )
                     .Message
             );
         }

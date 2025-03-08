@@ -915,7 +915,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 }
             ",
                     cancellationToken: new CancellationToken(true)
-                ));
+                )
+            );
         }
 
         [Fact]

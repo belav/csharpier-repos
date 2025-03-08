@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         )
         {
             return _threadingContext.JoinableTaskFactory.Run(() =>
-                StartInlineSessionAsync(document, textSpan, cancellationToken));
+                StartInlineSessionAsync(document, textSpan, cancellationToken)
+            );
         }
 
         public async Task<InlineRenameSessionInfo> StartInlineSessionAsync(

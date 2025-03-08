@@ -50,7 +50,8 @@ namespace System.Web.WebPages
             _applicationPartResources = new Lazy<IDictionary<string, string>>(() =>
                 Assembly
                     .GetManifestResourceNames()
-                    .ToDictionary(key => key, key => key, StringComparer.OrdinalIgnoreCase));
+                    .ToDictionary(key => key, key => key, StringComparer.OrdinalIgnoreCase)
+            );
             _applicationPartName = new Lazy<string>(() => Assembly.Name);
         }
 

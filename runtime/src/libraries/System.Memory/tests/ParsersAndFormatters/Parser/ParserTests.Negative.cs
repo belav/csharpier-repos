@@ -18,7 +18,8 @@ namespace System.Buffers.Text.Tests
                     out object value,
                     out int bytesConsumed,
                     '$'
-                ));
+                )
+            );
         }
     }
 }

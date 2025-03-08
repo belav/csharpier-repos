@@ -118,11 +118,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             Assert.Throws<IOException>(() => EmbeddedText.FromStream("path", new HugeStream()));
             Assert.Throws<EndOfStreamException>(() =>
-                EmbeddedText.FromStream("path", new TruncatingStream(10)));
+                EmbeddedText.FromStream("path", new TruncatingStream(10))
+            );
             Assert.Throws<EndOfStreamException>(() =>
-                EmbeddedText.FromStream("path", new TruncatingStream(1000)));
-            Assert.Throws<IOException>(() =>
-                EmbeddedText.FromStream("path", new ReadFailsStream()));
+                EmbeddedText.FromStream("path", new TruncatingStream(1000))
+            );
+            Assert.Throws<IOException>(() => EmbeddedText.FromStream("path", new ReadFailsStream())
+            );
         }
 
         private const string SmallSource = @"class P {}";

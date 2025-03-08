@@ -105,7 +105,8 @@ namespace System.Security.Cryptography
                     iterations: 1,
                     new HashAlgorithmName("BLAH"),
                     s_extractLength
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -239,7 +240,8 @@ namespace System.Security.Cryptography
                     iterations: 1,
                     new HashAlgorithmName("BLAH"),
                     s_extractLength
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -295,7 +297,8 @@ namespace System.Security.Cryptography
                     iterations: 1,
                     HashAlgorithmName.SHA256,
                     s_extractLength
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -516,7 +519,8 @@ namespace System.Security.Cryptography
                     iterations: 1,
                     hashAlgorithmName,
                     s_extractLength
-                ));
+                )
+            );
         }
 
         public static IEnumerable<object[]> Pbkdf2_PasswordBytes_Compare_Data()

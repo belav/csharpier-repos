@@ -152,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var editorBrowsableInfo = new Lazy<EditorBrowsableInfo>(() =>
-                    new EditorBrowsableInfo(originCompilation));
+                    new EditorBrowsableInfo(originCompilation)
+                );
                 foreach (
                     var peReference in currentProject.MetadataReferences.OfType<PortableExecutableReference>()
                 )

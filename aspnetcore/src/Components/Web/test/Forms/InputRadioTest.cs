@@ -21,7 +21,8 @@ public class InputRadioTest
         };
 
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            RenderAndGetTestInputComponentAsync(rootComponent));
+            RenderAndGetTestInputComponentAsync(rootComponent)
+        );
         Assert.Contains($"must have an ancestor", ex.Message);
     }
 

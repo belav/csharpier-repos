@@ -17,23 +17,26 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Aggregate((x, y) => x));
+                operation.Item(DefaultStart, DefaultSize, source.Item).Aggregate((x, y) => x)
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                operation.Item(DefaultStart, DefaultSize, source.Item).Aggregate(0, (x, y) => x + y)
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .Aggregate(0, (x, y) => x + y));
+                    .Aggregate(0, (x, y) => x + y, r => r)
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .Aggregate(0, (x, y) => x + y, r => r));
+                    .Aggregate(0, (a, x) => a + x, (l, r) => l + r, r => r)
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .Aggregate(0, (a, x) => a + x, (l, r) => l + r, r => r));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation
-                    .Item(DefaultStart, DefaultSize, source.Item)
-                    .Aggregate(() => 0, (a, x) => a + x, (l, r) => l + r, r => r));
+                    .Aggregate(() => 0, (a, x) => a + x, (l, r) => l + r, r => r)
+            );
         }
 
         [Theory]
@@ -45,7 +48,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).All(x => true));
+                operation.Item(DefaultStart, DefaultSize, source.Item).All(x => true)
+            );
         }
 
         [Theory]
@@ -57,7 +61,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Any(x => false));
+                operation.Item(DefaultStart, DefaultSize, source.Item).Any(x => false)
+            );
         }
 
         [Theory]
@@ -69,7 +74,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Average());
+                operation.Item(DefaultStart, DefaultSize, source.Item).Average()
+            );
         }
 
         [Theory]
@@ -83,7 +89,8 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .Contains(DefaultStart + DefaultSize));
+                    .Contains(DefaultStart + DefaultSize)
+            );
         }
 
         [Theory]
@@ -95,9 +102,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Count());
+                operation.Item(DefaultStart, DefaultSize, source.Item).Count()
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Count(x => true));
+                operation.Item(DefaultStart, DefaultSize, source.Item).Count(x => true)
+            );
         }
 
         [Theory]
@@ -110,7 +119,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ElementAt(DefaultSize - 1));
+                operation.Item(DefaultStart, DefaultSize, source.Item).ElementAt(DefaultSize - 1)
+            );
         }
 
         [Theory]
@@ -125,11 +135,13 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .ElementAtOrDefault(DefaultSize - 1));
+                    .ElementAtOrDefault(DefaultSize - 1)
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .ElementAtOrDefault(DefaultSize + 1));
+                    .ElementAtOrDefault(DefaultSize + 1)
+            );
         }
 
         [Theory]
@@ -141,7 +153,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).First(x => false));
+                operation.Item(DefaultStart, DefaultSize, source.Item).First(x => false)
+            );
         }
 
         [Theory]
@@ -177,11 +190,13 @@ namespace System.Linq.Parallel.Tests
             else
             {
                 AssertThrows.Wrapped<DeliberateTestException>(() =>
-                    operation.Item(DefaultStart, DefaultSize, source.Item).First());
+                    operation.Item(DefaultStart, DefaultSize, source.Item).First()
+                );
             }
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).First(x => false));
+                operation.Item(DefaultStart, DefaultSize, source.Item).First(x => false)
+            );
         }
 
         [Theory]
@@ -219,11 +234,13 @@ namespace System.Linq.Parallel.Tests
             else
             {
                 AssertThrows.Wrapped<DeliberateTestException>(() =>
-                    operation.Item(DefaultStart, DefaultSize, source.Item).FirstOrDefault());
+                    operation.Item(DefaultStart, DefaultSize, source.Item).FirstOrDefault()
+                );
             }
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).FirstOrDefault(x => false));
+                operation.Item(DefaultStart, DefaultSize, source.Item).FirstOrDefault(x => false)
+            );
         }
 
         [Theory]
@@ -235,7 +252,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ForAll(x => { }));
+                operation.Item(DefaultStart, DefaultSize, source.Item).ForAll(x => { })
+            );
         }
 
         [Theory]
@@ -290,7 +308,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             Assert.Throws<InvalidOperationException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Last(x => false));
+                operation.Item(DefaultStart, DefaultSize, source.Item).Last(x => false)
+            );
         }
 
         [Theory]
@@ -303,9 +322,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Last());
+                operation.Item(DefaultStart, DefaultSize, source.Item).Last()
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Last(x => true));
+                operation.Item(DefaultStart, DefaultSize, source.Item).Last(x => true)
+            );
         }
 
         [Theory]
@@ -318,9 +339,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).LastOrDefault());
+                operation.Item(DefaultStart, DefaultSize, source.Item).LastOrDefault()
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).LastOrDefault(x => true));
+                operation.Item(DefaultStart, DefaultSize, source.Item).LastOrDefault(x => true)
+            );
         }
 
         [Theory]
@@ -332,9 +355,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).LongCount());
+                operation.Item(DefaultStart, DefaultSize, source.Item).LongCount()
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).LongCount(x => true));
+                operation.Item(DefaultStart, DefaultSize, source.Item).LongCount(x => true)
+            );
         }
 
         [Theory]
@@ -346,7 +371,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Max());
+                operation.Item(DefaultStart, DefaultSize, source.Item).Max()
+            );
         }
 
         [Theory]
@@ -358,7 +384,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Min());
+                operation.Item(DefaultStart, DefaultSize, source.Item).Min()
+            );
         }
 
         [Theory]
@@ -374,14 +401,14 @@ namespace System.Linq.Parallel.Tests
             ThrowsWrapped(() =>
                 operation
                     .Item(DefaultStart, DefaultSize, source.Item)
-                    .SequenceEqual(
-                        ParallelEnumerable.Range(DefaultStart, DefaultSize).AsOrdered()
-                    ));
+                    .SequenceEqual(ParallelEnumerable.Range(DefaultStart, DefaultSize).AsOrdered())
+            );
             ThrowsWrapped(() =>
                 ParallelEnumerable
                     .Range(DefaultStart, DefaultSize)
                     .AsOrdered()
-                    .SequenceEqual(operation.Item(DefaultStart, DefaultSize, source.Item)));
+                    .SequenceEqual(operation.Item(DefaultStart, DefaultSize, source.Item))
+            );
         }
 
         private static void ThrowsWrapped(Action query)
@@ -401,9 +428,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, 2, source.Item).Single());
+                operation.Item(DefaultStart, 2, source.Item).Single()
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, 2, source.Item).Single(x => true));
+                operation.Item(DefaultStart, 2, source.Item).Single(x => true)
+            );
         }
 
         [Theory]
@@ -415,9 +444,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, 2, source.Item).SingleOrDefault());
+                operation.Item(DefaultStart, 2, source.Item).SingleOrDefault()
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, 2, source.Item).SingleOrDefault(x => true));
+                operation.Item(DefaultStart, 2, source.Item).SingleOrDefault(x => true)
+            );
         }
 
         [Theory]
@@ -429,7 +460,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).Sum());
+                operation.Item(DefaultStart, DefaultSize, source.Item).Sum()
+            );
         }
 
         [Theory]
@@ -442,7 +474,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToArray());
+                operation.Item(DefaultStart, DefaultSize, source.Item).ToArray()
+            );
         }
 
         [Theory]
@@ -455,11 +488,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToDictionary(x => x));
+                operation.Item(DefaultStart, DefaultSize, source.Item).ToDictionary(x => x)
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation
-                    .Item(DefaultStart, DefaultSize, source.Item)
-                    .ToDictionary(x => x, y => y));
+                operation.Item(DefaultStart, DefaultSize, source.Item).ToDictionary(x => x, y => y)
+            );
         }
 
         [Theory]
@@ -472,7 +505,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToList());
+                operation.Item(DefaultStart, DefaultSize, source.Item).ToList()
+            );
         }
 
         [Theory]
@@ -485,9 +519,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToLookup(x => x));
+                operation.Item(DefaultStart, DefaultSize, source.Item).ToLookup(x => x)
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToLookup(x => x, y => y));
+                operation.Item(DefaultStart, DefaultSize, source.Item).ToLookup(x => x, y => y)
+            );
         }
     }
 }

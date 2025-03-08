@@ -24,7 +24,8 @@ public class DotNetStreamReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Assert.Throws<NotSupportedException>(() =>
-            JsonSerializer.Deserialize<DotNetStreamReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<DotNetStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.StartsWith(
             "DotNetStreamReference cannot be supplied from JavaScript to .NET because the stream contents have already been transferred.",
             ex.Message

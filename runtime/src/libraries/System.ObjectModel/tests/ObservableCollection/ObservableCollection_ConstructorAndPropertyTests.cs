@@ -165,7 +165,8 @@ namespace System.Collections.ObjectModel.Tests
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                     typeof(ObservableCollection<int>),
                     null
-                ));
+                )
+            );
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );

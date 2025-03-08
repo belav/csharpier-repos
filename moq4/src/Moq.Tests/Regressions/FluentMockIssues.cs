@@ -46,7 +46,8 @@ namespace Moq.Tests.Regressions
             };
             // c.Serializable can't be mocked in a standard way as it doesn't implement the ISerializable properly
             Assert.Throws<ArgumentException>(() =>
-                mock.SetupGet(c => c.Serializable.SomeString).Returns("blah"));
+                mock.SetupGet(c => c.Serializable.SomeString).Returns("blah")
+            );
         }
 
         [Fact]

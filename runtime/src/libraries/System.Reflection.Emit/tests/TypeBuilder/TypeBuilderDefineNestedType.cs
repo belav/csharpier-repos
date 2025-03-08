@@ -508,7 +508,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             Assert.Throws<NotSupportedException>(() =>
-                type.AsType().GetNestedType("Any", Helpers.AllFlags));
+                type.AsType().GetNestedType("Any", Helpers.AllFlags)
+            );
         }
 
         [Fact]
@@ -516,7 +517,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             Assert.Throws<NotSupportedException>(() =>
-                type.AsType().GetNestedTypes(Helpers.AllFlags));
+                type.AsType().GetNestedTypes(Helpers.AllFlags)
+            );
         }
     }
 }

@@ -208,7 +208,8 @@ namespace Tests.Integration
             );
 
             ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
-                container.GetExportedValue<Needy>());
+                container.GetExportedValue<Needy>()
+            );
         }
 
         public class MissingImportPart : NoImportPart
@@ -223,7 +224,8 @@ namespace Tests.Integration
             var container = ContainerFactory.Create();
 
             ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new MissingImportPart()));
+                container.ComposeParts(new MissingImportPart())
+            );
         }
 
         [Fact]
@@ -264,14 +266,16 @@ namespace Tests.Integration
 
             // Cannot add another import because it would break existing promised compositions
             ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new NoImportPart()));
+                container.ComposeParts(new NoImportPart())
+            );
 
             // Instansitate the object
             var needy = export.Value;
 
             // Cannot add another import because it would break existing compositions
             ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new NoImportPart()));
+                container.ComposeParts(new NoImportPart())
+            );
         }
 
         [Fact]
@@ -303,7 +307,8 @@ namespace Tests.Integration
 
             // Cannot add another import because it would break existing compositions
             ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new NoImportPart()));
+                container.ComposeParts(new NoImportPart())
+            );
         }
 
         public interface ILoopA { }

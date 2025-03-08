@@ -301,7 +301,8 @@ public class SniOptionsSelectorTests
                 fallbackHttpsOptions: new HttpsConnectionAdapterOptions(),
                 fallbackHttpProtocols: HttpProtocols.Http1AndHttp2,
                 logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
-            ));
+            )
+        );
         Assert.Equal(
             "An item with the same key has already been added. Key: .EXAMPLE.org (Parameter 'key')",
             exception.Message
@@ -321,14 +322,16 @@ public class SniOptionsSelectorTests
         );
 
         var authExWithServerName = Assert.Throws<AuthenticationException>(() =>
-            sniOptionsSelector.GetOptions(new MockConnectionContext(), "example.org"));
+            sniOptionsSelector.GetOptions(new MockConnectionContext(), "example.org")
+        );
         Assert.Equal(
             CoreStrings.FormatSniNotConfiguredForServerName("example.org", "TestEndpointName"),
             authExWithServerName.Message
         );
 
         var authExWithoutServerName = Assert.Throws<AuthenticationException>(() =>
-            sniOptionsSelector.GetOptions(new MockConnectionContext(), null));
+            sniOptionsSelector.GetOptions(new MockConnectionContext(), null)
+        );
         Assert.Equal(
             CoreStrings.FormatSniNotConfiguredToAllowNoServerName("TestEndpointName"),
             authExWithoutServerName.Message
@@ -514,7 +517,8 @@ public class SniOptionsSelectorTests
                 fallbackHttpsOptions: new HttpsConnectionAdapterOptions(),
                 fallbackHttpProtocols: HttpProtocols.Http1AndHttp2,
                 logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
-            ));
+            )
+        );
 
         Assert.Equal(CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound, ex.Message);
     }

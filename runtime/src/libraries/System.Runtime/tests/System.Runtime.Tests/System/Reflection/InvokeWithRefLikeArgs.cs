@@ -59,7 +59,8 @@ namespace System.Reflection.Tests
                     mockBinder.Object,
                     new object[] { "hello" },
                     null
-                ));
+                )
+            );
         }
 
         [Fact]

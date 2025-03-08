@@ -39,7 +39,8 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, -1, 0).DontBox());
+                new ReadOnlySpan<int>(a, -1, 0).DontBox()
+            );
         }
 
         [Fact]
@@ -47,7 +48,8 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 4, 0).DontBox());
+                new ReadOnlySpan<int>(a, 4, 0).DontBox()
+            );
         }
 
         [Fact]
@@ -55,7 +57,8 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 0, -1).DontBox());
+                new ReadOnlySpan<int>(a, 0, -1).DontBox()
+            );
         }
 
         [Fact]
@@ -63,15 +66,20 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 3, 1).DontBox());
+                new ReadOnlySpan<int>(a, 3, 1).DontBox()
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 2, 2).DontBox());
+                new ReadOnlySpan<int>(a, 2, 2).DontBox()
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 1, 3).DontBox());
+                new ReadOnlySpan<int>(a, 1, 3).DontBox()
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, 0, 4).DontBox());
+                new ReadOnlySpan<int>(a, 0, 4).DontBox()
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySpan<int>(a, int.MaxValue, int.MaxValue).DontBox());
+                new ReadOnlySpan<int>(a, int.MaxValue, int.MaxValue).DontBox()
+            );
         }
 
         [Fact]

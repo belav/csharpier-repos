@@ -57,7 +57,8 @@ namespace MonoTests.System.Drawing.Imaging
             Assert.Throws<IndexOutOfRangeException>(() =>
                 new ColorMatrix(
                     new float[][] { new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } }
-                ));
+                )
+            );
         }
 
         [Test]
@@ -74,7 +75,8 @@ namespace MonoTests.System.Drawing.Imaging
                         new float[] { 4.0f },
                         new float[] { 5.0f },
                     }
-                ));
+                )
+            );
         }
 
         [Test]

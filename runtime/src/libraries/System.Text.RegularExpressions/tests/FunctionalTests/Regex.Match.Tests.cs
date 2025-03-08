@@ -4472,19 +4472,25 @@ namespace System.Text.RegularExpressions.Tests
                         if (options == RegexOptions.None)
                         {
                             Assert.Throws<RegexMatchTimeoutException>(() =>
-                                Regex.Match(input, Pattern));
+                                Regex.Match(input, Pattern)
+                            );
                             Assert.Throws<RegexMatchTimeoutException>(() =>
-                                Regex.IsMatch(input, Pattern));
+                                Regex.IsMatch(input, Pattern)
+                            );
                             Assert.Throws<RegexMatchTimeoutException>(() =>
-                                Regex.Matches(input, Pattern).Count);
+                                Regex.Matches(input, Pattern).Count
+                            );
                         }
 
                         Assert.Throws<RegexMatchTimeoutException>(() =>
-                            Regex.Match(input, Pattern, options));
+                            Regex.Match(input, Pattern, options)
+                        );
                         Assert.Throws<RegexMatchTimeoutException>(() =>
-                            Regex.IsMatch(input, Pattern, options));
+                            Regex.IsMatch(input, Pattern, options)
+                        );
                         Assert.Throws<RegexMatchTimeoutException>(() =>
-                            Regex.Matches(input, Pattern, options).Count);
+                            Regex.Matches(input, Pattern, options).Count
+                        );
                     },
                     ((int)options).ToString(CultureInfo.InvariantCulture)
                 )
@@ -4528,7 +4534,8 @@ namespace System.Text.RegularExpressions.Tests
                     "a*",
                     RegexHelpers.RegexOptionNonBacktracking,
                     TimeSpan.FromTicks(1)
-                ).Match(new string('a', CharsToTriggerTimeoutCheck)));
+                ).Match(new string('a', CharsToTriggerTimeoutCheck))
+            );
 
             // The actual test: ^a*$ shouldn't match in a string ending in 'b'
             Regex testPattern = new Regex(
@@ -5330,8 +5337,8 @@ namespace System.Text.RegularExpressions.Tests
             Match match = Regex.Match("foo", "foo");
             AssertExtensions.Throws<ArgumentNullException>("replacement", () => match.Result(null));
 
-            Assert.Throws<NotSupportedException>(() =>
-                RegularExpressions.Match.Empty.Result("any"));
+            Assert.Throws<NotSupportedException>(() => RegularExpressions.Match.Empty.Result("any")
+            );
         }
 
         [Theory]
@@ -6600,12 +6607,14 @@ namespace System.Text.RegularExpressions.Tests
                 Assert.Throws<T>(() =>
                     timeout == Regex.InfiniteMatchTimeout
                         ? Regex.IsMatch(input, pattern, options)
-                        : Regex.IsMatch(input, pattern, options, timeout));
+                        : Regex.IsMatch(input, pattern, options, timeout)
+                );
 #if NET7_0_OR_GREATER
                 Assert.Throws<T>(() =>
                     timeout == Regex.InfiniteMatchTimeout
                         ? Regex.IsMatch(input.AsSpan(), pattern, options)
-                        : Regex.IsMatch(input.AsSpan(), pattern, options, timeout));
+                        : Regex.IsMatch(input.AsSpan(), pattern, options, timeout)
+                );
 #endif
             }
             else

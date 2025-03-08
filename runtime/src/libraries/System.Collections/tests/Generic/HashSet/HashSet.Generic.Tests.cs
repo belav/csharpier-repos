@@ -134,7 +134,8 @@ namespace System.Collections.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new HashSet<T>((IEnumerable<T>)null));
             Assert.Throws<ArgumentNullException>(() =>
-                new HashSet<T>((IEnumerable<T>)null, EqualityComparer<T>.Default));
+                new HashSet<T>((IEnumerable<T>)null, EqualityComparer<T>.Default)
+            );
         }
 
         [Theory]
@@ -260,7 +261,8 @@ namespace System.Collections.Tests
             HashSet<T> hashSet = (HashSet<T>)GenericISetFactory(size);
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
-                hashSet.TrimExcess(newCapacity));
+                hashSet.TrimExcess(newCapacity)
+            );
         }
 
         [Fact]

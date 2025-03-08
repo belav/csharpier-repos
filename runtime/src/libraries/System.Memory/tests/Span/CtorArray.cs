@@ -95,7 +95,8 @@ namespace System.SpanTests
             string[] a = { "Hello" };
             Assert.Throws<ArrayTypeMismatchException>(() => new Span<object>(a).DontBox());
             Assert.Throws<ArrayTypeMismatchException>(() =>
-                new Span<object>(a, 0, a.Length).DontBox());
+                new Span<object>(a, 0, a.Length).DontBox()
+            );
         }
 
         [Fact]

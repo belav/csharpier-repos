@@ -53,7 +53,8 @@ namespace System.Xml.Linq.Tests
         {
             XElement element = XElement.Parse("<A xmlns:p='ns'/>");
             Assert.Throws<InvalidOperationException>(() =>
-                element.Add(new XAttribute(XNamespace.Xmlns + "p", "ns")));
+                element.Add(new XAttribute(XNamespace.Xmlns + "p", "ns"))
+            );
         }
 
         [Fact]

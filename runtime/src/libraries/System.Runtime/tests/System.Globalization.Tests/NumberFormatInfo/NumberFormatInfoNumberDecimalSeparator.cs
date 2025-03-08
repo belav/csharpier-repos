@@ -49,7 +49,8 @@ namespace System.Globalization.Tests
         public void NumberDecimalSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.NumberDecimalSeparator = "string");
+                NumberFormatInfo.InvariantInfo.NumberDecimalSeparator = "string"
+            );
         }
     }
 }

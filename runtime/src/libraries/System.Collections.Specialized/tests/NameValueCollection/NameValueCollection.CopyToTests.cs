@@ -87,7 +87,8 @@ namespace System.Collections.Specialized.Tests
                     () => nameValueCollection.CopyTo(new string[count], count)
                 );
                 Assert.Throws<InvalidCastException>(() =>
-                    nameValueCollection.CopyTo(new DictionaryEntry[count], 0));
+                    nameValueCollection.CopyTo(new DictionaryEntry[count], 0)
+                );
             }
             else
             {

@@ -2615,7 +2615,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     AssertEqual(e.Customer, a.Customer);
                     AssertEqual(e.HasOrder, a.HasOrder);
                 }
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

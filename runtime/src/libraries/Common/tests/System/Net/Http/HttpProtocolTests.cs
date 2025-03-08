@@ -441,7 +441,8 @@ namespace System.Net.Http.Functional.Tests
                             );
 
                         await Assert.ThrowsAsync<HttpRequestException>(() =>
-                            client.GetAsync(TestAsync, url));
+                            client.GetAsync(TestAsync, url)
+                        );
                     }
                 },
                 new LoopbackServer.Options { StreamWrapper = GetStream }

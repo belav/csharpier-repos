@@ -90,7 +90,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         e3,
                     },
                 e => (e.e1.EmployeeID, e.e2.EmployeeID, e.e3.EmployeeID)
-            ));
+            )
+        );
 
     private static uint GetEmployeeID(Employee employee) => employee.EmployeeID;
 
@@ -276,7 +277,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     from e in ss.Set<Employee>()
                     join id in ids on e.EmployeeID equals id
                     select e.EmployeeID
-            ));
+            )
+        );
 
         ids = "3";
         await AssertTranslationFailed(() =>
@@ -286,7 +288,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     from e in ss.Set<Employee>()
                     join id in ids on e.EmployeeID equals id
                     select e.EmployeeID
-            ));
+            )
+        );
     }
 
     [ConditionalTheory(Skip = "#30677")]
@@ -302,7 +305,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     from e in ss.Set<Employee>()
                     join id in ids on e.EmployeeID equals id
                     select e.EmployeeID
-            ));
+            )
+        );
 
         ids = new byte[] { 3 };
         await AssertTranslationFailed(() =>
@@ -312,7 +316,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     from e in ss.Set<Employee>()
                     join id in ids on e.EmployeeID equals id
                     select e.EmployeeID
-            ));
+            )
+        );
     }
 
     [ConditionalTheory]

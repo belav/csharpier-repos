@@ -18,9 +18,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.True(comObjectType.IsCOMObject);
 
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetUninitializedObject(typeof(COMObject)));
+                FormatterServices.GetUninitializedObject(typeof(COMObject))
+            );
             Assert.Throws<NotSupportedException>(() =>
-                FormatterServices.GetSafeUninitializedObject(typeof(COMObject)));
+                FormatterServices.GetSafeUninitializedObject(typeof(COMObject))
+            );
         }
 
         [ComImport]

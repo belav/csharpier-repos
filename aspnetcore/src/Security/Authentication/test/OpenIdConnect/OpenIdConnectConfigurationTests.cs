@@ -67,7 +67,8 @@ public class OpenIdConnectConfigurationTests
         Assert.Equal(1, forwardDefault.SignOutCount);
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal()));
+            context.SignInAsync(new ClaimsPrincipal())
+        );
     }
 
     [Fact]
@@ -98,7 +99,8 @@ public class OpenIdConnectConfigurationTests
         context.RequestServices = sp;
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal()));
+            context.SignInAsync(new ClaimsPrincipal())
+        );
     }
 
     [Fact]
@@ -308,7 +310,8 @@ public class OpenIdConnectConfigurationTests
         Assert.Equal(1, selector.SignOutCount);
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal()));
+            context.SignInAsync(new ClaimsPrincipal())
+        );
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);
         Assert.Equal(0, forwardDefault.ForbidCount);
@@ -365,7 +368,8 @@ public class OpenIdConnectConfigurationTests
         Assert.Equal(1, forwardDefault.SignOutCount);
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal()));
+            context.SignInAsync(new ClaimsPrincipal())
+        );
 
         Assert.Equal(0, selector.AuthenticateCount);
         Assert.Equal(0, selector.ForbidCount);
@@ -427,7 +431,8 @@ public class OpenIdConnectConfigurationTests
         Assert.Equal(1, specific.SignOutCount);
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal()));
+            context.SignInAsync(new ClaimsPrincipal())
+        );
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);
         Assert.Equal(0, forwardDefault.ForbidCount);
@@ -612,7 +617,8 @@ public class OpenIdConnectConfigurationTests
         where T : Exception
     {
         var exception = await Assert.ThrowsAsync<T>(() =>
-            BuildTestServer(options).SendAsync(@"https://example.com"));
+            BuildTestServer(options).SendAsync(@"https://example.com")
+        );
         verifyException(exception);
     }
 }

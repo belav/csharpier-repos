@@ -231,7 +231,8 @@ namespace System.Web.Http.Dispatcher
 
             // Act & Assert
             InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                activator.Create(request, descriptorSimpleController, typeof(SimpleController)));
+                activator.Create(request, descriptorSimpleController, typeof(SimpleController))
+            );
 
             Assert.Equal(
                 "An error occurred when trying to create a controller of type 'SimpleController'. Make sure that the controller has a parameterless public constructor.",

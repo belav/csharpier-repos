@@ -290,7 +290,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             var ex = Assert.Throws<InvalidOperationException>(() =>
                 serviceProvider.GetRequiredService<
                     IHubContext<SimpleVoidReturningTypedHub, IVoidReturningTypedHubClient>
-                >());
+                >()
+            );
             Assert.Equal(
                 $"Cannot generate proxy implementation for '{typeof(IVoidReturningTypedHubClient).FullName}.{nameof(IVoidReturningTypedHubClient.Send)}'. All client proxy methods must return '{typeof(Task).FullName}' or 'System.Threading.Tasks.Task<T>'.",
                 ex.Message
@@ -967,7 +968,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 client.Dispose();
 
                 var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await connectionHandlerTask);
+                    await connectionHandlerTask
+                );
                 Assert.Equal("Hub OnDisconnected failed.", exception.Message);
 
                 mockLifetimeManager.Verify(
@@ -1694,7 +1696,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             );
 
             var exception = Assert.Throws<NotSupportedException>(() =>
-                serviceProvider.GetService<HubConnectionHandler<GenericMethodHub>>());
+                serviceProvider.GetService<HubConnectionHandler<GenericMethodHub>>()
+            );
 
             Assert.Equal(
                 "Method 'GenericMethod' is a generic method which is not supported on a Hub.",
@@ -3191,7 +3194,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                         await await client.ConnectAsync(
                             connectionHandler,
                             expectedHandshakeResponseMessage: false
-                        ))
+                        )
+                    )
                     .DefaultTimeout();
             }
         }
@@ -3228,7 +3232,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                         await await client.ConnectAsync(
                             connectionHandler,
                             expectedHandshakeResponseMessage: false
-                        ))
+                        )
+                    )
                     .DefaultTimeout();
             }
         }
@@ -6468,7 +6473,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             });
         });
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>());
+            serviceProvider.GetService<HubConnectionHandler<KeyedServicesHub>>()
+        );
         Assert.Equal(
             "'Microsoft.AspNetCore.SignalR.Tests.Service1' is not in DI as a keyed service.",
             ex.Message
@@ -6488,7 +6494,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddKeyedScoped<Service1>("service1");
         });
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetService<HubConnectionHandler<BadServicesHub>>());
+            serviceProvider.GetService<HubConnectionHandler<BadServicesHub>>()
+        );
         Assert.Equal(
             "BadServicesHub.BadMethod: The FromKeyedServicesAttribute is not supported on parameters that are also annotated with IFromServiceMetadata.",
             ex.Message
@@ -6503,7 +6510,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             provider.AddSingleton<Service1>();
         });
         Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetService<HubConnectionHandler<TooManyParamsHub>>());
+            serviceProvider.GetService<HubConnectionHandler<TooManyParamsHub>>()
+        );
     }
 
     [Fact]

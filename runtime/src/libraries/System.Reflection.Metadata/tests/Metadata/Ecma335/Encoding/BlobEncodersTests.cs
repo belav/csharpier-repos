@@ -67,9 +67,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.MethodSpecificationSignature(genericArgumentCount: -1));
+                e.MethodSpecificationSignature(genericArgumentCount: -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.MethodSpecificationSignature(genericArgumentCount: ushort.MaxValue + 1));
+                e.MethodSpecificationSignature(genericArgumentCount: ushort.MaxValue + 1)
+            );
         }
 
         [Fact]
@@ -106,9 +108,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.MethodSignature(genericParameterCount: -1));
+                e.MethodSignature(genericParameterCount: -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.MethodSignature(genericParameterCount: ushort.MaxValue + 1));
+                e.MethodSignature(genericParameterCount: ushort.MaxValue + 1)
+            );
         }
 
         [Fact]
@@ -176,7 +180,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => e.LocalVariableSignature(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.LocalVariableSignature(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+                e.LocalVariableSignature(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
         }
 
         [Fact]
@@ -210,7 +215,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => e.PermissionSetBlob(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.PermissionSetBlob(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+                e.PermissionSetBlob(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
         }
 
         [Fact]
@@ -232,7 +238,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => e.PermissionSetArguments(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.PermissionSetArguments(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+                e.PermissionSetArguments(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
         }
 
         [Fact]
@@ -259,13 +266,15 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Parameters(-1, out returnType, out parameters));
+                e.Parameters(-1, out returnType, out parameters)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 e.Parameters(
                     BlobWriterImpl.MaxCompressedIntegerValue + 1,
                     out returnType,
                     out parameters
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() => e.Parameters(0, null, ps => { }));
             Assert.Throws<ArgumentNullException>(() => e.Parameters(0, rt => { }, null));
         }
@@ -409,11 +418,13 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentNullException>(() =>
-                e.AddPermission(null, ImmutableArray.Create<byte>(1)));
+                e.AddPermission(null, ImmutableArray.Create<byte>(1))
+            );
             Assert.Throws<ArgumentNullException>(() => e.AddPermission(null, args));
 
             Assert.Throws<ArgumentNullException>(() =>
-                e.AddPermission("A", default(ImmutableArray<byte>)));
+                e.AddPermission("A", default(ImmutableArray<byte>))
+            );
             Assert.Throws<ArgumentNullException>(() => e.AddPermission("A", null));
         }
 
@@ -727,12 +738,12 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             AssertEx.Equal(new byte[] { 0x54 }, b.ToArray());
             b.Clear();
 
-            Assert.Throws<ArgumentNullException>(() =>
-                e.AddArgument(true, null, _ => { }, _ => { }));
-            Assert.Throws<ArgumentNullException>(() =>
-                e.AddArgument(true, _ => { }, null, _ => { }));
-            Assert.Throws<ArgumentNullException>(() =>
-                e.AddArgument(true, _ => { }, _ => { }, null));
+            Assert.Throws<ArgumentNullException>(() => e.AddArgument(true, null, _ => { }, _ => { })
+            );
+            Assert.Throws<ArgumentNullException>(() => e.AddArgument(true, _ => { }, null, _ => { })
+            );
+            Assert.Throws<ArgumentNullException>(() => e.AddArgument(true, _ => { }, _ => { }, null)
+            );
         }
 
         [Fact]
@@ -916,7 +927,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.PrimitiveType((PrimitiveSerializationTypeCode)255));
+                e.PrimitiveType((PrimitiveSerializationTypeCode)255)
+            );
         }
 
         [Fact]
@@ -1100,10 +1112,10 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             AssertEx.Equal(new byte[] { 0x1C }, b.ToArray());
             b.Clear();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.PrimitiveType(PrimitiveTypeCode.Void));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.PrimitiveType((PrimitiveTypeCode)255));
+            Assert.Throws<ArgumentOutOfRangeException>(() => e.PrimitiveType(PrimitiveTypeCode.Void)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() => e.PrimitiveType((PrimitiveTypeCode)255)
+            );
         }
 
         [Fact]
@@ -1197,9 +1209,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     e.FunctionPointer(0, (FunctionPointerAttributes)1000, genericParameterCount: 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.FunctionPointer(0, 0, genericParameterCount: -1));
+                e.FunctionPointer(0, 0, genericParameterCount: -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.FunctionPointer(0, 0, genericParameterCount: ushort.MaxValue + 1));
+                e.FunctionPointer(0, 0, genericParameterCount: ushort.MaxValue + 1)
+            );
             Assert.Equal(0, b.Count);
         }
 
@@ -1241,11 +1255,14 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 () => e.GenericInstantiation(default(EntityHandle), 1, isValueType: false)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.GenericInstantiation(default(TypeDefinitionHandle), 0, true));
+                e.GenericInstantiation(default(TypeDefinitionHandle), 0, true)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.GenericInstantiation(default(TypeDefinitionHandle), -1, true));
+                e.GenericInstantiation(default(TypeDefinitionHandle), -1, true)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.GenericInstantiation(default(TypeDefinitionHandle), ushort.MaxValue + 1, true));
+                e.GenericInstantiation(default(TypeDefinitionHandle), ushort.MaxValue + 1, true)
+            );
             Assert.Equal(0, b.Count);
         }
 
@@ -1266,7 +1283,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => e.GenericMethodTypeParameter(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.GenericMethodTypeParameter(ushort.MaxValue + 1));
+                e.GenericMethodTypeParameter(ushort.MaxValue + 1)
+            );
             Assert.Equal(0, b.Count);
         }
 
@@ -1287,7 +1305,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => e.GenericTypeParameter(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.GenericTypeParameter(ushort.MaxValue + 1));
+                e.GenericTypeParameter(ushort.MaxValue + 1)
+            );
             Assert.Equal(0, b.Count);
         }
 
@@ -1435,37 +1454,47 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentNullException>(() =>
-                e.Shape(1, default(ImmutableArray<int>), ImmutableArray<int>.Empty));
+                e.Shape(1, default(ImmutableArray<int>), ImmutableArray<int>.Empty)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Shape(0, ImmutableArray<int>.Empty, ImmutableArray<int>.Empty));
+                e.Shape(0, ImmutableArray<int>.Empty, ImmutableArray<int>.Empty)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Shape(-1, ImmutableArray<int>.Empty, ImmutableArray<int>.Empty));
+                e.Shape(-1, ImmutableArray<int>.Empty, ImmutableArray<int>.Empty)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Shape(ushort.MaxValue + 1, ImmutableArray<int>.Empty, ImmutableArray<int>.Empty));
+                e.Shape(ushort.MaxValue + 1, ImmutableArray<int>.Empty, ImmutableArray<int>.Empty)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Shape(1, ImmutableArray.Create(1, 2, 3), ImmutableArray<int>.Empty));
+                e.Shape(1, ImmutableArray.Create(1, 2, 3), ImmutableArray<int>.Empty)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Shape(1, ImmutableArray<int>.Empty, ImmutableArray.Create(1, 2, 3)));
+                e.Shape(1, ImmutableArray<int>.Empty, ImmutableArray.Create(1, 2, 3))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                e.Shape(1, ImmutableArray.Create(-1), ImmutableArray<int>.Empty));
+                e.Shape(1, ImmutableArray.Create(-1), ImmutableArray<int>.Empty)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 e.Shape(
                     1,
                     ImmutableArray.Create(BlobWriterImpl.MaxCompressedIntegerValue + 1),
                     ImmutableArray<int>.Empty
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 e.Shape(
                     1,
                     ImmutableArray<int>.Empty,
                     ImmutableArray.Create(BlobWriterImpl.MinSignedCompressedIntegerValue - 1)
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 e.Shape(
                     1,
                     ImmutableArray<int>.Empty,
                     ImmutableArray.Create(BlobWriterImpl.MaxSignedCompressedIntegerValue + 1)
-                ));
+                )
+            );
         }
 
         [Fact]

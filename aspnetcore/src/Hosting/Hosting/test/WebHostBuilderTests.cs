@@ -70,7 +70,8 @@ public class WebHostBuilderTests
     {
         var server = new TestServer();
         Assert.Throws<ArgumentNullException>(() =>
-            builder.UseServer(server).UseStartup((Func<WebHostBuilderContext, object>)null));
+            builder.UseServer(server).UseStartup((Func<WebHostBuilderContext, object>)null)
+        );
     }
 
     [Theory]
@@ -79,7 +80,8 @@ public class WebHostBuilderTests
     {
         var server = new TestServer();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.UseServer(server).UseStartup<object>(context => null).Build());
+            builder.UseServer(server).UseStartup<object>(context => null).Build()
+        );
         Assert.Equal("The specified factory returned null startup instance.", ex.Message);
     }
 
@@ -1463,7 +1465,8 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             var startEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                host.StartAsync());
+                host.StartAsync()
+            );
             Assert.Equal("Hosted Service throws in StartAsync", startEx.Message);
             var stopEx = await Assert.ThrowsAnyAsync<Exception>(() => host.StopAsync());
             if (stopEx is AggregateException aggregateException)

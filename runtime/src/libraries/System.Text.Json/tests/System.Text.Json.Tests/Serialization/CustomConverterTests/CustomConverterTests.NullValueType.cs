@@ -154,9 +154,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // The json is not valid with the default converter.
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(
-                    Json
-                ));
+                JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(Json)
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new JsonNullableDateTimeOffsetConverter());

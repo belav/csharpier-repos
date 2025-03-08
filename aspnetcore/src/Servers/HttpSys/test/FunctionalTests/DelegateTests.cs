@@ -100,7 +100,8 @@ public class DelegateTests : LoggedTest
                 var delegateFeature = httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
                 Assert.False(delegateFeature.CanDelegate);
                 Assert.Throws<InvalidOperationException>(() =>
-                    delegateFeature.DelegateRequest(destination));
+                    delegateFeature.DelegateRequest(destination)
+                );
             },
             LoggerFactory
         );
@@ -183,7 +184,8 @@ public class DelegateTests : LoggedTest
                 await httpContext.Request.Body.CopyToAsync(memoryStream);
                 var delegateFeature = httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
                 Assert.Throws<InvalidOperationException>(() =>
-                    delegateFeature.DelegateRequest(destination));
+                    delegateFeature.DelegateRequest(destination)
+                );
             },
             LoggerFactory
         );

@@ -1307,7 +1307,8 @@ public partial class Startup
         foreach (var header in DisallowedTrailers)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                context.Response.AppendTrailer(header, "value"));
+                context.Response.AppendTrailer(header, "value")
+            );
         }
         return Task.FromResult(0);
     }

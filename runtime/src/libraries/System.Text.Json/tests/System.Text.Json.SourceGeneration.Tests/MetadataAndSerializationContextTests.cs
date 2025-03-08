@@ -150,9 +150,11 @@ namespace System.Text.Json.SourceGeneration.Tests
                 MetadataAndSerializationContext.Default.StructWithCustomConverterFactoryProperty
             );
             Assert.Throws<InvalidOperationException>(() =>
-                MetadataAndSerializationContext.Default.ClassWithBadCustomConverter);
+                MetadataAndSerializationContext.Default.ClassWithBadCustomConverter
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                MetadataAndSerializationContext.Default.StructWithBadCustomConverter);
+                MetadataAndSerializationContext.Default.StructWithBadCustomConverter
+            );
             Assert.Null(
                 MetadataAndSerializationContext.Default.NullablePersonStruct.SerializeHandler
             );

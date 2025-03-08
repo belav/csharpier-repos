@@ -219,7 +219,8 @@ public class RelationalDatabaseFacadeExtensionsTest
             RelationalStrings.RelationalNotInUse,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Database.UseTransaction(transaction))
+                    context.Database.UseTransaction(transaction)
+                )
                 .Message
         );
     }

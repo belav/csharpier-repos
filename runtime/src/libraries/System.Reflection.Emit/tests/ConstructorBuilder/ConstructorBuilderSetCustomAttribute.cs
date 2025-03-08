@@ -119,7 +119,8 @@ namespace System.Reflection.Emit.Tests
                 new Type[0]
             );
             Assert.Throws<NotSupportedException>(() =>
-                constructor.IsDefined(typeof(IntAllAttribute)));
+                constructor.IsDefined(typeof(IntAllAttribute))
+            );
         }
     }
 }

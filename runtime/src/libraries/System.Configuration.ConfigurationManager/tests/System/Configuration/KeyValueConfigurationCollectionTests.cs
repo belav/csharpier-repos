@@ -71,7 +71,8 @@ namespace System.ConfigurationTests
         public void AddNullKeyValueThrows()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new KeyValueConfigurationCollection().Add(null, null));
+                new KeyValueConfigurationCollection().Add(null, null)
+            );
         }
 
         [Fact]
@@ -79,14 +80,16 @@ namespace System.ConfigurationTests
         {
             var element = new KeyValueConfigurationElement(null, null);
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new KeyValueConfigurationCollection().Add(element));
+                new KeyValueConfigurationCollection().Add(element)
+            );
         }
 
         [Fact]
         public void AddNullKeyThrows()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new KeyValueConfigurationCollection().Add(null, "foo"));
+                new KeyValueConfigurationCollection().Add(null, "foo")
+            );
         }
 
         [Fact]

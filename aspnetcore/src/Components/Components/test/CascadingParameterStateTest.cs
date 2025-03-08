@@ -480,7 +480,8 @@ public class CascadingParameterStateTest
             CreateAncestry(
                 new SupplyParameterWithSingleDeliveryComponent(isFixed: false),
                 new ComponentWithCascadingParams()
-            ));
+            )
+        );
 
         Assert.StartsWith(
             $"'{typeof(SupplyParameterWithSingleDeliveryAttribute)}' is flagged with SingleDelivery",

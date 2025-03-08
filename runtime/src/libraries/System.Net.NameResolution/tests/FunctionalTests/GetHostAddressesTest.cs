@@ -53,7 +53,8 @@ namespace System.Net.NameResolution.Tests
             string longHostNameWithDot = longHostName + ".";
 
             SocketException ex = await Assert.ThrowsAnyAsync<SocketException>(() =>
-                Dns.GetHostAddressesAsync(longHostNameWithDot));
+                Dns.GetHostAddressesAsync(longHostNameWithDot)
+            );
 
             Assert.Equal(SocketError.HostNotFound, ex.SocketErrorCode);
         }
@@ -64,7 +65,8 @@ namespace System.Net.NameResolution.Tests
             int maxHostName = 255;
             string longHostName = new string('a', maxHostName);
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                Dns.GetHostAddressesAsync(longHostName));
+                Dns.GetHostAddressesAsync(longHostName)
+            );
         }
 
         [Fact]
@@ -187,7 +189,8 @@ namespace System.Net.NameResolution.Tests
 
             OperationCanceledException oce =
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    Dns.GetHostAddressesAsync(TestSettings.LocalHost, cts.Token));
+                    Dns.GetHostAddressesAsync(TestSettings.LocalHost, cts.Token)
+                );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
     }

@@ -267,8 +267,8 @@ namespace Microsoft.EntityFrameworkCore
                     loggerFactory.CreateLogger("MyLogger");
                 }
 
-                Assert.Throws<ObjectDisposedException>(() =>
-                    loggerFactory.CreateLogger("MyLogger"));
+                Assert.Throws<ObjectDisposedException>(() => loggerFactory.CreateLogger("MyLogger")
+                );
             }
         }
 
@@ -2459,7 +2459,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.DbContextMissingConstructor(nameof(ConstructorTestContextWithOC1A)),
                 Assert
                     .Throws<ArgumentException>(() =>
-                        serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(_ => { }))
+                        serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(_ => { })
+                    )
                     .Message
             );
 
@@ -2469,7 +2470,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<ArgumentException>(() =>
                         serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(
                             (_, __) => { }
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -3252,7 +3254,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.NoEfServices,
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        new ConstructorTestContextWithSets(options))
+                        new ConstructorTestContextWithSets(options)
+                    )
                     .Message
             );
         }
@@ -3273,7 +3276,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.NoEfServices,
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithSets>())
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithSets>()
+                    )
                     .Message
             );
         }
@@ -3309,7 +3313,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.NoEfServices,
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>())
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
+                    )
                     .Message
             );
         }
@@ -3816,7 +3821,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        new ConstructorTestContextWithOC3A(options))
+                        new ConstructorTestContextWithOC3A(options)
+                    )
                     .Message
             );
         }
@@ -3845,7 +3851,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>())
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>()
+                    )
                     .Message
             );
         }
@@ -3931,7 +3938,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        new ConstructorTestContextWithOC3A(options))
+                        new ConstructorTestContextWithOC3A(options)
+                    )
                     .Message
             );
         }
@@ -3960,7 +3968,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>())
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>()
+                    )
                     .Message
             );
         }
@@ -4015,7 +4024,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        new ConstructorTestContextWithOC3A(options))
+                        new ConstructorTestContextWithOC3A(options)
+                    )
                     .Message
             );
         }
@@ -4044,7 +4054,8 @@ namespace Microsoft.EntityFrameworkCore
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>())
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>()
+                    )
                     .Message
             );
         }

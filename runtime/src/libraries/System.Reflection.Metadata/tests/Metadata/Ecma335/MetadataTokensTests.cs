@@ -281,19 +281,26 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             Assert.Equal(s_userStringHandle, MetadataTokens.Handle((TableIndex)0x70, 1));
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x71, 1));
+                MetadataTokens.Handle((TableIndex)0x71, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x72, 1));
+                MetadataTokens.Handle((TableIndex)0x72, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x73, 1));
+                MetadataTokens.Handle((TableIndex)0x73, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x74, 1));
+                MetadataTokens.Handle((TableIndex)0x74, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x7a, 1));
+                MetadataTokens.Handle((TableIndex)0x7a, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x7e, 1));
+                MetadataTokens.Handle((TableIndex)0x7e, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MetadataTokens.Handle((TableIndex)0x7f, 0xffffff));
+                MetadataTokens.Handle((TableIndex)0x7f, 0xffffff)
+            );
         }
 
         [Fact]

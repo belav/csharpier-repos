@@ -1856,7 +1856,8 @@ namespace Microsoft.Extensions
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                config.Get<MyClassWithCustomCollections>());
+                config.Get<MyClassWithCustomCollections>()
+            );
             Assert.Equal(
                 SR.Format(
                     SR.Error_CannotActivateAbstractOrInterface,
@@ -1876,7 +1877,8 @@ namespace Microsoft.Extensions
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                config.Get<MyClassWithCustomCollections>());
+                config.Get<MyClassWithCustomCollections>()
+            );
             Assert.Equal(
                 SR.Format(
                     SR.Error_CannotActivateAbstractOrInterface,
@@ -1896,7 +1898,8 @@ namespace Microsoft.Extensions
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                config.Get<MyClassWithCustomDictionary>());
+                config.Get<MyClassWithCustomDictionary>()
+            );
             Assert.Equal(
                 SR.Format(
                     SR.Error_CannotActivateAbstractOrInterface,
@@ -1916,7 +1919,8 @@ namespace Microsoft.Extensions
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(() =>
-                config.Get<MyClassWithCustomSet>());
+                config.Get<MyClassWithCustomSet>()
+            );
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ICustomSet<string>)),
                 exception.Message

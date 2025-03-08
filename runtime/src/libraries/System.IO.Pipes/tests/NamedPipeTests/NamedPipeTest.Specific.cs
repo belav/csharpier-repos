@@ -70,12 +70,14 @@ namespace System.IO.Pipes.Tests
             using (NamedPipeClientStream client = new NamedPipeClientStream(".", "notthere"))
             {
                 var ctx = new CancellationTokenSource();
-                Assert.Throws<TimeoutException>(() =>
-                    client.Connect(TimeSpan.FromMilliseconds(60))); // 60 to be over internal 50 interval
+                Assert.Throws<TimeoutException>(() => client.Connect(TimeSpan.FromMilliseconds(60))
+                ); // 60 to be over internal 50 interval
                 await Assert.ThrowsAsync<TimeoutException>(() =>
-                    client.ConnectAsync(TimeSpan.FromMilliseconds(50), default));
+                    client.ConnectAsync(TimeSpan.FromMilliseconds(50), default)
+                );
                 await Assert.ThrowsAsync<TimeoutException>(() =>
-                    client.ConnectAsync(TimeSpan.FromMilliseconds(60), ctx.Token)); // testing Token overload; ctx is not canceled in this test
+                    client.ConnectAsync(TimeSpan.FromMilliseconds(60), ctx.Token)
+                ); // testing Token overload; ctx is not canceled in this test
             }
         }
 
@@ -96,7 +98,8 @@ namespace System.IO.Pipes.Tests
 
                 ctx.Cancel();
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    client.ConnectAsync(ctx.Token));
+                    client.ConnectAsync(ctx.Token)
+                );
             }
         }
 
@@ -212,7 +215,8 @@ namespace System.IO.Pipes.Tests
             {
                 // NPSS was created with max of 1, so creating another fails.
                 Assert.Throws<IOException>(() =>
-                    new NamedPipeServerStream(name, PipeDirection.InOut, 1));
+                    new NamedPipeServerStream(name, PipeDirection.InOut, 1)
+                );
             }
 
             using (new NamedPipeServerStream(name, PipeDirection.InOut, 3))
@@ -220,14 +224,16 @@ namespace System.IO.Pipes.Tests
                 // NPSS was created with max of 3, but NPSS not only validates against the original max but also
                 // against the max of the stream being created, so since there's already 1 and this specifies max == 1, it fails.
                 Assert.Throws<UnauthorizedAccessException>(() =>
-                    new NamedPipeServerStream(name, PipeDirection.InOut, 1));
+                    new NamedPipeServerStream(name, PipeDirection.InOut, 1)
+                );
 
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 2)) // lower max ignored
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 4)) // higher max ignored
                 {
                     // NPSS was created with a max of 3, and we're creating a 4th, so it fails.
                     Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(name, PipeDirection.InOut, 3));
+                        new NamedPipeServerStream(name, PipeDirection.InOut, 3)
+                    );
                 }
 
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 3))
@@ -236,9 +242,11 @@ namespace System.IO.Pipes.Tests
                     // NPSS was created with a max of 3, and we've already created 3, so it fails,
                     // even if the new stream tries to raise it.
                     Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(name, PipeDirection.InOut, 4));
+                        new NamedPipeServerStream(name, PipeDirection.InOut, 4)
+                    );
                     Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(name, PipeDirection.InOut, 2));
+                        new NamedPipeServerStream(name, PipeDirection.InOut, 2)
+                    );
                 }
             }
         }
@@ -588,7 +596,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.InOut,
                     1,
                     PipeTransmissionMode.Message
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -763,7 +772,8 @@ namespace System.IO.Pipes.Tests
 
                 // Throws regardless of connection status for the pipe that is set to PipeDirection.In
                 Assert.Throws<UnauthorizedAccessException>(() =>
-                    server.ReadMode = PipeTransmissionMode.Byte);
+                    server.ReadMode = PipeTransmissionMode.Byte
+                );
                 client.ReadMode = PipeTransmissionMode.Byte;
             }
 
@@ -784,7 +794,8 @@ namespace System.IO.Pipes.Tests
 
                 // Throws regardless of connection status for the pipe that is set to PipeDirection.In
                 Assert.Throws<UnauthorizedAccessException>(() =>
-                    client.ReadMode = PipeTransmissionMode.Byte);
+                    client.ReadMode = PipeTransmissionMode.Byte
+                );
                 server.ReadMode = PipeTransmissionMode.Byte;
             }
 
@@ -926,9 +937,11 @@ namespace System.IO.Pipes.Tests
                 clientConnect.Wait();
 
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    server.ReadMode = (PipeTransmissionMode)999);
+                    server.ReadMode = (PipeTransmissionMode)999
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    client.ReadMode = (PipeTransmissionMode)999);
+                    client.ReadMode = (PipeTransmissionMode)999
+                );
             }
         }
 
@@ -1104,7 +1117,8 @@ namespace System.IO.Pipes.Tests
 
                 await Assert
                     .ThrowsAsync<OperationCanceledException>(() =>
-                        secondClient.ConnectAsync(cts.Token))
+                        secondClient.ConnectAsync(cts.Token)
+                    )
                     .WaitAsync(1000);
             }
         }

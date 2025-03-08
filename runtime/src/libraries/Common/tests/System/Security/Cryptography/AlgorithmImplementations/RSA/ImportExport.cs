@@ -317,7 +317,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             if (!(PlatformDetection.IsNetFramework && rsa.GetType().Name.EndsWith("Cng")))
             {
                 Assert.Throws<ObjectDisposedException>(() =>
-                    rsa.ImportParameters(TestData.RSA1024Params));
+                    rsa.ImportParameters(TestData.RSA1024Params)
+                );
             }
         }
 

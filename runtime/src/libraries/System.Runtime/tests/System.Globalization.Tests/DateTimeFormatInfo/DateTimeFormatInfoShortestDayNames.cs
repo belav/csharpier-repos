@@ -365,7 +365,8 @@ namespace System.Globalization.Tests
                     "5",
                     "6",
                     "7",
-                });
+                }
+            );
         }
     }
 }

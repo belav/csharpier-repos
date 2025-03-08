@@ -236,7 +236,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             else
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    iut.DeriveRawSecretAgreement(cavsPublic));
+                    iut.DeriveRawSecretAgreement(cavsPublic)
+                );
             }
         }
     }

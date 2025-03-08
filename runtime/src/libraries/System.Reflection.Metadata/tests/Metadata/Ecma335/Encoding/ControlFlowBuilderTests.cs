@@ -239,7 +239,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     l3,
                     l4,
                     MetadataTokens.TypeReferenceHandle(1)
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 flow.AddCatchRegion(
                     l1,
@@ -247,7 +248,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     l3,
                     l4,
                     MetadataTokens.TypeReferenceHandle(1)
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 flow.AddCatchRegion(
                     l1,
@@ -255,7 +257,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(LabelHandle),
                     l4,
                     MetadataTokens.TypeReferenceHandle(1)
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 flow.AddCatchRegion(
                     l1,
@@ -263,7 +266,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     l3,
                     default(LabelHandle),
                     MetadataTokens.TypeReferenceHandle(1)
-                ));
+                )
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tryStart",

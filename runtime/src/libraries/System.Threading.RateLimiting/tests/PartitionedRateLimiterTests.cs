@@ -15,7 +15,8 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                limiter.AttemptAcquire(string.Empty, -1));
+                limiter.AttemptAcquire(string.Empty, -1)
+            );
         }
 
         [Fact]
@@ -23,7 +24,8 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                await limiter.AcquireAsync(string.Empty, -1));
+                await limiter.AcquireAsync(string.Empty, -1)
+            );
         }
 
         [Fact]
@@ -31,7 +33,8 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
             await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await limiter.AcquireAsync(string.Empty, 1, new CancellationToken(true)));
+                await limiter.AcquireAsync(string.Empty, 1, new CancellationToken(true))
+            );
         }
 
         [Fact]
@@ -379,7 +382,8 @@ namespace System.Threading.RateLimiting.Tests
             limiter.AttemptAcquire("2");
 
             var ex = await Assert.ThrowsAsync<AggregateException>(() =>
-                limiter.DisposeAsync().AsTask());
+                limiter.DisposeAsync().AsTask()
+            );
             Assert.Equal(2, ex.InnerExceptions.Count);
         }
 
@@ -613,8 +617,8 @@ namespace System.Threading.RateLimiting.Tests
             innerLimiter2.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
             // Run Timer
-            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
-                Utils.RunTimerFunc(limiter));
+            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter)
+            );
 
             Assert.True(dispose1Called);
             Assert.True(dispose2Called);
@@ -672,8 +676,8 @@ namespace System.Threading.RateLimiting.Tests
             };
             idleLimiter.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
-                Utils.RunTimerFunc(limiter));
+            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter)
+            );
             Assert.Single(ex.InnerExceptions);
 
             // Wait for Timer to run again which will see the throwing TryReplenish and an idle limiter it needs to clean-up

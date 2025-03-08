@@ -19,9 +19,11 @@ namespace System.Diagnostics.Tracing
         public XplatEventLogger() { }
 
         private static readonly Lazy<string?> eventSourceNameFilter = new Lazy<string?>(() =>
-            CompatibilitySwitch.GetValueInternal("EventSourceFilter"));
+            CompatibilitySwitch.GetValueInternal("EventSourceFilter")
+        );
         private static readonly Lazy<string?> eventSourceEventFilter = new Lazy<string?>(() =>
-            CompatibilitySwitch.GetValueInternal("EventNameFilter"));
+            CompatibilitySwitch.GetValueInternal("EventNameFilter")
+        );
 
         private static bool initializedPersistentListener;
 

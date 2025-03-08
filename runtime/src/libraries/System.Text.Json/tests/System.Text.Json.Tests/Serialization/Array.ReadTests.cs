@@ -217,15 +217,18 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Invalid data
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[1,""a""]")));
+                JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[1,""a""]"))
+            );
 
             // Invalid data
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<List<int?>>(Encoding.UTF8.GetBytes(@"[1,""a""]")));
+                JsonSerializer.Deserialize<List<int?>>(Encoding.UTF8.GetBytes(@"[1,""a""]"))
+            );
 
             // Multidimensional arrays currently not supported
             Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<int[,]>(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")));
+                JsonSerializer.Deserialize<int[,]>(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]"))
+            );
         }
 
         public static IEnumerable<object[]> ReadNullJson
@@ -792,7 +795,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() =>
                 JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
                     inputJsonWithNullCollections
-                ));
+                )
+            );
         }
 
         [Fact]

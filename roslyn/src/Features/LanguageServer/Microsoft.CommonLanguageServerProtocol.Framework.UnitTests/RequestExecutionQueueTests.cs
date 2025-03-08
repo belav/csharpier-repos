@@ -74,7 +74,8 @@ public class RequestExecutionQueueTests
                 ThrowingHandler.Name,
                 lspServices,
                 CancellationToken.None
-            ));
+            )
+        );
     }
 
     [Fact]

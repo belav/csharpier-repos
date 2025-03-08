@@ -294,7 +294,8 @@ static class PathExtensions
                                 runners,
                                 recursive,
                                 directories
-                            ))
+                            )
+                        )
                     );
                 }
             }

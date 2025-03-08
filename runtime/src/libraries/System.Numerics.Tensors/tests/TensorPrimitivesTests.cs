@@ -435,11 +435,14 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(x, y, z, destination));
+                TensorPrimitives.AddMultiply(x, y, z, destination)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(x, z, y, destination));
+                TensorPrimitives.AddMultiply(x, z, y, destination)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(z, x, y, destination));
+                TensorPrimitives.AddMultiply(z, x, y, destination)
+            );
         }
 
         [Theory]
@@ -568,9 +571,11 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(x, y, multiplier, destination));
+                TensorPrimitives.AddMultiply(x, y, multiplier, destination)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(y, x, multiplier, destination));
+                TensorPrimitives.AddMultiply(y, x, multiplier, destination)
+            );
         }
 
         [Theory]
@@ -681,9 +686,11 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(x, y, z, destination));
+                TensorPrimitives.AddMultiply(x, y, z, destination)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.AddMultiply(z, y, x, destination));
+                TensorPrimitives.AddMultiply(z, y, x, destination)
+            );
         }
 
         [Theory]
@@ -865,11 +872,14 @@ namespace System.Numerics.Tensors.Tests
                 TensorPrimitives.CosineSimilarity(
                     ReadOnlySpan<float>.Empty,
                     ReadOnlySpan<float>.Empty
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.CosineSimilarity(ReadOnlySpan<float>.Empty, CreateTensor(1)));
+                TensorPrimitives.CosineSimilarity(ReadOnlySpan<float>.Empty, CreateTensor(1))
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.CosineSimilarity(CreateTensor(1), ReadOnlySpan<float>.Empty));
+                TensorPrimitives.CosineSimilarity(CreateTensor(1), ReadOnlySpan<float>.Empty)
+            );
         }
 
         [Theory]
@@ -909,11 +919,14 @@ namespace System.Numerics.Tensors.Tests
         public static void Distance_ThrowsForEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.Distance(ReadOnlySpan<float>.Empty, ReadOnlySpan<float>.Empty));
+                TensorPrimitives.Distance(ReadOnlySpan<float>.Empty, ReadOnlySpan<float>.Empty)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.Distance(ReadOnlySpan<float>.Empty, CreateTensor(1)));
+                TensorPrimitives.Distance(ReadOnlySpan<float>.Empty, CreateTensor(1))
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.Distance(CreateTensor(1), ReadOnlySpan<float>.Empty));
+                TensorPrimitives.Distance(CreateTensor(1), ReadOnlySpan<float>.Empty)
+            );
         }
 
         [Theory]
@@ -1803,7 +1816,8 @@ namespace System.Numerics.Tensors.Tests
         public static void MaxMagnitude_Tensor_ThrowsForEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MaxMagnitude(ReadOnlySpan<float>.Empty));
+                TensorPrimitives.MaxMagnitude(ReadOnlySpan<float>.Empty)
+            );
         }
 
         [Theory]
@@ -1948,10 +1962,10 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> y = CreateAndFillTensor(tensorLength - 1);
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
-            Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MaxMagnitude(x, y, destination));
-            Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MaxMagnitude(y, x, destination));
+            Assert.Throws<ArgumentException>(() => TensorPrimitives.MaxMagnitude(x, y, destination)
+            );
+            Assert.Throws<ArgumentException>(() => TensorPrimitives.MaxMagnitude(y, x, destination)
+            );
         }
 
         [Theory]
@@ -2213,7 +2227,8 @@ namespace System.Numerics.Tensors.Tests
         public static void MinMagnitude_Tensor_ThrowsForEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MinMagnitude(ReadOnlySpan<float>.Empty));
+                TensorPrimitives.MinMagnitude(ReadOnlySpan<float>.Empty)
+            );
         }
 
         [Theory]
@@ -2356,10 +2371,10 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> y = CreateAndFillTensor(tensorLength - 1);
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
-            Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MinMagnitude(x, y, destination));
-            Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MinMagnitude(y, x, destination));
+            Assert.Throws<ArgumentException>(() => TensorPrimitives.MinMagnitude(x, y, destination)
+            );
+            Assert.Throws<ArgumentException>(() => TensorPrimitives.MinMagnitude(y, x, destination)
+            );
         }
 
         [Theory]
@@ -2623,11 +2638,14 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MultiplyAdd(x, y, z, destination));
+                TensorPrimitives.MultiplyAdd(x, y, z, destination)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MultiplyAdd(x, z, y, destination));
+                TensorPrimitives.MultiplyAdd(x, z, y, destination)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.MultiplyAdd(z, x, y, destination));
+                TensorPrimitives.MultiplyAdd(z, x, y, destination)
+            );
         }
 
         [Theory]
@@ -2996,7 +3014,8 @@ namespace System.Numerics.Tensors.Tests
         public static void Product_ThrowsForEmpty()
         {
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.Product(ReadOnlySpan<float>.Empty));
+                TensorPrimitives.Product(ReadOnlySpan<float>.Empty)
+            );
         }
 
         [Theory]
@@ -3039,15 +3058,20 @@ namespace System.Numerics.Tensors.Tests
                 TensorPrimitives.ProductOfDifferences(
                     ReadOnlySpan<float>.Empty,
                     ReadOnlySpan<float>.Empty
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfDifferences(ReadOnlySpan<float>.Empty, CreateTensor(1)));
+                TensorPrimitives.ProductOfDifferences(ReadOnlySpan<float>.Empty, CreateTensor(1))
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfDifferences(CreateTensor(1), ReadOnlySpan<float>.Empty));
+                TensorPrimitives.ProductOfDifferences(CreateTensor(1), ReadOnlySpan<float>.Empty)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfDifferences(CreateTensor(44), CreateTensor(43)));
+                TensorPrimitives.ProductOfDifferences(CreateTensor(44), CreateTensor(43))
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfDifferences(CreateTensor(43), CreateTensor(44)));
+                TensorPrimitives.ProductOfDifferences(CreateTensor(43), CreateTensor(44))
+            );
         }
 
         [Theory]
@@ -3089,18 +3113,20 @@ namespace System.Numerics.Tensors.Tests
         public static void ProductOfSums_ThrowsForEmptyAndMismatchedLengths()
         {
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfSums(
-                    ReadOnlySpan<float>.Empty,
-                    ReadOnlySpan<float>.Empty
-                ));
+                TensorPrimitives.ProductOfSums(ReadOnlySpan<float>.Empty, ReadOnlySpan<float>.Empty)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfSums(ReadOnlySpan<float>.Empty, CreateTensor(1)));
+                TensorPrimitives.ProductOfSums(ReadOnlySpan<float>.Empty, CreateTensor(1))
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfSums(CreateTensor(1), ReadOnlySpan<float>.Empty));
+                TensorPrimitives.ProductOfSums(CreateTensor(1), ReadOnlySpan<float>.Empty)
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfSums(CreateTensor(44), CreateTensor(43)));
+                TensorPrimitives.ProductOfSums(CreateTensor(44), CreateTensor(43))
+            );
             Assert.Throws<ArgumentException>(() =>
-                TensorPrimitives.ProductOfSums(CreateTensor(43), CreateTensor(44)));
+                TensorPrimitives.ProductOfSums(CreateTensor(43), CreateTensor(44))
+            );
         }
 
         [Theory]
@@ -3236,7 +3262,8 @@ namespace System.Numerics.Tensors.Tests
         public static void Sigmoid_ThrowsForEmptyInput()
         {
             AssertExtensions.Throws<ArgumentException>(() =>
-                TensorPrimitives.Sigmoid(ReadOnlySpan<float>.Empty, CreateTensor(1)));
+                TensorPrimitives.Sigmoid(ReadOnlySpan<float>.Empty, CreateTensor(1))
+            );
         }
 
         [Fact]
@@ -3436,7 +3463,8 @@ namespace System.Numerics.Tensors.Tests
         public static void SoftMax_ThrowsForEmptyInput()
         {
             AssertExtensions.Throws<ArgumentException>(() =>
-                TensorPrimitives.SoftMax(ReadOnlySpan<float>.Empty, CreateTensor(1)));
+                TensorPrimitives.SoftMax(ReadOnlySpan<float>.Empty, CreateTensor(1))
+            );
         }
 
         [Fact]

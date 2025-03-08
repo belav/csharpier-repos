@@ -51,7 +51,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         {
             Assert.Throws<InvalidCastException>(() => new ServiceNameCollection(new[] { 1 }));
             Assert.Throws<InvalidCastException>(() =>
-                new ServiceNameCollection(new[] { new object() }));
+                new ServiceNameCollection(new[] { new object() })
+            );
         }
 
         [Fact]

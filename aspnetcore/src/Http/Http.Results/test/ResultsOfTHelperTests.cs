@@ -101,7 +101,8 @@ public class ResultsOfTHelperTests
             {
                 // Improve with https://github.com/dotnet/aspnetcore/issues/46267
                 Assert.Throws<InvalidOperationException>(() =>
-                    GetMetadata<DefaultInterfaceMethodEndpointMetadataProvider>());
+                    GetMetadata<DefaultInterfaceMethodEndpointMetadataProvider>()
+                );
             },
             options
         );

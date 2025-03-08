@@ -70,24 +70,25 @@ public class SqlServerDatabaseFacadeExtensionsTest
     public void Setting_CommandTimeout_to_negative_value_throws()
     {
         Assert.Throws<InvalidOperationException>(() =>
-            new DbContextOptionsBuilder().UseSqlServer(
-                "No=LoveyDovey",
-                b => b.CommandTimeout(-55)
-            ));
+            new DbContextOptionsBuilder().UseSqlServer("No=LoveyDovey", b => b.CommandTimeout(-55))
+        );
 
         using var context = new TimeoutContext();
         Assert.Null(context.Database.GetCommandTimeout());
 
         Assert.Throws<ArgumentException>(() => context.Database.SetCommandTimeout(-3));
         Assert.Throws<ArgumentException>(() =>
-            context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-3)));
+            context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-3))
+        );
 
         Assert.Throws<ArgumentException>(() => context.Database.SetCommandTimeout(-99));
         Assert.Throws<ArgumentException>(() =>
-            context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-99)));
+            context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-99))
+        );
 
         Assert.Throws<ArgumentException>(() =>
-            context.Database.SetCommandTimeout(TimeSpan.FromSeconds(uint.MaxValue)));
+            context.Database.SetCommandTimeout(TimeSpan.FromSeconds(uint.MaxValue))
+        );
     }
 
     public class TimeoutContext : DbContext

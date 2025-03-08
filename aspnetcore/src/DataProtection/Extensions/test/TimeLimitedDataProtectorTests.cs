@@ -183,7 +183,8 @@ public class TimeLimitedDataProtectorTests
 
         // Act & assert
         var ex = Assert.Throws<CryptographicException>(() =>
-            timeLimitedProtector.UnprotectCore(new byte[] { 0x10, 0x11 }, now, out var _));
+            timeLimitedProtector.UnprotectCore(new byte[] { 0x10, 0x11 }, now, out var _)
+        );
 
         // Assert
         Assert.Equal(
@@ -219,7 +220,8 @@ public class TimeLimitedDataProtectorTests
 
         // Act & assert
         var ex = Assert.Throws<CryptographicException>(() =>
-            timeLimitedProtector.Unprotect(new byte[] { 0x10, 0x11 }, out var _));
+            timeLimitedProtector.Unprotect(new byte[] { 0x10, 0x11 }, out var _)
+        );
 
         // Assert
         Assert.Equal(ExtResources.TimeLimitedDataProtector_PayloadInvalid, ex.Message);
@@ -240,7 +242,8 @@ public class TimeLimitedDataProtectorTests
 
         // Act & assert
         var ex = Assert.Throws<CryptographicException>(() =>
-            timeLimitedProtector.Unprotect(new byte[] { 0x10, 0x11 }, out var _));
+            timeLimitedProtector.Unprotect(new byte[] { 0x10, 0x11 }, out var _)
+        );
 
         // Assert
         Assert.Equal(Resources.CryptCommon_GenericError, ex.Message);
@@ -279,9 +282,11 @@ public class TimeLimitedDataProtectorTests
 
         // the two providers shouldn't be able to talk to one another (due to the purpose chaining)
         Assert.Throws<CryptographicException>(() =>
-            ephemeralProtector.Unprotect(timeLimitedProtectedPayload));
+            ephemeralProtector.Unprotect(timeLimitedProtectedPayload)
+        );
         Assert.Throws<CryptographicException>(() =>
-            timeLimitedProtector.Unprotect(ephemeralProtectedPayload, out actualExpiration));
+            timeLimitedProtector.Unprotect(ephemeralProtectedPayload, out actualExpiration)
+        );
     }
 
     private static DateTime StringToDateTime(string input)

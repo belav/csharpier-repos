@@ -419,7 +419,8 @@ namespace System.Net.Tests
                 if (willBlock)
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock));
+                        response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock)
+                    );
                 }
                 else
                 {
@@ -427,7 +428,8 @@ namespace System.Net.Tests
                     // depending on timing. This is because any exceptions are swallowed up by NonBlockingCloseCallback,
                     // but the response could have closed before that.
                     Assert.ThrowsAny<InvalidOperationException>(() =>
-                        response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock));
+                        response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock)
+                    );
                 }
 
                 string clientResponse = GetClientResponse(110);

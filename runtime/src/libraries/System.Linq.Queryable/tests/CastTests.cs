@@ -134,7 +134,8 @@ namespace System.Linq.Tests
         public void ArrayConversionThrows()
         {
             Assert.Throws<InvalidCastException>(() =>
-                new[] { -4 }.AsQueryable().Cast<long>().ToList());
+                new[] { -4 }.AsQueryable().Cast<long>().ToList()
+            );
         }
 
         [Fact]

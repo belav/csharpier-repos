@@ -77,7 +77,8 @@ namespace System.Runtime.InteropServices.Tests
             secureString.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                Marshal.SecureStringToGlobalAllocAnsi(secureString));
+                Marshal.SecureStringToGlobalAllocAnsi(secureString)
+            );
         }
 
         private static SecureString ToSecureString(string data)

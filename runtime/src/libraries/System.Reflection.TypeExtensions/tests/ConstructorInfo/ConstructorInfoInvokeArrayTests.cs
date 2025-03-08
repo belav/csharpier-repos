@@ -19,7 +19,8 @@ namespace System.Reflection.Tests
             for (int j = 0; j < blength.Length; j++)
             {
                 Exception ex = Assert.Throws<TargetInvocationException>(() =>
-                    constructor.Invoke(new object[] { blength[j] }));
+                    constructor.Invoke(new object[] { blength[j] })
+                );
 
                 Assert.IsType<OverflowException>(ex.InnerException);
             }
@@ -56,7 +57,8 @@ namespace System.Reflection.Tests
                             for (int j = 0; j < invalidLengths.Length; j++)
                             {
                                 Exception ex = Assert.Throws<TargetInvocationException>(() =>
-                                    constructors[i].Invoke(new object[] { invalidLengths[j] }));
+                                    constructors[i].Invoke(new object[] { invalidLengths[j] })
+                                );
 
                                 Assert.IsType<OverflowException>(ex.InnerException);
                             }
@@ -90,7 +92,8 @@ namespace System.Reflection.Tests
                                                 invalidLowerBounds[j],
                                                 invalidLengths[j],
                                             }
-                                        ));
+                                        )
+                                );
 
                                 Assert.IsType<OverflowException>(ex.InnerException);
                             }
@@ -145,7 +148,8 @@ namespace System.Reflection.Tests
                                     constructors[i]
                                         .Invoke(
                                             new object[] { invalidLengths1[j], invalidLengths2[j] }
-                                        ));
+                                        )
+                                );
 
                                 Assert.IsType<OverflowException>(ex.InnerException);
                             }
@@ -194,7 +198,8 @@ namespace System.Reflection.Tests
                                                 invalidLowerBounds2[j],
                                                 invalidLengths4[j],
                                             }
-                                        ));
+                                        )
+                                );
 
                                 Assert.IsType<OverflowException>(ex.InnerException);
                             }
@@ -330,7 +335,8 @@ namespace System.Reflection.Tests
             ConstructorInfo[] cia = TypeExtensions.GetConstructors(type);
             Assert.Equal(2, cia.Length);
             Assert.Throws<TypeLoadException>(() =>
-                Type.GetType($"System.Type[{new string(',', 42)}]"));
+                Type.GetType($"System.Type[{new string(',', 42)}]")
+            );
         }
 
         [Fact]
@@ -350,7 +356,8 @@ namespace System.Reflection.Tests
                             for (int j = 0; j < invalidLengths.Length; j++)
                             {
                                 Exception ex = Assert.Throws<TargetInvocationException>(() =>
-                                    constructors[i].Invoke(new object[] { invalidLengths[j] }));
+                                    constructors[i].Invoke(new object[] { invalidLengths[j] })
+                                );
 
                                 Assert.IsType<OverflowException>(ex.InnerException);
                             }
@@ -376,7 +383,8 @@ namespace System.Reflection.Tests
                                     constructors[i]
                                         .Invoke(
                                             new object[] { invalidLengths1[j], invalidLengths2[j] }
-                                        ));
+                                        )
+                                );
 
                                 Assert.IsType<OverflowException>(ex.InnerException);
                             }

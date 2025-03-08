@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.U
         public void OpenStream_Errors()
         {
             Assert.Throws<ArgumentException>(() =>
-                new CompilationOutputFilesWithImplicitPdbPath(@"a.dll"));
+                new CompilationOutputFilesWithImplicitPdbPath(@"a.dll")
+            );
         }
 
         [Theory]

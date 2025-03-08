@@ -196,7 +196,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     position.Character,
                     options,
                     cancellationToken
-                ));
+                )
+            );
         }
 
         protected bool TryNavigateToItem(
@@ -218,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 {
                     // We couldn't find a document ID when the item was created, so it may be a source generator output.
                     var documents = ThreadingContext.JoinableTaskFactory.Run(() =>
-                        project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask());
+                        project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask()
+                    );
                     var projectDirectory = Path.GetDirectoryName(project.FilePath);
                     documentId = documents
                         .FirstOrDefault(document =>

@@ -142,13 +142,15 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateByte(byte value)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Negate(Expression.Constant(value, typeof(byte))));
+                Expression.Negate(Expression.Constant(value, typeof(byte)))
+            );
         }
 
         private static void VerifyArithmeticNegateChar(char value)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Negate(Expression.Constant(value, typeof(char))));
+                Expression.Negate(Expression.Constant(value, typeof(char)))
+            );
         }
 
         private static void VerifyArithmeticNegateDecimal(decimal value, bool useInterpreter)
@@ -204,7 +206,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticNegateSByte(sbyte value)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Negate(Expression.Constant(value, typeof(sbyte))));
+                Expression.Negate(Expression.Constant(value, typeof(sbyte)))
+            );
         }
 
         private static void VerifyArithmeticNegateShort(short value, bool useInterpreter)

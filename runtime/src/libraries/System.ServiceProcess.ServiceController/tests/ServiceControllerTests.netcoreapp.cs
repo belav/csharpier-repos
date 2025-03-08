@@ -28,7 +28,8 @@ namespace System.ServiceProcess.Tests
                 _testService.ControlTimeout
             );
             Assert.Throws<InvalidOperationException>(() =>
-                prerequisiteServiceController.Stop(stopDependentServices: false));
+                prerequisiteServiceController.Stop(stopDependentServices: false)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]

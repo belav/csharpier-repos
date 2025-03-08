@@ -718,7 +718,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>());
+                serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>()
+            );
 
             // Assert
             Assert.Equal(

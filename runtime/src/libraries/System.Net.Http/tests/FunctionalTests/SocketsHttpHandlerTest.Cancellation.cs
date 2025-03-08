@@ -32,7 +32,8 @@ namespace System.Net.Http.Functional.Tests
                     TestAsync,
                     new HttpRequestMessage(HttpMethod.Get, uri) { Version = UseVersion },
                     default
-                ));
+                )
+            );
             sw.Stop();
 
             Assert.IsType<TimeoutException>(oce.InnerException);
@@ -450,7 +451,8 @@ namespace System.Net.Http.Functional.Tests
 
             await Assert
                 .ThrowsAnyAsync<TaskCanceledException>(() =>
-                    client.GetAsync("https://dummy", requestCts.Token))
+                    client.GetAsync("https://dummy", requestCts.Token)
+                )
                 .WaitAsync(TestHelper.PassingTestTimeout);
 
             await requestCanceledTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
@@ -509,7 +511,8 @@ namespace System.Net.Http.Functional.Tests
 
                         await Assert
                             .ThrowsAnyAsync<TaskCanceledException>(() =>
-                                client.GetAsync("https://dummy", requestCts.Token))
+                                client.GetAsync("https://dummy", requestCts.Token)
+                            )
                             .WaitAsync(TestHelper.PassingTestTimeout);
 
                         await connectionTestTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);

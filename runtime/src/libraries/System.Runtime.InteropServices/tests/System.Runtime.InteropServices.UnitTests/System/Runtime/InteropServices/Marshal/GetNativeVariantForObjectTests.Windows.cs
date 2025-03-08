@@ -226,9 +226,11 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 Assert.Throws<InvalidCastException>(() =>
-                    Marshal.GetNativeVariantForObject(obj, pNative));
+                    Marshal.GetNativeVariantForObject(obj, pNative)
+                );
                 Assert.Throws<InvalidCastException>(() =>
-                    Marshal.GetNativeVariantForObject<object>(obj, pNative));
+                    Marshal.GetNativeVariantForObject<object>(obj, pNative)
+                );
             }
             finally
             {

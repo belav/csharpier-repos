@@ -11,22 +11,29 @@ namespace System.Reflection.PortableExecutable.Tests
         public void Ctor_Errors()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(sectionAlignment: 0));
+                new PEHeaderBuilder(sectionAlignment: 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => new PEHeaderBuilder(fileAlignment: 0));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(sectionAlignment: 512, fileAlignment: 1024));
+                new PEHeaderBuilder(sectionAlignment: 512, fileAlignment: 1024)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(sectionAlignment: 513));
+                new PEHeaderBuilder(sectionAlignment: 513)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(sectionAlignment: int.MinValue));
+                new PEHeaderBuilder(sectionAlignment: int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() => new PEHeaderBuilder(fileAlignment: 513)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(fileAlignment: 513));
+                new PEHeaderBuilder(fileAlignment: 64 * 1024 * 2)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(fileAlignment: 64 * 1024 * 2));
+                new PEHeaderBuilder(fileAlignment: int.MaxValue)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(fileAlignment: int.MaxValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PEHeaderBuilder(fileAlignment: int.MinValue));
+                new PEHeaderBuilder(fileAlignment: int.MinValue)
+            );
         }
 
         [Fact]

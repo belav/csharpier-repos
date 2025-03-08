@@ -35,7 +35,8 @@ namespace System.Text.Json.SourceGeneration
             // In practice this should still be ok as the generator driver itself will
             // cancel after every file it processes.
             context.RegisterForSyntaxNotifications(static () =>
-                new SyntaxContextReceiver(CancellationToken.None));
+                new SyntaxContextReceiver(CancellationToken.None)
+            );
         }
 
         /// <summary>

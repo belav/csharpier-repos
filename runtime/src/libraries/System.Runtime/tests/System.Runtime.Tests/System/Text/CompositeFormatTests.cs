@@ -168,7 +168,8 @@ namespace System.Text.Tests
                         null,
                         cf,
                         Enumerable.Repeat((object)"arg", expected - 1).ToArray()
-                    ));
+                    )
+                );
             }
         }
 
@@ -367,11 +368,13 @@ namespace System.Text.Tests
                     break;
                 case 2:
                     Assert.Throws<FormatException>(() =>
-                        string.Format(provider, cf, args[0], args[1]));
+                        string.Format(provider, cf, args[0], args[1])
+                    );
                     break;
                 case 3:
                     Assert.Throws<FormatException>(() =>
-                        string.Format(provider, cf, args[0], args[1], args[2]));
+                        string.Format(provider, cf, args[0], args[1], args[2])
+                    );
                     break;
             }
         }
@@ -400,11 +403,13 @@ namespace System.Text.Tests
                     break;
                 case 2:
                     Assert.Throws<FormatException>(() =>
-                        sb.AppendFormat(provider, cf, args[0], args[1]));
+                        sb.AppendFormat(provider, cf, args[0], args[1])
+                    );
                     break;
                 case 3:
                     Assert.Throws<FormatException>(() =>
-                        sb.AppendFormat(provider, cf, args[0], args[1], args[2]));
+                        sb.AppendFormat(provider, cf, args[0], args[1], args[2])
+                    );
                     break;
             }
         }
@@ -426,16 +431,19 @@ namespace System.Text.Tests
             char[] dest = new char[1024];
 
             Assert.Throws<FormatException>(() =>
-                new Span<char>(dest).TryWrite(provider, cf, out _, args));
+                new Span<char>(dest).TryWrite(provider, cf, out _, args)
+            );
             switch (args.Length)
             {
                 case 1:
                     Assert.Throws<FormatException>(() =>
-                        new Span<char>(dest).TryWrite(provider, cf, out _, args[0]));
+                        new Span<char>(dest).TryWrite(provider, cf, out _, args[0])
+                    );
                     break;
                 case 2:
                     Assert.Throws<FormatException>(() =>
-                        new Span<char>(dest).TryWrite(provider, cf, out _, args[0], args[1]));
+                        new Span<char>(dest).TryWrite(provider, cf, out _, args[0], args[1])
+                    );
                     break;
                 case 3:
                     Assert.Throws<FormatException>(() =>
@@ -446,7 +454,8 @@ namespace System.Text.Tests
                             args[0],
                             args[1],
                             args[2]
-                        ));
+                        )
+                    );
                     break;
             }
         }

@@ -153,7 +153,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     new Guid().ToString("D"),
                     StoreLocation.CurrentUser,
                     OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly
-                ));
+                )
+            );
         }
 #endif
 
@@ -200,7 +201,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             )
             {
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    store.Open(OpenFlags.OpenExistingOnly));
+                    store.Open(OpenFlags.OpenExistingOnly)
+                );
             }
         }
 
@@ -416,7 +418,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
             {
                 Exception e = Assert.Throws<CryptographicException>(() =>
-                    store.Open(OpenFlags.ReadOnly));
+                    store.Open(OpenFlags.ReadOnly)
+                );
                 Assert.NotNull(e.InnerException);
                 Assert.IsType<PlatformNotSupportedException>(e.InnerException);
             }
@@ -438,7 +441,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 if (shouldThrow)
                 {
                     Exception e = Assert.Throws<CryptographicException>(() =>
-                        store.Open(permissions));
+                        store.Open(permissions)
+                    );
                     Assert.NotNull(e.InnerException);
                     Assert.IsType<PlatformNotSupportedException>(e.InnerException);
                 }

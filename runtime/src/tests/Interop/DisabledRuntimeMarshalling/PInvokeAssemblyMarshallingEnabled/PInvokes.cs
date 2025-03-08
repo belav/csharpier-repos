@@ -92,7 +92,8 @@ public class PInvokes
                 new StructWithShortAndBool(s, b),
                 s,
                 b
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -106,7 +107,8 @@ public class PInvokes
                 new StructWithShortAndGeneric<char>(s, c),
                 s,
                 c
-            ));
+            )
+        );
     }
 
     [Fact]

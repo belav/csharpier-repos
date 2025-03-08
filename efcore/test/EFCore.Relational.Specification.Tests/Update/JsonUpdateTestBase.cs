@@ -3552,7 +3552,8 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                     ),
                     (
                         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await context.SaveChangesAsync())
+                            await context.SaveChangesAsync()
+                        )
                     ).Message
                 );
             }

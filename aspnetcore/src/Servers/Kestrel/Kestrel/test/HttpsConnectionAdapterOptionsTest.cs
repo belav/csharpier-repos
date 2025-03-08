@@ -47,7 +47,8 @@ public class HttpsConnectionAdapterOptionsTests
     public void HandshakeTimeoutInvalid(TimeSpan value)
     {
         var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new HttpsConnectionAdapterOptions { HandshakeTimeout = value });
+            new HttpsConnectionAdapterOptions { HandshakeTimeout = value }
+        );
 
         Assert.Equal("value", exception.ParamName);
         Assert.StartsWith(CoreStrings.PositiveTimeSpanRequired, exception.Message);

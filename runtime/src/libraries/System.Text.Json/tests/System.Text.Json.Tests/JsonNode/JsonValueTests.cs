@@ -292,7 +292,8 @@ namespace System.Text.Json.Nodes.Tests
         {
             using (JsonDocument document = JsonDocument.Parse(json))
                 Assert.Throws<InvalidOperationException>(() =>
-                    JsonValue.Create(document.RootElement));
+                    JsonValue.Create(document.RootElement)
+                );
         }
 
         [Fact]

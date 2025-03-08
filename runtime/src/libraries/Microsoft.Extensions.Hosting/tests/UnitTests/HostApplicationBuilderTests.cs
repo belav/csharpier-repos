@@ -747,11 +747,14 @@ namespace Microsoft.Extensions.Hosting.Tests
             using IHost host = builder.Build();
 
             Assert.Throws<InvalidOperationException>(() =>
-                builder.Services.AddSingleton(new ServiceA()));
+                builder.Services.AddSingleton(new ServiceA())
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                builder.Services.Remove(ServiceDescriptor.Singleton(new ServiceA())));
+                builder.Services.Remove(ServiceDescriptor.Singleton(new ServiceA()))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                builder.Services[0] = ServiceDescriptor.Singleton(new ServiceA()));
+                builder.Services[0] = ServiceDescriptor.Singleton(new ServiceA())
+            );
             Assert.Throws<InvalidOperationException>(() => builder.Services.Clear());
             Assert.Throws<InvalidOperationException>(() => builder.Services.RemoveAt(0));
         }

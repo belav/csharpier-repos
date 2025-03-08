@@ -36,7 +36,8 @@ namespace System.Data.Common
         {
             ClearRegisteredFactories();
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory("System.Data.SqlClient"));
+                DbProviderFactories.GetFactory("System.Data.SqlClient")
+            );
         }
 
         [Fact]
@@ -47,7 +48,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
             DbProviderFactory factory = DbProviderFactories.GetFactory("System.Data.SqlClient");
             Assert.NotNull(factory);
             Assert.Equal(typeof(System.Data.SqlClient.SqlClientFactory), factory.GetType());
@@ -62,7 +64,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
             DbProviderFactory factory = DbProviderFactories.GetFactory(
                 new System.Data.SqlClient.SqlConnection()
             );
@@ -79,7 +82,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -90,7 +94,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory).AssemblyQualifiedName
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -101,7 +106,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -112,7 +118,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     System.Data.SqlClient.SqlClientFactory.Instance
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -120,12 +127,14 @@ namespace System.Data.Common
         {
             ClearRegisteredFactories();
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory("System.Data.SqlClient"));
+                DbProviderFactories.GetFactory("System.Data.SqlClient")
+            );
             Assert.Throws<ArgumentException>(() =>
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlConnection)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -133,12 +142,14 @@ namespace System.Data.Common
         {
             ClearRegisteredFactories();
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory("System.Data.SqlClient"));
+                DbProviderFactories.GetFactory("System.Data.SqlClient")
+            );
             Assert.Throws<ArgumentException>(() =>
                 DbProviderFactories.RegisterFactory(
                     string.Empty,
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -149,7 +160,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory).AssemblyQualifiedName
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -157,7 +169,8 @@ namespace System.Data.Common
         {
             ClearRegisteredFactories();
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory("System.Data.SqlClient"));
+                DbProviderFactories.GetFactory("System.Data.SqlClient")
+            );
             DataTable providerTable = DbProviderFactories.GetFactoryClasses();
             Assert.Equal(0, providerTable.Rows.Count);
             // register the connection type which is the wrong type. Registraton should succeed, as type registration/checking is deferred.
@@ -169,9 +182,11 @@ namespace System.Data.Common
             Assert.Equal(1, providerTable.Rows.Count);
             // obtaining the factory will kick in the checks of the registered type name, which will cause exceptions. The checks were deferred till the GetFactory() call.
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory(providerTable.Rows[0]));
+                DbProviderFactories.GetFactory(providerTable.Rows[0])
+            );
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory("System.Data.SqlClient"));
+                DbProviderFactories.GetFactory("System.Data.SqlClient")
+            );
         }
 
         [Fact]
@@ -182,7 +197,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     System.Data.SqlClient.SqlClientFactory.Instance
-                ));
+                )
+            );
             Assert.True(DbProviderFactories.UnregisterFactory("System.Data.SqlClient"));
             DataTable providerTable = DbProviderFactories.GetFactoryClasses();
             Assert.Equal(0, providerTable.Rows.Count);
@@ -199,7 +215,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     System.Data.SqlClient.SqlClientFactory.Instance
-                ));
+                )
+            );
             Assert.True(
                 DbProviderFactories.TryGetFactory(
                     "System.Data.SqlClient",
@@ -219,7 +236,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
             DbProviderFactories.RegisterFactory(
                 "System.Data.SqlClient",
                 typeof(TestProviderFactory)
@@ -240,7 +258,8 @@ namespace System.Data.Common
                 DbProviderFactories.RegisterFactory(
                     "System.Data.SqlClient",
                     typeof(System.Data.SqlClient.SqlClientFactory)
-                ));
+                )
+            );
             DbProviderFactories.RegisterFactory(
                 "System.Data.Common.TestProvider",
                 typeof(TestProviderFactory)
@@ -271,7 +290,8 @@ namespace System.Data.Common
         {
             Assert.NotNull(registrationFunc);
             Assert.Throws<ArgumentException>(() =>
-                DbProviderFactories.GetFactory("System.Data.SqlClient"));
+                DbProviderFactories.GetFactory("System.Data.SqlClient")
+            );
             DataTable providerTable = DbProviderFactories.GetFactoryClasses();
             Assert.Equal(0, providerTable.Rows.Count);
             registrationFunc();

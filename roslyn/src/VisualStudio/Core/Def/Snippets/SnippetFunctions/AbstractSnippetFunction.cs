@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         )
         {
             var (ExitCode, Value, HasDefaultValue) = _threadingContext.JoinableTaskFactory.Run(() =>
-                GetDefaultValueAsync(cancellationToken));
+                GetDefaultValueAsync(cancellationToken)
+            );
             value = Value;
             hasDefaultValue = HasDefaultValue;
             return ExitCode;
@@ -70,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         )
         {
             var (ExitCode, Value, HasCurrentValue) = _threadingContext.JoinableTaskFactory.Run(() =>
-                GetCurrentValueAsync(cancellationToken));
+                GetCurrentValueAsync(cancellationToken)
+            );
             value = Value;
             hasCurrentValue = HasCurrentValue;
             return ExitCode;

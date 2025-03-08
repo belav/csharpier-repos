@@ -192,7 +192,8 @@ namespace System.ComponentModel.Design.Tests
                                     deserializeMethod.Invoke(
                                         null,
                                         new object[] { stream, key, runtimeLicenseContext }
-                                    ));
+                                    )
+                                );
                             Assert.IsType<NotSupportedException>(exception.InnerException);
                         }
                     },

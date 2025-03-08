@@ -104,7 +104,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 {
                     // Since the directory was explicitly deleted already, this should fail.
                     Assert.Throws<CryptographicException>(() =>
-                        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly));
+                        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly)
+                    );
                 }
             );
         }

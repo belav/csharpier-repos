@@ -20,7 +20,8 @@ namespace System.Management.Tests
             Assert.Throws<PlatformNotSupportedException>(() =>
                 new ManagementObject(
                     $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]

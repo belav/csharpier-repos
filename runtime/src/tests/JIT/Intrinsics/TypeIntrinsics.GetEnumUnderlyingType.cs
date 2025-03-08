@@ -57,7 +57,8 @@ public class GetEnumUnderlyingType
         AssertThrowsNullReferenceException(() => NoInline(null).GetEnumUnderlyingType());
 
         AssertThrowsArgumentException(() =>
-            typeof(GenericEnumClass<>).GetGenericArguments()[0].GetEnumUnderlyingType());
+            typeof(GenericEnumClass<>).GetGenericArguments()[0].GetEnumUnderlyingType()
+        );
     }
 
     public enum SByteEnum : sbyte { }

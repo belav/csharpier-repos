@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
                     oldRoot,
                     newRoot,
                     new[] { KeyValuePairUtil.Create(x1, x1) }
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentException>(() =>
                 TestTreeComparer.Instance.ComputeMatch(
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
                         KeyValuePairUtil.Create(x1, x2),
                         KeyValuePairUtil.Create(x1, new TestNode(0, 0)),
                     }
-                ));
+                )
+            );
         }
 
         [Fact]

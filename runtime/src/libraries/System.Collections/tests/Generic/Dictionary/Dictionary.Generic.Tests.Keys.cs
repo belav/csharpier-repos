@@ -49,7 +49,8 @@ namespace System.Collections.Tests
         public void Dictionary_Generic_KeyCollection_Constructor_NullDictionary()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new Dictionary<string, string>.KeyCollection(null));
+                new Dictionary<string, string>.KeyCollection(null)
+            );
         }
 
         [Theory]

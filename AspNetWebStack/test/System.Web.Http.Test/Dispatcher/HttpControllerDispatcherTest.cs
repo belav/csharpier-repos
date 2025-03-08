@@ -241,7 +241,8 @@ namespace System.Web.Http.Dispatcher
 
                 // Act
                 await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                    product.SendAsync(expectedRequest, cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -336,7 +337,8 @@ namespace System.Web.Http.Dispatcher
 
                 // Act
                 await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                    product.SendAsync(expectedRequest, cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -407,7 +409,8 @@ namespace System.Web.Http.Dispatcher
 
                 // Act & Assert
                 await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                    product.SendAsync(expectedRequest, cancellationToken)
+                );
             }
         }
 
@@ -453,7 +456,8 @@ namespace System.Web.Http.Dispatcher
 
                 // Act & Assert
                 var exception = await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(request, cancellationToken));
+                    product.SendAsync(request, cancellationToken)
+                );
 
                 Assert.Same(exceptionInfo.SourceException, exception);
                 Assert.NotNull(exception.StackTrace);

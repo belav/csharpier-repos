@@ -46,7 +46,8 @@ namespace System.Collections.Tests
         public void SortedDictionary_Generic_KeyCollection_Constructor_NullDictionary()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SortedDictionary<string, string>.KeyCollection(null));
+                new SortedDictionary<string, string>.KeyCollection(null)
+            );
         }
 
         [Theory]

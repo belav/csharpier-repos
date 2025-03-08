@@ -80,7 +80,8 @@ namespace System.Security.Cryptography.Cose.Tests
         )
         {
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                CoseMessage.DecodeMultiSign(ByteUtils.HexToByteArray(hexCborMessage)));
+                CoseMessage.DecodeMultiSign(ByteUtils.HexToByteArray(hexCborMessage))
+            );
             if (shouldContainInnerException) // if the duplicate headers were in one bucket the exception comes from CborReader because we use CborConformanceMode.Strict.
             {
                 Assert.IsType<CborContentException>(ex.InnerException);
@@ -103,7 +104,8 @@ namespace System.Security.Cryptography.Cose.Tests
         public void DecodeMultiSign_IncorrectTag(string hexCborMessage)
         {
             Assert.Throws<CryptographicException>(() =>
-                CoseMessage.DecodeMultiSign(ByteUtils.HexToByteArray(hexCborMessage)));
+                CoseMessage.DecodeMultiSign(ByteUtils.HexToByteArray(hexCborMessage))
+            );
         }
 
         [Fact]
@@ -116,8 +118,8 @@ namespace System.Security.Cryptography.Cose.Tests
             writer.WriteNull();
             writer.WriteNull();
             writer.WriteEndArray();
-            Assert.Throws<CryptographicException>(() =>
-                CoseMessage.DecodeMultiSign(writer.Encode()));
+            Assert.Throws<CryptographicException>(() => CoseMessage.DecodeMultiSign(writer.Encode())
+            );
         }
 
         [Theory]
@@ -164,7 +166,8 @@ namespace System.Security.Cryptography.Cose.Tests
         {
             byte[] cborPayload = ByteUtils.HexToByteArray(hexCborPayload);
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                CoseMessage.DecodeMultiSign(cborPayload));
+                CoseMessage.DecodeMultiSign(cborPayload)
+            );
             Assert.IsType<CborContentException>(ex.InnerException);
         }
 
@@ -186,7 +189,8 @@ namespace System.Security.Cryptography.Cose.Tests
         {
             byte[] cborPayload = ByteUtils.HexToByteArray(hexCborPayload);
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                CoseMessage.DecodeMultiSign(cborPayload));
+                CoseMessage.DecodeMultiSign(cborPayload)
+            );
         }
 
         [Theory]
@@ -200,7 +204,8 @@ namespace System.Security.Cryptography.Cose.Tests
         {
             byte[] cborPayload = ByteUtils.HexToByteArray(hexCborPayload);
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                CoseMessage.DecodeMultiSign(cborPayload));
+                CoseMessage.DecodeMultiSign(cborPayload)
+            );
             Assert.Null(ex.InnerException);
         }
     }

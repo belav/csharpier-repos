@@ -47,11 +47,14 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                 // KeySize must equal EffectiveKeySize
                 rc2.KeySize = 48;
                 Assert.Throws<CryptographicUnexpectedOperationException>(() =>
-                    rc2.EffectiveKeySize = 48 + 8);
+                    rc2.EffectiveKeySize = 48 + 8
+                );
                 Assert.Throws<CryptographicUnexpectedOperationException>(() =>
-                    rc2.EffectiveKeySize = 48 - 8);
+                    rc2.EffectiveKeySize = 48 - 8
+                );
                 Assert.Throws<CryptographicUnexpectedOperationException>(() =>
-                    rc2.EffectiveKeySize = 0);
+                    rc2.EffectiveKeySize = 0
+                );
             }
         }
     }

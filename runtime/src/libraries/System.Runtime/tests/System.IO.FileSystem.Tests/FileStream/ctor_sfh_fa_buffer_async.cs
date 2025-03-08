@@ -60,7 +60,8 @@ namespace System.IO.Tests
             )
             {
                 Assert.Throws<ArgumentException>(() =>
-                    CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, false));
+                    CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, false)
+                );
             }
 
             using (
@@ -75,7 +76,8 @@ namespace System.IO.Tests
             )
             {
                 Assert.Throws<ArgumentException>(() =>
-                    CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, true));
+                    CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, true)
+                );
             }
         }
     }

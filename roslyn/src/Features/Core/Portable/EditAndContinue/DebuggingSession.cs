@@ -1062,7 +1062,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             // report telemetry (fire and forget):
             _ = Task.Run(() =>
-                DebuggingSessionTelemetry.Log(data, Logger.Log, CorrelationIdFactory.GetNextId));
+                DebuggingSessionTelemetry.Log(data, Logger.Log, CorrelationIdFactory.GetNextId)
+            );
         }
 
         internal TestAccessor GetTestAccessor() => new(this);

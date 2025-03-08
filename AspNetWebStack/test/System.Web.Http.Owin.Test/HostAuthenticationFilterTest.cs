@@ -251,7 +251,8 @@ namespace System.Web.Http.Owin
 
                 // Act & Assert
                 await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                    filter.AuthenticateAsync(context, cancellationToken));
+                    filter.AuthenticateAsync(context, cancellationToken)
+                );
             }
         }
 

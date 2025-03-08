@@ -613,7 +613,8 @@ namespace System.Net.NameResolution.PalTests
                         justAddresses,
                         AddressFamily.Unspecified,
                         CancellationToken.None
-                    ))
+                    )
+                )
                 .ConfigureAwait(false);
             SocketError socketError = socketException.SocketErrorCode;
 

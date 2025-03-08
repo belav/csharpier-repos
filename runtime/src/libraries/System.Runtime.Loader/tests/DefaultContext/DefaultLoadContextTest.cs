@@ -194,7 +194,8 @@ namespace System.Runtime.Loader.Tests
             Assert.Throws<FileNotFoundException>(() =>
                 AssemblyLoadContext.Default.LoadFromAssemblyName(
                     new AssemblyName("System.Runtime.Loader.NonExistent.Assembly")
-                ));
+                )
+            );
         }
 
         private void DefaultContextFallback()

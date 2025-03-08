@@ -191,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                             options,
                             operationContext.GetCodeAnalysisProgress(),
                             operationContext.UserCancellationToken
-                        ));
+                        )
+                    );
                 }
             );
 

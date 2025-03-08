@@ -148,7 +148,8 @@ internal sealed class GetDocumentCommandWorker
             var applicationLifetime = services.GetRequiredService<IHostApplicationLifetime>();
             using (
                 var registration = applicationLifetime.ApplicationStarted.Register(() =>
-                    waitForStartTcs.TrySetResult(null))
+                    waitForStartTcs.TrySetResult(null)
+                )
             )
             {
                 waitForStartTcs.Task.Wait();

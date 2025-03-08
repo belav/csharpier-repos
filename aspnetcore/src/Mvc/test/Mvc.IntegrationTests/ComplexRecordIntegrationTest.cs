@@ -3437,7 +3437,8 @@ public class ComplexRecordIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            parameterBinder.BindModelAsync(parameter, testContext));
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3516,7 +3517,8 @@ public class ComplexRecordIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            parameterBinder.BindModelAsync(parameter, testContext));
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3560,7 +3562,8 @@ public class ComplexRecordIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            parameterBinder.BindModelAsync(parameter, testContext));
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 

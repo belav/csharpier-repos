@@ -31,7 +31,8 @@ public class DynamicComponentTest
         var componentId = renderer.AssignRootComponentId(instance);
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            renderer.RenderRootComponent(componentId, ParameterView.Empty));
+            renderer.RenderRootComponent(componentId, ParameterView.Empty)
+        );
 
         Assert.StartsWith(
             $"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(DynamicComponent.Type)}.",

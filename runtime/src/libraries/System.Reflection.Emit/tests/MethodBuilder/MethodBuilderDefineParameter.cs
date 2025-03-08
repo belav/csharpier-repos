@@ -168,7 +168,8 @@ namespace System.Reflection.Emit.Tests
             Type resultType = type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                method.DefineParameter(1, ParameterAttributes.Retval, "param1"));
+                method.DefineParameter(1, ParameterAttributes.Retval, "param1")
+            );
         }
 
         [Fact]
@@ -185,7 +186,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                builder.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam"));
+                builder.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam")
+            );
         }
 
         [Theory]
@@ -220,9 +222,11 @@ namespace System.Reflection.Emit.Tests
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                method.DefineParameter(-1, parameterAttributes, "Param1"));
+                method.DefineParameter(-1, parameterAttributes, "Param1")
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                method.DefineParameter(paramTypes.Length + 1, parameterAttributes, "Param1"));
+                method.DefineParameter(paramTypes.Length + 1, parameterAttributes, "Param1")
+            );
         }
 
         [Theory]
@@ -242,9 +246,11 @@ namespace System.Reflection.Emit.Tests
             MethodBuilder method = type.DefineMethod("TestMethod", methodAttributes);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                method.DefineParameter(1, parameterAttributes, "Param1"));
+                method.DefineParameter(1, parameterAttributes, "Param1")
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                method.DefineParameter(-1, parameterAttributes, "Param1"));
+                method.DefineParameter(-1, parameterAttributes, "Param1")
+            );
         }
 
         private static void VerifyParameterBuilder(

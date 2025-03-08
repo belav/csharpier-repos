@@ -674,7 +674,8 @@ namespace System.Net.Primitives.Unit.Tests
 
             cc.MaxCookieSize = 1;
             Assert.Throws<CookieException>(() =>
-                cc.Add(new Cookie("name", "long-text", "", "contoso.com"))); // Value.Length > MaxCookieSize
+                cc.Add(new Cookie("name", "long-text", "", "contoso.com"))
+            ); // Value.Length > MaxCookieSize
         }
 
         [Fact]

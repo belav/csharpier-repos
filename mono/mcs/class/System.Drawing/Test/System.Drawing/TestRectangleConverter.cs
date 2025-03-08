@@ -503,7 +503,8 @@ namespace MonoTests.System.Drawing
             Assert.Throws<ArgumentException>(() =>
                 rconv.ConvertFromString(
                     string.Format(culture, "1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator)
-                ));
+                )
+            );
         }
 
         [Test]

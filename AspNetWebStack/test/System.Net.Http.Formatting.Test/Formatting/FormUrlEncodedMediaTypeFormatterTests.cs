@@ -132,7 +132,8 @@ namespace System.Net.Http.Formatting
             );
             var contentStream = await content.ReadAsStreamAsync();
             await Assert.ThrowsAsync<ArgumentException>(() =>
-                formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null));
+                formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null)
+            );
         }
 
         [Fact]

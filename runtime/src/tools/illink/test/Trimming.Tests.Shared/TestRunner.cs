@@ -126,7 +126,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     additionalDefines?.ToArray(),
                     resources,
                     additionalArguments
-                ));
+                )
+            );
 
             var expectationsDefines = new string[] { "INCLUDE_EXPECTATIONS" };
             if (additionalDefines != null)
@@ -142,7 +143,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     expectationsDefines,
                     resources,
                     additionalArguments
-                ));
+                )
+            );
 
             NPath? inputAssemblyPath = null;
             NPath? expectationsAssemblyPath = null;

@@ -653,7 +653,8 @@ namespace System.Data.Tests
             t2.Columns[0].DateTimeMode = DataSetDateTime.Local;
             // DataColumn type should not match, and exception should be raised
             Assert.Throws<InvalidOperationException>(() =>
-                t2.Constraints.Add("fk", t1.Columns[0], t2.Columns[0]));
+                t2.Constraints.Add("fk", t1.Columns[0], t2.Columns[0])
+            );
         }
 
         [Fact]

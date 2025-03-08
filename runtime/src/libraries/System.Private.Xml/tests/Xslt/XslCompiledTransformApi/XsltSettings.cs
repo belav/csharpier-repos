@@ -72,7 +72,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         )
         {
             var e = Assert.ThrowsAny<XsltException>(() =>
-                XsltSettings1_1(param0, param1, param2, param3, param4));
+                XsltSettings1_1(param0, param1, param2, param3, param4)
+            );
             Assert.Equal(
                 "Compiling JScript/CSharp scripts is not supported",
                 e.InnerException.Message
@@ -99,7 +100,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         )
         {
             var e = Assert.ThrowsAny<XsltException>(() =>
-                XsltSettings1_2(param0, param1, param2, param3, param4, param5, param6));
+                XsltSettings1_2(param0, param1, param2, param3, param4, param5, param6)
+            );
             Assert.Equal(
                 "Compiling JScript/CSharp scripts is not supported",
                 e.InnerException.Message

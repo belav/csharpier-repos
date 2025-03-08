@@ -16,7 +16,8 @@ namespace System.IO.Compression.Tests
                 ZipArchiveEntry e = archive.GetEntry("first.txt");
 
                 Assert.Throws<ArgumentNullException>(() =>
-                    ((ZipArchiveEntry)null).ExtractToFile(file));
+                    ((ZipArchiveEntry)null).ExtractToFile(file)
+                );
                 Assert.Throws<ArgumentNullException>(() => e.ExtractToFile(null));
 
                 //extract when there is nothing there

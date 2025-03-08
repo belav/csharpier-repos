@@ -65,7 +65,8 @@ public class ResponseFeatureTests
 
         Assert.Throws<InvalidOperationException>(() => responseInformation.StatusCode = 400);
         Assert.Throws<InvalidOperationException>(() =>
-            responseInformation.ReasonPhrase = "Hello World");
+            responseInformation.ReasonPhrase = "Hello World"
+        );
     }
 
     [Fact]

@@ -40,8 +40,8 @@ internal abstract class AbstractUseAutoPropertyAnalyzer<
     private static readonly ObjectPool<ConcurrentStack<AnalysisResult>> s_analysisResultPool = new(
         () => new()
     );
-    private static readonly ObjectPool<ConcurrentSet<IFieldSymbol>> s_fieldSetPool = new(() =>
-        new());
+    private static readonly ObjectPool<ConcurrentSet<IFieldSymbol>> s_fieldSetPool = new(() => new()
+    );
     private static readonly ObjectPool<ConcurrentSet<SyntaxNode>> s_nodeSetPool = new(() => new());
     private static readonly ObjectPool<
         ConcurrentDictionary<IFieldSymbol, ConcurrentSet<SyntaxNode>>

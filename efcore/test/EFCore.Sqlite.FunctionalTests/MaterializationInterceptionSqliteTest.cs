@@ -23,7 +23,8 @@ public class MaterializationInterceptionSqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Intercept_query_materialization_with_owned_types_projecting_collection(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 

@@ -106,7 +106,8 @@ namespace System.Tests
         {
             Assert.Throws<InvalidCastException>(() => Convert.ToDateTime(new object()));
             Assert.Throws<InvalidCastException>(() =>
-                Convert.ToDateTime(new object(), s_dateTimeFormatInfo));
+                Convert.ToDateTime(new object(), s_dateTimeFormatInfo)
+            );
         }
 
         [Fact]

@@ -79,7 +79,8 @@ namespace System.Net.Http.Functional.Tests
                     }
                 );
                 Assert.Throws<InvalidOperationException>(() =>
-                    handler.SslProtocols = SslProtocols.Tls12);
+                    handler.SslProtocols = SslProtocols.Tls12
+                );
             }
         }
 
@@ -310,7 +311,8 @@ namespace System.Net.Http.Functional.Tests
                         () => client.GetAsync(url),
                         remoteServerExceptionWrapper,
                         url
-                    ));
+                    )
+                );
             }
         }
 

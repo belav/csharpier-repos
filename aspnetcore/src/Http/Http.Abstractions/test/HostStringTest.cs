@@ -177,6 +177,7 @@ public class HostStringTests
     public void HostMatchThrowsForBadPort()
     {
         Assert.Throws<FormatException>(() =>
-            HostString.MatchesAny("example.com:1abc", new StringSegment[] { "example.com" }));
+            HostString.MatchesAny("example.com:1abc", new StringSegment[] { "example.com" })
+        );
     }
 }

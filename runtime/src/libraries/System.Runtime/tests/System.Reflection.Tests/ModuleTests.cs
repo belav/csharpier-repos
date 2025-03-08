@@ -88,8 +88,8 @@ namespace System.Reflection.Tests
             Assert.Equal(expectedType, module.GetType(className.ToLower(), false, true));
 
             Assert.Null(module.GetType(className.ToLower(), false, false));
-            Assert.Throws<TypeLoadException>(() =>
-                module.GetType(className.ToLower(), true, false));
+            Assert.Throws<TypeLoadException>(() => module.GetType(className.ToLower(), true, false)
+            );
         }
 
         [Fact]
@@ -100,9 +100,11 @@ namespace System.Reflection.Tests
             Assert.NotSame(Module.FilterTypeName, Module.FilterTypeNameIgnoreCase);
 
             Assert.Throws<InvalidFilterCriteriaException>(() =>
-                Module.FilterTypeName(GetType(), null));
+                Module.FilterTypeName(GetType(), null)
+            );
             Assert.Throws<InvalidFilterCriteriaException>(() =>
-                Module.FilterTypeName(GetType(), new object()));
+                Module.FilterTypeName(GetType(), new object())
+            );
 
             Assert.Empty(
                 typeof(ModuleTest).GetTypeInfo().Module.FindTypes(Module.FilterTypeName, "out*")
@@ -156,9 +158,11 @@ namespace System.Reflection.Tests
             Assert.NotSame(Module.FilterTypeNameIgnoreCase, Module.FilterTypeName);
 
             Assert.Throws<InvalidFilterCriteriaException>(() =>
-                Module.FilterTypeName(GetType(), null));
+                Module.FilterTypeName(GetType(), null)
+            );
             Assert.Throws<InvalidFilterCriteriaException>(() =>
-                Module.FilterTypeName(GetType(), new object()));
+                Module.FilterTypeName(GetType(), new object())
+            );
 
             Assert.Equal(
                 2,

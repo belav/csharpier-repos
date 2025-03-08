@@ -413,7 +413,8 @@ FROM "Orders" AS "o"
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_code_using_instance_method_throws(async))
+                    base.Client_code_using_instance_method_throws(async)
+                )
             ).Message
         );
 
@@ -425,7 +426,8 @@ FROM "Orders" AS "o"
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_code_using_instance_in_static_method(async))
+                    base.Client_code_using_instance_in_static_method(async)
+                )
             ).Message
         );
 
@@ -436,7 +438,8 @@ FROM "Orders" AS "o"
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_code_using_instance_in_anonymous_type(async))
+                    base.Client_code_using_instance_in_anonymous_type(async)
+                )
             ).Message
         );
 
@@ -457,7 +460,8 @@ FROM "Orders" AS "o"
             ),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Entity_equality_through_subquery_composite_key(async))
+                    base.Entity_equality_through_subquery_composite_key(async)
+                )
             ).Message
         );
 
@@ -468,7 +472,8 @@ FROM "Orders" AS "o"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.DefaultIfEmpty_in_subquery_nested_filter_order_comparison(async))
+                    base.DefaultIfEmpty_in_subquery_nested_filter_order_comparison(async)
+                )
             ).Message
         );
 
@@ -477,7 +482,8 @@ FROM "Orders" AS "o"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Select_subquery_recursive_trivial(async))
+                    base.Select_subquery_recursive_trivial(async)
+                )
             ).Message
         );
 
@@ -486,7 +492,8 @@ FROM "Orders" AS "o"
             SqliteStrings.ApplyNotSupported,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Select_correlated_subquery_ordered(async))
+                    base.Select_correlated_subquery_ordered(async)
+                )
             ).Message
         );
 
@@ -499,7 +506,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -512,18 +520,20 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
                         async
-                    ))
+                    )
+                )
             ).Message
         );
 
     public override Task Max_on_empty_sequence_throws(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Max_on_empty_sequence_throws(async));
+        Assert.ThrowsAsync<InvalidOperationException>(() => base.Max_on_empty_sequence_throws(async)
+        );
 
     [ConditionalFact]
     public async Task Single_Predicate_Cancellation() =>
         await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-            await Single_Predicate_Cancellation_test(Fixture.TestSqlLoggerFactory.CancelQuery()));
+            await Single_Predicate_Cancellation_test(Fixture.TestSqlLoggerFactory.CancelQuery())
+        );
 
     private void AssertSql(params string[] expected) =>
         Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

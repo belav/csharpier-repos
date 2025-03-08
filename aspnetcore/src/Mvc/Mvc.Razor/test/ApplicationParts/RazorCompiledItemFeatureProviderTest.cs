@@ -118,7 +118,8 @@ public class RazorCompiledItemFeatureProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            featureProvider.PopulateFeature(new[] { part1, part2.Object }, feature));
+            featureProvider.PopulateFeature(new[] { part1, part2.Object }, feature)
+        );
         Assert.Equal(expected, ex.Message);
     }
 

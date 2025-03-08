@@ -323,7 +323,8 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             string result = RunWithoutViewEngine(() =>
-                DefaultEditorTemplates.CollectionTemplate(html));
+                DefaultEditorTemplates.CollectionTemplate(html)
+            );
 
             // Assert
             Assert.Equal(

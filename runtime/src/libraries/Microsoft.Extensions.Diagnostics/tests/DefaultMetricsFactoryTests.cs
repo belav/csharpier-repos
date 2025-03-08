@@ -126,7 +126,8 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 meterFactory.Create(
                     new MeterOptions("name") { Name = "SomeName", Scope = new object() }
-                ));
+                )
+            );
 
             Meter meter = meterFactory.Create(
                 new MeterOptions("name") { Name = "SomeName", Scope = meterFactory }

@@ -51,6 +51,7 @@ public partial class SafeWaitHandleExtensionsTests
 
         Assert.Throws<ArgumentNullException>(() => wh.GetSafeWaitHandle());
         Assert.Throws<ArgumentNullException>(() =>
-            wh.SetSafeWaitHandle(new SafeWaitHandle(IntPtr.Zero, false)));
+            wh.SetSafeWaitHandle(new SafeWaitHandle(IntPtr.Zero, false))
+        );
     }
 }

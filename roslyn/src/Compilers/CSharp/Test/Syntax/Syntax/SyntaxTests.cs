@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentException>(() =>
                 SyntaxFactory.IsCompleteSubmission(
                     SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)
-                ));
+                )
+            );
 
             AssertCompleteSubmission("");
             AssertCompleteSubmission("//hello");

@@ -243,37 +243,37 @@ namespace System.Resources.Extensions.Tests
                 writer.Generate();
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    writer.AddResource("duplicate", "value"));
+                    writer.AddResource("duplicate", "value")
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    writer.AddResource("duplicate", new object()));
+                    writer.AddResource("duplicate", new object())
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    writer.AddResource("duplicate", new byte[0]));
+                    writer.AddResource("duplicate", new byte[0])
+                );
 
                 using (var stream = new MemoryStream())
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.AddResource("duplicate", stream));
+                        writer.AddResource("duplicate", stream)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.AddResource("duplicate", stream, true));
+                        writer.AddResource("duplicate", stream, true)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.AddActivatorResource(
-                            "duplicate",
-                            stream,
-                            "System.DayOfWeek",
-                            false
-                        ));
+                        writer.AddActivatorResource("duplicate", stream, "System.DayOfWeek", false)
+                    );
                 }
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    writer.AddBinaryFormattedResource(
-                        "duplicate",
-                        new byte[1],
-                        "System.DayOfWeek"
-                    ));
+                    writer.AddBinaryFormattedResource("duplicate", new byte[1], "System.DayOfWeek")
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    writer.AddTypeConverterResource("duplicate", new byte[1], "System.DayOfWeek"));
+                    writer.AddTypeConverterResource("duplicate", new byte[1], "System.DayOfWeek")
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    writer.AddResource("duplicate", "Monday", "System.DayOfWeek"));
+                    writer.AddResource("duplicate", "Monday", "System.DayOfWeek")
+                );
             }
         }
 

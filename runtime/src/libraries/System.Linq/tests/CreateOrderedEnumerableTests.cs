@@ -12,7 +12,8 @@ namespace System.Linq.Tests
         {
             var enumerable = new int[0].Order();
             Assert.Throws<ArgumentNullException>(() =>
-                enumerable.CreateOrderedEnumerable((Func<int, int>)null!, null, false));
+                enumerable.CreateOrderedEnumerable((Func<int, int>)null!, null, false)
+            );
         }
     }
 }

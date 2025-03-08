@@ -994,7 +994,8 @@ namespace System.Net
                         this.BeginGetRequestStream,
                         this.EndGetRequestStream,
                         null
-                    ));
+                    )
+                );
             }
         }
 
@@ -1046,7 +1047,8 @@ namespace System.Net
                         this.BeginGetResponse,
                         this.EndGetResponse,
                         null
-                    ));
+                    )
+                );
             }
         }
 

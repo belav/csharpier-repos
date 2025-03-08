@@ -89,7 +89,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_multiple_one_to_one_and_one_to_many_self_reference(bool async) =>
         Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(async, ss => ss.Set<Weapon>().Include(w => w.Owner.Weapons)));
+            AssertQuery(async, ss => ss.Set<Weapon>().Include(w => w.Owner.Weapons))
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -111,7 +112,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_multiple_one_to_one_and_one_to_one_and_one_to_many(bool async) =>
         Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(async, ss => ss.Set<CogTag>().Include(t => t.Gear.Squad.Members)));
+            AssertQuery(async, ss => ss.Set<CogTag>().Include(t => t.Gear.Squad.Members))
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -180,7 +182,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         .Include(g => g.CityOfBirth.StationedGears)
                         .ThenInclude(g => g.Tag)
                         .OrderBy(g => g.Nickname)
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2783,7 +2786,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     select new { t.Note, Nickname = g != null ? g.Nickname : null },
 #pragma warning restore IDE0031 // Use null propagation
                 elementSorter: e => e.Note
-            ));
+            )
+        );
 
     private static IEnumerable<TElement> ClientDefaultIfEmpty<TElement>(
         IEnumerable<TElement> source
@@ -3181,7 +3185,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     from g in ss.Set<Gear>()
                     where g.HasSoulPatch && FavoriteWeapon(g.Weapons).Name == "Marcus' Lancer"
                     select g.Nickname
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3198,7 +3203,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         && FavoriteWeapon(EF.Property<List<Weapon>>(g, "Weapons")).Name
                             == "Cole's Gnasher"
                     select g.Nickname
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3212,7 +3218,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     orderby FavoriteWeapon(g.Weapons).Name descending
                     select g.Nickname,
                 assertOrder: true
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3227,7 +3234,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     from v in Veterans(g.Reports)
                     select new { g = g.Nickname, v = v.Nickname },
                 elementSorter: e => e.g + e.v
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3244,7 +3252,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         where o.HasSoulPatch
                         select new { o = o.Nickname, g = g.Nickname },
                     elementSorter: e => e.o + e.g
-                ))
+                )
+            )
         ).Message;
     }
 
@@ -3898,7 +3907,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo")))
+                AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo"))
+            )
         ).Message;
 
         Assert.Contains(
@@ -5386,7 +5396,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 new ExpectedInclude<Gear>(g => g.Squad),
                                 new ExpectedInclude<Officer>(o => o.Squad)
                             )
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -6003,7 +6014,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Cast_to_derived_type_causes_client_eval(bool async) =>
         Assert.ThrowsAsync<InvalidCastException>(() =>
-            AssertQuery(async, ss => ss.Set<Gear>().Cast<Officer>()));
+            AssertQuery(async, ss => ss.Set<Gear>().Cast<Officer>())
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -7295,7 +7307,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         .Select(f => (f is LocustHorde) ? ((LocustHorde)f).Commander : null)
                     from lc2 in ss.Set<LocustLeader>().OfType<LocustCommander>()
                     select (lc1 ?? lc2).DefeatedBy
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -7309,7 +7322,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     from lc1 in ss.Set<Faction>().OfType<LocustHorde>().Select(lh => lh.Commander)
                     join lc2 in ss.Set<LocustLeader>().OfType<LocustCommander>() on true equals true
                     select (lc1 ?? lc2).DefeatedBy
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -7323,7 +7337,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     from lc1 in ss.Set<Faction>().OfType<LocustHorde>().Select(lh => lh.Commander)
                     join lc2 in ss.Set<LocustLeader>().OfType<LocustCommander>() on true equals true
                     select (lc1.Name == "Queen Myrrah" ? lc1 : lc2).DefeatedBy
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -7445,7 +7460,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 .Where(f => f is LocustHorde)
                                 .Select(f => (LocustHorde)f)
                                 .Include(h => h.Commander)
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -7459,7 +7475,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     AssertQuery(
                         async,
                         ss => ss.Set<Faction>().Select(f => f.Capital).Include(c => c.BornGears)
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -7473,7 +7490,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     AssertQuery(
                         async,
                         ss => ss.Set<Faction>().Select(f => new { f }).Include(x => x.f.Capital)
-                    ))
+                    )
+                )
             ).Message
         );
 
@@ -7768,7 +7786,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     ss.Set<Gear>()
                         .GroupBy(g => g.CityOfBirthName)
                         .Select(g => new { g.Key, Aggregate = g.Max() })
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -8244,7 +8263,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     isAsync,
                     ss =>
                         ss.Set<LocustLeader>().Select(w => w.ThreatLevel >= (byte)GetThreatLevel())
-                ));
+                )
+            );
         }
     }
 

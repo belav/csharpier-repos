@@ -70,7 +70,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new BatchedJoinBlock<int, int>(
                     2,
                     new GroupingDataflowBlockOptions { BoundedCapacity = 3 }
-                ));
+                )
+            );
         }
 
         [Test]

@@ -266,7 +266,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveCharacterStringBytes(
                     new Asn1Tag(UniversalTagNumber.UTF8String),
                     out _
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -351,7 +352,8 @@ namespace System.Formats.Asn1.Tests.Reader
                     outputData,
                     new Asn1Tag(UniversalTagNumber.UTF8String),
                     out bytesWritten
-                ));
+                )
+            );
 
             Assert.Equal(-1, bytesWritten);
             Assert.Equal(252, outputData[0]);
@@ -373,7 +375,8 @@ namespace System.Formats.Asn1.Tests.Reader
                     outputData,
                     UniversalTagNumber.UTF8String,
                     out bytesWritten
-                ));
+                )
+            );
 
             Assert.Equal(-1, bytesWritten);
             Assert.Equal('a', outputData[0]);
@@ -395,7 +398,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
             Assert.Throws<AsnContentException>(() =>
-                reader.ReadCharacterString(UniversalTagNumber.UTF8String));
+                reader.ReadCharacterString(UniversalTagNumber.UTF8String)
+            );
         }
 
         [Theory]
@@ -665,7 +669,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveCharacterStringBytes(
                     new Asn1Tag(TagClass.ContextSpecific, 0),
                     out _
-                ));
+                )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -698,7 +703,8 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
             Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveCharacterStringBytes(new Asn1Tag(EncodingType), out _));
+                reader.TryReadPrimitiveCharacterStringBytes(new Asn1Tag(EncodingType), out _)
+            );
 
             Assert.True(reader.HasData, "HasData after default tag");
 
@@ -706,7 +712,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveCharacterStringBytes(
                     new Asn1Tag(TagClass.Application, 0),
                     out _
-                ));
+                )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
@@ -714,7 +721,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveCharacterStringBytes(
                     new Asn1Tag(TagClass.ContextSpecific, 1),
                     out _
-                ));
+                )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 

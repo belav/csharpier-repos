@@ -157,9 +157,11 @@ namespace System.Net.Security.Tests
             Assert.Equal(X509RevocationMode.Offline, _serverOptions.CertificateRevocationCheckMode);
 
             Assert.Throws<ArgumentException>(() =>
-                _clientOptions.CertificateRevocationCheckMode = (X509RevocationMode)3);
+                _clientOptions.CertificateRevocationCheckMode = (X509RevocationMode)3
+            );
             Assert.Throws<ArgumentException>(() =>
-                _serverOptions.CertificateRevocationCheckMode = (X509RevocationMode)3);
+                _serverOptions.CertificateRevocationCheckMode = (X509RevocationMode)3
+            );
         }
 
         [Fact]
@@ -177,9 +179,11 @@ namespace System.Net.Security.Tests
 #pragma warning restore SYSLIB0040
 
             Assert.Throws<ArgumentException>(() =>
-                _clientOptions.EncryptionPolicy = (EncryptionPolicy)3);
+                _clientOptions.EncryptionPolicy = (EncryptionPolicy)3
+            );
             Assert.Throws<ArgumentException>(() =>
-                _serverOptions.EncryptionPolicy = (EncryptionPolicy)3);
+                _serverOptions.EncryptionPolicy = (EncryptionPolicy)3
+            );
         }
     }
 }

@@ -2277,13 +2277,15 @@ namespace System.Tests
         public static void TryFormat_InvalidFormat_ThrowsFormatException(string format)
         {
             Assert.Throws<FormatException>(() =>
-                s_testGuid.TryFormat(new Span<char>(), out int charsWritten, format));
+                s_testGuid.TryFormat(new Span<char>(), out int charsWritten, format)
+            );
             Assert.Throws<FormatException>(() =>
                 s_testGuid.TryFormat(
                     new Span<char>(),
                     out int charsWritten,
                     format.ToUpperInvariant()
-                ));
+                )
+            );
 
             Assert.Throws<FormatException>(() =>
                 ((ISpanFormattable)s_testGuid).TryFormat(
@@ -2291,23 +2293,27 @@ namespace System.Tests
                     out int charsWritten,
                     format,
                     null
-                ));
+                )
+            );
             Assert.Throws<FormatException>(() =>
                 ((ISpanFormattable)s_testGuid).TryFormat(
                     new Span<char>(),
                     out int charsWritten,
                     format.ToUpperInvariant(),
                     null
-                ));
+                )
+            );
 
             Assert.Throws<FormatException>(() =>
-                s_testGuid.TryFormat(new Span<byte>(), out int bytesWritten, format));
+                s_testGuid.TryFormat(new Span<byte>(), out int bytesWritten, format)
+            );
             Assert.Throws<FormatException>(() =>
                 s_testGuid.TryFormat(
                     new Span<byte>(),
                     out int bytesWritten,
                     format.ToUpperInvariant()
-                ));
+                )
+            );
         }
 
         [Theory]

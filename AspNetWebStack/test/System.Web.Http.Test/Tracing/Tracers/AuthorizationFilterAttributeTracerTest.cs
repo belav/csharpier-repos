@@ -258,7 +258,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext,
                     CancellationToken.None,
                     continuation
-                ));
+                )
+            );
 
             // Assert
             Assert.Same(exception, thrown);

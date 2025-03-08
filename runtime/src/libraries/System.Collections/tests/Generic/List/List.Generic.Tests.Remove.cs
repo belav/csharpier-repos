@@ -164,7 +164,8 @@ namespace System.Collections.Tests
                 invalidSet =>
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.RemoveRange(invalidSet.Item1, invalidSet.Item2));
+                        list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
+                    );
                 }
             );
         }

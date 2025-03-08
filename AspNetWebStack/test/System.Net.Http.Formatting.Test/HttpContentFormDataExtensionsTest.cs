@@ -125,7 +125,8 @@ namespace System.Net.Http
             content.Headers.ContentType = MediaTypeConstants.ApplicationFormUrlEncodedMediaType;
 
             await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                content.ReadAsFormDataAsync(cts.Token));
+                content.ReadAsFormDataAsync(cts.Token)
+            );
         }
 
         [Theory]
@@ -179,7 +180,8 @@ namespace System.Net.Http
         {
             HttpContent content = new StringContent("{}", Encoding.UTF8, "test/unknown");
             return Assert.ThrowsAsync<UnsupportedMediaTypeException>(() =>
-                content.ReadAsFormDataAsync());
+                content.ReadAsFormDataAsync()
+            );
         }
     }
 }

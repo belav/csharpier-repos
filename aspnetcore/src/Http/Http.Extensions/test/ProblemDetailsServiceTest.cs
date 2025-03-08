@@ -81,7 +81,8 @@ public class ProblemDetailsServiceTest
 
         // Act
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await service.WriteAsync(new() { HttpContext = context }));
+            await service.WriteAsync(new() { HttpContext = context })
+        );
     }
 
     [Fact]
@@ -99,7 +100,8 @@ public class ProblemDetailsServiceTest
 
         // Act & Assert
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await service.WriteAsync(new() { HttpContext = context }));
+            await service.WriteAsync(new() { HttpContext = context })
+        );
     }
 
     [Fact]

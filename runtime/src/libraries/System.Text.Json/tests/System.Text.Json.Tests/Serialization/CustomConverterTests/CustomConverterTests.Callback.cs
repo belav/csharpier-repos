@@ -155,7 +155,8 @@ namespace System.Text.Json.Serialization.Tests
             // - "Path:" is not repeated due to having two try\catch blocks (the second block does not append "Path:" again).
 
             ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<TopLevelPocoWithNoConverter>(Json, options));
+                JsonSerializer.Deserialize<TopLevelPocoWithNoConverter>(Json, options)
+            );
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains("Path: $.InvalidProperty.NotSupported", ex.Message);
             Assert.Equal(
@@ -180,8 +181,8 @@ namespace System.Text.Json.Serialization.Tests
                 },
             };
 
-            ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Serialize(poco, options));
+            ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(poco, options)
+            );
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains("Path: $.InvalidProperty.NotSupported.", ex.Message);
             Assert.Equal(

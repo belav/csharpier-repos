@@ -3032,14 +3032,16 @@ S"
                         nonGenericExtension.ReduceExtensionMethod(
                             receiverType: null,
                             compilation: null!
-                        ));
+                        )
+                    );
 
                     Assert.True(genericExtension.IsExtensionMethod);
                     Assert.Throws<ArgumentNullException>(() =>
                         genericExtension.ReduceExtensionMethod(
                             receiverType: null,
                             compilation: null!
-                        ));
+                        )
+                    );
                 }
             );
         }

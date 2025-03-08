@@ -1142,7 +1142,8 @@ public abstract class UrlHelperTestBase
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            urlHelper.ActionLink("contact", "home"));
+            urlHelper.ActionLink("contact", "home")
+        );
 
         // Assert
         var expectedMessage =

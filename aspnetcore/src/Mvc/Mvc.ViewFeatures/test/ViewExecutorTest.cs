@@ -97,7 +97,8 @@ public class ViewExecutorTest
                 Mock.Of<ITempDataDictionary>(),
                 contentType: null,
                 statusCode: null
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal("This should be raw!", exception.Message);
@@ -318,7 +319,8 @@ public class ViewExecutorTest
                 Mock.Of<ITempDataDictionary>(),
                 contentType: null,
                 statusCode: null
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(expectedLength, memoryStream.Length);

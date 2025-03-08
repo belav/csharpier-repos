@@ -440,7 +440,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .ListGuaranteedUnmarshal<int, int>
                 .AllocateContainerForManagedElementsFinallyCalled = false;
             Assert.Throws<Exception>(() =>
-                NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<int> _));
+                NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<int> _)
+            );
             Assert.True(
                 NativeExportsNE
                     .Collections
@@ -456,7 +457,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .Marshaller
                 .ToManagedFinallyCalled = false;
             Assert.Throws<Exception>(() =>
-                NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<int> _));
+                NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<int> _)
+            );
             Assert.True(
                 NativeExportsNE
                     .Collections
@@ -589,7 +591,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                 .AllocateContainerForManagedElementsFinallyCalled = false;
             Assert.Throws<Exception>(() =>
-                NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<BoolStruct> _));
+                NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<BoolStruct> _)
+            );
             Assert.True(
                 NativeExportsNE
                     .Collections
@@ -605,7 +608,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 .Marshaller
                 .ToManagedFinallyCalled = false;
             Assert.Throws<Exception>(() =>
-                NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<BoolStruct> _));
+                NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<BoolStruct> _)
+            );
             Assert.True(
                 NativeExportsNE
                     .Collections

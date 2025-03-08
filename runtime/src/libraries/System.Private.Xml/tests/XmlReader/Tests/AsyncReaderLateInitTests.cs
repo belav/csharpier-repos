@@ -107,7 +107,8 @@ namespace System.Xml.XmlReaderTests
             )
             {
                 Assert.Throws<System.Net.Http.HttpRequestException>(() =>
-                    reader.ReadAsync().GetAwaiter().GetResult());
+                    reader.ReadAsync().GetAwaiter().GetResult()
+                );
             }
         }
 
@@ -142,7 +143,8 @@ namespace System.Xml.XmlReaderTests
                 XmlReader.Create(
                     "http://test.test/test.html",
                     new XmlReaderSettings() { Async = false }
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

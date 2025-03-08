@@ -285,7 +285,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Baseline failure (no JsonConverterAttributes).
             Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<MyModelWithNoConverterAttributes>(Json));
+                JsonSerializer.Deserialize<MyModelWithNoConverterAttributes>(Json)
+            );
 
             // Success case.
             MyModelWithConverterAttributes obj;

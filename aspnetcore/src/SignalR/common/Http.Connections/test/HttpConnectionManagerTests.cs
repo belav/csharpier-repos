@@ -166,11 +166,13 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
             Assert.True(result.IsCompleted);
 
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await connection.Transport.Input.ReadAsync());
+                await connection.Transport.Input.ReadAsync()
+            );
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
 
             exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await connection.Application.Input.ReadAsync());
+                await connection.Application.Input.ReadAsync()
+            );
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
         }
     }
@@ -392,11 +394,13 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
             tcs.TrySetException(new InvalidOperationException("Error"));
 
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await firstTask.DefaultTimeout());
+                await firstTask.DefaultTimeout()
+            );
             Assert.Equal("Error", exception.Message);
 
             exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await secondTask.DefaultTimeout());
+                await secondTask.DefaultTimeout()
+            );
             Assert.Equal("Error", exception.Message);
         }
     }
@@ -423,9 +427,11 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
             tcs.TrySetCanceled();
 
             await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await firstTask.DefaultTimeout());
+                await firstTask.DefaultTimeout()
+            );
             await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await secondTask.DefaultTimeout());
+                await secondTask.DefaultTimeout()
+            );
         }
     }
 

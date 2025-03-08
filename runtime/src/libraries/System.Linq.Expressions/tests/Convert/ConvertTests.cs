@@ -19244,9 +19244,11 @@ namespace System.Linq.Expressions.Tests
                     x,
                     typeof(HalfLiftedTo?),
                     typeof(ImplicitHalfLiftedFromReverse).GetMethod("op_Implicit")
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(x, typeof(HalfLiftedTo?)));
+                Expression.Convert(x, typeof(HalfLiftedTo?))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -19282,10 +19284,8 @@ namespace System.Linq.Expressions.Tests
         public static void ExplicitOpImplicit()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(
-                    Expression.Constant(new PerverselyNamedMembers(0)),
-                    typeof(uint)
-                ));
+                Expression.Convert(Expression.Constant(new PerverselyNamedMembers(0)), typeof(uint))
+            );
         }
 
         [Fact]
@@ -19473,7 +19473,8 @@ namespace System.Linq.Expressions.Tests
                 nameof(CustomConversions.ConvertToInt)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(operand, typeof(long), method));
+                Expression.Convert(operand, typeof(long), method)
+            );
         }
 
         [Fact]
@@ -19484,7 +19485,8 @@ namespace System.Linq.Expressions.Tests
                 nameof(CustomConversions.ConvertFromInt)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(operand, typeof(CustomConversions), method));
+                Expression.Convert(operand, typeof(CustomConversions), method)
+            );
         }
 
         [Fact]
@@ -19530,11 +19532,14 @@ namespace System.Linq.Expressions.Tests
         public static void CannotConvertNonVoidToVoid()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Constant(1), typeof(void)));
+                Expression.Convert(Expression.Constant(1), typeof(void))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Constant("a"), typeof(void)));
+                Expression.Convert(Expression.Constant("a"), typeof(void))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Constant(DateTime.MinValue), typeof(void)));
+                Expression.Convert(Expression.Constant(DateTime.MinValue), typeof(void))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -19550,38 +19555,40 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertReferenceArrayToValueTypeArray()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Default(typeof(string[])), typeof(int[])));
+                Expression.Convert(Expression.Default(typeof(string[])), typeof(int[]))
+            );
         }
 
         [Fact]
         public static void ConvertValueTypeArrayToValueTypeArray()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Default(typeof(long[])), typeof(int[])));
+                Expression.Convert(Expression.Default(typeof(long[])), typeof(int[]))
+            );
         }
 
         [Fact]
         public static void ConvertValueTypeArrayToReferenceArray()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(
-                    Expression.Default(typeof(StringComparison[])),
-                    typeof(string[])
-                ));
+                Expression.Convert(Expression.Default(typeof(StringComparison[])), typeof(string[]))
+            );
         }
 
         [Fact]
         public static void ConvertSealedTypeArrayToNonImplementedInterfaceArray()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Default(typeof(string[])), typeof(IAsyncResult[])));
+                Expression.Convert(Expression.Default(typeof(string[])), typeof(IAsyncResult[]))
+            );
         }
 
         [Fact]
         public static void ConvertNonImplementedInterfaceArrayToSealedTypeArray()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(Expression.Default(typeof(IAsyncResult[])), typeof(string[])));
+                Expression.Convert(Expression.Default(typeof(IAsyncResult[])), typeof(string[]))
+            );
         }
 
         interface IInterface { }
@@ -19710,7 +19717,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Convert(
                     Expression.Default(typeof(IList<NonSealed>[])),
                     typeof(NonSealed[,][])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -19720,7 +19728,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Convert(
                     Expression.Default(typeof(NonSealed[,][])),
                     typeof(IList<NonSealed>[])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -19730,12 +19739,14 @@ namespace System.Linq.Expressions.Tests
                 Expression.Convert(
                     Expression.Default(typeof(NonSealed[][])),
                     typeof(IEquatable<NonSealed>[])
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.Convert(
                     Expression.Default(typeof(NonSealed[][])),
                     typeof(IDictionary<NonSealed, NonSealed>[])
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -19745,22 +19756,22 @@ namespace System.Linq.Expressions.Tests
                 Expression.Convert(
                     Expression.Default(typeof(IEquatable<NonSealed>[])),
                     typeof(NonSealed[][])
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.Convert(
                     Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])),
                     typeof(NonSealed[][])
-                ));
+                )
+            );
         }
 
         [Fact]
         public static void ArrayToNotRelated()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Convert(
-                    Expression.Default(typeof(NonSealed[][][])),
-                    typeof(string[][])
-                ));
+                Expression.Convert(Expression.Default(typeof(NonSealed[][][])), typeof(string[][]))
+            );
         }
     }
 }

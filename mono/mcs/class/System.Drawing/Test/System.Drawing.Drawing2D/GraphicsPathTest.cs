@@ -62,8 +62,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Constructor_Point_Null_Byte()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath((Point[])null, new byte[1]));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath((Point[])null, new byte[1])
+            );
         }
 
         [Test]
@@ -81,8 +81,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Constructor_PointF_Null_Byte()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath((PointF[])null, new byte[1]));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath((PointF[])null, new byte[1])
+            );
         }
 
         [Test]
@@ -180,7 +180,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             Assert.AreEqual(Int32.MaxValue, (int)gp.FillMode, "MaxValue");
             // but you can't set the FillMode property to an invalid value ;-)
             Assert.Throws<SC.InvalidEnumArgumentException>(() =>
-                gp.FillMode = (FillMode)Int32.MaxValue);
+                gp.FillMode = (FillMode)Int32.MaxValue
+            );
         }
 
         [Test]
@@ -406,8 +407,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddBeziers_Point_Null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().AddBeziers((Point[])null));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddBeziers((Point[])null)
+            );
         }
 
         [Test]
@@ -415,7 +416,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddBeziers(new Point[3] { new Point(1, 1), new Point(2, 2), new Point(3, 3) }));
+                gp.AddBeziers(new Point[3] { new Point(1, 1), new Point(2, 2), new Point(3, 3) })
+            );
         }
 
         [Test]
@@ -431,8 +433,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddBeziers_PointF_Null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().AddBeziers((PointF[])null));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddBeziers((PointF[])null)
+            );
         }
 
         [Test]
@@ -442,7 +444,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             Assert.Throws<ArgumentException>(() =>
                 gp.AddBeziers(
                     new PointF[3] { new PointF(1f, 1f), new PointF(2f, 2f), new PointF(3f, 3f) }
-                ));
+                )
+            );
         }
 
         [Test]
@@ -888,8 +891,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddPolygon_Point_Null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().AddPolygon((Point[])null));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddPolygon((Point[])null)
+            );
         }
 
         [Test]
@@ -910,7 +913,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddPolygon(new Point[2] { new Point(1, 1), new Point(2, 2) }));
+                gp.AddPolygon(new Point[2] { new Point(1, 1), new Point(2, 2) })
+            );
         }
 
         [Test]
@@ -924,8 +928,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddPolygon_PointF_Null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().AddPolygon((PointF[])null));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddPolygon((PointF[])null)
+            );
         }
 
         [Test]
@@ -939,7 +943,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddPolygon(new PointF[1] { new PointF(1f, 1f) }));
+                gp.AddPolygon(new PointF[1] { new PointF(1f, 1f) })
+            );
         }
 
         [Test]
@@ -947,7 +952,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddPolygon(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }));
+                gp.AddPolygon(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) })
+            );
         }
 
         [Test]
@@ -1239,7 +1245,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void AddClosedCurve_Point_Null()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().AddClosedCurve((Point[])null));
+                new GraphicsPath().AddClosedCurve((Point[])null)
+            );
         }
 
         [Test]
@@ -1254,7 +1261,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddClosedCurve(new Point[1] { new Point(1, 1) }));
+                gp.AddClosedCurve(new Point[1] { new Point(1, 1) })
+            );
         }
 
         [Test]
@@ -1262,7 +1270,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddClosedCurve(new Point[2] { new Point(1, 1), new Point(2, 2) }));
+                gp.AddClosedCurve(new Point[2] { new Point(1, 1), new Point(2, 2) })
+            );
         }
 
         [Test]
@@ -1277,7 +1286,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void AddClosedCurve_PointF_Null()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().AddClosedCurve((PointF[])null));
+                new GraphicsPath().AddClosedCurve((PointF[])null)
+            );
         }
 
         [Test]
@@ -1292,7 +1302,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddClosedCurve(new PointF[1] { new PointF(1f, 1f) }));
+                gp.AddClosedCurve(new PointF[1] { new PointF(1f, 1f) })
+            );
         }
 
         [Test]
@@ -1300,7 +1311,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddClosedCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }));
+                gp.AddClosedCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) })
+            );
         }
 
         [Test]
@@ -1418,7 +1430,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddCurve(new Point[2] { new Point(1, 1), new Point(2, 2) }, 0, 2, 0.5f));
+                gp.AddCurve(new Point[2] { new Point(1, 1), new Point(2, 2) }, 0, 2, 0.5f)
+            );
             // adding only two points isn't supported by GdipAddCurve3I
         }
 
@@ -1439,8 +1452,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void AddCurve_PointF_1()
         {
             GraphicsPath gp = new GraphicsPath();
-            Assert.Throws<ArgumentException>(() =>
-                gp.AddCurve(new PointF[1] { new PointF(1f, 1f) }));
+            Assert.Throws<ArgumentException>(() => gp.AddCurve(new PointF[1] { new PointF(1f, 1f) })
+            );
         }
 
         [Test]
@@ -1468,7 +1481,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }, 0, 2, 0.5f));
+                gp.AddCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }, 0, 2, 0.5f)
+            );
             // adding only two points isn't supported by GdipAddCurve3
         }
 
@@ -1491,7 +1505,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }, 0, 0, 0.5f));
+                gp.AddCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }, 0, 0, 0.5f)
+            );
         }
 
         [Test]
@@ -1499,7 +1514,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }, 0, -1, 0.5f));
+                gp.AddCurve(new PointF[2] { new PointF(1f, 1f), new PointF(2f, 2f) }, 0, -1, 0.5f)
+            );
         }
 
         [Test]
@@ -1512,7 +1528,8 @@ namespace MonoTests.System.Drawing.Drawing2D
                     1,
                     2,
                     0.5f
-                ));
+                )
+            );
         }
 
         [Test]
@@ -1640,7 +1657,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             GraphicsPath gp = new GraphicsPath();
             FontFamily ff = GetFontFamily();
             Assert.Throws<NullReferenceException>(() =>
-                gp.AddString(null, ff, 0, 10, new Point(10, 10), StringFormat.GenericDefault));
+                gp.AddString(null, ff, 0, 10, new Point(10, 10), StringFormat.GenericDefault)
+            );
         }
 
         [Test]
@@ -1657,7 +1675,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         {
             GraphicsPath gp = new GraphicsPath();
             Assert.Throws<ArgumentException>(() =>
-                gp.AddString("mono", null, 0, 10, new Point(10, 10), StringFormat.GenericDefault));
+                gp.AddString("mono", null, 0, 10, new Point(10, 10), StringFormat.GenericDefault)
+            );
         }
 
         [Test]
@@ -2088,14 +2107,16 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void Warp_Null()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().Warp(null, new RectangleF()));
+                new GraphicsPath().Warp(null, new RectangleF())
+            );
         }
 
         [Test]
         public void Warp_NoPoints()
         {
             Assert.Throws<ArgumentException>(() =>
-                new GraphicsPath().Warp(new PointF[0], new RectangleF()));
+                new GraphicsPath().Warp(new PointF[0], new RectangleF())
+            );
         }
 
         [Test]
@@ -2656,8 +2677,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Widen_Pen_Null_Matrix()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().Widen(null, new Matrix()));
+            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().Widen(null, new Matrix())
+            );
         }
 
         [Test]
@@ -2807,28 +2828,32 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void IsOutlineVisible_IntNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().IsOutlineVisible(1, 1, null));
+                new GraphicsPath().IsOutlineVisible(1, 1, null)
+            );
         }
 
         [Test]
         public void IsOutlineVisible_FloatNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().IsOutlineVisible(1.0f, 1.0f, null));
+                new GraphicsPath().IsOutlineVisible(1.0f, 1.0f, null)
+            );
         }
 
         [Test]
         public void IsOutlineVisible_PointNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().IsOutlineVisible(new Point(), null));
+                new GraphicsPath().IsOutlineVisible(new Point(), null)
+            );
         }
 
         [Test]
         public void IsOutlineVisible_PointFNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new GraphicsPath().IsOutlineVisible(new PointF(), null));
+                new GraphicsPath().IsOutlineVisible(new PointF(), null)
+            );
         }
 
         private void IsOutlineVisible_Line(Graphics graphics)

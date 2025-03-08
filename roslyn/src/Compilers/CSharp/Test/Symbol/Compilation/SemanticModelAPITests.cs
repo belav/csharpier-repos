@@ -2576,19 +2576,22 @@ class C
                     statement.SpanStart,
                     statement: null,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 model.TryGetSpeculativeSemanticModel(
                     statement.SpanStart,
                     constructorInitializer: (ConstructorInitializerSyntax)null,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 model.TryGetSpeculativeSemanticModel(
                     statement.SpanStart,
                     attribute: null,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
 
             // Speculate on a node from the same syntax tree.
             Assert.Throws<ArgumentException>(() =>
@@ -2596,19 +2599,22 @@ class C
                     statement.SpanStart,
                     statement: statement,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 model.TryGetSpeculativeSemanticModel(
                     ctorInitializer.SpanStart,
                     constructorInitializer: ctorInitializer,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 model.TryGetSpeculativeSemanticModel(
                     attribute.SpanStart,
                     attribute: attribute,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
 
             // Chaining speculative semantic model is not supported.
             var speculatedStatement = statement.ReplaceNode(
@@ -2625,7 +2631,8 @@ class C
                     speculatedStatement.SpanStart,
                     speculatedStatement,
                     speculativeModel: out speculativeModel
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2684,7 +2691,8 @@ class C
                     speculatedStatement.SpanStart,
                     newSpeculatedStatement,
                     out newModel
-                ));
+                )
+            );
 
             // (b) Statement
             newSpeculatedStatement = (LocalDeclarationStatementSyntax)
@@ -2694,7 +2702,8 @@ class C
                     speculatedStatement.SpanStart,
                     newSpeculatedStatement,
                     out newModel
-                ));
+                )
+            );
         }
 
         [Fact]

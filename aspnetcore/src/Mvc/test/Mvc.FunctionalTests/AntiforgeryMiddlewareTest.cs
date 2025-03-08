@@ -162,7 +162,8 @@ public class AntiforgeryMiddlewareTest
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await client.SendAsync(request));
+            await client.SendAsync(request)
+        );
         Assert.Equal("The maximum number of bytes have been read.", exception.Message);
     }
 

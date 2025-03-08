@@ -54,7 +54,8 @@ namespace System.ComponentModel.Tests
         public void ConvertTo_InvalidValue_ThrowsNotSupportedException(Type destinationType)
         {
             Assert.Throws<NotSupportedException>(() =>
-                Converter.ConvertTo(new object(), destinationType));
+                Converter.ConvertTo(new object(), destinationType)
+            );
         }
     }
 }

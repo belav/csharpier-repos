@@ -462,7 +462,8 @@ namespace Castle.DynamicProxy.Tests
             var newScope = new ModuleScope(false);
 
             Assert.Throws<ArgumentException>(() =>
-                newScope.LoadAssemblyIntoCache(Assembly.GetExecutingAssembly()));
+                newScope.LoadAssemblyIntoCache(Assembly.GetExecutingAssembly())
+            );
         }
 
         [Test]

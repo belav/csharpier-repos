@@ -73,7 +73,8 @@ namespace System.Runtime.InteropServices.Tests
         public void CreateAggregatedObject_Unix_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.CreateAggregatedObject(IntPtr.Zero, 1));
+                Marshal.CreateAggregatedObject(IntPtr.Zero, 1)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

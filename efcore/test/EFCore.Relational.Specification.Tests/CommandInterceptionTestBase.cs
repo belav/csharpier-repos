@@ -1316,8 +1316,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
         using (context)
         {
             var exception = async
-                ? await Assert.ThrowsAsync<Exception>(() =>
-                    context.Set<Singularity>().ToListAsync())
+                ? await Assert.ThrowsAsync<Exception>(() => context.Set<Singularity>().ToListAsync()
+                )
                 : Assert.Throws<Exception>(() => context.Set<Singularity>().ToList());
 
             Assert.Equal("Bang!", exception.Message);
@@ -1352,7 +1352,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
             var exception = async
                 ? await Assert.ThrowsAsync<Exception>(() =>
-                    command.ExecuteScalarAsync(commandParameterObject))
+                    command.ExecuteScalarAsync(commandParameterObject)
+                )
                 : Assert.Throws<Exception>(() => command.ExecuteScalar(commandParameterObject));
 
             Assert.Equal("Bang!", exception.Message);
@@ -1377,7 +1378,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
                 var exception = async
                     ? await Assert.ThrowsAsync<Exception>(() =>
-                        context.Database.ExecuteSqlRawAsync(nonQuery))
+                        context.Database.ExecuteSqlRawAsync(nonQuery)
+                    )
                     : Assert.Throws<Exception>(() => context.Database.ExecuteSqlRaw(nonQuery));
 
                 Assert.Equal("Bang!", exception.Message);

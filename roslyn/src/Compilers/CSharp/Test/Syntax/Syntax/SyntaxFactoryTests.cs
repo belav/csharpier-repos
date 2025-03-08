@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // Verify that the Token factory method does validation for cases when the argument is not a valid token.
             Assert.Throws<ArgumentException>(() =>
-                SyntaxFactory.Token(SyntaxKind.NumericLiteralExpression));
+                SyntaxFactory.Token(SyntaxKind.NumericLiteralExpression)
+            );
         }
 
         [WorkItem(546101, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546101")]
@@ -175,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     "text",
                     "valueText",
                     default(SyntaxTriviaList)
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 SyntaxFactory.Token(
                     default(SyntaxTriviaList),
@@ -183,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     "text",
                     "valueText",
                     default(SyntaxTriviaList)
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 SyntaxFactory.Token(
                     default(SyntaxTriviaList),
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     "text",
                     "valueText",
                     default(SyntaxTriviaList)
-                ));
+                )
+            );
 
             // Ensure that when they throw, the appropriate message is used
             using (new EnsureEnglishUICulture())

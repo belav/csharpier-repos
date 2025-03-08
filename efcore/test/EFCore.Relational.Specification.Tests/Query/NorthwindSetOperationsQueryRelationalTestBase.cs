@@ -16,7 +16,8 @@ public abstract class NorthwindSetOperationsQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Collection_projection_after_set_operation_fails_if_distinct(async))
+                base.Collection_projection_after_set_operation_fails_if_distinct(async)
+            )
         ).Message;
 
         Assert.Equal(
@@ -29,7 +30,8 @@ public abstract class NorthwindSetOperationsQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Collection_projection_before_set_operation_fails(async))
+                base.Collection_projection_before_set_operation_fails(async)
+            )
         ).Message;
 
         Assert.Equal(RelationalStrings.SetOperationsNotAllowedAfterClientEvaluation, message);

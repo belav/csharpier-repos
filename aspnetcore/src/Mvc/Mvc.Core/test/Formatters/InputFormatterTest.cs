@@ -433,7 +433,8 @@ public class InputFormatterTest
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() =>
-            formatter.GetSupportedContentTypes("application/json", typeof(object)));
+            formatter.GetSupportedContentTypes("application/json", typeof(object))
+        );
     }
 
     [Theory]

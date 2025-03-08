@@ -77,7 +77,8 @@ public class HandlerProviderTests
                 "UndefinedMethod",
                 TestMethodHandler.RequestType,
                 TestMethodHandler.ResponseType
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -90,7 +91,8 @@ public class HandlerProviderTests
                 TestMethodHandler.Name,
                 TestMethodHandler.RequestType,
                 responseType: typeof(long)
-            ));
+            )
+        );
     }
 
     [Theory]

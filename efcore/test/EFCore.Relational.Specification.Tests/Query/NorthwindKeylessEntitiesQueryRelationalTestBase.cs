@@ -36,7 +36,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
                             })
                             .OrderBy(x => x.City)
                             .Take(2)
-                ))
+                )
+            )
         ).Message;
 
         Assert.Equal(
@@ -65,7 +66,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
                                     .Where(cq => cq.City == c.City)
                                     .ToList(),
                             })
-                ))
+                )
+            )
         ).Message;
 
         Assert.Equal(
@@ -80,7 +82,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.KeylessEntity_with_included_navs_multi_level(async))
+                base.KeylessEntity_with_included_navs_multi_level(async)
+            )
         ).Message;
 
         Assert.Equal(
@@ -97,7 +100,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.KeylessEntity_with_defining_query_and_correlated_collection(async))
+                base.KeylessEntity_with_defining_query_and_correlated_collection(async)
+            )
         ).Message;
 
         Assert.Equal(

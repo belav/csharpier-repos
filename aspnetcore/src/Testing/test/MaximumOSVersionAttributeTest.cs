@@ -12,24 +12,24 @@ public class MaximumOSVersionAttributeTest
     public void Linux_ThrowsNotImplemeneted()
     {
         Assert.Throws<NotImplementedException>(() =>
-            new MaximumOSVersionAttribute(OperatingSystems.Linux, "2.5"));
+            new MaximumOSVersionAttribute(OperatingSystems.Linux, "2.5")
+        );
     }
 
     [Fact]
     public void Mac_ThrowsNotImplemeneted()
     {
         Assert.Throws<NotImplementedException>(() =>
-            new MaximumOSVersionAttribute(OperatingSystems.MacOSX, "2.5"));
+            new MaximumOSVersionAttribute(OperatingSystems.MacOSX, "2.5")
+        );
     }
 
     [Fact]
     public void WindowsOrLinux_ThrowsNotImplemeneted()
     {
         Assert.Throws<NotImplementedException>(() =>
-            new MaximumOSVersionAttribute(
-                OperatingSystems.Linux | OperatingSystems.Windows,
-                "2.5"
-            ));
+            new MaximumOSVersionAttribute(OperatingSystems.Linux | OperatingSystems.Windows, "2.5")
+        );
     }
 
     [Fact]

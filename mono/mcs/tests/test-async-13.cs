@@ -242,7 +242,8 @@ class Tester : Base
     {
         var s = new byte?[] { 3, 2, 1 };
         var r = s[await Task.Factory.StartNew(() => 1)] += await Task.Factory.StartNew(() =>
-            (byte)30);
+            (byte)30
+        );
         if (r != 32)
             return 1;
 

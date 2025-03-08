@@ -202,7 +202,8 @@ namespace MonoTests.System.Collections.Concurrent
             string res = null;
 
             Task<int> t = Task.Factory.StartNew(() =>
-                BlockingCollection<string>.TakeFromAny(arr, out res));
+                BlockingCollection<string>.TakeFromAny(arr, out res)
+            );
             a.Add("foo");
             Assert.AreEqual(0, t.Result, "#1");
             Assert.AreEqual("foo", res, "#2");
@@ -224,14 +225,16 @@ namespace MonoTests.System.Collections.Concurrent
             string res = null;
 
             Task<int> t = Task.Factory.StartNew(() =>
-                BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token));
+                BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token)
+            );
             Thread.Sleep(100);
             a.Add("foo");
             Assert.AreEqual(0, t.Result, "#1");
             Assert.AreEqual("foo", res, "#2");
 
             t = Task.Factory.StartNew(() =>
-                BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token));
+                BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token)
+            );
             Thread.Sleep(100);
             b.Add("bar");
             Assert.AreEqual(1, t.Result, "#3");

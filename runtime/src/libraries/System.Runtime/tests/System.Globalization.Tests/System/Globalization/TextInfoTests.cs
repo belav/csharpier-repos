@@ -207,7 +207,8 @@ namespace System.Globalization.Tests
         public void ListSeparator_Set_Invalid()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                CultureInfo.InvariantCulture.TextInfo.ListSeparator = "");
+                CultureInfo.InvariantCulture.TextInfo.ListSeparator = ""
+            );
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
                 () => new CultureInfo("en-US").TextInfo.ListSeparator = null

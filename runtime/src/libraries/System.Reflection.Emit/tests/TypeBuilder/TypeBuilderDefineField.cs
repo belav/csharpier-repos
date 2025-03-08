@@ -207,7 +207,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateTypeInfo();
 
             Assert.Throws<InvalidOperationException>(() =>
-                type.DefineField("Name", typeof(int), FieldAttributes.Public));
+                type.DefineField("Name", typeof(int), FieldAttributes.Public)
+            );
         }
 
         [Theory]

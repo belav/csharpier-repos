@@ -148,7 +148,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
 
             // Act
             var exception = Assert.Throws<ArgumentException>(() =>
-                new CommandLineConfigurationProvider(args, switchMappings));
+                new CommandLineConfigurationProvider(args, switchMappings)
+            );
 
             // Assert
             Assert.Equal(expectedMsg, exception.Message);
@@ -179,7 +180,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
             ).Message;
 
             var exception = Assert.Throws<ArgumentException>(() =>
-                new CommandLineConfigurationProvider(args, switchMappings));
+                new CommandLineConfigurationProvider(args, switchMappings)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -191,7 +193,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
             var expectedMsg = new ArgumentNullException("args").Message;
 
             var exception = Assert.Throws<ArgumentNullException>(() =>
-                new CommandLineConfigurationProvider(args));
+                new CommandLineConfigurationProvider(args)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }

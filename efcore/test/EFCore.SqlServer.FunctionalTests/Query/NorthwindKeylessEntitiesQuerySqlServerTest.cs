@@ -68,7 +68,8 @@ FROM [Alphabetical list of products] AS [a]
     {
         // FromSql mapping. Issue #21627.
         await Assert.ThrowsAsync<SqlException>(() =>
-            base.KeylessEntity_with_nav_defining_query(async));
+            base.KeylessEntity_with_nav_defining_query(async)
+        );
 
         AssertSql(
             """

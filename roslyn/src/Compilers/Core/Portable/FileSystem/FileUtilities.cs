@@ -337,7 +337,8 @@ namespace Roslyn.Utilities
                     FileShare.Read,
                     4096,
                     FileOptions.Asynchronous
-                ));
+                )
+            );
         }
 
         public static T RethrowExceptionsAsIOException<T>(Func<T> operation) =>

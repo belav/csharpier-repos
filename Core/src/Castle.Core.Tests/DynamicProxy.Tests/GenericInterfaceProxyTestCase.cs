@@ -552,7 +552,8 @@ namespace Castle.DynamicProxy.Tests
                 generator.CreateInterfaceProxyWithoutTarget(
                     typeof(IGenInterfaceHierarchyBase<>),
                     interceptor
-                ));
+                )
+            );
         }
 
         [Test(

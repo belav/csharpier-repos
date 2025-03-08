@@ -146,7 +146,8 @@ public class MapPathMiddlewareTests
     public void MatchPathWithTrailingSlashThrowsException(string matchPath)
     {
         Assert.Throws<ArgumentException>(() =>
-            new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build());
+            new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build()
+        );
     }
 
     [Theory]

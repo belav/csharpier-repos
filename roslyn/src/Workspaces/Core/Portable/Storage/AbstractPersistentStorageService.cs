@@ -184,10 +184,8 @@ namespace Microsoft.CodeAnalysis.Storage
                     // Report this so we can try to address whatever is causing this.
                     FatalError.ReportAndCatch(ex);
                     IOUtilities.PerformIO(() =>
-                        Directory.Delete(
-                            Path.GetDirectoryName(databaseFilePath)!,
-                            recursive: true
-                        ));
+                        Directory.Delete(Path.GetDirectoryName(databaseFilePath)!, recursive: true)
+                    );
                 }
 
                 return true;

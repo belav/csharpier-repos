@@ -112,7 +112,8 @@ public class KestrelServerOptionsTests
         var options = new KestrelServerOptions();
 
         var ex = Assert.Throws<ArgumentNullException>(() =>
-            options.RequestHeaderEncodingSelector = null);
+            options.RequestHeaderEncodingSelector = null
+        );
         Assert.Equal("value", ex.ParamName);
     }
 }

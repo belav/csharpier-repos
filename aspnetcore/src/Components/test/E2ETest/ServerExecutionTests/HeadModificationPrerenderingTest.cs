@@ -66,6 +66,7 @@ public class HeadModificationPrerenderingTest
             (bool)
                 javascript.ExecuteScript(
                     "return window['__aspnetcore__testing__blazor__started__'] === true;"
-                ));
+                )
+        );
     }
 }

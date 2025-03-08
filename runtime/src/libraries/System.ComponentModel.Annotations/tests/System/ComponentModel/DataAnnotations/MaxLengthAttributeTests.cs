@@ -133,7 +133,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void Validate_ICollection_Invalid(MaxLengthAttribute attribute, object value)
         {
             Assert.Throws<ValidationException>(() =>
-                attribute.Validate(value, new ValidationContext(new object())));
+                attribute.Validate(value, new ValidationContext(new object()))
+            );
             Assert.False(attribute.IsValid(value));
         }
 
@@ -146,7 +147,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new MaxLengthAttribute(length);
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("Twoflower", new ValidationContext(new object())));
+                attribute.Validate("Twoflower", new ValidationContext(new object()))
+            );
         }
 
         [Fact]
@@ -156,7 +158,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 new MaxLengthAttribute().GetValidationResult(
                     new Random(),
                     new ValidationContext(new object())
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -166,7 +169,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 new MaxLengthAttribute().GetValidationResult(
                     new GenericIEnumerableClass(),
                     new ValidationContext(new object())
-                ));
+                )
+            );
         }
     }
 

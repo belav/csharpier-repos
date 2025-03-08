@@ -32,27 +32,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var collection1256 = factory(new[] { 1, 2, 5, 6 });
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(emptyCollection, 100, 1, 1, EqualityComparer<int>.Default));
+                indexOfItemIndexCountEQ(emptyCollection, 100, 1, 1, EqualityComparer<int>.Default)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(
-                    emptyCollection,
-                    100,
-                    -1,
-                    1,
-                    EqualityComparer<int>.Default
-                ));
+                indexOfItemIndexCountEQ(emptyCollection, 100, -1, 1, EqualityComparer<int>.Default)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(collection1256, 100, 1, 20, EqualityComparer<int>.Default));
+                indexOfItemIndexCountEQ(collection1256, 100, 1, 20, EqualityComparer<int>.Default)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(collection1256, 100, 1, -1, EqualityComparer<int>.Default));
+                indexOfItemIndexCountEQ(collection1256, 100, 1, -1, EqualityComparer<int>.Default)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(emptyCollection, 100, 1, 1, new CustomComparer(50)));
+                indexOfItemIndexCountEQ(emptyCollection, 100, 1, 1, new CustomComparer(50))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(emptyCollection, 100, -1, 1, new CustomComparer(50)));
+                indexOfItemIndexCountEQ(emptyCollection, 100, -1, 1, new CustomComparer(50))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(collection1256, 100, 1, 20, new CustomComparer(1)));
+                indexOfItemIndexCountEQ(collection1256, 100, 1, 20, new CustomComparer(1))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                indexOfItemIndexCountEQ(collection1256, 100, 1, -1, new CustomComparer(1)));
+                indexOfItemIndexCountEQ(collection1256, 100, 1, -1, new CustomComparer(1))
+            );
 
             Assert.Equal(-1, indexOfItem(emptyCollection, 5));
             Assert.Equal(-1, indexOfItemIndex(emptyCollection, 5, 0));
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     1,
                     1,
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 lastIndexOfItemIndexCountEQ(
                     emptyCollection,
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     -1,
                     1,
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 lastIndexOfItemIndexCountEQ(
                     collection1256,
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     1,
                     20,
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 lastIndexOfItemIndexCountEQ(
                     collection1256,
@@ -161,17 +166,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     1,
                     -1,
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                lastIndexOfItemIndexCountEQ(emptyCollection, 100, 1, 1, new CustomComparer(50)));
+                lastIndexOfItemIndexCountEQ(emptyCollection, 100, 1, 1, new CustomComparer(50))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                lastIndexOfItemIndexCountEQ(emptyCollection, 100, -1, 1, new CustomComparer(50)));
+                lastIndexOfItemIndexCountEQ(emptyCollection, 100, -1, 1, new CustomComparer(50))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                lastIndexOfItemIndexCountEQ(collection1256, 100, 1, 20, new CustomComparer(1)));
+                lastIndexOfItemIndexCountEQ(collection1256, 100, 1, 20, new CustomComparer(1))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                lastIndexOfItemIndexCountEQ(collection1256, 100, 1, -1, new CustomComparer(1)));
+                lastIndexOfItemIndexCountEQ(collection1256, 100, 1, -1, new CustomComparer(1))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                lastIndexOfItemIndex(collection1256, 2, 5));
+                lastIndexOfItemIndex(collection1256, 2, 5)
+            );
 
             Assert.Equal(-1, lastIndexOfItem(emptyCollection, 5));
             Assert.Equal(-1, lastIndexOfItemEQ(emptyCollection, 5, EqualityComparer<int>.Default));

@@ -210,7 +210,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 invalidSet =>
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer()));
+                        list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
+                    );
                 }
             );
         }

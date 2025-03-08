@@ -39,7 +39,8 @@ namespace System.Globalization.Tests
         public void NaNSymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.NaNSymbol = "");
+                NumberFormatInfo.InvariantInfo.NaNSymbol = ""
+            );
         }
     }
 }

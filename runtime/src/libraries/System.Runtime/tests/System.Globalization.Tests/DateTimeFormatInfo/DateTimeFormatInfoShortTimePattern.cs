@@ -261,7 +261,8 @@ namespace System.Globalization.Tests
         public void ShortTimePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.ShortTimePattern = "HH:mm");
+                DateTimeFormatInfo.InvariantInfo.ShortTimePattern = "HH:mm"
+            );
         }
     }
 }

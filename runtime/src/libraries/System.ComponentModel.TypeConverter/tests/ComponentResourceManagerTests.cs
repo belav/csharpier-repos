@@ -70,7 +70,8 @@ namespace System.ComponentModel.Tests
 
             var value = new MulticasedClass();
             Assert.Throws<AmbiguousMatchException>(() =>
-                resourceManager.ApplyResources(value, "Object"));
+                resourceManager.ApplyResources(value, "Object")
+            );
         }
 
         private class MulticasedClass

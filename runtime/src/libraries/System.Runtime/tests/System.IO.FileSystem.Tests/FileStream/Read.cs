@@ -16,7 +16,8 @@ namespace System.IO.Tests
                     Path.GetPathRoot(Directory.GetCurrentDirectory()),
                     FileMode.Open,
                     FileAccess.Read
-                ));
+                )
+            );
         }
     }
 }

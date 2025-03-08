@@ -108,7 +108,8 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Null(Marshal.PtrToStructure(IntPtr.Zero, typeof(SomeTestStruct)));
             Assert.Null(Marshal.PtrToStructure<NonGenericClass>(IntPtr.Zero));
             Assert.Throws<NullReferenceException>(() =>
-                Marshal.PtrToStructure<SomeTestStruct>(IntPtr.Zero));
+                Marshal.PtrToStructure<SomeTestStruct>(IntPtr.Zero)
+            );
         }
 
         [Fact]

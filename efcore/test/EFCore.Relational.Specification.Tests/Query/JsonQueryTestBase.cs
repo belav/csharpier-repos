@@ -90,7 +90,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 AssertQuery(
                     async,
                     ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedReferenceRoot)
-                ))
+                )
+            )
         ).Message;
 
         Assert.Equal(
@@ -110,7 +111,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 AssertQuery(
                     async,
                     ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedCollectionRoot)
-                ))
+                )
+            )
         ).Message;
 
         Assert.Equal(
@@ -139,7 +141,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                 x.OwnedReferenceRoot,
                                 x.OwnedCollectionRoot,
                             })
-                ))
+                )
+            )
         ).Message;
 
         Assert.Equal(

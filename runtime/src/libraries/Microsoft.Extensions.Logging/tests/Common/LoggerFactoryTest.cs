@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.Logging.Test
             factory.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                ((ILoggerFactory)factory).AddProvider(CreateProvider()));
+                ((ILoggerFactory)factory).AddProvider(CreateProvider())
+            );
         }
 
         [Fact]
@@ -296,7 +297,8 @@ namespace Microsoft.Extensions.Logging.Test
                     builder.Configure(o =>
                         o.ActivityTrackingOptions = (ActivityTrackingOptions)0xFF00
                     );
-                }));
+                })
+            );
         }
 
         [Fact]

@@ -195,7 +195,8 @@ namespace System.Memory.Tests
 
             // Cannot get 101 starting from empty adjacent segment
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sequence.GetOffset(new SequencePosition(bufferSegment3, 1)));
+                sequence.GetOffset(new SequencePosition(bufferSegment3, 1))
+            );
         }
 
         [Fact]
@@ -288,7 +289,8 @@ namespace System.Memory.Tests
 
             // Invalid positions
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sequence.GetOffset(new SequencePosition(data, 1)));
+                sequence.GetOffset(new SequencePosition(data, 1))
+            );
         }
 
         [Fact]
@@ -309,11 +311,14 @@ namespace System.Memory.Tests
 
             // Invalid positions
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sequence.GetOffset(new SequencePosition(bufferSegment1, 1)));
+                sequence.GetOffset(new SequencePosition(bufferSegment1, 1))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sequence.GetOffset(new SequencePosition(bufferSegment2, 1)));
+                sequence.GetOffset(new SequencePosition(bufferSegment2, 1))
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sequence.GetOffset(new SequencePosition(bufferSegment3, 1)));
+                sequence.GetOffset(new SequencePosition(bufferSegment3, 1))
+            );
 
             for (int i = 0; i <= bufferSegment4.Memory.Length; i++)
             {
@@ -453,9 +458,11 @@ namespace System.Memory.Tests
 
             // Go out of bounds for segment
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                c1 = buffer.GetPosition(150, buffer.Start));
+                c1 = buffer.GetPosition(150, buffer.Start)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                c1 = buffer.GetPosition(250, buffer.Start));
+                c1 = buffer.GetPosition(250, buffer.Start)
+            );
         }
 
         [Fact]
@@ -482,9 +489,11 @@ namespace System.Memory.Tests
 
             // Go out of bounds for segment
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                c1 = buffer.GetPosition(150, buffer.Start));
+                c1 = buffer.GetPosition(150, buffer.Start)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                c1 = buffer.GetPosition(250, buffer.Start));
+                c1 = buffer.GetPosition(250, buffer.Start)
+            );
         }
 
         #endregion
@@ -623,14 +632,16 @@ namespace System.Memory.Tests
         [Fact]
         public void Ctor_Array_ValidatesArguments()
         {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlySequence<T>(new T[5], 6, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlySequence<T>(new T[5], 4, 2)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(new T[5], 6, 0));
+                new ReadOnlySequence<T>(new T[5], -4, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(new T[5], 4, 2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(new T[5], -4, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(new T[5], 4, -2));
+                new ReadOnlySequence<T>(new T[5], 4, -2)
+            );
             Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(null, 4, 2));
         }
 
@@ -639,20 +650,25 @@ namespace System.Memory.Tests
         {
             var segment = new BufferSegment<T>(new T[5]);
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySequence<T>(null, 2, segment, 3));
-            Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySequence<T>(segment, 2, null, 3));
+            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(null, 2, segment, 3)
+            );
+            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(segment, 2, null, 3)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment, 6, segment, 3));
+                new ReadOnlySequence<T>(segment, 6, segment, 3)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment, 2, segment, 6));
+                new ReadOnlySequence<T>(segment, 2, segment, 6)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment, -1, segment, 0));
+                new ReadOnlySequence<T>(segment, -1, segment, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment, 0, segment, -1));
+                new ReadOnlySequence<T>(segment, 0, segment, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment, 3, segment, 2));
+                new ReadOnlySequence<T>(segment, 3, segment, 2)
+            );
         }
 
         [Fact]
@@ -661,20 +677,25 @@ namespace System.Memory.Tests
             var segment1 = new BufferSegment<T>(new T[5]);
             BufferSegment<T> segment2 = segment1.Append(new T[5]);
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySequence<T>(null, 5, segment2, 3));
-            Assert.Throws<ArgumentNullException>(() =>
-                new ReadOnlySequence<T>(segment1, 2, null, 3));
+            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(null, 5, segment2, 3)
+            );
+            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(segment1, 2, null, 3)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment1, 6, segment2, 3));
+                new ReadOnlySequence<T>(segment1, 6, segment2, 3)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment1, 2, segment2, 6));
+                new ReadOnlySequence<T>(segment1, 2, segment2, 6)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment1, -1, segment2, 0));
+                new ReadOnlySequence<T>(segment1, -1, segment2, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment1, 0, segment2, -1));
+                new ReadOnlySequence<T>(segment1, 0, segment2, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ReadOnlySequence<T>(segment2, 2, segment1, 3));
+                new ReadOnlySequence<T>(segment2, 2, segment1, 3)
+            );
         }
 
         #endregion

@@ -4132,7 +4132,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
                     (
                         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            referenceEntry.LoadAsync())
+                            referenceEntry.LoadAsync()
+                        )
                     ).Message
                 );
             }
@@ -4572,7 +4573,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
                     (
                         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            referenceEntry.LoadAsync())
+                            referenceEntry.LoadAsync()
+                        )
                     ).Message
                 );
             }

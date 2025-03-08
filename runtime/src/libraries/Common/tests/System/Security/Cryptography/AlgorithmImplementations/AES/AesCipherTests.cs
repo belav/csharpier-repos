@@ -2413,7 +2413,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                     plainBytes: "b84a90fc6d".HexToByteArray(),
                     cipherBytes: "1a9a61c307".HexToByteArray(),
                     feedbackSize: 128
-                ));
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
@@ -3115,7 +3116,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 byte[] input = new byte[3 * (alg.BlockSize / 8)];
 
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    xform.TransformBlock(input, 0, input.Length, output, 0));
+                    xform.TransformBlock(input, 0, input.Length, output, 0)
+                );
 
                 Assert.Equal(new byte[output.Length], output);
             }

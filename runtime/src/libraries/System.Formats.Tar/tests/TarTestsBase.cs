@@ -416,7 +416,8 @@ namespace System.Formats.Tar.Tests
             Assert.True(entry.ModificationTime > approxNow);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                entry.ModificationTime = DateTime.MinValue); // Minimum allowed is UnixEpoch, not MinValue
+                entry.ModificationTime = DateTime.MinValue
+            ); // Minimum allowed is UnixEpoch, not MinValue
             entry.ModificationTime = TestModificationTime;
 
             // Name

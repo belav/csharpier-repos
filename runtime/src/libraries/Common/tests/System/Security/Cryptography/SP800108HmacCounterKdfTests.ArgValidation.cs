@@ -78,7 +78,8 @@ namespace System.Security.Cryptography.Tests
                     s_labelBytes,
                     s_contextBytes,
                     42
-                ));
+                )
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -156,7 +157,8 @@ namespace System.Security.Cryptography.Tests
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_unknownHash, Label, Context, 42));
+                SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_unknownHash, Label, Context, 42)
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -218,7 +220,8 @@ namespace System.Security.Cryptography.Tests
                     s_labelBytes.AsSpan(),
                     s_contextBytes.AsSpan(),
                     42
-                ));
+                )
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -282,7 +285,8 @@ namespace System.Security.Cryptography.Tests
                     s_labelBytes,
                     s_contextBytes,
                     destination
-                ));
+                )
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -332,7 +336,8 @@ namespace System.Security.Cryptography.Tests
                     Label.AsSpan(),
                     Context.AsSpan(),
                     42
-                ));
+                )
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -396,7 +401,8 @@ namespace System.Security.Cryptography.Tests
                     Label.AsSpan(),
                     Context.AsSpan(),
                     destination
-                ));
+                )
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -431,7 +437,8 @@ namespace System.Security.Cryptography.Tests
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                new SP800108HmacCounterKdf(s_kdk, s_unknownHash));
+                new SP800108HmacCounterKdf(s_kdk, s_unknownHash)
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
         }
 
@@ -449,7 +456,8 @@ namespace System.Security.Cryptography.Tests
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
-                new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_unknownHash));
+                new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_unknownHash)
+            );
             Assert.Contains(s_unknownHash.Name, ex.Message);
         }
 
@@ -595,10 +603,12 @@ namespace System.Security.Cryptography.Tests
             byte[] derivedKey = new byte[42];
 
             Assert.Throws<EncoderFallbackException>(() =>
-                kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), derivedKey));
+                kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), derivedKey)
+            );
 
             Assert.Throws<EncoderFallbackException>(() =>
-                kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), derivedKey));
+                kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), derivedKey)
+            );
         }
 
         [Fact]
@@ -610,10 +620,12 @@ namespace System.Security.Cryptography.Tests
             );
 
             Assert.Throws<EncoderFallbackException>(() =>
-                kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), 42));
+                kdf.DeriveKey("\uD800".AsSpan(), Context.AsSpan(), 42)
+            );
 
             Assert.Throws<EncoderFallbackException>(() =>
-                kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), 42));
+                kdf.DeriveKey(Label.AsSpan(), "\uD800".AsSpan(), 42)
+            );
         }
 
         [Fact]
@@ -628,7 +640,8 @@ namespace System.Security.Cryptography.Tests
                     Label.AsSpan(),
                     "\uD800".AsSpan(),
                     destination
-                ));
+                )
+            );
 
             Assert.Throws<EncoderFallbackException>(() =>
                 SP800108HmacCounterKdf.DeriveBytes(
@@ -637,7 +650,8 @@ namespace System.Security.Cryptography.Tests
                     "\uD800".AsSpan(),
                     Context.AsSpan(),
                     destination
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -650,7 +664,8 @@ namespace System.Security.Cryptography.Tests
                     Label.AsSpan(),
                     "\uD800".AsSpan(),
                     42
-                ));
+                )
+            );
 
             Assert.Throws<EncoderFallbackException>(() =>
                 SP800108HmacCounterKdf.DeriveBytes(
@@ -659,7 +674,8 @@ namespace System.Security.Cryptography.Tests
                     "\uD800".AsSpan(),
                     Context.AsSpan(),
                     42
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -672,7 +688,8 @@ namespace System.Security.Cryptography.Tests
                     Label,
                     "\uD800",
                     42
-                ));
+                )
+            );
 
             Assert.Throws<EncoderFallbackException>(() =>
                 SP800108HmacCounterKdf.DeriveBytes(
@@ -681,7 +698,8 @@ namespace System.Security.Cryptography.Tests
                     "\uD800",
                     Context,
                     42
-                ));
+                )
+            );
         }
 
         private static unsafe Span<byte> GetOversizedSpan()

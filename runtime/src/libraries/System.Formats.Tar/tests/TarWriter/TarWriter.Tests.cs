@@ -13,7 +13,8 @@ namespace System.Formats.Tar.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new TarWriter(archiveStream: null));
             Assert.Throws<ArgumentNullException>(() =>
-                new TarWriter(archiveStream: null, TarEntryFormat.V7));
+                new TarWriter(archiveStream: null, TarEntryFormat.V7)
+            );
         }
 
         [Fact]
@@ -74,11 +75,14 @@ namespace System.Formats.Tar.Tests
             Assert.Equal(TarEntryFormat.Pax, writerNoFormat.Format);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new TarWriter(archiveStream, TarEntryFormat.Unknown));
+                new TarWriter(archiveStream, TarEntryFormat.Unknown)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new TarWriter(archiveStream, (TarEntryFormat)int.MinValue));
+                new TarWriter(archiveStream, (TarEntryFormat)int.MinValue)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new TarWriter(archiveStream, (TarEntryFormat)int.MaxValue));
+                new TarWriter(archiveStream, (TarEntryFormat)int.MaxValue)
+            );
         }
 
         [Fact]

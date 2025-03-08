@@ -66,11 +66,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 invalidLinkOptions = null;
 
             Assert.Throws<ArgumentNullException>(() =>
-                source.LinkTo(invalidTarget, validLinkOptions));
+                source.LinkTo(invalidTarget, validLinkOptions)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                source.LinkTo(validTarget, invalidLinkOptions));
+                source.LinkTo(validTarget, invalidLinkOptions)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                source.LinkTo(invalidTarget, invalidLinkOptions));
+                source.LinkTo(invalidTarget, invalidLinkOptions)
+            );
         }
 
         internal static void TestConsumeReserveReleaseArgumentsExceptions<T>(ISourceBlock<T> source)
@@ -82,7 +85,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             bool consumed;
 
             Assert.Throws<ArgumentNullException>(() =>
-                source.ConsumeMessage(validMessageHeader, invalidTarget, out consumed));
+                source.ConsumeMessage(validMessageHeader, invalidTarget, out consumed)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "messageHeader",
                 () => source.ConsumeMessage(invalidMessageHeader, validTarget, out consumed)
@@ -92,7 +96,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 () => source.ConsumeMessage(invalidMessageHeader, invalidTarget, out consumed)
             );
             Assert.Throws<ArgumentNullException>(() =>
-                source.ReserveMessage(validMessageHeader, invalidTarget));
+                source.ReserveMessage(validMessageHeader, invalidTarget)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "messageHeader",
                 () => source.ReserveMessage(invalidMessageHeader, validTarget)
@@ -102,7 +107,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 () => source.ReserveMessage(invalidMessageHeader, invalidTarget)
             );
             Assert.Throws<ArgumentNullException>(() =>
-                source.ReleaseReservation(validMessageHeader, invalidTarget));
+                source.ReleaseReservation(validMessageHeader, invalidTarget)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "messageHeader",
                 () => source.ReleaseReservation(invalidMessageHeader, validTarget)
@@ -287,7 +293,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 Assert.False(block.ReserveMessage(offeredMessage, DataflowBlock.NullTarget<T>())); // another block tries to reserve the message
                 Assert.Throws<InvalidOperationException>(() =>
-                    block.ReleaseReservation(offeredMessage, DataflowBlock.NullTarget<T>())); // another block tries to release the message
+                    block.ReleaseReservation(offeredMessage, DataflowBlock.NullTarget<T>())
+                ); // another block tries to release the message
             }
 
             T item;
@@ -297,7 +304,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ); // anyone tries to receive
 
             Assert.Throws<InvalidOperationException>(() =>
-                block.ReleaseReservation(new DataflowMessageHeader(-42), target)); // anyone tries to release a reservation on a different message
+                block.ReleaseReservation(new DataflowMessageHeader(-42), target)
+            ); // anyone tries to release a reservation on a different message
 
             block.ReleaseReservation(offeredMessage, target); // release the reservation
 

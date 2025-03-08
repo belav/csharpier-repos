@@ -39,7 +39,8 @@ namespace System.Globalization.Tests
         public void PercentGroupSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.PercentGroupSeparator = "string");
+                NumberFormatInfo.InvariantInfo.PercentGroupSeparator = "string"
+            );
         }
     }
 }

@@ -53,7 +53,8 @@ public class SendFileResponseExtensionsTests
         response.Body = body;
 
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            response.SendFileAsync("testfile1kb.txt", 1, 3, new CancellationToken(canceled: true)));
+            response.SendFileAsync("testfile1kb.txt", 1, 3, new CancellationToken(canceled: true))
+        );
 
         Assert.Equal(0, body.Length);
     }
@@ -67,7 +68,8 @@ public class SendFileResponseExtensionsTests
         var response = context.Response;
 
         await Assert.ThrowsAsync<OperationCanceledException>(() =>
-            response.SendFileAsync("testfile1kb.txt", 1, 3, new CancellationToken(canceled: true)));
+            response.SendFileAsync("testfile1kb.txt", 1, 3, new CancellationToken(canceled: true))
+        );
     }
 
     [Fact]

@@ -74,7 +74,8 @@ public class DbSetTest
             CoreStrings.ContextDisposed,
             (
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    set.AddAsync(new Category()).AsTask())
+                    set.AddAsync(new Category()).AsTask()
+                )
             ).Message
         );
 
@@ -133,7 +134,8 @@ public class DbSetTest
             CoreStrings.ContextDisposed,
             (
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    set.AddAsync(new Category()).AsTask())
+                    set.AddAsync(new Category()).AsTask()
+                )
             ).Message
         );
 
@@ -845,8 +847,8 @@ public class DbSetTest
         Assert.Equal(
             CoreStrings.DataBindingWithIListSource,
             Assert
-                .Throws<NotSupportedException>(() =>
-                    ((IListSource)context.Gus.Distinct()).GetList())
+                .Throws<NotSupportedException>(() => ((IListSource)context.Gus.Distinct()).GetList()
+                )
                 .Message
         );
     }

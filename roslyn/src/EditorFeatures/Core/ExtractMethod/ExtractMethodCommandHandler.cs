@@ -96,7 +96,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
                 _renameService.ActiveSession.CommitAsync(
                     previewChanges: false,
                     CancellationToken.None
-                ));
+                )
+            );
         }
 
         if (!args.SubjectBuffer.SupportsRefactorings())

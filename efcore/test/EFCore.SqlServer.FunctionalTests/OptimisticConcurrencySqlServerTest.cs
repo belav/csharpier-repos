@@ -233,7 +233,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     }
 
                     await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync());
+                        context.SaveChangesAsync()
+                    );
 
                     await fanEntry.ReloadAsync();
                     await swagEntry.ReloadAsync();
@@ -276,7 +277,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     }
 
                     await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync());
+                        context.SaveChangesAsync()
+                    );
 
                     await fanEntry.ReloadAsync();
                     await swagEntry.ReloadAsync();
@@ -367,7 +369,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     }
 
                     await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync());
+                        context.SaveChangesAsync()
+                    );
 
                     await circuitEntry.ReloadAsync();
                     await cityEntry.ReloadAsync();
@@ -412,7 +415,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     }
 
                     await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync());
+                        context.SaveChangesAsync()
+                    );
 
                     await circuitEntry.ReloadAsync();
                     await cityEntry.ReloadAsync();

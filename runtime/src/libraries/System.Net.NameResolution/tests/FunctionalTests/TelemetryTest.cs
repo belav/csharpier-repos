@@ -94,23 +94,29 @@ namespace System.Net.NameResolution.Tests
                         async () =>
                         {
                             await Assert.ThrowsAnyAsync<SocketException>(async () =>
-                                await Dns.GetHostEntryAsync(InvalidHostName));
+                                await Dns.GetHostEntryAsync(InvalidHostName)
+                            );
                             await Assert.ThrowsAnyAsync<SocketException>(async () =>
-                                await Dns.GetHostAddressesAsync(InvalidHostName));
+                                await Dns.GetHostAddressesAsync(InvalidHostName)
+                            );
 
                             Assert.ThrowsAny<SocketException>(() =>
-                                Dns.GetHostEntry(InvalidHostName));
+                                Dns.GetHostEntry(InvalidHostName)
+                            );
                             Assert.ThrowsAny<SocketException>(() =>
-                                Dns.GetHostAddresses(InvalidHostName));
+                                Dns.GetHostAddresses(InvalidHostName)
+                            );
 
                             Assert.ThrowsAny<SocketException>(() =>
                                 Dns.EndGetHostEntry(
                                     Dns.BeginGetHostEntry(InvalidHostName, null, null)
-                                ));
+                                )
+                            );
                             Assert.ThrowsAny<SocketException>(() =>
                                 Dns.EndGetHostAddresses(
                                     Dns.BeginGetHostAddresses(InvalidHostName, null, null)
-                                ));
+                                )
+                            );
                         }
                     );
 

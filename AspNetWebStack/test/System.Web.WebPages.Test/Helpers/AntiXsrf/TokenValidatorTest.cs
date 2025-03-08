@@ -73,7 +73,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                validator.GenerateFormToken(httpContext, identity, cookieToken));
+                validator.GenerateFormToken(httpContext, identity, cookieToken)
+            );
             Assert.Equal(
                 @"The provided identity of type 'System.Web.Helpers.AntiXsrf.Test.TokenValidatorTest+MyAuthenticatedIdentityWithoutUsername' is marked IsAuthenticated = true but does not have a value for Name. By default, the anti-forgery system requires that all authenticated identities have a unique Name. If it is not possible to provide a unique Name for this identity, consider setting the static property AntiForgeryConfig.AdditionalDataProvider to an instance of a type that can provide some form of unique identifier for the current user.",
                 ex.Message
@@ -281,7 +282,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken)
+            );
             Assert.Equal(
                 @"The required anti-forgery cookie ""my-cookie-name"" is not present.",
                 ex.Message
@@ -305,7 +307,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken)
+            );
             Assert.Equal(
                 @"The required anti-forgery form field ""my-form-field-name"" is not present.",
                 ex.Message
@@ -330,14 +333,16 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex1 = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, fieldtoken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, fieldtoken, fieldtoken)
+            );
             Assert.Equal(
                 @"Validation of the provided anti-forgery token failed. The cookie ""my-cookie-name"" and the form field ""my-form-field-name"" were swapped.",
                 ex1.Message
             );
 
             var ex2 = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, sessionToken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, sessionToken)
+            );
             Assert.Equal(
                 @"Validation of the provided anti-forgery token failed. The cookie ""my-cookie-name"" and the form field ""my-form-field-name"" were swapped.",
                 ex2.Message
@@ -357,7 +362,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken)
+            );
             Assert.Equal(
                 @"The anti-forgery cookie token and form field token do not match.",
                 ex.Message
@@ -398,7 +404,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken)
+            );
             Assert.Equal(
                 @"The provided anti-forgery token was meant for user """
                     + embeddedUsername
@@ -436,7 +443,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken)
+            );
             Assert.Equal(
                 @"The provided anti-forgery token was meant for a different claims-based user than the current user.",
                 ex.Message
@@ -472,7 +480,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             // Act & assert
             var ex = Assert.Throws<HttpAntiForgeryException>(() =>
-                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken));
+                validator.ValidateTokens(httpContext, identity, sessionToken, fieldtoken)
+            );
             Assert.Equal(
                 @"The provided anti-forgery token failed a custom data check.",
                 ex.Message

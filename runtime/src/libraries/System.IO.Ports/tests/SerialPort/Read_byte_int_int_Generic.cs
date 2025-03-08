@@ -130,7 +130,8 @@ namespace System.IO.Ports.Tests
                 com.Open();
 
                 Assert.Throws<TimeoutException>(() =>
-                    com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize));
+                    com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+                );
 
                 VerifyTimeout(com);
             }
@@ -336,7 +337,8 @@ namespace System.IO.Ports.Tests
 
             // Warm up read method
             Assert.Throws<TimeoutException>(() =>
-                com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize));
+                com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+            );
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -344,7 +346,8 @@ namespace System.IO.Ports.Tests
             {
                 timer.Start();
                 Assert.Throws<TimeoutException>(() =>
-                    com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize));
+                    com.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+                );
 
                 timer.Stop();
                 actualTime += (int)timer.ElapsedMilliseconds;

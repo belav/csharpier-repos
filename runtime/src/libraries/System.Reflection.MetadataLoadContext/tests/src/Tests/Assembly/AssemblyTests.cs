@@ -491,7 +491,8 @@ namespace System.Reflection.Tests
                 Assembly middle = lc.LoadFromByteArray(TestData.s_MiddleImage);
 
                 ReflectionTypeLoadException re = Assert.Throws<ReflectionTypeLoadException>(() =>
-                    upper.GetForwardedTypesThunk());
+                    upper.GetForwardedTypesThunk()
+                );
                 Assert.Equal(3, re.Types.Length);
                 Assert.Equal(3, re.LoaderExceptions.Length);
 
@@ -515,7 +516,8 @@ namespace System.Reflection.Tests
                 Assembly lower = lc.LoadFromByteArray(TestData.s_LowerImage);
 
                 ReflectionTypeLoadException re = Assert.Throws<ReflectionTypeLoadException>(() =>
-                    upper.GetForwardedTypesThunk());
+                    upper.GetForwardedTypesThunk()
+                );
                 Assert.Equal(4, re.Types.Length);
                 Assert.Equal(4, re.LoaderExceptions.Length);
 

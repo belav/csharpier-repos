@@ -17,7 +17,8 @@ namespace System.Net.Sockets.Tests
         public void SelectNone_Throws()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                Socket.Select(null, null, null, SelectSuccessTimeoutMicroseconds));
+                Socket.Select(null, null, null, SelectSuccessTimeoutMicroseconds)
+            );
         }
 
         [Fact]

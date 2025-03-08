@@ -637,7 +637,8 @@ public class EventCallbackFactoryBinderExtensionsTest
         Action<ClassWithoutTypeConverter> setter = (_) => value = _;
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            EventCallback.Factory.CreateBinder(component, setter, value));
+            EventCallback.Factory.CreateBinder(component, setter, value)
+        );
 
         Assert.Equal(
             $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. "

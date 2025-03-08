@@ -134,7 +134,8 @@ namespace System.Net.Sockets.Tests
                                 clientSafeHandle.DangerousGetHandle(),
                                 ownsHandle: false
                             )
-                        ));
+                        )
+                    );
                     Assert.Equal(SocketError.NotSocket, se.SocketErrorCode);
                 })
                 .Dispose();

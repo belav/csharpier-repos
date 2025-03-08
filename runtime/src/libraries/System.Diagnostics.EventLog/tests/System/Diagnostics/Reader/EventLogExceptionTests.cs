@@ -12,50 +12,58 @@ namespace System.Diagnostics.Tests
         public void EventLogNotFoundException_Ctor()
         {
             Assert.ThrowsAsync<EventLogNotFoundException>(() =>
-                throw new EventLogNotFoundException());
+                throw new EventLogNotFoundException()
+            );
             Assert.ThrowsAsync<EventLogNotFoundException>(() =>
-                throw new EventLogNotFoundException("message"));
+                throw new EventLogNotFoundException("message")
+            );
             Assert.ThrowsAsync<EventLogNotFoundException>(() =>
-                throw new EventLogNotFoundException("message", new Exception("inner exception")));
+                throw new EventLogNotFoundException("message", new Exception("inner exception"))
+            );
         }
 
         [Fact]
         public void EventLogReadingException_Ctor()
         {
+            Assert.ThrowsAsync<EventLogReadingException>(() => throw new EventLogReadingException()
+            );
             Assert.ThrowsAsync<EventLogReadingException>(() =>
-                throw new EventLogReadingException());
+                throw new EventLogReadingException("message")
+            );
             Assert.ThrowsAsync<EventLogReadingException>(() =>
-                throw new EventLogReadingException("message"));
-            Assert.ThrowsAsync<EventLogReadingException>(() =>
-                throw new EventLogReadingException("message", new Exception("inner exception")));
+                throw new EventLogReadingException("message", new Exception("inner exception"))
+            );
         }
 
         [Fact]
         public void EventLogProviderDisabledException_Ctor()
         {
             Assert.ThrowsAsync<EventLogProviderDisabledException>(() =>
-                throw new EventLogProviderDisabledException());
+                throw new EventLogProviderDisabledException()
+            );
             Assert.ThrowsAsync<EventLogProviderDisabledException>(() =>
-                throw new EventLogProviderDisabledException("message"));
+                throw new EventLogProviderDisabledException("message")
+            );
             Assert.ThrowsAsync<EventLogProviderDisabledException>(() =>
                 throw new EventLogProviderDisabledException(
                     "message",
                     new Exception("inner exception")
-                ));
+                )
+            );
         }
 
         [Fact]
         public void EventLogInvalidDataException_Ctor()
         {
             Assert.ThrowsAsync<EventLogInvalidDataException>(() =>
-                throw new EventLogInvalidDataException());
+                throw new EventLogInvalidDataException()
+            );
             Assert.ThrowsAsync<EventLogInvalidDataException>(() =>
-                throw new EventLogInvalidDataException("message"));
+                throw new EventLogInvalidDataException("message")
+            );
             Assert.ThrowsAsync<EventLogInvalidDataException>(() =>
-                throw new EventLogInvalidDataException(
-                    "message",
-                    new Exception("inner exception")
-                ));
+                throw new EventLogInvalidDataException("message", new Exception("inner exception"))
+            );
         }
     }
 }

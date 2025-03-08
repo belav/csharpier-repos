@@ -930,7 +930,8 @@ namespace System.Linq.Expressions.Tests
             );
             ConstantExpression index = Expression.Constant("");
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Property(instance, "Item", index));
+                Expression.Property(instance, "Item", index)
+            );
         }
 
         [Fact]

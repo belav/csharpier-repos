@@ -594,7 +594,8 @@ namespace System.Net.Security.Tests
                     targetName,
                     ProtectionLevel.EncryptAndSign,
                     TokenImpersonationLevel.Identification
-                ));
+                )
+            );
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
             Task.Run(() =>
@@ -602,7 +603,8 @@ namespace System.Net.Security.Tests
                     (NetworkCredential)CredentialCache.DefaultCredentials,
                     ProtectionLevel.EncryptAndSign,
                     TokenImpersonationLevel.Identification
-                ));
+                )
+            );
     }
 
     public class NegotiateStreamStreamToStreamTest_Sync_NotEncrypted
@@ -619,7 +621,8 @@ namespace System.Net.Security.Tests
                     targetName,
                     ProtectionLevel.None,
                     TokenImpersonationLevel.Identification
-                ));
+                )
+            );
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
             Task.Run(() =>
@@ -627,7 +630,8 @@ namespace System.Net.Security.Tests
                     (NetworkCredential)CredentialCache.DefaultCredentials,
                     ProtectionLevel.None,
                     TokenImpersonationLevel.Identification
-                ));
+                )
+            );
 
         protected override bool IsEncryptedAndSigned => false;
     }

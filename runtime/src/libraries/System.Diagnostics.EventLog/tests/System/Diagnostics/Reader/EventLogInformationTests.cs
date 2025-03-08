@@ -19,7 +19,8 @@ namespace System.Diagnostics.Tests
             )
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    session.GetLogInformation(null, PathType.LogName));
+                    session.GetLogInformation(null, PathType.LogName)
+                );
             }
         }
 

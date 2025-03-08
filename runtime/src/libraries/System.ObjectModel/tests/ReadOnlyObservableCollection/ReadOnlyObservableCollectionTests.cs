@@ -311,7 +311,8 @@ namespace System.Collections.ObjectModel.Tests
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                     typeof(ReadOnlyObservableCollection<int>),
                     null
-                ));
+                )
+            );
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );

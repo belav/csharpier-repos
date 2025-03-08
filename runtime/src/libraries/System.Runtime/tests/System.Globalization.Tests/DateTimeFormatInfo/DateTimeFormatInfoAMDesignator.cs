@@ -243,7 +243,8 @@ namespace System.Globalization.Tests
         public void AMDesignator_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.AMDesignator = "AA");
+                DateTimeFormatInfo.InvariantInfo.AMDesignator = "AA"
+            );
         }
     }
 }

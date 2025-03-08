@@ -43,7 +43,8 @@ public abstract class TPTInheritanceQueryTestBase<TFixture> : InheritanceQueryTe
 
         var message = Assert
             .Throws<InvalidOperationException>(() =>
-                context.Set<Bird>().FromSqlRaw("Select * from Birds"))
+                context.Set<Bird>().FromSqlRaw("Select * from Birds")
+            )
             .Message;
 
         Assert.Equal(
@@ -53,7 +54,8 @@ public abstract class TPTInheritanceQueryTestBase<TFixture> : InheritanceQueryTe
 
         message = Assert
             .Throws<InvalidOperationException>(() =>
-                context.Set<Bird>().FromSqlInterpolated($"Select * from Birds"))
+                context.Set<Bird>().FromSqlInterpolated($"Select * from Birds")
+            )
             .Message;
 
         Assert.Equal(
@@ -66,7 +68,8 @@ public abstract class TPTInheritanceQueryTestBase<TFixture> : InheritanceQueryTe
 
         message = Assert
             .Throws<InvalidOperationException>(() =>
-                context.Set<Bird>().FromSql($"Select * from Birds"))
+                context.Set<Bird>().FromSql($"Select * from Birds")
+            )
             .Message;
 
         Assert.Equal(

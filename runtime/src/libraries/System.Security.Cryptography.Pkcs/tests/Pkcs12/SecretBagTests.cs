@@ -64,7 +64,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
             Assert.ThrowsAny<CryptographicException>(() =>
-                contents.AddSecret(new Oid("Hi", "There"), payloadHex.HexToByteArray()));
+                contents.AddSecret(new Oid("Hi", "There"), payloadHex.HexToByteArray())
+            );
         }
 
         [Theory]

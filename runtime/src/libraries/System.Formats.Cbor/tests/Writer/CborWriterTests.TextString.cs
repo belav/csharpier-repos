@@ -92,7 +92,8 @@ namespace System.Formats.Cbor.Tests
             string invalidUnicodeString = "\ud800";
             var writer = new CborWriter(conformanceMode);
             ArgumentException exn = Assert.Throws<ArgumentException>(() =>
-                writer.WriteTextString(invalidUnicodeString));
+                writer.WriteTextString(invalidUnicodeString)
+            );
             Assert.NotNull(exn.InnerException);
             Assert.IsType<System.Text.EncoderFallbackException>(exn.InnerException);
         }
@@ -135,7 +136,8 @@ namespace System.Formats.Cbor.Tests
         {
             var writer = new CborWriter(conformanceMode, convertIndefiniteLengthEncodings: false);
             Assert.Throws<InvalidOperationException>(() =>
-                writer.WriteStartIndefiniteLengthTextString());
+                writer.WriteStartIndefiniteLengthTextString()
+            );
         }
     }
 }

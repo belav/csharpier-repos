@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         {
             var containerMock = new Mock<SourceTextContainer>(MockBehavior.Strict);
             Assert.Throws<ArgumentException>(() =>
-                Microsoft.CodeAnalysis.Text.Extensions.GetTextBuffer(containerMock.Object));
+                Microsoft.CodeAnalysis.Text.Extensions.GetTextBuffer(containerMock.Object)
+            );
         }
 
         [Fact]

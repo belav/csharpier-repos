@@ -1295,7 +1295,8 @@ namespace Microsoft.VisualBasic.Tests
         )
         {
             Assert.Throws<ArgumentException>(() =>
-                Strings.Replace(expression, find, replacement, start, length, compare));
+                Strings.Replace(expression, find, replacement, start, length, compare)
+            );
         }
 
         [Theory]
@@ -1347,7 +1348,8 @@ namespace Microsoft.VisualBasic.Tests
         )
         {
             Assert.Throws<IndexOutOfRangeException>(() =>
-                Strings.Split(expression, delimiter, limit, compare));
+                Strings.Split(expression, delimiter, limit, compare)
+            );
         }
 
         [Theory]
@@ -1389,7 +1391,8 @@ namespace Microsoft.VisualBasic.Tests
             else
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    Strings.StrConv(str, conversion, localeID));
+                    Strings.StrConv(str, conversion, localeID)
+                );
             }
         }
 

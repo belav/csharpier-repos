@@ -135,7 +135,8 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.Throws<ArgumentNullException>(() => new ManagedPEBuilder(hdr, null, il));
             Assert.Throws<ArgumentNullException>(() => new ManagedPEBuilder(hdr, ms, null));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ManagedPEBuilder(hdr, ms, il, strongNameSignatureSize: -1));
+                new ManagedPEBuilder(hdr, ms, il, strongNameSignatureSize: -1)
+            );
         }
 
         [Theory] // Do BasicValidation on all machine types listed in the Machine enum

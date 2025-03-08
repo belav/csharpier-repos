@@ -41,7 +41,8 @@ namespace System.Tests
         public void CurrentDirectory_SetToNonExistentDirectory_ThrowsDirectoryNotFoundException()
         {
             Assert.Throws<DirectoryNotFoundException>(() =>
-                Environment.CurrentDirectory = GetTestFilePath());
+                Environment.CurrentDirectory = GetTestFilePath()
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -310,7 +311,8 @@ namespace System.Tests
         {
             using (
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(() =>
-                    Environment.FailFast("message"))
+                    Environment.FailFast("message")
+                )
             )
             {
                 Process p = handle.Process;
@@ -321,7 +323,8 @@ namespace System.Tests
 
             using (
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(() =>
-                    Environment.FailFast("message", new Exception("uh oh")))
+                    Environment.FailFast("message", new Exception("uh oh"))
+                )
             )
             {
                 Process p = handle.Process;

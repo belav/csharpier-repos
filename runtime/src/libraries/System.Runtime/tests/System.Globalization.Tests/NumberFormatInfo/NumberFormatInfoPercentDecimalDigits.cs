@@ -54,7 +54,8 @@ namespace System.Globalization.Tests
         public void PercentDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.PercentDecimalDigits = 1);
+                NumberFormatInfo.InvariantInfo.PercentDecimalDigits = 1
+            );
         }
     }
 }

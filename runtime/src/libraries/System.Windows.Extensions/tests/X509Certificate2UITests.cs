@@ -26,7 +26,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     string.Empty,
                     string.Empty,
                     (X509SelectionFlag)2
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -50,7 +51,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     string.Empty,
                     (X509SelectionFlag)2,
                     IntPtr.Zero
-                ));
+                )
+            );
         }
 
         [Fact]

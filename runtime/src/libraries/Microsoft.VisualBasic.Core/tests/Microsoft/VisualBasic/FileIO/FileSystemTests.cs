@@ -30,8 +30,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         [Fact]
         public void CombinePathTest_BadBaseDirectory_RelativePath()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                FileIO.FileSystem.CombinePath(null, "Test2"));
+            Assert.Throws<ArgumentNullException>(() => FileIO.FileSystem.CombinePath(null, "Test2")
+            );
             Assert.Throws<ArgumentNullException>(() => FileIO.FileSystem.CombinePath("", "Test2"));
         }
 
@@ -98,7 +98,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 FileIO.FileSystem.CopyDirectory(
                     FullPathToSourceDirectory,
                     FullPathToTargetDirectory
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -143,7 +144,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                     FullPathToSourceDirectory,
                     FullPathToTargetDirectory,
                     overwrite: false
-                ));
+                )
+            );
             Assert.Equal(
                 System.IO.Directory.GetFiles(FullPathToTargetDirectory).Length,
                 System.IO.Directory.GetFiles(FullPathToSourceDirectory).Length
@@ -270,7 +272,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                     FullPathToSourceDirectory,
                     FullPathToTargetDirectory,
                     UIOption.AllDialogs
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -283,7 +286,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             WriteFile(testFileSource, SourceData);
             WriteFile(testFileDest, DestData);
             Assert.Throws<System.IO.IOException>(() =>
-                FileIO.FileSystem.CopyFile(testFileSource, testFileDest));
+                FileIO.FileSystem.CopyFile(testFileSource, testFileDest)
+            );
 
             // Ensure copy didn't overwrite existing data
             Assert.True(HasExpectedData(testFileDest, DestData));
@@ -310,7 +314,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             WriteFile(testFileSource, SourceData);
             WriteFile(testFileDest, DestData);
             Assert.Throws<System.IO.IOException>(() =>
-                FileIO.FileSystem.CopyFile(testFileSource, testFileDest, overwrite: false));
+                FileIO.FileSystem.CopyFile(testFileSource, testFileDest, overwrite: false)
+            );
 
             // Ensure copy didn't overwrite existing data
             Assert.True(HasExpectedData(testFileDest, DestData));
@@ -504,7 +509,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 FileIO.FileSystem.DeleteDirectory(
                     FullPathToNewDirectory,
                     DeleteDirectoryOption.ThrowIfDirectoryNonEmpty
-                ));
+                )
+            );
             Assert.True(System.IO.Directory.Exists(FullPathToNewDirectory));
             Assert.True(System.IO.File.Exists(testFileSource));
         }
@@ -553,7 +559,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                     showUI: UIOption.AllDialogs,
                     recycle: RecycleOption.DeletePermanently,
                     onUserCancel: UICancelOption.ThrowException
-                ));
+                )
+            );
             Assert.True(System.IO.Directory.Exists(FullPathToNewDirectory));
             Assert.True(System.IO.File.Exists(testFileSource));
         }
@@ -1031,7 +1038,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 FileIO.FileSystem.MoveDirectory(
                     FullPathToSourceDirectory,
                     FullPathToTargetDirectory
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1078,7 +1086,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                     FullPathToSourceDirectory,
                     FullPathToTargetDirectory,
                     overwrite: false
-                ));
+                )
+            );
             string[] RemainingSourceFilesWithPath = System.IO.Directory.GetFiles(
                 FullPathToSourceDirectory
             );
@@ -1150,7 +1159,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             SourceFileNameWithPath = DestinationFileNameWithPath;
             DestinationFileNameWithPath = CreateTestFile(DestData, TestFileName: GetTestFileName());
             Assert.Throws<System.IO.IOException>(() =>
-                FileIO.FileSystem.MoveFile(SourceFileNameWithPath, DestinationFileNameWithPath));
+                FileIO.FileSystem.MoveFile(SourceFileNameWithPath, DestinationFileNameWithPath)
+            );
             // Make sure we did not override existing file
             Assert.True(HasExpectedData(DestinationFileNameWithPath, DestData));
             Assert.True(System.IO.File.Exists(SourceFileNameWithPath));
@@ -1183,7 +1193,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                     SourceFileNameWithPath,
                     DestinationFileNameWithPath,
                     overwrite: false
-                ));
+                )
+            );
             // Make sure we did not override existing file
             Assert.True(HasExpectedData(DestinationFileNameWithPath, DestData));
             Assert.True(System.IO.File.Exists(SourceFileNameWithPath));
@@ -1274,16 +1285,19 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 FileIO.FileSystem.RenameDirectory(
                     System.IO.Path.Combine(TestDirectory, "DoesNotExistDirectory"),
                     "NewDirectory"
-                ));
+                )
+            );
             var OrigDirectoryWithPath = System.IO.Path.Combine(TestDirectory, "OriginalDirectory");
             System.IO.Directory.CreateDirectory(OrigDirectoryWithPath);
             // <exception cref="System.ArgumentException">If newName is null or Empty String.</exception>
             Assert.Throws<ArgumentNullException>(() =>
-                FileIO.FileSystem.RenameDirectory(OrigDirectoryWithPath, ""));
+                FileIO.FileSystem.RenameDirectory(OrigDirectoryWithPath, "")
+            );
             var DirectoryNameWithPath = System.IO.Path.Combine(TestDirectory, "DoesNotExist");
             // <exception cref="System.ArgumentException">If contains path information.</exception>
             Assert.Throws<ArgumentException>(() =>
-                FileIO.FileSystem.RenameDirectory(OrigDirectoryWithPath, DirectoryNameWithPath));
+                FileIO.FileSystem.RenameDirectory(OrigDirectoryWithPath, DirectoryNameWithPath)
+            );
             FileIO.FileSystem.RenameDirectory(OrigDirectoryWithPath, "NewFDirectory");
             var NewFDirectoryPath = System.IO.Path.Combine(TestDirectory, "NewFDirectory");
             Assert.True(System.IO.Directory.Exists(NewFDirectoryPath));
@@ -1291,7 +1305,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             // <exception cref="IO.IOException">If directory points to a root directory or if there's an existing directory or an existing file with the same name.</exception>
             System.IO.Directory.CreateDirectory(OrigDirectoryWithPath);
             Assert.Throws<System.IO.IOException>(() =>
-                FileIO.FileSystem.RenameDirectory(NewFDirectoryPath, "OriginalDirectory"));
+                FileIO.FileSystem.RenameDirectory(NewFDirectoryPath, "OriginalDirectory")
+            );
         }
 
         [Fact]
@@ -1302,27 +1317,32 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 FileIO.FileSystem.RenameFile(
                     System.IO.Path.Combine(TestDirectory, "DoesNotExistFile"),
                     "NewFile"
-                ));
+                )
+            );
             var OrigFileWithPath = CreateTestFile(SourceData, TestFileName: GetTestFileName());
             var ExistingFileWithPath = CreateTestFile(DestData, TestFileName: GetTestFileName());
             // <exception cref="System.ArgumentException">If newName is null or Empty String.</exception>
             Assert.Throws<ArgumentNullException>(() =>
-                FileIO.FileSystem.RenameFile(OrigFileWithPath, ""));
+                FileIO.FileSystem.RenameFile(OrigFileWithPath, "")
+            );
             // <exception cref="System.ArgumentException">If contains path information.</exception>
             Assert.Throws<ArgumentException>(() =>
-                FileIO.FileSystem.RenameFile(OrigFileWithPath, ExistingFileWithPath));
+                FileIO.FileSystem.RenameFile(OrigFileWithPath, ExistingFileWithPath)
+            );
             FileIO.FileSystem.RenameFile(OrigFileWithPath, "NewFile");
             var NewFileWithPath = System.IO.Path.Combine(TestDirectory, "NewFile");
             Assert.True(System.IO.File.Exists(NewFileWithPath));
             Assert.False(System.IO.File.Exists(OrigFileWithPath));
             // <exception cref="IO.IOException">If there's an existing directory or an existing file with the same name.</exception>
             Assert.Throws<System.IO.IOException>(() =>
-                FileIO.FileSystem.RenameFile(NewFileWithPath, "NewFile"));
+                FileIO.FileSystem.RenameFile(NewFileWithPath, "NewFile")
+            );
             System.IO.Directory.CreateDirectory(
                 System.IO.Path.Combine(TestDirectory, "NewFDirectory")
             );
             Assert.Throws<System.IO.IOException>(() =>
-                FileIO.FileSystem.RenameFile(NewFileWithPath, "NewFDirectory"));
+                FileIO.FileSystem.RenameFile(NewFileWithPath, "NewFDirectory")
+            );
         }
 
         // Not tested:

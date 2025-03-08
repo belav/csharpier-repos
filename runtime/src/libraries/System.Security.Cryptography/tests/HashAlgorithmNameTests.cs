@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.Tests
         public static void FromOid_ThrowsForInvalidInput()
         {
             CryptographicException exception = Assert.Throws<CryptographicException>(() =>
-                HashAlgorithmName.FromOid("1.2.3.4"));
+                HashAlgorithmName.FromOid("1.2.3.4")
+            );
             Assert.Contains("1.2.3.4", exception.Message);
         }
 

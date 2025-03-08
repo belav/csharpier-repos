@@ -342,7 +342,8 @@ namespace System.Net.Tests
             _listener.Start();
             _listener.Close();
             Assert.Throws<ObjectDisposedException>(() =>
-                _listener.TimeoutManager.MinSendBytesPerSecond = 10 * 1024 * 1024);
+                _listener.TimeoutManager.MinSendBytesPerSecond = 10 * 1024 * 1024
+            );
         }
 
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]

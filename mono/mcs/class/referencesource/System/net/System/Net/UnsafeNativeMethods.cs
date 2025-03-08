@@ -4297,7 +4297,8 @@ namespace System.Net
         {
             [SecuritySafeCritical]
             internal static Lazy<IntPtr> PrimaryWindowHandle = new Lazy<IntPtr>(() =>
-                GetPrimaryWindowHandle());
+                GetPrimaryWindowHandle()
+            );
 
             [SecuritySafeCritical]
             [SuppressMessage(

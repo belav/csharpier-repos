@@ -124,7 +124,8 @@ public partial class HubConnectionTests
                 }
 
                 testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart));
+                    new TestConnection(OnTestConnectionStart)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();
@@ -245,7 +246,8 @@ public partial class HubConnectionTests
                 }
 
                 var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart));
+                    new TestConnection(OnTestConnectionStart)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();
@@ -355,7 +357,8 @@ public partial class HubConnectionTests
                 }
 
                 var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart));
+                    new TestConnection(OnTestConnectionStart)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();
@@ -575,8 +578,8 @@ public partial class HubConnectionTests
                     .WithUrl("http://example.com");
                 var testConnectionFactory = default(ReconnectingConnectionFactory);
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection());
+                testConnectionFactory = new ReconnectingConnectionFactory(() => new TestConnection()
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();
@@ -676,8 +679,8 @@ public partial class HubConnectionTests
                     .WithUrl("http://example.com");
                 var testConnectionFactory = default(ReconnectingConnectionFactory);
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection());
+                testConnectionFactory = new ReconnectingConnectionFactory(() => new TestConnection()
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var reconnectingCount = 0;
@@ -810,7 +813,8 @@ public partial class HubConnectionTests
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl("http://example.com");
                 var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(autoHandshake: false));
+                    new TestConnection(autoHandshake: false)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
@@ -880,7 +884,8 @@ public partial class HubConnectionTests
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl("http://example.com");
                 var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(autoHandshake: false));
+                    new TestConnection(autoHandshake: false)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();
@@ -1006,7 +1011,8 @@ public partial class HubConnectionTests
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl("http://example.com");
                 var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(autoHandshake: false));
+                    new TestConnection(autoHandshake: false)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();
@@ -1166,7 +1172,8 @@ public partial class HubConnectionTests
                 }
 
                 var testConnectionFactory = new ReconnectingConnectionFactory(() =>
-                    new TestConnection(OnTestConnectionStart));
+                    new TestConnection(OnTestConnectionStart)
+                );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
                 var retryContexts = new List<RetryContext>();

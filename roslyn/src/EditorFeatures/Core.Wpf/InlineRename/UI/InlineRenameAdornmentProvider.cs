@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             if (smartRenameSessionFactory is not null)
             {
                 _smartRenameSessionFactory = new Lazy<ISmartRenameSessionFactoryWrapper>(() =>
-                    ISmartRenameSessionFactoryWrapper.FromInstance(smartRenameSessionFactory));
+                    ISmartRenameSessionFactoryWrapper.FromInstance(smartRenameSessionFactory)
+                );
             }
 
             _threadingContext = threadingContext;

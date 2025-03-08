@@ -1675,9 +1675,11 @@ namespace System.Numerics.Tests
             Assert.Equal((BigInteger)62, BinaryNumberHelper<BigInteger>.Log2(Int64MaxValue));
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BinaryNumberHelper<BigInteger>.Log2(Int64MinValue));
+                BinaryNumberHelper<BigInteger>.Log2(Int64MinValue)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BinaryNumberHelper<BigInteger>.Log2(NegativeOne));
+                BinaryNumberHelper<BigInteger>.Log2(NegativeOne)
+            );
 
             Assert.Equal((BigInteger)63, BinaryNumberHelper<BigInteger>.Log2(Int64MaxValuePlusOne));
             Assert.Equal((BigInteger)63, BinaryNumberHelper<BigInteger>.Log2(UInt64MaxValue));
@@ -2191,7 +2193,8 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<DivideByZeroException>(() =>
-                DivisionOperatorsHelper<BigInteger, BigInteger, BigInteger>.op_Division(One, 0));
+                DivisionOperatorsHelper<BigInteger, BigInteger, BigInteger>.op_Division(One, 0)
+            );
         }
 
         [Fact]
@@ -2253,7 +2256,8 @@ namespace System.Numerics.Tests
                 DivisionOperatorsHelper<BigInteger, BigInteger, BigInteger>.op_CheckedDivision(
                     One,
                     0
-                ));
+                )
+            );
         }
 
         //
@@ -2442,7 +2446,8 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<DivideByZeroException>(() =>
-                ModulusOperatorsHelper<BigInteger, BigInteger, BigInteger>.op_Modulus(One, 0));
+                ModulusOperatorsHelper<BigInteger, BigInteger, BigInteger>.op_Modulus(One, 0)
+            );
         }
 
         //
@@ -2821,12 +2826,15 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<double>(double.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateChecked<double>(double.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<double>(double.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateChecked<double>(double.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<double>(double.NaN));
+                NumberBaseHelper<BigInteger>.CreateChecked<double>(double.NaN)
+            );
         }
 
         [Fact]
@@ -2848,12 +2856,15 @@ namespace System.Numerics.Tests
             Assert.Equal(-65504, NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.MinValue));
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.NaN));
+                NumberBaseHelper<BigInteger>.CreateChecked<Half>(Half.NaN)
+            );
         }
 
         [Fact]
@@ -3032,12 +3043,15 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<float>(float.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateChecked<float>(float.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<float>(float.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateChecked<float>(float.NegativeInfinity)
+            );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateChecked<float>(float.NaN));
+                NumberBaseHelper<BigInteger>.CreateChecked<float>(float.NaN)
+            );
         }
 
         [Fact]
@@ -3262,9 +3276,11 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateSaturating<double>(double.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateSaturating<double>(double.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateSaturating<double>(double.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateSaturating<double>(double.NegativeInfinity)
+            );
 
             Assert.Equal(Zero, NumberBaseHelper<BigInteger>.CreateSaturating<double>(double.NaN));
         }
@@ -3294,9 +3310,11 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateSaturating<Half>(Half.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateSaturating<Half>(Half.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateSaturating<Half>(Half.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateSaturating<Half>(Half.NegativeInfinity)
+            );
 
             Assert.Equal(Zero, NumberBaseHelper<BigInteger>.CreateSaturating<Half>(Half.NaN));
         }
@@ -3486,9 +3504,11 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateSaturating<float>(float.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateSaturating<float>(float.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateSaturating<float>(float.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateSaturating<float>(float.NegativeInfinity)
+            );
 
             Assert.Equal(Zero, NumberBaseHelper<BigInteger>.CreateSaturating<float>(float.NaN));
         }
@@ -3725,9 +3745,11 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateTruncating<double>(double.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateTruncating<double>(double.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateTruncating<double>(double.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateTruncating<double>(double.NegativeInfinity)
+            );
 
             Assert.Equal(Zero, NumberBaseHelper<BigInteger>.CreateTruncating<double>(double.NaN));
         }
@@ -3757,9 +3779,11 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateTruncating<Half>(Half.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateTruncating<Half>(Half.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateTruncating<Half>(Half.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateTruncating<Half>(Half.NegativeInfinity)
+            );
 
             Assert.Equal(Zero, NumberBaseHelper<BigInteger>.CreateTruncating<Half>(Half.NaN));
         }
@@ -3949,9 +3973,11 @@ namespace System.Numerics.Tests
             );
 
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateTruncating<float>(float.PositiveInfinity));
+                NumberBaseHelper<BigInteger>.CreateTruncating<float>(float.PositiveInfinity)
+            );
             Assert.Throws<OverflowException>(() =>
-                NumberBaseHelper<BigInteger>.CreateTruncating<float>(float.NegativeInfinity));
+                NumberBaseHelper<BigInteger>.CreateTruncating<float>(float.NegativeInfinity)
+            );
 
             Assert.Equal(Zero, NumberBaseHelper<BigInteger>.CreateTruncating<float>(float.NaN));
         }

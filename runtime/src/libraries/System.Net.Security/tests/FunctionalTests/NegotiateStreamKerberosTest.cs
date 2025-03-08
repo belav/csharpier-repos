@@ -160,7 +160,8 @@ namespace System.Net.Security.Tests
         {
             var credential = (NetworkCredential)credentialObject;
             await Assert.ThrowsAsync<AuthenticationException>(() =>
-                VerifyClientAuthentication(credential));
+                VerifyClientAuthentication(credential)
+            );
         }
 
         private async Task VerifyClientAuthentication(NetworkCredential credential)

@@ -390,7 +390,8 @@ namespace System.Linq.Tests
             };
 
             Assert.Throws<InvalidOperationException>(() =>
-                source.ToDictionary(keySelector, valueSelector));
+                source.ToDictionary(keySelector, valueSelector)
+            );
         }
 
         [Fact]

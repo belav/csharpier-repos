@@ -687,7 +687,8 @@ namespace System.IO.Compression.Tests
             string filename = bad(zipname);
             using (var stream = await StreamHelpers.CreateTempCopyStream(filename))
                 Assert.Throws<InvalidDataException>(() =>
-                    new ZipArchive(stream, ZipArchiveMode.Read));
+                    new ZipArchive(stream, ZipArchiveMode.Read)
+                );
         }
 
         [Theory]

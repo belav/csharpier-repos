@@ -294,10 +294,12 @@ namespace System.Collections.ObjectModel.Tests
             IDictionary<int, string> dictAsIDictionary = dictionary;
 
             Assert.Throws<NotSupportedException>(() =>
-                dictAsIDictionary.Add(new KeyValuePair<int, string>(7, "seven")));
+                dictAsIDictionary.Add(new KeyValuePair<int, string>(7, "seven"))
+            );
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Add(7, "seven"));
             Assert.Throws<NotSupportedException>(() =>
-                dictAsIDictionary.Remove(new KeyValuePair<int, string>(1, "one")));
+                dictAsIDictionary.Remove(new KeyValuePair<int, string>(1, "one"))
+            );
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Remove(1));
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Clear());
 
@@ -372,7 +374,8 @@ namespace System.Collections.ObjectModel.Tests
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                     typeof(ReadOnlyDictionary<int, int>),
                     null
-                ));
+                )
+            );
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );
@@ -393,7 +396,8 @@ namespace System.Collections.ObjectModel.Tests
                     typeof(ReadOnlyDictionary<int, int>.KeyCollection),
                     new Type[] { typeof(int) },
                     null
-                ));
+                )
+            );
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );

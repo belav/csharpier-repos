@@ -33,7 +33,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
                     ActiveDirectoryInterSiteTransport.FindByTransportType(
                         context,
                         ActiveDirectoryTransportType.Rpc
-                    ));
+                    )
+                );
             }
         }
 
@@ -103,7 +104,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
                 ActiveDirectoryInterSiteTransport.FindByTransportType(
                     context,
                     ActiveDirectoryTransportType.Rpc
-                ));
+                )
+            );
             Assert.NotNull(exception);
             Assert.True(
                 exception is ArgumentException || exception is ActiveDirectoryOperationException,
@@ -120,7 +122,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
                 ActiveDirectoryInterSiteTransport.FindByTransportType(
                     context,
                     ActiveDirectoryTransportType.Rpc
-                ));
+                )
+            );
         }
 
         [Theory]

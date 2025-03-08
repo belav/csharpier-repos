@@ -87,7 +87,8 @@ public class TemporaryNumberValueGeneratorFactoryTest
             ),
             Assert
                 .Throws<ArgumentException>(() =>
-                    new TemporaryNumberValueGeneratorFactory().Create(property, entityType))
+                    new TemporaryNumberValueGeneratorFactory().Create(property, entityType)
+                )
                 .Message
         );
     }

@@ -198,7 +198,8 @@ End Class";
                             analyzerType,
                             ideAnalyzerOptions,
                             source.Token
-                        ));
+                        )
+                    );
 
                     // wait random milli-second
                     var random = new Random(Environment.TickCount);

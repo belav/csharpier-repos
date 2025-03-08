@@ -166,7 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                         StringConstants.XamlLanguageName,
                         projectInfo,
                         CancellationToken.None
-                    ));
+                    )
+                );
                 _xamlProjects.Add(hierarchy, project);
             }
 

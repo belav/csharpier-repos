@@ -18,7 +18,8 @@ namespace Microsoft.Win32.RegistryTests
                     name: null,
                     permissionCheck: RegistryKeyPermissionCheck.ReadSubTree,
                     rights: RegistryRights.ReadKey
-                ));
+                )
+            );
 
             // Should throw if subkey name greater than 255 chars
             AssertExtensions.Throws<ArgumentException>(

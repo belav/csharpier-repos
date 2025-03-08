@@ -3464,7 +3464,8 @@ struct S
                         output,
                         pdbOutput,
                         options: EmitOptions.Default.WithEmitMetadataOnly(true)
-                    ));
+                    )
+                );
             }
         }
 
@@ -3485,7 +3486,8 @@ struct S
                         output,
                         metadataPEStream: metadataPeOutput,
                         options: EmitOptions.Default.WithEmitMetadataOnly(true)
-                    ));
+                    )
+                );
             }
         }
 
@@ -3506,7 +3508,8 @@ struct S
                         output,
                         metadataPEStream: metadataPeOutput,
                         options: EmitOptions.Default.WithIncludePrivateMembers(true)
-                    ));
+                    )
+                );
             }
         }
 
@@ -3549,7 +3552,8 @@ struct S
                         output,
                         metadataPEStream: metadataPeOutput,
                         options: EmitOptions.Default
-                    ));
+                    )
+                );
             }
         }
 
@@ -3567,7 +3571,8 @@ struct S
             using (var output = new MemoryStream())
             {
                 Assert.Throws<ArgumentException>(() =>
-                    comp.Emit(output, options: EmitOptions.Default.WithEmitMetadataOnly(true)));
+                    comp.Emit(output, options: EmitOptions.Default.WithEmitMetadataOnly(true))
+                );
             }
         }
 
@@ -3633,7 +3638,8 @@ struct S
                         options: EmitOptions
                             .Default.WithEmitMetadataOnly(true)
                             .WithDebugInformationFormat(DebugInformationFormat.Embedded)
-                    ));
+                    )
+                );
             }
         }
 
@@ -7347,7 +7353,8 @@ public class X
                 broken = new BrokenStream();
                 broken.BreakHow = BrokenStream.BreakHowType.CancelOnWrite;
                 Assert.Throws<OperationCanceledException>(() =>
-                    comp.Emit(peStream, pdbStream: broken, options: portablePdbOptions));
+                    comp.Emit(peStream, pdbStream: broken, options: portablePdbOptions)
+                );
             }
         }
 

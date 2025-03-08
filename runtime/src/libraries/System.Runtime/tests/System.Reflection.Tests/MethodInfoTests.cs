@@ -977,13 +977,16 @@ namespace System.Reflection.Tests
         {
             Assert.Throws<ArgumentNullException>(() =>
                 GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.GenericMethod1))
-                    .MakeGenericMethod(null)); // TypeArguments is null
+                    .MakeGenericMethod(null)
+            ); // TypeArguments is null
             Assert.Throws<ArgumentNullException>(() =>
                 GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.GenericMethod2))
-                    .MakeGenericMethod(typeof(string), null)); // TypeArguments has null Type
+                    .MakeGenericMethod(typeof(string), null)
+            ); // TypeArguments has null Type
             Assert.Throws<InvalidOperationException>(() =>
                 GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.VoidMethodReturningInt))
-                    .MakeGenericMethod(typeof(int))); // Method is non generic
+                    .MakeGenericMethod(typeof(int))
+            ); // Method is non generic
 
             // Number of typeArguments does not match
             AssertExtensions.Throws<ArgumentException>(
@@ -1022,7 +1025,8 @@ namespace System.Reflection.Tests
         {
             Assert.Throws<InvalidOperationException>(() =>
                 GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.VoidMethodReturningInt))
-                    .GetGenericMethodDefinition());
+                    .GetGenericMethodDefinition()
+            );
         }
 
         [Fact]

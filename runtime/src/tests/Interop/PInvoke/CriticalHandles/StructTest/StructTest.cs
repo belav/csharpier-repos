@@ -149,7 +149,8 @@ public class CriticalHandleStructTest
         };
 
         Assert.Throws<NotSupportedException>(() =>
-            Native.RefModify(handleValue2, ref handleStruct, null));
+            Native.RefModify(handleValue2, ref handleStruct, null)
+        );
     }
 
     internal class Native

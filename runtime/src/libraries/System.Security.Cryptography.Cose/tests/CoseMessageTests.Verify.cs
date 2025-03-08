@@ -79,7 +79,8 @@ namespace System.Security.Cryptography.Cose.Tests
             CoseMessage msg = Decode(encodedMsg);
 
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                Verify(msg, DefaultKey, null!));
+                Verify(msg, DefaultKey, null!)
+            );
             Assert.True(ex.ParamName == "content" || ex.ParamName == "detachedContent");
         }
 

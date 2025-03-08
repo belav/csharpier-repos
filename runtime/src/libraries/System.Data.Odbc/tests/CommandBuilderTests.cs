@@ -34,12 +34,14 @@ namespace System.Data.Odbc.Tests
 
             // Needs an active connection
             Assert.Throws<InvalidOperationException>(() =>
-                commandBuilder.QuoteIdentifier("Test", null));
+                commandBuilder.QuoteIdentifier("Test", null)
+            );
             Assert.Throws<InvalidOperationException>(() => commandBuilder.QuoteIdentifier("Test"));
             Assert.Throws<InvalidOperationException>(() =>
-                commandBuilder.UnquoteIdentifier("Test", null));
-            Assert.Throws<InvalidOperationException>(() =>
-                commandBuilder.UnquoteIdentifier("Test"));
+                commandBuilder.UnquoteIdentifier("Test", null)
+            );
+            Assert.Throws<InvalidOperationException>(() => commandBuilder.UnquoteIdentifier("Test")
+            );
         }
 
         [ConditionalFact]

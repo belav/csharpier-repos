@@ -177,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                                 encoding: null,
                                 checksumAlgorithm: SourceHashAlgorithm.Sha256
                             )
-                        ));
+                        )
+                    );
                 },
             };
 

@@ -153,7 +153,8 @@ namespace System.Web.Http.Filters
                         continuationCalled = true;
                         return null;
                     }
-                ));
+                )
+            );
 
             // Assert
             Assert.Same(expectedException, exception);
@@ -203,7 +204,8 @@ namespace System.Web.Http.Filters
                     context,
                     CancellationToken.None,
                     () => TaskHelpers.Canceled<HttpResponseMessage>()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -249,7 +251,8 @@ namespace System.Web.Http.Filters
                     context,
                     CancellationToken.None,
                     () => TaskHelpers.FromError<HttpResponseMessage>(expectedException)
-                ));
+                )
+            );
 
             // Assert
             Assert.Same(expectedException, exception);

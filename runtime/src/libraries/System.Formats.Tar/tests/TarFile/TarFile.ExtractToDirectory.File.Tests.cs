@@ -17,25 +17,29 @@ namespace System.Formats.Tar.Tests
                     sourceFileName: null,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 TarFile.ExtractToDirectory(
                     sourceFileName: string.Empty,
                     destinationDirectoryName: "path",
                     overwriteFiles: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 TarFile.ExtractToDirectory(
                     sourceFileName: "path",
                     destinationDirectoryName: null,
                     overwriteFiles: false
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 TarFile.ExtractToDirectory(
                     sourceFileName: "path",
                     destinationDirectoryName: string.Empty,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -53,7 +57,8 @@ namespace System.Formats.Tar.Tests
                     sourceFileName: filePath,
                     destinationDirectoryName: dirPath,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -71,7 +76,8 @@ namespace System.Formats.Tar.Tests
                     sourceFileName: filePath,
                     destinationDirectoryName: dirPath,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -264,7 +270,8 @@ namespace System.Formats.Tar.Tests
                     sourceArchiveFileName,
                     destination.Path,
                     overwriteFiles: false
-                ));
+                )
+            );
         }
 
         [Fact]

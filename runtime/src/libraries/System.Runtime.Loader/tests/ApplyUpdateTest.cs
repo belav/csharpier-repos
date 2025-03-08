@@ -613,7 +613,8 @@ namespace System.Reflection.Metadata
                     new ReadOnlySpan<byte>(metadataDelta),
                     new ReadOnlySpan<byte>(ilDelta),
                     ReadOnlySpan<byte>.Empty
-                ));
+                )
+            );
 
             // Tests that this assembly isn't not editable
             Assert.Throws<InvalidOperationException>(() =>
@@ -622,7 +623,8 @@ namespace System.Reflection.Metadata
                     new ReadOnlySpan<byte>(metadataDelta),
                     new ReadOnlySpan<byte>(ilDelta),
                     ReadOnlySpan<byte>.Empty
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1156,7 +1158,8 @@ namespace System.Reflection.Metadata
                 ApplyUpdateUtil.ApplyUpdate(assm);
 
                 InvalidOperationException exn = Assert.Throws<InvalidOperationException>(() =>
-                    x.ExistingMethod("spqr"));
+                    x.ExistingMethod("spqr")
+                );
 
                 Assert.Equal("spqr", exn.Message);
 

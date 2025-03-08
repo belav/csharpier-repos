@@ -194,7 +194,8 @@ public class ClrCollectionAccessorFactoryTest
             CoreStrings.NoFieldOrGetter("WriteOnlyPropNoField", typeof(MyEntity).Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    new ClrCollectionAccessorFactory().Create(navigation))
+                    new ClrCollectionAccessorFactory().Create(navigation)
+                )
                 .Message
         );
     }
@@ -254,7 +255,8 @@ public class ClrCollectionAccessorFactoryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    new ClrCollectionAccessorFactory().Create(navigation))
+                    new ClrCollectionAccessorFactory().Create(navigation)
+                )
                 .Message
         );
     }
@@ -274,7 +276,8 @@ public class ClrCollectionAccessorFactoryTest
                         new MyEntity(false),
                         new MyOtherEntity(),
                         forMaterialization: false
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -294,7 +297,8 @@ public class ClrCollectionAccessorFactoryTest
                         new MyEntity(false),
                         new MyOtherEntity(),
                         forMaterialization: false
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -326,7 +330,8 @@ public class ClrCollectionAccessorFactoryTest
                         new MyEntity(false),
                         new MyOtherEntity(),
                         forMaterialization: false
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -350,7 +355,8 @@ public class ClrCollectionAccessorFactoryTest
                         new MyEntity(false),
                         new MyOtherEntity(),
                         forMaterialization: false
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -374,7 +380,8 @@ public class ClrCollectionAccessorFactoryTest
                         new MyEntity(false),
                         new MyOtherEntity(),
                         forMaterialization: false
-                    ))
+                    )
+                )
                 .Message
         );
     }

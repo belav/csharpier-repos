@@ -139,7 +139,8 @@ public class PropertyBagEntityTypeTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    orderEntityType.HasOne("Customer", "Customer"))
+                    orderEntityType.HasOne("Customer", "Customer")
+                )
                 .Message
         );
     }
@@ -154,7 +155,8 @@ public class PropertyBagEntityTypeTest
             CoreStrings.NoClrNavigation("CustomerNavigation", typeof(Order).ShortDisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    orderEntityType.HasOne(typeof(Customer), "CustomerNavigation"))
+                    orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
+                )
                 .Message
         );
     }

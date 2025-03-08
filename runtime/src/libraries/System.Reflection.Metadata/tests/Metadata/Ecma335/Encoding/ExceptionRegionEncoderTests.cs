@@ -367,43 +367,58 @@ namespace System.Reflection.Metadata.Ecma335.Tests
         public void Add_Errors()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                default(ExceptionRegionEncoder).Add(ExceptionRegionKind.Fault, 0, 0, 0, 0));
+                default(ExceptionRegionEncoder).Add(ExceptionRegionKind.Fault, 0, 0, 0, 0)
+            );
 
             var builder = new BlobBuilder();
             var smallEncoder = new ExceptionRegionEncoder(builder, hasSmallFormat: true);
             var fatEncoder = new ExceptionRegionEncoder(builder, hasSmallFormat: false);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, -1, 2, 4, 5));
+                smallEncoder.Add(ExceptionRegionKind.Finally, -1, 2, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 1, -1, 4, 5));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 1, -1, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, -1, 5));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, -1, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 4, -1));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 4, -1)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 0x10000, 2, 4, 5));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 0x10000, 2, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 0x100, 4, 5));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 0x100, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 0x10000, 5));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 0x10000, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 4, 0x100));
+                smallEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 4, 0x100)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                fatEncoder.Add(ExceptionRegionKind.Finally, -1, 2, 4, 5));
+                fatEncoder.Add(ExceptionRegionKind.Finally, -1, 2, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                fatEncoder.Add(ExceptionRegionKind.Finally, 1, -1, 4, 5));
+                fatEncoder.Add(ExceptionRegionKind.Finally, 1, -1, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                fatEncoder.Add(ExceptionRegionKind.Finally, 1, 2, -1, 5));
+                fatEncoder.Add(ExceptionRegionKind.Finally, 1, 2, -1, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                fatEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 4, -1));
+                fatEncoder.Add(ExceptionRegionKind.Finally, 1, 2, 4, -1)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                fatEncoder.Add((ExceptionRegionKind)5, 1, 2, 4, 5));
+                fatEncoder.Add((ExceptionRegionKind)5, 1, 2, 4, 5)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                fatEncoder.Add(ExceptionRegionKind.Filter, 1, 2, 4, 5, filterOffset: -1));
+                fatEncoder.Add(ExceptionRegionKind.Filter, 1, 2, 4, 5, filterOffset: -1)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "catchType",
                 () =>

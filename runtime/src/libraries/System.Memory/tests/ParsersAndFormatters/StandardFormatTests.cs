@@ -13,7 +13,8 @@ namespace System.Buffers.Text.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new StandardFormat((char)256));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new StandardFormat('D', StandardFormat.MaxPrecision + 1));
+                new StandardFormat('D', StandardFormat.MaxPrecision + 1)
+            );
         }
 
         [Theory]

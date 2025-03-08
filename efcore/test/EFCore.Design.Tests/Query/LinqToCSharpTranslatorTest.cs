@@ -49,8 +49,8 @@ public class LinqToCSharpTranslatorTest
 
     [Fact]
     public void Constant_throws_on_unsupported_type() =>
-        Assert.Throws<NotSupportedException>(() =>
-            AssertExpression(Constant(default(DateTime)), ""));
+        Assert.Throws<NotSupportedException>(() => AssertExpression(Constant(default(DateTime)), "")
+        );
 
     [Fact]
     public void Enum() => AssertExpression(Constant(SomeEnum.One), "SomeEnum.One");
@@ -415,7 +415,8 @@ Activator.CreateInstance<LinqToCSharpTranslatorTest.BlogWithRequiredProperties>(
                     Constant("foo")
                 ),
                 ""
-            ));
+            )
+        );
 
     [Fact]
     public void Instantiation_with_required_properties_with_SetsRequiredMembers() =>
@@ -511,7 +512,8 @@ Activator.CreateInstance<LinqToCSharpTranslatorTest.BlogWithRequiredProperties>(
     [Fact]
     public void Conditional_without_false_value_fails() =>
         Assert.Throws<NotSupportedException>(() =>
-            AssertExpression(IfThen(Constant(true), Constant(8)), "true ? 1 : 2"));
+            AssertExpression(IfThen(Constant(true), Constant(8)), "true ? 1 : 2")
+        );
 
     [Fact]
     public void Conditional_statement() =>
@@ -1351,7 +1353,8 @@ new int[]
             AssertExpression(
                 Assign(Parameter(typeof(int), "i"), Block(Call(FooMethod), Constant(8))),
                 ""
-            ));
+            )
+        );
 
     [Fact]
     public void Lift_switch_expression()

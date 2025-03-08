@@ -789,7 +789,8 @@ class C3
                         model,
                         null,
                         CancellationToken.None
-                    ));
+                    )
+                );
             }
 
             await Task.WhenAll(tasks);
@@ -860,7 +861,8 @@ class C3
                         model,
                         null,
                         CancellationToken.None
-                    ));
+                    )
+                );
             }
 
             await Task.WhenAll(tasks);
@@ -894,7 +896,8 @@ class C3
                 compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(
                     tree,
                     analyzer.CancellationToken
-                ));
+                )
+            );
 
             // Second call into analyzer reports diagnostic.
             var diagnostics = await compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(

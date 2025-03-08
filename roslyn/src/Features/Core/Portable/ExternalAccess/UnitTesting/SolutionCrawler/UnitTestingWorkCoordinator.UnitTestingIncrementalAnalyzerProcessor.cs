@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             _registration,
                             analyzersGetter,
                             onlyHighPriorityAnalyzer: false
-                        ));
+                        )
+                    );
 
 #if false // Not used in unit testing crawling
                     if (!initializeLazily)

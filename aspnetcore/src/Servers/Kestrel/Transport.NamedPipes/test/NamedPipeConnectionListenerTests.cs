@@ -331,10 +331,8 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
 
         // Act & Assert
         await Assert.ThrowsAsync<AddressInUseException>(() =>
-            NamedPipeTestHelpers.CreateConnectionListenerFactory(
-                LoggerFactory,
-                pipeName: pipeName
-            ));
+            NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, pipeName: pipeName)
+        );
     }
 
     [ConditionalFact]

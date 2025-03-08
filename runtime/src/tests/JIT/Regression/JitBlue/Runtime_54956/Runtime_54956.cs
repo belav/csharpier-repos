@@ -17,59 +17,75 @@ public unsafe class Runtime_54956
 
         succeeded &= Test(() => SideEffects_Vector_AndNot(Array.Empty<Vector<int>>(), null));
 
+        succeeded &= Test(() => SideEffects_Avx2_PermuteVar8x32(Array.Empty<Vector256<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Avx2_PermuteVar8x32(Array.Empty<Vector256<int>>(), null));
+            SideEffects_Avx2_ShiftLeftLogical(Array.Empty<Vector256<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Avx2_ShiftLeftLogical(Array.Empty<Vector256<int>>(), null));
+            SideEffects_Avx2_ShiftRightArithmetic(Array.Empty<Vector256<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Avx2_ShiftRightArithmetic(Array.Empty<Vector256<int>>(), null));
-        succeeded &= Test(() =>
-            SideEffects_Avx2_ShiftRightLogical(Array.Empty<Vector256<int>>(), null));
+            SideEffects_Avx2_ShiftRightLogical(Array.Empty<Vector256<int>>(), null)
+        );
 
         succeeded &= Test(() =>
             SideEffects_Sse2_CompareScalarNotGreaterThanOrEqual(
                 Array.Empty<Vector128<double>>(),
                 null
-            ));
+            )
+        );
         succeeded &= Test(() =>
-            SideEffects_Sse2_ShiftLeftLogical(Array.Empty<Vector128<int>>(), null));
+            SideEffects_Sse2_ShiftLeftLogical(Array.Empty<Vector128<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Sse2_ShiftRightArithmetic(Array.Empty<Vector128<int>>(), null));
+            SideEffects_Sse2_ShiftRightArithmetic(Array.Empty<Vector128<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Sse2_ShiftRightLogical(Array.Empty<Vector128<int>>(), null));
+            SideEffects_Sse2_ShiftRightLogical(Array.Empty<Vector128<int>>(), null)
+        );
 
         succeeded &= Test(() => SideEffects_Vector64_Store(Array.Empty<Vector64<int>>(), null));
         succeeded &= Test(() =>
-            SideEffects_Vector64_StoreAligned(Array.Empty<Vector64<int>>(), null));
+            SideEffects_Vector64_StoreAligned(Array.Empty<Vector64<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Vector64_StoreAlignedNonTemporal(Array.Empty<Vector64<int>>(), null));
+            SideEffects_Vector64_StoreAlignedNonTemporal(Array.Empty<Vector64<int>>(), null)
+        );
         succeeded &= Test(() =>
             SideEffects_Vector64_StoreUnsafe(
                 Array.Empty<Vector64<int>>(),
                 ref Unsafe.NullRef<int>()
-            ));
+            )
+        );
 
         succeeded &= Test(() => SideEffects_Vector128_Store(Array.Empty<Vector128<int>>(), null));
         succeeded &= Test(() =>
-            SideEffects_Vector128_StoreAligned(Array.Empty<Vector128<int>>(), null));
+            SideEffects_Vector128_StoreAligned(Array.Empty<Vector128<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Vector128_StoreAlignedNonTemporal(Array.Empty<Vector128<int>>(), null));
+            SideEffects_Vector128_StoreAlignedNonTemporal(Array.Empty<Vector128<int>>(), null)
+        );
         succeeded &= Test(() =>
             SideEffects_Vector128_StoreUnsafe(
                 Array.Empty<Vector128<int>>(),
                 ref Unsafe.NullRef<int>()
-            ));
+            )
+        );
 
         succeeded &= Test(() => SideEffects_Vector256_Store(Array.Empty<Vector256<int>>(), null));
         succeeded &= Test(() =>
-            SideEffects_Vector256_StoreAligned(Array.Empty<Vector256<int>>(), null));
+            SideEffects_Vector256_StoreAligned(Array.Empty<Vector256<int>>(), null)
+        );
         succeeded &= Test(() =>
-            SideEffects_Vector256_StoreAlignedNonTemporal(Array.Empty<Vector256<int>>(), null));
+            SideEffects_Vector256_StoreAlignedNonTemporal(Array.Empty<Vector256<int>>(), null)
+        );
         succeeded &= Test(() =>
             SideEffects_Vector256_StoreUnsafe(
                 Array.Empty<Vector256<int>>(),
                 ref Unsafe.NullRef<int>()
-            ));
+            )
+        );
 
         return succeeded ? 100 : 0;
     }

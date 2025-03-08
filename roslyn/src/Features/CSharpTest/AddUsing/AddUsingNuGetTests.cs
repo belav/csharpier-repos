@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
                         "NuGetPackage",
                         "NuGetType",
                         CreateNameParts("NuGetNamespace")
-                    ));
+                    )
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C
@@ -187,7 +189,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -202,7 +205,8 @@ class C
                         "NuGetPackage",
                         "NuGetType",
                         CreateNameParts("NuGetNamespace")
-                    ));
+                    )
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C
@@ -261,7 +265,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -276,7 +281,8 @@ class C
                         "NuGetPackage",
                         "NuGetType",
                         CreateNameParts("NuGetNamespace")
-                    ));
+                    )
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C
@@ -335,7 +341,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -346,7 +353,8 @@ class C
                     )
                 )
                 .Returns(() =>
-                    CreateSearchResult("NuGetPackage", "NuGetType", CreateNameParts("NS1", "NS2")));
+                    CreateSearchResult("NuGetPackage", "NuGetType", CreateNameParts("NS1", "NS2"))
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C
@@ -388,7 +396,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -399,7 +408,8 @@ class C
                     )
                 )
                 .Returns(() =>
-                    CreateSearchResult("NuGetPackage", "NuGetType", CreateNameParts("NS1", "NS2")));
+                    CreateSearchResult("NuGetPackage", "NuGetType", CreateNameParts("NS1", "NS2"))
+                );
 
             await TestMissingInRegularAndScriptAsync(
                 @"class C
@@ -450,7 +460,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -461,7 +472,8 @@ class C
                     )
                 )
                 .Returns(() =>
-                    CreateSearchResult("NuGetPackage", "NuGetType", CreateNameParts("NS1", "NS2")));
+                    CreateSearchResult("NuGetPackage", "NuGetType", CreateNameParts("NS1", "NS2"))
+                );
 
             var data = new FixProviderData(installerServiceMock.Object, packageServiceMock.Object);
             await TestSmartTagTextAsync(
@@ -531,7 +543,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -546,7 +559,8 @@ class C
                         "NuGetPackage",
                         "NuGetType",
                         CreateNameParts("NuGetNamespace")
-                    ));
+                    )
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C
@@ -611,7 +625,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -626,7 +641,8 @@ class C
                         "NuGetPackage",
                         "NuGetType",
                         CreateNameParts("NuGetNamespace")
-                    ));
+                    )
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C
@@ -691,7 +707,8 @@ class C
                 .Returns(() =>
                     ValueTaskFactory.FromResult(
                         ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
-                    ));
+                    )
+                );
             packageServiceMock
                 .Setup(s =>
                     s.FindPackagesWithTypeAsync(
@@ -706,7 +723,8 @@ class C
                         "NuGetPackage",
                         "NuGetType",
                         CreateNameParts("NuGetNamespace")
-                    ));
+                    )
+                );
 
             await TestInRegularAndScriptAsync(
                 @"class C

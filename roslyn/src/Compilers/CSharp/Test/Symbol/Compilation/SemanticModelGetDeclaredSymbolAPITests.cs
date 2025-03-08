@@ -4537,7 +4537,8 @@ class C
                     .Last()
                     .Parent;
             var modelWeakReference = ObjectReference.CreateFromFactory(() =>
-                compilation.GetSemanticModel(tree));
+                compilation.GetSemanticModel(tree)
+            );
             var alias1 = modelWeakReference.UseReference(sm => sm.GetAliasInfo(node));
 
             // We want the Compilation's WeakReference<BinderFactory> to be collected

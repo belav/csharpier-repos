@@ -16125,7 +16125,8 @@ class C
                             GetSyntaxMapFromMarkers(source0, source1)
                         )
                     )
-                ));
+                )
+            );
         }
 
         [Fact]

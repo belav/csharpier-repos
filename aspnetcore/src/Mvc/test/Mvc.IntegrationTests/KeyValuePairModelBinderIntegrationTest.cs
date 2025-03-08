@@ -100,7 +100,8 @@ public class KeyValuePairModelBinderIntegrationTest
                     {
                         // A real details provider could customize message based on BindingMetadataProviderContext.
                         binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(() =>
-                            $"Hurts when nothing is provided.");
+                            $"Hurts when nothing is provided."
+                        );
                     }
                 )
             );
@@ -194,7 +195,8 @@ public class KeyValuePairModelBinderIntegrationTest
                     {
                         // A real details provider could customize message based on BindingMetadataProviderContext.
                         binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(() =>
-                            $"Hurts when nothing is provided.");
+                            $"Hurts when nothing is provided."
+                        );
                     }
                 )
             );

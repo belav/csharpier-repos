@@ -48,6 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     _peekResultFactory,
                     _threadingContext,
                     _uiThreadOperationExecutor
-                ));
+                )
+            );
     }
 }

@@ -542,7 +542,8 @@ public class CircuitHostTest
 
         // Assert
         Assert.Throws<ArgumentException>(() =>
-            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0));
+            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
+        );
         var componentState = ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(1);
         var component = Assert.IsType<DynamicallyAddedComponent>(componentState.Component);
         Assert.Equal(expectedMessage, component.Message);
@@ -669,7 +670,8 @@ public class CircuitHostTest
 
         // Assert
         Assert.Throws<ArgumentException>(() =>
-            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0));
+            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
+        );
     }
 
     private async Task AddComponentAsync<TComponent>(
@@ -1095,7 +1097,8 @@ public class CircuitHostTest
         public void TriggerRender()
         {
             var task = _renderHandle.Dispatcher.InvokeAsync(() =>
-                _renderHandle.Render(_renderFragment));
+                _renderHandle.Render(_renderFragment)
+            );
             Assert.True(task.IsCompletedSuccessfully);
         }
     }

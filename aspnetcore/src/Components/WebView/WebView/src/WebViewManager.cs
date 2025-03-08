@@ -153,7 +153,8 @@ public abstract class WebViewManager : IAsyncDisposable
         if (_currentPageContext != null && rootComponent.ComponentId.HasValue)
         {
             return Dispatcher.InvokeAsync(() =>
-                _currentPageContext.Renderer.RemoveRootComponent(rootComponent.ComponentId.Value));
+                _currentPageContext.Renderer.RemoveRootComponent(rootComponent.ComponentId.Value)
+            );
         }
         else
         {

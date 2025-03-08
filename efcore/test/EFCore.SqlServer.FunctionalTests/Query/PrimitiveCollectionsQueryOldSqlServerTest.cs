@@ -447,12 +447,13 @@ WHERE 0 = 1
         AssertCompatibilityLevelTooLow(() => base.Column_collection_of_ints_Contains(async));
 
     public override Task Column_collection_of_nullable_ints_Contains(bool async) =>
-        AssertCompatibilityLevelTooLow(() =>
-            base.Column_collection_of_nullable_ints_Contains(async));
+        AssertCompatibilityLevelTooLow(() => base.Column_collection_of_nullable_ints_Contains(async)
+        );
 
     public override Task Column_collection_of_nullable_ints_Contains_null(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Column_collection_of_nullable_ints_Contains_null(async));
+            base.Column_collection_of_nullable_ints_Contains_null(async)
+        );
 
     public override Task Column_collection_of_strings_contains_null(bool async) =>
         AssertTranslationFailed(() => base.Column_collection_of_strings_contains_null(async));
@@ -523,11 +524,13 @@ WHERE (
 
     public override Task Parameter_collection_index_Column_equal_Column(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Parameter_collection_index_Column_equal_Column(async));
+            base.Parameter_collection_index_Column_equal_Column(async)
+        );
 
     public override Task Parameter_collection_index_Column_equal_constant(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Parameter_collection_index_Column_equal_constant(async));
+            base.Parameter_collection_index_Column_equal_constant(async)
+        );
 
     public override Task Column_collection_ElementAt(bool async) =>
         AssertCompatibilityLevelTooLow(() => base.Column_collection_ElementAt(async));
@@ -568,23 +571,27 @@ ORDER BY [p].[Id]
 
     public override Task Inline_collection_Join_ordered_column_collection(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Inline_collection_Join_ordered_column_collection(async));
+            base.Inline_collection_Join_ordered_column_collection(async)
+        );
 
     public override Task Parameter_collection_Concat_column_collection(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Parameter_collection_Concat_column_collection(async));
+            base.Parameter_collection_Concat_column_collection(async)
+        );
 
     public override Task Column_collection_Union_parameter_collection(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Column_collection_Union_parameter_collection(async));
+            base.Column_collection_Union_parameter_collection(async)
+        );
 
     public override Task Column_collection_Intersect_inline_collection(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Column_collection_Intersect_inline_collection(async));
+            base.Column_collection_Intersect_inline_collection(async)
+        );
 
     public override Task Inline_collection_Except_column_collection(bool async) =>
-        AssertCompatibilityLevelTooLow(() =>
-            base.Inline_collection_Except_column_collection(async));
+        AssertCompatibilityLevelTooLow(() => base.Inline_collection_Except_column_collection(async)
+        );
 
     public override async Task Column_collection_equality_parameter_collection(bool async)
     {
@@ -636,17 +643,20 @@ WHERE [p].[Ints] = N'[1,10]'
         bool async
     ) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Parameter_collection_in_subquery_Union_column_collection_as_compiled_query(async));
+            base.Parameter_collection_in_subquery_Union_column_collection_as_compiled_query(async)
+        );
 
     public override Task Parameter_collection_in_subquery_Union_column_collection(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Parameter_collection_in_subquery_Union_column_collection(async));
+            base.Parameter_collection_in_subquery_Union_column_collection(async)
+        );
 
     public override Task Parameter_collection_in_subquery_Union_column_collection_nested(
         bool async
     ) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Parameter_collection_in_subquery_Union_column_collection_nested(async));
+            base.Parameter_collection_in_subquery_Union_column_collection_nested(async)
+        );
 
     public override void Parameter_collection_in_subquery_and_Convert_as_compiled_query()
     {
@@ -655,11 +665,13 @@ WHERE [p].[Ints] = N'[1,10]'
 
     public override Task Parameter_collection_in_subquery_Count_as_compiled_query(bool async) =>
         AssertTranslationFailed(() =>
-            base.Parameter_collection_in_subquery_Count_as_compiled_query(async));
+            base.Parameter_collection_in_subquery_Count_as_compiled_query(async)
+        );
 
     public override Task Column_collection_in_subquery_Union_parameter_collection(bool async) =>
         AssertCompatibilityLevelTooLow(() =>
-            base.Column_collection_in_subquery_Union_parameter_collection(async));
+            base.Column_collection_in_subquery_Union_parameter_collection(async)
+        );
 
     // Base implementation asserts that a different exception is thrown
     public override Task Parameter_collection_in_subquery_Union_another_parameter_collection_as_compiled_query(
@@ -668,7 +680,8 @@ WHERE [p].[Ints] = N'[1,10]'
         Assert.ThrowsAsync<EqualException>(() =>
             base.Parameter_collection_in_subquery_Union_another_parameter_collection_as_compiled_query(
                 async
-            ));
+            )
+        );
 
     public override async Task Project_collection_of_ints_simple(bool async)
     {
@@ -771,7 +784,8 @@ ORDER BY [p].[Id]
         // we don't propagate error details from projection
         =>
         AssertTranslationFailed(() =>
-            base.Project_empty_collection_of_nullables_and_collection_only_containing_nulls(async));
+            base.Project_empty_collection_of_nullables_and_collection_only_containing_nulls(async)
+        );
 
     public override async Task Project_primitive_collections_element(bool async)
     {

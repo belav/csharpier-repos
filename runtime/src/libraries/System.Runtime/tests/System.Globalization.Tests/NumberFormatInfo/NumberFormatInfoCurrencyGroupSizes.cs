@@ -93,7 +93,8 @@ namespace System.Globalization.Tests
         public void CurrencyGroupSizes_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.CurrencyGroupSizes = new int[] { 1, 2, 3 });
+                NumberFormatInfo.InvariantInfo.CurrencyGroupSizes = new int[] { 1, 2, 3 }
+            );
         }
     }
 }

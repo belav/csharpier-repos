@@ -240,13 +240,8 @@ public class MemoryOutputCacheStoreTests
         var key = "abc";
 
         await Assert.ThrowsAsync<ArgumentException>(async () =>
-            await store.SetAsync(
-                key,
-                value,
-                new string[] { tag },
-                TimeSpan.FromMinutes(1),
-                default
-            ));
+            await store.SetAsync(key, value, new string[] { tag }, TimeSpan.FromMinutes(1), default)
+        );
     }
 
     private class TestMemoryOptionsClock : Extensions.Internal.ISystemClock

@@ -82,7 +82,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
                     )
-                    .Result);
+                    .Result
+            );
 
             data = Encoding.UTF8.GetBytes(@"[1,true,{""City"":""MyCity""},null,""foo""");
             stream = new MemoryStream(data);
@@ -92,7 +93,8 @@ namespace System.Text.Json.Serialization.Tests
                         stream,
                         new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
                     )
-                    .Result);
+                    .Result
+            );
         }
     }
 }

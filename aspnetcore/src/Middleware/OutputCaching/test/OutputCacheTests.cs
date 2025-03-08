@@ -995,7 +995,8 @@ public class OutputCacheTests
         {
             var client = server.CreateClient();
             await Assert.ThrowsAsync<SomeException>(() =>
-                client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "")));
+                client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ""))
+            );
         }
     }
 

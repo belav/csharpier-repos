@@ -25,7 +25,8 @@ namespace System.IO.Tests
         public void SetToNonExistentDirectory_ThrowsDirectoryNotFoundException()
         {
             Assert.Throws<DirectoryNotFoundException>(() =>
-                Directory.SetCurrentDirectory(GetTestFilePath()));
+                Directory.SetCurrentDirectory(GetTestFilePath())
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

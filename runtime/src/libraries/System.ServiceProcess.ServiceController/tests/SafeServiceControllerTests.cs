@@ -133,7 +133,8 @@ namespace System.ServiceProcess.Tests
         {
             var controller = new ServiceController(Guid.NewGuid().ToString("N"));
             Exception exception = Assert.Throws<InvalidOperationException>(() =>
-                controller.DisplayName);
+                controller.DisplayName
+            );
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -152,7 +153,8 @@ namespace System.ServiceProcess.Tests
             var controller = new ServiceController();
             controller.ServiceName = Guid.NewGuid().ToString("N");
             Exception exception = Assert.Throws<InvalidOperationException>(() =>
-                controller.DisplayName);
+                controller.DisplayName
+            );
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -171,7 +173,8 @@ namespace System.ServiceProcess.Tests
             var controller = new ServiceController();
             controller.DisplayName = Guid.NewGuid().ToString("N");
             Exception exception = Assert.Throws<InvalidOperationException>(() =>
-                controller.ServiceName);
+                controller.ServiceName
+            );
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -232,7 +235,8 @@ namespace System.ServiceProcess.Tests
         {
             var controller = new ServiceController(KeyIsoSvcName);
             Assert.Throws<System.ServiceProcess.TimeoutException>(() =>
-                controller.WaitForStatus(ServiceControllerStatus.Paused, TimeSpan.Zero));
+                controller.WaitForStatus(ServiceControllerStatus.Paused, TimeSpan.Zero)
+            );
         }
     }
 }

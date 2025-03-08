@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.Configuration.Ini.Test
 
             // Act and Assert
             var ex = Assert.Throws<ArgumentException>(() =>
-                IniConfigurationExtensions.AddIniFile(configurationBuilder, path));
+                IniConfigurationExtensions.AddIniFile(configurationBuilder, path)
+            );
             Assert.Equal("path", ex.ParamName);
             Assert.StartsWith("File path must be a non-empty string.", ex.Message);
         }
@@ -34,7 +35,8 @@ namespace Microsoft.Extensions.Configuration.Ini.Test
 
             // Act and Assert
             var ex = Assert.Throws<FileNotFoundException>(() =>
-                new ConfigurationBuilder().AddIniFile(path).Build());
+                new ConfigurationBuilder().AddIniFile(path).Build()
+            );
             Assert.StartsWith(
                 $"The configuration file '{path}' was not found and is not optional. The expected physical path was '",
                 ex.Message

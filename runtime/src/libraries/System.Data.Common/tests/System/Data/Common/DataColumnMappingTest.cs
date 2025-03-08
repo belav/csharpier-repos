@@ -82,7 +82,8 @@ namespace System.Data.Tests.Common
                     dataTable,
                     typeof(string),
                     new MissingSchemaAction()
-                ));
+                )
+            );
         }
 
         [Fact]

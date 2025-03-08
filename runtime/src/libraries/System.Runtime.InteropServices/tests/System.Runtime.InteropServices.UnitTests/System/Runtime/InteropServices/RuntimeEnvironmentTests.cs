@@ -26,21 +26,24 @@ namespace System.Runtime.InteropServices
         public void SystemConfigurationFile_Get_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                RuntimeEnvironment.SystemConfigurationFile);
+                RuntimeEnvironment.SystemConfigurationFile
+            );
         }
 
         [Fact]
         public void GetRuntimeInterfaceAsObject_Invoke_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid.Empty, Guid.Empty));
+                RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid.Empty, Guid.Empty)
+            );
         }
 
         [Fact]
         public void GetRuntimeInterfaceAsIntPtr_Invoke_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid.Empty, Guid.Empty));
+                RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid.Empty, Guid.Empty)
+            );
         }
 #pragma warning restore SYSLIB0019
 

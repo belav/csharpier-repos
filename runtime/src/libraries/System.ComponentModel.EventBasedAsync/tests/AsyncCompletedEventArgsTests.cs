@@ -70,7 +70,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 if (expectedError != null)
                 {
                     TargetInvocationException error = Assert.Throws<TargetInvocationException>(() =>
-                        target.RaiseExceptionIfNecessary());
+                        target.RaiseExceptionIfNecessary()
+                    );
                     Assert.Equal(expectedExceptionType, error.InnerException.GetType());
                     Assert.Same(expectedError, error.InnerException);
                 }

@@ -162,7 +162,8 @@ namespace System.Diagnostics.Tests
                 eventLog.Log = "Application";
                 Assert.Throws<ArgumentOutOfRangeException>(() => eventLog.MaximumKilobytes = 2);
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    eventLog.MaximumKilobytes = 0x3FFFC1);
+                    eventLog.MaximumKilobytes = 0x3FFFC1
+                );
             }
         }
 
@@ -230,7 +231,8 @@ namespace System.Diagnostics.Tests
             {
                 eventLog.Log = "Application";
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    eventLog.ModifyOverflowPolicy(OverflowAction.OverwriteOlder, 400));
+                    eventLog.ModifyOverflowPolicy(OverflowAction.OverwriteOlder, 400)
+                );
             }
         }
 

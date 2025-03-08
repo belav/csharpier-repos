@@ -91,7 +91,8 @@ namespace System.ConfigurationTests
 
                 Assert.Throws<ConfigurationErrorsException>(() =>
                     config.GetSection("simpleCustomSectionRequiredValue")
-                    as SimpleCustomSectionRequiredValue);
+                    as SimpleCustomSectionRequiredValue
+                );
             }
         }
 

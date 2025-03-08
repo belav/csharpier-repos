@@ -91,7 +91,8 @@ namespace System.Reflection.Emit.Tests
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() =>
-                type.AddInterfaceImplementation(typeof(EmptyNonGenericInterface1)));
+                type.AddInterfaceImplementation(typeof(EmptyNonGenericInterface1))
+            );
         }
 
         public static IEnumerable<object[]> NonInterfaceTypes_TestData()

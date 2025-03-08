@@ -209,7 +209,8 @@ namespace System.Net.Tests
                         ssl2Client | ssl2Server
                     );
                     Assert.Throws<NotSupportedException>(() =>
-                        ServicePointManager.SecurityProtocol = ssl2);
+                        ServicePointManager.SecurityProtocol = ssl2
+                    );
 
                     AssertExtensions.Throws<ArgumentNullException>(
                         "uriString",
@@ -251,7 +252,8 @@ namespace System.Net.Tests
                         ServicePointManager.FindServicePoint(
                             "http://anything",
                             new FixedWebProxy("https://anything")
-                        ));
+                        )
+                    );
 
                     ServicePoint sp = ServicePointManager.FindServicePoint(
                         $"http://{Guid.NewGuid():N}",
@@ -297,9 +299,11 @@ namespace System.Net.Tests
             {
 #pragma warning disable 0618 // Ssl2, Ssl3 are deprecated.
                 Assert.Throws<NotSupportedException>(() =>
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3);
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
+                );
                 Assert.Throws<NotSupportedException>(() =>
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | ssl2);
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | ssl2
+                );
 #pragma warning restore
             }
             finally

@@ -130,7 +130,8 @@ public class WebSocketClientTests
                         Assert.NotNull(upgradeFeature);
                         Assert.False(upgradeFeature.IsUpgradableRequest);
                         await Assert.ThrowsAsync<NotSupportedException>(() =>
-                            upgradeFeature.UpgradeAsync());
+                            upgradeFeature.UpgradeAsync()
+                        );
 
                         var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
                         Assert.NotNull(webSocketFeature);

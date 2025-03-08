@@ -565,7 +565,8 @@ public class RelationalMetadataExtensionsTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId < Id"))
+                    entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId < Id")
+                )
                 .Message
         );
     }

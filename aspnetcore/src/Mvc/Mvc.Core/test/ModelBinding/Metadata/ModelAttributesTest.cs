@@ -332,7 +332,8 @@ public class ModelAttributesTest
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            ModelAttributes.GetAttributesForProperty(modelType, property));
+            ModelAttributes.GetAttributesForProperty(modelType, property)
+        );
         Assert.Equal(
             "Only one ModelMetadataType attribute is permitted per type.",
             exception.Message

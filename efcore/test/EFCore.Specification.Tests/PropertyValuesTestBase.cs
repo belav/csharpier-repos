@@ -924,7 +924,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             CoreStrings.PropertyNotFound("Foo", nameof(Building)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    clonedBuildingValues.GetValue<string>("Foo"))
+                    clonedBuildingValues.GetValue<string>("Foo")
+                )
                 .Message
         );
     }
@@ -969,7 +970,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    clonedBuildingValues.GetValue<string>(property))
+                    clonedBuildingValues.GetValue<string>(property)
+                )
                 .Message
         );
     }
@@ -1042,7 +1044,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    clonedValues.GetValue<string>("TerminationDate"))
+                    clonedValues.GetValue<string>("TerminationDate")
+                )
                 .Message
         );
     }
@@ -1113,7 +1116,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    clonedValues.GetValue<string>(shadowProperty))
+                    clonedValues.GetValue<string>(shadowProperty)
+                )
                 .Message
         );
 
@@ -1162,8 +1166,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 nameof(CurrentEmployee)
             ),
             Assert
-                .Throws<InvalidOperationException>(() =>
-                    clonedValues.GetValue<string>(termProperty))
+                .Throws<InvalidOperationException>(() => clonedValues.GetValue<string>(termProperty)
+                )
                 .Message
         );
     }

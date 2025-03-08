@@ -22,7 +22,8 @@ namespace System.Linq.Tests
         public void EmptyInt32()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().AsQueryable().Max());
+                Enumerable.Empty<int>().AsQueryable().Max()
+            );
         }
 
         [Fact]
@@ -45,7 +46,8 @@ namespace System.Linq.Tests
         public void EmptyInt64()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<long>().AsQueryable().Max());
+                Enumerable.Empty<long>().AsQueryable().Max()
+            );
         }
 
         [Fact]
@@ -59,7 +61,8 @@ namespace System.Linq.Tests
         public void EmptySingle()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<float>().AsQueryable().Max());
+                Enumerable.Empty<float>().AsQueryable().Max()
+            );
         }
 
         [Fact]
@@ -91,7 +94,8 @@ namespace System.Linq.Tests
         public void EmptyDouble()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<double>().AsQueryable().Max());
+                Enumerable.Empty<double>().AsQueryable().Max()
+            );
         }
 
         [Fact]
@@ -114,7 +118,8 @@ namespace System.Linq.Tests
         public void EmptyDecimal()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<decimal>().AsQueryable().Max());
+                Enumerable.Empty<decimal>().AsQueryable().Max()
+            );
         }
 
         [Fact]
@@ -232,7 +237,8 @@ namespace System.Linq.Tests
         public void EmptyDateTime()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<DateTime>().AsQueryable().Max());
+                Enumerable.Empty<DateTime>().AsQueryable().Max()
+            );
         }
 
         [Fact]
@@ -308,7 +314,8 @@ namespace System.Linq.Tests
         public void EmptyInt64WithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<long>().AsQueryable().Max(x => x));
+                Enumerable.Empty<long>().AsQueryable().Max(x => x)
+            );
         }
 
         [Fact]
@@ -378,14 +385,16 @@ namespace System.Linq.Tests
         public void EmptySingleWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<float>().AsQueryable().Max(x => x));
+                Enumerable.Empty<float>().AsQueryable().Max(x => x)
+            );
         }
 
         [Fact]
         public void EmptyDoubleWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<double>().AsQueryable().Max(x => x));
+                Enumerable.Empty<double>().AsQueryable().Max(x => x)
+            );
         }
 
         [Fact]
@@ -423,7 +432,8 @@ namespace System.Linq.Tests
         public void EmptyDecimalWithSelector()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<decimal>().AsQueryable().Max(x => x));
+                Enumerable.Empty<decimal>().AsQueryable().Max(x => x)
+            );
         }
 
         [Fact]
@@ -709,7 +719,8 @@ namespace System.Linq.Tests
         public void EmptyBoolean()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<bool>().AsQueryable().Max());
+                Enumerable.Empty<bool>().AsQueryable().Max()
+            );
         }
 
         [Fact]

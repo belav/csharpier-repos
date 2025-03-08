@@ -289,9 +289,11 @@ namespace System.Text.Json.Tests
             Assert.Throws<ArgumentNullException>(() => writer.WriteRawValue(json: default(string)));
             Assert.Throws<ArgumentException>(() => writer.WriteRawValue(json: ""));
             Assert.Throws<ArgumentException>(() =>
-                writer.WriteRawValue(json: default(ReadOnlySpan<char>)));
+                writer.WriteRawValue(json: default(ReadOnlySpan<char>))
+            );
             Assert.Throws<ArgumentException>(() =>
-                writer.WriteRawValue(utf8Json: default(ReadOnlySpan<byte>)));
+                writer.WriteRawValue(utf8Json: default(ReadOnlySpan<byte>))
+            );
         }
 
         [Theory]
@@ -323,7 +325,8 @@ namespace System.Text.Json.Tests
                 else
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.WriteRawValue(@"{}", skipInputValidation));
+                        writer.WriteRawValue(@"{}", skipInputValidation)
+                    );
                 }
             }
         }
@@ -344,7 +347,8 @@ namespace System.Text.Json.Tests
                 if (expectFail)
                 {
                     Assert.ThrowsAny<JsonException>(() =>
-                        writer.WriteRawValue(json, skipInputValidation));
+                        writer.WriteRawValue(json, skipInputValidation)
+                    );
                 }
                 else
                 {
@@ -423,7 +427,8 @@ namespace System.Text.Json.Tests
                     // Next write forces a grow beyond max array length
 
                     Assert.Throws<OutOfMemoryException>(() =>
-                        writer.WriteRawValue(WrapInQuotes(text3.EncodedUtf8Bytes)));
+                        writer.WriteRawValue(WrapInQuotes(text3.EncodedUtf8Bytes))
+                    );
 
                     Assert.Equal(2_100_097_542, writer.BytesPending);
 
@@ -576,9 +581,11 @@ namespace System.Text.Json.Tests
 
                 // UTF-16 overloads not compatible with this length.
                 Assert.Throws<ArgumentException>(() =>
-                    WriteRawValueWithSetting(writer, payload, OverloadParamType.ROSChar));
+                    WriteRawValueWithSetting(writer, payload, OverloadParamType.ROSChar)
+                );
                 Assert.Throws<ArgumentException>(() =>
-                    WriteRawValueWithSetting(writer, payload, OverloadParamType.String));
+                    WriteRawValueWithSetting(writer, payload, OverloadParamType.String)
+                );
 
                 // UTF-8 overload is okay.
                 WriteRawValueWithSetting(writer, payload, OverloadParamType.ByteArray);

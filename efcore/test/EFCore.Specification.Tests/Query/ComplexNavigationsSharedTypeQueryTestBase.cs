@@ -19,7 +19,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
         AssertUnableToTranslateEFProperty(() =>
             base.Join_condition_optimizations_applied_correctly_when_anonymous_type_with_multiple_properties(
                 async
-            ));
+            )
+        );
 
     public override Task Join_condition_optimizations_applied_correctly_when_anonymous_type_with_single_property(
         bool async
@@ -27,7 +28,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
         AssertUnableToTranslateEFProperty(() =>
             base.Join_condition_optimizations_applied_correctly_when_anonymous_type_with_single_property(
                 async
-            ));
+            )
+        );
 
     public override Task Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(
         bool async
@@ -35,7 +37,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
         AssertTranslationFailed(() =>
             base.Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(
                 async
-            ));
+            )
+        );
 
     public override Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(
         bool async
@@ -43,7 +46,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
         AssertTranslationFailed(() =>
             base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(
                 async
-            ));
+            )
+        );
 
     public override Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(
         bool async
@@ -51,7 +55,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
         AssertTranslationFailed(() =>
             base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(
                 async
-            ));
+            )
+        );
 
     public override Task SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(
         bool async
@@ -59,7 +64,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
         AssertTranslationFailed(() =>
             base.SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(
                 async
-            ));
+            )
+        );
 
     public override Task Include8(bool async) =>
         AssertIncludeOnNonEntity(() => base.Include8(async));

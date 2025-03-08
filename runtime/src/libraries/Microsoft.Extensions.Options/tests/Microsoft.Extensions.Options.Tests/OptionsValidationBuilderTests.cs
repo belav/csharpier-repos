@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.Options.Tests
             ValidateOptionsResultBuilder builder = new();
             Assert.Throws<ArgumentNullException>(() => builder.AddError(null));
             Assert.Throws<ArgumentNullException>(() =>
-                builder.AddResult((ValidateOptionsResult)null));
+                builder.AddResult((ValidateOptionsResult)null)
+            );
         }
 
         [Fact]

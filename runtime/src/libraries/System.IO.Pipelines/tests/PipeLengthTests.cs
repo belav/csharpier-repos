@@ -251,7 +251,8 @@ namespace System.IO.Pipelines.Tests
 
             result = await _pipe.Reader.ReadAsync();
             Assert.Throws<InvalidOperationException>(() =>
-                _pipe.Reader.AdvanceTo(result.Buffer.Start, result.Buffer.Start));
+                _pipe.Reader.AdvanceTo(result.Buffer.Start, result.Buffer.Start)
+            );
         }
 
         [Fact]
@@ -262,7 +263,8 @@ namespace System.IO.Pipelines.Tests
 
             ReadResult result = await _pipe.Reader.ReadAsync();
             Assert.Throws<InvalidOperationException>(() =>
-                _pipe.Reader.AdvanceTo(result.Buffer.End, result.Buffer.Start));
+                _pipe.Reader.AdvanceTo(result.Buffer.End, result.Buffer.Start)
+            );
         }
 
         [Fact]

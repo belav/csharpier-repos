@@ -186,7 +186,8 @@ namespace Tests.Integration
             );
 
             Assert.Throws<CompositionException>(() =>
-                container.GetExportedValue<InvalidImportManyCI>());
+                container.GetExportedValue<InvalidImportManyCI>()
+            );
         }
     }
 }

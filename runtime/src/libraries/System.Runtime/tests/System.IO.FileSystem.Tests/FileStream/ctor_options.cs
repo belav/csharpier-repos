@@ -110,7 +110,8 @@ namespace System.IO.Tests
                     bufferSize: 1,
                     FileOptions.None,
                     preallocationSize: -1
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -129,7 +130,8 @@ namespace System.IO.Tests
                     bufferSize: 1,
                     FileOptions.None,
                     preallocationSize: 20
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -146,7 +148,8 @@ namespace System.IO.Tests
                     bufferSize: 1,
                     FileOptions.None,
                     preallocationSize: 20
-                ));
+                )
+            );
         }
 
         [Theory]

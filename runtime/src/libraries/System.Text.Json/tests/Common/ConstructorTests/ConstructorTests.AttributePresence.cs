@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task NonPublicCtors_NotSupported(Type type)
         {
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.DeserializeWrapper("{}", type));
+                Serializer.DeserializeWrapper("{}", type)
+            );
             Assert.Contains("JsonConstructorAttribute", ex.ToString());
         }
 
@@ -39,7 +40,8 @@ namespace System.Text.Json.Serialization.Tests
             else
             {
                 NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    Serializer.DeserializeWrapper("{}", type));
+                    Serializer.DeserializeWrapper("{}", type)
+                );
                 Assert.Contains("JsonConstructorAttribute", ex.ToString());
             }
         }
@@ -61,7 +63,8 @@ namespace System.Text.Json.Serialization.Tests
             else
             {
                 NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    Serializer.DeserializeWrapper("{}", type));
+                    Serializer.DeserializeWrapper("{}", type)
+                );
                 Assert.Contains("JsonConstructorAttribute", ex.ToString());
             }
         }
@@ -129,7 +132,8 @@ namespace System.Text.Json.Serialization.Tests
             return Assert.ThrowsAsync<NotSupportedException>(() =>
                 Serializer.DeserializeWrapper<MultiplePublicParameterizedCtor>(
                     @"{""MyInt"":1,""MyString"":""1""}"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -194,7 +198,8 @@ namespace System.Text.Json.Serialization.Tests
             async Task RunTestAsync<T>()
             {
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    Serializer.DeserializeWrapper<T>("{}"));
+                    Serializer.DeserializeWrapper<T>("{}")
+                );
             }
 
             await RunTestAsync<MultiplePublicParameterizedCtor_WithMultipleAttributes>();
@@ -215,7 +220,8 @@ namespace System.Text.Json.Serialization.Tests
             async Task RunTestAsync<T>()
             {
                 await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    Serializer.DeserializeWrapper<T>("[]"));
+                    Serializer.DeserializeWrapper<T>("[]")
+                );
             }
 
             await RunTestAsync<Parameterized_StackWrapper>();

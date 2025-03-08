@@ -450,7 +450,8 @@ namespace System.Web.Tests
             );
             Assert.Equal("<", HttpUtility.HtmlEncode(new ActionHtmlString(() => "<")));
             Assert.Throws<FormatException>(() =>
-                HttpUtility.HtmlEncode(new ActionHtmlString(() => throw new FormatException())));
+                HttpUtility.HtmlEncode(new ActionHtmlString(() => throw new FormatException()))
+            );
         }
 
         private sealed class ActionHtmlString(Func<string> toHtmlString) : IHtmlString

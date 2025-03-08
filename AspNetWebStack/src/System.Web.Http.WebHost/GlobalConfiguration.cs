@@ -106,13 +106,15 @@ namespace System.Web.Http
         private static Lazy<HttpMessageHandler> CreateDefaultHandler()
         {
             return new Lazy<HttpMessageHandler>(() =>
-                new HttpRoutingDispatcher(_configuration.Value));
+                new HttpRoutingDispatcher(_configuration.Value)
+            );
         }
 
         private static Lazy<HttpServer> CreateDefaultServer()
         {
             return new Lazy<HttpServer>(() =>
-                new HttpServer(_configuration.Value, _defaultHandler.Value));
+                new HttpServer(_configuration.Value, _defaultHandler.Value)
+            );
         }
     }
 }

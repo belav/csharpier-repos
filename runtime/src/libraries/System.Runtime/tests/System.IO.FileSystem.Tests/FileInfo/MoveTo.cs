@@ -27,12 +27,14 @@ namespace System.IO.Tests
                 Move(
                     testFile.FullName,
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
-                ));
+                )
+            );
             Assert.Throws<DirectoryNotFoundException>(() =>
                 Move(
                     Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
                     testFile.FullName
-                ));
+                )
+            );
         }
     }
 }

@@ -480,17 +480,20 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                                 else if (req.Path == new PathString("/signIn"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.SignInAsync("Microsoft", new ClaimsPrincipal()));
+                                        context.SignInAsync("Microsoft", new ClaimsPrincipal())
+                                    );
                                 }
                                 else if (req.Path == new PathString("/signOut"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.SignOutAsync("Microsoft"));
+                                        context.SignOutAsync("Microsoft")
+                                    );
                                 }
                                 else if (req.Path == new PathString("/forbid"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.ForbidAsync("Microsoft"));
+                                        context.ForbidAsync("Microsoft")
+                                    );
                                 }
                                 else
                                 {

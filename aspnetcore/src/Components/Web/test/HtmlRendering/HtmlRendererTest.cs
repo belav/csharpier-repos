@@ -46,7 +46,8 @@ public class HtmlRendererTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            htmlContent.WriteHtmlTo(new StringWriter()));
+            htmlContent.WriteHtmlTo(new StringWriter())
+        );
         Assert.Contains("The current thread is not associated with the Dispatcher", ex.Message);
     }
 
@@ -1242,7 +1243,8 @@ public class HtmlRendererTest
                             { nameof(ErrorThrowingComponent.ThrowAsync), true },
                         }
                     )
-                ));
+                )
+            );
             Assert.Equal("async", ex.Message);
         });
     }

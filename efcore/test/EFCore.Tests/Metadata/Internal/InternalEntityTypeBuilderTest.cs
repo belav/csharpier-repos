@@ -112,7 +112,8 @@ public class InternalEntityTypeBuilderTest
                         Customer.OrdersProperty,
                         ConfigurationSource.DataAnnotation,
                         targetIsPrincipal: true
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -349,7 +350,8 @@ public class InternalEntityTypeBuilderTest
                         customerEntityBuilder.Metadata.Name,
                         new[] { "ShadowCustomerId", "ShadowCustomerUnique" },
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -869,7 +871,8 @@ public class InternalEntityTypeBuilderTest
                             relationshipBuilder.Metadata,
                             ConfigurationSource.DataAnnotation
                         )
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1275,7 +1278,8 @@ public class InternalEntityTypeBuilderTest
                         new[] { Order.CustomerIdProperty, Order.IdProperty },
                         "NamedIndex",
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1316,7 +1320,8 @@ public class InternalEntityTypeBuilderTest
                         new[] { Order.CustomerIdProperty, Order.IdProperty },
                         "NamedIndex",
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1357,7 +1362,8 @@ public class InternalEntityTypeBuilderTest
                         new[] { Order.CustomerIdProperty, Order.IdProperty },
                         "NamedIndex",
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1844,7 +1850,8 @@ public class InternalEntityTypeBuilderTest
                     entityBuilder.HasKey(
                         new[] { Customer.UniqueProperty.Name },
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1872,7 +1879,8 @@ public class InternalEntityTypeBuilderTest
                     derivedEntityBuilder.HasKey(
                         new[] { Order.IdProperty.Name, Order.CustomerIdProperty.Name },
                         ConfigurationSource.DataAnnotation
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1903,7 +1911,8 @@ public class InternalEntityTypeBuilderTest
                     derivedEntityBuilder.HasBaseType(
                         entityBuilder.Metadata,
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -1924,7 +1933,8 @@ public class InternalEntityTypeBuilderTest
                     entityBuilder.HasKey(
                         new[] { Order.IdProperty.Name },
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -2171,7 +2181,8 @@ public class InternalEntityTypeBuilderTest
             CoreStrings.KeylessTypeExistingKey(nameof(Order), "{'CustomerId'}"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    entityBuilder.HasNoKey(ConfigurationSource.Explicit))
+                    entityBuilder.HasNoKey(ConfigurationSource.Explicit)
+                )
                 .Message
         );
         Assert.NotEmpty(entityType.GetKeys());
@@ -2309,7 +2320,8 @@ public class InternalEntityTypeBuilderTest
                     entityBuilder.PrimaryKey(
                         new[] { Customer.UniqueProperty.Name },
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -2330,7 +2342,8 @@ public class InternalEntityTypeBuilderTest
                     entityBuilder.PrimaryKey(
                         new[] { Order.IdProperty.Name },
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -2358,7 +2371,8 @@ public class InternalEntityTypeBuilderTest
                     derivedEntityBuilder.PrimaryKey(
                         new[] { Order.IdProperty.Name, Order.CustomerIdProperty.Name },
                         ConfigurationSource.DataAnnotation
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -2826,7 +2840,8 @@ public class InternalEntityTypeBuilderTest
                         typeof(string),
                         IndexedClass.IndexerPropertyName,
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -2868,7 +2883,8 @@ public class InternalEntityTypeBuilderTest
                     dependentEntityBuilder.Property(
                         Order.CustomerProperty,
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -2883,7 +2899,8 @@ public class InternalEntityTypeBuilderTest
             CoreStrings.NoPropertyType("Shadow", nameof(Order)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    entityBuilder.Property("Shadow", ConfigurationSource.DataAnnotation))
+                    entityBuilder.Property("Shadow", ConfigurationSource.DataAnnotation)
+                )
                 .Message
         );
     }
@@ -3355,7 +3372,8 @@ public class InternalEntityTypeBuilderTest
                             ignoredEntityTypeBuilder.Ignore(
                                 memberToIgnore,
                                 ignoreConfigurationSource
-                            ))
+                            )
+                        )
                         .Message
                 );
                 return;
@@ -3399,7 +3417,8 @@ public class InternalEntityTypeBuilderTest
                                 DbLoggerCategory.Model.Validation,
                                 TestLoggingDefinitions
                             >()
-                        ))
+                        )
+                    )
                     .Message
             );
 
@@ -4397,7 +4416,8 @@ public class InternalEntityTypeBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        ConfigureMember(secondEntityTypeBuilder, secondMemberType, secondSource))
+                        ConfigureMember(secondEntityTypeBuilder, secondMemberType, secondSource)
+                    )
                     .Message
             );
 
@@ -4430,7 +4450,8 @@ public class InternalEntityTypeBuilderTest
                         ),
                         Assert
                             .Throws<InvalidOperationException>(() =>
-                                ConfigureOrdersHierarchy(modelBuilder))
+                                ConfigureOrdersHierarchy(modelBuilder)
+                            )
                             .Message
                     );
                 }
@@ -4447,7 +4468,8 @@ public class InternalEntityTypeBuilderTest
                         ),
                         Assert
                             .Throws<InvalidOperationException>(() =>
-                                ConfigureOrdersHierarchy(modelBuilder))
+                                ConfigureOrdersHierarchy(modelBuilder)
+                            )
                             .Message
                     );
                 }
@@ -5151,7 +5173,8 @@ public class InternalEntityTypeBuilderTest
                     derivedDependentEntityBuilder.HasBaseType(
                         dependentEntityBuilder.Metadata,
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -5680,7 +5703,8 @@ public class InternalEntityTypeBuilderTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    discriminatorBuilder.HasValue(nonDerivedTypeBuilder.Metadata, "1"))
+                    discriminatorBuilder.HasValue(nonDerivedTypeBuilder.Metadata, "1")
+                )
                 .Message
         );
     }

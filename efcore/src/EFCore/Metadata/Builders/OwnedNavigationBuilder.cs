@@ -155,7 +155,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
                         ConfigurationSource.Explicit
                     )!
                     .Metadata
-            ));
+            )
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned entity type.
@@ -181,7 +182,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
                         ConfigurationSource.Explicit
                     )!
                     .Metadata
-            ));
+            )
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned entity type.
@@ -229,7 +231,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
                         ConfigurationSource.Explicit
                     )!
                     .Metadata
-            ));
+            )
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned type where that property represents
@@ -258,7 +261,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
                         ConfigurationSource.Explicit
                     )!
                     .Metadata
-            ));
+            )
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned type where that property represents

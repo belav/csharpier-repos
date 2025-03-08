@@ -78,7 +78,8 @@ public readonly struct RenderHandle
         var renderer = _renderer;
         var componentId = _componentId;
         return Dispatcher.InvokeAsync(() =>
-            renderer!.HandleComponentException(exception, componentId));
+            renderer!.HandleComponentException(exception, componentId)
+        );
     }
 
     [DoesNotReturn]

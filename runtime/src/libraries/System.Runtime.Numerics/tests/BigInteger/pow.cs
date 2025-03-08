@@ -210,7 +210,8 @@ namespace System.Numerics.Tests
             bytes[bytes.Length - 1] = 1;
 
             Assert.Throws<OverflowException>(() =>
-                BigInteger.Pow(new BigInteger(bytes), int.MaxValue));
+                BigInteger.Pow(new BigInteger(bytes), int.MaxValue)
+            );
         }
 
         private static void VerifyPowString(string opstring)

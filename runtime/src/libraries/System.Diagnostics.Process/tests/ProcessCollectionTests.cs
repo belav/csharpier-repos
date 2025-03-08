@@ -41,7 +41,8 @@ namespace System.Diagnostics.Tests
             }
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                moduleCollection.CopyTo(moduleArray, -1));
+                moduleCollection.CopyTo(moduleArray, -1)
+            );
 
             // Explicit interface implementations
             Assert.False(((ICollection)moduleCollection).IsSynchronized);
@@ -93,7 +94,8 @@ namespace System.Diagnostics.Tests
             }
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                threadCollection.CopyTo(threadArray, -1));
+                threadCollection.CopyTo(threadArray, -1)
+            );
 
             // Remove
             threadCollection.Remove(tArray[0]);
@@ -129,8 +131,8 @@ namespace System.Diagnostics.Tests
             Assert.Equal(index, threadCollection.IndexOf(null));
             Assert.Equal(initialCount + 1, threadCollection.Count);
             // Insert at invalid index
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                threadCollection.Insert(-1, tArray[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => threadCollection.Insert(-1, tArray[0])
+            );
 
             // Explicit interface implementations
             Assert.False(((ICollection)threadCollection).IsSynchronized);

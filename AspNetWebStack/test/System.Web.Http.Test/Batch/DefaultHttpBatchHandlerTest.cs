@@ -212,7 +212,8 @@ namespace System.Web.Http
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None));
+                batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None)
+            );
 
             Assert.Equal(2, responses.Count);
             foreach (var response in responses)
@@ -407,7 +408,8 @@ namespace System.Web.Http
             HttpRequestMessage request = new HttpRequestMessage();
 
             HttpResponseException errorResponse = Assert.Throws<HttpResponseException>(() =>
-                batchHandler.ValidateRequest(request));
+                batchHandler.ValidateRequest(request)
+            );
             Assert.Equal(HttpStatusCode.BadRequest, errorResponse.Response.StatusCode);
             Assert.Equal(
                 "The 'Content' property on the batch request cannot be null.",
@@ -424,7 +426,8 @@ namespace System.Web.Http
             request.Content.Headers.ContentType = null;
 
             HttpResponseException errorResponse = Assert.Throws<HttpResponseException>(() =>
-                batchHandler.ValidateRequest(request));
+                batchHandler.ValidateRequest(request)
+            );
             Assert.Equal(HttpStatusCode.BadRequest, errorResponse.Response.StatusCode);
             Assert.Equal(
                 "The batch request must have a \"Content-Type\" header.",
@@ -441,7 +444,8 @@ namespace System.Web.Http
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/json");
 
             HttpResponseException errorResponse = Assert.Throws<HttpResponseException>(() =>
-                batchHandler.ValidateRequest(request));
+                batchHandler.ValidateRequest(request)
+            );
             Assert.Equal(HttpStatusCode.BadRequest, errorResponse.Response.StatusCode);
             Assert.Equal(
                 "The batch request of media type 'text/json' is not supported.",

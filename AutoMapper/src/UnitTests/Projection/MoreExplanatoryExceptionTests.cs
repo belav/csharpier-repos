@@ -14,7 +14,8 @@ public class MoreExplanatoryExceptionTests
         var exception = Assert.Throws<AutoMapperMappingException>(() =>
             new EntitySource[0]
                 .AsQueryable()
-                .ProjectTo<EntityDestination>(config));
+                .ProjectTo<EntityDestination>(config)
+        );
 
         // Assert
         Assert.Contains(

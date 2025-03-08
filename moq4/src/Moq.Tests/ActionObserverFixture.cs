@@ -355,7 +355,8 @@ namespace Moq.Tests
             void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
             {
                 var error = Assert.Throws<ArgumentException>(() =>
-                    ActionObserver.Instance.ReconstructExpression(action));
+                    ActionObserver.Instance.ReconstructExpression(action)
+                );
                 Assert.Contains($": {expectedPartial}", error.Message);
             }
 

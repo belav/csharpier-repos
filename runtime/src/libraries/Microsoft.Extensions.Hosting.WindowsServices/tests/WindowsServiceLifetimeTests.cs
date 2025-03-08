@@ -85,7 +85,8 @@ namespace Microsoft.Extensions.Hosting
                     Assert.Equal(
                         lifetime.ThrowOnStart,
                         await Assert.ThrowsAsync<Exception>(async () =>
-                            await lifetime.WaitForStartAsync(CancellationToken.None))
+                            await lifetime.WaitForStartAsync(CancellationToken.None)
+                        )
                     );
                 }
             });
@@ -113,7 +114,8 @@ namespace Microsoft.Extensions.Hosting
                     Assert.Equal(
                         lifetime.ThrowOnStop,
                         await Assert.ThrowsAsync<Exception>(async () =>
-                            await lifetime.StopAsync(CancellationToken.None))
+                            await lifetime.StopAsync(CancellationToken.None)
+                        )
                     );
                 }
             });
@@ -142,7 +144,8 @@ namespace Microsoft.Extensions.Hosting
                 await lifetime.WaitForStartAsync(CancellationToken.None);
 
                 await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-                    await lifetime.StopAsync(new CancellationToken(true)));
+                    await lifetime.StopAsync(new CancellationToken(true))
+                );
             });
 
             serviceTester.Start();
@@ -170,11 +173,14 @@ namespace Microsoft.Extensions.Hosting
                     var applicationLifetime =
                         host.Services.GetRequiredService<IHostApplicationLifetime>();
                     applicationLifetime.ApplicationStarted.Register(() =>
-                        FileLogger.Log($"lifetime started"));
+                        FileLogger.Log($"lifetime started")
+                    );
                     applicationLifetime.ApplicationStopping.Register(() =>
-                        FileLogger.Log($"lifetime stopping"));
+                        FileLogger.Log($"lifetime stopping")
+                    );
                     applicationLifetime.ApplicationStopped.Register(() =>
-                        FileLogger.Log($"lifetime stopped"));
+                        FileLogger.Log($"lifetime stopped")
+                    );
 
                     FileLogger.Log("host.Start()");
                     host.Start();
@@ -249,11 +255,14 @@ namespace Microsoft.Extensions.Hosting
                     var applicationLifetime =
                         host.Services.GetRequiredService<IHostApplicationLifetime>();
                     applicationLifetime.ApplicationStarted.Register(() =>
-                        FileLogger.Log($"lifetime started"));
+                        FileLogger.Log($"lifetime started")
+                    );
                     applicationLifetime.ApplicationStopping.Register(() =>
-                        FileLogger.Log($"lifetime stopping"));
+                        FileLogger.Log($"lifetime stopping")
+                    );
                     applicationLifetime.ApplicationStopped.Register(() =>
-                        FileLogger.Log($"lifetime stopped"));
+                        FileLogger.Log($"lifetime stopped")
+                    );
 
                     FileLogger.Log("host.Run()");
                     host.Run();

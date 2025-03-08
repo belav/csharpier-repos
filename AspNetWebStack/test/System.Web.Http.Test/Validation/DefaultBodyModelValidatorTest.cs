@@ -186,7 +186,8 @@ namespace System.Web.Http.Validation
                     metadataProvider,
                     actionContext,
                     string.Empty
-                ));
+                )
+            );
 
             // Assert
             Dictionary<string, string> actualErrors = new Dictionary<string, string>();
@@ -222,7 +223,8 @@ namespace System.Web.Http.Validation
                     metadataProvider,
                     actionContext,
                     string.Empty
-                ));
+                )
+            );
 
             // Assert
             Assert.Contains("Street", actionContext.ModelState.Keys);
@@ -303,7 +305,8 @@ namespace System.Web.Http.Validation
                     metadataProvider,
                     actionContext,
                     String.Empty
-                ));
+                )
+            );
         }
 
         public class Person

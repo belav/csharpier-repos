@@ -70,7 +70,8 @@ namespace System.IO.Compression.Tests
                 Path.Combine(GetTestFilePath(), "Bar")
             );
             Assert.Throws<IOException>(() =>
-                ZipFile.ExtractToDirectory(archivePath, destination.FullName));
+                ZipFile.ExtractToDirectory(archivePath, destination.FullName)
+            );
         }
 
         /// <summary>
@@ -174,13 +175,11 @@ namespace System.IO.Compression.Tests
                     ZipFile.ExtractToDirectory(
                         zipFileName,
                         tempFolder.Path /* default false */
-                    ));
+                    )
+                );
                 Assert.Throws<IOException>(() =>
-                    ZipFile.ExtractToDirectory(
-                        zipFileName,
-                        tempFolder.Path,
-                        overwriteFiles: false
-                    ));
+                    ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: false)
+                );
                 ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: true);
 
                 DirsEqual(tempFolder.Path, folderName);
@@ -206,14 +205,16 @@ namespace System.IO.Compression.Tests
                         zipFileName,
                         tempFolder.Path,
                         Encoding.UTF8 /* default false */
-                    ));
+                    )
+                );
                 Assert.Throws<IOException>(() =>
                     ZipFile.ExtractToDirectory(
                         zipFileName,
                         tempFolder.Path,
                         Encoding.UTF8,
                         overwriteFiles: false
-                    ));
+                    )
+                );
                 ZipFile.ExtractToDirectory(
                     zipFileName,
                     tempFolder.Path,
@@ -241,7 +242,8 @@ namespace System.IO.Compression.Tests
                 writer.Write("This is a test.");
             }
             Assert.Throws<IOException>(() =>
-                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
+            );
         }
 
         [Fact]
@@ -263,7 +265,8 @@ namespace System.IO.Compression.Tests
                 writer.Write("This is a test.");
             }
             Assert.Throws<IOException>(() =>
-                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
+            );
         }
     }
 }

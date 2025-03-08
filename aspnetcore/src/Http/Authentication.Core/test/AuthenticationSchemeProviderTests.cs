@@ -177,7 +177,8 @@ public class AuthenticationSchemeProviderTests
             .BuildServiceProvider();
 
         var error = Assert.Throws<InvalidOperationException>(() =>
-            services.GetRequiredService<IAuthenticationSchemeProvider>());
+            services.GetRequiredService<IAuthenticationSchemeProvider>()
+        );
 
         Assert.Contains("Scheme already exists: signin", error.Message);
     }

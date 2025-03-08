@@ -228,9 +228,11 @@ namespace System.Linq.Parallel.Tests
         {
 #pragma warning disable 618
             Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).SequenceEqual(Enumerable.Range(0, 1)));
+                ParallelEnumerable.Range(0, 1).SequenceEqual(Enumerable.Range(0, 1))
+            );
             Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).SequenceEqual(Enumerable.Range(0, 1), null));
+                ParallelEnumerable.Range(0, 1).SequenceEqual(Enumerable.Range(0, 1), null)
+            );
 #pragma warning restore 618
         }
 
@@ -334,7 +336,8 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                left.Item.SequenceEqual(right.Item, new FailingEqualityComparer<int>()));
+                left.Item.SequenceEqual(right.Item, new FailingEqualityComparer<int>())
+            );
         }
 
         [Fact]
@@ -346,12 +349,14 @@ namespace System.Linq.Parallel.Tests
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithCancellation(t)
-                    .SequenceEqual(ParallelEnumerable.Range(0, 1).WithCancellation(t)));
+                    .SequenceEqual(ParallelEnumerable.Range(0, 1).WithCancellation(t))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithDegreeOfParallelism(1)
-                    .SequenceEqual(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1)));
+                    .SequenceEqual(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -360,7 +365,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(0, 1)
                             .WithExecutionMode(ParallelExecutionMode.Default)
-                    ));
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -369,7 +375,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(0, 1)
                             .WithMergeOptions(ParallelMergeOptions.Default)
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -415,11 +422,13 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<TestDisposeException>(() =>
                 leftQuery.SequenceEqual(
                     new DisposeExceptionEnumerable<int>(rightQuery).AsParallel()
-                ));
+                )
+            );
             AssertThrows.Wrapped<TestDisposeException>(() =>
                 new DisposeExceptionEnumerable<int>(leftQuery)
                     .AsParallel()
-                    .SequenceEqual(rightQuery));
+                    .SequenceEqual(rightQuery)
+            );
         }
 
         private class DisposeExceptionEnumerable<T> : IEnumerable<T>

@@ -315,7 +315,8 @@ public class ClrPropertySetterFactoryTest
         );
 
         Assert.Throws<InvalidOperationException>(() =>
-            new ClrPropertySetterFactory().Create((IProperty)property));
+            new ClrPropertySetterFactory().Create((IProperty)property)
+        );
 
         entityType = CreateModel().AddEntityType(typeof(ConcreteEntity2));
         property = entityType.AddProperty(
@@ -323,7 +324,8 @@ public class ClrPropertySetterFactoryTest
         );
 
         Assert.Throws<InvalidOperationException>(() =>
-            new ClrPropertySetterFactory().Create((IProperty)property));
+            new ClrPropertySetterFactory().Create((IProperty)property)
+        );
     }
 
     [ConditionalFact]

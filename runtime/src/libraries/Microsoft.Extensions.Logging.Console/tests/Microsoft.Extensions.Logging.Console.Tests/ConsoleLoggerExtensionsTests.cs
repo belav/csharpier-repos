@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ServiceCollection().AddLogging(builder =>
                 {
                     builder.AddConsole(null);
-                }));
+                })
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -36,7 +37,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ServiceCollection().AddLogging(builder =>
                 {
                     builder.AddSimpleConsole(null);
-                }));
+                })
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -46,7 +48,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ServiceCollection().AddLogging(builder =>
                 {
                     builder.AddSystemdConsole(null);
-                }));
+                })
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -56,7 +59,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ServiceCollection().AddLogging(builder =>
                 {
                     builder.AddJsonConsole(null);
-                }));
+                })
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -66,7 +70,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ServiceCollection().AddLogging(builder =>
                 {
                     builder.AddConsoleFormatter<CustomFormatter, CustomOptions>(null);
-                }));
+                })
+            );
         }
 
         [ConditionalTheory(
@@ -494,7 +499,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 .BuildServiceProvider();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                serviceProvider.GetRequiredService<ILoggerProvider>());
+                serviceProvider.GetRequiredService<ILoggerProvider>()
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

@@ -54,7 +54,8 @@ public abstract class SharedTypeQueryRelationalTestBase : SharedTypeQueryTestBas
             CoreStrings.ClashingSharedType("Dictionary<string, object>"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Database.SqlQueryRaw<Dictionary<string, object>>(@"SELECT * FROM X"))
+                    context.Database.SqlQueryRaw<Dictionary<string, object>>(@"SELECT * FROM X")
+                )
                 .Message
         );
     }

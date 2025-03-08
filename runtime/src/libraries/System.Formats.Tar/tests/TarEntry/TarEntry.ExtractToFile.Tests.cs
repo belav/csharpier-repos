@@ -109,7 +109,8 @@ namespace System.Formats.Tar.Tests
             entry.LinkName = linkTarget;
 
             Assert.Throws<InvalidOperationException>(() =>
-                entry.ExtractToFile(fileName, overwrite: false));
+                entry.ExtractToFile(fileName, overwrite: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }

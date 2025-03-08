@@ -250,7 +250,8 @@ public class ResponseSendFileTests : LoggedTest
                             1234567,
                             null,
                             CancellationToken.None
-                        ));
+                        )
+                    );
                     completed = true;
                 },
                 LoggerFactory
@@ -275,12 +276,8 @@ public class ResponseSendFileTests : LoggedTest
                 {
                     var sendFile = httpContext.Features.Get<IHttpResponseBodyFeature>();
                     await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                        sendFile.SendFileAsync(
-                            AbsoluteFilePath,
-                            0,
-                            1234567,
-                            CancellationToken.None
-                        ));
+                        sendFile.SendFileAsync(AbsoluteFilePath, 0, 1234567, CancellationToken.None)
+                    );
                     completed = true;
                 },
                 LoggerFactory
@@ -774,12 +771,8 @@ public class ResponseSendFileTests : LoggedTest
                         });
 
                         await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                            httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            ));
+                            httpContext.Response.SendFileAsync(AbsoluteFilePath, 0, null, cts.Token)
+                        );
 
                         testComplete.SetResult();
                     }

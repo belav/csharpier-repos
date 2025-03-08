@@ -908,7 +908,8 @@ class Program
         {
             Assert.NotNull(
                 await Record.ExceptionAsync(() =>
-                    GetSmartTokenFormatterIndentationAsync(code, indentationLine, '}', useTabs))
+                    GetSmartTokenFormatterIndentationAsync(code, indentationLine, '}', useTabs)
+                )
             );
         }
     }

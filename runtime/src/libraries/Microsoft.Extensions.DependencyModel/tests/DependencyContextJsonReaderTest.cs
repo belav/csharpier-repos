@@ -81,7 +81,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         */
     }
 }"
-                ));
+                )
+            );
 
             Assert.Equal(
                 "'/' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 6 | BytePositionInLine: 8.",
@@ -371,7 +372,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     },
     ""libraries"": {}
 }"
-                ));
+                )
+            );
 
             Assert.Equal(
                 $"Cannot find library information for System.Banana/1.0.0",
@@ -862,7 +864,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
 }"
-                    ))
+                    )
+                )
                 .Message.Should()
                 .Contain("line 2 position 23");
         }
@@ -920,7 +923,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     }
 }
 "
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -933,7 +937,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         """": {}
     }
  }"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -951,7 +956,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     }
 }
 "
-                ));
+                )
+            );
         }
     }
 }

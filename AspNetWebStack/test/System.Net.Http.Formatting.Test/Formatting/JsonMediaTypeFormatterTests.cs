@@ -32,7 +32,8 @@ namespace System.Net.Http.Formatting
                     true,
                     Double.MinValue,
                     Double.MaxValue,
-                });
+                }
+            );
 
         // Test data for DBNull.  Separate from BunchOfJsonObjectsTestData because DBNull will round-trip as null.
         private static readonly RefTypeTestData<object> DBNullAsObjectTestData =

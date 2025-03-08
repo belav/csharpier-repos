@@ -113,7 +113,8 @@ public class OwnedNavigationBuilder<
                         ConfigurationSource.Explicit
                     )!
                     .Metadata
-            ));
+            )
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned type where that property represents
@@ -145,7 +146,8 @@ public class OwnedNavigationBuilder<
                         ConfigurationSource.Explicit
                     )!
                     .Metadata
-            ));
+            )
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure an existing navigation property

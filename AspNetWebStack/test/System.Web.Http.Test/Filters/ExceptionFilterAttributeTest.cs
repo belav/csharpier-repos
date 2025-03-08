@@ -55,7 +55,8 @@ namespace System.Web.Http.Filters
 
             // Act & Assert
             var thrownException = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteExceptionFilterAsync(_context, CancellationToken.None));
+                filter.ExecuteExceptionFilterAsync(_context, CancellationToken.None)
+            );
             Assert.Same(exception, thrownException);
         }
 

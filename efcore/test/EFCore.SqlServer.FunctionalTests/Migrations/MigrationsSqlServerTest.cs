@@ -3044,7 +3044,8 @@ EXEC sp_rename N'[People].[Foo]', N'foo', N'INDEX';
     public override async Task Add_primary_key_int()
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Add_primary_key_int());
+            base.Add_primary_key_int()
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, exception.Message);
     }
@@ -3135,7 +3136,8 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([SomeF
     public override async Task Drop_primary_key_int()
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            base.Drop_primary_key_int());
+            base.Drop_primary_key_int()
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, exception.Message);
     }
@@ -8661,7 +8663,8 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
                             Assert.Single(table.PrimaryKey!.Columns)
                         );
                     }
-                ))
+                )
+            )
         ).Message;
 
         Assert.Equal(

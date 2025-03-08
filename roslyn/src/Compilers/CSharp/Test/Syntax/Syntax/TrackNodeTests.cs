@@ -208,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
             Assert.Throws<ArgumentException>(() =>
-                expr.TrackNodes(SyntaxFactory.IdentifierName("c")));
+                expr.TrackNodes(SyntaxFactory.IdentifierName("c"))
+            );
         }
     }
 }

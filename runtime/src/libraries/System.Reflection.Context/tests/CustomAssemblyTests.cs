@@ -152,12 +152,14 @@ namespace System.Reflection.Context.Tests
         public void GetSatelliteAssemblyTest()
         {
             Assert.Throws<FileNotFoundException>(() =>
-                _customAssembly.GetSatelliteAssembly(CultureInfo.InvariantCulture));
+                _customAssembly.GetSatelliteAssembly(CultureInfo.InvariantCulture)
+            );
             Assert.Throws<FileNotFoundException>(() =>
                 _customAssembly.GetSatelliteAssembly(
                     CultureInfo.InvariantCulture,
                     Version.Parse("1.0.0.0")
-                ));
+                )
+            );
         }
 
         [Fact]

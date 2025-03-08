@@ -73,7 +73,8 @@ namespace System.Collections.Tests
         public void SortedList_Generic_Constructor_NullIDictionary_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SortedList<TKey, TValue>((IDictionary<TKey, TValue>)null));
+                new SortedList<TKey, TValue>((IDictionary<TKey, TValue>)null)
+            );
         }
 
         #endregion
@@ -109,7 +110,8 @@ namespace System.Collections.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new SortedList<TKey, TValue>(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new SortedList<TKey, TValue>(int.MinValue));
+                new SortedList<TKey, TValue>(int.MinValue)
+            );
         }
 
         #endregion
@@ -311,8 +313,8 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dictionary.GetKeyAtIndex(int.MinValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(int.MinValue)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count + 1));
         }
@@ -345,7 +347,8 @@ namespace System.Collections.Tests
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dictionary.GetValueAtIndex(int.MinValue));
+                dictionary.GetValueAtIndex(int.MinValue)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(count + 1));
         }
@@ -495,7 +498,8 @@ namespace System.Collections.Tests
                 SortedList<TKey, TValue> dictionary =
                     (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
                 Assert.Throws<NotSupportedException>(() =>
-                    dictionary.SetValueAtIndex(0, CreateTValue(34543)));
+                    dictionary.SetValueAtIndex(0, CreateTValue(34543))
+                );
             }
         }
 
@@ -553,13 +557,17 @@ namespace System.Collections.Tests
                 SortedList<TKey, TValue> dictionary =
                     (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(-1, default));
+                    dictionary.SetValueAtIndex(-1, default)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(int.MinValue, default));
+                    dictionary.SetValueAtIndex(int.MinValue, default)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(count, default));
+                    dictionary.SetValueAtIndex(count, default)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    dictionary.SetValueAtIndex(count + 1, default));
+                    dictionary.SetValueAtIndex(count + 1, default)
+                );
             }
         }
 

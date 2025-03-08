@@ -155,7 +155,8 @@ namespace System.Tests
             // This is inconsistent with the other numeric conversions, but fixing this behavior is not worth making
             // a breaking change.
             Assert.Throws<ArgumentNullException>(() =>
-                Convert.ToSByte((string)null, TestFormatProvider.s_instance));
+                Convert.ToSByte((string)null, TestFormatProvider.s_instance)
+            );
         }
 
         [Fact]

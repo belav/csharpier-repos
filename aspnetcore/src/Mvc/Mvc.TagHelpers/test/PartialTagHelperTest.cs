@@ -694,7 +694,8 @@ public class PartialTagHelperTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            tagHelper.ProcessAsync(tagHelperContext, output));
+            tagHelper.ProcessAsync(tagHelperContext, output)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -886,7 +887,8 @@ public class PartialTagHelperTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            tagHelper.ProcessAsync(tagHelperContext, output));
+            tagHelper.ProcessAsync(tagHelperContext, output)
+        );
         Assert.Equal(expected, exception.Message);
     }
 

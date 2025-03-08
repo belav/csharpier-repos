@@ -446,21 +446,24 @@ public class EntityEntryTest
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Property("Chimp").Metadata.Name)
+                    context.Entry(entity).Property("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Property("Chimp").Metadata.Name)
+                    context.Entry((object)entity).Property("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Property<int>("Chimp").Metadata.Name)
+                    context.Entry(entity).Property<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -532,21 +535,24 @@ public class EntityEntryTest
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference("Chimp").Metadata.Name)
+                    context.Entry(entity).Reference("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Chimp").Metadata.Name)
+                    context.Entry((object)entity).Reference("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name)
+                    context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -567,7 +573,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference("Monkey").Metadata.Name)
+                    context.Entry(entity).Reference("Monkey").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -580,7 +587,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Monkey").Metadata.Name)
+                    context.Entry((object)entity).Reference("Monkey").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -593,7 +601,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>("Monkey").Metadata.Name)
+                    context.Entry(entity).Reference<Random>("Monkey").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -606,7 +615,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name)
+                    context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name
+                )
                 .Message
         );
     }
@@ -638,7 +648,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Monkeys"))
+                    context.Entry((object)entity).Reference("Monkeys")
+                )
                 .Message
         );
 
@@ -651,7 +662,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>("Monkeys"))
+                    context.Entry(entity).Reference<Random>("Monkeys")
+                )
                 .Message
         );
 
@@ -664,7 +676,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference(e => e.Monkeys))
+                    context.Entry(entity).Reference(e => e.Monkeys)
+                )
                 .Message
         );
 
@@ -679,7 +692,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference(navigationBase))
+                    context.Entry(entity).Reference(navigationBase)
+                )
                 .Message
         );
 
@@ -692,7 +706,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference(navigationBase))
+                    context.Entry((object)entity).Reference(navigationBase)
+                )
                 .Message
         );
 
@@ -705,7 +720,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>(navigationBase))
+                    context.Entry(entity).Reference<Random>(navigationBase)
+                )
                 .Message
         );
     }
@@ -777,21 +793,24 @@ public class EntityEntryTest
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection("Chimp").Metadata.Name)
+                    context.Entry(entity).Collection("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Collection("Chimp").Metadata.Name)
+                    context.Entry((object)entity).Collection("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name)
+                    context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -812,7 +831,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection("Garcia").Metadata.Name)
+                    context.Entry(entity).Collection("Garcia").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -825,7 +845,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Collection("Garcia").Metadata.Name)
+                    context.Entry((object)entity).Collection("Garcia").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -838,7 +859,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection<Random>("Garcia").Metadata.Name)
+                    context.Entry(entity).Collection<Random>("Garcia").Metadata.Name
+                )
                 .Message
         );
     }
@@ -870,7 +892,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Collection("Garcia"))
+                    context.Entry((object)entity).Collection("Garcia")
+                )
                 .Message
         );
 
@@ -883,7 +906,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection<Cherry>("Garcia"))
+                    context.Entry(entity).Collection<Cherry>("Garcia")
+                )
                 .Message
         );
 
@@ -898,7 +922,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection(navigationBase))
+                    context.Entry(entity).Collection(navigationBase)
+                )
                 .Message
         );
 
@@ -911,7 +936,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Collection(navigationBase))
+                    context.Entry((object)entity).Collection(navigationBase)
+                )
                 .Message
         );
 
@@ -924,7 +950,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection<Cherry>(navigationBase))
+                    context.Entry(entity).Collection<Cherry>(navigationBase)
+                )
                 .Message
         );
     }
@@ -954,14 +981,16 @@ public class EntityEntryTest
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Member("Chimp").Metadata.Name)
+                    context.Entry(entity).Member("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Member("Chimp").Metadata.Name)
+                    context.Entry((object)entity).Member("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1054,14 +1083,16 @@ public class EntityEntryTest
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Navigation("Chimp").Metadata.Name)
+                    context.Entry(entity).Navigation("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Navigation("Chimp").Metadata.Name)
+                    context.Entry((object)entity).Navigation("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1146,7 +1177,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Navigation("Monkey").Metadata.Name)
+                    context.Entry(entity).Navigation("Monkey").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1159,7 +1191,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Navigation("Monkey").Metadata.Name)
+                    context.Entry((object)entity).Navigation("Monkey").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1367,7 +1400,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<ArgumentException>(() =>
-                    context.Entry(entity).ComplexProperty<string>("Culture"))
+                    context.Entry(entity).ComplexProperty<string>("Culture")
+                )
                 .Message
         );
 
@@ -1380,7 +1414,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<ArgumentException>(() =>
-                    context.Entry(entity).ComplexProperty<string>("Milk"))
+                    context.Entry(entity).ComplexProperty<string>("Milk")
+                )
                 .Message
         );
     }
@@ -1408,21 +1443,24 @@ public class EntityEntryTest
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).ComplexProperty("Chimp").Metadata.Name)
+                    context.Entry(entity).ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name)
+                    context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name)
+                    context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1443,7 +1481,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference("Culture").Metadata.Name)
+                    context.Entry(entity).Reference("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1456,7 +1495,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Culture").Metadata.Name)
+                    context.Entry((object)entity).Reference("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1469,7 +1509,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>("Culture").Metadata.Name)
+                    context.Entry(entity).Reference<Random>("Culture").Metadata.Name
+                )
                 .Message
         );
 
@@ -1483,7 +1524,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference("Milk").Metadata.Name)
+                    context.Entry(entity).Reference("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1496,7 +1538,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Milk").Metadata.Name)
+                    context.Entry((object)entity).Reference("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1509,7 +1552,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>("Milk").Metadata.Name)
+                    context.Entry(entity).Reference<Random>("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1522,7 +1566,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference(e => e.Milk).Metadata.Name)
+                    context.Entry(entity).Reference(e => e.Milk).Metadata.Name
+                )
                 .Message
         );
     }
@@ -1543,7 +1588,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection("Culture").Metadata.Name)
+                    context.Entry(entity).Collection("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1556,7 +1602,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Collection("Culture").Metadata.Name)
+                    context.Entry((object)entity).Collection("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1569,7 +1616,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection<Random>("Culture").Metadata.Name)
+                    context.Entry(entity).Collection<Random>("Culture").Metadata.Name
+                )
                 .Message
         );
 
@@ -1583,7 +1631,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection("Milk").Metadata.Name)
+                    context.Entry(entity).Collection("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1596,7 +1645,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Collection("Milk").Metadata.Name)
+                    context.Entry((object)entity).Collection("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1609,7 +1659,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Collection<Random>("Milk").Metadata.Name)
+                    context.Entry(entity).Collection<Random>("Milk").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1679,7 +1730,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Navigation("Culture").Metadata.Name)
+                    context.Entry(entity).Navigation("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1692,7 +1744,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Navigation("Culture").Metadata.Name)
+                    context.Entry((object)entity).Navigation("Culture").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1796,7 +1849,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<ArgumentException>(() =>
-                    context.Entry(entity).ComplexProperty<string>("Culture"))
+                    context.Entry(entity).ComplexProperty<string>("Culture")
+                )
                 .Message
         );
 
@@ -1809,7 +1863,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<ArgumentException>(() =>
-                    context.Entry(entity).ComplexProperty<string>("Milk"))
+                    context.Entry(entity).ComplexProperty<string>("Milk")
+                )
                 .Message
         );
     }
@@ -1837,21 +1892,24 @@ public class EntityEntryTest
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).ComplexProperty("Chimp").Metadata.Name)
+                    context.Entry(entity).ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name)
+                    context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name)
+                    context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name
+                )
                 .Message
         );
     }
@@ -1872,7 +1930,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference("Culture").Metadata.Name)
+                    context.Entry(entity).Reference("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1885,7 +1944,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Culture").Metadata.Name)
+                    context.Entry((object)entity).Reference("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1898,7 +1958,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>("Culture").Metadata.Name)
+                    context.Entry(entity).Reference<Random>("Culture").Metadata.Name
+                )
                 .Message
         );
 
@@ -1912,7 +1973,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference("Milk").Metadata.Name)
+                    context.Entry(entity).Reference("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1925,7 +1987,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Reference("Milk").Metadata.Name)
+                    context.Entry((object)entity).Reference("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1938,7 +2001,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference<Random>("Milk").Metadata.Name)
+                    context.Entry(entity).Reference<Random>("Milk").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -1951,7 +2015,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Reference(e => e.Milk).Metadata.Name)
+                    context.Entry(entity).Reference(e => e.Milk).Metadata.Name
+                )
                 .Message
         );
     }
@@ -2021,7 +2086,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry(entity).Navigation("Culture").Metadata.Name)
+                    context.Entry(entity).Navigation("Culture").Metadata.Name
+                )
                 .Message
         );
         Assert.Equal(
@@ -2034,7 +2100,8 @@ public class EntityEntryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context.Entry((object)entity).Navigation("Culture").Metadata.Name)
+                    context.Entry((object)entity).Navigation("Culture").Metadata.Name
+                )
                 .Message
         );
     }

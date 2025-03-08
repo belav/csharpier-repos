@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Tests
             var json = JsonSerializer.Serialize(obj);
 
             var ex = Assert.Throws<InvalidCastException>(() =>
-                JsonSerializer.Deserialize<ObjectWrapperWithProperty>(json));
+                JsonSerializer.Deserialize<ObjectWrapperWithProperty>(json)
+            );
         }
 
         [Fact]
@@ -33,7 +34,8 @@ namespace System.Text.Json.Serialization.Tests
             var json = JsonSerializer.Serialize(obj);
 
             var ex = Assert.Throws<InvalidCastException>(() =>
-                JsonSerializer.Deserialize<ObjectWrapperWithField>(json, options));
+                JsonSerializer.Deserialize<ObjectWrapperWithField>(json, options)
+            );
         }
 
         /// <summary>
@@ -120,7 +122,8 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize<ObjectWrapperDerivedWithProperty>(
                     @"{""DerivedProperty"":""""}",
                     options
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -131,7 +134,8 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize<ObjectWrapperDerivedWithField>(
                     @"{""DerivedField"":""""}",
                     options
-                ));
+                )
+            );
         }
 
         /// <summary>

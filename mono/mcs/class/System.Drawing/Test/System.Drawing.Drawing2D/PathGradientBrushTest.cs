@@ -263,7 +263,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void Constructor_PointF_WrapMode_Invalid()
         {
             Assert.Throws<InvalidEnumArgumentException>(() =>
-                new PathGradientBrush(pts_2f, (WrapMode)Int32.MinValue));
+                new PathGradientBrush(pts_2f, (WrapMode)Int32.MinValue)
+            );
         }
 
         [Test]
@@ -491,7 +492,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void Transform_Null()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PathGradientBrush(pts_2f, WrapMode.Clamp).Transform = null);
+                new PathGradientBrush(pts_2f, WrapMode.Clamp).Transform = null
+            );
         }
 
         [Test]
@@ -510,7 +512,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             using (PathGradientBrush pgb = new PathGradientBrush(pts_2f, WrapMode.Clamp))
             {
                 Assert.Throws<ArgumentException>(() =>
-                    pgb.Transform = new Matrix(123, 24, 82, 16, 47, 30));
+                    pgb.Transform = new Matrix(123, 24, 82, 16, 47, 30)
+                );
             }
         }
 
@@ -533,7 +536,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             using (PathGradientBrush pgb = new PathGradientBrush(pts_2f, WrapMode.Clamp))
             {
                 Assert.Throws<InvalidEnumArgumentException>(() =>
-                    pgb.WrapMode = (WrapMode)Int32.MinValue);
+                    pgb.WrapMode = (WrapMode)Int32.MinValue
+                );
             }
         }
 
@@ -569,7 +573,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             using (PathGradientBrush pgb = new PathGradientBrush(pts_2f, WrapMode.Clamp))
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    pgb.MultiplyTransform(null, MatrixOrder.Append));
+                    pgb.MultiplyTransform(null, MatrixOrder.Append)
+                );
             }
         }
 
@@ -668,7 +673,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             using (PathGradientBrush pgb = new PathGradientBrush(pts_2f, WrapMode.Clamp))
             {
                 Assert.Throws<ArgumentException>(() =>
-                    pgb.RotateTransform(720, (MatrixOrder)Int32.MinValue));
+                    pgb.RotateTransform(720, (MatrixOrder)Int32.MinValue)
+                );
             }
         }
 
@@ -713,7 +719,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             using (PathGradientBrush pgb = new PathGradientBrush(pts_2f, WrapMode.Clamp))
             {
                 Assert.Throws<ArgumentException>(() =>
-                    pgb.ScaleTransform(1, 1, (MatrixOrder)Int32.MinValue));
+                    pgb.ScaleTransform(1, 1, (MatrixOrder)Int32.MinValue)
+                );
             }
         }
 
@@ -893,7 +900,8 @@ namespace MonoTests.System.Drawing.Drawing2D
             using (PathGradientBrush pgb = new PathGradientBrush(pts_2f, WrapMode.Clamp))
             {
                 Assert.Throws<ArgumentException>(() =>
-                    pgb.TranslateTransform(1, 1, (MatrixOrder)Int32.MinValue));
+                    pgb.TranslateTransform(1, 1, (MatrixOrder)Int32.MinValue)
+                );
             }
         }
 

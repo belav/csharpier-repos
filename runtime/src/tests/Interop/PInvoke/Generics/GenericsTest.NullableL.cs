@@ -36,17 +36,20 @@ unsafe partial class GenericsTest
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetNullableL(true, 1L));
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetNullableLOut(true, 1L, out long? value3));
+            GenericsNative.GetNullableLOut(true, 1L, out long? value3)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddNullableL(default, default));
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableL(default, default)
+        );
 
         long?[] values = new long?[] { default, default, default, default, default };
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddNullableLs(values, values.Length));
+            GenericsNative.AddNullableLs(values, values.Length)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddNullableLs(in values[0], values.Length));
+            GenericsNative.AddNullableLs(in values[0], values.Length)
+        );
     }
 }

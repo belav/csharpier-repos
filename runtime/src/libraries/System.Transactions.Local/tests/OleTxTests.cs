@@ -127,8 +127,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             tx.Commit();
 
-            Retry(() =>
-                Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status));
+            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+            );
         });
 
     protected static bool IsRemoteExecutorSupportedAndNotNano =>
@@ -233,7 +233,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 waitHandle3.Set();
 
                 Retry(() =>
-                    Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status));
+                    Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+                );
             }
             catch
             {
@@ -598,8 +599,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             Assert.True(outcomeReceived.WaitOne(Timeout));
             Assert.Equal(EnlistmentOutcome.Committed, enlistment.Outcome);
-            Retry(() =>
-                Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status));
+            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+            );
         });
 
     [ConditionalFact(nameof(IsRemoteExecutorSupportedAndNotNano))]
@@ -635,7 +636,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             TransactionManager.ImplicitDistributedTransactions = true;
 
             Assert.Throws<InvalidOperationException>(() =>
-                TransactionManager.ImplicitDistributedTransactions = false);
+                TransactionManager.ImplicitDistributedTransactions = false
+            );
         });
     }
 
@@ -656,7 +658,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             Test(MinimalOleTxScenario);
 
             Assert.Throws<InvalidOperationException>(() =>
-                TransactionManager.ImplicitDistributedTransactions = false);
+                TransactionManager.ImplicitDistributedTransactions = false
+            );
             TransactionManager.ImplicitDistributedTransactions = true;
         });
     }
@@ -675,7 +678,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             Assert.Throws<NotSupportedException>(MinimalOleTxScenario);
 
             Assert.Throws<InvalidOperationException>(() =>
-                TransactionManager.ImplicitDistributedTransactions = true);
+                TransactionManager.ImplicitDistributedTransactions = true
+            );
             TransactionManager.ImplicitDistributedTransactions = false;
         });
     }

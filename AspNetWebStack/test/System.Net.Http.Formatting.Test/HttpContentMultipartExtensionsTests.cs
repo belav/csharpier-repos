@@ -288,7 +288,8 @@ namespace System.Net.Http
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
             IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new BadStreamProvider()));
+                content.ReadAsMultipartAsync(new BadStreamProvider())
+            );
             InvalidOperationException invalidOperationException =
                 exception.InnerException as InvalidOperationException;
             Assert.NotNull(invalidOperationException);
@@ -304,7 +305,8 @@ namespace System.Net.Http
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
             IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new NullProvider()));
+                content.ReadAsMultipartAsync(new NullProvider())
+            );
             Assert.IsType<InvalidOperationException>(exception.InnerException);
         }
 
@@ -313,7 +315,8 @@ namespace System.Net.Http
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
             IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new ReadOnlyStreamProvider()));
+                content.ReadAsMultipartAsync(new ReadOnlyStreamProvider())
+            );
             Assert.IsType<InvalidOperationException>(exception.InnerException);
         }
 
@@ -339,7 +342,8 @@ namespace System.Net.Http
             );
             content.Headers.ContentType = MediaTypeHeaderValue.Parse(mediaType);
             IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync());
+                content.ReadAsMultipartAsync()
+            );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(ExceptionAsyncStreamMessage, exception.InnerException.Message);
         }
@@ -349,7 +353,8 @@ namespace System.Net.Http
         {
             HttpContent content = CreateContent(ValidBoundary, "A", "B", "C");
             IOException exception = await Assert.ThrowsAsync<IOException>(() =>
-                content.ReadAsMultipartAsync(new WriteErrorStreamProvider()));
+                content.ReadAsMultipartAsync(new WriteErrorStreamProvider())
+            );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(ExceptionAsyncStreamMessage, exception.InnerException.Message);
         }

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     name: "Goo",
                     assemblyName: "Bar",
                     language: "C#"
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 ProjectInfo.Create(
                     pid,
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     name: null,
                     assemblyName: "Bar",
                     language: "C#"
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 ProjectInfo.Create(
                     pid,
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     name: "Goo",
                     assemblyName: null,
                     language: "C#"
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 ProjectInfo.Create(
                     pid,
@@ -51,7 +54,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     name: "Goo",
                     assemblyName: "Bar",
                     language: null
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 ProjectInfo.Create(
@@ -61,7 +65,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     assemblyName: "Bar",
                     language: "C#",
                     documents: new DocumentInfo[] { null }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -91,7 +96,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     assemblyName: "Bar",
                     language: "C#",
                     additionalDocuments: new DocumentInfo[] { null }
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentException>(
                 "additionalDocuments[1]",
@@ -114,7 +120,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     assemblyName: "Bar",
                     language: "C#",
                     projectReferences: new ProjectReference[] { null }
-                ));
+                )
+            );
 
             var projectReference = new ProjectReference(ProjectId.CreateNewId());
             Assert.Throws<ArgumentException>(
@@ -165,7 +172,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     assemblyName: "Bar",
                     language: "C#",
                     metadataReferences: new MetadataReference[] { null }
-                ));
+                )
+            );
 
             var metadataReference = new TestMetadataReference();
             Assert.Throws<ArgumentException>(

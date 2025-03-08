@@ -109,8 +109,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     formatSpecifiers,
                     result =>
                         wl.ContinueWith(() =>
-                            completionRoutine(new DkmEvaluationAsyncResult(result)))
-                ));
+                            completionRoutine(new DkmEvaluationAsyncResult(result))
+                        )
+                )
+            );
         }
 
         DkmClrValue IDkmClrResultProvider.GetClrValue(DkmSuccessEvaluationResult evaluationResult)
@@ -215,7 +217,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             rows.Free();
                         }),
                     onException
-                ));
+                )
+            );
         }
 
         void IDkmClrResultProvider.GetItems(
@@ -280,7 +283,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             rows.Free();
                         }),
                     onException
-                ));
+                )
+            );
         }
 
         string IDkmClrResultProvider.GetUnderlyingString(DkmEvaluationResult result)
@@ -1079,7 +1083,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                                     displayType.Result,
                                                     useDebuggerDisplay
                                                 )
-                                            )),
+                                            )
+                                        ),
                                     onException
                                 ),
                             onException

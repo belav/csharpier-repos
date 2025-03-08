@@ -48,7 +48,8 @@ namespace System.Globalization.Tests
         public void Calendar_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                DateTimeFormatInfo.InvariantInfo.Calendar = new GregorianCalendar());
+                DateTimeFormatInfo.InvariantInfo.Calendar = new GregorianCalendar()
+            );
         }
     }
 }

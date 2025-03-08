@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         where T : EditorConfigOption
     {
         private readonly Lazy<ImmutableArray<Section>> _sections = new(() =>
-            Options.SelectAsArray(x => x.Section).Distinct());
+            Options.SelectAsArray(x => x.Section).Distinct()
+        );
 
         public ImmutableArray<Section> Sections => _sections.Value;
 

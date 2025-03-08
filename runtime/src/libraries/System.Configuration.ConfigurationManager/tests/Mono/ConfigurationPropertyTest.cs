@@ -40,7 +40,8 @@ namespace MonoTests.System.Configuration
         public void CostructorTest()
         {
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new ConfigurationProperty("Name", typeof(char), 5));
+                new ConfigurationProperty("Name", typeof(char), 5)
+            );
         }
 
         [Fact]

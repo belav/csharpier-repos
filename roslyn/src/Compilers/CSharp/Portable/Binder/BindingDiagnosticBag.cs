@@ -20,28 +20,32 @@ namespace Microsoft.CodeAnalysis.CSharp
                     s_poolWithBoth!,
                     new DiagnosticBag(),
                     new HashSet<AssemblySymbol>()
-                ));
+                )
+            );
         private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithDiagnosticsOnly =
             new ObjectPool<BindingDiagnosticBag>(() =>
                 new BindingDiagnosticBag(
                     s_poolWithDiagnosticsOnly!,
                     new DiagnosticBag(),
                     dependenciesBag: null
-                ));
+                )
+            );
         private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithDependenciesOnly =
             new ObjectPool<BindingDiagnosticBag>(() =>
                 new BindingDiagnosticBag(
                     s_poolWithDependenciesOnly!,
                     diagnosticBag: null,
                     new HashSet<AssemblySymbol>()
-                ));
+                )
+            );
         private static readonly ObjectPool<BindingDiagnosticBag> s_poolWithConcurrent =
             new ObjectPool<BindingDiagnosticBag>(() =>
                 new BindingDiagnosticBag(
                     s_poolWithConcurrent!,
                     new DiagnosticBag(),
                     new Roslyn.Utilities.ConcurrentSet<AssemblySymbol>()
-                ));
+                )
+            );
 
         public static readonly BindingDiagnosticBag Discarded = new BindingDiagnosticBag(
             null,

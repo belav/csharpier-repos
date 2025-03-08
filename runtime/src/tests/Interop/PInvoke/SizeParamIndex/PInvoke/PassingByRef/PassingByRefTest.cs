@@ -178,7 +178,8 @@ public class ClientMarshalArrayAsSizeParamIndexByRefTest
             MarshalCStyleArrayShortReturnNegative_AsByRef_AsSizeParamIndex(
                 ref short_Array_Size,
                 ref arrShort
-            ));
+            )
+        );
         Console.WriteLine(strDescription + " Ends!");
     }
 

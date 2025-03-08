@@ -305,7 +305,8 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
             Assert.Throws<InvalidOperationException>(() =>
-                module.DefineType("A", TypeAttributes.Interface));
+                module.DefineType("A", TypeAttributes.Interface)
+            );
         }
     }
 }

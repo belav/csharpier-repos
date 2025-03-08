@@ -13,7 +13,8 @@ public class ZipFile_Open : ZipFileTestBase
     {
         //out of range enum values
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            ZipFile.Open("bad file", (ZipArchiveMode)(10)));
+            ZipFile.Open("bad file", (ZipArchiveMode)(10))
+        );
     }
 
     [Fact]
@@ -23,7 +24,8 @@ public class ZipFile_Open : ZipFileTestBase
         using (TempFile testArchive = CreateTempCopyFile(bad("EOCDmissing.zip"), GetTestFilePath()))
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
 
         Assert.Throws<InvalidDataException>(() => ZipFile.OpenRead(bad("CDoffsetOutOfBounds.zip")));
@@ -35,7 +37,8 @@ public class ZipFile_Open : ZipFileTestBase
         )
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
 
         using (ZipArchive archive = ZipFile.OpenRead(bad("CDoffsetInBoundsWrong.zip")))
@@ -54,7 +57,8 @@ public class ZipFile_Open : ZipFileTestBase
         )
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
 
         using (ZipArchive archive = ZipFile.OpenRead(bad("numberOfEntriesDifferent.zip")))
@@ -72,7 +76,8 @@ public class ZipFile_Open : ZipFileTestBase
         )
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
 
         //read mode on empty file
@@ -96,7 +101,8 @@ public class ZipFile_Open : ZipFileTestBase
         )
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
 
         //compressed data offset + compressed size out of bounds
@@ -114,7 +120,8 @@ public class ZipFile_Open : ZipFileTestBase
         )
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
 
         //signature wrong
@@ -132,7 +139,8 @@ public class ZipFile_Open : ZipFileTestBase
         )
         {
             Assert.Throws<InvalidDataException>(() =>
-                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+            );
         }
     }
 

@@ -85,7 +85,8 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions { Converters = { new LongArrayConverter() } };
             JsonException ex = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<long[]>(json, options));
+                JsonSerializer.Deserialize<long[]>(json, options)
+            );
 
             Assert.Null(ex.InnerException);
             Assert.Equal("$", ex.Path);

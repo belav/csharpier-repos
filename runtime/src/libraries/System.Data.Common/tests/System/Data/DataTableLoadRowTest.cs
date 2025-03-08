@@ -138,8 +138,8 @@ namespace System.Data.Tests
                 ResetEventFlags();
                 dt.LoadDataRow(new object[] { 4, "mono 4" }, LoadOption.Upsert);
                 Assert.Equal("mono 4", dt.Rows[3][1]);
-                Assert.Throws<VersionNotFoundException>(() =>
-                    dt.Rows[3][1, DataRowVersion.Original]);
+                Assert.Throws<VersionNotFoundException>(() => dt.Rows[3][1, DataRowVersion.Original]
+                );
                 Assert.Equal(DataRowState.Added, dt.Rows[3].RowState);
                 Assert.True(_rowChanging);
                 Assert.Equal(dt.Rows[3], _rowInAction_Changing);
@@ -152,8 +152,8 @@ namespace System.Data.Tests
                 ResetEventFlags();
                 dt.LoadDataRow(new object[] { 5, "mono 5" }, LoadOption.Upsert);
                 Assert.Equal("mono 5", dt.Rows[4][1]);
-                Assert.Throws<VersionNotFoundException>(() =>
-                    dt.Rows[4][1, DataRowVersion.Original]);
+                Assert.Throws<VersionNotFoundException>(() => dt.Rows[4][1, DataRowVersion.Original]
+                );
                 Assert.Equal(DataRowState.Added, dt.Rows[4].RowState);
                 Assert.True(_rowChanging);
                 Assert.Equal(dt.Rows[4], _rowInAction_Changing);
@@ -175,8 +175,8 @@ namespace System.Data.Tests
                 dt.LoadDataRow(new object[] { 5, "mono 5" }, LoadOption.Upsert);
                 Assert.Equal(6, dt.Rows.Count);
                 Assert.Equal("mono 5", dt.Rows[5][1]);
-                Assert.Throws<VersionNotFoundException>(() =>
-                    dt.Rows[5][1, DataRowVersion.Original]);
+                Assert.Throws<VersionNotFoundException>(() => dt.Rows[5][1, DataRowVersion.Original]
+                );
                 Assert.Equal(DataRowState.Added, dt.Rows[5].RowState);
                 Assert.True(_rowChanging);
                 Assert.Equal(dt.Rows[5], _rowInAction_Changing);

@@ -46,7 +46,8 @@ namespace System.IO.Tests
         public void CreateSymbolicLink_NullPathToTarget()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                CreateSymbolicLink(GetRandomFilePath(), pathToTarget: null));
+                CreateSymbolicLink(GetRandomFilePath(), pathToTarget: null)
+            );
         }
 
         [Theory]
@@ -55,7 +56,8 @@ namespace System.IO.Tests
         public void CreateSymbolicLink_InvalidPathToTarget(string pathToTarget)
         {
             Assert.Throws<ArgumentException>(() =>
-                CreateSymbolicLink(GetRandomFilePath(), pathToTarget));
+                CreateSymbolicLink(GetRandomFilePath(), pathToTarget)
+            );
         }
 
         [Fact]

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         public void NullOptions()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                s_formatter.FormatObject("hello", options: null));
+                s_formatter.FormatObject("hello", options: null)
+            );
         }
 
         [Fact]
@@ -32,16 +33,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         public void InvalidMemberDisplayFormat()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PrintOptions().MemberDisplayFormat = (MemberDisplayFormat)(-1));
+                new PrintOptions().MemberDisplayFormat = (MemberDisplayFormat)(-1)
+            );
         }
 
         [Fact]
         public void InvalidMaximumOutputLength()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PrintOptions().MaximumOutputLength = -1);
+                new PrintOptions().MaximumOutputLength = -1
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PrintOptions().MaximumOutputLength = 0);
+                new PrintOptions().MaximumOutputLength = 0
+            );
         }
 
         [Fact]

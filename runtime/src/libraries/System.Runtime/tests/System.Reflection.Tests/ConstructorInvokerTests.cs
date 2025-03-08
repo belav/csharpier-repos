@@ -170,7 +170,8 @@ namespace System.Reflection.Tests
                 typeof(TestClass).GetConstructor(new Type[] { })
             );
             Assert.Throws<TargetParameterCountException>(() =>
-                invoker.Invoke(new Span<object?>(new object[] { "1", "2" })));
+                invoker.Invoke(new Span<object?>(new object[] { "1", "2" }))
+            );
         }
 
         [Fact]
@@ -251,7 +252,8 @@ namespace System.Reflection.Tests
             );
 
             Assert.Throws<InvalidOperationException>(() =>
-                invoker.Invoke(new Span<object?>(new object[] { "1", "2", "3", "4", "5" })));
+                invoker.Invoke(new Span<object?>(new object[] { "1", "2", "3", "4", "5" }))
+            );
         }
 
         [Fact]
@@ -262,7 +264,8 @@ namespace System.Reflection.Tests
 
             // Invoker classes do not support calling class constructors; use standard reflection for that.
             Assert.Throws<MemberAccessException>(() =>
-                Invoke(constructors[0], null, new object[] { }));
+                Invoke(constructors[0], null, new object[] { })
+            );
         }
 
         private class TestClass

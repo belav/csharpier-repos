@@ -270,7 +270,8 @@ namespace System.Web.Http.Controllers
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
                 request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
-                    expected);
+                    expected
+                );
 
                 // Act
                 bool actual = context.IncludeErrorDetail;
@@ -293,7 +294,8 @@ namespace System.Web.Http.Controllers
                 HttpRequestContext context = CreateProductUnderTest(request);
                 context.IncludeErrorDetail = expectedIncludeErrorDetail;
                 request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
-                    !expectedIncludeErrorDetail);
+                    !expectedIncludeErrorDetail
+                );
 
                 // Act
                 bool includeErrorDetail = context.IncludeErrorDetail;
@@ -362,7 +364,8 @@ namespace System.Web.Http.Controllers
                 HttpRequestContext context = CreateProductUnderTest(request);
                 context.IsLocal = expectedIsLocal;
                 request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(() =>
-                    !expectedIsLocal);
+                    !expectedIsLocal
+                );
 
                 // Act
                 bool isLocal = context.IsLocal;

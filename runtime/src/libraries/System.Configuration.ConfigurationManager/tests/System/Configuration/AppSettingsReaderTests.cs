@@ -14,14 +14,16 @@ namespace System.Configuration
         public void GetValue_KeyNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                _appSettingsReader.GetValue(null, typeof(object)));
+                _appSettingsReader.GetValue(null, typeof(object))
+            );
         }
 
         [Fact]
         public void GetValue_TypeNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                _appSettingsReader.GetValue(string.Empty, null));
+                _appSettingsReader.GetValue(string.Empty, null)
+            );
         }
     }
 }

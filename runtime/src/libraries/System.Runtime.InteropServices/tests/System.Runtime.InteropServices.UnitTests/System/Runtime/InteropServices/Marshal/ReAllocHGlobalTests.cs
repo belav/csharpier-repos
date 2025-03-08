@@ -62,7 +62,8 @@ namespace System.Runtime.InteropServices.Tests
         public void ReAllocHGlobal_NegativeSize_ThrowsOutOfMemoryException()
         {
             Assert.Throws<OutOfMemoryException>(() =>
-                Marshal.ReAllocHGlobal(IntPtr.Zero, (IntPtr)(-1)));
+                Marshal.ReAllocHGlobal(IntPtr.Zero, (IntPtr)(-1))
+            );
 
             IntPtr p = Marshal.AllocHGlobal((IntPtr)1);
             Assert.Throws<OutOfMemoryException>(() => Marshal.ReAllocHGlobal(p, (IntPtr)(-1)));

@@ -141,7 +141,8 @@ WHERE "b"."IndexerVisible" = 'Nay'
             CoreStrings.TranslationFailed("")[47..],
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    base.Value_conversion_on_enum_collection_contains())
+                    base.Value_conversion_on_enum_collection_contains()
+                )
                 .Message
         );
 

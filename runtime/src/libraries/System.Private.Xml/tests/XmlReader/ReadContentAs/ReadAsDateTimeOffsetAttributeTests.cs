@@ -160,7 +160,8 @@ namespace System.Xml.XmlReaderTests
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                reader.ReadContentAs(typeof(DateTimeOffset), null));
+                reader.ReadContentAs(typeof(DateTimeOffset), null)
+            );
         }
 
         [Fact]

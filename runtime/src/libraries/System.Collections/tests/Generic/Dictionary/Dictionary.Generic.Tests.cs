@@ -253,7 +253,8 @@ namespace System.Collections.Tests
                 TValue initValue = CreateTValue(count);
                 outValue = initValue;
                 Assert.Throws<ArgumentNullException>(() =>
-                    dictionary.Remove(default(TKey), out outValue));
+                    dictionary.Remove(default(TKey), out outValue)
+                );
                 Assert.Equal(initValue, outValue);
             }
         }

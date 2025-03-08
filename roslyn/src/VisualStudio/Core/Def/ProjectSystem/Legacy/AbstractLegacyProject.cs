@@ -123,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                         ProjectGuid = GetProjectIDGuid(hierarchy),
                     },
                     CancellationToken.None
-                ));
+                )
+            );
 
             workspaceImpl.AddProjectRuleSetFileToInternalMaps(
                 ProjectSystemProject,

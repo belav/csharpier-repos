@@ -13,14 +13,16 @@ namespace System.IO.Tests
         public void NullAsPath_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new DirectoryInfo(TestDirectory).CreateSubdirectory(null));
+                new DirectoryInfo(TestDirectory).CreateSubdirectory(null)
+            );
         }
 
         [Fact]
         public void EmptyAsPath_ThrowsArgumentException()
         {
             Assert.Throws<ArgumentException>(() =>
-                new DirectoryInfo(TestDirectory).CreateSubdirectory(string.Empty));
+                new DirectoryInfo(TestDirectory).CreateSubdirectory(string.Empty)
+            );
         }
 
         [Fact]
@@ -30,15 +32,18 @@ namespace System.IO.Tests
             File.Create(Path.Combine(TestDirectory, path)).Dispose();
 
             Assert.Throws<IOException>(() =>
-                new DirectoryInfo(TestDirectory).CreateSubdirectory(path));
+                new DirectoryInfo(TestDirectory).CreateSubdirectory(path)
+            );
             Assert.Throws<IOException>(() =>
                 new DirectoryInfo(TestDirectory).CreateSubdirectory(
                     IOServices.AddTrailingSlashIfNeeded(path)
-                ));
+                )
+            );
             Assert.Throws<IOException>(() =>
                 new DirectoryInfo(TestDirectory).CreateSubdirectory(
                     IOServices.RemoveTrailingSlash(path)
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -91,7 +96,8 @@ namespace System.IO.Tests
         {
             string path = Path.Combine(TestDirectory, GetTestFileName(), "c");
             Assert.Throws<ArgumentException>(() =>
-                new DirectoryInfo(TestDirectory).CreateSubdirectory(path));
+                new DirectoryInfo(TestDirectory).CreateSubdirectory(path)
+            );
         }
 
         [Fact]
@@ -114,9 +120,11 @@ namespace System.IO.Tests
             Assert.Throws<ArgumentException>(() =>
                 new DirectoryInfo(TestDirectory).CreateSubdirectory(
                     Path.Combine(TestDirectory, "..")
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
-                new DirectoryInfo(TestDirectory + "/path").CreateSubdirectory("../../path2"));
+                new DirectoryInfo(TestDirectory + "/path").CreateSubdirectory("../../path2")
+            );
         }
 
         [Fact]
@@ -201,7 +209,8 @@ namespace System.IO.Tests
         public void WindowsControlWhiteSpace_Core(string component)
         {
             Assert.Throws<IOException>(() =>
-                new DirectoryInfo(TestDirectory).CreateSubdirectory(component));
+                new DirectoryInfo(TestDirectory).CreateSubdirectory(component)
+            );
         }
 
         [Theory, MemberData(nameof(SimpleWhiteSpace))]
@@ -209,7 +218,8 @@ namespace System.IO.Tests
         public void WindowsSimpleWhiteSpaceThrowsException(string component)
         {
             Assert.Throws<ArgumentException>(() =>
-                new DirectoryInfo(TestDirectory).CreateSubdirectory(component));
+                new DirectoryInfo(TestDirectory).CreateSubdirectory(component)
+            );
         }
 
         [Theory, MemberData(nameof(WhiteSpace))]
@@ -262,7 +272,8 @@ namespace System.IO.Tests
             DirectoryInfo di = Directory.CreateDirectory(Path.Combine(TestDirectory, randomName));
 
             Assert.Throws<ArgumentException>(() =>
-                di.CreateSubdirectory(Path.Combine("..", randomName + "abc", GetTestFileName())));
+                di.CreateSubdirectory(Path.Combine("..", randomName + "abc", GetTestFileName()))
+            );
         }
 
         #endregion

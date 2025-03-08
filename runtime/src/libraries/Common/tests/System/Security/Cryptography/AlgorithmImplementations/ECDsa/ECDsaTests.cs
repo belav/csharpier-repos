@@ -89,14 +89,16 @@ namespace System.Security.Cryptography.EcDsa.Tests
             );
 
             Assert.ThrowsAny<CryptographicException>(() =>
-                ecdsa.SignData(new byte[0], new HashAlgorithmName(Guid.NewGuid().ToString("N"))));
+                ecdsa.SignData(new byte[0], new HashAlgorithmName(Guid.NewGuid().ToString("N")))
+            );
             Assert.ThrowsAny<CryptographicException>(() =>
                 ecdsa.SignData(
                     new byte[0],
                     0,
                     0,
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -160,7 +162,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     new byte[0],
                     new byte[0],
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
             Assert.ThrowsAny<CryptographicException>(() =>
                 ecdsa.VerifyData(
                     new byte[0],
@@ -168,7 +171,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     0,
                     new byte[0],
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -294,7 +298,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 ecdsa.SignData(
                     new MemoryStream(),
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -321,7 +326,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     new MemoryStream(),
                     new byte[0],
                     new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                ));
+                )
+            );
         }
     }
 
@@ -404,10 +410,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
             if (!(PlatformDetection.IsNetFramework && ecdsa.GetType().Name.EndsWith("Cng")))
             {
                 Assert.Throws<ObjectDisposedException>(() =>
-                    ecdsa.GenerateKey(ECCurve.NamedCurves.nistP256));
+                    ecdsa.GenerateKey(ECCurve.NamedCurves.nistP256)
+                );
 
                 Assert.Throws<ObjectDisposedException>(() =>
-                    ecdsa.ImportParameters(EccTestData.GetNistP256ReferenceKey()));
+                    ecdsa.ImportParameters(EccTestData.GetNistP256ReferenceKey())
+                );
             }
 
             // Either set_KeySize or SignData should throw.
@@ -421,10 +429,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
         protected virtual void UseAfterDispose(ECDsa ecdsa, byte[] data, byte[] sig)
         {
             Assert.Throws<ObjectDisposedException>(() =>
-                SignData(ecdsa, data, HashAlgorithmName.SHA256));
+                SignData(ecdsa, data, HashAlgorithmName.SHA256)
+            );
 
             Assert.Throws<ObjectDisposedException>(() =>
-                VerifyData(ecdsa, data, sig, HashAlgorithmName.SHA256));
+                VerifyData(ecdsa, data, sig, HashAlgorithmName.SHA256)
+            );
         }
 
         [ConditionalTheory]

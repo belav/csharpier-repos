@@ -686,7 +686,8 @@ public class DbFunctionTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    modelBuilder.HasDbFunction(queryableNoParams).IsNullable())
+                    modelBuilder.HasDbFunction(queryableNoParams).IsNullable()
+                )
                 .Message
         );
     }
@@ -845,7 +846,8 @@ public class DbFunctionTest
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty")))
+                    dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty"))
+                )
                 .Message
         );
 
@@ -857,7 +859,8 @@ public class DbFunctionTest
                 .Throws<InvalidOperationException>(() =>
                     ((IConventionDbFunction)dbFunction).SetTranslation(
                         args => new SqlFragmentExpression("Empty")
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -868,7 +871,8 @@ public class DbFunctionTest
                     ((IConventionDbFunction)dbFunction).SetTranslation(
                         args => new SqlFragmentExpression("Empty"),
                         fromDataAnnotation: true
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -876,7 +880,8 @@ public class DbFunctionTest
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    dbFunction.Translation = args => new SqlFragmentExpression("Empty"))
+                    dbFunction.Translation = args => new SqlFragmentExpression("Empty")
+                )
                 .Message
         );
     }

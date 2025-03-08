@@ -18,15 +18,19 @@ namespace Microsoft.CodeAnalysis.Debugging.UnitTests
             Assert.Throws<ArgumentException>(() =>
                 DebugInformationReaderProvider.CreateFromStream(
                     new TestStream(canRead: false, canSeek: true, canWrite: true)
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 DebugInformationReaderProvider.CreateFromStream(
                     new TestStream(canRead: true, canSeek: false, canWrite: true)
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                DebugInformationReaderProvider.CreateFromStream(null));
+                DebugInformationReaderProvider.CreateFromStream(null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                DebugInformationReaderProvider.CreateFromMetadataReader(null));
+                DebugInformationReaderProvider.CreateFromMetadataReader(null)
+            );
         }
     }
 }

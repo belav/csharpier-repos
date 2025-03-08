@@ -133,7 +133,8 @@ internal partial class EndpointHtmlRenderer
                 ? InstantiateComponent(componentType)
                 : new SSRRenderModeBoundary(_httpContext, componentType, prerenderMode);
             var htmlRootComponent = await Dispatcher.InvokeAsync(() =>
-                BeginRenderingComponent(rootComponent, parameters));
+                BeginRenderingComponent(rootComponent, parameters)
+            );
             var result = new PrerenderedComponentHtmlContent(Dispatcher, htmlRootComponent);
 
             await WaitForResultReady(waitForQuiescence, result);

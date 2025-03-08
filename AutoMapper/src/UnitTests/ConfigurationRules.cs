@@ -32,7 +32,8 @@ public class ConfigurationRules : NonValidatingSpecBase
         });
 
         typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(() =>
-            config.AssertConfigurationIsValid());
+            config.AssertConfigurationIsValid()
+        );
     }
 
     [Fact]
@@ -45,7 +46,8 @@ public class ConfigurationRules : NonValidatingSpecBase
         });
 
         typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(() =>
-            config.AssertConfigurationIsValid());
+            config.AssertConfigurationIsValid()
+        );
     }
 
     [Fact]
@@ -57,12 +59,10 @@ public class ConfigurationRules : NonValidatingSpecBase
             cfg.AddProfile<Profile1>();
         });
 
-        new Action(() =>
-            config.AssertConfigurationIsValid()).ShouldThrowException<DuplicateTypeMapConfigurationException>(
-            c =>
-            {
-                c.Errors.SelectMany(t => t.ProfileNames).ShouldNotContain(string.Empty);
-            }
-        );
+        new Action(() => config.AssertConfigurationIsValid()
+        ).ShouldThrowException<DuplicateTypeMapConfigurationException>(c =>
+        {
+            c.Errors.SelectMany(t => t.ProfileNames).ShouldNotContain(string.Empty);
+        });
     }
 }

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         {
                             var analyzers = _lazyAnalyzers.Value;
                             _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() =>
-                                analyzers.Add(analyzer));
+                                analyzers.Add(analyzer)
+                            );
                         }
                     }
 

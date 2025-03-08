@@ -161,7 +161,8 @@ namespace System.Security.Cryptography.Cose.Tests
                             hashAlgorithm,
                             protectedHeaders,
                             padding: padding
-                        ));
+                        )
+                    );
                 }
             }
         }
@@ -181,7 +182,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 var protectedHeaders = GetEmptyHeaderMap();
                 protectedHeaders.Add(CoseHeaderLabel.Algorithm, "FOO");
                 Assert.Throws<CryptographicException>(() =>
-                    Sign(s_sampleContent, key, hashAlgorithm, protectedHeaders, padding: padding));
+                    Sign(s_sampleContent, key, hashAlgorithm, protectedHeaders, padding: padding)
+                );
             }
         }
 
@@ -196,7 +198,8 @@ namespace System.Security.Cryptography.Cose.Tests
                     GetHeaderMapWithAlgorithm(
                         (CoseAlgorithm)(-47) /*ES256K*/
                     )
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -751,7 +754,8 @@ namespace System.Security.Cryptography.Cose.Tests
             );
 
             Assert.Throws<CryptographicException>(() =>
-                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders));
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
+            );
         }
 
         [Theory]
@@ -771,7 +775,8 @@ namespace System.Security.Cryptography.Cose.Tests
             );
 
             Assert.Throws<CryptographicException>(() =>
-                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders));
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
+            );
         }
 
         [Theory]
@@ -791,7 +796,8 @@ namespace System.Security.Cryptography.Cose.Tests
             );
 
             Assert.Throws<CryptographicException>(() =>
-                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders));
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders)
+            );
         }
 
         [Fact]

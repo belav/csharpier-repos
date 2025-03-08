@@ -416,7 +416,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                                 // Try to delete the temp file if it is still around.
                                 // If this fails, that's unfortunately, but just proceed.
                                 IOUtilities.PerformIO(() =>
-                                    _service._ioService.Delete(new FileInfo(tempFilePath)));
+                                    _service._ioService.Delete(new FileInfo(tempFilePath))
+                                );
                             }
                         },
                         cancellationToken

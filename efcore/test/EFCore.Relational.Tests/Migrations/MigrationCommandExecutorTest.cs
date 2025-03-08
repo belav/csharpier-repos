@@ -134,7 +134,8 @@ public class MigrationCommandExecutorTest
                             await migrationCommandExecutor.ExecuteNonQueryAsync(
                                 commandList,
                                 fakeConnection
-                            ))
+                            )
+                        )
                     ).Message
                 );
             }
@@ -144,7 +145,8 @@ public class MigrationCommandExecutorTest
                     RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
                     Assert
                         .Throws<NotSupportedException>(() =>
-                            migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection))
+                            migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection)
+                        )
                         .Message
                 );
             }
@@ -372,12 +374,14 @@ public class MigrationCommandExecutorTest
         if (async)
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await migrationCommandExecutor.ExecuteNonQueryAsync(commandList, fakeConnection));
+                await migrationCommandExecutor.ExecuteNonQueryAsync(commandList, fakeConnection)
+            );
         }
         else
         {
             Assert.Throws<InvalidOperationException>(() =>
-                migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection));
+                migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection)
+            );
         }
 
         Assert.Equal(1, fakeDbConnection.OpenCount);

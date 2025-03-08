@@ -25,7 +25,8 @@ namespace System.Net.Http.Functional.Tests
             Assert.Null(handler.InnerHandler);
             handler.Dispose();
             Assert.Throws<ObjectDisposedException>(() =>
-                handler.InnerHandler = new MockTransportHandler());
+                handler.InnerHandler = new MockTransportHandler()
+            );
         }
 
         [Fact]

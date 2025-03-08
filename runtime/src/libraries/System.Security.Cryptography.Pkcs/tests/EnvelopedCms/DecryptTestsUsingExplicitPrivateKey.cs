@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (ECDsa ecdsa = ECDsa.Create())
             {
                 Assert.Throws<CryptographicException>(() =>
-                    ecms.Decrypt(ecms.RecipientInfos[0], ecdsa));
+                    ecms.Decrypt(ecms.RecipientInfos[0], ecdsa)
+                );
             }
         }
 
@@ -68,7 +69,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                     encodedMessage,
                     Certificates.RSASha256KeyTransfer1,
                     expectedContentInfo
-                ));
+                )
+            );
         }
     }
 }

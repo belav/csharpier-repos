@@ -57,7 +57,8 @@ public class AutobahnTests : LoggedTest
                     logger.LogError(
                         "Test run is taking longer than maximum duration of {timeoutMinutes:0.00} minutes. Aborting...",
                         TestTimeout.TotalMinutes
-                    ))
+                    )
+                )
             )
             {
                 AutobahnResult result;

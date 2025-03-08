@@ -24,7 +24,8 @@ public class CosmosTransactionManagerTest
             CosmosStrings.TransactionsNotSupported,
             (
                 await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await transactionManager.BeginTransactionAsync())
+                    await transactionManager.BeginTransactionAsync()
+                )
             ).Message
         );
 
@@ -39,7 +40,8 @@ public class CosmosTransactionManagerTest
             CosmosStrings.TransactionsNotSupported,
             (
                 await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await transactionManager.CommitTransactionAsync())
+                    await transactionManager.CommitTransactionAsync()
+                )
             ).Message
         );
 
@@ -54,7 +56,8 @@ public class CosmosTransactionManagerTest
             CosmosStrings.TransactionsNotSupported,
             (
                 await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                    await transactionManager.RollbackTransactionAsync())
+                    await transactionManager.RollbackTransactionAsync()
+                )
             ).Message
         );
 

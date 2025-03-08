@@ -24,7 +24,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             new MetadataBuilder(userStringHeapStartOffset: 0x00fffffe);
             Assert.Throws<ImageFormatLimitationException>(() =>
-                new MetadataBuilder(userStringHeapStartOffset: 0x00ffffff));
+                new MetadataBuilder(userStringHeapStartOffset: 0x00ffffff)
+            );
         }
 
         [Fact]
@@ -361,7 +362,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(BlobHandle),
                     0,
                     0
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 builder.AddAssemblyReference(
                     default(StringHandle),
@@ -370,7 +372,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(BlobHandle),
                     0,
                     default(BlobHandle)
-                ));
+                )
+            );
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
@@ -510,7 +513,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(GuidHandle),
                     default(GuidHandle),
                     default(GuidHandle)
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 builder.AddModule(
                     ushort.MaxValue + 1,
@@ -518,18 +522,22 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(GuidHandle),
                     default(GuidHandle),
                     default(GuidHandle)
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddParameter(0, default(StringHandle), -1));
+                builder.AddParameter(0, default(StringHandle), -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 builder.AddGenericParameter(
                     default(TypeDefinitionHandle),
                     0,
                     default(StringHandle),
                     -1
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddFieldRelativeVirtualAddress(default(FieldDefinitionHandle), -1));
+                builder.AddFieldRelativeVirtualAddress(default(FieldDefinitionHandle), -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 builder.AddMethodDefinition(
                     0,
@@ -538,9 +546,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(BlobHandle),
                     -2,
                     default(ParameterHandle)
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.AddLocalVariable(0, -1, default(StringHandle)));
+                builder.AddLocalVariable(0, -1, default(StringHandle))
+            );
         }
 
         [Fact]
@@ -572,7 +582,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(BlobHandle),
                     0,
                     0
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 builder.AddModule(
                     0,
@@ -580,7 +591,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(GuidHandle),
                     default(GuidHandle),
                     default(GuidHandle)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1457,9 +1469,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             builder.SetCapacity(TableIndex.MethodDef, 1);
             builder.SetCapacity(TableIndex.MethodDef, 1000);
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.SetCapacity(TableIndex.MethodDef, -1));
+                builder.SetCapacity(TableIndex.MethodDef, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.SetCapacity((TableIndex)0xff, 10));
+                builder.SetCapacity((TableIndex)0xff, 10)
+            );
 
             builder.SetCapacity(HeapIndex.String, 3);
             builder.SetCapacity(HeapIndex.String, 1000);
@@ -1471,9 +1485,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             builder.SetCapacity(HeapIndex.UserString, 1000);
             builder.SetCapacity(HeapIndex.String, 0);
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.SetCapacity(HeapIndex.String, -1));
+                builder.SetCapacity(HeapIndex.String, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.SetCapacity((HeapIndex)0xff, 10));
+                builder.SetCapacity((HeapIndex)0xff, 10)
+            );
         }
 
         [Fact]

@@ -54,14 +54,12 @@ namespace System.Data.SqlClient
 
         private static readonly Singleton<Func<BinaryReader, object>> sqlGeographyFromBinaryReader =
             new Singleton<Func<BinaryReader, object>>(() =>
-                CreateBinaryReadDelegate(
-                    SqlProviderServices.GetSqlTypesAssembly().SqlGeographyType
-                ));
+                CreateBinaryReadDelegate(SqlProviderServices.GetSqlTypesAssembly().SqlGeographyType)
+            );
         private static readonly Singleton<Func<BinaryReader, object>> sqlGeometryFromBinaryReader =
             new Singleton<Func<BinaryReader, object>>(() =>
-                CreateBinaryReadDelegate(
-                    SqlProviderServices.GetSqlTypesAssembly().SqlGeometryType
-                ));
+                CreateBinaryReadDelegate(SqlProviderServices.GetSqlTypesAssembly().SqlGeometryType)
+            );
 
         // test to ensure that the SQL column has the expected SQL type.   Don't use the CLR type to avoid having to worry about differences in
         // type versions between the client and the database.

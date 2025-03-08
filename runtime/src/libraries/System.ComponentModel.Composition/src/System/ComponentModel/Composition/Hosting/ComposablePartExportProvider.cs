@@ -389,7 +389,8 @@ namespace System.ComponentModel.Composition.Hosting
             );
 
             atomicComposition.AddCompleteAction(() =>
-                OnExportsChanged(new ExportsChangeEventArgs(addedExports, removedExports, null)));
+                OnExportsChanged(new ExportsChangeEventArgs(addedExports, removedExports, null))
+            );
         }
 
         private Export CreateExport(ComposablePart part, ExportDefinition export)

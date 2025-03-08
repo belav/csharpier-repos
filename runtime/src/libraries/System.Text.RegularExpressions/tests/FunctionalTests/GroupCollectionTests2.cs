@@ -197,7 +197,8 @@ namespace System.Text.RegularExpressions.Tests
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                     typeof(GroupCollection),
                     null
-                ));
+                )
+            );
             Assert.IsType<ArgumentNullException>(ex.InnerException);
         }
     }

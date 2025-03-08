@@ -112,7 +112,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         // http://[nihongo].example/ca4.crl
                         "http://\u65E5\u672C\u8A8E.example/ca4.crl",
                     }
-                ));
+                )
+            );
         }
     }
 }

@@ -212,7 +212,8 @@ public class EndpointNameAddressSchemeTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            addressScheme.FindEndpoints("any name"));
+            addressScheme.FindEndpoints("any name")
+        );
 
         // Assert
         Assert.Equal(

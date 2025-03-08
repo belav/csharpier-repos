@@ -21,5 +21,6 @@ public class ComplexNavigationsQueryInMemoryTest
         // Expression cannot be used for return type. Issue #23302.
         =>
         Assert.ThrowsAsync<ArgumentException>(() =>
-            base.Join_with_result_selector_returning_queryable_throws_validation_error(async));
+            base.Join_with_result_selector_returning_queryable_throws_validation_error(async)
+        );
 }

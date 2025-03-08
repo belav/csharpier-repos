@@ -30,7 +30,8 @@ namespace System.IO.FileSystem.Tests
 
                 Assert.Throws<IOException>(() => File.ReadAllBytes(fs.Name));
                 await Assert.ThrowsAsync<IOException>(async () =>
-                    await File.ReadAllBytesAsync(fs.Name));
+                    await File.ReadAllBytesAsync(fs.Name)
+                );
             }
         }
 

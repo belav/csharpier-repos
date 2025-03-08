@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // null item:
             Assert.Throws<ArgumentNullException>(() =>
-                factory(instanceWithNoItem, new TValue[] { item, default }));
+                factory(instanceWithNoItem, new TValue[] { item, default })
+            );
 
             // duplicate item:
             if (allowDuplicates)
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             else
             {
                 Assert.Throws<ArgumentException>(() =>
-                    factory(instanceWithNoItem, new TValue[] { item, item }));
+                    factory(instanceWithNoItem, new TValue[] { item, item })
+                );
             }
         }
     }

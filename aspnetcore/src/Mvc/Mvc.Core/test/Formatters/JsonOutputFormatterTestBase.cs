@@ -178,7 +178,8 @@ public abstract class JsonOutputFormatterTestBase
 
         // Act
         await Record.ExceptionAsync(() =>
-            jsonFormatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8));
+            jsonFormatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8)
+        );
 
         // Assert
         var body = outputFormatterContext.HttpContext.Response.Body;

@@ -456,8 +456,8 @@ WHERE (((c["Discriminator"] = "OrderDetail") AND (c["Quantity"] < 5)) AND (ROUND
         AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection(async));
 
     public override Task Sum_over_truncate_works_correctly_in_projection_2(bool async) =>
-        AssertTranslationFailed(() =>
-            base.Sum_over_truncate_works_correctly_in_projection_2(async));
+        AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection_2(async)
+        );
 
     public override async Task Select_math_round_int(bool async)
     {
@@ -1274,7 +1274,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(async));
+            base.IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(async)
+        );
 
         AssertSql();
     }
@@ -1338,7 +1339,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (LTRIM(c["ContactTitle"]) = "Owner"
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.TrimStart_with_char_array_argument_in_predicate(async));
+            base.TrimStart_with_char_array_argument_in_predicate(async)
+        );
 
         AssertSql();
     }
@@ -1368,7 +1370,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (RTRIM(c["ContactTitle"]) = "Owner"
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.TrimEnd_with_char_array_argument_in_predicate(async));
+            base.TrimEnd_with_char_array_argument_in_predicate(async)
+        );
 
         AssertSql();
     }
@@ -1423,9 +1426,8 @@ ORDER BY LENGTH(c["CustomerID"]), c["CustomerID"]
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
-                async
-            ));
+            base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(async)
+        );
 
         AssertSql();
     }
@@ -1475,7 +1477,8 @@ WHERE ((c["Discriminator"] = "Order") AND false)
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.Projecting_Math_Truncate_and_ordering_by_it_twice(async));
+            base.Projecting_Math_Truncate_and_ordering_by_it_twice(async)
+        );
 
         AssertSql();
     }
@@ -1484,7 +1487,8 @@ WHERE ((c["Discriminator"] = "Order") AND false)
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.Projecting_Math_Truncate_and_ordering_by_it_twice2(async));
+            base.Projecting_Math_Truncate_and_ordering_by_it_twice2(async)
+        );
 
         AssertSql();
     }
@@ -1493,7 +1497,8 @@ WHERE ((c["Discriminator"] = "Order") AND false)
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(() =>
-            base.Projecting_Math_Truncate_and_ordering_by_it_twice3(async));
+            base.Projecting_Math_Truncate_and_ordering_by_it_twice3(async)
+        );
 
         AssertSql();
     }
@@ -1688,7 +1693,8 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
                 ss =>
                     ss.Set<Customer>()
                         .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1705,7 +1711,8 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
                                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft
                             )
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

@@ -478,7 +478,8 @@ public class AsAnyTests
                 unMappableCharArray_InOut,
                 unMappableCharArray_Out,
                 true
-            ));
+            )
+        );
 
         CharArrayInit(
             unMappableCharArray_In,
@@ -520,7 +521,8 @@ public class AsAnyTests
                 unMappableCharArray_InOut,
                 unMappableCharArray_Out,
                 true
-            ));
+            )
+        );
 
         CharArrayInit(
             unMappableCharArray_In,
@@ -538,7 +540,8 @@ public class AsAnyTests
                 mappableCharArray_InOut,
                 mappableCharArray_Out,
                 false
-            ));
+            )
+        );
 
         CharArrayInit(
             unMappableCharArray_In,

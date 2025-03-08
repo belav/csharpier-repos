@@ -26,7 +26,8 @@ public class IndexTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    entityType.AddIndex(new[] { property }, "Name"))
+                    entityType.AddIndex(new[] { property }, "Name")
+                )
                 .Message
         );
 

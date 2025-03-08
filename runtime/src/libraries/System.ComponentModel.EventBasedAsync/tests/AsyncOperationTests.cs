@@ -38,11 +38,14 @@ namespace System.ComponentModel.EventBasedAsync.Tests
 
                     SendOrPostCallback noopCallback = state => { };
                     Assert.Throws<InvalidOperationException>(() =>
-                        operation.AsyncOperation.Post(noopCallback, null));
+                        operation.AsyncOperation.Post(noopCallback, null)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        operation.AsyncOperation.PostOperationCompleted(noopCallback, null));
+                        operation.AsyncOperation.PostOperationCompleted(noopCallback, null)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        operation.AsyncOperation.OperationCompleted());
+                        operation.AsyncOperation.OperationCompleted()
+                    );
                 })
                 .GetAwaiter()
                 .GetResult();
@@ -58,9 +61,11 @@ namespace System.ComponentModel.EventBasedAsync.Tests
 
                     SendOrPostCallback noopCallback = state => { };
                     Assert.Throws<InvalidOperationException>(() =>
-                        operation.Post(noopCallback, null));
+                        operation.Post(noopCallback, null)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        operation.PostOperationCompleted(noopCallback, null));
+                        operation.PostOperationCompleted(noopCallback, null)
+                    );
                     Assert.Throws<InvalidOperationException>(() => operation.OperationCompleted());
                 })
                 .GetAwaiter()
@@ -125,7 +130,8 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 var operation = AsyncOperationManager.CreateOperation(state);
                 Assert.Throws<ArgumentNullException>(() => operation.Post(null, state));
                 Assert.Throws<ArgumentNullException>(() =>
-                    operation.PostOperationCompleted(null, state));
+                    operation.PostOperationCompleted(null, state)
+                );
             }
             finally
             {

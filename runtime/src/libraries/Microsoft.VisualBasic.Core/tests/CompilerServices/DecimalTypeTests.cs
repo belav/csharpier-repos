@@ -32,7 +32,8 @@ namespace Microsoft.VisualBasic.Tests
         public void FromString_Invalid()
         {
             Assert.Throws<OverflowException>(() =>
-                DecimalType.FromString("9999999999999999999999999999999999999"));
+                DecimalType.FromString("9999999999999999999999999999999999999")
+            );
             Assert.Throws<InvalidCastException>(() => DecimalType.FromString("abc"));
         }
 
@@ -75,7 +76,8 @@ namespace Microsoft.VisualBasic.Tests
         {
             Assert.Throws<ArgumentNullException>(() => DecimalType.Parse(null, null));
             Assert.Throws<FormatException>(() =>
-                DecimalType.Parse("abc", CultureInfo.InvariantCulture.NumberFormat));
+                DecimalType.Parse("abc", CultureInfo.InvariantCulture.NumberFormat)
+            );
         }
     }
 }

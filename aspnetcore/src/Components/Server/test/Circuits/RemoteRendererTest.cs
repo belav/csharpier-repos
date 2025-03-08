@@ -260,7 +260,8 @@ public class RemoteRendererTest
                         [nameof(AutoParameterTestComponent.Trigger)] = trigger,
                     }
                 )
-            ));
+            )
+        );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -342,7 +343,8 @@ public class RemoteRendererTest
                         [nameof(AutoParameterTestComponent.Trigger)] = trigger,
                     }
                 )
-            ));
+            )
+        );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -424,7 +426,8 @@ public class RemoteRendererTest
                         [nameof(AutoParameterTestComponent.Trigger)] = trigger,
                     }
                 )
-            ));
+            )
+        );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -500,7 +503,8 @@ public class RemoteRendererTest
                         [nameof(AutoParameterTestComponent.Trigger)] = trigger,
                     }
                 )
-            ));
+            )
+        );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -519,7 +523,8 @@ public class RemoteRendererTest
         };
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            renderer.OnRenderCompletedAsync(4, null));
+            renderer.OnRenderCompletedAsync(4, null)
+        );
         firstBatchTCS.SetResult();
         secondBatchTCS.SetResult();
 
@@ -545,7 +550,8 @@ public class RemoteRendererTest
 
         // Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AddWebRootComponentAsync(renderer, MaxInteractiveServerRootComponentCount));
+            AddWebRootComponentAsync(renderer, MaxInteractiveServerRootComponentCount)
+        );
 
         Assert.Equal(
             "Exceeded the maximum number of allowed server interactive root components.",
@@ -565,7 +571,8 @@ public class RemoteRendererTest
 
         // Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AddWebRootComponentAsync(renderer, 0));
+            AddWebRootComponentAsync(renderer, 0)
+        );
 
         Assert.Equal("A root component with SSR component ID 0 already exists.", ex.Message);
     }
@@ -742,7 +749,8 @@ public class RemoteRendererTest
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            renderer.GetOrCreateWebRootComponentManager().RemoveRootComponent(1));
+            renderer.GetOrCreateWebRootComponentManager().RemoveRootComponent(1)
+        );
 
         Assert.Equal($"No root component exists with SSR component ID 1.", ex.Message);
     }
@@ -929,7 +937,8 @@ public class RemoteRendererTest
         public void TriggerRender()
         {
             var task = _renderHandle.Dispatcher.InvokeAsync(() =>
-                _renderHandle.Render(_renderFragment));
+                _renderHandle.Render(_renderFragment)
+            );
             Assert.True(task.IsCompletedSuccessfully);
         }
     }

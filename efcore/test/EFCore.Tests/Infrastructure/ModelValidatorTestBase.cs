@@ -467,7 +467,8 @@ public abstract class ModelValidatorTestBase
     {
         var message = Assert
             .Throws<InvalidOperationException>(() =>
-                Validate(modelBuilder, sensitiveDataLoggingEnabled))
+                Validate(modelBuilder, sensitiveDataLoggingEnabled)
+            )
             .Message;
         Assert.Equal(expectedMessage, message);
     }

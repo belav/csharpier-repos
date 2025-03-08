@@ -55,7 +55,8 @@ public class UrlDecoderTests
     {
         var source = new char[2];
         Assert.Throws<ArgumentException>(() =>
-            UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1)));
+            UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1))
+        );
     }
 
     [Fact]
@@ -63,7 +64,8 @@ public class UrlDecoderTests
     {
         var source = new byte[2];
         Assert.Throws<ArgumentException>(() =>
-            UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1), false));
+            UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1), false)
+        );
     }
 
     [Fact]
@@ -98,7 +100,8 @@ public class UrlDecoderTests
     {
         var source = Encoding.UTF8.GetBytes("%00");
         Assert.Throws<InvalidOperationException>(() =>
-            UrlDecoder.DecodeInPlace(source.AsSpan(), false));
+            UrlDecoder.DecodeInPlace(source.AsSpan(), false)
+        );
     }
 
     [Theory]

@@ -134,7 +134,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // Nothing has been written yet
             Assert.Throws<InvalidOperationException>(() =>
-                storage.ReadStream(CancellationToken.None));
+                storage.ReadStream(CancellationToken.None)
+            );
             Assert.Throws<AggregateException>(() => storage.ReadStreamAsync().Result);
 
             // write a normal stream

@@ -17,7 +17,8 @@ namespace System.Linq.Parallel.Tests
                 .AsParallel()
                 .WithCancellation(new CancellationToken(canceled: true));
             OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
-                query(s));
+                query(s)
+            );
         }
 
         public static void EventuallyCanceled(Action<ParallelQuery<int>, Action> query)
@@ -36,7 +37,8 @@ namespace System.Linq.Parallel.Tests
                 .Range(0, EventualCancellationSize)
                 .WithCancellation(source.Token);
             OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
-                query(s, cancel));
+                query(s, cancel)
+            );
             Assert.Equal(source.Token, oce.CancellationToken);
         }
 
@@ -59,7 +61,8 @@ namespace System.Linq.Parallel.Tests
                 .Range(0, EventualCancellationSize)
                 .WithCancellation(source.Token);
             OperationCanceledException oce = Wrapped<OperationCanceledException>(() =>
-                query(s, cancel));
+                query(s, cancel)
+            );
             Assert.NotEqual(source.Token, oce.CancellationToken);
         }
 
@@ -79,7 +82,8 @@ namespace System.Linq.Parallel.Tests
                 .Range(0, EventualCancellationSize)
                 .WithCancellation(source.Token);
             OperationCanceledException oce = Wrapped<OperationCanceledException>(() =>
-                query(s, cancel));
+                query(s, cancel)
+            );
             Assert.Equal(source.Token, oce.CancellationToken);
         }
 

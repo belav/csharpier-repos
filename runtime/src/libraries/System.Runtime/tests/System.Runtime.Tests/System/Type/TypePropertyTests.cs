@@ -223,7 +223,8 @@ namespace System.Tests.Types
             else
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    CreateType().GetGenericTypeDefinition());
+                    CreateType().GetGenericTypeDefinition()
+                );
             }
         }
 
@@ -237,7 +238,8 @@ namespace System.Tests.Types
             else
             {
                 Assert.Throws<InvalidOperationException>(() =>
-                    CreateType().GenericParameterAttributes);
+                    CreateType().GenericParameterAttributes
+                );
             }
         }
 
@@ -250,8 +252,8 @@ namespace System.Tests.Types
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    CreateType().GenericParameterPosition);
+                Assert.Throws<InvalidOperationException>(() => CreateType().GenericParameterPosition
+                );
             }
         }
 

@@ -125,7 +125,8 @@ namespace MonoTests.System.Configuration
                 string exePath = Path.Combine(temp.Path, "DoesNotExist.exe");
 
                 ConfigurationErrorsException ex = Assert.Throws<ConfigurationErrorsException>(() =>
-                    ConfigurationManager.OpenExeConfiguration(exePath));
+                    ConfigurationManager.OpenExeConfiguration(exePath)
+                );
 
                 // An error occurred loading a configuration file:
                 // The parameter 'exePath' is invalid
@@ -484,7 +485,8 @@ namespace MonoTests.System.Configuration
                     file,
                     Assert
                         .Throws<ConfigurationErrorsException>(() =>
-                            ConfigurationManager.OpenMappedMachineConfiguration(fileMap))
+                            ConfigurationManager.OpenMappedMachineConfiguration(fileMap)
+                        )
                         .Filename
                 );
             }

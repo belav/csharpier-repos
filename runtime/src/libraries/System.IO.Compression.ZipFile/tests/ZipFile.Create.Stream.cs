@@ -16,14 +16,16 @@ public class ZipFile_Create_Stream : ZipFileTestBase
     {
         using MemoryStream ms = new MemoryStream();
         Assert.Throws<ArgumentNullException>(() =>
-            ZipFile.CreateFromDirectory(sourceDirectoryName: null, ms));
+            ZipFile.CreateFromDirectory(sourceDirectoryName: null, ms)
+        );
         Assert.Throws<ArgumentNullException>(() =>
             ZipFile.CreateFromDirectory(
                 sourceDirectoryName: null,
                 ms,
                 CompressionLevel.NoCompression,
                 includeBaseDirectory: false
-            ));
+            )
+        );
         Assert.Throws<ArgumentNullException>(() =>
             ZipFile.CreateFromDirectory(
                 sourceDirectoryName: null,
@@ -31,7 +33,8 @@ public class ZipFile_Create_Stream : ZipFileTestBase
                 CompressionLevel.NoCompression,
                 includeBaseDirectory: false,
                 Encoding.UTF8
-            ));
+            )
+        );
     }
 
     [Theory]
@@ -50,7 +53,8 @@ public class ZipFile_Create_Stream : ZipFileTestBase
                 ms,
                 invalidCompressionLevel,
                 includeBaseDirectory: false
-            ));
+            )
+        );
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             ZipFile.CreateFromDirectory(
                 "sourceDirectory",
@@ -58,7 +62,8 @@ public class ZipFile_Create_Stream : ZipFileTestBase
                 invalidCompressionLevel,
                 includeBaseDirectory: false,
                 Encoding.UTF8
-            ));
+            )
+        );
     }
 
     [Fact]

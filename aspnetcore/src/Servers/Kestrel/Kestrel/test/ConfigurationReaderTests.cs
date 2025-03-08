@@ -134,7 +134,8 @@ public class ConfigurationReaderTests
                         ),
                     }
                 )
-                .Build());
+                .Build()
+        );
 
         Assert.Contains(CoreStrings.KeyAlreadyExists, exception.Message);
     }

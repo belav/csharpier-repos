@@ -211,7 +211,8 @@ namespace Castle.DynamicProxy.Tests
                 generator.CreateInterfaceProxyWithTargetInterface<PrivateInterface>(
                     new PrivateClass(),
                     new IInterceptor[0]
-                ));
+                )
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type Castle.DynamicProxy.Tests.InterfaceProxyWithTargetInterfaceTestCase+PrivateInterface because it is not accessible. Make it public, or internal",
                 ex.Message
@@ -225,7 +226,8 @@ namespace Castle.DynamicProxy.Tests
                 generator.CreateInterfaceProxyWithTargetInterface<IList<PrivateInterface>>(
                     new List<PrivateInterface>(),
                     new IInterceptor[0]
-                ));
+                )
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type System.Collections.Generic.IList`1[[Castle.DynamicProxy.Tests.InterfaceProxyWithTargetInterfaceTestCase+PrivateInterface, Castle.Core.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.DynamicProxy.Tests.InterfaceProxyWithTargetInterfaceTestCase+PrivateInterface is not accessible. Make it public, or internal",
                 ex.Message
@@ -239,7 +241,8 @@ namespace Castle.DynamicProxy.Tests
                 generator.CreateInterfaceProxyWithTargetInterface<IList<IList<PrivateInterface>>>(
                     new List<IList<PrivateInterface>>(),
                     new IInterceptor[0]
-                ));
+                )
+            );
 
             var expected = string.Format(
                 "Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",

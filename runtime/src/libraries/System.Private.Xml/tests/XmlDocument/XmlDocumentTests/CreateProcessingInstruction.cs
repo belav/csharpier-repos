@@ -31,7 +31,8 @@ namespace System.Xml.XmlDocumentTests
         {
             var xmlDocument = new XmlDocument();
             Assert.Throws<ArgumentNullException>(() =>
-                xmlDocument.CreateProcessingInstruction(null, "anyData"));
+                xmlDocument.CreateProcessingInstruction(null, "anyData")
+            );
         }
 
         [Fact]
@@ -39,7 +40,8 @@ namespace System.Xml.XmlDocumentTests
         {
             var xmlDocument = new XmlDocument();
             Assert.Throws<ArgumentException>(() =>
-                xmlDocument.CreateProcessingInstruction("", "anyData"));
+                xmlDocument.CreateProcessingInstruction("", "anyData")
+            );
         }
     }
 }

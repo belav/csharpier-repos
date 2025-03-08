@@ -53,7 +53,8 @@ public class ModelTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot))
+                    model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)
+                )
                 .Message
         );
 
@@ -174,7 +175,8 @@ public class ModelTest
             CoreStrings.AmbiguousSharedTypeEntityTypeName(typeof(Customer).DisplayName()),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer)))
+                    model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))
+                )
                 .Message
         );
     }
@@ -266,7 +268,8 @@ public class ModelTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    model.AddEntityType(typeof(Customer).FullName))
+                    model.AddEntityType(typeof(Customer).FullName)
+                )
                 .Message
         );
     }
@@ -283,7 +286,8 @@ public class ModelTest
             CoreStrings.CannotMarkShared(nameof(Customer)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    model.AddShared(typeof(Customer), ConfigurationSource.Explicit))
+                    model.AddShared(typeof(Customer), ConfigurationSource.Explicit)
+                )
                 .Message
         );
     }

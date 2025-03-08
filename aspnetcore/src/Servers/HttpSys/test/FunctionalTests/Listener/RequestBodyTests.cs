@@ -29,7 +29,8 @@ public class RequestBodyTests
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             byte[] input = new byte[100];
             Assert.Throws<InvalidOperationException>(() =>
-                context.Request.Body.Read(input, 0, input.Length));
+                context.Request.Body.Read(input, 0, input.Length)
+            );
 
             context.AllowSynchronousIO = true;
 
@@ -194,7 +195,8 @@ public class RequestBodyTests
                     0,
                     input.Length,
                     context.DisconnectToken
-                ));
+                )
+            );
             client.CancelPendingRequests();
             await assertTask;
             content.Block.Release();

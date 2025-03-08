@@ -121,14 +121,16 @@ namespace Microsoft.Extensions.Options.Tests
             object validDependency = new();
 
             Assert.Throws<ArgumentNullException>(() =>
-                new ValidateOptions<object>(validName, null, validFailureMessage));
+                new ValidateOptions<object>(validName, null, validFailureMessage)
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new ValidateOptions<object, object>(
                     validName,
                     validDependency,
                     null,
                     validFailureMessage
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new ValidateOptions<object, object, object>(
                     validName,
@@ -136,7 +138,8 @@ namespace Microsoft.Extensions.Options.Tests
                     validDependency,
                     null,
                     validFailureMessage
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new ValidateOptions<object, object, object, object>(
                     validName,
@@ -145,7 +148,8 @@ namespace Microsoft.Extensions.Options.Tests
                     validDependency,
                     null,
                     validFailureMessage
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new ValidateOptions<object, object, object, object, object>(
                     validName,
@@ -155,7 +159,8 @@ namespace Microsoft.Extensions.Options.Tests
                     validDependency,
                     null,
                     validFailureMessage
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new ValidateOptions<object, object, object, object, object, object>(
                     validName,
@@ -166,7 +171,8 @@ namespace Microsoft.Extensions.Options.Tests
                     validDependency,
                     null,
                     validFailureMessage
-                ));
+                )
+            );
         }
     }
 }

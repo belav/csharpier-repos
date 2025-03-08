@@ -27,7 +27,8 @@ public class WebHostServiceTests
         webHostService.Start();
 
         await Assert.ThrowsAsync<TaskCanceledException>(() =>
-            Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped));
+            Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped)
+        );
     }
 
     [ConditionalFact]
@@ -41,7 +42,8 @@ public class WebHostServiceTests
         applicationLifetime.StopApplication();
 
         await Assert.ThrowsAsync<TaskCanceledException>(() =>
-            Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped));
+            Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped)
+        );
     }
 
     private sealed class FakeServer : IServer

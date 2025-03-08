@@ -1534,7 +1534,8 @@ namespace System.Web.Http.Owin
 
                     // Act & Assert
                     await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        product.Invoke(context));
+                        product.Invoke(context)
+                    );
                 }
             }
         }
@@ -1574,7 +1575,8 @@ namespace System.Web.Http.Owin
 
                     // Act & Assert
                     var exception = await Assert.ThrowsAsync<Exception>(() =>
-                        product.Invoke(context));
+                        product.Invoke(context)
+                    );
                     Assert.Same(expectedException, exception);
                     Assert.NotNull(exception.StackTrace);
                     Assert.StartsWith(expectedStackTrace, exception.StackTrace);
@@ -1873,7 +1875,8 @@ namespace System.Web.Http.Owin
 
                     // Act & Assert
                     await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        product.Invoke(context));
+                        product.Invoke(context)
+                    );
 
                     mock.Verify(
                         l =>
@@ -2079,7 +2082,8 @@ namespace System.Web.Http.Owin
 
                     // Act
                     await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        product.Invoke(context));
+                        product.Invoke(context)
+                    );
                 }
             }
         }

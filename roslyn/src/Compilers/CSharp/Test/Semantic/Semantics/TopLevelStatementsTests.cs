@@ -2788,7 +2788,8 @@ namespace N1
                         Parse(text1, filename: "text2", TestOptions.Regular6),
                     },
                     options: TestOptions.DebugExe
-                ));
+                )
+            );
 
             comp = CreateCompilation(
                 new[] { text1, text2 },

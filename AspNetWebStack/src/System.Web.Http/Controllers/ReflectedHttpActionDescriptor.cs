@@ -61,7 +61,8 @@ namespace System.Web.Http.Controllers
         public ReflectedHttpActionDescriptor()
         {
             _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() =>
-                InitializeParameterDescriptors());
+                InitializeParameterDescriptors()
+            );
             _supportedHttpMethods = new Collection<HttpMethod>();
         }
 
@@ -78,7 +79,8 @@ namespace System.Web.Http.Controllers
 
             InitializeProperties(methodInfo);
             _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() =>
-                InitializeParameterDescriptors());
+                InitializeParameterDescriptors()
+            );
         }
 
         public override string ActionName

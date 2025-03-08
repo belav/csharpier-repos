@@ -9,7 +9,8 @@ public class ReportMissingInclude
             new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<object, BaseType>().Include<object, ChildType>();
-            })).ShouldThrowException<InvalidOperationException>(ex =>
+            })
+        ).ShouldThrowException<InvalidOperationException>(ex =>
             ex.Message.ShouldStartWith($"Missing map from {typeof(object)} to {typeof(ChildType)}.")
         );
     }
@@ -32,7 +33,8 @@ public class ReportMissingIncludeCreateMissingMap
             {
                 cfg.CreateMap<ReportMissingIncludeCreateMissingMap, BaseType>()
                     .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
-            })).ShouldThrowException<InvalidOperationException>(ex =>
+            })
+        ).ShouldThrowException<InvalidOperationException>(ex =>
             ex.Message.ShouldStartWith(
                 $"Missing map from {typeof(ReportMissingIncludeCreateMissingMap)} to {typeof(ChildType)}."
             )
@@ -56,7 +58,8 @@ public class ReportMissingIncludeBase
             new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<object, ChildType>().IncludeBase<object, BaseType>();
-            })).ShouldThrowException<InvalidOperationException>(ex =>
+            })
+        ).ShouldThrowException<InvalidOperationException>(ex =>
             ex.Message.ShouldStartWith($"Missing map from {typeof(object)} to {typeof(BaseType)}.")
         );
     }
@@ -79,7 +82,8 @@ public class ReportMissingIncludeBaseCreateMissingMap
             {
                 cfg.CreateMap<ReportMissingIncludeBaseCreateMissingMap, ChildType>()
                     .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
-            })).ShouldThrowException<InvalidOperationException>(ex =>
+            })
+        ).ShouldThrowException<InvalidOperationException>(ex =>
             ex.Message.ShouldStartWith(
                 $"Missing map from {typeof(ReportMissingIncludeBaseCreateMissingMap)} to {typeof(BaseType)}."
             )

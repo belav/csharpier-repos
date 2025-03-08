@@ -189,11 +189,14 @@ namespace System.Linq.Expressions.Tests
         public void MakeBinaryLeftNull(ExpressionType type)
         {
             Assert.Throws<ArgumentNullException>(() =>
-                Expression.MakeBinary(type, null, Expression.Constant(0)));
+                Expression.MakeBinary(type, null, Expression.Constant(0))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Expression.MakeBinary(type, null, Expression.Constant(0), false, null));
+                Expression.MakeBinary(type, null, Expression.Constant(0), false, null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Expression.MakeBinary(type, null, Expression.Constant(0), false, null, null));
+                Expression.MakeBinary(type, null, Expression.Constant(0), false, null, null)
+            );
         }
 
         [Theory]
@@ -201,15 +204,11 @@ namespace System.Linq.Expressions.Tests
         public void MakeBinaryRightNull(ExpressionType type)
         {
             Assert.Throws<ArgumentNullException>(() =>
-                Expression.MakeBinary(type, Expression.Variable(typeof(object)), null));
+                Expression.MakeBinary(type, Expression.Variable(typeof(object)), null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                Expression.MakeBinary(
-                    type,
-                    Expression.Variable(typeof(object)),
-                    null,
-                    false,
-                    null
-                ));
+                Expression.MakeBinary(type, Expression.Variable(typeof(object)), null, false, null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 Expression.MakeBinary(
                     type,
@@ -218,7 +217,8 @@ namespace System.Linq.Expressions.Tests
                     false,
                     null,
                     null
-                ));
+                )
+            );
         }
 
         internal static void CompileBinaryExpression(

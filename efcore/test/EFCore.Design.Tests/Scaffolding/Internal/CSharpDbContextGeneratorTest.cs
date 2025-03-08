@@ -213,7 +213,8 @@ public partial class TestDbContext : DbContext
                                 ContextName = null,
                                 ConnectionString = "Initial Catalog=TestDatabase",
                             }
-                        ))
+                        )
+                    )
                     .Message
             );
 
@@ -231,7 +232,8 @@ public partial class TestDbContext : DbContext
                                 ContextName = "TestDbContext",
                                 ConnectionString = null,
                             }
-                        ))
+                        )
+                    )
                     .Message
             );
         }
@@ -1464,7 +1466,8 @@ public partial class TestDbContext : DbContext
                             {
                                 // TODO
                             }
-                        ))
+                        )
+                    )
                 ).Message
             );
 

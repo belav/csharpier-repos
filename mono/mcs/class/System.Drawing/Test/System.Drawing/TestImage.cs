@@ -111,7 +111,8 @@ namespace MonoTests.System.Drawing
                         0,
                         new Image.GetThumbnailImageAbort(CallbackFalse),
                         IntPtr.Zero
-                    ));
+                    )
+                );
             }
         }
 
@@ -126,7 +127,8 @@ namespace MonoTests.System.Drawing
                         5,
                         new Image.GetThumbnailImageAbort(CallbackFalse),
                         IntPtr.Zero
-                    ));
+                    )
+                );
             }
         }
 

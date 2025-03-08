@@ -1237,7 +1237,8 @@ class C1
             using var workspace = CreateMSBuildWorkspace();
 
             await Assert.ThrowsAsync<FileNotFoundException>(() =>
-                workspace.OpenSolutionAsync(solutionFilePath));
+                workspace.OpenSolutionAsync(solutionFilePath)
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled))]
@@ -1251,7 +1252,8 @@ class C1
             using var workspace = CreateMSBuildWorkspace(throwOnWorkspaceFailed: false);
 
             await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenSolutionAsync(solutionFilePath));
+                workspace.OpenSolutionAsync(solutionFilePath)
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled))]
@@ -1361,7 +1363,8 @@ class C1
             workspace.SkipUnrecognizedProjects = false;
 
             await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenSolutionAsync(solutionFilePath));
+                workspace.OpenSolutionAsync(solutionFilePath)
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled))]
@@ -1396,7 +1399,8 @@ class C1
             workspace.SkipUnrecognizedProjects = false;
 
             await Assert.ThrowsAsync<FileNotFoundException>(() =>
-                workspace.OpenSolutionAsync(solutionFilePath));
+                workspace.OpenSolutionAsync(solutionFilePath)
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled))]
@@ -1561,7 +1565,8 @@ class C1
                 MefHostServices.Create(_defaultAssembliesWithoutCSharp)
             );
             var e = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                workspace.OpenProjectAsync(projectName));
+                workspace.OpenProjectAsync(projectName)
+            );
 
             var expected = string.Format(
                 WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
@@ -1582,7 +1587,8 @@ class C1
             using var workspace = CreateMSBuildWorkspace();
 
             await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenProjectAsync(projectFilePath));
+                workspace.OpenProjectAsync(projectFilePath)
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled))]
@@ -1639,7 +1645,8 @@ class C1
             using var workspace = CreateMSBuildWorkspace(throwOnWorkspaceFailed: false);
             workspace.SkipUnrecognizedProjects = false;
             await AssertThrowsExceptionForInvalidPath(() =>
-                workspace.OpenProjectAsync(projectFilePath));
+                workspace.OpenProjectAsync(projectFilePath)
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled))]
@@ -3610,7 +3617,8 @@ class C1
                 MSBuildWorkspace
                     .Create()
                     .OpenSolutionAsync(GetSolutionFileName("TestSolution.sln"))
-                    .Result);
+                    .Result
+            );
             var workspace = sol.GetObjectReference(static s => s.Workspace);
             var project = sol.GetObjectReference(static s => s.Projects.First());
             var document = project.GetObjectReference(static p => p.Documents.First());
@@ -4241,7 +4249,8 @@ class C { }";
 
             using var workspace = CreateMSBuildWorkspace();
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                workspace.OpenSolutionAsync(solutionFilePath));
+                workspace.OpenSolutionAsync(solutionFilePath)
+            );
 
             Assert.Equal(0, workspace.CurrentSolution.ProjectIds.Count);
         }

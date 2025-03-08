@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
     internal class CloudCachePersistentStorage : AbstractPersistentStorage
     {
         private static readonly ObjectPool<byte[]> s_byteArrayPool = new(() =>
-            new byte[Checksum.HashSize]);
+            new byte[Checksum.HashSize]
+        );
 
         /// <remarks>
         /// We do not need to store anything specific about the solution in this key as the platform cloud cache is

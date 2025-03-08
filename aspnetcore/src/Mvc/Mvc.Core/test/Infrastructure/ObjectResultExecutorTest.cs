@@ -327,7 +327,8 @@ public class ObjectResultExecutorTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            executor.ExecuteAsync(actionContext, result));
+            executor.ExecuteAsync(actionContext, result)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -365,7 +366,8 @@ public class ObjectResultExecutorTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            executor.ExecuteAsync(actionContext, result));
+            executor.ExecuteAsync(actionContext, result)
+        );
 
         var expectedMessage = string.Format(
             CultureInfo.CurrentCulture,

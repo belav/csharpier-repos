@@ -22,9 +22,11 @@ namespace System.Reflection.Tests
                 ).ManifestModule;
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    icp.GetCustomAttributes(inherit: false));
+                    icp.GetCustomAttributes(inherit: false)
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    icp.GetCustomAttributes(null, inherit: false));
+                    icp.GetCustomAttributes(null, inherit: false)
+                );
                 Assert.Throws<InvalidOperationException>(() => icp.IsDefined(null, inherit: false));
             }
         }

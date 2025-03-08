@@ -2180,7 +2180,8 @@ namespace System.Transactions.Tests
             {
                 Trace("Before EnlistPromotable");
                 Exception ex = Assert.ThrowsAny<Exception>(() =>
-                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
+                );
                 Assert.True(
                     ex is TransactionException
                         || (
@@ -2207,7 +2208,8 @@ namespace System.Transactions.Tests
 
                 Trace("After EnlistPromotable");
                 ex = Assert.ThrowsAny<Exception>(() =>
-                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
+                );
                 Assert.True(
                     ex is TransactionException
                         || (
@@ -2220,7 +2222,8 @@ namespace System.Transactions.Tests
 
                 Trace("After Promotion");
                 ex = Assert.ThrowsAny<Exception>(() =>
-                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
+                );
                 Assert.True(
                     ex is TransactionException
                         || (

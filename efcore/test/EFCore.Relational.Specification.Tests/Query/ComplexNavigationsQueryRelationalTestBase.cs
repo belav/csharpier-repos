@@ -14,7 +14,8 @@ public abstract class ComplexNavigationsQueryRelationalTestBase<TFixture>
         bool async
     ) =>
         AssertTranslationFailed(() =>
-            base.Complex_query_with_optional_navigations_and_client_side_evaluation(async));
+            base.Complex_query_with_optional_navigations_and_client_side_evaluation(async)
+        );
 
     protected virtual bool CanExecuteQueryString => false;
 

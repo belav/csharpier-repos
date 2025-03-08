@@ -34,7 +34,8 @@ namespace System.Linq.Tests
         {
             int[] source = { };
             Assert.Throws<InvalidOperationException>(() =>
-                source.AsQueryable().Single(i => i % 2 == 0));
+                source.AsQueryable().Single(i => i % 2 == 0)
+            );
         }
 
         [Fact]
@@ -42,7 +43,8 @@ namespace System.Linq.Tests
         {
             int[] source = { 3, 1, 7, 9, 13, 19 };
             Assert.Throws<InvalidOperationException>(() =>
-                source.AsQueryable().Single(i => i % 2 == 0));
+                source.AsQueryable().Single(i => i % 2 == 0)
+            );
         }
 
         [Fact]

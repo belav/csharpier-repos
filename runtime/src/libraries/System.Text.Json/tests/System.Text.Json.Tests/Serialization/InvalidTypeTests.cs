@@ -59,7 +59,8 @@ namespace System.Text.Json.Serialization.Tests
         public void DeserializeInvalidType(Type type)
         {
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize("", type));
+                JsonSerializer.Deserialize("", type)
+            );
             Assert.Contains(type.ToString(), ex.ToString());
         }
 
@@ -86,15 +87,18 @@ namespace System.Text.Json.Serialization.Tests
 
             object obj = Activator.CreateInstance(classType);
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(obj, classType));
+                Serializer.SerializeWrapper(obj, classType)
+            );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
 
             ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(null, classType));
+                Serializer.SerializeWrapper(null, classType)
+            );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
 
             ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize("", classType));
+                JsonSerializer.Deserialize("", classType)
+            );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
         }
 
@@ -113,8 +117,8 @@ namespace System.Text.Json.Serialization.Tests
                 obj = Activator.CreateInstance(type.MakeGenericType(typeof(string), typeof(int)));
             }
 
-            await Assert.ThrowsAsync<ArgumentException>(() =>
-                Serializer.SerializeWrapper(obj, type));
+            await Assert.ThrowsAsync<ArgumentException>(() => Serializer.SerializeWrapper(obj, type)
+            );
         }
 
         [Theory]
@@ -122,7 +126,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task SerializeInvalidTypes_NullValue(Type type)
         {
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(null, type));
+                Serializer.SerializeWrapper(null, type)
+            );
             Assert.Contains(type.ToString(), ex.ToString());
         }
 
@@ -133,7 +138,8 @@ namespace System.Text.Json.Serialization.Tests
             object obj = Activator.CreateInstance(openNullableType.MakeGenericType(typeof(int)));
 
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                Serializer.SerializeWrapper(obj, openNullableType));
+                Serializer.SerializeWrapper(obj, openNullableType)
+            );
             Assert.Contains(openNullableType.ToString(), ex.ToString());
         }
 
@@ -214,7 +220,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(@"{""ArraySegment"":[1]}", serialized);
 
             NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithArraySegment>(serialized));
+                JsonSerializer.Deserialize<ClassWithArraySegment>(serialized)
+            );
             Assert.Contains(typeof(ArraySegment<byte>).ToString(), ex.ToString());
         }
 

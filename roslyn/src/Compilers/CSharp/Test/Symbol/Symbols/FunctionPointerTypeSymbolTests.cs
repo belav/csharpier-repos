@@ -2100,14 +2100,16 @@ unsafe class C
                     returnRefKind: RefKind.None,
                     parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
                     parameterRefKinds: ImmutableArray.Create(RefKind.None)
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
                     returnRefKind: RefKind.Out,
                     parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
                     parameterRefKinds: ImmutableArray<RefKind>.Empty
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2115,7 +2117,8 @@ unsafe class C
                     parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: (SignatureCallingConvention)10
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2124,7 +2127,8 @@ unsafe class C
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.Default,
                     callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2133,7 +2137,8 @@ unsafe class C
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.StdCall,
                     callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2142,7 +2147,8 @@ unsafe class C
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.FastCall,
                     callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2151,7 +2157,8 @@ unsafe class C
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.CDecl,
                     callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2160,7 +2167,8 @@ unsafe class C
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.ThisCall,
                     callingConventionTypes: ImmutableArray.Create(cdeclType)!
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateFunctionPointerTypeSymbol(
                     returnType: @string,
@@ -2169,7 +2177,8 @@ unsafe class C
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.Unmanaged,
                     callingConventionTypes: ImmutableArray.Create(@string)!
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2825,7 +2834,8 @@ namespace System
                     parameterRefKinds: ImmutableArray<RefKind>.Empty,
                     callingConvention: SignatureCallingConvention.Unmanaged,
                     callingConventionTypes: ImmutableArray.Create(testConvention.GetPublicSymbol()!)
-                ));
+                )
+            );
         }
 
         [Fact]

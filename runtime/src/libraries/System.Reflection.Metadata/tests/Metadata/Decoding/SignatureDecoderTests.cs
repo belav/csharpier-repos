@@ -470,11 +470,14 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 );
 
                 Assert.Throws<BadImageFormatException>(() =>
-                    decoder.DecodeMethodSignature(ref fieldSignature));
+                    decoder.DecodeMethodSignature(ref fieldSignature)
+                );
                 Assert.Throws<BadImageFormatException>(() =>
-                    decoder.DecodeFieldSignature(ref methodSignature));
+                    decoder.DecodeFieldSignature(ref methodSignature)
+                );
                 Assert.Throws<BadImageFormatException>(() =>
-                    decoder.DecodeLocalSignature(ref propertySignature));
+                    decoder.DecodeLocalSignature(ref propertySignature)
+                );
             }
         }
 
@@ -591,7 +594,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
                         new OpaqueTokenTypeProvider(),
                         metadataReader: null,
                         genericContext: null
-                    ).DecodeType(ref reader));
+                    ).DecodeType(ref reader)
+                );
             }
         }
 

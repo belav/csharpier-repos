@@ -76,7 +76,8 @@ namespace System.Net.Http
         public void Constructor_ThrowsOnNotSupportedRootPath(string notSupportedPath)
         {
             Assert.Throws<NotSupportedException>(() =>
-                new MultipartFileStreamProvider(notSupportedPath, ValidBufferSize));
+                new MultipartFileStreamProvider(notSupportedPath, ValidBufferSize)
+            );
         }
 #endif
 

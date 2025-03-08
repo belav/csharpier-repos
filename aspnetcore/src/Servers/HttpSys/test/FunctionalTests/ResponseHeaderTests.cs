@@ -293,7 +293,8 @@ public class ResponseHeaderTests : LoggedTest
                         responseHeaders.Add(
                             "Custom3",
                             new string[] { "value3a, value3b", "value3c" }
-                        ));
+                        )
+                    );
                     return Task.FromResult(0);
                 },
                 LoggerFactory
@@ -334,7 +335,8 @@ public class ResponseHeaderTests : LoggedTest
                         responseHeaders.Add(
                             "Custom3",
                             new string[] { "value3a, value3b", "value3c" }
-                        ));
+                        )
+                    );
                 },
                 LoggerFactory
             )

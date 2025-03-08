@@ -585,7 +585,8 @@ namespace System.Text.Tests
             Assert.Throws<ArgumentException>(() =>
                 rune.CompareTo(
                     0 /* int32 */
-                ));
+                )
+            );
         }
 
         [Fact]

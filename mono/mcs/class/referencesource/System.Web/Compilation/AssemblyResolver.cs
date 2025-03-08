@@ -54,7 +54,8 @@ namespace System.Web.Compilation
         // Maps physical paths of reference assemblies to their versions as returned by AssemblyName.GetAssemblyName
         private static readonly Lazy<ConcurrentDictionary<string, Version>> s_assemblyVersions =
             new Lazy<ConcurrentDictionary<string, Version>>(() =>
-                new ConcurrentDictionary<string, Version>(StringComparer.OrdinalIgnoreCase));
+                new ConcurrentDictionary<string, Version>(StringComparer.OrdinalIgnoreCase)
+            );
 
         private static IList<string> TargetFrameworkReferenceAssemblyPaths
         {

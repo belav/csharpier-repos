@@ -409,7 +409,8 @@ namespace Microsoft.Extensions.Diagnostics.Tests
                             instrument,
                             "ListenerName",
                             new FakeMeterFactory()
-                        ));
+                        )
+                    );
                 })
                 .Dispose();
         }

@@ -186,7 +186,8 @@ public class SqlServerValueGeneratorSelectorTest
             CoreStrings.NoValueGenerator("Random", "AnEntity", "Something"),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    selector.Select(entityType.FindProperty("Random"), entityType))
+                    selector.Select(entityType.FindProperty("Random"), entityType)
+                )
                 .Message
         );
     }

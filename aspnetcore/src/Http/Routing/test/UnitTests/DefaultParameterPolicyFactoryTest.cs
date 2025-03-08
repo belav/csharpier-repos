@@ -26,7 +26,8 @@ public class DefaultParameterPolicyFactoryTest
                     RoutePatternParameterKind.Optional
                 ),
                 @"notpresent(\d+)"
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(
@@ -49,7 +50,8 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<RouteCreationException>(() =>
-            factory.Create(RoutePatternFactory.ParameterPart("id"), @"bad"));
+            factory.Create(RoutePatternFactory.ParameterPart("id"), @"bad")
+        );
 
         // Assert
         Assert.Equal(
@@ -406,7 +408,8 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<RouteCreationException>(() =>
-            factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)"));
+            factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)")
+        );
 
         // Assert
         Assert.Equal(
@@ -456,7 +459,8 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<RouteCreationException>(() =>
-            factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(20)"));
+            factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(20)")
+        );
 
         // Assert
         var inner = Assert.IsType<InvalidOperationException>(exception.InnerException);

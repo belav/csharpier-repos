@@ -81,7 +81,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "foo=1&baz=2&bar=3&baz=4&baf=5");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 }));
+            ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 })
+        );
         Assert.Equal("Form value count limit 3 exceeded.", exception.Message);
     }
 
@@ -93,7 +94,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "baz=1&baz=2&baz=3&baz=4");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 }));
+            ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 })
+        );
         Assert.Equal("Form value count limit 3 exceeded.", exception.Message);
     }
 
@@ -120,7 +122,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "foo=1&baz1234567890=2");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormReader(body) { KeyLengthLimit = 10 }));
+            ReadFormAsync(new FormReader(body) { KeyLengthLimit = 10 })
+        );
         Assert.Equal("Form key or value length limit 10 exceeded.", exception.Message);
     }
 
@@ -147,7 +150,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "foo=1&baz=1234567890123");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            ReadFormAsync(new FormReader(body) { ValueLengthLimit = 10 }));
+            ReadFormAsync(new FormReader(body) { ValueLengthLimit = 10 })
+        );
         Assert.Equal("Form key or value length limit 10 exceeded.", exception.Message);
     }
 

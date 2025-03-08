@@ -52,7 +52,8 @@ namespace ILCompiler.Sorting.Implementation
                 int halfLen = length / 2;
 
                 Task rightSortTask = Task.Run(() =>
-                    ParallelSort(arrayToSort, index + halfLen, length - halfLen, comparer));
+                    ParallelSort(arrayToSort, index + halfLen, length - halfLen, comparer)
+                );
 
                 T[] localCopyOfHalfOfArray = new T[halfLen];
                 accessor.Copy(arrayToSort, index, localCopyOfHalfOfArray, 0, halfLen);

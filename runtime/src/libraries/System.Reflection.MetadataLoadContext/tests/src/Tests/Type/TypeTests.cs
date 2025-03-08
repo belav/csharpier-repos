@@ -654,7 +654,8 @@ namespace System.Reflection.Tests
                 Type[] types = { typeof(int).Project(), typeof(short).Project() };
                 Type gi = t.MakeGenericType(typeof(int).Project()).BaseType;
                 Assert.Throws<AmbiguousMatchException>(() =>
-                    gi.GetMethod("Hoo", bf, binder, types, null));
+                    gi.GetMethod("Hoo", bf, binder, types, null)
+                );
             }
 
             {

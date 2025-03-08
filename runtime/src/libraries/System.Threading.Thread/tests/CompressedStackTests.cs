@@ -23,8 +23,8 @@ namespace System.Threading.Tests
         [Fact]
         public static void RunTest_SkipOnDesktopFramework()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                CompressedStack.Run(null, state => { }, null));
+            Assert.Throws<ArgumentNullException>(() => CompressedStack.Run(null, state => { }, null)
+            );
         }
 
         [Fact]
@@ -32,7 +32,8 @@ namespace System.Threading.Tests
         {
             CompressedStack compressedStack = CompressedStack.Capture();
             Assert.Throws<NullReferenceException>(() =>
-                CompressedStack.Run(compressedStack, null, null));
+                CompressedStack.Run(compressedStack, null, null)
+            );
 
             var obj = new object();
             Thread mainThread = Thread.CurrentThread;

@@ -893,20 +893,24 @@ namespace System.IO.Tests
             // Search pattern with double dots no longer throws ArgumentException
             string directory = Directory.CreateDirectory(GetTestFilePath()).FullName;
             Assert.Throws<DirectoryNotFoundException>(() =>
-                GetEntries(directory, Path.Combine("..ab ab.. .. abc..d", "abc..")));
+                GetEntries(directory, Path.Combine("..ab ab.. .. abc..d", "abc.."))
+            );
             GetEntries(directory, "..");
             GetEntries(directory, @".." + Path.DirectorySeparatorChar);
 
             Assert.Throws<DirectoryNotFoundException>(() =>
-                GetEntries(directory, Path.Combine("..ab ab.. .. abc..d", "abc", "..")));
+                GetEntries(directory, Path.Combine("..ab ab.. .. abc..d", "abc", ".."))
+            );
             GetEntries(directory, Path.Combine("..ab ab.. .. abc..d", "..", "abc"));
             Assert.Throws<DirectoryNotFoundException>(() =>
-                GetEntries(directory, Path.Combine("..", "..ab ab.. .. abc..d", "abc")));
+                GetEntries(directory, Path.Combine("..", "..ab ab.. .. abc..d", "abc"))
+            );
             Assert.Throws<DirectoryNotFoundException>(() =>
                 GetEntries(
                     directory,
                     Path.Combine("..", "..ab ab.. .. abc..d", "abc") + Path.DirectorySeparatorChar
-                ));
+                )
+            );
         }
 
         private static char[] OldWildcards = new char[] { '*', '?' };
@@ -930,7 +934,8 @@ namespace System.IO.Tests
                                     GetEntries(
                                         TestDirectory,
                                         string.Format("te{0}st", invalidChar.ToString())
-                                    ));
+                                    )
+                                );
                             }
                             else
                             {
@@ -946,7 +951,8 @@ namespace System.IO.Tests
                                 GetEntries(
                                     TestDirectory,
                                     string.Format("te{0}st", invalidChar.ToString())
-                                ));
+                                )
+                            );
                             break;
 
                         case '\0':

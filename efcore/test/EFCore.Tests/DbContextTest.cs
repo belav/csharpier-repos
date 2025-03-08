@@ -32,7 +32,8 @@ public partial class DbContextTest
     {
         using var context = new EarlyLearningCenter();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            context.Set<DifferentNamespace.Category>().Local);
+            context.Set<DifferentNamespace.Category>().Local
+        );
 
         Assert.Equal(
             CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
@@ -195,7 +196,8 @@ public partial class DbContextTest
         );
 
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            context.SaveChangesAsync(new CancellationToken(canceled: true)));
+            context.SaveChangesAsync(new CancellationToken(canceled: true))
+        );
 
         Assert.Contains(CoreEventId.SaveChangesCanceled, loggerFactory.Log.Select(l => l.Id));
         Assert.DoesNotContain(CoreEventId.SaveChangesFailed, loggerFactory.Log.Select(l => l.Id));
@@ -1443,7 +1445,8 @@ public partial class DbContextTest
             CoreStrings.ContextDisposed,
             (
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    context.AddAsync(new object()).AsTask())
+                    context.AddAsync(new object()).AsTask()
+                )
             ).Message
         );
 
@@ -1451,7 +1454,8 @@ public partial class DbContextTest
             CoreStrings.ContextDisposed,
             (
                 await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    context.FindAsync(typeof(Random), 77).AsTask())
+                    context.FindAsync(typeof(Random), 77).AsTask()
+                )
             ).Message
         );
 
@@ -1503,7 +1507,8 @@ public partial class DbContextTest
             CoreStrings.ContextDisposed,
             Assert
                 .Throws<ObjectDisposedException>(() =>
-                    ((IInfrastructure<IServiceProvider>)context).Instance)
+                    ((IInfrastructure<IServiceProvider>)context).Instance
+                )
                 .Message
         );
     }

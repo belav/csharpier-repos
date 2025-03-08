@@ -45,12 +45,14 @@ unsafe partial class GenericsTest
             GenericsNative.GetSequentialClassCOut(
                 '1',
                 out GenericsNative.SequentialClass<char> value2
-            ));
+            )
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetSequentialClassCRef('1'));
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddSequentialClassC(default, default));
+            GenericsNative.AddSequentialClassC(default, default)
+        );
 
         GenericsNative.SequentialClass<char>[] values = new GenericsNative.SequentialClass<char>[]
         {
@@ -60,9 +62,11 @@ unsafe partial class GenericsTest
         };
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddSequentialClassCs(values, values.Length));
+            GenericsNative.AddSequentialClassCs(values, values.Length)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddSequentialClassCs(in values[0], values.Length));
+            GenericsNative.AddSequentialClassCs(in values[0], values.Length)
+        );
     }
 }

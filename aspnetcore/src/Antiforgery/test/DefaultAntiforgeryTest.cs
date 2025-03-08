@@ -32,7 +32,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            antiforgery.ValidateRequestAsync(httpContext));
+            antiforgery.ValidateRequestAsync(httpContext)
+        );
         Assert.Equal(
             @"The antiforgery system has the configuration value AntiforgeryOptions.Cookie.SecurePolicy = Always, "
                 + "but the current request is not an SSL request.",
@@ -54,7 +55,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            antiforgery.IsRequestValidAsync(httpContext));
+            antiforgery.IsRequestValidAsync(httpContext)
+        );
         Assert.Equal(
             @"The antiforgery system has the configuration value AntiforgeryOptions.Cookie.SecurePolicy = Always, "
                 + "but the current request is not an SSL request.",
@@ -76,7 +78,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            antiforgery.GetAndStoreTokens(httpContext));
+            antiforgery.GetAndStoreTokens(httpContext)
+        );
         Assert.Equal(
             @"The antiforgery system has the configuration value AntiforgeryOptions.Cookie.SecurePolicy = Always, "
                 + "but the current request is not an SSL request.",
@@ -98,7 +101,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            antiforgery.GetTokens(httpContext));
+            antiforgery.GetTokens(httpContext)
+        );
         Assert.Equal(
             @"The antiforgery system has the configuration value AntiforgeryOptions.Cookie.SecurePolicy = Always, "
                 + "but the current request is not an SSL request.",
@@ -120,7 +124,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            antiforgery.SetCookieTokenAndHeader(httpContext));
+            antiforgery.SetCookieTokenAndHeader(httpContext)
+        );
         Assert.Equal(
             @"The antiforgery system has the configuration value AntiforgeryOptions.Cookie.SecurePolicy = Always, "
                 + "but the current request is not an SSL request.",
@@ -890,7 +895,8 @@ public class DefaultAntiforgeryTest
 
         // Act & assert
         var exception = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
-            antiforgery.ValidateRequestAsync(context.HttpContext));
+            antiforgery.ValidateRequestAsync(context.HttpContext)
+        );
         Assert.Equal("my-message", exception.Message);
         context.TokenGenerator.Verify();
 
@@ -962,7 +968,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
-            antiforgery.ValidateRequestAsync(context.HttpContext));
+            antiforgery.ValidateRequestAsync(context.HttpContext)
+        );
         Assert.Equal(
             "The required antiforgery cookie \"cookie-name\" is not present.",
             exception.Message
@@ -991,7 +998,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
-            antiforgery.ValidateRequestAsync(context.HttpContext));
+            antiforgery.ValidateRequestAsync(context.HttpContext)
+        );
         Assert.Equal(
             "The required antiforgery form field \"form-field-name\" is not present.",
             exception.Message
@@ -1027,7 +1035,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
-            antiforgery.ValidateRequestAsync(context.HttpContext));
+            antiforgery.ValidateRequestAsync(context.HttpContext)
+        );
         Assert.Equal(
             "The required antiforgery header value \"header-name\" is not present.",
             exception.Message
@@ -1063,7 +1072,8 @@ public class DefaultAntiforgeryTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
-            antiforgery.ValidateRequestAsync(context.HttpContext));
+            antiforgery.ValidateRequestAsync(context.HttpContext)
+        );
         Assert.Equal(
             "The required antiforgery request token was not provided in either form field \"form-field-name\" "
                 + "or header value \"header-name\".",
@@ -1594,7 +1604,8 @@ public class DefaultAntiforgeryTest
             .Returns(() =>
                 Task.FromResult(
                     new AntiforgeryTokenSet(formToken, oldCookieToken, "form", "header")
-                ));
+                )
+            );
 
         if (saveNewCookie)
         {

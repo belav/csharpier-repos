@@ -298,7 +298,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.Default,
                         ColorAdjustType.Any
-                    ));
+                    )
+                );
             }
         }
 
@@ -312,7 +313,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.Default,
                         ColorAdjustType.Count
-                    ));
+                    )
+                );
             }
         }
 
@@ -322,7 +324,8 @@ namespace MonoTests.System.Drawing.Imaging
             using (ImageAttributes ia = new ImageAttributes())
             {
                 Assert.Throws<ArgumentException>(() =>
-                    ia.SetColorMatrix(global_color_matrix, ColorMatrixFlag.AltGrays));
+                    ia.SetColorMatrix(global_color_matrix, ColorMatrixFlag.AltGrays)
+                );
             }
         }
 
@@ -336,7 +339,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Any
-                    ));
+                    )
+                );
             }
         }
 
@@ -350,7 +354,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Bitmap
-                    ));
+                    )
+                );
             }
         }
 
@@ -364,7 +369,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Brush
-                    ));
+                    )
+                );
             }
         }
 
@@ -378,7 +384,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Count
-                    ));
+                    )
+                );
             }
         }
 
@@ -392,7 +399,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Default
-                    ));
+                    )
+                );
             }
         }
 
@@ -406,7 +414,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Pen
-                    ));
+                    )
+                );
             }
         }
 
@@ -420,7 +429,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.AltGrays,
                         ColorAdjustType.Text
-                    ));
+                    )
+                );
             }
         }
 
@@ -468,7 +478,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.SkipGrays,
                         ColorAdjustType.Any
-                    ));
+                    )
+                );
             }
         }
 
@@ -482,7 +493,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.SkipGrays,
                         ColorAdjustType.Count
-                    ));
+                    )
+                );
             }
         }
 
@@ -492,7 +504,8 @@ namespace MonoTests.System.Drawing.Imaging
             using (ImageAttributes ia = new ImageAttributes())
             {
                 Assert.Throws<ArgumentException>(() =>
-                    ia.SetColorMatrix(global_color_matrix, (ColorMatrixFlag)Int32.MinValue));
+                    ia.SetColorMatrix(global_color_matrix, (ColorMatrixFlag)Int32.MinValue)
+                );
             }
         }
 
@@ -506,7 +519,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.Default,
                         (ColorAdjustType)Int32.MinValue
-                    ));
+                    )
+                );
             }
         }
 
@@ -516,7 +530,8 @@ namespace MonoTests.System.Drawing.Imaging
             using (ImageAttributes ia = new ImageAttributes())
             {
                 Assert.Throws<ArgumentException>(() =>
-                    ia.SetColorMatrices(null, global_color_matrix));
+                    ia.SetColorMatrices(null, global_color_matrix)
+                );
             }
         }
 
@@ -537,7 +552,8 @@ namespace MonoTests.System.Drawing.Imaging
             using (ImageAttributes ia = new ImageAttributes())
             {
                 Assert.Throws<ArgumentException>(() =>
-                    ia.SetColorMatrices(global_color_matrix, null, ColorMatrixFlag.AltGrays));
+                    ia.SetColorMatrices(global_color_matrix, null, ColorMatrixFlag.AltGrays)
+                );
             }
         }
 
@@ -637,7 +653,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         global_color_matrix,
                         (ColorMatrixFlag)Int32.MinValue
-                    ));
+                    )
+                );
             }
         }
 
@@ -652,7 +669,8 @@ namespace MonoTests.System.Drawing.Imaging
                         global_color_matrix,
                         ColorMatrixFlag.Default,
                         (ColorAdjustType)Int32.MinValue
-                    ));
+                    )
+                );
             }
         }
 

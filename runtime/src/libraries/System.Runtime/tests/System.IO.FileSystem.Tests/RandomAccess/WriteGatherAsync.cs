@@ -66,7 +66,8 @@ namespace System.IO.Tests
                 TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
                     RandomAccess
                         .WriteAsync(handle, new ReadOnlyMemory<byte>[] { new byte[1] }, 0, token)
-                        .AsTask());
+                        .AsTask()
+                );
                 Assert.Equal(token, ex.CancellationToken);
             }
         }
@@ -82,7 +83,8 @@ namespace System.IO.Tests
                         handle,
                         new ReadOnlyMemory<byte>[] { new byte[1] },
                         0
-                    ));
+                    )
+                );
             }
         }
 

@@ -1879,16 +1879,20 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         var error = $"No IUserTwoFactorTokenProvider<{nameof(TUser)}> named 'bogus' is registered.";
         var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-            manager.GenerateTwoFactorTokenAsync(user, "bogus"));
+            manager.GenerateTwoFactorTokenAsync(user, "bogus")
+        );
         Assert.Equal(error, ex.Message);
         ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-            manager.VerifyTwoFactorTokenAsync(user, "bogus", "bogus"));
+            manager.VerifyTwoFactorTokenAsync(user, "bogus", "bogus")
+        );
         Assert.Equal(error, ex.Message);
         ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-            manager.VerifyUserTokenAsync(user, "bogus", "bogus", "bogus"));
+            manager.VerifyUserTokenAsync(user, "bogus", "bogus", "bogus")
+        );
         Assert.Equal(error, ex.Message);
         ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-            manager.GenerateUserTokenAsync(user, "bogus", "bogus"));
+            manager.GenerateUserTokenAsync(user, "bogus", "bogus")
+        );
         Assert.Equal(error, ex.Message);
     }
 

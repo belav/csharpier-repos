@@ -128,7 +128,8 @@ namespace System.Linq.Parallel.Tests
                 ArgumentException e = AssertThrows.Wrapped<ArgumentException>(() =>
                     UnorderedSources
                         .Default(count)
-                        .ToDictionary(x => x, new ModularCongruenceComparer(2)));
+                        .ToDictionary(x => x, new ModularCongruenceComparer(2))
+                );
             }
             else if (count == 1 || count == 2)
             {
@@ -173,7 +174,8 @@ namespace System.Linq.Parallel.Tests
                 AssertThrows.Wrapped<ArgumentException>(() =>
                     UnorderedSources
                         .Default(count)
-                        .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2)));
+                        .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2))
+                );
             }
             else if (count == 1 || count == 2)
             {
@@ -210,14 +212,16 @@ namespace System.Linq.Parallel.Tests
         public static void ToDictionary_DuplicateKeys()
         {
             AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x));
+                ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x)
+            );
         }
 
         [Fact]
         public static void ToDictionary_DuplicateKeys_ElementSelector()
         {
             AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x, y => y));
+                ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x, y => y)
+            );
         }
 
         [Fact]
@@ -226,7 +230,8 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<ArgumentException>(() =>
                 ParallelEnumerable
                     .Repeat(0, 2)
-                    .ToDictionary(x => x, new ModularCongruenceComparer(2)));
+                    .ToDictionary(x => x, new ModularCongruenceComparer(2))
+            );
         }
 
         [Fact]
@@ -235,7 +240,8 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<ArgumentException>(() =>
                 ParallelEnumerable
                     .Repeat(0, 2)
-                    .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2)));
+                    .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2))
+            );
         }
 
         [Fact]
@@ -318,7 +324,8 @@ namespace System.Linq.Parallel.Tests
                             throw new DeliberateTestException();
                         }
                     )
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToDictionary(
                     (Func<int, int>)(
@@ -328,7 +335,8 @@ namespace System.Linq.Parallel.Tests
                         }
                     ),
                     y => y
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToDictionary(
                     x => x,
@@ -338,7 +346,8 @@ namespace System.Linq.Parallel.Tests
                             throw new DeliberateTestException();
                         }
                     )
-                ));
+                )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToDictionary(
@@ -349,7 +358,8 @@ namespace System.Linq.Parallel.Tests
                         }
                     ),
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToDictionary(
                     (Func<int, int>)(
@@ -360,7 +370,8 @@ namespace System.Linq.Parallel.Tests
                     ),
                     y => y,
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 labeled.Item.ToDictionary(
                     x => x,
@@ -371,12 +382,15 @@ namespace System.Linq.Parallel.Tests
                         }
                     ),
                     EqualityComparer<int>.Default
-                ));
+                )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(x => x, new FailingEqualityComparer<int>()));
+                labeled.Item.ToDictionary(x => x, new FailingEqualityComparer<int>())
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(x => x, y => y, new FailingEqualityComparer<int>()));
+                labeled.Item.ToDictionary(x => x, y => y, new FailingEqualityComparer<int>())
+            );
         }
 
         [Fact]

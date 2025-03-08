@@ -162,7 +162,8 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
         var ex = Assert.Throws<InvalidOperationException>(() =>
             new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
                 XElement.Parse(xml)
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(

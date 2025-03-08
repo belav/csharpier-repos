@@ -222,7 +222,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Assert.ThrowsAsync<NotSupportedException>(async () =>
                     await Serializer.DeserializeWrapper<
                         GenericIReadOnlyDictionaryWrapper<string, string>
-                    >(JsonString));
+                    >(JsonString)
+                );
 
                 GenericIReadOnlyDictionaryWrapper<string, string> obj =
                     new GenericIReadOnlyDictionaryWrapper<string, string>(
@@ -243,7 +244,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Assert.ThrowsAsync<NotSupportedException>(async () =>
                     await Serializer.DeserializeWrapper<StringToStringIImmutableDictionaryWrapper>(
                         JsonString
-                    ));
+                    )
+                );
 
                 StringToStringIImmutableDictionaryWrapper obj =
                     new StringToStringIImmutableDictionaryWrapper(
@@ -1175,7 +1177,8 @@ namespace System.Text.Json.Serialization.Tests
             await Serializer.DeserializeWrapper<Dictionary<string, object>>(json);
 
             await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<Dictionary<string, string>>(json));
+                await Serializer.DeserializeWrapper<Dictionary<string, string>>(json)
+            );
         }
 
         [Fact]
@@ -1587,7 +1590,8 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""MyDictionary"":{""Key"":""Value""}}";
 
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.DeserializeWrapper<ClassWithNotSupportedDictionary>(json));
+                await Serializer.DeserializeWrapper<ClassWithNotSupportedDictionary>(json)
+            );
 
             // The exception contains the key type.
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
@@ -2133,7 +2137,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, ((JsonElement)dictionary["One"]).GetInt32());
             Assert.Equal(2, ((JsonElement)dictionary["Two"]).GetInt32());
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.SerializeWrapper(dictionary));
+                await Serializer.SerializeWrapper(dictionary)
+            );
         }
 
         [Fact]
@@ -2147,7 +2152,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, ((JsonElement)dictionary["One"]).GetProperty("Id").GetInt32());
             Assert.Equal(2, ((JsonElement)dictionary["Two"]).GetProperty("Id").GetInt32());
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await Serializer.SerializeWrapper(dictionary));
+                await Serializer.SerializeWrapper(dictionary)
+            );
         }
 
         public class ClassWithoutParameterlessCtor
@@ -2177,11 +2183,13 @@ namespace System.Text.Json.Serialization.Tests
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<
                     Dictionary<string, ClassWithInternalParameterlessConstructor>
-                >(@"{""key"":{}}"));
+                >(@"{""key"":{}}")
+            );
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await Serializer.DeserializeWrapper<
                     Dictionary<string, ClassWithPrivateParameterlessConstructor>
-                >(@"{""key"":{}}"));
+                >(@"{""key"":{}}")
+            );
         }
 
         [Fact]

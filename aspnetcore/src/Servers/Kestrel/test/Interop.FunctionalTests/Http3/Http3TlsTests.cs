@@ -343,7 +343,8 @@ public class Http3TlsTests : LoggedTest
                 using var host = builder.Build();
 
                 var exception = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                    host.StartAsync().DefaultTimeout());
+                    host.StartAsync().DefaultTimeout()
+                );
                 Assert.Equal(
                     "The OnAuthenticate callback is not supported with HTTP/3.",
                     exception.Message

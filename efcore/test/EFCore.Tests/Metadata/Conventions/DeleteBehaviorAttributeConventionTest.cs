@@ -97,7 +97,8 @@ public class DeleteBehaviorAttributeConventionTest
                 .Throws<InvalidOperationException>(() =>
                     modelBuilder
                         .Entity<Post_On_FK_Property>()
-                        .Property(e => e.Blog_On_FK_PropertyId))
+                        .Property(e => e.Blog_On_FK_PropertyId)
+                )
                 .Message
         );
     }
@@ -114,7 +115,8 @@ public class DeleteBehaviorAttributeConventionTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    modelBuilder.Entity<Post_On_Property>().Property(e => e.Blog_On_PropertyId))
+                    modelBuilder.Entity<Post_On_Property>().Property(e => e.Blog_On_PropertyId)
+                )
                 .Message
         );
     }

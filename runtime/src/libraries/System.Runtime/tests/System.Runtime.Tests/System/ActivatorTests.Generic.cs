@@ -33,17 +33,20 @@ namespace System.Tests
         [Fact]
         public void CreateInstanceT_ClassWithPrivateConstructor_ThrowsMissingMethodException() =>
             Assert.Throws<MissingMethodException>(() =>
-                Activator.CreateInstance<ClassWithPrivateDefaultConstructor>());
+                Activator.CreateInstance<ClassWithPrivateDefaultConstructor>()
+            );
 
         [Fact]
         public void CreateInstanceT_ClassWithoutDefaultConstructor_ThrowsMissingMethodException() =>
             Assert.Throws<MissingMethodException>(() =>
-                Activator.CreateInstance<ClassWithoutDefaultConstructor>());
+                Activator.CreateInstance<ClassWithoutDefaultConstructor>()
+            );
 
         [Fact]
         public void CreateInstanceT_ClassWithDefaultConstructorThatThrows_ThrowsTargetInvocationException() =>
             Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance<ClassWithDefaultConstructorThatThrows>());
+                Activator.CreateInstance<ClassWithDefaultConstructorThatThrows>()
+            );
 
         [Fact]
         public void CreateInstanceT_StructWithDefaultConstructor_InvokesConstructor() =>
@@ -64,7 +67,8 @@ namespace System.Tests
         )]
         public void CreateInstanceT_StructWithPrivateDefaultConstructor_ThrowsMissingMethodException() =>
             Assert.Throws<MissingMethodException>(() =>
-                Activator.CreateInstance<StructWithPrivateDefaultConstructor>());
+                Activator.CreateInstance<StructWithPrivateDefaultConstructor>()
+            );
 
         [Fact]
         public void CreateInstanceT_StructWithoutDefaultConstructor_InvokesConstructor() =>
@@ -73,7 +77,8 @@ namespace System.Tests
         [Fact]
         public void CreateInstanceT_StructWithDefaultConstructorThatThrows_ThrowsTargetInvocationException() =>
             Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance<StructWithDefaultConstructorThatThrows>());
+                Activator.CreateInstance<StructWithDefaultConstructorThatThrows>()
+            );
 
         private interface IInterface { }
 

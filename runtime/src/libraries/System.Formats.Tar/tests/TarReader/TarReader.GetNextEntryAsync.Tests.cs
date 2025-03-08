@@ -19,7 +19,8 @@ namespace System.Formats.Tar.Tests
             await using (TarReader reader = new TarReader(archiveStream, leaveOpen: false))
             {
                 await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                    await reader.GetNextEntryAsync(copyData: false, cs.Token));
+                    await reader.GetNextEntryAsync(copyData: false, cs.Token)
+                );
             }
         }
 
@@ -35,7 +36,8 @@ namespace System.Formats.Tar.Tests
                 await using (TarReader reader = new TarReader(malformed))
                 {
                     await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-                        await reader.GetNextEntryAsync());
+                        await reader.GetNextEntryAsync()
+                    );
                 }
             }
         }
@@ -53,7 +55,8 @@ namespace System.Formats.Tar.Tests
                 await using (TarReader reader = new TarReader(malformed))
                 {
                     await Assert.ThrowsAsync<InvalidDataException>(async () =>
-                        await reader.GetNextEntryAsync());
+                        await reader.GetNextEntryAsync()
+                    );
                 }
             }
         }
@@ -209,8 +212,8 @@ namespace System.Formats.Tar.Tests
                         }
                     }
                     // The reader must stay alive because it's in charge of disposing all the entries it collected
-                    Assert.Throws<ObjectDisposedException>(() =>
-                        entry.DataStream.Read(new byte[1]));
+                    Assert.Throws<ObjectDisposedException>(() => entry.DataStream.Read(new byte[1])
+                    );
                 }
             }
         }
@@ -280,12 +283,14 @@ namespace System.Formats.Tar.Tests
 
                 // This is not possible because the position of the main stream is already past the data
                 await Assert.ThrowsAsync<EndOfStreamException>(async () =>
-                    await entry.DataStream.ReadAsync(b));
+                    await entry.DataStream.ReadAsync(b)
+                );
             }
 
             // The reader must stay alive because it's in charge of disposing all the entries it collected
             await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                await entry.DataStream.ReadAsync(b));
+                await entry.DataStream.ReadAsync(b)
+            );
         }
 
         [Theory]

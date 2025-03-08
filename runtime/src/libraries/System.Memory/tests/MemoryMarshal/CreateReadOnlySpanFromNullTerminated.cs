@@ -87,7 +87,8 @@ namespace System.SpanTests
                 *(mem + int.MaxValue + 1) = '\0';
 
                 Assert.Throws<ArgumentException>(() =>
-                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem));
+                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem)
+                );
             }
             finally
             {
@@ -116,7 +117,8 @@ namespace System.SpanTests
                 *(mem + int.MaxValue + 1) = 0;
 
                 Assert.Throws<ArgumentException>(() =>
-                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem));
+                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem)
+                );
             }
             finally
             {

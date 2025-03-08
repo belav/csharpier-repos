@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.Tests
 
             theKey.Dispose();
             Assert.ThrowsAny<ObjectDisposedException>(() =>
-                propInfo.GetValue(theKey, BindingFlags.DoNotWrapExceptions, null, null, null));
+                propInfo.GetValue(theKey, BindingFlags.DoNotWrapExceptions, null, null, null)
+            );
         }
 
         public static IEnumerable<object[]> AllPublicProperties()

@@ -134,7 +134,8 @@ namespace System.Threading.Tests
         {
             ManualResetEventSlim mres = null;
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                mres = new ManualResetEventSlim(false, -1));
+                mres = new ManualResetEventSlim(false, -1)
+            );
             // Failure Case: Constructor didn't throw AORE when -1 passed
 
             mres = new ManualResetEventSlim(false);
@@ -149,11 +150,13 @@ namespace System.Threading.Tests
             // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                mres.Wait(TimeSpan.FromDays(-1), new CancellationToken()));
+                mres.Wait(TimeSpan.FromDays(-1), new CancellationToken())
+            );
             // Failure Case: Wait(TimeSpan) didn't throw AORE when the totalmilliseconds < -1
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                mres.Wait(TimeSpan.MaxValue, new CancellationToken()));
+                mres.Wait(TimeSpan.MaxValue, new CancellationToken())
+            );
             // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
         }
     }

@@ -2128,16 +2128,19 @@ namespace System.Reflection.Emit.Tests
                     object[] fieldValues = new object[0];
 
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new CustomAttributeBuilder(con, constructorArgs));
+                        new CustomAttributeBuilder(con, constructorArgs)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
-                        new CustomAttributeBuilder(con, constructorArgs, namedFields, fieldValues));
+                        new CustomAttributeBuilder(con, constructorArgs, namedFields, fieldValues)
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
                         new CustomAttributeBuilder(
                             con,
                             constructorArgs,
                             namedProperties,
                             propertyValues
-                        ));
+                        )
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() =>
                         new CustomAttributeBuilder(
                             con,
@@ -2146,7 +2149,8 @@ namespace System.Reflection.Emit.Tests
                             propertyValues,
                             namedFields,
                             fieldValues
-                        ));
+                        )
+                    );
                 },
                 options
             );

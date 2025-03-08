@@ -38,9 +38,11 @@ namespace PInvokeTests
             try
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    CustomMarshalersNative.Unsupported(typeof(object)));
+                    CustomMarshalersNative.Unsupported(typeof(object))
+                );
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    CustomMarshalersNative.Unsupported((IReflect)typeof(object)));
+                    CustomMarshalersNative.Unsupported((IReflect)typeof(object))
+                );
             }
             catch (System.Exception e)
             {

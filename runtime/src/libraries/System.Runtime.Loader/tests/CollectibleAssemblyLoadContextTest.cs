@@ -28,7 +28,8 @@ namespace System.Runtime.Loader.Tests
 
             // Check that any attempt to load an assembly after an explicit Unload will fail
             Assert.Throws<InvalidOperationException>(() =>
-                alc.LoadFromAssemblyPath(Path.GetFullPath("none.dll")));
+                alc.LoadFromAssemblyPath(Path.GetFullPath("none.dll"))
+            );
         }
 
         [Fact]

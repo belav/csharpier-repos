@@ -68,7 +68,8 @@ namespace System.Web.Http
             if (customErrors != null)
             {
                 request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
-                    !(bool)customErrors);
+                    !(bool)customErrors
+                );
             }
 
             await ScenarioHelper.RunTestAsync(

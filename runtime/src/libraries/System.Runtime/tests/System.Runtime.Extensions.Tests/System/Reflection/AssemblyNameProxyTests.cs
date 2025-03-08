@@ -27,7 +27,8 @@ namespace System.Reflection.Tests
                 () => anp.GetAssemblyName(string.Empty)
             );
             Assert.Throws<FileNotFoundException>(() =>
-                anp.GetAssemblyName(Guid.NewGuid().ToString("N")));
+                anp.GetAssemblyName(Guid.NewGuid().ToString("N"))
+            );
 
             if (PlatformDetection.HasAssemblyFiles)
             {

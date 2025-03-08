@@ -65,7 +65,8 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
                         )[21..],
                         (
                             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                context.MeterReadings.ExecuteDeleteAsync())
+                                context.MeterReadings.ExecuteDeleteAsync()
+                            )
                         ).Message
                     )
             );
@@ -86,7 +87,8 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
                         )[21..],
                         Assert
                             .Throws<InvalidOperationException>(() =>
-                                context.MeterReadings.ExecuteDelete())
+                                context.MeterReadings.ExecuteDelete()
+                            )
                             .Message
                     )
             );

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
                 )
             );
             Assert.Throws<InvalidOperationException>(() =>
-                options.WithLanguageVersion(LanguageVersion.CSharp8));
+                options.WithLanguageVersion(LanguageVersion.CSharp8)
+            );
         }
     }
 }

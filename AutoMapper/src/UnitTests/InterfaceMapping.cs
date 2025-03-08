@@ -447,7 +447,8 @@ public class When_mapping_an_interface_type_to_a_concrete_type_and_reverse : Aut
     {
         Should
             .Throw<AutoMapperMappingException>(() =>
-                Mapper.Map<Destination, ISource>(new Destination { Value = 5 }))
+                Mapper.Map<Destination, ISource>(new Destination { Value = 5 })
+            )
             .Message.ShouldStartWith("Cannot create interface " + typeof(ISource).FullName);
     }
 }

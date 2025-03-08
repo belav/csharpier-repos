@@ -290,7 +290,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 method
             );
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("Does not matter", s_testValidationContext));
+                attribute.Validate("Does not matter", s_testValidationContext)
+            );
         }
 
         [Theory]
@@ -317,7 +318,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 attribute.Validate(
                     new IConvertibleImplementor() { IntThrow = new ArithmeticException() },
                     s_testValidationContext
-                ));
+                )
+            );
         }
 
         [Fact]

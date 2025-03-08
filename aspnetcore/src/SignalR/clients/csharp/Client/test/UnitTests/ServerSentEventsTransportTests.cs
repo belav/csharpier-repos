@@ -216,7 +216,8 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                 .DefaultTimeout();
 
             var exception = await Assert.ThrowsAsync<FormatException>(() =>
-                sseTransport.Input.ReadAllAsync());
+                sseTransport.Input.ReadAllAsync()
+            );
 
             await sseTransport.Running.DefaultTimeout();
 
@@ -302,7 +303,8 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
             await sseTransport.Output.WriteAsync(new byte[] { 0x42 });
 
             var exception = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                sseTransport.Input.ReadAllAsync().DefaultTimeout());
+                sseTransport.Input.ReadAllAsync().DefaultTimeout()
+            );
             Assert.Contains("500", exception.Message);
 
             // Errors are only communicated through the pipe
@@ -527,7 +529,8 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
             var ex = await Assert.ThrowsAsync<ArgumentException>(() =>
                 sseTransport
                     .StartAsync(new Uri("http://fakeuri.org"), TransferFormat.Binary)
-                    .DefaultTimeout());
+                    .DefaultTimeout()
+            );
 
             Assert.Equal("transferFormat", ex.ParamName);
             Assert.Equal(
@@ -567,7 +570,8 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                 loggerFactory: LoggerFactory
             );
             var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
-                sseTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat));
+                sseTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat)
+            );
 
             Assert.Contains(
                 $"The '{transferFormat}' transfer format is not supported by this transport.",

@@ -103,7 +103,8 @@ public class DiagnosticMemoryPoolTests : MemoryPoolTests
         ExpectDisposeException(memoryPool);
 
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            MemoryMarshal.TryGetArray<byte>(memory, out _));
+            MemoryMarshal.TryGetArray<byte>(memory, out _)
+        );
         Assert.Equal("Block is backed by disposed slab", exception.Message);
     }
 
@@ -179,7 +180,8 @@ public class DiagnosticMemoryPoolTests : MemoryPoolTests
         block.Dispose();
 
         var exception = Assert.Throws<ObjectDisposedException>(() =>
-            MemoryMarshal.TryGetArray<byte>(memory, out _));
+            MemoryMarshal.TryGetArray<byte>(memory, out _)
+        );
         Assert.Equal(
             $"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.",
             exception.Message
@@ -216,7 +218,8 @@ public class DiagnosticMemoryPoolTests : MemoryPoolTests
 
         block.Dispose();
         var aggregateException = await Assert.ThrowsAsync<AggregateException>(async () =>
-            await memoryPool.WhenAllBlocksReturnedAsync(TimeSpan.FromSeconds(5)));
+            await memoryPool.WhenAllBlocksReturnedAsync(TimeSpan.FromSeconds(5))
+        );
 
         Assert.Equal(new Exception[] { exception }, aggregateException.InnerExceptions);
     }

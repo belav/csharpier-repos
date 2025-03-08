@@ -75,7 +75,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void GetDigestedOutput_Null()
         {
             Assert.Throws<NullReferenceException>(() =>
-                new ConcreteTransform().GetDigestedOutput(null));
+                new ConcreteTransform().GetDigestedOutput(null)
+            );
         }
 
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]

@@ -760,7 +760,8 @@ public class InteropClient : IDisposable
             Payload = CreateZerosPayload(271828),
         };
         var e = Assert.Throws<RpcException>(() =>
-            client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false)));
+            client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false))
+        );
         Assert.AreEqual(StatusCode.InvalidArgument, e.Status.StatusCode);
 
         var compressedRequest = new SimpleRequest

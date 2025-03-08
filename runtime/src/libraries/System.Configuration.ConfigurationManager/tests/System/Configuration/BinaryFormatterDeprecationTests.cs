@@ -32,7 +32,8 @@ namespace System.ConfigurationTests
                     new SettingsAttributeDictionary(),
                     true,
                     true
-                ));
+                )
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 

@@ -585,7 +585,8 @@ namespace System.IO
                     Task.Run(() =>
                         OnCreated(
                             new FileSystemEventArgs(WatcherChangeTypes.Created, path, filename)
-                        ));
+                        )
+                    );
                     break;
                 case FileAction.Removed:
                     lastData.Name = filename;
@@ -593,7 +594,8 @@ namespace System.IO
                     Task.Run(() =>
                         OnDeleted(
                             new FileSystemEventArgs(WatcherChangeTypes.Deleted, path, filename)
-                        ));
+                        )
+                    );
                     break;
                 case FileAction.Modified:
                     lastData.Name = filename;
@@ -601,7 +603,8 @@ namespace System.IO
                     Task.Run(() =>
                         OnChanged(
                             new FileSystemEventArgs(WatcherChangeTypes.Changed, path, filename)
-                        ));
+                        )
+                    );
                     break;
                 case FileAction.RenamedOldName:
                     if (renamed != null)

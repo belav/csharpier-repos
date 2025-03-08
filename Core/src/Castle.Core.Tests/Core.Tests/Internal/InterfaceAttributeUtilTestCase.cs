@@ -226,7 +226,8 @@ namespace Castle.Core.Internal.Tests
         private static void AssertInvalid(Type interfaceType)
         {
             Assert.Throws<InvalidOperationException>(() =>
-                InterfaceAttributeUtil.GetAttributes(interfaceType, true));
+                InterfaceAttributeUtil.GetAttributes(interfaceType, true)
+            );
         }
     }
 }

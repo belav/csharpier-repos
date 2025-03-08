@@ -383,7 +383,8 @@ namespace System.Tests
                 else
                 {
                     Assert.Throws<NullReferenceException>(() =>
-                        comparable.CompareTo(valueTuple, null));
+                        comparable.CompareTo(valueTuple, null)
+                    );
                 }
             }
 

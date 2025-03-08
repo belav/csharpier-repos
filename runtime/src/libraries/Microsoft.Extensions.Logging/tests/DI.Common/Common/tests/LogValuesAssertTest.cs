@@ -123,7 +123,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         {
             // Act && Assert
             Assert.Throws<EqualException>(() =>
-                LogValuesAssert.Contains(expectedValues, actualValues));
+                LogValuesAssert.Contains(expectedValues, actualValues)
+            );
         }
 
         [Fact]
@@ -211,7 +212,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         {
             // Act && Assert
             Assert.Throws<EqualException>(() =>
-                LogValuesAssert.Contains(expectedValues, actualValues));
+                LogValuesAssert.Contains(expectedValues, actualValues)
+            );
         }
 
         private string GetString(IEnumerable<KeyValuePair<string, object>> logValues)

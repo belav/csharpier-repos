@@ -218,7 +218,8 @@ public class ProtectedBrowserStorageTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<JsonException>(async () =>
-            await protectedBrowserStorage.GetAsync<TestModel>("testKey"));
+            await protectedBrowserStorage.GetAsync<TestModel>("testKey")
+        );
     }
 
     [Fact]
@@ -238,7 +239,8 @@ public class ProtectedBrowserStorageTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<CryptographicException>(async () =>
-            await protectedBrowserStorage.GetAsync<TestModel>("testKey"));
+            await protectedBrowserStorage.GetAsync<TestModel>("testKey")
+        );
     }
 
     [Fact]
@@ -264,7 +266,8 @@ public class ProtectedBrowserStorageTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<CryptographicException>(async () =>
-            await protectedBrowserStorage.GetAsync<TestModel>("testKey"));
+            await protectedBrowserStorage.GetAsync<TestModel>("testKey")
+        );
     }
 
     [Fact]
@@ -286,7 +289,8 @@ public class ProtectedBrowserStorageTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<CryptographicException>(async () =>
-            await protectedBrowserStorage.GetAsync<TestModel>("different key"));
+            await protectedBrowserStorage.GetAsync<TestModel>("different key")
+        );
         var innerException = ex.InnerException;
         Assert.IsType<ArgumentException>(innerException);
         Assert.Contains(

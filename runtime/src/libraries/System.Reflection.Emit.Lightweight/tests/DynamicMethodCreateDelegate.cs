@@ -135,9 +135,11 @@ namespace System.Reflection.Emit.Tests
             );
 
             Assert.Throws<InvalidOperationException>(() =>
-                method.CreateDelegate(typeof(IntDelegate)));
+                method.CreateDelegate(typeof(IntDelegate))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                method.CreateDelegate(typeof(IntDelegate), target));
+                method.CreateDelegate(typeof(IntDelegate), target)
+            );
         }
 
         [Fact]

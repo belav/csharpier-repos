@@ -116,9 +116,11 @@ namespace System.IO.Compression.Tests
                     Assert.Throws<IOException>(() =>
                         archive.ExtractToDirectory(
                             tempFolder.Path /* default false */
-                        ));
+                        )
+                    );
                     Assert.Throws<IOException>(() =>
-                        archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: false));
+                        archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: false)
+                    );
                     archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: true);
 
                     DirsEqual(tempFolder.Path, folderName);

@@ -296,14 +296,16 @@ namespace System.Linq.Parallel.Tests
                     .Last(x =>
                     {
                         throw new DeliberateTestException();
-                    }));
+                    })
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(1)
                     .LastOrDefault(x =>
                     {
                         throw new DeliberateTestException();
-                    }));
+                    })
+            );
         }
 
         [Fact]

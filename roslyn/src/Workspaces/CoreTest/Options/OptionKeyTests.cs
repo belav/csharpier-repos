@@ -21,25 +21,32 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         public void OptionConstructor_Errors()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new Option<bool>("Test Feature", null!, false));
+                new Option<bool>("Test Feature", null!, false)
+            );
             Assert.Throws<ArgumentNullException>(() => new Option<bool>(null!, "Test Name", false));
             Assert.Throws<ArgumentNullException>(() =>
-                new Option<bool>("X", "Test Name", false, storageLocations: null!));
+                new Option<bool>("X", "Test Name", false, storageLocations: null!)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new Option<bool>("X", "Test Name", false, storageLocations: [null!]));
+                new Option<bool>("X", "Test Name", false, storageLocations: [null!])
+            );
         }
 
         [Fact]
         public void PerLanguageOptionConstructor_Errors()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new PerLanguageOption<bool>("Test Feature", null!, false));
+                new PerLanguageOption<bool>("Test Feature", null!, false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new PerLanguageOption<bool>(null!, "Test Name", false));
+                new PerLanguageOption<bool>(null!, "Test Name", false)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: null!));
+                new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: null!)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: [null!]));
+                new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: [null!])
+            );
         }
 
         [Fact]
@@ -85,9 +92,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
             Assert.Throws<ArgumentNullException>(() => new OptionKey(null!, null!));
             Assert.Throws<ArgumentNullException>(() => new OptionKey(null!, "lang"));
             Assert.Throws<ArgumentNullException>(() =>
-                new OptionKey(new TestOption() { IsPerLanguage = true }));
+                new OptionKey(new TestOption() { IsPerLanguage = true })
+            );
             Assert.Throws<ArgumentException>(() =>
-                new OptionKey(new TestOption() { IsPerLanguage = false }, language: "lang"));
+                new OptionKey(new TestOption() { IsPerLanguage = false }, language: "lang")
+            );
         }
 
         [Fact]

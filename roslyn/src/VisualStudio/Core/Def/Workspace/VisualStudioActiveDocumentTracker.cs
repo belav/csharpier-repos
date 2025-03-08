@@ -265,7 +265,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 )
                 {
                     var runningDocumentTable = ThreadingContext.JoinableTaskFactory.Run(() =>
-                        GetRunningDocumentTableAsync(ThreadingContext.DisposalToken).AsTask());
+                        GetRunningDocumentTableAsync(ThreadingContext.DisposalToken).AsTask()
+                    );
                     TrackNewActiveWindowFrame(frame, runningDocumentTable);
                 }
             }

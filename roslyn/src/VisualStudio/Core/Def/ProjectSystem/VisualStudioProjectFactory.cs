@@ -182,7 +182,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         projectGuid,
                         CancellationToken.None
                     )
-                    .ConfigureAwait(false));
+                    .ConfigureAwait(false)
+            );
         }
 
         async ValueTask<VSTypeScriptVisualStudioProjectWrapper> IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspaceAsync(

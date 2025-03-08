@@ -676,7 +676,8 @@ public class DefaultHtmlGeneratorTest
                 modelExplorer: null,
                 expression: nameof(Model.Name),
                 allowMultiple: true
-            ));
+            )
+        );
         Assert.Equal(
             "The parameter 'expression' must evaluate to an IEnumerable when multiple selection is allowed.",
             exception.Message

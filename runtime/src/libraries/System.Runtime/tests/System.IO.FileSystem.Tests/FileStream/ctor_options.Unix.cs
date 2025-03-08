@@ -117,7 +117,8 @@ namespace System.IO.Tests
                         FileOptions.None,
                         preallocationSize: 0,
                         unixMode
-                    ));
+                    )
+                );
             }
         }
 

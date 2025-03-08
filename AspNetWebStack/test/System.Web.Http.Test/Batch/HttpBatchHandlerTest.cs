@@ -220,7 +220,8 @@ namespace System.Web.Http
 
                 // Act
                 await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                    product.SendAsync(expectedRequest, cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -285,7 +286,8 @@ namespace System.Web.Http
 
                 // Act & Assert
                 await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                    product.SendAsync(expectedRequest, cancellationToken)
+                );
             }
         }
 
@@ -328,7 +330,8 @@ namespace System.Web.Http
 
                 // Act
                 var exception = await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(request, cancellationToken));
+                    product.SendAsync(request, cancellationToken)
+                );
 
                 // Assert
                 Assert.Same(expectedException, exception);

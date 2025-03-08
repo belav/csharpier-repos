@@ -65,7 +65,8 @@ namespace System.ComponentModel.Tests
                     null,
                     3,
                     typeof(string)
-                ));
+                )
+            );
         }
     }
 }

@@ -1134,7 +1134,8 @@ app.MapPost("/", TestAction);
         );
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 

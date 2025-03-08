@@ -54,7 +54,8 @@ public class DefaultTransportFactoryTests
                 httpClient: null,
                 httpConnectionOptions: null,
                 accessTokenProvider: null
-            ));
+            )
+        );
 
         Assert.Equal("httpClient", exception.ParamName);
     }
@@ -111,7 +112,8 @@ public class DefaultTransportFactoryTests
             accessTokenProvider: null
         );
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            transportFactory.CreateTransport(~requestedTransport, useStatefulReconnect: true));
+            transportFactory.CreateTransport(~requestedTransport, useStatefulReconnect: true)
+        );
 
         Assert.Equal("No requested transports available on the server.", ex.Message);
     }
@@ -172,7 +174,8 @@ public class DefaultTransportFactoryTests
                 accessTokenProvider: null
             );
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                transportFactory.CreateTransport(AllTransportTypes, useStatefulReconnect: true));
+                transportFactory.CreateTransport(AllTransportTypes, useStatefulReconnect: true)
+            );
 
             Assert.Equal("No requested transports available on the server.", ex.Message);
         }

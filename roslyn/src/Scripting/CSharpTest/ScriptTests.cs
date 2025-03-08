@@ -1052,7 +1052,8 @@ i",
                 .WithFilePath(null)
                 .WithFileEncoding(null);
             return VerifyStackTraceAsync(() =>
-                CSharpScript.Create("throw new System.Exception();", opts));
+                CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
         [ConditionalFact(
@@ -1066,7 +1067,8 @@ i",
                 .WithFilePath("debug.csx")
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(() =>
-                CSharpScript.Create("throw new System.Exception();", opts));
+                CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
         [ConditionalFact(
@@ -1101,7 +1103,8 @@ i",
                 CSharpScript.Create(
                     new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
                     opts
-                ));
+                )
+            );
         }
 
         [ConditionalFact(
@@ -1143,7 +1146,8 @@ i",
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFileEncoding(null);
             return VerifyStackTraceAsync(() =>
-                CSharpScript.Create("throw new System.Exception();", opts));
+                CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
         [Fact]
@@ -1153,7 +1157,8 @@ i",
                 .Default.WithEmitDebugInformation(false)
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(() =>
-                CSharpScript.Create("throw new System.Exception();", opts));
+                CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
         [ConditionalFact(
@@ -1184,7 +1189,8 @@ i",
                 CSharpScript.Create(
                     new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
                     opts
-                ));
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12348")]

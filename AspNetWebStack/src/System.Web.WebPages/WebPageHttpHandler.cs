@@ -30,7 +30,8 @@ namespace System.Web.WebPages
                         webPage,
                         StartPageFileName,
                         GetRegisteredExtensions()
-                    ))
+                    )
+                )
             ) { }
 
         internal WebPageHttpHandler(WebPage webPage, Lazy<WebPageRenderingBase> startPage)

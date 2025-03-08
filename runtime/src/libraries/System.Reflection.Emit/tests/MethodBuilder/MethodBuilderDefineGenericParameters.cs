@@ -87,8 +87,8 @@ namespace System.Reflection.Emit.Tests
                     | MethodImplAttributes.NoInlining
             );
 
-            Assert.Throws<InvalidOperationException>(() =>
-                method.DefineGenericParameters("T", "U"));
+            Assert.Throws<InvalidOperationException>(() => method.DefineGenericParameters("T", "U")
+            );
         }
 
         [Fact]
@@ -113,8 +113,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             method.DefineGenericParameters("T", "U");
-            Assert.Throws<InvalidOperationException>(() =>
-                method.DefineGenericParameters("M", "K"));
+            Assert.Throws<InvalidOperationException>(() => method.DefineGenericParameters("M", "K")
+            );
         }
 
         [Theory]
@@ -177,8 +177,8 @@ namespace System.Reflection.Emit.Tests
             method.GetILGenerator().Emit(OpCodes.Ret);
 
             Type resultType = type.CreateType();
-            Assert.Throws<InvalidOperationException>(() =>
-                method.DefineGenericParameters("T", "U"));
+            Assert.Throws<InvalidOperationException>(() => method.DefineGenericParameters("T", "U")
+            );
         }
     }
 }

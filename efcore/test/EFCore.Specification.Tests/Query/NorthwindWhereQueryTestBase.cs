@@ -284,7 +284,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             AssertQuery(
                 async,
                 ss => ss.Set<Customer>().Where(c => c.City == city.Nested.InstanceFieldValue)
-            ));
+            )
+        );
     }
 
     [ConditionalTheory]
@@ -299,7 +300,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             AssertQuery(
                 async,
                 ss => ss.Set<Customer>().Where(c => c.City == city.Throw().InstanceFieldValue)
-            ));
+            )
+        );
     }
 
     [ConditionalTheory]
@@ -539,7 +541,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
                             ss.Set<Customer>()
                                 .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
                         )
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2746,7 +2749,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             AssertQuery(
                 async,
                 ss => ss.Set<Customer>().Where(c => c.CustomerID == EF.Constant(c.CustomerID))
-            ));
+            )
+        );
 
         Assert.Equal(CoreStrings.EFConstantWithNonEvaluableArgument, exception.Message);
     }
@@ -2797,7 +2801,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             AssertQuery(
                 async,
                 ss => ss.Set<Customer>().Where(c => c.CustomerID == EF.Parameter(c.CustomerID))
-            ));
+            )
+        );
 
         Assert.Equal(CoreStrings.EFConstantWithNonEvaluableArgument, exception.Message);
     }

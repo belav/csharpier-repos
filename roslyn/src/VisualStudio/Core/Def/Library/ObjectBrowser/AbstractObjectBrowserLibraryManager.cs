@@ -59,9 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Workspace.WorkspaceChanged += OnWorkspaceChanged;
 
             _libraryService = new Lazy<ILibraryService>(() =>
-                Workspace
-                    .Services.GetLanguageServices(_languageName)
-                    .GetService<ILibraryService>());
+                Workspace.Services.GetLanguageServices(_languageName).GetService<ILibraryService>()
+            );
         }
 
         internal abstract AbstractDescriptionBuilder CreateDescriptionBuilder(

@@ -56,7 +56,8 @@ namespace System.IO.Tests.Enumeration
         public void NegativeRecursionDepth_ThrowsArgumentOutOfRangeException()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new EnumerationOptions() { MaxRecursionDepth = -1 });
+                new EnumerationOptions() { MaxRecursionDepth = -1 }
+            );
         }
     }
 }

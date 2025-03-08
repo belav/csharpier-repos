@@ -320,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                                         testDocument.Id,
                                         CancellationToken.None
                                     )
-                                    .AsTask());
+                                    .AsTask()
+                            );
                             Contract.ThrowIfNull(document);
 
                             workspace.OnSourceGeneratedDocumentOpened(

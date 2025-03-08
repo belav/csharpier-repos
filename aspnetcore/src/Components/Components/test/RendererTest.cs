@@ -203,7 +203,8 @@ public class RendererTest
         // Act
         var componentId = renderer.AssignRootComponentId(component);
         var renderTask = renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderRootComponentAsync(componentId));
+            renderer.RenderRootComponentAsync(componentId)
+        );
 
         // Assert
         Assert.False(renderTask.IsCompleted);
@@ -327,7 +328,8 @@ public class RendererTest
                         [LogName] = log,
                     }
                 )
-            ));
+            )
+        );
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForChild = log.Where(l => l.id == 1).ToArray();
@@ -399,7 +401,8 @@ public class RendererTest
 
         // Act/Assert 1: Its SetParametersAsync task remains incomplete
         var renderTask1 = renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderRootComponentAsync(component1Id));
+            renderer.RenderRootComponentAsync(component1Id)
+        );
         Assert.False(renderTask1.IsCompleted);
 
         // Arrange/Act 2: Can add a second root component while not quiescent
@@ -407,7 +410,8 @@ public class RendererTest
         var component2 = new AsyncComponent(tcs2.Task, 1);
         var component2Id = renderer.AssignRootComponentId(component2);
         var renderTask2 = renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderRootComponentAsync(component2Id));
+            renderer.RenderRootComponentAsync(component2Id)
+        );
 
         // Assert 2
         Assert.False(renderTask1.IsCompleted);
@@ -419,7 +423,8 @@ public class RendererTest
         // renderTask1 should not complete until we finish tcs2.
         // We can't really prove that absolutely, but at least show it doesn't happen during a certain time period.
         await Assert.ThrowsAsync<TimeoutException>(() =>
-            renderTask1.WaitAsync(TimeSpan.FromMilliseconds(250)));
+            renderTask1.WaitAsync(TimeSpan.FromMilliseconds(250))
+        );
         Assert.False(renderTask1.IsCompleted);
         Assert.False(renderTask2.IsCompleted);
 
@@ -457,7 +462,8 @@ public class RendererTest
 
         // Act
         var renderTask = renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderRootComponentAsync(componentId.Value));
+            renderer.RenderRootComponentAsync(componentId.Value)
+        );
 
         // Assert
         Assert.False(renderTask.IsCompleted);
@@ -538,7 +544,8 @@ public class RendererTest
                         [LogName] = log,
                     }
                 )
-            ));
+            )
+        );
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForChild = log.Where(l => l.id == 1).ToArray();
@@ -621,7 +628,8 @@ public class RendererTest
                         [LogName] = log,
                     }
                 )
-            ));
+            )
+        );
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForChild = log.Where(l => l.id == 1).ToArray();
@@ -749,7 +757,8 @@ public class RendererTest
                         [LogName] = log,
                     }
                 )
-            ));
+            )
+        );
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForFirstChild = log.Where(l => l.id == 1).ToArray();
@@ -893,7 +902,8 @@ public class RendererTest
 
         // Assert: Cannot determine event args type
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            renderer.GetEventArgsType(eventHandlerId));
+            renderer.GetEventArgsType(eventHandlerId)
+        );
         Assert.Contains("declares more than one parameter", ex.Message);
     }
 
@@ -917,7 +927,8 @@ public class RendererTest
 
         // Assert: Cannot determine event args type
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            renderer.GetEventArgsType(eventHandlerId));
+            renderer.GetEventArgsType(eventHandlerId)
+        );
         Assert.Contains($"must inherit from {typeof(EventArgs).FullName}", ex.Message);
     }
 
@@ -2721,7 +2732,8 @@ public class RendererTest
         renderHandle.Dispatcher.InvokeAsync(() =>
             renderHandle.Render(builder =>
                 throw new NotImplementedException("Should not be invoked")
-            ));
+            )
+        );
         Assert.Equal(2, renderer.Batches.Count);
     }
 
@@ -3824,7 +3836,8 @@ public class RendererTest
                         {
                             value = __value;
                             return RuntimeHelpers.InvokeAsynchronousDelegate(() =>
-                                Task.CompletedTask);
+                                Task.CompletedTask
+                            );
                         },
                         value
                     ),
@@ -5264,7 +5277,8 @@ public class RendererTest
 
         // Act/Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            renderer.RenderRootComponent(componentId));
+            renderer.RenderRootComponent(componentId)
+        );
         Assert.Contains("Cannot start a batch when one is already in progress.", ex.Message);
     }
 
@@ -5298,12 +5312,15 @@ public class RendererTest
         // Internal APIs don't have to be, because we won't call them at the wrong time
         Assert.Throws<InvalidOperationException>(() => parameterView.GetEnumerator());
         Assert.Throws<InvalidOperationException>(() =>
-            parameterView.GetValueOrDefault<object>("anything"));
+            parameterView.GetValueOrDefault<object>("anything")
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            parameterView.SetParameterProperties(new object()));
+            parameterView.SetParameterProperties(new object())
+        );
         Assert.Throws<InvalidOperationException>(parameterView.ToDictionary);
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            parameterView.TryGetValue<object>("anything", out _));
+            parameterView.TryGetValue<object>("anything", out _)
+        );
 
         // It's enough to assert about one of the messages
         Assert.Equal(
@@ -5391,7 +5408,8 @@ public class RendererTest
 
         // Act/Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            renderer.RenderRootComponentAsync(rootComponentId));
+            renderer.RenderRootComponentAsync(rootComponentId)
+        );
         Assert.StartsWith(
             $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Element' was left unclosed.",
             ex.Message
@@ -5797,7 +5815,8 @@ public class RendererTest
         await renderer.Dispatcher.InvokeAsync(() =>
         {
             var ex = Assert.Throws<ArgumentException>(() =>
-                renderer.RemoveRootComponent(rootComponentId));
+                renderer.RemoveRootComponent(rootComponentId)
+            );
             Assert.Equal(
                 $"The renderer does not have a component with ID {rootComponentId}.",
                 ex.Message
@@ -5826,7 +5845,8 @@ public class RendererTest
 
             // Even though we didn't await anything, it's synchronously unavailable for re-removal
             var ex = Assert.Throws<ArgumentException>(() =>
-                renderer.RemoveRootComponent(rootComponentId));
+                renderer.RemoveRootComponent(rootComponentId)
+            );
             Assert.Equal(
                 $"The renderer does not have a component with ID {rootComponentId}.",
                 ex.Message
@@ -5860,7 +5880,8 @@ public class RendererTest
         await renderer.Dispatcher.InvokeAsync(() =>
         {
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                renderer.RemoveRootComponent(nestedComponentFrame.ComponentId));
+                renderer.RemoveRootComponent(nestedComponentFrame.ComponentId)
+            );
             Assert.Equal("The specified component is not a root component", ex.Message);
         });
 
@@ -6213,8 +6234,8 @@ public class RendererTest
 
         public void TriggerRender()
         {
-            var t = _renderHandle.Dispatcher.InvokeAsync(() =>
-                _renderHandle.Render(_renderFragment));
+            var t = _renderHandle.Dispatcher.InvokeAsync(() => _renderHandle.Render(_renderFragment)
+            );
             // This should always be run synchronously
             Assert.True(t.IsCompleted);
             if (t.IsFaulted)
@@ -6479,7 +6500,8 @@ public class RendererTest
                     renderHandle.Render(builder =>
                     {
                         builder.AddContent(0, $"Hello from {nameof(MultiRendererComponent)}");
-                    }));
+                    })
+                );
             }
         }
     }

@@ -44,7 +44,8 @@ namespace System.IO.Tests
             foreach (FileMode invalidMode in invalidModes)
             {
                 Assert.Throws<ArgumentException>(() =>
-                    CreateFileStream(GetTestFilePath(), invalidMode, FileAccess.Read));
+                    CreateFileStream(GetTestFilePath(), invalidMode, FileAccess.Read)
+                );
                 // ArgumentException.ParamName is not set since two parameters disagree.
             }
         }
@@ -53,9 +54,11 @@ namespace System.IO.Tests
         public void InvalidFileModeAppendWithWriteThrows()
         {
             Assert.Throws<ArgumentException>(() =>
-                CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.Read));
+                CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.Read)
+            );
             Assert.Throws<ArgumentException>(() =>
-                CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.ReadWrite));
+                CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.ReadWrite)
+            );
             // ArgumentException.ParamName is not set since two parameters disagree.
         }
 

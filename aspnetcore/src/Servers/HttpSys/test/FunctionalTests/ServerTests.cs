@@ -485,7 +485,8 @@ public class ServerTests : LoggedTest
         {
             Assert.Null(server.Listener.Options.MaxConnections);
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                server.Listener.Options.MaxConnections = -2);
+                server.Listener.Options.MaxConnections = -2
+            );
             Assert.Null(server.Listener.Options.MaxConnections);
             server.Listener.Options.MaxConnections = null;
             server.Listener.Options.MaxConnections = 3;

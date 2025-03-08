@@ -21,7 +21,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // A null name in JsonPropertyNameAttribute is not allowed.
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await Serializer.SerializeWrapper(new NullPropertyName_TestClass(), options));
+                await Serializer.SerializeWrapper(new NullPropertyName_TestClass(), options)
+            );
         }
 
         [Fact]
@@ -37,12 +38,14 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.DeserializeWrapper<IntPropertyNamesDifferentByCaseOnly_TestClass>(
                         json,
                         options
-                    ));
+                    )
+                );
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     await Serializer.SerializeWrapper(
                         new IntPropertyNamesDifferentByCaseOnly_TestClass(),
                         options
-                    ));
+                    )
+                );
             }
         }
 

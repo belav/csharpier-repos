@@ -3368,9 +3368,11 @@ public static partial class DataContractJsonSerializerTests
     {
         var settings = new DataContractJsonSerializerSettings();
         Assert.Throws<ArgumentNullException>(() =>
-            settings.DateTimeFormat = new DateTimeFormat(null));
+            settings.DateTimeFormat = new DateTimeFormat(null)
+        );
         Assert.Throws<ArgumentNullException>(() =>
-            settings.DateTimeFormat = new DateTimeFormat("ddmmyyyyy", null));
+            settings.DateTimeFormat = new DateTimeFormat("ddmmyyyyy", null)
+        );
     }
 
     [Fact]
@@ -3390,8 +3392,8 @@ public static partial class DataContractJsonSerializerTests
         serializer.WriteObject(ms, original);
         var serializedJsonValue = Encoding.UTF8.GetString(ms.ToArray());
         serializedJsonValue = serializedJsonValue.Replace("2011", "         2011");
-        Assert.Throws<SerializationException>(() =>
-            DeserializeString<DateTime>(serializedJsonValue));
+        Assert.Throws<SerializationException>(() => DeserializeString<DateTime>(serializedJsonValue)
+        );
     }
 
     [Fact]

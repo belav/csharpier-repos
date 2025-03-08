@@ -32,7 +32,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithInvalidMetadata)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                provider.GetTypeDescriptor(typeof(ClassWithInvalidMetadata), null));
+                provider.GetTypeDescriptor(typeof(ClassWithInvalidMetadata), null)
+            );
         }
 
         [Fact]

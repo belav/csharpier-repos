@@ -193,7 +193,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveDocument(null!));
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveDocument(s_unrelatedDocumentId));
+                solution.RemoveDocument(s_unrelatedDocumentId)
+            );
         }
 
         [Fact]
@@ -203,9 +204,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveDocuments(default));
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveDocuments(ImmutableArray.Create(s_unrelatedDocumentId)));
+                solution.RemoveDocuments(ImmutableArray.Create(s_unrelatedDocumentId))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                solution.RemoveDocuments(ImmutableArray.Create((DocumentId)null!)));
+                solution.RemoveDocuments(ImmutableArray.Create((DocumentId)null!))
+            );
         }
 
         [Fact]
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveAdditionalDocument(null!));
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAdditionalDocument(s_unrelatedDocumentId));
+                solution.RemoveAdditionalDocument(s_unrelatedDocumentId)
+            );
         }
 
         [Fact]
@@ -225,9 +229,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveAdditionalDocuments(default));
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAdditionalDocuments(ImmutableArray.Create(s_unrelatedDocumentId)));
+                solution.RemoveAdditionalDocuments(ImmutableArray.Create(s_unrelatedDocumentId))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                solution.RemoveAdditionalDocuments(ImmutableArray.Create((DocumentId)null!)));
+                solution.RemoveAdditionalDocuments(ImmutableArray.Create((DocumentId)null!))
+            );
         }
 
         [Fact]
@@ -235,10 +241,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
-            Assert.Throws<ArgumentNullException>(() =>
-                solution.RemoveAnalyzerConfigDocument(null!));
+            Assert.Throws<ArgumentNullException>(() => solution.RemoveAnalyzerConfigDocument(null!)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAnalyzerConfigDocument(s_unrelatedDocumentId));
+                solution.RemoveAnalyzerConfigDocument(s_unrelatedDocumentId)
+            );
         }
 
         [Fact]
@@ -247,13 +254,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() =>
-                solution.RemoveAnalyzerConfigDocuments(default));
+                solution.RemoveAnalyzerConfigDocuments(default)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAnalyzerConfigDocuments(
-                    ImmutableArray.Create(s_unrelatedDocumentId)
-                ));
+                solution.RemoveAnalyzerConfigDocuments(ImmutableArray.Create(s_unrelatedDocumentId))
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                solution.RemoveAnalyzerConfigDocuments(ImmutableArray.Create((DocumentId)null!)));
+                solution.RemoveAnalyzerConfigDocuments(ImmutableArray.Create((DocumentId)null!))
+            );
         }
 
         [Fact]
@@ -271,11 +279,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Same(newSolution1, newSolution2);
 
             Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentName(documentId, name: null!));
+                solution.WithDocumentName(documentId, name: null!)
+            );
 
             Assert.Throws<ArgumentNullException>(() => solution.WithDocumentName(null!, name));
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithDocumentName(s_unrelatedDocumentId, name));
+                solution.WithDocumentName(s_unrelatedDocumentId, name)
+            );
         }
 
         [Fact]
@@ -306,12 +316,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Same(newSolution3, newSolution5);
 
             Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentFolders(documentId, folders: new string[] { null! }));
+                solution.WithDocumentFolders(documentId, folders: new string[] { null! })
+            );
 
-            Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentFolders(null!, folders));
+            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFolders(null!, folders)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithDocumentFolders(s_unrelatedDocumentId, folders));
+                solution.WithDocumentFolders(s_unrelatedDocumentId, folders)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34837")]
@@ -337,11 +349,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // TODO: https://github.com/dotnet/roslyn/issues/37125
             Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentFilePath(documentId, filePath: null!));
+                solution.WithDocumentFilePath(documentId, filePath: null!)
+            );
 
             Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFilePath(null!, path));
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithDocumentFilePath(s_unrelatedDocumentId, path));
+                solution.WithDocumentFilePath(s_unrelatedDocumentId, path)
+            );
         }
 
         [Fact]
@@ -366,12 +380,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithDocumentSourceCodeKind(documentId, (SourceCodeKind)(-1)));
+                solution.WithDocumentSourceCodeKind(documentId, (SourceCodeKind)(-1))
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentSourceCodeKind(null!, SourceCodeKind.Script));
+                solution.WithDocumentSourceCodeKind(null!, SourceCodeKind.Script)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithDocumentSourceCodeKind(s_unrelatedDocumentId, SourceCodeKind.Script));
+                solution.WithDocumentSourceCodeKind(s_unrelatedDocumentId, SourceCodeKind.Script)
+            );
         }
 
         [Fact, Obsolete("Testing obsolete API")]
@@ -418,12 +435,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Same(newSolution1, newSolution2);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithDocumentSyntaxRoot(documentId, root, (PreservationMode)(-1)));
+                solution.WithDocumentSyntaxRoot(documentId, root, (PreservationMode)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentSyntaxRoot(null!, root));
+            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentSyntaxRoot(null!, root)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithDocumentSyntaxRoot(s_unrelatedDocumentId, root));
+                solution.WithDocumentSyntaxRoot(s_unrelatedDocumentId, root)
+            );
         }
 
         [Fact, WorkItem(37125, "https://github.com/dotnet/roslyn/issues/41940")]
@@ -446,7 +465,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var tree = compilation.SyntaxTrees.Single();
             var provider = compilation.Options.SyntaxTreeOptionsProvider!;
             Assert.Throws<ArgumentException>(() =>
-                provider.TryGetDiagnosticValue(tree, "CA1234", CancellationToken.None, out _));
+                provider.TryGetDiagnosticValue(tree, "CA1234", CancellationToken.None, out _)
+            );
         }
 
         [Fact]
@@ -480,22 +500,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     (SourceText)null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithDocumentText(documentId, text, (PreservationMode)(-1)));
+                solution.WithDocumentText(documentId, text, (PreservationMode)(-1))
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithDocumentText(
                     (DocumentId)null!,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithDocumentText(
                     s_unrelatedDocumentId,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -533,22 +557,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     (SourceText)null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithDocumentText(documentId, textAndVersion, (PreservationMode)(-1)));
+                solution.WithDocumentText(documentId, textAndVersion, (PreservationMode)(-1))
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithDocumentText(
                     (DocumentId)null!,
                     textAndVersion,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithDocumentText(
                     s_unrelatedDocumentId,
                     textAndVersion,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -586,15 +614,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     (DocumentId[])null!,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithDocumentText(
                     new[] { documentId },
                     null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithDocumentText(new[] { documentId }, text, (PreservationMode)(-1)));
+                solution.WithDocumentText(new[] { documentId }, text, (PreservationMode)(-1))
+            );
         }
 
         public enum TextUpdateType
@@ -1110,22 +1141,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     (SourceText)null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithAdditionalDocumentText(documentId, text, (PreservationMode)(-1)));
+                solution.WithAdditionalDocumentText(documentId, text, (PreservationMode)(-1))
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithAdditionalDocumentText(
                     (DocumentId)null!,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithAdditionalDocumentText(
                     s_unrelatedDocumentId,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1167,26 +1202,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     (SourceText)null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 solution.WithAdditionalDocumentText(
                     documentId,
                     textAndVersion,
                     (PreservationMode)(-1)
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithAdditionalDocumentText(
                     (DocumentId)null!,
                     textAndVersion,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithAdditionalDocumentText(
                     s_unrelatedDocumentId,
                     textAndVersion,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1219,22 +1258,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     (SourceText)null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithAnalyzerConfigDocumentText(documentId, text, (PreservationMode)(-1)));
+                solution.WithAnalyzerConfigDocumentText(documentId, text, (PreservationMode)(-1))
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithAnalyzerConfigDocumentText(
                     (DocumentId)null!,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithAnalyzerConfigDocumentText(
                     s_unrelatedDocumentId,
                     text,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1276,26 +1319,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     (SourceText)null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 solution.WithAnalyzerConfigDocumentText(
                     documentId,
                     textAndVersion,
                     (PreservationMode)(-1)
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithAnalyzerConfigDocumentText(
                     (DocumentId)null!,
                     textAndVersion,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithAnalyzerConfigDocumentText(
                     s_unrelatedDocumentId,
                     textAndVersion,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1332,18 +1379,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                solution.WithDocumentTextLoader(documentId, loader, (PreservationMode)(-1)));
+                solution.WithDocumentTextLoader(documentId, loader, (PreservationMode)(-1))
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
-                solution.WithDocumentTextLoader(null!, loader, PreservationMode.PreserveIdentity));
+                solution.WithDocumentTextLoader(null!, loader, PreservationMode.PreserveIdentity)
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithDocumentTextLoader(
                     s_unrelatedDocumentId,
                     loader,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1380,26 +1431,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 solution.WithAdditionalDocumentTextLoader(
                     documentId,
                     loader,
                     (PreservationMode)(-1)
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithAdditionalDocumentTextLoader(
                     null!,
                     loader,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithAdditionalDocumentTextLoader(
                     s_unrelatedDocumentId,
                     loader,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1436,26 +1491,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId,
                     null!,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 solution.WithAnalyzerConfigDocumentTextLoader(
                     documentId,
                     loader,
                     (PreservationMode)(-1)
-                ));
+                )
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
                 solution.WithAnalyzerConfigDocumentTextLoader(
                     null!,
                     loader,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithAnalyzerConfigDocumentTextLoader(
                     s_unrelatedDocumentId,
                     loader,
                     PreservationMode.PreserveIdentity
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1488,7 +1547,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectAssemblyName(null!, "x.dll")
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectAssemblyName(ProjectId.CreateNewId(), "x.dll"));
+                solution.WithProjectAssemblyName(ProjectId.CreateNewId(), "x.dll")
+            );
         }
 
         [Fact]
@@ -1520,7 +1580,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectOutputFilePath(null!, "x.dll")
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectOutputFilePath(ProjectId.CreateNewId(), "x.dll"));
+                solution.WithProjectOutputFilePath(ProjectId.CreateNewId(), "x.dll")
+            );
         }
 
         [Fact]
@@ -1552,7 +1613,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectOutputRefFilePath(null!, "x.dll")
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectOutputRefFilePath(ProjectId.CreateNewId(), "x.dll"));
+                solution.WithProjectOutputRefFilePath(ProjectId.CreateNewId(), "x.dll")
+            );
         }
 
         [Fact]
@@ -1591,7 +1653,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution.WithProjectCompilationOutputInfo(
                     ProjectId.CreateNewId(),
                     new CompilationOutputInfo("x.dll")
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1623,7 +1686,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectDefaultNamespace(null!, "x")
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectDefaultNamespace(ProjectId.CreateNewId(), "x"));
+                solution.WithProjectDefaultNamespace(ProjectId.CreateNewId(), "x")
+            );
         }
 
         [Fact]
@@ -1797,7 +1861,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectName(null!, "x")
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectName(ProjectId.CreateNewId(), "x"));
+                solution.WithProjectName(ProjectId.CreateNewId(), "x")
+            );
         }
 
         [Fact]
@@ -1829,7 +1894,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectFilePath(null!, "x")
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectFilePath(ProjectId.CreateNewId(), "x"));
+                solution.WithProjectFilePath(ProjectId.CreateNewId(), "x")
+            );
         }
 
         [Fact]
@@ -1852,7 +1918,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectCompilationOptions(null!, options)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectCompilationOptions(ProjectId.CreateNewId(), options));
+                solution.WithProjectCompilationOptions(ProjectId.CreateNewId(), options)
+            );
         }
 
         [Theory]
@@ -1924,7 +1991,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectParseOptions(null!, options)
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectParseOptions(ProjectId.CreateNewId(), options));
+                solution.WithProjectParseOptions(ProjectId.CreateNewId(), options)
+            );
         }
 
         [Fact]
@@ -2046,19 +2114,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => solution.WithProjectReferences(null!, new[] { projectRef })
             );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectReferences(ProjectId.CreateNewId(), new[] { projectRef }));
+                solution.WithProjectReferences(ProjectId.CreateNewId(), new[] { projectRef })
+            );
 
             // cycles:
             Assert.Throws<InvalidOperationException>(() =>
                 solution2.WithProjectReferences(
                     projectId2,
                     new[] { new ProjectReference(projectId) }
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution.WithProjectReferences(
-                    projectId,
-                    new[] { new ProjectReference(projectId) }
-                ));
+                solution.WithProjectReferences(projectId, new[] { new ProjectReference(projectId) })
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42406")]
@@ -2142,16 +2210,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // dup:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.AddProjectReferences(projectId3, new[] { projectRef2 }));
+                solution.AddProjectReferences(projectId3, new[] { projectRef2 })
+            );
 
             // cycles:
             Assert.Throws<InvalidOperationException>(() =>
-                solution3.AddProjectReferences(projectId2, new[] { projectRef3 }));
+                solution3.AddProjectReferences(projectId2, new[] { projectRef3 })
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                solution3.AddProjectReferences(
-                    projectId,
-                    new[] { new ProjectReference(projectId) }
-                ));
+                solution3.AddProjectReferences(projectId, new[] { new ProjectReference(projectId) })
+            );
         }
 
         [Fact]
@@ -2209,7 +2277,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // project not in solution:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveProjectReference(ProjectId.CreateNewId(), projectRef2));
+                solution.RemoveProjectReference(ProjectId.CreateNewId(), projectRef2)
+            );
         }
 
         [Fact]
@@ -2291,7 +2360,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution.AddProjectReferences(
                     submissionId2,
                     new[] { new ProjectReference(submissionId3) }
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectReferences(
                     submissionId1,
@@ -2300,19 +2370,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         new ProjectReference(submissionId2),
                         new ProjectReference(submissionId3),
                     }
-                ));
+                )
+            );
 
             // non-submission project can't reference a submission:
             Assert.Throws<InvalidOperationException>(() =>
                 solution.AddProjectReferences(
                     projectId0,
                     new[] { new ProjectReference(submissionId1) }
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectReferences(
                     projectId0,
                     new[] { new ProjectReference(submissionId1) }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2339,7 +2412,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution.WithProjectMetadataReferences(
                     ProjectId.CreateNewId(),
                     new[] { metadataRef }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2387,7 +2461,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // dup:
             Assert.Throws<InvalidOperationException>(() =>
-                solution3.AddMetadataReferences(projectId, new[] { metadataRef1 }));
+                solution3.AddMetadataReferences(projectId, new[] { metadataRef1 })
+            );
         }
 
         [Fact]
@@ -2424,11 +2499,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // removing a reference that's not in the list:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveMetadataReference(projectId, new TestMetadataReference()));
+                solution.RemoveMetadataReference(projectId, new TestMetadataReference())
+            );
 
             // project not in solution:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveMetadataReference(ProjectId.CreateNewId(), metadataRef1));
+                solution.RemoveMetadataReference(ProjectId.CreateNewId(), metadataRef1)
+            );
         }
 
         [Fact]
@@ -2455,7 +2532,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution.WithProjectAnalyzerReferences(
                     ProjectId.CreateNewId(),
                     new[] { analyzerRef }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2506,7 +2584,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // dup:
             Assert.Throws<InvalidOperationException>(() =>
-                solution3.AddAnalyzerReferences(projectId, new[] { analyzerRef1 }));
+                solution3.AddAnalyzerReferences(projectId, new[] { analyzerRef1 })
+            );
         }
 
         [Fact]
@@ -2543,11 +2622,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // removing a reference that's not in the list:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAnalyzerReference(projectId, new TestAnalyzerReference()));
+                solution.RemoveAnalyzerReference(projectId, new TestAnalyzerReference())
+            );
 
             // project not in solution:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAnalyzerReference(ProjectId.CreateNewId(), analyzerRef1));
+                solution.RemoveAnalyzerReference(ProjectId.CreateNewId(), analyzerRef1)
+            );
         }
 
         [Fact]
@@ -2601,7 +2682,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // dup:
             Assert.Throws<InvalidOperationException>(() =>
-                solution3.AddAnalyzerReferences(new[] { analyzerRef1 }));
+                solution3.AddAnalyzerReferences(new[] { analyzerRef1 })
+            );
         }
 
         [Fact]
@@ -2627,7 +2709,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // removing a reference that's not in the list:
             Assert.Throws<InvalidOperationException>(() =>
-                solution.RemoveAnalyzerReference(new TestAnalyzerReference()));
+                solution.RemoveAnalyzerReference(new TestAnalyzerReference())
+            );
         }
 
         [Fact]
@@ -2673,7 +2756,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId: DocumentId.CreateNewId(ProjectId.CreateNewId()),
                     "name",
                     loader
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2722,7 +2806,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId: DocumentId.CreateNewId(ProjectId.CreateNewId()),
                     "name",
                     "text"
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2778,7 +2863,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId: DocumentId.CreateNewId(ProjectId.CreateNewId()),
                     "name",
                     sourceText
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -2825,7 +2911,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     documentId: DocumentId.CreateNewId(ProjectId.CreateNewId()),
                     "name",
                     syntaxRoot: root
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -3060,7 +3147,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             Assert.ThrowsAny<InvalidOperationException>(() =>
-                solution.AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2)));
+                solution.AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2))
+            );
         }
 
         [Fact]
@@ -3152,7 +3240,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentException>(() =>
                 solution
                     .GetProject(projectId2)
-                    .RemoveDocuments(ImmutableArray.Create(documentInfo1.Id)));
+                    .RemoveDocuments(ImmutableArray.Create(documentInfo1.Id))
+            );
         }
 
         [Fact]
@@ -3182,7 +3271,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentException>(() =>
                 solution
                     .GetProject(projectId2)
-                    .RemoveAdditionalDocuments(ImmutableArray.Create(documentInfo1.Id)));
+                    .RemoveAdditionalDocuments(ImmutableArray.Create(documentInfo1.Id))
+            );
         }
 
         [Fact]
@@ -3212,7 +3302,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentException>(() =>
                 solution
                     .GetProject(projectId2)
-                    .RemoveAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1.Id)));
+                    .RemoveAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1.Id))
+            );
         }
 
         [Fact]
@@ -5318,19 +5409,23 @@ public class C : A {
                 solution = solution.WithProjectDocumentsOrder(
                     pid,
                     ImmutableList.Create<DocumentId>()
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                solution = solution.WithProjectDocumentsOrder(pid, null));
+                solution = solution.WithProjectDocumentsOrder(pid, null)
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 solution = solution.WithProjectDocumentsOrder(
                     pid,
                     ImmutableList.CreateRange(new[] { did5, did3, did2, did1 })
-                ));
+                )
+            );
             Assert.Throws<ArgumentException>(() =>
                 solution = solution.WithProjectDocumentsOrder(
                     pid,
                     ImmutableList.CreateRange(new[] { did3, did2, did1 })
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -5972,7 +6067,8 @@ class C
             // Create a source text we'll release and ensure it disappears. We'll also make sure we don't accidentally root
             // that solution in the middle.
             var sourceTextToRelease = ObjectReference.CreateFromFactory(static () =>
-                SourceText.From(Guid.NewGuid().ToString()));
+                SourceText.From(Guid.NewGuid().ToString())
+            );
             var solutionWithSourceTextToRelease = sourceTextToRelease.GetObjectReference(
                 static (sourceText, document) =>
                     document.Project.Solution.WithDocumentText(

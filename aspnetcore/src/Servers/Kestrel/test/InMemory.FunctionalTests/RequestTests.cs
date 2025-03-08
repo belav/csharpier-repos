@@ -1902,11 +1902,13 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     // Synchronous reads throw.
                     var ioEx = Assert.Throws<InvalidOperationException>(() =>
-                        context.Request.Body.Read(new byte[1], 0, 1));
+                        context.Request.Body.Read(new byte[1], 0, 1)
+                    );
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
 
                     var ioEx2 = Assert.Throws<InvalidOperationException>(() =>
-                        context.Request.Body.CopyTo(Stream.Null));
+                        context.Request.Body.CopyTo(Stream.Null)
+                    );
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                     while (offset < 5)
@@ -1999,11 +2001,13 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     // Synchronous reads now throw.
                     var ioEx = Assert.Throws<InvalidOperationException>(() =>
-                        context.Request.Body.Read(new byte[1], 0, 1));
+                        context.Request.Body.Read(new byte[1], 0, 1)
+                    );
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
 
                     var ioEx2 = Assert.Throws<InvalidOperationException>(() =>
-                        context.Request.Body.CopyTo(Stream.Null));
+                        context.Request.Body.CopyTo(Stream.Null)
+                    );
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                     var buffer = new byte[5];
@@ -2178,7 +2182,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     httpContext.Request.BodyReader.Complete();
 
                     await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await request.BodyReader.ReadAsync());
+                        await request.BodyReader.ReadAsync()
+                    );
 
                     response.Headers["Content-Length"] = new[] { "11" };
 

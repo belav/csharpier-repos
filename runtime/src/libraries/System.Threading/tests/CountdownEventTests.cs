@@ -121,11 +121,13 @@ namespace System.Threading.Tests
             // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                cde.Wait(TimeSpan.FromDays(-1), new CancellationToken()));
+                cde.Wait(TimeSpan.FromDays(-1), new CancellationToken())
+            );
             // Failure Case: Wait(TimeSpan) didn't throw AORE when the totalmilliseconds < -1
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                cde.Wait(TimeSpan.MaxValue, new CancellationToken()));
+                cde.Wait(TimeSpan.MaxValue, new CancellationToken())
+            );
             // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
 
             cde.Dispose();

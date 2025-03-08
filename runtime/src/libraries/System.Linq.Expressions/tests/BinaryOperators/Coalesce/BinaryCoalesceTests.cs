@@ -995,9 +995,11 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<int, int>> conversion = x => x * 2;
 
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Coalesce(Expression.Constant(5), Expression.Constant(5)));
+                Expression.Coalesce(Expression.Constant(5), Expression.Constant(5))
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.Coalesce(Expression.Constant(5), Expression.Constant(5), conversion));
+                Expression.Coalesce(Expression.Constant(5), Expression.Constant(5), conversion)
+            );
         }
 
         [Fact]
@@ -1065,7 +1067,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(5, typeof(int?)),
                     Expression.Constant(5, typeof(int?)),
                     nullableNotEquivalent
-                ));
+                )
+            );
 
             Expression<Func<string, bool>> stringNotEquivalent = x => x == "";
             Assert.Throws<InvalidOperationException>(() =>
@@ -1073,7 +1076,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(""),
                     Expression.Constant(""),
                     stringNotEquivalent
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -1085,13 +1089,15 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(""),
                     Expression.Constant(""),
                     boolNotEquivalent
-                ));
+                )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 Expression.Coalesce(
                     Expression.Constant(0, typeof(int?)),
                     Expression.Constant(""),
                     boolNotEquivalent
-                ));
+                )
+            );
         }
 
         [Fact]

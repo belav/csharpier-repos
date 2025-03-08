@@ -61,7 +61,8 @@ public class DynamicSchemeTests
         using var host = await CreateHost();
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("http://example.com/auth/One"));
+            server.SendAsync("http://example.com/auth/One")
+        );
 
         // Add One scheme
         var response = await server.CreateClient().GetAsync("http://example.com/add/One");
@@ -79,7 +80,8 @@ public class DynamicSchemeTests
         response = await server.CreateClient().GetAsync("http://example.com/remove/Two");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("http://example.com/auth/Two"));
+            server.SendAsync("http://example.com/auth/Two")
+        );
         transaction = await server.SendAsync("http://example.com/auth/One");
         Assert.Equal("One", transaction.FindClaimValue(ClaimTypes.NameIdentifier, "One"));
 
@@ -87,9 +89,11 @@ public class DynamicSchemeTests
         response = await server.CreateClient().GetAsync("http://example.com/remove/One");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("http://example.com/auth/Two"));
+            server.SendAsync("http://example.com/auth/Two")
+        );
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            server.SendAsync("http://example.com/auth/One"));
+            server.SendAsync("http://example.com/auth/One")
+        );
     }
 
     public class TestOptions : AuthenticationSchemeOptions

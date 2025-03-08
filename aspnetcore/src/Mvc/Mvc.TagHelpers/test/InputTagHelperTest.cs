@@ -969,7 +969,8 @@ public class InputTagHelperTest
                 viewContext.FormContext.InvariantField(
                     tagBuilder.Attributes["name"],
                     usesInvariantFormatting
-                ))
+                )
+            )
             .Verifiable();
 
         var expectedPostElement = usesInvariantFormatting

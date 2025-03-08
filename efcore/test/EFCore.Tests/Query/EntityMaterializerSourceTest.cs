@@ -32,7 +32,8 @@ public class EntityMaterializerSourceTest
                     source.CreateMaterializeExpression(
                         new EntityMaterializerSourceParameters((IEntityType)entityType, "", null),
                         null!
-                    ))
+                    )
+                )
                 .Message
         );
     }

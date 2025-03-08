@@ -3506,7 +3506,8 @@ ORDER BY [t].[Id], [t0].[c], [t0].[Id1]
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
             base.SelectMany_with_predicate_and_DefaultIfEmpty_projecting_root_collection_element_and_another_collection(
                 async
-            ));
+            )
+        );
 
         Assert.StartsWith(
             CoreStrings.ExpressionParameterizationExceptionSensitive("X").Substring(0, 30),

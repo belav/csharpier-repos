@@ -167,12 +167,14 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             Assert.Throws<PlatformNotSupportedException>(() =>
                 ECDiffieHellmanFactory
                     .Create(ECCurve.CreateFromFriendlyName("Invalid"))
-                    .ExportExplicitParameters(false));
+                    .ExportExplicitParameters(false)
+            );
 
             Assert.Throws<PlatformNotSupportedException>(() =>
                 ECDiffieHellmanFactory
                     .Create(ECCurve.CreateFromValue("Invalid"))
-                    .ExportExplicitParameters(false));
+                    .ExportExplicitParameters(false)
+            );
         }
 
         [Fact]
@@ -362,8 +364,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
                     temp = p;
                     temp.Curve = ECCurve.CreateFromOid(new Oid("Invalid", "Invalid"));
-                    Assert.ThrowsAny<PlatformNotSupportedException>(() =>
-                        ec.ImportParameters(temp));
+                    Assert.ThrowsAny<PlatformNotSupportedException>(() => ec.ImportParameters(temp)
+                    );
                 }
             }
         }
@@ -461,13 +463,15 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 if (ECDiffieHellmanFactory.ExplicitCurvesSupported)
                 {
                     Assert.ThrowsAny<CryptographicException>(() =>
-                        cavs.ExportExplicitParameters(true));
+                        cavs.ExportExplicitParameters(true)
+                    );
                 }
 
                 using (ECDiffieHellmanPublicKey iutPublic = iut.PublicKey)
                 {
                     Assert.ThrowsAny<CryptographicException>(() =>
-                        cavs.DeriveKeyFromHash(iutPublic, HashAlgorithmName.SHA256));
+                        cavs.DeriveKeyFromHash(iutPublic, HashAlgorithmName.SHA256)
+                    );
                 }
             }
         }

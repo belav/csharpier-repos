@@ -200,7 +200,8 @@ namespace System.Net.Http.Functional.Tests
 
             // SocksException is not public
             var exception = await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
-                client.SendAsync(TestAsync, request));
+                client.SendAsync(TestAsync, request)
+            );
             var innerException = exception.InnerException;
             Assert.Equal(exceptionMessage, innerException.Message);
             Assert.Equal("SocksException", innerException.GetType().Name);

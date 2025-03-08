@@ -60,10 +60,8 @@ namespace System.Threading.Tasks.Tests
         public static void RunPartitionerStaticTest_SingleChunking_Negative()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Partitioner.Create(
-                    new int[] { 1, 2, 3, 4, 5 },
-                    (EnumerablePartitionerOptions)1000
-                ));
+                Partitioner.Create(new int[] { 1, 2, 3, 4, 5 }, (EnumerablePartitionerOptions)1000)
+            );
         }
 
         // Test proper range coverage

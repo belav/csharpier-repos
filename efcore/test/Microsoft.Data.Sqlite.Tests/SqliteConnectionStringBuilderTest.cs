@@ -180,11 +180,13 @@ public class SqliteConnectionStringBuilderTest
     public void Item_validates_argument()
     {
         var ex = Assert.Throws<ArgumentException>(() =>
-            new SqliteConnectionStringBuilder()["Invalid"]);
+            new SqliteConnectionStringBuilder()["Invalid"]
+        );
         Assert.Equal(Resources.KeywordNotSupported("Invalid"), ex.Message);
 
         ex = Assert.Throws<ArgumentException>(() =>
-            new SqliteConnectionStringBuilder()["Invalid"] = 0);
+            new SqliteConnectionStringBuilder()["Invalid"] = 0
+        );
         Assert.Equal(Resources.KeywordNotSupported("Invalid"), ex.Message);
     }
 

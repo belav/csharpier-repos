@@ -12,7 +12,8 @@ public class OperationExecutorTest
         Assert.Equal("reportHandler", ex.ParamName);
 
         ex = Assert.Throws<ArgumentNullException>(() =>
-            new OperationExecutor(new OperationReportHandler(), null));
+            new OperationExecutor(new OperationReportHandler(), null)
+        );
         Assert.Equal("args", ex.ParamName);
     }
 

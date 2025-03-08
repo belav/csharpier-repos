@@ -5250,7 +5250,8 @@ class Class3 { }
 ";
             await VerifyItemExistsAsync(code, "X");
             await Assert.ThrowsAsync<Xunit.Sdk.TrueException>(() =>
-                VerifyItemExistsAsync(code, "XAttribute"));
+                VerifyItemExistsAsync(code, "XAttribute")
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]

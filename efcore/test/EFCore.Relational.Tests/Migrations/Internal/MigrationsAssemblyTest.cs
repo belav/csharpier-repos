@@ -33,7 +33,8 @@ public class MigrationsAssemblyTest
             RelationalStrings.MigrationNotFound("Spike"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    CreateMigrationsAssembly().GetMigrationId("Spike"))
+                    CreateMigrationsAssembly().GetMigrationId("Spike")
+                )
                 .Message
         );
 

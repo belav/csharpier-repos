@@ -1111,7 +1111,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Min(e => e.TestNullableDecimal)).ToList())
+                    query.Select(g => g.Min(e => e.TestNullableDecimal)).ToList()
+                )
                 .Message
         );
 
@@ -1122,7 +1123,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Min(e => e.TestNullableDateTimeOffset)).ToList())
+                    query.Select(g => g.Min(e => e.TestNullableDateTimeOffset)).ToList()
+                )
                 .Message
         );
 
@@ -1133,7 +1135,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Min(e => e.TestNullableTimeSpan)).ToList())
+                    query.Select(g => g.Min(e => e.TestNullableTimeSpan)).ToList()
+                )
                 .Message
         );
 
@@ -1144,7 +1147,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Min(e => e.TestNullableUnsignedInt64)).ToList())
+                    query.Select(g => g.Min(e => e.TestNullableUnsignedInt64)).ToList()
+                )
                 .Message
         );
     }
@@ -1197,7 +1201,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Max(e => e.TestNullableDecimal)).ToList())
+                    query.Select(g => g.Max(e => e.TestNullableDecimal)).ToList()
+                )
                 .Message
         );
 
@@ -1208,7 +1213,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Max(e => e.TestNullableDateTimeOffset)).ToList())
+                    query.Select(g => g.Max(e => e.TestNullableDateTimeOffset)).ToList()
+                )
                 .Message
         );
 
@@ -1219,7 +1225,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Max(e => e.TestNullableTimeSpan)).ToList())
+                    query.Select(g => g.Max(e => e.TestNullableTimeSpan)).ToList()
+                )
                 .Message
         );
 
@@ -1230,7 +1237,8 @@ public class BuiltInDataTypesSqliteTest
             ),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    query.Select(g => g.Max(e => e.TestNullableUnsignedInt64)).ToList())
+                    query.Select(g => g.Max(e => e.TestNullableUnsignedInt64)).ToList()
+                )
                 .Message
         );
     }
@@ -1269,7 +1277,8 @@ public class BuiltInDataTypesSqliteTest
                     context
                         .Set<BuiltInNullableDataTypes>()
                         .Where(e => e.PartitionId == 202)
-                        .Average(e => e.TestNullableDecimal))
+                        .Average(e => e.TestNullableDecimal)
+                )
                 .Message
         );
     }
@@ -1308,7 +1317,8 @@ public class BuiltInDataTypesSqliteTest
                     context
                         .Set<BuiltInDataTypes>()
                         .Where(e => e.PartitionId == 203)
-                        .Sum(e => e.TestDecimal))
+                        .Sum(e => e.TestDecimal)
+                )
                 .Message
         );
     }
@@ -1749,19 +1759,23 @@ public class BuiltInDataTypesSqliteTest
         var query = context.Set<BuiltInNullableDataTypes>().Where(e => e.PartitionId == 205);
 
         var ex = Assert.Throws<NotSupportedException>(() =>
-            query.OrderBy(e => e.TestNullableDecimal).First());
+            query.OrderBy(e => e.TestNullableDecimal).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("decimal"), ex.Message);
 
         ex = Assert.Throws<NotSupportedException>(() =>
-            query.OrderBy(e => e.TestNullableDateTimeOffset).First());
+            query.OrderBy(e => e.TestNullableDateTimeOffset).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("DateTimeOffset"), ex.Message);
 
         ex = Assert.Throws<NotSupportedException>(() =>
-            query.OrderBy(e => e.TestNullableTimeSpan).First());
+            query.OrderBy(e => e.TestNullableTimeSpan).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("TimeSpan"), ex.Message);
 
         ex = Assert.Throws<NotSupportedException>(() =>
-            query.OrderBy(e => e.TestNullableUnsignedInt64).First());
+            query.OrderBy(e => e.TestNullableUnsignedInt64).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("ulong"), ex.Message);
     }
 
@@ -1807,19 +1821,23 @@ public class BuiltInDataTypesSqliteTest
             .OrderBy(e => e.PartitionId);
 
         var ex = Assert.Throws<NotSupportedException>(() =>
-            query.ThenBy(e => e.TestNullableDecimal).First());
+            query.ThenBy(e => e.TestNullableDecimal).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("decimal"), ex.Message);
 
         ex = Assert.Throws<NotSupportedException>(() =>
-            query.ThenBy(e => e.TestNullableDateTimeOffset).First());
+            query.ThenBy(e => e.TestNullableDateTimeOffset).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("DateTimeOffset"), ex.Message);
 
         ex = Assert.Throws<NotSupportedException>(() =>
-            query.ThenBy(e => e.TestNullableTimeSpan).First());
+            query.ThenBy(e => e.TestNullableTimeSpan).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("TimeSpan"), ex.Message);
 
         ex = Assert.Throws<NotSupportedException>(() =>
-            query.ThenBy(e => e.TestNullableUnsignedInt64).First());
+            query.ThenBy(e => e.TestNullableUnsignedInt64).First()
+        );
         Assert.Equal(SqliteStrings.OrderByNotSupported("ulong"), ex.Message);
     }
 

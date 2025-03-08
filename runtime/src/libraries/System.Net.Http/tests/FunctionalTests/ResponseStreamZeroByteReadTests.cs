@@ -185,7 +185,8 @@ namespace System.Net.Http.Functional.Tests
                         0,
                         0,
                         CancellationToken.None
-                    ));
+                    )
+                );
                 Assert.False(zeroByteReadTask.IsCompleted);
 
                 // The zero-byte read should block until data is actually available

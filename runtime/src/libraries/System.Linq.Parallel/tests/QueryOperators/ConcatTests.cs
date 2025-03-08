@@ -184,7 +184,8 @@ namespace System.Linq.Parallel.Tests
         {
 #pragma warning disable 618
             Assert.Throws<NotSupportedException>(() =>
-                ParallelEnumerable.Range(0, 1).Concat(Enumerable.Range(0, 1)));
+                ParallelEnumerable.Range(0, 1).Concat(Enumerable.Range(0, 1))
+            );
 #pragma warning restore 618
         }
 
@@ -197,12 +198,14 @@ namespace System.Linq.Parallel.Tests
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithCancellation(t)
-                    .Concat(ParallelEnumerable.Range(0, 1).WithCancellation(t)));
+                    .Concat(ParallelEnumerable.Range(0, 1).WithCancellation(t))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
                     .WithDegreeOfParallelism(1)
-                    .Concat(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1)));
+                    .Concat(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1))
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -211,7 +214,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(0, 1)
                             .WithExecutionMode(ParallelExecutionMode.Default)
-                    ));
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -220,7 +224,8 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(0, 1)
                             .WithMergeOptions(ParallelMergeOptions.Default)
-                    ));
+                    )
+            );
         }
 
         [Fact]

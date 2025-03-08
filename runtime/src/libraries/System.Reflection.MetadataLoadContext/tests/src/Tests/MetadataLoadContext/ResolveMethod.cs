@@ -85,7 +85,8 @@ namespace System.Reflection.Tests
                 );
                 Type t = derived.GetType("Derived1", throwOnError: true);
                 TargetParameterCountException e = Assert.Throws<TargetParameterCountException>(() =>
-                    t.BaseType);
+                    t.BaseType
+                );
 
                 Assert.Same(lc, resolver.Context);
                 Assert.Equal(1, resolver.CallCount);

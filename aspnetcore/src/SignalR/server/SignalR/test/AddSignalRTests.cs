@@ -273,7 +273,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public void ThrowsIfSetInvalidValueForMaxInvokes()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new HubOptions() { MaximumParallelInvocationsPerClient = 0 });
+                new HubOptions() { MaximumParallelInvocationsPerClient = 0 }
+            );
         }
     }
 

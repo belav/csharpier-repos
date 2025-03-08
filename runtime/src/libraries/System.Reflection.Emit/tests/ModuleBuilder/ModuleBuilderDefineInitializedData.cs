@@ -100,7 +100,8 @@ namespace System.Reflection.Emit.Tests
                     "MyField2",
                     new byte[] { 1, 0, 1 },
                     FieldAttributes.Public
-                ));
+                )
+            );
         }
 
         [ConditionalFact(

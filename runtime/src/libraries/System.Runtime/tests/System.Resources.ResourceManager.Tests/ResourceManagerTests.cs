@@ -530,7 +530,8 @@ namespace System.Resources.Tests
             {
                 Assert.Throws<NotSupportedException>(() => manager.GetObject(key));
                 Assert.Throws<NotSupportedException>(() =>
-                    manager.GetObject(key, new CultureInfo("en-US")));
+                    manager.GetObject(key, new CultureInfo("en-US"))
+                );
             }
             else
             {

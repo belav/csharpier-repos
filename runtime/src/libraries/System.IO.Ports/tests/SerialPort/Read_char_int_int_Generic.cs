@@ -131,7 +131,8 @@ namespace System.IO.Ports.Tests
                 com.Open();
 
                 Assert.Throws<TimeoutException>(() =>
-                    com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize));
+                    com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+                );
 
                 VerifyTimeout(com);
             }
@@ -338,7 +339,8 @@ namespace System.IO.Ports.Tests
 
             //Warm up read method
             Assert.Throws<TimeoutException>(() =>
-                com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize));
+                com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+            );
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
             for (int i = 0; i < NUM_TRYS; i++)
@@ -346,7 +348,8 @@ namespace System.IO.Ports.Tests
                 timer.Start();
 
                 Assert.Throws<TimeoutException>(() =>
-                    com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize));
+                    com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+                );
 
                 timer.Stop();
 

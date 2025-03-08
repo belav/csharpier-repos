@@ -12,7 +12,8 @@ namespace System.Linq.Tests
         public void Empty()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().AsQueryable().Last());
+                Enumerable.Empty<int>().AsQueryable().Last()
+            );
         }
 
         [Fact]

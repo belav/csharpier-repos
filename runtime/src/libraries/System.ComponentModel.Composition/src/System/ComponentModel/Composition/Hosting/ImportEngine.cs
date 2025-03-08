@@ -315,7 +315,8 @@ namespace System.ComponentModel.Composition.Hosting
 
                 // If this atomicComposition gets rolledback for any reason we need to reset our state
                 atomicComposition.AddRevertActionAllowNull(() =>
-                    partManager.State = ImportState.NoImportsSatisfied);
+                    partManager.State = ImportState.NoImportsSatisfied
+                );
 
                 result = result.MergeResult(
                     TrySatisfyImportSubset(partManager, requiredImports, atomicComposition)
@@ -600,7 +601,8 @@ namespace System.ComponentModel.Composition.Hosting
                 else
                 {
                     atomicComposition.AddCompleteAction(() =>
-                        partManager.TryOnComposed().ThrowOnErrors());
+                        partManager.TryOnComposed().ThrowOnErrors()
+                    );
                 }
             }
 
@@ -647,7 +649,8 @@ namespace System.ComponentModel.Composition.Hosting
                 else
                 {
                     atomicComposition.AddCompleteAction(() =>
-                        partManager.TrySetImport(import, exports).ThrowOnErrors());
+                        partManager.TrySetImport(import, exports).ThrowOnErrors()
+                    );
                 }
             }
             else

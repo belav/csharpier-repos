@@ -38,7 +38,8 @@ public class SkipNavigationTest
                         secondEntity,
                         true,
                         false
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -46,7 +47,8 @@ public class SkipNavigationTest
             CoreStrings.ModelReadOnly,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    firstEntity.RemoveSkipNavigation(navigation))
+                    firstEntity.RemoveSkipNavigation(navigation)
+                )
                 .Message
         );
 
@@ -215,7 +217,8 @@ public class SkipNavigationTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    navigation.SetForeignKey(orderProductForeignKey))
+                    navigation.SetForeignKey(orderProductForeignKey)
+                )
                 .Message
         );
     }
@@ -257,7 +260,8 @@ public class SkipNavigationTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    navigation.SetForeignKey(orderProductForeignKey))
+                    navigation.SetForeignKey(orderProductForeignKey)
+                )
                 .Message
         );
     }
@@ -317,7 +321,8 @@ public class SkipNavigationTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    productsNavigation.SetForeignKey(orderProductForeignKey))
+                    productsNavigation.SetForeignKey(orderProductForeignKey)
+                )
                 .Message
         );
     }
@@ -397,7 +402,8 @@ public class SkipNavigationTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    orderEntity.RemoveSkipNavigation(productsNavigation))
+                    orderEntity.RemoveSkipNavigation(productsNavigation)
+                )
                 .Message
         );
 
@@ -463,7 +469,8 @@ public class SkipNavigationTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    productsNavigation.SetInverse(ordersNavigation))
+                    productsNavigation.SetInverse(ordersNavigation)
+                )
                 .Message
         );
     }
@@ -521,7 +528,8 @@ public class SkipNavigationTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    productsNavigation.SetInverse(ordersNavigation))
+                    productsNavigation.SetInverse(ordersNavigation)
+                )
                 .Message
         );
     }

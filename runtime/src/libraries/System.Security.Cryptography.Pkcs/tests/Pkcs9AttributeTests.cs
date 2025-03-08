@@ -41,14 +41,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             DateTime dt = new DateTime(1600, 12, 31, 11, 59, 59, DateTimeKind.Utc);
             AssertExtensions.Throws<CryptographicException, ArgumentOutOfRangeException>(() =>
-                new Pkcs9SigningTime(dt));
+                new Pkcs9SigningTime(dt)
+            );
         }
 
         [Fact]
         public static void Pkcs9SigningTime_DateTimeMinValue()
         {
             AssertExtensions.Throws<CryptographicException, ArgumentOutOfRangeException>(() =>
-                new Pkcs9SigningTime(DateTime.MinValue));
+                new Pkcs9SigningTime(DateTime.MinValue)
+            );
         }
 
         [Fact]
@@ -236,7 +238,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             object ignore;
             Assert.Throws<ArgumentNullException>(() =>
-                ignore = new Pkcs9DocumentDescription((string)null));
+                ignore = new Pkcs9DocumentDescription((string)null)
+            );
         }
 
         [Fact]
@@ -309,8 +312,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void DocumentNamenNullValue()
         {
             object ignore;
-            Assert.Throws<ArgumentNullException>(() =>
-                ignore = new Pkcs9DocumentName((string)null));
+            Assert.Throws<ArgumentNullException>(() => ignore = new Pkcs9DocumentName((string)null)
+            );
         }
 
         [Fact]
@@ -447,13 +450,17 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void ContentTypeBadData()
         {
             Assert.ThrowsAny<CryptographicException>(() =>
-                CreatePkcs9ContentTypeAndExtractContentType(new byte[0])); // Too short
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[0])
+            ); // Too short
             Assert.ThrowsAny<CryptographicException>(() =>
-                CreatePkcs9ContentTypeAndExtractContentType(new byte[1])); // Too short
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[1])
+            ); // Too short
             Assert.ThrowsAny<CryptographicException>(() =>
-                CreatePkcs9ContentTypeAndExtractContentType(new byte[2])); // Does not start with ASN_TAG_OBJID.
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[2])
+            ); // Does not start with ASN_TAG_OBJID.
             Assert.ThrowsAny<CryptographicException>(() =>
-                CreatePkcs9ContentTypeAndExtractContentType(new byte[] { ASN_TAG_OBJID, 1 })); // Bad length byte.
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[] { ASN_TAG_OBJID, 1 })
+            ); // Bad length byte.
         }
 
         [Fact]

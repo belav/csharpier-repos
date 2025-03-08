@@ -462,25 +462,32 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Max());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Max());
+            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Max()
+            );
+            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Max()
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<double>().Max());
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<decimal>().Max());
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<NotComparable>().Max());
+                ParallelEnumerable.Empty<NotComparable>().Max()
+            );
 
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Max(x => (int)x));
+                ParallelEnumerable.Empty<int>().Max(x => (int)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Max(x => (long)x));
+                ParallelEnumerable.Empty<int>().Max(x => (long)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Max(x => (float)x));
+                ParallelEnumerable.Empty<int>().Max(x => (float)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Max(x => (double)x));
+                ParallelEnumerable.Empty<int>().Max(x => (double)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Max(x => (decimal)x));
+                ParallelEnumerable.Empty<int>().Max(x => (decimal)x)
+            );
             Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Empty<int>().Max(x => new NotComparable(x)));
+                ParallelEnumerable.Empty<int>().Max(x => new NotComparable(x))
+            );
         }
 
         [Fact]
@@ -780,7 +787,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -791,7 +799,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -803,7 +812,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -814,7 +824,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -826,7 +837,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -837,7 +849,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -849,7 +862,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -860,7 +874,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -872,7 +887,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
                     .Range(0, 1)
@@ -883,7 +899,8 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 ParallelEnumerable
@@ -895,18 +912,21 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    ));
+                    )
+            );
         }
 
         [Fact]
         public static void Max_AggregateException_NotComparable()
         {
             ArgumentException e = AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Repeat(new NotComparable(0), 2).Max());
+                ParallelEnumerable.Repeat(new NotComparable(0), 2).Max()
+            );
             Assert.Null(e.ParamName);
 
             e = AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Range(0, 2).Max(x => new NotComparable(x)));
+                ParallelEnumerable.Range(0, 2).Max(x => new NotComparable(x))
+            );
             Assert.Null(e.ParamName);
         }
 

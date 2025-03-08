@@ -148,7 +148,8 @@ namespace System.Security.Cryptography.Cose.Tests
         public void SignWithNullContent()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                Sign(null!, GetCoseSigner(DefaultKey, DefaultHash)));
+                Sign(null!, GetCoseSigner(DefaultKey, DefaultHash))
+            );
             Assert.True(ex.ParamName == "embeddedContent" || ex.ParamName == "detachedContent");
         }
 
@@ -179,7 +180,8 @@ namespace System.Security.Cryptography.Cose.Tests
                     Sign(
                         s_sampleContent,
                         GetCoseSigner(nonPrivateKey, hashAlgorithm, padding: padding)
-                    ));
+                    )
+                );
             }
         }
 

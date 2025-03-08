@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var text = SourceText.From("abcdef");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TextLine.FromSpan(text, new TextSpan(0, 0)));
+                TextLine.FromSpan(text, new TextSpan(0, 0))
+            );
         }
 
         [Fact]
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var text = SourceText.From("abcdef");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TextLine.FromSpan(text, new TextSpan(0, 3)));
+                TextLine.FromSpan(text, new TextSpan(0, 3))
+            );
         }
 
         [Fact]
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var text = SourceText.From("abcdef");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TextLine.FromSpan(text, new TextSpan(1, 5)));
+                TextLine.FromSpan(text, new TextSpan(1, 5))
+            );
         }
 
         [Fact]
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var text = SourceText.From("abcdef");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TextLine.FromSpan(text, new TextSpan(1, 10)));
+                TextLine.FromSpan(text, new TextSpan(1, 10))
+            );
         }
 
         [Fact]
@@ -116,7 +120,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var text = SourceText.From("abcdef");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TextLine.FromSpan(text, new TextSpan(-1, 2)));
+                TextLine.FromSpan(text, new TextSpan(-1, 2))
+            );
         }
 
         [Fact]
@@ -124,7 +129,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var text = SourceText.From("abcdef");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TextLine.FromSpan(text, new TextSpan(7, 0)));
+                TextLine.FromSpan(text, new TextSpan(7, 0))
+            );
         }
 
         [Fact]

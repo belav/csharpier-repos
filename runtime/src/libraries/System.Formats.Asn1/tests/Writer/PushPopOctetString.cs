@@ -25,7 +25,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             Assert.Throws<InvalidOperationException>(() =>
-                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -52,7 +53,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PopOctetString();
 
             Assert.Throws<InvalidOperationException>(() =>
-                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -77,7 +79,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushOctetString();
 
             Assert.Throws<InvalidOperationException>(() =>
-                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]

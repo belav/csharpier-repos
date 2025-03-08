@@ -142,13 +142,15 @@ namespace System.ComponentModel.Tests
                     TypeConverterTests.s_context,
                     null,
                     null
-                ));
+                )
+            );
             Assert.Throws<UriFormatException>(() =>
                 UriTypeConverterTests.s_converter.ConvertFrom(
                     TypeConverterTests.s_context,
                     null,
                     "mailto:User@"
-                ));
+                )
+            );
         }
     }
 }

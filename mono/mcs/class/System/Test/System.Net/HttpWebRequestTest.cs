@@ -2339,7 +2339,8 @@ namespace MonoTests.System.Net
                     r.Method = "POST";
                     r.ContentLength = data64KB.Length;
                     WebException ex = ExceptionAssert.Throws<WebException>(() =>
-                        r.GetRequestStream().Close());
+                        r.GetRequestStream().Close()
+                    );
                     Assert.AreEqual(ex.Status, WebExceptionStatus.RequestCanceled);
                     c.Set();
                 },
@@ -2360,7 +2361,8 @@ namespace MonoTests.System.Net
                     r.ContentLength = data64KB.Length;
                     r.Timeout = 100;
                     WebException ex = ExceptionAssert.Throws<WebException>(() =>
-                        r.GetRequestStream());
+                        r.GetRequestStream()
+                    );
                     Assert.IsTrue(
                         ex.Status == WebExceptionStatus.Timeout
                             || ex.Status == WebExceptionStatus.ConnectFailure
@@ -2428,7 +2430,8 @@ namespace MonoTests.System.Net
                     r.Abort();
 
                     WebException ex = ExceptionAssert.Throws<WebException>(() =>
-                        s.BeginWrite(data64KB, 0, data64KB.Length, null, null));
+                        s.BeginWrite(data64KB, 0, data64KB.Length, null, null)
+                    );
                     Assert.AreEqual(ex.Status, WebExceptionStatus.RequestCanceled);
 
                     c.Set();
@@ -2596,7 +2599,8 @@ namespace MonoTests.System.Net
                     using (Stream s = x.GetResponseStream())
                     {
                         WebException ex = ExceptionAssert.Throws<WebException>(() =>
-                            s.ReadAll(received, 0, received.Length));
+                            s.ReadAll(received, 0, received.Length)
+                        );
                         Assert.AreEqual(ex.Status, WebExceptionStatus.Timeout);
                     }
 
@@ -2697,7 +2701,8 @@ namespace MonoTests.System.Net
                         (a) =>
                         {
                             WebException ex = ExceptionAssert.Throws<WebException>(() =>
-                                r.EndGetResponse(a));
+                                r.EndGetResponse(a)
+                            );
                             Assert.AreEqual(ex.Status, WebExceptionStatus.RequestCanceled);
                             c.Set();
                         },

@@ -2149,18 +2149,23 @@ namespace System.Tests
         {
             string value = "456";
             Assert.Throws<ArgumentException>(() =>
-                string.Compare(value, value, StringComparison.CurrentCulture - 1));
+                string.Compare(value, value, StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                string.Compare(value, value, StringComparison.OrdinalIgnoreCase + 1));
-            Assert.Throws<ArgumentException>(() =>
-                string.Compare(value, value, (StringComparison)6));
+                string.Compare(value, value, StringComparison.OrdinalIgnoreCase + 1)
+            );
+            Assert.Throws<ArgumentException>(() => string.Compare(value, value, (StringComparison)6)
+            );
 
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1));
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6));
+                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6)
+            );
         }
 
         [Fact]
@@ -2582,11 +2587,14 @@ namespace System.Tests
         {
             string value = "456";
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1));
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6));
+                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6)
+            );
         }
 
         [Fact]
@@ -3606,17 +3614,22 @@ namespace System.Tests
             string value = "456";
 
             Assert.Throws<ArgumentException>(() =>
-                value.EndsWith(value, StringComparison.CurrentCulture - 1));
+                value.EndsWith(value, StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.EndsWith(value, StringComparison.OrdinalIgnoreCase + 1));
+                value.EndsWith(value, StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() => value.EndsWith(value, (StringComparison)6));
 
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1));
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6));
+                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6)
+            );
         }
 
         [ConditionalFact(
@@ -4619,12 +4632,13 @@ namespace System.Tests
                         Assert.Throws<FormatException>(() => string.Format(format, args[0]));
                         break;
                     case 2:
-                        Assert.Throws<FormatException>(() =>
-                            string.Format(format, args[0], args[1]));
+                        Assert.Throws<FormatException>(() => string.Format(format, args[0], args[1])
+                        );
                         break;
                     case 3:
                         Assert.Throws<FormatException>(() =>
-                            string.Format(format, args[0], args[1], args[2]));
+                            string.Format(format, args[0], args[1], args[2])
+                        );
                         break;
                 }
             }
@@ -4637,11 +4651,13 @@ namespace System.Tests
                     break;
                 case 2:
                     Assert.Throws<FormatException>(() =>
-                        string.Format(provider, format, args[0], args[1]));
+                        string.Format(provider, format, args[0], args[1])
+                    );
                     break;
                 case 3:
                     Assert.Throws<FormatException>(() =>
-                        string.Format(provider, format, args[0], args[1], args[2]));
+                        string.Format(provider, format, args[0], args[1], args[2])
+                    );
                     break;
             }
         }
@@ -10303,24 +10319,32 @@ namespace System.Tests
         {
             string s1 = "456";
             Assert.Throws<ArgumentException>(() =>
-                s1.StartsWith(s1, StringComparison.CurrentCulture - 1));
+                s1.StartsWith(s1, StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                s1.StartsWith(s1, StringComparison.OrdinalIgnoreCase + 1));
+                s1.StartsWith(s1, StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() => s1.StartsWith(s1, (StringComparison)6));
 
             Assert.Throws<ArgumentException>(() =>
-                s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.CurrentCulture - 1));
+                s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+                s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                s1.AsSpan().StartsWith(s1.AsSpan(), (StringComparison)6));
+                s1.AsSpan().StartsWith(s1.AsSpan(), (StringComparison)6)
+            );
 
             Assert.Throws<ArgumentException>(() =>
-                s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.CurrentCulture - 1));
+                s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.CurrentCulture - 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+                s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
+            );
             Assert.Throws<ArgumentException>(() =>
-                s1.AsSpan().CompareTo(s1.AsSpan(), (StringComparison)6));
+                s1.AsSpan().CompareTo(s1.AsSpan(), (StringComparison)6)
+            );
         }
 
         [ConditionalFact(

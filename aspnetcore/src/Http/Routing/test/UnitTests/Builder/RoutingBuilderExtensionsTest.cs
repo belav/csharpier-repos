@@ -23,7 +23,8 @@ public class RoutingBuilderExtensionsTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            applicationBuilderMock.Object.UseRouter(router));
+            applicationBuilderMock.Object.UseRouter(router)
+        );
 
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling "

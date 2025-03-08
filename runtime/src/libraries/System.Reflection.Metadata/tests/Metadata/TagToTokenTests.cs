@@ -171,13 +171,16 @@ namespace System.Reflection.Metadata.Tests
 
                     uint badRowId = (uint)random.Next((int)TokenTypeIds.RIDMask + 1, int.MaxValue);
                     Assert.Throws<BadImageFormatException>(() =>
-                        tag.ConvertToHandle(i | ~tag.GetTagMask()));
+                        tag.ConvertToHandle(i | ~tag.GetTagMask())
+                    );
                     Assert.Throws<BadImageFormatException>(() =>
                         tag.ConvertToHandle(
                             i | ((TokenTypeIds.RIDMask + 1) << tag.GetNumberOfBits())
-                        ));
+                        )
+                    );
                     Assert.Throws<BadImageFormatException>(() =>
-                        tag.ConvertToHandle(i | (badRowId << tag.GetNumberOfBits())));
+                        tag.ConvertToHandle(i | (badRowId << tag.GetNumberOfBits()))
+                    );
 
                     Assert.True(
                         (uint)(handle.Kind) << 24 == tag.GetTagToTokenTypeArray()[i],

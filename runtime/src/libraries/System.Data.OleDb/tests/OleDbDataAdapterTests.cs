@@ -102,10 +102,12 @@ namespace System.Data.OleDb.Tests
                     {
                         Assert.Throws<ArgumentNullException>(() => adapter.Fill(null));
                         Assert.Throws<ArgumentNullException>(() =>
-                            adapter.Fill(new DataTable(), null));
+                            adapter.Fill(new DataTable(), null)
+                        );
                         Assert.Throws<ArgumentNullException>(() => adapter.Fill(null, null, null));
                         Assert.Throws<ArgumentNullException>(() =>
-                            adapter.Fill(new DataSet(), null, null));
+                            adapter.Fill(new DataSet(), null, null)
+                        );
                     }
                 }
             );

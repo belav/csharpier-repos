@@ -147,7 +147,8 @@ namespace System.Linq.Parallel.Tests
                     .All(x =>
                     {
                         throw new DeliberateTestException();
-                    }));
+                    })
+            );
         }
 
         [Fact]

@@ -1700,7 +1700,8 @@ class D { }";
                         expected,
                         typeof(SerializableAttribute),
                         SyntaxFactory.Token(SyntaxKind.RefKeyword)
-                    ));
+                    )
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeGeneration)]

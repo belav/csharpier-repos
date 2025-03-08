@@ -39,7 +39,8 @@ public class TempDataFilterPageApplicationModelProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -58,7 +59,8 @@ public class TempDataFilterPageApplicationModelProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 

@@ -399,7 +399,8 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             _ = HandleInboundActivityAsync(() =>
-                Renderer.OnRenderCompletedAsync(renderId, errorMessageOrNull));
+                Renderer.OnRenderCompletedAsync(renderId, errorMessageOrNull)
+            );
         }
         catch (Exception e)
         {
@@ -446,7 +447,8 @@ internal partial class CircuitHost : IAsyncDisposable
                         callId
                     );
                     DotNetDispatcher.BeginInvokeDotNet(JSRuntime, invocationInfo, argsJson);
-                }));
+                })
+            );
         }
         catch (Exception ex)
         {
@@ -494,7 +496,8 @@ internal partial class CircuitHost : IAsyncDisposable
                     }
 
                     DotNetDispatcher.EndInvokeJS(JSRuntime, arguments);
-                }));
+                })
+            );
         }
         catch (Exception ex)
         {
@@ -526,7 +529,8 @@ internal partial class CircuitHost : IAsyncDisposable
                 {
                     Log.ReceiveByteArraySuccess(_logger, id);
                     DotNetDispatcher.ReceiveByteArray(JSRuntime, id, data);
-                }));
+                })
+            );
         }
         catch (Exception ex)
         {
@@ -568,7 +572,8 @@ internal partial class CircuitHost : IAsyncDisposable
                         chunk,
                         error
                     );
-                }));
+                })
+            );
         }
         catch (Exception ex)
         {
@@ -599,7 +604,8 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             return await Renderer.Dispatcher.InvokeAsync(async () =>
-                await dotNetStreamReference.Stream.ReadAsync(buffer));
+                await dotNetStreamReference.Stream.ReadAsync(buffer)
+            );
         }
         catch (Exception ex)
         {
@@ -671,7 +677,8 @@ internal partial class CircuitHost : IAsyncDisposable
                     Log.LocationChange(_logger, uri, CircuitId);
                     _navigationManager.NotifyLocationChanged(uri, state, intercepted);
                     Log.LocationChangeSucceeded(_logger, uri, CircuitId);
-                }));
+                })
+            );
         }
         // It's up to the NavigationManager implementation to validate the URI.
         //
@@ -733,7 +740,8 @@ internal partial class CircuitHost : IAsyncDisposable
                         state,
                         intercepted
                     );
-                }));
+                })
+            );
 
             await Client.SendAsync("JS.EndLocationChanging", callId, shouldContinueNavigation);
         }

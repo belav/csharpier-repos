@@ -206,13 +206,15 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Contains(@"""CreditLimit"":100", json);
                 Assert.Contains(@"""Name"":""C""", json);
                 Assert.Throws<NotSupportedException>(() =>
-                    JsonSerializer.Deserialize<Person>(json, options));
+                    JsonSerializer.Deserialize<Person>(json, options)
+                );
 
                 string arrayJson = JsonSerializer.Serialize(new Person[] { person }, options);
                 Assert.Contains(@"""CreditLimit"":100", arrayJson);
                 Assert.Contains(@"""Name"":""C""", arrayJson);
                 Assert.Throws<NotSupportedException>(() =>
-                    JsonSerializer.Deserialize<Person[]>(arrayJson, options));
+                    JsonSerializer.Deserialize<Person[]>(arrayJson, options)
+                );
             }
 
             {

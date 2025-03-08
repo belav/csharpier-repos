@@ -14,13 +14,17 @@ namespace System.Text.Json.Serialization.Tests
         public async Task ReadNullArgumentFail()
         {
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await Serializer.DeserializeWrapper<string>((Stream)null));
+                await Serializer.DeserializeWrapper<string>((Stream)null)
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await Serializer.DeserializeWrapper((Stream)null, (Type)null));
+                await Serializer.DeserializeWrapper((Stream)null, (Type)null)
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await Serializer.DeserializeWrapper((Stream)null, typeof(string)));
+                await Serializer.DeserializeWrapper((Stream)null, typeof(string))
+            );
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await Serializer.DeserializeWrapper(new MemoryStream(), (Type)null));
+                await Serializer.DeserializeWrapper(new MemoryStream(), (Type)null)
+            );
         }
 
         [Fact]
@@ -277,7 +281,8 @@ namespace System.Text.Json.Serialization.Tests
             using (Stream stream = new MemoryStream(utf8BomAndValueArray))
             {
                 await Assert.ThrowsAsync<JsonException>(async () =>
-                    await Serializer.DeserializeWrapper<byte>(stream));
+                    await Serializer.DeserializeWrapper<byte>(stream)
+                );
             }
         }
 
@@ -445,7 +450,8 @@ namespace System.Text.Json.Serialization.Tests
             using (MemoryStream stream = new MemoryStream(data))
             {
                 JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                    await Serializer.DeserializeWrapper<int>(stream, options));
+                    await Serializer.DeserializeWrapper<int>(stream, options)
+                );
                 Assert.Equal(16387, stream.Position);
 
                 // We should get an exception like: '!' is invalid after a single JSON value.
@@ -467,7 +473,8 @@ namespace System.Text.Json.Serialization.Tests
             using (MemoryStream stream = new MemoryStream(data))
             {
                 JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                    await Serializer.DeserializeWrapper<SimpleTestClass>(stream, options));
+                    await Serializer.DeserializeWrapper<SimpleTestClass>(stream, options)
+                );
                 Assert.Equal(16387, stream.Position);
 
                 // We should get an exception like: '!' is invalid after a single JSON value.

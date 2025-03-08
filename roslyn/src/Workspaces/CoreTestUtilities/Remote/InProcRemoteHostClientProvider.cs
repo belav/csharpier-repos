@@ -111,14 +111,16 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     testSerializerServiceFactory.SharedTestGeneratorReferences,
                     AdditionalRemoteParts,
                     ExcludedRemoteParts
-                ));
+                )
+            );
             _lazyClient = new Lazy<RemoteHostClient>(() =>
                 InProcRemoteHostClient.Create(
                     _services,
                     callbackDispatchers,
                     TraceListener,
                     new RemoteHostTestData(_lazyManager.Value, isInProc: true)
-                ));
+                )
+            );
         }
 
         public void Dispose()

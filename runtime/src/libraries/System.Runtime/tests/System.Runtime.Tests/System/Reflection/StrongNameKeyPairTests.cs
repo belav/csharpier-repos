@@ -16,14 +16,16 @@ namespace System.Reflection.Tests
         public void Ctor_ByteArray_ThrowsPlatformNotSupportedException()
         {
             AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair(new byte[] { 7, 2, 0, 0 }));
+                new StrongNameKeyPair(new byte[] { 7, 2, 0, 0 })
+            );
         }
 
         [Fact]
         public void Ctor_NullKeyPairArray_ThrowsPlatformNotSupportedException()
         {
             AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair((byte[])null));
+                new StrongNameKeyPair((byte[])null)
+            );
         }
 
         [Fact]
@@ -34,7 +36,8 @@ namespace System.Reflection.Tests
             using (FileStream fileStream = File.OpenRead(tempPath))
             {
                 AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                    new StrongNameKeyPair(fileStream));
+                    new StrongNameKeyPair(fileStream)
+                );
             }
         }
 
@@ -42,7 +45,8 @@ namespace System.Reflection.Tests
         public void Ctor_NullKeyPairFile_ThrowsPlatformNotSupportedException()
         {
             AssertExtensions.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair((FileStream)null));
+                new StrongNameKeyPair((FileStream)null)
+            );
         }
 
         [Theory]
@@ -52,14 +56,16 @@ namespace System.Reflection.Tests
         public void Ctor_String_ThrowsPlatformNotSupportedException(string keyPairContainer)
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new StrongNameKeyPair(keyPairContainer));
+                new StrongNameKeyPair(keyPairContainer)
+            );
         }
 
         [Fact]
         public void Ctor_SerializationInfo_StreamingContext_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                new SubStrongNameKeyPair(null, new StreamingContext()));
+                new SubStrongNameKeyPair(null, new StreamingContext())
+            );
         }
 
         private class SubStrongNameKeyPair : StrongNameKeyPair

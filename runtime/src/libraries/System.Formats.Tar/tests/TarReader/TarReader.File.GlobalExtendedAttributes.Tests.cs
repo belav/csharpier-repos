@@ -91,7 +91,8 @@ namespace System.Formats.Tar.Tests
             {
                 TarEntry entry = reader.GetNextEntry();
                 Assert.Throws<InvalidOperationException>(() =>
-                    entry.ExtractToFile(Path.Join(root.Path, "file"), overwrite: true));
+                    entry.ExtractToFile(Path.Join(root.Path, "file"), overwrite: true)
+                );
             }
         }
 

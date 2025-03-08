@@ -41,7 +41,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new BatchBlock<int>(-1));
             Assert.Throws<ArgumentNullException>(() => new BatchBlock<int>(2, null));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new BatchBlock<int>(2, new GroupingDataflowBlockOptions { BoundedCapacity = 1 }));
+                new BatchBlock<int>(2, new GroupingDataflowBlockOptions { BoundedCapacity = 1 })
+            );
             DataflowTestHelpers.TestArgumentsExceptions(new BatchBlock<int>(1));
         }
 

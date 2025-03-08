@@ -91,7 +91,8 @@ unsafe partial class GenericsTest
     private static void TestVector256F()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetVector256F(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f));
+            GenericsNative.GetVector256F(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f)
+        );
 
         Vector256<float> value2;
         GenericsNative.GetVector256FOut(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, &value2);
@@ -115,7 +116,8 @@ unsafe partial class GenericsTest
                 7.0f,
                 8.0f,
                 out Vector256<float> value3
-            ));
+            )
+        );
 
         Vector256<float>* value4 = GenericsNative.GetVector256FPtr(
             1.0f,
@@ -137,10 +139,12 @@ unsafe partial class GenericsTest
         Assert.Equal(value4->GetElement(7), 8.0f);
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetVector256FRef(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f));
+            GenericsNative.GetVector256FRef(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector256F(default, default));
+            GenericsNative.AddVector256F(default, default)
+        );
 
         Vector256<float>[] values = new Vector256<float>[]
         {
@@ -160,9 +164,11 @@ unsafe partial class GenericsTest
         });
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector256Fs(values, values.Length));
+            GenericsNative.AddVector256Fs(values, values.Length)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector256Fs(in values[0], values.Length));
+            GenericsNative.AddVector256Fs(in values[0], values.Length)
+        );
     }
 }

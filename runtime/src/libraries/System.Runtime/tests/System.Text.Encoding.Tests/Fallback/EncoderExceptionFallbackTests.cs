@@ -45,11 +45,13 @@ namespace System.Text.Tests
             Assert.Equal(0, buffer.Remaining);
 
             EncoderFallbackException ex = Assert.Throws<EncoderFallbackException>(() =>
-                buffer.Fallback('a', 0));
+                buffer.Fallback('a', 0)
+            );
             Assert.Equal('a', ex.CharUnknown);
 
             ex = Assert.Throws<EncoderFallbackException>(() =>
-                buffer.Fallback('\uD800', '\uDC00', 0));
+                buffer.Fallback('\uD800', '\uDC00', 0)
+            );
             Assert.Equal('\uD800', ex.CharUnknownHigh);
             Assert.Equal('\uDC00', ex.CharUnknownLow);
         }

@@ -26,7 +26,8 @@ public class NorthwindSetOperationsQueryInMemoryTest
             InMemoryStrings.SetOperationsNotAllowedAfterClientEvaluation,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Collection_projection_before_set_operation_fails(async))
+                    base.Collection_projection_before_set_operation_fails(async)
+                )
             ).Message
         );
 
@@ -37,7 +38,8 @@ public class NorthwindSetOperationsQueryInMemoryTest
             InMemoryStrings.SetOperationsNotAllowedAfterClientEvaluation,
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Client_eval_Union_FirstOrDefault(async))
+                    base.Client_eval_Union_FirstOrDefault(async)
+                )
             ).Message
         );
 }

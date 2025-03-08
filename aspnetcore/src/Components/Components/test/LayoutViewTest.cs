@@ -25,7 +25,8 @@ public class LayoutViewTest
     {
         // Arrange/Act
         var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(ParameterView.Empty));
+            _layoutViewComponent.SetParametersAsync(ParameterView.Empty)
+        );
         Assert.True(setParametersTask.IsCompletedSuccessfully);
         var frames = _renderer.GetCurrentRenderTreeFrames(_layoutViewComponentId).AsEnumerable();
 
@@ -55,7 +56,8 @@ public class LayoutViewTest
                         },
                     }
                 )
-            ));
+            )
+        );
         Assert.True(setParametersTask.IsCompletedSuccessfully);
         var frames = _renderer.GetCurrentRenderTreeFrames(_layoutViewComponentId).AsEnumerable();
 
@@ -80,7 +82,8 @@ public class LayoutViewTest
                         { nameof(LayoutView.Layout), typeof(RootLayout) },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -129,7 +132,8 @@ public class LayoutViewTest
                         },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -180,7 +184,8 @@ public class LayoutViewTest
                         },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -243,7 +248,8 @@ public class LayoutViewTest
                         },
                     }
                 )
-            ));
+            )
+        );
 
         // Act
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -264,7 +270,8 @@ public class LayoutViewTest
                         },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(2, _renderer.Batches.Count);
@@ -315,7 +322,8 @@ public class LayoutViewTest
                         },
                     }
                 )
-            ));
+            )
+        );
         Assert.True(setParametersTask1.IsCompletedSuccessfully);
 
         // Act
@@ -327,7 +335,8 @@ public class LayoutViewTest
                         { nameof(LayoutView.Layout), typeof(OtherNestedLayout) },
                     }
                 )
-            ));
+            )
+        );
 
         // Assert
         Assert.True(setParametersTask2.IsCompletedSuccessfully);

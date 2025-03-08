@@ -2053,7 +2053,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                             "Dogs"
                         ),
                         modelBuilder
-                    ))
+                    )
+                )
                 .Message
         );
     }

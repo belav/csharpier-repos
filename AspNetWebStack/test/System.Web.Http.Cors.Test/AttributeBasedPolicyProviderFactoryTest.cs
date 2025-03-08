@@ -228,7 +228,8 @@ namespace System.Web.Http.Cors
 
             Assert.True(request.GetCorsRequestContext().IsPreflight);
             Assert.Throws<HttpResponseException>(() =>
-                providerFactory.GetCorsPolicyProvider(request));
+                providerFactory.GetCorsPolicyProvider(request)
+            );
         }
 
         [Fact]

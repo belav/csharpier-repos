@@ -222,7 +222,8 @@ namespace Microsoft.TestCommon
                     "c:\\a|b",
                     "c:\\a\bb",
                     "c:\\a\0b",
-                });
+                }
+            );
 
         /// <summary>
         /// All expected permutations of an empty string.
@@ -235,7 +236,8 @@ namespace Microsoft.TestCommon
         /// All expected permutations of an empty string.
         /// </summary>
         public static readonly TestData<string> EmptyStrings = new RefTypeTestData<string>(() =>
-            new List<string>() { null, String.Empty, " ", "\t\r\n" });
+            new List<string>() { null, String.Empty, " ", "\t\r\n" }
+        );
 
         /// <summary>
         ///  Common <see cref="TestData"/> for a <see cref="string"/>.

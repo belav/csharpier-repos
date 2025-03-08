@@ -61,7 +61,8 @@ namespace System.ComponentModel.Tests
                     TypeConverterTests.s_context,
                     null,
                     null
-                ));
+                )
+            );
         }
 
         [Theory]
@@ -78,7 +79,8 @@ namespace System.ComponentModel.Tests
                     TypeConverterTests.s_context,
                     null,
                     version
-                ));
+                )
+            );
         }
     }
 }

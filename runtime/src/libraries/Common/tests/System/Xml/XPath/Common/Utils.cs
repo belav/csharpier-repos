@@ -121,7 +121,8 @@ namespace XPathTests.Common
             where T : Exception
         {
             Assert.Throws<T>(() =>
-                XPathMatch(kind, xml, testExpression, namespaceManager, startingNodePath));
+                XPathMatch(kind, xml, testExpression, namespaceManager, startingNodePath)
+            );
         }
 
         private static T XPathObject<T>(
@@ -173,7 +174,8 @@ namespace XPathTests.Common
             where T : Exception
         {
             Assert.Throws<T>(() =>
-                XPathObject<string>(kind, xml, testExpression, null, startingNodePath));
+                XPathObject<string>(kind, xml, testExpression, null, startingNodePath)
+            );
         }
 
         internal static void XPathNumberTest(
@@ -224,7 +226,8 @@ namespace XPathTests.Common
             where T : Exception
         {
             Assert.Throws<T>(() =>
-                XPathObject<double>(kind, xml, testExpression, namespaceManager, startingNodePath));
+                XPathObject<double>(kind, xml, testExpression, namespaceManager, startingNodePath)
+            );
         }
 
         internal static void XPathNodesetTest(

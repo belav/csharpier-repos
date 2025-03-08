@@ -181,7 +181,8 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
         httpContext.Request.RouteValues["tryParsable2"] = "invalid again!";
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -225,7 +226,8 @@ app.MapGet("/", TestAction);
         );
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         // The httpContext should be untouched.
         Assert.False(httpContext.RequestAborted.IsCancellationRequested);
@@ -325,7 +327,8 @@ app.MapGet("/", TestAction);
         var httpContext = CreateHttpContext();
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -420,7 +423,8 @@ app.MapGet("/", TestAction);
         // Not supplying any headers will cause the HttpContext BindAsync overload to return null.
         var httpContext = CreateHttpContext();
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -677,7 +681,8 @@ app.MapPost("/", TestAction);
         );
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
         // The httpContext should be untouched.
@@ -773,7 +778,8 @@ app.MapPost("/", TestAction);
         );
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            endpoint.RequestDelegate(httpContext));
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
         // The httpContext should be untouched.

@@ -336,7 +336,8 @@ public class UriHelperTests
         var resQuery = new QueryString();
         var resFragment = new FragmentString();
         Assert.Throws<ArgumentNullException>(() =>
-            UriHelper.BuildAbsolute(null, resHost, resPath, resPath, resQuery, resFragment));
+            UriHelper.BuildAbsolute(null, resHost, resPath, resPath, resQuery, resFragment)
+        );
     }
 
     [Fact]
@@ -355,6 +356,7 @@ public class UriHelperTests
                 out resPath,
                 out resQuery,
                 out resFragment
-            ));
+            )
+        );
     }
 }

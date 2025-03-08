@@ -98,7 +98,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new EnumDataTypeAttribute(enumType);
             Assert.Throws<InvalidOperationException>(() =>
-                attribute.Validate("AnyValue", new ValidationContext(new object())));
+                attribute.Validate("AnyValue", new ValidationContext(new object()))
+            );
         }
 
         private enum NonFlagsEnumType

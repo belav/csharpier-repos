@@ -226,7 +226,8 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new DictionaryEnumConverter());
 
             JsonException ex = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(Json, options));
+                JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(Json, options)
+            );
             Assert.Contains($"Unable to convert \"BAD\" to Enum \"{typeof(MyEnum)}\".", ex.Message);
         }
     }

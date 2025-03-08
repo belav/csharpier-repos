@@ -36,7 +36,8 @@ namespace System.Globalization.Tests
                 () => new CultureInfo("en-US").NumberFormat = null
             );
             Assert.Throws<InvalidOperationException>(() =>
-                CultureInfo.InvariantCulture.NumberFormat = new NumberFormatInfo());
+                CultureInfo.InvariantCulture.NumberFormat = new NumberFormatInfo()
+            );
         }
     }
 }

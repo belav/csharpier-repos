@@ -58,16 +58,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void TestArgumentExceptions()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>((Func<int, IEnumerable<int>>)null));
+                new TransformManyBlock<int, int>((Func<int, IEnumerable<int>>)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>((Func<int, Task<IEnumerable<int>>>)null));
+                new TransformManyBlock<int, int>((Func<int, Task<IEnumerable<int>>>)null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable, null));
+                new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable, null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
                 new TransformManyBlock<int, int>(
                     i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
                     null
-                ));
+                )
+            );
 
             DataflowTestHelpers.TestArgumentsExceptions(
                 new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable)
@@ -150,7 +154,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public Task TestCompletionTask()
         {
             return DataflowTestHelpers.TestCompletionTask(() =>
-                new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable));
+                new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable)
+            );
         }
 
         [Fact]

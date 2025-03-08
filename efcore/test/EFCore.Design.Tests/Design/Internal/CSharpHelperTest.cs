@@ -261,7 +261,8 @@ public class CSharpHelperTest
     public void UnknownLiteral_throws_when_unknown()
     {
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            new CSharpHelper(TypeMappingSource).UnknownLiteral(new object()));
+            new CSharpHelper(TypeMappingSource).UnknownLiteral(new object())
+        );
         Assert.Equal(DesignStrings.UnknownLiteral(typeof(object)), ex.Message);
     }
 
@@ -605,7 +606,8 @@ public class CSharpHelperTest
             CoreStrings.LiteralGenerationNotSupported(nameof(SimpleTestType)),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType()))
+                    new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
+                )
                 .Message
         );
     }
@@ -878,7 +880,8 @@ public class CSharpHelperTest
             DesignStrings.LiteralExpressionNotSupported("(10 * 10)", nameof(SimpleTestType)),
             Assert
                 .Throws<NotSupportedException>(() =>
-                    new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType()))
+                    new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
+                )
                 .Message
         );
     }

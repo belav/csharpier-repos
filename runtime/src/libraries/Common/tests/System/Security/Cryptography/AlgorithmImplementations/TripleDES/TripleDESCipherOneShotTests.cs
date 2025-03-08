@@ -229,7 +229,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                         Span<byte>.Empty,
                         out _,
                         feedbackSizeInBits: 48
-                    ));
+                    )
+                );
             }
         }
 
@@ -245,7 +246,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                         Span<byte>.Empty,
                         out _,
                         feedbackSizeInBits: 48
-                    ));
+                    )
+                );
             }
         }
 

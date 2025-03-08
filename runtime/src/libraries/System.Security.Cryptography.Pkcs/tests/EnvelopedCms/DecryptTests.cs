@@ -200,7 +200,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                     message,
                     Certificates.RSASha512KeyTransfer1,
                     new ContentInfo(content)
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -819,7 +820,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                     encodedMessage,
                     Certificates.RSASha256KeyTransfer1,
                     expectedContentInfo
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -848,7 +850,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                     encodedMessage,
                     Certificates.RSASha256KeyTransfer1,
                     expectedContentInfo
-                ));
+                )
+            );
         }
 
         [Fact]

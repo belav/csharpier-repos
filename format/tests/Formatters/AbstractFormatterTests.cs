@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
                         isNonPublicSupported: true
                     );
                     var parts = Task.Run(() =>
-                            discovery.CreatePartsAsync(MefHostServices.DefaultAssemblies))
+                            discovery.CreatePartsAsync(MefHostServices.DefaultAssemblies)
+                        )
                         .GetAwaiter()
                         .GetResult();
                     var catalog = ComposableCatalog

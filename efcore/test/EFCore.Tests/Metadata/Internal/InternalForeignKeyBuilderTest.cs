@@ -863,7 +863,8 @@ public class InternalForeignKeyBuilderTest
             CoreStrings.AmbiguousEndRequiredDependent("{'CustomerTempId'}", nameof(Order)),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    relationshipBuilder.IsRequiredDependent(true, ConfigurationSource.Explicit))
+                    relationshipBuilder.IsRequiredDependent(true, ConfigurationSource.Explicit)
+                )
                 .Message
         );
     }
@@ -927,7 +928,8 @@ public class InternalForeignKeyBuilderTest
                         nameof(Order.Customer),
                         ConfigurationSource.Convention,
                         setTargetAsPrincipal: true
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -985,7 +987,8 @@ public class InternalForeignKeyBuilderTest
                     relationshipBuilder.DependentEntityType(
                         relationshipBuilder.Metadata.PrincipalEntityType,
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -1008,7 +1011,8 @@ public class InternalForeignKeyBuilderTest
                     relationshipBuilder.PrincipalEntityType(
                         relationshipBuilder.Metadata.DeclaringEntityType,
                         ConfigurationSource.Explicit
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -1092,7 +1096,8 @@ public class InternalForeignKeyBuilderTest
                         relationshipBuilder.Metadata.DeclaringEntityType,
                         relationshipBuilder.Metadata.PrincipalEntityType,
                         ConfigurationSource.DataAnnotation
-                    ))
+                    )
+                )
                 .Message
         );
     }

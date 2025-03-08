@@ -278,7 +278,8 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal(0xffffffffu, id3.Stamp);
 
             Assert.Throws<ArgumentNullException>(() =>
-                BlobContentId.FromHash(default(ImmutableArray<byte>)));
+                BlobContentId.FromHash(default(ImmutableArray<byte>))
+            );
             Assert.Throws<ArgumentNullException>(() => BlobContentId.FromHash(null));
             AssertExtensions.Throws<ArgumentException>(
                 "hashCode",

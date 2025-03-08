@@ -238,7 +238,8 @@ namespace System.Data.Tests
 
             // EvaluateException : Invalid number of arguments: function substring().
             Assert.ThrowsAny<InvalidExpressionException>(() =>
-                cols.Add("test2", typeof(string), "substring ('fdsafewq', 2)"));
+                cols.Add("test2", typeof(string), "substring ('fdsafewq', 2)")
+            );
         }
 
         [Fact]

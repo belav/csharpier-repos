@@ -77,7 +77,8 @@ public class OpenApiOperationGeneratorTests
         var unnamedParameter = Expression.Parameter(typeof(int));
         var lambda = Expression.Lambda(Expression.Block(), unnamedParameter);
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            GetOpenApiOperation(lambda.Compile()));
+            GetOpenApiOperation(lambda.Compile())
+        );
         Assert.Equal(
             "Encountered a parameter of type 'System.Runtime.CompilerServices.Closure' without a name. Parameters must have a name.",
             ex.Message
@@ -203,14 +204,16 @@ public class OpenApiOperationGeneratorTests
             GetOpenApiOperation(() =>
                 FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
                     new InferredJsonClass()
-                )),
+                )
+            ),
             "object"
         );
         AssertJsonResponse(
             GetOpenApiOperation(() =>
                 FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
                     (IInferredJsonInterface)null
-                )),
+                )
+            ),
             "object"
         );
     }
@@ -245,7 +248,8 @@ public class OpenApiOperationGeneratorTests
             GetOpenApiOperation(() =>
                 FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
                     default(FSharp.Core.Unit)
-                ))
+                )
+            )
         );
     }
 

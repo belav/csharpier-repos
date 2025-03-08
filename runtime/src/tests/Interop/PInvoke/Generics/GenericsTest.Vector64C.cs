@@ -71,7 +71,8 @@ unsafe partial class GenericsTest
     private static void TestVector64C()
     {
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetVector64C('0', '1', '2', '3'));
+            GenericsNative.GetVector64C('0', '1', '2', '3')
+        );
 
         Vector64<char> value2;
         GenericsNative.GetVector64COut('0', '1', '2', '3', &value2);
@@ -82,7 +83,8 @@ unsafe partial class GenericsTest
         Assert.Equal(tValue2.GetElement(3), (short)'3');
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetVector64COut('0', '1', '2', '3', out Vector64<char> value3));
+            GenericsNative.GetVector64COut('0', '1', '2', '3', out Vector64<char> value3)
+        );
 
         Vector64<char>* value4 = GenericsNative.GetVector64CPtr('0', '1', '2', '3');
         Vector64<short>* tValue4 = (Vector64<short>*)value4;
@@ -92,10 +94,11 @@ unsafe partial class GenericsTest
         Assert.Equal(tValue4->GetElement(3), (short)'3');
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetVector64CRef('0', '1', '2', '3'));
+            GenericsNative.GetVector64CRef('0', '1', '2', '3')
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector64C(default, default));
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64C(default, default)
+        );
 
         Vector64<char>[] values = new Vector64<char>[]
         {
@@ -115,9 +118,11 @@ unsafe partial class GenericsTest
         });
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector64Cs(values, values.Length));
+            GenericsNative.AddVector64Cs(values, values.Length)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddVector64Cs(in values[0], values.Length));
+            GenericsNative.AddVector64Cs(in values[0], values.Length)
+        );
     }
 }

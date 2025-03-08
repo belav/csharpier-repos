@@ -69,7 +69,8 @@ public class HandshakeTests : LoggedTest
                         }
                     );
                 }
-            ));
+            )
+        );
 
         Assert.Equal(
             "HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.",

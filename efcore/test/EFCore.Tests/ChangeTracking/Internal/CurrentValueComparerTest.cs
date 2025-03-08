@@ -93,7 +93,8 @@ public class CurrentValueComparerTest
                         context
                             .Model.FindEntityType(typeof(Godzilla))
                             .FindProperty(nameof(Godzilla.NotComparable))
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -118,7 +119,8 @@ public class CurrentValueComparerTest
                         context
                             .Model.FindEntityType(typeof(Godzilla))
                             .FindProperty(nameof(Godzilla.NotComparableConverted))
-                    ))
+                    )
+                )
                 .Message
         );
     }

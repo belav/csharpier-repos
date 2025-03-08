@@ -25,7 +25,8 @@ public class JSStreamReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Required property __jsObjectId not found.", ex.Message);
     }
 
@@ -37,7 +38,8 @@ public class JSStreamReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Unexpected JSON property foo.", ex.Message);
     }
 
@@ -49,7 +51,8 @@ public class JSStreamReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Record.Exception(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -61,7 +64,8 @@ public class JSStreamReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Record.Exception(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -74,7 +78,8 @@ public class JSStreamReferenceJsonConverterTest
 
         // Act & Assert
         var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Required property __jsStreamReferenceLength not found.", ex.Message);
     }
 

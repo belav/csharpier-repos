@@ -25,14 +25,16 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public void Constructor_RequiresNode()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SysXmlNode(null, typeof(T), NamespaceSource.Instance));
+                new SysXmlNode(null, typeof(T), NamespaceSource.Instance)
+            );
         }
 
         [Test]
         public void Constructor_RequiresType()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new SysXmlNode(new XmlDocument(), null, NamespaceSource.Instance));
+                new SysXmlNode(new XmlDocument(), null, NamespaceSource.Instance)
+            );
         }
 
         protected override IXmlNode NodeForElement(params string[] xml)

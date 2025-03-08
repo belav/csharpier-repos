@@ -21,7 +21,8 @@ namespace System.Data.OleDb.Tests
         public void Ctor_LongProvider_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                new OleDbConnection("provider=" + new string('c', 256)));
+                new OleDbConnection("provider=" + new string('c', 256))
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
@@ -34,21 +35,24 @@ namespace System.Data.OleDb.Tests
         public void Ctor_MissingUdlFile_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                new OleDbConnection(@"file name = missing-file.udl"));
+                new OleDbConnection(@"file name = missing-file.udl")
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_AsynchronousNotSupported_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                new OleDbConnection(ConnectionString + ";asynchronous processing=true"));
+                new OleDbConnection(ConnectionString + ";asynchronous processing=true")
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_InvalidConnectTimeout_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                new OleDbConnection(ConnectionString + ";connect timeout=-2"));
+                new OleDbConnection(ConnectionString + ";connect timeout=-2")
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
@@ -97,7 +101,8 @@ namespace System.Data.OleDb.Tests
         {
             transaction.Dispose();
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                connection.BeginTransaction((IsolationLevel)0));
+                connection.BeginTransaction((IsolationLevel)0)
+            );
         }
 
         [ConditionalFact(Helpers.IsAceDriverAvailable)]
@@ -247,7 +252,8 @@ namespace System.Data.OleDb.Tests
         {
             object[] restrictions = new object[] { null };
             Assert.Throws<ArgumentException>(() =>
-                connection.GetOleDbSchemaTable(oleDbSchemaGuid, restrictions));
+                connection.GetOleDbSchemaTable(oleDbSchemaGuid, restrictions)
+            );
         }
 
         public static IEnumerable<object[]> ManufacturedOleDbSchemaGuids

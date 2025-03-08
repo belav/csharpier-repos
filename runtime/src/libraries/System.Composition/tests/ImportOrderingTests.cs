@@ -73,7 +73,8 @@ namespace System.Composition.UnitTests
                 typeof(ItemWithoutOrder)
             );
             var x = Assert.Throws<CompositionFailedException>(() =>
-                container.GetExport<HasImportedItems>());
+                container.GetExport<HasImportedItems>()
+            );
             Assert.Equal(
                 "The metadata 'Order' cannot be used for ordering because it is missing from exports on part(s) 'ItemWithoutOrder'.",
                 x.Message

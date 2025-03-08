@@ -48,7 +48,8 @@ namespace System.CodeDom.Compiler.Tests
             var options = new CompilerParameters();
             options.ReferencedAssemblies.Add("referenced");
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.CompileAssemblyFromDom(options, compilationUnit));
+                compiler.CompileAssemblyFromDom(options, compilationUnit)
+            );
         }
 
         [Fact]
@@ -82,7 +83,8 @@ namespace System.CodeDom.Compiler.Tests
             var options = new CompilerParameters();
             options.ReferencedAssemblies.Add("referenced");
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.FromDomEntryPoint(options, compilationUnit));
+                compiler.FromDomEntryPoint(options, compilationUnit)
+            );
         }
 
         [Fact]
@@ -127,7 +129,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.CompileAssemblyFromDomBatch(new CompilerParameters(), compilationUnits));
+                compiler.CompileAssemblyFromDomBatch(new CompilerParameters(), compilationUnits)
+            );
         }
 
         [Fact]
@@ -171,7 +174,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.FromDomBatchEntryPoint(new CompilerParameters(), compilationUnits));
+                compiler.FromDomBatchEntryPoint(new CompilerParameters(), compilationUnits)
+            );
         }
 
         [Fact]
@@ -212,7 +216,8 @@ namespace System.CodeDom.Compiler.Tests
             using (var file = new TempFile(Path.GetTempFileName(), 0))
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    compiler.CompileAssemblyFromFile(new CompilerParameters(), file.Path));
+                    compiler.CompileAssemblyFromFile(new CompilerParameters(), file.Path)
+                );
             }
         }
 
@@ -252,7 +257,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<FileNotFoundException>(() =>
-                compiler.CompileAssemblyFromFile(new CompilerParameters(), "noSuchFile"));
+                compiler.CompileAssemblyFromFile(new CompilerParameters(), "noSuchFile")
+            );
         }
 
         [Fact]
@@ -263,7 +269,8 @@ namespace System.CodeDom.Compiler.Tests
             using (var file = new TempFile(Path.GetTempFileName(), 0))
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    compiler.FromFileEntryPoint(new CompilerParameters(), file.Path));
+                    compiler.FromFileEntryPoint(new CompilerParameters(), file.Path)
+                );
             }
         }
 
@@ -303,7 +310,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             var compiler = new Compiler();
             Assert.Throws<FileNotFoundException>(() =>
-                compiler.FromFileEntryPoint(new CompilerParameters(), "noSuchFile"));
+                compiler.FromFileEntryPoint(new CompilerParameters(), "noSuchFile")
+            );
         }
 
         [Fact]
@@ -332,7 +340,8 @@ namespace System.CodeDom.Compiler.Tests
                     compiler.CompileAssemblyFromFileBatch(
                         new CompilerParameters(),
                         new string[] { file.Path }
-                    ));
+                    )
+                );
             }
         }
 
@@ -393,7 +402,8 @@ namespace System.CodeDom.Compiler.Tests
                 compiler.CompileAssemblyFromFileBatch(
                     new CompilerParameters(),
                     new string[] { "noSuchFile" }
-                ));
+                )
+            );
         }
 
         public static IEnumerable<object[]> FromFileBatch_TestData()
@@ -413,7 +423,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.FromFileBatchEntryPoint(new CompilerParameters(), fileNames));
+                compiler.FromFileBatchEntryPoint(new CompilerParameters(), fileNames)
+            );
         }
 
         [Fact]
@@ -460,7 +471,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.CompileAssemblyFromSource(new CompilerParameters(), source));
+                compiler.CompileAssemblyFromSource(new CompilerParameters(), source)
+            );
         }
 
         [Fact]
@@ -488,7 +500,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.FromSourceEntryPoint(new CompilerParameters(), source));
+                compiler.FromSourceEntryPoint(new CompilerParameters(), source)
+            );
         }
 
         [Fact]
@@ -526,7 +539,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             ICodeCompiler compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.CompileAssemblyFromSourceBatch(new CompilerParameters(), sources));
+                compiler.CompileAssemblyFromSourceBatch(new CompilerParameters(), sources)
+            );
         }
 
         [Fact]
@@ -566,7 +580,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             var compiler = new Compiler();
             Assert.Throws<PlatformNotSupportedException>(() =>
-                compiler.FromSourceBatchEntryPoint(new CompilerParameters(), sources));
+                compiler.FromSourceBatchEntryPoint(new CompilerParameters(), sources)
+            );
         }
 
         [Fact]
@@ -613,7 +628,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             var compiler = new Compiler();
             Assert.Throws<NullReferenceException>(() =>
-                compiler.GetResponseFileCmdArgsEntryPoint(null, "cmdArgs"));
+                compiler.GetResponseFileCmdArgsEntryPoint(null, "cmdArgs")
+            );
         }
 
         public static IEnumerable<object[]> JoinStringArray_TestData()

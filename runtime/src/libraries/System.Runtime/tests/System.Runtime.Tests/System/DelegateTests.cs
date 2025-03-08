@@ -1563,7 +1563,8 @@ namespace System.Tests
             int? num = 123;
             MethodInfo mi = typeof(int?).GetMethod("ToString");
             AssertExtensions.Throws<ArgumentException>(() =>
-                Delegate.CreateDelegate(typeof(NullableIntToString), num, mi));
+                Delegate.CreateDelegate(typeof(NullableIntToString), num, mi)
+            );
         }
         #endregion Tests
 

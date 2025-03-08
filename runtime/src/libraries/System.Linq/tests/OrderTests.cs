@@ -229,7 +229,8 @@ namespace System.Linq.Tests
                 {
                     counter++;
                     return false;
-                }));
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
@@ -260,7 +261,8 @@ namespace System.Linq.Tests
                 {
                     counter++;
                     return false;
-                }));
+                })
+            );
             Assert.Equal(10, counter);
         }
 

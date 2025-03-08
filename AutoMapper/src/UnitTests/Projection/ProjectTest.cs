@@ -62,7 +62,8 @@ public class ProjectTest
         IList<Unmapped> projected = null;
 
         typeof(InvalidOperationException).ShouldBeThrownBy(() =>
-            projected = customers.ProjectTo<Unmapped>(_config).ToList());
+            projected = customers.ProjectTo<Unmapped>(_config).ToList()
+        );
 
         projected.ShouldBeNull();
     }

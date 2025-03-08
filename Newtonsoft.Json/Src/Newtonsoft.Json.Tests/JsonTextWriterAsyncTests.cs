@@ -1187,11 +1187,13 @@ Parameter name: value",
             {
                 ArgumentOutOfRangeException ex =
                     await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                        await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue));
+                        await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue)
+                    );
                 Assert.AreEqual("token", ex.ParamName);
 
                 ex = await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-                    await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue, "test"));
+                    await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue, "test")
+                );
                 Assert.AreEqual("token", ex.ParamName);
             }
         }
@@ -2086,7 +2088,8 @@ null//comment
             writer.Formatting = Formatting.Indented;
             await writer.WriteStartObjectAsync();
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>(async () =>
-                await writer.WritePropertyNameAsync("aa"));
+                await writer.WritePropertyNameAsync("aa")
+            );
         }
 
         [Test]
@@ -2094,7 +2097,8 @@ null//comment
         {
             JsonTextWriter writer = new JsonTextWriter(new ThrowingWriter('{'));
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>(async () =>
-                await writer.WriteStartObjectAsync());
+                await writer.WriteStartObjectAsync()
+            );
         }
 
         public class ThrowingWriter : TextWriter

@@ -311,7 +311,8 @@ public class ConnectionSpecificationTest
                 RelationalStrings.CannotChangeWhenOpen,
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        context.Database.SetDbConnection(newConnection))
+                        context.Database.SetDbConnection(newConnection)
+                    )
                     .Message
             );
         }

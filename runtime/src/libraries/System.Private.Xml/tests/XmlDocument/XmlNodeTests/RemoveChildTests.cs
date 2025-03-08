@@ -84,7 +84,8 @@ namespace System.Xml.XmlDocumentTests
             xmlDocument.LoadXml("<root><child/></root>");
 
             Assert.Throws<NullReferenceException>(() =>
-                xmlDocument.DocumentElement.RemoveChild(null));
+                xmlDocument.DocumentElement.RemoveChild(null)
+            );
         }
 
         [Fact]

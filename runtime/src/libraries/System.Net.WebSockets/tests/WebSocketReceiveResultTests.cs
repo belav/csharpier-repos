@@ -70,7 +70,8 @@ namespace System.Net.WebSockets.Tests
         public void ConstructorTest_Invalid_ThrowsArgumentException()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new WebSocketReceiveResult(-1, WebSocketMessageType.Text, false, null, null));
+                new WebSocketReceiveResult(-1, WebSocketMessageType.Text, false, null, null)
+            );
         }
     }
 }

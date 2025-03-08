@@ -557,7 +557,8 @@ namespace System.ComponentModel.Tests
         public static void GetConverter_NotAvailable()
         {
             Assert.Throws<MissingMethodException>(() =>
-                TypeDescriptor.GetConverter(typeof(ClassWithInvalidConverter)));
+                TypeDescriptor.GetConverter(typeof(ClassWithInvalidConverter))
+            );
             // GetConverter should throw MissingMethodException because parameterless constructor is missing in the InvalidConverter class.
         }
 

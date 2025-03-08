@@ -51,7 +51,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 .BuildServiceProvider();
 
             InvalidOperationException e = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetRequiredService<ILoggerProvider>());
+                serviceProvider.GetRequiredService<ILoggerProvider>()
+            );
 
             // "Console:" is stripped off from the config path since that config section is read by the ConsoleLogger, and not part of the Options path.
             string configPath = key.Substring("Console:".Length);

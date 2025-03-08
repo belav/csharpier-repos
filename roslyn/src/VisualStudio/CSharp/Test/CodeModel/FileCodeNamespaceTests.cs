@@ -106,7 +106,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes));
+                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -114,7 +115,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<COMException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter));
+                testObject.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -133,7 +135,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -141,7 +144,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartHeader));
+                testObject.GetStartPoint(vsCMPart.vsCMPartHeader)
+            );
         }
 
         [WpfFact]
@@ -149,7 +153,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
@@ -157,7 +162,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartName));
+                testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -176,7 +182,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetStartPoint(vsCMPart.vsCMPartWhole));
+                testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]
@@ -194,7 +201,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes));
+                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -202,7 +210,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<COMException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter));
+                testObject.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -221,7 +230,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+                testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -229,7 +239,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeader));
+                testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
+            );
         }
 
         [WpfFact]
@@ -237,7 +248,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+                testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
@@ -245,7 +257,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartName));
+                testObject.GetEndPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -264,7 +277,8 @@ namespace A.B
         {
             var testObject = GetCodeNamespace("A.B");
             Assert.Throws<NotImplementedException>(() =>
-                testObject.GetEndPoint(vsCMPart.vsCMPartWhole));
+                testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]

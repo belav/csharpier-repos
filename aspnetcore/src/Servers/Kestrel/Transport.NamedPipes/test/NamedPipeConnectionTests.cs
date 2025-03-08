@@ -55,7 +55,8 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
 
         var serverEx = await Assert
             .ThrowsAsync<ConnectionAbortedException>(() =>
-                serverConnection.Transport.Input.ReadAsync().AsTask())
+                serverConnection.Transport.Input.ReadAsync().AsTask()
+            )
             .DefaultTimeout();
         Assert.Equal("Test reason", serverEx.Message);
 

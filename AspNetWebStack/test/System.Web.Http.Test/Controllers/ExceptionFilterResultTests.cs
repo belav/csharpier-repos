@@ -86,7 +86,8 @@ namespace System.Web.Http.Controllers
 
             // Act & Assert
             await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                product.ExecuteAsync(CancellationToken.None));
+                product.ExecuteAsync(CancellationToken.None)
+            );
 
             Assert.Equal(new string[] { "exceptionFilter" }, log.ToArray());
         }
@@ -130,7 +131,8 @@ namespace System.Web.Http.Controllers
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                product.ExecuteAsync(CancellationToken.None));
+                product.ExecuteAsync(CancellationToken.None)
+            );
 
             Assert.Same(expectedException, exception);
             Assert.Same(expectedException, exceptionSeenByFilter);
@@ -168,7 +170,8 @@ namespace System.Web.Http.Controllers
 
                 // Act
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    product.ExecuteAsync(cancellationToken));
+                    product.ExecuteAsync(cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -367,7 +370,8 @@ namespace System.Web.Http.Controllers
 
                 // Act & Assert
                 var exception = await Assert.ThrowsAsync<NotImplementedException>(() =>
-                    product.ExecuteAsync(CancellationToken.None));
+                    product.ExecuteAsync(CancellationToken.None)
+                );
                 Assert.Same(expectedException, exception);
             }
         }
@@ -401,7 +405,8 @@ namespace System.Web.Http.Controllers
 
                 // Act & Assert
                 var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    product.ExecuteAsync(CancellationToken.None));
+                    product.ExecuteAsync(CancellationToken.None)
+                );
 
                 Assert.NotNull(expectedStackTrace);
                 Assert.NotNull(exception);

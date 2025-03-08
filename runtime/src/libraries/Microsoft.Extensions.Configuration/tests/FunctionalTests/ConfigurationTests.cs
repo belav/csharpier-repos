@@ -126,15 +126,18 @@ CommonKey3:CommonKey4=IniValue6";
         public void MissingFileIncludesAbsolutePathIfPhysicalFileProvider()
         {
             var error = Assert.Throws<FileNotFoundException>(() =>
-                new ConfigurationBuilder().AddIniFile("missing.ini").Build());
+                new ConfigurationBuilder().AddIniFile("missing.ini").Build()
+            );
             Assert.True(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(() =>
-                new ConfigurationBuilder().AddJsonFile("missing.json").Build());
+                new ConfigurationBuilder().AddJsonFile("missing.json").Build()
+            );
             Assert.True(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(() =>
-                new ConfigurationBuilder().AddXmlFile("missing.xml").Build());
+                new ConfigurationBuilder().AddXmlFile("missing.xml").Build()
+            );
             Assert.True(error.Message.Contains(_basePath), error.Message);
         }
 
@@ -187,19 +190,22 @@ CommonKey3:CommonKey4=IniValue6";
             var error = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddIniFile(provider, "missing.ini", optional: false, reloadOnChange: false)
-                    .Build());
+                    .Build()
+            );
             Assert.False(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddJsonFile(provider, "missing.json", optional: false, reloadOnChange: false)
-                    .Build());
+                    .Build()
+            );
             Assert.False(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddXmlFile(provider, "missing.xml", optional: false, reloadOnChange: false)
-                    .Build());
+                    .Build()
+            );
             Assert.False(error.Message.Contains(_basePath), error.Message);
         }
 
@@ -210,19 +216,22 @@ CommonKey3:CommonKey4=IniValue6";
             var error = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddIniFile(provider, "missing.ini", optional: false, reloadOnChange: false)
-                    .Build());
+                    .Build()
+            );
             Assert.False(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddJsonFile(provider, "missing.json", optional: false, reloadOnChange: false)
-                    .Build());
+                    .Build()
+            );
             Assert.False(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(() =>
                 new ConfigurationBuilder()
                     .AddXmlFile(provider, "missing.xml", optional: false, reloadOnChange: false)
-                    .Build());
+                    .Build()
+            );
             Assert.False(error.Message.Contains(_basePath), error.Message);
         }
 
@@ -899,7 +908,8 @@ IniKey1=IniValue2"
             _fileSystem.WriteFile(_jsonFile, json);
 
             var exception = Assert.Throws<InvalidDataException>(() =>
-                CreateBuilder().AddJsonFile(_jsonFile).Build());
+                CreateBuilder().AddJsonFile(_jsonFile).Build()
+            );
             Assert.Contains("Could not parse the JSON file.", exception.InnerException.Message);
         }
 

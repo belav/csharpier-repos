@@ -25,7 +25,8 @@ public class DefaultPageApplicationModelProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
 
         // Assert
         Assert.Equal(
@@ -68,7 +69,8 @@ public class DefaultPageApplicationModelProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
 
         // Assert
         Assert.Equal(
@@ -93,7 +95,8 @@ public class DefaultPageApplicationModelProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
 
         // Assert
         Assert.Equal(
@@ -120,7 +123,8 @@ public class DefaultPageApplicationModelProviderTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+            provider.OnProvidersExecuting(context)
+        );
 
         // Assert
         Assert.Equal(

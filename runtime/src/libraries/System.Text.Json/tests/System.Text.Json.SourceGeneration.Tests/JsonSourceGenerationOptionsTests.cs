@@ -131,7 +131,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         public static void ContextWithInvalidSerializerDefaults_ThrowsArgumentOutOfRangeException()
         {
             TypeInitializationException ex = Assert.Throws<TypeInitializationException>(() =>
-                ContextWithInvalidSerializerDefaults.Default);
+                ContextWithInvalidSerializerDefaults.Default
+            );
             ArgumentOutOfRangeException inner = Assert.IsType<ArgumentOutOfRangeException>(
                 ex.InnerException
             );

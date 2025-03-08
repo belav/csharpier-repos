@@ -79,8 +79,8 @@ namespace System.Data.OleDb.Tests
             Assert.False(new OleDbCommand().Parameters.GetEnumerator().MoveNext());
 
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Add(0));
-            Assert.Throws<ArgumentNullException>(() =>
-                new OleDbCommand().Parameters.AddRange(null));
+            Assert.Throws<ArgumentNullException>(() => new OleDbCommand().Parameters.AddRange(null)
+            );
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Insert(0, 0));
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Remove(0));
 
@@ -108,7 +108,8 @@ namespace System.Data.OleDb.Tests
         public void Ctor_InvalidOleDbType_Throws()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new OleDbParameter(name: "ParameterName", dataType: (OleDbType)500));
+                new OleDbParameter(name: "ParameterName", dataType: (OleDbType)500)
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
@@ -187,7 +188,8 @@ namespace System.Data.OleDb.Tests
         {
             Assert.Throws<ArgumentException>(() => new OleDbParameter(default, default, size: -2));
             Assert.Throws<ArgumentException>(() =>
-                new OleDbParameter(default, default, size: -2, srcColumn: default));
+                new OleDbParameter(default, default, size: -2, srcColumn: default)
+            );
 
             var oleDbParameter = new OleDbParameter();
             Assert.Equal(0, oleDbParameter.Size);
@@ -217,7 +219,8 @@ namespace System.Data.OleDb.Tests
             Assert.Equal(ParameterDirection.InputOutput, oleDbParameter.Direction);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                oleDbParameter.Direction = (ParameterDirection)0);
+                oleDbParameter.Direction = (ParameterDirection)0
+            );
         }
 
         [ConditionalTheory(Helpers.IsDriverAvailable)]
@@ -254,14 +257,16 @@ namespace System.Data.OleDb.Tests
                     default,
                     (DataRowVersion)0,
                     default
-                ));
+                )
+            );
 
             var oleDbParameter = new OleDbParameter();
             oleDbParameter.SourceVersion = DataRowVersion.Proposed;
             Assert.Equal(DataRowVersion.Proposed, oleDbParameter.SourceVersion);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                oleDbParameter.SourceVersion = (DataRowVersion)0);
+                oleDbParameter.SourceVersion = (DataRowVersion)0
+            );
         }
 
         [ConditionalTheory(Helpers.IsDriverAvailable)]

@@ -51,7 +51,8 @@ namespace System.Globalization.Tests
         public void PercentDecimalSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.PercentDecimalSeparator = "string");
+                NumberFormatInfo.InvariantInfo.PercentDecimalSeparator = "string"
+            );
         }
     }
 }

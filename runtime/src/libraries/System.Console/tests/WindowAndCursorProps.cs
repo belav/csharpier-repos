@@ -869,7 +869,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -881,7 +882,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -893,7 +895,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -905,7 +908,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -917,7 +921,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -929,7 +934,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     Console.BufferWidth + 1,
@@ -941,7 +947,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -953,7 +960,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -965,7 +973,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -977,7 +986,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     0,
@@ -989,7 +999,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Console.MoveBufferArea(
                     1,
@@ -1001,7 +1012,8 @@ public class WindowAndCursorProps
                     '0',
                     ConsoleColor.Black,
                     ConsoleColor.White
-                ));
+                )
+            );
 
             // Nothing to verify; just run the code.
             Console.MoveBufferArea(0, 0, 1, 1, 2, 2, 'a', ConsoleColor.Black, ConsoleColor.White);
@@ -1028,9 +1040,10 @@ public class WindowAndCursorProps
     [PlatformSpecific(TestPlatforms.AnyUnix)]
     public void MoveBufferArea_Unix_ThrowsPlatformNotSupportedException()
     {
+        Assert.Throws<PlatformNotSupportedException>(() => Console.MoveBufferArea(0, 0, 0, 0, 0, 0)
+        );
         Assert.Throws<PlatformNotSupportedException>(() =>
-            Console.MoveBufferArea(0, 0, 0, 0, 0, 0));
-        Assert.Throws<PlatformNotSupportedException>(() =>
-            Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'c', ConsoleColor.White, ConsoleColor.Black));
+            Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'c', ConsoleColor.White, ConsoleColor.Black)
+        );
     }
 }

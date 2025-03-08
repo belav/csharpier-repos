@@ -61,7 +61,8 @@ namespace System.Web.Mvc
                 {
                     // Startup initialization race is OK providing service remains read-only
                     _sharedFileExistsCache = new FileExistenceCache(() =>
-                        HostingEnvironment.VirtualPathProvider);
+                        HostingEnvironment.VirtualPathProvider
+                    );
                 }
 
                 _fileExistsCache = _sharedFileExistsCache;

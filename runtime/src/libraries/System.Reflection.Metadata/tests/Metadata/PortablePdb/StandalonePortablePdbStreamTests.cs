@@ -146,7 +146,8 @@ namespace System.Reflection.Metadata.Tests
                         0x00,
                         0x00,
                     }
-                ));
+                )
+            );
 
             // entry point not a MethodDef:
             Assert.Throws<BadImageFormatException>(() =>
@@ -191,7 +192,8 @@ namespace System.Reflection.Metadata.Tests
                         0x00,
                         0x00,
                     }
-                ));
+                )
+            );
         }
     }
 }

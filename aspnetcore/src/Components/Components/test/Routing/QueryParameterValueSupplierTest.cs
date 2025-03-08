@@ -194,7 +194,8 @@ public class QueryParameterValueSupplierTest
         ReadQuery($"?{key}={value}");
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            _supplier.GetQueryParameterValue(targetType, key));
+            _supplier.GetQueryParameterValue(targetType, key)
+        );
         Assert.Equal(
             $"Cannot parse the value '{value.Replace('+', ' ')}' as type '{targetType}' for '{key}'.",
             ex.Message
@@ -233,7 +234,8 @@ public class QueryParameterValueSupplierTest
         ReadQuery($"?{key}={validValue}&{key}={invalidValue}");
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            _supplier.GetQueryParameterValue(targetType.MakeArrayType(), key));
+            _supplier.GetQueryParameterValue(targetType.MakeArrayType(), key)
+        );
         Assert.Equal(
             $"Cannot parse the value '{invalidValue.Replace('+', ' ')}' as type '{targetType}' for '{key}'.",
             ex.Message
@@ -254,7 +256,8 @@ public class QueryParameterValueSupplierTest
         ReadQuery($"?StringVal=somevalue&{key}=");
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            _supplier.GetQueryParameterValue(targetType, key));
+            _supplier.GetQueryParameterValue(targetType, key)
+        );
         Assert.Equal($"Cannot parse the value '' as type '{targetType}' for '{key}'.", ex.Message);
     }
 
@@ -320,7 +323,8 @@ public class QueryParameterValueSupplierTest
         ReadQuery($"?StringVal=somevalue&{key}=");
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            _supplier.GetQueryParameterValue(targetType, key));
+            _supplier.GetQueryParameterValue(targetType, key)
+        );
         Assert.Equal($"Cannot parse the value '' as type '{targetType}' for '{key}'.", ex.Message);
     }
 

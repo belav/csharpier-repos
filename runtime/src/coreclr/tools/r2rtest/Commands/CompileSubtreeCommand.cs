@@ -183,7 +183,8 @@ namespace R2RTest
                 {
                     subfolderTasks.Add(
                         Task.Run(() =>
-                            LocateSubtreeAsync(subdir, coreRootFolder, testHostFolder, directories))
+                            LocateSubtreeAsync(subdir, coreRootFolder, testHostFolder, directories)
+                        )
                     );
                 }
                 await Task.WhenAll(subfolderTasks);

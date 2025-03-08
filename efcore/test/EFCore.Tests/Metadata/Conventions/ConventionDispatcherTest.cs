@@ -29,7 +29,8 @@ public class ConventionDispatcherTest
                         typeof(int),
                         shadowPropertyName,
                         ConfigurationSource.Convention
-                    ))
+                    )
+                )
                 .Message
         );
     }

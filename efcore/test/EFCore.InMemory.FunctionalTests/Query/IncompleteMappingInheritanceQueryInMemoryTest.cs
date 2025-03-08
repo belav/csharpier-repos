@@ -15,7 +15,8 @@ public class IncompleteMappingInheritanceQueryInMemoryTest
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Can_query_all_animal_views(async))
+                base.Can_query_all_animal_views(async)
+            )
         ).Message;
 
         Assert.Equal(

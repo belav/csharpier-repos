@@ -45,7 +45,8 @@ namespace System.IO.Pipelines.Tests
         public async Task CopyToAsyncThrowsTaskCanceledExceptionForAlreadyCancelledToken()
         {
             await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                PipeReader.CopyToAsync(new MemoryStream(), new CancellationToken(true)));
+                PipeReader.CopyToAsync(new MemoryStream(), new CancellationToken(true))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

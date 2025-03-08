@@ -22,7 +22,8 @@ namespace System.Xml.Tests
             Type typeToReturn = typeof(Stream);
 
             Assert.Throws<XmlException>(() =>
-                outerResolver.GetEntity(absoluteUri, "role", typeToReturn));
+                outerResolver.GetEntity(absoluteUri, "role", typeToReturn)
+            );
             Assert.False(innerResolver.WasAnyApiInvoked);
         }
 
@@ -35,7 +36,8 @@ namespace System.Xml.Tests
             Type typeToReturn = typeof(Stream);
 
             Assert.Throws<XmlException>(() =>
-                (object)outerResolver.GetEntityAsync(absoluteUri, "role", typeToReturn));
+                (object)outerResolver.GetEntityAsync(absoluteUri, "role", typeToReturn)
+            );
             Assert.False(innerResolver.WasAnyApiInvoked);
         }
 

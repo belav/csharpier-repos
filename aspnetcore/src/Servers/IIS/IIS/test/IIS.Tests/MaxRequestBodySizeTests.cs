@@ -284,7 +284,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     Assert.True(feature.IsReadOnly);
 
                     invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize);
+                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize
+                    );
                     throw invalidOpEx;
                 },
                 LoggerFactory

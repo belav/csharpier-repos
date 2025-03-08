@@ -317,7 +317,8 @@ namespace System.Security.Cryptography.Xml.Tests
             EncryptedXml exml = new EncryptedXml();
             X509Certificate2 certificate = null;
             Assert.Throws<ArgumentNullException>(() =>
-                exml.Encrypt(doc.DocumentElement, certificate));
+                exml.Encrypt(doc.DocumentElement, certificate)
+            );
         }
 
         [Fact]
@@ -391,7 +392,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 CheckEncryptionMethod(
                     new NotSupportedSymmetricAlgorithm(),
                     EncryptedXml.XmlEncAES192KeyWrapUrl
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -438,7 +440,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void ReplaceElement_XmlElementNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                EncryptedXml.ReplaceElement(null, new EncryptedData(), true));
+                EncryptedXml.ReplaceElement(null, new EncryptedData(), true)
+            );
         }
 
         [Fact]
@@ -447,7 +450,8 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<root />");
             Assert.Throws<ArgumentNullException>(() =>
-                EncryptedXml.ReplaceElement(doc.DocumentElement, null, false));
+                EncryptedXml.ReplaceElement(doc.DocumentElement, null, false)
+            );
         }
 
         [Fact]
@@ -481,7 +485,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             EncryptedXml ex = new EncryptedXml();
             Assert.Throws<ArgumentNullException>(() =>
-                ex.GetDecryptionKey(null, EncryptedXml.XmlEncAES128Url));
+                ex.GetDecryptionKey(null, EncryptedXml.XmlEncAES128Url)
+            );
         }
 
         [Fact]
@@ -557,7 +562,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             EncryptedXml ex = new EncryptedXml();
             Assert.Throws<ArgumentNullException>(() =>
-                ex.GetDecryptionIV(null, EncryptedXml.XmlEncAES128Url));
+                ex.GetDecryptionIV(null, EncryptedXml.XmlEncAES128Url)
+            );
         }
 
         [Fact]
@@ -585,8 +591,8 @@ namespace System.Security.Cryptography.Xml.Tests
             EncryptedXml ex = new EncryptedXml();
             EncryptedData encryptedData = new EncryptedData();
             encryptedData.CipherData = new CipherData(new byte[16]);
-            Assert.Throws<CryptographicException>(() =>
-                ex.GetDecryptionIV(encryptedData, "invalid"));
+            Assert.Throws<CryptographicException>(() => ex.GetDecryptionIV(encryptedData, "invalid")
+            );
         }
 
         [Fact]
@@ -635,7 +641,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void EncryptKey_WrongSymmetricAlgorithm()
         {
             Assert.Throws<CryptographicException>(() =>
-                EncryptedXml.EncryptKey(new byte[16], new NotSupportedSymmetricAlgorithm()));
+                EncryptedXml.EncryptKey(new byte[16], new NotSupportedSymmetricAlgorithm())
+            );
         }
 
         [Fact]
@@ -643,8 +650,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    EncryptedXml.EncryptKey(null, rsa, false));
+                Assert.Throws<ArgumentNullException>(() => EncryptedXml.EncryptKey(null, rsa, false)
+                );
             }
         }
 
@@ -652,7 +659,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void EncryptKey_RSA_RSANull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                EncryptedXml.EncryptKey(new byte[16], null, false));
+                EncryptedXml.EncryptKey(new byte[16], null, false)
+            );
         }
 
         [Fact]
@@ -780,7 +788,8 @@ namespace System.Security.Cryptography.Xml.Tests
             doc.LoadXml("<root />");
             EncryptedXml ex = new EncryptedXml();
             Assert.Throws<ArgumentNullException>(() =>
-                ex.EncryptData(doc.DocumentElement, null, true));
+                ex.EncryptData(doc.DocumentElement, null, true)
+            );
         }
 
         [Fact]
@@ -958,8 +967,8 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 byte[] key = "123"u8.ToArray();
 
-                Assert.Throws<CryptographicException>(() =>
-                    EncryptedXml.DecryptKey(key, tripleDES));
+                Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(key, tripleDES)
+                );
             }
         }
 
@@ -974,7 +983,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 encryptedKey[0] ^= 0xFF;
 
                 Assert.Throws<CryptographicException>(() =>
-                    EncryptedXml.DecryptKey(encryptedKey, tripleDES));
+                    EncryptedXml.DecryptKey(encryptedKey, tripleDES)
+                );
             }
         }
 
@@ -1000,7 +1010,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 encryptedKey[0] ^= 0xFF;
 
                 Assert.Throws<CryptographicException>(() =>
-                    EncryptedXml.DecryptKey(encryptedKey, aes));
+                    EncryptedXml.DecryptKey(encryptedKey, aes)
+                );
             }
         }
 
@@ -1015,7 +1026,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 encryptedKey[0] ^= 0xFF;
 
                 Assert.Throws<CryptographicException>(() =>
-                    EncryptedXml.DecryptKey(encryptedKey, aes));
+                    EncryptedXml.DecryptKey(encryptedKey, aes)
+                );
             }
         }
 
@@ -1023,7 +1035,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void DecryptKey_NotSupportedAlgorithm()
         {
             Assert.Throws<CryptographicException>(() =>
-                EncryptedXml.DecryptKey(new byte[16], new NotSupportedSymmetricAlgorithm()));
+                EncryptedXml.DecryptKey(new byte[16], new NotSupportedSymmetricAlgorithm())
+            );
         }
 
         [Fact]
@@ -1031,8 +1044,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    EncryptedXml.DecryptKey(null, rsa, false));
+                Assert.Throws<ArgumentNullException>(() => EncryptedXml.DecryptKey(null, rsa, false)
+                );
             }
         }
 
@@ -1040,7 +1053,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void DecryptKey_RSA_RSANull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                EncryptedXml.DecryptKey(new byte[16], null, false));
+                EncryptedXml.DecryptKey(new byte[16], null, false)
+            );
         }
 
         [Fact]

@@ -60,7 +60,8 @@ public abstract class AbstractLanguageServer<TRequestContext>
         _jsonRpc.Disconnected += JsonRpc_Disconnected;
         _lspServices = new Lazy<ILspServices>(() => ConstructLspServices());
         _queue = new Lazy<IRequestExecutionQueue<TRequestContext>>(() =>
-            ConstructRequestExecutionQueue());
+            ConstructRequestExecutionQueue()
+        );
     }
 
     /// <summary>

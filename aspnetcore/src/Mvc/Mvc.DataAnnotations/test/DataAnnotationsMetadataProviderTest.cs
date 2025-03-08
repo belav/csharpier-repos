@@ -628,21 +628,24 @@ public class DataAnnotationsMetadataProviderTest
                 new LocalizedString(
                     "Model_Name",
                     "name from localizer " + CultureInfo.CurrentCulture
-                ));
+                )
+            );
         stringLocalizer
             .Setup(s => s["Model_Description"])
             .Returns(() =>
                 new LocalizedString(
                     "Model_Description",
                     "description from localizer " + CultureInfo.CurrentCulture
-                ));
+                )
+            );
         stringLocalizer
             .Setup(s => s["Model_Prompt"])
             .Returns(() =>
                 new LocalizedString(
                     "Model_Prompt",
                     "prompt from localizer " + CultureInfo.CurrentCulture
-                ));
+                )
+            );
 
         var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
         stringLocalizerFactoryMock

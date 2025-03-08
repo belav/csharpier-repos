@@ -167,7 +167,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialization baseline, without enum converter, we get JsonException.
             await Assert.ThrowsAsync<JsonException>(async () =>
-                await Serializer.DeserializeWrapper<StructWithPropertiesWithConverter>(json));
+                await Serializer.DeserializeWrapper<StructWithPropertiesWithConverter>(json)
+            );
 
             var obj = await Serializer.DeserializeWrapper<StructWithPropertiesWithConverter>(
                 json,
@@ -178,7 +179,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // ConverterForInt32 throws this exception.
             await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await Serializer.SerializeWrapper(obj, options));
+                await Serializer.SerializeWrapper(obj, options)
+            );
         }
 
         public struct StructWithPropertiesWithConverter
@@ -433,7 +435,8 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Contains("JsonIncludeAttribute", exAsStr);
 
                 ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await Serializer.SerializeWrapper(Activator.CreateInstance(type), type));
+                    await Serializer.SerializeWrapper(Activator.CreateInstance(type), type)
+                );
                 exAsStr = ex.ToString();
                 Assert.Contains("MyString", exAsStr);
                 Assert.Contains(type.ToString(), exAsStr);

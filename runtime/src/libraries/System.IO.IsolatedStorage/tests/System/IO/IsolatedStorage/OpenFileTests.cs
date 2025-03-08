@@ -39,17 +39,14 @@ namespace System.IO.IsolatedStorage
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 isf.Remove();
+                Assert.Throws<InvalidOperationException>(() => isf.OpenFile("foo", FileMode.Create)
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    isf.OpenFile("foo", FileMode.Create));
+                    isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite)
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite));
-                Assert.Throws<InvalidOperationException>(() =>
-                    isf.OpenFile(
-                        "foo",
-                        FileMode.Create,
-                        FileAccess.ReadWrite,
-                        FileShare.ReadWrite
-                    ));
+                    isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite)
+                );
             }
         }
 
@@ -61,9 +58,11 @@ namespace System.IO.IsolatedStorage
 
             Assert.Throws<ObjectDisposedException>(() => isf.OpenFile("foo", FileMode.Create));
             Assert.Throws<ObjectDisposedException>(() =>
-                isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite));
+                isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite)
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite));
+                isf.OpenFile("foo", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite)
+            );
         }
 
         [Fact]
@@ -72,17 +71,14 @@ namespace System.IO.IsolatedStorage
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 isf.Close();
+                Assert.Throws<InvalidOperationException>(() => isf.OpenFile("foo", FileMode.Append)
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    isf.OpenFile("foo", FileMode.Append));
+                    isf.OpenFile("foo", FileMode.Append, FileAccess.ReadWrite)
+                );
                 Assert.Throws<InvalidOperationException>(() =>
-                    isf.OpenFile("foo", FileMode.Append, FileAccess.ReadWrite));
-                Assert.Throws<InvalidOperationException>(() =>
-                    isf.OpenFile(
-                        "foo",
-                        FileMode.Append,
-                        FileAccess.ReadWrite,
-                        FileShare.ReadWrite
-                    ));
+                    isf.OpenFile("foo", FileMode.Append, FileAccess.ReadWrite, FileShare.ReadWrite)
+                );
             }
         }
 
@@ -91,17 +87,19 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
+                Assert.Throws<IsolatedStorageException>(() => isf.OpenFile("\0bad", FileMode.Create)
+                );
                 Assert.Throws<IsolatedStorageException>(() =>
-                    isf.OpenFile("\0bad", FileMode.Create));
-                Assert.Throws<IsolatedStorageException>(() =>
-                    isf.OpenFile("\0bad", FileMode.Create, FileAccess.ReadWrite));
+                    isf.OpenFile("\0bad", FileMode.Create, FileAccess.ReadWrite)
+                );
                 Assert.Throws<IsolatedStorageException>(() =>
                     isf.OpenFile(
                         "\0bad",
                         FileMode.Create,
                         FileAccess.ReadWrite,
                         FileShare.ReadWrite
-                    ));
+                    )
+                );
             }
         }
 
@@ -139,7 +137,8 @@ namespace System.IO.IsolatedStorage
                 {
                     Assert.True(isf.FileExists(file), "file exists");
                     Assert.Throws<IsolatedStorageException>(() =>
-                        isf.OpenFile(file, FileMode.Open, FileAccess.ReadWrite));
+                        isf.OpenFile(file, FileMode.Open, FileAccess.ReadWrite)
+                    );
                 }
             }
         }
@@ -177,8 +176,8 @@ namespace System.IO.IsolatedStorage
                 using (isf.OpenFile(file, FileMode.CreateNew)) { }
                 Assert.True(isf.FileExists(file), "file exists");
 
-                Assert.Throws<IsolatedStorageException>(() =>
-                    isf.OpenFile(file, FileMode.CreateNew));
+                Assert.Throws<IsolatedStorageException>(() => isf.OpenFile(file, FileMode.CreateNew)
+                );
                 using (isf.OpenFile(file, FileMode.Create)) { }
             }
         }

@@ -56,7 +56,8 @@ public class InMemoryTransactionManagerTest
             CoreStrings.TransactionsNotSupported,
             Assert
                 .Throws<NotSupportedException>(() =>
-                    context.Database.EnlistTransaction(Transaction.Current))
+                    context.Database.EnlistTransaction(Transaction.Current)
+                )
                 .Message
         );
 
@@ -86,7 +87,8 @@ public class InMemoryTransactionManagerTest
             new InMemoryTransactionManager(CreateLogger())
                 .BeginTransactionAsync()
                 .GetAwaiter()
-                .GetResult());
+                .GetResult()
+        );
 
     [ConditionalFact]
     public void Throws_on_CommitTransaction() =>
@@ -98,7 +100,8 @@ public class InMemoryTransactionManagerTest
             new InMemoryTransactionManager(CreateLogger())
                 .CommitTransactionAsync()
                 .GetAwaiter()
-                .GetResult());
+                .GetResult()
+        );
 
     [ConditionalFact]
     public void Throws_on_RollbackTransaction() =>
@@ -110,7 +113,8 @@ public class InMemoryTransactionManagerTest
             new InMemoryTransactionManager(CreateLogger())
                 .RollbackTransactionAsync()
                 .GetAwaiter()
-                .GetResult());
+                .GetResult()
+        );
 
     private static void AssertThrows(Action action) =>
         Assert.Equal(

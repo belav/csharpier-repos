@@ -350,7 +350,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             using (IHost host = hostBuilder.Build())
             {
                 Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
-                    await host.StartAsync());
+                    await host.StartAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.False(impl.StartCalled);
@@ -380,7 +381,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             using (IHost host = hostBuilder.Build())
             {
                 Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
-                    await host.StartAsync());
+                    await host.StartAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.True(impl.StartCalled);
@@ -410,7 +412,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             using (IHost host = hostBuilder.Build())
             {
                 Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
-                    await host.StartAsync());
+                    await host.StartAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.True(impl.StartCalled);
@@ -441,7 +444,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             using (IHost host = hostBuilder.Build())
             {
                 await Assert.ThrowsAnyAsync<OptionsValidationException>(async () =>
-                    await host.StartAsync());
+                    await host.StartAsync()
+                );
                 Assert.False(impl.StartingCalled);
             }
         }

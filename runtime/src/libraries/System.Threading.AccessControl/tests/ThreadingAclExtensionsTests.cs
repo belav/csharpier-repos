@@ -39,13 +39,16 @@ namespace System.Threading.Tests
 
             Assert.Throws<PlatformNotSupportedException>(() => e.GetAccessControl());
             Assert.Throws<PlatformNotSupportedException>(() =>
-                e.SetAccessControl(new EventWaitHandleSecurity()));
+                e.SetAccessControl(new EventWaitHandleSecurity())
+            );
             Assert.Throws<PlatformNotSupportedException>(() => s.GetAccessControl());
             Assert.Throws<PlatformNotSupportedException>(() =>
-                s.SetAccessControl(new SemaphoreSecurity()));
+                s.SetAccessControl(new SemaphoreSecurity())
+            );
             Assert.Throws<PlatformNotSupportedException>(() => m.GetAccessControl());
             Assert.Throws<PlatformNotSupportedException>(() =>
-                m.SetAccessControl(new MutexSecurity()));
+                m.SetAccessControl(new MutexSecurity())
+            );
         }
     }
 }

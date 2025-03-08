@@ -134,7 +134,8 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         // Send a bogus sign in
         using var server = host.GetTestServer();
         var error = await Assert.ThrowsAnyAsync<Exception>(() =>
-            server.SendAsync("https://example.com/signin-twitter"));
+            server.SendAsync("https://example.com/signin-twitter")
+        );
         Assert.Equal("Invalid state cookie.", error.GetBaseException().Message);
     }
 
@@ -644,17 +645,20 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                                 if (req.Path == new PathString("/signIn"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.SignInAsync("Twitter", new ClaimsPrincipal()));
+                                        context.SignInAsync("Twitter", new ClaimsPrincipal())
+                                    );
                                 }
                                 else if (req.Path == new PathString("/signOut"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.SignOutAsync("Twitter"));
+                                        context.SignOutAsync("Twitter")
+                                    );
                                 }
                                 else if (req.Path == new PathString("/forbid"))
                                 {
                                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                        context.ForbidAsync("Twitter"));
+                                        context.ForbidAsync("Twitter")
+                                    );
                                 }
                                 else if (req.Path == new PathString("/me"))
                                 {

@@ -216,8 +216,8 @@ namespace System.Collections.Tests
         {
             Stack<T> stack = GenericStackFactory(size);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
-                stack.TrimExcess(newCapacity));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => stack.TrimExcess(newCapacity)
+            );
         }
 
         [Fact]
@@ -412,7 +412,8 @@ namespace System.Collections.Tests
         {
             var stack = GenericStackFactory();
             AssertExtensions.Throws<OutOfMemoryException>(() =>
-                stack.EnsureCapacity(requestedCapacity));
+                stack.EnsureCapacity(requestedCapacity)
+            );
         }
 
         [Theory]

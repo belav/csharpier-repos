@@ -28,7 +28,8 @@ namespace System.ConfigurationTests
         {
             var element = new NameValueConfigurationElement(null, null);
             Assert.Throws<ConfigurationErrorsException>(() =>
-                new NameValueConfigurationCollection().Add(element));
+                new NameValueConfigurationCollection().Add(element)
+            );
         }
 
         [Fact]

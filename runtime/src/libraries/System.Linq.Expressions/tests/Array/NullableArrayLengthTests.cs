@@ -21,7 +21,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableBoolArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableBoolArrayLengthExpression(null, useInterpreter));
+                CheckNullableBoolArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -40,7 +41,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableByteArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableByteArrayLengthExpression(null, useInterpreter));
+                CheckNullableByteArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -59,7 +61,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableCharArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableCharArrayLengthExpression(null, useInterpreter));
+                CheckNullableCharArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -87,7 +90,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableDecimalArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableDecimalArrayLengthExpression(null, useInterpreter));
+                CheckNullableDecimalArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -115,7 +119,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableDoubleArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableDoubleArrayLengthExpression(null, useInterpreter));
+                CheckNullableDoubleArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -134,7 +139,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableEnumArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableEnumArrayLengthExpression(null, useInterpreter));
+                CheckNullableEnumArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -162,7 +168,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableEnumLongArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableEnumLongArrayLengthExpression(null, useInterpreter));
+                CheckNullableEnumLongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -181,7 +188,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableFloatArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableFloatArrayLengthExpression(null, useInterpreter));
+                CheckNullableFloatArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -200,7 +208,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableIntArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableIntArrayLengthExpression(null, useInterpreter));
+                CheckNullableIntArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -219,7 +228,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableLongArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableLongArrayLengthExpression(null, useInterpreter));
+                CheckNullableLongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -238,7 +248,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableSByteArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableSByteArrayLengthExpression(null, useInterpreter));
+                CheckNullableSByteArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -266,7 +277,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableStructArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableStructArrayLengthExpression(null, useInterpreter));
+                CheckNullableStructArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -296,7 +308,8 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableStructWithStringArrayLengthExpression(null, useInterpreter));
+                CheckNullableStructWithStringArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -326,7 +339,8 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableStructWithStringAndValueArrayLengthExpression(null, useInterpreter));
+                CheckNullableStructWithStringAndValueArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -356,7 +370,8 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableStructWithTwoParametersArrayLengthExpression(null, useInterpreter));
+                CheckNullableStructWithTwoParametersArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -384,7 +399,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableStructWithValueArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableStructWithValueArrayLengthExpression(null, useInterpreter));
+                CheckNullableStructWithValueArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -403,7 +419,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableShortArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableShortArrayLengthExpression(null, useInterpreter));
+                CheckNullableShortArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -422,7 +439,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableUIntArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableUIntArrayLengthExpression(null, useInterpreter));
+                CheckNullableUIntArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -441,7 +459,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableULongArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableULongArrayLengthExpression(null, useInterpreter));
+                CheckNullableULongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -469,7 +488,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckExceptionNullableUShortArrayLengthTest(bool useInterpreter)
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckNullableUShortArrayLengthExpression(null, useInterpreter));
+                CheckNullableUShortArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -490,7 +510,8 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithStructRestrictionArrayLengthExpression<E>(null, useInterpreter));
+                CheckGenericWithStructRestrictionArrayLengthExpression<E>(null, useInterpreter)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -554,7 +575,8 @@ namespace System.Linq.Expressions.Tests
             where Ts : struct
         {
             Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter));
+                CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter)
+            );
         }
 
         #endregion

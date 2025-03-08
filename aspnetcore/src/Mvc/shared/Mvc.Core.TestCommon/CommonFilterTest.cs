@@ -34,7 +34,8 @@ public class CommonFilterTest
 
         var context = CreateActionExecutingContext(mock.As<IFilterMetadata>().Object);
         var next = new ActionExecutionDelegate(() =>
-            Task.FromResult(CreateActionExecutedContext(context)));
+            Task.FromResult(CreateActionExecutedContext(context))
+        );
 
         // Act
         await mock.As<IAsyncActionFilter>().Object.OnActionExecutionAsync(context, next);
@@ -113,7 +114,8 @@ public class CommonFilterTest
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
         var next = new ResultExecutionDelegate(() =>
-            Task.FromResult(CreateResultExecutedContext(context)));
+            Task.FromResult(CreateResultExecutedContext(context))
+        );
 
         // Act
         await mock.As<IAsyncResultFilter>().Object.OnResultExecutionAsync(context, next);
@@ -155,7 +157,8 @@ public class CommonFilterTest
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
         var next = new ResultExecutionDelegate(() =>
-            Task.FromResult(CreateResultExecutedContext(context)));
+            Task.FromResult(CreateResultExecutedContext(context))
+        );
 
         // Act
         await mock.As<IAsyncResultFilter>().Object.OnResultExecutionAsync(context, next);

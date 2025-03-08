@@ -30,7 +30,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .GenerateMessage("ArcticMonkeys", "ArcticMonkeys"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include("ArcticMonkeys")))
+                    AssertQuery(async, ss => ss.Set<Order>().Include("ArcticMonkeys"))
+                )
             ).Message
         );
 
@@ -41,7 +42,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .GenerateMessage("OrderDate", "OrderDate"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate)))
+                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
+                )
             ).Message
         );
 
@@ -52,7 +54,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .GenerateMessage("CustomerID", "Customer.CustomerID"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)))
+                    AssertQuery(async, ss => ss.Set<Order>().Include(o => o.Customer.CustomerID))
+                )
             ).Message
         );
 
@@ -60,13 +63,15 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
         // Property expression cannot be converted to string include
         =>
         Assert.ThrowsAsync<NotImplementedException>(() =>
-            base.Filtered_include_with_multiple_ordering(async));
+            base.Filtered_include_with_multiple_ordering(async)
+        );
 
     public override Task Then_include_property_expression_invalid(bool async)
         // Property expression cannot be converted to string include
         =>
         Assert.ThrowsAsync<NotImplementedException>(() =>
-            base.Filtered_include_with_multiple_ordering(async));
+            base.Filtered_include_with_multiple_ordering(async)
+        );
 
     public override async Task Include_closes_reader(bool async)
     {
@@ -144,7 +149,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
         // Filtered include does not work for string based API.
         =>
         Assert.ThrowsAsync<NotImplementedException>(() =>
-            base.Filtered_include_with_multiple_ordering(async));
+            base.Filtered_include_with_multiple_ordering(async)
+        );
 
     public override async Task Include_specified_on_non_entity_not_supported(bool async) =>
         Assert.Equal(
@@ -157,7 +163,8 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                             ss.Set<Customer>()
                                 .Select(c => new Tuple<Customer, int>(c, 5))
                                 .Include(t => t.Item1.Orders)
-                    ))
+                    )
+                )
             ).Message
         );
 

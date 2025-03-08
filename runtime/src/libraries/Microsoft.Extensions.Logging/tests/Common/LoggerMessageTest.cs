@@ -333,7 +333,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Act
             var exception = Assert.Throws<ArgumentException>(() =>
-                LoggerMessage.Define(LogLevel.Error, 0, formatString));
+                LoggerMessage.Define(LogLevel.Error, 0, formatString)
+            );
 
             // Assert
             Assert.Equal(expectedMessage, exception.Message);
@@ -363,11 +364,13 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 case 1:
                     exception = Assert.Throws<ArgumentException>(() =>
-                        LoggerMessage.Define<string>(LogLevel.Error, 0, formatString));
+                        LoggerMessage.Define<string>(LogLevel.Error, 0, formatString)
+                    );
                     break;
                 case 2:
                     exception = Assert.Throws<ArgumentException>(() =>
-                        LoggerMessage.Define<string, string>(LogLevel.Error, 0, formatString));
+                        LoggerMessage.Define<string, string>(LogLevel.Error, 0, formatString)
+                    );
                     break;
                 case 3:
                     exception = Assert.Throws<ArgumentException>(() =>
@@ -375,7 +378,8 @@ namespace Microsoft.Extensions.Logging.Test
                             LogLevel.Error,
                             0,
                             formatString
-                        ));
+                        )
+                    );
                     break;
                 case 4:
                     exception = Assert.Throws<ArgumentException>(() =>
@@ -383,7 +387,8 @@ namespace Microsoft.Extensions.Logging.Test
                             LogLevel.Error,
                             0,
                             formatString
-                        ));
+                        )
+                    );
                     break;
                 case 5:
                     exception = Assert.Throws<ArgumentException>(() =>
@@ -391,7 +396,8 @@ namespace Microsoft.Extensions.Logging.Test
                             LogLevel.Error,
                             0,
                             formatString
-                        ));
+                        )
+                    );
                     break;
                 case 6:
                     exception = Assert.Throws<ArgumentException>(() =>
@@ -399,7 +405,8 @@ namespace Microsoft.Extensions.Logging.Test
                             LogLevel.Error,
                             0,
                             formatString
-                        ));
+                        )
+                    );
                     break;
                 default:
                     throw new ArgumentException(
@@ -422,7 +429,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Act
             var exception = Assert.Throws<ArgumentException>(() =>
-                LoggerMessage.DefineScope(formatString));
+                LoggerMessage.DefineScope(formatString)
+            );
 
             // Assert
             Assert.Equal(expectedMessage, exception.Message);
@@ -452,31 +460,37 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 case 1:
                     exception = Assert.Throws<ArgumentException>(() =>
-                        LoggerMessage.DefineScope<string>(formatString));
+                        LoggerMessage.DefineScope<string>(formatString)
+                    );
                     break;
                 case 2:
                     exception = Assert.Throws<ArgumentException>(() =>
-                        LoggerMessage.DefineScope<string, string>(formatString));
+                        LoggerMessage.DefineScope<string, string>(formatString)
+                    );
                     break;
                 case 3:
                     exception = Assert.Throws<ArgumentException>(() =>
-                        LoggerMessage.DefineScope<string, string, string>(formatString));
+                        LoggerMessage.DefineScope<string, string, string>(formatString)
+                    );
                     break;
                 case 4:
                     exception = Assert.Throws<ArgumentException>(() =>
-                        LoggerMessage.DefineScope<string, string, string, string>(formatString));
+                        LoggerMessage.DefineScope<string, string, string, string>(formatString)
+                    );
                     break;
                 case 5:
                     exception = Assert.Throws<ArgumentException>(() =>
                         LoggerMessage.DefineScope<string, string, string, string, string>(
                             formatString
-                        ));
+                        )
+                    );
                     break;
                 case 6:
                     exception = Assert.Throws<ArgumentException>(() =>
                         LoggerMessage.DefineScope<string, string, string, string, string, string>(
                             formatString
-                        ));
+                        )
+                    );
                     break;
                 default:
                     throw new ArgumentException(
@@ -496,7 +510,8 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Act
             var exception = Assert.Throws<TargetInvocationException>(() =>
-                method.DynamicInvoke(parameters));
+                method.DynamicInvoke(parameters)
+            );
 
             // Assert
             Assert.IsType<ArgumentNullException>(exception.InnerException);

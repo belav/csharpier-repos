@@ -161,7 +161,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    alg.TryEncryptCfb(ReadOnlySpan<byte>.Empty, IV, Span<byte>.Empty, out _));
+                    alg.TryEncryptCfb(ReadOnlySpan<byte>.Empty, IV, Span<byte>.Empty, out _)
+                );
             }
         }
 
@@ -171,7 +172,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    alg.TryDecryptCfb(ReadOnlySpan<byte>.Empty, IV, Span<byte>.Empty, out _));
+                    alg.TryDecryptCfb(ReadOnlySpan<byte>.Empty, IV, Span<byte>.Empty, out _)
+                );
             }
         }
 

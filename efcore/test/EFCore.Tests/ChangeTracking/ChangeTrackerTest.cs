@@ -487,7 +487,8 @@ public class ChangeTrackerTest
             CoreStrings.UnknownKeyValue(nameof(Weak), nameof(Weak.HeroId)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges())
+                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                )
             ).Message
         );
     }
@@ -514,7 +515,8 @@ public class ChangeTrackerTest
             CoreStrings.SaveOwnedWithoutOwner(nameof(Skinner)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges())
+                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                )
             ).Message
         );
     }
@@ -541,7 +543,8 @@ public class ChangeTrackerTest
             CoreStrings.SaveOwnedWithoutOwner(nameof(TheStreets)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges())
+                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                )
             ).Message
         );
     }
@@ -3621,7 +3624,8 @@ public class ChangeTrackerTest
                                         ? EntityState.Unchanged
                                         : EntityState.Added;
                             }
-                        ))
+                        )
+                    )
                     .Message
             );
         }

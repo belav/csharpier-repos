@@ -60,15 +60,18 @@ namespace System.IO.Tests
             dstDisposed.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1));
+                ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1)
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1));
+                ExposeProtectedStream.ValidateCopyToArguments(dstDisposed, 1)
+            );
 
             Assert.Throws<NotSupportedException>(() =>
                 ExposeProtectedStream.ValidateCopyToArguments(
                     new MemoryStream(new byte[1], writable: false),
                     1
-                ));
+                )
+            );
         }
 
         private abstract class ExposeProtectedStream : Stream

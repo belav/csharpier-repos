@@ -64,7 +64,8 @@ namespace System.Runtime.InteropServices.Tests
             secureString.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() =>
-                Marshal.SecureStringToCoTaskMemUnicode(secureString));
+                Marshal.SecureStringToCoTaskMemUnicode(secureString)
+            );
         }
 
         private static SecureString ToSecureString(string data)

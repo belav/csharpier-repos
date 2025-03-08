@@ -252,7 +252,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 );
 
                 await Assert.ThrowsAsync<IOException>(() =>
-                    responseStream.ReadAsync(buffer, 0, buffer.Length));
+                    responseStream.ReadAsync(buffer, 0, buffer.Length)
+                );
             }
         }
 
@@ -427,7 +428,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 // If WinHTTP doesn't support streaming a request without a length then it will fallback
                 // to HTTP/1.1. This is pretty weird behavior but we keep it for backwards compatibility.
                 Exception ex = await Assert.ThrowsAsync<Exception>(async () =>
-                    await server.EstablishConnectionAsync());
+                    await server.EstablishConnectionAsync()
+                );
                 Assert.Equal("HTTP/1.1 request sent to HTTP/2 connection.", ex.Message);
 
                 completeStreamTcs.SetResult(null);

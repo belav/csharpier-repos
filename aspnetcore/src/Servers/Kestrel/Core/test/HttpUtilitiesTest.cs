@@ -281,7 +281,8 @@ public class HttpUtilitiesTest
                 HeaderNames.Accept,
                 selector,
                 checkForNewlineChars: true
-            ));
+            )
+        );
     }
 
     [Theory]

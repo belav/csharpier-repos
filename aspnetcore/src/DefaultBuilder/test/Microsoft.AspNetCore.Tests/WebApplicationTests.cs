@@ -405,7 +405,8 @@ public class WebApplicationTests
         await using var app = builder.Build();
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            app.RunAsync("http://localhost:5001"));
+            app.RunAsync("http://localhost:5001")
+        );
     }
 
     [Theory]
@@ -421,7 +422,8 @@ public class WebApplicationTests
         await using var app = builder.Build();
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            app.RunAsync("http://localhost:5001"));
+            app.RunAsync("http://localhost:5001")
+        );
     }
 
     [Theory]
@@ -438,7 +440,8 @@ public class WebApplicationTests
     )
     {
         Assert.Throws<NotSupportedException>(() =>
-            ((IWebHostBuilder)createBuilder().WebHost).Build());
+            ((IWebHostBuilder)createBuilder().WebHost).Build()
+        );
     }
 
     [Theory]
@@ -454,23 +457,26 @@ public class WebApplicationTests
         var envName = $"{nameof(WebApplicationTests)}_ENV";
 
         Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseSetting(
-                WebHostDefaults.ApplicationKey,
-                nameof(WebApplicationTests)
-            ));
+            builder.WebHost.UseSetting(WebHostDefaults.ApplicationKey, nameof(WebApplicationTests))
+        );
         Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseSetting(WebHostDefaults.EnvironmentKey, envName));
+            builder.WebHost.UseSetting(WebHostDefaults.EnvironmentKey, envName)
+        );
         Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseSetting(WebHostDefaults.ContentRootKey, contentRoot));
+            builder.WebHost.UseSetting(WebHostDefaults.ContentRootKey, contentRoot)
+        );
         Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseSetting(WebHostDefaults.WebRootKey, webRoot));
+            builder.WebHost.UseSetting(WebHostDefaults.WebRootKey, webRoot)
+        );
         Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "hosting"));
+            builder.WebHost.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "hosting")
+        );
         Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.UseSetting(
                 WebHostDefaults.HostingStartupExcludeAssembliesKey,
                 "hostingexclude"
-            ));
+            )
+        );
         Assert.Throws<NotSupportedException>(() => builder.WebHost.UseEnvironment(envName));
         Assert.Throws<NotSupportedException>(() => builder.WebHost.UseContentRoot(contentRoot));
     }
@@ -496,7 +502,8 @@ public class WebApplicationTests
                         { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) },
                     }
                 );
-            }));
+            })
+        );
 
         Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.ConfigureAppConfiguration(builder =>
@@ -504,7 +511,8 @@ public class WebApplicationTests
                 builder.AddInMemoryCollection(
                     new Dictionary<string, string> { { WebHostDefaults.EnvironmentKey, envName } }
                 );
-            }));
+            })
+        );
 
         Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.ConfigureAppConfiguration(builder =>
@@ -515,7 +523,8 @@ public class WebApplicationTests
                         { WebHostDefaults.ContentRootKey, contentRoot },
                     }
                 );
-            }));
+            })
+        );
 
         Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.ConfigureAppConfiguration(builder =>
@@ -523,7 +532,8 @@ public class WebApplicationTests
                 builder.AddInMemoryCollection(
                     new Dictionary<string, string> { { WebHostDefaults.WebRootKey, webRoot } }
                 );
-            }));
+            })
+        );
 
         Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.ConfigureAppConfiguration(builder =>
@@ -534,7 +544,8 @@ public class WebApplicationTests
                         { WebHostDefaults.HostingStartupAssembliesKey, "hosting" },
                     }
                 );
-            }));
+            })
+        );
 
         Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.ConfigureAppConfiguration(builder =>
@@ -545,7 +556,8 @@ public class WebApplicationTests
                         { WebHostDefaults.HostingStartupExcludeAssembliesKey, "hostingexclude" },
                     }
                 );
-            }));
+            })
+        );
     }
 
     [Theory]
@@ -1321,7 +1333,8 @@ public class WebApplicationTests
                 builder.AddInMemoryCollection(
                     new Dictionary<string, string> { { HostDefaults.ApplicationKey, "myapp" } }
                 );
-            }));
+            })
+        );
 
         Assert.Throws<NotSupportedException>(() => builder.Host.UseEnvironment(envName));
         Assert.Throws<NotSupportedException>(() => builder.Host.UseContentRoot(contentRoot));
@@ -2149,17 +2162,23 @@ public class WebApplicationTests
         await using var app = builder.Build();
 
         Assert.Throws<InvalidOperationException>(() =>
-            builder.Services.AddSingleton<IService>(new Service()));
+            builder.Services.AddSingleton<IService>(new Service())
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            builder.Services.TryAddSingleton(new Service()));
+            builder.Services.TryAddSingleton(new Service())
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            builder.Services.AddScoped<IService, Service>());
+            builder.Services.AddScoped<IService, Service>()
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            builder.Services.TryAddScoped<IService, Service>());
+            builder.Services.TryAddScoped<IService, Service>()
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            builder.Services.Remove(ServiceDescriptor.Singleton(new Service())));
+            builder.Services.Remove(ServiceDescriptor.Singleton(new Service()))
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            builder.Services[0] = ServiceDescriptor.Singleton(new Service()));
+            builder.Services[0] = ServiceDescriptor.Singleton(new Service())
+        );
     }
 
     [Theory]
@@ -2172,13 +2191,16 @@ public class WebApplicationTests
 
         var ex = Assert.Throws<NotSupportedException>(() => builder.WebHost.Configure(app => { }));
         var ex1 = Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.Configure((context, app) => { }));
-        var ex2 = Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseStartup<MyStartup>());
+            builder.WebHost.Configure((context, app) => { })
+        );
+        var ex2 = Assert.Throws<NotSupportedException>(() => builder.WebHost.UseStartup<MyStartup>()
+        );
         var ex3 = Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseStartup(typeof(MyStartup)));
+            builder.WebHost.UseStartup(typeof(MyStartup))
+        );
         var ex4 = Assert.Throws<NotSupportedException>(() =>
-            builder.WebHost.UseStartup(context => new MyStartup()));
+            builder.WebHost.UseStartup(context => new MyStartup())
+        );
 
         Assert.Equal(
             "Configure() is not supported by WebApplicationBuilder.WebHost. Use the WebApplication returned by WebApplicationBuilder.Build() instead.",
@@ -2202,13 +2224,17 @@ public class WebApplicationTests
         );
 
         var ex5 = Assert.Throws<NotSupportedException>(() =>
-            builder.Host.ConfigureWebHost(webHostBuilder => { }));
+            builder.Host.ConfigureWebHost(webHostBuilder => { })
+        );
         var ex6 = Assert.Throws<NotSupportedException>(() =>
-            builder.Host.ConfigureWebHost(webHostBuilder => { }, options => { }));
+            builder.Host.ConfigureWebHost(webHostBuilder => { }, options => { })
+        );
         var ex7 = Assert.Throws<NotSupportedException>(() =>
-            builder.Host.ConfigureSlimWebHost(webHostBuilder => { }, options => { }));
+            builder.Host.ConfigureSlimWebHost(webHostBuilder => { }, options => { })
+        );
         var ex8 = Assert.Throws<NotSupportedException>(() =>
-            builder.Host.ConfigureWebHostDefaults(webHostBuilder => { }));
+            builder.Host.ConfigureWebHostDefaults(webHostBuilder => { })
+        );
 
         Assert.Equal(
             "ConfigureWebHost() is not supported by WebApplicationBuilder.Host. Use the WebApplication returned by WebApplicationBuilder.Build() instead.",

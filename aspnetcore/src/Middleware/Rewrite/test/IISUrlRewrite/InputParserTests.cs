@@ -148,14 +148,16 @@ public class InputParserTests
     public void FormatExceptionsOnBadSyntax(string testString)
     {
         Assert.Throws<FormatException>(() =>
-            new InputParser().ParseInputString(testString, UriMatchPart.Path));
+            new InputParser().ParseInputString(testString, UriMatchPart.Path)
+        );
     }
 
     [Fact]
     public void Should_throw_FormatException_if_no_rewrite_maps_are_defined()
     {
         Assert.Throws<FormatException>(() =>
-            new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path));
+            new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path)
+        );
     }
 
     [Fact]
@@ -169,7 +171,8 @@ public class InputParserTests
             new InputParser(maps, false).ParseInputString(
                 $"{{{undefinedMapName}:{{R:1}}}}",
                 UriMatchPart.Path
-            ));
+            )
+        );
     }
 
     [Fact]

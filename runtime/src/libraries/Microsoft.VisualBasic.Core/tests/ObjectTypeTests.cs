@@ -322,9 +322,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void LikeObj_NullReference(object left, object right)
         {
             Assert.Throws<NullReferenceException>(() =>
-                ObjectType.LikeObj(left, right, CompareMethod.Binary));
+                ObjectType.LikeObj(left, right, CompareMethod.Binary)
+            );
             Assert.Throws<NullReferenceException>(() =>
-                ObjectType.LikeObj(left, right, CompareMethod.Text));
+                ObjectType.LikeObj(left, right, CompareMethod.Text)
+            );
         }
 
         public static IEnumerable<object[]> LikeObj_NullReference_TestData()

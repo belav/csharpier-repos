@@ -187,7 +187,8 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.Throws<BadImageFormatException>(() =>
                 reader.ReadCodeViewDebugDirectoryData(
                     new DebugDirectoryEntry(0, 0, 0, DebugDirectoryEntryType.CodeView, 0, 0, 0)
-                ));
+                )
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "entry",
@@ -207,7 +208,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -259,7 +261,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
             Assert.Throws<BadImageFormatException>(() =>
                 PEReader.ValidateEmbeddedPortablePdbVersion(
                     new DebugDirectoryEntry(
@@ -271,7 +274,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
 
             // minor version (Embedded blob format):
             Assert.Throws<BadImageFormatException>(() =>
@@ -285,7 +289,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
             Assert.Throws<BadImageFormatException>(() =>
                 PEReader.ValidateEmbeddedPortablePdbVersion(
                     new DebugDirectoryEntry(
@@ -297,7 +302,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
             Assert.Throws<BadImageFormatException>(() =>
                 PEReader.ValidateEmbeddedPortablePdbVersion(
                     new DebugDirectoryEntry(
@@ -309,7 +315,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
             Assert.Throws<BadImageFormatException>(() =>
                 PEReader.ValidateEmbeddedPortablePdbVersion(
                     new DebugDirectoryEntry(
@@ -321,7 +328,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         0,
                         0
                     )
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -433,13 +441,15 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, 1))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeCodeViewDebugDirectoryData(block));
+                    PEReader.DecodeCodeViewDebugDirectoryData(block)
+                );
             }
 
             using (var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, 4))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeCodeViewDebugDirectoryData(block));
+                    PEReader.DecodeCodeViewDebugDirectoryData(block)
+                );
             }
 
             using (
@@ -447,7 +457,8 @@ namespace System.Reflection.PortableExecutable.Tests
             )
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeCodeViewDebugDirectoryData(block));
+                    PEReader.DecodeCodeViewDebugDirectoryData(block)
+                );
             }
         }
 
@@ -481,7 +492,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes1).GetMemoryBlock(0, bytes1.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes2 = ImmutableArray.Create(
@@ -511,7 +523,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes2).GetMemoryBlock(0, bytes2.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes3 = ImmutableArray.Create(
@@ -541,7 +554,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes3).GetMemoryBlock(0, bytes3.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes4 = ImmutableArray.Create(
@@ -571,7 +585,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes4).GetMemoryBlock(0, bytes4.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes5 = ImmutableArray.Create(
@@ -601,7 +616,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes4).GetMemoryBlock(0, bytes4.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes6 = ImmutableArray.Create(
@@ -631,7 +647,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes6).GetMemoryBlock(0, bytes6.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes7 = ImmutableArray.Create(
@@ -650,7 +667,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes7).GetMemoryBlock(0, bytes7.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes8 = ImmutableArray.Create(
@@ -669,7 +687,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes8).GetMemoryBlock(0, bytes8.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
 
             var bytes9 = ImmutableArray.Create(
@@ -689,7 +708,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes9).GetMemoryBlock(0, 1))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+                    PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block)
+                );
             }
         }
 
@@ -743,7 +763,8 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length))
             {
                 Assert.Throws<BadImageFormatException>(() =>
-                    PEReader.DecodePdbChecksumDebugDirectoryData(block));
+                    PEReader.DecodePdbChecksumDebugDirectoryData(block)
+                );
             }
         }
     }

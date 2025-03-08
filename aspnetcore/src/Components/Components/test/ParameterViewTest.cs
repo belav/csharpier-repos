@@ -407,12 +407,15 @@ public partial class ParameterViewTest
         // Assert
         Assert.Throws<InvalidOperationException>(() => parameterView.GetEnumerator());
         Assert.Throws<InvalidOperationException>(() =>
-            parameterView.GetValueOrDefault<object>("anything"));
+            parameterView.GetValueOrDefault<object>("anything")
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            parameterView.SetParameterProperties(new object()));
+            parameterView.SetParameterProperties(new object())
+        );
         Assert.Throws<InvalidOperationException>(() => parameterView.ToDictionary());
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            parameterView.TryGetValue<object>("anything", out _));
+            parameterView.TryGetValue<object>("anything", out _)
+        );
 
         // It's enough to assert about one of the messages
         Assert.Equal(

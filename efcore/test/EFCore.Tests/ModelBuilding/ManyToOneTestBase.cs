@@ -1823,7 +1823,8 @@ public abstract partial class ModelBuilderTest
                 ),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<Hob>().HasOne(e => e.Nob).WithMany(e => e.Hobs))
+                        modelBuilder.Entity<Hob>().HasOne(e => e.Nob).WithMany(e => e.Hobs)
+                    )
                     .Message
             );
         }

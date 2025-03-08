@@ -165,7 +165,8 @@ namespace System.Numerics.Tests
         {
             Vector<bool> vector = default;
             Assert.Throws<NotSupportedException>(() =>
-                vector.ToString("G", CultureInfo.InvariantCulture));
+                vector.ToString("G", CultureInfo.InvariantCulture)
+            );
         }
 
         [Fact]

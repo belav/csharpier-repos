@@ -225,7 +225,8 @@ public class CookieChunkingTests
             new ChunkingCookieManager() { ThrowForPartialCookies = true }.GetRequestCookie(
                 context,
                 "TestCookie"
-            ));
+            )
+        );
     }
 
     [Fact]

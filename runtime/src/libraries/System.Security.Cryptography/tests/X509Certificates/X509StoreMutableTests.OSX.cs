@@ -223,7 +223,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (new TemporaryX509Store(store))
             {
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    store.Open(OpenFlags.OpenExistingOnly));
+                    store.Open(OpenFlags.OpenExistingOnly)
+                );
             }
         }
 

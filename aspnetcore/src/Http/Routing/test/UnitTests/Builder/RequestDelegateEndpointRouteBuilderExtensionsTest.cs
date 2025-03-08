@@ -600,9 +600,11 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
         Assert.Single(endpoint.Metadata.GetOrderedMetadata<IEndpointNameMetadata>());
 
         Assert.Throws<InvalidOperationException>(() =>
-            endpointBuilder.WithMetadata(new RouteNameMetadata("Foo")));
+            endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
+        );
         Assert.Throws<InvalidOperationException>(() =>
-            endpointBuilder.Finally(b => b.Metadata.Add(new RouteNameMetadata("Foo"))));
+            endpointBuilder.Finally(b => b.Metadata.Add(new RouteNameMetadata("Foo")))
+        );
     }
 
     [Fact]

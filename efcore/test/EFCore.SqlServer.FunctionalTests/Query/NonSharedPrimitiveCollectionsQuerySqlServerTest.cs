@@ -642,7 +642,8 @@ WHERE (
     public virtual async Task Ordered_array_of_byte_array()
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            TestOrderedArray(new byte[] { 1, 2 }, new byte[] { 3, 4 }));
+            TestOrderedArray(new byte[] { 1, 2 }, new byte[] { 3, 4 })
+        );
 
         Assert.Equal(
             SqlServerStrings.QueryingOrderedBinaryJsonCollectionsNotSupported,
@@ -923,7 +924,8 @@ WHERE EXISTS (
                 .Where(m =>
                     dateTimes.Any(d => d == EF.Property<DateTime>(m, "DateTime") && d != null)
                 )
-                .ToArrayAsync());
+                .ToArrayAsync()
+        );
         Assert.Equal(
             RelationalStrings.ConflictingTypeMappingsInferredForColumn("value"),
             exception.Message
@@ -958,7 +960,8 @@ WHERE EXISTS (
                         && d == EF.Property<DateTime>(m, "DateTime2")
                     )
                 )
-                .ToArrayAsync());
+                .ToArrayAsync()
+        );
         Assert.Equal(
             RelationalStrings.ConflictingTypeMappingsInferredForColumn("value"),
             exception.Message

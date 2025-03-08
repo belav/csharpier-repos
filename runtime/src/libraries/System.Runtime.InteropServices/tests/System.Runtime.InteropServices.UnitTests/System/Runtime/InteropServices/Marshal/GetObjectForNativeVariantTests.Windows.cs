@@ -235,7 +235,8 @@ namespace System.Runtime.InteropServices.Tests
             else
             {
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    Marshal.GetIDispatchForObject(obj));
+                    Marshal.GetIDispatchForObject(obj)
+                );
             }
 
             // VT_ERROR => int.

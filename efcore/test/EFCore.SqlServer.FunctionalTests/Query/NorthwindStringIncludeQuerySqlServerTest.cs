@@ -24,7 +24,8 @@ public class NorthwindStringIncludeQuerySqlServerTest
             RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Include_collection_with_last_no_orderby(async))
+                    base.Include_collection_with_last_no_orderby(async)
+                )
             ).Message
         );
 

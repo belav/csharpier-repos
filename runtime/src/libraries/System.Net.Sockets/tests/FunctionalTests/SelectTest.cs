@@ -119,7 +119,8 @@ namespace System.Net.Sockets.Tests
                 socketPairs[indexToDispose].Key.Dispose();
 
                 Assert.Throws<ObjectDisposedException>(() =>
-                    Socket.Select(reads, writes, errors, 1_000));
+                    Socket.Select(reads, writes, errors, 1_000)
+                );
 
                 for (int i = 0; i < socketPairs.Length; i++)
                 {

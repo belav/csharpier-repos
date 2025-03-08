@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             appConfig.WriteAllText("garbage");
             stream.Position = 0;
             Assert.Throws<COMException>(() =>
-                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path));
+                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
+            );
             Assert.Throws<XmlException>(() => AssemblyPortabilityPolicy.LoadFromXml(stream));
 
             // missing root element:
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             stream.Position = 0;
 
             Assert.Throws<COMException>(() =>
-                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path));
+                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
+            );
             Assert.Throws<XmlException>(() => AssemblyPortabilityPolicy.LoadFromXml(stream));
 
             // duplicate attribute:
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             stream.Position = 0;
 
             Assert.Throws<COMException>(() =>
-                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path));
+                FusionAssemblyPortabilityPolicy.LoadFromFile(appConfig.Path)
+            );
             Assert.Throws<XmlException>(() => AssemblyPortabilityPolicy.LoadFromXml(stream));
         }
 

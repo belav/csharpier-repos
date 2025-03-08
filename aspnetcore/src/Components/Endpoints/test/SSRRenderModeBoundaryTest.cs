@@ -50,7 +50,8 @@ public class SSRRenderModeBoundaryTest
                 httpContext,
                 typeof(TestComponent),
                 new ServerRenderModeSubclass()
-            ));
+            )
+        );
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(ServerRenderModeSubclass)}'",
             ex.Message
@@ -71,7 +72,8 @@ public class SSRRenderModeBoundaryTest
                 httpContext,
                 typeof(TestComponent),
                 new WebAssemblyRenderModeSubclass()
-            ));
+            )
+        );
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(WebAssemblyRenderModeSubclass)}'",
             ex.Message
@@ -92,7 +94,8 @@ public class SSRRenderModeBoundaryTest
                 httpContext,
                 typeof(TestComponent),
                 new AutoRenderModeSubclass()
-            ));
+            )
+        );
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(AutoRenderModeSubclass)}'",
             ex.Message
@@ -113,7 +116,8 @@ public class SSRRenderModeBoundaryTest
                 httpContext,
                 typeof(TestComponent),
                 new AutoRenderModeSubclass()
-            ));
+            )
+        );
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(AutoRenderModeSubclass)}'",
             ex.Message

@@ -551,20 +551,27 @@ namespace System.Tests
         public static void GCNotificationNegTests()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(-1, -1));
+                GC.RegisterForFullGCNotification(-1, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(100, -1));
+                GC.RegisterForFullGCNotification(100, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(-1, 100));
+                GC.RegisterForFullGCNotification(-1, 100)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(10, -1));
+                GC.RegisterForFullGCNotification(10, -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(-1, 10));
+                GC.RegisterForFullGCNotification(-1, 10)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(100, 10));
+                GC.RegisterForFullGCNotification(100, 10)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GC.RegisterForFullGCNotification(10, 100));
+                GC.RegisterForFullGCNotification(10, 100)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => GC.WaitForFullGCApproach(-2));
             Assert.Throws<ArgumentOutOfRangeException>(() => GC.WaitForFullGCComplete(-2));
@@ -663,7 +670,8 @@ namespace System.Tests
                     {
                         Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
                         Assert.Throws<InvalidOperationException>(() =>
-                            GC.TryStartNoGCRegion(NoGCRequestedBudget));
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget)
+                        );
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -685,7 +693,8 @@ namespace System.Tests
                     {
                         Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
                         Assert.Throws<InvalidOperationException>(() =>
-                            GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, true)
+                        );
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -709,7 +718,8 @@ namespace System.Tests
                             GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
                         );
                         Assert.Throws<InvalidOperationException>(() =>
-                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget));
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
+                        );
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -733,7 +743,8 @@ namespace System.Tests
                             GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true)
                         );
                         Assert.Throws<InvalidOperationException>(() =>
-                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true));
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true)
+                        );
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -760,7 +771,8 @@ namespace System.Tests
                         Assert.True(GC.TryStartNoGCRegion(4000 * 1024, true));
                         Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
                         Assert.Throws<InvalidOperationException>(() =>
-                            GCSettings.LatencyMode = GCLatencyMode.LowLatency);
+                            GCSettings.LatencyMode = GCLatencyMode.LowLatency
+                        );
 
                         GC.EndNoGCRegion();
                     },
@@ -1253,9 +1265,11 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(-1));
             Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(negValue));
             Assert.Throws<OverflowException>(() =>
-                GC.AllocateUninitializedArray<byte>(-1, pinned: true));
+                GC.AllocateUninitializedArray<byte>(-1, pinned: true)
+            );
             Assert.Throws<OverflowException>(() =>
-                GC.AllocateUninitializedArray<byte>(negValue, pinned: true));
+                GC.AllocateUninitializedArray<byte>(negValue, pinned: true)
+            );
         }
 
         [ConditionalFact(
@@ -1265,9 +1279,11 @@ namespace System.Tests
         private static void AllocateArrayTooLarge()
         {
             Assert.Throws<OutOfMemoryException>(() =>
-                GC.AllocateUninitializedArray<double>(int.MaxValue));
+                GC.AllocateUninitializedArray<double>(int.MaxValue)
+            );
             Assert.Throws<OutOfMemoryException>(() =>
-                GC.AllocateUninitializedArray<double>(int.MaxValue, pinned: true));
+                GC.AllocateUninitializedArray<double>(int.MaxValue, pinned: true)
+            );
         }
 
         [StructLayout(LayoutKind.Sequential)]

@@ -113,7 +113,8 @@ namespace Castle.DynamicProxy.Tests
         public void Cannot_proxy_open_generic_type()
         {
             var exception = Assert.Throws<ArgumentException>(() =>
-                generator.CreateClassProxy(typeof(List<>), new IInterceptor[0]));
+                generator.CreateClassProxy(typeof(List<>), new IInterceptor[0])
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type System.Collections.Generic.List`1 because it is an open generic type.",
                 exception.Message
@@ -126,7 +127,8 @@ namespace Castle.DynamicProxy.Tests
             var innerType = typeof(List<>);
             var targetType = innerType.MakeGenericType(typeof(List<>));
             var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateClassProxy(targetType, new IInterceptor[0]));
+                generator.CreateClassProxy(targetType, new IInterceptor[0])
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type List`1 because type System.Collections.Generic.List`1 is an open generic type.",
                 ex.Message
@@ -137,7 +139,8 @@ namespace Castle.DynamicProxy.Tests
         public void Cannot_proxy_inaccessible_class()
         {
             var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateClassProxy(typeof(PrivateClass), new IInterceptor[0]));
+                generator.CreateClassProxy(typeof(PrivateClass), new IInterceptor[0])
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type Castle.DynamicProxy.Tests.ClassProxyConstructorsTestCase+PrivateClass because it is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo(InternalsVisible.ToDynamicProxyGenAssembly2)] attribute, because assembly Castle.Core.Tests is strong-named.",
                 ex.Message
@@ -148,7 +151,8 @@ namespace Castle.DynamicProxy.Tests
         public void Cannot_proxy_generic_class_with_inaccessible_type_argument()
         {
             var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateClassProxy(typeof(List<PrivateClass>), new IInterceptor[0]));
+                generator.CreateClassProxy(typeof(List<PrivateClass>), new IInterceptor[0])
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type System.Collections.Generic.List`1[[Castle.DynamicProxy.Tests.ClassProxyConstructorsTestCase+PrivateClass, Castle.Core.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.DynamicProxy.Tests.ClassProxyConstructorsTestCase+PrivateClass is not accessible. Make it public, or internal",
                 ex.Message
@@ -159,7 +163,8 @@ namespace Castle.DynamicProxy.Tests
         public void Cannot_proxy_generic_class_with_type_argument_that_has_inaccessible_type_argument()
         {
             var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateClassProxy(typeof(List<List<PrivateClass>>), new IInterceptor[0]));
+                generator.CreateClassProxy(typeof(List<List<PrivateClass>>), new IInterceptor[0])
+            );
 
             var expected = string.Format(
                 "Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",

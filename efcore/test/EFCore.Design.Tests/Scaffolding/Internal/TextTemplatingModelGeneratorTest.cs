@@ -189,7 +189,8 @@ public class TextTemplatingModelGeneratorTest
                     ProjectDir = projectDir,
                     Language = "VB",
                 }
-            ));
+            )
+        );
 
         Assert.Equal(DesignStrings.NoContextTemplate, ex.Message);
     }
@@ -424,7 +425,8 @@ My entity type configuration template
                     ConnectionString = @"Name=DefaultConnection",
                     ProjectDir = projectDir,
                 }
-            ));
+            )
+        );
 
         Assert.Equal(DesignStrings.ErrorGeneratingOutput(contextTemplate), ex.Message);
 
@@ -520,7 +522,8 @@ My entity type configuration template
                     ConnectionString = @"Name=DefaultConnection",
                     ProjectDir = projectDir,
                 }
-            ));
+            )
+        );
 
         Assert.Equal(DesignStrings.ErrorGeneratingOutput(contextTemplate), ex.Message);
 

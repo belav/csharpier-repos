@@ -4402,7 +4402,8 @@ public static partial class DataContractSerializerTests
         var value2 = new TypeWithSerializableEnum();
         value2.EnumField = SerializableEnumWithNonSerializedValue.Two;
         Assert.Throws<SerializationException>(() =>
-            DataContractSerializerHelper.SerializeAndDeserialize(value2, ""));
+            DataContractSerializerHelper.SerializeAndDeserialize(value2, "")
+        );
     }
 
     [Fact]
@@ -7270,7 +7271,8 @@ public static partial class DataContractSerializerTests
                 (MemoryStream)
                     new DataContractSerializer(typeof(MemoryStream)).ReadObject(
                         new XmlTextReader(new StringReader(input))
-                    ));
+                    )
+            );
         }
     }
 

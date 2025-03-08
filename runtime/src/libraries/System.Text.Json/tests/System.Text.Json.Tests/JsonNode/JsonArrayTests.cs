@@ -35,7 +35,8 @@ namespace System.Text.Json.Nodes.Tests
         {
             using (JsonDocument document = JsonDocument.Parse(json))
                 Assert.Throws<InvalidOperationException>(() =>
-                    JsonArray.Create(document.RootElement));
+                    JsonArray.Create(document.RootElement)
+                );
         }
 
         [Fact]

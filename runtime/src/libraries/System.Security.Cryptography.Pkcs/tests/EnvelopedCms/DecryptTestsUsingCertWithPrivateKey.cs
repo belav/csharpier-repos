@@ -130,7 +130,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 EnvelopedCms ecms = new EnvelopedCms();
                 ecms.Decode(encryptedContent.HexToByteArray());
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    ecms.Decrypt(new X509Certificate2Collection(wrongRecipient)));
+                    ecms.Decrypt(new X509Certificate2Collection(wrongRecipient))
+                );
             }
         }
 
@@ -173,7 +174,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 ecms.Decode(encoded);
 
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    ecms.Decrypt(new X509Certificate2Collection(otherRecipientWithSameSki)));
+                    ecms.Decrypt(new X509Certificate2Collection(otherRecipientWithSameSki))
+                );
                 ecms.Decrypt(new X509Certificate2Collection(realRecipientCert));
 
                 Assert.Equal(plainText, ecms.ContentInfo.Content);

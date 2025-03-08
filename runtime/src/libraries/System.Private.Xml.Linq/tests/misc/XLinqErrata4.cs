@@ -88,7 +88,8 @@ namespace System.Xml.Linq.Tests
                 + "<foo/>";
 
             Assert.Throws<XmlException>(() =>
-                XDocument.Load(XmlReader.Create(new StringReader(xml))));
+                XDocument.Load(XmlReader.Create(new StringReader(xml)))
+            );
         }
 
         /// <summary>

@@ -17,7 +17,8 @@ public class RateLimitingOptionsTests
             options.AddPolicy<string>(
                 null,
                 context => RateLimitPartition.GetNoLimiter<string>("myKey")
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -25,15 +26,16 @@ public class RateLimitingOptionsTests
     {
         var options = new RateLimiterOptions();
         Assert.Throws<ArgumentNullException>(() =>
-            options.AddPolicy<string>("myKey", partitioner: null));
+            options.AddPolicy<string>("myKey", partitioner: null)
+        );
     }
 
     [Fact]
     public void AddPolicy_ThrowsOnNullPolicy()
     {
         var options = new RateLimiterOptions();
-        Assert.Throws<ArgumentNullException>(() =>
-            options.AddPolicy<string>("myKey", policy: null));
+        Assert.Throws<ArgumentNullException>(() => options.AddPolicy<string>("myKey", policy: null)
+        );
     }
 
     [Fact]
@@ -48,7 +50,8 @@ public class RateLimitingOptionsTests
             options.AddPolicy<string>(
                 "myKey",
                 context => RateLimitPartition.GetNoLimiter<string>("yourKey")
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -60,6 +63,7 @@ public class RateLimitingOptionsTests
             context => RateLimitPartition.GetNoLimiter<string>("myKey")
         );
         Assert.Throws<ArgumentException>(() =>
-            options.AddPolicy<string, TestRateLimiterPolicy>("myKey"));
+            options.AddPolicy<string, TestRateLimiterPolicy>("myKey")
+        );
     }
 }

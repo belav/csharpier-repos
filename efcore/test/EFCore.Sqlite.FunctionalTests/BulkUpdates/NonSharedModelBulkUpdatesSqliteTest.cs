@@ -106,7 +106,8 @@ SET "Rating" = length("b0"."Title"),
 
     public override Task Delete_entity_with_auto_include(bool async) =>
         Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-            base.Delete_entity_with_auto_include(async));
+            base.Delete_entity_with_auto_include(async)
+        );
 
     public override async Task Delete_predicate_based_on_optional_navigation(bool async)
     {

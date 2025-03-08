@@ -96,7 +96,8 @@ internal partial class CircuitRegistry
             if (DisconnectCore(circuitHost, connectionId))
             {
                 circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(() =>
-                    circuitHost.OnConnectionDownAsync(default));
+                    circuitHost.OnConnectionDownAsync(default)
+                );
             }
             else
             {

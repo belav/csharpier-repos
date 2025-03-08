@@ -117,7 +117,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             }
 
             Assert.Throws<HPackDecodingException>(() =>
-                decoder.TryDecode(octets[octets.Length - 1], out intResult));
+                decoder.TryDecode(octets[octets.Length - 1], out intResult)
+            );
         }
 
         public static TheoryData<int, byte[]> IntegerData_OverMax

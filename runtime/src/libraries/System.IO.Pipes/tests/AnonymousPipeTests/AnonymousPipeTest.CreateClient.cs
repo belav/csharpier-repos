@@ -66,11 +66,13 @@ namespace System.IO.Pipes.Tests
         {
             // Anonymous pipes can't be made with PipeDirection.InOut
             Assert.Throws<NotSupportedException>(() =>
-                new AnonymousPipeClientStream(PipeDirection.InOut, "123"));
+                new AnonymousPipeClientStream(PipeDirection.InOut, "123")
+            );
 
             using SafePipeHandle pipeHandle = new SafePipeHandle(new IntPtr(-1), true);
             Assert.Throws<NotSupportedException>(() =>
-                new AnonymousPipeClientStream(PipeDirection.InOut, pipeHandle));
+                new AnonymousPipeClientStream(PipeDirection.InOut, pipeHandle)
+            );
         }
     }
 }

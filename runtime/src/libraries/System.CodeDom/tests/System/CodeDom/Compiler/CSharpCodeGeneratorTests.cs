@@ -2703,7 +2703,8 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeBaseReferenceExpression(),
                         new StringWriter(),
                         new CodeGeneratorOptions()
-                    ));
+                    )
+                );
                 callCount++;
             };
             generator.GenerateCodeFromExpression(e, writer, new CodeGeneratorOptions());
@@ -4031,7 +4032,8 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeExpressionStatement(new CodeBaseReferenceExpression()),
                         new StringWriter(),
                         new CodeGeneratorOptions()
-                    ));
+                    )
+                );
                 callCount++;
             };
             generator.GenerateCodeFromStatement(e, writer, new CodeGeneratorOptions());
@@ -7700,7 +7702,8 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
                         new CodeTypeDeclaration("type"),
                         new StringWriter(),
                         new CodeGeneratorOptions()
-                    ));
+                    )
+                );
                 callCount++;
             };
             generator.GenerateCodeFromType(e, writer, new CodeGeneratorOptions());

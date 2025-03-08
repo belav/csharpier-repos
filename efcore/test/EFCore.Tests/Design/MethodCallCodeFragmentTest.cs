@@ -10,7 +10,8 @@ public class MethodCallCodeFragmentTest
     {
         _ = new MethodCallCodeFragment(_extensionFuncMethodInfo, 1);
         Assert.Throws<ArgumentException>(() =>
-            new MethodCallCodeFragment(_extensionFuncMethodInfo, 1, 2));
+            new MethodCallCodeFragment(_extensionFuncMethodInfo, 1, 2)
+        );
     }
 
     [ConditionalFact]
@@ -18,7 +19,8 @@ public class MethodCallCodeFragmentTest
     {
         _ = new MethodCallCodeFragment(_instanceFuncMethodInfo, 1);
         Assert.Throws<ArgumentException>(() =>
-            new MethodCallCodeFragment(_instanceFuncMethodInfo, 1, 2));
+            new MethodCallCodeFragment(_instanceFuncMethodInfo, 1, 2)
+        );
     }
 
     private static readonly MethodInfo _extensionFuncMethodInfo =

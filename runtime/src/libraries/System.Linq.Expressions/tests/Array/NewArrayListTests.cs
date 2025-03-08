@@ -918,7 +918,8 @@ namespace System.Linq.Expressions.Tests
             // an edge case could cause more obscure damage. A class derived from ReadOnlyCollection is used to catch
             // assumptions that such a type is safe.
             Assert.ThrowsAny<Exception>(() =>
-                Expression.NewArrayInit(typeof(int), new BogusReadOnlyCollection<Expression>()));
+                Expression.NewArrayInit(typeof(int), new BogusReadOnlyCollection<Expression>())
+            );
         }
 
         [Fact]
@@ -1911,7 +1912,8 @@ namespace System.Linq.Expressions.Tests
         public static void NotAssignable()
         {
             Assert.Throws<InvalidOperationException>(() =>
-                Expression.NewArrayInit(typeof(string), Expression.Constant(2)));
+                Expression.NewArrayInit(typeof(string), Expression.Constant(2))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]

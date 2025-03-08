@@ -1741,7 +1741,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include(l2 => l2.OneToOne_Optional_FK2),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1760,7 +1761,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include(l2 => l2.OneToOne_Optional_FK2),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1778,7 +1780,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include("OneToOne_Optional_FK2"),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1796,7 +1799,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1815,7 +1819,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include("OneToOne_Optional_FK2"),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1834,7 +1839,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1850,7 +1856,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Include(l2 => l2.OneToOne_Optional_FK2),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2572,7 +2579,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         into grouping_outer
                     from l2_outer in grouping_outer.DefaultIfEmpty()
                     select l2_outer.Name
-            ));
+            )
+        );
 
     private static Level1 ClientLevel1(Level1 arg) => arg;
 
@@ -3182,7 +3190,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
                     ),
                 elementSorter: e => e.Id
-            ));
+            )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

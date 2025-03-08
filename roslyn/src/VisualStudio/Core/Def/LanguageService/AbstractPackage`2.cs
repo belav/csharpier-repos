@@ -145,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 {
                     JoinableTaskFactory.Run(async () =>
                         await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
-                            .ConfigureAwait(true));
+                            .ConfigureAwait(true)
+                    );
                 }
 
                 // If we've created the language service then tell it it's time to clean itself up now.

@@ -44,9 +44,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Attributes
         public void CreateExportCompletionProviderAttributeWithNullArg()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new ExportCompletionProviderMef1Attribute("name", null));
+                new ExportCompletionProviderMef1Attribute("name", null)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ExportCompletionProviderMef1Attribute(null, "language"));
+                new ExportCompletionProviderMef1Attribute(null, "language")
+            );
         }
     }
 }

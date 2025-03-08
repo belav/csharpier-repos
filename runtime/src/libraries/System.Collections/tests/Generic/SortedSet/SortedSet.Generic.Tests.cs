@@ -66,7 +66,8 @@ namespace System.Collections.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new SortedSet<T>((IEnumerable<T>)null));
             Assert.Throws<ArgumentNullException>(() =>
-                new SortedSet<T>((IEnumerable<T>)null, Comparer<T>.Default));
+                new SortedSet<T>((IEnumerable<T>)null, Comparer<T>.Default)
+            );
         }
 
         [Theory]
@@ -225,7 +226,8 @@ namespace System.Collections.Tests
                 {
                     SortedSet<T> view = set.GetViewBetween(firstElement, middleElement);
                     Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        view.GetViewBetween(middleElement, lastElement));
+                        view.GetViewBetween(middleElement, lastElement)
+                    );
                 }
             }
         }

@@ -35,11 +35,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 CompilationWithAnalyzers.GetEffectiveDiagnostics(
                     default(ImmutableArray<Diagnostic>),
                     c
-                ));
+                )
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                CompilationWithAnalyzers.GetEffectiveDiagnostics(null, c));
+                CompilationWithAnalyzers.GetEffectiveDiagnostics(null, c)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, null));
+                CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, null)
+            );
         }
 
         [Fact]

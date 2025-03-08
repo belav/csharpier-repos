@@ -648,7 +648,8 @@ public class BuiltInDataTypesSqlServerTest
                         context,
                         id,
                         set.Where(e => e.Id == id && e.StringAsText == stringAsText)
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -660,7 +661,8 @@ public class BuiltInDataTypesSqlServerTest
                         context,
                         id,
                         set.Where(e => e.Id == id && e.StringAsNtext == gumballRulesOk)
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -672,7 +674,8 @@ public class BuiltInDataTypesSqlServerTest
                         context,
                         id,
                         set.Where(e => e.Id == id && e.BytesAsImage == bytesAsImage)
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -684,7 +687,8 @@ public class BuiltInDataTypesSqlServerTest
                         context,
                         id,
                         set.Where(e => e.Id == id && e.CharAsText == charAsText)
-                    ))
+                    )
+                )
                 .Message
         );
 
@@ -696,7 +700,8 @@ public class BuiltInDataTypesSqlServerTest
                         context,
                         id,
                         set.Where(e => e.Id == id && e.CharAsNtext == charAsNtext)
-                    ))
+                    )
+                )
                 .Message
         );
     }

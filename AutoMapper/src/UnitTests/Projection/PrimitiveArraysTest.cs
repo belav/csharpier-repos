@@ -13,7 +13,8 @@
                 });
 
                 typeof(NullReferenceException).ShouldNotBeThrownBy(() =>
-                    config.Internal().ProjectionBuilder.GetMapExpression<Source, Destination>());
+                    config.Internal().ProjectionBuilder.GetMapExpression<Source, Destination>()
+                );
             }
 
             [Fact]

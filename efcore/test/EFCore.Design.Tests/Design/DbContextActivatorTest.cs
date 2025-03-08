@@ -34,7 +34,8 @@ public class DbContextActivatorTest
             ),
             Assert
                 .Throws<OperationException>(() =>
-                    DbContextActivator.CreateInstance(typeof(ThrowingTestContext)))
+                    DbContextActivator.CreateInstance(typeof(ThrowingTestContext))
+                )
                 .Message
         );
 
@@ -56,7 +57,8 @@ public class DbContextActivatorTest
     {
         var message = Assert
             .Throws<OperationException>(() =>
-                DbContextActivator.CreateInstance(typeof(ParameterTestContext)))
+                DbContextActivator.CreateInstance(typeof(ParameterTestContext))
+            )
             .Message;
 
         Assert.StartsWith(

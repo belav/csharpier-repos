@@ -967,7 +967,8 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() =>
-                factory.GetControllerType(requestContext, controllerName: null));
+                factory.GetControllerType(requestContext, controllerName: null)
+            );
         }
 
         class NoParameterlessCtor : IController

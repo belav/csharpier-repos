@@ -113,7 +113,8 @@ namespace System.Net.Http.Functional.Tests
         public void Ctor_NullMethod_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new HttpRequestMessage(null, "http://example.com"));
+                new HttpRequestMessage(null, "http://example.com")
+            );
         }
 
         [Fact]

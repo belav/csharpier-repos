@@ -215,7 +215,8 @@ namespace System.Diagnostics.Tests
                 {
                     // Ensure we don't always return zero for a counter we know is not always zero
                     val = Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                        counterSample.NextValue());
+                        counterSample.NextValue()
+                    );
                     if (val > 0f)
                     {
                         break;
@@ -496,7 +497,8 @@ namespace System.Diagnostics.Tests
                         using (
                             PerformanceCounter counterSample =
                                 Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                                    new PerformanceCounter("Processor", "Interrupts/sec", "0", "."))
+                                    new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
+                                )
                         )
                         {
                             Assert.Equal("Processor", counterSample.CategoryName);
@@ -518,7 +520,8 @@ namespace System.Diagnostics.Tests
             string counterName = categoryName.Replace("_Category", "_Counter");
 
             PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(() =>
-                new PerformanceCounter(categoryName, counterName, readOnly));
+                new PerformanceCounter(categoryName, counterName, readOnly)
+            );
 
             return counterSample;
         }

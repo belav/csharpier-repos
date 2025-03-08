@@ -118,13 +118,17 @@ namespace System.SpanTests
         public static void CreateFromPinnedArrayNullArrayNonZeroStartAndLength()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray((int[])null, 1, 0));
+                MemoryMarshal.CreateFromPinnedArray((int[])null, 1, 0)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray((int[])null, 0, 1));
+                MemoryMarshal.CreateFromPinnedArray((int[])null, 0, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray((int[])null, 1, 1));
+                MemoryMarshal.CreateFromPinnedArray((int[])null, 1, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray((int[])null, -1, -1));
+                MemoryMarshal.CreateFromPinnedArray((int[])null, -1, -1)
+            );
         }
 
         [Fact]
@@ -133,7 +137,8 @@ namespace System.SpanTests
             // Cannot pass variant array, if array type is not a valuetype.
             string[] a = { "Hello" };
             Assert.Throws<ArrayTypeMismatchException>(() =>
-                MemoryMarshal.CreateFromPinnedArray<object>(a, 0, a.Length));
+                MemoryMarshal.CreateFromPinnedArray<object>(a, 0, a.Length)
+            );
         }
 
         [Fact]
@@ -156,7 +161,8 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, -1, 0));
+                MemoryMarshal.CreateFromPinnedArray(a, -1, 0)
+            );
         }
 
         [Fact]
@@ -164,7 +170,8 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, 4, 0));
+                MemoryMarshal.CreateFromPinnedArray(a, 4, 0)
+            );
         }
 
         [Fact]
@@ -172,7 +179,8 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, 0, -1));
+                MemoryMarshal.CreateFromPinnedArray(a, 0, -1)
+            );
         }
 
         [Fact]
@@ -180,15 +188,20 @@ namespace System.SpanTests
         {
             int[] a = new int[3];
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, 3, 1));
+                MemoryMarshal.CreateFromPinnedArray(a, 3, 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, 2, 2));
+                MemoryMarshal.CreateFromPinnedArray(a, 2, 2)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, 1, 3));
+                MemoryMarshal.CreateFromPinnedArray(a, 1, 3)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, 0, 4));
+                MemoryMarshal.CreateFromPinnedArray(a, 0, 4)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                MemoryMarshal.CreateFromPinnedArray(a, int.MaxValue, int.MaxValue));
+                MemoryMarshal.CreateFromPinnedArray(a, int.MaxValue, int.MaxValue)
+            );
         }
 
         [Fact]

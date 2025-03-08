@@ -225,9 +225,11 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_Unix_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetObjectForNativeVariant(IntPtr.Zero));
+                Marshal.GetObjectForNativeVariant(IntPtr.Zero)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero));
+                Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -503,7 +505,8 @@ namespace System.Runtime.InteropServices.Tests
                 variant.m_Variant._unionTypes._pvarVal = ptr;
 
                 Assert.Throws<InvalidOleVariantTypeException>(() =>
-                    GetObjectForNativeVariant(variant));
+                    GetObjectForNativeVariant(variant)
+                );
             }
             finally
             {

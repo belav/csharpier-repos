@@ -292,10 +292,12 @@ namespace System.Tests
             var excp = new DerivedException();
             Assert.Throws<PlatformNotSupportedException>(() =>
                 excp.SerializeObjectState += (exception, eventArgs) =>
-                    eventArgs.AddSerializedState(null));
+                    eventArgs.AddSerializedState(null)
+            );
             Assert.Throws<PlatformNotSupportedException>(() =>
                 excp.SerializeObjectState -= (exception, eventArgs) =>
-                    eventArgs.AddSerializedState(null));
+                    eventArgs.AddSerializedState(null)
+            );
         }
 #pragma warning restore SYSLIB0011
 

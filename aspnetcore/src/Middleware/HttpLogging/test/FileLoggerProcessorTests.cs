@@ -247,7 +247,8 @@ public class FileLoggerProcessorTests
 
                 logger.EnqueueMessage(_messageOne);
                 await WaitForCondition(() =>
-                        testSink.Writes.FirstOrDefault()?.EventId.Name == "MaxFilesReached")
+                        testSink.Writes.FirstOrDefault()?.EventId.Name == "MaxFilesReached"
+                    )
                     .DefaultTimeout();
             }
 
@@ -269,7 +270,8 @@ public class FileLoggerProcessorTests
                 logger.SystemDateTime = mockSystemDateTime;
                 logger.EnqueueMessage(_messageOne);
                 await WaitForCondition(() =>
-                        testSink2.Writes.FirstOrDefault()?.EventId.Name == "MaxFilesReached")
+                        testSink2.Writes.FirstOrDefault()?.EventId.Name == "MaxFilesReached"
+                    )
                     .DefaultTimeout();
             }
         }

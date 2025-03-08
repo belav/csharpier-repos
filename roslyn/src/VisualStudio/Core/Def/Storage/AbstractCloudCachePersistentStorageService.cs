@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
         )
         {
             var solutionFolder = IOUtilities.PerformIO(() =>
-                Path.GetDirectoryName(solutionKey.FilePath));
+                Path.GetDirectoryName(solutionKey.FilePath)
+            );
             if (RoslynString.IsNullOrEmpty(solutionFolder))
                 return null;
 

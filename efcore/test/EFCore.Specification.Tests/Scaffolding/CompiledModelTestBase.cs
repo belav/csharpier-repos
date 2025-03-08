@@ -393,7 +393,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             CoreStrings.RuntimeModelMissingData,
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    referenceOwnedType.GetNavigationAccessMode())
+                    referenceOwnedType.GetNavigationAccessMode()
+                )
                 .Message
         );
 
@@ -1441,8 +1442,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             Assert.Equal(
                 expectedExceptionMessage,
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        generator.GenerateModel(model, options))
+                    .Throws<InvalidOperationException>(() => generator.GenerateModel(model, options)
+                    )
                     .Message
             );
             return (null, null);

@@ -477,7 +477,8 @@ public class HtmlHelperLabelExtensionsTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
-            helper.LabelFor(model => new { foo = "Bar" }));
+            helper.LabelFor(model => new { foo = "Bar" })
+        );
         Assert.Equal(
             "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.",
             exception.Message

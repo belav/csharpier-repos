@@ -49,11 +49,14 @@ public unsafe class ArrayWithOffsetTest
             ArrayWithOffset arrayWithOffset = new ArrayWithOffset(new int[] { 1 }, 0);
 
             Assert.Throws<MarshalDirectiveException>(() =>
-                ArrayWithOffsetNative.Marshal_Invalid(arrayWithOffset));
+                ArrayWithOffsetNative.Marshal_Invalid(arrayWithOffset)
+            );
             Assert.Throws<MarshalDirectiveException>(() =>
-                ArrayWithOffsetNative.Marshal_Invalid(ref arrayWithOffset));
+                ArrayWithOffsetNative.Marshal_Invalid(ref arrayWithOffset)
+            );
             Assert.Throws<MarshalDirectiveException>(() =>
-                ArrayWithOffsetNative.Marshal_Invalid_Return());
+                ArrayWithOffsetNative.Marshal_Invalid_Return()
+            );
         }
         catch (Exception e)
         {

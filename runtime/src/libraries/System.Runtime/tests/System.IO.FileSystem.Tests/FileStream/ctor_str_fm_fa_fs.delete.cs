@@ -184,7 +184,8 @@ namespace System.IO.Tests
                             FileMode.Open,
                             FileAccess.Read,
                             FileShare.Delete | FileShare.ReadWrite
-                        ));
+                        )
+                    );
                 }
                 else
                 {
@@ -195,7 +196,8 @@ namespace System.IO.Tests
                             FileMode.Open,
                             FileAccess.Read,
                             FileShare.Delete | FileShare.ReadWrite
-                        ));
+                        )
+                    );
                     Assert.True(
                         File.Exists(fileName),
                         $"'{fileName}' should still exist after calling delete with inner filestream closed."

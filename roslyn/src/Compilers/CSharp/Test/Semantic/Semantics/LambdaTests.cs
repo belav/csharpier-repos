@@ -9590,7 +9590,8 @@ class Program
             Assert.False(lambdas[0].Symbol.Parameters[0].IsOptional);
             Assert.False(lambdas[0].Symbol.Parameters[0].HasExplicitDefaultValue);
             Assert.Throws<InvalidOperationException>(() =>
-                lambdas[0].Symbol.Parameters[0].ExplicitDefaultValue);
+                lambdas[0].Symbol.Parameters[0].ExplicitDefaultValue
+            );
             Assert.True(lambdas[0].Symbol.Parameters[1].IsOptional);
             Assert.True(lambdas[0].Symbol.Parameters[1].HasExplicitDefaultValue);
             Assert.Equal(1, lambdas[0].Symbol.Parameters[1].ExplicitDefaultValue);
@@ -9601,7 +9602,8 @@ class Program
             Assert.True(lambdas[1].Symbol.Parameters[0].IsOptional);
             Assert.False(lambdas[2].Symbol.Parameters[0].HasExplicitDefaultValue);
             Assert.Throws<InvalidOperationException>(() =>
-                lambdas[1].Symbol.Parameters[0].ExplicitDefaultValue);
+                lambdas[1].Symbol.Parameters[0].ExplicitDefaultValue
+            );
 
             // lam3
             Assert.Equal("([DefaultParameterValue(2)] int x) => x", lambdas[2].Node.ToString());
@@ -9609,7 +9611,8 @@ class Program
             Assert.False(lambdas[2].Symbol.Parameters[0].IsOptional);
             Assert.False(lambdas[2].Symbol.Parameters[0].HasExplicitDefaultValue);
             Assert.Throws<InvalidOperationException>(() =>
-                lambdas[2].Symbol.Parameters[0].ExplicitDefaultValue);
+                lambdas[2].Symbol.Parameters[0].ExplicitDefaultValue
+            );
 
             // lam4
             Assert.Equal(

@@ -67,7 +67,8 @@ namespace System.Net.Tests
         {
             WebRequest request = WebRequest.Create("file://anything");
             Assert.Throws<ProtocolViolationException>(() =>
-                request.BeginGetRequestStream(null, null));
+                request.BeginGetRequestStream(null, null)
+            );
         }
 
         [Fact]
@@ -199,7 +200,8 @@ namespace System.Net.Tests
                 using (WebResponse response = await GetResponseAsync(request))
                 {
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        GetRequestStreamAsync(request));
+                        GetRequestStreamAsync(request)
+                    );
                 }
             }
             finally

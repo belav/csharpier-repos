@@ -98,9 +98,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                     GetAfterOpenTokenIndentation()
                 );
                 _singleIndentationTrivia = new Lazy<SyntaxTrivia>(() =>
-                    generator.Whitespace(GetSingleIndentation()));
+                    generator.Whitespace(GetSingleIndentation())
+                );
                 _braceIndentationTrivia = new Lazy<SyntaxTrivia>(() =>
-                    generator.Whitespace(GetBraceTokenIndentation()));
+                    generator.Whitespace(GetBraceTokenIndentation())
+                );
             }
 
             private void AddTextChangeBetweenOpenAndFirstItem(

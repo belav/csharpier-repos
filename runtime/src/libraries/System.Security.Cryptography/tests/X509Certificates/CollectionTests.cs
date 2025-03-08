@@ -51,7 +51,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Same(c3, cc2[2]);
 
                 Assert.Throws<ArgumentNullException>(() =>
-                    new X509CertificateCollection(new X509Certificate[] { c1, c2, null, c3 }));
+                    new X509CertificateCollection(new X509Certificate[] { c1, c2, null, c3 })
+                );
             }
         }
 
@@ -77,7 +78,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Same(c3, cc2[2]);
 
                 Assert.Throws<ArgumentNullException>(() =>
-                    new X509Certificate2Collection(new X509Certificate2[] { c1, c2, null, c3 }));
+                    new X509Certificate2Collection(new X509Certificate2[] { c1, c2, null, c3 })
+                );
 
                 using (X509Certificate c4 = new X509Certificate())
                 {
@@ -90,7 +92,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     ((IList)collection).Add(c4); // Add non-X509Certificate2 object
 
                     Assert.Throws<InvalidCastException>(() =>
-                        new X509Certificate2Collection(collection));
+                        new X509Certificate2Collection(collection)
+                    );
                 }
             }
         }
@@ -226,9 +229,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate certificate = new X509Certificate())
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    new X509CertificateCollection((X509Certificate[])null));
+                    new X509CertificateCollection((X509Certificate[])null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    new X509CertificateCollection((X509CertificateCollection)null));
+                    new X509CertificateCollection((X509CertificateCollection)null)
+                );
 
                 X509CertificateCollection collection = new X509CertificateCollection
                 {
@@ -238,9 +243,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentNullException>(() => collection[0] = null);
                 Assert.Throws<ArgumentNullException>(() => collection.Add(null));
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.AddRange((X509Certificate[])null));
+                    collection.AddRange((X509Certificate[])null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.AddRange((X509CertificateCollection)null));
+                    collection.AddRange((X509CertificateCollection)null)
+                );
                 Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
                 Assert.Throws<ArgumentNullException>(() => collection.Insert(0, null));
                 Assert.Throws<ArgumentNullException>(() => collection.Remove(null));
@@ -254,7 +261,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             }
 
             AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
-                new X509CertificateCollection.X509CertificateEnumerator(null));
+                new X509CertificateCollection.X509CertificateEnumerator(null)
+            );
         }
 
         [Fact]
@@ -263,9 +271,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 certificate = new X509Certificate2())
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    new X509Certificate2Collection((X509Certificate2[])null));
+                    new X509Certificate2Collection((X509Certificate2[])null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    new X509Certificate2Collection((X509Certificate2Collection)null));
+                    new X509Certificate2Collection((X509Certificate2Collection)null)
+                );
 
                 X509Certificate2Collection collection = new X509Certificate2Collection
                 {
@@ -276,26 +286,34 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentNullException>(() => collection.Add((X509Certificate)null));
                 Assert.Throws<ArgumentNullException>(() => collection.Add((X509Certificate2)null));
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.AddRange((X509Certificate[])null));
+                    collection.AddRange((X509Certificate[])null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.AddRange((X509CertificateCollection)null));
+                    collection.AddRange((X509CertificateCollection)null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.AddRange((X509Certificate2[])null));
+                    collection.AddRange((X509Certificate2[])null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.AddRange((X509Certificate2Collection)null));
+                    collection.AddRange((X509Certificate2Collection)null)
+                );
                 Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.Insert(0, (X509Certificate)null));
+                    collection.Insert(0, (X509Certificate)null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.Insert(0, (X509Certificate2)null));
+                    collection.Insert(0, (X509Certificate2)null)
+                );
+                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate)null)
+                );
+                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate2)null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.Remove((X509Certificate)null));
+                    collection.RemoveRange((X509Certificate2[])null)
+                );
                 Assert.Throws<ArgumentNullException>(() =>
-                    collection.Remove((X509Certificate2)null));
-                Assert.Throws<ArgumentNullException>(() =>
-                    collection.RemoveRange((X509Certificate2[])null));
-                Assert.Throws<ArgumentNullException>(() =>
-                    collection.RemoveRange((X509Certificate2Collection)null));
+                    collection.RemoveRange((X509Certificate2Collection)null)
+                );
 
                 Assert.Throws<ArgumentNullException>(() => collection.Import((byte[])null));
                 Assert.Throws<ArgumentNullException>(() => collection.Import((string)null));
@@ -323,24 +341,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1] = certificate);
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection[collection.Count] = certificate);
+                    collection[collection.Count] = certificate
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection.Insert(-1, certificate));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection.Insert(collection.Count + 1, certificate));
+                    collection.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveAt(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection.RemoveAt(collection.Count));
+                    collection.RemoveAt(collection.Count)
+                );
 
                 IList ilist = (IList)collection;
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1] = certificate);
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    ilist[collection.Count] = certificate);
+                    ilist[collection.Count] = certificate
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.Insert(-1, certificate));
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    ilist.Insert(collection.Count + 1, certificate));
+                    ilist.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(collection.Count));
             }
@@ -360,24 +383,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1] = certificate);
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection[collection.Count] = certificate);
+                    collection[collection.Count] = certificate
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection.Insert(-1, certificate));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection.Insert(collection.Count + 1, certificate));
+                    collection.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveAt(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    collection.RemoveAt(collection.Count));
+                    collection.RemoveAt(collection.Count)
+                );
 
                 IList ilist = (IList)collection;
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1] = certificate);
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    ilist[collection.Count] = certificate);
+                    ilist[collection.Count] = certificate
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.Insert(-1, certificate));
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    ilist.Insert(collection.Count + 1, certificate));
+                    ilist.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(collection.Count));
             }
@@ -611,7 +639,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection cc2 = new X509Certificate2Collection();
             Assert.ThrowsAny<CryptographicException>(() =>
-                cc2.Import(TestData.StoreSavedAsSerializedCerData));
+                cc2.Import(TestData.StoreSavedAsSerializedCerData)
+            );
             Assert.Equal(0, cc2.Count);
         }
 
@@ -654,7 +683,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection cc2 = new X509Certificate2Collection();
             Assert.ThrowsAny<CryptographicException>(() =>
-                cc2.Import(TestData.StoreSavedAsSerializedStoreData));
+                cc2.Import(TestData.StoreSavedAsSerializedStoreData)
+            );
             Assert.Equal(0, cc2.Count);
         }
 
@@ -692,7 +722,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection cc2 = new X509Certificate2Collection();
             Assert.ThrowsAny<CryptographicException>(() =>
-                cc2.Import(new byte[] { 0, 1, 1, 2, 3, 5, 8, 13, 21 }));
+                cc2.Import(new byte[] { 0, 1, 1, 2, 3, 5, 8, 13, 21 })
+            );
         }
 
         [Theory]
@@ -783,7 +814,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     new[] { msCer, ecdsa256Cer }
                 );
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    cc.Export(X509ContentType.SerializedCert));
+                    cc.Export(X509ContentType.SerializedCert)
+                );
             }
         }
 
@@ -805,7 +837,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     new[] { msCer, ecdsa256Cer }
                 );
                 Assert.Throws<PlatformNotSupportedException>(() =>
-                    cc.Export(X509ContentType.SerializedStore));
+                    cc.Export(X509ContentType.SerializedStore)
+                );
             }
         }
 
@@ -1230,14 +1263,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 cc = new X509Certificate2Collection(array);
                 Assert.Throws<ArgumentNullException>(() =>
-                    cc.RemoveRange(new X509Certificate2[] { c1, c2, null }));
+                    cc.RemoveRange(new X509Certificate2[] { c1, c2, null })
+                );
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c1, cc[0]);
                 Assert.Same(c2, cc[1]);
 
                 cc = new X509Certificate2Collection(array);
                 Assert.Throws<ArgumentNullException>(() =>
-                    cc.RemoveRange(new X509Certificate2[] { c1, null, c2 }));
+                    cc.RemoveRange(new X509Certificate2[] { c1, null, c2 })
+                );
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);
                 Assert.Same(c1, cc[1]);
@@ -1765,7 +1800,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 builder.AppendLine(TestData.ECDsaCertificate);
 
                 Assert.ThrowsAny<CryptographicException>(() =>
-                    ic.Collection.ImportFromPem(builder.ToString()));
+                    ic.Collection.ImportFromPem(builder.ToString())
+                );
                 Assert.Single(ic.Collection);
                 Assert.Equal(
                     "35052C549E4E7805E4EA204C2BE7F4BC19B88EC8",

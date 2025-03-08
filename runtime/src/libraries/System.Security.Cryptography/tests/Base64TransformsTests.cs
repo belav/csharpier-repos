@@ -161,9 +161,11 @@ namespace System.Security.Cryptography.Tests
             // These exceptions only thrown in FromBase
             transform.Dispose();
             Assert.Throws<ObjectDisposedException>(() =>
-                transform.TransformBlock(data_4bytes, 0, 4, null, 0));
+                transform.TransformBlock(data_4bytes, 0, 4, null, 0)
+            );
             Assert.Throws<ObjectDisposedException>(() =>
-                transform.TransformFinalBlock(Array.Empty<byte>(), 0, 0));
+                transform.TransformFinalBlock(Array.Empty<byte>(), 0, 0)
+            );
         }
 
         [Fact]

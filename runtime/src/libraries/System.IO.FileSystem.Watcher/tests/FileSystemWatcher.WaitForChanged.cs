@@ -177,7 +177,8 @@ namespace System.IO.Tests
                 for (int i = 1; i <= DefaultAttemptsForExpectedEvent; i++)
                 {
                     Task<WaitForChangedResult> t = Task.Run(() =>
-                        fsw.WaitForChanged(changeType, LongWaitTimeout));
+                        fsw.WaitForChanged(changeType, LongWaitTimeout)
+                    );
                     while (!t.IsCompleted)
                     {
                         string path = Path.Combine(TestDirectory, Path.GetRandomFileName());
@@ -217,7 +218,8 @@ namespace System.IO.Tests
                     string name = CreateTestFile(TestDirectory, Path.GetRandomFileName());
 
                     Task<WaitForChangedResult> t = Task.Run(() =>
-                        fsw.WaitForChanged(WatcherChangeTypes.Changed, LongWaitTimeout));
+                        fsw.WaitForChanged(WatcherChangeTypes.Changed, LongWaitTimeout)
+                    );
                     while (!t.IsCompleted)
                     {
                         File.AppendAllText(name, "text");
@@ -253,7 +255,8 @@ namespace System.IO.Tests
                         fsw.WaitForChanged(
                             WatcherChangeTypes.Renamed | WatcherChangeTypes.Created,
                             LongWaitTimeout
-                        )); // on some OSes, the renamed might come through as Deleted/Created
+                        )
+                    ); // on some OSes, the renamed might come through as Deleted/Created
 
                     string name = CreateTestFile(TestDirectory, Path.GetRandomFileName());
 

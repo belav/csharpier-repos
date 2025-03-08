@@ -203,7 +203,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
             Assert.Throws<NullReferenceException>(() =>
-                generator.GenerateBinaryOperatorExpression(e));
+                generator.GenerateBinaryOperatorExpression(e)
+            );
         }
 
         public static IEnumerable<object[]> GenerateCodeFromMember_TestData()
@@ -477,7 +478,8 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeTypeMember(),
                         new StringWriter(),
                         new CodeGeneratorOptions()
-                    ));
+                    )
+                );
             });
         }
 
@@ -1843,7 +1845,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualDirection);
             generator.OutputTypeAction = (actualType) => { };
             Assert.Throws<NullReferenceException>(() =>
-                generator.GenerateParameterDeclarationExpression(e));
+                generator.GenerateParameterDeclarationExpression(e)
+            );
         }
 
         public static IEnumerable<object[]> GeneratePrimitiveExpression_TestData()
@@ -3213,7 +3216,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
             generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
             Assert.Throws<NullReferenceException>(() =>
-                generator.OutputAttributeDeclarations(attributes));
+                generator.OutputAttributeDeclarations(attributes)
+            );
         }
 
         [Fact]
@@ -3340,7 +3344,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
             Assert.Throws<NullReferenceException>(() =>
-                generator.OutputFieldScopeModifier(attributes));
+                generator.OutputFieldScopeModifier(attributes)
+            );
         }
 
         [Theory]
@@ -3625,7 +3630,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
             Assert.Throws<NullReferenceException>(() =>
-                generator.OutputMemberAccessModifier(attributes));
+                generator.OutputMemberAccessModifier(attributes)
+            );
         }
 
         [Theory]
@@ -3879,7 +3885,8 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
             Assert.Throws<NullReferenceException>(() =>
-                generator.OutputMemberScopeModifier(attributes));
+                generator.OutputMemberScopeModifier(attributes)
+            );
         }
 
         [Theory]
@@ -4187,7 +4194,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualTypeRef, actualName);
             generator.OutputTypeAction = (actualTypeRef) => { };
             Assert.Throws<NullReferenceException>(() =>
-                generator.OutputTypeNamePair(typeRef, "name"));
+                generator.OutputTypeNamePair(typeRef, "name")
+            );
         }
 
         [Theory]
@@ -4315,7 +4323,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod
             ) => baseMethod(actualAttributes, isStruct, isEnum);
             Assert.Throws<NullReferenceException>(() =>
-                generator.OutputTypeAttributes(attributes, isStruct, isEnum));
+                generator.OutputTypeAttributes(attributes, isStruct, isEnum)
+            );
         }
 
         [Theory]

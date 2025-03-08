@@ -24,7 +24,8 @@ public class AuthenticationServiceTests
 
         await context.AuthenticateAsync("base");
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.AuthenticateAsync("missing"));
+            context.AuthenticateAsync("missing")
+        );
         Assert.Contains("base", ex.Message);
     }
 
@@ -69,7 +70,8 @@ public class AuthenticationServiceTests
 
         await context.ChallengeAsync("base");
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.ChallengeAsync("missing"));
+            context.ChallengeAsync("missing")
+        );
         Assert.Contains("base", ex.Message);
     }
 
@@ -88,7 +90,8 @@ public class AuthenticationServiceTests
 
         await context.ForbidAsync("base");
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.ForbidAsync("missing"));
+            context.ForbidAsync("missing")
+        );
         Assert.Contains("base", ex.Message);
     }
 
@@ -106,7 +109,8 @@ public class AuthenticationServiceTests
         context.RequestServices = services;
 
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync("signin", new ClaimsPrincipal(), null));
+            context.SignInAsync("signin", new ClaimsPrincipal(), null)
+        );
         await context.SignInAsync(
             "signin",
             new ClaimsPrincipal(new ClaimsIdentity("whatever")),
@@ -158,7 +162,8 @@ public class AuthenticationServiceTests
             null
         );
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync("base", new ClaimsPrincipal(new ClaimsIdentity("whatever")), null));
+            context.SignInAsync("base", new ClaimsPrincipal(new ClaimsIdentity("whatever")), null)
+        );
         Assert.Contains("uber", ex.Message);
         Assert.Contains("signin", ex.Message);
         await context.SignInAsync(
@@ -171,7 +176,8 @@ public class AuthenticationServiceTests
                 "signout",
                 new ClaimsPrincipal(new ClaimsIdentity("whatever")),
                 null
-            ));
+            )
+        );
         Assert.Contains("uber", ex.Message);
         Assert.Contains("signin", ex.Message);
     }
@@ -194,7 +200,8 @@ public class AuthenticationServiceTests
 
         await context.SignOutAsync("uber");
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignOutAsync("base"));
+            context.SignOutAsync("base")
+        );
         Assert.Contains("uber", ex.Message);
         Assert.Contains("signout", ex.Message);
         await context.SignOutAsync("signout");
@@ -221,7 +228,8 @@ public class AuthenticationServiceTests
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync());
         Assert.Contains("cannot be used for SignOutAsync", ex.Message);
         ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity("whatever"))));
+            context.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity("whatever")))
+        );
         Assert.Contains("cannot be used for SignInAsync", ex.Message);
     }
 
@@ -286,7 +294,8 @@ public class AuthenticationServiceTests
         await context.ForbidAsync();
         await context.SignOutAsync();
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity("whatever"))));
+            context.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity("whatever")))
+        );
         Assert.Contains("cannot be used for SignInAsync", ex.Message);
     }
 

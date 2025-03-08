@@ -212,7 +212,8 @@ namespace System.Reflection.Tests
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.Throws<FileLoadException>(() =>
-                    lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage));
+                    lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage)
+                );
             }
         }
 
@@ -239,7 +240,8 @@ namespace System.Reflection.Tests
             )
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    lc.LoadFromAssemblyName((AssemblyName)null));
+                    lc.LoadFromAssemblyName((AssemblyName)null)
+                );
             }
         }
 

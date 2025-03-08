@@ -38,7 +38,8 @@ namespace DebuggerTests
             await Ready();
 
             var ae = await Assert.ThrowsAsync<ArgumentException>(async () =>
-                await insp.OpenSessionAsync(fn, "", TestTimeout));
+                await insp.OpenSessionAsync(fn, "", TestTimeout)
+            );
             Assert.Contains(bad_cmd_name, ae.Message);
         }
     }

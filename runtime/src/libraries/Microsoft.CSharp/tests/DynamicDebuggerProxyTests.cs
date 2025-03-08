@@ -79,7 +79,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // ignoreException: false
             Assert.Throws<MissingMemberException>(() =>
-                GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false)));
+                GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false))
+            );
         }
 
         private static Type GetType(string typeName)

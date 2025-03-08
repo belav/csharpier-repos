@@ -74,7 +74,8 @@ namespace System.Security.AccessControl.Tests
         public static void Constructor2_NegativeCapacity()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new DiscretionaryAcl(false, false, 0, -1));
+                new DiscretionaryAcl(false, false, 0, -1)
+            );
         }
     }
 }

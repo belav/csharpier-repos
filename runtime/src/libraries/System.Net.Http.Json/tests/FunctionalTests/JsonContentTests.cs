@@ -212,7 +212,8 @@ namespace System.Net.Http.Json.Functional.Tests
 
                 // Validate for reflection
                 Exception ex = Assert.Throws<ArgumentException>(() =>
-                    JsonContent.Create(foo, typeOfBar));
+                    JsonContent.Create(foo, typeOfBar)
+                );
                 Assert.Contains(strTypeOfBar, ex.Message);
 
                 string afterInputTypeMessage = ex.Message.Split(strTypeOfBar.ToCharArray())[1];
@@ -220,7 +221,8 @@ namespace System.Net.Http.Json.Functional.Tests
 
                 // Validate for weakly-typed JsonTypeInfo
                 ex = Assert.Throws<ArgumentException>(() =>
-                    JsonContent.Create((object)foo, FooContext.Default.Bar));
+                    JsonContent.Create((object)foo, FooContext.Default.Bar)
+                );
                 Assert.Contains(strTypeOfBar, ex.Message);
 
                 afterInputTypeMessage = ex.Message.Split(strTypeOfBar.ToCharArray())[1];

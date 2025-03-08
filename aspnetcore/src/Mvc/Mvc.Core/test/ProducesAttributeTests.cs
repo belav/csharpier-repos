@@ -27,7 +27,8 @@ public class ProducesAttributeTests
             new IFilterMetadata[] { producesContentAttribute }
         );
         var next = new ResultExecutionDelegate(() =>
-            Task.FromResult(CreateResultExecutedContext(resultExecutingContext)));
+            Task.FromResult(CreateResultExecutedContext(resultExecutingContext))
+        );
 
         // Act
         producesContentAttribute.OnResultExecuting(resultExecutingContext);
@@ -52,7 +53,8 @@ public class ProducesAttributeTests
         var resultExecutingContext = CreateResultExecutingContext(filters);
 
         var next = new ResultExecutionDelegate(() =>
-            Task.FromResult(CreateResultExecutedContext(resultExecutingContext)));
+            Task.FromResult(CreateResultExecutedContext(resultExecutingContext))
+        );
 
         // Act
         producesContentAttribute.OnResultExecuting(resultExecutingContext);
@@ -75,7 +77,8 @@ public class ProducesAttributeTests
         var resultExecutingContext = CreateResultExecutingContext(filters);
 
         var next = new ResultExecutionDelegate(() =>
-            Task.FromResult(CreateResultExecutedContext(resultExecutingContext)));
+            Task.FromResult(CreateResultExecutedContext(resultExecutingContext))
+        );
 
         // Act
         producesContentAttribute.OnResultExecuting(resultExecutingContext);
@@ -102,7 +105,8 @@ public class ProducesAttributeTests
 
         // Assert
         var ex = Assert.Throws<FormatException>(() =>
-            new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+            new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+        );
         Assert.Equal(
             "The header contains invalid values at index 0: '"
                 + (invalidContentType ?? "<null>")
@@ -130,7 +134,8 @@ public class ProducesAttributeTests
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+            new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+        );
 
         Assert.Equal(
             $"The argument '{invalidContentType}' is invalid. "

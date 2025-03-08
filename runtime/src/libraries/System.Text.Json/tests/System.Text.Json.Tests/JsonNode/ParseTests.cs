@@ -149,7 +149,8 @@ namespace System.Text.Json.Nodes.Tests
         public static async Task NullReference_Fail()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                JsonSerializer.Deserialize<JsonNode>((string)null));
+                JsonSerializer.Deserialize<JsonNode>((string)null)
+            );
             Assert.Throws<ArgumentNullException>(() => JsonNode.Parse((string)null));
             Assert.Throws<ArgumentNullException>(() => JsonNode.Parse((Stream)null));
             await Assert.ThrowsAsync<ArgumentNullException>(() => JsonNode.ParseAsync(null));

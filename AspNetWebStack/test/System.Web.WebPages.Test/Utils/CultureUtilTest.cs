@@ -228,7 +228,8 @@ namespace System.Web.WebPages.Test
 
             // Act and Assert
             Assert.Throws<CultureNotFoundException>(() =>
-                CultureUtil.SetCulture(thread, context, "sans-culture"));
+                CultureUtil.SetCulture(thread, context, "sans-culture")
+            );
         }
 
         [Fact]
@@ -241,7 +242,8 @@ namespace System.Web.WebPages.Test
 
             // Act and Assert
             Assert.Throws<CultureNotFoundException>(() =>
-                CultureUtil.SetUICulture(thread, context, "sans-culture"));
+                CultureUtil.SetUICulture(thread, context, "sans-culture")
+            );
         }
 
         [Fact]

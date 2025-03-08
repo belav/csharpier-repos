@@ -280,7 +280,8 @@ namespace System.Web.Http.Tracing.Tracers
                     typeof(int),
                     _request,
                     new MediaTypeFormatter[0]
-                ));
+                )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

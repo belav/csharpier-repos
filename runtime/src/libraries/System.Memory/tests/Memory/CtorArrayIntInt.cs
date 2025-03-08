@@ -64,7 +64,8 @@ namespace System.MemoryTests
             Assert.Throws<ArgumentOutOfRangeException>(() => new Memory<int>(a, 1, 3));
             Assert.Throws<ArgumentOutOfRangeException>(() => new Memory<int>(a, 0, 4));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Memory<int>(a, int.MaxValue, int.MaxValue));
+                new Memory<int>(a, int.MaxValue, int.MaxValue)
+            );
         }
 
         [Fact]

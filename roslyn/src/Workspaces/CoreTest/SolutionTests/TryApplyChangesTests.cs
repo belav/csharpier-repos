@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                             project.CompilationOptions!.WithMainTypeName("WrongThing")
                         )
                         .Solution
-                ));
+                )
+            );
 
             Assert.Equal(
                 WorkspacesResources.Changing_compilation_options_is_not_supported,
@@ -235,7 +236,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                             )
                         )
                         .Solution
-                ));
+                )
+            );
 
             Assert.Equal(
                 WorkspacesResources.Changing_parse_options_is_not_supported,

@@ -107,7 +107,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void InvalidInput(string input, string messageFragment)
         {
             CryptographicException exception = Assert.ThrowsAny<CryptographicException>(() =>
-                new X500DistinguishedName(input));
+                new X500DistinguishedName(input)
+            );
 
             if (CultureInfo.CurrentCulture.Name == "en-US")
             {
@@ -136,7 +137,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ParseWithInvalidObjectIdentifiers(string distinguishedName)
         {
             Assert.ThrowsAny<CryptographicException>(() =>
-                new X500DistinguishedName(distinguishedName));
+                new X500DistinguishedName(distinguishedName)
+            );
         }
 
         private static void ProcessTestCase(

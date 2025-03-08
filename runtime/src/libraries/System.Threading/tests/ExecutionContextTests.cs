@@ -159,9 +159,11 @@ namespace System.Threading.Tests
                             state =>
                             {
                                 Assert.Throws<InvalidOperationException>(() =>
-                                    asyncFlowControl.Undo());
+                                    asyncFlowControl.Undo()
+                                );
                                 Assert.Throws<InvalidOperationException>(() =>
-                                    asyncFlowControl.Dispose());
+                                    asyncFlowControl.Dispose()
+                                );
                             },
                             null
                         );
@@ -315,7 +317,8 @@ namespace System.Threading.Tests
                 verifyEquality(asyncFlowControl1, asyncFlowControl0, false);
 
                 ThreadTestHelpers.RunTestInBackgroundThread(() =>
-                    asyncFlowControl1 = ExecutionContext.SuppressFlow());
+                    asyncFlowControl1 = ExecutionContext.SuppressFlow()
+                );
                 verifyEquality(asyncFlowControl0, asyncFlowControl1, false);
                 verifyEquality(asyncFlowControl1, asyncFlowControl0, false);
             });

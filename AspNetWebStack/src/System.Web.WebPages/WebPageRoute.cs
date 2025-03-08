@@ -11,7 +11,8 @@ namespace System.Web.WebPages
     internal sealed class WebPageRoute
     {
         private static readonly Lazy<bool> _isRootExplicitlyDisabled = new Lazy<bool>(() =>
-            WebPagesDeployment.IsExplicitlyDisabled("~/"));
+            WebPagesDeployment.IsExplicitlyDisabled("~/")
+        );
         private bool? _isExplicitlyDisabled;
 
         internal bool IsExplicitlyDisabled

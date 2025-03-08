@@ -292,39 +292,48 @@ namespace System.Linq.Tests
 
             // We need to use checked arithmetic summing up the collections' counts.
             Assert.Throws<OverflowException>(() =>
-                supposedlyLargeCollection.Concat(tinyCollection).Count());
+                supposedlyLargeCollection.Concat(tinyCollection).Count()
+            );
             Assert.Throws<OverflowException>(() =>
-                tinyCollection.Concat(tinyCollection).Concat(supposedlyLargeCollection).Count());
+                tinyCollection.Concat(tinyCollection).Concat(supposedlyLargeCollection).Count()
+            );
             Assert.Throws<OverflowException>(() =>
                 tinyCollection
                     .Concat(tinyCollection)
                     .Concat(tinyCollection)
                     .Concat(supposedlyLargeCollection)
-                    .Count());
+                    .Count()
+            );
 
             // This applies to ToArray() and ToList() as well, which try to preallocate the exact size
             // needed if all inputs are ICollections.
             Assert.Throws<OverflowException>(() =>
-                supposedlyLargeCollection.Concat(tinyCollection).ToArray());
+                supposedlyLargeCollection.Concat(tinyCollection).ToArray()
+            );
             Assert.Throws<OverflowException>(() =>
-                tinyCollection.Concat(tinyCollection).Concat(supposedlyLargeCollection).ToArray());
+                tinyCollection.Concat(tinyCollection).Concat(supposedlyLargeCollection).ToArray()
+            );
             Assert.Throws<OverflowException>(() =>
                 tinyCollection
                     .Concat(tinyCollection)
                     .Concat(tinyCollection)
                     .Concat(supposedlyLargeCollection)
-                    .ToArray());
+                    .ToArray()
+            );
 
             Assert.Throws<OverflowException>(() =>
-                supposedlyLargeCollection.Concat(tinyCollection).ToList());
+                supposedlyLargeCollection.Concat(tinyCollection).ToList()
+            );
             Assert.Throws<OverflowException>(() =>
-                tinyCollection.Concat(tinyCollection).Concat(supposedlyLargeCollection).ToList());
+                tinyCollection.Concat(tinyCollection).Concat(supposedlyLargeCollection).ToList()
+            );
             Assert.Throws<OverflowException>(() =>
                 tinyCollection
                     .Concat(tinyCollection)
                     .Concat(tinyCollection)
                     .Concat(supposedlyLargeCollection)
-                    .ToList());
+                    .ToList()
+            );
         }
 
         [Fact]

@@ -319,7 +319,8 @@ public class SqlServerMetadataExtensionsTest
                 .Throws<ArgumentException>(() =>
                     property.SetValueGenerationStrategy(
                         SqlServerValueGenerationStrategy.SequenceHiLo
-                    ))
+                    )
+                )
                 .Message
         );
     }
@@ -337,7 +338,8 @@ public class SqlServerMetadataExtensionsTest
                 .Throws<ArgumentException>(() =>
                     property.SetValueGenerationStrategy(
                         SqlServerValueGenerationStrategy.IdentityColumn
-                    ))
+                    )
+                )
                 .Message
         );
     }

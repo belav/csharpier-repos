@@ -3363,7 +3363,8 @@ namespace MonoTests.System.Security.Cryptography.Xml
             sut.SignatureFormatValidator = null;
 
             Assert.Throws<FormatException>(() =>
-                sut.CheckSignature(new HMACSHA1(Encoding.ASCII.GetBytes("no clue"))));
+                sut.CheckSignature(new HMACSHA1(Encoding.ASCII.GetBytes("no clue")))
+            );
         }
 
         [Test]

@@ -175,7 +175,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             HashAlgorithmName.SHA256,
                             null,
                             now.AddSeconds(1)
-                        ));
+                        )
+                    );
 
                     Assert.Null(e.ParamName);
                     Assert.Contains("thisUpdate", e.Message);
@@ -195,7 +196,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                                 HashAlgorithmName.SHA256,
                                 null,
                                 now.AddSeconds(1)
-                            ));
+                            )
+                        );
 
                         Assert.Null(e.ParamName);
                         Assert.Contains("thisUpdate", e.Message);
@@ -420,7 +422,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             HashAlgorithmName.SHA256,
                             null,
                             now
-                        ));
+                        )
+                    );
 
                     Assert.Null(e.ParamName);
                     Assert.Contains(nameof(RSASignaturePadding), e.Message);
@@ -486,7 +489,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         default,
                         default,
                         thisUpdate
-                    ));
+                    )
+                );
                 Assert.Null(ex.ParamName);
                 Assert.Contains("thisUpdate", ex.Message);
                 Assert.Contains("nextUpdate", ex.Message);
@@ -1484,7 +1488,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             int bytesConsumed = -1;
 
             Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.Load(invalid, out crlNumber));
+                CertificateRevocationListBuilder.Load(invalid, out crlNumber)
+            );
 
             Assert.Equal(BigInteger.MinusOne, crlNumber);
 
@@ -1493,7 +1498,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     new ReadOnlySpan<byte>(invalid),
                     out crlNumber,
                     out bytesConsumed
-                ));
+                )
+            );
 
             Assert.Equal(BigInteger.MinusOne, crlNumber);
             Assert.Equal(-1, bytesConsumed);
@@ -1615,7 +1621,8 @@ AQAB
             BigInteger crlNumber = BigInteger.MinusOne;
 
             Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.Load(oversized, out crlNumber));
+                CertificateRevocationListBuilder.Load(oversized, out crlNumber)
+            );
 
             Assert.Equal(BigInteger.MinusOne, crlNumber);
         }
@@ -1633,7 +1640,8 @@ AQAB
             BigInteger currentCrlNumber = BigInteger.MinusOne;
 
             Assert.Throws<CryptographicException>(() =>
-                CertificateRevocationListBuilder.LoadPem(pem, out currentCrlNumber));
+                CertificateRevocationListBuilder.LoadPem(pem, out currentCrlNumber)
+            );
 
             Assert.Equal(BigInteger.MinusOne, currentCrlNumber);
         }
@@ -1647,7 +1655,8 @@ AQAB
                 CertificateRevocationListBuilder.LoadPem(
                     System.Text.Encoding.ASCII.GetString(TestData.Pkcs7ChainPemBytes),
                     out currentCrlNumber
-                ));
+                )
+            );
 
             Assert.Equal(BigInteger.MinusOne, currentCrlNumber);
         }

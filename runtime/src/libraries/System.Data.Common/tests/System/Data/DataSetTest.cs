@@ -1666,7 +1666,8 @@ namespace System.Data.Tests
             DataSet ds = new DataSet();
 #pragma warning disable SYSLIB0038
             Assert.Throws<InvalidEnumArgumentException>(() =>
-                ds.RemotingFormat = SerializationFormat.Binary);
+                ds.RemotingFormat = SerializationFormat.Binary
+            );
 #pragma warning restore SYSLIB0038
         }
 

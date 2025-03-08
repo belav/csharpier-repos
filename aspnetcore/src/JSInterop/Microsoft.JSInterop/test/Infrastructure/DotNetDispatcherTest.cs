@@ -244,7 +244,8 @@ public class DotNetDispatcherTest
                 jsRuntime,
                 new DotNetInvocationInfo(thisAssemblyName, method, default, default),
                 argsJson
-            ));
+            )
+        );
         Assert.Equal(
             $"In call to '{method}', parameter of type '{nameof(TestDTO)}' at index 3 must be declared as type 'DotNetObjectRef<TestDTO>' to receive the incoming value.",
             ex.Message
@@ -332,7 +333,8 @@ public class DotNetDispatcherTest
                 jsRuntime,
                 new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
                 null
-            ));
+            )
+        );
         Assert.StartsWith("There is no tracked object with id '1'.", ex.Message);
     }
 
@@ -355,7 +357,8 @@ public class DotNetDispatcherTest
                 jsRuntime,
                 new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
                 null
-            ));
+            )
+        );
         Assert.StartsWith("There is no tracked object with id '1'.", ex.Message);
     }
 
@@ -467,7 +470,8 @@ public class DotNetDispatcherTest
             DotNetDispatcher.EndInvokeJS(
                 jsRuntime,
                 $"{{\"key\": \"{jsRuntime.LastInvocationAsyncHandle}\"}}"
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -482,7 +486,8 @@ public class DotNetDispatcherTest
             DotNetDispatcher.EndInvokeJS(
                 jsRuntime,
                 $"[{jsRuntime.LastInvocationAsyncHandle}, false"
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -497,7 +502,8 @@ public class DotNetDispatcherTest
             DotNetDispatcher.EndInvokeJS(
                 jsRuntime,
                 $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]"
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -653,7 +659,8 @@ public class DotNetDispatcherTest
                 jsRuntime,
                 new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, 0, default),
                 "[7]"
-            ));
+            )
+        );
         Assert.Contains(
             $"The assembly '{thisAssemblyName}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].",
             ex.Message
@@ -675,7 +682,8 @@ public class DotNetDispatcherTest
                 jsRuntime,
                 new DotNetInvocationInfo(null, methodIdentifier, 1, default),
                 argsJson
-            ));
+            )
+        );
         Assert.Contains(
             $"The type 'GenericType`1' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].",
             ex.Message
@@ -696,7 +704,8 @@ public class DotNetDispatcherTest
                 jsRuntime,
                 new DotNetInvocationInfo(null, nameof(GenericType<int>.EchoParameter), 1, default),
                 argsJson
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -1026,7 +1035,8 @@ public class DotNetDispatcherTest
                 "SomeMethod",
                 arguments,
                 new[] { typeof(string) }
-            ));
+            )
+        );
     }
 
     [Theory]
@@ -1041,7 +1051,8 @@ public class DotNetDispatcherTest
                 "SomeMethod",
                 arguments,
                 new[] { typeof(string) }
-            ));
+            )
+        );
     }
 
     [Theory]
@@ -1056,7 +1067,8 @@ public class DotNetDispatcherTest
                 "SomeMethod",
                 arguments,
                 new[] { typeof(string) }
-            ));
+            )
+        );
     }
 
     [Fact]
@@ -1129,7 +1141,8 @@ public class DotNetDispatcherTest
                 method,
                 arguments,
                 new[] { typeof(int), typeof(TestDTO) }
-            ));
+            )
+        );
 
         // Assert
         Assert.Equal(

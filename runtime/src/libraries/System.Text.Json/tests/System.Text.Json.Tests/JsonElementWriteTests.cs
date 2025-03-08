@@ -109,13 +109,17 @@ namespace System.Text.Json.Tests
                 else
                 {
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.WritePropertyName(CharLabel));
+                        writer.WritePropertyName(CharLabel)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.WritePropertyName(CharLabel.AsSpan()));
+                        writer.WritePropertyName(CharLabel.AsSpan())
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.WritePropertyName("byte"u8));
+                        writer.WritePropertyName("byte"u8)
+                    );
                     Assert.Throws<InvalidOperationException>(() =>
-                        writer.WritePropertyName(JsonEncodedText.Encode(CharLabel)));
+                        writer.WritePropertyName(JsonEncodedText.Encode(CharLabel))
+                    );
 
                     writer.Flush();
 

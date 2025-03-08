@@ -296,7 +296,8 @@ namespace Castle.Core.Logging.Tests
         public void SettingNameToNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                ((LevelFilteredLoggerInstance)logger).ChangeName(null));
+                ((LevelFilteredLoggerInstance)logger).ChangeName(null)
+            );
         }
     }
 

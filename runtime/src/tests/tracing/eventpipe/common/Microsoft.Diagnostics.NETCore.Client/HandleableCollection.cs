@@ -149,7 +149,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             var completionSource = new TaskCompletionSource<T>();
             using var _ = cancellation.Token.Register(() =>
-                completionSource.TrySetException(new TimeoutException()));
+                completionSource.TrySetException(new TimeoutException())
+            );
 
             RunOrQueueHandler(handler, completionSource);
 

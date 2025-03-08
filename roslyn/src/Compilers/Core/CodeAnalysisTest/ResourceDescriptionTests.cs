@@ -26,43 +26,60 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // null:
             Assert.Throws<ArgumentNullException>(() =>
-                new ResourceDescription(null, "file", data, isPublic: true));
+                new ResourceDescription(null, "file", data, isPublic: true)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ResourceDescription("res", null, data, isPublic: true));
+                new ResourceDescription("res", null, data, isPublic: true)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ResourceDescription("res", "file", null, isPublic: true));
+                new ResourceDescription("res", "file", null, isPublic: true)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ResourceDescription(null, data, isPublic: true));
+                new ResourceDescription(null, data, isPublic: true)
+            );
             Assert.Throws<ArgumentNullException>(() =>
-                new ResourceDescription("res", null, isPublic: true));
+                new ResourceDescription("res", null, isPublic: true)
+            );
 
             // empty:
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("", "file", data, isPublic: true));
+                new ResourceDescription("", "file", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("res", "", data, isPublic: true));
+                new ResourceDescription("res", "", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("res", "", data, isPublic: true));
+                new ResourceDescription("res", "", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("", "file", data, isPublic: true));
+                new ResourceDescription("", "file", data, isPublic: true)
+            );
 
             // invalid chars:
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("x", "x/x", data, isPublic: true));
+                new ResourceDescription("x", "x/x", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("x", "x\\x", data, isPublic: true));
+                new ResourceDescription("x", "x\\x", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("x", "x:x", data, isPublic: true));
+                new ResourceDescription("x", "x:x", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("x", "\0", data, isPublic: true));
+                new ResourceDescription("x", "\0", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("", "x", data, isPublic: true));
+                new ResourceDescription("", "x", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("xxx\0xxxx", "", data, isPublic: true));
+                new ResourceDescription("xxx\0xxxx", "", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("xxx\uD800asdas", "", data, isPublic: true));
+                new ResourceDescription("xxx\uD800asdas", "", data, isPublic: true)
+            );
             Assert.Throws<ArgumentException>(() =>
-                new ResourceDescription("xxx", "xxx\uD800asdas", data, isPublic: true));
+                new ResourceDescription("xxx", "xxx\uD800asdas", data, isPublic: true)
+            );
 
             // Now checked during emit.
             new ResourceDescription(new string('e', 1024), data, true);

@@ -329,7 +329,8 @@ public class CandidateSetTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            candidateSet.ExpandEndpoint(0, Array.Empty<Endpoint>(), comparer));
+            candidateSet.ExpandEndpoint(0, Array.Empty<Endpoint>(), comparer)
+        );
 
         // Assert
         Assert.Equal(

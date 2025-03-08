@@ -25,7 +25,8 @@ namespace System.Reflection.Emit.Tests
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
             Assert.Throws<InvalidOperationException>(() =>
-                typeParams[0].MakeGenericType(new Type[] { typeof(Type) }));
+                typeParams[0].MakeGenericType(new Type[] { typeof(Type) })
+            );
         }
 
         [Fact]
@@ -36,7 +37,8 @@ namespace System.Reflection.Emit.Tests
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
             Assert.Throws<InvalidOperationException>(() =>
-                typeParams[0].MakeGenericType(new Type[] { typeof(int), typeof(string) }));
+                typeParams[0].MakeGenericType(new Type[] { typeof(int), typeof(string) })
+            );
         }
     }
 }

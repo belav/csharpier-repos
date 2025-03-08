@@ -59,6 +59,7 @@ public class ServerJSRootComponentsTest : JSRootComponentsTest
 
         // Here's where we check that our most recent attempt to add another didn't do it
         Browser.Empty(() =>
-            Browser.FindElement(By.Id("root-container-7")).FindElements(By.CssSelector("*")));
+            Browser.FindElement(By.Id("root-container-7")).FindElements(By.CssSelector("*"))
+        );
     }
 }

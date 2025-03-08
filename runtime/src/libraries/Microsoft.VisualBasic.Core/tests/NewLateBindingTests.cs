@@ -337,7 +337,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     Arguments: new object[] { "B" },
                     ArgumentNames: null,
                     TypeArguments: null
-                ));
+                )
+            );
             Assert.Equal("A", instance.P);
         }
 
@@ -356,7 +357,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     Arguments: new object[] { 3, "3" },
                     ArgumentNames: null,
                     TypeArguments: null
-                ));
+                )
+            );
             Assert.Null(instance[3]);
         }
 
@@ -377,7 +379,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     TypeArguments: null,
                     CopyBack: null,
                     IgnoreReturn: true
-                ));
+                )
+            );
             Assert.Equal("A", instance.P);
         }
 
@@ -477,7 +480,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     Arguments: new object[] { "B" },
                     ArgumentNames: null,
                     TypeArguments: null
-                ));
+                )
+            );
             Assert.Equal("A", instance.P);
         }
 
@@ -494,7 +498,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     Arguments: new object[] { 3, "3" },
                     ArgumentNames: null,
                     TypeArguments: null
-                ));
+                )
+            );
             Assert.Null(instance[3]);
         }
 

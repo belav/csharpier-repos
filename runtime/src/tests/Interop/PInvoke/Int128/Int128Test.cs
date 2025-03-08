@@ -220,15 +220,18 @@ unsafe partial class Int128Native
 
         // Checking return value
         Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(() =>
-            GetInt128(0, 1));
+            GetInt128(0, 1)
+        );
 
         // Checking input value as Int128 itself
         Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(() =>
-            GetInt128Lower(default(Int128)));
+            GetInt128Lower(default(Int128))
+        );
 
         // Checking input value as structure wrapping Int128
         Assert.Throws<System.Runtime.InteropServices.MarshalDirectiveException>(() =>
-            GetInt128Lower_S(default(StructJustInt128)));
+            GetInt128Lower_S(default(StructJustInt128))
+        );
     }
 
     private static void TestInt128()

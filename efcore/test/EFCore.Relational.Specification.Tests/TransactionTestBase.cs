@@ -821,7 +821,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 else
                 {
                     await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync());
+                        context.SaveChangesAsync()
+                    );
                 }
             }
             else
@@ -1130,7 +1131,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using var transaction = TestStore.BeginTransaction();
         using var context = CreateContextWithConnectionString();
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            context.Database.UseTransaction(transaction));
+            context.Database.UseTransaction(transaction)
+        );
         Assert.Equal(RelationalStrings.TransactionAssociatedWithDifferentConnection, ex.Message);
     }
 
@@ -1197,7 +1199,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             using var transaction = TestStore.BeginTransaction();
             using var context = CreateContextWithConnectionString();
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Database.UseTransaction(transaction));
+                context.Database.UseTransaction(transaction)
+            );
             Assert.Equal(RelationalStrings.ConflictingAmbientTransaction, ex.Message);
         }
     }
@@ -1218,7 +1221,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         context.Database.EnlistTransaction(t);
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            context.Database.UseTransaction(transaction));
+            context.Database.UseTransaction(transaction)
+        );
         Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
         context.Database.CloseConnection();
     }
@@ -1230,7 +1234,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (context.Database.BeginTransaction())
         {
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Database.BeginTransaction());
+                context.Database.BeginTransaction()
+            );
             Assert.Equal(RelationalStrings.TransactionAlreadyStarted, ex.Message);
         }
     }
@@ -1247,7 +1252,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             using var context = CreateContextWithConnectionString();
             var ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Database.BeginTransaction());
+                context.Database.BeginTransaction()
+            );
             Assert.Equal(RelationalStrings.ConflictingAmbientTransaction, ex.Message);
         }
     }
@@ -1269,7 +1275,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         var ex = Assert.Throws<InvalidOperationException>(() =>
             context.Database.BeginTransaction(
                 DirtyReadsOccur ? IsolationLevel.ReadUncommitted : IsolationLevel.Unspecified
-            ));
+            )
+        );
         Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
         context.Database.CloseConnection();
     }
@@ -1357,7 +1364,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (context.Database.BeginTransaction())
         {
             Assert.Throws<InvalidOperationException>(() =>
-                context.Database.EnlistTransaction(transaction));
+                context.Database.EnlistTransaction(transaction)
+            );
         }
     }
 
@@ -1376,7 +1384,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.OpenConnection();
 
             Assert.Throws<InvalidOperationException>(() =>
-                context.Database.EnlistTransaction(transaction));
+                context.Database.EnlistTransaction(transaction)
+            );
 
             context.Database.CloseConnection();
         }
@@ -1587,7 +1596,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             {
                 await transaction.ReleaseSavepointAsync("FooSavepoint");
                 await Assert.ThrowsAnyAsync<DbException>(async () =>
-                    await transaction.ReleaseSavepointAsync("FooSavepoint"));
+                    await transaction.ReleaseSavepointAsync("FooSavepoint")
+                );
             }
             else
             {
